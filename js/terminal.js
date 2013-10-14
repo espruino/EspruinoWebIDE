@@ -19,6 +19,20 @@ Author: Gordon Williams (gw@pur3.co.uk)
 **/
 
 (function() {
+
+  /* Handle newline conversions - Windows expects newlines as /r/n
+     when we're saving/loading files */
+  var isWindows = navigator.userAgent.indexOf("Windows")>=0;
+  console.log((isWindows?"Is":"Not")+" running on Windows");
+  var convertFromOS = function (chars) {
+    if (!isWindows) return chars;
+    return chars.replace(/\r\n/g,"\n");
+  };
+  var convertToOS = function (chars) {
+    if (!isWindows) return chars;
+    return chars.replace(/\r\n/g,"\n").replace(/\n/g,"\r\n");
+  };
+
   
   var myLayout;
   var codeEditor;
@@ -54,7 +68,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
   };
 
   var saveFile = function(data, filename) {
-    saveAs(new Blob([data], { type: "text/plain" }), filename);
+    saveAs(new Blob([convertToOS(data)], { type: "text/plain" }), filename);
   };
   
   var serialWriteData = undefined;
@@ -159,7 +173,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
       if (event.target.files.length != 1) return;
       var reader = new FileReader();
       reader.onload = function(event) {
-        var data = event.target.result;
+        var data = convertFromOS(event.target.result);
         if (isInBlockly()) {
           Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, Blockly.Xml.textToDom(data));          
         } else { 
