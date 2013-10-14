@@ -310,16 +310,31 @@ Author: Gordon Williams (gw@pur3.co.uk)
     }
     $("#status").html("Connecting");
     flipState(true);
-    serial_lib.openSerial(serialPort, onOpen);
-  };
-  
-  var onOpen=function(cInfo) {
-    logSuccess("Device found (connectionId="+cInfo.connectionId+")");
-    flipState(false);
-    $("#status").html("Connected");
-    serial_lib.startListening(onRead);
+    serial_lib.openSerial(serialPort, function(cInfo) {
+      if (cInfo!=undefined) {
+        logSuccess("Device found (connectionId="+cInfo.connectionId+")");
+        flipState(false);
+        $("#status").html("Connected");
+        serial_lib.startListening(onRead);
+      } else {
+        // fail
+        flipState(true);
+        $("#status").html("Connect Failed.");
+      }
+    }, function () {
+      console.log("Force disconnect");
+      closeSerial(); // force disconnect
+    });
   };
 
+  var closeSerial=function() {
+   serial_lib.closeSerial(function(result) {
+     flipState(true);
+     $("#status").html("Disconnected");
+    });
+  };
+    
+  
   function getSubString(str, from, len) {
     if (len == undefined) {
       return str.substr(from, len);
@@ -419,15 +434,6 @@ Author: Gordon Williams (gw@pur3.co.uk)
       }, 100);
   };
 
-  var closeSerial=function() {
-   serial_lib.closeSerial(onClose);
-  };
-  
-  var onClose = function(result) {
-   flipState(true);
-   $("#status").html("Disconnected");
-  };
-  
   init();
 })();
 

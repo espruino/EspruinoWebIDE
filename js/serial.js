@@ -22,6 +22,23 @@ var serial_lib=(function() {
   
   var connectionInfo;
   var readListener;
+  var connectionChecker;
+  var connectedPort;
+
+  /** When connected, this is called every so often to check on the state
+   of the serial port. If it detects a disconnection it calls the disconnectCallback
+   which will force a disconnect (which means that hopefulyl chrome won't hog the
+   serial port if we physically reconnect the board). */
+  var checkConnection = function() {
+    chrome.serial.getControlSignals(connectionInfo.connectionId, function (sigs) { 
+      var connected = "cts" in sigs;
+      if (!connected) {
+        console.log("Detected Disconnect");
+        if (connectionDisconnectCallback!=undefined)
+          connectionDisconnectCallback();
+      }
+   });
+  }
   
   var startListening=function(callback) {
     if (!connectionInfo || !connectionInfo.connectionId) {
@@ -45,22 +62,25 @@ var serial_lib=(function() {
     chrome.serial.getPorts(callback);
   };
   
-  var openSerial=function(serialPort, callback) {
+  var openSerial=function(serialPort, openCallback, disconnectCallback) {
+    connectionDisconnectCallback = disconnectCallback;
     chrome.serial.open(serialPort, {bitrate: 9600}, 
       function(cInfo) {
-        onOpen(cInfo, callback);
+        if (!cInfo || !cInfo.connectionId || cInfo.connectionId<0) {
+          console.log("Could not find device (connectionInfo="+cInfo+")");
+          if (openCallback) openCallback(undefined);
+        } else {
+          connectionInfo=cInfo;
+          console.log(cInfo);
+          if (openCallback) openCallback(cInfo);
+          connectedPort = serialPort;
+          connectionChecker = setInterval(checkConnection, 500);
+        }        
     });
   };
   
   var onOpen=function(cInfo, callback) {
-    if (!cInfo || !cInfo.connectionId || cInfo.connectionId<0) {
-      console.log(cInfo);
-      throw "could not find device (connectionInfo="+cInfo+")";
-    } else {
-      connectionInfo=cInfo;
-      console.log(cInfo);
-      if (callback) callback(cInfo);
-    }
+    
   };
   
   var writeSerial=function(str) {
@@ -85,6 +105,12 @@ var serial_lib=(function() {
  
  
   var closeSerial=function(callback) {
+   connectionDisconnectCallback = undefined;
+   if (connectionChecker) {
+     clearInterval(connectionChecker);
+     connectedPort = undefined;
+     connectionChecker = undefined;
+   }
    if (connectionInfo) {
      chrome.serial.close(connectionInfo.connectionId, 
       function(result) {
