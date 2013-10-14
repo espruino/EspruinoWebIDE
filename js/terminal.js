@@ -57,10 +57,42 @@ Author: Gordon Williams (gw@pur3.co.uk)
     saveAs(new Blob([data], { type: "text/plain" }), filename);
   };
   
-  var serialWrite = function(ch) {
-  //console.log("KEY "+e.keyCode+" = '"+ch+"'");
-    if (serial_lib.isConnected())
-      serial_lib.writeSerial(ch);
+  var serialWriteData = undefined;
+  var serialWriteInterval = undefined;
+
+  var serialWrite = function(data) {
+    if (!serial_lib.isConnected()) return;
+    /* Here we queue data up to write out. We do this slowly because somehow 
+    characters get lost otherwise (compared to if we used other terminal apps
+    like minicom) */
+    if (serialWriteData == undefined)
+      serialWriteData = data;
+    else
+      serialWriteData += data;
+
+    if (serialWriteInterval==undefined) {
+      function sender() {
+        if (serialWriteData!=undefined) {
+          var d = undefined;
+          if (serialWriteData.length>8) {
+            d = serialWriteData.substr(0,8);
+            serialWriteData = serialWriteData.substr(8);
+          } else {
+            d = serialWriteData;
+            serialWriteData = undefined; 
+          }
+          serial_lib.writeSerial(d);
+        } 
+        if (serialWriteData==undefined && serialWriteInterval!=undefined) {
+          clearInterval(serialWriteInterval);
+          serialWriteInterval = undefined;
+        }
+      }
+      sender(); // send data instantly
+      // if there was any more left, do it after a delay
+      if (serialWriteData!=undefined) 
+        serialWriteInterval = setInterval(sender, 20);
+    }
   };
 
   var toggleWebCam = function() {
@@ -107,7 +139,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
       if (serial_lib.isConnected()) {
           var toSend = "echo(0);\n"+getCode()+"echo(1);\n";
           console.log(toSend);
-          serial_lib.writeSerial(toSend);
+          serialWrite(toSend);
       }
     });
     $( ".blockly" ).button({ text: false, icons: { primary: "ui-icon-image" } }).click(function() {
@@ -257,20 +289,6 @@ Author: Gordon Williams (gw@pur3.co.uk)
     flipState(false);
     $("#status").html("Connected");
     serial_lib.startListening(onRead);
-  };
-  
-  var writeSerial=function(writeString) {
-    if (!serial_lib.isConnected()) {
-      return;
-    }
-    if (!writeString) {
-      logError("Nothing to write");
-      return;
-    }
-    if (writeString.charAt(writeString.length-1)!=='\n') {
-      writeString+="\n"; 
-    }
-    serial_lib.writeSerial(writeString); 
   };
 
   function getSubString(str, from, len) {
