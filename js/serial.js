@@ -78,11 +78,7 @@ var serial_lib=(function() {
         }        
     });
   };
-  
-  var onOpen=function(cInfo, callback) {
-    
-  };
-  
+
   var writeSerial=function(str) {
     chrome.serial.write(connectionInfo.connectionId, str2ab(str), onWrite); 
   };
@@ -114,16 +110,12 @@ var serial_lib=(function() {
    if (connectionInfo) {
      chrome.serial.close(connectionInfo.connectionId, 
       function(result) {
-        onClose(result, callback);
+        connectionInfo=null;
+        if (callback) callback(result);
       });
     }
   };
-  
-  var onClose = function(result, callback) {
-   connectionInfo=null;
-   if (callback) callback(result);
-  };
-  
+   
   var isConnected = function() {
     return connectionInfo!=null && connectionInfo.connectionId>=0;
   };
