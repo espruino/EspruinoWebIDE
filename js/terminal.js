@@ -218,6 +218,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
         if (e.keyCode == 'C'.charCodeAt(0)) ch = String.fromCharCode(3); // control C
       }
       if (e.keyCode == 8) ch = "\x08"; // backspace
+      if (e.keyCode == 9) ch = "\x09"; // tab
       if (e.keyCode == 46) ch = String.fromCharCode(27)+String.fromCharCode(91)+String.fromCharCode(51)+String.fromCharCode(126); // delete
       if (e.keyCode == 38) ch = String.fromCharCode(27)+String.fromCharCode(91)+String.fromCharCode(65); // up
       if (e.keyCode == 40) ch = String.fromCharCode(27)+String.fromCharCode(91)+String.fromCharCode(66); // down
