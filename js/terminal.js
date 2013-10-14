@@ -276,13 +276,27 @@ Author: Gordon Williams (gw@pur3.co.uk)
     
     serial_lib.getPorts(function(items) {
       logSuccess("got "+items.length+" ports");
+
       var selected = -1;
-      for (var i=0; i<items.length; i++) {
-         serial_devices.options.add(new Option(items[i], items[i]));
-         if (i==0 || (/usb/i.test(items[i])  && /tty/i.test(items[i]))) {
-           selected = i;
-         }
+
+      if (isWindows) {
+        // Com ports will just be COM1,COM2,etc
+        // Chances are that the largest COM port is the one for Espruino:
+        items.sort();
+        if (items.length > 0)
+          selected = items.length-1;
+      } else { 
+        // Everyone else probably has USB in the name (or it might just be the first device)
+        for (var i=0; i<items.length; i++) {
+           if (i==0 || (/usb/i.test(items[i])  && /tty/i.test(items[i]))) {
+             selected = i;
+           }
+        }
       }
+
+      // add to menu
+      for (var i=0; i<items.length; i++) 
+        serial_devices.options.add(new Option(items[i], items[i]));
       if (selected) logSuccess("auto-selected "+items[selected]);
       serial_devices.options.selectedIndex = selected;
     });
