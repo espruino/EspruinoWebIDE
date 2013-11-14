@@ -93,7 +93,6 @@ Author: Gordon Williams (gw@pur3.co.uk)
         if (--n == 0) finished();
       }, 'text');           
     }
-
   };
 
   var saveFile = function(data, filename) {
@@ -167,9 +166,13 @@ Author: Gordon Williams (gw@pur3.co.uk)
     myLayout.sizePane("east", $(window).width()/2);
     // The code editor
     codeEditor = CodeMirror.fromTextArea(document.getElementById("code"), {
-      lineNumbers: true,
-      matchBrackets: true,
-      mode: "text/typescript"
+      lineNumbers: true,matchBrackets: true,mode: "text/typescript",
+      lineWrapping: true,
+      showTrailingSpace: true,lint:true,
+      highlightSelectionMatches: {showToken: /\w/},
+      foldGutter: {rangeFinder: new CodeMirror.fold.combine(CodeMirror.fold.brace, CodeMirror.fold.comment)},
+      gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter", "CodeMirror-lint-markers"],
+      extraKeys: {"Ctrl-Space": "autocomplete"}
     });
 
     // terminal toolbar
@@ -182,8 +185,8 @@ Author: Gordon Williams (gw@pur3.co.uk)
       if (serial_lib.isConnected()) {
           getCode(function (code) { 
             var toSend = "echo(0);\n"+code+"echo(1);\n";
-            console.log(toSend);
-            serialWrite(toSend);
+          console.log(toSend);
+          serialWrite(toSend);
           });
       }
     });
@@ -221,6 +224,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
         saveFile(codeEditor.getValue(), "code.js");
     });
     $("#terminal").css("top",  $("#terminaltoolbar").outerHeight()+"px");
+    Espruino.General.init(codeEditor);
 
     flipState(true);
     
