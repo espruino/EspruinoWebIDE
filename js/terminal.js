@@ -79,24 +79,25 @@ Author: Gordon Williams (gw@pur3.co.uk)
     
     var requires = getModulesRequired(code);    
     var moduleCode = ["Modules.removeAllCached();"];
+    var getModule = function (moduleName) {      
+      console.log("Getting module '"+moduleName+"'");
+      $.get("http://www.espruino.com/modules/"+moduleName+".min.js", function( moduleContents ) {
+        console.log("Got module '"+moduleName+"'");
+        moduleCode.push("Modules.addCached("+JSON.stringify(moduleName)+", "+JSON.stringify(moduleContents)+");\n");
+        Espruino.Status.incrementProgress(1);
+        if (--n == 0) {
+          Espruino.Status.setStatus("Done.");
+          finished();
+        }
+      }, 'text');
+    };
     var finished = function() {      
       callback(moduleCode.join("\n")+code);
     };
     var n = requires.length;
     if (n==0) finished();
     else Espruino.Status.setStatus("Loading Modules...", n); 
-    for (i in requires) {
-      var moduleName = requires[i];
-      console.log("Getting module '"+moduleName+"'");
-      $.get("http://www.espruino.com/modules/"+moduleName+".min.js", function( moduleContents ) {
-        moduleCode.push("Modules.addCached("+JSON.stringify(requires[i])+", "+JSON.stringify(moduleContents)+");\n");
-        Espruino.Status.incrementProgress(1);
-        if (--n == 0) {
-          Espruino.Status.setStatus("Done.");
-          finished();
-        }
-      }, 'text');           
-    }
+    for (i in requires) getModule(requires[i]);
   };
 
   var saveFile = function(data, filename) {
