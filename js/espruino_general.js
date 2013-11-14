@@ -21,22 +21,19 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
-var Espruino = {};
-Espruino["General"] = {};
-Espruino.General.pinRegExp = /\/\*.+?\*\/.+?(,|\)|\])/g;
-Espruino.General["setEditorCode"] = function(code,mode){
-    if(!mode){mode = $("input[name='replaceInEditor']:checked")[0];}
-    if(mode){Espruino.General.codeEditor.setValue(code);}
-    else{ Espruino.General.codeEditor.setValue(Espruino.General.codeEditor.getValue() + "\n" + code); }
-};
-Espruino.General["init"] = function(codeEditor){
-    Espruino.General["codeEditor"] = codeEditor;
- 
-    CodeMirror.commands.autocomplete = function(cm) {
-      CodeMirror.showHint(cm, CodeMirror.hint.espruino);
-    };
-    codeEditor.on("contextmenu",cursorMoved);
-    function cursorMoved(cm,evt){ 
+(function(){
+  Espruino["General"] = {};
+  Espruino.General.pinRegExp = /\/\*.+?\*\/.+?(,|\)|\])/g;
+  Espruino.General["setEditorCode"] = function(code,mode){
+      if(!mode){mode = $("input[name='replaceInEditor']:checked")[0];}
+      if(mode){Espruino.codeEditor.setValue(code);}
+      else{ Espruino.codeEditor.setValue(Espruino.codeEditor.getValue() + "\n" + code); }
+  };
+  Espruino.General["init"] = function(){
+      CodeMirror.commands.autocomplete = function(cm) {
+        CodeMirror.showHint(cm, CodeMirror.hint.espruino);
+      };
+      Espruino.codeEditor.on("contextmenu", function(cm,evt){ 
         if(cm.somethingSelected()){console.log(cm.getSelection());}
         else{
             var re =  /[\w$]/ ;
@@ -45,15 +42,17 @@ Espruino.General["init"] = function(codeEditor){
             while (end < line.length && re.test(line.charAt(end))) ++end;
             console.log(line.substring(start,end));
         }
-    }
-};
-Espruino.General.setEditorLine = function(){
-    var lineNr,start,end;
-    lineNr = parseInt(this.title) - 1;
-    start = parseInt($(this).attr("start"));
-    end = parseInt($(this).attr("end")) - 1;
-    Espruino.General.codeEditor.setSelection({line:lineNr,ch:start},{line:lineNr,ch:end});
-};
+      });
+      
+  };
+  Espruino.General.setEditorLine = function(){
+      var lineNr,start,end;
+      lineNr = parseInt(this.title) - 1;
+      start = parseInt($(this).attr("start"));
+      end = parseInt($(this).attr("end")) - 1;
+      Espruino.codeEditor.setSelection({line:lineNr,ch:start},{line:lineNr,ch:end});
+  };
+})();
 $.fn.selectRange = function(start, end) {
     if(!end) end = start; 
     return this.each(function() {

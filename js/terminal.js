@@ -35,8 +35,6 @@ Author: Gordon Williams (gw@pur3.co.uk)
 
   
   var myLayout;
-  var codeEditor;
-
   var serial_devices=document.querySelector(".serial_devices");
 
   var displayTimeout = null;
@@ -51,7 +49,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
     console.log(msg);
   };
   var logError=function(msg) {
-    $("#status").html(msg);
+    Espruino.Status.setStatus(msg);
     console.log("ERR: "+msg);
   };
   
@@ -76,21 +74,27 @@ Author: Gordon Williams (gw@pur3.co.uk)
     if (isInBlockly()) {
       code = "clearInterval();clearWatch();"+Blockly.Generator.workspaceToCode('JavaScript');
     } else {
-      code = codeEditor.getValue();
+      code = Espruino.codeEditor.getValue();
     }
-    var requires = getModulesRequired(code);
+    
+    var requires = getModulesRequired(code);    
     var moduleCode = ["Modules.removeAllCached();"];
-    var finished = function() {
+    var finished = function() {      
       callback(moduleCode.join("\n")+code);
-    }
+    };
     var n = requires.length;
     if (n==0) finished();
+    else Espruino.Status.setStatus("Loading Modules...", n); 
     for (i in requires) {
       var moduleName = requires[i];
       console.log("Getting module '"+moduleName+"'");
       $.get("http://www.espruino.com/modules/"+moduleName+".min.js", function( moduleContents ) {
-        moduleCode.push("Modules.addCached("+JSON.stringify(requires[i])+", "+JSON.stringify(moduleContents)+");\n");   
-        if (--n == 0) finished();
+        moduleCode.push("Modules.addCached("+JSON.stringify(requires[i])+", "+JSON.stringify(moduleContents)+");\n");
+        Espruino.Status.incrementProgress(1);
+        if (--n == 0) {
+          Espruino.Status.setStatus("Done.");
+          finished();
+        }
       }, 'text');           
     }
   };
@@ -104,13 +108,17 @@ Author: Gordon Williams (gw@pur3.co.uk)
 
   var serialWrite = function(data) {
     if (!serial_lib.isConnected()) return;
+    
     /* Here we queue data up to write out. We do this slowly because somehow 
     characters get lost otherwise (compared to if we used other terminal apps
     like minicom) */
     if (serialWriteData == undefined)
       serialWriteData = data;
     else
-      serialWriteData += data;
+      serialWriteData += data;    
+    
+    if (serialWriteData.length>8) 
+      Espruino.Status.setStatus("Sending...", serialWriteData.length);
 
     if (serialWriteInterval==undefined) {
       function sender() {
@@ -122,18 +130,25 @@ Author: Gordon Williams (gw@pur3.co.uk)
           } else {
             d = serialWriteData;
             serialWriteData = undefined; 
-          }
+          }          
           serial_lib.writeSerial(d);
+          Espruino.Status.incrementProgress(d.length);
         } 
         if (serialWriteData==undefined && serialWriteInterval!=undefined) {
           clearInterval(serialWriteInterval);
           serialWriteInterval = undefined;
+          if (Espruino.Status.hasProgress()) 
+            Espruino.Status.setStatus("Sent");
         }
       }
       sender(); // send data instantly
       // if there was any more left, do it after a delay
-      if (serialWriteData!=undefined) 
+      if (serialWriteData!=undefined) {
         serialWriteInterval = setInterval(sender, 20);
+      } else {
+        if (Espruino.Status.hasProgress())
+          Espruino.Status.setStatus("Sent");
+      }
     }
   };
 
@@ -165,7 +180,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
     } });
     myLayout.sizePane("east", $(window).width()/2);
     // The code editor
-    codeEditor = CodeMirror.fromTextArea(document.getElementById("code"), {
+    Espruino.codeEditor = CodeMirror.fromTextArea(document.getElementById("code"), {
       lineNumbers: true,matchBrackets: true,mode: "text/typescript",
       lineWrapping: true,
       showTrailingSpace: true,lint:true,
@@ -185,8 +200,8 @@ Author: Gordon Williams (gw@pur3.co.uk)
       if (serial_lib.isConnected()) {
           getCode(function (code) { 
             var toSend = "echo(0);\n"+code+"echo(1);\n";
-          console.log(toSend);
-          serialWrite(toSend);
+            console.log(toSend);
+            serialWrite(toSend);
           });
       }
     });
@@ -211,7 +226,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
         if (isInBlockly()) {
           Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, Blockly.Xml.textToDom(data));          
         } else { 
-          codeEditor.setValue(data);
+          Espruino.codeEditor.setValue(data);
         }
         document.getElementById('load').value = '';
       };
@@ -221,10 +236,10 @@ Author: Gordon Williams (gw@pur3.co.uk)
       if (isInBlockly()) 
         saveFile(Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(Blockly.mainWorkspace)), "code_blocks.xml");
       else
-        saveFile(codeEditor.getValue(), "code.js");
+        saveFile(Espruino.codeEditor.getValue(), "code.js");
     });
     $("#terminal").css("top",  $("#terminaltoolbar").outerHeight()+"px");
-    Espruino.General.init(codeEditor);
+    Espruino.initModules();
 
     flipState(true);
     
@@ -343,18 +358,18 @@ Author: Gordon Williams (gw@pur3.co.uk)
       logError("Invalid serialPort");
       return;
     }
-    $("#status").html("Connecting");
+    Espruino.Status.setStatus("Connecting");
     flipState(true);
     serial_lib.openSerial(serialPort, function(cInfo) {
       if (cInfo!=undefined) {
         logSuccess("Device found (connectionId="+cInfo.connectionId+")");
         flipState(false);
-        $("#status").html("Connected");
+        Espruino.Status.setStatus("Connected");
         serial_lib.startListening(onRead);
       } else {
         // fail
         flipState(true);
-        $("#status").html("Connect Failed.");
+        Espruino.Status.setStatus("Connect Failed.");
       }
     }, function () {
       console.log("Force disconnect");
@@ -365,7 +380,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
   var closeSerial=function() {
    serial_lib.closeSerial(function(result) {
      flipState(true);
-     $("#status").html("Disconnected");
+     Espruino.Status.setStatus("Disconnected");
     });
   };
     

@@ -11,6 +11,18 @@ body {
   overflow: hidden;
 }
 
+#progress {	
+	border: 1px solid black;
+	padding: 1px;
+	display: inline-block;
+	width: 104px;	
+}
+
+#progressindicator {
+    background-color: black;
+    display: inline-block;
+    width: 0px;
+}
 
 #terminal {
   font-family: Fixed, monospace;
