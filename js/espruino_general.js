@@ -32,7 +32,9 @@ Espruino.General["setEditorCode"] = function(code,mode){
 Espruino.General["init"] = function(codeEditor){
     Espruino.General["codeEditor"] = codeEditor;
  
-    CodeMirror.commands.autocomplete = function(cm) {CodeMirror.showHint(cm, CodeMirror.hint.javascript);};
+    CodeMirror.commands.autocomplete = function(cm) {
+      CodeMirror.showHint(cm, CodeMirror.hint.espruino);
+    };
     codeEditor.on("contextmenu",cursorMoved);
     function cursorMoved(cm,evt){ 
         if(cm.somethingSelected()){console.log(cm.getSelection());}

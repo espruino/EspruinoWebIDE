@@ -1,3 +1,4 @@
+// Originally javascript-hint, bodged up by Gordon Williams <gw@pur3.co.uk>
 (function () {
   var Pos = CodeMirror.Pos;
 
@@ -41,13 +42,12 @@
             to: Pos(cur.line, token.end)};
   }
 
-  function javascriptHint(editor, options) {
+  function espruinoHint(editor, options) {
     return scriptHint(editor, javascriptKeywords,
                       function (e, cur) {return e.getTokenAt(cur);},
                       options);
   };
-  CodeMirror.javascriptHint = javascriptHint; // deprecated
-  CodeMirror.registerHelper("hint", "javascript", javascriptHint);
+  CodeMirror.registerHelper("hint", "espruino", espruinoHint);
 
   function getCoffeeScriptToken(editor, cur) {
   // This getToken, it is for coffeescript, imitates the behavior of
@@ -78,10 +78,15 @@
   var arrayProps = ("length concat join splice push pop shift unshift slice reverse sort indexOf " +
                     "lastIndexOf every some filter forEach map reduce reduceRight ").split(" ");
   var funcProps = "prototype apply call bind".split(" ");
-  var javascriptKeywords = ("break case catch continue debugger default delete do else false finally for function " +
-                  "if in instanceof new null return switch throw true try typeof var void while with").split(" ");
-  var coffeescriptKeywords = ("and break catch class continue delete do else extends false finally for " +
-                  "if in instanceof isnt new no not null of off on or return switch then throw true try typeof until void while with yes").split(" ");
+  var javascriptKeywords = ("break case catch continue debugger default delete do else false for function " +
+                  "if in instanceof new null return switch true typeof var void while with").split(" ");
+  var espruinoObjects = ("Graphics Math SPI I2C OneWire Array ArrayBuffer ArrayBufferView Uint8Array Int8Array "+
+     "Uint16Array Int16Array Uint32Array Int32Array Float32Array Float64Array Serial Pin Object Function Integer "+
+     "Double String NaN Modules analogRead analogWrite fs arguments changeInterval clearInterval clearTimeout "+
+     "clearWatch digitalPulse digitalRead digitalWrite dump echo edit eval getSerial getTime load console memory "+
+     "JSON parseFloat parseInt peek16 peek32 peek8 pinMode poke16 poke32 poke8 print require reset save "+
+     "setBusyIndicator setDeepSleep setInterval setSleepIndicator setTimeout setWatch trace").split(" ");
+
 
   function getCompletions(token, context, keywords, options) {
     var found = [], start = token.string;
@@ -118,11 +123,12 @@
         base = base[context.pop().string];
       if (base != null) gatherCompletions(base);
     } else {
-      // If not, just look in the window object and any local scope
+      // If not, just add standard Espruino suggestions
       // (reading into JS mode internals to get at the local and global variables)
       for (var v = token.state.localVars; v; v = v.next) maybeAdd(v.name);
       for (var v = token.state.globalVars; v; v = v.next) maybeAdd(v.name);
-      gatherCompletions(window);
+      forEach(espruinoObjects, maybeAdd);
+      // gatherCompletions(window);
       forEach(keywords, maybeAdd);
     }
     return found;
