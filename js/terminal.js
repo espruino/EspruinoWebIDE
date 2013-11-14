@@ -59,12 +59,41 @@ Author: Gordon Williams (gw@pur3.co.uk)
     return $("#divblockly").is(":visible");
   };
 
-  var getCode=function() {
+  var getModulesRequired = function(code) {
+    var modules = [];
+    var requires = code.match(/require\(\"[^\"]*\"\)/g);
+    for (i in requires) { 
+      // strip off beginning and end, and parse the string
+      var module = JSON.parse(requires[i].substring(8,requires[i].length-1));
+      // add it to our array
+      modules.push(module);
+    }    
+    return modules;
+  }
+
+  var getCode=function(callback) {
+    var code;
     if (isInBlockly()) {
-      return "clearInterval();clearWatch();"+Blockly.Generator.workspaceToCode('JavaScript');
+      code = "clearInterval();clearWatch();"+Blockly.Generator.workspaceToCode('JavaScript');
     } else {
-      return codeEditor.getValue();
+      code = codeEditor.getValue();
     }
+    var requires = getModulesRequired(code);
+    var moduleCode = ["Modules.removeAllCached();"];
+    var finished = function() {
+      callback(moduleCode.join("\n")+code);
+    }
+    var n = requires.length;
+    if (n==0) finished();
+    for (i in requires) {
+      var moduleName = requires[i];
+      console.log("Getting module '"+moduleName+"'");
+      $.get("http://www.espruino.com/modules/"+moduleName+".min.js", function( moduleContents ) {
+        moduleCode.push("Modules.addCached("+JSON.stringify(requires[i])+", "+JSON.stringify(moduleContents)+");\n");   
+        if (--n == 0) finished();
+      }, 'text');           
+    }
+
   };
 
   var saveFile = function(data, filename) {
@@ -151,9 +180,11 @@ Author: Gordon Williams (gw@pur3.co.uk)
     // code toolbar
     $( ".send" ).button({ text: false, icons: { primary: "ui-icon-transferthick-e-w" } }).click(function() {
       if (serial_lib.isConnected()) {
-          var toSend = "echo(0);\n"+getCode()+"echo(1);\n";
-          console.log(toSend);
-          serialWrite(toSend);
+          getCode(function (code) { 
+            var toSend = "echo(0);\n"+code+"echo(1);\n";
+            console.log(toSend);
+            serialWrite(toSend);
+          });
       }
     });
     $( ".blockly" ).button({ text: false, icons: { primary: "ui-icon-image" } }).click(function() {
