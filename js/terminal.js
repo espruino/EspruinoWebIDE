@@ -67,7 +67,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
       modules.push(module);
     }    
     return modules;
-  }
+  };
 
   var getCode=function(callback) {
     var code;
@@ -164,7 +164,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
         console.log('onError!', e);
       });
     } 
-  }
+  };
 
   var init=function() {
     if (!serial_lib) throw "You must include serial.js before";
