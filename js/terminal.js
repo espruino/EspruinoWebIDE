@@ -200,7 +200,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
     $( ".send" ).button({ text: false, icons: { primary: "ui-icon-transferthick-e-w" } }).click(function() {
       if (serial_lib.isConnected()) {
           getCode(function (code) { 
-            var toSend = "echo(0);\n"+code+"echo(1);\n";
+            var toSend = "echo(0);\n"+code+"\necho(1);\n";
             console.log(toSend);
             serialWrite(toSend);
           });
@@ -473,16 +473,17 @@ Author: Gordon Williams (gw@pur3.co.uk)
   var onRead=function(readData) {
     // Add data to our buffer
     var bufView=new Uint8Array(readData);
-    for (var i=0;i<bufView.length;i++) displayData.push(bufView[i]);
-    // If we haven't had data after 100ms, update the HTML
-    if (displayTimeout != null) window.clearTimeout(displayTimeout);
+    for (var i=0;i<bufView.length;i++) 
+      displayData.push(bufView[i]);
+    // If we haven't had data after 50ms, update the HTML
+    if (displayTimeout == null) 
       displayTimeout = window.setTimeout(function() {
         for (i in displayData) 
           handleReceivedCharacter(displayData[i]);
         updateTerminal();
         displayData = [];
         displayTimeout = null;
-      }, 100);
+      }, 50);
   };
 
   init();
