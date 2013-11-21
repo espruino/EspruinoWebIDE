@@ -27,8 +27,9 @@ THE SOFTWARE.
 
     var serial_lib = undefined
     var dataReceived = undefined; // listener for when data is received
+
     var ACK = 0x79;
-    var NACK = 0x1f;
+    var NACK = 0x1F;
     
     Espruino.Flasher.init = function(){
     };
@@ -79,7 +80,6 @@ THE SOFTWARE.
       }, timeout?timeout:1000);   
       dataReceived = function (c) {
         dataReceived = undefined;
-        console.log("got "+c);
         if (c==ACK) {
           clearTimeout(iTimeout);
           callback(undefined);
@@ -95,7 +95,7 @@ THE SOFTWARE.
         chksum = chksum ^ data[i];
         s += String.fromCharCode(data[i]);
       }
-      serial_lib.write(s + chksum);
+      serial_lib.write(s + String.fromCharCode(chksum));
       waitForACK(callback, timeout);
     }
 
@@ -116,28 +116,78 @@ THE SOFTWARE.
         }, 20000/*timeout*/);                 
       });
     }
+
+    var writeData = function(callback, addr, data) {
+      if (data.length>256) callback("Writing too much data");
+      Espruino.Status.setStatus("Writing "+data.length+" bytes at 0x"+addr.toString(16)+"...");
+      // send write command
+      sendCommand(0x31, function(err) {
+        if (err) { console.log("Error sending command"); callback(err); return; }        
+        // send address
+        sendData([(addr>>24)&0xFF,(addr>>16)&0xFF,(addr>>8)&0xFF,addr&0xFF], function(err) {
+          if (err) { 
+            console.log("Error sending address retrying...");
+            initialiseChip(function (err) {
+              if (err) callback(err);
+              else writeData(callback, addr, data);
+            });
+            return; 
+          }
+          // work out data to send
+          var sData = [ data.length-1 ];
+          for (i in data) sData.push(data[i]&0xFF);
+          // send data
+          sendData(sData, function(err) {
+            if (err) { 
+              console.log("Error while writing. retrying...");
+              initialiseChip(function (err) {
+                if (err) callback(err);
+                else writeData(callback, addr, data);
+              });
+              return;
+            }  
+            callback(undefined); // done
+          }, 2000/*timeout*/);
+        });                 
+      });
+    }
     
     Espruino.Flasher.flashDevice = function(_serial_lib, callback) {
       serial_lib = _serial_lib;
       getBinary("espruino_r1v1_1v42.bin", function (err, binary) {
-        if (err) callback(err);
-        else {
-          // add serial listener
-          serial_lib.startListening(function (readData) {
-            var bufView=new Uint8Array(readData);
-            if (dataReceived)
-              for (var i=0;i<bufView.length;i++) 
-                dataReceived(bufView[i]);
+        if (err) { callback(err); return; }
+        console.log("Downloaded "+binary.byteLength+" bytes");
+        // add serial listener
+        serial_lib.startListening(function (readData) {
+          var bufView=new Uint8Array(readData);
+          if (dataReceived)
+            for (var i=0;i<bufView.length;i++) 
+              dataReceived(bufView[i]);
+        });
+        // initialise
+        initialiseChip(function (err) {
+          if (err) { callback(err); return; }
+          eraseChip(function (err) {
+            if (err) { callback(err); return; }
+            console.log("Writing "+binary.byteLength+" bytes");
+            var chunkSize = 256;
+            var writer = function(offset) {
+              if (offset>=binary.byteLength) {
+                Espruino.Status.setStatus("Flashing complete!");
+                callback(undefined); // done
+                return;
+              }
+              var len = binary.byteLength - offset;
+              if (len > chunkSize) len = chunkSize;              
+              var data = new Uint8Array(binary, offset, len);
+              writeData(function(err) {
+                if (err) { callback(err); return; }
+                writer(offset + chunkSize);
+              }, 0x08000000 + offset, data);
+            }
+            writer(1024*10 /* no bootloader */);
           });
-          // initialise
-          initialiseChip(function (err) {
-            if (err) callback(err);
-            else eraseChip(function (err) {
-              if (err) callback(err);
-              else callback(undefined);
-            });
-          });
-        }
+        });
       });
     };
 
