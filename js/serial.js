@@ -25,6 +25,10 @@ var serial_lib=(function() {
   var connectionChecker;
   var connectedPort;
 
+  // For throttled write
+  var writeData = undefined;
+  var writeInterval = undefined;
+
   /** When connected, this is called every so often to check on the state
    of the serial port. If it detects a disconnection it calls the disconnectCallback
    which will force a disconnect (which means that hopefulyl chrome won't hog the
@@ -79,7 +83,7 @@ var serial_lib=(function() {
     });
   };
 
-  var writeSerial=function(str) {
+  var writeSerialDirect = function(str) {
     chrome.serial.write(connectionInfo.connectionId, str2ab(str), onWrite); 
   };
   
@@ -120,12 +124,60 @@ var serial_lib=(function() {
     return connectionInfo!=null && connectionInfo.connectionId>=0;
   };
 
+  // Throttled serial write
+  var writeSerial = function(data) {
+    if (!isConnected()) return; // throw data away
+    
+    /* Here we queue data up to write out. We do this slowly because somehow 
+    characters get lost otherwise (compared to if we used other terminal apps
+    like minicom) */
+    if (writeData == undefined)
+      writeData = data;
+    else
+      writeData += data;    
+    
+    if (writeData.length>8) 
+      Espruino.Status.setStatus("Sending...", writeData.length);
+
+    if (writeInterval==undefined) {
+      function sender() {
+        if (writeData!=undefined) {
+          var d = undefined;
+          if (writeData.length>8) {
+            d = writeData.substr(0,8);
+            writeData = writeData.substr(8);
+          } else {
+            d = writeData;
+            writeData = undefined; 
+          }          
+          writeSerialDirect(d);
+          Espruino.Status.incrementProgress(d.length);
+        } 
+        if (writeData==undefined && writeInterval!=undefined) {
+          clearInterval(writeInterval);
+          writeInterval = undefined;
+          if (Espruino.Status.hasProgress()) 
+            Espruino.Status.setStatus("Sent");
+        }
+      }
+      sender(); // send data instantly
+      // if there was any more left, do it after a delay
+      if (writeData!=undefined) {
+        writeInterval = setInterval(sender, 20);
+      } else {
+        if (Espruino.Status.hasProgress())
+          Espruino.Status.setStatus("Sent");
+      }
+    }
+  };
+
+
   return {
     "getPorts": getPorts,
-    "openSerial": openSerial,
+    "open": openSerial,
     "isConnected": isConnected,
     "startListening": startListening,
-    "writeSerial": writeSerial,
-    "closeSerial": closeSerial
+    "write": writeSerial,
+    "close": closeSerial
   };
 })();

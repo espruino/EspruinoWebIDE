@@ -104,55 +104,6 @@ Author: Gordon Williams (gw@pur3.co.uk)
     saveAs(new Blob([convertToOS(data)], { type: "text/plain" }), filename);
   };
   
-  var serialWriteData = undefined;
-  var serialWriteInterval = undefined;
-
-  var serialWrite = function(data) {
-    if (!serial_lib.isConnected()) return;
-    
-    /* Here we queue data up to write out. We do this slowly because somehow 
-    characters get lost otherwise (compared to if we used other terminal apps
-    like minicom) */
-    if (serialWriteData == undefined)
-      serialWriteData = data;
-    else
-      serialWriteData += data;    
-    
-    if (serialWriteData.length>8) 
-      Espruino.Status.setStatus("Sending...", serialWriteData.length);
-
-    if (serialWriteInterval==undefined) {
-      function sender() {
-        if (serialWriteData!=undefined) {
-          var d = undefined;
-          if (serialWriteData.length>8) {
-            d = serialWriteData.substr(0,8);
-            serialWriteData = serialWriteData.substr(8);
-          } else {
-            d = serialWriteData;
-            serialWriteData = undefined; 
-          }          
-          serial_lib.writeSerial(d);
-          Espruino.Status.incrementProgress(d.length);
-        } 
-        if (serialWriteData==undefined && serialWriteInterval!=undefined) {
-          clearInterval(serialWriteInterval);
-          serialWriteInterval = undefined;
-          if (Espruino.Status.hasProgress()) 
-            Espruino.Status.setStatus("Sent");
-        }
-      }
-      sender(); // send data instantly
-      // if there was any more left, do it after a delay
-      if (serialWriteData!=undefined) {
-        serialWriteInterval = setInterval(sender, 20);
-      } else {
-        if (Espruino.Status.hasProgress())
-          Espruino.Status.setStatus("Sent");
-      }
-    }
-  };
-
   var toggleWebCam = function() {
     var window_url = window.URL || window.webkitURL;
     navigator.getUserMedia  = navigator.getUserMedia || navigator.webkitGetUserMedia ||
@@ -168,8 +119,6 @@ Author: Gordon Williams (gw@pur3.co.uk)
   };
 
   var init=function() {
-    if (!serial_lib) throw "You must include serial.js before";
-
     // The central divider
     myLayout = $('body').layout({ onresize : function() { 
         $("#terminal").width($(".ui-layout-center").innerWidth()-4);
@@ -265,7 +214,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
     $("#terminalfocus").keypress(function(e) { 
       e.preventDefault();
       var ch = String.fromCharCode(e.which);
-      serialWrite(ch);
+      serial_lib.write(ch);
     }).keydown(function(e) { 
       var ch = undefined;
       if (e.ctrlKey) {
@@ -285,7 +234,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
 
       if (ch!=undefined) {
         e.preventDefault();
-        serialWrite(ch);
+        serial_lib.write(ch);
       } 
     }).bind('paste', function () {
       var element = this; 
@@ -293,7 +242,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
       setTimeout(function () {
         var text = $(element).val();
         $(element).val("");        
-        serialWrite(text);
+        serial_lib.write(text);
       }, 100);
     });
 
@@ -364,7 +313,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
     }
     Espruino.Status.setStatus("Connecting");
     flipState(true);
-    serial_lib.openSerial(serialPort, function(cInfo) {
+    serial_lib.open(serialPort, function(cInfo) {
       if (cInfo!=undefined) {
         logSuccess("Device found (connectionId="+cInfo.connectionId+")");
         flipState(false);
@@ -382,7 +331,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
   };
 
   var closeSerial=function() {
-   serial_lib.closeSerial(function(result) {
+   serial_lib.close(function(result) {
      flipState(true);
      Espruino.Status.setStatus("Disconnected");
     });
@@ -476,16 +425,17 @@ Author: Gordon Williams (gw@pur3.co.uk)
   var onRead=function(readData) {
     // Add data to our buffer
     var bufView=new Uint8Array(readData);
-    for (var i=0;i<bufView.length;i++) displayData.push(bufView[i]);
-    // If we haven't had data after 100ms, update the HTML
-    if (displayTimeout != null) window.clearTimeout(displayTimeout);
+    for (var i=0;i<bufView.length;i++) 
+      displayData.push(bufView[i]);
+    // If we haven't had data after 50ms, update the HTML
+    if (displayTimeout == null) 
       displayTimeout = window.setTimeout(function() {
         for (i in displayData) 
           handleReceivedCharacter(displayData[i]);
         updateTerminal();
         displayData = [];
         displayTimeout = null;
-      }, 100);
+      }, 50);
   };
 
   init();
