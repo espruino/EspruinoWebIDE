@@ -48,8 +48,10 @@ var serial_lib=(function() {
     if (!connectionInfo || !connectionInfo.connectionId) {
       throw new "You must call openSerial first!";
     }
+    var oldListener = readListener;
     readListener=callback;
     onCharRead();
+    return oldListener;
   };
 
   var onCharRead=function(readInfo) {
@@ -136,16 +138,18 @@ var serial_lib=(function() {
     else
       writeData += data;    
     
-    if (writeData.length>8) 
+    var blockSize = 32;
+
+    if (writeData.length>blockSize) 
       Espruino.Status.setStatus("Sending...", writeData.length);
 
     if (writeInterval==undefined) {
       function sender() {
         if (writeData!=undefined) {
           var d = undefined;
-          if (writeData.length>8) {
-            d = writeData.substr(0,8);
-            writeData = writeData.substr(8);
+          if (writeData.length>blockSize) {
+            d = writeData.substr(0,blockSize);
+            writeData = writeData.substr(blockSize);
           } else {
             d = writeData;
             writeData = undefined; 
@@ -163,7 +167,7 @@ var serial_lib=(function() {
       sender(); // send data instantly
       // if there was any more left, do it after a delay
       if (writeData!=undefined) {
-        writeInterval = setInterval(sender, 20);
+        writeInterval = setInterval(sender, 50);
       } else {
         if (Espruino.Status.hasProgress())
           Espruino.Status.setStatus("Sent");

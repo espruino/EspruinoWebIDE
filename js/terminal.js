@@ -188,6 +188,16 @@ Author: Gordon Williams (gw@pur3.co.uk)
       else
         saveFile(Espruino.codeEditor.getValue(), "code.js");
     });
+/*  $( ".flash" ).button({ text: false, icons: { primary: "ui-icon-star" } }).click(function() {
+      Espruino.Flasher.flashDevice(serial_lib, "espruino_r1v1_1v42.bin",function (err) {
+        serial_lib.startListening(onRead); // reset listener
+        if (err) {
+          Espruino.Status.setStatus("Error Flashing.");
+          console.log(err);
+          //alert(err);
+       } else Espruino.Status.setStatus("Done.");
+      });
+    }); */
     $("#terminal").css("top",  $("#terminaltoolbar").outerHeight()+"px");
     Espruino.initModules();
 

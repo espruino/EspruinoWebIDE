@@ -27,6 +27,7 @@ THE SOFTWARE.
 
     var serial_lib = undefined
     var dataReceived = undefined; // listener for when data is received
+    var bytesReceived = []; // list of characters for when no handler is specified
 
     var ACK = 0x79;
     var NACK = 0x1F;
@@ -122,7 +123,15 @@ THE SOFTWARE.
       Espruino.Status.setStatus("Writing "+data.length+" bytes at 0x"+addr.toString(16)+"...");
       // send write command
       sendCommand(0x31, function(err) {
-        if (err) { console.log("Error sending command"); callback(err); return; }        
+        if (err) { 
+          console.log("Error sending command. retrying...");
+          initialiseChip(function (err) {
+            if (err) callback(err);
+            else writeData(callback, addr, data);
+          }); 
+          callback(err); 
+          return; 
+        }        
         // send address
         sendData([(addr>>24)&0xFF,(addr>>16)&0xFF,(addr>>8)&0xFF,addr&0xFF], function(err) {
           if (err) { 
@@ -152,17 +161,20 @@ THE SOFTWARE.
       });
     }
     
-    Espruino.Flasher.flashDevice = function(_serial_lib, callback) {
+    Espruino.Flasher.flashDevice = function(_serial_lib, filename, callback) {
       serial_lib = _serial_lib;
-      getBinary("espruino_r1v1_1v42.bin", function (err, binary) {
+      getBinary(bytesReceived, function (err, binary) {
         if (err) { callback(err); return; }
         console.log("Downloaded "+binary.byteLength+" bytes");
         // add serial listener
         serial_lib.startListening(function (readData) {
           var bufView=new Uint8Array(readData);
-          if (dataReceived)
-            for (var i=0;i<bufView.length;i++) 
-              dataReceived(bufView[i]);
+          for (var i=0;i<bufView.length;i++) bytesReceived.push(bufView[i]);
+          if (dataReceived) {
+            for (var i=0;i<bytesReceived.length;i++) 
+              dataReceived(bytesReceived[i]);
+            bytesReceived = [];
+          }
         });
         // initialise
         initialiseChip(function (err) {
