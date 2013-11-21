@@ -1,0 +1,77 @@
+<div id="optionsAccordion">
+    <h3>Espruino</h3>
+    <div><h3>Espruino Serial Terminal</h3>
+      <p>A Serial Port Terminal Web App for Chrome</p>
+      <p>This is designed for <a href="http://www.espruino.com" target="_blank">Espruino JavaScript for Microcontrollers</a>. If you like this, please give Espruino a try!</p>
+    </div>
+    <h3>Credit</h3>
+    <div>
+        <table border="1">
+            <tr><th>Function</th><th>Credit to</th></tr>
+            <tr><td>Web App</td><td>Google for supporting function, making this editor possible</td></tr>
+            <tr><td>jQuery</td><td>jQuery team for jQuery and jQuery UI, this reduced time for development a lot</td></tr>
+            <tr><td>FileSaver</td><td>Eli Grey for the library to support local Files</td></tr>
+            <tr><td>CodeMirror</td><td>the team of codemirror for the toolset behind the editor window</td></tr>
+            <tr><td>blockly</td><td>Neil Fraser and the team of blockly</td></tr>    
+        </table>
+    </div>
+    <h3 class="EspruinoOption">Options general</h3>
+    <div>
+        inactive
+        <Table border="1">
+            <tr><th>Function</th><th>Option</th></tr>
+            <tr>
+                <th>Start Mode</th>
+                <th>Javascript<input type="radio" class="startMode" name="startMode" value="JS" checked>
+                    Graphical<input type="radio" class="startMode" name="startMode" value="G"></th>
+            </tr>
+        </Table>
+    </div>
+    <h3 class="EspruinoOption">Options Examples and Tutorials</h3>
+    <div>
+        <Table border="1">
+            <tr><th>Type</th><th>Url</th><th>Sub directories</th><th>Extensions</th></tr>
+            <tr>
+                <td>Tutorial</td>
+                <td><Input type="text" id="urlTutorials" size="60" value=""></td>
+                <td><Input type="text" id="subDirsTutorials" size="40" value=""></td>
+                <td><Input type="text" id="fileExtensionsTutorials" size="10" value=""></td>
+            </tr>
+            <tr>
+                <td>Scripts</td>
+                <td><Input type="text" id="urlScripts" size="60" value=""></td>
+                <td><Input type="text" id="subDirsScripts" size="40" value=""></td>
+                <td><Input type="text" id="fileExtensionsScripts" size="10" value=""></td>
+            </tr>
+        </Table>
+    </div>
+    <h3 class="EspruinoOption">Options Interface</h3>
+    <div>
+        inactive
+        <table border="1">
+            <tr><th>Option</th><th>Value</th></tr>
+            <tr><th>Minify before send</th><th><input type="checkbox" id="sendMinified"></th></tr>
+            <tr><th>Compilation Level</th>
+                <th><select id="compilationLevel">
+                        <option value="WHITESPACE_ONLY">WHITESPACE_ONLY</option>
+                        <option value="SIMPLE_OPTIMIZATIONS">SIMPLE_OPTIMIZATIONS</option>
+                        <option value="ADVANCED_OPTIMIZATIONS">ADVANCED_OPTIMIZATIONS</option>
+                    </select>
+            </th></tr>
+        </table>
+    </div>
+</div>
+<div id="optionButtons" style="display: none;>
+    <Table width="100%">
+        <tr>
+            <th><button id="saveOptions">Save Options locally</button></th>
+            <th><button id="loadOptions">Load Options from local</button></th>
+            <th>&nbsp;&nbsp;&nbsp;</th>
+            <th><button id="resetOptions">Reset Options</button></th>
+            <th>&nbsp;&nbsp;&nbsp;</th>
+            <th><button id="saveOptionsToFile" class="save">Save Options to File</button></th>
+            <th><button id="loadOptionsFromFile" class="load">Load Options from File</button></th>
+        </tr>
+    </Table>
+    <input type="file" id="fileOptions" style="display: none;"/> <!-- for file loading -->
+</div>

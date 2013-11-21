@@ -21,11 +21,24 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
-var Espruino = {};
-
-Espruino.initModules = function() {
-  for (module in Espruino)
-    if (Espruino[module].init != undefined)
-      Espruino[module].init();
-}
-
+(function(){
+    Espruino["Minify"] = {};
+    Espruino.Minify.sendMinified = false;
+    Espruino.Minify.compilationLevel = "SIMPLE_OPTIMIZATIONS";
+    var minifyUrl = "http://closure-compiler.appspot.com/compile";
+    
+    Espruino.Minify.init = function(){
+    
+    };
+    Espruino.Minify.MinifyCode = function(data,callback){
+      var minifyObj = $.param({
+        compilation_level:Espruino.Minify.compilationLevel,
+        output_format:"text",
+        output_info:"compiled_code",
+        js_code:data
+      });
+      $.post(minifyUrl,minifyObj,function(data){
+        callback(data);  
+      },"text");
+    };    
+})();

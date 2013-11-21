@@ -199,10 +199,13 @@ Author: Gordon Williams (gw@pur3.co.uk)
     // code toolbar
     $( ".send" ).button({ text: false, icons: { primary: "ui-icon-transferthick-e-w" } }).click(function() {
       if (serial_lib.isConnected()) {
-          getCode(function (code) { 
-            var toSend = "echo(0);\n"+code+"echo(1);\n";
-            console.log(toSend);
-            serialWrite(toSend);
+          getCode(function (code) {
+            if(Espruino.Minify.sendMinified === true){Espruino.Minify.MinifyCode(code,sendSerial);}
+            else{sendSerial(code);}
+            function sendSerial(data){
+                console.log(data);
+                serialWrite("echo(0);\n" + data + "echo(1);\n");
+            }
           });
       }
     });
