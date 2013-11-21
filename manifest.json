@@ -12,6 +12,6 @@
     "256": "img/icon_256.png",
     "512": "img/icon_512.png"
   },
-  "permissions" : ["serial", "videoCapture"],
+  "permissions" : ["serial", "videoCapture", "storage"],
   "manifest_version": 2
 }

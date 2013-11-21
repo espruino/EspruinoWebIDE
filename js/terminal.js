@@ -147,6 +147,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
     $( ".webcam" ).button({ text: false, icons: { primary: "ui-icon-person" } }).click(toggleWebCam);
     // code toolbar
     $( ".send" ).button({ text: false, icons: { primary: "ui-icon-transferthick-e-w" } }).click(function() {
+      Espruino.Config.set("code", Espruino.codeEditor.getValue()); // save the code
       if (serial_lib.isConnected()) {
           getCode(function (code) { 
             var toSend = "echo(0);\n"+code+"\necho(1);\n";
@@ -254,6 +255,16 @@ Author: Gordon Williams (gw@pur3.co.uk)
     });
 
     refreshPorts();
+    
+    // get code from our config area at bootup
+    Espruino.Config.get("code", function (savedCode) {
+      if (savedCode) {
+        Espruino.codeEditor.setValue(savedCode);
+        console.log("Loaded code from storage.");
+      } else {
+        console.log("No code in storage.");
+      }
+    });
   };
   
   var addEventToElements=function(eventType, selector, listener) {
