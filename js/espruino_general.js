@@ -27,7 +27,7 @@ THE SOFTWARE.
   Espruino.General.startMode = "JS";
   Espruino.General.isWindows = navigator.userAgent.indexOf("Windows")>=0;
   Espruino.General["setEditorCode"] = function(code,mode){
-      if(!mode){mode = $("input[name='replaceInEditor']:checked")[0];}
+      if(!mode){mode = $("#replaceInEditor")[0].checked;}
       if(mode){Espruino.codeEditor.setValue(code);}
       else{ Espruino.codeEditor.setValue(Espruino.codeEditor.getValue() + "\n" + code); }
   };

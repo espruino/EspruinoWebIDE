@@ -153,7 +153,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
             else{sendSerial(code);}
             function sendSerial(data){
                 console.log(data);
-                serialWrite("echo(0);\n" + data + "echo(1);\n");
+                serial_lib.write("echo(0);\n" + data + "echo(1);\n");
             }
           });
       }
