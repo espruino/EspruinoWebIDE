@@ -38,8 +38,9 @@ THE SOFTWARE.
       for (i in requires) { 
         // strip off beginning and end, and parse the string
         var module = JSON.parse(requires[i].substring(8,requires[i].length-1));
-        // add it to our array
-        modules.push(module);
+        // add it to our array - FIXME don't hard code these
+        if (module!="http" && module!="fs" && modules.indexOf(module)<0)
+          modules.push(module);
       }    
       return modules;
     };
