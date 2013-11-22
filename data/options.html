@@ -66,6 +66,16 @@
             </th></tr>
         </table>
     </div>
+    <h3 class="EspruinoOption">Firmware Updates</h3>
+    <div>
+        <p><b>BETA:</b> be careful to choose the correct firmware for your device.</p>
+        <p><b>NOTE:</b> currently this only flashes devices with the Espruino USB Bootloader (like the Espruino Board). 
+        To put the board into bootloader mode, hold down BTN1 and then tap RST. The blue LED should start glowing. When this
+        is done and you have connected the Web IDE, click the 'Write Firmware' button and wait. Flashing can take around
+        5 minutes. When finished, the status in the top left will change and you can press the reset button on Espruino.</p>
+        <p><Input type="text" id="flashFirmwareUrl" size="50" value="http://www.espruino.com/binaries/espruino_r1v1_1v43.bin"/>
+        <button id="flashFirmware">Write Firmware</button></p>
+    </div>
 </div>
 <div id="optionButtons" style="display: none;>
     <Table width="100%">

@@ -35,10 +35,11 @@ THE SOFTWARE.
     Espruino.Flasher.init = function(){
     };
 
-    var getBinary = function(filename, callback) {
+    var getBinary = function(url, callback) {
+      console.log("Downloading "+url);
       Espruino.Status.setStatus("Downloading binary...");
       var xhr = new XMLHttpRequest();
-      xhr.open("GET", "http://www.espruino.com/binaries/"+filename, true);    
+      xhr.open("GET", url, true);    
       xhr.responseType = "arraybuffer";
       xhr.addEventListener("load", function () {
         if (xhr.status === 200) {
@@ -161,9 +162,9 @@ THE SOFTWARE.
       });
     }
     
-    Espruino.Flasher.flashDevice = function(_serial_lib, filename, callback) {
+    Espruino.Flasher.flashDevice = function(_serial_lib, url, callback) {
       serial_lib = _serial_lib;
-      getBinary(bytesReceived, function (err, binary) {
+      getBinary(url, function (err, binary) {
         if (err) { callback(err); return; }
         console.log("Downloaded "+binary.byteLength+" bytes");
         // add serial listener
