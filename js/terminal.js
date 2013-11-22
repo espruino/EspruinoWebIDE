@@ -57,18 +57,6 @@ Author: Gordon Williams (gw@pur3.co.uk)
     return $("#divblockly").is(":visible");
   };
 
-  var getModulesRequired = function(code) {
-    var modules = [];
-    var requires = code.match(/require\(\"[^\"]*\"\)/g);
-    for (i in requires) { 
-      // strip off beginning and end, and parse the string
-      var module = JSON.parse(requires[i].substring(8,requires[i].length-1));
-      // add it to our array
-      modules.push(module);
-    }    
-    return modules;
-  };
-
   var getCode=function(callback) {
     var code;
     if (isInBlockly()) {
@@ -77,27 +65,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
       code = Espruino.codeEditor.getValue();
     }
     
-    var requires = getModulesRequired(code);    
-    var moduleCode = ["Modules.removeAllCached();"];
-    var getModule = function (moduleName) {      
-      console.log("Getting module '"+moduleName+"'");
-      $.get("http://www.espruino.com/modules/"+moduleName+".min.js", function( moduleContents ) {
-        console.log("Got module '"+moduleName+"'");
-        moduleCode.push("Modules.addCached("+JSON.stringify(moduleName)+", "+JSON.stringify(moduleContents)+");\n");
-        Espruino.Status.incrementProgress(1);
-        if (--n == 0) {
-          Espruino.Status.setStatus("Done.");
-          finished();
-        }
-      }, 'text');
-    };
-    var finished = function() {      
-      callback(moduleCode.join("\n")+code);
-    };
-    var n = requires.length;
-    if (n==0) finished();
-    else Espruino.Status.setStatus("Loading Modules...", n); 
-    for (i in requires) getModule(requires[i]);
+    Espruino.Modules.loadModules(code, callback);
   };
 
   var saveFile = function(data, filename) {

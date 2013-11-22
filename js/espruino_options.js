@@ -31,6 +31,9 @@ THE SOFTWARE.
     {id:"#urlScripts",module:"Scripts",object:"Scripts",field:"url",type:"text"},
     {id:"#subDirsScripts",module:"Scripts",object:"Scripts",field:"subDirs",type:"JSON"},
     {id:"#fileExtensionsScripts",module:"Scripts",object:"Scripts",field:"fileExtensions",type:"JSON"},
+    {id:"#urlModules",module:"Modules",object:"Config",field:"url",type:"text"},
+    {id:"#fileExtensionsModules",module:"Modules",object:"Config",field:"fileExtensions",type:"JSON"},
+
     {id:".startMode",module:"General",field:"startMode",type:"radio"},
     {id:"#sendMinified",module:"Minify",field:"sendMinified",type:"check"},
     {id:"#compilationLevel",module:"Minify",field:"compilationLevel",type:"select"}
