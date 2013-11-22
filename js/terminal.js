@@ -149,10 +149,13 @@ Author: Gordon Williams (gw@pur3.co.uk)
     $( ".send" ).button({ text: false, icons: { primary: "ui-icon-transferthick-e-w" } }).click(function() {
       Espruino.Config.set("code", Espruino.codeEditor.getValue()); // save the code
       if (serial_lib.isConnected()) {
-          getCode(function (code) { 
-            var toSend = "echo(0);\n"+code+"\necho(1);\n";
-            console.log(toSend);
-            serial_lib.write(toSend);
+          getCode(function (code) {
+            if(Espruino.Minify.sendMinified === true){Espruino.Minify.MinifyCode(code,sendSerial);}
+            else{sendSerial(code);}
+            function sendSerial(data){
+                console.log(data);
+                serial_lib.write("echo(0);\n" + data + "echo(1);\n");
+            }
           });
       }
     });

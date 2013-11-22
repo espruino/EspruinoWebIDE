@@ -33,6 +33,9 @@
   <script src="js/espruino_general.js"></script>
   <script src="js/espruino_status.js"></script>
   <script src="js/espruino_flasher.js"></script>
+  <script src="js/espruino_scripts.js"></script>
+  <script src="js/espruino_options.js"></script>
+  <script src="js/espruino_minify.js"></script>
 
   <!-- for file save -->
   <script type="text/javascript" src="js/FileSaver.min.js"></script>
@@ -46,10 +49,16 @@
      <div id="codetoolbar" class="toolbar ui-widget-header">
         <button class="send">Send to Espruino</button>
         <button class="blockly">Switch between Code and Graphical Designer</button>
-        <button class="load">Load File</button> 
+        <button class="scripts">Load File</button> 
         <button class="save">Save File</button>
-        <!--<button class="flash">Flash Device</button>-->
+        <button class="options" style="position:absolute;right:4px;">Info / Options</button>
         <input type="file" id="fileLoader" style="display: none;"/> <!-- for file loading -->
+        <div id="loader" class="subform" style="display: none;">
+            <button class="load">Load File</button>
+            <span id="loaderTutorials"></span>
+            <span id="loaderScripts"></span>
+            <input type="checkbox" id="replaceInEditor"></input>Replace
+        </div>
       </div>
     <div id="divcode">
     <textarea id="code" name="code">
@@ -69,7 +78,7 @@ setInterval(function() {
           <button class="refresh">Refresh Serial Port List</button>
           <button class="open">Connect</button>
           <button class="close">Disconnect</button>
-          <span id="status">Not Connected</span>
+          <span id="status">Still Not Connected</span>
           <span id="progress"><span id="progressindicator">&nbsp;</span></span>
           <button class="webcam" style="position:absolute;right:4px;">Webcam</button>
     </div>

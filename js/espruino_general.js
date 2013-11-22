@@ -24,8 +24,10 @@ THE SOFTWARE.
 (function(){
   Espruino["General"] = {};
   Espruino.General.pinRegExp = /\/\*.+?\*\/.+?(,|\)|\])/g;
+  Espruino.General.startMode = "JS";
+  Espruino.General.isWindows = navigator.userAgent.indexOf("Windows")>=0;
   Espruino.General["setEditorCode"] = function(code,mode){
-      if(!mode){mode = $("input[name='replaceInEditor']:checked")[0];}
+      if(!mode){mode = $("#replaceInEditor")[0].checked;}
       if(mode){Espruino.codeEditor.setValue(code);}
       else{ Espruino.codeEditor.setValue(Espruino.codeEditor.getValue() + "\n" + code); }
   };
@@ -43,6 +45,8 @@ THE SOFTWARE.
             console.log(line.substring(start,end));
         }
       });
+      $("#divcode").click(function(){$(".subform").hide();});
+      $("#terminal").click(function(){$(".subform").hide();});
       
   };
   Espruino.General.setEditorLine = function(){
@@ -51,6 +55,14 @@ THE SOFTWARE.
       start = parseInt($(this).attr("start"));
       end = parseInt($(this).attr("end")) - 1;
       Espruino.codeEditor.setSelection({line:lineNr,ch:start},{line:lineNr,ch:end});
+  };
+  Espruino.General.convertFromOS = function (chars) {
+    if (!Espruino.General.isWindows) return chars;
+    return chars.replace(/\r\n/g,"\n");
+  };
+  Espruino.General.convertToOS = function (chars) {
+    if (!Espruino.General.isWindows) return chars;
+    return chars.replace(/\r\n/g,"\n").replace(/\n/g,"\r\n");
   };
 })();
 $.fn.selectRange = function(start, end) {

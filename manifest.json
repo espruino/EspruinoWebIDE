@@ -1,7 +1,7 @@
 {
   "name": "Espruino Web IDE",
   "description": "A Terminal and Graphical code Editor for Espruino JavaScript Microcontrollers",
-  "version": "0.29",
+  "version": "0.29.5",
   "app": {
     "background": {
       "scripts": ["js/background.js"]
@@ -12,6 +12,6 @@
     "256": "img/icon_256.png",
     "512": "img/icon_512.png"
   },
-  "permissions" : ["serial", "videoCapture", "storage"],
+  "permissions" : ["serial", "videoCapture", "app.window", "storage"],
   "manifest_version": 2
 }
