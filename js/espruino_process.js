@@ -22,28 +22,33 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 (function(){
-    Espruino["Minify"] = {};
-    Espruino.Minify.sendMinified = false;
-    Espruino.Minify.compilationLevel = "SIMPLE_OPTIMIZATIONS";
-    Espruino.Minify["initOptions"] = function(){
-      Espruino.Options.optionFields.push({id:"#sendMinified",module:"Minify",field:"sendMinified",type:"check"});
-      Espruino.Options.optionFields.push({id:"#compilationLevel",module:"Minify",field:"compilationLevel",type:"select"});
-      Espruino.Options.optionBlocks.push({id:"#divOptionMinify",htmlUrl:"data/Espruino_Minify.html"});
-    }
-    var minifyUrl = "http://closure-compiler.appspot.com/compile";
-    
-    Espruino.Minify.init = function(){
-    
+    // Code to load and save configuration options
+    Espruino["Process"] = {};
+    Espruino.Process.Env = {};
+
+    Espruino.Process.init = function() {
     };
-    Espruino.Minify.MinifyCode = function(data,callback){
-      var minifyObj = $.param({
-        compilation_level:Espruino.Minify.compilationLevel,
-        output_format:"text",
-        output_info:"compiled_code",
-        js_code:data
-      });
-      $.post(minifyUrl,minifyObj,function(data){
-        callback(data);  
-      },"text");
-    };    
+    
+    Espruino.Process.getProcess = function(callback){
+      var prevReader,bufText = "";
+      if(serial_lib.isConnected()){
+        prevReader = serial_lib.startListening(onRead);
+        serial_lib.write("echo(0);\nconsole.log(\"<<<<<\"+JSON.stringify(process.env)+\">>>>>\");echo(1);\n");
+        setTimeout(function(){
+          serial_lib.startListening(prevReader);
+          var startProcess = bufText.indexOf("<<<<<");endProcess = bufText.indexOf(">>>>>");
+          if(startProcess >= 0 && endProcess > 0){
+            Espruino.Process.Env = JSON.parse(bufText.substring(startProcess + 5,endProcess));
+            callback();
+          }
+        },500);
+        function onRead(readData){
+          var bufView=new Uint8Array(readData);
+          var startProcess = 0;endProcess = 0;
+          for(var i = 0; i < bufView.length; i++){
+            bufText += String.fromCharCode(bufView[i]);
+          }
+        }
+      }
+    };
 })();

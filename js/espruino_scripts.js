@@ -33,6 +33,15 @@ THE SOFTWARE.
       subDirs:["code"],
       fileExtensions:["js"]
   }
+  Espruino.Scripts["initOptions"] = function(){
+    Espruino.Options.optionFields.push({id:"#urlTutorials",module:"Scripts",object:"Scripts",field:"url",type:"text"});
+    Espruino.Options.optionFields.push({id:"#subDirsTutorials",module:"Scripts",object:"Tutorials",field:"subDirs",type:"JSON"});
+    Espruino.Options.optionFields.push({id:"#fileExtensionsTutorials",module:"Scripts",object:"Tutorials",field:"fileExtensions",type:"JSON"});
+    Espruino.Options.optionFields.push({id:"#urlScripts",module:"Scripts",object:"Scripts",field:"url",type:"text"});
+    Espruino.Options.optionFields.push({id:"#subDirsScripts",module:"Scripts",object:"Scripts",field:"subDirs",type:"JSON"});
+    Espruino.Options.optionFields.push({id:"#fileExtensionsScripts",module:"Scripts",object:"Scripts",field:"fileExtensions",type:"JSON"});
+    Espruino.Options.optionBlocks.push({id:"#divOptionScripts",htmlUrl:"data/Espruino_Scripts.html"});
+  };
 
   Espruino.Scripts.init = function(){
     $( ".scripts" ).button({ text: false, icons: { primary: "ui-icon-script" } }).click(openSelects);

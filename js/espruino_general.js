@@ -23,8 +23,17 @@ THE SOFTWARE.
 */
 (function(){
   Espruino["General"] = {};
-  Espruino.General.pinRegExp = /\/\*.+?\*\/.+?(,|\)|\])/g;
   Espruino.General.startMode = "JS";
+  Espruino.General.webCamOn = false;
+  Espruino.General.flashFirmwareUrl = "http://www.espruino.com/binaries/espruino_r1v1_1v43.bin";
+  Espruino.General["initOptions"] = function(){
+    Espruino.Options.optionFields.push({id:".startMode",module:"General",field:"startMode",type:"radio"});
+    Espruino.Options.optionFields.push({id:"#webCamOn",module:"General",field:"webCamOn",type:"check",onLoaded:switchWebCam});
+    Espruino.Options.optionFields.push({id:"#flashFirmwareUrl",module:"General",field:"flashFirmwareUrl",type:"text"});
+    Espruino.Options.optionBlocks.push({id:"#divOptionGeneral",htmlUrl:"data/Espruino_General.html"})
+    Espruino.Options.optionBlocks.push({id:"#divOptionFlashFirmware",htmlUrl:"data/Espruino_FlashFirmware.html"})
+  };
+  Espruino.General.pinRegExp = /\/\*.+?\*\/.+?(,|\)|\])/g;
   Espruino.General.isWindows = navigator.userAgent.indexOf("Windows")>=0;
   Espruino.General["setEditorCode"] = function(code,mode){
       if(!mode){mode = $("#replaceInEditor")[0].checked;}
@@ -64,6 +73,10 @@ THE SOFTWARE.
     if (!Espruino.General.isWindows) return chars;
     return chars.replace(/\r\n/g,"\n").replace(/\n/g,"\r\n");
   };
+  function switchWebCam(status){ 
+      if(status === true){ $(".webcam").show(500);}
+      else{ $(".webcam").hide(); }
+  }
 })();
 $.fn.selectRange = function(start, end) {
     if(!end) end = start; 

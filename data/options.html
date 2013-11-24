@@ -3,6 +3,7 @@
     <div><h3>Espruino Serial Terminal</h3>
       <p>A Serial Port Terminal Web App for Chrome</p>
       <p>This is designed for <a href="http://www.espruino.com" target="_blank">Espruino JavaScript for Microcontrollers</a>. If you like this, please give Espruino a try!</p>
+      <div id="processInfo"></div>
     </div>
     <h3>Credit</h3>
     <div>
@@ -14,67 +15,6 @@
             <tr><td>CodeMirror</td><td>the team of codemirror for the toolset behind the editor window</td></tr>
             <tr><td>blockly</td><td>Neil Fraser and the team of blockly</td></tr>    
         </table>
-    </div>
-    <h3 class="EspruinoOption">Options general</h3>
-    <div>
-        inactive
-        <Table border="1">
-            <tr><th>Function</th><th>Option</th></tr>
-            <tr>
-                <th>Start Mode</th>
-                <th>Javascript<input type="radio" class="startMode" name="startMode" value="JS" checked>
-                    Graphical<input type="radio" class="startMode" name="startMode" value="G"></th>
-            </tr>
-        </Table>
-    </div>
-    <h3 class="EspruinoOption">Locations</h3>
-    <div>
-        <Table border="1">
-            <tr><th>Type</th><th>Url</th><th>Sub directories</th><th>Extensions</th></tr>
-            <tr>
-                <td>Tutorial</td>
-                <td><Input type="text" id="urlTutorials" size="60" value=""></td>
-                <td><Input type="text" id="subDirsTutorials" size="40" value=""></td>
-                <td><Input type="text" id="fileExtensionsTutorials" size="10" value=""></td>
-            </tr>
-            <tr>
-                <td>Scripts</td>
-                <td><Input type="text" id="urlScripts" size="60" value=""></td>
-                <td><Input type="text" id="subDirsScripts" size="40" value=""></td>
-                <td><Input type="text" id="fileExtensionsScripts" size="10" value=""></td>
-            </tr>
-            <tr>
-                <td>Modules</td>
-                <td><Input type="text" id="urlModules" size="60" value=""></td>
-                <td></td>
-                <td><Input type="text" id="fileExtensionsModules" size="10" value=""></td>
-            </tr>
-        </Table>
-    </div>
-    <h3 class="EspruinoOption">Options Interface</h3>
-    <div>
-        inactive
-        <table border="1">
-            <tr><th>Option</th><th>Value</th></tr>
-            <tr><th>Minify before send</th><th><input type="checkbox" id="sendMinified"></th></tr>
-            <tr><th>Compilation Level</th>
-                <th><select id="compilationLevel">
-                        <option value="WHITESPACE_ONLY">WHITESPACE_ONLY</option>
-                        <option value="SIMPLE_OPTIMIZATIONS">SIMPLE_OPTIMIZATIONS</option>
-                        <option value="ADVANCED_OPTIMIZATIONS">ADVANCED_OPTIMIZATIONS</option>
-                    </select>
-            </th></tr>
-        </table>
-    </div>
-    <h3 class="EspruinoOption">Firmware Updates</h3>
-    <div>
-        <p><b>BETA:</b> be careful to choose the correct firmware for your device.</p>
-        <p><b>NOTE:</b> currently this only flashes devices with the Espruino USB Bootloader (like the Espruino Board). 
-        To put the board into bootloader mode, hold down BTN1 and then tap RST. The blue LED should start glowing. When this
-        is done and you have connected the Web IDE, click the 'Write Firmware' button and wait. Flashing can take around
-        5 minutes. When finished, the status in the top left will change and you can press the reset button on Espruino.</p>
-        <p><Input type="text" id="flashFirmwareUrl" size="50" value="http://www.espruino.com/binaries/espruino_r1v1_1v43.bin"/>
-        <button id="flashFirmware">Write Firmware</button></p>
     </div>
 </div>
 <div id="optionButtons" style="display: none;>
