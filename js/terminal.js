@@ -298,6 +298,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
         flipState(false);
         Espruino.Status.setStatus("Connected");
         serial_lib.startListening(onRead);
+        Espruino.Process.getProcess(setBoardConnected);
       } else {
         // fail
         flipState(true);
@@ -307,12 +308,15 @@ Author: Gordon Williams (gw@pur3.co.uk)
       console.log("Force disconnect");
       closeSerial(); // force disconnect
     });
+    function setBoardConnected(){$("#processBoard").html(Espruino.Process.Env.BOARD);}
   };
 
   var closeSerial=function() {
-   serial_lib.close(function(result) {
-     flipState(true);
-     Espruino.Status.setStatus("Disconnected");
+    serial_lib.close(function(result) {
+      flipState(true);
+      $("#processBoard").html("");
+      Espruino.Status.setStatus("Disconnected");
+      Espruino.Process.Env = {};
     });
   };
     

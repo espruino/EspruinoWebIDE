@@ -29,12 +29,13 @@
   <script src="js/codemirror/addon/lint/javascript-lint.js"></script>
   <script src="js/codemirror/addon/edit/trailingspace.js"></script>
   <script src="js/espruino.js"></script>
+  <script src="js/espruino_options.js"></script>
   <script src="js/espruino_config.js"></script>
   <script src="js/espruino_general.js"></script>
   <script src="js/espruino_status.js"></script>
+  <script src="js/espruino_process.js"></script>
   <script src="js/espruino_flasher.js"></script>
   <script src="js/espruino_scripts.js"></script>
-  <script src="js/espruino_options.js"></script>
   <script src="js/espruino_minify.js"></script>
   <script src="js/espruino_modules.js"></script>
 
@@ -81,7 +82,8 @@ setInterval(function() {
           <button class="close">Disconnect</button>
           <span id="status">Still Not Connected</span>
           <span id="progress"><span id="progressindicator">&nbsp;</span></span>
-          <button class="webcam" style="position:absolute;right:4px;">Webcam</button>
+          <span id="processBoard" style="position:absolute;right:100px;">&nbsp;</span>
+          <button class="webcam" style="position:absolute;right:4px;top:2px;">Webcam</button>
     </div>
     <video autoplay id="videotag"></video>  
     <div id="terminal">

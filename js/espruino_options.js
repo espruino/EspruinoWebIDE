@@ -24,31 +24,34 @@ THE SOFTWARE.
 (function(){
   Espruino.Options = {};
   var urlOptions = "data/options.html", defaultFileName = "EspruinoOptions";
-  var optionFields = [
-    {id:"#urlTutorials",module:"Scripts",object:"Scripts",field:"url",type:"text"},
-    {id:"#subDirsTutorials",module:"Scripts",object:"Tutorials",field:"subDirs",type:"JSON"},
-    {id:"#fileExtensionsTutorials",module:"Scripts",object:"Tutorials",field:"fileExtensions",type:"JSON"},
-    {id:"#urlScripts",module:"Scripts",object:"Scripts",field:"url",type:"text"},
-    {id:"#subDirsScripts",module:"Scripts",object:"Scripts",field:"subDirs",type:"JSON"},
-    {id:"#fileExtensionsScripts",module:"Scripts",object:"Scripts",field:"fileExtensions",type:"JSON"},
-    {id:"#urlModules",module:"Modules",object:"Config",field:"url",type:"text"},
-    {id:"#fileExtensionsModules",module:"Modules",object:"Config",field:"fileExtensions",type:"JSON"},
-
-    {id:".startMode",module:"General",field:"startMode",type:"radio"},
-    {id:"#sendMinified",module:"Minify",field:"sendMinified",type:"check"},
-    {id:"#compilationLevel",module:"Minify",field:"compilationLevel",type:"select"}
-  ];
-
+  var optionFields = [];
+  var optionBlocks = [];
+  var maxWait = 5000;
+  Espruino.Options.optionFields = optionFields;
+  Espruino.Options.optionBlocks = optionBlocks;
   Espruino.Options.init = function(){
     $( ".options" ).button({ text: false, icons: { primary: "ui-icon-info" } }).click(openOptionsForm);
+    for(var m in Espruino){
+      if(Espruino[m].initOptions){ Espruino[m].initOptions();}
+    }
     Espruino.Options.loadOptions(setStartMode);
     function setStartMode(){
       if(Espruino.General.startMode === "JS"){$("#divblockly").hide();$("#divcode").show();}
       else{$("#divcode").hide();$("#divblockly").show();}
+      optionsOnLoaded();
     }
   };
   function openOptionsForm(){
+    var html = "";
     $("#optionsdiv").remove();
+    if(!$.isEmptyObject(Espruino.Process.Env)){
+      html += "<table border=\"1\">";
+      for(var p in Espruino.Process.Env){
+        html += "<tr><th>" + p + "</th><th>" + Espruino.Process.Env[p] + "</th></tr>";
+      }
+      html += "</table>";
+    }
+    else{ html = "";}
     $.get(urlOptions,function(data){
       $('<div id="optionsdiv" class=\"subform\" style=\"z-index:5\">' + data + '</div>').css(
         { position: 'absolute',display: 'none',top: 30,left: 200,
@@ -56,24 +59,47 @@ THE SOFTWARE.
         }
       ).appendTo("body").fadeIn(200);
       window.setTimeout(function(){
-        $("#optionsAccordion").accordion({ active: 0, collapsible: true, beforeActivate: function( event, ui ) {switchButtons(ui);} });
-        setFormFromOptions();
-        $("#saveOptions").unbind().button({ text:false, icons: { primary: " ui-icon-arrowreturnthick-1-s" } }).click(Espruino.Options.saveOptions);
-        $("#loadOptions").unbind().button({ text:false, icons: { primary: " ui-icon-arrowreturnthick-1-n" } }).click(Espruino.Options.loadOptions);
-        $("#resetOptions").unbind().button({ text:false, icons: { primary: "ui-icon-refresh" } }).click(Espruino.Options.resetOptions);
-        $("#saveOptionsToFile").button({ text: false, icons: { primary: "ui-icon-disk" } }).unbind().click(Espruino.Options.saveToFileOptions);
-        $("#loadOptionsFromFile").button({ text: false, icons: { primary: "ui-icon-folder-open" } }).unbind().click(Espruino.Options.loadFromFileOptions);
+        $("#processInfo").html(html);
+        var defs = [];
+        for(var i = 0; i < optionBlocks.length; i++){
+          if(optionBlocks[i].htmlUrl){
+            defs.push(loadOptionsHtml(optionBlocks[i].htmlUrl));
+          }
+        }
+        if(defs.length > 0){$.when.apply(null,defs).then(function(){htmlLoaded();});}
+        function loadOptionsHtml(path){
+          var dfd = $.Deferred(),t;
+          t = setInterval(function(){clearInterval(t);dfd.reject();},maxWait);
+          $.get(path,function(data){
+            $("#optionsAccordion").append(data);
+            dfd.resolve();  
+          },"text").fail(function(a,b){ console.log(a,b);});
+          return dfd.promise();   
+        }
+        function htmlLoaded(){
+          for(var i = 0; i < optionBlocks.length; i++){
+            if(optionBlocks[i].html){ $("#optionsAccordion").append(optionBlocks[i].html);}
+          }
+          $("#optionsAccordion").accordion({ active: 0, collapsible: true, beforeActivate: function( event, ui ) {switchButtons(ui);} });
+          setFormFromOptions();
+          $("#saveOptions").unbind().button({ text:false, icons: { primary: " ui-icon-arrowreturnthick-1-s" } }).click(Espruino.Options.saveOptions);
+          $("#loadOptions").unbind().button({ text:false, icons: { primary: " ui-icon-arrowreturnthick-1-n" } }).click(Espruino.Options.loadOptions);
+          $("#resetOptions").unbind().button({ text:false, icons: { primary: "ui-icon-refresh" } }).click(Espruino.Options.resetOptions);
+          $("#saveOptionsToFile").button({ text: false, icons: { primary: "ui-icon-disk" } }).unbind().click(Espruino.Options.saveToFileOptions);
+          $("#loadOptionsFromFile").button({ text: false, icons: { primary: "ui-icon-folder-open" } }).unbind().click(Espruino.Options.loadFromFileOptions);
         // Set up the firmware flasher
-        $( "#flashFirmware" ).button().click(function() {
-          Espruino.Flasher.flashDevice(serial_lib, $("#flashFirmwareUrl").val() ,function (err) {
-            serial_lib.startListening(onRead); // reset listener
-            if (err) {
-              Espruino.Status.setStatus("Error Flashing.");
-              console.log(err);
-              //alert(err);
-           } else Espruino.Status.setStatus("Done.");
-         });
-    });
+          $( "#flashFirmware" ).button().click(function() {
+            Espruino.Flasher.flashDevice(serial_lib, $("#flashFirmwareUrl").val() ,function (err) {
+              serial_lib.startListening(onRead); // reset listener
+              if (err) {
+                Espruino.Status.setStatus("Error Flashing.");
+                console.log(err);
+                //alert(err);
+              }
+              else Espruino.Status.setStatus("Done.");
+            });
+          });
+        }
       },10);
     },"text");
   }
@@ -153,11 +179,22 @@ THE SOFTWARE.
       }
     }        
   }
+  function optionsOnLoaded(){
+    var value;
+    for(var i = 0; i < optionFields.length; i++){
+      if(optionFields[i].onLoaded){ 
+        if(optionFields[i].object){ value = Espruino[optionFields[i].module][optionFields[i].object][optionFields[i].field];}
+        else{ value = Espruino[optionFields[i].module][optionFields[i].field];}
+        optionFields[i].onLoaded(value);
+      }
+    }  
+  }
   Espruino.Options["saveOptions"] = function(){
     var optionsObj;
     setOptionsFromForm();
     optionsObj = getOptionsObj();
     chrome.storage.local.set({EspruinoOptions:optionsObj});
+    optionsOnLoaded();
     $(".subform").hide();   
   };
   Espruino.Options["resetOptions"] = function(){
@@ -177,6 +214,7 @@ THE SOFTWARE.
     setOptionsFromForm();
     optionsObj = JSON.stringify(getOptionsObj());
     saveAs(new Blob([Espruino.General.convertToOS(optionsObj)], { type: "text/plain" }), defaultFileName); 
+    optionsOnLoaded();
     $(".subform").hide();
   };
   Espruino.Options["loadFromFileOptions"] = function(callback){
