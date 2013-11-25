@@ -33,12 +33,15 @@ THE SOFTWARE.
       var prevReader,bufText = "";
       if(serial_lib.isConnected()){
         prevReader = serial_lib.startListening(onRead);
-        serial_lib.write("echo(0);\nconsole.log(\"<<<<<\"+JSON.stringify(process.env)+\">>>>>\");echo(1);\n");
+        // string adds to stop the command tag being detected in the output
+        serial_lib.write('\necho(0);\nconsole.log("<<"+"<<<"+JSON.stringify(process.env)+">>>"+">>");echo(1);\n');
         setTimeout(function(){
           serial_lib.startListening(prevReader);
-          var startProcess = bufText.indexOf("<<<<<");endProcess = bufText.indexOf(">>>>>");
+          var startProcess = bufText.indexOf("<<<<<");endProcess = bufText.indexOf(">>>>>", startProcess);
           if(startProcess >= 0 && endProcess > 0){
-            Espruino.Process.Env = JSON.parse(bufText.substring(startProcess + 5,endProcess));
+            var pText = bufText.substring(startProcess + 5,endProcess);
+            console.log("Got \""+pText+"\"");
+            Espruino.Process.Env = JSON.parse(pText);
             callback();
           }
         },500);

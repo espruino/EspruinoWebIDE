@@ -295,8 +295,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
     serial_lib.open(serialPort, function(cInfo) {
       if (cInfo!=undefined) {
         logSuccess("Device found (connectionId="+cInfo.connectionId+")");
-        flipState(false);
-        Espruino.Status.setStatus("Connected");
+        flipState(false);        
         serial_lib.startListening(onRead);
         Espruino.Process.getProcess(setBoardConnected);
       } else {
@@ -308,7 +307,10 @@ Author: Gordon Williams (gw@pur3.co.uk)
       console.log("Force disconnect");
       closeSerial(); // force disconnect
     });
-    function setBoardConnected(){$("#processBoard").html(Espruino.Process.Env.BOARD);}
+    function setBoardConnected(){
+      Espruino.Status.setStatus("Connected");
+      $("#processBoard").html(Espruino.Process.Env.BOARD);
+    }
   };
 
   var closeSerial=function() {
