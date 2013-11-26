@@ -18,7 +18,7 @@ Author: Luis Leao (luisleao@gmail.com)
 Author: Gordon Williams (gw@pur3.co.uk)
 **/
 
-var serial_lib=(function() {
+(function() {
   
   var connectionInfo;
   var readListener;
@@ -175,8 +175,7 @@ var serial_lib=(function() {
     }
   };
 
-
-  return {
+  Espruino["Serial"] = {
     "getPorts": getPorts,
     "open": openSerial,
     "isConnected": isConnected,

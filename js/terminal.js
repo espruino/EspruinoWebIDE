@@ -116,13 +116,13 @@ Author: Gordon Williams (gw@pur3.co.uk)
     // code toolbar
     $( ".send" ).button({ text: false, icons: { primary: "ui-icon-transferthick-e-w" } }).click(function() {
       Espruino.Config.set("code", Espruino.codeEditor.getValue()); // save the code
-      if (serial_lib.isConnected()) {
+      if (Espruino.Serial.isConnected()) {
           getCode(function (code) {
             if(Espruino.Minify.sendMinified === true){Espruino.Minify.MinifyCode(code,sendSerial);}
             else{sendSerial(code);}
             function sendSerial(data){
                 console.log(data);
-                serial_lib.write("echo(0);\n" + data + "\necho(1);\n");
+                Espruino.Serial.write("echo(0);\n" + data + "\necho(1);\n");
             }
           });
       }
@@ -183,7 +183,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
     $("#terminalfocus").keypress(function(e) { 
       e.preventDefault();
       var ch = String.fromCharCode(e.which);
-      serial_lib.write(ch);
+      Espruino.Serial.write(ch);
     }).keydown(function(e) { 
       var ch = undefined;
       if (e.ctrlKey) {
@@ -203,7 +203,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
 
       if (ch!=undefined) {
         e.preventDefault();
-        serial_lib.write(ch);
+        Espruino.Serial.write(ch);
       } 
     }).bind('paste', function () {
       var element = this; 
@@ -211,7 +211,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
       setTimeout(function () {
         var text = $(element).val();
         $(element).val("");        
-        serial_lib.write(text);
+        Espruino.Serial.write(text);
       }, 100);
     });
 
@@ -256,7 +256,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
     while (serial_devices.options.length > 0)
       serial_devices.options.remove(0);
     
-    serial_lib.getPorts(function(items) {
+    Espruino.Serial.getPorts(function(items) {
       logSuccess("got "+items.length+" ports");
 
       var selected = -1;
@@ -292,11 +292,11 @@ Author: Gordon Williams (gw@pur3.co.uk)
     }
     Espruino.Status.setStatus("Connecting");
     flipState(true);
-    serial_lib.open(serialPort, function(cInfo) {
+    Espruino.Serial.open(serialPort, function(cInfo) {
       if (cInfo!=undefined) {
         logSuccess("Device found (connectionId="+cInfo.connectionId+")");
         flipState(false);        
-        serial_lib.startListening(onRead);
+        Espruino.Serial.startListening(onRead);
         Espruino.Process.getProcess(setBoardConnected);
       } else {
         // fail
@@ -314,7 +314,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
   };
 
   var closeSerial=function() {
-    serial_lib.close(function(result) {
+    Espruino.Serial.close(function(result) {
       flipState(true);
       $("#processBoard").html("");
       Espruino.Status.setStatus("Disconnected");

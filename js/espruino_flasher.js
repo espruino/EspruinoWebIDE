@@ -25,7 +25,6 @@ THE SOFTWARE.
     // Code to re-flash Espruino via Web IDE
     Espruino["Flasher"] = {};
 
-    var serial_lib = undefined
     var dataReceived = undefined; // listener for when data is received
     var bytesReceived = []; // list of characters for when no handler is specified
 
@@ -61,7 +60,7 @@ THE SOFTWARE.
       }, 5000);      
       var iPoll = setInterval(function() {
         console.log("Sending... 0x7F");
-        serial_lib.write("\x7f");
+        Espruino.Serial.write("\x7f");
       }, 500);
       dataReceived = function (c) {
         dataReceived = undefined;
@@ -97,12 +96,12 @@ THE SOFTWARE.
         chksum = chksum ^ data[i];
         s += String.fromCharCode(data[i]);
       }
-      serial_lib.write(s + String.fromCharCode(chksum));
+      Espruino.Serial.write(s + String.fromCharCode(chksum));
       waitForACK(callback, timeout);
     }
 
     var sendCommand = function(command, callback) {
-      serial_lib.write(String.fromCharCode(command) + String.fromCharCode(0xFF ^ command));
+      Espruino.Serial.write(String.fromCharCode(command) + String.fromCharCode(0xFF ^ command));
       waitForACK(callback);
     }
 
@@ -162,13 +161,12 @@ THE SOFTWARE.
       });
     }
     
-    Espruino.Flasher.flashDevice = function(_serial_lib, url, callback) {
-      serial_lib = _serial_lib;
+    Espruino.Flasher.flashDevice = function(url, callback) {
       getBinary(url, function (err, binary) {
         if (err) { callback(err); return; }
         console.log("Downloaded "+binary.byteLength+" bytes");
         // add serial listener
-        serial_lib.startListening(function (readData) {
+        Espruino.Serial.startListening(function (readData) {
           var bufView=new Uint8Array(readData);
           for (var i=0;i<bufView.length;i++) bytesReceived.push(bufView[i]);
           if (dataReceived) {

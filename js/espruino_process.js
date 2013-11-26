@@ -31,12 +31,12 @@ THE SOFTWARE.
     
     Espruino.Process.getProcess = function(callback){
       var prevReader,bufText = "";
-      if(serial_lib.isConnected()){
-        prevReader = serial_lib.startListening(onRead);
+      if(Espruino.Serial.isConnected()){
+        prevReader = Espruino.Serial.startListening(onRead);
         // string adds to stop the command tag being detected in the output
-        serial_lib.write('\necho(0);\nconsole.log("<<"+"<<<"+JSON.stringify(process.env)+">>>"+">>");echo(1);\n');
+        Espruino.Serial.write('\necho(0);\nconsole.log("<<"+"<<<"+JSON.stringify(process.env)+">>>"+">>");echo(1);\n');
         setTimeout(function(){
-          serial_lib.startListening(prevReader);
+          Espruino.Serial.startListening(prevReader);
           var startProcess = bufText.indexOf("<<<<<");endProcess = bufText.indexOf(">>>>>", startProcess);
           if(startProcess >= 0 && endProcess > 0){
             var pText = bufText.substring(startProcess + 5,endProcess);
