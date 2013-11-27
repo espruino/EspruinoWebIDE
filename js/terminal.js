@@ -154,7 +154,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
     });
     $("#terminal").css("top",  $("#terminaltoolbar").outerHeight()+"px");
     Espruino.initModules();
-
+    
     flipState(true);
     
     refreshPorts();
@@ -238,7 +238,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
       if (cInfo!=undefined) {
         logSuccess("Device found (connectionId="+cInfo.connectionId+")");
         flipState(false);        
-        Espruino.Serial.startListening(Espruino.Terminal.outputDataHandler);
+        Espruino.Terminal.grabSerialPort();
         Espruino.Process.getProcess(setBoardConnected);
       } else {
         // fail

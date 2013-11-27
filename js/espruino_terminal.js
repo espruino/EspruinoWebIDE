@@ -25,7 +25,7 @@ THE SOFTWARE.
     // Code to handle display and input from the left-hand terminal pane
     Espruino["Terminal"] = {};
     
-    var onInputData = undefined; // the handler for character data from user 
+    var onInputData = function(d){}; // the handler for character data from user 
 
     var displayTimeout = null;
     var displayData = [];
@@ -55,7 +55,7 @@ THE SOFTWARE.
       $("#terminalfocus").keypress(function(e) { 
         e.preventDefault();
         var ch = String.fromCharCode(e.which);
-        Espruino.Serial.write(ch);
+        onInputData(ch);
       }).keydown(function(e) { 
         var ch = undefined;
         if (e.ctrlKey) {
@@ -75,7 +75,7 @@ THE SOFTWARE.
 
         if (ch!=undefined) {
           e.preventDefault();
-          Espruino.Serial.write(ch);
+          onInputData(ch);
         } 
       }).bind('paste', function () {
         var element = this; 
@@ -83,7 +83,7 @@ THE SOFTWARE.
         setTimeout(function () {
           var text = $(element).val();
           $(element).val("");        
-          Espruino.Serial.write(text);
+          onInputData(text);
         }, 100);
       });
     };
@@ -174,6 +174,16 @@ THE SOFTWARE.
           displayData = [];
           displayTimeout = null;
         }, 50);
+    };
+    
+    /// Claim input and output of the Serial port
+    Espruino.Terminal.grabSerialPort = function() {
+      // Ensure that keypresses go direct to the Espruino device
+      Espruino.Terminal.setInputDataHandler(function(d) {
+        Espruino.Serial.write(d);
+      });
+      // Ensure that data from Espruino goes to this terminal
+      Espruino.Serial.startListening(Espruino.Terminal.outputDataHandler);      
     };
 
     
