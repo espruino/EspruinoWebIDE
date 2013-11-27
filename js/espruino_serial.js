@@ -42,7 +42,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
           connectionDisconnectCallback();
       }
    });
-  }
+  };
   
   var startListening=function(callback) {
     if (!connectionInfo || !connectionInfo.connectionId) {
@@ -59,7 +59,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
       return;
     }
     if (readInfo && readInfo.bytesRead>0 && readInfo.data) {
-      onRead(readInfo.data);
+      if (readListener) readListener(readInfo.data);
     }
     chrome.serial.read(connectionInfo.connectionId, 128, onCharRead);
   };
@@ -90,10 +90,6 @@ Author: Gordon Williams (gw@pur3.co.uk)
   };
   
   var onWrite=function(obj) {
-  };
-  
-  var onRead=function(readInfo) {
-    if (readListener) readListener(readInfo);
   };
 
   var str2ab=function(str) {
@@ -140,8 +136,10 @@ Author: Gordon Williams (gw@pur3.co.uk)
     
     var blockSize = 32;
 
-    if (writeData.length>blockSize) 
+    if (writeData.length>blockSize) {
       Espruino.Status.setStatus("Sending...", writeData.length);
+      console.log("Sending "+JSON.stringify(data));
+    }
 
     if (writeInterval==undefined) {
       function sender() {

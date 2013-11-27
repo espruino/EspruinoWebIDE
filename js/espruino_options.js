@@ -90,7 +90,7 @@ THE SOFTWARE.
         // Set up the firmware flasher
           $( "#flashFirmware" ).button().click(function() {
             Espruino.Flasher.flashDevice($("#flashFirmwareUrl").val() ,function (err) {
-              Espruino.Serial.startListening(onRead); // reset listener
+              Espruino.Serial.startListening(Espruino.Terminal.outputDataHandler); // reset listener
               if (err) {
                 Espruino.Status.setStatus("Error Flashing.");
                 console.log(err);

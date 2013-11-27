@@ -30,8 +30,8 @@ THE SOFTWARE.
     Espruino.Options.optionFields.push({id:".startMode",module:"General",field:"startMode",type:"radio"});
     Espruino.Options.optionFields.push({id:"#webCamOn",module:"General",field:"webCamOn",type:"check",onLoaded:switchWebCam});
     Espruino.Options.optionFields.push({id:"#flashFirmwareUrl",module:"General",field:"flashFirmwareUrl",type:"text"});
-    Espruino.Options.optionBlocks.push({id:"#divOptionGeneral",htmlUrl:"data/Espruino_General.html"})
-    Espruino.Options.optionBlocks.push({id:"#divOptionFlashFirmware",htmlUrl:"data/Espruino_FlashFirmware.html"})
+    Espruino.Options.optionBlocks.push({id:"#divOptionGeneral",htmlUrl:"data/Espruino_General.html"});
+    Espruino.Options.optionBlocks.push({id:"#divOptionFlashFirmware",htmlUrl:"data/Espruino_FlashFirmware.html"});
   };
   Espruino.General.pinRegExp = /\/\*.+?\*\/.+?(,|\)|\])/g;
   Espruino.General.isWindows = navigator.userAgent.indexOf("Windows")>=0;
@@ -77,6 +77,24 @@ THE SOFTWARE.
       if(status === true){ $(".webcam").show(500);}
       else{ $(".webcam").hide(); }
   }
+  
+  Espruino.General.escapeHTML = (function () {
+    var chr = { '"': '&quot;', '&': '&amp;', '<': '&lt;', '>': '&gt;', ' ': '&nbsp;' };
+    return function (text) {
+        return text.replace(/[\"&<> ]/g, function (a) { return chr[a]; });
+    };
+  }());
+  
+  Espruino.General.getSubString = function(str, from, len) {
+    if (len == undefined) {
+      return str.substr(from, len);
+    } else {
+      var s = str.substr(from, len);
+      while (s.length < len) s+=" ";
+      return s;
+    }
+  };
+  
 })();
 $.fn.selectRange = function(start, end) {
     if(!end) end = start; 

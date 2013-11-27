@@ -27,5 +27,5 @@ Espruino.initModules = function() {
   for (module in Espruino)
     if (Espruino[module].init != undefined)
       Espruino[module].init();
-}
+};
 

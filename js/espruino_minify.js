@@ -29,7 +29,7 @@ THE SOFTWARE.
       Espruino.Options.optionFields.push({id:"#sendMinified",module:"Minify",field:"sendMinified",type:"check"});
       Espruino.Options.optionFields.push({id:"#compilationLevel",module:"Minify",field:"compilationLevel",type:"select"});
       Espruino.Options.optionBlocks.push({id:"#divOptionMinify",htmlUrl:"data/Espruino_Minify.html"});
-    }
+    };
     var minifyUrl = "http://closure-compiler.appspot.com/compile";
     
     Espruino.Minify.init = function(){

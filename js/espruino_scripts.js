@@ -32,7 +32,7 @@ THE SOFTWARE.
       url:"https://api.github.com/repos/espruino/Espruino/git/trees/master",
       subDirs:["code"],
       fileExtensions:["js"]
-  }
+  };
   Espruino.Scripts["initOptions"] = function(){
     Espruino.Options.optionFields.push({id:"#urlTutorials",module:"Scripts",object:"Scripts",field:"url",type:"text"});
     Espruino.Options.optionFields.push({id:"#subDirsTutorials",module:"Scripts",object:"Tutorials",field:"subDirs",type:"JSON"});

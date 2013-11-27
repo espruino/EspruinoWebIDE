@@ -1,7 +1,7 @@
 /*
  * The MIT License
 
-Copyright (c) 2013 by Juergen Marsch
+Copyright (c) 2013 by Gordon Williams
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -71,8 +71,8 @@ THE SOFTWARE.
           Espruino.Status.setStatus("Initialised.");
           callback(undefined);
         }
-      }
-    }
+      };
+    };
 
     var waitForACK = function(callback, timeout) {
       var iTimeout = setTimeout(function() {
@@ -86,8 +86,8 @@ THE SOFTWARE.
           callback(undefined);
         } else
           callback("Expected ACK but got "+c);
-      }   
-    }
+      };   
+    };
 
     var sendData = function(data, callback, timeout) {
       var s = "";
@@ -98,12 +98,12 @@ THE SOFTWARE.
       }
       Espruino.Serial.write(s + String.fromCharCode(chksum));
       waitForACK(callback, timeout);
-    }
+    };
 
     var sendCommand = function(command, callback) {
       Espruino.Serial.write(String.fromCharCode(command) + String.fromCharCode(0xFF ^ command));
       waitForACK(callback);
-    }
+    };
 
     var eraseChip = function(callback) {
       Espruino.Status.setStatus("Erasing...");
@@ -116,7 +116,7 @@ THE SOFTWARE.
           callback(undefined);
         }, 20000/*timeout*/);                 
       });
-    }
+    };
 
     var writeData = function(callback, addr, data) {
       if (data.length>256) callback("Writing too much data");
@@ -159,7 +159,7 @@ THE SOFTWARE.
           }, 2000/*timeout*/);
         });                 
       });
-    }
+    };
     
     Espruino.Flasher.flashDevice = function(url, callback) {
       getBinary(url, function (err, binary) {
@@ -195,7 +195,7 @@ THE SOFTWARE.
                 if (err) { callback(err); return; }
                 writer(offset + chunkSize);
               }, 0x08000000 + offset, data);
-            }
+            };
             writer(1024*10 /* no bootloader */);
           });
         });

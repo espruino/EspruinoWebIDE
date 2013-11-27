@@ -37,14 +37,6 @@ Author: Gordon Williams (gw@pur3.co.uk)
   var myLayout;
   var serial_devices=document.querySelector(".serial_devices");
 
-  var displayTimeout = null;
-  var displayData = [];
-  
-  var termText = [ "" ];
-  var termCursorX = 0;
-  var termCursorY = 0;
-  var termControlChars = [];
-  
   var logSuccess=function(msg) {
     console.log(msg);
   };
@@ -165,56 +157,6 @@ Author: Gordon Williams (gw@pur3.co.uk)
 
     flipState(true);
     
-    $("#terminal").mouseup(function() {
-      var terminalfocus = $('#terminalfocus');
-      var selectedText = window.getSelection().toString();
-      if (selectedText.length > 0) {               
-        //console.log(selectedText);
-        //console.log(selectedText.split("").map(function(c) { return c.charCodeAt(0); }));    
-        selectedText = selectedText.replace(/\xA0/g," "); // Convert nbsp chars to spaces
-        //console.log(selectedText.split("").map(function(c) { return c.charCodeAt(0); }));
-        terminalfocus.val(selectedText).select();
-        document.execCommand('copy');
-        terminalfocus.val('');
-      }
-      terminalfocus.focus(); 
-    });
-    $("#terminalfocus").focus(function() { $("#terminal").addClass('focus'); } ).blur(function() { $("#terminal").removeClass('focus'); } );
-    $("#terminalfocus").keypress(function(e) { 
-      e.preventDefault();
-      var ch = String.fromCharCode(e.which);
-      Espruino.Serial.write(ch);
-    }).keydown(function(e) { 
-      var ch = undefined;
-      if (e.ctrlKey) {
-        if (e.keyCode == 'C'.charCodeAt(0)) ch = String.fromCharCode(3); // control C
-      }
-      if (e.keyCode == 8) ch = "\x08"; // backspace
-      if (e.keyCode == 9) ch = "\x09"; // tab
-      if (e.keyCode == 46) ch = String.fromCharCode(27)+String.fromCharCode(91)+String.fromCharCode(51)+String.fromCharCode(126); // delete
-      if (e.keyCode == 38) ch = String.fromCharCode(27)+String.fromCharCode(91)+String.fromCharCode(65); // up
-      if (e.keyCode == 40) ch = String.fromCharCode(27)+String.fromCharCode(91)+String.fromCharCode(66); // down
-      if (e.keyCode == 39) ch = String.fromCharCode(27)+String.fromCharCode(91)+String.fromCharCode(67); // right
-      if (e.keyCode == 37) ch = String.fromCharCode(27)+String.fromCharCode(91)+String.fromCharCode(68); // left
-      if (e.keyCode == 36) ch = String.fromCharCode(27)+String.fromCharCode(79)+String.fromCharCode(72); // home
-      if (e.keyCode == 35) ch = String.fromCharCode(27)+String.fromCharCode(79)+String.fromCharCode(70); // end
-      if (e.keyCode == 33) ch = String.fromCharCode(27)+String.fromCharCode(91)+String.fromCharCode(53)+String.fromCharCode(126); // page up
-      if (e.keyCode == 34) ch = String.fromCharCode(27)+String.fromCharCode(91)+String.fromCharCode(54)+String.fromCharCode(126); // page down
-
-      if (ch!=undefined) {
-        e.preventDefault();
-        Espruino.Serial.write(ch);
-      } 
-    }).bind('paste', function () {
-      var element = this; 
-      // nasty hack - wait for paste to complete, then get contents of input
-      setTimeout(function () {
-        var text = $(element).val();
-        $(element).val("");        
-        Espruino.Serial.write(text);
-      }, 100);
-    });
-
     refreshPorts();
     
     // get code from our config area at bootup
@@ -296,7 +238,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
       if (cInfo!=undefined) {
         logSuccess("Device found (connectionId="+cInfo.connectionId+")");
         flipState(false);        
-        Espruino.Serial.startListening(onRead);
+        Espruino.Serial.startListening(Espruino.Terminal.outputDataHandler);
         Espruino.Process.getProcess(setBoardConnected);
       } else {
         // fail
@@ -321,108 +263,9 @@ Author: Gordon Williams (gw@pur3.co.uk)
       Espruino.Process.Env = {};
     });
   };
-    
   
-  function getSubString(str, from, len) {
-    if (len == undefined) {
-      return str.substr(from, len);
-    } else {
-      var s = str.substr(from, len);
-      while (s.length < len) s+=" ";
-      return s;
-    }
-  }
+
   
-  var handleReceivedCharacter = function (/*char*/ch) {
-        //console.log("IN = "+ch);
-        if (termControlChars.length==0) {        
-          switch (ch) {
-            case  8 : {
-              if (termCursorX>0) termCursorX--;
-            } break;
-            case 10 : {
-              termCursorX = 0; termCursorY++;
-              while (termCursorY >= termText.length) termText.push("");
-            } break;
-            case 13 : {
-              termCursorX = 0;           
-            } break;
-            case 27 : {
-              termControlChars = [ 27 ];
-            } break;
-            default : {
-              termText[termCursorY] = getSubString(termText[termCursorY],0,termCursorX) + String.fromCharCode(ch) + getSubString(termText[termCursorY],termCursorX+1);
-              termCursorX++;
-            }
-          }
-       } else if (termControlChars[0]==27) {
-         if (termControlChars[1]==91) {
-           switch (ch) {
-             case 65: if (termCursorY > 0) termCursorY--; break; break; // up  FIXME should add extra lines in...
-             case 66: termCursorY++; while (termCursorY >= termText.length) termText.push(""); break;  // down FIXME should add extra lines in...
-             case 67: termCursorX++; break; // right
-             case 68: if (termCursorX > 0) termCursorX--; break; // left
-           }
-           termControlChars = [];      
-         } else {
-           switch (ch) {
-             case 91: {
-               termControlChars = [27, 91];      
-             } break;
-             default: {
-               termControlChars = [];      
-             }
-           }
-         }
-       } else termControlChars = [];         
-  };
-
-  var escapeHTML = (function () {
-    var chr = { '"': '&quot;', '&': '&amp;', '<': '&lt;', '>': '&gt;', ' ': '&nbsp;' };
-    return function (text) {
-        return text.replace(/[\"&<> ]/g, function (a) { return chr[a]; });
-    };
-  }());
-
-  var updateTerminal = function() {        
-        var t = [];
-        for (y in termText) {
-          var line = termText[y];
-          if (y == termCursorY) {
-            var ch = getSubString(line,termCursorX,1);
-            line = escapeHTML(getSubString(line,0,termCursorX)) + "<span class='termCursor'>" + escapeHTML(ch) + "</span>" + escapeHTML(getSubString(line,termCursorX+1));
-          } else
-            line = escapeHTML(line);
-          t.push("<div class='termLine' lineNumber='"+y+"'>"+line+"</div>");
-        }
-        
-        $("#terminal").html(t.join(""));
-        var cursorLine = $("#terminal .termLine[lineNumber="+termCursorY+"]");
-        cursorLine[0].scrollIntoView();
-/*        var lineHeight = cursorLine.height();
-        var cursorPos = cursorLine.position().top;
-        var scrollHeight = $("#terminal").innerHeight();
-        var scrollPos = $("#terminal").scrollTop();
-        if (cursorPos+lineHeight > scrollHeight) $("#terminal").scrollTop(lineHeight+cursorPos-scrollHeight);
-        if (cursorPos < 0) $("#terminal").scrollTop(cursorPos);*/
-  };
-
-  var onRead=function(readData) {
-    // Add data to our buffer
-    var bufView=new Uint8Array(readData);
-    for (var i=0;i<bufView.length;i++) 
-      displayData.push(bufView[i]);
-    // If we haven't had data after 50ms, update the HTML
-    if (displayTimeout == null) 
-      displayTimeout = window.setTimeout(function() {
-        for (i in displayData) 
-          handleReceivedCharacter(displayData[i]);
-        updateTerminal();
-        displayData = [];
-        displayTimeout = null;
-      }, 50);
-  };
-
   init();
 })();
 

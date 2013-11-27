@@ -77,6 +77,6 @@ THE SOFTWARE.
       if (n==0) finished();
       else Espruino.Status.setStatus("Loading Modules...", n); 
       for (i in requires) getModule(requires[i]);
-    }
+    };
 
 })();

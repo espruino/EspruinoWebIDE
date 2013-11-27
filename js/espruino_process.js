@@ -32,26 +32,25 @@ THE SOFTWARE.
     Espruino.Process.getProcess = function(callback){
       var prevReader,bufText = "";
       if(Espruino.Serial.isConnected()){
-        prevReader = Espruino.Serial.startListening(onRead);
-        // string adds to stop the command tag being detected in the output
-        Espruino.Serial.write('\necho(0);\nconsole.log("<<"+"<<<"+JSON.stringify(process.env)+">>>"+">>");echo(1);\n');
-        setTimeout(function(){
-          Espruino.Serial.startListening(prevReader);
-          var startProcess = bufText.indexOf("<<<<<");endProcess = bufText.indexOf(">>>>>", startProcess);
-          if(startProcess >= 0 && endProcess > 0){
-            var pText = bufText.substring(startProcess + 5,endProcess);
-            console.log("Got \""+pText+"\"");
-            Espruino.Process.Env = JSON.parse(pText);
-            callback();
-          }
-        },500);
-        function onRead(readData){
+        prevReader = Espruino.Serial.startListening(function (readData){
           var bufView=new Uint8Array(readData);
           var startProcess = 0;endProcess = 0;
           for(var i = 0; i < bufView.length; i++){
             bufText += String.fromCharCode(bufView[i]);
           }
-        }
+        });
+        // string adds to stop the command tag being detected in the output
+        Espruino.Serial.write('\necho(0);\nconsole.log("<<"+"<<<"+JSON.stringify(process.env)+">>>"+">>");echo(1);\n');
+        setTimeout(function(){
+          Espruino.Serial.startListening(prevReader);
+          console.log("Got "+JSON.stringify(bufText));          
+          var startProcess = bufText.indexOf("<<<<<");endProcess = bufText.indexOf(">>>>>", startProcess);
+          if(startProcess >= 0 && endProcess > 0){
+            var pText = bufText.substring(startProcess + 5,endProcess);            
+            Espruino.Process.Env = JSON.parse(pText);
+            callback();
+          }
+        },500);        
       }
     };
 })();
