@@ -57,11 +57,11 @@ THE SOFTWARE.
         dataReceived = undefined;
         clearInterval(iPoll);
         callback("Can't find STM32 bootloader. Make sure the chip is reset with BOOT0=1 and BOOT1=0");
-      }, 5000);      
+      }, 10000);      
       var iPoll = setInterval(function() {
         console.log("Sending... 0x7F");
         Espruino.Serial.write("\x7f");
-      }, 500);
+      }, 200);
       dataReceived = function (c) {
         dataReceived = undefined;
         console.log("got "+c);
