@@ -46,29 +46,29 @@ Using
 * If you've only just plugged your device in, press the refresh button
 * In the Top Left, make sure the correct serial port is chosen (usually: Highest COM# number on Windows, tty.usbmodem/ttys000 on Mac, ttyUSB0/ttyACM0 on linux)
 * Click the 'Play' (connect) button
-* Click in the gray terminal window and start typing away!
+* Click in the left-hand terminal window and start typing away!
 
 Using (advanced)
 --------------
 * Click the button with left/right arrows to transfer the text (or graphics) in the right-hand pane to Espruino
 * Click the button with a picture frame to switch between graphical and text views (the code will not auto-update)
-* To copy on the left-hand side, click and drag over the text to copy
-* To paste, press Ctrl + V
+* To copy on the left-hand side, click and drag over the text to copy (text is copies when you lift the mouse button)
+* To paste, press **Ctrl + V**
+* **Ctrl + Space** starts auto-complete
 
 Features that would be good to implement
 -----------------------------------
 * Better auto-detection of the correct serial device
 * Detection of serial disconnect (and auto reconnect)
-* Figure out why Chrome on Linux randomly loses characters while writing to USB CDC devices
 * Make everything prettier/easier to use
 * Implement more of Espruino as Blockly Blocks
 * Actually toggle WebCam on and off (currently it can only turn on)
 * Blockly Blocks to turn red if they can't do certain things (for instance a pin that won't do analog)
-* Some kind of arrangement so projects on the Espruino website could immediately be loaded
 * Codeacademy-style online tutor that talks you through the first few steps of coding on Espruino
 * Keep code on right in sync with graphical editor
 * Being able to choose a filename for Save, so you don't have to change the name each time
-* Storing the code and blockly blocks locally so they are remembered on startup
+* Storing blockly blocks locally so they are remembered on startup
+* Auto-complete that knows more about Espruino's API
 
 Nice but not required at all
 -------------------------
