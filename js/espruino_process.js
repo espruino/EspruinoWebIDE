@@ -21,13 +21,14 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
+"use strict";
 (function(){
     // Code to load and save configuration options
     Espruino["Process"] = {};
     Espruino.Process.Env = {};
 
-    Espruino.Process.init = function() {
-    };
+    Espruino.Process.init = function() {};
+    Espruino.Process.setProcess = setProcess;
     
     Espruino.Process.getProcess = function(callback){
       var prevReader,bufText = "";
@@ -53,4 +54,8 @@ THE SOFTWARE.
         },500);        
       }
     };
+    function setProcess(data){
+      if($.isEmptyObject(data)){ Espruino.Process.Env = {};}
+      else{Espruino.Process.Env = {BOARD:data.info.name};}
+    }
 })();

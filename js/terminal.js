@@ -17,7 +17,7 @@ Author: Renato Mangini (mangini@chromium.org)
 Author: Luis Leao (luisleao@gmail.com)
 Author: Gordon Williams (gw@pur3.co.uk)
 **/
-
+"use strict";
 (function() {
 
   /* Handle newline conversions - Windows expects newlines as /r/n
@@ -153,6 +153,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
         saveFile(Espruino.codeEditor.getValue(), "code.js");
     });
     $("#terminal").css("top",  $("#terminaltoolbar").outerHeight()+"px");
+
     Espruino.initModules();
     
     flipState(true);
@@ -251,21 +252,18 @@ Author: Gordon Williams (gw@pur3.co.uk)
     });
     function setBoardConnected(){
       Espruino.Status.setStatus("Connected");
-      $("#processBoard").html(Espruino.Process.Env.BOARD);
+      Espruino.Board.setBoard(Espruino.Process.Env.BOARD);
     }
   };
 
   var closeSerial=function() {
     Espruino.Serial.close(function(result) {
       flipState(true);
-      $("#processBoard").html("");
       Espruino.Status.setStatus("Disconnected");
       Espruino.Process.Env = {};
     });
   };
-  
-
-  
+    
   init();
 })();
 
