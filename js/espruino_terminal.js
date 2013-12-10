@@ -91,7 +91,7 @@ THE SOFTWARE.
     
     var updateTerminal = function() {        
       var t = [];
-      for (y in termText) {
+      for (var y in termText) {
         var line = termText[y];
         if (y == termCursorY) {
           var ch = Espruino.General.getSubString(line,termCursorX,1);
