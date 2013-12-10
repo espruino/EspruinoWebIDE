@@ -21,6 +21,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
+"use strict";
 (function(){
     // Code to handle display and input from the left-hand terminal pane
     Espruino["Terminal"] = {};
@@ -90,7 +91,7 @@ THE SOFTWARE.
     
     var updateTerminal = function() {        
       var t = [];
-      for (y in termText) {
+      for (var y in termText) {
         var line = termText[y];
         if (y == termCursorY) {
           var ch = Espruino.General.getSubString(line,termCursorX,1);

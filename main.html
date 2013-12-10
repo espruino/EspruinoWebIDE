@@ -6,6 +6,7 @@
   <link href="css/ui-lightness/jquery-ui-1.10.1.custom.css" rel="stylesheet">
   <link rel="stylesheet" href="js/codemirror/css/codemirror.css">
   <link href="css/main.css" rel="stylesheet" media="all"></link>
+  <link rel="stylesheet" href="css/jquery.treeview.css"></link>
   <link rel="stylesheet" href="js/codemirror/addon/lint/lint.css">
   <link rel="stylesheet" href="js/codemirror/addon/hint/show-hint.css">
   <link rel="stylesheet" href="js/codemirror/addon/fold/foldgutter.css" />
@@ -28,7 +29,7 @@
   <script src="js/codemirror/addon/lint/lint.js"></script>
   <script src="js/codemirror/addon/lint/javascript-lint.js"></script>
   <script src="js/codemirror/addon/edit/trailingspace.js"></script>
-
+  <script src="js/jquery.treeview.js"></script>
   <script src="js/serial_new_api.js"></script>
   <script src="js/espruino.js"></script>
   <script src="js/espruino_options.js"></script>
@@ -42,6 +43,7 @@
   <script src="js/espruino_minify.js"></script>
   <script src="js/espruino_modules.js"></script>
   <script src="js/espruino_terminal.js"></script> <!-- LHS terminal window -->
+  <script src="js/espruino_board.js"></script>
 
   <!-- for file save -->
   <script type="text/javascript" src="js/FileSaver.min.js"></script>
@@ -57,6 +59,8 @@
         <button class="blockly">Switch between Code and Graphical Designer</button>
         <button class="scripts">Load File</button> 
         <button class="save">Save File</button>
+        &nbsp;&nbsp;&nbsp;
+        <button class="param">Replace Params</button>
         <button class="options" style="position:absolute;right:4px;">Info / Options</button>
         <input type="file" id="fileLoader" style="display: none;"/> <!-- for file loading -->
         <div id="loader" class="subform" style="display: none;">
@@ -68,13 +72,18 @@
       </div>
     <div id="divcode">
     <textarea id="code" name="code">
-clearInterval();
-
-var  l = false;
-setInterval(function() {
-  l = !l;
-  LED1.write(l);
-}, 500);</textarea>
+function Blinker(pin,frequency){
+    var status = true, duration = 1000 / frequency, interval;
+    interval = setInterval(function(){
+        status =! status;
+        pin.write(status);
+    },duration);
+    this.stop=function(){
+        pin.write(false);
+        clearInterval(interval);
+    };
+}
+var bl=new Blinker(/*LED,pin*/ ,2);</textarea>
     </div>
     <iframe id="divblockly" style="display:none;border:none;" src="blockly/blockly.html"></iframe>
   </div>
@@ -86,7 +95,8 @@ setInterval(function() {
           <button class="close">Disconnect</button>
           <span id="status">Still Not Connected</span>
           <span id="progress"><span id="progressindicator">&nbsp;</span></span>
-          <span id="processBoard" style="position:absolute;right:100px;">&nbsp;</span>
+          <span id="processBoard" style="position:absolute;right:55px;">&nbsp;</span>
+          <button class="board" style="position:absolute;right:30px;top:2px;">Board Info</button>
           <button class="webcam" style="position:absolute;right:4px;top:2px;">Webcam</button>
     </div>
     <video autoplay id="videotag"></video>  

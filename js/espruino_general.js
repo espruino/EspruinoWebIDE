@@ -21,6 +21,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
+"use strict";
 (function(){
   Espruino["General"] = {};
   Espruino.General.startMode = "JS";
@@ -73,6 +74,14 @@ THE SOFTWARE.
     if (!Espruino.General.isWindows) return chars;
     return chars.replace(/\r\n/g,"\n").replace(/\n/g,"\r\n");
   };
+  Espruino.General.ShowSubForm = function(divName,top,left,html,bgcolor,appendTo){
+      $("#" + divName).remove();      
+      $('<div id="' + divName + '" class="subform" style="z-index:5">' + html + '</div>').css(
+        { position: 'absolute',display: 'none',top: top,left: left,
+          border: '1px solid #fdd',padding: '2px','background-color': bgcolor
+        }
+      ).appendTo(appendTo).fadeIn(200);      
+  }
   function switchWebCam(status){ 
       if(status === true){ $(".webcam").show(500);}
       else{ $(".webcam").hide(); }

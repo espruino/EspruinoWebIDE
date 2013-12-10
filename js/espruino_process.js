@@ -21,20 +21,20 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
+"use strict";
 (function(){
     // Code to load and save configuration options
     Espruino["Process"] = {};
     Espruino.Process.Env = {};
 
-    Espruino.Process.init = function() {
-    };
+    Espruino.Process.init = function() {};
+    Espruino.Process.setProcess = setProcess;
     
     Espruino.Process.getProcess = function(callback){
       var prevReader,bufText = "";
       if(Espruino.Serial.isConnected()){
         prevReader = Espruino.Serial.startListening(function (readData){
           var bufView=new Uint8Array(readData);
-          var startProcess = 0;endProcess = 0;
           for(var i = 0; i < bufView.length; i++){
             bufText += String.fromCharCode(bufView[i]);
           }
@@ -44,7 +44,8 @@ THE SOFTWARE.
         setTimeout(function(){
           Espruino.Serial.startListening(prevReader);
           console.log("Got "+JSON.stringify(bufText));          
-          var startProcess = bufText.indexOf("<<<<<");endProcess = bufText.indexOf(">>>>>", startProcess);
+          var startProcess = bufText.indexOf("<<<<<");
+          var endProcess = bufText.indexOf(">>>>>", startProcess);
           if(startProcess >= 0 && endProcess > 0){
             var pText = bufText.substring(startProcess + 5,endProcess);            
             Espruino.Process.Env = JSON.parse(pText);
@@ -53,4 +54,8 @@ THE SOFTWARE.
         },500);        
       }
     };
+    function setProcess(data){
+      if($.isEmptyObject(data)){ Espruino.Process.Env = {};}
+      else{Espruino.Process.Env = {BOARD:data.info.name};}
+    }
 })();
