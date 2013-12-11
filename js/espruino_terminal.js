@@ -25,6 +25,7 @@ THE SOFTWARE.
 (function(){
     // Code to handle display and input from the left-hand terminal pane
     Espruino["Terminal"] = {};
+    Espruino.Terminal.autoSaveCode = true;
     
     var onInputData = function(d){}; // the handler for character data from user 
 
@@ -38,6 +39,9 @@ THE SOFTWARE.
     
     
     Espruino.Terminal.init = function() {
+      Espruino.Options.optionFields.push({id:"#autoSaveCode",module:"Terminal",field:"autoSaveCode",type:"check"});      
+      Espruino.Options.optionBlocks.push({id:"#divOptionTerminal",htmlUrl:"data/Espruino_Terminal.html"});
+      
       $("#terminal").mouseup(function() {
         var terminalfocus = $('#terminalfocus');
         var selectedText = window.getSelection().toString();

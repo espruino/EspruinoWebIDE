@@ -27,6 +27,8 @@ THE SOFTWARE.
     Espruino["Board"] = {};
     Espruino.Board.setBoard = setBoard;
     Espruino.Board.params = params;
+    Espruino.Board.boardActive = false;
+    Espruino.Board.boardEditSupport = true;
     
     var boardFolder = "http://www.espruino.com/json/";
     var boardImgFolder = "img/";
@@ -53,15 +55,35 @@ THE SOFTWARE.
       }
     }
     Espruino.Board.init = function() {
-      createBoardList();
-      $(".board").button({ text: false, icons: { primary: "ui-icon-wrench" } }).hide();
-      $(".param").button({ text: false, icons: { primary: "ui-icon-pin-s" } }).hide();
-      $("#boardList").change(selectBoard);
-      $("#boardList").click(function(){$(".subform").hide();});
-      Espruino.codeEditor.on("change",checkParam);
-      Espruino.codeEditor.on("cursorActivity",selectParam);
-      Espruino.codeEditor.on("dblclick",setParam);
+      switchOptions();
     };
+    Espruino.Board.initOptions = function(){
+      Espruino.Options.optionFields.push({id:"#boardActive",module:"Board",field:"boardActive",type:"check"});
+      Espruino.Options.optionFields.push({id:"#boardEditSupport",module:"Board",field:"boardEditSupport",type:"check"});      
+      Espruino.Options.optionBlocks.push({id:"#divOptionBoard",htmlUrl:"data/Espruino_Board.html",onLoaded:switchOptions});
+    }
+    function switchOptions(){
+      if(Espruino.Board.boardActive === true){
+        createBoardList();
+        $(".board").button({ text: false, icons: { primary: "ui-icon-wrench" } }).hide();
+        $(".param").button({ text: false, icons: { primary: "ui-icon-pin-s" } }).hide();
+        $("#boardList").unbind().change(selectBoard);
+        $("#boardList").click(function(){$(".subform").hide();});
+        if(Espruino.Board.boardEditSupport === true){
+          Espruino.codeEditor.on("change",checkParam);
+          Espruino.codeEditor.on("cursorActivity",selectParam);
+          Espruino.codeEditor.on("dblclick",setParam);
+        }
+      }
+      else{
+        $(".board").hide();
+        $(".param").hide();
+        $("#boardList").unbind().remove();
+        Espruino.codeEditor.off("change");
+        Espruino.codeEditor.off("cursorActivity");
+        Espruino.codeEditor.off("dblclick");
+      }
+    }
     function setParam(cm,evt){
       var html,pins,param,selectedParam = cm.getSelection();
       var i,j,k;
@@ -154,7 +176,9 @@ THE SOFTWARE.
     }
     function splitParams(params){ //splits all parameters into object
       var r = [];
-      for(var i = 0; i < params.length; i++){r.push(new paramObj(params[i]));}
+      if(params){
+        for(var i = 0; i < params.length; i++){r.push(new paramObj(params[i]));}
+      }
       return r;
     }
     function selectParamInEditor(evt){ //event for mouseover in parameter table
