@@ -62,7 +62,7 @@ THE SOFTWARE.
       Espruino.Options.optionFields.push({id:"#boardActive",module:"Board",field:"boardActive",type:"check"});
       Espruino.Options.optionFields.push({id:"#boardEditSupport",module:"Board",field:"boardEditSupport",type:"check"});      
       Espruino.Options.optionBlocks.push({id:"#divOptionBoard",htmlUrl:"data/Espruino_Board.html",onLoaded:switchOptions});
-    }
+    };
     function switchOptions(){
       if(Espruino.Board.boardActive === true){
         createBoardList();
