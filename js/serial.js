@@ -42,7 +42,7 @@ var serial_lib=(function() {
           connectionDisconnectCallback();
       }
    });
-  }
+  };
   
   var startListening=function(callback) {
     if (!connectionInfo || !connectionInfo.connectionId) {
