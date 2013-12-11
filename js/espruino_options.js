@@ -170,25 +170,31 @@ THE SOFTWARE.
   }
   function setOptionsFromObject(EO){
     for(var i = 0; i < optionFields.length; i++){
-      if(optionFields[i].object){
-        Espruino[optionFields[i].module][optionFields[i].object][optionFields[i].field] = 
-        EO[optionFields[i].module][optionFields[i].object][optionFields[i].field];
+      try{
+        if(optionFields[i].object){
+          Espruino[optionFields[i].module][optionFields[i].object][optionFields[i].field] = 
+          EO[optionFields[i].module][optionFields[i].object][optionFields[i].field];
+        }
+        else{
+          Espruino[optionFields[i].module][optionFields[i].field] =
+          EO[optionFields[i].module][optionFields[i].field];
+        }
       }
-      else{
-        Espruino[optionFields[i].module][optionFields[i].field] =
-        EO[optionFields[i].module][optionFields[i].field];
-      }
-    }        
+      catch(e){ console.log("Option Error:",e);}      
+    }      
   }
   function optionsOnLoaded(){
-    var value;
-    for(var i = 0; i < optionFields.length; i++){
+    var value,i;
+    for(i = 0; i < optionFields.length; i++){
       if(optionFields[i].onLoaded){ 
         if(optionFields[i].object){ value = Espruino[optionFields[i].module][optionFields[i].object][optionFields[i].field];}
         else{ value = Espruino[optionFields[i].module][optionFields[i].field];}
         optionFields[i].onLoaded(value);
       }
-    }  
+    } 
+    for(i = 0; i < optionBlocks.length; i++){
+      if(optionBlocks[i].onLoaded){optionBlocks[i].onLoaded();}
+    } 
   }
   Espruino.Options["saveOptions"] = function(){
     var optionsObj;
