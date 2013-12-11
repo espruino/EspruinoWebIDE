@@ -44,13 +44,14 @@ THE SOFTWARE.
       this.device = p[0][0];
       this.subdevice = p[0][1];
       this.param = param;
-      this.createParam = function(newValue){
+      this.createParam = function(newValue) {
         var r;
         r = "/*" + this.device;
-        if(this.subdevice){ r += "," + this.subdevice}
+        if(this.subdevice)
+          r += "," + this.subdevice; 
         r += "*/" + newValue + this.param.substr(this.param.length - 1);
         return r;
-      }
+      };
     }
     Espruino.Board.init = function() {
       createBoardList();
@@ -153,8 +154,11 @@ THE SOFTWARE.
       $(".parampin").unbind().hover(selectParamInEditor);
     }
     function splitParams(params){ //splits all parameters into object
+      if (!params) return undefined;
       var r = [];
-      for(var i = 0; i < params.length; i++){r.push(new paramObj(params[i]));}
+      for(var i = 0; i < params.length; i++){
+        r.push(new paramObj(params[i]));
+      }
       return r;
     }
     function selectParamInEditor(evt){ //event for mouseover in parameter table
