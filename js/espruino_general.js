@@ -81,7 +81,7 @@ THE SOFTWARE.
           border: '1px solid #fdd',padding: '2px','background-color': bgcolor
         }
       ).appendTo(appendTo).fadeIn(200);      
-  }
+  };
   function switchWebCam(status){ 
       if(status === true){ $(".webcam").show(500);}
       else{ $(".webcam").hide(); }
