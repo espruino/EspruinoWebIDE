@@ -41,7 +41,7 @@ THE SOFTWARE.
     var getModulesRequired = function(code) {
       var modules = [];
       var requires = code.match(/require\(\"[^\"]*\"\)/g);
-      for (i in requires) { 
+      for (var i in requires) { 
         // strip off beginning and end, and parse the string
         var module = JSON.parse(requires[i].substring(8,requires[i].length-1));
         // add it to our array - FIXME don't hard code these
@@ -77,7 +77,7 @@ THE SOFTWARE.
       var n = requires.length;
       if (n==0) finished();
       else Espruino.Status.setStatus("Loading Modules...", n); 
-      for (i in requires) getModule(requires[i]);
+      for (var i in requires) getModule(requires[i]);
     };
 
 })();
