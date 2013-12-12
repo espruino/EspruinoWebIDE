@@ -32,7 +32,10 @@ THE SOFTWARE.
     var displayTimeout = null;
     var displayData = [];
     
+    // Text to be displayed in the terminal
     var termText = [ "" ];
+    // Map of terminal line number to text to display before it
+    var termExtraText = {}; 
     var termCursorX = 0;
     var termCursorY = 0;
     var termControlChars = [];    
@@ -102,6 +105,9 @@ THE SOFTWARE.
           line = Espruino.General.escapeHTML(Espruino.General.getSubString(line,0,termCursorX)) + "<span class='termCursor'>" + Espruino.General.escapeHTML(ch) + "</span>" + Espruino.General.escapeHTML(Espruino.General.getSubString(line,termCursorX+1));
         } else
           line = Espruino.General.escapeHTML(line);
+        
+        if (termExtraText[y])
+          t.push(termExtraText[y]);
         t.push("<div class='termLine' lineNumber='"+y+"'>"+line+"</div>");
       }
       
@@ -191,6 +197,19 @@ THE SOFTWARE.
       Espruino.Serial.startListening(Espruino.Terminal.outputDataHandler);      
     };
 
+    /// Get the current terminal line that we're on
+    Espruino.Terminal.getCurrentLine = function() {
+      return termText.length-1;
+    };
     
+    /// Set extra text to display before a certain terminal line
+    Espruino.Terminal.setExtraText = function(line, text) {
+      termExtraText[line] = text;      
+    };    
+
+    // Give the terminal focus
+    Espruino.Terminal.focus = function() {
+        $("#terminalfocus").focus(); 
+    }
 
 })();

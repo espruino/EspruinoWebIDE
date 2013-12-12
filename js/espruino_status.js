@@ -1,7 +1,7 @@
 /*
  * The MIT License
 
-Copyright (c) 2013 by Juergen Marsch
+Copyright (c) 2013 by Gordon Williams
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -49,6 +49,10 @@ THE SOFTWARE.
         progressAmt = 0;
         progressMax = progress;
       }
+    };
+
+    Espruino.Status.setError = function(text) {
+      Espruino.Status.setStatus("ERROR:"+text);
     };
 
     Espruino.Status.hasProgress = function() {

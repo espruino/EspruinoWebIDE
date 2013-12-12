@@ -74,6 +74,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
         $("#terminal").addClass("with_webcam");
       }, function(e) {
         console.log('onError!', e);
+        Espruino.Status.setError("Problem initialising WebCam");
       });
     } 
   };
@@ -107,6 +108,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
     $( ".webcam" ).button({ text: false, icons: { primary: "ui-icon-person" } }).click(toggleWebCam);
     // code toolbar
     $( ".send" ).button({ text: false, icons: { primary: "ui-icon-transferthick-e-w" } }).click(function() {
+      Espruino.Terminal.focus(); // give the terminal focus
       if(Espruino.Terminal.autoSaveCode === true){
         Espruino.Config.set("code", Espruino.codeEditor.getValue()); // save the code
       }
@@ -117,8 +119,11 @@ Author: Gordon Williams (gw@pur3.co.uk)
             function sendSerial(data){
                 console.log(data);
                 Espruino.Serial.write("echo(0);\n" + data + "\necho(1);\n");
+//                Espruino.Serial.write(data);
             }
           });
+      } else { 
+        Espruino.Status.setError("Not Connected");
       }
     });
     $( ".blockly" ).button({ text: false, icons: { primary: "ui-icon-image" } }).click(function() {
