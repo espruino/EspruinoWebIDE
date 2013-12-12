@@ -66,6 +66,7 @@ THE SOFTWARE.
         else{defs.push(loadModule(requires[i],Espruino.Modules.Config.url + "/" + requires[i],".min.js",".js"));}
       }
       if(defs.length > 0) {$.when.apply(null,defs).then(function(){returnCode();});}
+      else{callback(code);}
       function loadModule(modName,url,firstTry,secondTry){
         var t, localUrl,dfd = $.Deferred();
         if(firstTry){ localUrl = url + firstTry; }
