@@ -55,29 +55,41 @@ THE SOFTWARE.
     /* Finds instances of 'require' and then ensures that 
      those modules are loaded into the module cache beforehand
      (by inserting the relevant 'addCached' commands into 'code' */
-    Espruino.Modules.loadModules = function(code, callback) {
-      var requires = getModulesRequired(code);    
+    Espruino.Modules.loadModules = function(code,callback){
+      var defs = [], maxWait = 5000,urlParts;
+      var requires = getModulesRequired(code);
       var moduleCode = ["Modules.removeAllCached();"];
-      var getModule = function (moduleName) {      
-        console.log("Getting module '"+moduleName+"'");
-        $.get(Espruino.Modules.Config.url+"/"+moduleName+".min.js", function( moduleContents ) {
-          // FIXME - if this fails, use the next element in Espruino.Modules.Config.fileExtensions
-          console.log("Got module '"+moduleName+"'");
-          moduleCode.push("Modules.addCached("+JSON.stringify(moduleName)+", "+JSON.stringify(moduleContents)+");\n");
-          Espruino.Status.incrementProgress(1);
-          if (--n == 0) {
-            Espruino.Status.setStatus("Done.");
-            finished();
+      var urlexp = new RegExp( '(http|https)://[\\w-]+(\\.[\\w-]+)+([\\w-.,@?^=%&:/~+#-]*[\\w@?^=%&;/~+#-])?' );
+      for(var i = 0; i < requires.length; i++){
+        if(urlexp.test(requires[i])){
+          defs.push(loadModule(requires[i].substr(requires[i].lastIndexOf("/") + 1).split(".")[0],requires[i]));}
+        else{defs.push(loadModule(requires[i],Espruino.Modules.Config.url + "/" + requires[i],".min.js",".js"));}
+      }
+      if(defs.length > 0) {$.when.apply(null,defs).then(function(){returnCode();});}
+      function loadModule(modName,url,firstTry,secondTry){
+        var t, localUrl,dfd = $.Deferred();
+        if(firstTry){ localUrl = url + firstTry; }
+        else{
+          localUrl = url;
+          code = code.replace("require(\"" + url + "\")","require(\"" + modName + "\")");
+        }
+        t = setInterval(function(){clearInterval(t);dfd.resolve();},maxWait);
+        $.get(localUrl,function(data){
+          moduleCode += "Modules.addCached(" + JSON.stringify(modName) + "," + JSON.stringify(data) + ");\n";
+          dfd.resolve();
+        },"text").fail(function(){
+          if(secondTry){
+            localUrl = url + secondTry;
+            $.get(localUrl,function(data){
+              moduleCode += "Modules.addCached(" + JSON.stringify(modName) + "," + JSON.stringify(data) + ");\n";
+              dfd.resolve();
+            },"text").fail(function(){ console.log(modName + " not found");dfd.resolve();});
           }
-        }, 'text');
-      };
-      var finished = function() {      
-        callback(moduleCode.join("\n")+code);
-      };
-      var n = requires.length;
-      if (n==0) finished();
-      else Espruino.Status.setStatus("Loading Modules...", n); 
-      for (var i in requires) getModule(requires[i]);
-    };
+          else{console.log(modName + " not found"); dfd.resolve();}   
+        });
+        return dfd.promise();
+      }
+      function returnCode(){ callback(moduleCode + "\n" + code); }
+    }
 
 })();
