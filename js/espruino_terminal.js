@@ -210,6 +210,6 @@ THE SOFTWARE.
     // Give the terminal focus
     Espruino.Terminal.focus = function() {
         $("#terminalfocus").focus(); 
-    }
+    };
 
 })();

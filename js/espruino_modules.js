@@ -58,7 +58,7 @@ THE SOFTWARE.
     Espruino.Modules.loadModules = function(code,callback){
       var defs = [], maxWait = 5000,urlParts;
       var requires = getModulesRequired(code);
-      var moduleCode = ["Modules.removeAllCached();"];
+      var moduleCode = "Modules.removeAllCached();";
       var urlexp = new RegExp( '(http|https)://[\\w-]+(\\.[\\w-]+)+([\\w-.,@?^=%&:/~+#-]*[\\w@?^=%&;/~+#-])?' );
       for(var i = 0; i < requires.length; i++){
         if(urlexp.test(requires[i])){
@@ -66,7 +66,7 @@ THE SOFTWARE.
         else{defs.push(loadModule(requires[i],Espruino.Modules.Config.url + "/" + requires[i],".min.js",".js"));}
       }
       if(defs.length > 0) {$.when.apply(null,defs).then(function(){returnCode();});}
-      else{callback(code);}
+      else{callback(code);}      
       function loadModule(modName,url,firstTry,secondTry){
         var t, localUrl,dfd = $.Deferred();
         if(firstTry){ localUrl = url + firstTry; }
@@ -91,6 +91,6 @@ THE SOFTWARE.
         return dfd.promise();
       }
       function returnCode(){ callback(moduleCode + "\n" + code); }
-    }
+    };
 
 })();
