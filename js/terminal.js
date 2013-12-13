@@ -163,7 +163,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
 
     Espruino.initModules();
     
-    flipState(true);
+    setConnectedState(false);
     
     refreshPorts();
     
@@ -197,9 +197,11 @@ Author: Gordon Williams (gw@pur3.co.uk)
     return ""+ch;
   };
   
-  var flipState=function(deviceLocated) {
-    $(".open").button( "option", "disabled", !deviceLocated);
-    $(".close").button( "option", "disabled", deviceLocated);
+  var setConnectedState = function(isConnected) {
+    $(".serial_devices").prop('disabled', isConnected);
+    $(".refresh").button( "option", "disabled", isConnected);
+    $(".open").button( "option", "disabled", isConnected);
+    $(".close").button( "option", "disabled", !isConnected);
   };
   
   var refreshPorts=function() {
@@ -241,16 +243,16 @@ Author: Gordon Williams (gw@pur3.co.uk)
       return;
     }
     Espruino.Status.setStatus("Connecting");
-    flipState(true);
+    setConnectedState(false);
     Espruino.Serial.open(serialPort, function(cInfo) {
       if (cInfo!=undefined) {
         logSuccess("Device found (connectionId="+cInfo.connectionId+")");
-        flipState(false);        
+        setConnectedState(true);        
         Espruino.Terminal.grabSerialPort();
         Espruino.Process.getProcess(setBoardConnected);
       } else {
         // fail
-        flipState(true);
+        setConnectedState(false);
         Espruino.Status.setStatus("Connect Failed.");
       }
     }, function () {
@@ -265,7 +267,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
 
   var closeSerial=function() {
     Espruino.Serial.close(function(result) {
-      flipState(true);
+      setConnectedState(false);
       Espruino.Status.setStatus("Disconnected");
       Espruino.Process.Env = {};
     });
