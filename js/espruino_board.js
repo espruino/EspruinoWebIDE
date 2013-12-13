@@ -265,7 +265,7 @@ THE SOFTWARE.
       addSubDevices(data.peripherals);
       addPins(data.pins);
       addDevicesPins(data.devices,data.pins);
-      $(".board").show().click(openBoard);
+      setupBoardButton();
       function addDevices(d){
         var device;
         for(var i in d){
@@ -411,9 +411,16 @@ THE SOFTWARE.
         $(boardPin).appendTo("#boardDiv");  
       }
     }               
+    function setupBoardButton() {
+      if (Espruino.Board.boardActive)
+        $(".board").show().click(openBoard);
+    }
     function setBoard(val){ //set selected value in list
       $("#boardList").val(val);
       if(val === ""){ $(".board").hide(); }
-      else{ loadBoard(val); $(".board").show().click(openBoard); }
+      else { 
+        loadBoard(val); 
+        setupBoardButton();
+      }
     }
 })();
