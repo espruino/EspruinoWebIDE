@@ -172,6 +172,8 @@ THE SOFTWARE.
     
     /// Called when data comes OUT of Espruino INTO the terminal
     Espruino.Terminal.outputDataHandler = function(readData) {
+      if ("string" == typeof readData)
+        readData = readData.split("").map(function(x) {return x.charCodeAt();});
       // Add data to our buffer
       var bufView=new Uint8Array(readData);
       for (var i=0;i<bufView.length;i++) 

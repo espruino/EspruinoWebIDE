@@ -198,6 +198,8 @@ Author: Gordon Williams (gw@pur3.co.uk)
   };
   
   var setConnectedState = function(isConnected) {
+    if (isConnected)
+      Espruino.Terminal.outputDataHandler("Connected\r\n");
     $(".serial_devices").prop('disabled', isConnected);
     $(".refresh").button( "option", "disabled", isConnected);
     $(".open").button( "option", "disabled", isConnected);
