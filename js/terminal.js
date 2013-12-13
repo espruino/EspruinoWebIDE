@@ -113,15 +113,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
         Espruino.Config.set("code", Espruino.codeEditor.getValue()); // save the code
       }
       if (Espruino.Serial.isConnected()) {
-          getCode(function (code) {
-            if(Espruino.Minify.sendMinified === true){Espruino.Minify.MinifyCode(code,sendSerial);}
-            else{sendSerial(code);}
-            function sendSerial(data){
-                console.log(data);
-                Espruino.Serial.write("echo(0);\n" + data + "\necho(1);\n");
-//                Espruino.Serial.write(data);
-            }
-          });
+          getCode(Espruino.CodeWriter.writeToEspruino);
       } else { 
         Espruino.Status.setError("Not Connected");
       }
@@ -202,8 +194,9 @@ Author: Gordon Williams (gw@pur3.co.uk)
       Espruino.Terminal.outputDataHandler("Connected\r\n");
     $(".serial_devices").prop('disabled', isConnected);
     $(".refresh").button( "option", "disabled", isConnected);
-    $(".open").button( "option", "disabled", isConnected);
-    $(".close").button( "option", "disabled", !isConnected);
+    $(".open").button( "option", "disabled", isConnected);    
+    $(".close").button( "option", "disabled", !isConnected);    
+    $(".send").button( "option", "disabled", !isConnected);
   };
   
   var refreshPorts=function() {

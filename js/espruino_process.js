@@ -23,7 +23,7 @@ THE SOFTWARE.
 */
 "use strict";
 (function(){
-    // Code to load and save configuration options
+    // Code to get board's 'process.env' variable
     Espruino["Process"] = {};
     Espruino.Process.Env = {};
 
