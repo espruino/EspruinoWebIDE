@@ -110,7 +110,7 @@ THE SOFTWARE.
       return dfd.promise();
     }
     function createSelect(){
-      var html,items = [];
+      var html,tree,items = [];
       html = "<select id=\"" + selectID + "\">";
       html += "<option value=\"\">Select " + selectID + "</option>";
       for(var t in trees){
