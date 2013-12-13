@@ -28,7 +28,7 @@ THE SOFTWARE.
     Espruino.Board.setBoard = setBoard;
     Espruino.Board.params = params;
     Espruino.Board.boardActive = false;
-    Espruino.Board.boardEditSupport = true;
+    Espruino.Board.boardEditSupport = false;
     
     var boardFolder = "http://www.espruino.com/json/";
     var boardImgFolder = "img/";
