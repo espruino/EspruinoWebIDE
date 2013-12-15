@@ -29,7 +29,7 @@ THE SOFTWARE.
   Espruino.General.flashFirmwareUrl = "http://www.espruino.com/binaries/espruino_r1v1_1v43.bin";
   Espruino.General["initOptions"] = function(){
     Espruino.Options.optionFields.push({id:".startMode",module:"General",field:"startMode",type:"radio"});
-    Espruino.Options.optionFields.push({id:"#webCamOn",module:"General",field:"webCamOn",type:"check",onLoaded:switchWebCam});
+    Espruino.Options.optionFields.push({id:"#webCamOn",module:"General",field:"webCamOn",type:"check",onLoaded:switchWebCam,onBlur:true});
     Espruino.Options.optionFields.push({id:"#flashFirmwareUrl",module:"General",field:"flashFirmwareUrl",type:"text"});
     Espruino.Options.optionBlocks.push({id:"#divOptionGeneral",htmlUrl:"data/Espruino_General.html"});
     Espruino.Options.optionBlocks.push({id:"#divOptionFlashFirmware",htmlUrl:"data/Espruino_FlashFirmware.html"});
@@ -52,7 +52,6 @@ THE SOFTWARE.
             var cur = cm.getCursor(), line = cm.getLine(cur.line), start = cur.ch, end = start;
             while (start && re.test(line.charAt(start - 1))) --start;
             while (end < line.length && re.test(line.charAt(end))) ++end;
-            console.log(line.substring(start,end));
         }
       });
       $("#divcode").click(function(){$(".subform").hide();});

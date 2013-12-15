@@ -121,33 +121,33 @@ THE SOFTWARE.
         case "select": $(optionFields[i].id).val(value);break;
         break;
       }
+      if(optionFields[i].onBlur){
+        $(optionFields[i].id).blur(callOnBlur);
+      }
     }   
+    function callOnBlur(){
+      for(var i = 0; i < optionFields.length; i++){
+        if(optionFields[i].id.substr(1) === this.id){
+          setOptionFromForm(optionFields[i]);
+          optionOnLoaded(optionFields[i]);
+        }
+      }
+    }
   }
   function setOptionsFromForm(){
-    for(var i = 0; i < optionFields.length; i++){
-      switch(optionFields[i].type){
-        case "text":
-          if(optionFields[i].object){Espruino[optionFields[i].module][optionFields[i].object][optionFields[i].field] = $(optionFields[i].id).val();}
-          else{Espruino[optionFields[i].module][optionFields[i].field] = $(optionFields[i].id).val();}
-          break;
-        case "JSON":
-          if(optionFields[i].object){Espruino[optionFields[i].module][optionFields[i].object][optionFields[i].field] = JSON.parse($(optionFields[i].id).val());}
-          else{Espruino[optionFields[i].module][optionFields[i].field] = JSON.parse($(optionFields[i].id).val());}
-          break;
-        case "radio":
-          if(optionFields[i].object){Espruino[optionFields[i].module][optionFields[i].object][optionFields[i].field] = $(optionFields[i].id).filter(":checked").val();}
-          else{Espruino[optionFields[i].module][optionFields[i].field] = $(optionFields[i].id).filter(":checked").val();}
-          break;
-        case "check":
-          if(optionFields[i].object){Espruino[optionFields[i].module][optionFields[i].object][optionFields[i].field] = $(optionFields[i].id)[0].checked;}
-          else{Espruino[optionFields[i].module][optionFields[i].field] = $(optionFields[i].id)[0].checked;}
-          break;
-        case "select":
-          if(optionFields[i].object){Espruino[optionFields[i].module][optionFields[i].object][optionFields[i].field] = $(optionFields[i].id).val();}
-          else{Espruino[optionFields[i].module][optionFields[i].field] = $(optionFields[i].id).val();}
-          break;
-      }
-    }      
+    for(var i = 0; i < optionFields.length; i++){ setOptionFromForm(optionFields[i]); }      
+  }
+  function setOptionFromForm(optionField){
+    var value="";
+    switch(optionField.type){
+      case "text": value = $(optionField.id).val(); break;
+      case "JSON": value = JSON.parse($(optionField.id).val());break;
+      case "radio": value = $(optionField.id).filter(":checked").val();break;
+      case "check": value = $(optionField.id)[0].checked;break;
+      case "select": value = $(optionField.id).val();break;  
+    }
+    if(optionField.object){Espruino[optionField.module][optionField.object][optionField.field] = value;}
+    else{Espruino[optionField.module][optionField.field] = value;}
   }
   function getOptionsObj(){
     var optionsObj = {},fld;
@@ -185,16 +185,17 @@ THE SOFTWARE.
   }
   function optionsOnLoaded(){
     var value,i;
-    for(i = 0; i < optionFields.length; i++){
-      if(optionFields[i].onLoaded){ 
-        if(optionFields[i].object){ value = Espruino[optionFields[i].module][optionFields[i].object][optionFields[i].field];}
-        else{ value = Espruino[optionFields[i].module][optionFields[i].field];}
-        optionFields[i].onLoaded(value);
-      }
+    for(i = 0; i < optionFields.length; i++){ optionOnLoaded(optionFields[i]); } 
+    for(i = 0; i < optionBlocks.length; i++){ if(optionBlocks[i].onLoaded){optionBlocks[i].onLoaded();}
     } 
-    for(i = 0; i < optionBlocks.length; i++){
-      if(optionBlocks[i].onLoaded){optionBlocks[i].onLoaded();}
-    } 
+  }
+  function optionOnLoaded(optionField){
+    var value;
+    if(optionField.onLoaded){ 
+      if(optionField.object){ value = Espruino[optionField.module][optionField.object][optionField.field];}
+      else{ value = Espruino[optionField.module][optionField.field];}
+      optionField.onLoaded(value);
+    }  
   }
   Espruino.Options["saveOptions"] = function(){
     var optionsObj;
