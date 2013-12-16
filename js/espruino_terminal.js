@@ -209,9 +209,22 @@ THE SOFTWARE.
       termExtraText[line] = text;      
     };    
 
-    // Give the terminal focus
+    /// Give the terminal focus
     Espruino.Terminal.focus = function() {
         $("#terminalfocus").focus(); 
+    };
+    
+    /// Get the latest terminal line (and the line number of it)
+    Espruino.Terminal.getInputLine = function() {
+      var startLine = termText.length-1;
+      while (startLine>=0 && termText[startLine].substr(0,1)!=">")
+        startLine--;
+      if (startLine<0) return "";
+      var line = startLine;
+      var text = termText[line++].substr(1);
+      while (line < termText.length && termText[line].substr(0,1)==":")
+        text += "\n"+termText[line++].substr(1);
+      return { start : startLine, text : text };
     };
 
 })();
