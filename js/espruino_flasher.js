@@ -93,7 +93,7 @@ THE SOFTWARE.
     var sendData = function(data, callback, timeout) {
       var s = "";
       var chksum = 0;
-      for (i in data) {
+      for (var i in data) {
         chksum = chksum ^ data[i];
         s += String.fromCharCode(data[i]);
       }
@@ -145,7 +145,7 @@ THE SOFTWARE.
           }
           // work out data to send
           var sData = [ data.length-1 ];
-          for (i in data) sData.push(data[i]&0xFF);
+          for (var i in data) sData.push(data[i]&0xFF);
           // send data
           sendData(sData, function(err) {
             if (err) { 
