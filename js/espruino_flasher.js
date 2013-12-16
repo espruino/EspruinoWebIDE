@@ -101,6 +101,22 @@ THE SOFTWARE.
       waitForACK(callback, timeout);
     };
 
+    var receiveData = function(count, callback, timeout) {
+      var data = [];
+      var iTimeout = setTimeout(function() {
+        dataReceived = undefined;
+        callback("Timeout reading "+count+" bytes");
+      }, timeout?timeout:2000);   
+      dataReceived = function (c) {
+        data.push(c);
+        if (data.length == count) {
+          clearTimeout(iTimeout);
+          dataReceived = undefined;
+          callback(0,data);
+        }
+      };   
+    };    
+    
     var sendCommand = function(command, callback) {
       Espruino.Serial.write(String.fromCharCode(command) + String.fromCharCode(0xFF ^ command));
       waitForACK(callback);
@@ -118,6 +134,36 @@ THE SOFTWARE.
         }, 20000/*timeout*/);                 
       });
     };
+    
+    var readData = function(callback, addr) {
+      var readBytes = 256;
+      Espruino.Status.setStatus("Reading "+readBytes+" bytes from 0x"+addr.toString(16)+"...");
+      // send read command
+      sendCommand(0x11, function(err) {
+        if (err) { 
+          console.log("Error sending command.");
+          callback(err); 
+          return; 
+        }        
+        // send address
+        sendData([(addr>>24)&0xFF,(addr>>16)&0xFF,(addr>>8)&0xFF,addr&0xFF], function(err) {
+          if (err) { 
+            console.log("Error sending address.");
+            callback(err); 
+            return; 
+          }
+          // send amount of bytes we want
+          sendData([readBytes-1], function(err) {
+            if (err) { 
+              console.log("Error while reading.");
+              callback(err); 
+              return;
+            }  
+            receiveData(readBytes, callback, 1000);
+          }, 2000/*timeout*/);
+        });                 
+      });
+    };
 
     var writeData = function(callback, addr, data) {
       if (data.length>256) callback("Writing too much data");
@@ -129,14 +175,13 @@ THE SOFTWARE.
           initialiseChip(function (err) {
             if (err) callback(err);
             else writeData(callback, addr, data);
-          }, 30000); 
-          callback(err); 
+          }, 30000);
           return; 
         }        
         // send address
         sendData([(addr>>24)&0xFF,(addr>>16)&0xFF,(addr>>8)&0xFF,addr&0xFF], function(err) {
           if (err) { 
-            console.log("Error sending address retrying...");
+            console.log("Error sending address. retrying...");
             initialiseChip(function (err) {
               if (err) callback(err);
               else writeData(callback, addr, data);
@@ -162,6 +207,50 @@ THE SOFTWARE.
       });
     };
     
+    var FLASH_OFFSET = 1024*10 /* no bootloader */;
+    
+    var writeAllData = function(binary) {
+      console.log("Writing "+binary.byteLength+" bytes");
+      var chunkSize = 256;
+      var writer = function(offset) {
+        if (offset>=binary.byteLength) {
+          Espruino.Status.setStatus("Flashing complete!");
+          callback(undefined); // done
+          return;
+        }
+        var len = binary.byteLength - offset;
+        if (len > chunkSize) len = chunkSize;              
+        var data = new Uint8Array(binary, offset, len);
+        writeData(function(err) {
+          if (err) { callback(err); return; }
+          writer(offset + chunkSize);
+        }, 0x08000000 + offset, data);
+      };
+      writer(FLASH_OFFSET);
+    };
+    
+    var readAllData = function(binaryLength, callback) {
+      var data = new Array(FLASH_OFFSET);
+      console.log("Reading "+binaryLength+" bytes");
+      var chunkSize = 256;
+      var reader = function(offset) {
+        if (offset>=binaryLength) {
+          Espruino.Status.setStatus("Reading complete!");
+          callback(undefined, data); // done
+          return;
+        }
+        var len = binaryLength - offset;
+        if (len > chunkSize) len = chunkSize;              
+        readData(function(err, dataChunk) {
+          if (err) { callback(err); return; }
+          for (var i in dataChunk)
+            data.push(dataChunk[i]);
+          reader(offset + chunkSize);
+        }, 0x08000000 + offset);
+      };
+      reader(FLASH_OFFSET);
+    };    
+    
     Espruino.Flasher.flashDevice = function(url, callback) {
       getBinary(url, function (err, binary) {
         if (err) { callback(err); return; }
@@ -181,24 +270,23 @@ THE SOFTWARE.
           if (err) { callback(err); return; }
           eraseChip(function (err) {
             if (err) { callback(err); return; }
-            console.log("Writing "+binary.byteLength+" bytes");
-            var chunkSize = 256;
-            var writer = function(offset) {
-              if (offset>=binary.byteLength) {
-                Espruino.Status.setStatus("Flashing complete!");
-                callback(undefined); // done
-                return;
-              }
-              var len = binary.byteLength - offset;
-              if (len > chunkSize) len = chunkSize;              
-              var data = new Uint8Array(binary, offset, len);
-              writeData(function(err) {
-                if (err) { callback(err); return; }
-                writer(offset + chunkSize);
-              }, 0x08000000 + offset, data);
-            };
-            writer(1024*10 /* no bootloader */);
+            writeAllData(binary);
           });
+          /*readAllData(binary.byteLength, function(err,data) {
+            if (err!==undefined) {
+              console.log(err);
+              return;
+            }
+            var errors = 0;
+            var binaryData = new Uint8Array(binary, 0, binary.byteLength);
+            for (var i=FLASH_OFFSET;i<binary.byteLength;i++) {
+              if (binaryData[i]!=data[i]) {
+                console.log(binaryData[i]+" vs "+data[i]);
+                errors++;
+              }
+            }
+            console.log(errors+" errors.");
+          });*/
         });
       });
     };
