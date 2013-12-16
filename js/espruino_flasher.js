@@ -52,13 +52,13 @@ THE SOFTWARE.
       xhr.send(null);
     };
 
-    var initialiseChip = function(callback) {
+    var initialiseChip = function(callback, timeout) {
       Espruino.Status.setStatus("Initialising...");
       var iTimeout = setTimeout(function() {
         dataReceived = undefined;
         clearInterval(iPoll);
         callback("Can't find STM32 bootloader. Make sure the chip is reset with BOOT0=1 and BOOT1=0");
-      }, 10000);      
+      }, (timeout==undefined)?10000:timeout);      
       var iPoll = setInterval(function() {
         console.log("Sending... 0x7F");
         Espruino.Serial.write("\x7f");
@@ -129,7 +129,7 @@ THE SOFTWARE.
           initialiseChip(function (err) {
             if (err) callback(err);
             else writeData(callback, addr, data);
-          }); 
+          }, 30000); 
           callback(err); 
           return; 
         }        
@@ -140,7 +140,7 @@ THE SOFTWARE.
             initialiseChip(function (err) {
               if (err) callback(err);
               else writeData(callback, addr, data);
-            });
+            }, 30000);
             return; 
           }
           // work out data to send
@@ -153,7 +153,7 @@ THE SOFTWARE.
               initialiseChip(function (err) {
                 if (err) callback(err);
                 else writeData(callback, addr, data);
-              });
+              }, 30000);
               return;
             }  
             callback(undefined); // done
