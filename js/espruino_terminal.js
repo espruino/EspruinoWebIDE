@@ -36,6 +36,9 @@ THE SOFTWARE.
     var termText = [ "" ];
     // Map of terminal line number to text to display before it
     var termExtraText = {}; 
+    /// Extra text that is displayed right at the end of the terminal
+    var termHintText = undefined;
+    
     var termCursorX = 0;
     var termCursorY = 0;
     var termControlChars = [];    
@@ -110,6 +113,11 @@ THE SOFTWARE.
           t.push(termExtraText[y]);
         t.push("<div class='termLine' lineNumber='"+y+"'>"+line+"</div>");
       }
+      // last line...
+      if (termExtraText[termText.length])
+        t.push(termExtraText[termText.length]);
+      if (termHintText!==undefined)
+        t.push(termHintText);
       
       $("#terminal").html(t.join(""));
       var cursorLine = $("#terminal .termLine[lineNumber="+termCursorY+"]");
@@ -123,11 +131,11 @@ THE SOFTWARE.
           case  8 : {
             if (termCursorX>0) termCursorX--;
           } break;
-          case 10 : {
+          case 10 : { // line feed
             termCursorX = 0; termCursorY++;
             while (termCursorY >= termText.length) termText.push("");
           } break;
-          case 13 : {
+          case 13 : { // carriage return
             termCursorX = 0;           
           } break;
           case 27 : {
@@ -206,25 +214,39 @@ THE SOFTWARE.
     
     /// Set extra text to display before a certain terminal line
     Espruino.Terminal.setExtraText = function(line, text) {
-      termExtraText[line] = text;      
+      if (termExtraText[line] != text) {
+        termExtraText[line] = text;
+        updateTerminal();
+      }      
     };    
+    
+    /// Set the hint text that appears after the final line
+    Espruino.Terminal.setHintText = function(text) {
+      if (termHintText != text) {
+        termHintText = text;
+        updateTerminal();
+      }      
+    };
 
     /// Give the terminal focus
     Espruino.Terminal.focus = function() {
         $("#terminalfocus").focus(); 
     };
     
-    /// Get the latest terminal line (and the line number of it)
-    Espruino.Terminal.getInputLine = function() {
+    /// Get the Nth from latest terminal line (and the line number of it)
+    Espruino.Terminal.getInputLine = function(n) {
+      if (n===undefined) n=0;
       var startLine = termText.length-1;
-      while (startLine>=0 && termText[startLine].substr(0,1)!=">")
+      while (startLine>=0 && !(n==0 && termText[startLine].substr(0,1)==">")) {
+        if (termText[startLine].substr(0,1)!=">") n--;
         startLine--;
-      if (startLine<0) return "";
+      }
+      if (startLine<0) return undefined;
       var line = startLine;
       var text = termText[line++].substr(1);
       while (line < termText.length && termText[line].substr(0,1)==":")
         text += "\n"+termText[line++].substr(1);
-      return { start : startLine, text : text };
+      return { line : startLine, text : text };
     };
 
 })();

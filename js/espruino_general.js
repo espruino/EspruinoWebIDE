@@ -103,7 +103,18 @@ THE SOFTWARE.
     }
   };
   
+  Espruino.General.markdownToHTML = function(markdown) {
+    var html = markdown;
+    console.log(JSON.stringify(html));
+    html = html.replace(/\n\s*\n/g, "\n<br/><br/>\n"); // newlines
+    html = html.replace(/\*\*(.*)\*\*/g, "<strong>$1</strong>"); // bold
+    html = html.replace(/```(.*)```/g, "<span class=\"code\">$1</span>"); // code
+    console.log(JSON.stringify(html));
+    return html;
+  };  
+  
 })();
+
 $.fn.selectRange = function(start, end) {
     if(!end) end = start; 
     return this.each(function() {

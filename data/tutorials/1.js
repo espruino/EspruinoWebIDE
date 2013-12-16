@@ -27,7 +27,7 @@ digitalWrite(LED1,0)
 // Type in the following to read the value of the pushbutton:
 digitalRead(BTN)
 
-// This will return ```false```, which means 0 - that the button is not
+// This will return ```0``` - which means that the button is not
 // pressed.
 //
 // Now type the same command again, hold down the button furthest from the
@@ -35,6 +35,6 @@ digitalRead(BTN)
 // execute it:
 digitalRead(BTN)
 
-// This returns ```true``` - meaning that the button is pressed
+// This returns ```1``` - meaning that the button is pressed
 // 
 // **Congratulations!** this concludes the first tutorial!

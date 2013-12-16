@@ -27,39 +27,85 @@ THE SOFTWARE.
     Espruino["Tutorial"] = {};
     
     var tutorialData = [];
+    var tutorialStep = 0;
+    var tutorialLastInputLine = undefined;
     
     function loadTutorial(text) {
-      var step = { text : "", command : "" };
+      var step = { text : "", code : "" };
       tutorialData = [ ];
       var lines = text.split("\n");
       for (var i in lines) {
         var l = lines[i].trim();
         if (l.substr(0,2)=="//") {
-          var text = l.substr(2);
-          if (text=="") text="\n";
-          step.text += text;
+          step.text += l.substr(2).trim()+"\n";
         } else
-          step.command += l;
+          step.code += l;
         if (l=="" && step.text!="") {
           tutorialData.push(step);
-          step = { text : "", command : "" };          
+          step = { text : "", code : "" };          
         }
       }      
       if (step.text!="") 
         tutorialData.push(step);
       // test
-      // Espruino.Terminal.setExtraText(0,tutorialData[0].text);
+      displayTutorialStep();
     }
     
+    function displayTutorialStep() {
+      var inputLine = Espruino.Terminal.getInputLine(0);
+      var text = '<div class="tutorial_text">'+Espruino.General.markdownToHTML(tutorialData[tutorialStep].text)+'<br/>';
+      if (tutorialData[tutorialStep].code != "")
+        text += '<div class="tutorial_code">'+Espruino.General.escapeHTML(tutorialData[tutorialStep].code)+'</div>';
+      text += '</div>';
+      Espruino.Terminal.setExtraText((inputLine===undefined)?0:inputLine.line, text);      
+    }
+       
+    function isCodeEqual(a,b) {
+      return a.trim()==b.trim();
+    }
     
+    function tutorialWatcher() {
+      if (tutorialStep >= tutorialData.length) return;
+      
+      // Find out if we've accidentally skipped some input lines
+      var linesPast = 0;
+      var line = Espruino.Terminal.getInputLine(linesPast);      
+      if (line===undefined) return;
+      var currentInputLine = line.line;
+      if (tutorialLastInputLine===undefined) tutorialLastInputLine = line.line;
+      while (line!==undefined && line.line>tutorialLastInputLine) {
+        linesPast++;
+        line = Espruino.Terminal.getInputLine(linesPast);
+      }
+      tutorialLastInputLine = currentInputLine;
+      // if we have, try and handle them
+      while (linesPast>0) {
+        console.log("Checking previous line "+linesPast);
+        line = Espruino.Terminal.getInputLine(linesPast);
+        // user has entered the correct command - let's move to next
+        if (isCodeEqual(line.text,tutorialData[tutorialStep].code)) {          
+          tutorialStep++;
+          displayTutorialStep();
+        }
+        linesPast--;
+      }
+      
+      
+     
+     /* 
+      if (line!==undefined) {
+        var ok = line.text == tutorialData[tutorialStep].code;        
+        Espruino.Terminal.setHintText(ok?"Right":"Wrong");
+      }*/
+    }
     
     Espruino.Tutorial.init = function(){
-      $.get( "data/tutorials/1.js", loadTutorial);
+      //$.get( "data/tutorials/1.js", loadTutorial);
+      //setInterval(tutorialWatcher, 1000);
     };
     
     Espruino.Tutorial.getTutorialData = function() {
        return tutorialData;
     };
-
-    
+   
 })();
