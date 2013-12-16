@@ -40,7 +40,8 @@ THE SOFTWARE.
           }
         });
         // string adds to stop the command tag being detected in the output
-        Espruino.Serial.write('\necho(0);\nconsole.log("<<"+"<<<"+JSON.stringify(process.env)+">>>"+">>");\necho(1);\n');
+        // \x3 (ctrl-c) sent first, to break out of line editing if we were in it
+        Espruino.Serial.write('\x03echo(0);\nconsole.log("<<"+"<<<"+JSON.stringify(process.env)+">>>"+">>");\necho(1);\n');
         setTimeout(function(){
           Espruino.Serial.startListening(prevReader);
           console.log("Got "+JSON.stringify(bufText));          
