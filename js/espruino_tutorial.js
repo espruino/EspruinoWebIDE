@@ -151,7 +151,8 @@ THE SOFTWARE.
         console.log("Checking previous line "+linesPast);
         line = Espruino.Terminal.getInputLine(linesPast);
         // user has entered the correct command - let's move to next
-        if (isCodeEqual(line.text,tutorialData[tutorialStep].code)) {          
+        if (isCodeEqual(line.text,tutorialData[tutorialStep].code) && 
+            tutorialStep+1 < tutorialData.length) {          
           tutorialStep++;
           displayTutorialStep();
         }
