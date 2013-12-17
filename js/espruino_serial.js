@@ -46,7 +46,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
   
   var startListening=function(callback) {
     if (!connectionInfo || !connectionInfo.connectionId) {
-      throw new "You must call openSerial first!";
+      throw "You must call openSerial first!";
     }
     var oldListener = readListener;
     readListener=callback;
@@ -61,7 +61,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
     if (readInfo && readInfo.bytesRead>0 && readInfo.data) {
       if (readListener) readListener(readInfo.data);
     }
-    chrome.serial.read(connectionInfo.connectionId, 128, onCharRead);
+    chrome.serial.read(connectionInfo.connectionId, 1024, onCharRead);
   };
 
   var getPorts=function(callback) {
@@ -126,6 +126,10 @@ Author: Gordon Williams (gw@pur3.co.uk)
   var writeSerial = function(data, showStatus) {
     if (!isConnected()) return; // throw data away
     if (showStatus===undefined) showStatus=true;
+    
+    /*var d = [];
+    for (var i=0;i<data.length;i++) d.push(data.charCodeAt(i));
+    console.log("Write "+data.length+" bytes - "+JSON.stringify(d));*/
     
     /* Here we queue data up to write out. We do this slowly because somehow 
     characters get lost otherwise (compared to if we used other terminal apps
