@@ -20,8 +20,8 @@ Installing From Chrome Web Store
 * Click 'Install'
 * Click 'Launch App'
 
-Installing
-----------
+Installing from GitHub
+-------------------
 
 * Install the [Chrome Web Browser](https://www.google.com/intl/en/chrome/browser/)
 * Download the files in EspruinoSerialTerminal to a directory on your PC (either as a [ZIP File](https://github.com/espruino/EspruinoWebIDE/archive/master.zip), or using git)
