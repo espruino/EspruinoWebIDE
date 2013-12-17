@@ -238,7 +238,7 @@ THE SOFTWARE.
       if (n===undefined) n=0;
       var startLine = termText.length-1;
       while (startLine>=0 && !(n==0 && termText[startLine].substr(0,1)==">")) {
-        if (termText[startLine].substr(0,1)!=">") n--;
+        if (termText[startLine].substr(0,1)==">") n--;
         startLine--;
       }
       if (startLine<0) return undefined;

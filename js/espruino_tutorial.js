@@ -29,8 +29,9 @@ THE SOFTWARE.
     var tutorialData = [];
     var tutorialStep = 0;
     var tutorialLastInputLine = undefined;
+    var tutorialWatcherInterval = undefined;
     
-    function loadTutorial(text) {
+    function loadTutorialText(text) {
       var step = { text : "", code : "" };
       tutorialData = [ ];
       var lines = text.split("\n");
@@ -39,8 +40,10 @@ THE SOFTWARE.
         if (l.substr(0,2)=="//") {
           step.text += l.substr(2).trim()+"\n";
         } else
-          step.code += l;
+          step.code += l+"\n";
         if (l=="" && step.text!="") {
+          step.code = step.code.trim();
+          step.text = step.text.trim();
           tutorialData.push(step);
           step = { text : "", code : "" };          
         }
@@ -51,16 +54,27 @@ THE SOFTWARE.
       displayTutorialStep();
     }
     
+    function loadTutorialURL(url) {
+      $.get( url, function(data) {
+        loadTutorialText(data);
+        if (tutorialWatcherInterval===undefined)
+          tutorialWatcherInterval = setInterval(tutorialWatcher, 1000);
+      });
+    }
+    
     function displayTutorialStep() {
       var inputLine = Espruino.Terminal.getInputLine(0);
       var text = '<div class="tutorial_text">'+Espruino.General.markdownToHTML(tutorialData[tutorialStep].text)+'<br/>';
       if (tutorialData[tutorialStep].code != "")
-        text += '<div class="tutorial_code">'+Espruino.General.escapeHTML(tutorialData[tutorialStep].code)+'</div>';
+        text += '<div class="tutorial_code">'+Espruino.General.escapeHTML(tutorialData[tutorialStep].code).replace(/\n/g,"<br/>")+'</div>';
       text += '</div>';
       Espruino.Terminal.setExtraText((inputLine===undefined)?0:inputLine.line, text);      
     }
        
     function isCodeEqual(a,b) {
+      console.log("Compare");
+      console.log("A> "+JSON.stringify(a));
+      console.log("B> "+JSON.stringify(b));
       return a.trim()==b.trim();
     }
     
@@ -89,9 +103,6 @@ THE SOFTWARE.
         }
         linesPast--;
       }
-      
-      
-     
      /* 
       if (line!==undefined) {
         var ok = line.text == tutorialData[tutorialStep].code;        
@@ -100,8 +111,7 @@ THE SOFTWARE.
     }
     
     Espruino.Tutorial.init = function(){
-      //$.get( "data/tutorials/1.js", loadTutorial);
-      //setInterval(tutorialWatcher, 1000);
+      //loadTutorialURL("data/tutorials/1.js");
     };
     
     Espruino.Tutorial.getTutorialData = function() {
