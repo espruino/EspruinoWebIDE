@@ -29,18 +29,18 @@ THE SOFTWARE.
       subDirs:["datasheets","devices","peripherals","tasks","tutorials"],
       fileExtensions:["md","pdf"]
   };
-  Espruino.Scripts["Scripts"] = {
-      url:"https://api.github.com/repos/espruino/Espruino/git/trees/master",
-      subDirs:["code"],
+  Espruino.Scripts["Examples"] = {
+      url:"https://api.github.com/repos/espruino/EspruinoDocs/git/trees/master",
+      subDirs:["examples"],
       fileExtensions:["js"]
   };
   Espruino.Scripts["initOptions"] = function(){
-    Espruino.Options.optionFields.push({id:"#urlTutorials",module:"Scripts",object:"Scripts",field:"url",type:"text"});
+    Espruino.Options.optionFields.push({id:"#urlTutorials",module:"Scripts",object:"Tutorials",field:"url",type:"text"});
     Espruino.Options.optionFields.push({id:"#subDirsTutorials",module:"Scripts",object:"Tutorials",field:"subDirs",type:"JSON"});
     Espruino.Options.optionFields.push({id:"#fileExtensionsTutorials",module:"Scripts",object:"Tutorials",field:"fileExtensions",type:"JSON"});
-    Espruino.Options.optionFields.push({id:"#urlScripts",module:"Scripts",object:"Scripts",field:"url",type:"text"});
-    Espruino.Options.optionFields.push({id:"#subDirsScripts",module:"Scripts",object:"Scripts",field:"subDirs",type:"JSON"});
-    Espruino.Options.optionFields.push({id:"#fileExtensionsScripts",module:"Scripts",object:"Scripts",field:"fileExtensions",type:"JSON"});
+    Espruino.Options.optionFields.push({id:"#urlExamples",module:"Scripts",object:"Examples",field:"url",type:"text"});
+    Espruino.Options.optionFields.push({id:"#subDirsExamples",module:"Scripts",object:"Examples",field:"subDirs",type:"JSON"});
+    Espruino.Options.optionFields.push({id:"#fileExtensionsExamples",module:"Scripts",object:"Examples",field:"fileExtensions",type:"JSON"});
     Espruino.Options.optionBlocks.push({id:"#divOptionScripts",htmlUrl:"data/Espruino_Scripts.html"});
   };
 
@@ -48,7 +48,7 @@ THE SOFTWARE.
     $( ".scripts" ).button({ text: false, icons: { primary: "ui-icon-script" } }).click(openSelects);
   };
   function copyScriptToEditor(){
-    var url = $("#scripts option:selected")[0].value;
+    var url = $("#examples option:selected")[0].value;
     if(url){
       $.getJSON(url, function(data){
         Espruino.General.setEditorCode(window.atob(data.content.replace(/(\r\n|\n|\r)/gm,"")));
@@ -74,16 +74,16 @@ THE SOFTWARE.
   }
   function openSelects(){
     loadGitHubTrees(Espruino.Scripts.Tutorials,"tutorials",tutorialsLoaded);
-    loadGitHubTrees(Espruino.Scripts.Scripts,"scripts",scriptsLoaded);
+    loadGitHubTrees(Espruino.Scripts.Examples,"examples",examplesLoaded);
     $("#loader").show();
   }
   function tutorialsLoaded(html,tutorials){
     $( "#loaderTutorials" ).html(html);
     $( "#loaderTutorials select" ).change(showTutorial);
   }
-  function scriptsLoaded(html,scripts){
-      $( "#loaderScripts" ).html(html);
-      $( "#loaderScripts select").change(copyScriptToEditor);
+  function examplesLoaded(html,scripts){
+      $( "#loaderExamples" ).html(html);
+      $( "#loaderExamples select").change(copyScriptToEditor);
   }
   function loadGitHubTrees(githubAdr,selectID,callback){
     var maxWait = 5000,trees = {};

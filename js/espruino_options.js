@@ -101,6 +101,7 @@ THE SOFTWARE.
   function setFormFromOptions(){
     var value;
     for(var i = 0; i < optionFields.length; i++){
+      //console.log(optionFields[i].id);
       if(optionFields[i].object){ value = Espruino[optionFields[i].module][optionFields[i].object][optionFields[i].field];}
       else{ value = Espruino[optionFields[i].module][optionFields[i].field];}
       switch(optionFields[i].type){
