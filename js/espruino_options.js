@@ -88,7 +88,7 @@ THE SOFTWARE.
           $("#resetOptions").unbind().button({ text:false, icons: { primary: "ui-icon-refresh" } }).click(Espruino.Options.resetOptions);
           $("#saveOptionsToFile").button({ text: false, icons: { primary: "ui-icon-disk" } }).unbind().click(Espruino.Options.saveToFileOptions);
           $("#loadOptionsFromFile").button({ text: false, icons: { primary: "ui-icon-folder-open" } }).unbind().click(Espruino.Options.loadFromFileOptions);
-        // Set up the firmware flasher
+          // Set up the firmware flasher
           $( "#flashFirmware" ).button().click(function() {
             Espruino.Flasher.flashDevice($("#flashFirmwareUrl").val() ,function (err) {
               Espruino.Terminal.grabSerialPort();
