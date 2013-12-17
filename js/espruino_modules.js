@@ -27,7 +27,7 @@ THE SOFTWARE.
     Espruino["Modules"] = {};
     Espruino.Modules.Config = {
       url : "http://www.espruino.com/modules",
-      fileExtensions : [ ".min.js"/*, ".js"*/ ] // FIXME fileExtensions is not used
+      fileExtensions : [ ".min.js", ".js" ]
     };
     Espruino.Modules["initOptions"] = function(){
       Espruino.Options.optionFields.push({id:"#urlModules",module:"Modules",object:"Config",field:"url",type:"text"});
@@ -63,33 +63,39 @@ THE SOFTWARE.
       for(var i = 0; i < requires.length; i++){
         if(urlexp.test(requires[i])){
           defs.push(loadModule(requires[i].substr(requires[i].lastIndexOf("/") + 1).split(".")[0],requires[i]));}
-        else{defs.push(loadModule(requires[i],Espruino.Modules.Config.url + "/" + requires[i],".min.js",".js"));}
+        else{defs.push(loadModule(requires[i],Espruino.Modules.Config.url + "/" + requires[i], Espruino.Modules.Config.fileExtensions));}
       }
       if(defs.length > 0) {$.when.apply(null,defs).then(function(){returnCode();});}
       else{callback(code);}      
-      function loadModule(modName,url,firstTry,secondTry){
+      
+      function loadModule(modName,url,extensions) {
         var t, localUrl,dfd = $.Deferred();
-        if(firstTry){ localUrl = url + firstTry; }
-        else{
-          localUrl = url;
-          code = code.replace("require(\"" + url + "\")","require(\"" + modName + "\")");
-        }
-        t = setInterval(function(){clearInterval(t);dfd.resolve();},maxWait);
-        $.get(localUrl,function(data){
-          moduleCode += "Modules.addCached(" + JSON.stringify(modName) + "," + JSON.stringify(data) + ");\n";
-          dfd.resolve();
-        },"text").fail(function(){
-          if(secondTry){
-            localUrl = url + secondTry;
-            $.get(localUrl,function(data){
-              moduleCode += "Modules.addCached(" + JSON.stringify(modName) + "," + JSON.stringify(data) + ");\n";
+        var extensionTry = 0;
+        var downloadModule = function(localUrl) {
+          $.get(localUrl,function(data){
+            moduleCode += "Modules.addCached(" + JSON.stringify(modName) + "," + JSON.stringify(data) + ");\n";
+            dfd.resolve();
+          },"text").fail(function() {
+            if(extensionTry < extensions.length) {
+              downloadModule(url + extensions[extensionTry++]);
+            } else { 
+              console.log(modName + " not found"); 
               dfd.resolve();
-            },"text").fail(function(){ console.log(modName + " not found");dfd.resolve();});
-          }
-          else{console.log(modName + " not found"); dfd.resolve();}   
-        });
+            }   
+          });
+        };
+        
+        t = setInterval(function(){clearInterval(t);dfd.resolve();},maxWait);        
+        if (extensions && extensions.length>0){ 
+          downloadModule(url + extensions[extensionTry++]);
+        } else {          
+          code = code.replace("require(\"" + url + "\")","require(\"" + modName + "\")");
+          downloadModule(url);
+        }
+        
         return dfd.promise();
       }
+      
       function returnCode(){ callback(moduleCode + "\n" + code); }
     };
 
