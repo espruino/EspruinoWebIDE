@@ -159,7 +159,8 @@ Author: Gordon Williams (gw@pur3.co.uk)
             writeData = undefined; 
           }          
           writeSerialDirect(d);
-          Espruino.Status.incrementProgress(d.length);
+          if (showStatus) 
+            Espruino.Status.incrementProgress(d.length);
         } 
         if (writeData==undefined && writeInterval!=undefined) {
           clearInterval(writeInterval);

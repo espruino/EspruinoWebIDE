@@ -60,9 +60,10 @@ THE SOFTWARE.
     };    
     
     Espruino.Status.incrementProgress = function(amount) {
-      if (!Espruino.Status.hasProgress()) return;
+      if (!Espruino.Status.hasProgress()) return;      
       progressAmt += amount;
       var width = (progressAmt * 100.0 / progressMax)|0;
+      //console.log(progressAmt,progressMax,width);
       if (width>100) width=100;
       progressIndicator.width(width);
     };
