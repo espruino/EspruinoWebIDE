@@ -80,6 +80,13 @@ body {
                -3px 0 white, 0 3px white, 3px 0 white, 0 -3px white;
 }
 
+#terminal a {
+  color:#88F;
+}
+#terminal a:visited {
+  color:#88F;
+}
+
 .termCursor {
   background-color: #FFF;
   color: #888;
