@@ -142,19 +142,33 @@ THE SOFTWARE.
             termControlChars = [ 27 ];
           } break;
           default : {
+            // E$lse actually add character
             termText[termCursorY] = Espruino.General.getSubString(termText[termCursorY],0,termCursorX) + String.fromCharCode(ch) + Espruino.General.getSubString(termText[termCursorY],termCursorX+1);
             termCursorX++;
           }
         }
      } else if (termControlChars[0]==27) {
        if (termControlChars[1]==91) {
-         switch (ch) {
-           case 65: if (termCursorY > 0) termCursorY--; break; break; // up  FIXME should add extra lines in...
-           case 66: termCursorY++; while (termCursorY >= termText.length) termText.push(""); break;  // down FIXME should add extra lines in...
-           case 67: termCursorX++; break; // right
-           case 68: if (termCursorX > 0) termCursorX--; break; // left
+         if (termControlChars[2]==63) {
+           if (termControlChars[3]==55) {
+             if (ch!=108)
+               console.log("Expected 27, 91, 63, 55, 108 - no line overflow sequence");
+             termControlChars = [];
+           } else {
+             if (ch==55) {
+               termControlChars = [27, 91, 63, 55];
+             } else termControlChars = [];
+           }
+         } else {
+           termControlChars = [];
+           switch (ch) {
+             case 63: termControlChars = [27, 91, 63]; break;
+             case 65: if (termCursorY > 0) termCursorY--; break; // up  FIXME should add extra lines in...
+             case 66: termCursorY++; while (termCursorY >= termText.length) termText.push(""); break;  // down FIXME should add extra lines in...
+             case 67: termCursorX++; break; // right
+             case 68: if (termCursorX > 0) termCursorX--; break; // left
+           }           
          }
-         termControlChars = [];      
        } else {
          switch (ch) {
            case 91: {
