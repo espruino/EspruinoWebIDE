@@ -38,8 +38,7 @@ THE SOFTWARE.
     var getBinary = function(url, callback) {
       console.log("Downloading "+url);
       Espruino.Status.setStatus("Downloading binary...");
-      var xhr = new XMLHttpRequest();
-      xhr.open("GET", url, true);    
+      var xhr = new XMLHttpRequest();          
       xhr.responseType = "arraybuffer";
       xhr.addEventListener("load", function () {
         if (xhr.status === 200) {
@@ -49,6 +48,10 @@ THE SOFTWARE.
         } else
           callback("Download error.");
       });
+      xhr.addEventListener("error", function () {
+        callback("Download error.");
+      });
+      xhr.open("GET", url, true);
       xhr.send(null);
     };
 
@@ -321,7 +324,7 @@ THE SOFTWARE.
     Espruino.Flasher.checkBoardInfo = function(boardInfo) {
       //console.log(boardInfo);
       if (boardInfo.info.binary_url !== undefined) {
-        Espruino.General.flashFirmwareUrl = boardInfo.info.binary_url;
+        $("#flashFirmwareUrl").val(boardInfo.info.binary_url);
         if (Espruino.Process.Env.VERSION!==undefined && boardInfo.info.binary_version!==undefined) {
           console.log("FIRMWARE: Current "+Espruino.Process.Env.VERSION+", Available "+boardInfo.info.binary_version);
           var vCurrent = Espruino.General.versionToFloat(Espruino.Process.Env.VERSION);
@@ -332,6 +335,22 @@ THE SOFTWARE.
           }
         }
       }
+    };
+    
+    Espruino.Flasher.flashButtonClicked = function() {
+      if (!Espruino.Serial.isConnected()) {
+        Espruino.Status.setStatus("Must be connected first.");
+        return;
+      }
+      Espruino.Flasher.flashDevice($("#flashFirmwareUrl").val() ,function (err) {
+        Espruino.Terminal.grabSerialPort();
+        if (err) {
+          Espruino.Status.setStatus("Error Flashing.");
+          console.log(err);
+          //alert(err);
+        }
+        else Espruino.Status.setStatus("Done.");
+      });
     };
 
 })();

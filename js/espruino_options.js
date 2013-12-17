@@ -89,17 +89,7 @@ THE SOFTWARE.
           $("#saveOptionsToFile").button({ text: false, icons: { primary: "ui-icon-disk" } }).unbind().click(Espruino.Options.saveToFileOptions);
           $("#loadOptionsFromFile").button({ text: false, icons: { primary: "ui-icon-folder-open" } }).unbind().click(Espruino.Options.loadFromFileOptions);
           // Set up the firmware flasher
-          $( "#flashFirmware" ).button().click(function() {
-            Espruino.Flasher.flashDevice($("#flashFirmwareUrl").val() ,function (err) {
-              Espruino.Terminal.grabSerialPort();
-              if (err) {
-                Espruino.Status.setStatus("Error Flashing.");
-                console.log(err);
-                //alert(err);
-              }
-              else Espruino.Status.setStatus("Done.");
-            });
-          });
+          $( "#flashFirmware" ).button().click(Espruino.Flasher.flashButtonClicked);
         }
       },10);
     },"text");
