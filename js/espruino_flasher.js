@@ -53,7 +53,9 @@ THE SOFTWARE.
     };
 
     var initialiseChip = function(callback, timeout) {
-      Espruino.Status.setStatus("Initialising...");
+      if (!Espruino.Status.hasProgress()) 
+        Espruino.Status.setStatus("Initialising...");
+      console.log("Initialising...");
       var iTimeout = setTimeout(function() {
         dataReceived = undefined;
         clearInterval(iPoll);
@@ -61,7 +63,7 @@ THE SOFTWARE.
       }, (timeout==undefined)?10000:timeout);      
       var iPoll = setInterval(function() {
         console.log("Sending... 0x7F");
-        Espruino.Serial.write("\x7f");
+        Espruino.Serial.write("\x7f", false);
       }, 200);
       dataReceived = function (c) {
         dataReceived = undefined;
@@ -69,7 +71,9 @@ THE SOFTWARE.
         if (c==ACK || c==NACK) {
           clearTimeout(iTimeout);
           clearInterval(iPoll);
-          Espruino.Status.setStatus("Initialised.");
+          if (!Espruino.Status.hasProgress())
+            Espruino.Status.setStatus("Initialised.");
+          console.log("Initialised.");
           callback(undefined);
         }
       };
@@ -97,19 +101,21 @@ THE SOFTWARE.
         chksum = chksum ^ data[i];
         s += String.fromCharCode(data[i]);
       }
-      Espruino.Serial.write(s + String.fromCharCode(chksum));
+      Espruino.Serial.write(s + String.fromCharCode(chksum), false);
       waitForACK(callback, timeout);
     };
 
     var receiveData = function(count, callback, timeout) {
-      var data = [];
+      var data = new Uint8Array(count);
+      var dataCount = 0;
       var iTimeout = setTimeout(function() {
         dataReceived = undefined;
         callback("Timeout reading "+count+" bytes");
       }, timeout?timeout:2000);   
       dataReceived = function (c) {
-        data.push(c);
-        if (data.length == count) {
+        console.log(dataCount);
+        data[dataCount++] = c;        
+        if (dataCount == count) {
           clearTimeout(iTimeout);
           dataReceived = undefined;
           callback(0,data);
@@ -118,7 +124,7 @@ THE SOFTWARE.
     };    
     
     var sendCommand = function(command, callback) {
-      Espruino.Serial.write(String.fromCharCode(command) + String.fromCharCode(0xFF ^ command));
+      Espruino.Serial.write(String.fromCharCode(command) + String.fromCharCode(0xFF ^ command), false);
       waitForACK(callback);
     };
 
@@ -137,7 +143,7 @@ THE SOFTWARE.
     
     var readData = function(callback, addr) {
       var readBytes = 256;
-      Espruino.Status.setStatus("Reading "+readBytes+" bytes from 0x"+addr.toString(16)+"...");
+      console.log("Reading "+readBytes+" bytes from 0x"+addr.toString(16)+"...");
       // send read command
       sendCommand(0x11, function(err) {
         if (err) { 
@@ -167,7 +173,7 @@ THE SOFTWARE.
 
     var writeData = function(callback, addr, data) {
       if (data.length>256) callback("Writing too much data");
-      Espruino.Status.setStatus("Writing "+data.length+" bytes at 0x"+addr.toString(16)+"...");
+      console.log("Writing "+data.length+" bytes at 0x"+addr.toString(16)+"...");
       // send write command
       sendCommand(0x31, function(err) {
         if (err) { 
@@ -209,12 +215,13 @@ THE SOFTWARE.
     
     var FLASH_OFFSET = 1024*10 /* no bootloader */;
     
-    var writeAllData = function(binary) {
-      console.log("Writing "+binary.byteLength+" bytes");
+    var writeAllData = function(binary) {      
       var chunkSize = 256;
+      console.log("Writing "+binary.byteLength+" bytes");
+      Espruino.Status.setStatus("Writing flash...",  binary.byteLength);
       var writer = function(offset) {
         if (offset>=binary.byteLength) {
-          Espruino.Status.setStatus("Flashing complete!");
+          Espruino.Status.setStatus("Write complete!");
           callback(undefined); // done
           return;
         }
@@ -223,6 +230,7 @@ THE SOFTWARE.
         var data = new Uint8Array(binary, offset, len);
         writeData(function(err) {
           if (err) { callback(err); return; }
+          Espruino.Status.incrementProgress(chunkSize);
           writer(offset + chunkSize);
         }, 0x08000000 + offset, data);
       };
@@ -230,12 +238,13 @@ THE SOFTWARE.
     };
     
     var readAllData = function(binaryLength, callback) {
-      var data = new Array(FLASH_OFFSET);
-      console.log("Reading "+binaryLength+" bytes");
+      var data = new Uint8Array(FLASH_OFFSET);            
       var chunkSize = 256;
+      console.log("Reading "+binaryLength+" bytes");
+      Espruino.Status.setStatus("Reading flash...",  binaryLength);
       var reader = function(offset) {
         if (offset>=binaryLength) {
-          Espruino.Status.setStatus("Reading complete!");
+          Espruino.Status.setStatus("Read complete!");
           callback(undefined, data); // done
           return;
         }
@@ -245,6 +254,7 @@ THE SOFTWARE.
           if (err) { callback(err); return; }
           for (var i in dataChunk)
             data.push(dataChunk[i]);
+          Espruino.Status.incrementProgress(chunkSize);
           reader(offset + chunkSize);
         }, 0x08000000 + offset);
       };
@@ -272,20 +282,22 @@ THE SOFTWARE.
             if (err) { callback(err); return; }
             writeAllData(binary);
           });
-          /*readAllData(binary.byteLength, function(err,data) {
+          /*readAllData(binary.byteLength, function(err,chipData) {
             if (err!==undefined) {
-              console.log(err);
+              callback(err);              
               return;
             }
             var errors = 0;
+            var needsErase = false;
             var binaryData = new Uint8Array(binary, 0, binary.byteLength);
             for (var i=FLASH_OFFSET;i<binary.byteLength;i++) {
-              if (binaryData[i]!=data[i]) {
+              if (binaryData[i]!=chipData[i]) {
+                if (chipData[i]!=0xFF) needsErase = true;
                 console.log(binaryData[i]+" vs "+data[i]);
                 errors++;
               }
             }
-            console.log(errors+" errors.");
+            console.log(errors+" differences, "+(needsErase?"needs erase":"doesn't need erase"));
           });*/
         });
       });

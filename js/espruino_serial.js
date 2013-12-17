@@ -123,8 +123,9 @@ Author: Gordon Williams (gw@pur3.co.uk)
   };
 
   // Throttled serial write
-  var writeSerial = function(data) {
+  var writeSerial = function(data, showStatus) {
     if (!isConnected()) return; // throw data away
+    if (showStatus===undefined) showStatus=true;
     
     /* Here we queue data up to write out. We do this slowly because somehow 
     characters get lost otherwise (compared to if we used other terminal apps
@@ -136,7 +137,8 @@ Author: Gordon Williams (gw@pur3.co.uk)
     
     var blockSize = 32;
 
-    if (writeData.length>blockSize) {
+    showStatus &= writeData.length>blockSize;
+    if (showStatus) {
       Espruino.Status.setStatus("Sending...", writeData.length);
       console.log("Sending "+JSON.stringify(data));
     }
@@ -158,7 +160,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
         if (writeData==undefined && writeInterval!=undefined) {
           clearInterval(writeInterval);
           writeInterval = undefined;
-          if (Espruino.Status.hasProgress()) 
+          if (showStatus) 
             Espruino.Status.setStatus("Sent");
         }
       }
@@ -167,7 +169,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
       if (writeData!=undefined) {
         writeInterval = setInterval(sender, 50);
       } else {
-        if (Espruino.Status.hasProgress())
+        if (showStatus)
           Espruino.Status.setStatus("Sent");
       }
     }
