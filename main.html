@@ -74,18 +74,13 @@
       </div>
     <div id="divcode">
     <textarea id="code" name="code">
-function Blinker(pin,frequency){
-    var status = true, duration = 1000 / frequency, interval;
-    interval = setInterval(function(){
-        status =! status;
-        pin.write(status);
-    },duration);
-    this.stop=function(){
-        pin.write(false);
-        clearInterval(interval);
-    };
-}
-var bl=new Blinker(/*LED,pin*/ ,2);</textarea>
+clearInterval();
+
+var  l = false;
+setInterval(function() {
+  l = !l;
+  LED1.write(l);
+}, 500);</textarea>
     </div>
     <iframe id="divblockly" style="display:none;border:none;" src="blockly/blockly.html"></iframe>
   </div>
