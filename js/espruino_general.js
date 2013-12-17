@@ -113,6 +113,10 @@ THE SOFTWARE.
     return html;
   };  
   
+  Espruino.General.versionToFloat = function(version) {
+    return parseFloat(version.trim().replace("v","."));
+  };    
+  
 })();
 
 $.fn.selectRange = function(start, end) {

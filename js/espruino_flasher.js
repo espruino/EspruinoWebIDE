@@ -113,7 +113,6 @@ THE SOFTWARE.
         callback("Timeout reading "+count+" bytes");
       }, timeout?timeout:2000);   
       dataReceived = function (c) {
-        console.log(dataCount);
         data[dataCount++] = c;        
         if (dataCount == count) {
           clearTimeout(iTimeout);
@@ -141,8 +140,7 @@ THE SOFTWARE.
       });
     };
     
-    var readData = function(callback, addr) {
-      var readBytes = 256;
+    var readData = function(callback, addr, readBytes) {
       console.log("Reading "+readBytes+" bytes from 0x"+addr.toString(16)+"...");
       // send read command
       sendCommand(0x11, function(err) {
@@ -162,10 +160,20 @@ THE SOFTWARE.
           sendData([readBytes-1], function(err) {
             if (err) { 
               console.log("Error while reading.");
-              callback(err); 
+              callback(err);
               return;
             }  
-            receiveData(readBytes, callback, 1000);
+            receiveData(readBytes, /*function(err) {
+              if (err) { 
+                console.log("Error while reading. retrying...");
+                initialiseChip(function (err) {
+                  if (err) callback(err);
+                  else readData(callback, addr, readBytes);
+                }, 10000);
+                return;
+              }
+              callback(undefined, data);
+            }*/callback, 1000);
           }, 2000/*timeout*/);
         });                 
       });
@@ -215,7 +223,7 @@ THE SOFTWARE.
     
     var FLASH_OFFSET = 1024*10 /* no bootloader */;
     
-    var writeAllData = function(binary) {      
+    var writeAllData = function(binary, callback) {      
       var chunkSize = 256;
       console.log("Writing "+binary.byteLength+" bytes");
       Espruino.Status.setStatus("Writing flash...",  binary.byteLength);
@@ -253,10 +261,10 @@ THE SOFTWARE.
         readData(function(err, dataChunk) {
           if (err) { callback(err); return; }
           for (var i in dataChunk)
-            data.push(dataChunk[i]);
+            data[offset+i] = dataChunk[i];
           Espruino.Status.incrementProgress(chunkSize);
           reader(offset + chunkSize);
-        }, 0x08000000 + offset);
+        }, 0x08000000 + offset, chunkSize);
       };
       reader(FLASH_OFFSET);
     };    
@@ -266,12 +274,16 @@ THE SOFTWARE.
         if (err) { callback(err); return; }
         console.log("Downloaded "+binary.byteLength+" bytes");
         // add serial listener
+        dataReceived = undefined;
         Espruino.Serial.startListening(function (readData) {
           var bufView=new Uint8Array(readData);
+          //console.log("Got "+bufView.length+" bytes");
           for (var i=0;i<bufView.length;i++) bytesReceived.push(bufView[i]);
-          if (dataReceived) {
-            for (var i=0;i<bytesReceived.length;i++) 
+          if (dataReceived!==undefined) {
+            for (var i=0;i<bytesReceived.length;i++) {
+              if (dataReceived===undefined) console.log("OH NO!");
               dataReceived(bytesReceived[i]);
+            }
             bytesReceived = [];
           }
         });
@@ -280,10 +292,13 @@ THE SOFTWARE.
           if (err) { callback(err); return; }
           eraseChip(function (err) {
             if (err) { callback(err); return; }
-            writeAllData(binary);
+            writeAllData(binary, function (err) {
+              if (err) { callback(err); return; }
+              callback();
+            });
           });
           /*readAllData(binary.byteLength, function(err,chipData) {
-            if (err!==undefined) {
+            if (err) {
               callback(err);              
               return;
             }
@@ -301,6 +316,22 @@ THE SOFTWARE.
           });*/
         });
       });
+    };
+    
+    Espruino.Flasher.checkBoardInfo = function(boardInfo) {
+      //console.log(boardInfo);
+      if (boardInfo.info.binary_url !== undefined) {
+        Espruino.General.flashFirmwareUrl = boardInfo.info.binary_url;
+        if (Espruino.Process.Env.VERSION!==undefined && boardInfo.info.binary_version!==undefined) {
+          console.log("FIRMWARE: Current "+Espruino.Process.Env.VERSION+", Available "+boardInfo.info.binary_version);
+          var vCurrent = Espruino.General.versionToFloat(Espruino.Process.Env.VERSION);
+          var vAvailable = Espruino.General.versionToFloat(boardInfo.info.binary_version);
+          if (vAvailable > vCurrent) {
+            console.log("New Firmware "+boardInfo.info.binary_version+" available");
+            Espruino.Status.setStatus("New Firmware "+boardInfo.info.binary_version+' available. Click <div style="display: inline-block" class="ui-state-default"><span class="ui-icon ui-icon-info"></span></div>  to update');
+          }
+        }
+      }
     };
 
 })();

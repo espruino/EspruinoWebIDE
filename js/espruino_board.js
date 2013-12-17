@@ -155,7 +155,9 @@ THE SOFTWARE.
       }
     }
     function checkParam(){ //if board selected and replaceable parameter in source, switch button on
-      if(Espruino.Process.Env.BOARD && Espruino.codeEditor.getValue().match(Espruino.General.pinRegExp)){
+      if(Espruino.Board.boardActive && 
+         Espruino.Process.Env.BOARD && 
+         Espruino.codeEditor.getValue().match(Espruino.General.pinRegExp)){
         $(".param").show().click(replaceParam);
       }
       else{
@@ -223,13 +225,14 @@ THE SOFTWARE.
         loadBoard($(this).val());
       }
     }
-    function loadBoard(val){ //loads boarddata from Espruino.com, merges with "my" position data
-      if(val !== ""){
-        $.getJSON(boardFolder + val + ".json",function(data){
+    function loadBoard(boardName){ //loads boarddata from Espruino.com, merges with "my" position data
+      if(boardName !== ""){
+        $.getJSON(boardFolder + boardName + ".json",function(data){
           boardObject = data;
           Espruino.Process.setProcess(data);
-          Espruino.Process.Env.ShortName = val;
-          mergePosition(data,val,getDevices);
+          Espruino.Process.Env.ShortName = boardName;
+          Espruino.Flasher.checkBoardInfo(data);
+          mergePosition(data,boardName,getDevices);          
           checkParam();
         });
       }
