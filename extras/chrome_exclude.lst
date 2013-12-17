@@ -1,0 +1,7 @@
+*~
+.git*
+.gitignore
+.project
+.settings*
+EspruinoSerialTerminal.zip
+extras*
