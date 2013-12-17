@@ -36,7 +36,7 @@ THE SOFTWARE.
       tutorialData = [ ];
       var lines = text.split("\n");
       for (var i in lines) {
-        var l = lines[i].trim();
+        var l = lines[i];
         if (l.substr(0,2)=="//") {
           step.text += l.substr(2).trim()+"\n";
         } else
@@ -70,12 +70,66 @@ THE SOFTWARE.
       text += '</div>';
       Espruino.Terminal.setExtraText((inputLine===undefined)?0:inputLine.line, text);      
     }
+    
+    function getLexer(str) {
+      // Nasty lexer - no comments/etc
+      var chAlpha="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+      var chNum="0123456789";
+      var chAlphaNum = chAlpha+chNum;
+      var chWhiteSpace=" \t\n\r";
+      var ch = str[0];
+      var idx = 1;
+      var nextCh = function() { ch = str[idx++]; };
+      var isIn = function(s,c) { return s.indexOf(c)>=0; } ;
+      var nextToken = function() {
+        while (isIn(chWhiteSpace,ch)) nextCh();
+        if (ch==undefined) return undefined; 
+        var s = "";        
+        if (isIn(chAlpha,ch)) {
+          do {
+            s+=ch;
+            nextCh();
+          } while (isIn(chAlphaNum,ch));
+        } else if (isIn(chNum,ch)) {
+          do {
+            s+=ch;
+            nextCh();
+          } while (isIn(chNum,ch))
+        } else if (isIn("\"'",ch)) {
+          var q = ch;
+          s+=ch;
+          nextCh();
+          while (ch!=q) {
+            s+=ch;
+            nextCh();
+          };
+        } else {
+          s+=ch;
+          nextCh();
+        }
+        return s;
+      };
+      
+      return {
+        next : nextToken
+      };
+    }
        
     function isCodeEqual(a,b) {
       console.log("Compare");
       console.log("A> "+JSON.stringify(a));
       console.log("B> "+JSON.stringify(b));
-      return a.trim()==b.trim();
+      // now compare streams of tokens
+      var la = getLexer(a);
+      var tka = la.next();
+      var lb = getLexer(b);
+      var tkb = lb.next();
+      while (tka!==undefined && tkb!=undefined) {
+        if (tka!=tkb) return false;
+        tka = la.next();
+        tkb = lb.next();
+      }
+      return true;
     }
     
     function tutorialWatcher() {
