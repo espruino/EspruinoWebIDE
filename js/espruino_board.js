@@ -37,7 +37,8 @@ THE SOFTWARE.
     var boardObject;
     var viewPoint = {};
     var params;
-
+    var markedParam;
+    
     function paramObj(param){
       var p;
       p = param.substr(2).split("*/");
@@ -46,14 +47,18 @@ THE SOFTWARE.
       this.device = p[0][0];
       this.subdevice = p[0][1];
       this.param = param;
-      this.createParam = function(newValue) {
+      this.createParam = function(newValue,subDevice){
         var r;
         r = "/*" + this.device;
-        if(this.subdevice)
-          r += "," + this.subdevice; 
-        r += "*/" + newValue + this.param.substr(this.param.length - 1);
+        if(this.subdevice){ r += "," + this.subdevice}
+        r += "*/";
+        if(subDevice){
+          if(this.device === subDevice){ r += newValue;} else{ r += subDevice; }
+        }
+        else{ r += newValue; }   
+        r += this.param.substr(this.param.length - 1);
         return r;
-      };
+      }
     }
     Espruino.Board.init = function() {
       switchOptions();
@@ -68,12 +73,10 @@ THE SOFTWARE.
         createBoardList();
         $(".board").button({ text: false, icons: { primary: "ui-icon-wrench" } }).hide();
         $(".param").button({ text: false, icons: { primary: "ui-icon-pin-s" } }).hide();
-        $("#boardList").unbind().change(selectBoard);
-        $("#boardList").click(function(){$(".subform").hide();});
         if(Espruino.Board.boardEditSupport === true){
           Espruino.codeEditor.on("change",checkParam);
           Espruino.codeEditor.on("cursorActivity",selectParam);
-          Espruino.codeEditor.on("dblclick",setParam);
+          Espruino.codeEditor.on("contextmenu",setParam);
         }
       }
       else{
@@ -82,13 +85,16 @@ THE SOFTWARE.
         $("#boardList").unbind().remove();
         Espruino.codeEditor.off("change");
         Espruino.codeEditor.off("cursorActivity");
-        Espruino.codeEditor.off("dblclick");
+        Espruino.codeEditor.off("contextmenu");
       }
     }
     function setParam(cm,evt){
-      var html,pins,param,selectedParam = cm.getSelection();
+      var mkp,html,pins,param,selectedParam;
       var i,j,k;
+      mkp = markedParam.find();
+      selectedParam = cm.getRange(mkp.from,mkp.to);
       if(Espruino.Process.Env.BOARD && selectedParam.match(Espruino.General.pinRegExp)){
+        evt.preventDefault();
         selectedParam = new paramObj(selectedParam);
         params = splitParams(Espruino.codeEditor.getValue().match(Espruino.General.pinRegExp));
         html = '<div id="boardDiv" class="subform" style="position:relative">';
@@ -133,23 +139,26 @@ THE SOFTWARE.
       function changeSource(i,pin){
         var ln = cm.getLine(cm.getCursor().line);
         if(selectedParam.subdevice){ln = ln.replace(selectedParam.param,selectedParam.createParam(pin));}
-        else{ln = ln.replace(selectedParam.param,selectedParam.createParam(i));}
+        else{ln = ln.replace(selectedParam.param,selectedParam.createParam(pin,i));}
         cm.setLine(cm.getCursor().line,ln);
         $(".subform").remove();
       }  
     }
     function selectParam(cm){
       var cPos,line,params,lPos,param;
-      cPos = cm.getCursor();
-      line = cm.getLine(cPos.line);
-      params = line.match(Espruino.General.pinRegExp);
-      if(params){
-        for(var i = 0; i < params.length; i++){
-          lPos = line.indexOf(params[i]);
-          if(lPos <= cPos.ch && (lPos + params[i].length) >= cPos.ch){
-            cm.setSelection({line:cPos.line,ch:lPos},{line:cPos.line,ch:lPos + params[i].length});
-            param = new paramObj(params[i]);
-            break;
+      if(markedParam){ markedParam.clear();markedParam = false;}
+      if(Espruino.Process.Env.BOARD){
+        cPos = cm.getCursor();
+        line = cm.getLine(cPos.line);
+        params = line.match(Espruino.General.pinRegExp);
+        if(params){
+          for(var i = 0; i < params.length; i++){
+            lPos = line.indexOf(params[i]);
+            if(lPos <= cPos.ch && (lPos + params[i].length) >= cPos.ch){
+              markedParam = cm.doc.markText({line:cPos.line,ch:lPos},{line:cPos.line,ch:lPos + params[i].length},{className:"paramStyle"});
+              param = new paramObj(params[i]);
+              break;
+            }
           }
         }
       }
@@ -203,18 +212,18 @@ THE SOFTWARE.
     }
     function createBoardList(){ //create list of boards, hardcoded until a better way
       var html;
-      html = "<select id=\"boardList\">";
-      html +="<option value=\"\">select Board</option>";
-      html +="<option value=\"ESPRUINOBOARD\">ESPRUINOBOARD</option>";
-      html +="<option value=\"HYSTM32_24\">HYSTM32_24</option>";
-      html +="<option value=\"HYSTM32_28\">HYSTM32_28</option>";
-      html +="<option value=\"HYSTM32_32\">HYSTM32_32</option>";
-      html +="<option value=\"OLIMEXINO_STM32\">OLIMEXINO_STM32</option>";
-      html +="<option value=\"STM32F3DISCOVERY\">STM32F3DISCOVERY</option>";
-      html +="<option value=\"STM32F4DISCOVERY\">STM32F4DISCOVERY</option>";
-      html +="<option value=\"STM32VLDISCOVERY\">STM32VLDISCOVERY</option>";
-      html +="</select>";
-      $("#processBoard").html(html);
+      $.get(boardFolder + "boards.json",function(data){  //change back to getJSON, as soon as board.js matches JSON
+        data = $.parseJSON(data.replace(/,\n\s*}/g,"\n}"));
+        html = "<select id=\"boardList\">";
+        html += '<option value="">select Board</option>';
+        for(var i in data){
+          html += '<option value="' + i + '">' + i + '</option>';
+        }
+        html +="</select>";
+        $("#processBoard").html(html);
+        $("#boardList").unbind().change(selectBoard);
+        $("#boardList").click(function(){$(".subform").hide();});
+      },"text").fail(function(a,b,c){console.log(a,b,c);});
     }
     function selectBoard(){ //event for change in boardlist, loads all data around board
       if(Espruino.Serial.isConnected() === true){
@@ -365,32 +374,29 @@ THE SOFTWARE.
       $(".paramPins").unbind().hover(function(){hoverParamPins($(this));}, function(){$(".pinFunction").remove(); });          
     }
     function hoverParamPins(thisPin){ //event hover for parameters from source shows pins
-      var d,pinFound = false;
-      var device = thisPin.attr("device"), subDevice = thisPin.attr("subdevice"), pinDevice = thisPin.attr("pindevice");
-      for(var i = 0; i < boardObject.pins.length; i++){
-        if(pinDevice === boardObject.pins[i].name){
-          pinFound = true;
-          addPinToImage(boardObject.pins[i]);
-          break;
-        }
-      }
-      if(!pinFound){
-        d = devices[device].channel[subDevice].pins;
-        for(var p in d){
-           addPinToImage(d[p]);
-        }
-      }
+      var pins = getMatchingPins(thisPin.attr("device"),thisPin.attr("subdevice"),thisPin.attr("pindevice"));
+      for(var i = 0; i < pins.length; i++){ addPinToImage(pins[i]);}
     }
     function hoverSubDevice(thisPin){ //event hover for devices / pin types
-        if(thisPin.attr("pindevice")){
-          addPinsToImage(devices[thisPin.attr("device")].channel[thisPin.attr("subdevice")].pins[thisPin.attr("pindevice")]);
+      var pins = getMatchingPins(thisPin.attr("device"),thisPin.attr("subdevice"),thisPin.attr("pindevice"));
+      for(var i = 0; i < pins.length; i++){ addPinToImage(pins[i]);}      
+    }
+    function getMatchingPins(device,subdevice,pindevice){
+      var r = [],channel,pins,device;
+      device = devices[device];
+      if(pindevice){
+        pins = device.channel[subdevice].pins[pindevice];
+        if($.isArray(pins)){ for(var i = 0; i < pins.length; i++){ r.push(pins[i]);}}
+        else{r.push(pins);}
+      }
+      else{
+        pins = device.channel[subdevice].pins;
+        for(var k in pins){
+          if($.isArray(pins[k])){ for(var j = 0; j < pins[k].length; j++){ r.push(pins[k][j]);}}
+          else{r.push(pins[k]);}
         }
-        else{
-          var pins = devices[thisPin.attr("device")].channel[thisPin.attr("subdevice")].pins;
-          for(var k in pins){
-            addPinsToImage(pins[k]);
-          }
-        }      
+      }
+      return r;
     }
     function addPinsToImage(pin){ //add all selected pins to image of board
       if($.isArray(pin)){ for(var i = 0; i < pin.length; i++){ addPinToImage(pin[i]); } }
@@ -403,14 +409,9 @@ THE SOFTWARE.
         boardPin += ' top:' + pin.top + 'px; left:' + pin.left + 'px;">';
         for(var i = 0; i < params.length; i++){
           if(params[i].pin){ if(params[i].pin === pin.pin){ imgSrc = "img/circle_tan.png";} }
-          else{
-            pins = devices[params[i].device].channel[params[i].subdevice].pins;
-            for(var j in pins){
-              if(pins[j].pin === pin.pin){ imgSrc  = "img/circle_tan.png"; break;}
-            }
-          }
         }
-        boardPin += '<img src="' + imgSrc + '" width=' + viewPoint.pinBall.width + ' height=' + viewPoint.pinBall.height + '></div>';
+        boardPin += '<img src="' + imgSrc + '" width=' + viewPoint.pinBall.width;
+        boardPin += ' height=' + viewPoint.pinBall.height + '></div>';
         $(boardPin).appendTo("#boardDiv");  
       }
     }               
