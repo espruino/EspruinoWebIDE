@@ -56,25 +56,56 @@ THE SOFTWARE.
      those modules are loaded into the module cache beforehand
      (by inserting the relevant 'addCached' commands into 'code' */
     Espruino.Modules.loadModules = function(code,callback){
-      var defs = [], maxWait = 5000,urlParts;
-      var requires = getModulesRequired(code);
+      var promises = [], maxWait = 5000,urlParts;
       var moduleCode = "Modules.removeAllCached();";
-      var urlexp = new RegExp( '(http|https)://[\\w-]+(\\.[\\w-]+)+([\\w-.,@?^=%&:/~+#-]*[\\w@?^=%&;/~+#-])?' );
-      for(var i = 0; i < requires.length; i++){
-        if(urlexp.test(requires[i])){
-          defs.push(loadModule(requires[i].substr(requires[i].lastIndexOf("/") + 1).split(".")[0],requires[i]));}
-        else{defs.push(loadModule(requires[i],Espruino.Modules.Config.url + "/" + requires[i], Espruino.Modules.Config.fileExtensions));}
-      }
-      if(defs.length > 0) {$.when.apply(null,defs).then(function(){returnCode();});}
-      else{callback(code);}      
       
-      function loadModule(modName,url,extensions) {
+      var requires = getModulesRequired(code);      
+      var urlexp = new RegExp( '(http|https)://[\\w-]+(\\.[\\w-]+)+([\\w-.,@?^=%&:/~+#-]*[\\w@?^=%&;/~+#-])?' );
+      // Kick off the module loading (each returns a promise)
+      for(var i = 0; i < requires.length; i++)
+        promises.push(loadModule(requires[i]));
+      // When all 
+      if(promises.length > 0) {
+        $.when.apply(null,promises).then(function(){ callback(moduleCode + "\n" + code); });
+      } else {
+        callback(code);
+      }      
+      // function to actually load the modules
+      function loadModule(fullModuleName) {
+        console.log("loadModule("+fullModuleName+")");
+        var modName,url,extensions;
+        if(urlexp.test(fullModuleName)) {
+          modName = fullModuleName.substr(fullModuleName.lastIndexOf("/") + 1).split(".")[0];
+          url = fullModuleName;
+          extensions = [];
+        } else {
+          modName = fullModuleName;
+          url = Espruino.Modules.Config.url + "/" + fullModuleName; 
+          extensions = Espruino.Modules.Config.fileExtensions;
+        }
+        
         var t, localUrl,dfd = $.Deferred();
         var extensionTry = 0;
         var downloadModule = function(localUrl) {
-          $.get(localUrl,function(data){
+          $.get(localUrl,function(data){            
             moduleCode += "Modules.addCached(" + JSON.stringify(modName) + "," + JSON.stringify(data) + ");\n";
-            dfd.resolve();
+            // Check for any modules used from this module that we don't already have
+            var newRequires = getModulesRequired(data);
+            console.log(" - "+fullModuleName+" requires "+JSON.stringify(newRequires));
+            // if we need new modules, set them to load and get their promises
+            var newPromises = [];
+            for (var i in newRequires)
+              if (requires.indexOf(newRequires[i])<0) {
+                requires.push(newRequires[i]);
+                newPromises.push(loadModule(newRequires[i]));
+              }
+            // if we need to load something, wait until we have all promises complete before resolving our promise!
+            if(newPromises.length > 0) {
+              $.when.apply(null,newPromises).then(function(){ dfd.resolve(); });
+            } else {
+              dfd.resolve();
+            }      
+            
           },"text").fail(function() {
             if(extensionTry < extensions.length) {
               downloadModule(url + extensions[extensionTry++]);
@@ -86,7 +117,7 @@ THE SOFTWARE.
         };
         
         t = setInterval(function(){clearInterval(t);dfd.resolve();},maxWait);        
-        if (extensions && extensions.length>0){ 
+        if (extensions.length>0){ 
           downloadModule(url + extensions[extensionTry++]);
         } else {          
           code = code.replace("require(\"" + url + "\")","require(\"" + modName + "\")");
@@ -95,8 +126,6 @@ THE SOFTWARE.
         
         return dfd.promise();
       }
-      
-      function returnCode(){ callback(moduleCode + "\n" + code); }
     };
 
 })();
