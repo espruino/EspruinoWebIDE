@@ -67,7 +67,7 @@ THE SOFTWARE.
       var iPoll = setInterval(function() {
         console.log("Sending... 0x7F");
         Espruino.Serial.write("\x7f", false);
-      }, 50);
+      }, 200);
       dataReceived = function (c) {
         dataReceived = undefined;
         console.log("got "+c);
@@ -227,7 +227,7 @@ THE SOFTWARE.
     var FLASH_OFFSET = 1024*10 /* no bootloader */;
     
     var writeAllData = function(binary, callback) {      
-      var chunkSize = 32;
+      var chunkSize = 256;
       console.log("Writing "+binary.byteLength+" bytes");
       Espruino.Status.setStatus("Writing flash...",  binary.byteLength);
       var writer = function(offset) {
