@@ -139,7 +139,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
     else
       writeData += data;    
     
-    var blockSize = 32;
+    var blockSize = 60;
 
     showStatus &= writeData.length>blockSize;
     if (showStatus) {
@@ -172,7 +172,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
       sender(); // send data instantly
       // if there was any more left, do it after a delay
       if (writeData!=undefined) {
-        writeInterval = setInterval(sender, 50);
+        writeInterval = setInterval(sender, 120);
       } else {
         if (showStatus)
           Espruino.Status.setStatus("Sent");
