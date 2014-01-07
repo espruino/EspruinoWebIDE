@@ -67,17 +67,24 @@ THE SOFTWARE.
       var iPoll = setInterval(function() {
         console.log("Sending... 0x7F");
         Espruino.Serial.write("\x7f", false);
-      }, 200);
+      }, 70);
       dataReceived = function (c) {
-        dataReceived = undefined;
         console.log("got "+c);
         if (c==ACK || c==NACK) {
           clearTimeout(iTimeout);
           clearInterval(iPoll);
           if (!Espruino.Status.hasProgress())
             Espruino.Status.setStatus("Initialised.");
-          console.log("Initialised.");
-          callback(undefined);
+          console.log("Initialised. Just waiting for a bit...");
+		  // wait for random extra data...
+		  dataReceived = function(c){
+		    console.log("Already ACKed but got "+c);
+		  };
+		  setTimeout(function() {
+		    dataReceived = undefined;
+			// finally call callback
+		    bodgeClock(callback);
+	      }, 500);
         }
       };
     };
@@ -120,7 +127,7 @@ THE SOFTWARE.
         if (dataCount == count) {
           clearTimeout(iTimeout);
           dataReceived = undefined;
-          callback(0,data);
+          callback(undefined,data);
         }
       };   
     };    
@@ -148,21 +155,21 @@ THE SOFTWARE.
       // send read command
       sendCommand(0x11, function(err) {
         if (err) { 
-          console.log("Error sending command.");
+          console.log("Error sending command ("+err+").");
           callback(err); 
           return; 
         }        
         // send address
         sendData([(addr>>24)&0xFF,(addr>>16)&0xFF,(addr>>8)&0xFF,addr&0xFF], function(err) {
           if (err) { 
-            console.log("Error sending address.");
+            console.log("Error sending address. ("+err+")");
             callback(err); 
             return; 
           }
           // send amount of bytes we want
           sendData([readBytes-1], function(err) {
             if (err) { 
-              console.log("Error while reading.");
+              console.log("Error while reading. ("+err+")");
               callback(err);
               return;
             }  
@@ -182,13 +189,34 @@ THE SOFTWARE.
       });
     };
 
+	var bodgeClock = function(callback) {
+	  /* 1v43 bootloader ran APB1 at 9Mhz, which isn't enough for
+	  some STM32 silicon, which has a bug. Instead, set the APB1 clock
+	  using the bootloader write command, which will fix it up enough for
+      flashing.	  */
+	  var RCC_CFGR = 0x40021004;
+	  readData(function(err, data) {
+	    if (err) return callback(err);
+		var word = (data[3]<<24) | (data[2]<<16) | (data[1]<<8) | data[0];
+		console.log("RCC->CFGR = "+word);
+		var newword = (word&0xFFFFF8FF) | 0x00000400;
+		if (newword==word) {
+		  console.log("RCC->CFGR is correct");
+		  callback(undefined);
+		} else {
+		  console.log("Setting RCC->CFGR to "+newword);
+		  writeData(callback, RCC_CFGR, [newword&0xFF, (newword>>8)&0xFF, (newword>>16)&0xFF, (newword>>24)&0xFF]);
+		}
+	  }, RCC_CFGR, 4);
+	}
+	
     var writeData = function(callback, addr, data) {
       if (data.length>256) callback("Writing too much data");
       console.log("Writing "+data.length+" bytes at 0x"+addr.toString(16)+"...");
       // send write command
       sendCommand(0x31, function(err) {
         if (err) { 
-          console.log("Error sending command. retrying...");
+          console.log("Error sending command ("+err+"). retrying...");
           initialiseChip(function (err) {
             if (err) callback(err);
             else writeData(callback, addr, data);
@@ -198,7 +226,7 @@ THE SOFTWARE.
         // send address
         sendData([(addr>>24)&0xFF,(addr>>16)&0xFF,(addr>>8)&0xFF,addr&0xFF], function(err) {
           if (err) { 
-            console.log("Error sending address. retrying...");
+            console.log("Error sending address ("+err+"). retrying...");
             initialiseChip(function (err) {
               if (err) callback(err);
               else writeData(callback, addr, data);
@@ -211,7 +239,7 @@ THE SOFTWARE.
           // send data
           sendData(sData, function(err) {
             if (err) { 
-              console.log("Error while writing. retrying...");
+              console.log("Error while writing ("+err+"). retrying...");
               initialiseChip(function (err) {
                 if (err) callback(err);
                 else writeData(callback, addr, data);
@@ -290,19 +318,25 @@ THE SOFTWARE.
             bytesReceived = [];
           }
         });
+		var hadSlowWrite = Espruino.Serial.isSlowWrite();
+		Espruino.Serial.setSlowWrite(false);
+		var finish = function(err) {
+		  Espruino.Serial.setSlowWrite(hadSlowWrite);
+		  callback(err);
+		};
         // initialise
         initialiseChip(function (err) {
-          if (err) { callback(err); return; }
+          if (err) { finish(err); return; }
           eraseChip(function (err) {
-            if (err) { callback(err); return; }
+            if (err) { finish(err); return; }
             writeAllData(binary, function (err) {
-              if (err) { callback(err); return; }
-              callback();
+              if (err) { finish(err); return; }
+              finish();
             });
           });
           /*readAllData(binary.byteLength, function(err,chipData) {
             if (err) {
-              callback(err);              
+              finish(err);              
               return;
             }
             var errors = 0;
@@ -329,6 +363,10 @@ THE SOFTWARE.
           console.log("FIRMWARE: Current "+Espruino.Process.Env.VERSION+", Available "+boardInfo.info.binary_version);
           var vCurrent = Espruino.General.versionToFloat(Espruino.Process.Env.VERSION);
           var vAvailable = Espruino.General.versionToFloat(boardInfo.info.binary_version);
+		  if (vCurrent > 1.43) {
+		    console.log("Firmware >1.43 supports faster writes");
+			Espruino.Serial.setSlowWrite(false);
+		  }
           if (vAvailable > vCurrent) {
             console.log("New Firmware "+boardInfo.info.binary_version+" available");
             Espruino.Status.setStatus("New Firmware "+boardInfo.info.binary_version+' available. Click <div style="display: inline-block" class="ui-state-default"><span class="ui-icon ui-icon-info"></span></div>  to update');

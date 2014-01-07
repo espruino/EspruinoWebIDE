@@ -19,55 +19,83 @@ Author: Gordon Williams (gw@pur3.co.uk)
 **/
 
 (function() {
-  if (chrome.serial.getDevices===undefined) {
+  if (chrome.serial.getPorts===undefined) {
     // wrong chrome version
-    console.log("Chrome does NOT have post-M33 serial API");
+    console.log("Chrome does NOT have pre-M33 serial API");
     return;
-  }  
- 
+  } 
+  
   var connectionInfo;
   var readListener;
-  var connectedPort; // unused?
-  var connectionDisconnectCallback;
+  var connectionChecker;
+  var connectedPort;
 
   // For throttled write
   var slowWrite = true;
   var writeData = undefined;
   var writeInterval = undefined;
 
+  /** When connected, this is called every so often to check on the state
+   of the serial port. If it detects a disconnection it calls the disconnectCallback
+   which will force a disconnect (which means that hopefulyl chrome won't hog the
+   serial port if we physically reconnect the board). */
+  var checkConnection = function() {
+    chrome.serial.getControlSignals(connectionInfo.connectionId, function (sigs) { 
+      var connected = "cts" in sigs;
+      if (!connected) {
+        console.log("Detected Disconnect");
+        if (connectionDisconnectCallback!=undefined)
+          connectionDisconnectCallback();
+      }
+   });
+  };
   
   var startListening=function(callback) {
+    if (!connectionInfo || !connectionInfo.connectionId) {
+      throw "You must call openSerial first!";
+    }
     var oldListener = readListener;
-    readListener = callback;
+    readListener=callback;
+    onCharRead();
     return oldListener;
   };
 
+  var onCharRead=function(readInfo) {
+    if (!readListener || !connectionInfo) {
+      return;
+    }
+    if (readInfo && readInfo.bytesRead>0 && readInfo.data) {
+      if (readListener) readListener(readInfo.data);
+    }
+    chrome.serial.read(connectionInfo.connectionId, 1024, onCharRead);
+  };
+
   var getPorts=function(callback) {
-    chrome.serial.getDevices(function(devices) {
-      callback(devices.map(function(device) {
-        return device.path;
-      }));
-    });
+    chrome.serial.getPorts(callback);
   };
   
   var openSerial=function(serialPort, openCallback, disconnectCallback) {
     connectionDisconnectCallback = disconnectCallback;
-    chrome.serial.connect(serialPort, {bitrate: 9600}, 
+    chrome.serial.open(serialPort, {bitrate: 9600}, 
       function(cInfo) {
-        if (!cInfo) {
-          console.log("Unable to open device (connectionInfo="+cInfo+")");
-          openCallback(undefined);
+        if (!cInfo || !cInfo.connectionId || cInfo.connectionId<0) {
+          console.log("Could not find device (connectionInfo="+cInfo+")");
+          if (openCallback) openCallback(undefined);
         } else {
           connectionInfo=cInfo;
           console.log(cInfo);
-          openCallback(cInfo);
+          if (openCallback) openCallback(cInfo);
           connectedPort = serialPort;
+          connectionChecker = setInterval(checkConnection, 500);
         }        
     });
   };
 
   var writeSerialDirect = function(str) {
-    chrome.serial.send(connectionInfo.connectionId, str2ab(str), function() {}); 
+    chrome.serial.write(connectionInfo.connectionId, str2ab(str), onWrite); 
+  };
+  
+  var onWrite=function(obj) {
   };
 
   var str2ab=function(str) {
@@ -82,8 +110,13 @@ Author: Gordon Williams (gw@pur3.co.uk)
  
   var closeSerial=function(callback) {
    connectionDisconnectCallback = undefined;
+   if (connectionChecker) {
+     clearInterval(connectionChecker);
+     connectedPort = undefined;
+     connectionChecker = undefined;
+   }
    if (connectionInfo) {
-     chrome.serial.disconnect(connectionInfo.connectionId, 
+     chrome.serial.close(connectionInfo.connectionId, 
       function(result) {
         connectionInfo=null;
         if (callback) callback(result);
@@ -100,8 +133,13 @@ Author: Gordon Williams (gw@pur3.co.uk)
     if (!isConnected()) return; // throw data away
     if (showStatus===undefined) showStatus=true;
     
-    /* Here we queue data up to write out. We do this slowly because on older
-       versions of Espruino, sometimes characters get lost if we send too quickly. */
+    /*var d = [];
+    for (var i=0;i<data.length;i++) d.push(data.charCodeAt(i));
+    console.log("Write "+data.length+" bytes - "+JSON.stringify(d));*/
+    
+    /* Here we queue data up to write out. We do this slowly because somehow 
+    characters get lost otherwise (compared to if we used other terminal apps
+    like minicom) */
     if (writeData == undefined)
       writeData = data;
     else
@@ -147,16 +185,6 @@ Author: Gordon Williams (gw@pur3.co.uk)
       }
     }
   };
-  
-  // ----------------------------------------------------------
-  chrome.serial.onReceive.addListener(function(receiveInfo) {
-    //var bytes = new Uint8Array(receiveInfo.data);
-    readListener(receiveInfo.data);
-  });
-
-  chrome.serial.onReceiveError.addListener(function(errorInfo) {
-    connectionDisconnectCallback();
-  });
 
   Espruino["Serial"] = {
     "getPorts": getPorts,
@@ -169,6 +197,6 @@ Author: Gordon Williams (gw@pur3.co.uk)
 	"setSlowWrite": function(isOn) { 
 	  console.log("Set Slow Write = "+isOn);
 	  slowWrite = isOn; 
-	}
+	}	
   };
 })();
