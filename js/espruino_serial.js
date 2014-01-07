@@ -26,6 +26,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
   var connectionDisconnectCallback;
 
   // For throttled write
+  var slowWrite = true;
   var writeData = undefined;
   var writeInterval = undefined;
 
@@ -94,19 +95,14 @@ Author: Gordon Williams (gw@pur3.co.uk)
     if (!isConnected()) return; // throw data away
     if (showStatus===undefined) showStatus=true;
     
-    /*var d = [];
-    for (var i=0;i<data.length;i++) d.push(data.charCodeAt(i));
-    console.log("Write "+data.length+" bytes - "+JSON.stringify(d));*/
-    
-    /* Here we queue data up to write out. We do this slowly because somehow 
-    characters get lost otherwise (compared to if we used other terminal apps
-    like minicom) */
+    /* Here we queue data up to write out. We do this slowly because on older
+       versions of Espruino, sometimes characters get lost if we send too quickly. */
     if (writeData == undefined)
       writeData = data;
     else
       writeData += data;    
     
-    var blockSize = 50;
+    var blockSize = slowWrite ? 30 : 1024;
 
     showStatus &= writeData.length>blockSize;
     if (showStatus) {
@@ -139,7 +135,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
       sender(); // send data instantly
       // if there was any more left, do it after a delay
       if (writeData!=undefined) {
-        writeInterval = setInterval(sender, 100);
+        writeInterval = setInterval(sender, 60);
       } else {
         if (showStatus)
           Espruino.Status.setStatus("Sent");
@@ -163,6 +159,11 @@ Author: Gordon Williams (gw@pur3.co.uk)
     "isConnected": isConnected,
     "startListening": startListening,
     "write": writeSerial,
-    "close": closeSerial
+    "close": closeSerial,
+	"isSlowWrite": function() { return slowWrite; },
+	"setSlowWrite": function(isOn) { 
+	  console.log("Set Slow Write = "+isOn);
+	  slowWrite = isOn; 
+	}
   };
 })();

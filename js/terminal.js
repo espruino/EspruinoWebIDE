@@ -243,6 +243,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
       return;
     }
     Espruino.Status.setStatus("Connecting");
+	Espruino.Serial.setSlowWrite(true);
     setConnectedState(false);
     Espruino.Serial.open(serialPort, function(cInfo) {
       if (cInfo!=undefined) {
