@@ -255,7 +255,7 @@ THE SOFTWARE.
     var FLASH_OFFSET = 1024*10 /* no bootloader */;
     
     var writeAllData = function(binary, callback) {      
-      var chunkSize = 256;
+      var chunkSize = 32;
       console.log("Writing "+binary.byteLength+" bytes");
       Espruino.Status.setStatus("Writing flash...",  binary.byteLength);
       var writer = function(offset) {
