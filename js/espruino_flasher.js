@@ -363,11 +363,11 @@ THE SOFTWARE.
           console.log("FIRMWARE: Current "+Espruino.Process.Env.VERSION+", Available "+boardInfo.info.binary_version);
           var vCurrent = Espruino.General.versionToFloat(Espruino.Process.Env.VERSION);
           var vAvailable = Espruino.General.versionToFloat(boardInfo.info.binary_version);
-		  if (vCurrent > 1.43) {
-		    console.log("Firmware >1.43 supports faster writes");
-			Espruino.Serial.setSlowWrite(false);
-		  }
-          if (vAvailable > vCurrent) {
+          if (vCurrent > 1.43) {
+            console.log("Firmware >1.43 supports faster writes");
+            Espruino.Serial.setSlowWrite(false);
+          }
+          if (vAvailable > vCurrent && Espruino.Process.Env.BOARD=="ESPRUINOBOARD") {
             console.log("New Firmware "+boardInfo.info.binary_version+" available");
             Espruino.Status.setStatus("New Firmware "+boardInfo.info.binary_version+' available. Click <div style="display: inline-block" class="ui-state-default"><span class="ui-icon ui-icon-info"></span></div>  to update');
           }
