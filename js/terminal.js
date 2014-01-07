@@ -211,7 +211,12 @@ Author: Gordon Williams (gw@pur3.co.uk)
       if (isWindows) {
         // Com ports will just be COM1,COM2,etc
         // Chances are that the largest COM port is the one for Espruino:
-        items.sort();
+        items.sort(function(a,b) {		  
+		  if (a.indexOf("COM")==0 && b.indexOf("COM")==0)
+		    return parseInt(a.substr(3)) - parseInt(b.substr(3));
+	      else
+		    return a.localeCompare(b);
+		});
         if (items.length > 0)
           selected = items.length-1;
       } else { 
