@@ -60,7 +60,7 @@ THE SOFTWARE.
     function setProcess(data){
       if (!$.isEmptyObject(data)) {
         // We don't want to overwrite all of Env, as this came from the board
-        Espruino.Process.Env.BOARD = data.info.name;
+        Espruino.Process.Env.BOARD_NAME = data.info.name;
         Espruino.Process.Env.AVAILABLE_VERSION = data.info.binary_version;
       }
     }
