@@ -81,7 +81,9 @@ Author: Gordon Williams (gw@pur3.co.uk)
 
   var init=function() {
     // The central divider
-    myLayout = $('body').layout({ onresize : function() { 
+    myLayout = $('body').layout({ 
+      defaults : { enableCursorHotkey: false, },
+      onresize : function() { 
         $("#terminal").width($(".ui-layout-center").innerWidth()-4);
         $("#videotag").width($(".ui-layout-center").innerWidth()-4);
         $("#videotag").height($(".ui-layout-center").innerHeight() - ($("#terminaltoolbar").outerHeight()+3));
