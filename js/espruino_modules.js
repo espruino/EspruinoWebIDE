@@ -58,18 +58,21 @@ THE SOFTWARE.
     Espruino.Modules.loadModules = function(code,callback){
       var promises = [], maxWait = 5000,urlParts;
       var moduleCode = "Modules.removeAllCached();";
-      
-      var requires = getModulesRequired(code);      
+      var notFound = "";
+      var requires = getModulesRequired(code);
       var urlexp = new RegExp( '(http|https)://[\\w-]+(\\.[\\w-]+)+([\\w-.,@?^=%&:/~+#-]*[\\w@?^=%&;/~+#-])?' );
       // Kick off the module loading (each returns a promise)
       for(var i = 0; i < requires.length; i++)
         promises.push(loadModule(requires[i]));
-      // When all 
+      // When all
       if(promises.length > 0) {
-        $.when.apply(null,promises).then(function(){ callback(moduleCode + "\n" + code); });
-      } else {
-        callback(code);
-      }      
+        $.when.apply(null,promises).then(function(){ callCallback(moduleCode + "\n" + code); });
+      } 
+      else { callCallback(code);}
+      function callCallback(data){ //send code including all modules if all modules found only
+        if(notFound !== ""){ Espruino.Status.setError("module(s) not found",notFound);}
+        else{callback(data);}
+      }
       // function to actually load the modules
       function loadModule(fullModuleName) {
         console.log("loadModule("+fullModuleName+")");
@@ -80,52 +83,69 @@ THE SOFTWARE.
           extensions = [];
         } else {
           modName = fullModuleName;
-          url = Espruino.Modules.Config.url + "/" + fullModuleName; 
+          url = Espruino.Modules.Config.url + "/" + fullModuleName;
           extensions = Espruino.Modules.Config.fileExtensions;
         }
         
         var t, localUrl,dfd = $.Deferred();
         var extensionTry = 0;
-        var downloadModule = function(localUrl) {
-          $.get(localUrl,function(data){            
-            moduleCode += "Modules.addCached(" + JSON.stringify(modName) + "," + JSON.stringify(data) + ");\n";
-            // Check for any modules used from this module that we don't already have
-            var newRequires = getModulesRequired(data);
-            console.log(" - "+fullModuleName+" requires "+JSON.stringify(newRequires));
-            // if we need new modules, set them to load and get their promises
-            var newPromises = [];
-            for (var i in newRequires)
-              if (requires.indexOf(newRequires[i])<0) {
-                requires.push(newRequires[i]);
-                newPromises.push(loadModule(newRequires[i]));
-              }
-            // if we need to load something, wait until we have all promises complete before resolving our promise!
-            if(newPromises.length > 0) {
-              $.when.apply(null,newPromises).then(function(){ dfd.resolve(); });
-            } else {
-              dfd.resolve();
-            }      
-            
-          },"text").fail(function() {
-            if(extensionTry < extensions.length) {
-              downloadModule(url + extensions[extensionTry++]);
-            } else { 
-              console.log(modName + " not found"); 
-              dfd.resolve();
-            }   
-          });
-        };
-        
-        t = setInterval(function(){clearInterval(t);dfd.resolve();},maxWait);        
-        if (extensions.length>0){ 
+        t = setInterval(function(){clearInterval(t);dfd.resolve();},maxWait);
+        if (extensions.length>0){
           downloadModule(url + extensions[extensionTry++]);
-        } else {          
+        } else {
           code = code.replace("require(\"" + url + "\")","require(\"" + modName + "\")");
           downloadModule(url);
-        }
-        
+        }        
         return dfd.promise();
+        function downloadModule(localUrl) { //downloads one module
+          var sequence = Espruino.Project.getModuleSequence(downloadWeb);  //get order for searching modules (see projects options)
+          var sequencePointer = 0;
+          downloadSequence();
+          function downloadSequence(){  //searches all possible sources for modules in given order, first comes first serves
+            if(sequencePointer < sequence.length){
+              sequence[sequencePointer](localUrl,modName,checkData);
+            }
+            else{
+              console.log(modName + " not found");
+              notFound += "Module " + modName + " not found<br>\n";              
+              dfd.resolve();
+            }
+          }
+          function checkData(data){ //checks if module found, if not search in next source
+            if(data){gotData(data);}
+            else{
+              sequencePointer++;
+              downloadSequence();
+            }
+          }
+          function downloadWeb(localUrl,modName,callback){  //searches module on www.espruino.com, (for local search see projects)
+            $.get(localUrl,callback,"text").fail(function() {
+              if(extensionTry < extensions.length) {
+                downloadModule(url + extensions[extensionTry++]);
+              } 
+              else { callback(); }
+            });               
+          }
+        };
+        function gotData(data){
+          moduleCode += "Modules.addCached(" + JSON.stringify(modName) + "," + JSON.stringify(data) + ");\n";
+          // Check for any modules used from this module that we don't already have
+          var newRequires = getModulesRequired(data);
+          console.log(" - "+fullModuleName+" requires "+JSON.stringify(newRequires));
+          // if we need new modules, set them to load and get their promises
+          var newPromises = [];
+          for (var i in newRequires)
+            if (requires.indexOf(newRequires[i])<0) {
+              requires.push(newRequires[i]);
+              newPromises.push(loadModule(newRequires[i]));
+            }
+          // if we need to load something, wait until we have all promises complete before resolving our promise!
+          if(newPromises.length > 0) {
+            $.when.apply(null,newPromises).then(function(){ dfd.resolve(); });
+          } else {
+            dfd.resolve();
+          }  
+        }        
       }
     };
-
 })();

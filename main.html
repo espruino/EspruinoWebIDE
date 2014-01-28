@@ -46,6 +46,9 @@
   <script src="js/espruino_terminal.js"></script> <!-- LHS terminal window -->
   <script src="js/espruino_board.js"></script>
   <script src="js/espruino_tutorial.js"></script>
+  <script src="js/espruino_project.js"></script>
+  <script src="js/espruino_display.js"></script>
+  <script src="js/jquery.sparkline.min.js"></script>
 
   <!-- for file save -->
   <script type="text/javascript" src="js/FileSaver.min.js"></script>
@@ -63,6 +66,8 @@
         <button class="save">Save File</button>
         &nbsp;&nbsp;&nbsp;
         <button class="param">Replace Params</button>
+        <span id="projectName" style="position:absolute;right:56px;top:1px;">&nbsp;</span>
+        <button class="project" style="position:absolute;right:30px;top:1px;">Project</button>
         <button class="options" style="position:absolute;right:4px;">Info / Options</button>
         <input type="file" id="fileLoader" style="display: none;"/> <!-- for file loading -->
         <div id="loader" class="subform" style="display: none;">
@@ -91,6 +96,7 @@ setInterval(function() {
           <button class="open">Connect</button>
           <button class="close">Disconnect</button>
           <span id="status">Not Connected</span>
+          <button class="display">Display</button>
           <span id="progress"><span id="progressindicator">&nbsp;</span></span>
           <span id="processBoard" style="position:absolute;right:55px;">&nbsp;</span>
           <button class="board" style="position:absolute;right:30px;top:2px;">Board Info</button>

@@ -80,6 +80,7 @@ THE SOFTWARE.
         function htmlLoaded(){
           for(var i = 0; i < optionBlocks.length; i++){
             if(optionBlocks[i].html){ $("#optionsAccordion").append(optionBlocks[i].html);}
+            if(optionBlocks[i].onForm){ optionBlocks[i].onForm();}
           }
           $("#optionsAccordion").accordion({ active: 0, collapsible: true, beforeActivate: function( event, ui ) {switchButtons(ui);} });
           setFormFromOptions();

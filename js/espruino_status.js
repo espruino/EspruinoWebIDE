@@ -25,8 +25,9 @@ THE SOFTWARE.
 (function(){
     // Status/progress bar
     Espruino["Status"] = {};
-    
-    var statusBox, progressBox, progressIndicator;
+    Espruino.Status.statusSoundOn = false;
+    Espruino.Status.errorSoundOn = false;    
+    var statusBox, progressBox, progressIndicator,audioPlayer;
     var progressAmt, progressMax = 0;
     
     Espruino.Status.init = function(){
@@ -34,8 +35,22 @@ THE SOFTWARE.
       progressBox = $("#progress");
       progressIndicator = $("#progressindicator");
       progressBox.hide();
+      audioPlayer = new Audio(""); 
+      document.body.appendChild(audioPlayer);
+      audioPlayer.addEventListener('canplay', function() { audioPlayer.play(); }, false);
     };
-    
+    Espruino.Status["initOptions"] = function(){
+      Espruino.Options.optionFields.push({id:"#errorSoundOn",module:"Status",field:"errorSoundOn",type:"check",onBlur:true});
+      Espruino.Options.optionFields.push({id:"#statusSoundOn",module:"Status",field:"statusSoundOn",type:"check",onBlur:true});
+      Espruino.Options.optionBlocks.push({id:"#divOptionStatus",htmlUrl:"data/Espruino_Status.html"});
+    };
+    Espruino.Status.sendSound = function(sound){
+      var snd = "";
+      if(sound === "error"){snd = "sounds/truck_horn.wav"; }
+      else if(sound="status"){snd = "sounds/chime_up.wav"; }
+      else {snd = "sounds/" + sound + ".wav"; }
+      audioPlayer.src = snd;
+    }    
     Espruino.Status.setStatus = function(text, progress) {
       console.log(">>> "+text);
       statusBox.html(text);
@@ -49,11 +64,21 @@ THE SOFTWARE.
         progressAmt = 0;
         progressMax = progress;
       }
+      if(Espruino.Status.statusSoundOn) {Espruino.Status.sendSound("status"); }
     };
 
-    Espruino.Status.setError = function(text) {
-      Espruino.Status.setStatus("ERROR:"+text);
+    Espruino.Status.setError = function(text,additionalInfo) {
+      var statusText = "";
+      if(additionalInfo){statusText = '<button class="showErrorAdditional" info="' + additionalInfo + '">Info</button>';}
+      Espruino.Status.setStatus(statusText + "ERROR:" + text);
+      $(".showErrorAdditional").button({ text: false, icons: { primary: "ui-icon-info" } }).show();
+      $(".showErrorAdditional").click(showAdditionalInfo);
+      if(Espruino.Status.errorSoundOn) {Espruino.Status.sendSound("error");}
     };
+    function showAdditionalInfo(evt){
+      console.log(evt, $(this).attr("info"));
+      Espruino.General.ShowSubForm("divStatusInfo",20,200,"<h3>" + $(this).attr("info") + "</h3>","#fdd","body");
+    }
 
     Espruino.Status.hasProgress = function() {
       return progressMax>0;
