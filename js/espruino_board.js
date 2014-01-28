@@ -93,7 +93,7 @@ THE SOFTWARE.
       var i,j,k;
       mkp = markedParam.find();
       selectedParam = cm.getRange(mkp.from,mkp.to);
-      if(Espruino.Process.Env.BOARD && selectedParam.match(Espruino.General.pinRegExp)){
+      if(Espruino.Process.Env.BOARD_NAME && selectedParam.match(Espruino.General.pinRegExp)){
         evt.preventDefault();
         selectedParam = new paramObj(selectedParam);
         params = splitParams(Espruino.codeEditor.getValue().match(Espruino.General.pinRegExp));
@@ -147,7 +147,7 @@ THE SOFTWARE.
     function selectParam(cm){
       var cPos,line,params,lPos,param;
       if(markedParam){ markedParam.clear();markedParam = false;}
-      if(Espruino.Process.Env.BOARD){
+      if(Espruino.Process.Env.BOARD_NAME){
         cPos = cm.getCursor();
         line = cm.getLine(cPos.line);
         params = line.match(Espruino.General.pinRegExp);
@@ -165,7 +165,7 @@ THE SOFTWARE.
     }
     function checkParam(){ //if board selected and replaceable parameter in source, switch button on
       if(Espruino.Board.boardActive && 
-         Espruino.Process.Env.BOARD && 
+         Espruino.Process.Env.BOARD_NAME && 
          Espruino.codeEditor.getValue().match(Espruino.General.pinRegExp)){
         $(".param").show().click(replaceParam);
       }
@@ -228,7 +228,7 @@ THE SOFTWARE.
     function selectBoard(){ //event for change in boardlist, loads all data around board
       if(Espruino.Serial.isConnected() === true){
         Espruino.Status.setStatus("Close connection first"); 
-        $("#boardList").val(Espruino.Process.Env.BOARD);
+        $("#boardList").val(Espruino.Process.Env.BOARD_NAME);
       }
       else{ 
         loadBoard($(this).val());
