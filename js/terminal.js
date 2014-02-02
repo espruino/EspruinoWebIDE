@@ -82,7 +82,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
   var init=function() {
     // The central divider
     myLayout = $('body').layout({ 
-      defaults : { enableCursorHotkey: false, },
+      defaults : { enableCursorHotkey: false },
       onresize : function() { 
         $("#terminal").width($(".ui-layout-center").innerWidth()-4);
         $("#videotag").width($(".ui-layout-center").innerWidth()-4);
@@ -130,9 +130,13 @@ Author: Gordon Williams (gw@pur3.co.uk)
         }
 
     });
-    $( ".load" ).button({ text: false, icons: { primary: "ui-icon-folder-open" } }).click(function() {
-      $("#fileLoader").click();
-    });
+
+    $( ".load" ).button( { text: false, icons: { primary: "ui-icon-folder-open" } } ).click( function () {
+      $( "#fileLoader" ).click();
+    } );
+    $( ".reload" ).button( { text: false, icons: { primary: "ui-icon-refresh" } } ).click( function () {
+        $('#fileLoader' ).change();
+    } );
     $("#fileLoader").change(function(event) {
       if (event.target.files.length != 1) return;
       var reader = new FileReader();
