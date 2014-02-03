@@ -194,7 +194,7 @@ THE SOFTWARE.
           EO[optionFields[i].module][optionFields[i].field];
         }
       }
-      catch(e){ console.log("Option Error:",e);}      
+      catch(e){ console.log("Option Error:",e,"on",optionFields[i]);}      
     }      
   }
   function optionsOnLoaded(){

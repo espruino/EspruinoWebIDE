@@ -330,7 +330,7 @@ THE SOFTWARE.
                   }
                 }
                 else{
-                  console.log("watt nu",i,j,k,pin);
+                  console.log("addPins: Can't find pin",i,j,k,pin);
                 }
               }
             }
