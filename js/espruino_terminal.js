@@ -233,6 +233,12 @@ THE SOFTWARE.
         updateTerminal();
       }      
     };    
+
+    /// Clear all extra text that is to be displayed
+    Espruino.Terminal.clearExtraText = function() {
+      termExtraText = {};
+      updateTerminal();
+    };   
     
     /// Set the hint text that appears after the final line
     Espruino.Terminal.setHintText = function(text) {

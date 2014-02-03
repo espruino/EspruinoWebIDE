@@ -23,13 +23,44 @@ THE SOFTWARE.
 */
 "use strict";
 (function(){
-    // Status/progress bar
-    Espruino["Tutorial"] = {};
+   // Tutorials
+   Espruino["Tutorial"] = {};
+
+   var tutorialDir = "data/tutorials/";
+
+   var tutorialData = [];
+   var tutorialStep = 0;
+   var tutorialLastInputLine = undefined;
+   var tutorialWatcherInterval = undefined;
     
-    var tutorialData = [];
-    var tutorialStep = 0;
-    var tutorialLastInputLine = undefined;
-    var tutorialWatcherInterval = undefined;
+   Espruino.Flasher.init = function() {
+   }
+
+   Espruino.Flasher.initOptions = function() {
+     Espruino.Options.optionBlocks.push({id:"#divOptionTutorial",htmlUrl:"data/Espruino_Tutorial.html", onForm:function() {
+       // load tutorial list
+       $.getJSON(tutorialDir+"index.json", function (data) {
+         $("#tutorialList").find('option').remove();
+         for (var i in data) {
+           $("#tutorialList").append('<option value="'+data[i].filename+'">'+data[i].name+'</option>');
+         }
+       });
+       // Set up tutorial button
+       $( "#startTutorial" ).button({ label : tutorialWatcherInterval ? "Stop" : "Start"  } ).click(function() {        
+         var btn = $("#startTutorial");
+         if (btn.text()!="Stop") {
+           loadTutorialURL(tutorialDir+$("#tutorialList").val());
+           btn.button({label:"Stop"});
+         } else {
+           stopTutorial();
+           btn.button({label:"Start"});
+         }
+       });
+     }});
+    };
+
+
+
     
     function loadTutorialText(text) {
       var step = { text : "", code : "" };
@@ -61,6 +92,15 @@ THE SOFTWARE.
           tutorialWatcherInterval = setInterval(tutorialWatcher, 1000);
       });
     }
+
+    function stopTutorial() {
+      tutorialData = [];
+      tutorialStep = 0;
+      tutorialLastInputLine = undefined;
+      if (tutorialWatcherInterval) clearInterval(tutorialWatcherInterval);
+      tutorialWatcherInterval = undefined;
+      Espruino.Terminal.clearExtraText();
+     }
     
     function displayTutorialStep() {
       var inputLine = Espruino.Terminal.getInputLine(0);
@@ -164,10 +204,6 @@ THE SOFTWARE.
         Espruino.Terminal.setHintText(ok?"Right":"Wrong");
       }*/
     }
-    
-    Espruino.Tutorial.init = function(){
-      //loadTutorialURL("data/tutorials/1.js");
-    };
     
     Espruino.Tutorial.getTutorialData = function() {
        return tutorialData;
