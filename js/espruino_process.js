@@ -41,9 +41,8 @@ THE SOFTWARE.
         });
         // string adds to stop the command tag being detected in the output
         // \x3 (ctrl-c) sent first, to break out of line editing if we were in it
-        Espruino.Serial.write('\x03echo(0);\nconsole.log("<<"+"<<<"+JSON.stringify(process.env)+">>>"+">>");\n');
-        setTimeout(function(){
-          Espruino.Serial.startListening(prevReader);
+        Espruino.Serial.write('\x03echo(0);\nconsole.log("<<"+"<<<"+JSON.stringify(process.env)+">>>"+">>");\n');  
+        setTimeout(function(){          
           console.log("Got "+JSON.stringify(bufText));          
           var startProcess = bufText.indexOf("<<<<<");
           var endProcess = bufText.indexOf(">>>>>", startProcess);
@@ -51,7 +50,13 @@ THE SOFTWARE.
             var pText = bufText.substring(startProcess + 5,endProcess);            
             Espruino.Process.Env = JSON.parse(pText);
             callback();
+            // strip out the text we found
+            bufText = bufText.substr(0,startProcess) + bufText.substr(endProcess+5);
           }
+          // start the previous reader listing again
+          Espruino.Serial.startListening(prevReader);          
+          // forward the original text to the previous reader
+          prevReader(bufText);
           // do echo(1) here as this will re-show the prompt
           Espruino.Serial.write('echo(1);\n'); 
         },500);        
