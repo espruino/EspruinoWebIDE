@@ -33,10 +33,10 @@ THE SOFTWARE.
    var tutorialLastInputLine = undefined;
    var tutorialWatcherInterval = undefined;
     
-   Espruino.Flasher.init = function() {
+   Espruino.Tutorial.init = function() {
    }
 
-   Espruino.Flasher.initOptions = function() {
+   Espruino.Tutorial.initOptions = function() {
      Espruino.Options.optionBlocks.push({id:"#divOptionTutorial",htmlUrl:"data/Espruino_Tutorial.html", onForm:function() {
        // load tutorial list
        $.getJSON(tutorialDir+"index.json", function (data) {
