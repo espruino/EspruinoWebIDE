@@ -70,9 +70,10 @@ THE SOFTWARE.
     if (!Espruino.General.isWindows) return chars;
     return chars.replace(/\r\n/g,"\n").replace(/\n/g,"\r\n");
   };
-  Espruino.General.ShowSubForm = function(divName,top,left,html,bgcolor,appendTo){
+  Espruino.General.ShowSubForm = function(divName,top,left,html,bgcolor,appendTo,divClass){
+      var cls = divClass?divClass:"subform";
       $("#" + divName).remove();      
-      $('<div id="' + divName + '" class="subform" style="z-index:5">' + html + '</div>').css(
+      $('<div id="' + divName + '" class="' + cls + ' style="z-index:5">' + html + '</div>').css(
         { position: 'absolute',display: 'none',top: top,left: left,
           border: '1px solid #fdd',padding: '2px','background-color': bgcolor
         }

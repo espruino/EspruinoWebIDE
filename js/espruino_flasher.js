@@ -36,7 +36,7 @@ THE SOFTWARE.
    }
 
    Espruino.Flasher.initOptions = function() {
-     Espruino.Options.optionBlocks.push({id:"#divOptionFlashFirmware",htmlUrl:"data/Espruino_FlashFirmware.html", onLoaded:function() {
+     Espruino.Options.optionBlocks.push({id:"#divOptionFlashFirmware",htmlUrl:"data/Espruino_FlashFirmware.html", onForm:function() {
        // Set up the firmware flasher button
        $( "#flashFirmware" ).button().click(Espruino.Flasher.flashButtonClicked);
        // Set up the URL

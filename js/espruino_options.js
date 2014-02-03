@@ -29,7 +29,8 @@ THE SOFTWARE.
    Espruino.YourFile.someText = false;    
 
    Espruino.YourFile.initOptions = function() {
-     Espruino.Options.optionBlocks.push({id:"#divOptionYourFile",htmlUrl:"data/Espruino_YourFile.html", onLoaded: function() { optional... });
+     Espruino.Options.optionBlocks.push({id:"#divOptionYourFile",htmlUrl:"data/Espruino_YourFile.html", onForm: function() { optional... });
+     // onForm is run when the optionBlock has been appended to the options menu
 
      Espruino.Options.optionFields.push({id:".anOption",module:"YourFile",field:"anOption",type:"radio"});
      Espruino.Options.optionFields.push({id:".someText",module:"YourFile",object:optionalString,field:"someText",type:"text"});
@@ -102,11 +103,9 @@ THE SOFTWARE.
         }
         function htmlLoaded(){
           for(var i = 0; i < optionBlocks.length; i++){
-            if(optionBlocks[i].html){ $("#optionsAccordion").append(optionBlocks[i].html);}                
+            if(optionBlocks[i].html){ $("#optionsAccordion").append(optionBlocks[i].html);}
+            if(optionBlocks[i].onForm){ optionBlocks[i].onForm();}
           }
-          for(var i = 0; i < optionBlocks.length; i++)
-            if (optionBlocks[i].onLoaded) 
-              optionBlocks[i].onLoaded();
           $("#optionsAccordion").accordion({ active: 0, collapsible: true, beforeActivate: function( event, ui ) {switchButtons(ui);} });
           setFormFromOptions();
           $("#saveOptions").unbind().button({ text:false, icons: { primary: " ui-icon-arrowreturnthick-1-s" } }).click(Espruino.Options.saveOptions);
