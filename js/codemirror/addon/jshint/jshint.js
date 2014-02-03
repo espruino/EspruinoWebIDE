@@ -1371,6 +1371,7 @@ unclosedString:     for (;;) {
                         if (c.isDigit()) {
                             if (binaryNumber.exec(t)) {
                               t = parseInt(t.substr(2),2).toString();
+                              c = "1"; // stop leading 0 warnings
                             }
                             if (!isFinite(Number(t))) {
                                 warningAt("Bad number '{a}'.",
