@@ -31,8 +31,24 @@ THE SOFTWARE.
 
     var ACK = 0x79;
     var NACK = 0x1F;
-    
-    Espruino.Flasher.init = function(){
+ 
+   Espruino.Flasher.init = function() {
+   }
+
+   Espruino.Flasher.initOptions = function() {
+     Espruino.Options.optionBlocks.push({id:"#divOptionFlashFirmware",htmlUrl:"data/Espruino_FlashFirmware.html", onLoaded:function() {
+       // Set up the firmware flasher button
+       $( "#flashFirmware" ).button().click(Espruino.Flasher.flashButtonClicked);
+       // Set up the URL
+       var boardInfo = Espruino.Board.getBoardObject();
+       if (boardInfo && boardInfo.info.binary_url !== undefined)
+         $("#flashFirmwareUrl").val(boardInfo.info.binary_url);
+       // Set up warning
+       var chromeVer = navigator.userAgent.replace(/.*Chrome\/([0-9]*).*/,"$1");
+       if (chromeVer < 31) {
+         $("#flashFirmwareInfo").css("color","red").html("Your Chrome version is "+chromeVer+". Please upgrade it before trying to flash your Espruino board.");
+       }
+     }});
     };
 
     var getBinary = function(url, callback) {
@@ -354,7 +370,7 @@ THE SOFTWARE.
         });
       });
     };
-    
+
     Espruino.Flasher.checkBoardInfo = function(boardInfo) {
       //console.log(boardInfo);
       if (boardInfo.info.binary_url !== undefined) {
@@ -380,7 +396,12 @@ THE SOFTWARE.
         Espruino.Status.setStatus("Must be connected first.");
         return;
       }
-      Espruino.Flasher.flashDevice($("#flashFirmwareUrl").val() ,function (err) {
+      var url = $("#flashFirmwareUrl").val().trim();
+      if (url=="") {
+        Espruino.Status.setStatus("You must provide a firmware URL!");
+        return;
+      }
+      Espruino.Flasher.flashDevice(url ,function (err) {
         Espruino.Terminal.grabSerialPort();
         if (err) {
           Espruino.Status.setStatus("Error Flashing.");

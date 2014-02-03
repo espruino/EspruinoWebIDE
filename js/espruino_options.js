@@ -23,6 +23,29 @@ THE SOFTWARE.
 */
 "use strict";
 (function(){
+/* To use this from a JS file:
+
+   Espruino.YourFile.anOption = false;
+   Espruino.YourFile.someText = false;    
+
+   Espruino.YourFile.initOptions = function() {
+     Espruino.Options.optionBlocks.push({id:"#divOptionYourFile",htmlUrl:"data/Espruino_YourFile.html", onLoaded: function() { optional... });
+
+     Espruino.Options.optionFields.push({id:".anOption",module:"YourFile",field:"anOption",type:"radio"});
+     Espruino.Options.optionFields.push({id:".someText",module:"YourFile",object:optionalString,field:"someText",type:"text"});
+     // if object specified, look in Espruino.YourFile.object.someText not Espruino.YourFile.someText 
+     // note: also { onLoaded:function, onBlur:bool }
+   }
+
+  and in data/Espruino_YourFile.html:
+
+  <h3 class="EspruinoOption">YourFile options</h3>
+  <div>
+    <input type="radio" class="anOption">
+    <Input type="text" class="someText" size="50" value=""/>
+  </div>
+*/
+
   Espruino.Options = {};
   var urlOptions = "data/options.html", defaultFileName = "EspruinoOptions";
   var optionFields = [];
@@ -79,17 +102,18 @@ THE SOFTWARE.
         }
         function htmlLoaded(){
           for(var i = 0; i < optionBlocks.length; i++){
-            if(optionBlocks[i].html){ $("#optionsAccordion").append(optionBlocks[i].html);}
+            if(optionBlocks[i].html){ $("#optionsAccordion").append(optionBlocks[i].html);}                
           }
+          for(var i = 0; i < optionBlocks.length; i++)
+            if (optionBlocks[i].onLoaded) 
+              optionBlocks[i].onLoaded();
           $("#optionsAccordion").accordion({ active: 0, collapsible: true, beforeActivate: function( event, ui ) {switchButtons(ui);} });
           setFormFromOptions();
           $("#saveOptions").unbind().button({ text:false, icons: { primary: " ui-icon-arrowreturnthick-1-s" } }).click(Espruino.Options.saveOptions);
           $("#loadOptions").unbind().button({ text:false, icons: { primary: " ui-icon-arrowreturnthick-1-n" } }).click(Espruino.Options.loadOptions);
           $("#resetOptions").unbind().button({ text:false, icons: { primary: "ui-icon-refresh" } }).click(Espruino.Options.resetOptions);
           $("#saveOptionsToFile").button({ text: false, icons: { primary: "ui-icon-disk" } }).unbind().click(Espruino.Options.saveToFileOptions);
-          $("#loadOptionsFromFile").button({ text: false, icons: { primary: "ui-icon-folder-open" } }).unbind().click(Espruino.Options.loadFromFileOptions);
-          // Set up the firmware flasher
-          $( "#flashFirmware" ).button().click(Espruino.Flasher.flashButtonClicked);
+          $("#loadOptionsFromFile").button({ text: false, icons: { primary: "ui-icon-folder-open" } }).unbind().click(Espruino.Options.loadFromFileOptions);          
         }
       },10);
     },"text");

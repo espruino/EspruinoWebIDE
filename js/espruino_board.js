@@ -63,11 +63,16 @@ THE SOFTWARE.
     Espruino.Board.init = function() {
       switchOptions();
     };
-    Espruino.Board.initOptions = function(){
+    Espruino.Board.initOptions = function() {
       Espruino.Options.optionFields.push({id:"#boardActive",module:"Board",field:"boardActive",type:"check"});
       Espruino.Options.optionFields.push({id:"#boardEditSupport",module:"Board",field:"boardEditSupport",type:"check"});      
       Espruino.Options.optionBlocks.push({id:"#divOptionBoard",htmlUrl:"data/Espruino_Board.html",onLoaded:switchOptions});
     };
+
+    Espruino.Board.getBoardObject = function() {
+      return boardObject;
+    }
+
     function switchOptions(){
       if(Espruino.Board.boardActive === true){
         createBoardList();
@@ -426,5 +431,5 @@ THE SOFTWARE.
         loadBoard(val); 
         setupBoardButton();
       }
-    }
+    }    
 })();
