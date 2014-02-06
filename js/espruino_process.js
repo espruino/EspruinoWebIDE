@@ -47,8 +47,12 @@ THE SOFTWARE.
           var startProcess = bufText.indexOf("<<<<<");
           var endProcess = bufText.indexOf(">>>>>", startProcess);
           if(startProcess >= 0 && endProcess > 0){
-            var pText = bufText.substring(startProcess + 5,endProcess);            
-            Espruino.Process.Env = JSON.parse(pText);
+            var pText = bufText.substring(startProcess + 5,endProcess);     
+            try {       
+              Espruino.Process.Env = JSON.parse(pText);
+            } catch (e) {
+              console.log("JSON parse failed - " + e);
+            }
             callback();
             // strip out the text we found
             bufText = bufText.substr(0,startProcess) + bufText.substr(endProcess+5);
