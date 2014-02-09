@@ -135,7 +135,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
       $( "#fileLoader" ).click();
     } );
     $( ".reload" ).button( { text: false, icons: { primary: "ui-icon-refresh" } } ).click( function () {
-        $('#fileLoader' ).change();
+      $('#fileLoader').change();
     } );
     $("#fileLoader").change(function(event) {
       if (event.target.files.length != 1) return;

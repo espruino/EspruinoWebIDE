@@ -25,10 +25,12 @@ THE SOFTWARE.
 (function(){
   Espruino["General"] = {};
   Espruino.General.startMode = "JS";
-  Espruino.General.webCamOn = false;  
+  Espruino.General.webCamOn = false;
+  Espruino.General.showReloadButton = false;
   Espruino.General["initOptions"] = function(){
     Espruino.Options.optionFields.push({id:".startMode",module:"General",field:"startMode",type:"radio"});
     Espruino.Options.optionFields.push({id:"#webCamOn",module:"General",field:"webCamOn",type:"check",onLoaded:switchWebCam,onBlur:true});
+    Espruino.Options.optionFields.push({id:"#showReloadButton",module:"General",field:"showReloadButton",type:"check",onLoaded:switchReloadButton,onBlur:true});
     Espruino.Options.optionBlocks.push({id:"#divOptionGeneral",htmlUrl:"data/Espruino_General.html"});
     Espruino.Options.optionBlocks.push({id:"#divOptionFlashFirmware",htmlUrl:"data/Espruino_FlashFirmware.html"});
   };
@@ -82,6 +84,10 @@ THE SOFTWARE.
   function switchWebCam(status){ 
       if(status === true){ $(".webcam").show(500);}
       else{ $(".webcam").hide(); }
+  }
+  function switchReloadButton(status) {
+    if (status === true) { $('.reload').show(500);}
+    else { $('.reload').hide(); }
   }
   
   Espruino.General.escapeHTML = (function () {
