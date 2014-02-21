@@ -29,41 +29,64 @@ THE SOFTWARE.
 
     Espruino.Process.init = function() {};
     Espruino.Process.setProcess = setProcess;
+
+    var bufText = "";
     
+    function getProcessInfo(prevReader, callback) {
+      // string adds to stop the command tag being detected in the output
+      Espruino.Serial.write('echo(0);\nconsole.log("<<"+"<<<"+JSON.stringify(process.env)+">>>"+">>");\n');  
+      setTimeout(function(){          
+        console.log("Got "+JSON.stringify(bufText));          
+        var startProcess = bufText.indexOf("<<<<<");
+        var endProcess = bufText.indexOf(">>>>>", startProcess);
+        if(startProcess >= 0 && endProcess > 0){
+          var pText = bufText.substring(startProcess + 5,endProcess);     
+          try {       
+            Espruino.Process.Env = JSON.parse(pText);
+          } catch (e) {
+            console.log("JSON parse failed - " + e);
+          }
+          callback();
+          // strip out the text we found
+          bufText = bufText.substr(0,startProcess) + bufText.substr(endProcess+5);
+          // try and strip out the echo 0 too...
+          bufText = bufText.replace("echo(0);","");
+        }
+        // start the previous reader listing again
+        Espruino.Serial.startListening(prevReader);          
+        // forward the original text to the previous reader
+        prevReader(bufText);
+        // do echo(1) here as this will re-show the prompt
+        Espruino.Serial.write('echo(1);\n'); 
+      },250);   
+    }
+
     Espruino.Process.getProcess = function(callback){
-      var prevReader,bufText = "";
+      bufText = "";
       if(Espruino.Serial.isConnected()){
-        prevReader = Espruino.Serial.startListening(function (readData){
-          var bufView=new Uint8Array(readData);
-          for(var i = 0; i < bufView.length; i++){
+        var prevReader = Espruino.Serial.startListening(function (readData) {
+          var bufView = new Uint8Array(readData);
+          for(var i = 0; i < bufView.length; i++) {
             bufText += String.fromCharCode(bufView[i]);
           }
         });
-        // string adds to stop the command tag being detected in the output
-        // \x3 (ctrl-c) sent first, to break out of line editing if we were in it
-        Espruino.Serial.write('\x03echo(0);\nconsole.log("<<"+"<<<"+JSON.stringify(process.env)+">>>"+">>");\n');  
-        setTimeout(function(){          
+        // send a newline, and we hope we'll see '=undefined\r\n>'
+        Espruino.Serial.write('\n');
+        setTimeout(function() {          
           console.log("Got "+JSON.stringify(bufText));          
-          var startProcess = bufText.indexOf("<<<<<");
-          var endProcess = bufText.indexOf(">>>>>", startProcess);
-          if(startProcess >= 0 && endProcess > 0){
-            var pText = bufText.substring(startProcess + 5,endProcess);     
-            try {       
-              Espruino.Process.Env = JSON.parse(pText);
-            } catch (e) {
-              console.log("JSON parse failed - " + e);
-            }
-            callback();
-            // strip out the text we found
-            bufText = bufText.substr(0,startProcess) + bufText.substr(endProcess+5);
+          // if we haven't had the prompt displayed for us, Ctrl-C to break out of what we had
+          if (bufText[bufText.length-1] == ">") {
+            console.log("Found a prompt... good!");
+          } else {
+            console.log("No Prompt found, got "+JSON.stringify(bufText[bufText.length-1])+" - issuing Ctrl-C to try and break out");
+            Espruino.Serial.write('\x03');
           }
-          // start the previous reader listing again
-          Espruino.Serial.startListening(prevReader);          
-          // forward the original text to the previous reader
+          // send data to console anyway...
           prevReader(bufText);
-          // do echo(1) here as this will re-show the prompt
-          Espruino.Serial.write('echo(1);\n'); 
-        },500);        
+          bufText="";
+          // now get the real info
+          getProcessInfo(prevReader, callback);
+        },250);        
       }
     };
     function setProcess(data){
