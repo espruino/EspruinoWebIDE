@@ -37,18 +37,30 @@ THE SOFTWARE.
     };
     Espruino.Modules.init = function(){
     };
+    
+    var BUILT_IN_MODULES = ["http","fs","CC3000"];
 
     var getModulesRequired = function(code) {
       var modules = [];
-      var requires = code.match(/require\(\"[^\"]*\"\)/g);
-      for (var i in requires) { 
-        // strip off beginning and end, and parse the string
-        var module = JSON.parse(requires[i].substring(8,requires[i].length-1));
-        // add it to our array - FIXME don't hard code these
-        var builtin_modules = ["http","fs","CC3000"];
-        if (builtin_modules.indexOf(module)<0 && modules.indexOf(module)<0)
-          modules.push(module);
-      }    
+      
+      var lex = Espruino.General.getLexer(code);
+      var tok = lex.next();
+      var state = 0;
+      while (tok!==undefined) {
+        if (state==0 && tok.str=="require") {
+          state=1;
+        } else if (state==1 && tok.str=="(") {
+          state=2;
+        } else if (state==2 && (tok.type=="STRING")) {
+          state=0;
+          var module = tok.value;
+          if (BUILT_IN_MODULES.indexOf(module)<0 && modules.indexOf(module)<0)
+            modules.push(module);
+        } else
+          state = 0;
+        tok = lex.next();
+      }
+          
       return modules;
     };
 
