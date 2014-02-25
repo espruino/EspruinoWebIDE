@@ -122,7 +122,7 @@ THE SOFTWARE.
   };    
   
   /** Get a Lexer to parse JavaScript - this is really very nasty right now and it doesn't lex even remotely properly.
-   * It'll return {type:"type", str:"string", value:"string_only_sometimes"}, until EOF when it returns undefined */
+   * It'll return {type:"type", str:"chars that were parsed", value:"string", startIdx: Index in string of the start, endIdx: Index in string of the end}, until EOF when it returns undefined */
   Espruino.General.getLexer = function(str) {
     // Nasty lexer - no comments/etc
     var chAlpha="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
@@ -135,7 +135,9 @@ THE SOFTWARE.
     var nextCh = function() { ch = str[idx++]; };
     var isIn = function(s,c) { return s.indexOf(c)>=0; } ;
     var nextToken = function() {
-      while (isIn(chWhiteSpace,ch)) nextCh();
+      while (isIn(chWhiteSpace,ch)) {
+        nextCh();
+      }
       if (ch==undefined) return undefined; 
       if (ch=="/") {
         nextCh();
@@ -154,10 +156,11 @@ THE SOFTWARE.
           nextCh();
           return nextToken();
         }
-        return {type:"CHAR", str:"/", value:"/"};
+        return {type:"CHAR", str:"/", value:"/", startIdx:idx-2, endIdx:idx-1};
       }
       var s = "";        
       var type, value;
+      var startIdx = idx-1;
       if (isIn(chAlpha,ch)) { // ID
         type = "ID";
         do {
@@ -189,7 +192,7 @@ THE SOFTWARE.
         nextCh();
       }
       if (value===undefined) value=s;
-      return {type:type, str:s, value:value};
+      return {type:type, str:s, value:value, startIdx:startIdx, endIdx:idx-1};
     };
     
     return {
