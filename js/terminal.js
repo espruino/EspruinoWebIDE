@@ -180,7 +180,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
     });
   };
     
-  $(document).ready(function() {
+  function init() {
     // handle layout
     function doLayout() {
       var w = $(window).innerWidth();
@@ -294,7 +294,14 @@ Author: Gordon Williams (gw@pur3.co.uk)
         console.log("No code in storage.");
       }
     });
-  });
+  }
+ 
+  // workaround for broken chrome
+  if (navigator.userAgent.indexOf("Chrome/33.0.1750")>=0) {
+    $(document).ready(function() { window.setTimeout(init,100); });
+  } else {
+    $(document).ready(init);
+  }
 })();
 
 
