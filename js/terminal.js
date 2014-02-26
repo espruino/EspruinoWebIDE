@@ -33,10 +33,6 @@ Author: Gordon Williams (gw@pur3.co.uk)
     return chars.replace(/\r\n/g,"\n").replace(/\n/g,"\r\n");
   };
 
-  
-  var myLayout;
-  var serial_devices=document.querySelector(".serial_devices");
-
   var logSuccess=function(msg) {
     console.log(msg);
   };
@@ -79,9 +75,114 @@ Author: Gordon Williams (gw@pur3.co.uk)
     } 
   };
 
-  var init=function() {
+  
+  var addEventToElements=function(eventType, selector, listener) {
+    var elems=document.querySelectorAll(selector);
+    
+    for (var i=0; i<elems.length; i++) {
+      (function() {
+        var c=i;
+        elems[i].addEventListener(eventType, function(e) {
+          listener.apply(this, [e, c]);
+        });
+      })();
+    }
+  };
+
+  var convertToChars=function(i) {
+    var ch=i.toString(16);
+    if (ch.length==1) return "0"+ch;
+    return ""+ch;
+  };
+  
+  var setConnectedState = function(isConnected) {
+    if (isConnected)
+      Espruino.Terminal.outputDataHandler("Connected\r\n");
+    $(".serial_devices").prop('disabled', isConnected);
+    $(".refresh").button( "option", "disabled", isConnected);
+    $(".open").button( "option", "disabled", isConnected);    
+    $(".close").button( "option", "disabled", !isConnected);    
+    $(".send").button( "option", "disabled", !isConnected);
+  };
+  
+  var refreshPorts=function() {
+    $(".serial_devices").find("option").remove();
+ 
+    Espruino.Serial.getPorts(function(items) {
+      var selected = -1;
+
+      if (isWindows) {
+        // Com ports will just be COM1,COM2,etc
+        // Chances are that the largest COM port is the one for Espruino:
+        items.sort(function(a,b) {		  
+          if (a.indexOf("COM")==0 && b.indexOf("COM")==0)
+            return parseInt(a.substr(3)) - parseInt(b.substr(3));
+          else
+            return a.localeCompare(b);
+        });
+        if (items.length > 0)
+          selected = items.length-1;
+      } else { 
+        // Everyone else probably has USB in the name (or it might just be the first device)
+        for (var i=0; i<items.length; i++) {
+          if (i==0 || (/usb/i.test(items[i])  && /tty/i.test(items[i]))) {
+            selected = i;
+          }
+        }
+      }
+      // add to menu
+      for (var i=0; i<items.length; i++) {
+        $(".serial_devices").append($("<option></option>").attr("value",items[i]).text(items[i]));
+      }
+      // select in menu
+      if (selected >= 0) {
+        logSuccess("auto-selected "+items[selected]);
+        $(".serial_devices option").eq(items[selected]).prop("selected",true);
+      }
+    });
+  };
+  
+  var openSerial=function() {
+    var serialPort=$(".serial_devices").val();
+    if (!serialPort) {
+      logError("Invalid serialPort");
+      return;
+    }
+    Espruino.Status.setStatus("Connecting");
+    Espruino.Serial.setSlowWrite(true);
+    setConnectedState(false);
+    Espruino.Serial.open(serialPort, function(cInfo) {
+      if (cInfo!=undefined) {
+        logSuccess("Device found (connectionId="+cInfo.connectionId+")");
+        setConnectedState(true);        
+        Espruino.Terminal.grabSerialPort();
+        Espruino.Process.getProcess(setBoardConnected);
+      } else {
+        // fail
+        setConnectedState(false);
+        Espruino.Status.setStatus("Connect Failed.");
+      }
+    }, function () {
+      console.log("Force disconnect");
+      closeSerial(); // force disconnect
+    });
+    function setBoardConnected(){
+      Espruino.Status.setStatus("Connected");
+      Espruino.Board.setBoard(Espruino.Process.Env.BOARD);
+    }
+  };
+
+  var closeSerial=function() {
+    Espruino.Serial.close(function(result) {
+      setConnectedState(false);
+      Espruino.Status.setStatus("Disconnected");
+      Espruino.Process.Env = {};
+    });
+  };
+    
+  $(document).ready(function() {
     // The central divider
-    myLayout = $('body').layout({ 
+    $('body').layout({
       defaults : { enableCursorHotkey: false },
       onresize : function() { 
         $("#terminal").width($(".ui-layout-center").innerWidth()-4);
@@ -90,8 +191,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
 
         $("#divblockly").width($(".ui-layout-east").innerWidth() - 2);
         $("#divblockly").height($(".ui-layout-east").innerHeight() - ($("#codetoolbar").outerHeight()+4));
-    } });
-    myLayout.sizePane("east", $(window).width()/2);
+    } }).sizePane("east", $(window).width()/2);
     // The code editor
     Espruino.codeEditor = CodeMirror.fromTextArea(document.getElementById("code"), {
       lineNumbers: true,matchBrackets: true,mode: "text/typescript",
@@ -174,113 +274,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
         console.log("No code in storage.");
       }
     });
-  };
-  
-  var addEventToElements=function(eventType, selector, listener) {
-    var elems=document.querySelectorAll(selector);
-    
-    for (var i=0; i<elems.length; i++) {
-      (function() {
-        var c=i;
-        elems[i].addEventListener(eventType, function(e) {
-          listener.apply(this, [e, c]);
-        });
-      })();
-    }
-  };
-
-  var convertToChars=function(i) {
-    var ch=i.toString(16);
-    if (ch.length==1) return "0"+ch;
-    return ""+ch;
-  };
-  
-  var setConnectedState = function(isConnected) {
-    if (isConnected)
-      Espruino.Terminal.outputDataHandler("Connected\r\n");
-    $(".serial_devices").prop('disabled', isConnected);
-    $(".refresh").button( "option", "disabled", isConnected);
-    $(".open").button( "option", "disabled", isConnected);    
-    $(".close").button( "option", "disabled", !isConnected);    
-    $(".send").button( "option", "disabled", !isConnected);
-  };
-  
-  var refreshPorts=function() {
-    while (serial_devices.options.length > 0)
-      serial_devices.options.remove(0);
-    
-    Espruino.Serial.getPorts(function(items) {
-      logSuccess("got "+items.length+" ports");
-
-      var selected = -1;
-
-      if (isWindows) {
-        // Com ports will just be COM1,COM2,etc
-        // Chances are that the largest COM port is the one for Espruino:
-        items.sort(function(a,b) {		  
-		  if (a.indexOf("COM")==0 && b.indexOf("COM")==0)
-		    return parseInt(a.substr(3)) - parseInt(b.substr(3));
-	      else
-		    return a.localeCompare(b);
-		});
-        if (items.length > 0)
-          selected = items.length-1;
-      } else { 
-        // Everyone else probably has USB in the name (or it might just be the first device)
-        for (var i=0; i<items.length; i++) {
-           if (i==0 || (/usb/i.test(items[i])  && /tty/i.test(items[i]))) {
-             selected = i;
-           }
-        }
-      }
-
-      // add to menu
-      for (var i=0; i<items.length; i++) 
-        serial_devices.options.add(new Option(items[i], items[i]));
-      if (selected) logSuccess("auto-selected "+items[selected]);
-      serial_devices.options.selectedIndex = selected;
-    });
-  };
-  
-  var openSerial=function() {
-    var serialPort=serial_devices.options[serial_devices.options.selectedIndex].value;
-    if (!serialPort) {
-      logError("Invalid serialPort");
-      return;
-    }
-    Espruino.Status.setStatus("Connecting");
-	Espruino.Serial.setSlowWrite(true);
-    setConnectedState(false);
-    Espruino.Serial.open(serialPort, function(cInfo) {
-      if (cInfo!=undefined) {
-        logSuccess("Device found (connectionId="+cInfo.connectionId+")");
-        setConnectedState(true);        
-        Espruino.Terminal.grabSerialPort();
-        Espruino.Process.getProcess(setBoardConnected);
-      } else {
-        // fail
-        setConnectedState(false);
-        Espruino.Status.setStatus("Connect Failed.");
-      }
-    }, function () {
-      console.log("Force disconnect");
-      closeSerial(); // force disconnect
-    });
-    function setBoardConnected(){
-      Espruino.Status.setStatus("Connected");
-      Espruino.Board.setBoard(Espruino.Process.Env.BOARD);
-    }
-  };
-
-  var closeSerial=function() {
-    Espruino.Serial.close(function(result) {
-      setConnectedState(false);
-      Espruino.Status.setStatus("Disconnected");
-      Espruino.Process.Env = {};
-    });
-  };
-    
-  init();
+  });
 })();
 
 
