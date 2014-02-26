@@ -181,18 +181,6 @@ Author: Gordon Williams (gw@pur3.co.uk)
   };
     
   $(document).ready(function() {
-    // The central divider
-    /*$('body').layout({
-      defaults : { enableCursorHotkey: false },
-      onresize : function() { 
-        $("#terminal").width($(".ui-layout-center").innerWidth()-4);
-        $("#videotag").width($(".ui-layout-center").innerWidth()-4);
-        $("#videotag").height($(".ui-layout-center").innerHeight() - ($("#terminaltoolbar").outerHeight()+3));
-
-        $("#divblockly").width($(".ui-layout-east").innerWidth() - 2);
-        $("#divblockly").height($(".ui-layout-east").innerHeight() - ($("#codetoolbar").outerHeight()+4));
-    } }).sizePane("east", $(window).width()/2);*/
-
     // handle layout
     function doLayout() {
       var w = $(window).innerWidth();
@@ -211,6 +199,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
 
       $(".splitter .right").css({"left":(splitx+splitw)+"px" , "width":rightWidth+"px"});
       $("#toolbar .right").css({"left":(splitx+splitw)+"px", "width":rightWidth+"px"});
+      $("#divcode").css({ "width":rightWidth, "height":h });     
       $("#divblockly").css({ "width":rightWidth, "height":h });      
     }
     // Set up the vertical splitter bar

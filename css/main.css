@@ -133,14 +133,14 @@ body {
   background-position:center;  
 }
 
+#divcode {
+  overflow-y: auto;
+  overflow-x: auto;
+}
 
 .CodeMirror {
   border: 1px solid #eee;
   height: auto;
-}
-.CodeMirror-scroll {
-  overflow-y: hidden;
-  overflow-x: auto;
 }
 
 .lint-error {font-family: arial; font-size: 70%; background: #ffa; color: #a00; padding: 2px 5px 3px; }
