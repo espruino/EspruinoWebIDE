@@ -182,7 +182,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
     
   $(document).ready(function() {
     // The central divider
-    $('body').layout({
+    /*$('body').layout({
       defaults : { enableCursorHotkey: false },
       onresize : function() { 
         $("#terminal").width($(".ui-layout-center").innerWidth()-4);
@@ -191,7 +191,37 @@ Author: Gordon Williams (gw@pur3.co.uk)
 
         $("#divblockly").width($(".ui-layout-east").innerWidth() - 2);
         $("#divblockly").height($(".ui-layout-east").innerHeight() - ($("#codetoolbar").outerHeight()+4));
-    } }).sizePane("east", $(window).width()/2);
+    } }).sizePane("east", $(window).width()/2);*/
+
+    // handle layout
+    function doLayout() {
+      var w = $(window).innerWidth();
+      var splitx = $(".splitter .divider").position().left;
+      var splitw = $(".splitter .divider").width();
+      var leftWidth = splitx;
+      var rightWidth = w-(splitx+splitw);
+      var h = $(window).innerHeight() - ($("#toolbar").outerHeight()+3);
+      $(".splitter").height(h);
+      $(".splitter").children().height(h);
+
+      $(".splitter .left").css({"left":"0px" , "width":leftWidth+"px" });
+      $("#toolbar .left").css({"left":"0px" , "width":leftWidth+"px" });
+      $("#terminal").css({ "width":leftWidth, "height":h });
+      $("#videotag").css({ "width":leftWidth, "height":h });
+
+      $(".splitter .right").css({"left":(splitx+splitw)+"px" , "width":rightWidth+"px"});
+      $("#toolbar .right").css({"left":(splitx+splitw)+"px", "width":rightWidth+"px"});
+      $("#divblockly").css({ "width":rightWidth, "height":h });      
+    }
+    // Set up the vertical splitter bar
+    $(".splitter .divider")
+       .css({"left":($(window).innerWidth() / 2)+"px"})
+       .draggable({ axis: "x", drag: function( event, ui ) { doLayout(); } });
+    // layout when window changes
+    $(window).resize(doLayout);
+    // layout now
+    doLayout();
+
     // The code editor
     Espruino.codeEditor = CodeMirror.fromTextArea(document.getElementById("code"), {
       lineNumbers: true,matchBrackets: true,mode: "text/typescript",
@@ -231,6 +261,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
 
     });
 
+
     $( ".load" ).button( { text: false, icons: { primary: "ui-icon-folder-open" } } ).click( function () {
       $( "#fileLoader" ).click();
     } );
@@ -264,13 +295,13 @@ Author: Gordon Williams (gw@pur3.co.uk)
     setConnectedState(false);
     
     refreshPorts();
-    
     // get code from our config area at bootup
     Espruino.Config.get("code", function (savedCode) {
       if (savedCode) {
         Espruino.codeEditor.setValue(savedCode);
         console.log("Loaded code from storage.");
       } else {
+        Espruino.codeEditor.setValue("var  l = false;\nsetInterval(function() {\n  l = !l;\n  LED1.write(l);\n}, 500);");
         console.log("No code in storage.");
       }
     });
