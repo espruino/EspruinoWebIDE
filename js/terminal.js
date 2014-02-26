@@ -297,7 +297,8 @@ Author: Gordon Williams (gw@pur3.co.uk)
   }
  
   // workaround for broken chrome
-  if (navigator.userAgent.indexOf("Chrome/33.0.1750")>=0) {
+  if (navigator.userAgent.indexOf("Mac OS X")>=0 &&
+      navigator.userAgent.indexOf("Chrome/33.0.1750")>=0) {
     $(document).ready(function() { window.setTimeout(init,100); });
   } else {
     $(document).ready(init);
