@@ -76,7 +76,6 @@ THE SOFTWARE.
           if (e.keyCode == 'C'.charCodeAt(0)) ch = String.fromCharCode(3); // control C
         }
         if (e.altKey) {
-          console.log(e.keyCode);
           if (e.keyCode == 13) ch = String.fromCharCode(27)+String.fromCharCode(10); // Alt enter
         }
         if (e.keyCode == 8) ch = "\x08"; // backspace
