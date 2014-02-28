@@ -58,7 +58,7 @@ THE SOFTWARE.
         prevReader(bufText);
         // do echo(1) here as this will re-show the prompt
         Espruino.Serial.write('echo(1);\n'); 
-      },250);   
+      },300);   
     }
 
     Espruino.Process.getProcess = function(callback){
@@ -86,9 +86,10 @@ THE SOFTWARE.
           bufText="";
           // now get the real info
           getProcessInfo(prevReader, callback);
-        },250);        
+        },300);        
       }
     };
+
     function setProcess(data){
       if (!$.isEmptyObject(data)) {
         // We don't want to overwrite all of Env, as this came from the board
