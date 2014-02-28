@@ -72,7 +72,7 @@ THE SOFTWARE.
       var moduleCode = "Modules.removeAllCached();";
       var notFound = "";
       var requires = getModulesRequired(code);
-      var urlexp = new RegExp( '(http|https)://[\\w-]+(\\.[\\w-]+)+([\\w-.,@?^=%&:/~+#-]*[\\w@?^=%&;/~+#-])?' );
+      var urlexp = new RegExp( '(http|https)://' );
       // Kick off the module loading (each returns a promise)
       for(var i = 0; i < requires.length; i++)
         promises.push(loadModule(requires[i]));
