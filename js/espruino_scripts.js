@@ -72,10 +72,18 @@ THE SOFTWARE.
       $("#loader").hide();
     }       
   }
-  function openSelects(){
+  function openSelects(e){
     loadGitHubTrees(Espruino.Scripts.Tutorials,"tutorials",tutorialsLoaded);
     loadGitHubTrees(Espruino.Scripts.Examples,"examples",examplesLoaded);
-    $("#loader").show();
+    $("#loader").css({'top':e.pageY,'left':e.pageX}).show();
+    $(document).mouseup(function (e) {
+      var loader = $("#loader");
+      if (!loader.is(e.target) // if the target of the click isn't the container...
+          && loader.has(e.target).length === 0) { // ... nor a descendant of the container
+       loader.hide();
+       $( this ).unbind( e );
+      }
+    });
   }
   function tutorialsLoaded(html,tutorials){
     $( "#loaderTutorials" ).html(html);

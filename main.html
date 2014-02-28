@@ -79,13 +79,6 @@
         <button class="param">Replace Params</button>
         <span id="projectName" style="position:absolute;right:56px;top:2px;">&nbsp;</span>
         <button class="project" style="position:absolute;right:30px;top:2px;">Project</button>
-        <div id="loader" class="subform" style="display: none;">
-            <button class="load">Load File</button>
-            <button class="reload">Reload File from Disk</button>
-            <span id="loaderTutorials"></span>
-            <span id="loaderExamples"></span>
-            <input type="checkbox" id="replaceInEditor" checked></input>Replace
-        </div>
         <button class="options" style="position:absolute;right:4px;">Info / Options</button>
 
       </div> <!--right-->
@@ -129,6 +122,15 @@
   </div><!--splitter-->
 
   <input type="file" id="fileLoader" style="display: none;"/> <!-- for file loading -->
+
+        <!-- script loading window -->
+        <div id="loader" class="subform ui-widget-header" style="display:none;position:absolute;z-index:100;">
+            <button class="load">Load File</button>
+            <button class="reload">Reload File from Disk</button>
+            <span id="loaderTutorials"></span>
+            <span id="loaderExamples"></span>
+            <input type="checkbox" id="replaceInEditor" checked></input>Replace
+        </div>
 
   <script src="js/terminal.js"></script>
 
