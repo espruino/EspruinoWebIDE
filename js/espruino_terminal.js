@@ -42,6 +42,9 @@ THE SOFTWARE.
     var termCursorX = 0;
     var termCursorY = 0;
     var termControlChars = [];    
+
+    // maximum lines on the terminal
+    var MAX_LINES = 2048;
     
     
     Espruino.Terminal.init = function() {
@@ -103,7 +106,20 @@ THE SOFTWARE.
       });
     };
     
-    var updateTerminal = function() {        
+    var updateTerminal = function() {     
+      // remove extra lines if there are too many
+      if (termText.length > MAX_LINES) {
+        var removedLines = termText.length - MAX_LINES;
+        termText = termText.slice(removedLines);
+        termCursorY -= removedLines;
+        var newTermExtraText = {};
+        for (var i in termExtraText) {
+          if (i>=removedLines) 
+            newTermExtraText[i-removedLines] = termExtraText[i];
+        }
+        termExtraText = newTermExtraText;
+      }   
+      // now write this to the screen
       var t = [];
       for (var y in termText) {
         var line = termText[y];
@@ -146,7 +162,7 @@ THE SOFTWARE.
             termControlChars = [ 27 ];
           } break;
           default : {
-            // E$lse actually add character
+            // Else actually add character
             termText[termCursorY] = Espruino.General.getSubString(termText[termCursorY],0,termCursorX) + String.fromCharCode(ch) + Espruino.General.getSubString(termText[termCursorY],termCursorX+1);
             termCursorX++;
           }
