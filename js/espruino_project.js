@@ -28,13 +28,15 @@ THE SOFTWARE.
     Espruino.Project.projectActive = false;
     Espruino.Project.projectPathEntry = null;
     Espruino.Project.projectModuleLoading = "localFirst";
-    var actualProject;
-    Espruino.Project.init = function() { switchProject();}; 
+    var actualProject, terminalSnippets = {};
+    Espruino.Project.init = function() { 
+      switchProject();
+    }; 
     Espruino.Options.initOptions = function(){
       Espruino.Options.optionFields.push({id:"#projectActive",module:"Project",field:"projectActive",type:"check",onLoaded:switchProject,onBlur:true});
-      Espruino.Options.optionFields.push({id:"#projectPathEntry",module:"Project",field:"projectPathEntry",type:"text"});
-      Espruino.Options.optionFields.push({id:"#projectModuleLoading",module:"Project",field:"projectModuleLoading",type:"select"});
-      Espruino.Options.optionBlocks.push({id:"#divOptionProject",htmlUrl:"data/Espruino_Project.html",onForm:initPath});
+      Espruino.Options.optionFields.push({id:"#projectPathEntry",module:"Project",field:"projectPathEntry",type:"directory",divObject:"projectPath",onBlur:true});
+      Espruino.Options.optionFields.push({id:"#projectModuleLoading",module:"Project",field:"projectModuleLoading",type:"select",options:["espruino","local","espruinoFirst","localFirst"],onBlur:true});
+      Espruino.Options.optionBlocks.push({module:"Project",buttonLine:2,onForm:initPath,onLoaded:getProjectSnippets});
     };
     function initPath(){
       if(Espruino.Project.projectPathEntry){
@@ -64,6 +66,7 @@ THE SOFTWARE.
               if(!checkSubFolder(results,"modules")){ theEntry.getDirectory("modules", {create: true}); }
               if(!checkSubFolder(results,"projects")){ theEntry.getDirectory("projects", {create:true}); } 
               if(!checkSubFolder(results,"firmware")){ theEntry.getDirectory("firmware", {create:true}); }
+              if(!checkSubFolder(results,"snippets")){ theEntry.getDirectory("snippets", {create:true}); }
             });
           });
         }
@@ -82,9 +85,27 @@ THE SOFTWARE.
       if(Espruino.Project.projectActive){
         $(".project").button({ text: false, icons: { primary: "ui-icon-suitcase" } }).show();
         $(".project").click(showForm);
+        $("#terminal").on("contextmenu",showSnippets);
       }
       else{
         $(".project").unbind().hide();
+        $("#terminal").unbind("contextmenu");
+      }
+    }
+    function showSnippets(evt){
+      if(Espruino.Serial.isConnected()){
+        var html = "<ul>";
+        evt.preventDefault();
+        for(var i in terminalSnippets){
+          html += '<li class="terminalSnippet">' + i + '</li>';
+        }
+        html += '</ul>';
+        Espruino.General.ShowSubForm("terminalSnippets",evt.pageY,evt.pageX,html,"#cff","body");
+        $(".terminalSnippet").click(sendSnippets)
+      }
+      function sendSnippets(evt){
+        Espruino.Serial.write(terminalSnippets[$(this).html()] + "\n");
+        $("#terminalSnippets").remove();
       }
     }
     function showForm(){
@@ -128,7 +149,7 @@ THE SOFTWARE.
             });
           });
         }
-        function fileExists(){Espruino.Status.setError("File already exists");}
+        function fileExists(fileEntry){Espruino.Status.setError("File already exists");}
       });
       $(".subform").hide();
     }
@@ -154,6 +175,17 @@ THE SOFTWARE.
           $("#modulSource").html(html);
         }
       }
+    }
+    function getProjectSnippets(){
+      if(Espruino.Project.projectPathEntry){
+        getProjectSubDir("snippets",function(subDirEntry){
+          checkFileExists(subDirEntry,"terminalsnippets.txt",function(fileEntry){
+            readFilefromEntry(fileEntry,function(data){
+              terminalSnippets = JSON.parse(data);
+            });
+          });
+        });
+      }      
     }
     function getProjectModules(callback){
       var html = "";
@@ -231,7 +263,7 @@ THE SOFTWARE.
         var fnd = false;
         for(var i = 0;i < results.length; i++){
           if(results[i].name === fileName){
-            existsCallback();
+            existsCallback(results[i]);
             fnd = true;
             break;
           }
@@ -246,7 +278,7 @@ THE SOFTWARE.
     }
     function readBinaryArrayfromEntry(entry,callback){
       var reader = new FileReader();
-      reader.onLoad = function(e){ callback(e.target.result);}
+      reader.onload = function(e){callback("",e.target.result);}
       entry.file(function(file){ reader.readAsArrayBuffer(file);});
     }
     Espruino.Project.readFirmware = function(firmwareName,callback){
@@ -262,7 +294,7 @@ THE SOFTWARE.
               break;
             }
           }
-          if(!fnd){callback(false);}
+          if(!fnd){callback("Error Reading firmware");}
         });
       }
     }

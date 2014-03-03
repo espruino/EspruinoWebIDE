@@ -30,10 +30,9 @@ THE SOFTWARE.
       fileExtensions : [ ".min.js", ".js" ]
     };
     Espruino.Modules["initOptions"] = function(){
-      Espruino.Options.optionFields.push({id:"#urlModules",module:"Modules",object:"Config",field:"url",type:"text"});
-      Espruino.Options.optionFields.push({id:"#fileExtensionsModules",module:"Modules",object:"Config",field:"fileExtensions",type:"JSON"});
-      Espruino.Options.optionBlocks.push();
-      Espruino.Options.optionBlocks.push({id:"#divOptionModules",htmlUrl:"data/Espruino_Modules.html"});
+      Espruino.Options.optionFields.push({id:"#urlModules",module:"Modules",object:"Config",field:"url",type:"text",onBlur:true});
+      Espruino.Options.optionFields.push({id:"#fileExtensionsModules",module:"Modules",object:"Config",field:"fileExtensions",type:"JSON",onBlur:true});
+      Espruino.Options.optionBlocks.push({module:"Modules",buttonLine:1});
     };
     Espruino.Modules.init = function(){
     };

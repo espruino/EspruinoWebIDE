@@ -27,16 +27,17 @@ THE SOFTWARE.
     Espruino.Minify.sendMinified = false;
     Espruino.Minify.compilationLevel = "SIMPLE_OPTIMIZATIONS";
     Espruino.Minify["initOptions"] = function(){
-      Espruino.Options.optionFields.push({id:"#sendMinified",module:"Minify",field:"sendMinified",type:"check"});
-      Espruino.Options.optionFields.push({id:"#compilationLevel",module:"Minify",field:"compilationLevel",type:"select"});
-      Espruino.Options.optionBlocks.push({id:"#divOptionMinify",htmlUrl:"data/Espruino_Minify.html"});
+      Espruino.Options.optionFields.push({id:"#minifyActive",module:"Minify",field:"minifyActive",type:"check",onBlur:true});
+      Espruino.Options.optionFields.push({id:"#compilationLevel",module:"Minify",field:"compilationLevel",type:"select",options:["WHITESPACE_ONLY","SIMPLE_OPTIMIZATIONS","ADVANCED_OPTIMIZATIONS"],onBlur:true});
+      Espruino.Options.optionBlocks.push({module:"Minify",buttonLine:2});
     };
     var minifyUrl = "http://closure-compiler.appspot.com/compile";
     
     Espruino.Minify.init = function(){
     
     };
-    Espruino.Minify.MinifyCode = function(data,callback){
+    function minifyGoogle(data,callback){
+      var l = data.length;
       var minifyObj = $.param({
         compilation_level:Espruino.Minify.compilationLevel,
         output_format:"text",
@@ -44,7 +45,11 @@ THE SOFTWARE.
         js_code:data
       });
       $.post(minifyUrl,minifyObj,function(data){
+        console.log("reduced from " + l + " to " + data.length);
         callback(data);  
       },"text");
-    };    
+    }    
+    Espruino.Minify.MinifyCode = function(data,callback){
+      minifyGoogle(data,callback);
+    }    
 })();

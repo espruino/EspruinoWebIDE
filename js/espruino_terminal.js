@@ -48,8 +48,8 @@ THE SOFTWARE.
     
     
     Espruino.Terminal.init = function() {
-      Espruino.Options.optionFields.push({id:"#autoSaveCode",module:"Terminal",field:"autoSaveCode",type:"check"});      
-      Espruino.Options.optionBlocks.push({id:"#divOptionTerminal",htmlUrl:"data/Espruino_Terminal.html"});
+      Espruino.Options.optionFields.push({id:"#autoSaveCode",module:"Terminal",field:"autoSaveCode",type:"check",onBlur:true});      
+      Espruino.Options.optionBlocks.push({module:"Terminal",buttonLine:1});
       
       $("#terminal").mouseup(function() {
         var terminalfocus = $('#terminalfocus');

@@ -37,30 +37,29 @@ THE SOFTWARE.
    }
 
    Espruino.Tutorial.initOptions = function() {
-     Espruino.Options.optionBlocks.push({id:"#divOptionTutorial",htmlUrl:"data/Espruino_Tutorial.html", onForm:function() {
-       // load tutorial list
-       $.getJSON(tutorialDir+"index.json", function (data) {
-         $("#tutorialList").find('option').remove();
-         for (var i in data) {
-           $("#tutorialList").append('<option value="'+data[i].filename+'">'+data[i].name+'</option>');
-         }
-       });
-       // Set up tutorial button
-       $( "#startTutorial" ).button({ label : tutorialWatcherInterval ? "Stop" : "Start"  } ).click(function() {        
-         var btn = $("#startTutorial");
-         if (btn.text()!="Stop") {
-           loadTutorialURL(tutorialDir+$("#tutorialList").val());
-           btn.button({label:"Stop"});
-         } else {
-           stopTutorial();
-           btn.button({label:"Start"});
-         }
-       });
-     }});
+     $.get("data/Espruino_Tutorial.html",function(data){         
+       Espruino.Options.optionBlocks.push({module:"Tutorial",buttonLine:0,id:"#divOptionTutorial",htmlData:data, onForm:function() {
+         // load tutorial list
+         $.getJSON(tutorialDir+"index.json", function (data) {
+           $("#tutorialList").find('option').remove();
+           for (var i in data) {
+             $("#tutorialList").append('<option value="'+data[i].filename+'">'+data[i].name+'</option>');
+           }
+         });
+         // Set up tutorial button
+         $( "#startTutorial" ).button({ label : tutorialWatcherInterval ? "Stop" : "Start"  } ).click(function() {        
+           var btn = $("#startTutorial");
+           if (btn.text()!="Stop") {
+             loadTutorialURL(tutorialDir+$("#tutorialList").val());
+             btn.button({label:"Stop"});
+           } else {
+             stopTutorial();
+             btn.button({label:"Start"});
+           }
+         });
+       }});
+     });
     };
-
-
-
     
     function loadTutorialText(text) {
       var step = { text : "", code : "" };
