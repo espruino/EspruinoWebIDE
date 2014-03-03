@@ -29,7 +29,8 @@ THE SOFTWARE.
 
     Espruino.CodeWriter.init = function() {};
     Espruino.CodeWriter["initOptions"] = function(){
-      Espruino.Options.optionFields.push({id:"#resetBeforeSend",module:"CodeWriter",field:"resetBeforeSend",type:"check"});
+      Espruino.Options.optionFields.push({id:"#resetBeforeSend",module:"CodeWriter",field:"resetBeforeSend",type:"check",onBlur:true});
+      Espruino.Options.optionBlocks.push({module:"CodeWriter",buttonLine:0})
     };
     
     Espruino.CodeWriter.resetEspruino = function (callback) {

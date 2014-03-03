@@ -28,10 +28,10 @@ THE SOFTWARE.
   Espruino.General.webCamOn = false;
   Espruino.General.showReloadButton = false;
   Espruino.General["initOptions"] = function(){
-    Espruino.Options.optionFields.push({id:".startMode",module:"General",field:"startMode",type:"radio"});
+    Espruino.Options.optionFields.push({id:".startMode",module:"General",field:"startMode",type:"radio",options:["JS","G"]});
     Espruino.Options.optionFields.push({id:"#webCamOn",module:"General",field:"webCamOn",type:"check",onLoaded:switchWebCam,onBlur:true});
     Espruino.Options.optionFields.push({id:"#showReloadButton",module:"General",field:"showReloadButton",type:"check",onLoaded:switchReloadButton,onBlur:true});
-    Espruino.Options.optionBlocks.push({id:"#divOptionGeneral",htmlUrl:"data/Espruino_General.html"});
+    Espruino.Options.optionBlocks.push({module:"General",buttonLine:1});
   };
   Espruino.General.pinRegExp = /\/\*.+?\*\/.+?(,|\)|\])/g;
   Espruino.General.isWindows = navigator.userAgent.indexOf("Windows")>=0;

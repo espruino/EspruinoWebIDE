@@ -27,6 +27,8 @@ THE SOFTWARE.
     Espruino["Status"] = {};
     Espruino.Status.statusSoundOn = false;
     Espruino.Status.errorSoundOn = false;    
+    Espruino.Status.statusSpeakOn = false;
+    Espruino.Status.errorSpeakOn = false;    
     var statusBox, progressBox, progressIndicator,audioPlayer;
     var progressAmt, progressMax = 0;
     
@@ -42,7 +44,9 @@ THE SOFTWARE.
     Espruino.Status["initOptions"] = function(){
       Espruino.Options.optionFields.push({id:"#errorSoundOn",module:"Status",field:"errorSoundOn",type:"check",onBlur:true});
       Espruino.Options.optionFields.push({id:"#statusSoundOn",module:"Status",field:"statusSoundOn",type:"check",onBlur:true});
-      Espruino.Options.optionBlocks.push({id:"#divOptionStatus",htmlUrl:"data/Espruino_Status.html"});
+      Espruino.Options.optionFields.push({id:"#errorSpeakOn",module:"Status",field:"errorSpeakOn",type:"check",onBlur:true});
+      Espruino.Options.optionFields.push({id:"#statusSpeakOn",module:"Status",field:"statusSpeakOn",type:"check",onBlur:true});
+      Espruino.Options.optionBlocks.push({module:"Status",buttonLine:1});
     };
     Espruino.Status.sendSound = function(sound){
       var snd = "";
@@ -51,6 +55,12 @@ THE SOFTWARE.
       else {snd = "sounds/" + sound + ".wav"; }
       audioPlayer.src = snd;
     }    
+    Espruino.Status.speak = function(text){
+      if(Espruino.Status.getChromeVersion() >= 33){
+        var msg = new SpeechSynthesisUtterance(text);
+        window.speechSynthesis.speak(msg);
+      }
+    }   
     Espruino.Status.setStatus = function(text, progress) {
       console.log(">>> "+text);
       statusBox.html(text);
@@ -65,6 +75,7 @@ THE SOFTWARE.
         progressMax = progress;
       }
       if(Espruino.Status.statusSoundOn) {Espruino.Status.sendSound("status"); }
+      if(Espruino.Status.statusSpeakOn) {Espruino.Status.speak(text); }
     };
 
     Espruino.Status.setError = function(text,additionalInfo) {
@@ -74,6 +85,7 @@ THE SOFTWARE.
       $(".showErrorAdditional").button({ text: false, icons: { primary: "ui-icon-info" } }).show();
       $(".showErrorAdditional").click(showAdditionalInfo);
       if(Espruino.Status.errorSoundOn) {Espruino.Status.sendSound("error");}
+      if(Espruino.Status.errorSpeakOn) {Espruino.Status.speak(text);}
     };
     function showAdditionalInfo(evt){
       console.log(evt, $(this).attr("info"));
@@ -93,6 +105,8 @@ THE SOFTWARE.
       progressIndicator.width(width);
     };
     
-
+    Espruino.Status.getChromeVersion = function(){
+      return parseInt(window.navigator.appVersion.match(/Chrome\/(.*?) /)[1].split(".")[0]);
+    }
     
 })();

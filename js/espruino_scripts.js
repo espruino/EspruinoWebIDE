@@ -35,13 +35,13 @@ THE SOFTWARE.
       fileExtensions:["js"]
   };
   Espruino.Scripts["initOptions"] = function(){
-    Espruino.Options.optionFields.push({id:"#urlTutorials",module:"Scripts",object:"Tutorials",field:"url",type:"text"});
-    Espruino.Options.optionFields.push({id:"#subDirsTutorials",module:"Scripts",object:"Tutorials",field:"subDirs",type:"JSON"});
-    Espruino.Options.optionFields.push({id:"#fileExtensionsTutorials",module:"Scripts",object:"Tutorials",field:"fileExtensions",type:"JSON"});
-    Espruino.Options.optionFields.push({id:"#urlExamples",module:"Scripts",object:"Examples",field:"url",type:"text"});
-    Espruino.Options.optionFields.push({id:"#subDirsExamples",module:"Scripts",object:"Examples",field:"subDirs",type:"JSON"});
-    Espruino.Options.optionFields.push({id:"#fileExtensionsExamples",module:"Scripts",object:"Examples",field:"fileExtensions",type:"JSON"});
-    Espruino.Options.optionBlocks.push({id:"#divOptionScripts",htmlUrl:"data/Espruino_Scripts.html"});
+    Espruino.Options.optionFields.push({id:"#urlTutorials",module:"Scripts",object:"Tutorials",field:"url",type:"text",onBlur:true});
+    Espruino.Options.optionFields.push({id:"#subDirsTutorials",module:"Scripts",object:"Tutorials",field:"subDirs",type:"JSON",onBlur:true});
+    Espruino.Options.optionFields.push({id:"#fileExtensionsTutorials",module:"Scripts",object:"Tutorials",field:"fileExtensions",type:"JSON",onBlur:true});
+    Espruino.Options.optionFields.push({id:"#urlExamples",module:"Scripts",object:"Examples",field:"url",type:"text",onBlur:true});
+    Espruino.Options.optionFields.push({id:"#subDirsExamples",module:"Scripts",object:"Examples",field:"subDirs",type:"JSON",onBlur:true});
+    Espruino.Options.optionFields.push({id:"#fileExtensionsExamples",module:"Scripts",object:"Examples",field:"fileExtensions",type:"JSON",onBlur:true});
+    Espruino.Options.optionBlocks.push({module:"Scripts",buttonLine:1});
   };
 
   Espruino.Scripts.init = function(){

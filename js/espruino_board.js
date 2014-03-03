@@ -64,9 +64,9 @@ THE SOFTWARE.
       switchOptions();
     };
     Espruino.Board.initOptions = function() {
-      Espruino.Options.optionFields.push({id:"#boardActive",module:"Board",field:"boardActive",type:"check"});
-      Espruino.Options.optionFields.push({id:"#boardEditSupport",module:"Board",field:"boardEditSupport",type:"check"});      
-      Espruino.Options.optionBlocks.push({id:"#divOptionBoard",htmlUrl:"data/Espruino_Board.html",onLoaded:switchOptions});
+      Espruino.Options.optionFields.push({id:"#boardActive",module:"Board",field:"boardActive",type:"check",onLoaded:switchOptions,onBlur:true});
+      Espruino.Options.optionFields.push({id:"#boardEditSupport",module:"Board",field:"boardEditSupport",type:"check",onLoaded:switchOptions,onBlur:true});      
+      Espruino.Options.optionBlocks.push({module:"Board",buttonLine:2,onLoaded:switchOptions});
     };
 
     Espruino.Board.getBoardObject = function() {
@@ -83,14 +83,19 @@ THE SOFTWARE.
           Espruino.codeEditor.on("cursorActivity",selectParam);
           Espruino.codeEditor.on("contextmenu",setParam);
         }
+        else{
+          Espruino.codeEditor.off("change",checkParam);
+          Espruino.codeEditor.off("cursorActivity",selectParam);
+          Espruino.codeEditor.off("contextmenu",setParam);
+        }
       }
       else{
         $(".board").hide();
         $(".param").hide();
         $("#boardList").unbind().remove();
-        Espruino.codeEditor.off("change");
-        Espruino.codeEditor.off("cursorActivity");
-        Espruino.codeEditor.off("contextmenu");
+        Espruino.codeEditor.off("change",checkParam);
+        Espruino.codeEditor.off("cursorActivity",selectParam);
+        Espruino.codeEditor.off("contextmenu",setParam);
       }
     }
     function setParam(cm,evt){
@@ -373,7 +378,7 @@ THE SOFTWARE.
       html += '<img src="' + boardImgFolder + Espruino.Process.Env.ShortName + '.jpg"';
       html += 'width=' + viewPoint.width + ' height=' + viewPoint.height + '></div></td>';
       html += '</tr></table>';
-      Espruino.General.ShowSubForm("optionsdiv",30,200,html,"#efe","body");
+      Espruino.General.ShowSubForm("optionsdiv",30,60,html,"#efe","body");
       $("#deviceTree").treeview({collapsed:true});
       $(".subdevice").unbind().hover(function(){hoverSubDevice($(this));}, function(){$(".pinFunction").remove(); });
       $(".paramPins").unbind().hover(function(){hoverParamPins($(this));}, function(){$(".pinFunction").remove(); });          
