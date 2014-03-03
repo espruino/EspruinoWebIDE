@@ -36,19 +36,21 @@ THE SOFTWARE.
    }
 
    Espruino.Flasher.initOptions = function() {
-     Espruino.Options.optionBlocks.push({id:"#divOptionFlashFirmware",htmlUrl:"data/Espruino_FlashFirmware.html", onForm:function() {
-       // Set up the firmware flasher button
-       $( "#flashFirmware" ).button().click(Espruino.Flasher.flashButtonClicked);
-       // Set up the URL
-       var boardInfo = Espruino.Board.getBoardObject();
-       if (boardInfo && boardInfo.info.binary_url !== undefined)
-         $("#flashFirmwareUrl").val(boardInfo.info.binary_url);
-       // Set up warning
-       var chromeVer = navigator.userAgent.replace(/.*Chrome\/([0-9]*).*/,"$1");
-       if (chromeVer < 31) {
-         $("#flashFirmwareInfo").css("color","red").html("Your Chrome version is "+chromeVer+". Please upgrade it before trying to flash your Espruino board.");
-       }
-     }});
+     $.get("data/Espruino_FlashFirmware.html",function(data){         
+       Espruino.Options.optionBlocks.push({module:"Flasher",buttonLine:0,id:"#divOptionFlashFirmware",htmlData:data, onForm:function() {
+         // Set up the firmware flasher button
+         $( "#flashFirmware" ).button().click(Espruino.Flasher.flashButtonClicked);
+         // Set up the URL
+         var boardInfo = Espruino.Board.getBoardObject();
+         if (boardInfo && boardInfo.info.binary_url !== undefined)
+           $("#flashFirmwareUrl").val(boardInfo.info.binary_url);
+         // Set up warning
+         var chromeVer = navigator.userAgent.replace(/.*Chrome\/([0-9]*).*/,"$1");
+         if (chromeVer < 31) {
+           $("#flashFirmwareInfo").css("color","red").html("Your Chrome version is "+chromeVer+". Please upgrade it before trying to flash your Espruino board.");
+         }
+       }});
+     });
     };
 
     var getBinary = function(url, callback) {

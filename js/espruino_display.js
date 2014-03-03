@@ -49,10 +49,10 @@ THE SOFTWARE.
     Espruino.Display["initOptions"] = function(){
       Espruino.Options.optionFields.push({id:"#displayActive",module:"Display",field:"displayActive",type:"check",onLoaded:switchDisplay,onBlur:true});
       Espruino.Options.optionFields.push({id:"#displayTimeout",module:"Display",field:"displayTimeout",type:"text"});
-      Espruino.Options.optionFields.push({id:"#displayMode",module:"Display",field:"displayMode",type:"radio"});
+      Espruino.Options.optionFields.push({id:"#displayMode",module:"Display",field:"displayMode",type:"radio",options:["wait","poll"]});
       Espruino.Options.optionFields.push({id:"#displayStartMarker",module:"Display",field:"startMarker",type:"text"});
       Espruino.Options.optionFields.push({id:"#displayEndMarker",module:"Display",field:"endMarker",type:"text"});
-      Espruino.Options.optionBlocks.push({id:"#divOptionDisplay",htmlUrl:"data/Espruino_Display.html"});
+      Espruino.Options.optionBlocks.push({module:"Display",buttonLine:2});
     };
     function switchDisplay(){
       if(Espruino.Display.displayActive){
