@@ -37,7 +37,7 @@ THE SOFTWARE.
     Espruino.Modules.init = function(){
     };
     
-    var BUILT_IN_MODULES = ["http","fs","CC3000"];
+    var BUILT_IN_MODULES = ["http","fs","CC3000","WIZnet"];
 
     var getModulesRequired = function(code) {
       var modules = [];
