@@ -215,7 +215,10 @@ Author: Gordon Williams (gw@pur3.co.uk)
     Espruino.codeEditor = CodeMirror.fromTextArea(document.getElementById("code"), {
       lineNumbers: true,matchBrackets: true,mode: "text/typescript",
       lineWrapping: true,
-      showTrailingSpace: true,lint:true,
+      showTrailingSpace: true,
+      lint: {
+        evil:true // don't warn on use of strings in setInterval
+      },
       highlightSelectionMatches: {showToken: /\w/},
       foldGutter: {rangeFinder: new CodeMirror.fold.combine(CodeMirror.fold.brace, CodeMirror.fold.comment)},
       gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter", "CodeMirror-lint-markers"],
