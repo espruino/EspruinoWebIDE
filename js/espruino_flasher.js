@@ -381,8 +381,8 @@ THE SOFTWARE.
           console.log("FIRMWARE: Current "+Espruino.Process.Env.VERSION+", Available "+boardInfo.info.binary_version);
           var vCurrent = Espruino.General.versionToFloat(Espruino.Process.Env.VERSION);
           var vAvailable = Espruino.General.versionToFloat(boardInfo.info.binary_version);
-          if (vCurrent > 1.43) {
-            console.log("Firmware >1.43 supports faster writes");
+          if (vCurrent > 1.43 && Espruino.Process.Env.CONSOLE=="USB") {
+            console.log("Firmware >1.43 supports faster writes over USB");
             Espruino.Serial.setSlowWrite(false);
           }
           if (vAvailable > vCurrent && Espruino.Process.Env.BOARD=="ESPRUINOBOARD") {
