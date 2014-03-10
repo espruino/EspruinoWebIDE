@@ -112,7 +112,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
     else
       writeData += data;    
     
-    var blockSize = slowWrite ? 30 : 1000000; // not sure how, but v33 serial API seems to lose stuff if we don't sent it at once
+    var blockSize = slowWrite ? 30 : 512; // not sure how, but v33 serial API seems to lose stuff if we don't sent it at once
 
     showStatus &= writeData.length>blockSize;
     if (showStatus) {
