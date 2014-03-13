@@ -217,7 +217,8 @@ Author: Gordon Williams (gw@pur3.co.uk)
       lineWrapping: true,
       showTrailingSpace: true,
       lint: {
-        evil:true // don't warn on use of strings in setInterval
+        es5         : true, // if ES5 syntax should be allowed
+        evil        :true // don't warn on use of strings in setInterval
       },
       highlightSelectionMatches: {showToken: /\w/},
       foldGutter: {rangeFinder: new CodeMirror.fold.combine(CodeMirror.fold.brace, CodeMirror.fold.comment)},
