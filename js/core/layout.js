@@ -47,8 +47,14 @@
     setTimeout(doLayout, 1);
   }
   
+  function isInBlockly() {
+    return $("#divblockly").is(":visible");
+  };
+  
   Espruino.Core.Layout = {
-      init : init
+      init : init,
+      
+      isInBlockly : isInBlockly
   };
   
 })();

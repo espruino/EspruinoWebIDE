@@ -23,6 +23,7 @@
     $( ".close" ).button({ text: false, icons: { primary: "ui-icon-stop" } }).click(closeSerial);
 
     refreshPorts();
+    eventHandler("disconnected"); // make sure everything gets set up right
   }
   
   function eventHandler(eventType) {
@@ -31,14 +32,12 @@
       $(".refresh").button( "option", "disabled", true);
       $(".open").button( "option", "disabled", true);    
       $(".close").button( "option", "disabled", false);    
-      $(".send").button( "option", "disabled", false);
     }
     if (eventType == "disconnected") {
       $(".serial_devices").prop('disabled', false);
       $(".refresh").button( "option", "disabled", false);
       $(".open").button( "option", "disabled", false);    
       $(".close").button( "option", "disabled", true);    
-      $(".send").button( "option", "disabled", true);
     }
   }  
   
@@ -93,7 +92,7 @@
       if (cInfo!=undefined) {
         console.log("Device found (connectionId="+cInfo.connectionId+")");
         Espruino.sendEvent("connected");
-        Espruino.Terminal.grabSerialPort();
+        Espruino.Core.Terminal.grabSerialPort();
         Espruino.Process.getProcess(setBoardConnected);
       } else {
         // fail

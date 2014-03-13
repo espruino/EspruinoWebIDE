@@ -13,23 +13,14 @@
 (function(){
   
   function init() {
-    // Configuration
-    Espruino.Core.Config.add("AUTO_SAVE_CODE", {
-      section : "Communications",
-      description : "Save code automatically when clicking 'Send to Espruino'?",
-      type : "boolean",
-      defaultValue : 20, 
-    });
     // Add stuff we need
     $('<button class="send">Send to Espruino</button>').appendTo(".toolbar .right");
     
     $( ".send" ).button({ text: false, icons: { primary: "ui-icon-transferthick-e-w" } }).click(function() {
       Espruino.Core.Terminal.focus(); // give the terminal focus
-      if(Espruino.Config.AUTO_SAVE_CODE){
-        Espruino.Config.set("code", Espruino.codeEditor.getValue()); // save the code
-      }
+      Espruino.sendEvent("sending");
       if (Espruino.Core.Serial.isConnected()) {
-          getCode(Espruino.Core.CodeWriter.writeToEspruino);
+        Espruino.Core.Code.getEspruinoCode(Espruino.Core.CodeWriter.writeToEspruino);
       } else { 
         Espruino.Core.Status.setError("Not Connected");
       }
@@ -37,6 +28,12 @@
   }
   
   function eventHandler(eventType) {
+    if (eventType == "connected") {
+      $(".send").button( "option", "disabled", false);
+    }
+    if (eventType == "disconnected") {
+      $(".send").button( "option", "disabled", true);
+    }    
   }
   
   Espruino.Core.Send = {

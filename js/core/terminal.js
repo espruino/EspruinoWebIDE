@@ -245,11 +245,11 @@
   /// Claim input and output of the Serial port
   function grabSerialPort() {
     // Ensure that keypresses go direct to the Espruino device
-    Espruino.Terminal.setInputDataHandler(function(d) {
+    Espruino.Core.Terminal.setInputDataHandler(function(d) {
       Espruino.Core.Serial.write(d);
     });
     // Ensure that data from Espruino goes to this terminal
-    Espruino.Core.Serial.startListening(Espruino.Terminal.outputDataHandler);      
+    Espruino.Core.Serial.startListening(Espruino.Core.Terminal.outputDataHandler);      
   };
 
   /// Get the current terminal line that we're on

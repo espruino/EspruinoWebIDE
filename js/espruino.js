@@ -40,6 +40,11 @@ var Espruino;
     $(document).ready(init);
   }
   
+  /** EVENTS:
+   *  connected
+   *  disconnected
+   *  sending
+   */
   function sendEvent(eventType) {
     for (var i in eventHandlers)
       eventHandlers[i](eventType);
