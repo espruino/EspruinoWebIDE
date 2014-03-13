@@ -55,12 +55,12 @@ THE SOFTWARE.
 
     var getBinary = function(url, callback) {
       console.log("Downloading "+url);
-      Espruino.Status.setStatus("Downloading binary...");
+      Espruino.Core.Status.setStatus("Downloading binary...");
       var xhr = new XMLHttpRequest();          
       xhr.responseType = "arraybuffer";
       xhr.addEventListener("load", function () {
         if (xhr.status === 200) {
-          Espruino.Status.setStatus("Done.");
+          Espruino.Core.Status.setStatus("Done.");
           var data = xhr.response;
           callback(undefined,data);
         } else
@@ -74,8 +74,8 @@ THE SOFTWARE.
     };
 
     var initialiseChip = function(callback, timeout) {
-      if (!Espruino.Status.hasProgress()) 
-        Espruino.Status.setStatus("Initialising...");
+      if (!Espruino.Core.Status.hasProgress()) 
+        Espruino.Core.Status.setStatus("Initialising...");
       console.log("Initialising...");
       var iTimeout = setTimeout(function() {
         dataReceived = undefined;
@@ -91,8 +91,8 @@ THE SOFTWARE.
         if (c==ACK || c==NACK) {
           clearTimeout(iTimeout);
           clearInterval(iPoll);
-          if (!Espruino.Status.hasProgress())
-            Espruino.Status.setStatus("Initialised.");
+          if (!Espruino.Core.Status.hasProgress())
+            Espruino.Core.Status.setStatus("Initialised.");
           console.log("Initialised. Just waiting for a bit...");
 		  // wait for random extra data...
 		  dataReceived = function(c){
@@ -156,7 +156,7 @@ THE SOFTWARE.
     };
 
     var eraseChip = function(callback) {
-      Espruino.Status.setStatus("Erasing...");
+      Espruino.Core.Status.setStatus("Erasing...");
       // Extended erase
       sendCommand(0x44, function(err) {
         if (err) { callback(err); return; }
@@ -275,10 +275,10 @@ THE SOFTWARE.
     var writeAllData = function(binary, callback) {      
       var chunkSize = 256;
       console.log("Writing "+binary.byteLength+" bytes");
-      Espruino.Status.setStatus("Writing flash...",  binary.byteLength);
+      Espruino.Core.Status.setStatus("Writing flash...",  binary.byteLength);
       var writer = function(offset) {
         if (offset>=binary.byteLength) {
-          Espruino.Status.setStatus("Write complete!");
+          Espruino.Core.Status.setStatus("Write complete!");
           callback(undefined); // done
           return;
         }
@@ -287,7 +287,7 @@ THE SOFTWARE.
         var data = new Uint8Array(binary, offset, len);
         writeData(function(err) {
           if (err) { callback(err); return; }
-          Espruino.Status.incrementProgress(chunkSize);
+          Espruino.Core.Status.incrementProgress(chunkSize);
           writer(offset + chunkSize);
         }, 0x08000000 + offset, data);
       };
@@ -298,10 +298,10 @@ THE SOFTWARE.
       var data = new Uint8Array(FLASH_OFFSET);            
       var chunkSize = 256;
       console.log("Reading "+binaryLength+" bytes");
-      Espruino.Status.setStatus("Reading flash...",  binaryLength);
+      Espruino.Core.Status.setStatus("Reading flash...",  binaryLength);
       var reader = function(offset) {
         if (offset>=binaryLength) {
-          Espruino.Status.setStatus("Read complete!");
+          Espruino.Core.Status.setStatus("Read complete!");
           callback(undefined, data); // done
           return;
         }
@@ -311,7 +311,7 @@ THE SOFTWARE.
           if (err) { callback(err); return; }
           for (var i in dataChunk)
             data[offset+i] = dataChunk[i];
-          Espruino.Status.incrementProgress(chunkSize);
+          Espruino.Core.Status.incrementProgress(chunkSize);
           reader(offset + chunkSize);
         }, 0x08000000 + offset, chunkSize);
       };
@@ -387,7 +387,7 @@ THE SOFTWARE.
           }
           if (vAvailable > vCurrent && Espruino.Process.Env.BOARD=="ESPRUINOBOARD") {
             console.log("New Firmware "+boardInfo.info.binary_version+" available");
-            Espruino.Status.setStatus("New Firmware "+boardInfo.info.binary_version+' available. Click <div style="display: inline-block" class="ui-state-default"><span class="ui-icon ui-icon-info"></span></div>  to update');
+            Espruino.Core.Status.setStatus("New Firmware "+boardInfo.info.binary_version+' available. Click <div style="display: inline-block" class="ui-state-default"><span class="ui-icon ui-icon-info"></span></div>  to update');
           }
         }
       }
@@ -395,22 +395,22 @@ THE SOFTWARE.
     
     Espruino.Flasher.flashButtonClicked = function() {
       if (!Espruino.Serial.isConnected()) {
-        Espruino.Status.setStatus("Must be connected first.");
+        Espruino.Core.Status.setStatus("Must be connected first.");
         return;
       }
       var url = $("#flashFirmwareUrl").val().trim();
       if (url=="") {
-        Espruino.Status.setStatus("You must provide a firmware URL!");
+        Espruino.Core.Status.setStatus("You must provide a firmware URL!");
         return;
       }
       Espruino.Flasher.flashDevice(url ,function (err) {
         Espruino.Terminal.grabSerialPort();
         if (err) {
-          Espruino.Status.setStatus("Error Flashing.");
+          Espruino.Core.Status.setStatus("Error Flashing.");
           console.log(err);
           //alert(err);
         }
-        else Espruino.Status.setStatus("Done.");
+        else Espruino.Core.Status.setStatus("Done.");
       });
     };
 

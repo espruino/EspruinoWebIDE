@@ -4,74 +4,66 @@
   <meta charset="utf-8" />
 
   <link href="css/ui-lightness/jquery-ui-1.10.1.custom.css" rel="stylesheet">
-  <link rel="stylesheet" href="js/codemirror/css/codemirror.css">
   <link href="css/main.css" rel="stylesheet" media="all"></link>
-  <link rel="stylesheet" href="css/jquery.treeview.css"></link>
-  <link rel="stylesheet" href="js/codemirror/addon/lint/lint.css">
-  <link rel="stylesheet" href="js/codemirror/addon/hint/show-hint.css">
-  <link rel="stylesheet" href="js/codemirror/addon/fold/foldgutter.css" />
+  
+  <link rel="stylesheet" href="js/libs/codemirror/css/codemirror.css">  
+  <link rel="stylesheet" href="css/libs/jquery.treeview.css"></link>
+  <link rel="stylesheet" href="js/libs/codemirror/addon/lint/lint.css">
+  <link rel="stylesheet" href="js/libs/codemirror/addon/hint/show-hint.css">
+  <link rel="stylesheet" href="js/libs/codemirror/addon/fold/foldgutter.css" />
 
-  <script src="js/jquery-1.11.0.js"></script>
-  <script src="js/jquery-ui-1.10.1.custom.js"></script>
-  <script src="js/codemirror/codemirror.js" type="text/javascript"></script>
-  <script src="js/codemirror/codemirror-javascript.js"></script>
-  <script src="js/codemirror/addon/hint/show-hint.js"></script>
-  <script src="js/codemirror/addon/hint/espruino-hint.js"></script>
-  <script src="js/codemirror/addon/fold/foldcode.js"></script>
-  <script src="js/codemirror/addon/fold/foldgutter.js"></script>
-  <script src="js/codemirror/addon/fold/brace-fold.js"></script>
-  <script src="js/codemirror/addon/fold/comment-fold.js"></script>
-  <script src="js/codemirror/addon/edit/closebrackets.js"></script>
-  <script src="js/codemirror/addon/search/searchcursor.js"></script>
-  <script src="js/codemirror/addon/search/match-highlighter.js"></script>
-  <script src="js/codemirror/addon/jshint/jshint.js"></script>
-  <script src="js/codemirror/addon/lint/lint.js"></script>
-  <script src="js/codemirror/addon/lint/javascript-lint.js"></script>
-  <script src="js/codemirror/addon/edit/trailingspace.js"></script>
-  <script src="js/jquery.treeview.js"></script>
+  <script src="js/libs/jquery-1.11.0.js"></script>
+  <script src="js/libs/jquery-ui-1.10.1.custom.js"></script>
+  <script src="js/libs/jquery.treeview.js"></script>
+  <script src="js/libs/jquery.sparkline.min.js"></script>
+  <script src="js/libs/FileSaver.min.js"></script>
+  
+  <script src="js/libs/codemirror/codemirror.js"></script>
+  <script src="js/libs/codemirror/codemirror-javascript.js"></script>
+  <script src="js/libs/codemirror/addon/hint/show-hint.js"></script>
+  <script src="js/libs/codemirror/addon/hint/espruino-hint.js"></script>
+  <script src="js/libs/codemirror/addon/fold/foldcode.js"></script>
+  <script src="js/libs/codemirror/addon/fold/foldgutter.js"></script>
+  <script src="js/libs/codemirror/addon/fold/brace-fold.js"></script>
+  <script src="js/libs/codemirror/addon/fold/comment-fold.js"></script>
+  <script src="js/libs/codemirror/addon/edit/closebrackets.js"></script>
+  <script src="js/libs/codemirror/addon/search/searchcursor.js"></script>
+  <script src="js/libs/codemirror/addon/search/match-highlighter.js"></script>
+  <script src="js/libs/codemirror/addon/jshint/jshint.js"></script>
+  <script src="js/libs/codemirror/addon/lint/lint.js"></script>
+  <script src="js/libs/codemirror/addon/lint/javascript-lint.js"></script>
+  <script src="js/libs/codemirror/addon/edit/trailingspace.js"></script>
+
   <script src="js/espruino.js"></script>
-  <script src="js/espruino_options.js"></script>
-  <script src="js/espruino_config.js"></script>
-  <script src="js/espruino_general.js"></script>
-  <script src="js/espruino_serial.js"></script>
-  <script src="js/espruino_serial_pre_m33.js"></script> <!-- compatibility with pre-chrome-M33 -->
-  <script src="js/espruino_codewriter.js"></script>
-  <script src="js/espruino_status.js"></script>
-  <script src="js/espruino_process.js"></script>
-  <script src="js/espruino_flasher.js"></script>
-  <script src="js/espruino_scripts.js"></script>
-  <script src="js/espruino_minify.js"></script>
-  <script src="js/espruino_modules.js"></script>
-  <script src="js/espruino_terminal.js"></script> <!-- LHS terminal window -->
-  <script src="js/espruino_board.js"></script>
-  <script src="js/espruino_tutorial.js"></script>
-  <script src="js/espruino_project.js"></script>
-  <script src="js/espruino_display.js"></script>
-  <script src="js/jquery.sparkline.min.js"></script>
-
-  <!-- for file save -->
-  <script type="text/javascript" src="js/FileSaver.min.js"></script>
-
-
+  
+  <script src="js/core/utils.js"></script>
+  <script src="js/core/config.js"></script>
+  
+  <script src="js/core/layout.js"></script>  
+  <script src="js/core/serial.js"></script>
+  <script src="js/core/serial_pre_m33.js"></script>
+  <script src="js/core/serial.js"></script>
+  <script src="js/core/terminal.js"></script>
+  <script src="js/core/portList.js"></script>
+  <script src="js/core/status.js"></script>
+  <script src="js/core/send.js"></script>
+  
+  <!-- <script src="js/plugins/_examplePlugin.js"></script> -->
   <title>Espruino Web IDE</title>
 </head>
 <body>
 
   <div id="toolbar" class="toolbar ui-widget-header">
       <div class="left">
-          <select class="serial_devices"></select>
-          <button class="refresh">Refresh Serial Port List</button>
-          <button class="open">Connect</button>
-          <button class="close">Disconnect</button>
-          <span id="status">Not Connected</span>
+<!--          
           <button class="display">Display</button>
-          <span id="progress"><span id="progressindicator">&nbsp;</span></span>
+          
           <span id="processBoard" style="position:absolute;right:55px;top:1px;">&nbsp;</span>
           <button class="board" style="position:absolute;right:30px;top:1px;">Board Info</button>
-          <button class="webcam" style="position:absolute;right:4px;top:1px;">Webcam</button>
+          <button class="webcam" style="position:absolute;right:4px;top:1px;">Webcam</button>-->
       </div> <!--left-->
       <div class="right">
-        <button class="send">Send to Espruino</button>
+        <!--<button class="send">Send to Espruino</button>
         <button class="blockly">Switch between Code and Graphical Designer</button>
         <button class="scripts">Load File</button> 
         <button class="save">Save File</button>
@@ -79,51 +71,31 @@
         <button class="param">Replace Params</button>
         <span id="projectName" style="position:absolute;right:56px;top:2px;">&nbsp;</span>
         <button class="project" style="position:absolute;right:30px;top:2px;">Project</button>
-        <button class="options" style="position:absolute;right:4px;">Info / Options</button>
-
+        <button class="options" style="position:absolute;right:4px;">Info / Options</button>-->
       </div> <!--right-->
     </div><!--toolbar-->
 
   <div class="splitter">
-
     <div class="left">    
-      <video autoplay id="videotag"></video>  
-      <div id="terminal">  <!-- espruino_terminal.js -->
-       <div style="margin:8px;">
-        <h1><img src="img/icon_128.png" width="64" height="64"/> Espruino Web IDE</h1>
-        <p>A Serial Port Terminal Web App for Chrome</p>
+<!--      <video autoplay id="videotag"></video> -->  
       
-        <p>To get started, choose a Serial Port from the drop-down list above and click the Play Button to connect. Click in this window to get focus (black border), which will allow you to send characters down the Serial Port.</p>
-        <div style="margin-left:32px;">      
-        <p><div style="display: inline-block" class="ui-state-default"><span class="ui-icon ui-icon-transferthick-e-w"></span></div> copies the code on the right into Espruino</p>
-        <p><div style="display: inline-block" class="ui-state-default"><span class="ui-icon ui-icon-image"></span></div> switches to the graphical code editor</p>
-        <p><div style="display: inline-block" class="ui-state-default"><span class="ui-icon ui-icon-script"></span></div> loads a file or an example script.</p>
-        <p><div style="display: inline-block" class="ui-state-default"><span class="ui-icon ui-icon-disk"></span></div> saves the editor contents to a file.</p>
-        <p><div style="display: inline-block" class="ui-state-default"><span class="ui-icon ui-icon-info"></span></div> brings up the options menu.</p>
-        </div>
-      
-        <p>This app is designed for <a href="http://www.espruino.com" target="_blank">Espruino JavaScript for Microcontrollers</a>. Please see the <a href="http://www.espruino.com" target="_blank">website</a> and  <a href="http://www.espruino.com/Quick+Start" target="_blank">Quick Start</a> page for more documentation, tutorials and example projects.</p>
-      
-       </div>
-      </div>
-      <textarea id="terminalfocus" rows="1" cols="1"></textarea> <!-- espruino_terminal.js -->
     </div><!--left-->
 
     <div class="divider">    
     </div><!--divider-->
 
     <div class="right">
-      <div id="divcode">
+      <!--<div id="divcode">
       <textarea id="code" name="code"></textarea>
       </div>
-      <iframe id="divblockly" style="display:none;border:none;" src="blockly/blockly.html"></iframe>
+      <iframe id="divblockly" style="display:none;border:none;" src="blockly/blockly.html"></iframe>-->
     </div> <!--right-->
 
   </div><!--splitter-->
 
-  <input type="file" id="fileLoader" style="display: none;"/> <!-- for file loading -->
+<!--
+  <input type="file" id="fileLoader" style="display: none;"/>
 
-        <!-- script loading window -->
         <div id="loader" class="subform ui-widget-header" style="display:none;position:absolute;z-index:100;">
             <button class="load">Load File</button>
             <button class="reload">Reload File from Disk</button>
@@ -132,7 +104,7 @@
             <input type="checkbox" id="replaceInEditor" checked></input>Replace
         </div>
 
-  <script src="js/terminal.js"></script>
+  <script src="js/terminal.js"></script>-->
 
 </body>
 </html>

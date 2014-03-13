@@ -25,14 +25,14 @@ THE SOFTWARE.
 (function(){
     // Status/progress bar
     Espruino["Status"] = {};
-    Espruino.Status.statusSoundOn = false;
-    Espruino.Status.errorSoundOn = false;    
-    Espruino.Status.statusSpeakOn = false;
-    Espruino.Status.errorSpeakOn = false;    
+    Espruino.Core.Status.statusSoundOn = false;
+    Espruino.Core.Status.errorSoundOn = false;    
+    Espruino.Core.Status.statusSpeakOn = false;
+    Espruino.Core.Status.errorSpeakOn = false;    
     var statusBox, progressBox, progressIndicator,audioPlayer;
-    var progressAmt, progressMax = 0;
+
     
-    Espruino.Status.init = function(){
+    Espruino.Core.Status.init = function(){
       statusBox = $("#status");
       progressBox = $("#progress");
       progressIndicator = $("#progressindicator");
@@ -48,65 +48,21 @@ THE SOFTWARE.
       Espruino.Options.optionFields.push({id:"#statusSpeakOn",module:"Status",field:"statusSpeakOn",type:"check",onBlur:true});
       Espruino.Options.optionBlocks.push({module:"Status",buttonLine:1});
     };
-    Espruino.Status.sendSound = function(sound){
+    Espruino.Core.Status.sendSound = function(sound){
       var snd = "";
       if(sound === "error"){snd = "sounds/truck_horn.wav"; }
       else if(sound="status"){snd = "sounds/chime_up.wav"; }
       else {snd = "sounds/" + sound + ".wav"; }
       audioPlayer.src = snd;
     }    
-    Espruino.Status.speak = function(text){
-      if(Espruino.Status.getChromeVersion() >= 33){
+    Espruino.Core.Status.speak = function(text){
+      if(Espruino.Core.Utils.getChromeVersion() >= 33){
         var msg = new SpeechSynthesisUtterance(text);
         window.speechSynthesis.speak(msg);
       }
     }   
-    Espruino.Status.setStatus = function(text, progress) {
-      console.log(">>> "+text);
-      statusBox.html(text);
-      if (progress === undefined) {
-        progressIndicator.width(0);
-        progressBox.hide();        
-        progressMax = 0;
-      } else {
-        progressBox.show();
-        if (progress<1) progress=1;
-        progressAmt = 0;
-        progressMax = progress;
-      }
-      if(Espruino.Status.statusSoundOn) {Espruino.Status.sendSound("status"); }
-      if(Espruino.Status.statusSpeakOn) {Espruino.Status.speak(text); }
-    };
 
-    Espruino.Status.setError = function(text,additionalInfo) {
-      var statusText = "";
-      if(additionalInfo){statusText = '<button class="showErrorAdditional" info="' + additionalInfo + '">Info</button>';}
-      Espruino.Status.setStatus(statusText + "ERROR:" + text);
-      $(".showErrorAdditional").button({ text: false, icons: { primary: "ui-icon-info" } }).show();
-      $(".showErrorAdditional").click(showAdditionalInfo);
-      if(Espruino.Status.errorSoundOn) {Espruino.Status.sendSound("error");}
-      if(Espruino.Status.errorSpeakOn) {Espruino.Status.speak(text);}
-    };
-    function showAdditionalInfo(evt){
-      console.log(evt, $(this).attr("info"));
-      Espruino.General.ShowSubForm("divStatusInfo",20,200,"<h3>" + $(this).attr("info") + "</h3>","#fdd","body");
-    }
+    
 
-    Espruino.Status.hasProgress = function() {
-      return progressMax>0;
-    };    
-    
-    Espruino.Status.incrementProgress = function(amount) {
-      if (!Espruino.Status.hasProgress()) return;      
-      progressAmt += amount;
-      var width = (progressAmt * 100.0 / progressMax)|0;
-      //console.log(progressAmt,progressMax,width);
-      if (width>100) width=100;
-      progressIndicator.width(width);
-    };
-    
-    Espruino.Status.getChromeVersion = function(){
-      return parseInt(window.navigator.appVersion.match(/Chrome\/(.*?) /)[1].split(".")[0]);
-    }
     
 })();

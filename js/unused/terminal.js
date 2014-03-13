@@ -22,23 +22,13 @@ Author: Gordon Williams (gw@pur3.co.uk)
 
   /* Handle newline conversions - Windows expects newlines as /r/n
      when we're saving/loading files */
-  var isWindows = navigator.userAgent.indexOf("Windows")>=0;
-  console.log((isWindows?"Is":"Not")+" running on Windows");
   var convertFromOS = function (chars) {
-    if (!isWindows) return chars;
+    if (!Espruino.Core.Utils.isWindows()) return chars;
     return chars.replace(/\r\n/g,"\n");
   };
   var convertToOS = function (chars) {
-    if (!isWindows) return chars;
+    if (!Espruino.Core.Utils.isWindows()) return chars;
     return chars.replace(/\r\n/g,"\n").replace(/\n/g,"\r\n");
-  };
-
-  var logSuccess=function(msg) {
-    console.log(msg);
-  };
-  var logError=function(msg) {
-    Espruino.Status.setStatus(msg);
-    console.log("ERR: "+msg);
   };
   
   var isInBlockly = function() {
@@ -95,121 +85,11 @@ Author: Gordon Williams (gw@pur3.co.uk)
     return ""+ch;
   };
   
-  var setConnectedState = function(isConnected) {
-    if (isConnected)
-      Espruino.Terminal.outputDataHandler("Connected\r\n");
-    $(".serial_devices").prop('disabled', isConnected);
-    $(".refresh").button( "option", "disabled", isConnected);
-    $(".open").button( "option", "disabled", isConnected);    
-    $(".close").button( "option", "disabled", !isConnected);    
-    $(".send").button( "option", "disabled", !isConnected);
-  };
-  
-  var refreshPorts=function() {
-    $(".serial_devices").find("option").remove();
- 
-    Espruino.Serial.getPorts(function(items) {
-      var selected = -1;
 
-      if (isWindows) {
-        // Com ports will just be COM1,COM2,etc
-        // Chances are that the largest COM port is the one for Espruino:
-        items.sort(function(a,b) {		  
-          if (a.indexOf("COM")==0 && b.indexOf("COM")==0)
-            return parseInt(a.substr(3)) - parseInt(b.substr(3));
-          else
-            return a.localeCompare(b);
-        });
-        if (items.length > 0)
-          selected = items.length-1;
-      } else { 
-        // Everyone else probably has USB in the name (or it might just be the first device)
-        for (var i=0; i<items.length; i++) {
-          if (i==0 || (/usb/i.test(items[i])  && /tty/i.test(items[i]))) {
-            selected = i;
-          }
-        }
-      }
-      // add to menu
-      for (var i=0; i<items.length; i++) {
-        $(".serial_devices").append($("<option></option>").attr("value",items[i]).text(items[i]));
-      }
-      // select in menu
-      if (selected >= 0) {
-        logSuccess("auto-selected "+items[selected]);
-        $(".serial_devices option").eq(items[selected]).prop("selected",true);
-      }
-    });
-  };
   
-  var openSerial=function() {
-    var serialPort=$(".serial_devices").val();
-    if (!serialPort) {
-      logError("Invalid serialPort");
-      return;
-    }
-    Espruino.Status.setStatus("Connecting");
-    Espruino.Serial.setSlowWrite(true);
-    setConnectedState(false);
-    Espruino.Serial.open(serialPort, function(cInfo) {
-      if (cInfo!=undefined) {
-        logSuccess("Device found (connectionId="+cInfo.connectionId+")");
-        setConnectedState(true);        
-        Espruino.Terminal.grabSerialPort();
-        Espruino.Process.getProcess(setBoardConnected);
-      } else {
-        // fail
-        setConnectedState(false);
-        Espruino.Status.setStatus("Connect Failed.");
-      }
-    }, function () {
-      console.log("Force disconnect");
-      closeSerial(); // force disconnect
-    });
-    function setBoardConnected(){
-      Espruino.Status.setStatus("Connected");
-      Espruino.Board.setBoard(Espruino.Process.Env.BOARD);
-    }
-  };
-
-  var closeSerial=function() {
-    Espruino.Serial.close(function(result) {
-      setConnectedState(false);
-      Espruino.Status.setStatus("Disconnected");
-      Espruino.Process.Env = {};
-    });
-  };
     
   function init() {
-    // handle layout
-    function doLayout() {
-      var w = $(window).innerWidth();
-      var splitx = $(".splitter .divider").position().left;
-      var splitw = $(".splitter .divider").width();
-      var leftWidth = splitx;
-      var rightWidth = w-(splitx+splitw);
-      var h = $(window).innerHeight() - ($("#toolbar").outerHeight()+3);
-      $(".splitter").height(h);
-      $(".splitter").children().height(h);
 
-      $(".splitter .left").css({"left":"0px" , "width":leftWidth+"px" });
-      $("#toolbar .left").css({"left":"0px" , "width":leftWidth+"px" });
-      $("#terminal").css({ "width":leftWidth, "height":h });
-      $("#videotag").css({ "width":leftWidth, "height":h });
-
-      $(".splitter .right").css({"left":(splitx+splitw)+"px" , "width":rightWidth+"px"});
-      $("#toolbar .right").css({"left":(splitx+splitw)+"px", "width":rightWidth+"px"});
-      $("#divcode").css({ "width":rightWidth, "height":h });     
-      $("#divblockly").css({ "width":rightWidth, "height":h });      
-    }
-    // Set up the vertical splitter bar
-    $(".splitter .divider")
-       .css({"left":($(window).innerWidth() / 2)+"px"})
-       .draggable({ axis: "x", drag: function( event, ui ) { doLayout(); } });
-    // layout when window changes
-    $(window).resize(doLayout);
-    // layout now
-    doLayout();
 
     // The code editor
     Espruino.codeEditor = CodeMirror.fromTextArea(document.getElementById("code"), {
@@ -237,22 +117,9 @@ Author: Gordon Williams (gw@pur3.co.uk)
     });
 
     // terminal toolbar
-    $( ".refresh" ).button({ text: false, icons: { primary: "ui-icon-refresh" } }).click(refreshPorts);
-    $( ".open" ).button({ text: false, icons: { primary: "ui-icon-play" } }).click(openSerial);
-    $( ".close" ).button({ text: false, icons: { primary: "ui-icon-stop" } }).click(closeSerial);
     $( ".webcam" ).button({ text: false, icons: { primary: "ui-icon-person" } }).click(toggleWebCam);
     // code toolbar
-    $( ".send" ).button({ text: false, icons: { primary: "ui-icon-transferthick-e-w" } }).click(function() {
-      Espruino.Terminal.focus(); // give the terminal focus
-      if(Espruino.Terminal.autoSaveCode === true){
-        Espruino.Config.set("code", Espruino.codeEditor.getValue()); // save the code
-      }
-      if (Espruino.Serial.isConnected()) {
-          getCode(Espruino.CodeWriter.writeToEspruino);
-      } else { 
-        Espruino.Status.setError("Not Connected");
-      }
-    });
+    
     $( ".blockly" ).button({ text: false, icons: { primary: "ui-icon-image" } }).click(function() {
         if (isInBlockly()) {
           $("#divblockly").hide();
@@ -291,13 +158,8 @@ Author: Gordon Williams (gw@pur3.co.uk)
       else
         saveFile(Espruino.codeEditor.getValue(), "code.js");
     });
-    $("#terminal").css("top",  $("#terminaltoolbar").outerHeight()+"px");
 
-    Espruino.initModules();
     
-    setConnectedState(false);
-    
-    refreshPorts();
     // get code from our config area at bootup
     Espruino.Config.get("code", function (savedCode) {
       if (savedCode) {
@@ -309,14 +171,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
       }
     });
   }
- 
-  // workaround for broken chrome
-  if (navigator.userAgent.indexOf("Mac OS X")>=0 &&
-      navigator.userAgent.indexOf("Chrome/33.0.1750")>=0) {
-    $(document).ready(function() { window.setTimeout(init,100); });
-  } else {
-    $(document).ready(init);
-  }
+
 })();
 
 

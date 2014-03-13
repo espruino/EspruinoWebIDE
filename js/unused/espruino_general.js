@@ -34,7 +34,6 @@ THE SOFTWARE.
     Espruino.Options.optionBlocks.push({module:"General",buttonLine:1});
   };
   Espruino.General.pinRegExp = /\/\*.+?\*\/.+?(,|\)|\])/g;
-  Espruino.General.isWindows = navigator.userAgent.indexOf("Windows")>=0;
   Espruino.General["setEditorCode"] = function(code,mode){
       if(!mode){mode = $("#replaceInEditor")[0].checked;}
       if(mode){Espruino.codeEditor.setValue(code);}
@@ -65,11 +64,11 @@ THE SOFTWARE.
       Espruino.codeEditor.setSelection({line:lineNr,ch:start},{line:lineNr,ch:end});
   };
   Espruino.General.convertFromOS = function (chars) {
-    if (!Espruino.General.isWindows) return chars;
+    if (!Espruino.Core.Utils.isWindows()) return chars;
     return chars.replace(/\r\n/g,"\n");
   };
   Espruino.General.convertToOS = function (chars) {
-    if (!Espruino.General.isWindows) return chars;
+    if (!Espruino.Core.Utils.isWindows()) return chars;
     return chars.replace(/\r\n/g,"\n").replace(/\n/g,"\r\n");
   };
   Espruino.General.ShowSubForm = function(divName,top,left,html,bgcolor,appendTo,divClass){
@@ -89,23 +88,6 @@ THE SOFTWARE.
     if (status === true) { $('.reload').show(500);}
     else { $('.reload').hide(); }
   }
-  
-  Espruino.General.escapeHTML = (function () {
-    var chr = { '"': '&quot;', '&': '&amp;', '<': '&lt;', '>': '&gt;', ' ': '&nbsp;' };
-    return function (text) {
-        return text.replace(/[\"&<> ]/g, function (a) { return chr[a]; });
-    };
-  }());
-  
-  Espruino.General.getSubString = function(str, from, len) {
-    if (len == undefined) {
-      return str.substr(from, len);
-    } else {
-      var s = str.substr(from, len);
-      while (s.length < len) s+=" ";
-      return s;
-    }
-  };
   
   Espruino.General.markdownToHTML = function(markdown) {
     var html = markdown;

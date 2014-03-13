@@ -81,7 +81,7 @@ THE SOFTWARE.
       } 
       else { callCallback(code);}
       function callCallback(data){ //send code including all modules if all modules found only
-        if(notFound !== ""){ Espruino.Status.setError("module(s) not found",notFound);}
+        if(notFound !== ""){ Espruino.Core.Status.setError("module(s) not found",notFound);}
         else{callback(data);}
       }
       // function to actually load the modules

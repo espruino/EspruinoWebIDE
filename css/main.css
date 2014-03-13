@@ -11,8 +11,6 @@ body {
   overflow: hidden;
 }
 
-
-
 #toolbar {
   position: relative;
   height: 28px;
@@ -25,8 +23,32 @@ body {
   top:0px;
   padding: 0px;
 }
+/* ----------------------------------------------------- */
+.splitter {
+  display: block;
+  position: relative;
+}
 
-#toolbar .right { top:1px; } /* Why! */
+.splitter > div {
+  position: absolute;
+  top : 0px;
+}
+
+.splitter .divider {
+  display:block;
+  width:10px;
+  height:100%;
+  background: #DDD; 
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAwCAYAAAAy7wv4AAAAAXNSR0IArs4c6QAAAAZiS0dEAGYAZgBmB7pKbQAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB94CGgsqGabRuG0AAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAALUlEQVQ4y2P8////fwZsAJtEWlrafyYGHIB0CRaYmQzEAsZR5446d9S5I9e5ALBPVsT0dcJqAAAAAElFTkSuQmCC);
+  background-repeat:no-repeat;
+  background-position:center;  
+}
+/* ----------------------------------------------------- */
+
+
+
+
+
 
 #progress {	
 	border: 1px solid black;
@@ -113,25 +135,7 @@ body {
         font-size: 10px;
 }
 
-.splitter {
-  display: block;
-  position: relative;
-}
 
-.splitter > div {
-  position: absolute;
-  top : 0px;
-}
-
-.splitter .divider {
-  display:block;
-  width:8px;
-  height:100%;
-  background: #DDD; 
-  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAwCAYAAAAy7wv4AAAAAXNSR0IArs4c6QAAAAZiS0dEAGYAZgBmB7pKbQAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB94CGgsqGabRuG0AAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAALUlEQVQ4y2P8////fwZsAJtEWlrafyYGHIB0CRaYmQzEAsZR5446d9S5I9e5ALBPVsT0dcJqAAAAAElFTkSuQmCC);
-  background-repeat:no-repeat;
-  background-position:center;  
-}
 
 #divcode {
   overflow-y: auto;

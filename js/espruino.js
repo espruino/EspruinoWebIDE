@@ -1,31 +1,57 @@
-/*
- * The MIT License
+/**
+ Copyright 2014 Gordon Williams (gw@pur3.co.uk)
 
-Copyright (c) 2013 by Juergen Marsch
+ This Source Code is subject to the terms of the Mozilla Public
+ License, v2.0. If a copy of the MPL was not distributed with this
+ file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ 
+ ------------------------------------------------------------------
+  Initialisation code
+ ------------------------------------------------------------------
+**/
+"use strict";
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+var Espruino;
 
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
+(function() {
+  
+  var eventHandlers = [];
+  
+  function init() {    
+    // Initialise all modules
+    
+    function initModule(mod) {
+      if (mod.init !== undefined)
+        Espruino.Core[module].init();
+      if (mod.eventHandler !== undefined)
+        eventHandlers.push(mod.eventHandler);
+    }
+    
+    var module;
+    for (module in Espruino.Core) initModule(Espruino.Core[module]);
+    for (module in Espruino.Plugins) initModule(Espruino.Plugins[module]);
+  }
+  
+  // workaround for broken chrome on Mac
+  if (navigator.userAgent.indexOf("Mac OS X")>=0 &&
+      navigator.userAgent.indexOf("Chrome/33.0.1750")>=0) {
+    $(document).ready(function() { window.setTimeout(init,100); });
+  } else {
+    $(document).ready(init);
+  }
+  
+  function sendEvent(eventType) {
+    for (var i in eventHandlers)
+      eventHandlers[i](eventType);
+  }
+  
+  // -----------------------------------
+  Espruino = { 
+    Core : { }, 
+    Plugins : { },
+    sendEvent : sendEvent,
+  };
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
-*/
-var Espruino = {};
+})();
 
-Espruino.initModules = function() {
-  for (module in Espruino)
-    if (Espruino[module].init != undefined)
-      Espruino[module].init();
-};
 

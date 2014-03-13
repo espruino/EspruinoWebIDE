@@ -75,3 +75,21 @@ Nice but not required at all
 * More complete VT100 terminal emulation
 * Option to use a Baud rate other than the default 9600
 * Use the Mozilla sound API to fake a serial port over the Audio Link for non-Chrome web browsers
+
+Contributing
+------------
+
+Contributions are welcome - especially if they make the Web IDE easier to use and more reliable!
+
+### Code Style
+
+ * Please stick to a [K&R style](http://en.wikipedia.org/wiki/1_true_brace_style#K.26R_style) with no tabs and 2 spaces per indent
+ * Filenames should start with a lowerCase letter, and different words should be capitalised, not split with underscores
+ 
+### Code Outline
+
+ * Core functionality goes in `js/core`, Plugins go in `js/plugins`. See `plugins/_examplePlugin.js` for an example layout
+ * Plugins/core can implement:
+   * `init` - called when the document is loaded
+   * `eventHandler` - called when a global event happens (sent by `Espruino.sendEvent`, such as `connected/disconnected`
+ * Annoyingly, right now plugins still have to be loaded via a `<script>` tag in `main.html`    

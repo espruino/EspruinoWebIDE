@@ -149,7 +149,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
 
     showStatus &= writeData.length>blockSize;
     if (showStatus) {
-      Espruino.Status.setStatus("Sending...", writeData.length);
+      Espruino.Core.Status.setStatus("Sending...", writeData.length);
       console.log("Sending "+JSON.stringify(data));
     }
 
@@ -166,13 +166,13 @@ Author: Gordon Williams (gw@pur3.co.uk)
           }          
           writeSerialDirect(d);
           if (showStatus) 
-            Espruino.Status.incrementProgress(d.length);
+            Espruino.Core.Status.incrementProgress(d.length);
         } 
         if (writeData==undefined && writeInterval!=undefined) {
           clearInterval(writeInterval);
           writeInterval = undefined;
           if (showStatus) 
-            Espruino.Status.setStatus("Sent");
+            Espruino.Core.Status.setStatus("Sent");
         }
       }
       sender(); // send data instantly
@@ -181,12 +181,12 @@ Author: Gordon Williams (gw@pur3.co.uk)
         writeInterval = setInterval(sender, 60);
       } else {
         if (showStatus)
-          Espruino.Status.setStatus("Sent");
+          Espruino.Core.Status.setStatus("Sent");
       }
     }
   };
 
-  Espruino["Serial"] = {
+  Espruino.Core.Serial = {
     "getPorts": getPorts,
     "open": openSerial,
     "isConnected": isConnected,

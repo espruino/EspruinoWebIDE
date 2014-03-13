@@ -47,7 +47,7 @@ THE SOFTWARE.
                 $("#projectPath").html(path);
               });
             }
-            else{Espruino.Status.setError("Project not found");}
+            else{Espruino.Core.Status.setError("Project not found");}
           }); 
         });
       }
@@ -127,7 +127,7 @@ THE SOFTWARE.
         setTimeout(function(evt){
           fileWriter.seek(0);
           fileWriter.write(bb);
-          //Espruino.Status.setStatus("Project saved");
+          //Espruino.Core.Status.setStatus("Project saved");
         },200);
       });
       $(".subform").hide();
@@ -144,12 +144,12 @@ THE SOFTWARE.
             fileEntry.createWriter(function(fileWriter){
               var bb = new Blob([Espruino.codeEditor.getValue()],{type:'text/plain'});
               fileWriter.write(bb);
-              Espruino.Status.setStatus("new Project");
+              Espruino.Core.Status.setStatus("new Project");
               $("#projectName").html(fileEntry.name);
             });
           });
         }
-        function fileExists(fileEntry){Espruino.Status.setError("File already exists");}
+        function fileExists(fileEntry){Espruino.Core.Status.setError("File already exists");}
       });
       $(".subform").hide();
     }
@@ -252,7 +252,7 @@ THE SOFTWARE.
         chrome.fileSystem.isRestorable(entry, function(bIsRestorable){
           chrome.fileSystem.restoreEntry(entry, function(theEntry) { 
             if(theEntry){ callback(theEntry);}
-            else{Espruino.Status.setError("Project not found");}
+            else{Espruino.Core.Status.setError("Project not found");}
           });
         });
       }
