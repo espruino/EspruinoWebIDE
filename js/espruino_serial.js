@@ -81,6 +81,11 @@ Author: Gordon Williams (gw@pur3.co.uk)
  
  
   var closeSerial=function(callback) {
+   if (writeInterval!==undefined) 
+     clearInterval(writeInterval);
+   writeInterval = undefined;
+   writeData = undefined;
+
    connectionDisconnectCallback = undefined;
    if (connectionInfo) {
      chrome.serial.disconnect(connectionInfo.connectionId, 
@@ -120,7 +125,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
       console.log("Sending "+JSON.stringify(data));
     }
 
-    if (writeInterval==undefined) {
+    if (writeInterval===undefined) {
       function sender() {
         if (writeData!=undefined) {
           var d = undefined;
