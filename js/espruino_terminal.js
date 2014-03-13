@@ -25,7 +25,9 @@ THE SOFTWARE.
 (function(){
     // Code to handle display and input from the left-hand terminal pane
     Espruino["Terminal"] = {};
-    Espruino.Terminal.autoSaveCode = true;
+    // Options
+    Espruino.Terminal.autoSaveCode = true;    // Save the contents of the code pane when it is sent to Espruino
+    Espruino.Terminal.forceThrottle = false;  // Always throttle code sent to Espruino
     
     var onInputData = function(d){}; // the handler for character data from user 
 
@@ -49,6 +51,7 @@ THE SOFTWARE.
     
     Espruino.Terminal.init = function() {
       Espruino.Options.optionFields.push({id:"#autoSaveCode",module:"Terminal",field:"autoSaveCode",type:"check",onBlur:true});      
+      Espruino.Options.optionFields.push({id:"#forceThrottle",module:"Terminal",field:"forceThrottle",type:"check",onBlur:true,onLoaded:function() { Espruino.Flasher.checkBoardInfo(Espruino.Board.getBoardObject()); }});      
       Espruino.Options.optionBlocks.push({module:"Terminal",buttonLine:1});
       
       $("#terminal").mouseup(function() {

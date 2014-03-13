@@ -2,12 +2,14 @@
  {"module":"Project","field":"projectActive","header":"Activate Project support","help":""},
  {"module":"Project","field":"projectPathEntry","header":"Path to local project folder","help":""},
  {"module":"Project","field":"projectModuleLoading","header":"Sequence for searching modules","help":""},
- {"module":"General","field":"startMode","header":"Select JS-Editor(JS) or Graphical(G)","help":""},
+ {"module":"General","field":"startMode","header":"Select JavaScript or Graphical editors","help":""},
  {"module":"General","field":"webCamOn","header":"Switch Webcam on/off","help":""},
  {"module":"General","field":"showReloadButton","header":"Activate Reload button for source","help":""},
  {"module":"CodeWriter","field":"resetBeforeSend","header":"Send Reset Before Send","help":""},
- {"module":"Status","field":"errorSoundOn","header":"Sound on Error message","help":""},
+ {"module":"Status","field":"errorSoundOn","header":"Sound on error message","help":""},
  {"module":"Status","field":"statusSoundOn","header":"Sound on status","help":""},
+ {"module":"Status","field":"errorSpeakOn","header":"Speak on error message","help":""},
+ {"module":"Status","field":"statusSpeakOn","header":"Speak on status","help":""},
  {"module":"Scripts","field":"url","object":"Tutorials","header":"Url for tutorials","help":""},
  {"module":"Scripts","field":"subDirs","object":"Tutorials","header":"Subdir for tutorials","help":""},
  {"module":"Scripts","field":"fileExtensions","object":"Tutorials","header":"File extensions for tutorials","help":""},
@@ -25,5 +27,6 @@
  {"module":"Display","field":"displayMode","header":"Display mode","help":""},
  {"module":"Display","field":"startMarker","header":"Start Marker for log command","help":""},
  {"module":"Display","field":"endMarker","header":"End Marker for log command","help":""},
- {"module":"Terminal","field":"autoSaveCode","header":"Save Code on send to board","help":""}
+ {"module":"Terminal","field":"autoSaveCode","header":"Save code pane when sending code to Espruino","help":""},
+ {"module":"Terminal","field":"forceThrottle","header":"Force throttling of data sent to Espruino","help":""}
 ]

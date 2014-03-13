@@ -38,13 +38,19 @@ THE SOFTWARE.
      // note: also { onLoaded:function, onBlur:bool }
    }
 
-  and in data/Espruino_YourFile.html:
+  and in data/Options.json add a line to describe your options
 
-  <h3 class="EspruinoOption">YourFile options</h3>
-  <div>
-    <input type="radio" class="anOption">
-    <Input type="text" class="someText" size="50" value=""/>
-  </div>
+
+  For debugging (in Chrome console):
+
+  Reset to complete defaults:
+
+  chrome.storage.local.set({EspruinoOptions:{}})
+
+  See what's being stored:
+  
+  chrome.storage.local.get("EspruinoOptions",function (r) { console.log(r); })
+
 */
 
   Espruino.Options = {};

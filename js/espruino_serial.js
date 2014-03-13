@@ -24,7 +24,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
     console.log("Chrome does NOT have post-M33 serial API");
     return;
   }  
- 
+
   var connectionInfo;
   var readListener;
   var connectedPort; // unused?
@@ -178,8 +178,12 @@ Author: Gordon Williams (gw@pur3.co.uk)
     "close": closeSerial,
 	"isSlowWrite": function() { return slowWrite; },
 	"setSlowWrite": function(isOn) { 
-	  console.log("Set Slow Write = "+isOn);
+          if (Espruino.Terminal.forceThrottle) {
+            console.log("ForceThrottle option is set - set Slow Write = true");
+            isOn = true;
+          } else
+  	    console.log("Set Slow Write = "+isOn);
 	  slowWrite = isOn; 
-	}
+	},
   };
 })();
