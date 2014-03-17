@@ -14,6 +14,7 @@
   
   function init() {
     // Configuration
+    
    
     // Add stuff we need
     $('<button class="load">Load File</button>').appendTo(".toolbar .right");

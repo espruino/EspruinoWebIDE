@@ -38,7 +38,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
 
 
   function init() {
-
+   $('<button class="webcam" style="position:absolute;right:4px;top:1px;">Webcam</button>').appendTo(".toolbar .left");
 
     
 
@@ -46,16 +46,6 @@ Author: Gordon Williams (gw@pur3.co.uk)
     $( ".webcam" ).button({ text: false, icons: { primary: "ui-icon-person" } }).click(toggleWebCam);
     // code toolbar
     
-    $( ".blockly" ).button({ text: false, icons: { primary: "ui-icon-image" } }).click(function() {
-        if (isInBlockly()) {
-          $("#divblockly").hide();
-          $("#divcode").show();
-        } else {
-          $("#divcode").hide();
-          $("#divblockly").show();
-        }
-
-    });
 
   }
 

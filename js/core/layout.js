@@ -37,6 +37,8 @@
   
   
   function init() {
+    // Buttons 
+    $('<button class="blockly">Switch between Code and Graphical Designer</button>').appendTo(".toolbar .right");
     // Set up the vertical splitter bar
     $(".splitter .divider")
        .css({"left":($(window).innerWidth() / 2)+"px"})
@@ -45,6 +47,17 @@
     $(window).resize(doLayout);
     // layout after everything else has been added
     setTimeout(doLayout, 1);
+    
+    // Handling for swapping between blockly
+    $( ".blockly" ).button({ text: false, icons: { primary: "ui-icon-image" } }).click(function() {
+      if (isInBlockly()) {
+        $("#divblockly").hide();
+        $("#divcode").show();
+      } else {
+        $("#divcode").hide();
+        $("#divblockly").show();
+      }
+    });
   }
   
   function isInBlockly() {
