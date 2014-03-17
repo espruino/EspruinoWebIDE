@@ -49,7 +49,7 @@
   
   function getCurrentCode() {
     if (Espruino.Core.Layout.isInBlockly()) {
-      return "clearInterval();clearWatch();"+Blockly.Generator.workspaceToCode('JavaScript');
+      return Espruino.Core.EditorBlockly.getCode();
     } else {
       return Espruino.Core.EditorJavaScript.getCode();
     }

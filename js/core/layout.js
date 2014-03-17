@@ -42,7 +42,11 @@
     // Set up the vertical splitter bar
     $(".splitter .divider")
        .css({"left":($(window).innerWidth() / 2)+"px"})
-       .draggable({ axis: "x", drag: function( event, ui ) { doLayout(); } });
+       .draggable({ 
+         axis: "x", 
+         drag: function( event, ui ) { doLayout(); },
+         iframeFix: true
+       });
     // layout when window changes
     $(window).resize(doLayout);
     // layout after everything else has been added
@@ -60,7 +64,7 @@
     });
   }
   
-  function isInBlockly() {
+  function isInBlockly() { // TODO: we should really enumerate views - we might want another view?
     return $("#divblockly").is(":visible");
   };
   

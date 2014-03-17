@@ -31,7 +31,7 @@
     });*/
     $( ".save" ).button({ text: false, icons: { primary: "ui-icon-disk" } }).click(function() {
       if (Espruino.Core.Layout.isInBlockly()) 
-        saveFile(Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(Blockly.mainWorkspace)), "code_blocks.xml");
+        saveFile(Espruino.Core.EditorBlockly.getXML(), "code_blocks.xml");
       else
         saveFile(Espruino.Core.EditorJavaScript.getCode(), "code.js");
     });
@@ -42,9 +42,9 @@
       reader.onload = function(event) {
         var data = convertFromOS(event.target.result);
         if (Espruino.Core.Layout.isInBlockly()) {
-          Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, Blockly.Xml.textToDom(data));          
+          Espruino.Core.EditorBlockly.setXML(data);          
         } else { 
-          Espruino.codeEditor.setValue(data);
+          Espruino.Core.EditorJavaScript.setCode(data);
         }
         document.getElementById('load').value = '';
       };

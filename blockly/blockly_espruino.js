@@ -1,3 +1,23 @@
+/**
+ Copyright 2014 Gordon Williams (gw@pur3.co.uk)
+
+ This Source Code is subject to the terms of the Mozilla Public
+ License, v2.0. If a copy of the MPL was not distributed with this
+ file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ 
+ ------------------------------------------------------------------
+  Blockly blocks for Espruino
+ ------------------------------------------------------------------
+**/    
+
+// --------------------------------- Blockly init code - see /js/core/editorBlockly.js
+window.onload = function() {
+  Blockly.inject(document.body,{path: '', toolbox: document.getElementById('toolbox')});
+  Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, document.getElementById('blocklyInitial')); 
+  window.parent.blocklyLoaded(Blockly); // see core/editorBlockly.js
+};
+// ---------------------------------
+
 var ESPRUINO_COL = 190;
 
 var PORTS = ["A","B","C"];
@@ -49,7 +69,7 @@ Blockly.Language.espruino_interval = {
   }
 };
 Blockly.Language.espruino_pin = {
-//  category: 'Espruino',
+//      category: 'Espruino',
   init: function() {
     this.setColour(ESPRUINO_COL);
     this.setOutput(true, 'Pin');
@@ -114,6 +134,25 @@ Blockly.Language.espruino_digitalWrite = {
     this.setTooltip('Writes a Digital Value to a Pin');
   }
 };
+Blockly.Language.espruino_digitalPulse = {
+    category: 'Espruino',
+    init: function() {
+        this.appendValueInput('PIN')
+            .setCheck('Pin')
+            .appendTitle('digitalPulse Pin');
+        this.appendValueInput('VAL')
+            .setCheck(['Boolean']);
+        this.appendValueInput('TIME')
+            .setCheck(['Number'])
+            .appendTitle('Milliseconds');
+
+      this.setPreviousStatement(true);
+      this.setNextStatement(true);
+      this.setColour(ESPRUINO_COL);
+      this.setInputsInline(true);
+      this.setTooltip('Pulses a pin for the given number of milliseconds');
+    }
+  };
 Blockly.Language.espruino_digitalRead = {
   category: 'Espruino',
   init: function() {
@@ -195,6 +234,12 @@ Blockly.JavaScript.espruino_digitalWrite = function() {
   var val = Blockly.JavaScript.valueToCode(this, 'VAL', Blockly.JavaScript.ORDER_ASSIGNMENT) || '0';
   return "digitalWrite("+pin+", "+val+");\n";
 };
+Blockly.JavaScript.espruino_digitalPulse = function() {
+  var pin = Blockly.JavaScript.valueToCode(this, 'PIN', Blockly.JavaScript.ORDER_ASSIGNMENT) || '0';
+  var val = Blockly.JavaScript.valueToCode(this, 'VAL', Blockly.JavaScript.ORDER_ASSIGNMENT) || '0';
+  var tim = Blockly.JavaScript.valueToCode(this, 'TIME', Blockly.JavaScript.ORDER_ASSIGNMENT) || '0';
+  return "digitalPulse("+pin+", "+val+", "+tim+");\n";
+};
 Blockly.JavaScript.espruino_digitalRead = function() {
   var pin = Blockly.JavaScript.valueToCode(this, 'PIN', Blockly.JavaScript.ORDER_ASSIGNMENT) || '0';
   return ["digitalRead("+pin+")\n", Blockly.JavaScript.ORDER_ATOMIC];
@@ -208,12 +253,3 @@ Blockly.JavaScript.espruino_analogRead = function() {
   var pin = Blockly.JavaScript.valueToCode(this, 'PIN', Blockly.JavaScript.ORDER_ASSIGNMENT) || '0';
   return ["analogRead("+pin+")\n", Blockly.JavaScript.ORDER_ATOMIC];
 };
-
-// -----------------------------------------------------------------------------------
-
-onload = function() {
-  Blockly.inject(document.body,{path: '', toolbox: document.getElementById('toolbox')});
-  Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, document.getElementById('blocklyInitial')); 
-  window.parent.Blockly = Blockly;
-};
-
