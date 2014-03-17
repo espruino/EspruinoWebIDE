@@ -27,10 +27,15 @@
       type : "string",
       defaultValue : ".min.js|.js"
     });    
+    
+    // When code is sent to Espruino, search it for modules and add extra code required to load them 
+    Espruino.addProcessor("transformForEspruino", function(code, callback) {
+      loadModules(code, callback);
+    });
   }
 
 //Code to handle 'require("...")' and to load the relevant modules
-  var BUILT_IN_MODULES = ["http","fs","CC3000","WIZnet"];
+  var BUILT_IN_MODULES = ["http","fs","CC3000","WIZnet"]; // TODO: get these from board.js (hopefully)
 
   var getModulesRequired = function(code) {
     var modules = [];
@@ -95,8 +100,8 @@
         extensions = [];
       } else {
         modName = fullModuleName;
-        url = Espruino.Modules.Config.url + "/" + fullModuleName;
-        extensions = Espruino.Modules.Config.fileExtensions;
+        url = Espruino.Config.MODULE_URL + "/" + fullModuleName;
+        extensions = Espruino.Config.MODULE_EXTENSIONS.split("|");
       }
       
       var t, localUrl,dfd = $.Deferred();
@@ -111,7 +116,9 @@
       return dfd.promise();
       
       function downloadModule(localUrl) { //downloads one module
-        var sequence = Espruino.Project.getModuleSequence(downloadWeb);  //get order for searching modules (see projects options)
+        // TODO: JumJum's module loading sequence... Use addProcessor again?
+        //var sequence = Espruino.Project.getModuleSequence(downloadWeb);  //get order for searching modules (see projects options)
+        var sequence = [downloadWeb];
         var sequencePointer = 0;
         downloadSequence();
         function downloadSequence(){  //searches all possible sources for modules in given order, first comes first serves
@@ -165,7 +172,6 @@
   
   
   Espruino.Core.Modules = {
-    init : init,
-    loadModules : loadModules
+    init : init
   };
 }());

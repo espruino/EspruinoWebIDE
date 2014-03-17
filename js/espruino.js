@@ -15,7 +15,16 @@ var Espruino;
 
 (function() {
   
+  /** List of functions to call when an event happens */
   var eventHandlers = [];
+  /** List of processors. These are functions that are called one
+   * after the other with the data received from the last one.
+   * 
+   * Common processors are:
+   * 
+   *   transformForEspruino - transform code ready to be sent to Espruino
+   **/  
+  var processors = {};
   
   function init() {    
     // Initialise all modules
@@ -51,11 +60,40 @@ var Espruino;
       eventHandlers[i](eventType);
   }
   
+  /** Add a processor function of type function(data,callback) */
+  function addProcessor(eventType, processor) {
+    if (processors[eventType]===undefined)
+      processors[eventType] = [];
+    processors[eventType].push(processor);
+  }
+  
+  /** Call a processor function */
+  function callProcessor(eventType, data, callback) {
+    var p = processors[eventType];
+    // no processors
+    if (p===undefined || p.length==0) {
+      callback(data);
+      return;
+    }
+    // now go through all processors
+    var n = 0;
+    var cb = function(inData) {
+      if (n < p.length) {
+        p[n++](inData, cb);
+      } else {
+        callback(inData);
+      }        
+    };
+    cb(data);
+  }  
+  
   // -----------------------------------
   Espruino = { 
     Core : { }, 
     Plugins : { },
     sendEvent : sendEvent,
+    addProcessor : addProcessor,
+    callProcessor : callProcessor,
   };
 
 })();

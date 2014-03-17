@@ -44,7 +44,7 @@
   }
   
   function getEspruinoCode(callback) {
-    Espruino.Core.Modules.loadModules(getCurrentCode(), callback);
+    Espruino.callProcessor("transformForEspruino", getCurrentCode(), callback);
   }
   
   function getCurrentCode() {
