@@ -150,7 +150,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
       sender(); // send data instantly
       // if there was any more left, do it after a delay
       if (writeData!=undefined) {
-        writeInterval = setInterval(sender, 60);
+        writeInterval = setInterval(sender, 100);
       } else {
         if (showStatus)
           Espruino.Core.Status.setStatus("Sent");

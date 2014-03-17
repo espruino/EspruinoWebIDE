@@ -93,7 +93,7 @@
         console.log("Device found (connectionId="+cInfo.connectionId+")");
         Espruino.sendEvent("connected");
         Espruino.Core.Terminal.grabSerialPort();
-        Espruino.Process.getProcess(setBoardConnected);
+      //  Espruino.Process.getProcess(setBoardConnected);
       } else {
         // fail
         Espruino.sendEvent("disconnected");

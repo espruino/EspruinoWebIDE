@@ -32,7 +32,7 @@
       if (Espruino.Core.Layout.isInBlockly()) 
         saveFile(Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(Blockly.mainWorkspace)), "code_blocks.xml");
       else
-        saveFile(Espruino.Core.Code.getJavaScript(), "code.js");
+        saveFile(Espruino.Core.EditorJavaScript.getCode(), "code.js");
     });
     
     $("#fileLoader").change(function(event) {
@@ -68,7 +68,7 @@
     saveAs(new Blob([convertToOS(data)], { type: "text/plain" }), filename);
   };  
 
-  Espruino.Core.Send = {
+  Espruino.Core.File = {
     init : init
   };
 }());

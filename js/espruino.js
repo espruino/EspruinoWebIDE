@@ -20,7 +20,8 @@ var Espruino;
   function init() {    
     // Initialise all modules
     
-    function initModule(mod) {
+    function initModule(modName, mod) {      
+      console.log("Initialising "+modName);
       if (mod.init !== undefined)
         Espruino.Core[module].init();
       if (mod.eventHandler !== undefined)
@@ -28,8 +29,8 @@ var Espruino;
     }
     
     var module;
-    for (module in Espruino.Core) initModule(Espruino.Core[module]);
-    for (module in Espruino.Plugins) initModule(Espruino.Plugins[module]);
+    for (module in Espruino.Core) initModule(module, Espruino.Core[module]);
+    for (module in Espruino.Plugins) initModule(module, Espruino.Plugins[module]);
   }
   
   // workaround for broken chrome on Mac

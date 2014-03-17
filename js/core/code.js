@@ -16,26 +16,29 @@
     // Configuration
     Espruino.Core.Config.add("AUTO_SAVE_CODE", {
       section : "Communications",
-      description : "Save code automatically when clicking 'Send to Espruino'?",
+      name : "Auto Save",
+      description : "Save code to Chrome's cloud storage when clicking 'Send to Espruino'?",
       type : "boolean",
       defaultValue : 20, 
     });    
     // get code from our config area at bootup
     setTimeout(function() {
+      var code;
       if (Espruino.Config.CODE) {
-        setJavaScript(Espruino.Config.CODE);
+        code = Espruino.Config.CODE;
         console.log("Loaded code from storage.");
       } else {
-        setJavaScript("var  l = false;\nsetInterval(function() {\n  l = !l;\n  LED1.write(l);\n}, 500);");
+        code = "var  l = false;\nsetInterval(function() {\n  l = !l;\n  LED1.write(l);\n}, 500);";
         console.log("No code in storage.");
       }
+      Espruino.Core.EditorJavaScript.setCode(code);
     },1);
   }
   
   function eventHandler(eventType) {
     if (eventType=="sending") {
       if(Espruino.Config.AUTO_SAVE_CODE){
-        Espruino.Config.set("CODE", Espruino.Core.Code.getJavaScript()); // save the code
+        Espruino.Config.set("CODE", Espruino.Core.EditorJavaScript.getCode()); // save the code
       }
     }
   }
@@ -45,30 +48,17 @@
   }
   
   function getCurrentCode() {
-    if (isInBlockly()) {
+    if (Espruino.Core.Layout.isInBlockly()) {
       return "clearInterval();clearWatch();"+Blockly.Generator.workspaceToCode('JavaScript');
     } else {
-      return Espruino.codeEditor.getValue();
+      return Espruino.Core.EditorJavaScript.getCode();
     }
-  }
-  
-  function getJavaScript() {
-    return Espruino.codeEditor.getValue();
-  }
-  
-  function setJavaScript(code) {
-    Espruino.codeEditor.setValue(code);
-  }
-  
-  function getBlockly() {
   }
   
   Espruino.Core.Code = {
     init : init,
     eventHandler : eventHandler,
     getEspruinoCode : getEspruinoCode, // get the currently selected bit of code ready to send to Espruino (including Modules)
-    getCurrentCode : getCurrentCode, // get the currently selected bit of code
-    getJavaScript : getJavaScript, // get from JS editor
-    getBlockly : getBlockly, // get from Blockly Editor
+    getCurrentCode : getCurrentCode, // get the currently selected bit of code (either blockly or javascript editor)
   };
 }());

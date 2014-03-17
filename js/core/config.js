@@ -13,7 +13,8 @@
   
   Espruino.Core.Config.add("MAX_FOOBARS", {
     section : "Communications",           // Heading this will come under in the config screen
-    description : "How many foobars?",
+    name : "Foobars",                     // Nice name 
+    description : "How many foobars?",    // More detail about this
     type : "int"/"boolean"/"string",
     defaultValue : 20, 
     onChange : function(newValue) { ... }
@@ -40,6 +41,10 @@
   }  
   
   Espruino.Config = {};
+  Espruino.Config.set = function (key, value) {
+    Espruino.Config[key] = value;
+    // TODO: Save to storage...
+  }
   
   Espruino.Core.Config = {
       init : init,
