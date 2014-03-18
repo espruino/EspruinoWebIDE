@@ -23,13 +23,18 @@
   function queryBoardProcess(data, callback) {
     Espruino.Core.Utils.executeExpression("process.env", function(result) {
       environmentData = {};
+      var json = {};
       if (result!==undefined) {
         try {       
-          environmentData = JSON.parse(result);
+          json = JSON.parse(result);
         } catch (e) {
           console.log("JSON parse failed - " + e);
         }
       }
+      // now process the enviroment variables
+      Espruino.callProcessor("environmentVar", json, function(data) { 
+        environmentData = data; 
+      }); 
       callback(data);
     });    
   }

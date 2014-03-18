@@ -175,6 +175,9 @@
     }
   };
   
+  function versionToFloat(version) {
+    return parseFloat(version.trim().replace("v","."));
+  };    
   
   Espruino.Core.Utils = {
       init : init,
@@ -184,5 +187,6 @@
       getSubString : getSubString,
       getLexer : getLexer,
       executeExpression : executeExpression,
+      versionToFloat : versionToFloat,
   };
 }());

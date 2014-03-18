@@ -15,6 +15,7 @@
   function init() {
     Espruino.Core.Config.add("MAX_FOOBARS", {
       section : "Communications",
+      name : "Foobar Count",
       description : "How many foobars?",
       type : "int",
       defaultValue : 20, 

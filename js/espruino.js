@@ -24,6 +24,7 @@ var Espruino;
    *   transformForEspruino - transform code ready to be sent to Espruino
    *   connected            - connected to Espruino (no data) 
    *   disconnected         - disconnected from Espruino (no data) 
+   *   environmentVar       - Board's process.env loaded (object to be saved into Espruino.Env.environmentData)
    **/  
   var processors = {};
   
@@ -33,7 +34,7 @@ var Espruino;
     function initModule(modName, mod) {      
       console.log("Initialising "+modName);
       if (mod.init !== undefined)
-        Espruino.Core[module].init();
+        mod.init();
     }
     
     var module;

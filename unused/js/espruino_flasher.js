@@ -373,26 +373,6 @@ THE SOFTWARE.
       });
     };
 
-    Espruino.Flasher.checkBoardInfo = function(boardInfo) {
-      //console.log(boardInfo);
-      if (boardInfo.info.binary_url !== undefined) {
-        $("#flashFirmwareUrl").val(boardInfo.info.binary_url);
-        if (Espruino.Process.Env.VERSION!==undefined && boardInfo.info.binary_version!==undefined) {
-          console.log("FIRMWARE: Current "+Espruino.Process.Env.VERSION+", Available "+boardInfo.info.binary_version);
-          var vCurrent = Espruino.General.versionToFloat(Espruino.Process.Env.VERSION);
-          var vAvailable = Espruino.General.versionToFloat(boardInfo.info.binary_version);
-          if (vCurrent > 1.43 && Espruino.Process.Env.CONSOLE=="USB") {
-            console.log("Firmware >1.43 supports faster writes over USB");
-            Espruino.Serial.setSlowWrite(false);
-          }
-          if (vAvailable > vCurrent && Espruino.Process.Env.BOARD=="ESPRUINOBOARD") {
-            console.log("New Firmware "+boardInfo.info.binary_version+" available");
-            Espruino.Core.Status.setStatus("New Firmware "+boardInfo.info.binary_version+' available. Click <div style="display: inline-block" class="ui-state-default"><span class="ui-icon ui-icon-info"></span></div>  to update');
-          }
-        }
-      }
-    };
-    
     Espruino.Flasher.flashButtonClicked = function() {
       if (!Espruino.Serial.isConnected()) {
         Espruino.Core.Status.setStatus("Must be connected first.");
