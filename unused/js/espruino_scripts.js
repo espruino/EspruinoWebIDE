@@ -23,6 +23,9 @@ THE SOFTWARE.
 */
 "use strict";
 (function(){
+  
+  //         <button class="scripts">Load File</button> 
+
   Espruino["Scripts"] = {};
   Espruino.Scripts["Tutorials"] = {
       url:"https://api.github.com/repos/espruino/EspruinoDocs/git/trees/master",

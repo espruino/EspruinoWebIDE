@@ -23,6 +23,8 @@ THE SOFTWARE.
 */
 "use strict";
 (function(){
+  // <button class="display">Display</button>
+  
     // simple data logger
     Espruino["Display"] = {};
     Espruino.Display.displayActive = false;

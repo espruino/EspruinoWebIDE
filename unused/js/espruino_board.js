@@ -23,6 +23,13 @@ THE SOFTWARE.
 */
 "use strict";
 (function(){
+  /*
+    
+    <span id="processBoard" style="position:absolute;right:55px;top:1px;">&nbsp;</span>
+          <button class="board" style="position:absolute;right:30px;top:1px;">Board Info</button>
+          <button class="param">Replace Params</button>
+          */
+  
     // Code to load and save configuration options
     Espruino["Board"] = {};
     Espruino.Board.setBoard = setBoard;

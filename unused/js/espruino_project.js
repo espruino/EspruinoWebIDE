@@ -23,6 +23,9 @@ THE SOFTWARE.
 */
 "use strict";
 (function(){
+  
+  // <button class="project" style="position:absolute;right:30px;top:2px;">Project</button>
+  // <span id="projectName" style="position:absolute;right:56px;top:2px;">&nbsp;</span>
     // Code to load and save project
     Espruino["Project"] = {};
     Espruino.Project.projectActive = false;

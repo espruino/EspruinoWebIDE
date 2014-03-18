@@ -22,6 +22,16 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 (function(){
+  /*
+   <div id="loader" class="subform ui-widget-header" style="display:none;position:absolute;z-index:100;">
+            <button class="load">Load File</button>
+            <button class="reload">Reload File from Disk</button>
+            <span id="loaderTutorials"></span>
+            <span id="loaderExamples"></span>
+            <input type="checkbox" id="replaceInEditor" checked></input>Replace
+        </div>*/
+  
+  
     var selectHTML;
     Espruino.Snippet.init = function(){
         $(".snippetsButton").button({ text: false, icons: { primary: "ui-icon-script" } }).click(function() {

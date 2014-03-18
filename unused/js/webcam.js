@@ -20,6 +20,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
 "use strict";
 (function() {
 
+  //<!--      <video autoplay id="videotag"></video> -->
 
   var toggleWebCam = function() {
     var window_url = window.URL || window.webkitURL;

@@ -23,6 +23,9 @@ THE SOFTWARE.
 */
 "use strict";
 (function(){
+  
+  // <button class="options" style="position:absolute;right:4px;">Info / Options</button>
+  
 /* To use this from a JS file:
 
    Espruino.YourFile.anOption = false;
