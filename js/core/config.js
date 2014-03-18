@@ -15,7 +15,7 @@
     section : "Communications",           // Heading this will come under in the config screen
     name : "Foobars",                     // Nice name 
     description : "How many foobars?",    // More detail about this
-    type : "int"/"boolean"/"string",
+    type : "int"/"boolean"/"string"/{ value1:niceName, value2:niceName },
     defaultValue : 20, 
     onChange : function(newValue) { ... }
   });

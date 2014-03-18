@@ -33,7 +33,7 @@ THE SOFTWARE.
     var NACK = 0x1F;
  
    Espruino.Flasher.init = function() {
-   }
+   };
 
    Espruino.Flasher.initOptions = function() {
      $.get("data/Espruino_FlashFirmware.html",function(data){         
@@ -226,7 +226,7 @@ THE SOFTWARE.
 		  writeData(callback, RCC_CFGR, [newword&0xFF, (newword>>8)&0xFF, (newword>>16)&0xFF, (newword>>24)&0xFF]);
 		}
 	  }, RCC_CFGR, 4);
-	}
+	};
 	
     var writeData = function(callback, addr, data) {
       if (data.length>256) callback("Writing too much data");
