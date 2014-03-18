@@ -22,11 +22,7 @@
     });
   }
   
-  function eventHandler(eventType) {
-  }
-  
   Espruino.Plugins.ExamplePlugin = {
     init : init,
-    eventHandler : eventHandler,
   };
 }());

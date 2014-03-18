@@ -23,24 +23,28 @@
     $( ".close" ).button({ text: false, icons: { primary: "ui-icon-stop" } }).click(closeSerial);
 
     refreshPorts();
-    eventHandler("disconnected"); // make sure everything gets set up right
-  }
-  
-  function eventHandler(eventType) {
-    if (eventType == "connected") {
+    
+    $(".serial_devices").prop('disabled', false);
+    $(".refresh").button( "option", "disabled", false);
+    $(".open").button( "option", "disabled", false);    
+    $(".close").button( "option", "disabled", true); 
+    
+    Espruino.addProcessor("connected", function(data, callback) {
       $(".serial_devices").prop('disabled', true);
       $(".refresh").button( "option", "disabled", true);
       $(".open").button( "option", "disabled", true);    
-      $(".close").button( "option", "disabled", false);    
-    }
-    if (eventType == "disconnected") {
+      $(".close").button( "option", "disabled", false);   
+      callback(data);
+    });
+    Espruino.addProcessor("disconnected", function(data, callback) {
       $(".serial_devices").prop('disabled', false);
       $(".refresh").button( "option", "disabled", false);
       $(".open").button( "option", "disabled", false);    
       $(".close").button( "option", "disabled", true);    
-    }
-  }  
-  
+      callback(data);
+    });    
+  }
+ 
 
   function refreshPorts() {
     console.log("Refreshing ports...");
@@ -90,13 +94,13 @@
     Espruino.Core.Serial.setSlowWrite(true);
     Espruino.Core.Serial.open(serialPort, function(cInfo) {
       if (cInfo!=undefined) {
-        console.log("Device found (connectionId="+cInfo.connectionId+")");
-        Espruino.sendEvent("connected");
+        console.log("Device found (connectionId="+cInfo.connectionId+")");        
         Espruino.Core.Terminal.grabSerialPort();
+        Espruino.callProcessor("connected");
       //  Espruino.Process.getProcess(setBoardConnected);
       } else {
         // fail
-        Espruino.sendEvent("disconnected");
+        Espruino.callProcessor("disconnected");
         Espruino.Core.Status.setStatus("Connect Failed.");
       }
     }, function () {
@@ -111,15 +115,13 @@
 
   function closeSerial() {
     Espruino.Core.Serial.close(function(result) {
-      Espruino.sendEvent("disconnected");
+      Espruino.callProcessor("disconnected");
       Espruino.Core.Status.setStatus("Disconnected");
-      Espruino.Process.Env = {};
     });
   };
 
   
   Espruino.Core.PortList = {
       init : init,
-      eventHandler : eventHandler,
   };
 }());

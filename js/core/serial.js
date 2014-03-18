@@ -161,7 +161,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
   // ----------------------------------------------------------
   chrome.serial.onReceive.addListener(function(receiveInfo) {
     //var bytes = new Uint8Array(receiveInfo.data);
-    readListener(receiveInfo.data);
+    if (readListener!==undefined) readListener(receiveInfo.data);
   });
 
   chrome.serial.onReceiveError.addListener(function(errorInfo) {

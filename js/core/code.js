@@ -33,14 +33,13 @@
       }
       Espruino.Core.EditorJavaScript.setCode(code);
     },1);
-  }
-  
-  function eventHandler(eventType) {
-    if (eventType=="sending") {
-      if(Espruino.Config.AUTO_SAVE_CODE){
+    
+    
+    Espruino.addProcessor("sending", function(data, callback) {
+      if(Espruino.Config.AUTO_SAVE_CODE)
         Espruino.Config.set("CODE", Espruino.Core.EditorJavaScript.getCode()); // save the code
-      }
-    }
+      callback(data);
+    });
   }
   
   function getEspruinoCode(callback) {
@@ -57,7 +56,6 @@
   
   Espruino.Core.Code = {
     init : init,
-    eventHandler : eventHandler,
     getEspruinoCode : getEspruinoCode, // get the currently selected bit of code ready to send to Espruino (including Modules)
     getCurrentCode : getCurrentCode, // get the currently selected bit of code (either blockly or javascript editor)
   };

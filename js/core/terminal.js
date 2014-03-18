@@ -103,14 +103,17 @@
         onInputData(text);
       }, 100);
     });
-  };
-  
-  function eventHandler(eventType) {
-    if (eventType=="connected")
+    
+    
+    Espruino.addProcessor("connected", function(data, callback) {
       outputDataHandler("Connected\r\n");
-    if (eventType=="disconnected")
+      callback(data);
+    });
+    Espruino.addProcessor("disconnected", function(data, callback) {
       outputDataHandler("Disconnected\r\n");
-  }
+      callback(data);
+    });
+  };
   
   var updateTerminal = function() {     
     // remove extra lines if there are too many
@@ -304,7 +307,6 @@
 
   Espruino.Core.Terminal = {
       init : init,
-      eventHandler : eventHandler,
       
       getInputLine : getInputLine,
       getCurrentLine : getCurrentLine,

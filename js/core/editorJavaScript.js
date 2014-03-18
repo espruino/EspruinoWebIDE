@@ -40,10 +40,7 @@
       }
     });
   }
-  
-  function eventHandler(eventType) {
-  }
-  
+
   function getCode() {
     return codeMirror.getValue();
   }
@@ -54,7 +51,6 @@
   
   Espruino.Core.EditorJavaScript = {
     init : init,
-    eventHandler : eventHandler,
     getCode : getCode,
     setCode : setCode,
   };

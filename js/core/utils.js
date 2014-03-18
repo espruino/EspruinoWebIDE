@@ -118,6 +118,63 @@
     };
   };
   
+  /** Return the value of executing an expression on the board */
+  function executeExpression(expressionToExecute, callback) {
+    var  receivedData = "";
+    
+    function getProcessInfo(expressionToExecute, prevReader, callback) {
+      // string adds to stop the command tag being detected in the output
+      Espruino.Core.Serial.write('echo(0);\nconsole.log("<<"+"<<<"+JSON.stringify('+expressionToExecute+')+">>>"+">>");\n');  
+      setTimeout(function(){          
+        var result;
+        console.log("Got "+JSON.stringify(receivedData));          
+        var startProcess = receivedData.indexOf("<<<<<");
+        var endProcess = receivedData.indexOf(">>>>>", startProcess);
+        if(startProcess >= 0 && endProcess > 0){
+          result = receivedData.substring(startProcess + 5,endProcess);          
+          // strip out the text we found
+          receivedData = receivedData.substr(0,startProcess) + receivedData.substr(endProcess+5);
+          // try and strip out the echo 0 too...
+          receivedData = receivedData.replace("echo(0);","");
+        }
+        // start the previous reader listing again
+        Espruino.Core.Serial.startListening(prevReader);          
+        // forward the original text to the previous reader
+        prevReader(receivedData);
+        // do echo(1) here as this will re-show the prompt
+        Espruino.Core.Serial.write('echo(1);\n'); 
+        // run the callback
+        callback(result);
+      },300);   
+    }    
+   
+    if(Espruino.Core.Serial.isConnected()){
+      var prevReader = Espruino.Core.Serial.startListening(function (readData) {
+        var bufView = new Uint8Array(readData);
+        for(var i = 0; i < bufView.length; i++) {
+          receivedData += String.fromCharCode(bufView[i]);
+        }
+      });
+      // send a newline, and we hope we'll see '=undefined\r\n>'
+      Espruino.Core.Serial.write('\n');
+      setTimeout(function() {          
+        console.log("Got "+JSON.stringify(receivedData));          
+        // if we haven't had the prompt displayed for us, Ctrl-C to break out of what we had
+        if (receivedData[receivedData.length-1] == ">") {
+          console.log("Found a prompt... good!");
+        } else {
+          console.log("No Prompt found, got "+JSON.stringify(receivedData[receivedData.length-1])+" - issuing Ctrl-C to try and break out");
+          Espruino.Core.Serial.write('\x03');
+        }
+        // send data to console anyway...
+        prevReader(receivedData);
+        receivedData = "";
+        // now get the real info
+        getProcessInfo(expressionToExecute, prevReader, callback);
+      },300);        
+    }
+  };
+  
   
   Espruino.Core.Utils = {
       init : init,
@@ -126,5 +183,6 @@
       escapeHTML : escapeHTML,
       getSubString : getSubString,
       getLexer : getLexer,
+      executeExpression : executeExpression,
   };
 }());
