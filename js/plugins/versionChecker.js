@@ -51,7 +51,10 @@
       if (vAvailable > vCurrent && env.BOARD=="ESPRUINOBOARD") {
         console.log("New Firmware "+tAvailable+" available");
         Espruino.Core.Terminal.setExtraText(Espruino.Core.Terminal.getCurrentLine(), 
-            "<b>New Firmware "+tAvailable+' available. Click <div style="display: inline-block" class="ui-state-default"><span class="ui-icon ui-icon-info"></span></div>  to update</b>');
+            "<b>New Firmware "+tAvailable+' available. <a class="flash_menu" style="cursor:pointer">Click here to update</a></b>');
+        $(".flash_menu").click(function() {
+          Espruino.Core.MenuSettings.show("Flasher");
+        });
       }
      // $("#flashFirmwareUrl").val(env.info.binary_url);
     } 

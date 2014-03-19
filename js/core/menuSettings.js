@@ -13,10 +13,14 @@
 (function(){
   
   function init() {
-    Espruino.Core.Layout.addIcon({ name: "settings", title : "Settings", order: 0, area: "right" }, createSettingsWindow);
+    Espruino.Core.Layout.addIcon({ name: "settings", title : "Settings", order: 0, area: "right" }, function() {
+      createSettingsWindow();
+    });
   }
   
-  function createSettingsWindow() {
+  function createSettingsWindow(initialSection) {
+    if (initialSection==undefined)
+      initialSection = "About";
     // Get sections
     var sections = Espruino.Core.Config.getSections();
     // Write list of sections
@@ -40,7 +44,7 @@
       showSettingsSection($(this).attr("name"));
     });
     // Show initial section
-    showSettingsSection("About");
+    showSettingsSection(initialSection);
   }
   
   function showSettingsSection(sectionName) {
@@ -126,5 +130,7 @@
   
   Espruino.Core.MenuSettings = {
     init : init,
+    
+    show : createSettingsWindow,
   };
 }());
