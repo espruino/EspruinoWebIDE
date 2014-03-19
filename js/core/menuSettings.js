@@ -70,30 +70,48 @@
         html += getHtmlForConfigItem(configName, configItem);
       }
     }
+    // send the HTML
+    callback(html);    
+    // now we handle when stuff changes
     
-    callback(html);
+   $(".settings .currentsection input,select").change(function() {
+     var configName = $(this).attr("name");
+     if (configItems[configName] !== undefined) {
+       if (configItems[configName].type == "boolean")
+         Espruino.Config.set(configName, $(this).is(':checked'));
+       else
+         Espruino.Config.set(configName, $(this).val());
+       console.log("Config."+configName+" => "+Espruino.Config[configName]);
+     } else
+       console.warn("Config named '"+configName+"' not found");
+   });
+    
   }
   
   function getHtmlForConfigItem(configName, config) {
     var value = Espruino.Config[configName];
     var html = 
       '<h3>'+Espruino.Core.Utils.escapeHTML(config.name)+'</h3>';
+    var desc =
+      '<p>'+Espruino.Core.Utils.escapeHTML(config.description)+'</p>';
     // type : "int"/"boolean"/"string"/{ value1:niceName, value2:niceName },
     if (config.type == "boolean") {
-      html += '<input type="checkbox" '+(value?"checked":"")+'/>';
+      html += '<input name="'+configName+'" type="checkbox" style="float: right;" '+(value?"checked":"")+'/>';
+      html += desc;
     } else if (config.type == "string") {
-      html += '<input type="text" value="'+Espruino.Core.Utils.escapeHTML(value)+'"/>';
+      html += desc;
+      html += '<input name="'+configName+'" type="text" size="80" value="'+Espruino.Core.Utils.escapeHTML(value)+'"/>';
     } else if ((typeof config.type) == "object") {
-      html += '<select>';
+      html += '<select name="'+configName+'" style="float: right;">';
       for (var key in config.type)
         html += '<option value="'+Espruino.Core.Utils.escapeHTML(key)+'" '+(key==value?"selected":"")+'>'+
                   Espruino.Core.Utils.escapeHTML(config.type[key])+
                 '</option>';
       html += '</select>';
+      html += desc;
     } else
-      console.warn("Unknown config type '"+config.type+"' for Config."+configName);
-    html +=
-      '<p>'+Espruino.Core.Utils.escapeHTML(config.description)+'</p>';
+      console.warn("Unknown config type '"+config.type+"' for Config."+configName);    
+      
     return html;
   }
   

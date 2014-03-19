@@ -32,17 +32,6 @@
   
   
   function init() {
-    // Configuration
-    Espruino.Core.Config.add("SERIAL_THROTTLE_SEND", {
-      section : "Communications",
-      name : "Throttle Send",
-      description : "Throttle code when sending to Espruino?",
-      type : "boolean",
-      defaultValue : false,
-      onChange : function() { 
-        Espruino.Flasher.checkBoardInfo(Espruino.Board.getBoardObject()); 
-      }
-    });
     // Add stuff we need
     $('<div id="terminal"></div>').appendTo(".splitter .left");
     $('<textarea id="terminalfocus" rows="1" cols="1"></textarea>').appendTo(document.body);

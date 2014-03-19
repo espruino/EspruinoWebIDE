@@ -26,7 +26,7 @@
   
   function escapeHTML(text) {
     var chr = { '"': '&quot;', '&': '&amp;', '<': '&lt;', '>': '&gt;', ' ': '&nbsp;' };
-    return text.replace(/[\"&<> ]/g, function (a) { return chr[a]; });    
+    return text.toString().replace(/[\"&<> ]/g, function (a) { return chr[a]; });    
   }
   
   function getSubString(str, from, len) {

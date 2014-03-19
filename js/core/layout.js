@@ -86,6 +86,7 @@
       sortIcons(".toolbar .middle");
       sortIcons(".toolbar .right");
       doLayout();
+      callback(data);
     });
   }
   

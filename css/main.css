@@ -162,10 +162,6 @@ body {
     overflow: auto;
 }
 
-.settings .currentsection input,select {
-	float: right;
-}
-
 /* ----------------------------------------------------- */
 
 .progress {	

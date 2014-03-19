@@ -29,19 +29,21 @@ var Espruino;
   var processors = {};
   
   function init() {    
-    // Initialise all modules
     
-    function initModule(modName, mod) {      
-      console.log("Initialising "+modName);
-      if (mod.init !== undefined)
-        mod.init();
-    }
-    
-    var module;
-    for (module in Espruino.Core) initModule(module, Espruino.Core[module]);
-    for (module in Espruino.Plugins) initModule(module, Espruino.Plugins[module]);
-    
-    callProcessor("initialised");
+    Espruino.Core.Config.loadConfiguration(function() {
+      // Initialise all modules    
+      function initModule(modName, mod) {      
+        console.log("Initialising "+modName);
+        if (mod.init !== undefined)
+          mod.init();
+      }
+      
+      var module;
+      for (module in Espruino.Core) initModule(module, Espruino.Core[module]);
+      for (module in Espruino.Plugins) initModule(module, Espruino.Plugins[module]);
+      
+      callProcessor("initialised");
+    });
   }
   
   // workaround for broken chrome on Mac
