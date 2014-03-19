@@ -183,7 +183,7 @@
   function htmlTable(obj) {
     var html = '<table>';
     for (var key in obj) {
-      html += '<tr><td>'+Espruino.Core.Utils.escapeHTML(key)+'</td><td>'+Espruino.Core.Utils.escapeHTML(obj[key])+'</td></tr>';
+      html += '<tr><th>'+Espruino.Core.Utils.escapeHTML(key)+'</th><td>'+Espruino.Core.Utils.escapeHTML(obj[key])+'</td></tr>';
     }
     return html + '</table>';
   }

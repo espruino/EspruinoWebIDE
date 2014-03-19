@@ -44,17 +44,17 @@
     });
     
     Espruino.Core.Serial.getPorts(function(items) {
-      var html = "";
+      var html = '<div class="port_selector">';
       for (var i in items) {
         var port = items[i];
-        html += '<div class="port_selector_port" port="'+port+'">'+
+        html += '<div class="port" port="'+port+'">'+
                   '<div class="icon-usb lrg"></div>'+
                   '<div class="port_name">'+port+'</div>'+
                 '</div>';
       }
-      console.log(html);
-      popup.html(html);
-      $(".port_selector_port").click(function () {
+      html += '</div>';      
+      popup.html(html);      
+      $(".port_selector .port").click(function () {
         popup.close();
         openSerial($(this).attr("port"));
       });

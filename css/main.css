@@ -96,7 +96,11 @@ body {
 
 /* ----------------------------------------------------- */
 
-.port_selector_port {
+.port_selector {
+	margin: 4px;
+}
+
+.port_selector .port {
 	position:relative; 
 	width: 350px;
 	height: 60px;
@@ -104,7 +108,7 @@ body {
 	margin: 2px;
 }
 
-.port_selector_port .port_name {
+.port_selector .port .port_name {
 	position:absolute;
 	left: 74px; 
 	top:50%; 
@@ -112,12 +116,12 @@ body {
 	margin-top:-8px;
 }
 
-.port_selector_port .icon-usb {
+.port_selector .port .icon-usb {
 	background-color: #CCC;
 }
 
-.port_selector_port:hover { background-color: #2ecc71; }
-.port_selector_port:hover .icon-usb { background-color: #27ae60; }
+.port_selector .port:hover { background-color: #2ecc71; }
+.port_selector .port:hover .icon-usb { background-color: #27ae60; }
 
 /* ----------------------------------------------------- */
 

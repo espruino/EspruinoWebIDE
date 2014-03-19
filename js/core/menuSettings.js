@@ -57,7 +57,12 @@
     if (sectionName == "About") {
       $.get("/data/settings_about.html", function(data) {
         callback(data);
-        $('.board_info').html( Espruino.Core.Utils.htmlTable(Espruino.Core.Env.getBoardData()) );
+        var html;
+        if (Object.keys(Espruino.Core.Env.getBoardData()).length > 0)
+          html = Espruino.Core.Utils.htmlTable(Espruino.Core.Env.getBoardData());
+        else
+          html = "<p>Unable to get board information</p>";
+        $('.board_info').html( html );
       });
       return;
     }

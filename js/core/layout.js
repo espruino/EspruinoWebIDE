@@ -143,7 +143,10 @@
     doLayout();
     
     return {
-      html : function(txt) { $(".popup_contents").html(txt); },
+      html : function(txt) { 
+        $(".popup_contents").html(txt);
+        doLayout(); // if this was centered, make sure we align it correctly
+      },
       close : closeWindow,
     };
   }
