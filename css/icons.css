@@ -1,0 +1,147 @@
+/* 
+    ===================================================
+    Icons
+    ===================================================
+ */
+
+[class*="icon-"] 
+{
+    display: block;
+    position: relative;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+}
+
+[class*="icon-"]:before 
+{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: transparent url(/img/icons.png) left top;
+}
+
+a[class*="icon-"]
+{
+    cursor: pointer;
+}
+
+a[class*="icon-"]:hover
+{
+    background-color: rgba(0,0,0,.15);
+}
+
+.icon-connect { background-color: #f1c40f; }
+.icon-disconnect { background-color: #2ecc71; }
+/* FIXME ... */
+.icon-connect:hover { background-color: #f39c12; }
+.icon-disconnect:hover { background-color: #27ae60; }
+
+
+[class*="icon-"].lrg,
+[class*="icon-"].lrg:before
+{
+    width: 60px;
+    height: 60px;
+}
+
+[class*="icon-"].sml,
+[class*="icon-"].sml:before
+{
+    width: 30px;
+    height: 30px;
+}
+
+
+.icon-cross.lrg:before { background-position: 0 0 }
+.icon-cross.sml:before { background-position: -60px 0 }
+
+.icon-window.lrg:before { background-position: 0 -60px }
+.icon-window.sml:before { background-position: -60px -60px }
+
+.icon-minus.lrg:before { background-position: 0 -120px }
+.icon-minus.sml:before { background-position: -60px -120px }
+
+.icon-plus.lrg:before { background-position: 0 -180px }
+.icon-plus.sml:before { background-position: -60px -180px }
+
+.icon-back.lrg:before { background-position: 0 -240px }
+.icon-back.sml:before { background-position: -60px -240px }
+
+.icon-forward.lrg:before { background-position: 0 -300px }
+.icon-forward.sml:before { background-position: -60px -300px }
+
+.icon-down.lrg:before { background-position: 0 -360px }
+.icon-down.sml:before { background-position: -60px -360px }
+
+.icon-up.lrg:before { background-position: 0 -420px }
+.icon-up.sml:before { background-position: -60px -420px }
+
+.icon-settings.lrg:before { background-position: 0 -480px }
+.icon-settings.sml:before { background-position: -60px -480px }
+
+.icon-alert.lrg:before { background-position: 0 -540px }
+.icon-alert.sml:before { background-position: -60px -540px }
+
+.icon-connect.lrg:before { background-position: 0 -600px }
+.icon-connect.sml:before { background-position: -60px -600px }
+
+.icon-disconnect.lrg:before { background-position: 0 -660px }
+.icon-disconnect.sml:before { background-position: -60px -660px }
+
+.icon-split-vertical.lrg:before { background-position: 0 -720px }
+.icon-split-vertical.sml:before { background-position: -60px -720px }
+
+.icon-split-horizontal.lrg:before { background-position: 0 -780px }
+.icon-split-horizontal.sml:before { background-position: -60px -780px }
+
+.icon-folder.lrg:before { background-position: 0 -840px }
+.icon-folder.sml:before { background-position: -60px -840px }
+
+.icon-folder-open.lrg:before { background-position: 0 -900px }
+.icon-folder-open.sml:before { background-position: -60px -900px }
+
+.icon-save.lrg:before { background-position: 0 -960px }
+.icon-save.sml:before { background-position: -60px -960px }
+
+.icon-deploy.lrg:before { background-position: 0 -1020px }
+.icon-deploy.sml:before { background-position: -60px -1020px }
+
+.icon-code.lrg:before { background-position: 0 -1080px }
+.icon-code.sml:before { background-position: -60px -1080px }
+
+.icon-clear.lrg:before { background-position: 0 -1140px }
+.icon-clear.sml:before { background-position: -60px -1140px }
+
+.icon-eye.lrg:before { background-position: 0 -1200px }
+.icon-eye.sml:before { background-position: -60px -1200px }
+
+.icon-webcam.lrg:before { background-position: 0 -1260px }
+.icon-webcam.sml:before { background-position: -60px -1260px }
+
+.icon-block.lrg:before { background-position: 0 -1320px }
+.icon-block.sml:before { background-position: -60px -1320px }
+
+.icon-bin.lrg:before { background-position: 0 -1380px }
+.icon-bin.sml:before { background-position: -60px -1380px }
+
+.icon-star.lrg:before { background-position: 0 -1440px }
+.icon-star.sml:before { background-position: -60px -1440px }
+
+.icon-heart.lrg:before { background-position: 0 -1500px }
+.icon-heart.sml:before { background-position: -60px -1500px }
+
+.icon-lightning.lrg:before { background-position: 0 -1560px }
+.icon-lightning.sml:before { background-position: -60px -1560px }
+
+.icon-tick.lrg:before { background-position: 0 -1620px }
+.icon-tick.sml:before { background-position: -60px -1620px }
+
+.icon-cloud.lrg:before { background-position: 0 -1680px }
+.icon-cloud.sml:before { background-position: -60px -1680px }
+
+.icon-usb.lrg:before { background-position: 0 -1740px }
+.icon-usb.sml:before { background-position: -60px -1740px }

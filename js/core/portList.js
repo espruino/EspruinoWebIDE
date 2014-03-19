@@ -12,15 +12,19 @@
 "use strict";
 (function(){
   
+  var connectButton;
+  
   function init() {
+    connectButton = Espruino.Core.Layout.addIcon({ name: "connect", title : "Connect / Disconnect", order: -1000, area: "left" }, toggleConnection);
+    
     $('<select class="serial_devices"></select>').appendTo(".toolbar .left");
-    $('<button class="refresh">Refresh Serial Port List</button>').appendTo(".toolbar .left");
+    /*$('<button class="refresh">Refresh Serial Port List</button>').appendTo(".toolbar .left");
     $('<button class="open">Connect</button>').appendTo(".toolbar .left");
     $('<button class="close">Disconnect</button>').appendTo(".toolbar .left");
     
     $( ".refresh" ).button({ text: false, icons: { primary: "ui-icon-refresh" } }).click(refreshPorts);
     $( ".open" ).button({ text: false, icons: { primary: "ui-icon-play" } }).click(openSerial);
-    $( ".close" ).button({ text: false, icons: { primary: "ui-icon-stop" } }).click(closeSerial);
+    $( ".close" ).button({ text: false, icons: { primary: "ui-icon-stop" } }).click(closeSerial);*/
 
     refreshPorts();
     
@@ -45,6 +49,19 @@
     });    
   }
  
+  function toggleConnection() {
+    if (Espruino.Core.Serial.isConnected()) {
+      closeSerial();
+    } else {
+      openSerial();
+    }
+    if (Espruino.Core.Serial.isConnected()) {
+      connectButton.setIcon("connect");
+    } else {
+      connectButton.setIcon("disconnect");
+    }
+  }
+  
 
   function refreshPorts() {
     console.log("Refreshing ports...");

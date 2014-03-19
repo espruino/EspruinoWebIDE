@@ -18,7 +18,7 @@
       name : "Module URL",
       description : "Where to search online for modules when `require()` is used",
       type : "string",
-      defaultValue : "http://www.espruino.com/modules"
+      defaultValue : "http://localhost:84/modules"
     });
     Espruino.Core.Config.add("MODULE_EXTENSIONS", {
       section : "Communications",

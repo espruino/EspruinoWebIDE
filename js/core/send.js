@@ -14,9 +14,7 @@
   
   function init() {
     // Add stuff we need
-    $('<button class="send">Send to Espruino</button>').appendTo(".toolbar .right");
-    
-    $( ".send" ).button({ text: false, icons: { primary: "ui-icon-transferthick-e-w" } }).click(function() {
+    Espruino.Core.Layout.addIcon({ name: "deploy", title : "Send to Espruino", order: 300, area: "splitter" }, function() {
       Espruino.Core.Terminal.focus(); // give the terminal focus
       Espruino.callProcessor("sending");
       if (Espruino.Core.Serial.isConnected()) {

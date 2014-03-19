@@ -17,24 +17,23 @@
     
    
     // Add stuff we need
-    $('<button class="load">Load File</button>').appendTo(".toolbar .right");
-    //$('<button class="reload">Reload File</button>').appendTo(".toolbar .right");
-    $('<button class="save">Save File</button>').appendTo(".toolbar .right");
-    
-    $('<input type="file" id="fileLoader" style="display: none;"/>').appendTo(document.body);
-     
-    $( ".load" ).button( { text: false, icons: { primary: "ui-icon-folder-open" } } ).click( function () {
+    Espruino.Core.Layout.addIcon({ name: "folder-open", title : "Open File", order: 100, area: "splitter" }, function() {
       $( "#fileLoader" ).click();
     });
-    /*/$( ".reload" ).button( { text: false, icons: { primary: "ui-icon-refresh" } } ).click( function () {
-      $('#fileLoader').change();
-    });*/
-    $( ".save" ).button({ text: false, icons: { primary: "ui-icon-disk" } }).click(function() {
+    Espruino.Core.Layout.addIcon({ name: "save", title : "Save File", order: 200, area: "splitter" }, function() {
       if (Espruino.Core.Layout.isInBlockly()) 
         saveFile(Espruino.Core.EditorBlockly.getXML(), "code_blocks.xml");
       else
         saveFile(Espruino.Core.EditorJavaScript.getCode(), "code.js");
     });
+    
+    
+    // required for file loading... (hidden)
+    $('<input type="file" id="fileLoader" style="display: none;"/>').appendTo(document.body);
+     
+    /*/$( ".reload" ).button( { text: false, icons: { primary: "ui-icon-refresh" } } ).click( function () {
+      $('#fileLoader').change();
+    });*/
     
     $("#fileLoader").change(function(event) {
       if (event.target.files.length != 1) return;

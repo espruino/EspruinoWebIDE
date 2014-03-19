@@ -40,6 +40,8 @@ var Espruino;
     var module;
     for (module in Espruino.Core) initModule(module, Espruino.Core[module]);
     for (module in Espruino.Plugins) initModule(module, Espruino.Plugins[module]);
+    
+    callProcessor("initialised");
   }
   
   // workaround for broken chrome on Mac

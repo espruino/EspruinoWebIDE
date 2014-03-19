@@ -13,15 +13,18 @@ body {
 
 #toolbar {
   position: relative;
-  height: 28px;
+  background: #3498db;
+  height: 60px;
   padding: 0px;
 }
 
-#toolbar > div {
+#toolbar > div { /* .left .middle .right */
   position: absolute;
-  height: 27px;
-  top:0px;
-  padding: 0px;
+  top : 0px;
+}
+
+#toolbar .right {
+  right: 0px;
 }
 /* ----------------------------------------------------- */
 .splitter {
@@ -29,26 +32,48 @@ body {
   position: relative;
 }
 
-.splitter > div {
+.splitter > div { /* .left .divider .right */
   position: absolute;
   top : 0px;
 }
 
 .splitter .divider {
   display:block;
-  width:10px;
-  height:100%;
-  background: #DDD; 
-  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAwCAYAAAAy7wv4AAAAAXNSR0IArs4c6QAAAAZiS0dEAGYAZgBmB7pKbQAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB94CGgsqGabRuG0AAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAALUlEQVQ4y2P8////fwZsAJtEWlrafyYGHIB0CRaYmQzEAsZR5446d9S5I9e5ALBPVsT0dcJqAAAAAElFTkSuQmCC);
-  background-repeat:no-repeat;
-  background-position:center;  
+  width:60px;
+  background: #42484a;
 }
 /* ----------------------------------------------------- */
 
+.popup_overlay {
+  background-color: #000000;
+  display: block;
+  opacity: 0.5;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 2000;
+}
 
 
+.popup {
+  background-color: #FFFFFF;
+  display: block;
+  position: absolute;
+  z-index: 2001;
+}
 
+.popup_title {
+  color: #FFFFFF;
+  background-color: #000000;
+  display: block;
+  height: 40px;
+  padding-top: 8px;
+  padding-left: 8px;
+  font-weight: bold;
+  font-size: 200%;    
+}
 
+/* ----------------------------------------------------- */
 
 #progress {	
 	border: 1px solid black;
@@ -69,8 +94,8 @@ body {
   background-color: #000;
   color: white;
   display: block;
-  border: 2px solid #666;
-  overflow: scroll; /* adds scrollbar */
+  border: 2px solid #000;
+  overflow: auto; /* adds scrollbar if needed */
 
   position: absolute;
   left: 0px;
@@ -84,7 +109,7 @@ body {
 }
 
 #terminal.focus {
- border: 2px solid black;
+ border: 2px solid #666; 
 }
 
 #terminalfocus {
