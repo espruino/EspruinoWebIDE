@@ -39,6 +39,7 @@
     $(".popup_overlay").css({ "width":w, "height":h });  
     var POPUP_MARGIN = 48;
     $(".popup.stretch").css({ "left":POPUP_MARGIN, "top":POPUP_MARGIN, "width":w-POPUP_MARGIN*2, "height":h-POPUP_MARGIN*2 });
+    $(".popup.center").css({ "left":(w-$(".popup.center").outerWidth())/2, "top":(h-$(".popup.center").outerHeight())/2 });
   }
   
   // sort all icons in a container according to their icon-order field (see addIcon)
@@ -128,15 +129,22 @@
       $(".popup_overlay").remove();
     }
     $('<div class="popup_overlay"></div>').appendTo(document.body).click(closeWindow);
-    $('<div class="popup stretch">'+
+    $('<div class="popup '+options.position+'">'+
         '<div class="popup_title">'+
           options.title+
           
         '</div>'+
-        contents+
+        '<div class="popup_contents">'+
+          contents+
+        '</div>'+
       '</div>').appendTo(document.body);
     $('<a class="icon-cross sml" title="Close"></a>').appendTo(".popup_title").click(closeWindow);
     doLayout();
+    
+    return {
+      html : function(txt) { $(".popup_contents").html(txt); },
+      close : closeWindow,
+    };
   }
   
   

@@ -16,6 +16,7 @@
     Espruino.Core.Layout.addIcon({ name: "settings", title : "Settings", order: 0, area: "right" }, function() {
       Espruino.Core.Layout.addPopup("Hello", {
         title: "Settings",
+        position: "stretch",
       });
     });
   }

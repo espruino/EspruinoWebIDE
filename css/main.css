@@ -23,6 +23,11 @@ body {
   top : 0px;
 }
 
+#toolbar > div > div { /* buttons inside toolbars */
+  position: absolute;
+  top : 0px;
+}
+
 #toolbar .right {
   right: 0px;
 }
@@ -60,6 +65,8 @@ body {
   display: block;
   position: absolute;
   z-index: 2001;
+  min-width: 200px;
+  min-height: 100px;
 }
 
 .popup_title {
@@ -79,20 +86,65 @@ body {
   right: 0px;
 }
 
+.popup_contents {  
+  margin: 4px;
+}
+
 /* ----------------------------------------------------- */
 
-#progress {	
-	border: 1px solid black;
-	padding: 1px;
-	display: inline-block;
-	width: 104px;	
+.port_selector_port {
+	position:relative; 
+	width: 350px;
+	height: 60px;
+	background-color: #EEE;
+	margin: 1px;
 }
 
-#progressindicator {
-    background-color: black;
-    display: inline-block;
-    width: 0px;
+.port_selector_port .port_name {
+	position:absolute;
+	left: 74px; 
+	top:50%; 
+	font-size: 16px;
+	margin-top:-8px;
 }
+
+.port_selector_port .icon-usb {
+	background-color: #CCC;
+}
+
+.port_selector_port:hover { background-color: #2ecc71; }
+.port_selector_port:hover .icon-usb { background-color: #27ae60; }
+
+/* ----------------------------------------------------- */
+
+.progress {	
+	position: relative;
+	display: inline-block;
+	width: 154px;	
+	height: 60px;
+}
+
+.progress .status {
+	color: #194969;
+    position:absolute;
+    left: 16px; 
+    top:50%; 
+    font-size: 16px;
+    margin-top:-8px;
+}
+
+.progress .indicator {
+	position:absolute;
+	top: 2px;
+	left: 2px;
+	width: 0px;
+	height: 56px;
+    background-color: #2978ac;
+    display: block;
+}
+
+/* ----------------------------------------------------- */
+
 
 #terminal {
   font-family: Fixed, monospace;

@@ -15,22 +15,24 @@
   var progressAmt, progressMax = 0;
   
   function init() {
-    $('<span id="status">Not Connected</span>').appendTo(".toolbar .left");
-    $('<span id="progress"><span id="progressindicator">&nbsp;</span></span>').appendTo(".toolbar .left");
+    $('<div class="progress" icon-order="1000">'+
+        '<span class="indicator">&nbsp;</span>'+
+        '<span class="status">Not Connected</span>'+
+      '</div>').appendTo(".toolbar .left");
   }
   
   function setStatus(text, progress) {
-    console.log(">>> "+text);
-    var statusBox = $("#status");
-    var progressBox = $("#progress");
-    var progressIndicator = $("#progressindicator");
+    console.log(">>> "+text);    
+    var progressBox = $(".progress");
+    var statusBox = $(".progress .status");
+    var progressIndicator = $(".progress .indicator");
     statusBox.html(text);
     if (progress === undefined) {
       progressIndicator.width(0);
-      progressBox.hide();        
+      progressIndicator.hide();        
       progressMax = 0;
     } else {
-      progressBox.show();
+      progressIndicator.show();
       if (progress<1) progress=1;
       progressAmt = 0;
       progressMax = progress;
@@ -61,11 +63,12 @@
   function incrementProgress(amount) {
     if (!hasProgress()) return;      
     progressAmt += amount;
-    var width = (progressAmt * 100.0 / progressMax)|0;
+    var fullWidth = $(".progress").width()-4/*padding*/;
+    var width = (progressAmt * fullWidth / progressMax)|0;
     //console.log(progressAmt,progressMax,width);
-    if (width>100) width=100;
+    if (width>fullWidth) width=fullWidth;
     
-    $("#progressindicator").width(width);
+    $(".progress .indicator").width(width);
   };  
   
   Espruino.Core.Status = {
