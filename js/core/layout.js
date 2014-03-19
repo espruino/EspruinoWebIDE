@@ -123,11 +123,19 @@
    * Add a popup window
    */
   function addPopup(contents, options) {
-    $('<div class="popup_overlay"></div>').appendTo(document.body).click(function() {
+    function closeWindow() {
       $(".popup").remove();
       $(".popup_overlay").remove();
-    });
-    $('<div class="popup stretch"><div class="popup_title">'+options.title+'</div>'+contents+'</div>').appendTo(document.body);
+    }
+    $('<div class="popup_overlay"></div>').appendTo(document.body).click(closeWindow);
+    $('<div class="popup stretch">'+
+        '<div class="popup_title">'+
+          options.title+
+          
+        '</div>'+
+        contents+
+      '</div>').appendTo(document.body);
+    $('<a class="icon-cross sml" title="Close"></a>').appendTo(".popup_title").click(closeWindow);
     doLayout();
   }
   
