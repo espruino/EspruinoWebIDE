@@ -13,6 +13,7 @@
 (function(){
   
   var environmentData = {};
+  var boardData = {};
   
   function init() {
     
@@ -22,7 +23,7 @@
   
   function queryBoardProcess(data, callback) {
     Espruino.Core.Utils.executeExpression("process.env", function(result) {
-      environmentData = {};
+      boardData = {};
       var json = {};
       if (result!==undefined) {
         try {       
@@ -32,6 +33,9 @@
         }
       }
       // now process the enviroment variables
+      boardData = {};
+      for (var k in json) boardData[k] = json[k];
+      environmentData = boardData;
       Espruino.callProcessor("environmentVar", json, function(data) { 
         environmentData = data; 
       }); 
@@ -39,12 +43,19 @@
     });    
   }
   
+  /** Get all data merged in from the board */
   function getData() {
     return environmentData;
   }
   
+  /** Get just the board's environment data */
+  function getBoardData() {
+    return boardData;
+  }
+  
   Espruino.Core.Env = {
     init : init,
-    getData : getData 
+    getData : getData,
+    getBoardData : getBoardData
   };
 }());

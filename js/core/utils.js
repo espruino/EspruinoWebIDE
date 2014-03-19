@@ -179,6 +179,15 @@
     return parseFloat(version.trim().replace("v","."));
   };    
   
+  /** Make an HTML table out of a simple key/value object */
+  function htmlTable(obj) {
+    var html = '<table>';
+    for (var key in obj) {
+      html += '<tr><td>'+Espruino.Core.Utils.escapeHTML(key)+'</td><td>'+Espruino.Core.Utils.escapeHTML(obj[key])+'</td></tr>';
+    }
+    return html + '</table>';
+  }
+  
   Espruino.Core.Utils = {
       init : init,
       isWindows : isWindows,   
@@ -188,5 +197,6 @@
       getLexer : getLexer,
       executeExpression : executeExpression,
       versionToFloat : versionToFloat,
+      htmlTable : htmlTable,
   };
 }());

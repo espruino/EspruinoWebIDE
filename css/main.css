@@ -86,8 +86,12 @@ body {
   right: 0px;
 }
 
-.popup_contents {  
-  margin: 4px;
+.popup_contents { 
+  position: absolute;
+  top: 34px;
+  bottom: 4px;
+  left: 4px;
+  right: 4px;
 }
 
 /* ----------------------------------------------------- */
@@ -97,7 +101,7 @@ body {
 	width: 350px;
 	height: 60px;
 	background-color: #EEE;
-	margin: 1px;
+	margin: 2px;
 }
 
 .port_selector_port .port_name {
@@ -114,6 +118,53 @@ body {
 
 .port_selector_port:hover { background-color: #2ecc71; }
 .port_selector_port:hover .icon-usb { background-color: #27ae60; }
+
+/* ----------------------------------------------------- */
+
+.settings {
+	position:relative; 
+	height:100%;
+}
+
+.settings .sections a {
+    position:relative; 
+    top:0px;
+    left:0px;
+    width: 200px;  
+    height: 30px;  
+    display: block;
+    background-color: #EEE;
+    margin: 2px;
+}
+
+.settings .sections a span {
+    position:absolute;
+    left: 35px; 
+    top:50%; 
+    font-size: 16px;
+    margin-top:-8px;
+}
+
+.settings .sections a.current {
+    background-color: #CCC;
+}
+
+.settings .sections a:hover {
+    background-color: #BBB;
+}
+
+.settings .currentsection {
+    position:absolute; 
+    top: 8px;
+    left: 220px;
+    right: 8px;
+    bottom: 8px;
+    overflow: auto;
+}
+
+.settings .currentsection input,select {
+	float: right;
+}
 
 /* ----------------------------------------------------- */
 
@@ -214,11 +265,38 @@ body {
   color: #888;
 }
 
-.ui-widget {
-        font-size: 10px;
+/* ----------------------------------------------------- */
+
+.tutorial_text {
+    background-color : #222;
+    border: 1px solid #888;
+    border-radius: 10px;
+    padding: 4px;
+    margin-left: 16px;
+    margin-right: 16px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+.tutorial_text .code {
+    background-color : #333;
+    border: 1px solid #888;
+    border-radius: 5px;
+    padding: 2px;
+}
+
+.tutorial_code {
+    background-color : #333;
+    border: 1px solid #888;
+    border-radius: 5px;
+    padding: 4px;
+    margin-top: 8px;
+    font-weight: bold;
+    color: #CFC;
 }
 
 
+/* ----------------------------------------------------- */
 
 #divcode {
   overflow-y: auto;
@@ -247,33 +325,7 @@ body {
     background-repeat: repeat-x;
 }
 
-.tutorial_text {
-	background-color : #222;
-	border: 1px solid #888;
-	border-radius: 10px;
-	padding: 4px;
-	margin-left: 16px;
-	margin-right: 16px;
-	margin-top: 8px;
-    margin-bottom: 8px;
-}
+/* ----------------------------------------------------- */
 
-.tutorial_text .code {
-    background-color : #333;
-    border: 1px solid #888;
-    border-radius: 5px;
-    padding: 2px;
-}
-
-.tutorial_code {
-	background-color : #333;
-    border: 1px solid #888;
-    border-radius: 5px;
-    padding: 4px;
-    margin-top: 8px;
-    font-weight: bold;
-    color: #CFC;
-}
-
- *.paramStyle { background-color:#ccccff; }
+*.paramStyle { background-color:#ccccff; }
  

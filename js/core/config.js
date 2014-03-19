@@ -38,18 +38,31 @@
   function add(name, options) {
     Espruino.Core.Config.data[name] = options;
     Espruino.Config[name] = options.defaultValue;
-  }  
+  }
+  
+  /** Get a list of 'sections' used in all the configs */
+  function getSections() {
+    var sections = [];
+    for (var i in Espruino.Core.Config.data) {
+      var c = Espruino.Core.Config.data[i];
+      if (sections.indexOf(c.section)<0)
+        sections.push(c.section);
+    }
+    return sections;
+  }
   
   Espruino.Config = {};
   Espruino.Config.set = function (key, value) {
     Espruino.Config[key] = value;
     // TODO: Save to storage...
-  }
+  };
   
   Espruino.Core.Config = {
       init : init,
       add : add,
       data : {},
+      
+      getSections : getSections,
   };
   
 })();
