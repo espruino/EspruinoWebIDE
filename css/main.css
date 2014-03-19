@@ -86,7 +86,7 @@ body {
   right: 0px;
 }
 
-.popup_contents { 
+.popup.stretch .popup_contents { 
   position: absolute;
   top: 34px;
   bottom: 4px;
