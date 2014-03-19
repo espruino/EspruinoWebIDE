@@ -31,6 +31,9 @@
 "use strict";
 (function() {
   
+  /** See addSection and getSections */
+  var builtinSections = {};
+  
   function loadConfiguration(callback) {
     chrome.storage.sync.get( "CONFIGS", function (data) {
       var value = data["CONFIGS"];
@@ -46,7 +49,9 @@
     });
   }
   
-  function init() {    
+  function init() {
+    addSection("Communications", { sortOrder:100, description: "Settings for communicating with the Espruino Board" });
+    addSection("Board", { sortOrder:200, description: "Settings for the Espruino Board itself" });
   }
   
   function add(name, options) {
@@ -55,14 +60,54 @@
       Espruino.Config[name] = options.defaultValue;
   }
   
-  /** Get a list of 'sections' used in all the configs */
+  /** Add a section (or information on the page).
+   * options = {
+   *   sortOrder : int, // a number used for sorting
+   *   description : "",
+   *   getHTML : function(callback(html)) // optional
+   * };
+   */
+  function addSection(name, options) {
+    options.name = name;
+    builtinSections[name] = options;
+  }
+  
+  /** Get an object containing the information on a section used in configs */
+  function getSection(name) {
+    if (builtinSections[name]!==undefined)
+      return builtinSections[name];
+    // not found - but we warned about this in getSections
+    return {
+      name : name
+    };
+  }
+  
+  /** Get an object containing information on all 'sections' used in all the configs */
   function getSections() {
     var sections = [];
+    // add sections we know about
+    for (var name in builtinSections)
+      sections.push(builtinSections[name]);
+    // add other sections
     for (var i in Espruino.Core.Config.data) {
       var c = Espruino.Core.Config.data[i];
-      if (sections.indexOf(c.section)<0)
-        sections.push(c.section);
+      
+      var found = false;
+      for (var s in sections)
+        if (sections[s].name == c.section)
+          found = true;
+      
+      if (!found) {
+        console.warn("Section named "+c.section+" was not added with Config.addSection");
+        sections[c.section] = {
+            name : c.section,
+            sortOrder : 0
+        };        
+      }
     }
+    // Now sort by sortOrder
+    sections.sort(function (a,b) { return a.sortOrder - b.sortOrder; });
+    
     return sections;
   }
   
@@ -87,6 +132,9 @@
       add : add,
       data : {},
       
+      
+      addSection : addSection,
+      getSection : getSection,
       getSections : getSections,
   };
   

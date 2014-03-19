@@ -19,14 +19,12 @@
   function createSettingsWindow() {
     // Get sections
     var sections = Espruino.Core.Config.getSections();
-    sections.unshift("About");
     // Write list of sections
     var html = 
       '<div class="settings">'+
         '<div class="sections">';   
     for (var i in sections)
-      html+=
-        '  <a name="'+sections[i]+'"><div class="icon-forward sml"></div><span>'+sections[i]+'</span></a>';
+      html += '<a name="'+sections[i].name+'" title="'+sections[i].description+'"><div class="icon-forward sml"></div><span>'+sections[i].name+'</span></a>';
     html +=    
         '</div>'+
         '<div class="currentsection">'+
@@ -54,20 +52,26 @@
   }
   
   function getSettingsSection(sectionName, callback) {
-    if (sectionName == "About") {
-      $.get("/data/settings_about.html", function(data) {
-        callback(data);
-        var html;
-        if (Object.keys(Espruino.Core.Env.getBoardData()).length > 0)
-          html = Espruino.Core.Utils.htmlTable(Espruino.Core.Env.getBoardData());
-        else
-          html = "<p>Unable to get board information</p>";
-        $('.board_info').html( html );
-      });
+    var section = Espruino.Core.Config.getSection(sectionName);
+    if (section===undefined) {
+      console.warn("No section named "+sectionName+" found");
+      callback("");
       return;
     }
     
     var html = "<h1>"+sectionName+"</h1>";
+    if (section.description!==undefined)
+      html += "<p>"+Espruino.Core.Utils.escapeHTML(section.description)+"<p>";
+    
+    // if there's a built-in handler...
+    if (section.getHTML!==undefined) {
+      section.getHTML(function (data) {
+        callback(html + data);        
+      });
+      return;
+    }
+    
+    
     var configItems = Espruino.Core.Config.data;
     for (var configName in configItems) {
       var configItem = configItems[configName];

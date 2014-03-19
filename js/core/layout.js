@@ -122,14 +122,18 @@
   }
   
   /**
+   * Close a popup window if one was shown
+   */
+  function closePopup() {
+    $(".popup").remove();
+    $(".popup_overlay").remove();
+  }
+  
+  /**
    * Add a popup window
    */
-  function addPopup(contents, options) {
-    function closeWindow() {
-      $(".popup").remove();
-      $(".popup_overlay").remove();
-    }
-    $('<div class="popup_overlay"></div>').appendTo(document.body).click(closeWindow);
+  function addPopup(contents, options) {    
+    $('<div class="popup_overlay"></div>').appendTo(document.body).click(closePopup);
     $('<div class="popup '+options.position+'">'+
         '<div class="popup_title">'+
           options.title+
@@ -139,7 +143,7 @@
           contents+
         '</div>'+
       '</div>').appendTo(document.body);
-    $('<a class="icon-cross sml" title="Close"></a>').appendTo(".popup_title").click(closeWindow);
+    $('<a class="icon-cross sml" title="Close"></a>').appendTo(".popup_title").click(closePopup);
     doLayout();
     
     return {
@@ -147,7 +151,7 @@
         $(".popup_contents").html(txt);
         doLayout(); // if this was centered, make sure we align it correctly
       },
-      close : closeWindow,
+      close : closePopup,
     };
   }
   
@@ -161,6 +165,7 @@
       
       addIcon : addIcon,
       addPopup : addPopup,
+      closePopup : closePopup,
       
       isInBlockly : isInBlockly
   };
