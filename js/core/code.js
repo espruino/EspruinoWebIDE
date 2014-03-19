@@ -22,7 +22,7 @@
       defaultValue : 20, 
     });    
     // get code from our config area at bootup
-    setTimeout(function() {
+    Espruino.addProcessor("initialised", function(data,callback) {
       var code;
       if (Espruino.Config.CODE) {
         code = Espruino.Config.CODE;
@@ -32,7 +32,8 @@
         console.log("No code in storage.");
       }
       Espruino.Core.EditorJavaScript.setCode(code);
-    },1);
+      callback(data);
+    });
     
     
     Espruino.addProcessor("sending", function(data, callback) {
