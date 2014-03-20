@@ -39,6 +39,7 @@
       var value = data["CONFIGS"];
       console.log("GET chrome.storage.sync = "+JSON.stringify(value));
       for (var key in value) { 
+        if (key=="set") continue;
         Espruino.Config[key] = value[key];
         if (Espruino.Core.Config.data[key] !== undefined &&
             Espruino.Core.Config.data[key].onChange !== undefined)
@@ -120,8 +121,12 @@
           Espruino.Core.Config.data[key].onChange !== undefined)
         Espruino.Core.Config.data[key].onChange(value);
       // Save to synchronized storage...
-      console.log("SET chrome.storage.sync = "+JSON.stringify(Espruino.Config));
-      chrome.storage.sync.set({ CONFIGS : Espruino.Config});    
+      var data = {};
+      for (var key in Espruino.Config)
+        if (key != "set")
+          data[key] = Espruino.Config[key];
+      console.log("SET chrome.storage.sync = "+JSON.stringify(data));
+      chrome.storage.sync.set({ CONFIGS : data});    
     }
   };
   
