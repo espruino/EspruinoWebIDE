@@ -34,7 +34,7 @@
       $('<video autoplay id="videotag" style="background-color:black;position: absolute;left:0px;bottom: 0px;"></video>').prependTo(".splitter .left"); 
     } else {
       if (hasWebCam()) toggleWebCam();
-      icon.remove();
+      if (icon!==undefined) icon.remove();
       $('video').remove();
     }
   }
