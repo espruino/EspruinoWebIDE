@@ -1,7 +1,7 @@
 Espruino Web IDE
 ======================
 
-A Simple Web-Based VT100 Serial Terminal - designed for writing code on microcontrollers that use the Espruino JavaScript interpreter (http://www.espruino.com) - but useful for a bunch of other stuff too!
+A Web-Based VT100 Serial Terminal - designed for writing code on microcontrollers that use the Espruino JavaScript interpreter (http://www.espruino.com) - but useful for a bunch of other stuff too!
 
 [![ScreenShot](https://raw.github.com/espruino/EspruinoWebIDE/master/extras/screenshot.png)](http://youtu.be/Fjju_QhzL-c)
 [![ScreenShot](https://raw.github.com/espruino/EspruinoWebIDE/master/extras/screenshot2.png)](http://youtu.be/Fjju_QhzL-c)
@@ -24,13 +24,13 @@ Installing from GitHub
 -------------------
 
 * Install the [Chrome Web Browser](https://www.google.com/intl/en/chrome/browser/)
-* Download the files in EspruinoSerialTerminal to a directory on your PC (either as a [ZIP File](https://github.com/espruino/EspruinoWebIDE/archive/master.zip), or using git)
+* Download the files in EspruinoWebIDE to a directory on your PC (either as a [ZIP File](https://github.com/espruino/EspruinoWebIDE/archive/master.zip), or using git)
 * Click the menu icon in the top right
 * Click 'Settings'
 * Click 'Extensions' on the left
 * Click 'Load Unpackaged Extension'
-* Navigate to the EspruinoSerialTerminal Directory and click Ok
-* Job Done. It'll now appear as an app, but you can start it easily right now by clicking the 'Launch' link on the extensions page, or whenever you open a new tab
+* Navigate to the EspruinoWebIDE Directory and click Ok
+* Job Done. It'll now appear as an app with the 'Unpacked' banner so you can tell it apart from the normal Web IDE. You can start it easily by clicking the 'Launch' link on the extensions page, or whenever you open a new tab.
 
 Permissions
 ----------
@@ -89,7 +89,5 @@ Contributions are welcome - especially if they make the Web IDE easier to use an
 ### Code Outline
 
  * Core functionality goes in `js/core`, Plugins go in `js/plugins`. See `plugins/_examplePlugin.js` for an example layout
- * Plugins/core can implement:
-   * `init` - called when the document is loaded
-   * `eventHandler` - called when a global event happens (sent by `Espruino.sendEvent`, such as `connected/disconnected`
+ * Plugins/core need to implement in init function, which is called when the document (and settings) have loaded.
  * Annoyingly, right now plugins still have to be loaded via a `<script>` tag in `main.html`    

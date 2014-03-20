@@ -17,7 +17,7 @@
       section : "General",
       name : "Font Size",
       description : "How many foobars?",
-      type : {8:8,12:12,14:14,18:18,24:24,32:32},
+      type : {8:8,10:10,12:12,14:14,18:18,24:24,32:32},
       defaultValue : 12, 
       onChange :setFontSize
     });
