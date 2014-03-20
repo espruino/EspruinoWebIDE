@@ -12,6 +12,8 @@
 "use strict";
 
 (function() {
+
+  var initialised = false;
   
   // handle layout
   function doLayout() {
@@ -44,6 +46,14 @@
   
   // sort all icons in a container according to their icon-order field (see addIcon)
   function sortIcons(container) {
+    if (container===undefined) {
+      sortIcons(".splitter .divider");
+      sortIcons(".toolbar .left");
+      sortIcons(".toolbar .middle");
+      sortIcons(".toolbar .right");
+      return;
+    }
+
     var mylist = $(container);
     var listitems = mylist.children(/*'a'*/).get();
     listitems.sort(function(a, b) {
@@ -81,12 +91,10 @@
     $(window).resize(doLayout);
     // layout after everything else has been added
     Espruino.addProcessor("initialised", function(data,callback) {
-      sortIcons(".splitter .divider");
-      sortIcons(".toolbar .left");
-      sortIcons(".toolbar .middle");
-      sortIcons(".toolbar .right");
+      sortIcons();
       doLayout();
       callback(data);
+      initialised = true;
     });
   }
   
@@ -112,11 +120,17 @@
     var element = $('<a class="'+elementClass+' lrg" title="'+options.title+'" icon-order="'+order+'"></a>').appendTo(area);
     element.click(callback);
     
+    if (initialised)
+      sortIcons(area);
+
     return {
       setIcon : function(icon) {
         element.removeClass(elementClass);
         elementClass = 'icon-'+icon;
         element.addClass(elementClass);
+      },
+      remove : function() {
+        element.remove();
       }
     };
   }

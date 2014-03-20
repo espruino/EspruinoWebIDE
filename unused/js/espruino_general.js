@@ -80,10 +80,6 @@ THE SOFTWARE.
         }
       ).appendTo(appendTo).fadeIn(200);      
   };
-  function switchWebCam(status){ 
-      if(status === true){ $(".webcam").show(500);}
-      else{ $(".webcam").hide(); }
-  }
   function switchReloadButton(status) {
     if (status === true) { $('.reload').show(500);}
     else { $('.reload').hide(); }

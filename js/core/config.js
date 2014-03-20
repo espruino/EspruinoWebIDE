@@ -51,8 +51,10 @@
   }
   
   function init() {
-    addSection("Communications", { sortOrder:100, description: "Settings for communicating with the Espruino Board" });
-    addSection("Board", { sortOrder:200, description: "Settings for the Espruino Board itself" });
+    addSection("General", { sortOrder:100, description: "General Web IDE Settings" });
+    addSection("Communications", { sortOrder:200, description: "Settings for communicating with the Espruino Board" });
+    addSection("Board", { sortOrder:300, description: "Settings for the Espruino Board itself" });
+    
   }
   
   function add(name, options) {
