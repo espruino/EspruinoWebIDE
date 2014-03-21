@@ -15,13 +15,15 @@
   function init() {
     // Add stuff we need
     Espruino.Core.Layout.addIcon({ name: "deploy", title : "Send to Espruino", order: 300, area: "splitter" }, function() {
-      Espruino.Core.Terminal.focus(); // give the terminal focus
-      Espruino.callProcessor("sending");
-      if (Espruino.Core.Serial.isConnected()) {
-        Espruino.Core.Code.getEspruinoCode(Espruino.Core.CodeWriter.writeToEspruino);
-      } else { 
-        Espruino.Core.Status.setError("Not Connected");
-      }
+      Espruino.Core.MenuPortSelector.ensureConnected(function() {
+        Espruino.Core.Terminal.focus(); // give the terminal focus
+        Espruino.callProcessor("sending");
+        if (Espruino.Core.Serial.isConnected()) {
+          Espruino.Core.Code.getEspruinoCode(Espruino.Core.CodeWriter.writeToEspruino);
+        } else { 
+          Espruino.Core.Status.setError("Not Connected");
+        }
+      });
     });
     
     Espruino.addProcessor("connected", function(data, callback) {

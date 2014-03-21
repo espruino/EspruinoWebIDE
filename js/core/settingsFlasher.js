@@ -43,12 +43,6 @@
   
   function startFlashing() {
     var url = $(".flash_url").val().trim();
-    
-    if (!Espruino.Core.Serial.isConnected()) {
-      Espruino.Core.Status.setStatus("Must be connected first.");
-      return;
-    }
-    
     if (url=="") {
       Espruino.Core.Status.setStatus("You must provide a firmware URL!");
       return;
@@ -56,18 +50,19 @@
     
     Espruino.Core.Layout.closePopup();
     
-    Espruino.Core.Flasher.flashDevice(url ,function (err) {
-      Espruino.Core.Terminal.grabSerialPort();
-      if (err) {
-        Espruino.Core.Status.setStatus("Error Flashing.");        
-        console.log(err);
-        writeFlashStatus("ERROR FLASHING : "+err);
-      } else {        
-        Espruino.Core.Status.setStatus("Flashing Complete");
-        writeFlashStatus("Flashing Completed Successfully");
-      }
+    Espruino.Core.MenuPortSelector.ensureConnected(function() {
+      Espruino.Core.Flasher.flashDevice(url ,function (err) {
+        Espruino.Core.Terminal.grabSerialPort();
+        if (err) {
+          Espruino.Core.Status.setStatus("Error Flashing.");        
+          console.log(err);
+          writeFlashStatus("ERROR FLASHING : "+err);
+        } else {        
+          Espruino.Core.Status.setStatus("Flashing Complete");
+          writeFlashStatus("Flashing Completed Successfully");
+        }
+      });
     });
-    
   }
   
   Espruino.Core.SettingsFlasher = {

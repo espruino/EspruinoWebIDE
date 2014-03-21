@@ -37,7 +37,7 @@
     }
   }
   
-  function createPortSelector() {
+  function createPortSelector(successCallback) {
     var popup = Espruino.Core.Layout.addPopup("Loading...", {
       title: "Select Port",
       position: "center",
@@ -64,7 +64,7 @@
         popup.html(html);      
         $(".port_selector .port").click(function () {
           popup.close();
-          openSerial($(this).attr("port"));
+          openSerial($(this).attr("port"), successCallback);
         });
       });
     }
@@ -73,7 +73,7 @@
     var refreshInterval = setInterval(refreshPorts, 2000);
   }
   
-  function openSerial(serialPort) {
+  function openSerial(serialPort, successCallback) {
     if (!serialPort) {
       Espruino.Core.Status.setError("Invalid Serial Port");
       return;
@@ -85,6 +85,8 @@
         console.log("Device found (connectionId="+cInfo.connectionId+")");        
         Espruino.Core.Terminal.grabSerialPort();
         Espruino.callProcessor("connected");
+        if (successCallback!==undefined)
+          successCallback();
       //  Espruino.Process.getProcess(setBoardConnected);
       } else {
         // fail
@@ -108,8 +110,19 @@
     });
   };
 
+  /** If we're connected, call callback, otherwise put up a connection dialog.
+   * If connection succeeds, call callback - otherwise don't */
+  function ensureConnected(callback) {
+    if (Espruino.Core.Serial.isConnected()) {
+      callback(); // great - we're done!
+    } else {
+      createPortSelector(callback);
+    }
+  }
   
   Espruino.Core.MenuPortSelector = {
       init : init,
+      
+      ensureConnected : ensureConnected,
   };
 }());
