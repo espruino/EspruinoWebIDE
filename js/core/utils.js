@@ -143,12 +143,12 @@
           // Now stop time timeout
           clearTimeout(timeout);
           // Do the next stuff
-          nextStep();
+          nextStep(result);
         }
       });
       
       // when we're done...
-      var nextStep = function() {
+      var nextStep = function(result) {
         // start the previous reader listing again
         Espruino.Core.Serial.startListening(prevReader);          
         // forward the original text to the previous reader
@@ -163,7 +163,7 @@
       //
       var timeout = setTimeout(function(){
         console.warn("No result found - just got "+JSON.stringify(receivedData));          
-        nextStep();        
+        nextStep(undefined);        
       },500);   
     }    
    
