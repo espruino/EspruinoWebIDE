@@ -14,6 +14,7 @@
 (function() {
 
   var initialised = false;
+  var popupCloseCallback;
   
   // handle layout
   function doLayout() {
@@ -139,14 +140,26 @@
    * Close a popup window if one was shown
    */
   function closePopup() {
+    if (popupCloseCallback!==undefined) {
+      popupCloseCallback();
+      popupCloseCallback = undefined;
+    }
     $(".popup").remove();
     $(".popup_overlay").remove();
   }
   
   /**
    * Add a popup window
+   * 
+   * options = {
+   *   position : "stretch" | "center",
+   *   title : "Popup Title",
+   *   onClose :function() { }
+   * }
    */
   function addPopup(contents, options) {    
+    if (options.onClose!==undefined)
+      popupCloseCallback = options.onClose;
     $('<div class="popup_overlay"></div>').appendTo(document.body).click(closePopup);
     $('<div class="popup '+options.position+'">'+
         '<div class="popup_title">'+
@@ -169,6 +182,10 @@
     };
   }
   
+  function hasPopup() {
+    return $('.popup').length != 0;
+  }
+  
   
   function isInBlockly() { // TODO: we should really enumerate views - we might want another view?
     return $("#divblockly").is(":visible");
@@ -180,6 +197,7 @@
       addIcon : addIcon,
       addPopup : addPopup,
       closePopup : closePopup,
+      hasPopup : hasPopup,
       
       isInBlockly : isInBlockly
   };

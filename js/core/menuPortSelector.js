@@ -41,24 +41,36 @@
     var popup = Espruino.Core.Layout.addPopup("Loading...", {
       title: "Select Port",
       position: "center",
-    });
-    
-    Espruino.Core.Serial.getPorts(function(items) {
-      var html = '<div class="port_selector">';
-      for (var i in items) {
-        var port = items[i];
-        html += '<div class="port" port="'+port+'">'+
-                  '<div class="icon-usb lrg"></div>'+
-                  '<div class="port_name">'+port+'</div>'+
-                '</div>';
+      onClose: function() {
+        clearInterval(refreshInterval);
+        refreshInterval = undefined;
       }
-      html += '</div>';      
-      popup.html(html);      
-      $(".port_selector .port").click(function () {
-        popup.close();
-        openSerial($(this).attr("port"));
-      });
     });
+    function refreshPorts() {
+      Espruino.Core.Serial.getPorts(function(items) {        
+        var html = '<div class="port_selector">';
+        if (items.length > 0) {
+          for (var i in items) {
+            var port = items[i];
+            html += '<div class="port" port="'+port+'">'+
+                      '<div class="icon-usb lrg"></div>'+
+                      '<div class="port_name">'+port+'</div>'+
+                    '</div>';
+          }
+        } else {
+          html += "<p>No ports found. Please wait...</p>";
+        }
+        html += '</div>';      
+        popup.html(html);      
+        $(".port_selector .port").click(function () {
+          popup.close();
+          openSerial($(this).attr("port"));
+        });
+      });
+    }
+    
+    refreshPorts();
+    var refreshInterval = setInterval(refreshPorts, 2000);
   }
   
   function openSerial(serialPort) {
