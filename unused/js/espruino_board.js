@@ -244,7 +244,7 @@ THE SOFTWARE.
     }
     function selectBoard(){ //event for change in boardlist, loads all data around board
       if(Espruino.Serial.isConnected() === true){
-        Espruino.Core.Status.setStatus("Close connection first"); 
+        Espruino.Core.Notifications.warning("Close connection first"); 
         $("#boardList").val(Espruino.Process.Env.BOARD_NAME);
       }
       else{ 

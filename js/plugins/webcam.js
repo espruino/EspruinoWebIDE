@@ -30,8 +30,8 @@
 
   function showIcon(show) {
     if (show) {
-      icon = Espruino.Core.Layout.addIcon({ name: "webcam", title : "WebCam View", order: -100, area: "right" }, toggleWebCam);    
-      $('<video autoplay id="videotag" style="background-color:black;position: absolute;left:0px;bottom: 0px;"></video>').prependTo(".splitter .left"); 
+      icon = Espruino.Core.App.addIcon({ name: "webcam", title : "WebCam View", order: -90, area: { name: "terminal", position: "top" } }, toggleWebCam);    
+      $('<video autoplay id="videotag" style="background-color:black;position: absolute;left:0;top:0;width:100%;height:100%;"></video>').prependTo(".editor--terminal .editor__canvas"); 
     } else {
       if (hasWebCam()) toggleWebCam();
       if (icon!==undefined) icon.remove();
@@ -40,7 +40,7 @@
   }
   
   function hasWebCam() {
-    return $('#terminal').hasClass("with_webcam");
+    return $('#terminal').hasClass("terminal--webcam");
   }
 
   function toggleWebCam() {
@@ -49,19 +49,19 @@
       navigator.getUserMedia  = navigator.getUserMedia || navigator.webkitGetUserMedia ||
                               navigator.mozGetUserMedia || navigator.msGetUserMedia;
       if (navigator.getUserMedia) {
-        navigator.getUserMedia({audio: false, video: { "mandatory" : { "minWidth":"1280","minHeight":"720" }}}, function(stream) {
+        navigator.getUserMedia({audio: false, video: true}, function(stream) {
           webCamStream = stream;
           $('video').attr('src', window_url.createObjectURL(stream));
-          $("#terminal").addClass("with_webcam");
+          $("#terminal").addClass("terminal--webcam");
         }, function(e) {
           console.log('onError!', e);
-          Espruino.Core.Status.setError("Problem initialising WebCam");
+          Espruino.Core.Notifications.error("Problem initialising WebCam");
         });
       }
     } else {
       webCamStream.stop();
       $('video').attr('src', "");
-      $("#terminal").removeClass("with_webcam");
+      $("#terminal").removeClass("terminal--webcam");
     } 
   };
   

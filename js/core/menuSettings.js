@@ -13,7 +13,15 @@
 (function(){
   
   function init() {
-    Espruino.Core.Layout.addIcon({ name: "settings", title : "Settings", order: 0, area: "right" }, function() {
+    Espruino.Core.App.addIcon({ 
+      name: "settings", 
+      title : "Settings", 
+      order: -100,
+      area: {
+        name: "toolbar",
+        position: "right"
+      } 
+    }, function() {
       createSettingsWindow();
     });
   }
@@ -35,8 +43,9 @@
         '</div>'+
       '</div>';
     // Create the window
-    Espruino.Core.Layout.addPopup(html, {
+    Espruino.Core.App.openPopup({
       title: "Settings",
+      contents: html,
       position: "stretch",
     });
     // Handle section changes

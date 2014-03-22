@@ -21,6 +21,28 @@
       type : "boolean",
       defaultValue : 20, 
     });    
+
+    // Setup code mode button
+    var viewButton = Espruino.Core.App.addIcon({ 
+      name: "code", 
+      title : "Switch between Code and Graphical Designer", 
+      order: 0, 
+      area: {
+        name: "code",
+        position: "bottom"
+      }
+    }, function() {
+      if (isInBlockly()) {
+        $("#divblockly").hide();
+        $("#divcode").show();
+        viewButton.setIcon("code");
+      } else {
+        $("#divcode").hide();
+        $("#divblockly").show();
+        viewButton.setIcon("block");
+      }
+    })
+
     // get code from our config area at bootup
     Espruino.addProcessor("initialised", function(data,callback) {
       var code;
@@ -43,12 +65,16 @@
     });
   }
   
+  function isInBlockly() { // TODO: we should really enumerate views - we might want another view?
+    return $("#divblockly").is(":visible");
+  };
+
   function getEspruinoCode(callback) {
     Espruino.callProcessor("transformForEspruino", getCurrentCode(), callback);
   }
   
   function getCurrentCode() {
-    if (Espruino.Core.Layout.isInBlockly()) {
+    if (isInBlockly()) {
       return Espruino.Core.EditorBlockly.getCode();
     } else {
       return Espruino.Core.EditorJavaScript.getCode();
@@ -59,5 +85,6 @@
     init : init,
     getEspruinoCode : getEspruinoCode, // get the currently selected bit of code ready to send to Espruino (including Modules)
     getCurrentCode : getCurrentCode, // get the currently selected bit of code (either blockly or javascript editor)
+    isInBlockly: isInBlockly
   };
 }());

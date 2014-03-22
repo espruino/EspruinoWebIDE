@@ -1,0 +1,115 @@
+/* 
+    ===================================================
+    Abstracts
+    ===================================================
+*/
+
+ .h-split
+ {
+    display: table;
+    width: 100%;
+ }
+
+  .h-split__left,
+  .h-split__right 
+  {
+      display: table-cell;
+      vertical-align: top;
+  }
+
+  .h-split--middle .h-split__left,
+  .h-split--middle .h-split__right
+  {
+      vertical-align: middle;
+  }
+
+  .h-split--bottom .h-split__left,
+  .h-split--bottom .h-split__right 
+  {
+      vertical-align: bottom;
+  }
+
+  .h-split__left 
+  {
+
+  }
+
+  .h-split__right 
+  {
+      direction: rtl;
+  }
+
+    .h-split__right > * 
+    {
+        direction: ltr;
+    }
+
+.v-split
+{
+  position: relative;
+  display: table;
+  height: 100%;
+}
+
+  .v-split__top,
+  .v-split__bottom 
+  {
+      display: table-row;
+      vertical-align: top;
+      height: auto;
+  }
+
+  .v-split__bottom 
+  {
+      vertical-align: bottom;
+      height: 1px;
+  }
+
+  .v-split__bottom > *
+  {
+      vertical-align: bottom;
+  }
+
+.button 
+{
+  position: relative;
+  display: inline-block;
+  background: #ccc;
+  border: 0;
+  cursor: pointer;
+  padding: 10px;
+  height: 60px;
+}
+
+  .button--wide
+  {
+    width: 100%;
+  }
+
+  .button--icon
+  {
+    border-left: 60px solid #999;
+  }
+
+  .button--icon .button__icon
+  {
+    position: absolute;
+    top: 0;
+    left: -60px;
+  }
+
+  .button:hover 
+  {
+    color: #fff !important;
+    background: #2ecc71;
+  }
+
+  .button:hover *
+  {
+    color: #fff !important;
+  }
+
+  .button--icon:hover 
+  {
+    border-left-color: #27ae60;
+  }

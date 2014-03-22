@@ -114,7 +114,7 @@ THE SOFTWARE.
         $(".stopDisplay").button( "option", "disabled", false);
         $(".runDisplay").button( "option", "disabled", true);
       }
-      else{Espruino.Core.Status.setError("not connected");}
+      else{Espruino.Core.Notifications.error("not connected");}
     }
     function stopDisplay(e){
       Espruino.Serial.write('\x03clearInterval(' + intervalName + ');\ndelete ' + intervalName + ';\necho(1);\n')

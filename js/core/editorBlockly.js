@@ -19,7 +19,7 @@
   };
   
   function init() {
-    $('<iframe id="divblockly" style="display:none;border:none;" src="blockly/blockly.html"></iframe>').appendTo(".splitter .right");
+    $('<iframe id="divblockly" class="blocky" style="display:none;border:none;" src="blockly/blockly.html"></iframe>').appendTo(".editor--code .editor__canvas");
   }
   
   function getCode() {

@@ -1,0 +1,301 @@
+/* 
+  ===================================================
+  Components
+  ===================================================
+*/
+
+/* Window */
+.window
+{
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+  .window--modal
+  {
+  	display: inline-block;
+  	text-align: left;
+    background: white;
+    z-index: 200;
+  	width: 300px;
+  	min-height: 300px;
+  	height: auto;
+  }
+
+  .window--modal.window--stretch
+  {
+    display: block;
+    position: absolute;
+  	top: 30px;
+  	left: 30px;
+  	right: 30px;
+  	bottom: 30px;
+  	width: auto;
+  	height: auto;
+  }
+
+  .window__title-bar 
+  {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+
+  .window--app > .window__title-bar
+  {
+    z-index: 100;
+    -webkit-app-region: drag;
+  }
+
+  .window--modal .window__title-bar .title-bar__title
+  {
+    text-align: left;
+  }
+
+  .window__viewport
+  {
+    position: absolute;
+    top: 30px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: auto;
+  }
+
+  .window--modal .window__viewport
+  {
+  	padding: 10px;
+  }
+
+  .window__overlay 
+  {
+  	display: table;
+	position: absolute;
+	top: 0;
+	left: 0;
+  	width: 100%;
+  	height: 100%;
+	background: rgba(0,0,0,0.4);
+	z-index: 199;
+  }
+
+  .window__overlay-inner
+  {
+  	display: table-cell;
+   	text-align: center;
+   	vertical-align: middle;
+  }
+
+
+/* Title Bar */
+.title-bar
+{
+  background: #333;
+  color: #fff;
+  height: 30px;
+}
+
+  .title-bar__title
+  {
+    text-align: center;
+    font-size: 100%;
+    line-height: 30px;
+    text-transform: uppercase;
+    margin: 0;
+    padding: 0 10px;
+  }
+
+  .title-bar__buttons
+  {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  .title-bar__button 
+  {
+    display: inline-block;
+    -webkit-app-region: no-drag
+  }
+
+/* Toolbar */
+.toolbar 
+{
+  position: relative;
+  background: #3498db;
+  height: 60px;
+  padding: 0px;
+}
+
+/* Split Pane */
+.split-pane
+{
+	position: absolute;
+	margin-top: 60px;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+}
+
+/* Editor Wrapper */
+.editor
+{
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+	.editor__sidebar
+	{
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+
+	.editor__canvas
+	{
+		position: absolute;
+		top: 0;
+		left: 60px;
+		right: 0;
+		bottom: 0;
+    overflow: hidden;
+	}
+
+/* Sidebar */
+.sidebar
+{
+	background: #42484a;
+	width: 60px;
+	height: 100%;
+	overflow: visible;
+}
+
+	.sidebar .v-split 
+	{
+		background: #42484a;
+	}
+
+/* Port List */
+.port-list,
+.port-list__item
+{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+	.port-list__item
+	{
+		margin-bottom: 10px;
+	}
+
+	.port-list__item__name
+	{
+		font-weight: normal;
+    font-size: 150%;
+    line-height: 40px;
+    padding-left: 5px;
+	}
+
+/* Terminal */
+/* ----------------------------------------------------- */
+
+
+.terminal 
+{
+  font-family: Fixed, monospace;
+  font-size: 12px;
+  background-color: #222;
+  color: white;
+  display: block;
+  border: 0;
+  padding: 10px;
+  overflow: auto; /* adds scrollbar if needed */
+
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  bottom: 0px;
+  right: 0px;
+  
+  -o-user-select: text;
+  -moz-user-select: text;
+  -webkit-user-select: text;  
+  user-select: text;
+}
+
+.terminal.focus 
+{
+  background-color: #333;
+}
+
+.terminal__focus 
+{
+  position: absolute;
+  top: -100px;  /* hide it */
+}
+
+.terminal--webcam
+{
+  background: none;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 8px;
+  /*  color : white;
+  text-shadow: -1px -1px black, 1px 1px black, 1px -1px black, -1px 1px black,
+               -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black,
+               -2px -2px black, 2px 2px black, 2px -2px black, -2px 2px black,
+               -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black,
+               -3px 0 black, 0 3px black, 3px 0 black, 0 -3px black;  */
+  color : black;
+  text-shadow: -1px -1px white, 1px 1px white, 1px -1px white, -1px 1px white,
+               -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white,
+               -2px -2px rgba(255,255,255,0.5), 2px 2px rgba(255,255,255,0.5), 2px -2px rgba(255,255,255,0.5), -2px 2px rgba(255,255,255,0.5),
+               -2px 0 rgba(255,255,255,0.5), 0 2px rgba(255,255,255,0.5), 2px 0 rgba(255,255,255,0.5), 0 -2px rgba(255,255,255,0.5),
+               -3px 0 rgba(255,255,255,0.2), 0 3px rgba(255,255,255,0.2), 3px 0 rgba(255,255,255,0.2), 0 -3px rgba(255,255,255,0.2);
+}
+
+.terminal--webcam.focus
+{
+  background: transparent;
+}
+
+.terminal a 
+{
+  color:#88F;
+}
+.terminal a:visited 
+{
+  color:#88F;
+}
+
+.terminal--connected .terminal__cursor 
+{
+  -webkit-animation: blink 1s infinite steps(1, start);
+  animation: blink 1s infinite steps(1, start);
+}
+
+@keyframes blink {
+  0%, 100% {
+        background-color: transparent;
+        color: #aaa;
+  }
+  50% {
+        background-color: #fff; /* not #aaa because it's seem there is Google Chrome bug */
+        color: #000;
+  }
+}
+@-webkit-keyframes blink {
+  0%, 100% {
+        background-color: transparent;
+        color: #aaa;
+  }
+  50% {
+        background-color: #fff;
+        color: #000;
+  }
+}

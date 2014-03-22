@@ -1,3 +1,8 @@
+/* 
+  ===================================================
+  Main
+  ===================================================
+*/
 html, body {
   height: 100%;
   margin: 0;
@@ -11,117 +16,27 @@ body {
   overflow: hidden;
 }
 
-#toolbar {
-  position: relative;
-  background: #3498db;
-  height: 60px;
-  padding: 0px;
+a, button, .no-drag
+{
+  -webkit-app-region: no-drag;
 }
 
-#toolbar > div { /* .left .middle .right */
-  position: absolute;
-  top : 0px;
+::-webkit-scrollbar 
+{
+  background: #ecf0f1;
+  width: 15px;
 }
 
-#toolbar > div > div { /* buttons inside toolbars */
-  position: absolute;
-  top : 0px;
+::-webkit-scrollbar-thumb 
+{
+    background: #bdc3c7;
+  border: 5px solid #ecf0f1;
 }
 
-#toolbar .right {
-  right: 0px;
+::-webkit-scrollbar-thumb:hover
+{
+    background: #42484a;
 }
-/* ----------------------------------------------------- */
-.splitter {
-  display: block;
-  position: relative;
-}
-
-.splitter > div { /* .left .divider .right */
-  position: absolute;
-  top : 0px;
-}
-
-.splitter .divider {
-  display:block;
-  width:60px;
-  background: #42484a;
-}
-/* ----------------------------------------------------- */
-
-.popup_overlay {
-  background-color: #000000;
-  display: block;
-  opacity: 0.5;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  z-index: 2000;
-}
-
-
-.popup {
-  background-color: #FFFFFF;
-  display: block;
-  position: absolute;
-  z-index: 2001;
-  min-width: 200px;
-  min-height: 100px;
-}
-
-.popup_title {
-  color: #FFFFFF;
-  background-color: #42484a;
-  display: block;
-  height: 24px;
-  padding-top: 6px;
-  padding-left: 4px;
-  font-weight: bold;
-  font-size: 150%;    
-}
-
-.popup_title .icon-cross {
-  position: absolute;
-  top: 0px;
-  right: 0px;
-}
-
-.popup.stretch .popup_contents { 
-  position: absolute;
-  top: 34px;
-  bottom: 4px;
-  left: 4px;
-  right: 4px;
-}
-
-/* ----------------------------------------------------- */
-
-.port_selector {
-	margin: 4px;
-}
-
-.port_selector .port {
-	position:relative; 
-	width: 350px;
-	height: 60px;
-	background-color: #EEE;
-	margin: 2px;
-}
-
-.port_selector .port .port_name {
-	position:absolute;
-	left: 74px; 
-	top:50%; 
-	font-size: 16px;
-	margin-top:-8px;
-}
-
-.port_selector .port .icon-usb {
-	background-color: #CCC;
-}
-
-.port_selector .port:hover { background-color: #2ecc71; }
-.port_selector .port:hover .icon-usb { background-color: #27ae60; }
 
 /* ----------------------------------------------------- */
 
@@ -194,68 +109,6 @@ body {
     display: block;
 }
 
-/* ----------------------------------------------------- */
-
-
-#terminal {
-  font-family: Fixed, monospace;
-  font-size: 12px;
-  background-color: #000;
-  color: white;
-  display: block;
-  border: 2px solid #000;
-  overflow: auto; /* adds scrollbar if needed */
-
-  position: absolute;
-  left: 0px;
-  top: 0px;
-  bottom: 0px;
-  
-    -o-user-select: text;
-    -moz-user-select: text;
-    -webkit-user-select: text;  
-  user-select: text;
-}
-
-#terminal.focus {
- border: 2px solid #666; 
-}
-
-#terminalfocus {
-  position: absolute;
-  top: -100px;  /* hide it */
-}
-
-#terminal.with_webcam {
-  background: none;
-  font-size: 18px;
-  font-weight: bold;
-  padding: 8px;
-/*  color : white;
-  text-shadow: -1px -1px black, 1px 1px black, 1px -1px black, -1px 1px black,
-               -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black,
-               -2px -2px black, 2px 2px black, 2px -2px black, -2px 2px black,
-               -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black,
-               -3px 0 black, 0 3px black, 3px 0 black, 0 -3px black;	*/
-  color : black;
-  text-shadow: -1px -1px white, 1px 1px white, 1px -1px white, -1px 1px white,
-               -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white,
-               -2px -2px rgba(255,255,255,0.5), 2px 2px rgba(255,255,255,0.5), 2px -2px rgba(255,255,255,0.5), -2px 2px rgba(255,255,255,0.5),
-               -2px 0 rgba(255,255,255,0.5), 0 2px rgba(255,255,255,0.5), 2px 0 rgba(255,255,255,0.5), 0 -2px rgba(255,255,255,0.5),
-               -3px 0 rgba(255,255,255,0.2), 0 3px rgba(255,255,255,0.2), 3px 0 rgba(255,255,255,0.2), 0 -3px rgba(255,255,255,0.2);
-}
-
-#terminal a {
-  color:#88F;
-}
-#terminal a:visited {
-  color:#88F;
-}
-
-.termCursor {
-  background-color: #FFF;
-  color: #888;
-}
 
 /* ----------------------------------------------------- */
 
@@ -295,13 +148,14 @@ body {
   overflow-x: auto;
 }
 
-.CodeMirror {
-  border: 1px solid #eee;
-  height: auto;
+.blocky 
+{
+  width: 100%;
+  height: 100%;
 }
-.CodeMirror-scroll {
-  overflow-y: hidden;
-  overflow-x: auto;
+
+.CodeMirror {
+  height: 100%;
 }
 
 .lint-error {font-family: arial; font-size: 70%; background: #ffa; color: #a00; padding: 2px 5px 3px; }

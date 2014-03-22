@@ -14,88 +14,118 @@
   
   var connectButton;
   
-  function init() {
-    connectButton = Espruino.Core.Layout.addIcon({ name: "connect", title : "Connect / Disconnect", order: -1000, area: "left" }, toggleConnection);
+  function init() 
+  {
+    connectButton = Espruino.Core.App.addIcon({ 
+      name: "connect", 
+      title : "Connect / Disconnect", 
+      order: -1000, 
+      area: {
+        name: "toolbar",
+        position: "left"
+      } 
+    }, 
+    toggleConnection);
     
     Espruino.addProcessor("connected", function(data, callback) {
       connectButton.setIcon("disconnect");
-      $(".serial_devices").prop('disabled', true);
+      //$(".serial_devices").prop('disabled', true);
       callback(data);
     });
+
     Espruino.addProcessor("disconnected", function(data, callback) {
       connectButton.setIcon("connect");
-      $(".serial_devices").prop('disabled', false);
+      //$(".serial_devices").prop('disabled', false);
       callback(data);
     });    
   }
  
   function toggleConnection() {
     if (Espruino.Core.Serial.isConnected()) {
-      closeSerial();
+      disconnect();
     } else {
       createPortSelector();
     }
   }
   
-  function createPortSelector() {
-    var popup = Espruino.Core.Layout.addPopup("Loading...", {
-      title: "Select Port",
+  function createPortSelector() 
+  {
+    var checkInt, popup;
+
+    function selectPort()
+    {
+      connectToPort($(this).data("port"), function(success){
+        if(success){
+          clearInterval(checkInt);
+          popup.close();
+          $(".window--modal").off("click", ".port-list__item a", selectPort);
+        }
+      });
+    }
+
+    function getPorts()
+    {
+      Espruino.Core.Serial.getPorts(function(items) {
+
+        var html = '<ul class="port-list">';
+        for (var i in items) {
+          var port = items[i];
+          html += '<li class="port-list__item">'+
+                    '<a title="'+ port +'" class="button button--icon button--wide" data-port="'+ port +'">'+
+                      '<i class="icon-usb lrg button__icon"></i>'+
+                      '<span class="port-list__item__name">'+ port +'</span>'+
+                    '</a>'
+                  '</li>';
+        }
+        html += '</ul>';    
+
+        popup.setContents(html);   
+
+      });
+    }
+
+    popup = Espruino.Core.App.openPopup({
+      title: "Select a port...",
+      contents: "Loading...",
       position: "center",
     });
-    
-    Espruino.Core.Serial.getPorts(function(items) {
-      var html = '<div class="port_selector">';
-      for (var i in items) {
-        var port = items[i];
-        html += '<div class="port" port="'+port+'">'+
-                  '<div class="icon-usb lrg"></div>'+
-                  '<div class="port_name">'+port+'</div>'+
-                '</div>';
-      }
-      html += '</div>';      
-      popup.html(html);      
-      $(".port_selector .port").click(function () {
-        popup.close();
-        openSerial($(this).attr("port"));
-      });
-    });
+
+    $(".window--modal").on("click", ".port-list__item a", selectPort);
+
+    checkInt = setInterval(getPorts, 3000);
+    getPorts();
+
   }
-  
-  function openSerial(serialPort) {
+
+  function connectToPort(serialPort, callback) 
+  {
     if (!serialPort) {
-      Espruino.Core.Status.setError("Invalid Serial Port");
+      Espruino.Core.Notifications.error("Invalid Serial Port");
       return;
     }
-    Espruino.Core.Status.setStatus("Connecting");
+
     Espruino.Core.Serial.setSlowWrite(true);
     Espruino.Core.Serial.open(serialPort, function(cInfo) {
       if (cInfo!=undefined) {
-        console.log("Device found (connectionId="+cInfo.connectionId+")");        
-        Espruino.Core.Terminal.grabSerialPort();
-        Espruino.callProcessor("connected");
-      //  Espruino.Process.getProcess(setBoardConnected);
+        console.log("Device found (connectionId="+ cInfo.connectionId +")");        
+        Espruino.Core.Notifications.success("Connected to port "+ serialPort);
+        callback(true);
       } else {
         // fail
-        Espruino.callProcessor("disconnected");
-        Espruino.Core.Status.setStatus("Connect Failed.");
+        Espruino.Core.Notifications.error("Connection Failed.");
+        callback(false);
       }
     }, function () {
       console.log("Force disconnect");
-      closeSerial(); // force disconnect
+      Espruino.Core.Notifications.warning("Disconnected");
     });
-    function setBoardConnected(){
-      Espruino.Core.Status.setStatus("Connected");
-      Espruino.Board.setBoard(Espruino.Process.Env.BOARD);
-    }
+
   };
 
-  function closeSerial() {
-    Espruino.Core.Serial.close(function(result) {
-      Espruino.callProcessor("disconnected");
-      Espruino.Core.Status.setStatus("Disconnected");
-    });
-  };
-
+  function disconnect()
+  {
+    Espruino.Core.Serial.close();
+  }
   
   Espruino.Core.MenuPortSelector = {
       init : init,
