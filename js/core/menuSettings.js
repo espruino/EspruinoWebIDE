@@ -36,7 +36,7 @@
       '<div class="settings">'+
         '<div class="sections">';   
     for (var i in sections)
-      html += '<a name="'+sections[i].name+'" title="'+sections[i].description+'"><div class="icon-forward sml"></div><span>'+sections[i].name+'</span></a>';
+      html += '<a name="'+sections[i].name+'" title="'+ sections[i].description +'"><div class="icon-forward sml"></div><span>'+sections[i].name+'</span></a>';
     html +=    
         '</div>'+
         '<div class="currentsection">'+
@@ -74,8 +74,10 @@
     
     var html = "<h1>"+sectionName+"</h1>";
     if (section.description!==undefined)
-      html += "<p>"+Espruino.Core.Utils.escapeHTML(section.description)+"<p>";
+      html += "<p>"+Espruino.Core.Utils.escapeHTML(section.description, false) +"<p>";
     
+    console.log(html.replace("&nbsp;", " "));
+
     // if there's a built-in handler...
     if (section.getHTML!==undefined) {
       section.getHTML(function (data) {
@@ -115,7 +117,7 @@
     var html = 
       '<h3>'+Espruino.Core.Utils.escapeHTML(config.name)+'</h3>';
     var desc =
-      '<p>'+Espruino.Core.Utils.escapeHTML(config.description)+'</p>';
+      '<p>'+Espruino.Core.Utils.escapeHTML(config.description, false)+'</p>';
     // type : "int"/"boolean"/"string"/{ value1:niceName, value2:niceName },
     if (config.type == "boolean") {
       html += '<input name="'+configName+'" type="checkbox" style="float: right;" '+(value?"checked":"")+'/>';

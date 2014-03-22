@@ -24,8 +24,12 @@
     return parseInt(window.navigator.appVersion.match(/Chrome\/(.*?) /)[1].split(".")[0]);
   }
   
-  function escapeHTML(text) {
-    var chr = { '"': '&quot;', '&': '&amp;', '<': '&lt;', '>': '&gt;', ' ': '&nbsp;' };
+  function escapeHTML(text, escapeSpaces) 
+  {
+    escapeSpaces = typeof escapeSpaces !== 'undefined' ? escapeSpaces : true;
+
+    var chr = { '"': '&quot;', '&': '&amp;', '<': '&lt;', '>': '&gt;', ' ' : (escapeSpaces ? '&nbsp;' : ' ') };
+    
     return text.toString().replace(/[\"&<> ]/g, function (a) { return chr[a]; });    
   }
   

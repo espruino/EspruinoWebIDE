@@ -64,11 +64,6 @@
     overflow: auto;
   }
 
-  .window--modal .window__viewport
-  {
-  	padding: 10px;
-  }
-
   .window__overlay 
   {
   	display: table;
@@ -136,9 +131,52 @@
 	margin-top: 60px;
 	top: 0;
 	right: 0;
-	bottom: 0;
+	bottom: 30px;
 	left: 0;
 }
+
+/* Status */
+.status 
+{
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: #42484a;
+  color: #fff;
+  height: 30px;
+  width: 100%;
+}
+
+  .status__message 
+  {
+    display: inline-block;
+    font-size: 100%;
+    line-height: 30px;
+    text-transform: uppercase;
+    margin: 0;
+    padding: 0 10px;
+  }
+
+/* Progress */
+.status__progress
+{
+  position: relative;
+  display: inline-block;
+  width: 180px; 
+  height: 4px;
+  margin: 13px 13px;
+  vertical-align: middle;
+  background: rgba(0,0,0,0.2);
+}
+
+  .status__progress-bar
+  {
+    background: #2ecc71;
+    width: 0%;
+    height: 4px;
+    max-width: 100% !important;
+  }
 
 /* Editor Wrapper */
 .editor
@@ -187,6 +225,11 @@
 	padding: 0;
 	list-style: none;
 }
+
+  .port-list 
+  {
+    margin: 10px;
+  }
 
 	.port-list__item
 	{
@@ -298,4 +341,131 @@
         background-color: #fff;
         color: #000;
   }
+}
+
+/* Tutorial */
+.tutorial_text {
+    background-color : #222;
+    border: 1px solid #888;
+    border-radius: 10px;
+    padding: 4px;
+    margin-left: 16px;
+    margin-right: 16px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+.tutorial_text .code {
+    background-color : #333;
+    border: 1px solid #888;
+    border-radius: 5px;
+    padding: 2px;
+}
+
+.tutorial_code {
+    background-color : #333;
+    border: 1px solid #888;
+    border-radius: 5px;
+    padding: 4px;
+    margin-top: 8px;
+    font-weight: bold;
+    color: #CFC;
+}
+
+/* Code Editors */
+#divcode {
+  overflow-y: auto;
+  overflow-x: auto;
+}
+
+.blocky 
+{
+  width: 100%;
+  height: 100%;
+}
+
+.CodeMirror {
+  height: 100%;
+}
+
+.lint-error {font-family: arial; font-size: 70%; background: #ffa; color: #a00; padding: 2px 5px 3px; }
+.lint-error-icon {color: white; background-color: red; font-weight: bold; border-radius: 50%; padding: 0 3px; margin-right: 7px;}
+.cm-trailingspace {
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAYAAAC09K7GAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9sJFhQXEbhTg7YAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAAMklEQVQI12NkgIIvJ3QXMjAwdDN+OaEbysDA4MPAwNDNwMCwiOHLCd1zX07o6kBVGQEAKBANtobskNMAAAAASUVORK5CYII=");
+    background-position: bottom left;
+    background-repeat: repeat-x;
+}
+.CodeMirror-focused .cm-matchhighlight {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAFklEQVQI12NgYGBgkKzc8x9CMDAwAAAmhwSbidEoSQAAAABJRU5ErkJggg==);
+    background-position: bottom;
+    background-repeat: repeat-x;
+}
+
+/* Settings */
+.settings {
+  position:relative; 
+  height:100%;
+  overflow: hidden;
+}
+
+  .settings .sections 
+  {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #42484a;
+    width: 180px;
+    height: 100%;
+  }
+
+    .settings .sections a 
+    {
+        display: block;
+        color: #fff;
+        font-size: 12px;
+        font-weight: bold;
+        text-transform: uppercase;
+        height: 30px;  
+        cursor: pointer;
+    }
+
+    .settings .sections a:hover 
+    {
+      background: rgba(0,0,0,0.4);
+    }
+
+    .settings .sections [class*="icon-"]
+    {
+      vertical-align: middle;
+    }
+
+    .settings .sections a.current 
+    {
+      position: relative;
+      background-color: #2ecc71;
+    }
+
+    .settings .sections a.current:after 
+    {
+      content: '';
+      position: absolute;
+      border-style: solid;
+      border-width: 5px 0 5px 5px;
+      border-color: transparent #2ecc71;
+      display: block;
+      width: 0;
+      z-index: 1;
+      right: -5px;
+      top: 10px;
+    }
+
+.settings .currentsection 
+{
+    position:absolute; 
+    top: 0;
+    left: 180px;
+    right: 0px;
+    bottom: 0px;
+    overflow: auto;
+    padding: 15px 30px;
 }

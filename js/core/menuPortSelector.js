@@ -54,9 +54,9 @@
 
     function selectPort()
     {
+      Espruino.Core.Status.setStatus("Connecting...");
       connectToPort($(this).data("port"), function(success){
         if(success){
-          clearInterval(checkInt);
           popup.close();
           $(".window--modal").off("click", ".port-list__item a", selectPort);
         }
@@ -84,6 +84,7 @@
       });
     }
 
+    // Launch the popup
     popup = Espruino.Core.App.openPopup({
       title: "Select a port...",
       contents: "Loading...",
@@ -92,8 +93,20 @@
 
     $(".window--modal").on("click", ".port-list__item a", selectPort);
 
+    // Setup checker interval
     checkInt = setInterval(getPorts, 3000);
     getPorts();
+
+
+    // Make sure any calls to close popup, also clear
+    // the port check interval
+    var oldPopupClose = popup.close;
+    popup.close = function()
+    {
+      clearInterval(checkInt);
+      oldPopupClose();
+      popup.close = oldPopupClose;
+    }
 
   }
 
@@ -108,16 +121,16 @@
     Espruino.Core.Serial.open(serialPort, function(cInfo) {
       if (cInfo!=undefined) {
         console.log("Device found (connectionId="+ cInfo.connectionId +")");        
-        Espruino.Core.Notifications.success("Connected to port "+ serialPort);
+        Espruino.Core.Notifications.success("Connected to port "+ serialPort, true);
         callback(true);
       } else {
         // fail
-        Espruino.Core.Notifications.error("Connection Failed.");
+        Espruino.Core.Notifications.error("Connection Failed.", true);
         callback(false);
       }
     }, function () {
       console.log("Force disconnect");
-      Espruino.Core.Notifications.warning("Disconnected");
+      Espruino.Core.Notifications.warning("Disconnected", true);
     });
 
   };

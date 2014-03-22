@@ -59,8 +59,6 @@
       orientationBtn.setIcon("split-" + orientation);
     });
 
-    //Espruino.Core.Notifications.error("Something good");
-
     // layout after everything else has been added
     Espruino.addProcessor("initialised", function(data,callback) {
       sortIcons();
@@ -103,8 +101,21 @@
    */
   function openPopup(options) 
   {    
+    // Declare API first, as we need to make sure the close button / overlay click
+    // call the methods on the API object, rathert than a copy of the close method
+    // so that the close method can be overridden with extra logic if needed.
+    var api = {
+      setContents : function(contents) 
+      { 
+        $(".window--modal > .window__viewport").html(contents);
+      },
+      close : closePopup
+    }
+
     // Append the modal overlay
-    $('<div class="window__overlay"><div class="window__overlay-inner"></div></div>').appendTo(".window--app > .window__viewport").click(closePopup);
+    $('<div class="window__overlay"><div class="window__overlay-inner"></div></div>').appendTo(".window--app > .window__viewport").click(function(){
+      api.close();
+    });
 
     // Append the popup window
     $('<div class="window window--modal window--'+ options.position +'">'+
@@ -118,7 +129,9 @@
         '</div>').appendTo(".window__overlay-inner").click(function(e){ e.stopPropagation(); })
 
     // Append close button
-    $('<a class="icon-cross sml title-bar__button title-bar__button--close" title="Close"></a>').appendTo(".window--modal .title-bar__buttons").click(closePopup);
+    $('<a class="icon-cross sml title-bar__button title-bar__button--close" title="Close"></a>').appendTo(".window--modal .title-bar__buttons").click(function(){
+      api.close();
+    });
 
     // Apply dimensions
     if(options.width)
@@ -131,13 +144,7 @@
       $(".window--modal").height(options.height);
     }
     
-    return {
-      setContents : function(contents) 
-      { 
-        $(".window--modal > .window__viewport").html(contents);
-      },
-      close : closePopup,
-    };
+    return api;
   }
 
   /**

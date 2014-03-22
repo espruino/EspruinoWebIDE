@@ -130,7 +130,7 @@ THE SOFTWARE.
         setTimeout(function(evt){
           fileWriter.seek(0);
           fileWriter.write(bb);
-          //Espruino.Core.Status.setStatus("Project saved");
+          Espruino.Core.Notifications.success("Project saved");
         },200);
       });
       $(".subform").hide();

@@ -35,21 +35,29 @@
 
   Espruino.Core.Notifications = {
       init : init,
-      success: function(msg)
+      success: function(msg, setStatus)
       {
         toastr.success(msg);
+        if(setStatus)
+          Espruino.Core.Status.setStatus(msg);
       },
-      error: function(msg)
+      error: function(msg, setStatus)
       {
         toastr.error(msg);
+        if(setStatus)
+          Espruino.Core.Status.setStatus(msg);
       },
-      warning: function(msg)
+      warning: function(msg, setStatus)
       {
         toastr.warning(msg);
+        if(setStatus)
+          Espruino.Core.Status.setStatus(msg);
       },
-      info: function(msg)
+      info: function(msg, setStatus)
       {
         toastr.info(msg);
+        if(setStatus)
+          Espruino.Core.Status.setStatus(msg);
       }
   };
   
