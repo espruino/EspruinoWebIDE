@@ -75,8 +75,6 @@
     var html = "<h1>"+sectionName+"</h1>";
     if (section.description!==undefined)
       html += "<p>"+Espruino.Core.Utils.escapeHTML(section.description, false) +"<p>";
-    
-    console.log(html.replace("&nbsp;", " "));
 
     // if there's a built-in handler...
     if (section.getHTML!==undefined) {
