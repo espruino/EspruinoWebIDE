@@ -58,7 +58,7 @@
 
     // Populate terminal
     $.get("data/terminal_initial.html", function (data){
-      $("#terminal").html(data);      
+      $("#terminal").html(data);  
     });
     
     $("#terminal").mouseup(function() {

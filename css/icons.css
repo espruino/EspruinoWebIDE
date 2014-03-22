@@ -54,6 +54,10 @@ a.icon-disconnect:hover { background-color: #27ae60; }
     height: 30px;
 }
 
+.icon--divide-right { border-right: solid 1px rgba(255,255,255,0.3); }
+.icon--divide-left { border-left: solid 1px rgba(255,255,255,0.3); }
+.icon--divide-bottom { border-bottom: solid 1px rgba(255,255,255,0.3); }
+.icon--divide-top { border-top: solid 1px rgba(255,255,255,0.3); }
 
 .icon-cross.lrg:before { background-position: 0 0 }
 .icon-cross.sml:before { background-position: -60px 0 }
@@ -147,3 +151,6 @@ a.icon-disconnect:hover { background-color: #27ae60; }
 
 .icon-help.lrg:before { background-position: 0 -1800px }
 .icon-help.sml:before { background-position: -60px -1800px }
+
+.icon-compass.lrg:before { background-position: 0 -1860px }
+.icon-compass.sml:before { background-position: -60px -1860px }

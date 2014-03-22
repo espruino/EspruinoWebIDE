@@ -9,6 +9,11 @@ h1
 	margin-top: 0;
 }
 
+h1 img 
+{
+	vertical-align: middle;
+}
+
 .settings h1 
 {
 	text-transform: uppercase;

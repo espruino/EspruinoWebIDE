@@ -48,7 +48,8 @@
     var orientationBtn = Espruino.Core.App.addIcon({ 
       name: "split-" + orientation, 
       title : "Toggle Orientation", 
-      order: -90, 
+      order: -80, 
+      divider: "right",
       area: { 
         name: "toolbar", 
         position: "right" 
@@ -183,6 +184,8 @@
 
     var elementClass = 'icon-'+ options.name;    
     var element = $('<a class="'+ elementClass +' lrg" title="'+ options.title +'" data-icon-order="'+ order +'"></a>').appendTo(container);
+    if(options.divider)
+      element.addClass("icon--divide-"+ options.divider);
     element.click(callback);
     
     if (initialised)
