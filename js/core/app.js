@@ -13,7 +13,6 @@
 
 (function() {
 
-  var iconsCache = [];
   var defaultIcon = {
     area: {
       name: "toolbar",
@@ -222,7 +221,11 @@
         if(menuEl.length == 0)
            menuEl = $('<div class="menu"></div>').appendTo(element)
 
-        var menuItemEl = $('<a data-id="'+ options.id +'" title="'+ options.title +'" data-icon-order="'+ 1 +'"><i class="icon-'+ options.icon +' sml"></i> '+ options.title +'</a>').appendTo(menuEl);
+        var order = 0;
+        if (options.order !== undefined) 
+          order = options.order;
+
+        var menuItemEl = $('<a data-id="'+ options.id +'" title="'+ options.title +'" data-icon-order="'+ order +'"><i class="icon-'+ options.icon +' sml"></i> '+ options.title +'</a>').appendTo(menuEl);
         if(options.click)
           menuItemEl.click(function(e){
             e.stopPropagation();
