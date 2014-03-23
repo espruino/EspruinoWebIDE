@@ -24,24 +24,26 @@
 
     // Setup code mode button
     var viewButton = Espruino.Core.App.addIcon({ 
-      name: "code", 
+      id: "code",
+      icon: "code", 
       title : "Switch between Code and Graphical Designer", 
       order: 0, 
       area: {
         name: "code",
         position: "bottom"
+      },
+      click: function() {
+        if (isInBlockly()) {
+          $("#divblockly").hide();
+          $("#divcode").show();
+          viewButton.setIcon("code");
+        } else {
+          $("#divcode").hide();
+          $("#divblockly").show();
+          viewButton.setIcon("block");
+        }
       }
-    }, function() {
-      if (isInBlockly()) {
-        $("#divblockly").hide();
-        $("#divcode").show();
-        viewButton.setIcon("code");
-      } else {
-        $("#divcode").hide();
-        $("#divblockly").show();
-        viewButton.setIcon("block");
-      }
-    })
+    });
 
     // get code from our config area at bootup
     Espruino.addProcessor("initialised", function(data,callback) {

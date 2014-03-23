@@ -30,7 +30,17 @@
 
   function showIcon(show) {
     if (show) {
-      icon = Espruino.Core.App.addIcon({ name: "webcam", title : "WebCam View", order: -90, area: { name: "terminal", position: "top" } }, toggleWebCam);    
+      icon = Espruino.Core.App.addIcon({ 
+        id: "webcam",
+        icon: "webcam", 
+        title : "WebCam View", 
+        order: -90, 
+        area: { 
+          name: "terminal", 
+          position: "top" 
+        },
+        click: toggleWebCam
+      });    
       $('<video autoplay id="videotag" style="background-color:black;position: absolute;left:0;top:0;width:100%;height:100%;"></video>').prependTo(".editor--terminal .editor__canvas"); 
     } else {
       if (hasWebCam()) toggleWebCam();

@@ -17,15 +17,35 @@
     
    
     // Add stuff we need
-    Espruino.Core.App.addIcon({ name: "folder-open", title : "Open File", order: 100, area: { name: "code", position: "top"} }, function() {
-      $( "#fileLoader" ).click();
+    Espruino.Core.App.addIcon({ 
+      id: "openFile",
+      icon: "folder-open", 
+      title : "Open File", 
+      order: 100, 
+      area: { 
+        name: "code", 
+        position: "top"
+      }, 
+      click: function() {
+        $( "#fileLoader" ).click();
+      }
     });
 
-    Espruino.Core.App.addIcon({ name: "save", title : "Save File", order: 200, area: { name: "code", position: "top"} }, function() {
-      if (Espruino.Core.Code.isInBlockly()) 
-        saveFile(Espruino.Core.EditorBlockly.getXML(), "code_blocks.xml");
-      else
-        saveFile(Espruino.Core.EditorJavaScript.getCode(), "code.js");
+    Espruino.Core.App.addIcon({ 
+      id: "saveFile",
+      icon: "save", 
+      title : "Save File", 
+      order: 200, 
+      area: { 
+        name: "code", 
+        position: "top"
+      },
+      click: function() {
+        if (Espruino.Core.Code.isInBlockly()) 
+          saveFile(Espruino.Core.EditorBlockly.getXML(), "code_blocks.xml");
+        else
+          saveFile(Espruino.Core.EditorJavaScript.getCode(), "code.js");
+      }
     });
     
     

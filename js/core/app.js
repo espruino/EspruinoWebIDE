@@ -13,6 +13,14 @@
 
 (function() {
 
+  var iconsCache = [];
+  var defaultIcon = {
+    area: {
+      name: "toolbar",
+      position: "right"
+    },
+    menu: []
+  };
   var initialised = false;
   
   /**
@@ -46,18 +54,20 @@
     // Setup orientation button
     var orientation = "vertical";
     var orientationBtn = Espruino.Core.App.addIcon({ 
-      name: "split-" + orientation, 
+      id: "orientation",
+      icon: "split-" + orientation, 
       title : "Toggle Orientation", 
       order: -80, 
       divider: "right",
       area: { 
         name: "toolbar", 
         position: "right" 
-      } 
-    }, function() {
-      orientation = orientation == "vertical" ? "horizontal" : "vertical";
-      $(".split-pane").splitster("orientation", orientation);
-      orientationBtn.setIcon("split-" + orientation);
+      },
+      click: function() {
+        orientation = orientation == "vertical" ? "horizontal" : "vertical";
+        $(".split-pane").splitster("orientation", orientation);
+        orientationBtn.setIcon("split-" + orientation);
+      }
     });
 
     // layout after everything else has been added
@@ -81,7 +91,7 @@
       return;
     }
 
-    var mylist = $(container);
+    var mylist = typeof container === "string" ? $(container) : container;
     var listitems = mylist.children(/*'a'*/).get();
     listitems.sort(function(a, b) {
        return parseFloat($(a).data("icon-order")) - parseFloat($(b).data("icon-order"));
@@ -157,8 +167,10 @@
    *   title : nice title for tooltips
    *   order : integer specifying the order. After icons have been added they'll be sorted so this is ascending
    */
-  function addIcon(options, callback) 
+  function addIcon(options) 
   {
+    options = $.extend({}, defaultIcon, options);
+
     var selector = "";
     switch(options.area.name){
       case "toolbar":
@@ -180,18 +192,22 @@
     }
 
     var order = 0;
-    if (options.order !== undefined) order = options.order;
+    if (options.order !== undefined) 
+      order = options.order;
 
-    var elementClass = 'icon-'+ options.name;    
-    var element = $('<a class="'+ elementClass +' lrg" title="'+ options.title +'" data-icon-order="'+ order +'"></a>').appendTo(container);
+    var elementClass = 'icon-'+ options.icon;    
+    var element = $('<a data-id="'+ options.id +'" class="'+ elementClass +' lrg" title="'+ options.title +'" data-icon-order="'+ order +'"></a>').appendTo(container);
+    
     if(options.divider)
       element.addClass("icon--divide-"+ options.divider);
-    element.click(callback);
+
+    if(options.click)
+      element.click(options.click);
     
     if (initialised)
       sortIcons(selector);
 
-    return {
+    var api = {
       setIcon : function(icon) {
         element.removeClass(elementClass);
         elementClass = 'icon-'+ icon;
@@ -199,15 +215,47 @@
       },
       remove : function() {
         element.remove();
+      },
+      addMenuItem: function(options)
+      {
+        var menuEl = element.find(".menu");
+        if(menuEl.length == 0)
+           menuEl = $('<div class="menu"></div>').appendTo(element)
+
+        var menuItemEl = $('<a data-id="'+ options.id +'" title="'+ options.title +'" data-icon-order="'+ 1 +'"><i class="icon-'+ options.icon +' sml"></i> '+ options.title +'</a>').appendTo(menuEl);
+        if(options.click)
+          menuItemEl.click(function(e){
+            e.stopPropagation();
+            options.click(e);
+          });
+
+        sortIcons(menuEl);
       }
     };
+
+    if(options.menu && options.menu.length > 0)
+    {
+      $.each(options.menu, function(idx, itm){
+        api.addMenuItem(itm);
+      });
+    }
+
+    element.data("api", api);
+
+    return api;
+  }
+
+  function findIcon(id)
+  {
+    return $("a[data-id="+ id +"]").data("api");
   }
 
   Espruino.Core.App = {
       init : init,
       openPopup: openPopup,
       closePopup: closePopup,
-      addIcon: addIcon
+      addIcon: addIcon,
+      findIcon: findIcon
   };
   
 })();

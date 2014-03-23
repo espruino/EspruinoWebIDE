@@ -14,15 +14,17 @@
   
   function init() {
     Espruino.Core.App.addIcon({ 
-      name: "settings", 
+      id: "settings",
+      icon: "settings", 
       title : "Settings", 
       order: -100,
       area: {
         name: "toolbar",
         position: "right"
-      } 
-    }, function() {
-      createSettingsWindow();
+      },
+      click: function() {
+        createSettingsWindow();
+      }
     });
   }
   

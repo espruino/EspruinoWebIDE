@@ -123,6 +123,49 @@
   padding: 0px;
 }
 
+/* Menu */
+a:hover > .menu 
+{
+  display: block;
+}
+
+.menu
+{
+  display: none;
+  position: absolute;
+  width: 180px;
+  padding: 10px;
+  background: #2c80b9;
+  z-index: 2000;
+}
+
+  .menu a 
+  {
+    color: #fff;
+    font-weight: bold;
+    text-transform: uppercase;
+    display: block;
+    line-height: 30px;
+  }
+
+  .menu a:hover 
+  {
+    background: rgba(0,0,0,0.3);
+  }
+
+  .menu a i 
+  {
+    vertical-align: middle;
+  }
+
+  .toolbar .menu { background: #2c80b9; }
+  .toolbar .toolbar__buttons--left .menu { top: 60px; left: 0; }
+  .toolbar .toolbar__buttons--right .menu { top: 60px; right: 0; }
+
+  .sidebar .menu { background: #373d3e; }
+  .sidebar .sidebar__buttons--top .menu { top: 0; left: 60px; }
+  .sidebar .sidebar__buttons--bottom .menu { bottom: 0; left: 60px; }
+
 /* Split Pane */
 .split-pane
 {

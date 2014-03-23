@@ -14,13 +14,23 @@
   
   function init() {
     // Add stuff we need
-    Espruino.Core.App.addIcon({ name: "deploy", title : "Send to Espruino", order: 300, area: { name: "code", position: "top"} }, function() {
-      Espruino.Core.Terminal.focus(); // give the terminal focus
-      Espruino.callProcessor("sending");
-      if (Espruino.Core.Serial.isConnected()) {
-        Espruino.Core.Code.getEspruinoCode(Espruino.Core.CodeWriter.writeToEspruino);
-      } else { 
-        Espruino.Core.Notifications.error("Not Connected");
+    Espruino.Core.App.addIcon({ 
+      id: "deploy",
+      icon: "deploy", 
+      title : "Send to Espruino", 
+      order: 300, 
+      area: { 
+        name: "code", 
+        position: "top"
+      }, 
+      click: function() {
+        Espruino.Core.Terminal.focus(); // give the terminal focus
+        Espruino.callProcessor("sending");
+        if (Espruino.Core.Serial.isConnected()) {
+          Espruino.Core.Code.getEspruinoCode(Espruino.Core.CodeWriter.writeToEspruino);
+        } else { 
+          Espruino.Core.Notifications.error("Not Connected");
+        }
       }
     });
     

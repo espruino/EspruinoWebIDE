@@ -20,12 +20,28 @@
   var tutorialWatcherInterval = undefined;  
   
   function init() {
-    Espruino.Core.App.addIcon({ name: "help", title : "Tutorial", order: -95, area: { name: "toolbar", position: "right" } }, function() {
-      if (!hasTutorial()) {
-        loadTutorialURL(TUTORIALS_DIR+"1.js");        
-      } else {
-        stopTutorial(); 
-      }
+    Espruino.Core.App.addIcon({ 
+      id: "help",
+      icon: "help", 
+      title : "Help", 
+      order: -95, 
+      area: { 
+        name: "toolbar", 
+        position: "right" 
+      },
+      menu: [{
+        id: "tutorial",
+        icon: "help",
+        title: "Tutorial",
+        order: 1,
+        click: function(){
+          if (!hasTutorial()) {
+            loadTutorialURL(TUTORIALS_DIR+"1.js");        
+          } else {
+            stopTutorial(); 
+          }
+        }
+      }]
     });
   }
   

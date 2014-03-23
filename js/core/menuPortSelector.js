@@ -17,15 +17,16 @@
   function init() 
   {
     connectButton = Espruino.Core.App.addIcon({ 
-      name: "connect", 
+      id: "connection",
+      icon: "connect", 
       title : "Connect / Disconnect", 
       order: -1000, 
       area: {
         name: "toolbar",
         position: "left"
-      } 
-    }, 
-    toggleConnection);
+      },
+      click: toggleConnection
+    });
     
     Espruino.addProcessor("connected", function(data, callback) {
       connectButton.setIcon("disconnect");

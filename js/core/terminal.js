@@ -34,22 +34,23 @@
   {
     // Add buttons
     Espruino.Core.App.addIcon({ 
-      name: "clear", 
+      id: "clearScreen",
+      icon: "clear", 
       title : "Clear Screen", 
       order: -100, 
       area: {
         name: "terminal",
         position: "top"
-      } 
-    }, 
-    function(){
-      termText = [">"];
-      termExtraText = {}; 
-      termHintText = undefined;
-      termCursorX = 1;
-      termCursorY = 0;
-      termControlChars = [];    
-      updateTerminal();
+      },
+      click: function(){
+        termText = [">"];
+        termExtraText = {}; 
+        termHintText = undefined;
+        termCursorX = 1;
+        termCursorY = 0;
+        termControlChars = [];    
+        updateTerminal();
+      }
     });
 
     // Add stuff we need

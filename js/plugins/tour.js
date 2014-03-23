@@ -13,26 +13,21 @@
 (function(){
   
   function init() {
-    /*Espruino.Core.Config.add("MAX_FOOBARS", {
-      section : "Communications",
-      name : "Foobar Count",
-      description : "How many foobars?",
-      type : "int",
-      defaultValue : 20, 
-      onChange : function(newValue) {  }
-    });*/
-    /*Espruino.Core.App.addIcon({ 
-      name: "compass", 
-      title : "Tour", 
-      order: -96, 
-      area: { 
-        name: "toolbar", 
-        position: "right" 
-      } 
-    }, function() {
-      //$('body').chardinJs('start');
-    });
-*/
+
+    // When finding an icon, you need to make sure your plugin
+    // comes after the inital icon module.
+    var icon = Espruino.Core.App.findIcon("help");
+    if(icon) {
+      icon.addMenuItem({
+          id: "tour",
+          icon: "compass",
+          title: "Tour",
+          order: 2,
+          click: function(){
+            console.log("tour");
+          }
+        });
+    }
 
     Espruino.addProcessor("initialised", function(data,callback) {
       
