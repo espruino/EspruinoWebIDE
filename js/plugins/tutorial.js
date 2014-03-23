@@ -33,7 +33,7 @@
         id: "tutorial",
         icon: "help",
         title: "Tutorial",
-        order: 1,
+        order: 100,
         click: function(){
           if (!hasTutorial()) {
             loadTutorialURL(TUTORIALS_DIR+"1.js");        
