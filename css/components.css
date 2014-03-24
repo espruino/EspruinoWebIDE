@@ -521,3 +521,7 @@ a:hover > .menu
 .compact-mode .split-pane { margin-top: 30px; }
 .compact-mode .editor__canvas { left: 30px; }
 .compact-mode .sidebar {  width: 30px; }
+.compact-mode .button { height: 30px; padding: 0; }
+.compact-mode .button--icon { border-left-width: 30px; }
+.compact-mode .button--icon .button__icon { left: -30px; }
+.compact-mode .port-list__item__name { font-size: 100%; line-height: 30px; }
