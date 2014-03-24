@@ -286,6 +286,15 @@ a:hover > .menu
     padding-left: 5px;
 	}
 
+  .port-list__no-results
+  {
+    color: #333;
+    font-size: 120%;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 60px;
+  }
+
 /* Terminal */
 /* ----------------------------------------------------- */
 
