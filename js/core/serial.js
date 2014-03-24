@@ -56,7 +56,6 @@ Author: Gordon Williams (gw@pur3.co.uk)
       function(cInfo) {
         if (!cInfo) {
           console.log("Unable to open device (connectionInfo="+cInfo+")");
-          //Espruino.callProcessor("disconnected");
           openCallback(undefined);
         } else {
           connectionInfo = cInfo;

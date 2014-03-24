@@ -84,6 +84,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
         } else {
           connectionInfo=cInfo;
           console.log(cInfo);
+          Espruino.callProcessor("connected");
           if (openCallback) openCallback(cInfo);
           connectedPort = serialPort;
           connectionChecker = setInterval(checkConnection, 500);
@@ -119,6 +120,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
      chrome.serial.close(connectionInfo.connectionId, 
       function(result) {
         connectionInfo=null;
+        Espruino.callProcessor("disconnected");
         if (callback) callback(result);
       });
     }
