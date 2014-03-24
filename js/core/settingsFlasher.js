@@ -63,6 +63,7 @@
       } else {        
         //Espruino.Core.Status.setStatus("Flashing Complete");  
         Espruino.Core.Notifications.success("Flashing Complete", true);
+        Espruino.callProcessor("flashComplete");
       }
     });
     

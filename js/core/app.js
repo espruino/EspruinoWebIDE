@@ -244,7 +244,7 @@
       element.addClass("icon--divide-"+ options.divider);
 
     if(options.click)
-      element.click(options.click);
+      element.on("click", options.click);
     
     if (initialised)
       sortIcons(selector);
@@ -256,6 +256,7 @@
         element.addClass(elementClass);
       },
       remove : function() {
+        element.off(); // Remove all event handlers
         element.remove();
       },
       addMenuItem: function(options)

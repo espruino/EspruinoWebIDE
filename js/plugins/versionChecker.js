@@ -30,6 +30,14 @@
       checkEnv(env);
       callback(env);
     }); 
+
+    Espruino.addProcessor("flashComplete", function(env, callback) {
+
+      var icon = Espruino.Core.App.findIcon("update");
+      if(icon) icon.remove();
+
+      callback(env);
+    }); 
   }
   
   function checkEnv(env) {
