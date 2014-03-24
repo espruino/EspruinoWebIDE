@@ -51,10 +51,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
   };
   
   var openSerial=function(serialPort, openCallback, disconnectCallback) {
-    connectionDisconnectCallback = function(){
-      Espruino.callProcessor("disconnected");
-      disconnectCallback();
-    };
+    connectionDisconnectCallback = disconnectCallback;
     chrome.serial.connect(serialPort, {bitrate: 9600}, 
       function(cInfo) {
         if (!cInfo) {

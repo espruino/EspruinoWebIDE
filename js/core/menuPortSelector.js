@@ -30,13 +30,11 @@
     
     Espruino.addProcessor("connected", function(data, callback) {
       connectButton.setIcon("disconnect");
-      //$(".serial_devices").prop('disabled', true);
       callback(data);
     });
 
     Espruino.addProcessor("disconnected", function(data, callback) {
       connectButton.setIcon("connect");
-      //$(".serial_devices").prop('disabled', false);
       callback(data);
     });    
   }
@@ -76,7 +74,7 @@
                     '<a title="'+ port +'" class="button button--icon button--wide" data-port="'+ port +'">'+
                       '<i class="icon-usb lrg button__icon"></i>'+
                       '<span class="port-list__item__name">'+ port +'</span>'+
-                    '</a>'
+                    '</a>'+
                   '</li>';
         }
         html += '</ul>';    
@@ -133,6 +131,7 @@
     }, function () {
       console.log("Force disconnect");
       Espruino.Core.Notifications.warning("Disconnected", true);
+      disconnect();
     });
 
   };
