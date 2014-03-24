@@ -28,13 +28,15 @@
 		z-index: 100000;
 	}
 
-	.splitster--vertical .splitster__bar
+	.splitster--vertical .splitster__bar,
+	.splitster--vertical .splitster__draggable
 	{
 		height: 100% !important;
 		cursor: col-resize;
 	}
 
-	.splitster--horizontal .splitster__bar
+	.splitster--horizontal .splitster__bar,
+	.splitster--horizontal .splitster__draggable
 	{
 		width: 100% !important;
 		cursor: row-resize;

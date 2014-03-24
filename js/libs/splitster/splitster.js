@@ -33,13 +33,33 @@
 			self.pane2 = $el.find("> .splitster__pane:last-child").get(0);
 			self.bar = $el.find("> .splitster__bar").get(0);
 
-			$(self.bar).draggable({
+			var dragOpts = self._getDraggableOptions();
+
+			$(self.bar).draggable(dragOpts);
+
+			if(self.opts.draggable)
+				$(self.opts.draggable).draggable(dragOpts).addClass("splitster__draggable");
+
+			self._updateSplit();
+
+			$(window).on("resize.splitster", function(){
+				self._updateSplit();
+			});
+		},
+
+		_getDraggableOptions: function()
+		{
+			var self = this;
+			var $el = $(self.el);
+
+			return {
 				helper: "clone",
-				containment: "parent",
+				containment: ".splitster",
+				appendTo: ".splitster",
 				axis: self.opts.orientation == "vertical" ? "x" : "y",
 				start: function(e, ui)
 				{
-					$(ui.helper).addClass("splitster__bar--ghost");
+					$(ui.helper).addClass("splitster__bar--ghost").empty();
 				},
 				stop: function(e, ui)
 				{
@@ -60,13 +80,7 @@
 					// Update the split
 					self._updateSplit();
 				}
-			});
-
-			self._updateSplit();
-
-			$(window).on("resize.splitster", function(){
-				self._updateSplit();
-			});
+			};
 		},
 
 		_updateSplit: function()
@@ -151,6 +165,40 @@
 
 			// Update the split
 			self._updateSplit();
+		},
+
+		barWidth: function(barWidth)
+		{
+			var self = this;
+			var $el = $(self.el);
+
+			// Store new width
+			self.opts.barWidth = barWidth;
+
+			// Update bar size
+			$(self.bar).css({"width":barWidth+"px", "height":barWidth+"px"});
+
+			// Update the split
+			self._updateSplit();
+		},
+
+		draggable: function(selector)
+		{
+			var self = this;
+			var $el = $(self.el);
+
+			// Destroy the current draggable
+			if(self.opts.draggable)
+			{
+				$(self.opts.draggable).draggable("destroy").removeClass("splitster__draggable");
+			}
+
+			self.opts.draggable = selector;
+
+			if(self.opts.draggable)
+			{
+				$(self.opts.draggable).draggable(self._getDraggableOptions()).addClass("splitster__draggable");
+			}
 		}
 
 	}

@@ -79,7 +79,9 @@
 
     // Setup splitter
     $(".split-pane").splitster({
-      orientation: "vertical" //TODO: Load from local storage
+      orientation: "vertical", //TODO: Load from local storage,
+      barWidth: 0, // Don't show the bar when vertical,
+      draggable: ".editor--code > .sidebar"
     });
 
     // Setup orientation button
@@ -97,6 +99,8 @@
       click: function() {
         orientation = orientation == "vertical" ? "horizontal" : "vertical";
         $(".split-pane").splitster("orientation", orientation);
+        $(".split-pane").splitster("barWidth", orientation == "vertical" ? 0 : 10);
+        $(".split-pane").splitster("draggable", orientation == "vertical" ? ".editor--code > .sidebar" : false);
         orientationBtn.setIcon("split-" + orientation);
       }
     });
