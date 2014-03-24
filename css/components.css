@@ -512,3 +512,12 @@ a:hover > .menu
     padding: 15px 30px;
 }
 
+/* Compact */
+.compact-mode .toolbar { height: 30px; }
+.compact-mode .toolbar .toolbar__buttons--left .menu { top: 30px; }
+.compact-mode .toolbar .toolbar__buttons--right .menu { top: 30px; }
+.compact-mode .sidebar .sidebar__buttons--top .menu { left: 30px; }
+.compact-mode .sidebar .sidebar__buttons--bottom .menu { left: 30px; }
+.compact-mode .split-pane { margin-top: 30px; }
+.compact-mode .editor__canvas { left: 30px; }
+.compact-mode .sidebar {  width: 30px; }

@@ -50,7 +50,9 @@ a.title-bar__button--alert:hover { background-color: #f39c12; }
 }
 
 [class*="icon-"].sml,
-[class*="icon-"].sml:before
+[class*="icon-"].sml:before,
+.compact-mode [class*="icon-"].lrg,
+.compact-mode [class*="icon-"].lrg:before
 {
     width: 30px;
     height: 30px;
@@ -62,97 +64,129 @@ a.title-bar__button--alert:hover { background-color: #f39c12; }
 .icon--divide-top { border-top: solid 1px rgba(255,255,255,0.3); }
 
 .icon-cross.lrg:before { background-position: 0 0 }
+.compact-mode .icon-cross.lrg:before,
 .icon-cross.sml:before { background-position: -60px 0 }
 
 .icon-window.lrg:before { background-position: 0 -60px }
+.compact-mode .icon-window.lrg:before,
 .icon-window.sml:before { background-position: -60px -60px }
 
 .icon-minus.lrg:before { background-position: 0 -120px }
+.compact-mode .icon-minus.lrg:before,
 .icon-minus.sml:before { background-position: -60px -120px }
 
 .icon-plus.lrg:before { background-position: 0 -180px }
+.compact-mode .icon-plus.lrg:before,
 .icon-plus.sml:before { background-position: -60px -180px }
 
 .icon-back.lrg:before { background-position: 0 -240px }
+.compact-mode .icon-back.lrg:before,
 .icon-back.sml:before { background-position: -60px -240px }
 
 .icon-forward.lrg:before { background-position: 0 -300px }
+.compact-mode .icon-forward.lrg:before,
 .icon-forward.sml:before { background-position: -60px -300px }
 
 .icon-down.lrg:before { background-position: 0 -360px }
+.compact-mode .icon-down.lrg:before,
 .icon-down.sml:before { background-position: -60px -360px }
 
 .icon-up.lrg:before { background-position: 0 -420px }
+.compact-mode .icon-up.lrg:before,
 .icon-up.sml:before { background-position: -60px -420px }
 
 .icon-settings.lrg:before { background-position: 0 -480px }
+.compact-mode .icon-settings.lrg:before,
 .icon-settings.sml:before { background-position: -60px -480px }
 
 .icon-alert.lrg:before { background-position: 0 -540px }
+.compact-mode .icon-alert.lrg:before,
 .icon-alert.sml:before { background-position: -60px -540px }
 
 .icon-connect.lrg:before { background-position: 0 -600px }
+.compact-mode .icon-connect.lrg:before,
 .icon-connect.sml:before { background-position: -60px -600px }
 
 .icon-disconnect.lrg:before { background-position: 0 -660px }
+.compact-mode .icon-disconnect.lrg:before,
 .icon-disconnect.sml:before { background-position: -60px -660px }
 
 .icon-split-vertical.lrg:before { background-position: 0 -720px }
+.compact-mode .icon-split-vertical.lrg:before,
 .icon-split-vertical.sml:before { background-position: -60px -720px }
 
 .icon-split-horizontal.lrg:before { background-position: 0 -780px }
+.compact-mode .icon-split-horizontal.lrg:before,
 .icon-split-horizontal.sml:before { background-position: -60px -780px }
 
 .icon-folder.lrg:before { background-position: 0 -840px }
+.compact-mode .icon-folder.lrg:before,
 .icon-folder.sml:before { background-position: -60px -840px }
 
 .icon-folder-open.lrg:before { background-position: 0 -900px }
+.compact-mode .icon-folder-open.lrg:before,
 .icon-folder-open.sml:before { background-position: -60px -900px }
 
 .icon-save.lrg:before { background-position: 0 -960px }
+.compact-mode .icon-save.lrg:before,
 .icon-save.sml:before { background-position: -60px -960px }
 
 .icon-deploy.lrg:before { background-position: 0 -1020px }
+.compact-mode .icon-deploy.lrg:before,
 .icon-deploy.sml:before { background-position: -60px -1020px }
 
 .icon-code.lrg:before { background-position: 0 -1080px }
+.compact-mode .icon-code.lrg:before,
 .icon-code.sml:before { background-position: -60px -1080px }
 
 .icon-clear.lrg:before { background-position: 0 -1140px }
+.compact-mode .icon-clear.lrg:before,
 .icon-clear.sml:before { background-position: -60px -1140px }
 
 .icon-eye.lrg:before { background-position: 0 -1200px }
+.compact-mode .icon-eye.lrg:before,
 .icon-eye.sml:before { background-position: -60px -1200px }
 
 .icon-webcam.lrg:before { background-position: 0 -1260px }
+.compact-mode .icon-webcam.lrg:before,
 .icon-webcam.sml:before { background-position: -60px -1260px }
 
 .icon-block.lrg:before { background-position: 0 -1320px }
+.compact-mode .icon-block.lrg:before,
 .icon-block.sml:before { background-position: -60px -1320px }
 
 .icon-bin.lrg:before { background-position: 0 -1380px }
+.compact-mode .icon-bin.lrg:before,
 .icon-bin.sml:before { background-position: -60px -1380px }
 
 .icon-star.lrg:before { background-position: 0 -1440px }
+.compact-mode .icon-star.lrg:before,
 .icon-star.sml:before { background-position: -60px -1440px }
 
 .icon-heart.lrg:before { background-position: 0 -1500px }
+.compact-mode .icon-heart.lrg:before,
 .icon-heart.sml:before { background-position: -60px -1500px }
 
 .icon-lightning.lrg:before { background-position: 0 -1560px }
+.compact-mode .icon-lightning.lrg:before,
 .icon-lightning.sml:before { background-position: -60px -1560px }
 
 .icon-tick.lrg:before { background-position: 0 -1620px }
+.compact-mode .icon-tick.lrg:before,
 .icon-tick.sml:before { background-position: -60px -1620px }
 
 .icon-cloud.lrg:before { background-position: 0 -1680px }
+.compact-mode .icon-cloud.lrg:before,
 .icon-cloud.sml:before { background-position: -60px -1680px }
 
 .icon-usb.lrg:before { background-position: 0 -1740px }
+.compact-mode .icon-usb.lrg:before,
 .icon-usb.sml:before { background-position: -60px -1740px }
 
 .icon-help.lrg:before { background-position: 0 -1800px }
+.compact-mode .icon-help.lrg:before,
 .icon-help.sml:before { background-position: -60px -1800px }
 
 .icon-compass.lrg:before { background-position: 0 -1860px }
+.compact-mode .icon-compass.lrg:before,
 .icon-compass.sml:before { background-position: -60px -1860px }
