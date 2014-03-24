@@ -27,9 +27,9 @@
   
   function setUiMode(mode) {
     if(mode == "compact")
-      $("body").addClass("compact-mode");
+      $("body").addClass("compact");
     else
-      $("body").removeClass("compact-mode");
+      $("body").removeClass("compact");
   }
   
   Espruino.Plugins.UiMode = {
