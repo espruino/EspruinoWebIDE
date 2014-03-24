@@ -358,7 +358,7 @@ a:hover > .menu
   color:#88F;
 }
 
-.terminal--connected .terminal__cursor 
+.terminal--connected.focus .terminal__cursor 
 {
   -webkit-animation: blink 1s infinite steps(1, start);
   animation: blink 1s infinite steps(1, start);

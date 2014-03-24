@@ -50,8 +50,7 @@
         Espruino.Core.Serial.setSlowWrite(false);
       if (vAvailable > vCurrent && env.BOARD=="ESPRUINOBOARD") {
         console.log("New Firmware "+tAvailable+" available");
-        Espruino.Core.Terminal.setExtraText(Espruino.Core.Terminal.getCurrentLine(), 
-            "<b>New Firmware "+tAvailable+' available. <a class="flash_menu" style="cursor:pointer">Click here to update</a></b>');
+        Espruino.Core.Notifications.info('New Firmware '+ tAvailable +' available. <a class="flash_menu" style="cursor:pointer">Click here to update</a>');
         $(".flash_menu").click(function() {
           Espruino.Core.MenuSettings.show("Flasher");
         });
