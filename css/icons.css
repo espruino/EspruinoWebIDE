@@ -39,6 +39,8 @@ a.icon-disconnect { background-color: #2ecc71; }
 a.icon-connect:hover { background-color: #f39c12; }
 a.icon-disconnect:hover { background-color: #27ae60; }
 
+a.title-bar__button--alert { background-color: #f1c40f; }
+a.title-bar__button--alert:hover { background-color: #f39c12; }
 
 [class*="icon-"].lrg,
 [class*="icon-"].lrg:before

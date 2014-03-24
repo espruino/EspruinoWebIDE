@@ -28,21 +28,53 @@
   function init()
   {
     // Hookup window buttons
-    $(".window--app .title-bar__button--minimize").on("click", function(e){
-      e.preventDefault();
-      chrome.app.window.current().minimize();
-    });
-    $(".window--app .title-bar__button--maximize").on("click", function(e){
-      e.preventDefault();
-      if(chrome.app.window.current().isMaximized()) {
-        chrome.app.window.current().restore();
-      } else {
-        chrome.app.window.current().maximize();
+    Espruino.Core.App.addIcon({
+      id:'minimize',
+      icon: 'minus',
+      title: 'Minimize Window',
+      order: 1000,
+      cssClass: 'title-bar__button--minimize',
+      area: {
+        name: "titlebar",
+        position: "right"
+      },
+      click: function(){
+        chrome.app.window.current().minimize();
       }
     });
-    $(".window--app .title-bar__button--close").on("click", function(e){
-      e.preventDefault();
-      chrome.app.window.current().close();
+
+    Espruino.Core.App.addIcon({
+      id:'maximize',
+      icon: 'window',
+      title: 'Maximize / Restore Window',
+      order: 1001,
+      cssClass: 'title-bar__button--maximize',
+      area: {
+        name: "titlebar",
+        position: "right"
+      },
+      click: function(){
+        if(chrome.app.window.current().isMaximized()) {
+          chrome.app.window.current().restore();
+        } else {
+          chrome.app.window.current().maximize();
+        }
+      }
+    });
+
+    Espruino.Core.App.addIcon({
+      id:'close',
+      icon: 'cross',
+      title: 'Close Window',
+      order: 1002,
+      cssClass: 'title-bar__button--close',
+      area: {
+        name: "titlebar",
+        position: "right"
+      },
+      click: function(){
+        chrome.app.window.current().close();
+      }
     });
 
     // Setup splitter
@@ -81,6 +113,7 @@
   function sortIcons(container) 
   {
     if (container === undefined) {
+      sortIcons(".title-bar__buttons");
       sortIcons(".toolbar__buttons--left");
       sortIcons(".toolbar__buttons--right");
       sortIcons(".editor--terminal .sidebar__buttons--top");
@@ -171,7 +204,14 @@
     options = $.extend({}, defaultIcon, options);
 
     var selector = "";
+    var iconSize = 'lrg';
+    var additionalClasses = '';
     switch(options.area.name){
+      case "titlebar":
+        selector = ".title-bar__buttons";
+        iconSize = 'sml';
+        additionalClasses = 'title-bar__button';
+        break;
       case "toolbar":
         selector = ".toolbar__buttons--" + options.area.position
         break;
@@ -182,6 +222,9 @@
         selector = ".editor--code .sidebar__buttons--" + options.area.position
         break;
     }
+
+    if(options.cssClass)
+      additionalClasses += ' '+ options.cssClass;
 
     var container = $(selector);
     if(container.length == 0)
@@ -195,7 +238,7 @@
       order = options.order;
 
     var elementClass = 'icon-'+ options.icon;    
-    var element = $('<a data-id="'+ options.id +'" class="'+ elementClass +' lrg" title="'+ options.title +'" data-icon-order="'+ order +'"></a>').appendTo(container);
+    var element = $('<a data-id="'+ options.id +'" class="'+ elementClass +' '+ iconSize +' '+ additionalClasses +'" title="'+ options.title +'" data-icon-order="'+ order +'"></a>').appendTo(container);
     
     if(options.divider)
       element.addClass("icon--divide-"+ options.divider);

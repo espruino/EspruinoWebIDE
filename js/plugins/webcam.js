@@ -72,7 +72,8 @@
       webCamStream.stop();
       $('video').attr('src', "");
       $("#terminal").removeClass("terminal--webcam");
-    } 
+    }
+    Espruino.Core.Terminal.focus(); 
   };
   
   Espruino.Plugins.Webcam = {

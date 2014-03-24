@@ -43,13 +43,8 @@
         position: "top"
       },
       click: function(){
-        termText = [">"];
-        termExtraText = {}; 
-        termHintText = undefined;
-        termCursorX = 1;
-        termCursorY = 0;
-        termControlChars = [];    
-        updateTerminal();
+        clearTerminal();
+        focus();
       }
     });
 
@@ -129,6 +124,17 @@
     });
   };
   
+  var clearTerminal = function()
+  {
+    termText = [">"];
+    termExtraText = {}; 
+    termHintText = undefined;
+    termCursorX = 1;
+    termCursorY = 0;
+    termControlChars = [];    
+    updateTerminal();
+  }
+
   var updateTerminal = function() {     
     // remove extra lines if there are too many
     if (termText.length > MAX_LINES) {
