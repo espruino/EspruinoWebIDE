@@ -36,7 +36,9 @@
         order: 100,
         click: function(){
           if (!hasTutorial()) {
-            loadTutorialURL(TUTORIALS_DIR+"1.js");        
+            Espruino.Core.MenuPortSelector.ensureConnected(function() {
+              loadTutorialURL(TUTORIALS_DIR+"1.js");        
+            });
           } else {
             stopTutorial(); 
           }

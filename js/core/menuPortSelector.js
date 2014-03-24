@@ -49,7 +49,7 @@
     }
   }
   
-  function createPortSelector() 
+  function createPortSelector(callback) 
   {
     var checkInt, popup;
 
@@ -60,6 +60,7 @@
         if(success){
           popup.close();
           $(".window--modal").off("click", ".port-list__item a", selectPort);
+          if (callback!==undefined) callback();
         }
       });
     }
