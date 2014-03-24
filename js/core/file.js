@@ -17,14 +17,35 @@
     
    
     // Add stuff we need
-    Espruino.Core.Layout.addIcon({ name: "folder-open", title : "Open File", order: 100, area: "splitter" }, function() {
-      $( "#fileLoader" ).click();
+    Espruino.Core.App.addIcon({ 
+      id: "openFile",
+      icon: "folder-open", 
+      title : "Open File", 
+      order: 100, 
+      area: { 
+        name: "code", 
+        position: "top"
+      }, 
+      click: function() {
+        $( "#fileLoader" ).click();
+      }
     });
-    Espruino.Core.Layout.addIcon({ name: "save", title : "Save File", order: 200, area: "splitter" }, function() {
-      if (Espruino.Core.Layout.isInBlockly()) 
-        saveFile(Espruino.Core.EditorBlockly.getXML(), "code_blocks.xml");
-      else
-        saveFile(Espruino.Core.EditorJavaScript.getCode(), "code.js");
+
+    Espruino.Core.App.addIcon({ 
+      id: "saveFile",
+      icon: "save", 
+      title : "Save File", 
+      order: 200, 
+      area: { 
+        name: "code", 
+        position: "top"
+      },
+      click: function() {
+        if (Espruino.Core.Code.isInBlockly()) 
+          saveFile(Espruino.Core.EditorBlockly.getXML(), "code_blocks.xml");
+        else
+          saveFile(Espruino.Core.EditorJavaScript.getCode(), "code.js");
+      }
     });
     
     
@@ -40,7 +61,7 @@
       var reader = new FileReader();
       reader.onload = function(event) {
         var data = convertFromOS(event.target.result);
-        if (Espruino.Core.Layout.isInBlockly()) {
+        if (Espruino.Core.Code.isInBlockly()) {
           Espruino.Core.EditorBlockly.setXML(data);          
         } else { 
           Espruino.Core.EditorJavaScript.setCode(data);

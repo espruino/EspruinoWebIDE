@@ -30,14 +30,31 @@
   // maximum lines on the terminal
   var MAX_LINES = 2048;
   
-  
-  function init() {
+  function init() 
+  {
+    // Add buttons
+    Espruino.Core.App.addIcon({ 
+      id: "clearScreen",
+      icon: "clear", 
+      title : "Clear Screen", 
+      order: -100, 
+      area: {
+        name: "terminal",
+        position: "top"
+      },
+      click: function(){
+        clearTerminal();
+        focus();
+      }
+    });
+
     // Add stuff we need
-    $('<div id="terminal"></div>').appendTo(".splitter .left");
-    $('<textarea id="terminalfocus" rows="1" cols="1"></textarea>').appendTo(document.body);
+    $('<div id="terminal" class="terminal"></div>').appendTo(".editor--terminal .editor__canvas");
+    $('<textarea id="terminalfocus" class="terminal__focus" rows="1" cols="1"></textarea>').appendTo(document.body);
+
     // Populate terminal
     $.get("data/terminal_initial.html", function (data){
-      $("#terminal").html(data);      
+      $("#terminal").html(data);  
     });
     
     $("#terminal").mouseup(function() {
@@ -95,15 +112,29 @@
     
     
     Espruino.addProcessor("connected", function(data, callback) {
-      outputDataHandler("Connected\r\n");
+      grabSerialPort();
+      outputDataHandler("\r\nConnected\r\n>");
+      $("#terminal").addClass("terminal--connected");
       callback(data);
     });
     Espruino.addProcessor("disconnected", function(data, callback) {
-      outputDataHandler("Disconnected\r\n");
+      outputDataHandler("\r\nDisconnected\r\n>");
+      $("#terminal").removeClass("terminal--connected");
       callback(data);
     });
   };
   
+  var clearTerminal = function()
+  {
+    termText = [">"];
+    termExtraText = {}; 
+    termHintText = undefined;
+    termCursorX = 1;
+    termCursorY = 0;
+    termControlChars = [];    
+    updateTerminal();
+  }
+
   var updateTerminal = function() {     
     // remove extra lines if there are too many
     if (termText.length > MAX_LINES) {
@@ -125,7 +156,7 @@
         var ch = Espruino.Core.Utils.getSubString(line,termCursorX,1);
         line = Espruino.Core.Utils.escapeHTML(
             Espruino.Core.Utils.getSubString(line,0,termCursorX)) + 
-            "<span class='termCursor'>" + Espruino.Core.Utils.escapeHTML(ch) + "</span>" + 
+            "<span class='terminal__cursor'>" + Espruino.Core.Utils.escapeHTML(ch) + "</span>" + 
             Espruino.Core.Utils.escapeHTML(Espruino.Core.Utils.getSubString(line,termCursorX+1));
       } else
         line = Espruino.Core.Utils.escapeHTML(line);

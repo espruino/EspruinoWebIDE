@@ -14,9 +14,11 @@
   var codeMirror;
   
   function init() {    
-    $('<div id="divcode"><textarea id="code" name="code"></textarea></div>').appendTo(".splitter .right");
+    $('<div id="divcode" style="width:100%;height:100%;"><textarea id="code" name="code"></textarea></div>').appendTo(".editor--code .editor__canvas");
     // The code editor
     codeMirror = CodeMirror.fromTextArea(document.getElementById("code"), {
+      width: "100%",
+      height: "100%",
       lineNumbers: true,matchBrackets: true,mode: "text/typescript",
       lineWrapping: true,
       showTrailingSpace: true,

@@ -1,0 +1,41 @@
+.splitster
+{
+	overflow: hidden;
+}
+
+	.splitster__pane
+	{
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: #ccc;
+		overflow: auto;
+	}
+
+	.splitster__bar
+	{
+		position: absolute;
+		top: 0;
+		left: 0;
+		background: #373d3e;
+	}
+
+	.splitster__bar--ghost
+	{
+		background: #3498db;
+		z-index: 100000;
+	}
+
+	.splitster--vertical .splitster__bar
+	{
+		height: 100% !important;
+		cursor: col-resize;
+	}
+
+	.splitster--horizontal .splitster__bar
+	{
+		width: 100% !important;
+		cursor: row-resize;
+	}

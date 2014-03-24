@@ -37,29 +37,27 @@
     });
   }
   
-  function writeFlashStatus(status) {
-    Espruino.Core.Terminal.setExtraText(Espruino.Core.Terminal.getCurrentLine(), "<b>"+status+"</b>");
-  }
-  
   function startFlashing() {
     var url = $(".flash_url").val().trim();
+
     if (url=="") {
-      Espruino.Core.Status.setStatus("You must provide a firmware URL!");
+      Espruino.Core.Notifications.error("You must provide a firmware URL!");
       return;
     }
     
-    Espruino.Core.Layout.closePopup();
+    Espruino.Core.App.closePopup();
     
     Espruino.Core.MenuPortSelector.ensureConnected(function() {
       Espruino.Core.Flasher.flashDevice(url ,function (err) {
         Espruino.Core.Terminal.grabSerialPort();
         if (err) {
-          Espruino.Core.Status.setStatus("Error Flashing.");        
+          //Espruino.Core.Status.setStatus("Error Flashing");  
+          Espruino.Core.Notifications.error("Error Flashing: "+ err, true);        
           console.log(err);
-          writeFlashStatus("ERROR FLASHING : "+err);
         } else {        
-          Espruino.Core.Status.setStatus("Flashing Complete");
-          writeFlashStatus("Flashing Completed Successfully");
+          //Espruino.Core.Status.setStatus("Flashing Complete");  
+          Espruino.Core.Notifications.success("Flashing Complete", true);
+          Espruino.callProcessor("flashComplete");
         }
       });
     });

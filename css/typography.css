@@ -1,0 +1,33 @@
+/* 
+  ===================================================
+  Typography
+  ===================================================
+*/
+
+h1 
+{
+	margin-top: 0;
+}
+
+h1 img 
+{
+	vertical-align: middle;
+}
+
+.settings h1 
+{
+	text-transform: uppercase;
+	color: #42484a;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #ccc;
+}
+
+.settings a 
+{
+	color: #3498db;
+}
+
+.settings a:hover
+{
+	color: #2980b9;
+}

@@ -30,6 +30,14 @@
       checkEnv(env);
       callback(env);
     }); 
+
+    Espruino.addProcessor("flashComplete", function(env, callback) {
+
+      var icon = Espruino.Core.App.findIcon("update");
+      if(icon) icon.remove();
+
+      callback(env);
+    }); 
   }
   
   function checkEnv(env) {
@@ -50,11 +58,26 @@
         Espruino.Core.Serial.setSlowWrite(false);
       if (vAvailable > vCurrent && env.BOARD=="ESPRUINOBOARD") {
         console.log("New Firmware "+tAvailable+" available");
-        Espruino.Core.Terminal.setExtraText(Espruino.Core.Terminal.getCurrentLine(), 
-            "<b>New Firmware "+tAvailable+' available. <a class="flash_menu" style="cursor:pointer">Click here to update</a></b>');
-        $(".flash_menu").click(function() {
-          Espruino.Core.MenuSettings.show("Flasher");
+
+        Espruino.Core.App.addIcon({
+          id:'update',
+          icon: 'alert',
+          title: 'New Firmware '+ tAvailable +' available. Click to update.',
+          order: 999,
+          cssClass: 'title-bar__button--alert',
+          area: {
+            name: "titlebar",
+            position: "right"
+          },
+          click: function(){
+            Espruino.Core.MenuSettings.show("Flasher");
+          }
         });
+
+        //Espruino.Core.Notifications.info('New Firmware '+ tAvailable +' available. <a class="flash_menu" style="cursor:pointer">Click here to update</a>');
+        //$(".flash_menu").click(function() {
+        //  Espruino.Core.MenuSettings.show("Flasher");
+        //});
       }
      // $("#flashFirmwareUrl").val(env.info.binary_url);
     } 

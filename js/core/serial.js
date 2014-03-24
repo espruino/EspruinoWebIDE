@@ -51,17 +51,22 @@ Author: Gordon Williams (gw@pur3.co.uk)
   };
   
   var openSerial=function(serialPort, openCallback, disconnectCallback) {
-    connectionDisconnectCallback = disconnectCallback;
+    connectionDisconnectCallback = function(){
+      Espruino.callProcessor("disconnected");
+      disconnectCallback();
+    };
     chrome.serial.connect(serialPort, {bitrate: 9600}, 
       function(cInfo) {
         if (!cInfo) {
           console.log("Unable to open device (connectionInfo="+cInfo+")");
+          //Espruino.callProcessor("disconnected");
           openCallback(undefined);
         } else {
-          connectionInfo=cInfo;
-          console.log(cInfo);
-          openCallback(cInfo);
+          connectionInfo = cInfo;
           connectedPort = serialPort;
+          console.log(cInfo);
+          Espruino.callProcessor("connected");
+          openCallback(cInfo);
         }        
     });
   };
@@ -91,6 +96,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
      chrome.serial.disconnect(connectionInfo.connectionId, 
       function(result) {
         connectionInfo=null;
+        Espruino.callProcessor("disconnected");
         if (callback) callback(result);
       });
     }
@@ -121,7 +127,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
 
     showStatus &= writeData.length>blockSize;
     if (showStatus) {
-      Espruino.Core.Status.setStatus("Sending...", writeData.length);
+      //Espruino.Core.Status.setStatus("Sending...", writeData.length);
       console.log("Sending "+JSON.stringify(data));
     }
 

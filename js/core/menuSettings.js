@@ -13,8 +13,18 @@
 (function(){
   
   function init() {
-    Espruino.Core.Layout.addIcon({ name: "settings", title : "Settings", order: 0, area: "right" }, function() {
-      createSettingsWindow();
+    Espruino.Core.App.addIcon({ 
+      id: "settings",
+      icon: "settings", 
+      title : "Settings", 
+      order: -100,
+      area: {
+        name: "toolbar",
+        position: "right"
+      },
+      click: function() {
+        createSettingsWindow();
+      }
     });
   }
   
@@ -28,15 +38,16 @@
       '<div class="settings">'+
         '<div class="sections">';   
     for (var i in sections)
-      html += '<a name="'+sections[i].name+'" title="'+sections[i].description+'"><div class="icon-forward sml"></div><span>'+sections[i].name+'</span></a>';
+      html += '<a name="'+sections[i].name+'" title="'+ sections[i].description +'"><div class="icon-forward sml"></div><span>'+sections[i].name+'</span></a>';
     html +=    
         '</div>'+
         '<div class="currentsection">'+
         '</div>'+
       '</div>';
     // Create the window
-    Espruino.Core.Layout.addPopup(html, {
+    Espruino.Core.App.openPopup({
       title: "Settings",
+      contents: html,
       position: "stretch",
     });
     // Handle section changes
@@ -65,8 +76,8 @@
     
     var html = "<h1>"+sectionName+"</h1>";
     if (section.description!==undefined)
-      html += "<p>"+Espruino.Core.Utils.escapeHTML(section.description)+"<p>";
-    
+      html += "<p>"+Espruino.Core.Utils.escapeHTML(section.description, false) +"<p>";
+
     // if there's a built-in handler...
     if (section.getHTML!==undefined) {
       section.getHTML(function (data) {
@@ -106,7 +117,7 @@
     var html = 
       '<h3>'+Espruino.Core.Utils.escapeHTML(config.name)+'</h3>';
     var desc =
-      '<p>'+Espruino.Core.Utils.escapeHTML(config.description)+'</p>';
+      '<p>'+Espruino.Core.Utils.escapeHTML(config.description, false)+'</p>';
     // type : "int"/"boolean"/"string"/{ value1:niceName, value2:niceName },
     if (config.type == "boolean") {
       html += '<input name="'+configName+'" type="checkbox" style="float: right;" '+(value?"checked":"")+'/>';

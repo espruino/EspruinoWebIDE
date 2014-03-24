@@ -84,7 +84,7 @@
     
     function callCallback(data){ //send code including all modules if all modules found only
       if (notFound !== "") { 
-        Espruino.Core.Status.setError("module(s) not found",notFound);
+        Espruino.Core.Notifications.error("module(s) not found",notFound);
       } else {
         callback(data);
       }

@@ -4,7 +4,11 @@
   <meta charset="utf-8" />
 
   <link href="css/ui-lightness/jquery-ui-1.10.1.custom.css" rel="stylesheet">
+  <link href="css/reset.css" rel="stylesheet" media="all"></link>
   <link href="css/main.css" rel="stylesheet" media="all"></link>
+  <link href="css/typography.css" rel="stylesheet" media="all"></link>
+  <link href="css/abstracts.css" rel="stylesheet" media="all"></link>
+  <link href="css/components.css" rel="stylesheet" media="all"></link>
   <link href="css/icons.css" rel="stylesheet" media="all"></link>
   
   <link rel="stylesheet" href="js/libs/codemirror/css/codemirror.css">  
@@ -12,12 +16,16 @@
   <link rel="stylesheet" href="js/libs/codemirror/addon/lint/lint.css">
   <link rel="stylesheet" href="js/libs/codemirror/addon/hint/show-hint.css">
   <link rel="stylesheet" href="js/libs/codemirror/addon/fold/foldgutter.css" />
+  <link rel="stylesheet" href="js/libs/splitster/splitster.css" />
+  <link rel="stylesheet" href="js/libs/toastr/toastr.css" />
 
   <script src="js/libs/jquery-1.11.0.js"></script>
   <script src="js/libs/jquery-ui-1.10.1.custom.js"></script>
   <script src="js/libs/jquery.treeview.js"></script>
   <script src="js/libs/jquery.sparkline.min.js"></script>
   <script src="js/libs/FileSaver.min.js"></script>
+  <script src="js/libs/splitster/splitster.js"></script>
+  <script src="js/libs/toastr/toastr.min.js"></script>
   
   <script src="js/libs/codemirror/codemirror.js"></script>
   <script src="js/libs/codemirror/codemirror-javascript.js"></script>
@@ -39,28 +47,32 @@
   
   <script src="js/core/utils.js"></script>
   <script src="js/core/config.js"></script>
+  <script src="js/core/notifications.js"></script>
+  <script src="js/core/status.js"></script>
   
+  <script src="js/core/app.js"></script>
+
   <script src="js/core/serial.js"></script>
   <script src="js/core/serial_pre_m33.js"></script>
   <script src="js/core/serial.js"></script>
   <script src="js/core/terminal.js"></script>
-  <script src="js/core/editorJavaScript.js"></script>
-  <script src="js/core/editorBlockly.js"></script>  
-  <script src="js/core/status.js"></script>
+  <script src="js/core/editorBlockly.js"></script> 
+  <script src="js/core/editorJavaScript.js"></script> 
   <script src="js/core/send.js"></script>
-  <script src="js/core/layout.js"></script>
   <script src="js/core/file.js"></script>
   <script src="js/core/code.js"></script>
   <script src="js/core/codeWriter.js"></script>
   <script src="js/core/modules.js"></script>
   <script src="js/core/env.js"></script>
   <script src="js/core/flasher.js"></script>
+  
   <!-- Popup Windows -->
   <script src="js/core/menuPortSelector.js"></script>
   <script src="js/core/menuSettings.js"></script>
   <!-- Special pages in Settings Window -->
   <script src="js/core/settingsAbout.js"></script>
   <script src="js/core/settingsFlasher.js"></script>
+
   <!-- Non-vital Plugins -->
   <script src="js/plugins/boardJSON.js"></script>
   <script src="js/plugins/versionChecker.js"></script>
@@ -68,27 +80,75 @@
   <script src="js/plugins/tutorial.js"></script>
   <script src="js/plugins/webcam.js"></script>
   <script src="js/plugins/fontSize.js"></script>
+
+  <script src="js/plugins/tour.js"></script>
   
   <!-- <script src="js/plugins/_examplePlugin.js"></script> -->
   <title>Espruino Web IDE</title>
 </head>
 <body>
 
-  <div id="toolbar" class="toolbar">
-    <div class="left"></div> <!--left-->
-    <div class="middle"></div> <!--middle-->
-    <div class="right"></div> <!--right-->
-  </div><!--toolbar-->
+  <div class="window window--app">
 
-  <div class="splitter">
-    <div class="left">    
-    </div><!--left-->
+    <!-- Tile Bar -->
+    <div class="window__title-bar title-bar">
+      <h5 class="title-bar__title">Espruino Web IDE</h5>
+      <div class="title-bar__buttons"></div>
+    </div>
 
-    <div class="divider">    
-    </div><!--divider-->
+    <!-- Viewport -->
+    <div class="window__viewport">
 
-    <div class="right">
-    </div> <!--right-->
-  </div><!--splitter-->
+      <!-- Toolbar -->
+      <div class="toolbar">
+        <div class="h-split">
+          <div class="h-split__left toolbar__buttons toolbar__buttons--left"></div>
+          <div class="h-split__right toolbar__buttons toolbar__buttons--right"></div>
+        </div>
+      </div>
+
+      <!-- Splitter -->
+      <div class="split-pane">
+
+        <div class="split-pane__left">
+
+          <div class="editor editor--terminal">
+            <div class="sidebar editor__sidebar">
+              <div class="v-split">
+                <div class="v-split__top sidebar__buttons sidebar__buttons--top"></div>
+                <div class="v-split__bottom sidebar__buttons sidebar__buttons--bottom"></div>
+              </div>
+            </div>
+            <div class="canvas editor__canvas"></div>
+          </div>
+
+        </div>
+
+        <div class="split-pane__right">
+
+          <div class="editor editor--code">
+            <div class="sidebar editor__sidebar">
+              <div class="v-split">
+                <div class="v-split__top sidebar__buttons sidebar__buttons--top"></div>
+                <div class="v-split__bottom sidebar__buttons sidebar__buttons--bottom"></div>
+              </div>
+            </div>
+            <div class="canvas editor__canvas"></div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Status -->
+      <div class="status">
+        <div class="h-split">
+          <div class="h-split__left status__left"></div>
+          <div class="h-split__right status__right"></div>
+        </div>
+      </div>
+
+    </div>
+
 </body>
 </html>

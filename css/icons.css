@@ -34,12 +34,13 @@ a[class*="icon-"]:hover
     background-color: rgba(0,0,0,.15);
 }
 
-.icon-connect { background-color: #f1c40f; }
-.icon-disconnect { background-color: #2ecc71; }
-/* FIXME ... */
-.icon-connect:hover { background-color: #f39c12; }
-.icon-disconnect:hover { background-color: #27ae60; }
+a.icon-connect { background-color: #f1c40f; }
+a.icon-disconnect { background-color: #2ecc71; }
+a.icon-connect:hover { background-color: #f39c12; }
+a.icon-disconnect:hover { background-color: #27ae60; }
 
+a.title-bar__button--alert { background-color: #f1c40f; }
+a.title-bar__button--alert:hover { background-color: #f39c12; }
 
 [class*="icon-"].lrg,
 [class*="icon-"].lrg:before
@@ -55,6 +56,10 @@ a[class*="icon-"]:hover
     height: 30px;
 }
 
+.icon--divide-right { border-right: solid 1px rgba(255,255,255,0.3); }
+.icon--divide-left { border-left: solid 1px rgba(255,255,255,0.3); }
+.icon--divide-bottom { border-bottom: solid 1px rgba(255,255,255,0.3); }
+.icon--divide-top { border-top: solid 1px rgba(255,255,255,0.3); }
 
 .icon-cross.lrg:before { background-position: 0 0 }
 .icon-cross.sml:before { background-position: -60px 0 }
@@ -145,3 +150,9 @@ a[class*="icon-"]:hover
 
 .icon-usb.lrg:before { background-position: 0 -1740px }
 .icon-usb.sml:before { background-position: -60px -1740px }
+
+.icon-help.lrg:before { background-position: 0 -1800px }
+.icon-help.sml:before { background-position: -60px -1800px }
+
+.icon-compass.lrg:before { background-position: 0 -1860px }
+.icon-compass.sml:before { background-position: -60px -1860px }
