@@ -59,20 +59,25 @@
       if (vAvailable > vCurrent && env.BOARD=="ESPRUINOBOARD") {
         console.log("New Firmware "+tAvailable+" available");
 
-        Espruino.Core.App.addIcon({
-          id:'update',
-          icon: 'alert',
-          title: 'New Firmware '+ tAvailable +' available. Click to update.',
-          order: 999,
-          cssClass: 'title-bar__button--alert',
-          area: {
-            name: "titlebar",
-            position: "right"
-          },
-          click: function(){
-            Espruino.Core.MenuSettings.show("Flasher");
-          }
-        });
+        var icon = Espruino.Core.App.findIcon("update");
+        if(!icon){
+
+          Espruino.Core.App.addIcon({
+            id:'update',
+            icon: 'alert',
+            title: 'New Firmware '+ tAvailable +' available. Click to update.',
+            order: 999,
+            cssClass: 'title-bar__button--alert',
+            area: {
+              name: "titlebar",
+              position: "right"
+            },
+            click: function(){
+              Espruino.Core.MenuSettings.show("Flasher");
+            }
+          });
+
+        }
 
         //Espruino.Core.Notifications.info('New Firmware '+ tAvailable +' available. <a class="flash_menu" style="cursor:pointer">Click here to update</a>');
         //$(".flash_menu").click(function() {
