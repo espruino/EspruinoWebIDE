@@ -12,39 +12,80 @@
 "use strict";
 (function(){
   
+  // Reset guiders defaults
+  $.guiders._buttonAttributes = { "href": "#" };
+  $.guiders._arrowSize = 10;
+
+  // Define slides
+  var slides = [
+    {
+      title: "Welcome to the Espruino Web IDE",
+      description: "Lorem ipsum dolar"
+    },
+    {
+      title: "Connect to your Espruino",
+      description: "Guiders are a user interface design pattern for introducing features of software. This dialog box, for example, is the first in a series of guiders that together make up a guide.",
+      attachTo: "#icon-connection",
+      position: "bottomLeft"
+    },
+    {
+      title: "Welcome to the Espruino Web IDE",
+      description: "Guiders are a user interface design pattern for introducing features of software. This dialog box, for example, is the first in a series of guiders that together make up a guide.",
+      attachTo: "#icon-saveFile",
+      position: "bottomRight"
+    }
+  ];
+
   function init() {
 
     // When finding an icon, you need to make sure your plugin
     // comes after the inital icon module.
     var icon = Espruino.Core.App.findIcon("help");
     if(icon) {
+
       icon.addMenuItem({
           id: "tour",
           icon: "compass",
           title: "Tour",
           order: 2,
           click: function(){
-            console.log("tour");
+            startTour();
           }
         });
     }
 
-    Espruino.addProcessor("initialised", function(data,callback) {
-      
+    $.each(slides, function(idx, itm){
 
-      /*
-      $(".sidebar *[data-icon-order]").each(function(idx, itm){
-        $(itm).attr("data-intro", $(this).attr("title")).attr("data-position", "right");
-      });
+      var opts = $.extend({}, {
+        id: "g"+ idx,
+        overlay: true,
+        isHashable: false
+      }, itm);
 
-      $(".toolbar *[data-icon-order]").each(function(idx, itm){
-        $(itm).attr("data-intro", $(this).attr("title")).attr("data-position", "bottom");
-      });
+      if(idx < slides.length - 1)
+      {
+        opts.next = "g"+ (idx + 1);
+        opts.buttons = [{ name: "Next" }];
+      }
 
-      $(".toolbar .toolbar__buttons--left *:first-child").attr("data-position", "right");
-      */
+      guiders.createGuider(opts);
 
-    });
+    });   
+
+    // Make sure clicking overlay hides the tour
+    $("body").on("click", "#guiders_overlay", function(){
+      guiders.hideAll();
+    })
+
+    // Start the tour
+    function startTour()
+    {
+      // Check arrow offset
+      $.guiders._arrowOffset = $("body").hasClass("compact") ? 5 : 20;
+
+      // Start the tour
+      guiders.show("g0");
+    }
   }
   
   Espruino.Plugins.Tour = {
