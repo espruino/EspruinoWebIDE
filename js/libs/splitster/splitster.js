@@ -37,8 +37,9 @@
 
 			$(self.bar).draggable(dragOpts);
 
-			if(self.opts.draggable)
+			if(self.opts.draggable){
 				$(self.opts.draggable).draggable(dragOpts).addClass("splitster__draggable");
+			}
 
 			self._updateSplit();
 
@@ -57,6 +58,7 @@
 				containment: ".splitster",
 				appendTo: ".splitster",
 				axis: self.opts.orientation == "vertical" ? "x" : "y",
+				cancel: "a",
 				start: function(e, ui)
 				{
 					$(ui.helper).addClass("splitster__bar--ghost").empty();
