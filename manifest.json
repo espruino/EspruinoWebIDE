@@ -20,5 +20,13 @@
     {"fileSystem": ["write", "retainEntries", "directory"]},
     "storage"
   ],
-  "manifest_version": 2
+  "manifest_version": 2,
+  "url_handlers": {
+    "espruino_code": {
+      "title": "Load code into the Espruino Web IDE",
+      "matches": [
+        "*://www.espruino.com/webide*"
+      ]
+    }
+  }
 }
