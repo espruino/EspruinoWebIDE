@@ -37,7 +37,7 @@
       attachTo: ".window--modal",
       position: "bottom",
       onShow: function(){
-        $("#icon-connection").trigger("click");
+        Espruino.Core.MenuPortSelector.showPortSelector();
       },
       onHide: function(){
         Espruino.Core.App.closePopup();

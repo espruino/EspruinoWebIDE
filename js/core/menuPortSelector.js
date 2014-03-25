@@ -161,6 +161,7 @@
       init : init,
       
       ensureConnected : ensureConnected,
+      showPortSelector: createPortSelector
   };
 
 }());
