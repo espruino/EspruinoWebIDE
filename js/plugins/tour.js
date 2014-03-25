@@ -22,6 +22,14 @@
   // Define slides
   var slides = [
     {
+      title: "Web IDE tour",
+      description: "Click here for a quick tour of the new Web IDE",
+      attachTo: "#icon-help",
+      position: "bottomRight",
+      buttons: []
+    },
+    // now we start the real tour
+    {
       title: "Welcome to the Espruino Web IDE",
       description: "The Espruino Web IDE is a Web-Based VT100 Serial Terminal - designed for writing code on microcontrollers that use the <a href='http://www.espruino.com' target='_blank'>Espruino JavaScript interpreter</a> (but useful for a bunch of other stuff too!)<br /><br />To help you get up to speed quickly with the IDE, this tour will run you through some of the core features you'll need to know to get started. <br /><br />So when you are ready, click next to continue."
     },
@@ -113,7 +121,6 @@
     // comes after the inital icon module.
     var icon = Espruino.Core.App.findIcon("help");
     if(icon) {
-
       icon.addMenuItem({
           id: "tour",
           icon: "compass",
@@ -126,14 +133,13 @@
     }
 
     $.each(slides, function(idx, itm){
-
       var opts = $.extend({}, {
         id: "g"+ idx,
         overlay: true,
         isHashable: false
       }, itm);
 
-      if(idx < slides.length - 1)
+      if(opts.buttons==undefined && idx < slides.length - 1)
       {
         opts.next = "g"+ (idx + 1);
         opts.buttons = [{ name: "Next" }];
@@ -146,7 +152,7 @@
     // Make sure clicking overlay hides the tour
     $("body").on("click", "#guiders_overlay", function(){
       guiders.hideAll();
-    })
+    });
 
     // Start the tour
     function startTour()
@@ -155,8 +161,18 @@
       $.guiders._arrowOffset = $("body").hasClass("compact") ? 5 : 20;
 
       // Start the tour
-      guiders.show("g0");
+      guiders.show("g1");
     }
+    
+    // If this is our first run, prompt about the Tour
+    Espruino.addProcessor("initialised", function(data, callback) {      
+      if (!Espruino.Config.NOT_FIRST_RUN) {
+        Espruino.Config.set("NOT_FIRST_RUN", true);         
+        guiders.show("g0");
+      }
+      
+      callback(data); 
+    });
   }
   
   Espruino.Plugins.Tour = {
