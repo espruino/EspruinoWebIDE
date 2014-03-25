@@ -79,7 +79,9 @@
 
     // Setup splitter
     $(".split-pane").splitster({
-      orientation: "vertical" //TODO: Load from local storage
+      orientation: "vertical", //TODO: Load from local storage,
+      barWidth: 0, // Don't show the bar when vertical,
+      draggable: ".editor--code > .sidebar"
     });
 
     // Setup orientation button
@@ -97,6 +99,8 @@
       click: function() {
         orientation = orientation == "vertical" ? "horizontal" : "vertical";
         $(".split-pane").splitster("orientation", orientation);
+        $(".split-pane").splitster("barWidth", orientation == "vertical" ? 0 : 10);
+        $(".split-pane").splitster("draggable", orientation == "vertical" ? ".editor--code > .sidebar" : false);
         orientationBtn.setIcon("split-" + orientation);
       }
     });
@@ -238,7 +242,7 @@
       order = options.order;
 
     var elementClass = 'icon-'+ options.icon;    
-    var element = $('<a data-id="'+ options.id +'" class="'+ elementClass +' '+ iconSize +' '+ additionalClasses +'" title="'+ options.title +'" data-icon-order="'+ order +'"></a>').appendTo(container);
+    var element = $('<a id="icon-'+ options.id +'" class="'+ elementClass +' '+ iconSize +' '+ additionalClasses +'" title="'+ options.title +'" data-icon-order="'+ order +'"></a>').appendTo(container);
     
     if(options.divider)
       element.addClass("icon--divide-"+ options.divider);
@@ -269,7 +273,7 @@
         if (options.order !== undefined) 
           order = options.order;
 
-        var menuItemEl = $('<a data-id="'+ options.id +'" title="'+ options.title +'" data-icon-order="'+ order +'"><i class="icon-'+ options.icon +' sml"></i> '+ options.title +'</a>').appendTo(menuEl);
+        var menuItemEl = $('<a id="icon-'+ options.id +'" title="'+ options.title +'" data-icon-order="'+ order +'"><i class="icon-'+ options.icon +' sml"></i> '+ options.title +'</a>').appendTo(menuEl);
         if(options.click)
           menuItemEl.click(function(e){
             e.stopPropagation();
@@ -294,7 +298,7 @@
 
   function findIcon(id)
   {
-    return $("a[data-id="+ id +"]").data("api");
+    return $("#icon-"+ id).data("api");
   }
 
   Espruino.Core.App = {
