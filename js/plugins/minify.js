@@ -18,7 +18,7 @@
     Espruino.Core.Config.add("MINIFICATION_LEVEL", {
       section : "Communications",
       name : "Minification",
-      description : "Automatically minify sent code?",
+      description : "Automatically minify sent code? This will save Espruino's memory and may increase execution speed, but it will make debugging harder.",
       type : {"":"No Minification","WHITESPACE_ONLY":"Whitespace Only","SIMPLE_OPTIMIZATIONS":"Simple Optimizations","ADVANCED_OPTIMIZATIONS":"Advanced Optimizations"},
       defaultValue : ""
     });
