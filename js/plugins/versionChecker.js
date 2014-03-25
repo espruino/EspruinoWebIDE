@@ -17,7 +17,7 @@
     Espruino.Core.Config.add("SERIAL_THROTTLE_SEND", {
       section : "Communications",
       name : "Throttle Send",
-      description : "Throttle code when sending to Espruino?",
+      description : "Throttle code when sending to Espruino? If you are experiencing lost characters when sending code from the Code Editor pane, this may help.",
       type : "boolean",
       defaultValue : false,
       onChange : function() { 

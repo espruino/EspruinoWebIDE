@@ -242,9 +242,11 @@
 // ----------------------------------------------------------------------------------------------------------
 // ----------------------------------------------------------------------------------------------------------
   
-  /// Set the callback(String) that gets called when the user presses a key
+  /// Set the callback(String) that gets called when the user presses a key. Returns the old one
   function setInputDataHandler( callback ) {
+    var old = onInputData; 
     onInputData = callback;
+    return old;
   };
   
   /// Called when data comes OUT of Espruino INTO the terminal

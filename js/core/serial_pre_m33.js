@@ -84,10 +84,11 @@ Author: Gordon Williams (gw@pur3.co.uk)
         } else {
           connectionInfo=cInfo;
           console.log(cInfo);
-          Espruino.callProcessor("connected");
-          if (openCallback) openCallback(cInfo);
           connectedPort = serialPort;
-          connectionChecker = setInterval(checkConnection, 500);
+          connectionChecker = setInterval(checkConnection, 500);          
+          Espruino.callProcessor("connected", undefined, function() {
+            openCallback(cInfo);
+          });
         }        
     });
   };

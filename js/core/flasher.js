@@ -307,8 +307,12 @@
       });
       var hadSlowWrite = Espruino.Core.Serial.isSlowWrite();
       Espruino.Core.Serial.setSlowWrite(false);
+      var oldHandler = Espruino.Core.Terminal.setInputDataHandler(function() {
+        // ignore keyPress from terminal during flashing
+      });      
       var finish = function(err) {
         Espruino.Core.Serial.setSlowWrite(hadSlowWrite);
+        Espruino.Core.Terminal.setInputDataHandler(oldHandler);
         callback(err);
       };
       // initialise
