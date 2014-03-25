@@ -42,7 +42,12 @@ var Espruino;
       for (module in Espruino.Core) initModule(module, Espruino.Core[module]);
       for (module in Espruino.Plugins) initModule(module, Espruino.Plugins[module]);
       
-      callProcessor("initialised");
+      callProcessor("initialised", undefined, function() {
+        // We need the delay because of background.js's url_handler...
+        setTimeout(function() {
+          Espruino.initialised = true;
+        }, 1000);
+      });
     });
   }
   
@@ -87,6 +92,7 @@ var Espruino;
     Plugins : { },
     addProcessor : addProcessor,
     callProcessor : callProcessor,
+    initialised : false,
   };
 
 })();
