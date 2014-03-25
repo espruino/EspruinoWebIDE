@@ -16,6 +16,9 @@
   $.guiders._buttonAttributes = { "href": "#" };
   $.guiders._arrowSize = 10;
 
+  // Temp var to hold the blockly state so we can revert back
+  var isInBlockly;
+
   // Define slides
   var slides = [
     {
@@ -64,17 +67,43 @@
       offset: {
         top: -300,
         left: null
+      },
+      onShow: function(){
+        isInBlockly = Espruino.Core.Code.isInBlockly();
+        if(isInBlockly){
+          Espruino.Core.Code.switchToCode();
+        }
+      }, 
+      onHide: function(){
+        if(isInBlockly)
+          Espruino.Core.Code.switchToBlockly();
+      }
+    },
+    {
+      title: "The block editor",
+      description: "...or switch to the block editor and use 'Scratch' like code blocks...",
+      attachTo: "#icon-code",
+      position: "topRight",
+      onShow: function(){
+        isInBlockly = Espruino.Core.Code.isInBlockly();
+        if(!isInBlockly){
+            Espruino.Core.Code.switchToBlockly();
+        }
+      }, 
+      onHide: function(){
+        if(!isInBlockly)
+          Espruino.Core.Code.switchToCode();
       }
     },
     {
       title: "Deploying your code",
-      description: "...then upload it to your Espruino by clicking the 'Deploy' button.",
+      description: "...then when your are ready, upload it to your Espruino by clicking the 'Deploy' button.",
       attachTo: "#icon-deploy",
       position: "left"
     },
     {
-      title: "Go wild",
-      description: "And that is the basics of the Espruino Web IDE.<br /><br />For more helpful guides and tutorials, be sure to checkout the <a href='http://www.espruino.com/Tutorials' target='_blank'>Tutorials</a> section on the Espruino website.<br /><br />We hope you enjoy your Espruino!"
+      title: "Go wild!",
+      description: "And that is the basics of the Espruino Web IDE.<br /><br />For more helpful guides and tutorials, be sure to checkout the <a href='http://www.espruino.com/Tutorials' target='_blank'>Tutorials</a> section on the Espruino website, or if you have any questions, why not head on over to the <a href='http://forum.espruino.com/' target='_blank'>Forums</a>.<br /><br />We hope you enjoy your Espruino!"
     }
   ];
 

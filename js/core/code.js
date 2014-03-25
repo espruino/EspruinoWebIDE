@@ -12,6 +12,8 @@
 "use strict";
 (function(){
   
+  var viewModeButton;
+
   function init() {
     // Configuration
     Espruino.Core.Config.add("AUTO_SAVE_CODE", {
@@ -23,7 +25,7 @@
     });    
 
     // Setup code mode button
-    var viewButton = Espruino.Core.App.addIcon({ 
+    viewModeButton = Espruino.Core.App.addIcon({ 
       id: "code",
       icon: "code", 
       title : "Switch between Code and Graphical Designer", 
@@ -34,13 +36,9 @@
       },
       click: function() {
         if (isInBlockly()) {
-          $("#divblockly").hide();
-          $("#divcode").show();
-          viewButton.setIcon("code");
+          switchToCode();
         } else {
-          $("#divcode").hide();
-          $("#divblockly").show();
-          viewButton.setIcon("block");
+          switchToBlockly();
         }
       }
     });
@@ -71,6 +69,18 @@
     return $("#divblockly").is(":visible");
   };
 
+  function switchToBlockly() {
+    $("#divcode").hide();
+    $("#divblockly").show();
+    viewModeButton.setIcon("block");
+  }
+
+  function switchToCode() {
+    $("#divblockly").hide();
+    $("#divcode").show();
+    viewModeButton.setIcon("code");
+  }
+
   function getEspruinoCode(callback) {
     Espruino.callProcessor("transformForEspruino", getCurrentCode(), callback);
   }
@@ -87,6 +97,8 @@
     init : init,
     getEspruinoCode : getEspruinoCode, // get the currently selected bit of code ready to send to Espruino (including Modules)
     getCurrentCode : getCurrentCode, // get the currently selected bit of code (either blockly or javascript editor)
-    isInBlockly: isInBlockly
+    isInBlockly: isInBlockly,
+    switchToCode: switchToCode,
+    switchToBlockly: switchToBlockly
   };
 }());
