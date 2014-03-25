@@ -17,6 +17,7 @@
   }
   
   function handleQuery(key, val) {
+    Espruino.Core.Code.switchToCode(); // if in blockly
     switch(key){
       case "code":
         Espruino.Core.EditorJavaScript.setCode(val);
@@ -35,7 +36,6 @@
         });
         break;
     }
-    Espruino.Core.Code.switchToCode(); // if in blockly
   }
   
   function handle(url) {    
