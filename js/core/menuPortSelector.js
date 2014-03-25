@@ -67,17 +67,23 @@
     {
       Espruino.Core.Serial.getPorts(function(items) {
 
-        var html = '<ul class="port-list">';
-        for (var i in items) {
-          var port = items[i];
-          html += '<li class="port-list__item">'+
-                    '<a title="'+ port +'" class="button button--icon button--wide" data-port="'+ port +'">'+
-                      '<i class="icon-usb lrg button__icon"></i>'+
-                      '<span class="port-list__item__name">'+ port +'</span>'+
-                    '</a>'+
-                  '</li>';
-        }
-        html += '</ul>';    
+        var html;
+
+        if(items && items.length > 0){
+          html = '<ul class="port-list">';
+          for (var i in items) {
+            var port = items[i];
+            html += '<li class="port-list__item">'+
+                      '<a title="'+ port +'" class="button button--icon button--wide" data-port="'+ port +'">'+
+                        '<i class="icon-usb lrg button__icon"></i>'+
+                        '<span class="port-list__item__name">'+ port +'</span>'+
+                      '</a>'+
+                    '</li>';
+          }
+          html += '</ul>';   
+        } else {
+          html = "<h2 class='port-list__no-results'>Searching...</h2>"
+        } 
 
         popup.setContents(html);   
 
