@@ -17,8 +17,10 @@
   }
   
   function handleQuery(key, val) {
-    if (key=="code")
+    if (key=="code") {
       Espruino.Core.EditorJavaScript.setCode(val);
+      Espruino.Core.Code.switchToCode(); // if in blockly
+    }
   }
   
   function handle(url) {    
