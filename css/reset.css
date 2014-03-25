@@ -4,14 +4,15 @@
     ===================================================
  */
 
-* {
+/* Not for #terminal and 'Board Information' */
+/** {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-}
+}*/
 
 *, *:before, *:after {
     -moz-box-sizing: border-box; 
