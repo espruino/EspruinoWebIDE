@@ -60,9 +60,7 @@ Features that would be good to implement
 -----------------------------------
 * Better auto-detection of the correct serial device
 * Detection of serial disconnect (and auto reconnect)
-* Make everything prettier/easier to use
 * Implement more of Espruino as Blockly Blocks
-* Actually toggle WebCam on and off (currently it can only turn on)
 * Blockly Blocks to turn red if they can't do certain things (for instance a pin that won't do analog)
 * Codeacademy-style online tutor that talks you through the first few steps of coding on Espruino
 * Keep code on right in sync with graphical editor
