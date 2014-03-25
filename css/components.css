@@ -512,3 +512,16 @@ a:hover > .menu
     padding: 15px 30px;
 }
 
+/* Compact */
+.compact .toolbar { height: 30px; }
+.compact .toolbar .toolbar__buttons--left .menu { top: 30px; }
+.compact .toolbar .toolbar__buttons--right .menu { top: 30px; }
+.compact .sidebar .sidebar__buttons--top .menu { left: 30px; }
+.compact .sidebar .sidebar__buttons--bottom .menu { left: 30px; }
+.compact .split-pane { margin-top: 30px; }
+.compact .editor__canvas { left: 30px; }
+.compact .sidebar {  width: 30px; }
+.compact .button { height: 30px; padding: 0; }
+.compact .button--icon { border-left-width: 30px; }
+.compact .button--icon .button__icon { left: -30px; }
+.compact .port-list__item__name { font-size: 100%; line-height: 30px; }
