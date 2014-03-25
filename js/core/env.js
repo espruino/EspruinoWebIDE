@@ -23,7 +23,6 @@
   
   function queryBoardProcess(data, callback) {
     Espruino.Core.Utils.executeExpression("process.env", function(result) {
-      boardData = {};
       var json = {};
       if (result!==undefined) {
         try {       
@@ -33,10 +32,12 @@
         }
       }
       // now process the enviroment variables
-      boardData = {};
-      for (var k in json) boardData[k] = json[k];
-      environmentData = boardData;
-      Espruino.callProcessor("environmentVar", json, function(data) { 
+      for (var k in json) {
+        boardData[k] = json[k];
+        environmentData[k] = json[k];
+      }
+      
+      Espruino.callProcessor("environmentVar", environmentData, function(data) { 
         environmentData = data; 
       }); 
       callback(data);
