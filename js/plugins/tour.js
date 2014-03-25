@@ -20,19 +20,61 @@
   var slides = [
     {
       title: "Welcome to the Espruino Web IDE",
-      description: "Lorem ipsum dolar"
+      description: "The Espruino Web IDE is a Web-Based VT100 Serial Terminal - designed for writing code on microcontrollers that use the <a href='http://www.espruino.com' target='_blank'>Espruino JavaScript interpreter</a> (but useful for a bunch of other stuff too!)<br /><br />To help you get up to speed quickly with the IDE, this tour will run you through some of the core features you'll need to know to get started. <br /><br />So when you are ready, click next to continue."
     },
     {
       title: "Connect to your Espruino",
-      description: "Guiders are a user interface design pattern for introducing features of software. This dialog box, for example, is the first in a series of guiders that together make up a guide.",
+      description: "The first thing you'll want to do is connect to your Espruino board by clicking the 'Connect' button.",
       attachTo: "#icon-connection",
       position: "bottomLeft"
     },
     {
-      title: "Welcome to the Espruino Web IDE",
-      description: "Guiders are a user interface design pattern for introducing features of software. This dialog box, for example, is the first in a series of guiders that together make up a guide.",
-      attachTo: "#icon-saveFile",
-      position: "bottomRight"
+      title: "Select your port",
+      description: "Connect your Espruino to an available USB port and select the port from the list.",
+      attachTo: ".window--modal",
+      position: "bottom",
+      onShow: function(){
+        $("#icon-connection").trigger("click");
+      },
+      onHide: function(){
+        Espruino.Core.App.closePopup();
+      }
+    },
+    {
+      title: "Connected",
+      description: "The 'Connect' button should then turn green and you are ready to go.",
+      attachTo: "#icon-connection",
+      position: "bottomLeft"
+    },
+    {
+      title: "The terminal",
+      description: "To send simple commands to the Espruino, simply type them in the terminal window and hit enter to send.",
+      attachTo: "#terminal",
+      position: "bottom",
+      offset: {
+        top: -300,
+        left: null
+      }
+    },
+    {
+      title: "The code editor",
+      description: "To send more complex blocks of javascript, write them in the code editor window...",
+      attachTo: "#divcode",
+      position: "bottom",
+      offset: {
+        top: -300,
+        left: null
+      }
+    },
+    {
+      title: "Deploying your code",
+      description: "...then upload it to your Espruino by clicking the 'Deploy' button.",
+      attachTo: "#icon-deploy",
+      position: "left"
+    },
+    {
+      title: "Go wild",
+      description: "And that is the basics of the Espruino Web IDE.<br /><br />For more helpful guides and tutorials, be sure to checkout the <a href='http://www.espruino.com/Tutorials' target='_blank'>Tutorials</a> section on the Espruino website.<br /><br />We hope you enjoy your Espruino!"
     }
   ];
 

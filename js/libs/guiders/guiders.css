@@ -117,6 +117,16 @@
   font-size: 100%;
 }
 
+.guiders_description a 
+{
+  color: #3498db;
+}
+
+.guiders_description a:hover
+{
+  color: #2980b9;
+}
+
 .guiders_highlight {
   position: relative;
   z-index: 900003 !important; /* Should be larger than anything else on your page. */

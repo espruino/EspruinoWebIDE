@@ -140,7 +140,9 @@
    */
   function closePopup() 
   {
-    $(".window__overlay").remove();
+    var api = $(".window--modal").data("api");
+    if(api)
+        api.close();
   }
   
   /**
@@ -156,7 +158,9 @@
       { 
         $(".window--modal > .window__viewport").html(contents);
       },
-      close : closePopup
+      close : function(){
+        $(".window__overlay").remove();
+      }
     }
 
     // Append the modal overlay
@@ -191,6 +195,8 @@
       $(".window--modal").height(options.height);
     }
     
+    $(".window--modal").data("api", api);
+
     return api;
   }
 
