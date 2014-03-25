@@ -38,6 +38,11 @@
 
       callback(env);
     }); 
+
+    Espruino.addProcessor("disconnected", function(env, callback) {
+      var icon = Espruino.Core.App.findIcon("update");
+      if(icon) icon.remove();
+    });
   }
   
   function checkEnv(env) {
