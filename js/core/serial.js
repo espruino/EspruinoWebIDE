@@ -61,8 +61,9 @@ Author: Gordon Williams (gw@pur3.co.uk)
           connectionInfo = cInfo;
           connectedPort = serialPort;
           console.log(cInfo);
-          Espruino.callProcessor("connected");
-          openCallback(cInfo);
+          Espruino.callProcessor("connected", undefined, function() {
+            openCallback(cInfo);
+          });          
         }        
     });
   };
