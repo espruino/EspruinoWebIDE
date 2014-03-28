@@ -36,6 +36,11 @@
   	height: auto;
   }
 
+  .window--modal.window--center > .window__viewport
+  {
+    max-height: 400px;
+  }
+
   .window__title-bar 
   {
     position: absolute;
