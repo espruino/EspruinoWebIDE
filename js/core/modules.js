@@ -82,7 +82,7 @@
       callCallback(code);
     }
     
-    function callCallback(data){ //send code including all modules if all modules found only
+    function callCallback(data){ // send code including all modules if all modules found only
       if (notFound !== "") { 
         Espruino.Core.Notifications.error("module(s) not found",notFound);
       } else {
@@ -91,9 +91,19 @@
     }
     
     // function to actually load the modules
+    function getModule(fullModuleName) {
+      
+      
+    }
+    
+    // function to actually load the modules
     function loadModule(fullModuleName) {
-      console.log("loadModule("+fullModuleName+")");
-      var modName,url,extensions;
+      var dfd = $.Deferred();
+      
+      var modName, url;
+      var extensions,extensionTry;
+      
+      var modName;
       if(urlexp.test(fullModuleName)) {
         modName = fullModuleName.substr(fullModuleName.lastIndexOf("/") + 1).split(".")[0];
         url = fullModuleName;
@@ -104,15 +114,30 @@
         extensions = Espruino.Config.MODULE_EXTENSIONS.split("|");
       }
       
-      var t, localUrl,dfd = $.Deferred();
-      var extensionTry = 0;
-      t = setInterval(function(){clearInterval(t);dfd.resolve();},maxWait);
-      if (extensions.length>0){
-        downloadModule(url + extensions[extensionTry++]);
-      } else {
-        code = code.replace("require(\"" + url + "\")","require(\"" + modName + "\")");
-        downloadModule(url);
-      }        
+      Espruino.callProcessor(
+          "getModule", 
+          { moduleName:fullModuleName, moduleCode:undefined },
+          function(data) {
+            if (data.moduleCode!==undefined) { // did getModule return anything?
+              gotData(data.moduleCode);
+            } else {
+              // otherwise try and load the module the old way...
+              console.log("loadModule("+fullModuleName+")");
+              
+              
+              extensionTry = 0;
+              setTimeout(function(){dfd.resolve();},maxWait);
+              if (extensions.length>0){
+                downloadModule(url + extensions[extensionTry++]);
+              } else {
+                code = code.replace("require(\"" + url + "\")","require(\"" + modName + "\")");
+                downloadModule(url);
+              }        
+            }
+          }
+      );
+      
+      
       return dfd.promise();
       
       function downloadModule(localUrl) { //downloads one module
