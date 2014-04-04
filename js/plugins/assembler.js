@@ -12,9 +12,12 @@
 "use strict";
 (function(){
   
-  
-  
-//http://ece.uwaterloo.ca/~ece222/ARM/ARM7-TDMI-manual-pt3.pdf
+/*  Thumb reference :
+    http://ece.uwaterloo.ca/~ece222/ARM/ARM7-TDMI-manual-pt3.pdf
+    
+    ARM reference
+    https://web.eecs.umich.edu/~prabal/teaching/eecs373-f11/readings/ARMv7-M_ARM.pdf
+*/ 
   
   function rlist_lr(value) {
    var regs = value.split(",");
@@ -34,8 +37,9 @@
       var vals = { r0:0,r1:1,r2:2,r3:3,r4:4,r5:5,r6:6,r7:7 };
       if (!(reg in vals)) throw "Unknown register name "+reg;
       return vals[reg]<<reg_offset;
-    }
+    };
   }
+  var reg4 = reg; // 4 bit register
    
   function reg_or_immediate(reg_offset, immediate_bit) {
     return function(reg) {
@@ -45,14 +49,14 @@
       var vals = { r0:0,r1:1,r2:2,r3:3,r4:4,r5:5,r6:6,r7:7 };
       if (!(reg in vals)) throw "Unknown register name, or immediate out of range 0..7 "+reg;
       return vals[reg]<<reg_offset;
-    }
+    };
   }
    
   function reg_base_offset(base_offset, offset_offset) {
    return function(value) {
      var parms = value.split(",");
      return reg(base_offset)(parms[0]) | reg(offset_offset)(parms[0]);
-   }
+   };
   }
    
   function uint7_shr2(offset) {
@@ -61,7 +65,7 @@
       if (bits>=0 && bits<=511 && (bits&3)==0)
         return (bits>>2)<<offset;
       throw "Invalid number '"+value+"' - must be between 0 and 508 and a multiple of 4"
-    }
+    };
   }
    
   function uint8_shr2(offset) {
@@ -70,7 +74,7 @@
       if (bits>=0 && bits<=1023 && (bits&3)==0)
         return (bits>>2)<<offset;
       throw "Invalid number '"+value+"' - must be between 0 and 1020 and a multiple of 4"
-    }
+    };
   }
    
   function uint8(offset) {
@@ -79,7 +83,7 @@
       if (bits>=0 && bits<=255)
         return bits<<offset;
       throw "Invalid number '"+value+"' - must be between 0 and 255"
-    }
+    };
   }
    
   function uint5_shr2(offset) {
@@ -88,9 +92,23 @@
       if (bits>=0 && bits<=63*4)
         return (bits>>2)<<offset;
       throw "Invalid number '"+value+"' - must be between 0 and 255 and a multiple of 4"
-    }
+    };
   }
-   
+  
+  function thumb2_immediate_t3(value) {
+    var v = parseInt(value);
+    if (v>=0 && v<65536) {
+      // https://web.eecs.umich.edu/~prabal/teaching/eecs373-f11/readings/ARMv7-M_ARM.pdf page 347
+      var imm4,i,imm3,imm8; // what the...?
+      imm4 = (v>>12)&15;
+      i = (v>>11)&1;          
+      imm3 = (v>>8)&7;
+      imm8 = v&255;    
+      return (i<<26) | (imm4<<16) | (imm3<<12) | imm8;
+    }
+    throw "Invalid number '"+value+"' - must be between 0 and 65535";
+  }
+  
   var ops = { 
     "push" :[{ base:"1011010-________", regex : /^{(.*)}$/, args:[rlist_lr] }],
     "pop"  :[{ base:"1011110-________", regex : /^{(.*)}$/, args:[rlist_lr] }],
@@ -108,15 +126,19 @@
     "str"  :[{ base:"0101000---___---", regex : /(r[0-7]),\[(r[0-7]),(r[0-7])\]/, args:[reg(0),reg(3),reg(6)] },
              { base:"0110000---___---", regex : /(r[0-7]),\[(r[0-7]),#([0-9]+)\]/, args:[reg(0),reg(3), uint5_shr2(6)] }], 
     "strb" :[{ base:"0101010---___---", regex : /(r[0-7]),\[(r[0-7]),(r[0-7])\]/, args:[reg(0),reg(3),reg(6)] }], 
-    "ldr"  :[{ base:"0101100---___---", regex : /(r[0-7]),\[(r[0-7]),(r[0-7])\]/, args:[reg(0),reg(3),reg(6)] },
+    "ldr"  :[{ base:"01001---________", regex : /(r[0-7]),\[pc,#([0-9]+)\]/, args:[reg(8),uint8_shr2(0)] },
+             { base:"0101100---___---", regex : /(r[0-7]),\[(r[0-7]),(r[0-7])\]/, args:[reg(0),reg(3),reg(6)] },
              { base:"0110100---___---", regex : /(r[0-7]),\[(r[0-7]),#([0-9]+)\]/, args:[reg(0),reg(3), uint5_shr2(6)] }], 
     "ldrb" :[{ base:"0101110---___---", regex : /(r[0-7]),\[(r[0-7]),(r[0-7])\]/, args:[reg(0),reg(3),reg(6)] }], 
     "mov"  :[{ base:"0100011000---___", regex : /(r[0-7]),(r[0-7])/, args:[reg(0),reg(3)] },
              { base:"0100011010---101", regex : /sp,(r[0-7])/, args:[reg(3)] }], // made up again
     "movs" :[{ base:"00100---________", regex : /(r[0-7]),#([0-9]+)/, args:[reg(8),uint8(0)] }],
+    "movw" :[{ base:"11110-100100----0___----________", regex : /(r[0-7]),#([0-9]+)/, args:[reg4(8),thumb2_immediate_t3] }],
     "bx"   :[{ base:"0100011101110000", regex : /lr/, args:[] }], // made up again
+    ".word":[{ base:"--------------------------------", regex : /0x([0-9A-Fa-f]+)/, args:[function(v){v=parseInt(v,16);return (v>>16)|(v<<16);}] }], // made up again
     "nop"  :[{ base:"1011111100000000", regex : "", args:[] }], // made up again
   };
+  
    
   function getOpCode(binary) {
    var base = "";
@@ -158,7 +180,7 @@
             //console.log("  ",bits)
             opCode |= bits;
           }
-          if (opCode<0 || opCode>0xFFFF) {
+          if (op.base.length > 16) {
             wordCallback((opCode>>>16)); 
             wordCallback(opCode&0xFFFF);
           } else 
@@ -234,7 +256,7 @@
           try {
             assemble(asmLines, function(word) { machineCode.push("0x"+word.toString(16)); });
           } catch (err) {
-            conseole.log("Assembler failed: "+err);
+            console.log("Assembler failed: "+err);
             Espruino.Core.Notifications.error("Assembler failed: "+err);
             return;
           }
