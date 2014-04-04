@@ -67,7 +67,7 @@
   function loadModules(code, callback){
     var promises = [], maxWait = 5000,urlParts;
     var moduleCode = "Modules.removeAllCached();";
-    var notFound = "";
+    var notFound = [];
     var requires = getModulesRequired(code);
     var urlexp = new RegExp( '(http|https)://' );
     // Kick off the module loading (each returns a promise)
@@ -83,17 +83,15 @@
     }
     
     function callCallback(data){ // send code including all modules if all modules found only
-      if (notFound !== "") { 
-        Espruino.Core.Notifications.error("module(s) not found",notFound);
-      } else {
-        callback(data);
-      }
-    }
-    
-    // function to actually load the modules
-    function getModule(fullModuleName) {
-      
-      
+      if (notFound.length > 0) {
+        if (notFound.length==1)
+          Espruino.Core.Notifications.warning("Module "+notFound[0]+" not found");
+        else
+          Espruino.Core.Notifications.warning(
+              "Modules "+notFound.slice(0,notFound.length-1).join(", ")+
+              " and "+notFound[notFound.length-1]+" not found");
+      } 
+      callback(data);      
     }
     
     // function to actually load the modules
@@ -152,7 +150,7 @@
           }
           else{
             console.log(modName + " not found");
-            notFound += "Module " + modName + " not found<br>\n";              
+            notFound.push(modName);              
             dfd.resolve();
           }
         }
