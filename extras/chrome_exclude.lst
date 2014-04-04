@@ -3,5 +3,8 @@
 .gitignore
 .project
 .settings*
+.externalToolBuilders/*
 EspruinoSerialTerminal.zip
 extras*
+unused/*
+img/bak/*
