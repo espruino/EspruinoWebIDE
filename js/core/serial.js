@@ -180,11 +180,11 @@ Author: Gordon Williams (gw@pur3.co.uk)
     "write": writeSerial,
     "close": closeSerial,
 	"isSlowWrite": function() { return slowWrite; },
-	"setSlowWrite": function(isOn) { 
-          if (Espruino.Config.SERIAL_THROTTLE_SEND) {
-            console.log("ForceThrottle option is set - set Slow Write = true");
-            isOn = true;
-          } else
+	"setSlowWrite": function(isOn, force) { 
+        if ((!force) && Espruino.Config.SERIAL_THROTTLE_SEND) {
+          console.log("ForceThrottle option is set - set Slow Write = true");
+          isOn = true;
+        } else
   	    console.log("Set Slow Write = "+isOn);
 	  slowWrite = isOn; 
 	},
