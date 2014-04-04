@@ -227,6 +227,23 @@
     return html;
   };  
   
+  /// Gets a URL, and returns callback(data) or callback(undefined) on error
+  function getURL(url, callback) {
+    Espruino.callProcessor("getURL", { url : url, data : undefined }, function(result) {
+      if (result.data!==undefined) {
+        callback(result.data);
+      } else {
+        $.get( url, callback, "text" ).fail(function() {
+          callback(undefined);
+        });
+      }
+    });
+  }
+  
+  function isURL(text) {
+    return (new RegExp( '(http|https)://' )).test(text);
+  }
+  
   Espruino.Core.Utils = {
       init : init,
       isWindows : isWindows,   
@@ -238,5 +255,7 @@
       versionToFloat : versionToFloat,
       htmlTable : htmlTable,
       markdownToHTML : markdownToHTML,
+      getURL : getURL,
+      isURL : isURL,
   };
 }());

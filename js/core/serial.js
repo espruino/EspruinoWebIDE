@@ -125,7 +125,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
     showStatus &= writeData.length>blockSize;
     if (showStatus) {
       Espruino.Core.Status.setStatus("Sending...", writeData.length);
-      console.log("Sending "+JSON.stringify(data));
+      console.log("---> "+JSON.stringify(data));
     }
 
     if (writeInterval===undefined) {

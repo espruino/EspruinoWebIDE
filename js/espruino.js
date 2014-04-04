@@ -26,6 +26,7 @@ var Espruino;
    *   disconnected         - disconnected from Espruino (no data) 
    *   environmentVar       - Board's process.env loaded (object to be saved into Espruino.Env.environmentData)
    *   getModule            - Called with data={moduleName:"foo", moduleCode:undefined} - moduleCode should be filled in if the module can be found
+   *   getURL               - Called with data={url:"http://....", data:undefined) - data should be filled in if the URL is handled (See Espruino.Core.Utils.getURL to use this)
    **/  
   var processors = {};
   

@@ -34,9 +34,10 @@
     });
   }
 
-//Code to handle 'require("...")' and to load the relevant modules
+  // TODO: use Espruino.Core.Env.getData().info.builtin_modules
   var BUILT_IN_MODULES = ["http","fs","CC3000","WIZnet"]; // TODO: get these from board.js (hopefully)
 
+  /** Find any instances of require(...) in the code string and return a list */
   var getModulesRequired = function(code) {
     var modules = [];
     
@@ -60,136 +61,104 @@
         
     return modules;
   };
+  
+  /** Called from loadModule when a module is loaded. Parse it for other modules it might use
+   *  and resolve dfd after all submodules have been loaded */
+  function moduleLoaded(dfd, requires, modName, data, loadedModuleData){
+    loadedModuleData.push("Modules.addCached(" + JSON.stringify(modName) + "," + JSON.stringify(data) + ");");
+    // Check for any modules used from this module that we don't already have
+    var newRequires = getModulesRequired(data);
+    console.log(" - "+modName+" requires "+JSON.stringify(newRequires));
+    // if we need new modules, set them to load and get their promises
+    var newPromises = [];
+    for (var i in newRequires) {
+      if (requires.indexOf(newRequires[i])<0) {
+        console.log("   Queueing "+newRequires[i]);
+        requires.push(newRequires[i]);
+        newPromises.push(loadModule(newRequires, newRequires[i], loadedModuleData));
+      } else {
+        console.log("   Already loading "+newRequires[i]);
+      }
+  }
+    // if we need to load something, wait until we have all promises complete before resolving our promise!
+    if(newPromises.length > 0) {
+      $.when.apply(null,newPromises).then(function(){ dfd.resolve(); });
+    } else {
+      dfd.resolve();
+    }  
+  }      
+  
+  /** Given a module name (which could be a URL), try and find it. Return
+   * a deferred thingybob which signals when we're done. */
+  function loadModule(requires, fullModuleName, loadedModuleData) {
+    var dfd = $.Deferred();
+    
+    // First off, try and find this module using callProcessor 
+    Espruino.callProcessor("getModule", 
+        { moduleName:fullModuleName, moduleCode:undefined },
+        function(data) {
+          if (data.moduleCode!==undefined) {
+            // great! it found something. Use it.
+            moduleLoaded(dfd, requires, fullModuleName, data.moduleCode, loadedModuleData); 
+          } else {
+            // otherwise try and load the module the old way...
+            console.log("loadModule("+fullModuleName+")");
+            
+            var urls; // Array of where to look for this module
+            var modName; // Simple name of the module
+            if(Espruino.Core.Utils.isURL(fullModuleName)) {
+              modName = fullModuleName.substr(fullModuleName.lastIndexOf("/") + 1).split(".")[0];
+              urls = [ fullModuleName ];
+            } else {
+              modName = fullModuleName;
+              urls = Espruino.Config.MODULE_EXTENSIONS.split("|").map(function (extension) {
+                return Espruino.Config.MODULE_URL + "/" + fullModuleName + extension;
+              });
+            };
+            
+            // Recursively go through all the urls
+            (function download(urls) {
+              if (urls.length==0) {
+                Espruino.Core.Notifications.warning("Module "+fullModuleName+" not found");
+                return dfd.resolve();
+              }
+              Espruino.Core.Utils.getURL(urls[0], function (data) {
+                if (data!==undefined) {
+                  // we got it!
+                  moduleLoaded(dfd, requires, fullModuleName, data, loadedModuleData); 
+                } else {
+                  // else try next
+                  download(urls.slice(1));
+                }
+              });
+            })(urls);
+            
+             
+          }
+        }
+    );
+    
+    return dfd.promise();
+  }
 
-  /* Finds instances of 'require' and then ensures that 
+  /** Finds instances of 'require' and then ensures that 
    those modules are loaded into the module cache beforehand
    (by inserting the relevant 'addCached' commands into 'code' */
   function loadModules(code, callback){
-    var promises = [], maxWait = 5000,urlParts;
-    var moduleCode = "Modules.removeAllCached();";
-    var notFound = [];
+    var loadedModuleData = ["Modules.removeAllCached();"];
     var requires = getModulesRequired(code);
-    var urlexp = new RegExp( '(http|https)://' );
-    // Kick off the module loading (each returns a promise)
-    for(var i = 0; i < requires.length; i++)
-      promises.push(loadModule(requires[i]));
-    // When all promises are complete
-    if(promises.length > 0) {
-      $.when.apply(null,promises).then(function(){ 
-        callCallback(moduleCode + "\n" + code); 
+    if (requires.length == 0) {
+      // no modules needed - just return
+      callback(code);
+    } else {
+      // Kick off the module loading (each returns a promise)
+      var promises = requires.map(function (moduleName) {
+        return loadModule(requires, moduleName, loadedModuleData);
       });
-    } else { 
-      callCallback(code);
-    }
-    
-    function callCallback(data){ // send code including all modules if all modules found only
-      if (notFound.length > 0) {
-        if (notFound.length==1)
-          Espruino.Core.Notifications.warning("Module "+notFound[0]+" not found");
-        else
-          Espruino.Core.Notifications.warning(
-              "Modules "+notFound.slice(0,notFound.length-1).join(", ")+
-              " and "+notFound[notFound.length-1]+" not found");
-      } 
-      callback(data);      
-    }
-    
-    // function to actually load the modules
-    function loadModule(fullModuleName) {
-      var dfd = $.Deferred();
-      
-      var modName, url;
-      var extensions,extensionTry;
-      
-      var modName;
-      if(urlexp.test(fullModuleName)) {
-        modName = fullModuleName.substr(fullModuleName.lastIndexOf("/") + 1).split(".")[0];
-        url = fullModuleName;
-        extensions = [];
-      } else {
-        modName = fullModuleName;
-        url = Espruino.Config.MODULE_URL + "/" + fullModuleName;
-        extensions = Espruino.Config.MODULE_EXTENSIONS.split("|");
-      }
-      
-      Espruino.callProcessor(
-          "getModule", 
-          { moduleName:fullModuleName, moduleCode:undefined },
-          function(data) {
-            if (data.moduleCode!==undefined) { // did getModule return anything?
-              gotData(data.moduleCode);
-            } else {
-              // otherwise try and load the module the old way...
-              console.log("loadModule("+fullModuleName+")");
-              
-              
-              extensionTry = 0;
-              setTimeout(function(){dfd.resolve();},maxWait);
-              if (extensions.length>0){
-                downloadModule(url + extensions[extensionTry++]);
-              } else {
-                code = code.replace("require(\"" + url + "\")","require(\"" + modName + "\")");
-                downloadModule(url);
-              }        
-            }
-          }
-      );
-      
-      
-      return dfd.promise();
-      
-      function downloadModule(localUrl) { //downloads one module
-        // TODO: JumJum's module loading sequence... Use addProcessor again?
-        //var sequence = Espruino.Project.getModuleSequence(downloadWeb);  //get order for searching modules (see projects options)
-        var sequence = [downloadWeb];
-        var sequencePointer = 0;
-        downloadSequence();
-        function downloadSequence(){  //searches all possible sources for modules in given order, first comes first serves
-          if(sequencePointer < sequence.length){
-            sequence[sequencePointer](localUrl,modName,checkData);
-          }
-          else{
-            console.log(modName + " not found");
-            notFound.push(modName);              
-            dfd.resolve();
-          }
-        }
-        function checkData(data){ //checks if module found, if not search in next source
-          if(data){gotData(data);}
-          else{
-            sequencePointer++;
-            downloadSequence();
-          }
-        }
-        function downloadWeb(localUrl,modName,callback){  //searches module on www.espruino.com, (for local search see projects)
-          $.get(localUrl,callback,"text").fail(function() {
-            if(extensionTry < extensions.length) {
-              downloadModule(url + extensions[extensionTry++]);
-            } 
-            else { callback(); }
-          });               
-        }
-      };
-      
-      function gotData(data){
-        moduleCode += "Modules.addCached(" + JSON.stringify(modName) + "," + JSON.stringify(data) + ");\n";
-        // Check for any modules used from this module that we don't already have
-        var newRequires = getModulesRequired(data);
-        console.log(" - "+fullModuleName+" requires "+JSON.stringify(newRequires));
-        // if we need new modules, set them to load and get their promises
-        var newPromises = [];
-        for (var i in newRequires)
-          if (requires.indexOf(newRequires[i])<0) {
-            requires.push(newRequires[i]);
-            newPromises.push(loadModule(newRequires[i]));
-          }
-        // if we need to load something, wait until we have all promises complete before resolving our promise!
-        if(newPromises.length > 0) {
-          $.when.apply(null,newPromises).then(function(){ dfd.resolve(); });
-        } else {
-          dfd.resolve();
-        }  
-      }        
+      // When all promises are complete
+      $.when.apply(null,promises).then(function(){ 
+        callback(loadedModuleData.join("\n") + "\n" + code); 
+      });
     }
   };
   
