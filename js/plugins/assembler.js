@@ -1,0 +1,271 @@
+/**
+ Copyright 2014 Gordon Williams (gw@pur3.co.uk)
+
+ This Source Code is subject to the terms of the Mozilla Public
+ License, v2.0. If a copy of the MPL was not distributed with this
+ file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ 
+ ------------------------------------------------------------------
+  Automatically run an assembler on inline assembler statements
+ ------------------------------------------------------------------
+**/
+"use strict";
+(function(){
+  
+  
+  
+//http://ece.uwaterloo.ca/~ece222/ARM/ARM7-TDMI-manual-pt3.pdf
+  
+  function rlist_lr(value) {
+   var regs = value.split(",");
+   var vals = { r0:1,r1:2,r2:4,r3:8,r4:16,r5:32,r6:64,r7:128,lr:256 };
+   var bits = 0;
+   for (var i in regs) {
+     var reg = regs[i].trim();
+     if (!(reg in vals))  throw "Unknown register name "+reg;
+     bits |= vals[reg];
+   }
+   return bits;
+  }
+   
+   
+  function reg(reg_offset) {
+    return function(reg) {
+      var vals = { r0:0,r1:1,r2:2,r3:3,r4:4,r5:5,r6:6,r7:7 };
+      if (!(reg in vals)) throw "Unknown register name "+reg;
+      return vals[reg]<<reg_offset;
+    }
+  }
+   
+  function reg_or_immediate(reg_offset, immediate_bit) {
+    return function(reg) {
+      var regVal = parseInt(reg);
+      if (regVal>=0 && regVal<8)
+        return ((regVal&7)<<reg_offset) | (1<<immediate_bit);
+      var vals = { r0:0,r1:1,r2:2,r3:3,r4:4,r5:5,r6:6,r7:7 };
+      if (!(reg in vals)) throw "Unknown register name, or immediate out of range 0..7 "+reg;
+      return vals[reg]<<reg_offset;
+    }
+  }
+   
+  function reg_base_offset(base_offset, offset_offset) {
+   return function(value) {
+     var parms = value.split(",");
+     return reg(base_offset)(parms[0]) | reg(offset_offset)(parms[0]);
+   }
+  }
+   
+  function uint7_shr2(offset) {
+    return function(value) {
+      var bits = parseInt(value);
+      if (bits>=0 && bits<=511 && (bits&3)==0)
+        return (bits>>2)<<offset;
+      throw "Invalid number '"+value+"' - must be between 0 and 508 and a multiple of 4"
+    }
+  }
+   
+  function uint8_shr2(offset) {
+    return function(value) {
+      var bits = parseInt(value);
+      if (bits>=0 && bits<=1023 && (bits&3)==0)
+        return (bits>>2)<<offset;
+      throw "Invalid number '"+value+"' - must be between 0 and 1020 and a multiple of 4"
+    }
+  }
+   
+  function uint8(offset) {
+    return function(value) {
+      var bits = parseInt(value);
+      if (bits>=0 && bits<=255)
+        return bits<<offset;
+      throw "Invalid number '"+value+"' - must be between 0 and 255"
+    }
+  }
+   
+  function uint5_shr2(offset) {
+    return function(value) {
+      var bits = parseInt(value);
+      if (bits>=0 && bits<=63*4)
+        return (bits>>2)<<offset;
+      throw "Invalid number '"+value+"' - must be between 0 and 255 and a multiple of 4"
+    }
+  }
+   
+  var ops = { 
+    "push" :[{ base:"1011010-________", regex : /^{(.*)}$/, args:[rlist_lr] }],
+    "pop"  :[{ base:"1011110-________", regex : /^{(.*)}$/, args:[rlist_lr] }],
+    "add"  :[{ base:"10100---________", regex : /^(r[0-7]),pc,#([0-9]+)$/,args:[reg(8),uint8_shr2(0)] },
+             { base:"10101---________", regex : /^(r[0-7]),sp,#([0-9]+)$/, args:[reg(8),uint8_shr2(0)] },
+             { base:"101100000_______", regex : /^sp,#([0-9]+)$/, args:[uint7_shr2(0)] },
+  /*           { base:"00011-0___---___", regex : /^(r[0-7]),(r[0-7]),([^,]+)$/, args:[reg(0),reg(3),reg_or_immediate(6,10)] } */], // ?
+    "adds" :[{ base:"00011-0___---___", regex : /^(r[0-7]),(r[0-7]),([^,]+)$/, args:[reg(0),reg(3),reg_or_immediate(6,10)] } ],
+    "adc.w":[{ base:"111010110100----________--------", regex : /^(r[0-7]),(r[0-7]),(r[0-7])$/,args:[reg(16),reg(8),reg(0)] }], // made this up. probably wrong
+    "add.w":[{ base:"11110001--------________--------", regex : /^(r[0-7]),(r[0-7]),#([0-9]+)$/,args:[reg(16),reg(8),uint8(0)] }], // made this up. probably wrong
+    "sub"  :[/*{ base:"10100---________", regex : /^([^,]+),pc,#([0-9]+)$/,args:[reg(8),uint8_shr2(0)] },*/
+             { base:"101100001_______", regex : /^sp,#([0-9]+)$/, args:[uint7_shr2(0)] },
+             { base:"00011-1___---___", regex : /^([^,]+),([^,]+),([^,]+)$/, args:[reg(0),reg(3),reg_or_immediate(6,10)] } ],
+   
+    "str"  :[{ base:"0101000---___---", regex : /(r[0-7]),\[(r[0-7]),(r[0-7])\]/, args:[reg(0),reg(3),reg(6)] },
+             { base:"0110000---___---", regex : /(r[0-7]),\[(r[0-7]),#([0-9]+)\]/, args:[reg(0),reg(3), uint5_shr2(6)] }], 
+    "strb" :[{ base:"0101010---___---", regex : /(r[0-7]),\[(r[0-7]),(r[0-7])\]/, args:[reg(0),reg(3),reg(6)] }], 
+    "ldr"  :[{ base:"0101100---___---", regex : /(r[0-7]),\[(r[0-7]),(r[0-7])\]/, args:[reg(0),reg(3),reg(6)] },
+             { base:"0110100---___---", regex : /(r[0-7]),\[(r[0-7]),#([0-9]+)\]/, args:[reg(0),reg(3), uint5_shr2(6)] }], 
+    "ldrb" :[{ base:"0101110---___---", regex : /(r[0-7]),\[(r[0-7]),(r[0-7])\]/, args:[reg(0),reg(3),reg(6)] }], 
+    "mov"  :[{ base:"0100011000---___", regex : /(r[0-7]),(r[0-7])/, args:[reg(0),reg(3)] },
+             { base:"0100011010---101", regex : /sp,(r[0-7])/, args:[reg(3)] }], // made up again
+    "movs" :[{ base:"00100---________", regex : /(r[0-7]),#([0-9]+)/, args:[reg(8),uint8(0)] }],
+    "bx"   :[{ base:"0100011101110000", regex : /lr/, args:[] }], // made up again
+    "nop"  :[{ base:"1011111100000000", regex : "", args:[] }], // made up again
+  };
+   
+  function getOpCode(binary) {
+   var base = "";
+   for (var b in binary) 
+     if ("-_".indexOf(binary[b])>=0) 
+       base += "0";
+     else
+       base += binary[b];
+   var opCode = parseInt(base,2);
+   if (opCode<0) opCode = opCode + 2147483648.0;
+   return opCode;
+  }
+   
+  function assemble(asmLines, wordCallback) {
+    asmLines.forEach(function (line) {
+      line = line.trim();
+      //console.log("'"+line+"'");
+      if (line=="") return;
+      var firstArgEnd = line.indexOf("\t");
+      if (firstArgEnd<0) firstArgEnd = line.indexOf(" ");
+      if (firstArgEnd<0) firstArgEnd=line.length;
+      var opName = line.substr(0,firstArgEnd);
+      var args = line.substr(firstArgEnd).replace(/[ \t]/g,"").trim();
+      if (!(opName in ops)) throw "Unknown Op '"+opName+"'";
+      // search ops
+      var found = false;
+      for (var n in ops[opName]) {
+        var op = ops[opName][n];
+        var m;
+        if (m=args.match(op.regex)) {
+          found = true;
+          // work out the base opcode
+          var opCode = getOpCode(op.base);
+          // remove the first element
+          for (var i in op.args) {
+            //console.log(i,m[(i|0)+1]);
+            var argFunction = op.args[i];
+            var bits = argFunction(m[(i|0)+1]);
+            //console.log("  ",bits)
+            opCode |= bits;
+          }
+          if (opCode<0 || opCode>0xFFFF) {
+            wordCallback((opCode>>>16)); 
+            wordCallback(opCode&0xFFFF);
+          } else 
+            wordCallback(opCode);
+          break;
+        }
+      }
+      // now parse args
+      if (!found)
+        throw "Unknown arg style '"+args+"' in '"+line+"'";
+    });
+    
+  }
+  
+//---------------------------------------------------------------------------
+//---------------------------------------------------------------------------
+//---------------------------------------------------------------------------
+  
+  function init() {
+    // When code is sent to Espruino, search it for modules and add extra code required to load them 
+    Espruino.addProcessor("transformForEspruino", function(code, callback) {
+      findASMBlocks(code, callback);
+    });
+  }
+  
+  /* Finds instances of 'E.asm' and replaces them */
+  function findASMBlocks(code, callback){
+    
+    function match(str, type) {
+      if (str!==undefined && tok.str!=str) {
+        Espruino.Core.Notifications.error("Expecting '"+str+"' but got '"+tok.str+"'. Should have E.asm('arg spec', 'asmline1', ..., 'asmline2'");
+        return false;
+      }
+      if (type!==undefined && tok.type!=type) {
+        Espruino.Core.Notifications.error("Expecting a "+type+" but got "+tok.type+". Should have E.asm('arg spec', 'asmline1', ..., 'asmline2'");
+        return false;
+      }      
+      tok = lex.next();
+      return true;
+    }
+    
+    var foundAsm = true;
+    var assembledCode = "";
+    var asmBlockCount = 1;
+    while (foundAsm) {
+      foundAsm = false;
+      var lex = Espruino.Core.Utils.getLexer(code);
+      var tok = lex.next();
+      var state = 0;
+      var startIndex = -1;
+      while (tok!==undefined) {
+        if (state==0 && tok.str=="E") { state=1; startIndex = tok.startIdx; tok = lex.next();
+        } else if (state==1 && tok.str==".") { state=2; tok = lex.next();
+        } else if (state==2 && (tok.str=="asm")) { state=3; tok = lex.next();
+        } else if (state==3 && (tok.str=="(")) {
+          foundAsm = true;
+          state=0;
+          tok = lex.next(); // skip (
+          var argSpec = tok.value; 
+          var asmLines = [];
+          if (!match(undefined,"STRING")) return;
+          if (!match(",",undefined)) return;
+          while (tok && tok.str!=")") {
+            asmLines.push(tok.value);
+            if (!match(undefined,"STRING")) return;
+            if (tok.str!=")") 
+              if (!match(",",undefined)) return;
+          }
+          if (!match(")",undefined)) return;
+          var endIndex = tok.endIdx;
+          
+          var machineCode = [];
+          try {
+            assemble(asmLines, function(word) { machineCode.push("0x"+word.toString(16)); });
+          } catch (err) {
+            conseole.log("Assembler failed: "+err);
+            Espruino.Core.Notifications.error("Assembler failed: "+err);
+            return;
+          }
+          
+          assembledCode +=
+                 "var ASM_BASE"+asmBlockCount+"=ASM_BASE+1/*thumb*/;\n"+
+                 "["+machineCode.join(",")+"].forEach(function(v) { poke16((ASM_BASE+=2)-2,v); });\n";                
+          code = code.substr(0,startIndex) + 
+                 'E.nativeCall(ASM_BASE'+asmBlockCount+', '+JSON.stringify(argSpec)+')'+
+                 code.substr(endIndex);
+          asmBlockCount++;
+          
+          // Break out
+          tok = undefined;        
+        } else {
+          state = 0;
+          tok = lex.next();
+        }
+      }
+    }
+    
+    if (assembledCode!="") {
+      code = "var ASM_BASE=process.memory().stackEndAddress;\n"+
+             assembledCode+
+             code;
+    }
+    callback(code);
+  };
+  
+  
+  Espruino.Plugins.Assembler = {
+    init : init
+  };
+}());
