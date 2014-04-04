@@ -31,7 +31,8 @@
     // now we start the real tour
     {
       title: "Welcome to the Espruino Web IDE",
-      description: "The Espruino Web IDE is a Web-Based VT100 Serial Terminal - designed for writing code on microcontrollers that use the <a href='http://www.espruino.com' target='_blank'>Espruino JavaScript interpreter</a> (but useful for a bunch of other stuff too!)<br /><br />To help you get up to speed quickly with the IDE, this tour will run you through some of the core features you'll need to know to get started. <br /><br />So when you are ready, click next to continue."
+      description: "The Espruino Web IDE is designed for writing code on microcontrollers that use the <a href='http://www.espruino.com' target='_blank'>Espruino JavaScript interpreter</a><br /><br />"+
+                   "To help you get up to speed quickly with the IDE, this tour will run you through some of the core features you'll need to know to get started. <br /><br />So when you are ready, click next to continue."
     },
     {
       title: "Connect to your Espruino",
@@ -111,7 +112,7 @@
     },
     {
       title: "Go wild!",
-      description: "And that is the basics of the Espruino Web IDE.<br /><br />For more helpful guides and tutorials, be sure to checkout the <a href='http://www.espruino.com/Tutorials' target='_blank'>Tutorials</a> section on the Espruino website, or if you have any questions, why not head on over to the <a href='http://forum.espruino.com/' target='_blank'>Forums</a>.<br /><br />We hope you enjoy your Espruino!"
+      description: "And those are the basics of the Espruino Web IDE.<br /><br />For more helpful guides and tutorials, be sure to checkout the <a href='http://www.espruino.com/Tutorials' target='_blank'>Tutorials</a> section on the Espruino website, or if you have any questions, why not head on over to the <a href='http://forum.espruino.com/' target='_blank'>Forums</a>.<br /><br />We hope you enjoy your Espruino!"
     }
   ];
 

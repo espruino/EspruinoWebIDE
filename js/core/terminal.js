@@ -55,6 +55,10 @@
     // Populate terminal
     $.get("data/terminal_initial.html", function (data){
       $("#terminal").html(data);  
+      $(".tour_link").click(function(e) { 
+        e.preventDefault(); 
+        $("#icon-tour").click(); 
+      });
     });
     
     $("#terminal").mouseup(function() {
