@@ -24,7 +24,7 @@
     "espruino_code": {
       "title": "Load code into the Espruino Web IDE",
       "matches": [
-        "*://www.espruino.com/webide*"
+        "http://www.espruino.com/webide*"
       ]
     }
   }
