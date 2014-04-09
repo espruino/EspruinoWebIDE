@@ -190,3 +190,8 @@ a.title-bar__button--alert:hover { background-color: #f39c12; }
 .icon-compass.lrg:before { background-position: 0 -1860px }
 .compact .icon-compass.lrg:before,
 .icon-compass.sml:before { background-position: -60px -1860px }
+
+.icon-refresh.lrg:before { background-position: 0 -1920px }
+.compact .icon-refresh.lrg:before,
+.icon-refresh.sml:before { background-position: -60px -1920px }
+

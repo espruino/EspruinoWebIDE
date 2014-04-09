@@ -12,6 +12,9 @@
 "use strict";
 (function(){
   
+  var currentJSFileName = "code.js";
+  var currentXMLFileName = "code_blocks.xml";
+  
   function init() {
     // Configuration
     
@@ -27,6 +30,9 @@
         position: "top"
       }, 
       click: function() {
+        // this should ensure that if we load the same file, it works second time round
+        document.getElementById('fileLoader').value = '';
+        // fire the file loader
         $( "#fileLoader" ).click();
       }
     });
@@ -42,31 +48,32 @@
       },
       click: function() {
         if (Espruino.Core.Code.isInBlockly()) 
-          saveFile(Espruino.Core.EditorBlockly.getXML(), "code_blocks.xml");
+          saveFile(Espruino.Core.EditorBlockly.getXML(), currentXMLFileName);
         else
-          saveFile(Espruino.Core.EditorJavaScript.getCode(), "code.js");
+          saveFile(Espruino.Core.EditorJavaScript.getCode(), currentJSFileName);
       }
     });
     
     
     // required for file loading... (hidden)
     $('<input type="file" id="fileLoader" style="display: none;"/>').appendTo(document.body);
-     
-    /*/$( ".reload" ).button( { text: false, icons: { primary: "ui-icon-refresh" } } ).click( function () {
-      $('#fileLoader').change();
-    });*/
-    
+
     $("#fileLoader").change(function(event) {
       if (event.target.files.length != 1) return;
       var reader = new FileReader();
       reader.onload = function(event) {
+        // Get the last loaded filename
+        var currentFileName = document.getElementById('fileLoader').value;       
+        currentFileName = currentFileName.substr(currentFileName.lastIndexOf("\\")+1);
+        // Load data
         var data = convertFromOS(event.target.result);
         if (Espruino.Core.Code.isInBlockly()) {
           Espruino.Core.EditorBlockly.setXML(data);          
+          currentXMLFileName = currentFileName;
         } else { 
           Espruino.Core.EditorJavaScript.setCode(data);
+          currentJSFileName = currentFileName;
         }
-        document.getElementById('load').value = '';
       };
       reader.readAsText(event.target.files[0]);
     });
