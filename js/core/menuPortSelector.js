@@ -13,6 +13,7 @@
 (function(){
   
   var connectButton;
+  var lastContents = undefined;
   
   function init() 
   {
@@ -47,12 +48,10 @@
     }
   }
   
-  function createPortSelector(callback) 
-  {
+  function createPortSelector(callback) {
     var checkInt, popup;
 
-    function selectPort()
-    {
+    function selectPort() {
       Espruino.Core.Status.setStatus("Connecting...");
       connectToPort($(this).data("port"), function(success){
         if(success){
@@ -63,9 +62,13 @@
       });
     }
 
-    function getPorts()
-    {
+    function getPorts() {
       Espruino.Core.Serial.getPorts(function(items) {
+
+        if (items.toString() == lastContents) 
+          return; // same... don't update
+        lastContents = items.toString();
+      
 
         var html;
 
@@ -90,6 +93,8 @@
       });
     }
 
+    // force update
+    lastContents = undefined;
     // Launch the popup
     popup = Espruino.Core.App.openPopup({
       title: "Select a port...",
@@ -100,7 +105,7 @@
     $(".window--modal").on("click", ".port-list__item a", selectPort);
 
     // Setup checker interval
-    checkInt = setInterval(getPorts, 3000);
+    checkInt = setInterval(getPorts, 1000);
     getPorts();
 
 
