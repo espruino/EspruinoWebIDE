@@ -6,7 +6,7 @@
  file, You can obtain one at http://mozilla.org/MPL/2.0/.
  
  ------------------------------------------------------------------
-  An Example Plugin
+  A button to reload the last loaded file
  ------------------------------------------------------------------
 **/
 "use strict";
