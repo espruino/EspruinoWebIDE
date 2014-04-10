@@ -12,6 +12,8 @@
 "use strict";
 (function(){
   
+  var JSON_DIR = "http://www.espruino.com/json/";
+  
   var environmentData = {};
   var boardData = {};
   
@@ -54,9 +56,34 @@
     return boardData;
   }
   
+  /** Get a list of boards that we know about */
+  function getBoardList(callback) {
+    $.get(JSON_DIR + "boards.json", function(boards){
+     // now load all the individual JSON files 
+      var promises = [];      
+      for (var boardId in boards) {
+        promises.push((function() {
+          var id = boardId;
+          var dfd = $.Deferred();
+          $.get(JSON_DIR + boards[boardId].json, function (data) {
+            boards[id]["json"] = data;
+            dfd.resolve();
+          }, "json").fail(function () { dfd.resolve(); });
+          return dfd.promise();
+        })());
+      }
+      
+      // When all are loaded, load the callback
+      $.when.apply(null,promises).then(function(){ 
+        callback(boards); 
+      });      
+    },"json").fail(callback(undefined));
+  }
+  
   Espruino.Core.Env = {
     init : init,
     getData : getData,
-    getBoardData : getBoardData
+    getBoardData : getBoardData,
+    getBoardList : getBoardList,
   };
 }());

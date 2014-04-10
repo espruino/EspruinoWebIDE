@@ -16,7 +16,7 @@
     Espruino.Core.Config.add("NPM_MODULES", {
       section : "Communications",
       name : "Load modules from NPM (BETA)",
-      description : "If a module isn't found, try and load it from the NPM registry",
+      description : "If a module isn't found, try and load it from the NPM (Node.js) registry",
       type : "boolean",
       defaultValue : false
     });

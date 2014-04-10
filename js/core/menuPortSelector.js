@@ -166,6 +166,7 @@
       init : init,
       
       ensureConnected : ensureConnected,
+      disconnect : disconnect,
       showPortSelector: createPortSelector
   };
 

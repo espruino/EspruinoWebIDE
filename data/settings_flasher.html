@@ -1,19 +1,19 @@
  <p>Please see <a href="http://www.espruino.com/ChangeLog" target="_blank">the ChangeLog</a> for a list of the improvements and fixes present in each version of Espruino.</p> 
  
- <p><b>NOTE:</b> This will only flash devices with the Espruino USB Bootloader (like the <a href="http://www.espruino.com/EspruinoBoard" target="_blank">Espruino Board</a>).</p>
- <p>To use this, please do the following:</p>
-<ul>
-  <li>If connected, click the disconnect button</li>
-  <li>Click the connect button, and ensure that the firmware URL below updates correctly (or fill it in manually - see <a href="http://www.espruino.com/Troubleshooting" target="_blank">http://www.espruino.com/Troubleshooting</a>)</li>
-  <li>Click the disconnect button</li>
-  <li>Put the board into bootloader mode by holding down the BTN1 button on the board while pressing and releasing RST. The blue LED should start glowing.</li>
-  <li>Click 'Write Firmware' and wait. Flashing can take around 5 minutes</li>
-  <li> When finished, the status in the top left will change and you can disconnect and press the reset button on Espruino to start using it again.</li>
-  <li>If flashing fails, just repeat all but the first step.</li>
- </ul>
+ <p><b>NOTE:</b> The Flasher will only update flash devices with the Espruino USB Bootloader 
+ (like the <a href="http://www.espruino.com/EspruinoBoard" target="_blank">Espruino Board</a>).
+  TO update other devices please see <a href="http://www.espruino.com/Download" target="_blank">this page</a>.</p>
+  
+<h3>Normal Firmware Update</h3>
+ <p>Just click the button below and follow the on-screen instructions!</p>
  <p>
-  <Input type="text" class="flash_url" size="50" value=""/>
-  <button class="flash_start">Write Firmware</button>
+  <button class="flash_start">Flash Firmware</button>
+
+
+ <h3>Advanced Firmware Update</h3>
+ <p>If you know the exact URL of the binary you wish to update (for instance from a <a href="http://www.espruino.com/binaries/git" target="_blank">cutting-edge build</a>), please enter it below and click the button:</p>
+ <p>
+  <input type="text" class="flash_url" size="70" value=""/><button class="flash_start_advanced">Advanced Flash Firmware</button>
  </p>
 
 <p class="flash_info"></p> 

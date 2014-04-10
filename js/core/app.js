@@ -175,7 +175,9 @@
             '<div class="title-bar__buttons"></div>'+
           '</div>'+
           '<div class="window__viewport">'+
+            (options.padding ? '<div style="padding: 0px 10px 0px 10px;">':'')+
             options.contents +
+            (options.padding ? '</div>':'')+             
           '</div>'+
         '</div>').appendTo(".window__overlay-inner").click(function(e){ e.stopPropagation(); })
 
@@ -183,6 +185,13 @@
     $('<a class="icon-cross sml title-bar__button title-bar__button--close" title="Close"></a>').appendTo(".window--modal .title-bar__buttons").click(function(){
       api.close();
     });
+    
+    // Append 'next' button if we registered a callback
+    if (options.next) {
+      // TODO - nasty - need nice CSS
+      $('<div class="guiders_buttons_container" style="padding: 10px 10px 10px 10px;bottom:10px;"><a class="guiders_button" href="#">Next</a></div>')
+        .appendTo(".window--modal .window__viewport").click(options.next);
+    }
 
     // Apply dimensions
     if(options.width)
