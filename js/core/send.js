@@ -18,7 +18,7 @@
       id: "deploy",
       icon: "deploy", 
       title : "Send to Espruino", 
-      order: 300, 
+      order: 400, 
       area: { 
         name: "code", 
         position: "top"
