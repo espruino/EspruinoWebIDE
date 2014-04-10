@@ -17,7 +17,9 @@
     "serial",
     "videoCapture",
     {"fileSystem": ["write", "retainEntries", "directory"]},
-    "storage"
+    "storage",
+    "http://*/",
+    "https://*/"
   ],
   "manifest_version": 2,
   "url_handlers": {
