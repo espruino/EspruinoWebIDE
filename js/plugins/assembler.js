@@ -64,7 +64,7 @@
       var bits = parseInt(value);
       if (bits>=0 && bits<=511 && (bits&3)==0)
         return (bits>>2)<<offset;
-      throw "Invalid number '"+value+"' - must be between 0 and 508 and a multiple of 4"
+      throw "Invalid number '"+value+"' - must be between 0 and 508 and a multiple of 4";
     };
   }
    
@@ -73,7 +73,7 @@
       var bits = parseInt(value);
       if (bits>=0 && bits<=1023 && (bits&3)==0)
         return (bits>>2)<<offset;
-      throw "Invalid number '"+value+"' - must be between 0 and 1020 and a multiple of 4"
+      throw "Invalid number '"+value+"' - must be between 0 and 1020 and a multiple of 4";
     };
   }
   
@@ -86,7 +86,7 @@
       }
       if (bits>=-256 && bits<=255 && (bits&1)==0)
         return ((bits>>1) & 0xFF)<<offset;
-      throw "Invalid number '"+value+"' - must be between 0 and 1020 and a multiple of 4"
+      throw "Invalid number '"+value+"' - must be between -256 and 255 and a multiple of 2";
     };
   }  
    
@@ -157,20 +157,20 @@
     // 5.14 Format 14: push/pop registers
     //  done (below)
     // 5.16 Format 16: conditional branch
-    "beq" :[{ base:"11010000________", regex : /^#(.*)$/, args:[sint8_shr1_or_label(0)] }], // 5.16 Format 16: conditional branch
-    "bne" :[{ base:"11010001________", regex : /^#(.*)$/, args:[sint8_shr1_or_label(0)] }], // 5.16 Format 16: conditional branch
-    "bcs" :[{ base:"11010010________", regex : /^#(.*)$/, args:[sint8_shr1_or_label(0)] }], // 5.16 Format 16: conditional branch
-    "bcc" :[{ base:"11010011________", regex : /^#(.*)$/, args:[sint8_shr1_or_label(0)] }], // 5.16 Format 16: conditional branch
-    "bmi" :[{ base:"11010100________", regex : /^#(.*)$/, args:[sint8_shr1_or_label(0)] }], // 5.16 Format 16: conditional branch
-    "bpl" :[{ base:"11010101________", regex : /^#(.*)$/, args:[sint8_shr1_or_label(0)] }], // 5.16 Format 16: conditional branch
-    "bvs" :[{ base:"11010110________", regex : /^#(.*)$/, args:[sint8_shr1_or_label(0)] }], // 5.16 Format 16: conditional branch
-    "bvc" :[{ base:"11010111________", regex : /^#(.*)$/, args:[sint8_shr1_or_label(0)] }], // 5.16 Format 16: conditional branch
-    "bhi" :[{ base:"11011000________", regex : /^#(.*)$/, args:[sint8_shr1_or_label(0)] }], // 5.16 Format 16: conditional branch
-    "bls" :[{ base:"11011001________", regex : /^#(.*)$/, args:[sint8_shr1_or_label(0)] }], // 5.16 Format 16: conditional branch
-    "bge" :[{ base:"11011010________", regex : /^#(.*)$/, args:[sint8_shr1_or_label(0)] }], // 5.16 Format 16: conditional branch
-    "blt" :[{ base:"11011011________", regex : /^#(.*)$/, args:[sint8_shr1_or_label(0)] }], // 5.16 Format 16: conditional branch
-    "bgt" :[{ base:"11011100________", regex : /^#(.*)$/, args:[sint8_shr1_or_label(0)] }], // 5.16 Format 16: conditional branch
-    "ble" :[{ base:"11011101________", regex : /^#(.*)$/, args:[sint8_shr1_or_label(0)] }], // 5.16 Format 16: conditional branch
+    "beq" :[{ base:"11010000________", regex : /^(.*)$/, args:[sint8_shr1_or_label(0)] }], // 5.16 Format 16: conditional branch
+    "bne" :[{ base:"11010001________", regex : /^(.*)$/, args:[sint8_shr1_or_label(0)] }], // 5.16 Format 16: conditional branch
+    "bcs" :[{ base:"11010010________", regex : /^(.*)$/, args:[sint8_shr1_or_label(0)] }], // 5.16 Format 16: conditional branch
+    "bcc" :[{ base:"11010011________", regex : /^(.*)$/, args:[sint8_shr1_or_label(0)] }], // 5.16 Format 16: conditional branch
+    "bmi" :[{ base:"11010100________", regex : /^(.*)$/, args:[sint8_shr1_or_label(0)] }], // 5.16 Format 16: conditional branch
+    "bpl" :[{ base:"11010101________", regex : /^(.*)$/, args:[sint8_shr1_or_label(0)] }], // 5.16 Format 16: conditional branch
+    "bvs" :[{ base:"11010110________", regex : /^(.*)$/, args:[sint8_shr1_or_label(0)] }], // 5.16 Format 16: conditional branch
+    "bvc" :[{ base:"11010111________", regex : /^(.*)$/, args:[sint8_shr1_or_label(0)] }], // 5.16 Format 16: conditional branch
+    "bhi" :[{ base:"11011000________", regex : /^(.*)$/, args:[sint8_shr1_or_label(0)] }], // 5.16 Format 16: conditional branch
+    "bls" :[{ base:"11011001________", regex : /^(.*)$/, args:[sint8_shr1_or_label(0)] }], // 5.16 Format 16: conditional branch
+    "bge" :[{ base:"11011010________", regex : /^(.*)$/, args:[sint8_shr1_or_label(0)] }], // 5.16 Format 16: conditional branch
+    "blt" :[{ base:"11011011________", regex : /^(.*)$/, args:[sint8_shr1_or_label(0)] }], // 5.16 Format 16: conditional branch
+    "bgt" :[{ base:"11011100________", regex : /^(.*)$/, args:[sint8_shr1_or_label(0)] }], // 5.16 Format 16: conditional branch
+    "ble" :[{ base:"11011101________", regex : /^(.*)$/, args:[sint8_shr1_or_label(0)] }], // 5.16 Format 16: conditional branch
     // 5.17 Format 17: software interrupt
     // 5.18 Format 18: unconditional branch
     // 5.19 Format 19: long branch with link
