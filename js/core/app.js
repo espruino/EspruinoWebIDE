@@ -73,7 +73,7 @@
         position: "right"
       },
       click: function(){
-        if(Espruino.Core.Serial.isConnected){
+        if(Espruino.Core.Serial.isConnected()){
           Espruino.Core.Serial.close(function(){
             chrome.app.window.current().close();
           });
