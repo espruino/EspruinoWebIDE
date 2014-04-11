@@ -76,6 +76,19 @@
       throw "Invalid number '"+value+"' - must be between 0 and 1020 and a multiple of 4"
     };
   }
+  
+  function sint8_shr1_or_label(offset) {
+    return function(value) {
+      var bits = -100000000;
+      // TODO: label
+      if (value[0]=="#") {      
+        var bits = parseInt(value.substr(1));        
+      }
+      if (bits>=-256 && bits<=255 && (bits&1)==0)
+        return ((bits>>1) & 0xFF)<<offset;
+      throw "Invalid number '"+value+"' - must be between 0 and 1020 and a multiple of 4"
+    };
+  }  
    
   function uint8(offset) {
     return function(value) {
@@ -85,6 +98,15 @@
       throw "Invalid number '"+value+"' - must be between 0 and 255"
     };
   }
+  
+  function uint5(offset) {
+    return function(value) {
+      var bits = parseInt(value);
+      if (bits>=0 && bits<=63)
+        return bits<<offset;
+      throw "Invalid number '"+value+"' - must be between 0 and 63"
+    };
+  }  
    
   function uint5_shr2(offset) {
     return function(value) {
@@ -110,27 +132,78 @@
   }
   
   var ops = { 
-    "push" :[{ base:"1011010-________", regex : /^{(.*)}$/, args:[rlist_lr] }],
-    "pop"  :[{ base:"1011110-________", regex : /^{(.*)}$/, args:[rlist_lr] }],
-    "add"  :[{ base:"10100---________", regex : /^(r[0-7]),pc,#([0-9]+)$/,args:[reg(8),uint8_shr2(0)] },
+    // Format 1: move shifted register
+    "lsl"  :[{ base:"00000-----___---", regex : /(r[0-7]),(r[0-7]),#([0-9]+)/, args:[reg(0),reg(3),uint5(6)] }],
+    "lsr"  :[{ base:"00001-----___---", regex : /(r[0-7]),(r[0-7]),#([0-9]+)/, args:[reg(0),reg(3),uint5(6)] }],
+    "asr"  :[{ base:"00010-----___---", regex : /(r[0-7]),(r[0-7]),#([0-9]+)/, args:[reg(0),reg(3),uint5(6)] }],
+    // 5.2 Format 2: add/subtract
+    // 00011
+    // 5.3 Format 3: move/compare/add/subtract immediate
+    "cmp"  :[{ base:"00101---________", regex : /(r[0-7]),#([0-9]+)/, args:[reg(8),uint8()] }], // move/compare/subtract immediate
+    // 5.4 Format 4: ALU operations
+    // 5.5 Format 5: Hi register operations/branch exchange
+    // 5.6 Format 6: PC-relative load             
+    //  done (below)
+    // 5.7 Format 7: load/store with register offset 
+    //  done (below)
+    // 5.8 Format 8: load/store sign-extended byte/halfword
+    // 5.9 Format 9: load/store with immediate offset
+    //  done (below)
+    // 5.10 Format 10: load/store halfword
+    // 5.11 Format 11: SP-relative load/store
+    // 5.12 Format 12: load address
+    // done (below)
+    // 5.13 Format 13: add offset to Stack Pointer
+    // 5.14 Format 14: push/pop registers
+    //  done (below)
+    // 5.16 Format 16: conditional branch
+    "beq" :[{ base:"11010000________", regex : /^#(.*)$/, args:[sint8_shr1_or_label(0)] }], // 5.16 Format 16: conditional branch
+    "bne" :[{ base:"11010001________", regex : /^#(.*)$/, args:[sint8_shr1_or_label(0)] }], // 5.16 Format 16: conditional branch
+    "bcs" :[{ base:"11010010________", regex : /^#(.*)$/, args:[sint8_shr1_or_label(0)] }], // 5.16 Format 16: conditional branch
+    "bcc" :[{ base:"11010011________", regex : /^#(.*)$/, args:[sint8_shr1_or_label(0)] }], // 5.16 Format 16: conditional branch
+    "bmi" :[{ base:"11010100________", regex : /^#(.*)$/, args:[sint8_shr1_or_label(0)] }], // 5.16 Format 16: conditional branch
+    "bpl" :[{ base:"11010101________", regex : /^#(.*)$/, args:[sint8_shr1_or_label(0)] }], // 5.16 Format 16: conditional branch
+    "bvs" :[{ base:"11010110________", regex : /^#(.*)$/, args:[sint8_shr1_or_label(0)] }], // 5.16 Format 16: conditional branch
+    "bvc" :[{ base:"11010111________", regex : /^#(.*)$/, args:[sint8_shr1_or_label(0)] }], // 5.16 Format 16: conditional branch
+    "bhi" :[{ base:"11011000________", regex : /^#(.*)$/, args:[sint8_shr1_or_label(0)] }], // 5.16 Format 16: conditional branch
+    "bls" :[{ base:"11011001________", regex : /^#(.*)$/, args:[sint8_shr1_or_label(0)] }], // 5.16 Format 16: conditional branch
+    "bge" :[{ base:"11011010________", regex : /^#(.*)$/, args:[sint8_shr1_or_label(0)] }], // 5.16 Format 16: conditional branch
+    "blt" :[{ base:"11011011________", regex : /^#(.*)$/, args:[sint8_shr1_or_label(0)] }], // 5.16 Format 16: conditional branch
+    "bgt" :[{ base:"11011100________", regex : /^#(.*)$/, args:[sint8_shr1_or_label(0)] }], // 5.16 Format 16: conditional branch
+    "ble" :[{ base:"11011101________", regex : /^#(.*)$/, args:[sint8_shr1_or_label(0)] }], // 5.16 Format 16: conditional branch
+    // 5.17 Format 17: software interrupt
+    // 5.18 Format 18: unconditional branch
+    // 5.19 Format 19: long branch with link
+    // .... 
+
+    
+    "push" :[{ base:"1011010-________", regex : /^{(.*)}$/, args:[rlist_lr] }], // 5.14 Format 14: push/pop registers
+    "pop"  :[{ base:"1011110-________", regex : /^{(.*)}$/, args:[rlist_lr] }], // 5.14 Format 14: push/pop registers
+    "add"  :[{ base:"00110---________", regex : /(r[0-7]),#([0-9]+)/, args:[reg(8),uint8()] }, // move/compare/subtract immediate
+             { base:"10100---________", regex : /^(r[0-7]),pc,#([0-9]+)$/,args:[reg(8),uint8_shr2(0)] },
              { base:"10101---________", regex : /^(r[0-7]),sp,#([0-9]+)$/, args:[reg(8),uint8_shr2(0)] },
-             { base:"101100000_______", regex : /^sp,#([0-9]+)$/, args:[uint7_shr2(0)] },
-  /*           { base:"00011-0___---___", regex : /^(r[0-7]),(r[0-7]),([^,]+)$/, args:[reg(0),reg(3),reg_or_immediate(6,10)] } */], // ?
+             { base:"101100000_______", regex : /^sp,#([0-9]+)$/, args:[uint7_shr2(0)] }
+  /*         { base:"00011-0___---___", regex : /^(r[0-7]),(r[0-7]),([^,]+)$/, args:[reg(0),reg(3),reg_or_immediate(6,10)] } */], // ?
     "adds" :[{ base:"00011-0___---___", regex : /^(r[0-7]),(r[0-7]),([^,]+)$/, args:[reg(0),reg(3),reg_or_immediate(6,10)] } ],
     "adc.w":[{ base:"111010110100----________--------", regex : /^(r[0-7]),(r[0-7]),(r[0-7])$/,args:[reg(16),reg(8),reg(0)] }], // made this up. probably wrong
     "add.w":[{ base:"11110001--------________--------", regex : /^(r[0-7]),(r[0-7]),#([0-9]+)$/,args:[reg(16),reg(8),uint8(0)] }], // made this up. probably wrong
-    "sub"  :[/*{ base:"10100---________", regex : /^([^,]+),pc,#([0-9]+)$/,args:[reg(8),uint8_shr2(0)] },*/
+    "sub"  :[{ base:"00111---________", regex : /(r[0-7]),#([0-9]+)/, args:[reg(8),uint8()] }, // move/compare/subtract immediate
+              /*{ base:"10100---________", regex : /^([^,]+),pc,#([0-9]+)$/,args:[reg(8),uint8_shr2(0)] },*/
              { base:"101100001_______", regex : /^sp,#([0-9]+)$/, args:[uint7_shr2(0)] },
              { base:"00011-1___---___", regex : /^([^,]+),([^,]+),([^,]+)$/, args:[reg(0),reg(3),reg_or_immediate(6,10)] } ],
    
-    "str"  :[{ base:"0101000---___---", regex : /(r[0-7]),\[(r[0-7]),(r[0-7])\]/, args:[reg(0),reg(3),reg(6)] },
-             { base:"0110000---___---", regex : /(r[0-7]),\[(r[0-7]),#([0-9]+)\]/, args:[reg(0),reg(3), uint5_shr2(6)] }], 
-    "strb" :[{ base:"0101010---___---", regex : /(r[0-7]),\[(r[0-7]),(r[0-7])\]/, args:[reg(0),reg(3),reg(6)] }], 
-    "ldr"  :[{ base:"01001---________", regex : /(r[0-7]),\[pc,#([0-9]+)\]/, args:[reg(8),uint8_shr2(0)] },
-             { base:"0101100---___---", regex : /(r[0-7]),\[(r[0-7]),(r[0-7])\]/, args:[reg(0),reg(3),reg(6)] },
-             { base:"0110100---___---", regex : /(r[0-7]),\[(r[0-7]),#([0-9]+)\]/, args:[reg(0),reg(3), uint5_shr2(6)] }], 
-    "ldrb" :[{ base:"0101110---___---", regex : /(r[0-7]),\[(r[0-7]),(r[0-7])\]/, args:[reg(0),reg(3),reg(6)] }], 
-    "mov"  :[{ base:"0100011000---___", regex : /(r[0-7]),(r[0-7])/, args:[reg(0),reg(3)] },
+    "str"  :[{ base:"0101000---___---", regex : /(r[0-7]),\[(r[0-7]),(r[0-7])\]/, args:[reg(0),reg(3),reg(6)] }, // 5.7 Format 7: load/store with register offset 
+             { base:"0110000---___---", regex : /(r[0-7]),\[(r[0-7]),#([0-9]+)\]/, args:[reg(0),reg(3), uint5_shr2(6)] }], // 5.9 Format 9: load/store with immediate offset 
+    "strb" :[{ base:"0101010---___---", regex : /(r[0-7]),\[(r[0-7]),(r[0-7])\]/, args:[reg(0),reg(3),reg(6)] }, // 5.7 Format 7: load/store with register offset
+             { base:"0111000---___---", regex : /(r[0-7]),\[(r[0-7]),#([0-9]+)\]/, args:[reg(0),reg(3), uint5_shr2(6)] }], // 5.9 Format 9: load/store with immediate offset 
+    "ldr"  :[{ base:"01001---________", regex : /(r[0-7]),\[pc,#([0-9]+)\]/, args:[reg(8),uint8_shr2(0)] }, // 5.6 Format 6: PC-relative load             
+             { base:"0101100---___---", regex : /(r[0-7]),\[(r[0-7]),(r[0-7])\]/, args:[reg(0),reg(3),reg(6)] }, // 5.7 Format 7: load/store with register offset      
+             { base:"0110100---___---", regex : /(r[0-7]),\[(r[0-7]),#([0-9]+)\]/, args:[reg(0),reg(3), uint5_shr2(6)] }], // 5.9 Format 9: load/store with immediate offset
+    
+    "ldrb" :[{ base:"0101110---___---", regex : /(r[0-7]),\[(r[0-7]),(r[0-7])\]/, args:[reg(0),reg(3),reg(6)] }, // 5.7 Format 7: load/store with register offset 
+             { base:"0110100---___---", regex : /(r[0-7]),\[(r[0-7]),#([0-9]+)\]/, args:[reg(0),reg(3), uint5_shr2(6)] }], // 5.9 Format 9: load/store with immediate offset 
+    "mov"  :[{ base:"00100---________", regex : /(r[0-7]),#([0-9]+)/, args:[reg(8),uint8()] }, // move/compare/subtract immediate
+             { base:"0100011000---___", regex : /(r[0-7]),(r[0-7])/, args:[reg(0),reg(3)] },
              { base:"0100011010---101", regex : /sp,(r[0-7])/, args:[reg(3)] }], // made up again
     "movs" :[{ base:"00100---________", regex : /(r[0-7]),#([0-9]+)/, args:[reg(8),uint8(0)] }],
     "movw" :[{ base:"11110-100100----0___----________", regex : /(r[0-7]),#([0-9]+)/, args:[reg4(8),thumb2_immediate_t3] }],
