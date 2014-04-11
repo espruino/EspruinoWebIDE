@@ -44,8 +44,18 @@ Author: Gordon Williams (gw@pur3.co.uk)
 
   var getPorts=function(callback) {
     chrome.serial.getDevices(function(devices) {
+
+      var prefix = "";
+      // Workaround for Chrome v34 bug - http://forum.espruino.com/conversations/1056/#comment16121
+      // In this case, ports are reported as ttyACM0 - not /dev/ttyACM0      
+      if (navigator.userAgent.indexOf("Linux")>=0) {
+        hasSlashes = false;
+        devices.forEach(function(device) { if (device.path.indexOf("/")>=0) hasSlashes=true; })
+        if (!hasSlashes) prefix = "/dev/";
+      }
+
       callback(devices.map(function(device) {
-        return device.path;
+        return prefix+device.path;
       }));
     });
   };
