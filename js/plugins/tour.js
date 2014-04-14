@@ -110,6 +110,61 @@
       attachTo: "#icon-deploy",
       position: "left"
     },
+//Additional lines for project handling
+    {
+      title: "Initialize project handling",
+      description: "...click on settings, to set options.",
+      attachTo: "#icon-settings",
+      position: "left",
+      onHide: function(){
+        $("#icon-settings").click();
+      }
+    },
+    {
+      title: "Open options for sandbox",
+      description: "...click on Sandbox, to open options.",
+      attachTo: "[name='Sandbox']",
+      position: "right",
+      onHide: function(){
+        $("[name='Sandbox']").click();
+      }
+    },
+    {
+      title: "Select Directory on local drive",
+      description: "...click on button name <i>Select Directory for Sandbox</i><br>In next step, you have to close directory window manually, to get next step.",
+      attachTo: ".projectButton",
+      position: "bottom",
+      onHide: function(){
+        $(".projectButton").click();
+      }
+    },
+    {
+      title: "Assign directory",
+      description: "...select directory of yor choice. Some subdirectorys are created, if not already existing",
+      attachTo: "",
+      position: "bottom",
+      onHide: function(){
+        Espruino.Core.App.closePopup();
+      }
+    },
+    {
+      title: "Open Projects window",
+      description: "...open Project window with tabs for local projects, modules and binaries.",
+      attachTo: "#icon-openProjectFolder",
+      position: "bottom",
+      onHide: function(){
+        $("#icon-openProjectFolder").click();
+      }
+    },
+    {
+      title: "Projects window",
+      description: "...to open a project simply click name of project file.<br>Binaries(compiled assembler code and modules are listed only)",
+      attachTo: ".ui-tabs-nav",
+      position: "right",
+      onHide: function(){
+        Espruino.Core.App.closePopup();
+      }
+    },
     {
       title: "Go wild!",
       description: "And those are the basics of the Espruino Web IDE.<br /><br />For more helpful guides and tutorials, be sure to checkout the <a href='http://www.espruino.com/Tutorials' target='_blank'>Tutorials</a> section on the Espruino website, or if you have any questions, why not head on over to the <a href='http://forum.espruino.com/' target='_blank'>Forums</a>.<br /><br />We hope you enjoy your Espruino!"
