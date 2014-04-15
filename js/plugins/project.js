@@ -123,6 +123,7 @@
         );
       });
     });
+    Espruino.Plugins.Tour.addTourButton("data/tours/project.json");
     setTimeout(function(){
       getProjectSnippets();          
     },10); 
@@ -360,18 +361,19 @@
     }
     else{
       html += 'Sandbox not assigned<br>Open options and click Sandbox';
-      callback(html):
+      callback(html);
     }
   }
   function copy2SD(path,data){
     if(Espruino.Core.Serial.isConnected()){
       var src = 'echo(0)\n;';
-      src += 'function copyToSD(path,src){var fs = require("fs");fs.unlink(path);fs.writeFile(path,src);}\n';
       if(typeof data === "string"){
+        src += 'function copyToSD(path,src){var fs = require("fs");fs.unlink(path);fs.writeFile(path,src);}\n';
         src += 'copyToSD("' + path + '","' + data + '");\n';
       }
       else{
-        src += 'console.log(JSON.parse("' + JSON.stringify(data) + '"));\n';
+        src += 'function copyToSDb(path,src){var fs = require("fs");fs.unlink(path);fs.writeFile(path,atob(src));}\n';
+        src += 'copyToSDb("' + path + '","' + btoa(data) + '");\n';
       }
       src += 'echo(1);\n\n';
       Espruino.Core.Serial.write(src);
@@ -393,8 +395,8 @@
             name = results[i].name.split(".");
             if(name[1] === 'js'){
               html += '<li>' + name[0];
-              //html += '<button class="copyModule" fileentry="' + chrome.fileSystem.retainEntry(results[i]) + '"';
-              //html += ' filename="' + results[i].name + '">copy to SD</button>";
+              html += '<button class="copyModule" fileentry="' + chrome.fileSystem.retainEntry(results[i]) + '"';
+              html += ' filename="' + results[i].name + '">copy to SD</button>"';
               html += '</li>';
             }
           }

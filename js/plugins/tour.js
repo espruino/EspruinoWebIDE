@@ -11,7 +11,6 @@
 **/
 "use strict";
 (function(){
-  
   // Reset guiders defaults
   $.guiders._buttonAttributes = { "href": "#" };
   $.guiders._arrowSize = 10;
@@ -110,61 +109,6 @@
       attachTo: "#icon-deploy",
       position: "left"
     },
-//Additional lines for project handling
-    {
-      title: "Initialize project handling",
-      description: "...click on settings, to set options.",
-      attachTo: "#icon-settings",
-      position: "left",
-      onHide: function(){
-        $("#icon-settings").click();
-      }
-    },
-    {
-      title: "Open options for sandbox",
-      description: "...click on Sandbox, to open options.",
-      attachTo: "[name='Sandbox']",
-      position: "right",
-      onHide: function(){
-        $("[name='Sandbox']").click();
-      }
-    },
-    {
-      title: "Select Directory on local drive",
-      description: "...click on button name <i>Select Directory for Sandbox</i><br>In next step, you have to close directory window manually, to get next step.",
-      attachTo: ".projectButton",
-      position: "bottom",
-      onHide: function(){
-        $(".projectButton").click();
-      }
-    },
-    {
-      title: "Assign directory",
-      description: "...select directory of yor choice. Some subdirectorys are created, if not already existing",
-      attachTo: "",
-      position: "bottom",
-      onHide: function(){
-        Espruino.Core.App.closePopup();
-      }
-    },
-    {
-      title: "Open Projects window",
-      description: "...open Project window with tabs for local projects, modules and binaries.",
-      attachTo: "#icon-openProjectFolder",
-      position: "bottom",
-      onHide: function(){
-        $("#icon-openProjectFolder").click();
-      }
-    },
-    {
-      title: "Projects window",
-      description: "...to open a project simply click name of project file.<br>Binaries(compiled assembler code and modules are listed only)",
-      attachTo: ".ui-tabs-nav",
-      position: "right",
-      onHide: function(){
-        Espruino.Core.App.closePopup();
-      }
-    },
     {
       title: "Go wild!",
       description: "And those are the basics of the Espruino Web IDE.<br /><br />For more helpful guides and tutorials, be sure to checkout the <a href='http://www.espruino.com/Tutorials' target='_blank'>Tutorials</a> section on the Espruino website, or if you have any questions, why not head on over to the <a href='http://forum.espruino.com/' target='_blank'>Forums</a>.<br /><br />We hope you enjoy your Espruino!"
@@ -178,32 +122,16 @@
     var icon = Espruino.Core.App.findIcon("help");
     if(icon) {
       icon.addMenuItem({
-          id: "tour",
-          icon: "compass",
-          title: "Tour",
-          order: 2,
-          click: function(){
-            startTour();
-          }
-        });
+        id: "tour",
+        icon: "compass",
+        title: "Tour",
+        order: 2,
+        click: function(){
+          startTour();
+        }
+      });
     }
-
-    $.each(slides, function(idx, itm){
-      var opts = $.extend({}, {
-        id: "g"+ idx,
-        overlay: true,
-        isHashable: false
-      }, itm);
-
-      if(opts.buttons==undefined && idx < slides.length - 1)
-      {
-        opts.next = "g"+ (idx + 1);
-        opts.buttons = [{ name: "Next" }];
-      }
-
-      guiders.createGuider(opts);
-
-    });   
+    prepareSlides("g",slides);
 
     // Make sure clicking overlay hides the tour
     $("body").on("click", "#guiders_overlay", function(){
@@ -219,6 +147,7 @@
       // Start the tour
       guiders.show("g1");
     }
+
     
     // If this is our first run, prompt about the Tour
     Espruino.addProcessor("initialised", function(data, callback) {      
@@ -230,8 +159,55 @@
       callback(data); 
     });
   }
-  
+  function prepareSlides(slideId,slides){
+    $.each(slides, function(idx, itm){
+      switch(itm.onHide){
+        case "clickattached":
+          itm.onHide = function(){$(itm.attachTo).click();};
+          break;
+        case "closePopup":
+          itm.onHide = function(){Espruino.Core.App.closePopup();};
+          break;
+      }
+      var opts = $.extend({}, {
+        id: slideId + idx,
+        overlay: true,
+        isHashable: false
+      }, itm);
+
+      if(opts.buttons==undefined && idx < slides.length - 1)
+      {
+        opts.next = slideId + (idx + 1);
+        opts.buttons = [{ name: "Next" }];
+      }
+      if(!guiders.get(opts.id)) { guiders.createGuider(opts); }
+    });
+  }
+  function runTour(tourUrl){
+    $.getJSON(tourUrl,function(slide){
+      prepareSlides(slide.id,slide.slides);
+      guiders.show(slide.id + "1");         
+    });
+  }
+  function addTourButton(tourUrl){
+    var icon = Espruino.Core.App.findIcon("help");
+    if(icon) {
+      $.getJSON(tourUrl,function(slide){
+        icon.addMenuItem({
+          id: slide.buttonid,
+          icon: "compass",
+          title: slide.title,
+          order: 3,
+          click: function(){
+            runTour(tourUrl);
+          } 
+        });
+      });
+    }
+  }
   Espruino.Plugins.Tour = {
     init : init,
+    runTour : runTour,
+    addTourButton : addTourButton
   };
 }());
