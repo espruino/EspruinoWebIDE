@@ -75,7 +75,7 @@
       if (requires.indexOf(newRequires[i])<0) {
         console.log("   Queueing "+newRequires[i]);
         requires.push(newRequires[i]);
-        newPromises.push(loadModule(newRequires, newRequires[i], loadedModuleData));
+        newPromises.push(loadModule(requires, newRequires[i], loadedModuleData));
       } else {
         console.log("   Already loading "+newRequires[i]);
       }
