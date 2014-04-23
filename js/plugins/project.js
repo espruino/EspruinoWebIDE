@@ -11,8 +11,8 @@
 **/
 "use strict";
 (function(){
-  var actualProject = "", terminalSnippets = {};
-  var snippets = '{ "Reset":"reset();","Memory":"process.memory();","ClearInterval":"clearInterval();"}';
+  var actualProject = "";
+  var snippets = JSON.parse('{ "Reset":"reset();","Memory":"process.memory();","ClearInterval":"clearInterval();"}');
   function init() {
     Espruino.Core.Config.addSection("Sandbox", {
       sortOrder:500,
@@ -41,6 +41,7 @@
           Espruino.Core.App.openPopup({
             position: "relative",
             title: "Projects",
+            id: "projectsTab",
             contents: html
           });
           setTimeout(function(){
@@ -48,7 +49,9 @@
             $(".saveAsProject").button({ text:false, icons: { primary: "ui-icon-plusthick"} }).click(projectSaveAs);
             $(".copyBinary").button({ text:false, icons: { primary: "ui-icon-copy"} }).click(copyBinary);
             $(".copyModule").button({ text:false, icons: { primary: "ui-icon-copy"} }).click(copyModule);
-            $(".loadProjects").click(loadProject);
+            $(".dropSnippet").button({ text:false, icons: {primary: "ui-icon-trash"}}).click(dropSnippet);
+            $(".addSnippet").button({ text:false, icons: { primary: "ui-icon-plusthick"} }).click(addSnippet);
+            $(".loadProjects").button({ text:false, icons: { primary: "ui-icon-script"} }).click(loadProject);
             $("#tabs").tabs();
           },50);
         });
@@ -65,13 +68,14 @@
       },
       click: function(){
         var html = "<ul>";
-        for(var i in terminalSnippets){
+        for(var i in snippets){
           html += '<li class="terminalSnippet">' + i + '</li>';
         }
         html += '</ul>';
         Espruino.Core.App.openPopup({
           position: "relative",
           title: "Snippets",
+          id: "snippetPopup",
           contents: html
         });
         $(".terminalSnippet").click(sendSnippets);
@@ -124,6 +128,7 @@
       });
     });
     Espruino.Plugins.Tour.addTourButton("data/tours/project.json");
+    Espruino.Plugins.Tour.addTourButton("data/tours/projectSnippet.json");
     setTimeout(function(){
       getProjectSnippets();          
     },10); 
@@ -188,44 +193,8 @@
     if(l.length === 1){ l = "0" +l; }
     return l;
   }
-  function replaceAllBinarysOld(code,binarys,callback){
-    var i;
-    getProjectSubDir("binary",function(dirEntry){
-      i = 0;
-      readBinary();
-      function readBinary(){
-        checkFileExists(dirEntry,binarys[i].binary + ".BIN",function(fileEntry){
-          readBinaryArrayfromEntry(fileEntry,
-            function(data){
-              var l,h,asm = "if(!ASM_BASE){ASM_BASE = process.memory().stackEndAddress;}\n"
-              asm += "ASM_BASE_" + binarys[i].binary + " = ASM_BASE + 1;\n[";
-              var bufView=new Uint8Array(data);
-              for(var j = 0;j < bufView.length; j++){
-                l = bufView[j].toString(16);
-                if(l.length === 1){l = "0" + l;}
-                j++;
-                h = bufView[j].toString(16);
-                if(h.length === 1){h = "0" + h;}
-                asm += "0x" + h + l + ",";
-              }
-              asm = asm.substr(0,asm.length - 1) + "].forEach(function(v)";
-              asm += "{ poke16((ASM_BASE+=2)-2,v); });\n";
-              asm += "var " + binarys[i].binary  + " = E.nativeCall(ASM_BASE_" + binarys[i].binary + ",\"" + binarys[i].format + "\")";
-              code = code.replace(binarys[i].token,asm);
-              i++;
-              if(i >= binarys.length){ callback(code);}else{readBinary();}
-            },
-            function(){
-              i++;
-              if(i >= binarys.length){callback(code);} else{readBinary();}
-            }
-          );
-        });
-      }
-    });
-  }
   function sendSnippets(evt){
-    Espruino.Core.Serial.write(terminalSnippets[$(this).html()] + "\n");
+    Espruino.Core.Serial.write(snippets[$(this).html()] + "\n");
     Espruino.Core.App.closePopup();
     $("#terminalfocus").focus();
   }
@@ -253,15 +222,7 @@
               if(!checkSubFolder(results,"projects")){ theEntry.getDirectory("projects", {create:true}); } 
               if(!checkSubFolder(results,"firmware")){ theEntry.getDirectory("firmware", {create:true}); }
               if(!checkSubFolder(results,"binary")){ theEntry.getDirectory("binary", {create:true}); }
-              if(!checkSubFolder(results,"snippets")){ 
-                theEntry.getDirectory("snippets", {create:true});
-                setTimeout(function(){                    
-                  getProjectSubDir("snippets",function(dirEntry){
-                    terminalSnippets = JSON.parse(snippets);
-                    saveFileAs(dirEntry,"terminalsnippets.txt",snippets);
-                  });
-                },50)
-              }
+              if(!checkSubFolder(results,"snippets")){ saveSnippets(); }
             });
           });
         }
@@ -287,7 +248,7 @@
       getProjectSubDir("snippets",function(subDirEntry){
         checkFileExists(subDirEntry,"terminalsnippets.txt",function(fileEntry){
           readFilefromEntry(fileEntry,function(data){
-            terminalSnippets = JSON.parse(data);
+            snippets = JSON.parse(data);
           });
         });
       });
@@ -349,12 +310,17 @@
   function getProject(html,callback){
     if(Espruino.Config.projectEntry){
       html += '<div id="tabs">';
-      html += '<ul><li><a href="#p">Projects</a></li><li><a href="#m">Modules</a></li><li><a href="#b">Binaries</a></li></ul>';
+      html += '<ul><li><a href="#p">Projects</a></li>';
+      html += '<li><a href="#m">Modules</a></li>';
+      html += '<li><a href="#b">Binaries</a></li>';
+      html += '<li><a href="#s">Snippets</a></li></ul>';
       getProjects(html,function(html){
         getModules(html,function(html){
           getBinaries(html,function(html){
-            html += '</div>';
-            callback(html);
+            getSnippets(html,function(html){
+              html += '</div>';
+              callback(html);                
+            });
           });
         });
       });
@@ -384,23 +350,44 @@
       Espruino.Core.Notifications.error("No board connected");
     }
   }
+  function getSnippets(html,callback){
+    html += '<div id="s">' + getSnippetTable() + '</div>';
+    callback(html);
+  }
+  function getSnippetTable(){
+    var i,j,html = "";  
+    html += '<table width="100%">';
+    j = 0;
+    for(i in snippets){
+      html += '<tr><th>' + i + '</th><th>' + snippets[i] + '</th>';
+      html += '<th title="drop snippet"><button snippet="' + i + '" class="dropSnippet"></button></th></tr>';
+      j++;
+    }
+    html += '<tr><th><input type="text" size="10" id="newSnippetName" value="snippet' + j.toString() + '"></th><th>';
+    html += '<input type="text" id="newSnippetValue" value="console.log();"></th>';
+    html += '<th><button class="addSnippet">Add Snippet</button></th></tr>';
+    html += '</table>';
+    return html;
+  }
   function getModules(html,callback){
     getProjectSubDir("modules",getModules);
     function getModules(subDirEntry){
       var name,dirReader = subDirEntry.createReader();
       dirReader.readEntries(function(results){
         html += '<div id="m">';
+        html += '<table width="100%">';
         for(var i = 0; i < results.length; i++){
           if(!results[i].isDirectory){
             name = results[i].name.split(".");
             if(name[1] === 'js'){
-              html += '<li>' + name[0];
-              html += '<button class="copyModule" fileentry="' + chrome.fileSystem.retainEntry(results[i]) + '"';
-              html += ' filename="' + results[i].name + '">copy to SD</button>"';
-              html += '</li>';
+              html += '<tr><th>' + name[0] + "</th>";
+              html += '<th title="copy to SD"><button class="copyModule" fileentry="' + chrome.fileSystem.retainEntry(results[i]) + '"';
+              html += ' filename="' + results[i].name + '"></button>';
+              html += '</th></tr>';
             }
           }
         }
+        html += "</table>";
         html += '</div>';
         callback(html);
       });
@@ -420,16 +407,19 @@
       var name,dirReader = subDirEntry.createReader();
       dirReader.readEntries(function(results){
         html += '<div id="b">';
+        html += '<table width="100%">';
         for(var i = 0; i < results.length; i++){
           if(!results[i].isDirectory){
             name = results[i].name.split(".");
             if(name[1] === "BIN"){
-              html += '<li>' + name[0];
+              html += '<tr><th>' + name[0] + "</th>";
               //html += '<button class="copyBinary" fileentry="' + chrome.fileSystem.retainEntry(results[i]) + '"';
               //html += ' filename="' + results[i].name + '">copy to SD</button>';
-              html +='</li>';            }
+              html +='</th></tr>';
+            }
           }
         }
+        html +="</table>";
         html += '</div>';
         callback(html);  
       });
@@ -448,26 +438,27 @@
     getProjectSubDir("projects",function(subDirEntry){
       var name,dirReader = subDirEntry.createReader();
       dirReader.readEntries(function(results){
-        var span;
+        var attrFileEntry;
         html += '<div id="p">';
+        html += '<table width="100%">';
         for(var i = 0; i < results.length; i++){
           if(!results[i].isDirectory){
             name = results[i].name.split(".");
             if(name[1] === "js"){
-              span = '<span class="loadProjects" fileEntry="' + chrome.fileSystem.retainEntry(results[i]) + '">' + name[0] + '</span>';
-              html += '<li>';
+              attrFileEntry = 'fileEntry="' + chrome.fileSystem.retainEntry(results[i]) + '"'
+              html += '<tr><th>' + name[0] + '</th>';
               if(actualProject){
                 if(actualProject.name === results[i].name){ 
-                  html += '<b><i>' + span + '</i></b><button class="saveProject">Save</button>';
+                  html += '<th>&nbsp;</th><th title="save Project"><button class="saveProject"></button>';
                 }
-                else{ html += span; }
+                else{ html += '<th title="load into Editor"><button class="loadProjects"' + attrFileEntry + '></button>'; }
               }
-              else{ html += span; }
-              html += '</li>';
+              else{ html += '<th title="load into Editor"><button class="loadProjects"' + attrFileEntry + '></button>'; }
+              html += '</th></tr>';
             }
           }
         }
-        html += '</ul>';
+        html += '</table>';
         html += '<input type="text" value="newProject.js" id="saveAsName"/> <button class="saveAsProject">Save as</button>';
         html += '</div>';
         callback(html);
@@ -490,6 +481,50 @@
       saveFileAs(dirEntry,$("#saveAsName").val(),Espruino.Core.EditorJavaScript.getCode());
       Espruino.Core.App.closePopup();
     });
+  }
+  function dropSnippet(){
+    var i,snp = {};
+    var snippet = $(this).attr("snippet");
+    for(i in snippets){
+      if(i !== snippet){
+        snp[i] = snippets[i];
+      }
+    }
+    snippets = snp;
+    $("#s").html(getSnippetTable());
+    saveSnippets();
+    Espruino.Core.App.closePopup();
+  }
+  function addSnippet(){
+    snippets[$("#newSnippetName").val()] = $("#newSnippetValue").val();
+    $("#s").html(getSnippetTable());
+    saveSnippets();
+    Espruino.Core.App.closePopup();
+  }
+  function saveSnippets(){
+    if(Espruino.Config.projectEntry){
+      getProjectSubDir("snippets",function(subDirEntry){
+        checkFileExists(subDirEntry,"terminalsnippets.txt",
+          function(fileEntry){
+            fileEntry.createWriter(function(fileWriter){
+              var bb = new Blob([JSON.stringify(snippets)],{type:'text/plain'});
+              fileWriter.truncate(bb.size);
+              setTimeout(function(evt){
+                fileWriter.seek(0);
+                fileWriter.write(bb);
+              },200);
+            });
+          },
+          function(){
+            setTimeout(function(){                    
+              getProjectSubDir("snippets",function(dirEntry){
+                saveFileAs(dirEntry,"terminalsnippets.txt",JSON.stringify(snippets));
+              });
+            },50);
+          }
+        );
+      });
+    }
   }
   function loadProject(){
     checkEntry($(this).attr("fileentry"),openProject);

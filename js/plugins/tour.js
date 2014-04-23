@@ -165,8 +165,17 @@
         case "clickattached":
           itm.onHide = function(){$(itm.attachTo).click();};
           break;
+        case "clickElement":
+          itm.onHide = function(){$(itm.element).click();};
+          break;
         case "closePopup":
           itm.onHide = function(){Espruino.Core.App.closePopup();};
+          break;
+        case "sendBoard":
+          itm.onHide = function(){Espruino.Core.Serial.write(itm.source);};
+          break;
+        case "sendEditor":
+          itm.onHide = function(){Espruino.Core.EditorJavaScript(itm.source);};
           break;
       }
       var opts = $.extend({}, {

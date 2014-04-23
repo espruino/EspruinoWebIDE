@@ -10,7 +10,7 @@
     "title": "Initialize project handling",
     "description": "...click on settings, to set options.",
     "attachTo": "#icon-settings",
-    "position": "left",
+    "position": "bottomRight",
     "onHide": "clickattached"
   },
   {
@@ -44,7 +44,7 @@
   {
     "title": "Projects window",
     "description": "...to open a project simply click name of project file.<br>Binaries(compiled assembler code and modules are listed only)",
-    "attachTo": ".ui-tabs-nav",
+    "attachTo": "#saveAsName",
     "position": "right",
     "onHide": "closePopup"
   },
