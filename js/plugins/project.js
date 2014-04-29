@@ -14,6 +14,15 @@
   var actualProject = "";
   var snippets = JSON.parse('{ "Reset":"reset();","Memory":"process.memory();","ClearInterval":"clearInterval();"}');
   function init() {
+    Espruino.Core.Config.add("ENABLE_PROJECTS", {
+      section : "General",
+      name : "Enable Projects Plugin",
+      description : "BETA. This enables support for the Projects plugin, which allows you to use files on your local disk. Requires the Web IDE to be restarted in order to enable/disable.",
+      type : "boolean",
+      defaultValue : false
+    });     
+    if (!Espruino.Config.ENABLE_PROJECTS) return;
+    
     Espruino.Core.Config.addSection("Sandbox", {
       sortOrder:500,
       description: "Local directory used for projects, modules, etc",
@@ -83,7 +92,7 @@
     });
     Espruino.addProcessor("getModule", function (module, callback) {
       getProjectSubDir("modules",getModules);
-      var t = setTimeout(function(){callback(module)},500);
+      var t = setTimeout(function(){callback(module);},500);
       function getModules(subDirEntry){
         var fnd = false;
         var dirReader = subDirEntry.createReader();
@@ -144,7 +153,7 @@
       else if (state==1 && tok.str==".") { state=2; tok = lex.next();}
       else if (state==2 && (tok.str=="asmBinary")) { state=3; tok = lex.next();}
       else if (state==3 && (tok.str=="(")) { state=4; tok = lex.next();}
-      else if (state==4){ binary.var = tok.value; state=5; tok = lex.next();}
+      else if (state==4){ binary.variable = tok.value; state=5; tok = lex.next();}
       else if (state==5 && (tok.str==",")) { state=6; tok = lex.next();}
       else if (state==6){ binary.format = tok.value; state=7; tok = lex.next();}
       else if (state==7 && (tok.str==",")) {state=8; tok = lex.next();}
@@ -171,15 +180,15 @@
         { binary: binary, binaryCode:undefined},
         function(data){
           if(data.binaryCode){
-            var asm = "if(!ASM_BASE){ASM_BASE = process.memory().stackEndAddress;}\n"
-            asm += "ASM_BASE_" + data.binary.var + " = ASM_BASE + 1;\n[";
+            var asm = "if(!ASM_BASE){ASM_BASE = process.memory().stackEndAddress;}\n";
+            asm += "ASM_BASE_" + data.binary.variable + " = ASM_BASE + 1;\n[";
             var bufView=new Uint8Array(data.binaryCode);
             for(var j = 0;j < bufView.length; j+=2){
               asm += "0x" + int2Hex(bufView[j + 1]) + int2Hex(bufView[j]) + ",";
             }
             asm = asm.substr(0,asm.length - 1) + "].forEach(function(v)";
             asm += "{ poke16((ASM_BASE+=2)-2,v); });\n";
-            asm += "var " + data.binary.var  + " = E.nativeCall(ASM_BASE_" + data.binary.var + ",\"" + data.binary.format + "\")";
+            asm += "var " + data.binary.variable  + " = E.nativeCall(ASM_BASE_" + data.binary.variable + ",\"" + data.binary.format + "\")";
             code = code.replace(data.binary.token,asm);
           }
           i++;
@@ -265,6 +274,7 @@
             return;
           }
         }
+        console.warn("getProjectSubDir("+name+") failed");
         callback(false);
       });
     }
@@ -280,6 +290,11 @@
     }
   }
   function checkFileExists(dirEntry,fileName,existsCallback,notExistsCallback){
+    if (!dirEntry) {
+      if (notExistsCallback)notExistsCallback();
+      return;
+    }
+      
     var dirReader = dirEntry.createReader();
     dirReader.readEntries(function(results){
       var fnd = false;
@@ -290,12 +305,12 @@
           break;
         }
       }
-      if(!fnd){notExistsCallback();}
+      if(!fnd && notExistsCallback){notExistsCallback();}
     });
   }
   function readFilefromEntry(entry,callback){
     var reader = new FileReader();
-    reader.onload = function(e){ callback(e.target.result);}
+    reader.onload = function(e){ callback(e.target.result);};
     entry.file(function(file){ reader.readAsText(file);});
   }
   function saveFileAs(dirEntry,fileName,data){
@@ -445,7 +460,7 @@
           if(!results[i].isDirectory){
             name = results[i].name.split(".");
             if(name[1] === "js"){
-              attrFileEntry = 'fileEntry="' + chrome.fileSystem.retainEntry(results[i]) + '"'
+              attrFileEntry = 'fileEntry="' + chrome.fileSystem.retainEntry(results[i]) + '"';
               html += '<tr><th>' + name[0] + '</th>';
               if(actualProject){
                 if(actualProject.name === results[i].name){ 
@@ -504,6 +519,7 @@
   function saveSnippets(){
     if(Espruino.Config.projectEntry){
       getProjectSubDir("snippets",function(subDirEntry){
+        if (!subDirEntry) return;
         checkFileExists(subDirEntry,"terminalsnippets.txt",
           function(fileEntry){
             fileEntry.createWriter(function(fileWriter){
@@ -518,6 +534,7 @@
           function(){
             setTimeout(function(){                    
               getProjectSubDir("snippets",function(dirEntry){
+                if (!dirEntry) return;
                 saveFileAs(dirEntry,"terminalsnippets.txt",JSON.stringify(snippets));
               });
             },50);
@@ -558,7 +575,7 @@
   }
   function readBinaryArrayfromEntry(entry,callback){
     var reader = new FileReader();
-    reader.onload = function(e){callback(e.target.result);}
+    reader.onload = function(e){callback(e.target.result);};
     entry.file(function(file){ reader.readAsArrayBuffer(file);});
   }
   function loadFirmware(firmwareName,callback){
