@@ -16,8 +16,8 @@
   function init() {
     Espruino.Core.Config.add("ENABLE_PROJECTS", {
       section : "General",
-      name : "Enable Projects Plugin",
-      description : "BETA. This enables support for the Projects plugin, which allows you to use files on your local disk. Requires the Web IDE to be restarted in order to enable/disable.",
+      name : "Enable Projects Plugin (BETA)",
+      description : "This enables support for the Projects plugin, which allows you to use files on your local disk. Requires the Web IDE to be restarted in order to enable/disable.",
       type : "boolean",
       defaultValue : false
     });     
