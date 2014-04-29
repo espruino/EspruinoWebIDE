@@ -231,7 +231,7 @@
               if(!checkSubFolder(results,"projects")){ theEntry.getDirectory("projects", {create:true}); } 
               if(!checkSubFolder(results,"firmware")){ theEntry.getDirectory("firmware", {create:true}); }
               if(!checkSubFolder(results,"binary")){ theEntry.getDirectory("binary", {create:true}); }
-              if(!checkSubFolder(results,"snippets")){ saveSnippets(); }
+              if(!checkSubFolder(results,"snippets")){ theEntry.getDirectory("snippets", {create:true}); saveSnippets(); }
             });
           });
         }
