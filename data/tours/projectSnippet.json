@@ -1,0 +1,56 @@
+{"id": "ps",
+"buttonid": "projectSnippetTour",
+"title": "Snippets",
+"slides":
+[ {
+    "title": "Snippets handling",
+    "description": "Quick tour to create and use snippets in terminal window"
+  },
+  {
+    "title": "Open snippets collection",
+    "description": "...click on snippets(cloud), to set options.",
+    "attachTo": "#icon-terminalSnippets",
+    "position": "right",
+    "onHide": "clickattached"
+  },
+  {
+    "title": "Select Snippet",
+    "description": "...click on snippet, send it to board.",
+    "attachTo": "#snippetPopup",
+    "position": "top",
+    "onHide": "sendBoard",
+    "source": "process.memory();\n"
+  },
+  {
+    "title": "Memory Snippet",
+    "description": "...in terminal window, the actual status of is shown.",
+    "onHide": "closePopup"
+  },
+  {
+    "title": "Edit Snippets",
+    "description": "...click on projects button.",
+    "attachTo": "#icon-openProjectFolder",
+    "position": "right",
+    "onHide": "clickattached"
+  },  
+  {
+    "title": "Select Snippets tab",
+    "description": "...click on snippets tab.",
+    "attachTo": "#projectsTab",
+    "position": "top",
+    "onHide": "clickElement",
+    "element": "[href='#s']"
+  },
+  {
+    "title": "Manage snippets",
+    "description": "...click on trash to drop selected snippet.<br>or enter snippet Name and Snippet itself to add new one",
+    "attachTo": "#projectsTab",
+    "position": "top",
+    "onHide": "closePopup"
+  },   
+  {
+    "title": "Snippets done",
+    "description": "...Now that you got a first overview, check the functions by yourself and enjoy."
+  }
+]
+}

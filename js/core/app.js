@@ -167,9 +167,9 @@
     $('<div class="window__overlay"><div class="window__overlay-inner"></div></div>').appendTo(".window--app > .window__viewport").click(function(){
       api.close();
     });
-
+    var optid = (options.id) ? 'id="' + options.id + '"' : '';
     // Append the popup window
-    $('<div class="window window--modal window--'+ options.position +'">'+
+    $('<div class="window window--modal window--'+ options.position +'"' + optid + '>'+
           '<div class="window__title-bar title-bar">'+
             '<h5 class="title-bar__title">'+ options.title +'</h5>'+
             '<div class="title-bar__buttons"></div>'+
