@@ -227,7 +227,7 @@
     var additionalClasses = '';
     switch(options.area.name){
       case "titlebar":
-        selector = ".title-bar__buttons";
+        selector = ".window--app > .title-bar > .title-bar__buttons";
         iconSize = 'sml';
         additionalClasses = 'title-bar__button';
         break;
@@ -251,12 +251,17 @@
       console.warn("App.addIcon unknown area: "+ selector);
       return;
     }
-
+    
     var order = 0;
     if (options.order !== undefined) 
       order = options.order;
 
-    var elementClass = 'icon-'+ options.icon;    
+    var elementClass = 'icon-'+ options.icon;
+    
+    // remove old icon if there was one
+    //$(container, "."+elementClass).remove();
+    
+    // add the element
     var element = $('<a id="icon-'+ options.id +'" class="'+ elementClass +' '+ iconSize +' '+ additionalClasses +'" title="'+ options.title +'" data-icon-order="'+ order +'"></a>').appendTo(container);
     
     if(options.divider)
