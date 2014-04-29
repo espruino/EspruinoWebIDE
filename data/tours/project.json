@@ -1,0 +1,56 @@
+{"id": "p",
+"buttonid": "projectTour",
+"title": "Project",
+"slides":
+[ {
+    "title": "Project handling",
+    "description": "Quick tour to and around project handling in WebIDE"
+  },
+  {
+    "title": "Initialize project handling",
+    "description": "...click on settings, to set options.",
+    "attachTo": "#icon-settings",
+    "position": "bottomRight",
+    "onHide": "clickattached"
+  },
+  {
+    "title": "Open options for sandbox",
+    "description": "...click on Sandbox, to open options.",
+    "attachTo": "[name='Sandbox']",
+    "position": "right",
+    "onHide": "clickattached"
+  },
+  {
+    "title": "Select Directory on local drive",
+    "description": "...click on button name <i>Select Directory for Sandbox</i><br>In next step, you have to close directory window manually, to get next step.",
+    "attachTo": ".projectButton",
+    "position": "bottom",
+    "onHide": "clickattached"
+  },
+  {
+    "title": "Assign directory",
+    "description": "...select directory of yor choice. Some subdirectorys are created, if not already existing",
+    "attachTo": "",
+    "position": "bottom",
+    "onHide": "closePopup"
+  },
+  {
+    "title": "Open Projects window",
+    "description": "...open Project window with tabs for local projects, modules and binaries.",
+    "attachTo": "#icon-openProjectFolder",
+    "position": "bottom",
+    "onHide": "clickattached"
+  },
+  {
+    "title": "Projects window",
+    "description": "...to open a project simply click name of project file.<br>Binaries(compiled assembler code and modules are listed only)",
+    "attachTo": "#saveAsName",
+    "position": "right",
+    "onHide": "closePopup"
+  },
+  {
+    "title": "Projects done",
+    "description": "...Now that you got a first overview, check the functions by yourself and enjoy."
+  }
+]
+}

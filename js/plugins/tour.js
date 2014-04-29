@@ -11,7 +11,6 @@
 **/
 "use strict";
 (function(){
-  
   // Reset guiders defaults
   $.guiders._buttonAttributes = { "href": "#" };
   $.guiders._arrowSize = 10;
@@ -123,32 +122,16 @@
     var icon = Espruino.Core.App.findIcon("help");
     if(icon) {
       icon.addMenuItem({
-          id: "tour",
-          icon: "compass",
-          title: "Tour",
-          order: 2,
-          click: function(){
-            startTour();
-          }
-        });
+        id: "tour",
+        icon: "compass",
+        title: "Tour",
+        order: 2,
+        click: function(){
+          startTour();
+        }
+      });
     }
-
-    $.each(slides, function(idx, itm){
-      var opts = $.extend({}, {
-        id: "g"+ idx,
-        overlay: true,
-        isHashable: false
-      }, itm);
-
-      if(opts.buttons==undefined && idx < slides.length - 1)
-      {
-        opts.next = "g"+ (idx + 1);
-        opts.buttons = [{ name: "Next" }];
-      }
-
-      guiders.createGuider(opts);
-
-    });   
+    prepareSlides("g",slides);
 
     // Make sure clicking overlay hides the tour
     $("body").on("click", "#guiders_overlay", function(){
@@ -164,6 +147,7 @@
       // Start the tour
       guiders.show("g1");
     }
+
     
     // If this is our first run, prompt about the Tour
     Espruino.addProcessor("initialised", function(data, callback) {      
@@ -175,8 +159,64 @@
       callback(data); 
     });
   }
-  
+  function prepareSlides(slideId,slides){
+    $.each(slides, function(idx, itm){
+      switch(itm.onHide){
+        case "clickattached":
+          itm.onHide = function(){$(itm.attachTo).click();};
+          break;
+        case "clickElement":
+          itm.onHide = function(){$(itm.element).click();};
+          break;
+        case "closePopup":
+          itm.onHide = function(){Espruino.Core.App.closePopup();};
+          break;
+        case "sendBoard":
+          itm.onHide = function(){Espruino.Core.Serial.write(itm.source);};
+          break;
+        case "sendEditor":
+          itm.onHide = function(){Espruino.Core.EditorJavaScript(itm.source);};
+          break;
+      }
+      var opts = $.extend({}, {
+        id: slideId + idx,
+        overlay: true,
+        isHashable: false
+      }, itm);
+
+      if(opts.buttons==undefined && idx < slides.length - 1)
+      {
+        opts.next = slideId + (idx + 1);
+        opts.buttons = [{ name: "Next" }];
+      }
+      if(!guiders.get(opts.id)) { guiders.createGuider(opts); }
+    });
+  }
+  function runTour(tourUrl){
+    $.getJSON(tourUrl,function(slide){
+      prepareSlides(slide.id,slide.slides);
+      guiders.show(slide.id + "1");         
+    });
+  }
+  function addTourButton(tourUrl){
+    var icon = Espruino.Core.App.findIcon("help");
+    if(icon) {
+      $.getJSON(tourUrl,function(slide){
+        icon.addMenuItem({
+          id: slide.buttonid,
+          icon: "compass",
+          title: slide.title,
+          order: 3,
+          click: function(){
+            runTour(tourUrl);
+          } 
+        });
+      });
+    }
+  }
   Espruino.Plugins.Tour = {
     init : init,
+    runTour : runTour,
+    addTourButton : addTourButton
   };
 }());
