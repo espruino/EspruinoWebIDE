@@ -210,6 +210,8 @@
     "bx"   :[{ base:"0100011101110000", regex : /lr/, args:[] }], // made up again
     ".word":[{ base:"--------------------------------", regex : /0x([0-9A-Fa-f]+)/, args:[function(v){v=parseInt(v,16);return (v>>16)|(v<<16);}] }], // made up again
     "nop"  :[{ base:"1011111100000000", regex : "", args:[] }], // made up again
+    "cpsie"  :[{ base:"1011011001100010", regex : /i/, args:[] }], // made up again
+    "cpsid"  :[{ base:"1011011001110010", regex : /i/, args:[] }], // made up again
   };
   
    
