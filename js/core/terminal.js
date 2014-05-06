@@ -128,16 +128,22 @@
     });
   };
   
-  var clearTerminal = function()
-  {
-    termText = [">"];
+  var clearTerminal = function() {
+    // Get just the last entered line
+    var currentLine = Espruino.Core.Terminal.getInputLine();
+    termText = currentLine.text.split("\n");
+    // re-add > and : marks
+    for (var l in termText)
+      termText[l] = (l==0?">":":") + termText[l]; 
+    // reset other stuff...
     termExtraText = {}; 
     termHintText = undefined;
-    termCursorX = 1;
-    termCursorY = 0;
-    termControlChars = [];    
+    // leave X cursor where it was...
+    termCursorY -= currentLine.line; // move Y cursor back
+    termControlChars = [];   
+    // finally update the HTML
     updateTerminal();
-  }
+  };
 
   var updateTerminal = function() {     
     // remove extra lines if there are too many
@@ -314,7 +320,7 @@
     $("#terminalfocus").focus(); 
   };
   
-  /// Get the Nth from latest terminal line (and the line number of it)
+  /// Get the Nth from latest terminal line (and the line number of it). 0=current line
   function getInputLine(n) {
     if (n===undefined) n=0;
     var startLine = termText.length-1;
