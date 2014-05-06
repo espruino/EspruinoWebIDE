@@ -12,6 +12,7 @@
 "use strict";
 (function(){
   var codeMirror;
+  var codeMirrorDirty = false;
   
   function init() {    
     $('<div id="divcode" style="width:100%;height:100%;"><textarea id="code" name="code"></textarea></div>').appendTo(".editor--code .editor__canvas");
@@ -50,12 +51,26 @@
   }
   
   function setCode(code) {
-    codeMirror.setValue(code);
+    codeMirror.setValue(code);    
+    codeMirrorDirty = true;
+  }
+
+  /** Called this when we switch modes from blockly - the editor needs a prod to update if the code
+   * was set when it was invisible */
+  function madeVisible() {
+    if (codeMirrorDirty) {
+      codeMirrorDirty = false;
+      // important we do it a bit later so things have had time to lay out
+      setTimeout(function () {
+        codeMirror.refresh();
+      }, 1);
+    }
   }
   
   Espruino.Core.EditorJavaScript = {
     init : init,
     getCode : getCode,
     setCode : setCode,
+    madeVisible : madeVisible,
   };
 }());

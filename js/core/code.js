@@ -21,7 +21,7 @@
       name : "Auto Save",
       description : "Save code to Chrome's cloud storage when clicking 'Send to Espruino'?",
       type : "boolean",
-      defaultValue : 20, 
+      defaultValue : true, 
     });    
 
     // Setup code mode button
@@ -37,6 +37,7 @@
       click: function() {
         if (isInBlockly()) {
           switchToCode();
+          Espruino.Core.EditorJavaScript.madeVisible();
         } else {
           switchToBlockly();
         }
