@@ -19,7 +19,24 @@
   };
   
   function init() {
+    // Config
+    Espruino.Core.Config.add("BLOCKLY_TO_JS", {
+      section : "General",
+      name : "Overwrite JavaScript with Graphical Editor",
+      description : "When you click 'Send to Espruino', should the code from the Graphical Editor overwrite the JavaScript code in the editor window?",
+      type : "boolean",
+      defaultValue : false, 
+    });          
+    
+    // Add the HTML we need
     $('<iframe id="divblockly" class="blocky" style="display:none;border:none;" src="blockly/blockly.html"></iframe>').appendTo(".editor--code .editor__canvas");
+    
+    // Handle the 'sending' processor so we can update the JS if we need to...
+    Espruino.addProcessor("sending", function(data, callback) {
+      if(Espruino.Config.BLOCKLY_TO_JS && Espruino.Core.Code.isInBlockly())
+        Espruino.Core.EditorJavaScript.setCode( "// Code from Graphical Editor\n"+Espruino.Core.EditorBlockly.getCode() ); 
+      callback(data);
+    });
   }
   
   function getCode() {
