@@ -19,7 +19,9 @@
     codeMirror = CodeMirror.fromTextArea(document.getElementById("code"), {
       width: "100%",
       height: "100%",
-      lineNumbers: true,matchBrackets: true,mode: "text/typescript",
+      lineNumbers: true,
+      matchBrackets: true,
+      mode: {name: "javascript", globalVars: false},
       lineWrapping: true,
       showTrailingSpace: true,
       lint: {
@@ -30,8 +32,8 @@
       foldGutter: {rangeFinder: new CodeMirror.fold.combine(CodeMirror.fold.brace, CodeMirror.fold.comment)},
       gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter", "CodeMirror-lint-markers"],
       extraKeys: {
-        "Ctrl-Space": "autocomplete",
-        Tab: function(cm) { 
+        "Ctrl-Space" : CodeMirror.showHint,
+        "Tab" : function(cm) { 
           if (cm.somethingSelected()) {
             cm.indentSelection("add");
           } else { // make sure the tab key indents with spaces

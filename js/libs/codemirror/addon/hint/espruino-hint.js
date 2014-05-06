@@ -47,7 +47,7 @@
                       function (e, cur) {return e.getTokenAt(cur);},
                       options);
   };
-  CodeMirror.registerHelper("hint", "espruino", espruinoHint);
+  CodeMirror.registerHelper("hint", "javascript", espruinoHint);
 
   function getCoffeeScriptToken(editor, cur) {
   // This getToken, it is for coffeescript, imitates the behavior of
@@ -91,7 +91,7 @@
   function getCompletions(token, context, keywords, options) {
     var found = [], start = token.string;
     function maybeAdd(str) {
-      if (str.indexOf(start) == 0 && !arrayContains(found, str)) found.push(str);
+      if (str!==undefined && str.indexOf(start) == 0 && !arrayContains(found, str)) found.push(str);
     }
     function gatherCompletions(obj) {
       if (typeof obj == "string") forEach(stringProps, maybeAdd);
