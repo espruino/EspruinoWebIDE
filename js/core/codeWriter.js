@@ -22,11 +22,6 @@
     });
   }
 
-  function resetEspruino(callback) {
-    Espruino.Core.Serial.write("\x03reset();\n"); // \x03 is ctrl-c - just make sure we break out of everything
-    setTimeout(callback, 500);
-  };
-  
   function writeToEspruino(code) {  
     code = reformatCode(code);
     
@@ -36,18 +31,30 @@
     };
     var sendSerial = realSendSerial;
     
+    // If we're supposed to reset Espruino before sending...
     if (Espruino.Config.RESET_BEFORE_SEND) {
       sendSerial = function(data) { 
-        resetEspruino( function() {
+        // reset espruino
+        Espruino.Core.Serial.write("reset();\n");
+        // wait for the reset
+        setTimeout(function() {
           realSendSerial(data);
-        });
+        }, 200);
       };
-    }          
+    } 
+    
+    // We want to make sure we've got a prompt before sending. If not,
+    // this will issue a Ctrl+C
+    var sendSerialAfterPrompt = function(data) {
+      Espruino.Core.Utils.getEspruinoPrompt(function() {
+        sendSerial(data);
+      });
+    };
     
     if(Espruino.Config.SEND_MINIFIED === true){
-      Espruino.Plugins.Minify.MinifyCode(code,sendSerial);
+      Espruino.Plugins.Minify.MinifyCode(code,sendSerialAfterPrompt);
     } else {
-      sendSerial(code);
+      sendSerialAfterPrompt(code);
     }      
   };
   
