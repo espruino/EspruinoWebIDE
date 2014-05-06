@@ -23,7 +23,7 @@
   }
   
   function getCode() {
-    return "clearInterval();clearWatch();"+Blockly.Generator.workspaceToCode('JavaScript');
+    return Blockly.Generator.workspaceToCode('JavaScript');
   }
   
   function getXML() {
