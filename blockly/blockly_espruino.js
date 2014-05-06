@@ -227,7 +227,9 @@ Blockly.JavaScript.espruino_watch = function() {
   var pin = Blockly.JavaScript.valueToCode(this, 'PIN', Blockly.JavaScript.ORDER_ASSIGNMENT) || '0';
   var edge = this.getTitleValue('EDGE');
   var branch = Blockly.JavaScript.statementToCode(this, 'DO');
-  return "setWatch(function() {\n"+branch+" }, "+pin+", { repeat : true, edge : '"+edge+"'});\n";
+  var json = { repeat : true, edge : edge };
+  if (pin=="BTN1") json.debounce = 10;
+  return "setWatch(function() {\n"+branch+" }, "+pin+", "+JSON.stringify(json)+");\n";
 };
 Blockly.JavaScript.espruino_digitalWrite = function() {
   var pin = Blockly.JavaScript.valueToCode(this, 'PIN', Blockly.JavaScript.ORDER_ASSIGNMENT) || '0';
