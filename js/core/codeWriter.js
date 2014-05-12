@@ -69,6 +69,8 @@
      *   `do \n X`
      *   `function (.....) \n X`   
      *   `function N(.....) \n X`
+     *   `var a \n , b`    `var a = 0 \n, b`
+     *   `var a, \n b`     `var a = 0, \n b`
      *   
      *   These are divided into two groups - where there are brackets
      *   after the keyword (statementBeforeBrackets) and where there aren't
@@ -82,6 +84,7 @@
     var brackets = 0;
     var statementBeforeBrackets = false;
     var statement = false;
+    var varDeclaration = false;
     var lastIdx = 0;
     var lastTok;
     var tok = lex.next();
@@ -92,7 +95,7 @@
       
       if (tok.str==")" || tok.str=="}" || tok.str=="]") brackets--;
       if (brackets==0) {
-        if (statement || statementBeforeBrackets) {
+        if (statement || statementBeforeBrackets || varDeclaration) {
           //console.log("Possible"+JSON.stringify(previousString));
           previousString = previousString.replace(/\n/g, "\x1B\x0A");
         }
@@ -102,6 +105,9 @@
       if (brackets==0) {
         if (tok.str=="for" || tok.str=="if" || tok.str=="while" || tok.str=="function") {
           statementBeforeBrackets = true;
+          varDeclaration = false;
+        } else if (tok.str=="var") {
+          varDeclaration = true;
         } else if (tok.type=="ID" && lastTok!==undefined && lastTok.str=="function") {
           statementBeforeBrackets = true;
         } else if (tok.str==")" && statementBeforeBrackets) {            
@@ -110,6 +116,7 @@
         } else if (tok.str=="=" || tok.str=="do") {
           statement = true;
         } else {            
+          if (tok.str==";") varDeclaration = false;
           statement = false;
           statementBeforeBrackets = false;
         }          
