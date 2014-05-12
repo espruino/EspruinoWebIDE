@@ -93,14 +93,16 @@
       var tokenString = code.substring(tok.startIdx, tok.endIdx);
       //console.log("prev "+JSON.stringify(previousString)+"   next "+tokenString);
       
-      if (tok.str==")" || tok.str=="}" || tok.str=="]") brackets--;
-      if (brackets==0) {
-        if (statement || statementBeforeBrackets || varDeclaration) {
-          //console.log("Possible"+JSON.stringify(previousString));
-          previousString = previousString.replace(/\n/g, "\x1B\x0A");
-        }
-      }
       if (tok.str=="(" || tok.str=="{" || tok.str=="[") brackets++;
+      
+      if (brackets>0 || statement || statementBeforeBrackets || varDeclaration) {
+        //console.log("Possible"+JSON.stringify(previousString));
+        previousString = previousString.replace(/\n/g, "\x1B\x0A");
+      }
+      
+      if (tok.str==")" || tok.str=="}" || tok.str=="]") brackets--;      
+
+      
       
       if (brackets==0) {
         if (tok.str=="for" || tok.str=="if" || tok.str=="while" || tok.str=="function") {
