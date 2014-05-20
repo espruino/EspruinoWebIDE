@@ -64,8 +64,7 @@
   
   /** Called from loadModule when a module is loaded. Parse it for other modules it might use
    *  and resolve dfd after all submodules have been loaded */
-  function moduleLoaded(dfd, requires, modName, data, loadedModuleData){
-    loadedModuleData.push("Modules.addCached(" + JSON.stringify(modName) + "," + JSON.stringify(data) + ");");
+  function moduleLoaded(dfd, requires, modName, data, loadedModuleData, alreadyMinified){
     // Check for any modules used from this module that we don't already have
     var newRequires = getModulesRequired(data);
     console.log(" - "+modName+" requires "+JSON.stringify(newRequires));
@@ -79,13 +78,22 @@
       } else {
         console.log("   Already loading "+newRequires[i]);
       }
-  }
-    // if we need to load something, wait until we have all promises complete before resolving our promise!
-    if(newPromises.length > 0) {
-      $.when.apply(null,newPromises).then(function(){ dfd.resolve(); });
-    } else {
-      dfd.resolve();
-    }  
+    }
+
+    var loadProcessedModule = function (moduleCode) {
+      // add the module
+      loadedModuleData.push("Modules.addCached(" + JSON.stringify(modName) + "," + JSON.stringify(moduleCode) + ");");
+      // if we needed to load something, wait until we have all promises complete before resolving our promise!
+      if(newPromises.length > 0) {
+        $.when.apply(null,newPromises).then(function(){ dfd.resolve(); });
+      } else {
+        dfd.resolve();
+      }  
+    }
+    if (alreadyMinified)
+      loadProcessedModule(data);
+    else
+      Espruino.callProcessor("transformModuleForEspruino", data, loadProcessedModule);
   }      
   
   /** Given a module name (which could be a URL), try and find it. Return
@@ -99,7 +107,7 @@
         function(data) {
           if (data.moduleCode!==undefined) {
             // great! it found something. Use it.
-            moduleLoaded(dfd, requires, fullModuleName, data.moduleCode, loadedModuleData); 
+            moduleLoaded(dfd, requires, fullModuleName, data.moduleCode, loadedModuleData, false); 
           } else {
             // otherwise try and load the module the old way...
             console.log("loadModule("+fullModuleName+")");
@@ -122,10 +130,11 @@
                 Espruino.Core.Notifications.warning("Module "+fullModuleName+" not found");
                 return dfd.resolve();
               }
-              Espruino.Core.Utils.getURL(urls[0], function (data) {
+              var dlUrl = urls[0];
+              Espruino.Core.Utils.getURL(dlUrl, function (data) {
                 if (data!==undefined) {
                   // we got it!
-                  moduleLoaded(dfd, requires, fullModuleName, data, loadedModuleData); 
+                  moduleLoaded(dfd, requires, fullModuleName, data, loadedModuleData, dlUrl.substr(-7)==".min.js"); 
                 } else {
                   // else try next
                   download(urls.slice(1));
