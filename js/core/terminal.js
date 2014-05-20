@@ -187,6 +187,12 @@
     var cursorLine = $("#terminal .termLine[lineNumber="+termCursorY+"]");
     cursorLine[0].scrollIntoView();
   };
+
+  function trimRight(str) {
+    var s = str.length-1;
+    while (s>0 && str[s]==" ") s--;
+    return str.substr(0,s+1);      
+  }
   
   var handleReceivedCharacter = function (/*char*/ch) {
     //console.log("IN = "+ch);
@@ -207,10 +213,10 @@
         } break;
         default : {
           // Else actually add character
-          termText[termCursorY] = 
+          termText[termCursorY] = trimRight(
               Espruino.Core.Utils.getSubString(termText[termCursorY],0,termCursorX) + 
               String.fromCharCode(ch) + 
-              Espruino.Core.Utils.getSubString(termText[termCursorY],termCursorX+1);
+              Espruino.Core.Utils.getSubString(termText[termCursorY],termCursorX+1));
           termCursorX++;
         }
       }
