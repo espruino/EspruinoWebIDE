@@ -143,6 +143,8 @@
     termControlChars = [];   
     // finally update the HTML
     updateTerminal();
+    // fire off a clear terminal processor
+    Espruino.callProcessor("terminalClear");
   };
 
   var updateTerminal = function() {     

@@ -45,6 +45,19 @@
         }
       }]
     });
+
+    // if terminal was cleared this may have been to remove the tutorial, so do this if needed
+    Espruino.addProcessor("terminalClear", function(data, callback) {      
+      if (hasTutorial()) 
+        stopTutorial();
+      callback(data);
+    });
+    // If disconnect, stop tutorial too
+    Espruino.addProcessor("disconnected", function(data, callback) {      
+      if (hasTutorial()) 
+        stopTutorial();
+      callback(data);
+    });
   }
   
   function loadTutorialText(text) {
@@ -109,8 +122,10 @@
     var tka = la.next();
     var lb = Espruino.Core.Utils.getLexer(b);
     var tkb = lb.next();
-    while (tka!==undefined && tkb!=undefined) {
-      if (tka.str!=tkb.str) return false;
+    while (tka!==undefined || tkb!==undefined) {
+      if (tka==undefined || tkb==undefined || tka.str!=tkb.str) {
+        return false;
+      }
       tka = la.next();
       tkb = lb.next();
     }
