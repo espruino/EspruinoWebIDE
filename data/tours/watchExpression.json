@@ -1,0 +1,72 @@
+{"id": "ps",
+"buttonid": "watchExpressionTour",
+"title": "watch",
+"slides":
+[ {
+    "title": "Watch expressions",
+    "description": "Quick tour to watch expressions from Espruino in popup"
+  },
+  { "title": "Condition",
+    "description": "this tour will run perfect, if<ul><li>watch is diabled in options</li><li>IDE is connected to a board</li></ul>"
+  },
+  {
+    "title": "Initialize watch expressions",
+    "description": "...click on settings, to set options.",
+    "attachTo": "#icon-settings",
+    "position": "bottomRight",
+    "onHide": "clickattached"
+  },
+  {
+    "title": "Open options for watch",
+    "description": "...click on watch, to open options.",
+    "attachTo": "[name='Watch']",
+    "position": "right",
+    "onHide": "clickattached"
+  },
+  {
+    "title": "Enable watch expression",
+    "description": "...click checkbox, to enable this function.",
+    "attachTo": "[name='ENABLE_Watch']",
+    "position": "left",
+    "onHide": "clickattached"
+  },
+  {
+    "title": "Set timing",
+    "description": "First select how long you want to watch expressions<br><br><br><br>Next select how often you want data to be updated",
+    "attachTo": "[name='DURATION_Watch']",
+    "position": "left",
+    "onHide": "closePopup"
+  },
+  {
+    "title": "Open watch window",
+    "description": "...click on watch(eye), to open popup.",
+    "attachTo": "#icon-terminalWatch",
+    "position": "right",
+    "onHide": "clickattached"
+  },
+  {
+    "title": "Set expressions",
+    "description": "In this formular you define expressions, you would like to observe",
+    "attachTo": ".runWatch",
+    "position": "top",
+    "onHide": "clickattached"
+  },
+  {
+    "title": "Run watch",
+    "description": "Starts watching the expressions,<br>you will see last value and small sparkline.",
+    "attachTo": ".runWatch",
+    "position": "top"
+  },
+  {
+    "title": "Stop watching",
+    "description": "If you want to stop this immediately, wiithout waiting click this button",
+    "attachTo": ".stopWatch",
+    "position": "top",
+    "onHide": "clickattached"
+  },
+  {
+    "title": "Watch done",
+    "description": "...Now that you got a first overview, check the functions by yourself and enjoy."
+  }
+]
+}

@@ -57,6 +57,7 @@
             $(".saveProject").button({ text: false, icons: { primary: "ui-icon-disk" } }).click(projectSave);
             $(".saveAsProject").button({ text:false, icons: { primary: "ui-icon-plusthick"} }).click(projectSaveAs);
             $(".copyBinary").button({ text:false, icons: { primary: "ui-icon-copy"} }).click(copyBinary);
+            $(".copyImage").button({ text:false, icons:{ primary: "ui-icon-copy"} }).click(copyImage);
             $(".copyModule").button({ text:false, icons: { primary: "ui-icon-copy"} }).click(copyModule);
             $(".dropSnippet").button({ text:false, icons: {primary: "ui-icon-trash"}}).click(dropSnippet);
             $(".addSnippet").button({ text:false, icons: { primary: "ui-icon-plusthick"} }).click(addSnippet);
@@ -142,14 +143,14 @@
       getProjectSnippets();          
     },10); 
   }
-  function findBinary(code,callback){ // find it in E.asmBinary(format,asmFunction);
+  function findBinary(code,callback){ // find it in E.asmBinary(FunctionName,format,asmFunction);
     var binary = {},binarys = [];
     var lex = Espruino.Core.Utils.getLexer(code);
     var tok = lex.next();
     var state = 0;
     var startIndex = -1;
     while (tok!==undefined) {
-      if (state==0 && tok.str=="E") { state=1; binary={}; binary.start = tok.startIdx; tok = lex.next();}
+      if (state==0 && tok.str=="E") {state=1; binary={}; binary.start = tok.startIdx; tok = lex.next();}
       else if (state==1 && tok.str==".") { state=2; tok = lex.next();}
       else if (state==2 && (tok.str=="asmBinary")) { state=3; tok = lex.next();}
       else if (state==3 && (tok.str=="(")) { state=4; tok = lex.next();}
@@ -231,7 +232,11 @@
               if(!checkSubFolder(results,"projects")){ theEntry.getDirectory("projects", {create:true}); } 
               if(!checkSubFolder(results,"firmware")){ theEntry.getDirectory("firmware", {create:true}); }
               if(!checkSubFolder(results,"binary")){ theEntry.getDirectory("binary", {create:true}); }
-              if(!checkSubFolder(results,"snippets")){ theEntry.getDirectory("snippets", {create:true}); saveSnippets(); }
+              if(!checkSubFolder(results,"snippets")){ 
+                theEntry.getDirectory("snippets",
+                  {create:true},
+                  function(dirEntry){saveSnippets();});
+                }
             });
           });
         }
@@ -327,7 +332,7 @@
       html += '<div id="tabs">';
       html += '<ul><li><a href="#p">Projects</a></li>';
       html += '<li><a href="#m">Modules</a></li>';
-      html += '<li><a href="#b">Binaries</a></li>';
+      html += '<li><a href="#b">bin/bmp</a></li>';
       html += '<li><a href="#s">Snippets</a></li></ul>';
       getProjects(html,function(html){
         getModules(html,function(html){
@@ -346,17 +351,23 @@
     }
   }
   function copy2SD(path,data){
+    var src,i,y;
     if(Espruino.Core.Serial.isConnected()){
-      var src = 'echo(0)\n;';
-      if(typeof data === "string"){
-        src += 'function copyToSD(path,src){var fs = require("fs");fs.unlink(path);fs.writeFile(path,atob(src));}\n';
-        src += 'copyToSD("' + path + '","' + btoa(data) + '");\n';
+      src = 'echo(0);\n;';
+      src += 'var fs = require("fs");fs.unlink("' + path + '");';
+      Espruino.Core.Serial.write(src);
+      for(i = 0; i <= data.length / 256;i++){
+        y = new Uint8Array(data.buffer,i * 256,Math.min(data.length - i*256,256));
+        if(i === 0){ src = 'fs.writeFile';} else{ src='fs.appendFile';}
+        if(typeof data === "string"){
+          src += '("' + path + '","' + btoa(y) + '");\n';
+        }
+        else{
+          src += '("' + path + '","' + btoa(String.fromCharCode.apply(null,y)) + '");\n';
+        }
+        Espruino.Core.Serial.write(src);
       }
-      else{
-        src += 'function copyToSDb(path,src){var fs = require("fs");fs.unlink(path);fs.writeFile(path,atob(src));}\n';
-        src += 'copyToSDb("' + path + '","' + btoa(String.fromCharCode.apply(null, data)) + '");\n';
-      }
-      src += 'echo(1);\n\n';
+      src = 'echo(1);\n\n';
       Espruino.Core.Serial.write(src);
       Espruino.Core.App.closePopup();
       $("#terminalfocus").focus();
@@ -423,10 +434,11 @@
       dirReader.readEntries(function(results){
         html += '<div id="b">';
         html += '<table width="100%">';
+        html += '<tr><th align="center"><i>Binarys</i></th></tr>';
         for(var i = 0; i < results.length; i++){
           if(!results[i].isDirectory){
             name = results[i].name.split(".");
-            if(name[1] === "BIN"){
+            if(name[1].toUpperCase() === "BIN"){
               html += '<tr><th>' + name[0] + "</th>";
               html += '<th title="copy to SD"><button class="copyBinary" fileentry="' + chrome.fileSystem.retainEntry(results[i]) + '"';
               html += ' filename="' + results[i].name + '"></button>';
@@ -434,7 +446,19 @@
             }
           }
         }
-        html +="</table>";
+        html += '<tr><th colspan="2" align="center"><i>bmp files</i></th></tr>';
+        for(var i = 0; i < results.length; i++){
+          if(!results[i].isDirectory){
+            name = results[i].name.split(".");
+            if(name[1].toUpperCase() === "BMP"){
+              html += '<tr><th>' + name[0] + "</th>";
+              html += '<th title="copy to SD"><button class="copyImage" fileentry="' + chrome.fileSystem.retainEntry(results[i]) + '"';
+              html += ' filename="' + results[i].name + '"></button>';
+              html +='</th></tr>';              
+            }
+          }
+        }
+        html += "</table>";
         html += '</div>';
         callback(html);  
       });
@@ -448,6 +472,15 @@
         copy2SD("node_binaries/" + fileName,u);
       });  
     });
+  }
+  function copyImage(){
+    var fileName = $(this).attr("filename");
+    checkEntry($(this).attr("fileentry"),function(theEntry){
+      readBinaryArrayfromEntry(theEntry,function(data){
+        var u = new Uint8Array(data);
+        copy2SD("images/" + fileName,u);
+      });  
+    });    
   }
   function getProjects(html,callback){
     getProjectSubDir("projects",function(subDirEntry){

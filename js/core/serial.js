@@ -173,10 +173,28 @@ Author: Gordon Williams (gw@pur3.co.uk)
   
   // ----------------------------------------------------------
   chrome.serial.onReceive.addListener(function(receiveInfo) {
-    //var bytes = new Uint8Array(receiveInfo.data);
+    var bytes = new Uint8Array(receiveInfo.data);
+    searchData(bytes);
     if (readListener!==undefined) readListener(receiveInfo.data);
   });
-
+  var receivedData = "";
+  function searchData(bytes){
+    var si,ei;
+    for(var i = 0; i < bytes.length; i++) {
+      receivedData += String.fromCharCode(bytes[i]);
+    }
+    si = receivedData.indexOf("<<<<<");
+    if(si >= 0){ 
+      receivedData = receivedData.substr(si);
+      ei = receivedData.indexOf(">>>>>");
+      if(ei > 0){
+        receivedData = receivedData.substr(5,ei - 5);
+        Espruino.callProcessor("getWatched",receivedData,function(){});
+        receivedData = "";
+      }
+    }
+    else{ receivedData = ""; }
+  }
   chrome.serial.onReceiveError.addListener(function(errorInfo) {
     console.log("RECEIVE ERROR:",JSON.stringify(errorInfo));
     connectionDisconnectCallback();
