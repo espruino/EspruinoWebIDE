@@ -63,16 +63,32 @@
     
     $("#terminal").mouseup(function() {
       var terminalfocus = $('#terminalfocus');
-      var selectedText = window.getSelection().toString();
-      if (selectedText.length > 0) {               
-        //console.log(selectedText);
-        //console.log(selectedText.split("").map(function(c) { return c.charCodeAt(0); }));    
-        selectedText = selectedText.replace(/\xA0/g," "); // Convert nbsp chars to spaces
-        //console.log(selectedText.split("").map(function(c) { return c.charCodeAt(0); }));
-        terminalfocus.val(selectedText).select();
-        document.execCommand('copy');
-        terminalfocus.val('');
+      var selection = window.getSelection();
+      /* this rather convoluted code checks to see if the selection
+       * is actually part of the terminal. It may be that the user
+       * clicked on the editor pane, dragged, and released over the
+       * terminal in which case we DON'T want to copy. */ 
+      if (selection.rangeCount > 0) {
+        var node = selection.getRangeAt(0).startContainer;
+        var terminal = $("#terminal")[0];
+        while (node && node!=terminal)
+          node = node.parentNode;
+        
+        if (node==terminal) {
+          // selection WAS part of terminal  
+          var selectedText = selection.toString();
+          if (selectedText.trim().length > 0) {               
+            //console.log(selectedText);
+            //console.log(selectedText.split("").map(function(c) { return c.charCodeAt(0); }));    
+            selectedText = selectedText.replace(/\xA0/g," "); // Convert nbsp chars to spaces
+            //console.log(selectedText.split("").map(function(c) { return c.charCodeAt(0); }));
+            terminalfocus.val(selectedText).select();
+            document.execCommand('copy');
+            terminalfocus.val('');
+          }
+        }
       }
+      
       terminalfocus.focus(); 
     });
     $("#terminalfocus").focus(function() { $("#terminal").addClass('focus'); } ).blur(function() { $("#terminal").removeClass('focus'); } );

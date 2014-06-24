@@ -79,7 +79,6 @@ Blockly.Language.espruino_pin = {
     var listGen = function() {
       originalPin = this.value_;
       var list = PINS.slice(start, start+incrementStep);
-      console.log(start, incrementStep, list);
       if (start>0) list.unshift(['Back...', 'Back']);
       if (start+incrementStep<PINS.length) list.push(['More...', 'More']);        
       return list;
