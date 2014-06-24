@@ -68,18 +68,46 @@ Blockly.Language.espruino_interval = {
     this.setTooltip('Runs code repeatedly, every so many seconds');
   }
 };
+
 Blockly.Language.espruino_pin = {
 //      category: 'Espruino',
   init: function() {
+    
+    var start = 0;
+    var incrementStep = 10;
+    var originalPin = undefined;
+    var listGen = function() {
+      originalPin = this.value_;
+      var list = PINS.slice(start, start+incrementStep);
+      console.log(start, incrementStep, list);
+      if (start>0) list.unshift(['Back...', 'Back']);
+      if (start+incrementStep<PINS.length) list.push(['More...', 'More']);        
+      return list;
+    };    
+    
+    var pinSelector = new Blockly.FieldDropdown(listGen, function(selection){
+      var ret = undefined;
+      
+      if (selection == "More" || selection == "Back") {  
+        if (selection == "More")
+          start += incrementStep;
+        else
+          start -= incrementStep;
+        
+        var t = this;
+        setTimeout(function(){t.showEditor_();},1);
+
+        return originalPin;
+      }      
+    });
+    
     this.setColour(ESPRUINO_COL);
     this.setOutput(true, 'Pin');
-    this.appendDummyInput()
-         .appendTitle(new Blockly.FieldDropdown(this.PINS), 'PIN');
+    this.appendDummyInput().appendTitle(pinSelector, 'PIN');
     this.setTooltip('The Name of a Pin');
   },
-  PINS: PINS,
 };
-   
+
 
 Blockly.Language.espruino_watch = {
   category: 'Espruino',
