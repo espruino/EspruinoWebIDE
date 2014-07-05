@@ -25,6 +25,16 @@ Author: Gordon Williams (gw@pur3.co.uk)
     return;
   }  
 
+  function init() {
+    Espruino.Core.Config.add("BAUD_RATE", {
+      section : "Communications",
+      name : "Baud Rate",
+      description : "When connecting over serial, this is the baud rate that is used. 9600 is the default for Espruino",
+      type : {9600:9600,14400:14400,19200:19200,28800:28800,38400:38400,57600:57600,115200:115200},
+      defaultValue : 9600, 
+    });
+  }  
+  
   var connectionInfo;
   var readListener;
   var connectedPort; // unused?
@@ -50,7 +60,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
       // In this case, ports are reported as ttyACM0 - not /dev/ttyACM0      
       if (navigator.userAgent.indexOf("Linux")>=0) {
         hasSlashes = false;
-        devices.forEach(function(device) { if (device.path.indexOf("/")>=0) hasSlashes=true; })
+        devices.forEach(function(device) { if (device.path.indexOf("/")>=0) hasSlashes=true; });
         if (!hasSlashes) prefix = "/dev/";
       }
 
@@ -62,7 +72,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
   
   var openSerial=function(serialPort, openCallback, disconnectCallback) {
     connectionDisconnectCallback = disconnectCallback;
-    chrome.serial.connect(serialPort, {bitrate: 9600}, 
+    chrome.serial.connect(serialPort, {bitrate: parseInt(Espruino.Config.BAUD_RATE)}, 
       function(cInfo) {
         if (!cInfo) {
           console.log("Unable to open device (connectionInfo="+cInfo+")");
@@ -183,6 +193,7 @@ Author: Gordon Williams (gw@pur3.co.uk)
   });
 
   Espruino.Core.Serial = {
+    "init" : init,
     "getPorts": getPorts,
     "open": openSerial,
     "isConnected": isConnected,
