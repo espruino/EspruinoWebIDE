@@ -147,6 +147,8 @@
   var clearTerminal = function() {
     // Get just the last entered line
     var currentLine = Espruino.Core.Terminal.getInputLine();
+    if (currentLine==undefined)
+      currentLine = { text : "" };
     termText = currentLine.text.split("\n");
     // re-add > and : marks
     for (var l in termText)
@@ -201,7 +203,7 @@
     
     $("#terminal").html(t.join(""));
     var cursorLine = $("#terminal .termLine[lineNumber="+termCursorY+"]");
-    cursorLine[0].scrollIntoView();
+    if (cursorLine.length>0) cursorLine[0].scrollIntoView();
   };
 
   function trimRight(str) {
