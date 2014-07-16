@@ -151,18 +151,13 @@
       console.log("Checking previous line "+linesPast);
       line = Espruino.Core.Terminal.getInputLine(linesPast);
       // user has entered the correct command - let's move to next
-      if (isCodeEqual(line.text,tutorialData[tutorialStep].code) && 
+      if (line!==undefined && isCodeEqual(line.text,tutorialData[tutorialStep].code) && 
           tutorialStep+1 < tutorialData.length) {          
         tutorialStep++;
         displayTutorialStep();
       }
       linesPast--;
     }
-   /* 
-    if (line!==undefined) {
-      var ok = line.text == tutorialData[tutorialStep].code;        
-      Espruino.Core.Terminal.setHintText(ok?"Right":"Wrong");
-    }*/
   }
   
   Espruino.Plugins.Tutorial = {
