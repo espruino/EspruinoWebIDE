@@ -199,6 +199,10 @@
       }
       elements = newElements;
     }   
+    // remove elements if we have too many...
+    for (i=termText.length;i<elements.length;i++)
+      if (i in elements) 
+        elements[i].remove();
     // now write this to the screen
     var t = [];
     for (var y in termText) {
