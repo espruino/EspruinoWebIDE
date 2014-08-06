@@ -1,0 +1,46 @@
+Index: core/field_variable.js
+===================================================================
+--- core/field_variable.js	(revision 1741)
++++ core/field_variable.js	(working copy)
+@@ -137,30 +137,26 @@
+  * @this {!Blockly.FieldVariable}
+  */
+ Blockly.FieldVariable.dropdownChange = function(text) {
+-  function promptName(promptText, defaultText) {
++  function promptName(promptText, defaultText, callback) {
+     Blockly.hideChaff();
+-    var newVar = window.prompt(promptText, defaultText);
+-    // Merge runs of whitespace.  Strip leading and trailing whitespace.
+-    // Beyond this, all names are legal.
+-    return newVar && newVar.replace(/[\s\xa0]+/g, ' ').replace(/^ | $/g, '');
++    window.promptAsync(promptText, defaultText, function (newVar) {
++      // Merge runs of whitespace.  Strip leading and trailing whitespace.
++      // Beyond this, all names are legal.
++      callback(newVar && newVar.replace(/[\s\xa0]+/g, ' ').replace(/^ | $/g, ''));
++    });
+   }
+   if (text == Blockly.Msg.RENAME_VARIABLE) {
+     var oldVar = this.getText();
+-    text = promptName(Blockly.Msg.RENAME_VARIABLE_TITLE.replace('%1', oldVar),
+-                      oldVar);
++    promptName(Blockly.Msg.RENAME_VARIABLE_TITLE.replace('%1', oldVar),
++                      oldVar, function (text) {
+     if (text) {
+       Blockly.Variables.renameVariable(oldVar, text);
+     }
++  });
++
+     return null;
+   } else if (text == Blockly.Msg.NEW_VARIABLE) {
+-    text = promptName(Blockly.Msg.NEW_VARIABLE_TITLE, '');
+-    // Since variables are case-insensitive, ensure that if the new variable
+-    // matches with an existing variable, the new case prevails throughout.
+-    if (text) {
+-      Blockly.Variables.renameVariable(text, text);
+-      return text;
+-    }
+-    return null;
++    return Blockly.Variables.generateUniqueName();
+   }
+   return undefined;
+ };
