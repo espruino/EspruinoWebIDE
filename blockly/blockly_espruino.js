@@ -14,7 +14,7 @@
 window.onload = function() {
   Blockly.inject(document.body,{path: '', toolbox: document.getElementById('toolbox')});
   Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, document.getElementById('blocklyInitial')); 
-  window.parent.blocklyLoaded(Blockly); // see core/editorBlockly.js
+  window.parent.blocklyLoaded(Blockly, window); // see core/editorBlockly.js
 };
 // ---------------------------------
 
@@ -32,16 +32,16 @@ for (var p in PORTS)
     PINS.push([pinname,pinname]);
   }
 
-Blockly.Language.espruino_timeout = {
+Blockly.Blocks.espruino_timeout = {
   category: 'Espruino',
   init: function() {
       this.appendValueInput('SECONDS')
           .setCheck('Number')
-          .appendTitle('wait');
+          .appendField('wait');
       this.appendDummyInput()
-          .appendTitle("seconds");
+          .appendField("seconds");
       this.appendStatementInput('DO')
-           .appendTitle('do');
+           .appendField('do');
 
     this.setPreviousStatement(true);
     this.setNextStatement(true);
@@ -50,16 +50,16 @@ Blockly.Language.espruino_timeout = {
     this.setTooltip('Waits for a certain period before running code');
   }
 };
-Blockly.Language.espruino_interval = {
+Blockly.Blocks.espruino_interval = {
   category: 'Espruino',
   init: function() {
       this.appendValueInput('SECONDS')
           .setCheck('Number')
-          .appendTitle('every');
+          .appendField('every');
       this.appendDummyInput()
-          .appendTitle("seconds");
+          .appendField("seconds");
       this.appendStatementInput('DO')
-           .appendTitle('do');
+           .appendField('do');
 
     this.setPreviousStatement(true);
     this.setNextStatement(true);
@@ -69,7 +69,7 @@ Blockly.Language.espruino_interval = {
   }
 };
 
-Blockly.Language.espruino_pin = {
+Blockly.Blocks.espruino_pin = {
 //      category: 'Espruino',
   init: function() {
     
@@ -102,22 +102,22 @@ Blockly.Language.espruino_pin = {
     
     this.setColour(ESPRUINO_COL);
     this.setOutput(true, 'Pin');
-    this.appendDummyInput().appendTitle(pinSelector, 'PIN');
+    this.appendDummyInput().appendField(pinSelector, 'PIN');
     this.setTooltip('The Name of a Pin');
   },
 };
 
 
-Blockly.Language.espruino_watch = {
+Blockly.Blocks.espruino_watch = {
   category: 'Espruino',
   init: function() {
       this.appendValueInput('PIN')
           .setCheck('Pin')
-          .appendTitle('watch');
+          .appendField('watch');
       this.appendDummyInput()
-           .appendTitle(new Blockly.FieldDropdown(this.EDGES), 'EDGE').appendTitle('edge');;
+           .appendField(new Blockly.FieldDropdown(this.EDGES), 'EDGE').appendField('edge');;
       this.appendStatementInput('DO')
-           .appendTitle('do');
+           .appendField('do');
 
     this.setPreviousStatement(true);
     this.setNextStatement(true);
@@ -132,10 +132,10 @@ EDGES: [
 };
 
 
-Blockly.Language.espruino_getTime = {
+Blockly.Blocks.espruino_getTime = {
     category: 'Espruino',
     init: function() {
-      this.appendDummyInput().appendTitle('Time');
+      this.appendDummyInput().appendField('Time');
       this.setOutput(true, 'Number');
       this.setColour(230/*Number*/);
       this.setInputsInline(true);
@@ -144,15 +144,15 @@ Blockly.Language.espruino_getTime = {
   };
 
 
-Blockly.Language.espruino_digitalWrite = {
+Blockly.Blocks.espruino_digitalWrite = {
   category: 'Espruino',
   init: function() {
       this.appendValueInput('PIN')
           .setCheck('Pin')
-          .appendTitle('digitalWrite Pin');
+          .appendField('digitalWrite Pin');
       this.appendValueInput('VAL')
           .setCheck(['Number','Boolean'])
-          .appendTitle('Value');
+          .appendField('Value');
 
     this.setPreviousStatement(true);
     this.setNextStatement(true);
@@ -161,17 +161,17 @@ Blockly.Language.espruino_digitalWrite = {
     this.setTooltip('Writes a Digital Value to a Pin');
   }
 };
-Blockly.Language.espruino_digitalPulse = {
+Blockly.Blocks.espruino_digitalPulse = {
     category: 'Espruino',
     init: function() {
         this.appendValueInput('PIN')
             .setCheck('Pin')
-            .appendTitle('digitalPulse Pin');
+            .appendField('digitalPulse Pin');
         this.appendValueInput('VAL')
             .setCheck(['Boolean']);
         this.appendValueInput('TIME')
             .setCheck(['Number'])
-            .appendTitle('Milliseconds');
+            .appendField('Milliseconds');
 
       this.setPreviousStatement(true);
       this.setNextStatement(true);
@@ -180,12 +180,12 @@ Blockly.Language.espruino_digitalPulse = {
       this.setTooltip('Pulses a pin for the given number of milliseconds');
     }
   };
-Blockly.Language.espruino_digitalRead = {
+Blockly.Blocks.espruino_digitalRead = {
   category: 'Espruino',
   init: function() {
       this.appendValueInput('PIN')
           .setCheck('Pin')
-          .appendTitle('digitalRead Pin');
+          .appendField('digitalRead Pin');
 
     this.setOutput(true, 'Boolean');
     this.setColour(ESPRUINO_COL);
@@ -194,15 +194,15 @@ Blockly.Language.espruino_digitalRead = {
   }
 };
 
-Blockly.Language.espruino_analogWrite = {
+Blockly.Blocks.espruino_analogWrite = {
     category: 'Espruino',
     init: function() {
         this.appendValueInput('PIN')
             .setCheck('Pin')
-            .appendTitle('analogWrite Pin');
+            .appendField('analogWrite Pin');
         this.appendValueInput('VAL')
             .setCheck(['Number','Boolean'])
-            .appendTitle('Value');
+            .appendField('Value');
 
       this.setPreviousStatement(true);
       this.setNextStatement(true);
@@ -211,12 +211,12 @@ Blockly.Language.espruino_analogWrite = {
       this.setTooltip('Writes an Analog Value to a Pin');
     }
   };
-Blockly.Language.espruino_analogRead = {
+Blockly.Blocks.espruino_analogRead = {
     category: 'Espruino',
     init: function() {
         this.appendValueInput('PIN')
             .setCheck('Pin')
-            .appendTitle('analogRead Pin');
+            .appendField('analogRead Pin');
 
       this.setOutput(true, 'Number');
       this.setColour(ESPRUINO_COL);
