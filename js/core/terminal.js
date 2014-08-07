@@ -20,8 +20,6 @@
   var termText = [ "" ];
   // Map of terminal line number to text to display before it
   var termExtraText = {}; 
-  /// Extra text that is displayed right at the end of the terminal
-  var termHintText = undefined;
   
   var termCursorX = 0;
   var termCursorY = 0;
@@ -63,16 +61,32 @@
     
     $("#terminal").mouseup(function() {
       var terminalfocus = $('#terminalfocus');
-      var selectedText = window.getSelection().toString();
-      if (selectedText.length > 0) {               
-        //console.log(selectedText);
-        //console.log(selectedText.split("").map(function(c) { return c.charCodeAt(0); }));    
-        selectedText = selectedText.replace(/\xA0/g," "); // Convert nbsp chars to spaces
-        //console.log(selectedText.split("").map(function(c) { return c.charCodeAt(0); }));
-        terminalfocus.val(selectedText).select();
-        document.execCommand('copy');
-        terminalfocus.val('');
+      var selection = window.getSelection();
+      /* this rather convoluted code checks to see if the selection
+       * is actually part of the terminal. It may be that the user
+       * clicked on the editor pane, dragged, and released over the
+       * terminal in which case we DON'T want to copy. */ 
+      if (selection.rangeCount > 0) {
+        var node = selection.getRangeAt(0).startContainer;
+        var terminal = $("#terminal")[0];
+        while (node && node!=terminal)
+          node = node.parentNode;
+        
+        if (node==terminal) {
+          // selection WAS part of terminal  
+          var selectedText = selection.toString();
+          if (selectedText.trim().length > 0) {               
+            //console.log(selectedText);
+            //console.log(selectedText.split("").map(function(c) { return c.charCodeAt(0); }));    
+            selectedText = selectedText.replace(/\xA0/g," "); // Convert nbsp chars to spaces
+            //console.log(selectedText.split("").map(function(c) { return c.charCodeAt(0); }));
+            terminalfocus.val(selectedText).select();
+            document.execCommand('copy');
+            terminalfocus.val('');
+          }
+        }
       }
+      
       terminalfocus.focus(); 
     });
     $("#terminalfocus").focus(function() { $("#terminal").addClass('focus'); } ).blur(function() { $("#terminal").removeClass('focus'); } );
@@ -131,13 +145,14 @@
   var clearTerminal = function() {
     // Get just the last entered line
     var currentLine = Espruino.Core.Terminal.getInputLine();
+    if (currentLine==undefined)
+      currentLine = { text : "" };
     termText = currentLine.text.split("\n");
     // re-add > and : marks
     for (var l in termText)
       termText[l] = (l==0?">":":") + termText[l]; 
     // reset other stuff...
     termExtraText = {}; 
-    termHintText = undefined;
     // leave X cursor where it was...
     termCursorY -= currentLine.line; // move Y cursor back
     termControlChars = [];   
@@ -147,7 +162,18 @@
     Espruino.callProcessor("terminalClear");
   };
 
-  var updateTerminal = function() {     
+  var updateTerminal = function() {  
+    var terminal = $("#terminal");
+    // gather a list of elements for each line
+    var elements = [];
+    terminal.children().each(function() {
+      var n = $(this).attr("lineNumber");
+      if (n!==undefined)
+        elements[n] = $(this);
+      else
+        $(this).remove(); // remove stuff that doesn't have a line number
+    });
+    
     // remove extra lines if there are too many
     if (termText.length > MAX_LINES) {
       var removedLines = termText.length - MAX_LINES;
@@ -159,7 +185,24 @@
           newTermExtraText[i-removedLines] = termExtraText[i];
       }
       termExtraText = newTermExtraText;
+      
+      // now renumber our elements (cycle them around)
+      var newElements = [];
+      for (i in elements) {
+        var n = elements[i].attr("lineNumber") - removedLines;
+        if (n<0) { // if it's fallen off the bottom, delete it
+          elements[i].remove();
+        } else {
+          elements[i].attr("lineNumber", n);
+          newElements[n] = elements[i];
+        }
+      }
+      elements = newElements;
     }   
+    // remove elements if we have too many...
+    for (i=termText.length;i<elements.length;i++)
+      if (i in elements) 
+        elements[i].remove();
     // now write this to the screen
     var t = [];
     for (var y in termText) {
@@ -172,20 +215,23 @@
             Espruino.Core.Utils.escapeHTML(Espruino.Core.Utils.getSubString(line,termCursorX+1));
       } else
         line = Espruino.Core.Utils.escapeHTML(line);
-      
+      // extra text is for stuff like tutorials
       if (termExtraText[y])
-        t.push(termExtraText[y]);
-      t.push("<div class='termLine' lineNumber='"+y+"'>"+line+"</div>");
+        line = termExtraText[y] + line;
+      
+      // Only update the elements if they need updating
+      if (elements[y]===undefined) {
+        var prev = y-1;
+        while (prev>=0 && elements[prev]===undefined) prev--;
+        elements[y] = $("<div class='termLine' lineNumber='"+y+"'>"+line+"</div>");
+        if (prev<0) elements[y].appendTo(terminal);
+        else elements[y].insertAfter(elements[prev]);
+      } else if (elements[y].html()!=line)
+        elements[y].html(line);
     }
-    // last line...
-    if (termExtraText[termText.length])
-      t.push(termExtraText[termText.length]);
-    if (termHintText!==undefined)
-      t.push(termHintText);
-    
-    $("#terminal").html(t.join(""));
-    var cursorLine = $("#terminal .termLine[lineNumber="+termCursorY+"]");
-    cursorLine[0].scrollIntoView();
+    // now show the line where the cursor is
+    if (elements[termCursorY]!==undefined);
+      elements[termCursorY][0].scrollIntoView();
   };
 
   function trimRight(str) {
@@ -314,14 +360,6 @@
     termExtraText = {};
     updateTerminal();
   };   
-  
-  /// Set the hint text that appears after the final line
-  function setHintText(text) {
-    if (termHintText != text) {
-      termHintText = text;
-      updateTerminal();
-    }      
-  };
 
   /// Give the terminal focus
   function focus() {
@@ -354,7 +392,6 @@
       
       setExtraText : setExtraText,
       clearExtraText : clearExtraText,
-      setHintText : setHintText,
       
       grabSerialPort : grabSerialPort,
       setInputDataHandler : setInputDataHandler,

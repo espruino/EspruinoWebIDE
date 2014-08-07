@@ -93,7 +93,21 @@
   };  
   
   var saveFile = function(data, filename) {
-    saveAs(new Blob([convertToOS(data)], { type: "text/plain" }), filename);
+    //saveAs(new Blob([convertToOS(data)], { type: "text/plain" }), filename); // using FileSaver.min.js
+
+    function errorHandler() {
+      Espruino.Core.Notifications.error("Error Saving", true);     
+    }
+
+    chrome.fileSystem.chooseEntry({type: 'saveFile', suggestedName:filename}, function(writableFileEntry) {
+      writableFileEntry.createWriter(function(writer) {
+        writer.onerror = errorHandler;
+        writer.onwriteend = function(e) {
+          console.log('write complete');
+        };
+        writer.write(new Blob([convertToOS(data)], { type: "text/plain" }));
+      }, errorHandler);
+    });
   };  
 
   Espruino.Core.File = {

@@ -18,7 +18,7 @@
   var watchMode = "poll";
   function datapoint(label){
     this.label = label;
-    this.points = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+    this.points = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
   }
   function init() {
     Espruino.Core.Config.addSection("Watch", {
@@ -46,6 +46,13 @@
       description: "Defines how fast watching will happen",
       type: {"200":"5/sec","500":"2/sec","1000":"1/sec","2000":"2secs","5000":"5secs","10000":"10secs"},
       defaultValue : 2000 
+    });
+    Espruino.Core.Config.add("SCALE_Watch",{
+      section:"Watch",
+      name: "Scale",
+      description: "Scaling values for watching expressions",
+      type: {"":"auto","0,100":"0-100","0,1000":"0-1000","-100,100":"+-100"},
+      defaultValue: "" 
     });
     Espruino.addProcessor("getWatched", function (data, callback) {
       if(Espruino.Config.ENABLE_Watch){
@@ -90,7 +97,7 @@
       html += '<tr>';
       html += '<th>' + datapoints[i].label + '</th>';
       html += '<th><span id="datapoint_' + i.toString() + '"></span><br>';
-      html += '<span id="sparkline_' + i.toString() + '"</th>';
+      html += '<span id="sparkline_' + i.toString() + '"></span></th>';
       html += '<th><button class="dropWatchpoint" i="' + i.toString() + '">Drop</button>';
       html += '<tr>';
     }
@@ -153,15 +160,15 @@
     }
     Espruino.Core.Serial.write('\x03echo(0);\n' + cmd + '\n');
   }
-  function waitData(data){
-  
-  }
   function setWatchValues(data){
-    var i,dataset = JSON.parse(data);
+    var i,opt,options,dataset = JSON.parse(data);
+    opt = Espruino.Config.SCALE_Watch.split(",");
+    if(opt.length>1){options = {"chartRangeMin":opt[0],"chartRangeMax":opt[1]};}
+    else {options = {};}
     for(i = 0; i < dataset.length; i++){
       datapoints[i].points.shift();
       datapoints[i].points.push(dataset[i]);
-      $("#sparkline_" + i.toString()).sparkline(datapoints[i].points);
+      $("#sparkline_" + i.toString()).sparkline(datapoints[i].points,options);
       $("#datapoint_" + i.toString()).html(dataset[i].toString());
     }      
   }

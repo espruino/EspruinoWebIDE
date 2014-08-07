@@ -346,10 +346,64 @@
     });
   };
 
+  function resetDevice(callback) {
+    // add serial listener
+    dataReceived = undefined;
+    Espruino.Core.Serial.startListening(function (readData) {
+      var bufView=new Uint8Array(readData);
+      //console.log("Got "+bufView.length+" bytes");
+      for (var i=0;i<bufView.length;i++) bytesReceived.push(bufView[i]);
+      if (dataReceived!==undefined) {
+        for (var i=0;i<bytesReceived.length;i++) {
+          if (dataReceived===undefined) console.log("OH NO!");
+          dataReceived(bytesReceived[i]);
+        }
+        bytesReceived = [];
+      }
+    });
+    var hadSlowWrite = Espruino.Core.Serial.isSlowWrite();
+    Espruino.Core.Serial.setSlowWrite(false, true/*force*/);
+    var oldHandler = Espruino.Core.Terminal.setInputDataHandler(function() {
+      // ignore keyPress from terminal during flashing
+    });      
+    var finish = function(err) {
+      Espruino.Core.Serial.setSlowWrite(hadSlowWrite);
+      Espruino.Core.Terminal.setInputDataHandler(oldHandler);
+      callback(err);
+    };
+    // initialise
+    initialiseChip(function (err) {
+      if (err) { finish(err); return; }
+      var data = new Uint8Array([0x04,0x00,0xFA,0x05]);
+      var addr = 0xE000ED0C;
+      console.log("Writing "+data.length+" bytes at 0x"+addr.toString(16)+"...");
+      // send write command
+      sendCommand(0x31, function(err) {
+        if (err) return callback(err);
+        // send address
+        sendData([(addr>>24)&0xFF,(addr>>16)&0xFF,(addr>>8)&0xFF,addr&0xFF], function(err) {
+          if (err) return callback(err);
+          // work out data to send
+          var sData = [ data.length-1 ];
+          for (var i in data) sData.push(data[i]&0xFF);
+          var s = "";
+          var chksum = 0;
+          for (var i in sData) {
+            chksum = chksum ^ sData[i];
+            s += String.fromCharCode(sData[i]);
+          }
+          Espruino.Core.Serial.write(s + String.fromCharCode(chksum), false);
+          callback(undefined); // done
+        }, 2000/*timeout*/);
+      });                 
+    });
+  };
+
 
   
   Espruino.Core.Flasher = {
     init : init,
-    flashDevice : flashDevice
+    flashDevice : flashDevice,
+    resetDevice : resetDevice
   };
 }());

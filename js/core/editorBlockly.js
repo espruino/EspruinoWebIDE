@@ -14,8 +14,26 @@
 
   var Blockly;
   
-  window.blocklyLoaded = function(blockly) { // see blockly/blockly.html
+  window.blocklyLoaded = function(blockly, blocklyWindow) { // see blockly/blockly.html    
     Blockly = blockly;
+    if (blocklyWindow) {
+      blocklyWindow.promptAsync = function(title,value,callback) {
+        var popup = Espruino.Core.App.openPopup({
+          title: "Graphical Editor:",
+          padding: true,
+          contents: '<p>'+Espruino.Core.Utils.escapeHTML(title)+'</p>'+
+                     '<input id="promptinput" value="'+Espruino.Core.Utils.escapeHTML(value)+'" style="width:100%"/>' ,                
+          position: "center",
+          next : function() {
+            var value = $('#promptinput').val();
+            popup.close();
+            callback(value);
+          }
+        });
+        $('#promptinput').focus();
+
+      };
+    }
   };
   
   function init() {
@@ -40,7 +58,7 @@
   }
   
   function getCode() {
-    return Blockly.Generator.workspaceToCode('JavaScript');
+    return Blockly.JavaScript.workspaceToCode('JavaScript');
   }
   
   function getXML() {

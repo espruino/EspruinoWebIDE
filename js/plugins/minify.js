@@ -47,7 +47,8 @@
       compilation_level: minificationLevel,
       output_format: "text",
       output_info: output_info,
-      js_code: code
+      js_code: code,
+      language : "ECMASCRIPT6" // so no need to mess with binary numbers now. \o/
     });      
     $.post(minifyUrl, minifyObj, function(minifiedCode) {      
       code = minifiedCode;          
@@ -61,13 +62,8 @@
     });
   }
 
-  function removeBinaryNumbers(code) {
-    // replace all binary numbers with parseInt
-    return code.replace(/0b([01][01]*)/g, "parseInt(\"$1\",2)");
-  }
-
   function minifyCode(code, callback, minificationLevel) {
-    closureCompiler(removeBinaryNumbers(code), minificationLevel, 'compiled_code', function(minified) {
+    closureCompiler(code, minificationLevel, 'compiled_code', function(minified) {
       if (minified.trim()!="") { 
         console.log("Minification complete. Code Size reduced from " + code.length + " to " + minified.length);
         console.log(JSON.stringify(minified));
