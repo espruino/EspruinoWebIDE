@@ -319,6 +319,7 @@
       readData = readData.split("").map(function(x) {return x.charCodeAt();});
     // Add data to our buffer
     var bufView=new Uint8Array(readData);
+    searchData(bufView);
     for (var i=0;i<bufView.length;i++) 
       displayData.push(bufView[i]);
     // If we haven't had data after 50ms, update the HTML
@@ -331,6 +332,25 @@
         displayTimeout = null;
       }, 50);
   };
+
+  var receivedData = "";
+  function searchData(bytes){
+    var si,ei;
+    for(var i = 0; i < bytes.length; i++) {
+      receivedData += String.fromCharCode(bytes[i]);
+    }
+    si = receivedData.indexOf("<<<<<");
+    if(si >= 0){ 
+      receivedData = receivedData.substr(si);
+      ei = receivedData.indexOf(">>>>>");
+      if(ei > 0){
+        receivedData = receivedData.substr(5,ei - 5);
+        Espruino.callProcessor("getWatched",receivedData,function(){});
+        receivedData = "";
+      }
+    }
+    else{ receivedData = ""; }
+  }
   
   /// Claim input and output of the Serial port
   function grabSerialPort() {

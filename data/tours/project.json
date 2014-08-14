@@ -16,9 +16,12 @@
   {
     "title": "Open options for sandbox",
     "description": "...click on Sandbox, to open options.",
-    "attachTo": "[name='Sandbox']",
+    "attachTo": "[name='Project(Sandbox)']",
     "position": "right",
     "onHide": "clickattached"
+  },
+  { "title": "enable Project", "description":"Activate projects",
+    "attachTo": "[name='ENABLE_PROJECTS']","position": "left","source":"true","onHide": "sendattached"
   },
   {
     "title": "Select Directory on local drive",

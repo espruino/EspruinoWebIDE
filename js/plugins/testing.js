@@ -86,7 +86,7 @@
       name: "Frequency of new values",
       description: "Defines how fast new values will be scanned",
       type: {"200":"5/sec","500":"2/sec","1000":"1/sec","2000":"2secs","5000":"5secs","10000":"10secs"},
-      defaultValue : 2000 
+      defaultValue : 1000 
     });
     Espruino.addProcessor("getWatched", function (data, callback) {
       if(Espruino.Config.ENABLE_Testing){

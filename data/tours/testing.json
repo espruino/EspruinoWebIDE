@@ -1,9 +1,11 @@
-{"id": "ps",
+{"id": "ts",
 "buttonid": "TestingTour",
 "title": "Testing",
 "slides":
 [ {"title": "Testing expressions","description": "Quick tour how to check variables in a chart"},
   { "title": "Condition","description": "this tour will run perfect, if<ul><li>Projects are activ(see project tour)</li><li>IDE is connected to a board</li></ul>"}, 
+  { "title":"Not Connected","description":"Board is not connected to webIDE, this tour need a connection",
+    "shouldSkip":"notConnected"},
   { "title": "Initialize testing","description": "...click on settings, to set options.",
     "attachTo": "#icon-settings","position": "bottomRight","onHide": "clickattached"},
   { "title": "Open options for testing","description": "...click on TESTING, to open options.",

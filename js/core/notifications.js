@@ -38,23 +38,27 @@
       success: function(msg, setStatus)
       {
         toastr.success(msg);
+        Espruino.callProcessor("notification",{type:"success",msg:msg},function(){});
         if(setStatus)
           Espruino.Core.Status.setStatus(msg);
       },
       error: function(msg, setStatus)
       {
         toastr.error(msg);
+        Espruino.callProcessor("notification",{type:"error",msg:msg},function(){});
         if(setStatus)
           Espruino.Core.Status.setStatus(msg);
       },
       warning: function(msg, setStatus)
       {
+        Espruino.callProcessor("notification",{type:"warning",msg:msg},function(){});
         toastr.warning(msg);
         if(setStatus)
           Espruino.Core.Status.setStatus(msg);
       },
       info: function(msg, setStatus)
       {
+        Espruino.callProcessor("notification",{type:"info",msg:msg},function(){});
         toastr.info(msg);
         if(setStatus)
           Espruino.Core.Status.setStatus(msg);

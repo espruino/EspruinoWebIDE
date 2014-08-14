@@ -13,6 +13,8 @@
     "position": "right",
     "onHide": "clickattached"
   },
+  { "title":"Not Connected","description":"Board is not connected to webIDE, this tour need a connection",
+    "shouldSkip":"notConnected"},
   {
     "title": "Select Snippet",
     "description": "...click on snippet, send it to board.",
