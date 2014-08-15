@@ -156,6 +156,7 @@
     "ble" :[{ base:"11011101________", regex : /^(.*)$/, args:[sint(0,8,1)] }], // 5.16 Format 16: conditional branch
     // 5.17 Format 17: software interrupt
     // 5.18 Format 18: unconditional branch
+    "b"   :[{ base:"11100___________", regex : /^(.*)$/, args:[sint(0,11,1)] }], // 5.16 Format 16: conditional branch
     // 5.19 Format 19: long branch with link
     // .... 
 
