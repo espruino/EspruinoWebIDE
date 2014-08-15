@@ -27,7 +27,8 @@
       showTrailingSpace: true,
       lint: {
         es5         : true, // if ES5 syntax should be allowed
-        evil        :true // don't warn on use of strings in setInterval
+        evil        : true, // don't warn on use of strings in setInterval
+        laxbreak    : true  // don't warn about newlines in expressions
       },
       highlightSelectionMatches: {showToken: /\w/},
       foldGutter: {rangeFinder: new CodeMirror.fold.combine(CodeMirror.fold.brace, CodeMirror.fold.comment)},
