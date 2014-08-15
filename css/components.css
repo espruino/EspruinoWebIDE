@@ -300,6 +300,35 @@ a:hover > .menu
     line-height: 60px;
   }
 
+/* Snippets list */
+
+  .terminalSnippets 
+  {
+    padding-left: 15px;
+  }
+
+  .terminalSnippet 
+  {
+    position: relative;
+    display: inline-block;
+    background: #ccc;
+    border-left: 10px solid #999; 
+    cursor: pointer;
+    padding: 2px;
+    padding-left: 8px;
+    margin: 1px;
+    height: 20px;
+    width: 320px;
+  }
+
+  .terminalSnippet:hover 
+  {
+    color: #fff !important;
+    border-left-color: #27ae60;
+    background: #2ecc71;
+  }
+
+
 /* Terminal */
 /* ----------------------------------------------------- */
 

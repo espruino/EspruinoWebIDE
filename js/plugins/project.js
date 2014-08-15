@@ -16,25 +16,18 @@
   function init() {
     Espruino.Core.Config.addSection("Project(Sandbox)", {
       sortOrder:500,
-      description: "Local directory used for projects, modules, etc",
+      description: "Local directory used for projects, modules, etc. When you select a directory, the 'Projects' and 'Snippets' icons will appear in the main window.",
       getHTML : function(callback) { 
-        var html= '<span id="projectFolder"></span><br>';
+        var html= '<div id="projectFolder" style="width:100%;border:1px solid #BBB;margin-bottom:10px;"></div>';
         html += '<button class="projectButton">Select Directory for Sandbox</button>';
         callback(html);
         setTimeout(function(){
           showLocalFolder();
-          setSandboxButton();
+          setSandboxButton(); // make the 'Select Directory' button do something
         },10);
       }
     });
-    Espruino.Core.Config.add("ENABLE_PROJECTS", {
-      section : "Project(Sandbox)",
-      name : "Enable Projects Plugin (BETA)",
-      description : "This enables support for the Projects plugin, which allows you to use files on your local disk. Requires the Web IDE to be restarted in order to enable/disable.",
-      type : "boolean",
-      defaultValue : false,
-      onChange : function(newValue){showIcon(newValue)}
-    });         
+ 
     Espruino.addProcessor("getModule", function (module, callback) {
       getProjectSubDir("modules",getModules);
       var t = setTimeout(function(){callback(module);},500);
@@ -95,7 +88,7 @@
     setTimeout(function(){
       getProjectSnippets();          
     },10);
-    showIcon(Espruino.Config.ENABLE_PROJECTS); 
+    showIcon(Espruino.Config.projectEntry); 
   }
   function findBinary(code,callback){ // find it in E.asmBinary(FunctionName,format,asmFunction);
     var binary = {},binarys = [];
@@ -124,9 +117,9 @@
       }
     }
     if(binarys.length === 0){ callback(code);}
-    replaceAllBinarys(code,binarys,callback);
+    replaceAllBinaries(code,binarys,callback);
   }
-  function replaceAllBinarys(code,binarys,callback){
+  function replaceAllBinaries(code,binarys,callback){
     var i = 0;
     replaceBinary(binarys[i]);
     function replaceBinary(binary){
@@ -175,10 +168,10 @@
     $(".projectButton").click(function(evt){
       chrome.fileSystem.chooseEntry({type: 'openDirectory'}, function(theEntry) {
         if(theEntry){
-          chrome.fileSystem.getDisplayPath(theEntry,function(path) {
-            $("#projectFolder").html(path);
+          chrome.fileSystem.getDisplayPath(theEntry,function(path) {            
             $("#projectEntry").val(chrome.fileSystem.retainEntry(theEntry));
             Espruino.Config.set("projectEntry",chrome.fileSystem.retainEntry(theEntry));
+            showLocalFolder(); // update text box + icon
             var dirReader = theEntry.createReader();
             var entries = [];
             dirReader.readEntries (function(results) {
@@ -189,23 +182,31 @@
               if(!checkSubFolder(results,"snippets")){ theEntry.getDirectory("snippets", {create:true}); saveSnippets(); }
             });
           });
+        } else {
+          // user cancelled
+          Espruino.Config.set("projectEntry",""); // clear project entry
+          showLocalFolder(); // update text box + icon
         }
       }); 
     });
   }
   function showLocalFolder(){
+    // set whether we show the project icon or not
+    showIcon(Espruino.Config.projectEntry);
+    // update the project folder text box
+    $("#projectFolder").html("&nbsp;");
     if(Espruino.Config.projectEntry){
       chrome.fileSystem.isRestorable(Espruino.Config.projectEntry, function(bIsRestorable){
         chrome.fileSystem.restoreEntry(Espruino.Config.projectEntry, function(theEntry) {
           if(theEntry){
             chrome.fileSystem.getDisplayPath(theEntry,function(path) { 
-              $("#projectFolder").html(path);
+              $("#projectFolder").text(path);
             });
           }
           else{Espruino.Core.Status.setStatus("Project not found");}
         }); 
       });
-    }
+    } 
   }
   function getProjectSnippets(){
     if(Espruino.Config.projectEntry){
@@ -392,7 +393,7 @@
   }
   function getBinaries(html,callback){
     var header,row,footer;
-    header = '<div id="b"><table width="100%"><tr><th align="center"><i>Binarys</i></th></tr>';
+    header = '<div id="b"><table width="100%"><tr><th align="center"><i>Binaries</i></th></tr>';
     row = '<tr><th>$name0</th>';
     row += '<th title="copy to SD"><button class="copyBinary" fileentry="$fileentry"';
     row += ' filename="$name"></button></th></tr>';
@@ -603,6 +604,10 @@
     }
   }
   function showIcon(newValue){
+    if (iconFolder!==undefined) iconFolder.remove();
+    if (iconSnippet!==undefined) iconSnippet.remove();
+    iconFolder = undefined;
+    iconSnippet = undefined;
     if(newValue){
       iconFolder = Espruino.Core.App.addIcon({
         id: 'openProjectFolder',icon: 'folder',title: 'Projects',order: 500,
@@ -630,7 +635,7 @@
         id:'terminalSnippets',icon: 'cloud',title: 'Snippets',order: 500,
         area: {name: "terminal",position: "top"},
         click: function(){
-          var html = "<ul>";
+          var html = '<ul class="terminalSnippets">';
           for(var i in snippets){
             html += '<li class="terminalSnippet">' + i + '</li>';
           }
@@ -641,10 +646,6 @@
           $(".terminalSnippet").click(sendSnippets);
         }
       });        
-    }
-    else{
-      if (iconFolder!==undefined) iconFolder.remove();
-      if (iconSnippet!==undefined) iconSnippet.remove();
     }
   }
   Espruino.Plugins.Project = {
