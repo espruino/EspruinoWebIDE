@@ -175,7 +175,32 @@
           itm.onHide = function(){Espruino.Core.Serial.write(itm.source);};
           break;
         case "sendEditor":
-          itm.onHide = function(){Espruino.Core.EditorJavaScript(itm.source);};
+          itm.onHide = function(){Espruino.Core.EditorJavaScript.setCode(itm.source);};
+          break;
+        case "sendattached":
+          itm.onHide = function(){
+            switch(getInputType($(itm.attachTo))){
+              case "text":
+                $(itm.attachTo).val(itm.source);
+                break;
+              case "checkbox":
+                if($(itm.attachTo).prop("checked") != itm.source){
+                  $(itm.attachTo).click();
+                }
+                break;
+              case "select":
+                $(itm.attachTo).val(itm.source);
+                break;
+              default:
+                break;
+            }
+          }
+          break;
+      }
+      switch(itm.shouldSkip){
+        case "notConnected":
+          itm.shouldSkip = function(){return Espruino.Core.Serial.isConnected();};
+          itm.buttons = [{"name":"Close"}];
           break;
       }
       var opts = $.extend({}, {
@@ -183,12 +208,12 @@
         overlay: true,
         isHashable: false
       }, itm);
-
-      if(opts.buttons==undefined && idx < slides.length - 1)
-      {
+      if(idx < slides.length - 1){
         opts.next = slideId + (idx + 1);
-        opts.buttons = [{ name: "Next" }];
-      }
+        if(opts.buttons == undefined){
+          opts.buttons = [{ name: "Next" }];
+        }
+      }       
       if(!guiders.get(opts.id)) { guiders.createGuider(opts); }
     });
   }
@@ -214,6 +239,10 @@
       });
     }
   }
+  function getInputType(x) {
+    return x[0].tagName.toString().toLowerCase() === "input" ?
+      $(x).prop("type").toLowerCase() : x[0].tagName.toLowerCase();
+  };
   Espruino.Plugins.Tour = {
     init : init,
     runTour : runTour,

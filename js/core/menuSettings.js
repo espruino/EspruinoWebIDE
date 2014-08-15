@@ -78,15 +78,28 @@
     if (section.description!==undefined)
       html += "<p>"+Espruino.Core.Utils.escapeHTML(section.description, false) +"<p>";
 
-    // if there's a built-in handler...
+    var configItems = Espruino.Core.Config.data;
+    for (var configName in configItems) {
+      var configItem = configItems[configName];
+      if (configItem.section == sectionName) {
+        html += getHtmlForConfigItem(configName, configItem);
+      }
+    }
+    if (section.getHTML!==undefined) {
+      section.getHTML(function (data) {
+        callback(html + data);        
+      });
+    }
+    else{callback(html); }
+
+/*    // if there's a built-in handler...
     if (section.getHTML!==undefined) {
       section.getHTML(function (data) {
         callback(html + data);        
       });
       return;
     }
-    
-    
+        
     var configItems = Espruino.Core.Config.data;
     for (var configName in configItems) {
       var configItem = configItems[configName];
@@ -97,7 +110,7 @@
     // send the HTML
     callback(html);    
     // now we handle when stuff changes
-    
+*/    
    $(".settings .currentsection input,select").change(function() {
      var configName = $(this).attr("name");
      if (configItems[configName] !== undefined) {
