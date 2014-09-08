@@ -21,6 +21,13 @@ a, button, .no-drag
   -webkit-app-region: no-drag;
 }
 
+dt {
+  font-weight : bold;
+}
+dd {
+  font-style: italic;
+}
+
 ::-webkit-scrollbar 
 {
   background: #ecf0f1;

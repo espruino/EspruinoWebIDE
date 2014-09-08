@@ -1814,6 +1814,8 @@
     "!doc": "Write 32 bits of memory at the given location - VERY DANGEROUS!",
     "!url": "http://www.espruino.com/Reference#l__global_poke32"
   },
+  "A0": { "!type":"+Pin" },
+  "A1": { "!type":"+Pin" },
   "analogRead": {
     "!type": "fn(pin: +Pin) -> number",
     "!doc": "Get the analog value of the given pin\n\nThis is different to Arduino which only returns an integer between 0 and 1023\n\nHowever only pins connected to an ADC will work (see the datasheet)",

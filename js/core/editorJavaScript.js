@@ -62,14 +62,16 @@
   var server;
   getURL(/*"http://ternjs.net/defs/ecma5.json"*/"/data/espruino.json", function(err, code) {
     if (err) throw new Error("Request for ecma5.json: " + err);
-    server = new CodeMirror.TernServer({defs: [JSON.parse(code)]});
+    server = new CodeMirror.TernServer({defs: [JSON.parse(code)], completionTip : function(c) {
+      return c.doc;
+    }});
     codeMirror.setOption("extraKeys", {
       "Ctrl-Space": function(cm) { server.complete(cm); }, 
-/*      "Ctrl-I": function(cm) { server.showType(cm); },
+      "Ctrl-I": function(cm) { server.showType(cm); },
       "Alt-.": function(cm) { server.jumpToDef(cm); },
       "Alt-,": function(cm) { server.jumpBack(cm); },
       "Ctrl-Q": function(cm) { server.rename(cm); },
-      "Ctrl-.": function(cm) { server.selectName(cm); }*/
+      "Ctrl-.": function(cm) { server.selectName(cm); }
     })
     codeMirror.on("cursorActivity", function(cm) { server.updateArgHints(cm); });
   });
