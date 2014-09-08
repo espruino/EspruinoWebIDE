@@ -34,7 +34,6 @@
       foldGutter: {rangeFinder: new CodeMirror.fold.combine(CodeMirror.fold.brace, CodeMirror.fold.comment)},
       gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter", "CodeMirror-lint-markers"],
       extraKeys: {
-        "Ctrl-Space" : CodeMirror.showHint,
         "Tab" : function(cm) { 
           if (cm.somethingSelected()) {
             cm.indentSelection("add");
@@ -45,6 +44,35 @@
         }
       }
     });
+
+
+  function getURL(url, c) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("get", url, true);
+    xhr.send();
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState != 4) return;
+      if (xhr.status < 400) return c(null, xhr.responseText);
+      var e = new Error(xhr.responseText || "No response");
+      e.status = xhr.status;
+      c(e);
+    };
+  }
+
+  var server;
+  getURL(/*"http://ternjs.net/defs/ecma5.json"*/"/data/espruino.json", function(err, code) {
+    if (err) throw new Error("Request for ecma5.json: " + err);
+    server = new CodeMirror.TernServer({defs: [JSON.parse(code)]});
+    codeMirror.setOption("extraKeys", {
+      "Ctrl-Space": function(cm) { server.complete(cm); }, 
+/*      "Ctrl-I": function(cm) { server.showType(cm); },
+      "Alt-.": function(cm) { server.jumpToDef(cm); },
+      "Alt-,": function(cm) { server.jumpBack(cm); },
+      "Ctrl-Q": function(cm) { server.rename(cm); },
+      "Ctrl-.": function(cm) { server.selectName(cm); }*/
+    })
+    codeMirror.on("cursorActivity", function(cm) { server.updateArgHints(cm); });
+  });
   }
 
   function getCode() {
