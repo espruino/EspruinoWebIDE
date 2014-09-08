@@ -108,6 +108,12 @@
 
     showType: function(cm, pos, c) { showType(this, cm, pos, c); },
 
+    smartComplete: function(cm) {
+      smartComplete(this, cm, function(hint) {
+        cm.showHint({hint: hint});
+      });
+    },        
+
     updateArgHints: function(cm) { updateArgHints(this, cm); },
 
     jumpToDef: function(cm) { jumpToDef(this, cm); },
@@ -192,7 +198,7 @@
 
   // Completion
 
-  function hint(ts, cm, c) {
+  function hint(ts, cm, c, dataCallback) {
     ts.request(cm, {type: "completions", types: true, docs: true, urls: true}, function(error, data) {
       if (error) return showError(ts, cm, error);
       var completions = [], after = "";
@@ -200,6 +206,9 @@
       if (cm.getRange(Pos(from.line, from.ch - 2), from) == "[\"" &&
           cm.getRange(to, Pos(to.line, to.ch + 2)) != "\"]")
         after = "\"]";
+
+      if (dataCallback)
+        data = dataCallback(data);
 
       for (var i = 0; i < data.completions.length; ++i) {
         var completion = data.completions[i], className = typeToIcon(completion.type);
@@ -257,6 +266,58 @@
       if (c) c();
     }, pos);
   }
+
+  function smartComplete(ts, cm, hintCallback) {
+    if (cm.somethingSelected()) return;
+    var state = cm.getTokenAt(cm.getCursor()).state;
+    var inner = CodeMirror.innerMode(cm.getMode(), state);
+    if (inner.mode.name != "javascript") return hintCallback(CodeMirror.TernServer.getHint);
+    var lex = inner.state.lexical;
+    if (lex.info != "call") return hintCallback(CodeMirror.TernServer.getHint);
+
+    var ch, argPos = lex.pos || 0, tabSize = cm.getOption("tabSize");
+    for (var line = cm.getCursor().line, e = Math.max(0, line - 9), found = false; line >= e; --line) {
+      var str = cm.getLine(line), extra = 0;
+      for (var pos = 0;;) {
+        var tab = str.indexOf("\t", pos);
+        if (tab == -1) break;
+        extra += tabSize - (tab + extra) % tabSize - 1;
+        pos = tab + 1;
+      }
+      ch = lex.column - extra;
+      if (str.charAt(ch) == "(") {found = true; break;}
+    }
+    if (!found) return hintCallback(CodeMirror.TernServer.getHint);
+
+    var start = Pos(line, ch);
+
+    ts.request(cm, {type: "type", preferFunction: true, end: start}, function(error, data) {
+      if (error || !data.type || !(/^fn\(/).test(data.type)) return hintCallback(CodeMirror.TernServer.getHint);
+      var fn = parseFnType(data.type);
+      var fnArgType = argPos<fn.args.length ? fn.args[argPos].type : undefined;
+
+      var cb = function(cm, c) {
+        return hint(ts, cm, c, function (data) {
+          if (!fnArgType) return data;
+          var goodCompletions = [];
+          var otherCompletions = [];
+          data.completions.forEach(function (comp) {
+            var good = false;
+            if (comp.type == fnArgType ||
+                ((/^fn\(/).test(comp.type) && parseFnType(comp.type).rettype==fnArgType))
+              goodCompletions.push(comp);
+            else
+              otherCompletions.push(comp);
+          });
+          data.completions = goodCompletions.concat(otherCompletions);
+          return data;
+        });
+      }
+      cb.async = true;
+      hintCallback(cb);
+    });
+  }
+
 
   // Maintaining argument hints
 
@@ -567,6 +628,7 @@
       if (typeof elt == "string") elt = document.createTextNode(elt);
       e.appendChild(elt);
     }
+    if (tagname=="a") e.setAttribute("target","_blank");
     return e;
   }
 

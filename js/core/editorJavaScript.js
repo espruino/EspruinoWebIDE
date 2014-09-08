@@ -66,7 +66,7 @@
       return c.doc;
     }});
     codeMirror.setOption("extraKeys", {
-      "Ctrl-Space": function(cm) { server.complete(cm); }, 
+      "Ctrl-Space": function(cm) { server.smartComplete(cm); }, 
       "Ctrl-I": function(cm) { server.showType(cm); },
       "Alt-.": function(cm) { server.jumpToDef(cm); },
       "Alt-,": function(cm) { server.jumpBack(cm); },
