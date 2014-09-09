@@ -26,6 +26,7 @@ var Espruino;
    *   connected            - connected to Espruino (no data) 
    *   disconnected         - disconnected from Espruino (no data) 
    *   environmentVar       - Board's process.env loaded (object to be saved into Espruino.Env.environmentData)
+   *   boardJSONLoaded      - Board's JSON was loaded into environmentVar
    *   getModule            - Called with data={moduleName:"foo", moduleCode:undefined} - moduleCode should be filled in if the module can be found
    *   getURL               - Called with data={url:"http://....", data:undefined) - data should be filled in if the URL is handled (See Espruino.Core.Utils.getURL to use this)
    *   terminalClear        - terminal has been cleared

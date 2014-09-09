@@ -1695,12 +1695,12 @@
     "!url": "http://www.espruino.com/Reference#l__global_LOW"
   },
   "setBusyIndicator": {
-    "!type": "fn(pin: ?)",
+    "!type": "fn(pin: +Pin)",
     "!doc": "When Espruino is busy, set the pin specified here high. Set this to undefined to disable the feature.",
     "!url": "http://www.espruino.com/Reference#l__global_setBusyIndicator"
   },
   "setSleepIndicator": {
-    "!type": "fn(pin: ?)",
+    "!type": "fn(pin: +Pin)",
     "!doc": "When Espruino is asleep, set the pin specified here low (when it's awake, set it high). Set this to undefined to disable the feature.\n\nPlease see http://www.espruino.com/Power+Consumption for more details on this.",
     "!url": "http://www.espruino.com/Reference#l__global_setSleepIndicator"
   },
@@ -1814,8 +1814,6 @@
     "!doc": "Write 32 bits of memory at the given location - VERY DANGEROUS!",
     "!url": "http://www.espruino.com/Reference#l__global_poke32"
   },
-  "A0": { "!type":"+Pin" },
-  "A1": { "!type":"+Pin" },
   "analogRead": {
     "!type": "fn(pin: +Pin) -> number",
     "!doc": "Get the analog value of the given pin\n\nThis is different to Arduino which only returns an integer between 0 and 1023\n\nHowever only pins connected to an ADC will work (see the datasheet)",
@@ -1832,12 +1830,12 @@
     "!url": "http://www.espruino.com/Reference#l__global_digitalPulse"
   },
   "digitalWrite": {
-    "!type": "fn(pin: ?, value: number)",
+    "!type": "fn(pin: +Pin, value: number)",
     "!doc": "Set the digital value of the given pin\n\nIf pin is an array of pins, eg. ```[A2,A1,A0]``` the value will be treated as an integer where the first array element is the MSB.\n\nIn the case of an array of pins, pin values are set LSB first (from the right-hand side of the array of pins).",
     "!url": "http://www.espruino.com/Reference#l__global_digitalWrite"
   },
   "digitalRead": {
-    "!type": "fn(pin: ?) -> number",
+    "!type": "fn(pin: +Pin) -> number",
     "!doc": "Get the digital value of the given pin\n\nIf pin is an array of pins, eg. ```[A2,A1,A0]``` the value will be treated as an integer where the first array element is the MSB",
     "!url": "http://www.espruino.com/Reference#l__global_digitalRead"
   },

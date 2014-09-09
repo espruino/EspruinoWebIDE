@@ -271,9 +271,9 @@
     if (cm.somethingSelected()) return;
     var state = cm.getTokenAt(cm.getCursor()).state;
     var inner = CodeMirror.innerMode(cm.getMode(), state);
-    if (inner.mode.name != "javascript") return hintCallback(CodeMirror.TernServer.getHint);
+    if (inner.mode.name != "javascript") return hintCallback(ts.getHint);
     var lex = inner.state.lexical;
-    if (lex.info != "call") return hintCallback(CodeMirror.TernServer.getHint);
+    if (lex.info != "call") return hintCallback(ts.getHint);
 
     var ch, argPos = lex.pos || 0, tabSize = cm.getOption("tabSize");
     for (var line = cm.getCursor().line, e = Math.max(0, line - 9), found = false; line >= e; --line) {
@@ -287,12 +287,12 @@
       ch = lex.column - extra;
       if (str.charAt(ch) == "(") {found = true; break;}
     }
-    if (!found) return hintCallback(CodeMirror.TernServer.getHint);
+    if (!found) return hintCallback(ts.getHint);
 
     var start = Pos(line, ch);
 
     ts.request(cm, {type: "type", preferFunction: true, end: start}, function(error, data) {
-      if (error || !data.type || !(/^fn\(/).test(data.type)) return hintCallback(CodeMirror.TernServer.getHint);
+      if (error || !data.type || !(/^fn\(/).test(data.type)) return hintCallback(ts.getHint);
       var fn = parseFnType(data.type);
       var fnArgType = argPos<fn.args.length ? fn.args[argPos].type : undefined;
 
@@ -312,7 +312,7 @@
           data.completions = goodCompletions.concat(otherCompletions);
           return data;
         });
-      }
+      };
       cb.async = true;
       hintCallback(cb);
     });
