@@ -16,67 +16,68 @@
     audioPlayer = new Audio("");
     document.body.appendChild(audioPlayer);
     audioPlayer.addEventListener('canplay', function() { audioPlayer.play(); }, false);
-    Espruino.Core.Config.addSection("sound", {
-      sortOrder:600, description: "Sound page"
+    Espruino.Core.Config.addSection("Sound", {
+      sortOrder:600, description: "Play notification sounds or speak for certain events"
     });
-    Espruino.Core.Config.add("ENABLE_Sound", {
-      section : "sound", name : "Enable Sound (BETA)", description : "This enables sound on notifications",
-      type : "boolean", defaultValue : false,
-    });
-    Espruino.Core.Config.add("ENABLE_Speak", {
-      section : "sound", name : "Enable speak (BETA)", description : "This enables speak for notifications",
-      type : "boolean", defaultValue : false,
-    });
+    
+    var soundTypes = {
+        "":"None",
+        "doorbell2":"Doorbell",
+        "trolley2":"Trolley",
+        "sirens_x":"Siren",
+        "truck_horn":"Truck horn",
+        "car_horn_x":"Car horn",
+        "warning_horn":"Warning horn",
+        "boxing_bell":"Boxing Bell",
+        "phone_ring_old":"Phone ring"
+    };
     Espruino.Core.Config.add("Sound_Success",{
-      section: "sound",name: "Sound for Success",description: "Defines sound for Success",
-      type: {"":"none","doorbell2":"Doorbell","trolley2":"trolley"},defaultValue : "none"
+      section : "Sound",name: "Sound for Success",description: "Defines sound for Success",
+      type : soundTypes, defaultValue : ""
     });
     Espruino.Core.Config.add("Sound_Warning",{
-      section: "sound",name: "Sound for Warnings",description: "Defines sound for Warnings",
-      type: {"":"none","car_horn_x":"Car horn","warning_horn":"Warning horn"},defaultValue : "car_horn_x"
+      section : "Sound",name: "Sound for Warnings",description: "Defines sound for Warnings",
+      type : soundTypes, defaultValue : ""
     });
     Espruino.Core.Config.add("Sound_Error",{
-      section: "sound",name: "Sound for Errors",description: "Defines sound for Errors",
-      type: {"":"none","sirens_x":"Siren","truck_horn":"Truck horn"},defaultValue : "sirens_x"
+      section : "Sound",name: "Sound for Errors",description: "Defines sound for Errors",
+      type : soundTypes, defaultValue : ""
     });
     Espruino.Core.Config.add("Sound_Info",{
-      section: "sound",name: "Sound for Info",description: "Defines sound for Infos",
-      type: {"":"none","boxing_bell":"Boxing Bell","phone_ring_old":"Phone ring"},defaultValue : "none"
+      section : "Sound",name: "Sound for Info",description: "Defines sound for Infos",
+      type : soundTypes, defaultValue : ""
     });
     Espruino.Core.Config.add("Speak_Success",{
-      section: "sound",name:"Speak sucess",description: "Speak message for success",
+      section : "Sound",name:"Speak sucess",description: "Speak message for success",
       type: "boolean",defaultValue: false
     }); 
     Espruino.Core.Config.add("Speak_Warning",{
-      section: "sound",name: "Speak warning",description: "Speak message for warning",
-      type: "boolean",defaultValue: true
+      section : "Sound",name: "Speak warning",description: "Speak message for warning",
+      type: "boolean",defaultValue: false
     }); 
     Espruino.Core.Config.add("Speak_Error",{
-      section: "sound",name: "Speak error",description: "Speak message for sound",
-      type: "boolean",defaultValue: true
+      section : "Sound",name: "Speak error",description: "Speak message for sound",
+      type: "boolean",defaultValue: false
     }); 
     Espruino.Core.Config.add("Speak_Info",{
-      section: "sound",name: "Speak info",description: "Speakmessage for info",
+      section : "Sound",name: "Speak info",description: "Speak message for info",
       type: "boolean",defaultValue: false
     }); 
     Espruino.addProcessor("notification", function (data, callback) {
       var snd;
-      if(Espruino.Config.ENABLE_Sound){
-        switch(data.type){
-          case "success": snd = Espruino.Config.Sound_Success; break;
-          case "error": snd = Espruino.Config.Sound_Error; break;
-          case "warning": snd = Espruino.Config.Sound_Warning; break;
-          case "info": snd = Espruino.Config.Sound_Info; break;
-        }
-        if(snd && snd !== ""){ sendSound(snd);}
+      switch(data.type){
+        case "success": snd = Espruino.Config.Sound_Success; break;
+        case "error": snd = Espruino.Config.Sound_Error; break;
+        case "warning": snd = Espruino.Config.Sound_Warning; break;
+        case "info": snd = Espruino.Config.Sound_Info; break;
       }
-      if(Espruino.Config.ENABLE_Speak){
-        switch(data.type){
-          case "success": if(Espruino.Config.Speak_Success){ speak(data.msg); } break;
-          case "error": if(Espruino.Config.Speak_Error){ speak(data.msg); } break;
-          case "warning": if(Espruino.Config.Speak_Warning){ speak(data.msg); } break;
-          case "info": if(Espruino.Config.Speak_Info){ speak(data.msg); } break;
-        }
+      if(snd && snd !== ""){ sendSound(snd);}
+      
+      switch(data.type){
+        case "success": if(Espruino.Config.Speak_Success){ speak(data.msg); } break;
+        case "error": if(Espruino.Config.Speak_Error){ speak(data.msg); } break;
+        case "warning": if(Espruino.Config.Speak_Warning){ speak(data.msg); } break;
+        case "info": if(Espruino.Config.Speak_Info){ speak(data.msg); } break;
       }
       callback(data);
     });
