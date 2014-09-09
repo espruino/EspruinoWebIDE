@@ -131,7 +131,7 @@
         }
       });
     }
-    prepareSlides("g",slides);
+    prepareSlides("g", slides);
 
     // Make sure clicking overlay hides the tour
     $("body").on("click", "#guiders_overlay", function(){
@@ -162,7 +162,7 @@
   function prepareSlides(slideId,slides){
     $.each(slides, function(idx, itm){
       switch(itm.onHide){
-        case "clickattached":
+        case "clickAttached":
           itm.onHide = function(){$(itm.attachTo).click();};
           break;
         case "clickElement":
@@ -177,7 +177,7 @@
         case "sendEditor":
           itm.onHide = function(){Espruino.Core.EditorJavaScript.setCode(itm.source);};
           break;
-        case "sendattached":
+        case "sendAttached":
           itm.onHide = function(){
             switch(getInputType($(itm.attachTo))){
               case "text":
@@ -197,12 +197,6 @@
           }
           break;
       }
-      switch(itm.shouldSkip){
-        case "notConnected":
-          itm.shouldSkip = function(){return Espruino.Core.Serial.isConnected();};
-          itm.buttons = [{"name":"Close"}];
-          break;
-      }
       var opts = $.extend({}, {
         id: slideId + idx,
         overlay: true,
@@ -218,9 +212,38 @@
     });
   }
   function runTour(tourUrl){
-    $.getJSON(tourUrl,function(slide){
-      prepareSlides(slide.id,slide.slides);
-      guiders.show(slide.id + "1");         
+    $.getJSON(tourUrl,function(tour){
+      if (tour.needsConnection && !Espruino.Core.Serial.isConnected()) {
+        var popup = Espruino.Core.App.openPopup({
+          title: "Tour can't run",
+          padding: true,
+          contents: '<p>This tour needs a connection to an Espruino board</p>'+
+                    '<p>Please connect your board and then click the \'Connect\' icon in the top right</p>' ,                    
+          position: "center",
+          ok: function() { Espruino.Core.App.closePopup(); }
+        });
+      } else if (tour.needsProjectSetting && !Espruino.Config.projectEntry) {
+        var popup = Espruino.Core.App.openPopup({
+          title: "Tour can't run",
+          padding: true,
+          contents: '<p>This tour needs a Project directory to be defined.</p>'+
+                    '<p>Please go to <b>Settings</b>, then <b>Project</b>, and follow the <b>Project Tour</b>.</p>' ,                    
+          position: "center",
+          ok: function() { Espruino.Core.App.closePopup(); }
+        });      
+      } else if (tour.needsTestingSetting && !Espruino.Config.ENABLE_Testing) {
+        var popup = Espruino.Core.App.openPopup({
+          title: "Tour can't run",
+          padding: true,
+          contents: '<p>This tour needs Testing to be enabled.</p>'+
+                    '<p>Please go to <b>Settings</b>, then <b>Testing</b>, and follow the <b>Testing Tour</b>.</p>' ,                    
+          position: "center",
+          ok: function() { Espruino.Core.App.closePopup(); }
+        });          
+      } else {        
+        prepareSlides(tour.id, tour.slides);
+        guiders.show(tour.id + "1");
+      }
     });
   }
   function addTourButton(tourUrl){

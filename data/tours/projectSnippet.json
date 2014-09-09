@@ -1,23 +1,23 @@
 {"id": "ps",
 "buttonid": "projectSnippetTour",
 "title": "Snippets",
+"needsConnection" : true,
+"needsProjectSetting" : true,
 "slides":
 [ {
     "title": "Snippets handling",
     "description": "Quick tour to create and use snippets in terminal window"
   },
   {
-    "title": "Open snippets collection",
-    "description": "...click on snippets(cloud), to set options.",
+    "title": "Code Snippets",
+    "description": "Click on the Code Snippets icon to see a list of common commands that you can send.",
     "attachTo": "#icon-terminalSnippets",
     "position": "right",
-    "onHide": "clickattached"
+    "onHide": "clickAttached"
   },
-  { "title":"Not Connected","description":"Board is not connected to webIDE, this tour need a connection",
-    "shouldSkip":"notConnected"},
   {
     "title": "Select Snippet",
-    "description": "...click on snippet, send it to board.",
+    "description": "Click on a Snippet to send it to the board.",
     "attachTo": "#snippetPopup",
     "position": "top",
     "onHide": "sendBoard",
@@ -25,34 +25,34 @@
   },
   {
     "title": "Memory Snippet",
-    "description": "...in terminal window, the actual status of is shown.",
+    "description": "The result of executing the command is shown in the Terminal Window.",
     "onHide": "closePopup"
   },
   {
     "title": "Edit Snippets",
-    "description": "...click on projects button.",
+    "description": "To Edit Snippets, click on the Projects button.",
     "attachTo": "#icon-openProjectFolder",
     "position": "right",
-    "onHide": "clickattached"
+    "onHide": "clickAttached"
   },  
   {
-    "title": "Select Snippets tab",
-    "description": "...click on snippets tab.",
+    "title": "Edit Snippets",
+    "description": "Click on the Snippets tab.",
     "attachTo": "#projectsTab",
     "position": "top",
     "onHide": "clickElement",
     "element": "[href='#s']"
   },
   {
-    "title": "Manage snippets",
-    "description": "...click on trash to drop selected snippet.<br>or enter snippet Name and Snippet itself to add new one",
+    "title": "Manage Snippets",
+    "description": "Click on Trash to delete a snippet or enter a new Snippet Name and JavaScript code to add new one",
     "attachTo": "#projectsTab",
     "position": "top",
     "onHide": "closePopup"
   },   
   {
-    "title": "Snippets done",
-    "description": "...Now that you got a first overview, check the functions by yourself and enjoy."
+    "title": "All Done",
+    "description": "That's all you need to know about Snippets!"
   }
 ]
 }

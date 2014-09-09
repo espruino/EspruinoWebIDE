@@ -14,21 +14,21 @@
     "description": "...click on settings, to set options.",
     "attachTo": "#icon-settings",
     "position": "bottomRight",
-    "onHide": "clickattached"
+    "onHide": "clickAttached"
   },
   {
     "title": "Open options for watch",
     "description": "...click on watch, to open options.",
     "attachTo": "[name='Watch']",
     "position": "right",
-    "onHide": "clickattached"
+    "onHide": "clickAttached"
   },
   {
     "title": "Enable watch expression",
     "description": "...click checkbox, to enable this function.",
     "attachTo": "[name='ENABLE_Watch']",
     "position": "left",
-    "onHide": "clickattached"
+    "onHide": "clickAttached"
   },
   {
     "title": "Set timing",
@@ -42,14 +42,14 @@
     "description": "...click on watch(eye), to open popup.",
     "attachTo": "#icon-terminalWatch",
     "position": "right",
-    "onHide": "clickattached"
+    "onHide": "clickAttached"
   },
   {
     "title": "Set expressions",
     "description": "In this formular you define expressions, you would like to observe",
     "attachTo": ".runWatch",
     "position": "top",
-    "onHide": "clickattached"
+    "onHide": "clickAttached"
   },
   {
     "title": "Run watch",
@@ -62,7 +62,7 @@
     "description": "If you want to stop this immediately, wiithout waiting click this button",
     "attachTo": ".stopWatch",
     "position": "top",
-    "onHide": "clickattached"
+    "onHide": "clickAttached"
   },
   {
     "title": "Watch done",

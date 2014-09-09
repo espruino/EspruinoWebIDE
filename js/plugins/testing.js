@@ -49,8 +49,8 @@
       if(Espruino.Core.Serial.isConnected()){
         Espruino.Core.Serial.write('\x03echo(0);\n' + cmd + '\necho(1);\n');
       }
-      else{Espruino.Core.Notifications.error("not connected");}
-    }
+      else{Espruino.Core.Notifications.error("Not Connected");}
+    };
   }
   function datapoint(newValue){
     this.label = newValue.label;
@@ -65,13 +65,14 @@
     };
     this.reset = function(){
       this.points = [];
-    }
+    };
     this.reset();
   }
   function init() {
     Espruino.Core.Config.addSection("Testing", {
       sortOrder:600,
-      description: "Testing page"
+      description: "Displays a graph of values over time",
+      tours: { "Testing Tour":"testing.json", "Extended Testing Tour":"testingExt.json" }
     });
     Espruino.Core.Config.add("ENABLE_Testing", {
       section : "Testing",
@@ -107,8 +108,6 @@
       $("#loadTesting").button({ text:false, icons: { primary: "ui-icon-script"} }).click(loadTesting);
       showDataPoints();      
     },"html");
-    Espruino.Plugins.Tour.addTourButton("data/tours/testing.json");
-    Espruino.Plugins.Tour.addTourButton("data/tours/testingExt.json");
   }
   function testingSaveAs(){
     var html,dt = JSON.stringify({"dataPoints":datapoints,"actionPoints":actionpoints});
@@ -120,7 +119,7 @@
       title: "Save Testing as",
       id: "savetestingTab",
       contents: html
-    })
+    });
     setTimeout(function(){
       $(".saveTestingBtn").button({ text:false, icons: { primary: "ui-icon-disk"} }).click(saveTestingAs);       
     },10);
@@ -214,7 +213,7 @@
   }
   function dropActionPoint(){
     actionpoints.splice($(this).attr("i"),1);
-    showActionPoints()
+    showActionPoints();
   }
   function dropAllAction(){
     actionpoints = [];
@@ -273,10 +272,10 @@
       pollData();
       polling = true;
     }
-    else{Espruino.Core.Notifications.error("not connected");}    
+    else{Espruino.Core.Notifications.error("Not Connected");}    
   }
   function stopGetExpression(){
-    Espruino.Core.Serial.write('\x03clearInterval(' + intervalName + ');\ndelete ' + intervalName + ';\necho(1);\n')
+    Espruino.Core.Serial.write('\x03clearInterval(' + intervalName + ');\ndelete ' + intervalName + ';\necho(1);\n');
     $("#testingExpressionStop").button( "option", "disabled", true);
     $("#testingExpressionRun").button( "option", "disabled", false); 
     polling = false;   

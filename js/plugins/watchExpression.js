@@ -23,7 +23,8 @@
   function init() {
     Espruino.Core.Config.addSection("Watch", {
       sortOrder:600,
-      description: "Watch Expressions"
+      description: "Watch Expressions",
+      tours: { "Watch Tour":"watchExpr.json" }
     });
     Espruino.Core.Config.add("ENABLE_Watch", {
       section : "Watch",

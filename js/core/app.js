@@ -186,11 +186,14 @@
       api.close();
     });
     
-    // Append 'next' button if we registered a callback
+    // Append 'next'/'ok' button if we registered a callback
     if (options.next) {
-      // TODO - nasty - need nice CSS
       $('<div class="guiders_buttons_container" style="padding: 10px 10px 10px 10px;bottom:10px;"><a class="guiders_button" href="#">Next</a></div>')
         .appendTo(".window--modal .window__viewport").click(options.next);
+    }
+    if (options.ok) {
+      $('<div class="guiders_buttons_container" style="padding: 10px 10px 10px 10px;bottom:10px;"><a class="guiders_button" href="#">Ok</a></div>')
+        .appendTo(".window--modal .window__viewport").click(options.ok);
     }
 
     // Apply dimensions

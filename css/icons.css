@@ -195,3 +195,7 @@ a.title-bar__button--alert:hover { background-color: #f39c12; }
 .compact .icon-refresh.lrg:before,
 .icon-refresh.sml:before { background-position: -60px -1920px }
 
+.icon-snippets.lrg:before { background-position: 0 -1980px }
+.compact .icon-snippets.lrg:before,
+.icon-snippets.sml:before { background-position: -60px -1980px }
+

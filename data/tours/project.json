@@ -7,53 +7,50 @@
     "description": "Quick tour to and around project handling in WebIDE"
   },
   {
-    "title": "Initialize project handling",
-    "description": "...click on settings, to set options.",
+    "title": "Enable Project handling",
+    "description": "...click on Settings to enable Projects",
     "attachTo": "#icon-settings",
     "position": "bottomRight",
-    "onHide": "clickattached"
+    "onHide": "clickAttached"
   },
   {
-    "title": "Open options for sandbox",
-    "description": "...click on Sandbox, to open options.",
-    "attachTo": "[name='Project(Sandbox)']",
+    "title": "Open options for Sandbox",
+    "description": "...click on the Projects menu",
+    "attachTo": "[name='Project']",
     "position": "right",
-    "onHide": "clickattached"
-  },
-  { "title": "enable Project", "description":"Activate projects",
-    "attachTo": "[name='ENABLE_PROJECTS']","position": "left","source":"true","onHide": "sendattached"
+    "onHide": "clickAttached"
   },
   {
-    "title": "Select Directory on local drive",
-    "description": "...click on button name <i>Select Directory for Sandbox</i><br>In next step, you have to close directory window manually, to get next step.",
+    "title": "Select Directory on Local Drive",
+    "description": "...click on the <i>Select Directory for Sandbox</i> button.<br>In the next step you'll need to choose a directory that Espruino can use to store your files.",
     "attachTo": ".projectButton",
     "position": "bottom",
-    "onHide": "clickattached"
+    "onHide": "clickAttached"
   },
   {
     "title": "Assign directory",
-    "description": "...select directory of yor choice. Some subdirectorys are created, if not already existing",
+    "description": "You've now selected a project directory.",
     "attachTo": "",
     "position": "bottom",
     "onHide": "closePopup"
   },
   {
     "title": "Open Projects window",
-    "description": "...open Project window with tabs for local projects, modules and binaries.",
+    "description": "Open the project window,  with tabs for local projects, modules and binaries.",
     "attachTo": "#icon-openProjectFolder",
     "position": "bottom",
-    "onHide": "clickattached"
+    "onHide": "clickAttached"
   },
   {
     "title": "Projects window",
-    "description": "...to open a project simply click name of project file.<br>Binaries(compiled assembler code and modules are listed only)",
+    "description": "To open a project simply click name of project file.<br>Binaries (compiled assembler code and modules) are listed only.",
     "attachTo": "#saveAsName",
     "position": "right",
     "onHide": "closePopup"
   },
   {
     "title": "Projects done",
-    "description": "...Now that you got a first overview, check the functions by yourself and enjoy."
+    "description": "...Now that you got a quick overview, check out the functions by yourself and enjoy."
   }
 ]
 }

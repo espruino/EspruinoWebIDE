@@ -14,12 +14,14 @@
   var iconFolder,iconSnippet,actualProject = "";
   var snippets = JSON.parse('{ "Reset":"reset();","Memory":"process.memory();","ClearInterval":"clearInterval();"}');
   function init() {
-    Espruino.Core.Config.addSection("Project(Sandbox)", {
+    Espruino.Core.Config.addSection("Project", {
       sortOrder:500,
       description: "Local directory used for projects, modules, etc. When you select a directory, the 'Projects' and 'Snippets' icons will appear in the main window.",
+      tours: { "Project Tour":"project.json", "Snippets Tour":"projectSnippet.json" },
       getHTML : function(callback) { 
-        var html= '<div id="projectFolder" style="width:100%;border:1px solid #BBB;margin-bottom:10px;"></div>';
-        html += '<button class="projectButton">Select Directory for Sandbox</button>';
+        var html =
+                '<div id="projectFolder" style="width:100%;border:1px solid #BBB;margin-bottom:10px;"></div>'+
+                '<button class="projectButton">Select Directory for Sandbox</button>';
         callback(html);
         setTimeout(function(){
           showLocalFolder();
@@ -76,15 +78,12 @@
     });
     Espruino.addProcessor("getFirmware",function(url,callback){ loadFirmware(url,callback);});
     Espruino.addProcessor("initialised",function(){
-      if(!Espruino.Config.projectEntry){ Espruino.Core.Notifications.warning("no Sandbox defined in options"); }
-      else{
+      if(Espruino.Config.projectEntry){ 
         chrome.fileSystem.isRestorable(Espruino.Config.projectEntry,function(bisRestorable){
           if(!bisRestorable){ Espruino.Config.Notifications.warning("Sandbox not valid anymore");}
         });
       }
     });
-    Espruino.Plugins.Tour.addTourButton("data/tours/project.json");
-    Espruino.Plugins.Tour.addTourButton("data/tours/projectSnippet.json");
     setTimeout(function(){
       getProjectSnippets();          
     },10);
@@ -328,7 +327,7 @@
       $("#terminalfocus").focus();
     }
     else{
-      Espruino.Core.Notifications.error("No board connected");
+      Espruino.Core.Notifications.error("Not Connected");
     }
   }
   function getSnippets(html,callback){
@@ -583,14 +582,14 @@
       readFilefromEntry(theEntry,callback);
     }
     function fileNotFound(){
-      Espruino.Core.Notifications.error(fileName + " not found");
+      Espruino.Core.Notifications.error("File '" + fileName + "' not found");
     }
   }
   function saveFile(fileName,data){
     var adr = fileName.split("/");
     getProjectSubDir(adr[0],gotDir);
     function gotDir(subDirEntry){
-      if(!subDirEntry){ Espruino.Core.Notifications.error("project directory " + adr[0] + " missing");}
+      if(!subDirEntry){ Espruino.Core.Notifications.error("Project directory '" + adr[0] + "' is missing");}
       else{saveFileAs(subDirEntry,adr[1],data);}
     }
   }
@@ -632,7 +631,7 @@
         }
       });
       iconSnippet = Espruino.Core.App.addIcon({
-        id:'terminalSnippets',icon: 'cloud',title: 'Snippets',order: 500,
+        id:'terminalSnippets',icon: 'snippets',title: 'Snippets',order: 500,
         area: {name: "terminal",position: "top"},
         click: function(){
           var html = '<ul class="terminalSnippets">';

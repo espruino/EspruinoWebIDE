@@ -63,6 +63,11 @@
     getSettingsSection(sectionName, function(data) {
       $(".settings .currentsection").html(data);      
       $(".settings .sections a[name='"+sectionName+"']").addClass("current");
+      $(".tour_link").click(function(e) {
+        e.preventDefault();
+        Espruino.Core.App.closePopup();
+        Espruino.Plugins.Tour.runTour("/data/tours/"+$(this).attr("tour_name"));
+      });
     });
   }
   
@@ -77,6 +82,18 @@
     var html = "<h1>"+sectionName+"</h1>";
     if (section.description!==undefined)
       html += "<p>"+Espruino.Core.Utils.escapeHTML(section.description, false) +"<p>";
+    if (section.tours!==undefined) {
+      html += "<p>See the ";
+      var tours = [];
+      for (var tourName in section.tours) 
+        tours.push('<a href="#" class="tour_link" tour_name="'+section.tours[tourName]+'">'+tourName+'</a>');
+      
+      if (tours.length==1)
+        html += tours[0];
+      else
+        html += tours.slice(0,-1).join(", ") + " and "+tours[tours.length-1];
+      html += " for more information.</p>";
+    }
 
     var configItems = Espruino.Core.Config.data;
     for (var configName in configItems) {
@@ -85,32 +102,15 @@
         html += getHtmlForConfigItem(configName, configItem);
       }
     }
+    
     if (section.getHTML!==undefined) {
       section.getHTML(function (data) {
         callback(html + data);        
       });
+    } else {
+      callback(html); 
     }
-    else{callback(html); }
 
-/*    // if there's a built-in handler...
-    if (section.getHTML!==undefined) {
-      section.getHTML(function (data) {
-        callback(html + data);        
-      });
-      return;
-    }
-        
-    var configItems = Espruino.Core.Config.data;
-    for (var configName in configItems) {
-      var configItem = configItems[configName];
-      if (configItem.section == sectionName) {
-        html += getHtmlForConfigItem(configName, configItem);
-      }
-    }
-    // send the HTML
-    callback(html);    
-    // now we handle when stuff changes
-*/    
    $(".settings .currentsection input,select").change(function() {
      var configName = $(this).attr("name");
      if (configItems[configName] !== undefined) {

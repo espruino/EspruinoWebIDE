@@ -19,7 +19,7 @@
     xmlhttp.onload = function (e) {
         var manifest = JSON.parse(xmlhttp.responseText);
         callback(manifest.version);
-    }
+    };
     xmlhttp.send(null);
   }
 
@@ -37,15 +37,12 @@
             if (Object.keys(Espruino.Core.Env.getBoardData()).length > 0)
               html = Espruino.Core.Utils.htmlTable(Espruino.Core.Env.getBoardData());
             else
-              html = "<p>Unable to get board information</p>";
+              html = "<p>Unable to get board information. Please connect to an Espruino board first.</p>";
             $('.board_info').html( html );
           });
         }
       });
-
-    });
-
-    
+    });    
   }
   
   Espruino.Core.SettingsAbout = {
