@@ -1535,12 +1535,12 @@
     },
     "getTemperature": {
       "!type": "fn() -> number",
-      "!doc": "Use the STM32's internal thermistor to work out the temperature.\n\n**Note:** This is not entirely accurate and varies by a few degrees from chip to chip. It measures the **die temperature**, so when connected to USB it could be reading 10 over degrees C above ambient temperature. When running from battery with `setDeepSleep(true)` it is much more accurate though.",
+      "!doc": "Use the STM32's internal thermistor to work out the temperature.\n\nWhile this is implemented on Espruino boards, it may not be implemented on other devices. If so it'll return NaN.\n\n**Note:** This is not entirely accurate and varies by a few degrees from chip to chip. It measures the **die temperature**, so when connected to USB it could be reading 10 over degrees C above ambient temperature. When running from battery with `setDeepSleep(true)` it is much more accurate though.",
       "!url": "http://www.espruino.com/Reference#l_E_getTemperature"
     },
     "getAnalogVRef": {
       "!type": "fn() -> number",
-      "!doc": "Check the internal voltage reference. To work out an actual voltage of an input pin, you can use `analogRead(pin)*E.getAnalogVRef()` ",
+      "!doc": "Check the internal voltage reference. To work out an actual voltage of an input pin, you can use `analogRead(pin)*E.getAnalogVRef()` \n\nWhile this is implemented on Espruino boards, it may not be implemented on other devices. If so it'll return NaN.",
       "!url": "http://www.espruino.com/Reference#l_E_getAnalogVRef"
     },
     "nativeCall": {
@@ -1753,6 +1753,11 @@
     "!type": "fn() -> number",
     "!doc": "Return the current system time in Seconds (as a floating point number)",
     "!url": "http://www.espruino.com/Reference#l__global_getTime"
+  },
+  "setTime": {
+    "!type": "fn(time: number)",
+    "!doc": "Set the current system time in seconds (to the nearest second)",
+    "!url": "http://www.espruino.com/Reference#l__global_setTime"
   },
   "getSerial": {
     "!type": "fn() -> ?",
