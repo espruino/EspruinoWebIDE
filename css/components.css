@@ -337,6 +337,7 @@ a:hover > .menu
 {
   font-family: Fixed, monospace;
   font-size: 12px;
+  tab-size: 4;
   background-color: #222;
   color: white;
   display: block;
@@ -403,28 +404,33 @@ a:hover > .menu
 
 .terminal--connected.focus .terminal__cursor 
 {
-  -webkit-animation: blink 1s infinite steps(1, start);
-  animation: blink 1s infinite steps(1, start);
+  -webkit-animation: blink 1s step-end 0s infinite;
+  animation: blink 1s step-end 0s infinite;
+}
+
+.terminal--webcam.focus .terminal__cursor 
+{
+  text-shadow: none; 
 }
 
 @keyframes blink {
   0%, 100% {
-        background-color: transparent;
-        color: #aaa;
-  }
-  50% {
         background-color: #fff; /* not #aaa because it's seem there is Google Chrome bug */
         color: #000;
+  }
+  50% {
+        background-color: transparent;
+        color: #aaa;
   }
 }
 @-webkit-keyframes blink {
   0%, 100% {
-        background-color: transparent;
-        color: #aaa;
+        background-color: #ffffff; /* not #aaa because it's seem there is Google Chrome bug */
+        color: #000000;
   }
   50% {
-        background-color: #fff;
-        color: #000;
+        background-color: transparent;
+        color: #aaaaaa;
   }
 }
 
