@@ -131,6 +131,14 @@
       chrome.storage.sync.set({ CONFIGS : data});    
     }
   };
+   
+  function clearAll() { // clear all settings
+    chrome.storage.sync.set({ CONFIGS : {} });
+    for (var name in Espruino.Core.Config.data) {
+      var options = Espruino.Core.Config.data[name];
+      Espruino.Config[name] = options.defaultValue;
+    }
+  }
   
   Espruino.Core.Config = {
       loadConfiguration : loadConfiguration, // special - called before init 
@@ -143,6 +151,8 @@
       addSection : addSection,
       getSection : getSection,
       getSections : getSections,
+      
+      clearAll : clearAll, // clear all settings
   };
   
 })();
