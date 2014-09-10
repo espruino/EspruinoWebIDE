@@ -19,7 +19,7 @@
     Espruino.Core.Config.add("SHOW_CODE_LINK_ICON", {
       section : "General",
       name : "Show Copy URL Icon",
-      description : "Show an icon that will create a URL containing the code from the Code Editor, and will copy it to the clipboard. Great for sharing your code on Twitter/Websites/etc",
+      description : "Show an icon that will create a URL containing the code from the Code Editor and will copy it to the clipboard. Great for sharing your code on Twitter/Websites/etc",
       type : "boolean",
       defaultValue : false, 
       onChange : function(newValue) { showIcon(newValue); }
