@@ -101,11 +101,19 @@
 
     chrome.fileSystem.chooseEntry({type: 'saveFile', suggestedName:filename}, function(writableFileEntry) {
       writableFileEntry.createWriter(function(writer) {
+        var blob = new Blob([convertToOS(data)],{ type: "text/plain"} );
         writer.onerror = errorHandler;
+        // when truncation has finished, write
         writer.onwriteend = function(e) {
-          console.log('write complete');
+          writer.onwriteend = function(e) {
+            console.log('FileWriter: complete');
+          };
+          console.log('FileWriter: writing');
+          writer.write(blob);
         };
-        writer.write(new Blob([convertToOS(data)], { type: "text/plain" }));
+        // truncate
+        console.log('FileWriter: truncating');
+        writer.truncate(blob.size);
       }, errorHandler);
     });
   };  
