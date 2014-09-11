@@ -49,44 +49,43 @@
   
   function checkEnv(env) {
     if (env!==undefined && 
-        env.VERSION!==undefined &&
-        env.info!==undefined &&
-        env.info.binary_version!==undefined) {
+        env.VERSION!==undefined) {        
       var tCurrent = env.VERSION;
-      var tAvailable = env.info.binary_version;
       var vCurrent = Espruino.Core.Utils.versionToFloat(tCurrent);
-      var vAvailable = Espruino.Core.Utils.versionToFloat(tAvailable);
-      console.log("FIRMWARE: Current "+tCurrent+", Available "+tAvailable);
-      
+
       if (vCurrent > 1.43 && env.CONSOLE=="USB") {
         console.log("Firmware >1.43 supports faster writes over USB");
         Espruino.Core.Serial.setSlowWrite(false);
-      } else
-        Espruino.Core.Serial.setSlowWrite(false);
-      if (vAvailable > vCurrent && env.BOARD=="ESPRUINOBOARD") {
-        console.log("New Firmware "+tAvailable+" available");
+      } else {
+        Espruino.Core.Serial.setSlowWrite(true);
+      }  
 
-        Espruino.Core.App.addIcon({
-          id:'update',
-          icon: 'alert',
-          title: 'New Firmware '+ tAvailable +' available. Click to update.',
-          order: 999,
-          cssClass: 'title-bar__button--alert',
-          area: {
-            name: "titlebar",
-            position: "right"
-          },
-          click: function(){
-            Espruino.Core.MenuSettings.show("Flasher");
-          }
-        });
+      if (env.info!==undefined &&
+          env.info.binary_version!==undefined) {
+        var tAvailable = env.info.binary_version;
+        var vAvailable = Espruino.Core.Utils.versionToFloat(tAvailable);
 
-        //Espruino.Core.Notifications.info('New Firmware '+ tAvailable +' available. <a class="flash_menu" style="cursor:pointer">Click here to update</a>');
-        //$(".flash_menu").click(function() {
-        //  Espruino.Core.MenuSettings.show("Flasher");
-        //});
+        console.log("FIRMWARE: Current "+tCurrent+", Available "+tAvailable);
+      
+        if (vAvailable > vCurrent && env.BOARD=="ESPRUINOBOARD") {
+          console.log("New Firmware "+tAvailable+" available");
+
+          Espruino.Core.App.addIcon({
+            id:'update',
+            icon: 'alert',
+            title: 'New Firmware '+ tAvailable +' available. Click to update.',
+            order: 999,
+            cssClass: 'title-bar__button--alert',
+            area: {
+              name: "titlebar",
+              position: "right"
+            },
+            click: function(){
+              Espruino.Core.MenuSettings.show("Flasher");
+            }
+          });
+        }
       }
-     // $("#flashFirmwareUrl").val(env.info.binary_url);
     } 
   }
   
