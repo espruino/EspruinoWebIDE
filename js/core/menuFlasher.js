@@ -43,9 +43,12 @@
                 '<p>If you don\'t see your board here, you can\'t update the firmware on it from the IDE. Please click outside this window to close it, and <a href="http://www.espruino.com/Download" target="_blank">see the download page</a> for more instructions.</p>' ,                
       position: "center",
       next : function() {
-        var binary_url = $('option:selected').attr("url");
+        var binary_url = $('.board_list option:selected').attr("url");
         popup.close();
-        stepReset( { binary_url : binary_url } );
+        if (binary_url===undefined)
+          console.error("No binary URL found! Looks like no option selected");
+        else
+          stepReset( { binary_url : binary_url } );
       }
     });
     
@@ -88,7 +91,7 @@
   
   function stepFlash(data) {
     Espruino.Core.MenuPortSelector.ensureConnected(function() {
-      console.log(data);
+      console.log("stepFlash: ",data);
       var url = data.binary_url;
       
       var popup = Espruino.Core.App.openPopup({
