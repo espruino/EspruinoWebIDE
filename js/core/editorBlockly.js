@@ -55,6 +55,12 @@
         Espruino.Core.EditorJavaScript.setCode( "// Code from Graphical Editor\n"+Espruino.Core.EditorBlockly.getCode() ); 
       callback(data);
     });
+    // when we get JSON for the board, pass it to blockly
+    Espruino.addProcessor("boardJSONLoaded", function (data, callback) {
+      if (Blockly!==undefined && Blockly.setBoardJSON!==undefined)
+        Blockly.setBoardJSON(data);
+      callback(data);
+    });
   }
   
   function getCode() {
