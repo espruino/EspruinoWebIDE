@@ -16,6 +16,27 @@ window.onload = function() {
   Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, document.getElementById('blocklyInitial')); 
   window.parent.blocklyLoaded(Blockly, window); // see core/editorBlockly.js
 };
+// When we have JSON from the board, use it to
+// update our list of available pins
+Blockly.setBoardJSON = function(info) {
+  console.log("Blockly.setBoardJSON ", info);
+  if (!("pins" in info)) return;
+  if (!("devices" in info)) return;
+  PINS = [];
+  var i,s; 
+  for (i=1;i<8;i++) {
+    s = "LED"+i;
+    if (s in info.devices) PINS.push([s,s]);
+  }
+  for (i=1;i<8;i++) {
+    s = "BTN"+i;
+    if (s in info.devices) PINS.push([s,s]);
+  }
+  for (i in info.pins)
+    PINS.push([info.pins[i].name, info.pins[i].name]);
+  
+  
+};
 // ---------------------------------
 
 var ESPRUINO_COL = 190;
