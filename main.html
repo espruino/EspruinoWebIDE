@@ -61,27 +61,29 @@
 <script src="js/libs/acorn/infer.js"></script>
 <script src="js/libs/acorn/doc_comment.js"></script>
 
-  <script src="js/espruino.js"></script>
+  <script src="EspruinoTools/espruino.js"></script>
   
-  <script src="js/core/utils.js"></script>
-  <script src="js/core/config.js"></script>
+  <script src="EspruinoTools/core/utils.js"></script>
+  <script src="EspruinoTools/core/config.js"></script>
   <script src="js/core/notifications.js"></script>
   <script src="js/core/status.js"></script>
   
   <script src="js/core/app.js"></script>
 
-  <script src="js/core/serial.js"></script>
-  <script src="js/core/serial_pre_m33.js"></script>
-  <script src="js/core/terminal.js"></script>
+  <script src="EspruinoTools/core/serial_chrome.js"></script>
+  <script src="EspruinoTools/core/serial_chrome_pre_m33.js"></script>
+  <script src="EspruinoTools/core/terminal.js"></script>
+  <script src="EspruinoTools/core/file.js"></script>
+  <script src="EspruinoTools/core/code.js"></script>
+  <script src="EspruinoTools/core/codeWriter.js"></script>
+  <script src="EspruinoTools/core/modules.js"></script>
+  <script src="EspruinoTools/core/env.js"></script>
+  <script src="EspruinoTools/core/flasher.js"></script>
+  
   <script src="js/core/editorBlockly.js"></script> 
   <script src="js/core/editorJavaScript.js"></script> 
   <script src="js/core/send.js"></script>
-  <script src="js/core/file.js"></script>
-  <script src="js/core/code.js"></script>
-  <script src="js/core/codeWriter.js"></script>
-  <script src="js/core/modules.js"></script>
-  <script src="js/core/env.js"></script>
-  <script src="js/core/flasher.js"></script>
+  
   
   <!-- Popup Windows -->
   <script src="js/core/menuPortSelector.js"></script>
@@ -92,30 +94,29 @@
   <script src="js/core/settingsFlasher.js"></script>
 
   <!-- Non-vital Plugins -->
-  <script src="js/plugins/boardJSON.js"></script>
-  <script src="js/plugins/versionChecker.js"></script>
-  <script src="js/plugins/minify.js"></script>
+  <script src="EspruinoTools/plugins/boardJSON.js"></script>
+  <script src="EspruinoTools/plugins/versionChecker.js"></script>
+  <script src="EspruinoTools/plugins/minify.js"></script>
+  <script src="EspruinoTools/plugins/assembler.js"></script>
+  <script src="EspruinoTools/plugins/getGitHub.js"></script>
+  <script src="EspruinoTools/libs/targz.js"></script> <!-- needed for npmMpdules -->
+  <script src="EspruinoTools/plugins/npmModules.js"></script>
+  
   <script src="js/plugins/tutorial.js"></script>
   <script src="js/plugins/webcam.js"></script>
   <script src="js/plugins/fontSize.js"></script>
   <script src="js/plugins/uiMode.js"></script>
-  <script src="js/plugins/urlHandler.js"></script>
-  <script src="js/plugins/assembler.js"></script>
-  <!-- <script src="js/plugins/localModules.js"></script> -->
-  <script src="js/plugins/getGitHub.js"></script>
+  <script src="js/plugins/urlHandler.js"></script>   
   <script src="js/plugins/fileReload.js"></script>
   <script src="js/plugins/codeLink.js"></script>
   <script src="js/plugins/project.js"></script>
   <script src="js/plugins/testing.js"></script>
   <script src="js/plugins/notification_sound.js"></script> 
-  <script src="js/libs/targz.js"></script> <!-- needed for npmMpdules -->
-  <script src="js/plugins/npmModules.js"></script>
   <script src="js/plugins/tern.js"></script> <!-- smart autocomplete -->
-
-  <script src="js/plugins/tour.js"></script>
-  
+  <script src="js/plugins/tour.js"></script>  
   
   <!-- <script src="js/plugins/_examplePlugin.js"></script> -->
+  
   <title>Espruino Web IDE</title>
 </head>
 <body>

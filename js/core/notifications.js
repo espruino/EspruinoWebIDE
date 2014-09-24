@@ -6,15 +6,13 @@
  file, You can obtain one at http://mozilla.org/MPL/2.0/.
  
  ------------------------------------------------------------------
-  Main App Container
+  Display Notifications
  ------------------------------------------------------------------
 **/
 "use strict";
 
 (function() {
 
-  var initialised = false;
-  
   function init()
   {
     toastr.options = {

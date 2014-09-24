@@ -1,0 +1,3 @@
+[submodule "EspruinoTools"]
+	path = EspruinoTools
+	url = git@github.com:espruino/EspruinoTools.git

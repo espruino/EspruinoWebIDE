@@ -5,6 +5,7 @@
 .settings*
 .externalToolBuilders/*
 EspruinoSerialTerminal.zip
+EspruinoTools/.git*
 extras*
 unused/*
 img/bak/*
