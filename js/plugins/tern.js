@@ -33,14 +33,18 @@
       if (err) throw new Error("Request for ecma5.json: " + err);
       espruinoJSON = code;
       server = new CodeMirror.TernServer({defs: [JSON.parse(espruinoJSON)]});
-      codeMirror.setOption("extraKeys", {
+      var k = codeMirror.getOption("extraKeys");
+      var nk = {
         "Ctrl-Space": function(cm) { server.smartComplete(cm); }, 
         "Ctrl-I": function(cm) { server.showType(cm); },
         "Alt-.": function(cm) { server.jumpToDef(cm); },
         "Alt-,": function(cm) { server.jumpBack(cm); },
         "Ctrl-Q": function(cm) { server.rename(cm); },
         "Ctrl-.": function(cm) { server.selectName(cm); }
-      })
+      };
+      for (var i in nk)
+        k[i] = nk[i];
+      codeMirror.setOption("extraKeys", k);
       codeMirror.on("cursorActivity", function(cm) { server.updateArgHints(cm); });
     });
     
