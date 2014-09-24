@@ -28,7 +28,8 @@
       lint: {
         es5         : true, // if ES5 syntax should be allowed
         evil        : true, // don't warn on use of strings in setInterval
-        laxbreak    : true  // don't warn about newlines in expressions
+        laxbreak    : true,  // don't warn about newlines in expressions
+        laxcomma    : true  // don't warn about commas at the start of the line
       },
       highlightSelectionMatches: {showToken: /\w/},
       foldGutter: {rangeFinder: new CodeMirror.fold.combine(CodeMirror.fold.brace, CodeMirror.fold.comment)},
