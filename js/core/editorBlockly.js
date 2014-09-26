@@ -72,6 +72,7 @@
   }
   
   function setXML(xml) {
+    Blockly.mainWorkspace.clear();
     Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, Blockly.Xml.textToDom(xml));
   }
   

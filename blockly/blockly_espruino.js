@@ -245,6 +245,19 @@ Blockly.Blocks.espruino_analogRead = {
       this.setTooltip('Read an Analog Value from a Pin');
     }
   };
+
+Blockly.Blocks.espruino_code = {
+    category: 'Espruino',
+    init: function() {
+      this.appendDummyInput().appendField(new Blockly.FieldTextArea("// Enter JavaScript Code Here"),"CODE");
+
+      this.setPreviousStatement(true);
+      this.setNextStatement(true);
+      this.setColour(ESPRUINO_COL);
+      this.setInputsInline(true);
+      this.setTooltip('Executes the given JavaScript code');
+    }
+  };
 // -----------------------------------------------------------------------------------
 
 Blockly.JavaScript.text_print = function() {
@@ -302,4 +315,8 @@ Blockly.JavaScript.espruino_analogWrite = function() {
 Blockly.JavaScript.espruino_analogRead = function() {
   var pin = Blockly.JavaScript.valueToCode(this, 'PIN', Blockly.JavaScript.ORDER_ASSIGNMENT) || '0';
   return ["analogRead("+pin+")\n", Blockly.JavaScript.ORDER_ATOMIC];
+};
+Blockly.JavaScript.espruino_code = function() {
+  var code = JSON.stringify(this.getFieldValue("CODE"));
+  return "eval("+code+");\n";
 };
