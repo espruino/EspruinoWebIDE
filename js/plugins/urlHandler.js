@@ -22,6 +22,14 @@
       case "code":
         Espruino.Core.EditorJavaScript.setCode(val);
         break;
+      case "upload":
+        Espruino.Core.MenuPortSelector.ensureConnected(function() {
+          Espruino.Core.Terminal.focus(); // give the terminal focus
+          Espruino.callProcessor("sending");
+          Espruino.Core.CodeWriter.writeToEspruino(val);
+          Espruino.Core.EditorJavaScript.setCode(val);
+        });        
+        break;
       case "gist":
         Espruino.Core.EditorJavaScript.setCode("Loading...");
         $.getJSON("https://api.github.com/gists/"+ val, function(data){
