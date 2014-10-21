@@ -30,10 +30,10 @@
         position: "top"
       }, 
       click: function() {
-        // this should ensure that if we load the same file, it works second time round
-        document.getElementById('fileLoader').value = '';
-        // fire the file loader
-        $( "#fileLoader" ).click();
+        if (Espruino.Core.Code.isInBlockly()) 
+          loadFile(Espruino.Core.EditorBlockly.setXML, currentXMLFileName);
+        else
+          loadFile(Espruino.Core.EditorJavaScript.setCode, currentJSFileName);
       }
     });
 
@@ -53,30 +53,6 @@
           saveFile(Espruino.Core.EditorJavaScript.getCode(), currentJSFileName);
       }
     });
-    
-    
-    // required for file loading... (hidden)
-    $('<input type="file" id="fileLoader" style="display: none;"/>').appendTo(document.body);
-
-    $("#fileLoader").change(function(event) {
-      if (event.target.files.length != 1) return;
-      var reader = new FileReader();
-      reader.onload = function(event) {
-        // Get the last loaded filename
-        var currentFileName = document.getElementById('fileLoader').value;       
-        currentFileName = currentFileName.substr(currentFileName.lastIndexOf("\\")+1);
-        setCurrentFileName(currentFileName);
-        // Load data
-        var data = convertFromOS(event.target.result);
-        if (Espruino.Core.Code.isInBlockly()) {
-          Espruino.Core.EditorBlockly.setXML(data);          
-        } else { 
-          Espruino.Core.EditorJavaScript.setCode(data);
-        }
-      };
-      reader.readAsText(event.target.files[0]);
-    });
-        
   }
 
   function setCurrentFileName(filename) {
@@ -98,8 +74,25 @@
    if (!Espruino.Core.Utils.isWindows()) return chars;
    return chars.replace(/\r\n/g,"\n").replace(/\n/g,"\r\n");
   };  
+
+  function loadFile(callback, filename) {
+    chrome.fileSystem.chooseEntry({type: 'openFile', suggestedName:filename}, function(fileEntry) {
+      if (!fileEntry) return;
+      if (fileEntry.name) setCurrentFileName(fileEntry.name);
+      fileEntry.file(function(file) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+          callback(convertFromOS(e.target.result));
+        };
+        reader.onerror = function() {
+          Espruino.Core.Notifications.error("Error Loading", true);     
+        };
+        reader.readAsText(file);
+      });
+    });
+  }
   
-  var saveFile = function(data, filename) {
+  function saveFile(data, filename) {
     //saveAs(new Blob([convertToOS(data)], { type: "text/plain" }), filename); // using FileSaver.min.js
 
     function errorHandler() {
