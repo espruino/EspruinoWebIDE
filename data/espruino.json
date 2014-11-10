@@ -1,5 +1,37 @@
 {
   "!name": "Espruino",
+  "ESP8266": {
+    "!type": "fn()",
+    "!doc": "Library for the Espressif ESP8266 WiFi Module",
+    "!url": "http://www.espruino.com/Reference#l_ESP8266_undefined",
+    "connect": {
+      "!type": "fn(serial: ?, callback: ?) -> +ESP8266",
+      "!doc": "Initialise the WIZnet module and return an Ethernet object",
+      "!url": "http://www.espruino.com/Reference#l_ESP8266_connect"
+    }
+  },
+  "ESPWifi": {
+    "!type": "fn()",
+    "!doc": "An instantiation of an ESP8266 network adaptor",
+    "!url": "http://www.espruino.com/Reference#ESPWifi",
+    "prototype": {
+      "connect": {
+        "!type": "fn(ap: ?, key: ?, callback: ?) -> bool",
+        "!doc": "Connect to an access point",
+        "!url": "http://www.espruino.com/Reference#l_ESPWifi_connect"
+      },
+      "getIP": {
+        "!type": "fn() -> ?",
+        "!doc": "Get the current IP address",
+        "!url": "http://www.espruino.com/Reference#l_ESPWifi_getIP"
+      },
+      "setIP": {
+        "!type": "fn(options: ?) -> bool",
+        "!doc": "Set the current IP address for get an IP from DHCP (if no options object is specified)",
+        "!url": "http://www.espruino.com/Reference#l_ESPWifi_setIP"
+      }
+    }
+  },
   "http": {
     "!type": "fn()",
     "!doc": "This library allows you to create http servers and make http requests\n\nIn order to use this, you will need an extra module to get network connectivity such as the [TI CC3000](/CC3000) or [WIZnet W5500](/WIZnet).\n\nThis is designed to be a cut-down version of the [node.js library](http://nodejs.org/api/http.html). Please see the [Internet](/Internet) page for more information on how to use it.",
@@ -135,7 +167,7 @@
     "!doc": "",
     "!url": "http://www.espruino.com/Reference#l_CC3000_undefined",
     "connect": {
-      "!type": "fn() -> +WLAN",
+      "!type": "fn(spi: ?, cs: +Pin, en: +Pin, irq: +Pin) -> +WLAN",
       "!doc": "Initialise the CC3000 and return a WLAN object",
       "!url": "http://www.espruino.com/Reference#l_CC3000_connect"
     }
@@ -174,10 +206,10 @@
   },
   "WIZnet": {
     "!type": "fn()",
-    "!doc": "",
+    "!doc": "Library for communication with the WIZnet Ethernet module",
     "!url": "http://www.espruino.com/Reference#l_WIZnet_undefined",
     "connect": {
-      "!type": "fn() -> +Ethernet",
+      "!type": "fn(spi: ?, cs: +Pin) -> +Ethernet",
       "!doc": "Initialise the WIZnet module and return an Ethernet object",
       "!url": "http://www.espruino.com/Reference#l_WIZnet_connect"
     }
@@ -553,8 +585,13 @@
       },
       "skip": {
         "!type": "fn(nBytes: number)",
-        "!doc": "Skip the specified number of bytes forwards",
+        "!doc": "Skip the specified number of bytes forward in the file",
         "!url": "http://www.espruino.com/Reference#l_File_skip"
+      },
+      "seek": {
+        "!type": "fn(nBytes: number)",
+        "!doc": "Seek to a certain position in the file",
+        "!url": "http://www.espruino.com/Reference#l_File_seek"
       },
       "pipe": {
         "!type": "fn(destination: ?, options: ?)",
@@ -617,10 +654,130 @@
       "!doc": "Delete the given file",
       "!url": "http://www.espruino.com/Reference#l_fs_unlinkSync"
     },
+    "statSync": {
+      "!type": "fn(path: ?) -> ?",
+      "!doc": "Return information on the given file. This returns an object with the following\nfields:\n\nsize: size in bytes\ndir: a boolean specifying if the file is a directory or not\nmtime: A Date structure specifying the time the file was last modified",
+      "!url": "http://www.espruino.com/Reference#l_fs_statSync"
+    },
     "pipe": {
       "!type": "fn(source: ?, destination: ?, options: ?)",
       "!doc": "",
       "!url": "http://www.espruino.com/Reference#l_fs_pipe"
+    }
+  },
+  "Nucleo": {
+    "!type": "fn()",
+    "!doc": "This is the built-in class for the Arduino-style pin namings on ST Nucleo boards",
+    "!url": "http://www.espruino.com/Reference#Nucleo",
+    "A0": {
+      "!type": "+Pin",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Nucleo_A0"
+    },
+    "A1": {
+      "!type": "+Pin",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Nucleo_A1"
+    },
+    "A2": {
+      "!type": "+Pin",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Nucleo_A2"
+    },
+    "A3": {
+      "!type": "+Pin",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Nucleo_A3"
+    },
+    "A4": {
+      "!type": "+Pin",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Nucleo_A4"
+    },
+    "A5": {
+      "!type": "+Pin",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Nucleo_A5"
+    },
+    "D0": {
+      "!type": "+Pin",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Nucleo_D0"
+    },
+    "D1": {
+      "!type": "+Pin",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Nucleo_D1"
+    },
+    "D2": {
+      "!type": "+Pin",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Nucleo_D2"
+    },
+    "D3": {
+      "!type": "+Pin",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Nucleo_D3"
+    },
+    "D4": {
+      "!type": "+Pin",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Nucleo_D4"
+    },
+    "D5": {
+      "!type": "+Pin",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Nucleo_D5"
+    },
+    "D6": {
+      "!type": "+Pin",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Nucleo_D6"
+    },
+    "D7": {
+      "!type": "+Pin",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Nucleo_D7"
+    },
+    "D8": {
+      "!type": "+Pin",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Nucleo_D8"
+    },
+    "D9": {
+      "!type": "+Pin",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Nucleo_D9"
+    },
+    "D10": {
+      "!type": "+Pin",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Nucleo_D10"
+    },
+    "D11": {
+      "!type": "+Pin",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Nucleo_D11"
+    },
+    "D12": {
+      "!type": "+Pin",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Nucleo_D12"
+    },
+    "D13": {
+      "!type": "+Pin",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Nucleo_D13"
+    },
+    "D14": {
+      "!type": "+Pin",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Nucleo_D14"
+    },
+    "D15": {
+      "!type": "+Pin",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Nucleo_D15"
     }
   },
   "SPI": {
@@ -776,7 +933,7 @@
   },
   "Array": {
     "!type": "fn(args: ?) -> ?",
-    "!doc": "Create an Array. Either give it one integer argument (>=0) which is the length of the array, or any number of arguments ",
+    "!doc": "Create an Array. Either give it one integer argument (>=0) which is the length of the array, or any number of arguments",
     "!url": "http://www.espruino.com/Reference#l_Array_Array",
     "prototype": {
       "!stdProto": "Array",
@@ -960,7 +1117,7 @@
     },
     "parse": {
       "!type": "fn(str: ?) -> number",
-      "!doc": "Parse a date string and return milliseconds since 1970. Data can be either '2011-10-20T14:48:00', '2011-10-20' or 'Mon, 25 Dec 1995 13:30:00 +0430' ",
+      "!doc": "Parse a date string and return milliseconds since 1970. Data can be either '2011-10-20T14:48:00', '2011-10-20' or 'Mon, 25 Dec 1995 13:30:00 +0430'",
       "!url": "http://www.espruino.com/Reference#l_Date_parse"
     }
   },
@@ -1630,7 +1787,7 @@
     },
     "memory": {
       "!type": "fn() -> ?",
-      "!doc": "Run a Garbage Collection pass, and return an object containing information on memory usage.\n\nfree : Memory that is available to be used\n\nusage : Memory that has been used\n\ntotal : Total memory\n\nhistory : Memory used for command history - that is freed if memory is low. Note that this is INCLUDED in the figure for 'free'.\n\nOn ARM, stackEndAddress is the address (that can be used with peek/poke/etc) of the END of the stack. The stack grows down, so unless you do a lot of recursion, the bytes above this can be used.",
+      "!doc": "Run a Garbage Collection pass, and return an object containing information on memory usage.\n\nfree : Memory that is available to be used\n\nusage : Memory that has been used\n\ntotal : Total memory\n\nhistory : Memory used for command history - that is freed if memory is low. Note that this is INCLUDED in the figure for 'free'\n\nstackEndAddress : (on ARM) the address (that can be used with peek/poke/etc) of the END of the stack. The stack grows down, so unless you do a lot of recursion the bytes above this can be used.\n\nMemory units are specified in 'blocks', which are around 16 bytes each (depending on your device). See http://www.espruino.com/Performance for more information.",
       "!url": "http://www.espruino.com/Reference#l_process_memory"
     }
   },
@@ -1836,12 +1993,12 @@
   },
   "digitalWrite": {
     "!type": "fn(pin: +Pin, value: number)",
-    "!doc": "Set the digital value of the given pin\n\nIf pin is an array of pins, eg. ```[A2,A1,A0]``` the value will be treated as an integer where the first array element is the MSB.\n\nIn the case of an array of pins, pin values are set LSB first (from the right-hand side of the array of pins).",
+    "!doc": "Set the digital value of the given pin\n\nIf pin argument is an array of pins (eg. `[A2,A1,A0]`) the value argument will be treated as an array of bits where the last array element is the least significant bit. \n\nIn this case, pin values are set last significant bit first (from the right-hand side of the array of pins). This means you can use the same pin multiple times, for example `digitalWrite([A1,A1,A0,A0],0b0101)` would pulse A0 followed by A1.",
     "!url": "http://www.espruino.com/Reference#l__global_digitalWrite"
   },
   "digitalRead": {
     "!type": "fn(pin: +Pin) -> number",
-    "!doc": "Get the digital value of the given pin\n\nIf pin is an array of pins, eg. ```[A2,A1,A0]``` the value will be treated as an integer where the first array element is the MSB",
+    "!doc": "Get the digital value of the given pin\n\nIf the pin argument is an array of pins (eg. `[A2,A1,A0]`) the value returned will be an number where the last array element is the least significant bit, for example if `A0=A1=1` and `A2=0`, `digitalRead([A2,A1,A0]) == 0b011`",
     "!url": "http://www.espruino.com/Reference#l__global_digitalRead"
   },
   "pinMode": {

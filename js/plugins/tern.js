@@ -51,22 +51,35 @@
     /* When we connect to a board and we load its description,
      go through an add all the pins as variables so Tern cal autocomplete */ 
     Espruino.addProcessor("boardJSONLoaded", function (data, callback) {
-      if (espruinoJSON !== undefined && "pins" in data) {
+      if (espruinoJSON !== undefined) {
         var defs = JSON.parse(espruinoJSON);
-        data.pins.forEach(function(pin) {
-          var functions = [];
-          for (var fn in pin.simplefunctions) {
-            if (["PWM","USART","SPI","I2C","DEVICE"].indexOf(fn)>=0)
-              functions = functions.concat(pin.simplefunctions[fn]);              
-            else
-              functions.push(fn);
-          }
-          defs[pin["name"]] = {
-            "!type": "+Pin",
-            "!doc": functions.join(", "),
-            "!url": "http://www.espruino.com/Reference"+data["BOARD"]+"#"+pin["name"],
-          };
-        });
+        if ("pins" in data) {
+          data.pins.forEach(function(pin) {
+            var functions = [];
+            for (var fn in pin.simplefunctions) {
+              if (["PWM","USART","SPI","I2C","DEVICE"].indexOf(fn)>=0)
+                functions = functions.concat(pin.simplefunctions[fn]);              
+              else
+                functions.push(fn);
+            }
+            defs[pin["name"]] = {
+              "!type": "+Pin",
+              "!doc": functions.join(", "),
+              "!url": "http://www.espruino.com/Reference"+data["BOARD"]+"#"+pin["name"],
+            };
+          });
+        }
+        if ("devices" in data) {
+          var devices = ["LED1","LED2","LED3","LED4","LED5","LED6","LED7","LED8","BTN","BTN1","BTN2","BTN3","BTN4"];
+          devices.forEach(function(device) {
+            if (device in data.devices) {
+              defs[device] = {
+                  "!type": "+Pin",
+                  "!doc": "A Pin"
+                };
+            }
+          });
+        }
         
         // reload tern server with new defs
         server = new CodeMirror.TernServer({defs: [defs]});
