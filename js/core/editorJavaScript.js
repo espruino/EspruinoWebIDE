@@ -45,6 +45,11 @@
         }
       }
     });
+    // When things have changed, write the modified code into local storage
+    codeMirror.on("change", function(cm, changeObj) {
+      if (chrome && chrome.storage && chrome.storage.local)
+        chrome.storage.local.set({"CODE_JS": cm.getValue()});
+    });
   }
 
   function getCode() {
