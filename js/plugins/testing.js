@@ -43,7 +43,7 @@
           cmd = this.expression + '="' + $("#" + this.label + '_input').val() + '";';
           break;
         case "command":
-          cmd = $("#" + this.label + '_input').val() + ';';
+          cmd = this.expression + ';';
           break;
       }
       if(Espruino.Core.Serial.isConnected()){
