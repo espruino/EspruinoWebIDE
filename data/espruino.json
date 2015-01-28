@@ -54,7 +54,7 @@
   },
   "httpSrv": {
     "!type": "fn()",
-    "!doc": "The HTTP server created by http.createServer",
+    "!doc": "The HTTP server created by `require('http').createServer`",
     "!url": "http://www.espruino.com/Reference#httpSrv",
     "prototype": {
       "listen": {
@@ -152,16 +152,6 @@
       }
     }
   },
-  "url": {
-    "!type": "fn()",
-    "!doc": "This class helps to convert URLs into Objects of information ready for http.request/get",
-    "!url": "http://www.espruino.com/Reference#url",
-    "parse": {
-      "!type": "fn(urlStr: ?, parseQuery: bool) -> ?",
-      "!doc": "A utility function to split a URL into parts\n\nThis is useful in web servers for instance when handling a request.\n\nFor instance `url.parse(\"/a?b=c&d=e\",true)` returns `{\"method\":\"GET\",\"host\":\"\",\"path\":\"/a?b=c&d=e\",\"pathname\":\"/a\",\"search\":\"?b=c&d=e\",\"port\":80,\"query\":{\"b\":\"c\",\"d\":\"e\"}}`",
-      "!url": "http://www.espruino.com/Reference#l_url_parse"
-    }
-  },
   "CC3000": {
     "!type": "fn()",
     "!doc": "",
@@ -204,6 +194,80 @@
       }
     }
   },
+  "url": {
+    "!type": "fn()",
+    "!doc": "This class helps to convert URLs into Objects of information ready for http.request/get",
+    "!url": "http://www.espruino.com/Reference#url",
+    "parse": {
+      "!type": "fn(urlStr: ?, parseQuery: bool) -> ?",
+      "!doc": "A utility function to split a URL into parts\n\nThis is useful in web servers for instance when handling a request.\n\nFor instance `url.parse(\"/a?b=c&d=e\",true)` returns `{\"method\":\"GET\",\"host\":\"\",\"path\":\"/a?b=c&d=e\",\"pathname\":\"/a\",\"search\":\"?b=c&d=e\",\"port\":80,\"query\":{\"b\":\"c\",\"d\":\"e\"}}`",
+      "!url": "http://www.espruino.com/Reference#l_url_parse"
+    }
+  },
+  "net": {
+    "!type": "fn()",
+    "!doc": "This library allows you to create TCPIP servers and clients\n\nIn order to use this, you will need an extra module to get network connectivity.\n\nThis is designed to be a cut-down version of the [node.js library](http://nodejs.org/api/net.html). Please see the [Internet](/Internet) page for more information on how to use it.",
+    "!url": "http://www.espruino.com/Reference#l_net_undefined",
+    "createServer": {
+      "!type": "fn(callback: ?) -> +Server",
+      "!doc": "Create a Server\n\nWhen a request to the server is made, the callback is called. In the callback you can use the methods on the connection to send data. You can also add `connection.on('data',function() { ... })` to listen for received data",
+      "!url": "http://www.espruino.com/Reference#l_net_createServer"
+    },
+    "connect": {
+      "!type": "fn(options: ?, callback: ?) -> +Socket",
+      "!doc": "Create a socket connection",
+      "!url": "http://www.espruino.com/Reference#l_net_connect"
+    }
+  },
+  "Server": {
+    "!type": "fn()",
+    "!doc": "The socket server created by `require('net').createServer`",
+    "!url": "http://www.espruino.com/Reference#Server",
+    "prototype": {
+      "listen": {
+        "!type": "fn(port: number)",
+        "!doc": "Start listening for new connections on the given port",
+        "!url": "http://www.espruino.com/Reference#l_Server_listen"
+      },
+      "close": {
+        "!type": "fn()",
+        "!doc": "Stop listening for new connections",
+        "!url": "http://www.espruino.com/Reference#l_Server_close"
+      }
+    }
+  },
+  "Socket": {
+    "!type": "fn()",
+    "!doc": "An actual socket connection - allowing transmit/receive of TCP data",
+    "!url": "http://www.espruino.com/Reference#Socket",
+    "prototype": {
+      "available": {
+        "!type": "fn() -> number",
+        "!doc": "Return how many bytes are available to read. If there is already a listener for data, this will always return 0.",
+        "!url": "http://www.espruino.com/Reference#l_Socket_available"
+      },
+      "read": {
+        "!type": "fn(chars: number) -> ?",
+        "!doc": "Return a string containing characters that have been received",
+        "!url": "http://www.espruino.com/Reference#l_Socket_read"
+      },
+      "pipe": {
+        "!type": "fn(destination: ?, options: ?)",
+        "!doc": "Pipe this to a stream (an object with a 'write' method)",
+        "!url": "http://www.espruino.com/Reference#l_Socket_pipe"
+      },
+      "write": {
+        "!type": "fn(data: ?) -> bool",
+        "!doc": "",
+        "!url": "http://www.espruino.com/Reference#l_Socket_write"
+      },
+      "end": {
+        "!type": "fn(data: ?)",
+        "!doc": "Close this socket - optional data to append as an argument",
+        "!url": "http://www.espruino.com/Reference#l_Socket_end"
+      }
+    }
+  },
   "WIZnet": {
     "!type": "fn()",
     "!doc": "Library for communication with the WIZnet Ethernet module",
@@ -229,6 +293,16 @@
         "!doc": "Set the current IP address for get an IP from DHCP (if no options object is specified)",
         "!url": "http://www.espruino.com/Reference#l_Ethernet_setIP"
       }
+    }
+  },
+  "tv": {
+    "!type": "fn()",
+    "!doc": "This library provides TV out capability on the Espruino and Espruino Pico",
+    "!url": "http://www.espruino.com/Reference#l_tv_undefined",
+    "setup": {
+      "!type": "fn(options: ?, width: number) -> ?",
+      "!doc": "This initialises the TV output. Options for PAL are as follows:\n\n```\nvar g = require('tv').setup({ type : \"pal\",\n  video : A7, // Pin - SPI MOSI Pin for Video output (MUST BE SPI1)\n  sync : A6, // Pin - Timer pin to use for video sync\n  width : 384,\n  height : 270, // max 270\n});\n```\n\nand for VGA:\n\n\n```\nvar g = require('tv').setup({ type : \"vga\",\n  video : A7, // Pin - SPI MOSI Pin for Video output (MUST BE SPI1)\n  hsync : A6, // Pin - Timer pin to use for video sync\n  vsync : A5, // Pin - pin to use for video sync\n  width : 220,\n  height : 480,\n});\n```",
+      "!url": "http://www.espruino.com/Reference#l_tv_setup"
     }
   },
   "Math": {
@@ -374,6 +448,43 @@
       "!type": "fn(args: ?) -> number",
       "!doc": "Find the maximum of a series of numbers",
       "!url": "http://www.espruino.com/Reference#l_Math_max"
+    }
+  },
+  "hashlib": {
+    "!type": "fn()",
+    "!doc": "",
+    "!url": "http://www.espruino.com/Reference#l_hashlib_undefined",
+    "sha224": {
+      "!type": "fn(message: ?) -> +HASH",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_hashlib_sha224"
+    },
+    "sha256": {
+      "!type": "fn(message: ?) -> +HASH",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_hashlib_sha256"
+    }
+  },
+  "HASH": {
+    "!type": "fn()",
+    "!doc": "",
+    "!url": "http://www.espruino.com/Reference#HASH",
+    "prototype": {
+      "update": {
+        "!type": "fn(message: ?)",
+        "!doc": "",
+        "!url": "http://www.espruino.com/Reference#l_HASH_update"
+      },
+      "digest": {
+        "!type": "fn(message: ?) -> ?",
+        "!doc": "",
+        "!url": "http://www.espruino.com/Reference#l_HASH_digest"
+      },
+      "hexdigest": {
+        "!type": "fn(message: ?) -> ?",
+        "!doc": "",
+        "!url": "http://www.espruino.com/Reference#l_HASH_hexdigest"
+      }
     }
   },
   "Trig": {
@@ -566,7 +677,7 @@
   "File": {
     "!type": "fn()",
     "!doc": "This is the File object - it allows you to stream data to and from files (As opposed to the `require('fs').readFile(..)` style functions that read an entire file).\n\nTo create a File object, you must type ```var fd = E.openFile('filepath','mode')``` - see [E.openFile](#l_E_openFile) for more information.\n\n**Note:** If you want to remove an SD card after you have started using it, you *must* call `E.unmountSD()` or you may cause damage to the card.",
-    "!url": "http://www.espruino.com/Reference#l_File_undefined",
+    "!url": "http://www.espruino.com/Reference#File",
     "prototype": {
       "close": {
         "!type": "fn()",
@@ -843,8 +954,8 @@
         "!url": "http://www.espruino.com/Reference#l_I2C_writeTo"
       },
       "readFrom": {
-        "!type": "fn(address: ?, quantity: number) -> ?",
-        "!doc": "Request bytes from the given slave device, and return them as an array. This is like using Arduino Wire's requestFrom, available and read functions.  Sends a STOP",
+        "!type": "fn(address: ?, quantity: number) -> +Uint8Array",
+        "!doc": "Request bytes from the given slave device, and return them as a Uint8Array (packed array of bytes). This is like using Arduino Wire's requestFrom, available and read functions.  Sends a STOP",
         "!url": "http://www.espruino.com/Reference#l_I2C_readFrom"
       }
     }
@@ -885,12 +996,12 @@
         "!url": "http://www.espruino.com/Reference#l_OneWire_skip"
       },
       "write": {
-        "!type": "fn(data: number, power: bool)",
-        "!doc": "Write a byte",
+        "!type": "fn(data: ?, power: bool)",
+        "!doc": "Write one or more bytes",
         "!url": "http://www.espruino.com/Reference#l_OneWire_write"
       },
       "read": {
-        "!type": "fn() -> number",
+        "!type": "fn(count: ?) -> ?",
         "!doc": "Read a byte",
         "!url": "http://www.espruino.com/Reference#l_OneWire_read"
       },
@@ -1113,6 +1224,11 @@
         "!type": "fn() -> ?",
         "!doc": "Converts to a String, eg: `Fri Jun 20 2014 14:52:20 GMT+0000`\n\n**Note:** This always assumes a timezone of GMT+0000",
         "!url": "http://www.espruino.com/Reference#l_Date_toString"
+      },
+      "toUTCString": {
+        "!type": "fn() -> ?",
+        "!doc": "Converts to a String, eg: `Fri, 20 Jun 2014 14:52:20 GMT`\n\n**Note:** This always assumes a timezone of GMT",
+        "!url": "http://www.espruino.com/Reference#l_Date_toUTCString"
       }
     },
     "parse": {
@@ -1701,8 +1817,8 @@
       "!url": "http://www.espruino.com/Reference#l_E_getAnalogVRef"
     },
     "nativeCall": {
-      "!type": "fn(addr: number, sig: ?) -> ?",
-      "!doc": "ADVANCED: This is a great way to crash Espruino if you're not sure what you are doing\n\nCreate a native function that executes the code at the given address. Eg. `E.nativeCall(0x08012345,'double (double,double)')(1.1, 2.2)` \n\nIf you're executing a thumb function, you'll almost certainly need to set the bottom bit of the address to 1.\n\nNote it's not guaranteed that the call signature you provide can be used - it has to be something that a function in Espruino already uses.",
+      "!type": "fn(addr: number, sig: ?, data: ?) -> ?",
+      "!doc": "ADVANCED: This is a great way to crash Espruino if you're not sure what you are doing\n\nCreate a native function that executes the code at the given address. Eg. `E.nativeCall(0x08012345,'double (double,double)')(1.1, 2.2)` \n\nIf you're executing a thumb function, you'll almost certainly need to set the bottom bit of the address to 1.\n\nNote it's not guaranteed that the call signature you provide can be used - there are limits on the number of arguments allowed.\n\nWhen supplying `data`, if it is a 'flat string' then it will be used directly, otherwise it'll be converted to a flat string and used.",
       "!url": "http://www.espruino.com/Reference#l_E_nativeCall"
     },
     "clip": {
@@ -1754,6 +1870,16 @@
       "!type": "fn(str: ?) -> +ArrayBufferView",
       "!doc": "Create an ArrayBuffer from the given string. This is done via a reference, not a copy - so it is very fast and memory efficient.\n\nNote that this is an ArrayBuffer, not a Uint8Array. To get one of those, do: `new Uint8Array(E.toArrayBuffer('....'))`.",
       "!url": "http://www.espruino.com/Reference#l_E_toArrayBuffer"
+    },
+    "toString": {
+      "!type": "fn(args: ?) -> +String",
+      "!doc": "This creates a string from the given arguments. If an argument is a String or an Array,\neach element is traversed and added as an 8 bit character. If it is anything else, it is\nconverted to a character directly.",
+      "!url": "http://www.espruino.com/Reference#l_E_toString"
+    },
+    "toUint8Array": {
+      "!type": "fn(args: ?) -> +Uint8Array",
+      "!doc": "This creates a Uint8Array from the given arguments. If an argument is a String or an Array,\neach element is traversed and added as if it were an 8 bit value. If it is anything else, it is\nconverted to an 8 bit value directly.",
+      "!url": "http://www.espruino.com/Reference#l_E_toUint8Array"
     },
     "reverseByte": {
       "!type": "fn(x: number) -> number",
@@ -1947,32 +2073,32 @@
     "!url": "http://www.espruino.com/Reference#l__global_changeInterval"
   },
   "peek8": {
-    "!type": "fn(addr: number) -> number",
+    "!type": "fn(addr: number, count: number) -> ?",
     "!doc": "Read 8 bits of memory at the given location - DANGEROUS!",
     "!url": "http://www.espruino.com/Reference#l__global_peek8"
   },
   "poke8": {
-    "!type": "fn(addr: number, value: number)",
+    "!type": "fn(addr: number, value: ?)",
     "!doc": "Write 8 bits of memory at the given location - VERY DANGEROUS!",
     "!url": "http://www.espruino.com/Reference#l__global_poke8"
   },
   "peek16": {
-    "!type": "fn(addr: number) -> number",
+    "!type": "fn(addr: number, count: number) -> ?",
     "!doc": "Read 16 bits of memory at the given location - DANGEROUS!",
     "!url": "http://www.espruino.com/Reference#l__global_peek16"
   },
   "poke16": {
-    "!type": "fn(addr: number, value: number)",
+    "!type": "fn(addr: number, value: ?)",
     "!doc": "Write 16 bits of memory at the given location - VERY DANGEROUS!",
     "!url": "http://www.espruino.com/Reference#l__global_poke16"
   },
   "peek32": {
-    "!type": "fn(addr: number) -> number",
+    "!type": "fn(addr: number, count: number) -> ?",
     "!doc": "Read 32 bits of memory at the given location - DANGEROUS!",
     "!url": "http://www.espruino.com/Reference#l__global_peek32"
   },
   "poke32": {
-    "!type": "fn(addr: number, value: number)",
+    "!type": "fn(addr: number, value: ?)",
     "!doc": "Write 32 bits of memory at the given location - VERY DANGEROUS!",
     "!url": "http://www.espruino.com/Reference#l__global_poke32"
   },
@@ -1987,8 +2113,8 @@
     "!url": "http://www.espruino.com/Reference#l__global_analogWrite"
   },
   "digitalPulse": {
-    "!type": "fn(pin: +Pin, value: bool, time: number)",
-    "!doc": "Pulse the pin with the value for the given time in milliseconds. It uses a hardware timer to produce accurate pulses, and returns immediately (before the pulse has finished). Use `digitalPulse(A0,1,0)` to wait until a previous pulse has finished.\n\neg. `digitalPulse(A0,1,5);` pulses A0 high for 5ms\n\ndigitalPulse is for SHORT pulses that need to be very accurate. If you're doing anything over a few milliseconds, use setTimeout instead.",
+    "!type": "fn(pin: +Pin, value: bool, time: ?)",
+    "!doc": "Pulse the pin with the value for the given time in milliseconds. It uses a hardware timer to produce accurate pulses, and returns immediately (before the pulse has finished). Use `digitalPulse(A0,1,0)` to wait until a previous pulse has finished.\n\neg. `digitalPulse(A0,1,5);` pulses A0 high for 5ms. `digitalPulse(A0,1,[5,2,4]);` pulses A0 high for 5ms, low for 2ms, and high for 4ms\n\ndigitalPulse is for SHORT pulses that need to be very accurate. If you're doing anything over a few milliseconds, use setTimeout instead.",
     "!url": "http://www.espruino.com/Reference#l__global_digitalPulse"
   },
   "digitalWrite": {
@@ -2013,7 +2139,7 @@
   },
   "setWatch": {
     "!type": "fn(function: ?, pin: +Pin, options: ?) -> ?",
-    "!doc": "Call the function specified when the pin changes\n\nThe function may also take an argument, which is an object of type `{time:float, lastTime:float, state:bool}`.\n\n`time` is the time in seconds at which the pin changed state, `lastTime` is the time in seconds at which the pin last changed state, and `state` is the current state of the pin.\n\nFor instance, if you want to measure the length of a positive pusle you could use: ```setWatch(function(e) { console.log(e.time-e.lastTime); }, BTN, { repeat:true, edge:'falling' });```\n\nThis can also be removed using clearWatch",
+    "!doc": "Call the function specified when the pin changes\n\nThe function may also take an argument, which is an object of type `{time:float, lastTime:float, state:bool}`.\n\n`time` is the time in seconds at which the pin changed state, `lastTime` is the time in seconds at which the pin last changed state, and `state` is the current state of the pin.\n\nFor instance, if you want to measure the length of a positive pulse you could use: ```setWatch(function(e) { console.log(e.time-e.lastTime); }, BTN, { repeat:true, edge:'falling' });```\n\nIf the callback is a native function `void (bool state)`\nthen you can also add `irq:true` to options, which will cause the function to be\ncalled from within the IRQ. When doing this, interruptions will happen on both\nedges and there will be no debouncing.\n\nWatches set with `setWatch` can be removed using `clearWatch`",
     "!url": "http://www.espruino.com/Reference#l__global_setWatch"
   },
   "clearWatch": {
