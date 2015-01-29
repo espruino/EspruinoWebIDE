@@ -657,6 +657,11 @@
     var node = elt("div", cls + "tooltip", content);
     node.style.left = x + "px";
     node.style.top = y + "px";
+
+    // remove old tooltips. oldTips is a 'live' list so the while loop will end as stuff gets removed
+    var oldTips = document.getElementsByClassName(cls + "tooltip");
+    while(oldTips[0]) oldTips[0].parentNode.removeChild(oldTips[0]);
+
     document.body.appendChild(node);
     return node;
   }
