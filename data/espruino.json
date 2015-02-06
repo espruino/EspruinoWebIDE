@@ -297,11 +297,11 @@
   },
   "tv": {
     "!type": "fn()",
-    "!doc": "This library provides TV out capability on the Espruino and Espruino Pico",
+    "!doc": "This library provides TV out capability on the Espruino and Espruino Pico.\n\nSee the [[Television]] page for more information.",
     "!url": "http://www.espruino.com/Reference#l_tv_undefined",
     "setup": {
       "!type": "fn(options: ?, width: number) -> ?",
-      "!doc": "This initialises the TV output. Options for PAL are as follows:\n\n```\nvar g = require('tv').setup({ type : \"pal\",\n  video : A7, // Pin - SPI MOSI Pin for Video output (MUST BE SPI1)\n  sync : A6, // Pin - Timer pin to use for video sync\n  width : 384,\n  height : 270, // max 270\n});\n```\n\nand for VGA:\n\n\n```\nvar g = require('tv').setup({ type : \"vga\",\n  video : A7, // Pin - SPI MOSI Pin for Video output (MUST BE SPI1)\n  hsync : A6, // Pin - Timer pin to use for video sync\n  vsync : A5, // Pin - pin to use for video sync\n  width : 220,\n  height : 480,\n});\n```",
+      "!doc": "This initialises the TV output. Options for PAL are as follows:\n\n```\nvar g = require('tv').setup({ type : \"pal\",\n  video : A7, // Pin - SPI MOSI Pin for Video output (MUST BE SPI1)\n  sync : A6, // Pin - Timer pin to use for video sync\n  width : 384,\n  height : 270, // max 270\n});\n```\n\nand for VGA:\n\n\n```\nvar g = require('tv').setup({ type : \"vga\",\n  video : A7, // Pin - SPI MOSI Pin for Video output (MUST BE SPI1)\n  hsync : A6, // Pin - Timer pin to use for video sync\n  vsync : A5, // Pin - pin to use for video sync\n  width : 220,\n  height : 480,\n});\n```\n\nSee the [[Television]] page for more information.",
       "!url": "http://www.espruino.com/Reference#l_tv_setup"
     }
   },
@@ -452,7 +452,7 @@
   },
   "hashlib": {
     "!type": "fn()",
-    "!doc": "",
+    "!doc": "**Note:** This library is currently only included in builds for the original Espruino boards.\nFor other boards you will have to make build your own firmware.",
     "!url": "http://www.espruino.com/Reference#l_hashlib_undefined",
     "sha224": {
       "!type": "fn(message: ?) -> +HASH",
@@ -467,7 +467,7 @@
   },
   "HASH": {
     "!type": "fn()",
-    "!doc": "",
+    "!doc": "**Note:** This class is currently only included in builds for the original Espruino boards.\nFor other boards you will have to make build your own firmware.",
     "!url": "http://www.espruino.com/Reference#HASH",
     "prototype": {
       "update": {
@@ -898,7 +898,7 @@
     "prototype": {
       "setup": {
         "!type": "fn(options: ?)",
-        "!doc": "Set up this SPI port as SPI Master, with no checksum\n\nIf not specified in options, the default pins are used (usually the lowest numbered pins on the lowest port that supports this peripheral)",
+        "!doc": "Set up this SPI port as an SPI Master.",
         "!url": "http://www.espruino.com/Reference#l_SPI_setup"
       },
       "send": {
@@ -1313,6 +1313,14 @@
     "!type": "fn(arr: ?, byteOffset: number, length: number) -> +ArrayBufferView",
     "!doc": "Create a typed array based on the given input. Either an existing Array Buffer, an Integer as a Length, or a simple array. If an ArrayBuffer view (eg. Uint8Array rather than ArrayBuffer) is given, it will be completely copied rather than referenced.",
     "!url": "http://www.espruino.com/Reference#l_Uint8Array_Uint8Array",
+    "prototype": {
+      "!proto": "ArrayBufferView.prototype"
+    }
+  },
+  "Uint8ClampedArray": {
+    "!type": "fn(arr: ?, byteOffset: number, length: number) -> +ArrayBufferView",
+    "!doc": "Create a typed array based on the given input. Either an existing Array Buffer, an Integer as a Length, or a simple array. If an ArrayBuffer view (eg. Uint8Array rather than ArrayBuffer) is given, it will be completely copied rather than referenced.\n\nClamped arrays clamp their values to the allowed range, rather than 'wrapping'. e.g. after `a[0]=12345;`, `a[0]==255`.",
+    "!url": "http://www.espruino.com/Reference#l_Uint8ClampedArray_Uint8ClampedArray",
     "prototype": {
       "!proto": "ArrayBufferView.prototype"
     }
@@ -1796,6 +1804,11 @@
     "!type": "fn()",
     "!doc": "This is the built-in JavaScript class for Espruino utility functions.",
     "!url": "http://www.espruino.com/Reference#E",
+    "connectSDCard": {
+      "!type": "fn(spi: ?, csPin: +Pin)",
+      "!doc": "Setup the filesystem so that subsequent calls to `E.openFile` and `require('fs').*` will use an SD card on the supplied SPI device and pin.\n\nIt can even work using software SPI - for instance:\n\n```\nvar spi = new SPI();\nspi.setup({mosi:C7,miso:C8,sck:C9});\nE.connectSDCard(spi,C6);\nconsole.log(require(\"fs\").readdirSync());\n```",
+      "!url": "http://www.espruino.com/Reference#l_E_connectSDCard"
+    },
     "unmountSD": {
       "!type": "fn()",
       "!doc": "Unmount the SD card, so it can be removed. If you remove the SD card without calling this you may cause corruption, and you will be unable to access another SD card until you reset Espruino or call `E.unmountSD()`.",
@@ -1956,6 +1969,11 @@
     "!type": "fn(moduleName: ?) -> ?",
     "!doc": "Load the given module, and return the exported functions",
     "!url": "http://www.espruino.com/Reference#l__global_require"
+  },
+  "Boolean": {
+    "!type": "fn(value: ?) -> bool",
+    "!doc": "Creates a number",
+    "!url": "http://www.espruino.com/Reference#l_Boolean_Boolean"
   },
   "NaN": {
     "!type": "number",
