@@ -22,8 +22,8 @@ Installing from GitHub (Latest Version)
 ---------------------------------------
 
 * Install the [Chrome Web Browser](https://www.google.com/intl/en/chrome/browser/)
-* Download the files in (https://github.com/espruino/EspruinoWebIDE)[EspruinoWebIDE] to an `EspruinoWebIDE` directory on your PC (either as a [ZIP File](https://github.com/espruino/EspruinoWebIDE/archive/master.zip), or using git)
-* Download the files in (https://github.com/espruino/EspruinoTools)[EspruinoTools] into the `EspruinoWebIDE/EspruinoTools` on your PC (either as a [ZIP File](https://github.com/espruino/EspruinoTools/archive/master.zip), or using git)
+* Download the files in [EspruinoWebIDE](https://github.com/espruino/EspruinoWebIDE) to an `EspruinoWebIDE` directory on your PC (either as a [ZIP File](https://github.com/espruino/EspruinoWebIDE/archive/master.zip), or using git)
+* Download the files in [EspruinoTools](https://github.com/espruino/EspruinoTools) into the `EspruinoWebIDE/EspruinoTools` on your PC (either as a [ZIP File](https://github.com/espruino/EspruinoTools/archive/master.zip), or using git)
 * Click the menu icon in the top right
 * Click 'Settings'
 * Click 'Extensions' on the left
