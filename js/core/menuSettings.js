@@ -80,6 +80,8 @@
     }
     
     var html = "<h1>"+sectionName+"</h1>";
+    if (section.descriptionHTML!==undefined)
+      html += "<p>"+section.descriptionHTML+"<p>";
     if (section.description!==undefined)
       html += "<p>"+Espruino.Core.Utils.escapeHTML(section.description, false) +"<p>";
     if (section.tours!==undefined) {
@@ -129,8 +131,11 @@
     var value = Espruino.Config[configName];
     var html = 
       '<h3>'+Espruino.Core.Utils.escapeHTML(config.name)+'</h3>';
-    var desc =
-      '<p>'+Espruino.Core.Utils.escapeHTML(config.description, false)+'</p>';
+    var desc = "";
+    if (config.descriptionHTML!==undefined)
+      desc += "<p>"+config.descriptionHTML+"<p>";
+    if (config.description!==undefined)
+      desc += '<p>'+Espruino.Core.Utils.escapeHTML(config.description, false)+'</p>';
     // type : "int"/"boolean"/"string"/{ value1:niceName, value2:niceName },
     if (config.type == "boolean") {
       html += '<input name="'+configName+'" type="checkbox" style="float: right;" '+(value?"checked":"")+'/>';
