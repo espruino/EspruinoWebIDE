@@ -52,7 +52,7 @@ Contributions are welcome - especially if they make the Web IDE easier to use fo
 
 ### Getting Started
 
-Espruino Web IDE expects the [EspruinoTools](https://github.com/espruino/EspruinoTools) repository to be in `EspruinoWebIDE/EspruinoTools`. If you're using Git, make sure you add it using the command:
+Espruino Web IDE expects the (https://github.com/espruino/EspruinoTools)[EspruinoTools] repository to be in `EspruinoWebIDE/EspruinoTools`. If you're using Git, make sure you add it using the command:
 
 ```
 git submodule add git@github.com:espruino/EspruinoTools.git
