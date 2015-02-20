@@ -1,5 +1,5 @@
 /**
- Copyright 2014 Juergen Marsch (juergenmarsch@googlemail.com)
+ Copyright 2014,2015 Juergen Marsch (juergenmarsch@googlemail.com)
 
  This Source Code is subject to the terms of the Mozilla Public
  License, v2.0. If a copy of the MPL was not distributed with this
@@ -81,6 +81,7 @@
       if(Espruino.Config.projectEntry){ 
         chrome.fileSystem.isRestorable(Espruino.Config.projectEntry,function(bisRestorable){
           if(!bisRestorable){ Espruino.Config.Notifications.warning("Sandbox not valid anymore");}
+          else{ checkEntry(Espruino.Config.projectEntry,function(theEntry){ updateProjectFolder(theEntry);});}
         });
       }
     });
@@ -163,6 +164,18 @@
     }
     return r;
   }      
+  function updateProjectFolder(theEntry){
+    var dirReader = theEntry.createReader();
+    var entries = [];
+    dirReader.readEntries (function(results) {
+      if(!checkSubFolder(results,"binary")){ theEntry.getDirectory("binary", {create:true}); }
+      if(!checkSubFolder(results,"firmware")){ theEntry.getDirectory("firmware", {create:true}); }
+      if(!checkSubFolder(results,"modules")){ theEntry.getDirectory("modules", {create: true}); }
+      if(!checkSubFolder(results,"projects")){ theEntry.getDirectory("projects", {create:true}); } 
+      if(!checkSubFolder(results,"snippets")){ theEntry.getDirectory("snippets", {create:true}); saveSnippets(); }
+      if(!checkSubFolder(results,"testing")){ theEntry.getDirectory("testing", {create:true}); }
+      if(!checkSubFolder(results,"testinglog")){ theEntry.getDirectory("testinglog", {create: true}); }    });  
+  }
   function setSandboxButton(){
     $(".projectButton").click(function(evt){
       chrome.fileSystem.chooseEntry({type: 'openDirectory'}, function(theEntry) {
@@ -171,15 +184,7 @@
             $("#projectEntry").val(chrome.fileSystem.retainEntry(theEntry));
             Espruino.Config.set("projectEntry",chrome.fileSystem.retainEntry(theEntry));
             showLocalFolder(); // update text box + icon
-            var dirReader = theEntry.createReader();
-            var entries = [];
-            dirReader.readEntries (function(results) {
-              if(!checkSubFolder(results,"modules")){ theEntry.getDirectory("modules", {create: true}); }
-              if(!checkSubFolder(results,"projects")){ theEntry.getDirectory("projects", {create:true}); } 
-              if(!checkSubFolder(results,"firmware")){ theEntry.getDirectory("firmware", {create:true}); }
-              if(!checkSubFolder(results,"binary")){ theEntry.getDirectory("binary", {create:true}); }
-              if(!checkSubFolder(results,"snippets")){ theEntry.getDirectory("snippets", {create:true}); saveSnippets(); }
-            });
+            updateProjectFolder(theEntry);
           });
         } else {
           // user cancelled
@@ -267,6 +272,11 @@
     var reader = new FileReader();
     reader.onload = function(e){ callback(e.target.result);};
     entry.file(function(file){ reader.readAsText(file);});
+  }
+  function readDataUrlfromEntry(entry,callback){
+    var reader = new FileReader();
+    reader.onloadend = function(e){callback(e.target.result);};
+    entry.file(function(file){reader.readAsDataURL(file);});
   }
   function saveFileAs(dirEntry,fileName,data){
     dirEntry.getFile(fileName,{create:true},function(fileEntry){
@@ -585,6 +595,19 @@
       Espruino.Core.Notifications.error("File '" + fileName + "' not found");
     }
   }
+  function loadDataUrl(fileName,callback){
+    var adr = fileName.split("/");
+    getProjectSubDir(adr[0],getFile);
+    function getFile(subDirEntry){ 
+      checkFileExists(subDirEntry,adr[1],fileFound,fileNotFound);
+    }
+    function fileFound(theEntry){
+      readDataUrlfromEntry(theEntry,callback);
+    }
+    function fileNotFound(){
+      Espruino.Core.Notifications.error("File '" + fileName + "' not found");
+    }
+  }
   function saveFile(fileName,data){
     var adr = fileName.split("/");
     getProjectSubDir(adr[0],gotDir);
@@ -647,13 +670,34 @@
       });        
     }
   }
+  function appendFile(fileName,data){
+    var adr = fileName.split("/");
+    getProjectSubDir(adr[0],gotDir);
+    function gotDir(subDirEntry){
+      if(!subDirEntry){ Espruino.Core.Notifications.error("Project directory '" + adr[0] + "' is missing");}
+      else{
+        subDirEntry.getFile(adr[1],{create:true},function(fileEntry){
+          fileEntry.createWriter(function(fileWriter){
+            var bb = new Blob([data],{type:'text/plain'});
+            setTimeout(function(evt){
+              if(fileWriter.length === 0) fileWriter.seek(0); else fileWriter.seek(fileWriter.length - 1);
+              fileWriter.write(bb);          
+            },100);
+          });
+        });
+      }
+    }
+  }
+  
   Espruino.Plugins.Project = {
     init : init,
     
     loadModule: loadModule,
     loadFirmware: loadFirmware,
     loadFile: loadFile,
+    loadDataUrl: loadDataUrl,
     saveFile: saveFile,
+    appendFile: appendFile,
     loadDir: loadDir,
     loadDirHtml: getProjectTable
   };

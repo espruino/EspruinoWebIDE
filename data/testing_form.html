@@ -1,0 +1,63 @@
+<table width="100%" height="100%">
+  <tr height="350"><th>
+    <table width="100%" height="100%" bgcolor="#dfd">      
+      <tr>
+        <th>
+          <button id="testingExpressionClear">Drop all expressions</button>
+        </th>
+        <th>
+          <button id="testingExpressionReset">Reset Chart</button>
+        </th>
+      </tr>
+      <tr>
+        <th valign="top"><div id="testingTable"></div></th>
+        <th valign="top">
+          <div id="testingChart">
+            <div id="flotlegendholder">hugo</div>
+            <div id="flotplaceholder" style="width:380px;height:200px;"></div>
+          </div>
+          <div id="flottertooltip" 
+            style="position:absolute;display:none;border:1px solid #fdd;padding:2px;background-color:#fee;opacity:0.80;">
+          </div>
+        </th>
+      </tr>
+      <tr>
+        <th colspan="2" valign="bottom">
+          <input id="testingLabel" size="10" maxlength="20" value="newExpr">
+          <input id="testingExpression" size="40" value="getTime()">
+          <select id="testingType">
+            <option value="number">Number</option>
+            <option value="string">String</option>
+          </select>
+          <button id="testingAdd">new Expression</button>
+        </th>
+      </tr>
+    </table>      
+  </th></tr>
+  <tr><th>
+    <table width="100%" height="100%" bgcolor="#ccf">    
+      <tr>
+        <th colspan="2">
+          <button id="testingSetClear">Clear</button>
+        </th>
+      </tr>
+      <tr>
+        <th valign="top"><div id="testingAction"></div></th>
+      </tr>
+      <tr>
+        <th valign="bottom">
+          <input id="actionName" size="10" maxlength="20" value="newAction">
+          <input id="actionExpression" size="20" value="myVariable">
+          <select id="actionType">
+            <option value="number">Number</option>
+            <option value="boolean">Boolean</option>
+            <option value="string">String</option>
+            <option value="command">Command</option>
+          </select>
+          <button id="testingAddAction">new Action</button>
+        </th>
+      </tr>
+    </table>      
+  </th></tr>
+</table>
+
