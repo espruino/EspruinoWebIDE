@@ -903,12 +903,12 @@
       },
       "send": {
         "!type": "fn(data: ?, nss_pin: +Pin) -> ?",
-        "!doc": "Send data down SPI, and return the result\n\nSending multiple bytes in one call to send is preferable as they can then be transmitted end to end. Using multiple calls to send() will result in significantly slower transmission speeds.",
+        "!doc": "Send data down SPI, and return the result\n\nSending multiple bytes in one call to send is preferable as they can then be transmitted end to end. Using multiple calls to send() will result in significantly slower transmission speeds.\n\nFor maximum speeds, please pass either Strings or Typed Arrays as arguments.",
         "!url": "http://www.espruino.com/Reference#l_SPI_send"
       },
       "write": {
         "!type": "fn(data: ?)",
-        "!doc": "Write a character or array of characters to SPI - without reading the result back",
+        "!doc": "Write a character or array of characters to SPI - without reading the result back.\n\nFor maximum speeds, please pass either Strings or Typed Arrays as arguments.",
         "!url": "http://www.espruino.com/Reference#l_SPI_write"
       },
       "send4bit": {
@@ -1125,7 +1125,7 @@
       },
       "slice": {
         "!type": "fn(start: number, end: ?) -> ?",
-        "!doc": "Return a copy of a portion of the calling array",
+        "!doc": "Return a copy of a portion of this array (in a new array)",
         "!url": "http://www.espruino.com/Reference#l_Array_slice"
       },
       "sort": {
@@ -1306,6 +1306,11 @@
         "!type": "fn() -> +ArrayBufferView",
         "!doc": "Reverse the contents of this arraybuffer in-place",
         "!url": "http://www.espruino.com/Reference#l_ArrayBufferView_reverse"
+      },
+      "slice": {
+        "!type": "fn(start: number, end: ?) -> +Array",
+        "!doc": "Return a copy of a portion of this array (in a new array).\n\n**Note:** This currently returns a normal Array, not an ArrayBuffer",
+        "!url": "http://www.espruino.com/Reference#l_ArrayBufferView_slice"
       }
     }
   },
@@ -1994,6 +1999,11 @@
     "!type": "number",
     "!doc": "",
     "!url": "http://www.espruino.com/Reference#l__global_LOW"
+  },
+  "global": {
+    "!type": "?",
+    "!doc": "A reference to the global scope, where everything is defined.",
+    "!url": "http://www.espruino.com/Reference#l__global_global"
   },
   "setBusyIndicator": {
     "!type": "fn(pin: +Pin)",
