@@ -96,13 +96,17 @@
   <!-- Non-vital Plugins -->
   <script src="EspruinoTools/plugins/boardJSON.js"></script>
   <script src="EspruinoTools/plugins/versionChecker.js"></script>
-  <script src="EspruinoTools/plugins/minify.js"></script>
   <script src="EspruinoTools/plugins/compiler.js"></script>
   <script src="EspruinoTools/plugins/assembler.js"></script>
   <script src="EspruinoTools/plugins/getGitHub.js"></script>
   <script src="EspruinoTools/libs/targz.js"></script> <!-- needed for npmMpdules -->
   <script src="EspruinoTools/plugins/npmModules.js"></script>
-  <script src="EspruinoTools/plugins/setTime.js"></script>  
+  <script src="EspruinoTools/plugins/setTime.js"></script>
+
+  <script src="EspruinoTools/libs/esprima/esprima.js"></script> <!-- needed for minify -->
+  <script src="EspruinoTools/libs/esprima/esmangle.js"></script> <!-- needed for minify -->
+  <script src="EspruinoTools/libs/esprima/escodegen.js"></script> <!-- needed for minify -->
+  <script src="EspruinoTools/plugins/minify.js"></script>
   
   <script src="js/plugins/tutorial.js"></script>
   <script src="js/plugins/webcam.js"></script>
