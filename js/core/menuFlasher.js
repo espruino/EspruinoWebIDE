@@ -23,8 +23,10 @@
       var env = Espruino.Core.Env.getData();
       if (env!==undefined &&
           env.info!==undefined &&
-          env.info.binary_url!==undefined) 
-        urlOrNothing = env.info.binary_url;
+          env.info.binary_url!==undefined) {
+        stepSelectBinary(env.info);
+        return;
+      }
     }     
     
     if (urlOrNothing) {
@@ -35,6 +37,8 @@
   }
   
   function stepSelectBoard() {
+    var boardList;
+    
     var popup = Espruino.Core.App.openPopup({
       title: "Firmware Update",
       padding: true,
@@ -43,24 +47,29 @@
                 '<p>If you don\'t see your board here, you can\'t update the firmware on it from the IDE. Please click outside this window to close it, and <a href="http://www.espruino.com/Download" target="_blank">see the download page</a> for more instructions.</p>' ,                
       position: "center",
       next : function() {
-        var binary_url = $('.board_list option:selected').attr("url");
+        var boardId = $('.board_list option:selected').attr("name");
         popup.close();
-        if (binary_url===undefined)
-          console.error("No binary URL found! Looks like no option selected");
+        if (boardId===undefined || boardList[boardId]===undefined)
+          console.error("No board ID found! Looks like no option selected");
         else
-          stepReset( { binary_url : binary_url } );
+          stepSelectBinary( boardList[boardId]["json"]["info"] );
       }
     });
     
     Espruino.Core.Env.getBoardList(function(data) {
       var html = "<red>Error loading boards...</red>";      
       if (data) {
+        boardList = data;
         html = "<select>";
         for (var boardId in data) {
           //if (data[boardId]["json"]["info"]["serial_bootloader"]) {
-          if (boardId.indexOf("ESPRUINO")>=0) { // currently the flasher doesn't flash other boards properly because it starts at 0x08002800
+          if (boardId.indexOf("ESPRUINO")==0 || boardId.indexOf("PICO")==0) { // currently the flasher doesn't flash other boards properly because it starts at 0x08002800
             //html += '<img src="data:image/png;base64,'+data[boardId]["thumb_b64"]+'" alt="'+boardId+'"/>';
-            html += '  <option name="'+boardId+'" url="'+data[boardId]["json"]["info"]["binary_url"]+'">'+data[boardId]["json"]["info"]["name"]+'</option>';
+            try {
+              html += '  <option name="'+boardId+'">'+data[boardId]["json"]["info"]["name"]+'</option>';
+            } catch (e) {
+              console.warn(e);
+            }
           }
         }
         html += "</select>";
@@ -71,6 +80,48 @@
     
   }
 
+  function stepSelectBinary(boardInfo) {
+    // Just one firmware image - go to next!
+    if (boardInfo["binaries"]===undefined) {
+      stepReset( { binary_url : boardInfo["binary_url"] } );
+      return;
+    }
+    // More than one...
+    // Make a list
+    var binaries = boardInfo["binaries"];
+    var html = "<select class=\"fw_list\">";
+    for (var i in binaries) {
+      try {
+        html += '  <option name="'+i+'" filename="'+binaries[i]["filename"]+'">'+binaries[i]["description"]+'</option>';
+      } catch (e) {
+        console.warn(e);
+      }
+    }
+    html += "</select>";
+    // Crearte popup
+    var popup = Espruino.Core.App.openPopup({
+      title: "Firmware Update",
+      padding: true,
+      contents: '<p>Your board has multiple options for firmware. Please select from the list below and click next...</p>'+
+                html,                
+      position: "center",
+      next : function() {
+        var binary_filename = $('.fw_list option:selected').attr("filename");
+        popup.close();
+        if (binary_filename===undefined)
+          console.error("No binary filename found! Looks like no option selected");
+        else {
+          var base_url = boardInfo["binary_url"];
+          base_url = base_url.substr(0,base_url.lastIndexOf("/")+1);          
+          var binary_url = base_url+binary_filename.replace("%v", boardInfo["binary_version"]);
+          console.log("Choosing "+binary_url);
+          stepReset( { binary_url : binary_url } );
+        }
+      }
+    });
+    
+  }
+  
   
   function stepReset(data) {
     Espruino.Core.MenuPortSelector.disconnect();
