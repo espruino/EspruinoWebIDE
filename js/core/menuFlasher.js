@@ -14,7 +14,7 @@
   
   function init() {
   }
-
+  
   function showFlasher(urlOrNothing) {
     if (urlOrNothing) urlOrNothing = urlOrNothing.trim();
     if (urlOrNothing=="") urlOrNothing=undefined;
@@ -24,7 +24,7 @@
       if (env!==undefined &&
           env.info!==undefined &&
           env.info.binary_url!==undefined) {
-        stepSelectBinary(env.info);
+        stepSelectBinary(env.BOARD, env.info);
         return;
       }
     }     
@@ -52,7 +52,7 @@
         if (boardId===undefined || boardList[boardId]===undefined)
           console.error("No board ID found! Looks like no option selected");
         else
-          stepSelectBinary( boardList[boardId]["json"]["info"] );
+          stepSelectBinary( boardId, boardList[boardId]["json"]["info"] );
       }
     });
     
@@ -80,10 +80,10 @@
     
   }
 
-  function stepSelectBinary(boardInfo) {
+  function stepSelectBinary(boardId, boardInfo) {
     // Just one firmware image - go to next!
     if (boardInfo["binaries"]===undefined) {
-      stepReset( { binary_url : boardInfo["binary_url"] } );
+      stepReset( { binary_url : boardInfo["binary_url"], board_id : boardId } );
       return;
     }
     // More than one...
@@ -115,7 +115,7 @@
           base_url = base_url.substr(0,base_url.lastIndexOf("/")+1);          
           var binary_url = base_url+binary_filename.replace("%v", boardInfo["binary_version"]);
           console.log("Choosing "+binary_url);
-          stepReset( { binary_url : binary_url } );
+          stepReset( { binary_url : binary_url, board_id : boardId } );
         }
       }
     });
@@ -129,9 +129,7 @@
     var popup = Espruino.Core.App.openPopup({
       title: "Firmware Update",
       padding: true,
-      contents: '<p><b>Please put your board into bootloader mode.</b> On Espruino boards, hold down BTN1, and then press and release RST.</p>'+
-                '<p>When the blue LED starts pulsing on and off, click \'Next\'...</p>'+
-                '<p>If the blue LED is not pulsing, please see the <a href="http://www.espruino.com/Troubleshooting" target="_blank">Troubleshooting page</a></p>',                
+      contents: getDocs(data, "reset"),                
       position: "center",
       next : function() {
         popup.close();
@@ -164,18 +162,18 @@
         } else {        
           Espruino.Core.Notifications.success("Flashing Complete", true);
           Espruino.callProcessor("flashComplete");
-          stepSuccess();
+          stepSuccess(data);
         }
       });
     });
   }
   
-  function stepSuccess() {
+  function stepSuccess(data) {
     var popup = Espruino.Core.App.openPopup({
       title: "Firmware Update",
       padding: true,
       contents: '<p><b>The Firmware was updated successfully!</b><p>'+
-                '<p>Please press the RST button to reset the Espruino device out of bootloader mode, and click Next to start using it!</p>' ,                
+                getDocs(data, "success"),                
       position: "center",
       next : function() {
         popup.close();
@@ -195,7 +193,37 @@
         popup.close();
       }
     });
-  }  
+  }
+  
+  function getDocs(data, doc) {
+    var html = undefined;
+    if (doc=="reset") {
+      if (data.board_id.substr(0,4)=="PICO") {
+        html = 
+          '<p><b>Please put your board into bootloader mode.</b> Plug it into USB with the button held down.</p>'+
+          '<p>When the red and green LEDs start pulsing on and off, click \'Next\'...</p>'+
+          '<p>If the LEDs are not pulsing, please see the <a href="http://www.espruino.com/Troubleshooting" target="_blank">Troubleshooting page</a></p>';
+      } else {        
+        html = 
+          '<p><b>Please put your board into bootloader mode.</b> Hold down BTN1, and then press and release RST.</p>'+
+          '<p>When the blue LED starts pulsing on and off, click \'Next\'...</p>'+
+          '<p>If the blue LED is not pulsing, please see the <a href="http://www.espruino.com/Troubleshooting" target="_blank">Troubleshooting page</a></p>';
+      }
+    } else if (doc=="success") {
+      if (data.board_id.substr(0,4)=="PICO") {
+        html = 
+          '<p>Please unplug the Pico and plug it back in to exit bootloader mode, then click Next to start using it!</p>';
+      } else {        
+        html = 
+          '<p>Please press the RST button to reset the Espruino out of bootloader mode, then click Next to start using it!</p>';
+      }
+    } 
+    if (!html) {
+      html = "Couldn't find documentation"
+      console.warn("Unknown doc type '"+doc+"' for board '"+data.board_id+"'");
+    }
+    return html;
+  }
   
   Espruino.Core.MenuFlasher = {
       init : init,
