@@ -194,6 +194,16 @@
       }
     }
   },
+  "NetworkJS": {
+    "!type": "fn()",
+    "!doc": "Library that initialises a network device that calls into JavaScript",
+    "!url": "http://www.espruino.com/Reference#l_NetworkJS_undefined",
+    "create": {
+      "!type": "fn(obj: ?) -> ?",
+      "!doc": "Initialise the WIZnet module and return an Ethernet object. For instance:\n\n```\nrequire(\"NetworkJS\").create({\n  create : function(host,port) {\n    // Create a socket and return its index, host is a string, port is an integer.\n    // If host isn't defined, create a server socket\n    console.log(\"Create\",host,port);\n    return 1;\n  },\n  close : function(sckt) {\n    // Close the socket. returns nothing\n  },\n  accept : function(sckt) {\n    // Accept the connection on the server socket. Returns socket number or -1 if no connection\n    return -1;\n  },\n  recv : function(sckt, maxLen) {\n    // Receive data. Returns a string (even if empty).\n    // If non-string returned, socket is then closed\n    return null;//or \"\";\n  },\n  send : function(sckt, data) {\n    // Send data (as string). Returns the number of bytes sent - 0 is ok.\n    // Less than 0\n    return data.length;\n  }\n});\n```",
+      "!url": "http://www.espruino.com/Reference#l_NetworkJS_create"
+    }
+  },
   "url": {
     "!type": "fn()",
     "!doc": "This class helps to convert URLs into Objects of information ready for http.request/get",
@@ -1656,6 +1666,11 @@
         "!url": "http://www.espruino.com/Reference#l_SyntaxError_toString"
       }
     }
+  },
+  "TypeError": {
+    "!type": "fn(message: ?) -> ?",
+    "!doc": "Creates a TypeError object",
+    "!url": "http://www.espruino.com/Reference#l_TypeError_TypeError"
   },
   "InternalError": {
     "!type": "fn(message: ?) -> ?",
