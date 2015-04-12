@@ -29,14 +29,10 @@
       }
     }     
     
-    if (urlOrNothing) {
-      stepReset( { binary_url : urlOrNothing } );
-    } else {
-      stepSelectBoard();
-    }
+    stepSelectBoard(urlOrNothing);
   }
   
-  function stepSelectBoard() {
+  function stepSelectBoard( urlOrNothing ) {
     var boardList;
     
     var popup = Espruino.Core.App.openPopup({
@@ -51,8 +47,13 @@
         popup.close();
         if (boardId===undefined || boardList[boardId]===undefined)
           console.error("No board ID found! Looks like no option selected");
-        else
-          stepSelectBinary( boardId, boardList[boardId]["json"]["info"] );
+        else {
+          var boardInfo = boardList[boardId]["json"]["info"];
+          if (urlOrNothing)
+            stepReset( { binary_url : urlOrNothing, board_id : boardId } );
+          else
+            stepSelectBinary( boardId, boardInfo );
+        }
       }
     });
     
