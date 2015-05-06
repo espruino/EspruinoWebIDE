@@ -6,7 +6,7 @@
  file, You can obtain one at http://mozilla.org/MPL/2.0/.
  
  ------------------------------------------------------------------
-  Settings Page for the Espruimno Flasher
+  Settings Page for the Espruino Flasher
  ------------------------------------------------------------------
 **/
 "use strict";
@@ -14,7 +14,7 @@
   
   function init() {
     Espruino.Core.Config.addSection("Flasher", {
-      description : "Writing a new version of Espruino onto the board",
+      description : "This allows you to update the Espruino Firmware that is on your board",
       sortOrder : 10000,
       getHTML : function(callback) {      
         $.get("/data/settings_flasher.html", function(data) {

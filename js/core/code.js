@@ -51,7 +51,7 @@
         code = Espruino.Config.CODE;
         console.log("Loaded code from storage.");
       } else {
-        code = "var  l = false;\nsetInterval(function() {\n  l = !l;\n  LED1.write(l);\n}, 500);";
+        code = "var  on = false;\nsetInterval(function() {\n  on = !on;\n  LED1.write(on);\n}, 500);";
         console.log("No code in storage.");
       }
       Espruino.Core.EditorJavaScript.setCode(code);

@@ -104,6 +104,7 @@
       title: "Firmware Update",
       padding: true,
       contents: '<p>Your board has multiple options for firmware. Please select from the list below and click next...</p>'+
+                '<p><b>Note:</b> If you don\'t need any of the features listed, you can choose any firmware.</p>'+
                 html,                
       position: "center",
       next : function() {
