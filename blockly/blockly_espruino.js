@@ -53,12 +53,28 @@ for (var p in PORTS)
     PINS.push([pinname,pinname]);
   }
 
-Blockly.Blocks.espruino_timeout = {
+Blockly.Blocks.espruino_delay = {
   category: 'Espruino',
   init: function() {
       this.appendValueInput('SECONDS')
           .setCheck('Number')
           .appendField('wait');
+      this.appendDummyInput()
+          .appendField("seconds");
+
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setColour(ESPRUINO_COL);
+    this.setInputsInline(true);
+    this.setTooltip('Delay for a certain amount of time');
+  }
+};
+Blockly.Blocks.espruino_timeout = {
+  category: 'Espruino',
+  init: function() {
+      this.appendValueInput('SECONDS')
+          .setCheck('Number')
+          .appendField('after');
       this.appendDummyInput()
           .appendField("seconds");
       this.appendStatementInput('DO')
@@ -259,11 +275,53 @@ Blockly.Blocks.espruino_code = {
     }
   };
 // -----------------------------------------------------------------------------------
+Blockly.Blocks.hw_servoMove = {
+  category: 'Espruino',
+  init: function() {
+    this.appendValueInput('PIN')
+        .setCheck('Pin')
+        .appendField('Move Servo on Pin');
+    this.appendValueInput('VAL')
+        .setCheck(['Number','Boolean'])
+        .appendField('to');
+
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setColour(ESPRUINO_COL);
+    this.setInputsInline(true);
+    this.setTooltip('Start moving the servo motor - position between -1 and 1');
+  }
+};
+Blockly.Blocks.hw_servoStop = {
+  category: 'Espruino',
+  init: function() {
+    this.appendValueInput('PIN')
+        .setCheck('Pin')
+        .appendField('Stop Servo on Pin');
+
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setColour(ESPRUINO_COL);
+    this.setInputsInline(true);
+    this.setTooltip('Stop moving the servo motor');
+  }
+};
+
+
+// -----------------------------------------------------------------------------------
+// -----------------------------------------------------------------------------------
+// -----------------------------------------------------------------------------------
+// -----------------------------------------------------------------------------------
 
 Blockly.JavaScript.text_print = function() {
   var argument0 = Blockly.JavaScript.valueToCode(this, 'TEXT',
       Blockly.JavaScript.ORDER_NONE) || '\'\'';
   return 'print(' + argument0 + ');\n';
+};
+Blockly.JavaScript.espruino_delay = function() {
+  var seconds = Blockly.JavaScript.valueToCode(this, 'SECONDS',
+      Blockly.JavaScript.ORDER_ASSIGNMENT) || '1';
+  return "var t=getTime()+"+seconds+";while(getTime()<t);\n"
 };
 Blockly.JavaScript.espruino_timeout = function() {
   var seconds = Blockly.JavaScript.valueToCode(this, 'SECONDS',
@@ -319,4 +377,14 @@ Blockly.JavaScript.espruino_analogRead = function() {
 Blockly.JavaScript.espruino_code = function() {
   var code = JSON.stringify(this.getFieldValue("CODE"));
   return "eval("+code+");\n";
+};
+// -----------------------------------------------------------------------------------
+Blockly.JavaScript.hw_servoMove = function() {
+  var pin = Blockly.JavaScript.valueToCode(this, 'PIN', Blockly.JavaScript.ORDER_ASSIGNMENT) || '0';
+  var val = Blockly.JavaScript.valueToCode(this, 'VAL', Blockly.JavaScript.ORDER_ASSIGNMENT) || '0';
+  return "analogWrite("+pin+", (1.5+"+val+")/20, {freq:50});\n";
+};
+Blockly.JavaScript.hw_servoStop = function() {
+  var pin = Blockly.JavaScript.valueToCode(this, 'PIN', Blockly.JavaScript.ORDER_ASSIGNMENT) || '0';
+  return "digitalWrite("+pin+", 0);\n";
 };
