@@ -140,9 +140,8 @@
         callback(false);
       }
     }, function () {
-      console.log("Force disconnect");
+      console.log("Disconnect callback...");
       Espruino.Core.Notifications.warning("Disconnected", true);
-      disconnect();
     });
 
   };
