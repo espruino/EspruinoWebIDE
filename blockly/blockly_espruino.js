@@ -306,7 +306,21 @@ Blockly.Blocks.hw_servoStop = {
     this.setTooltip('Stop moving the servo motor');
   }
 };
-
+Blockly.Blocks.hw_ultrasonic = {
+    category: 'Espruino',
+    init: function() {
+      this.appendValueInput('TRIG')
+          .setCheck('Pin')
+          .appendField('Get distance, trigger');
+      this.appendValueInput('ECHO')
+          .setCheck('Pin')
+          .appendField(', echo');
+      this.setOutput(true, 'Number');
+      this.setColour(ESPRUINO_COL);
+      this.setInputsInline(true);
+      this.setTooltip('Use ultrasonic sensor');
+    }
+  };
 
 // -----------------------------------------------------------------------------------
 // -----------------------------------------------------------------------------------
@@ -382,9 +396,31 @@ Blockly.JavaScript.espruino_code = function() {
 Blockly.JavaScript.hw_servoMove = function() {
   var pin = Blockly.JavaScript.valueToCode(this, 'PIN', Blockly.JavaScript.ORDER_ASSIGNMENT) || '0';
   var val = Blockly.JavaScript.valueToCode(this, 'VAL', Blockly.JavaScript.ORDER_ASSIGNMENT) || '0';
-  return "analogWrite("+pin+", (1.5+"+val+")/20, {freq:50});\n";
+  return "analogWrite("+pin+", (1.5+0.7*("+val+"))/20, {freq:50});\n";
 };
 Blockly.JavaScript.hw_servoStop = function() {
   var pin = Blockly.JavaScript.valueToCode(this, 'PIN', Blockly.JavaScript.ORDER_ASSIGNMENT) || '0';
   return "digitalWrite("+pin+", 0);\n";
+};
+Blockly.JavaScript.hw_ultrasonic = function() {
+  var trig = Blockly.JavaScript.valueToCode(this, 'TRIG', Blockly.JavaScript.ORDER_ASSIGNMENT) || '0';
+  var echo = Blockly.JavaScript.valueToCode(this, 'ECHO', Blockly.JavaScript.ORDER_ASSIGNMENT) || '0';
+  var funcVar = "ultrasonic"+trig+echo;
+  var distanceVar = "distance"+trig+echo;
+  var watchVar = "isListening"+trig+echo;
+  var functionName = Blockly.JavaScript.provideFunction_(
+    funcVar,
+    [ "function " + Blockly.JavaScript.FUNCTION_NAME_PLACEHOLDER_ + "() {",       
+      "  if (!"+watchVar+") {",
+      "    "+watchVar+"=true;",
+      "    "+distanceVar+"=0;",
+      "    setWatch(",
+      "      function(e) { "+distanceVar+"=(e.time-e.lastTime)*17544; },",
+      "      "+echo+", {repeat:true, edge:'falling'});",
+      "    setInterval(",
+      "      function(e) { digitalPulse("+trig+", 1, 0.01/*10uS*/); }, 100);",
+      "  }",
+      "  return "+distanceVar+";",
+      "}"]);
+  return [funcVar+"()", Blockly.JavaScript.ORDER_ATOMIC];
 };

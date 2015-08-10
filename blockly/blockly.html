@@ -293,9 +293,14 @@
     <category name="Hardware">
       <block type="hw_servoMove">
         <value name="PIN"><block type="espruino_pin"><title name="PIN">B15</title></block></value>
+        <value name="VAL"><block type="math_number"><title name="NUM">1</title></block></value>
       </block>
       <block type="hw_servoStop">
         <value name="PIN"><block type="espruino_pin"><title name="PIN">B15</title></block></value>
+      </block>
+      <block type="hw_ultrasonic">
+        <value name="TRIG"><block type="espruino_pin"><title name="PIN">A0</title></block></value>
+        <value name="ECHO"><block type="espruino_pin"><title name="PIN">A1</title></block></value>
       </block>
     </category>
     <category name="Functions" custom="PROCEDURE"></category>
