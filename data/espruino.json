@@ -200,7 +200,7 @@
     "!url": "http://www.espruino.com/Reference#l_NetworkJS_undefined",
     "create": {
       "!type": "fn(obj: ?) -> ?",
-      "!doc": "Initialise the WIZnet module and return an Ethernet object. For instance:\n\n```\nrequire(\"NetworkJS\").create({\n  create : function(host,port) {\n    // Create a socket and return its index, host is a string, port is an integer.\n    // If host isn't defined, create a server socket\n    console.log(\"Create\",host,port);\n    return 1;\n  },\n  close : function(sckt) {\n    // Close the socket. returns nothing\n  },\n  accept : function(sckt) {\n    // Accept the connection on the server socket. Returns socket number or -1 if no connection\n    return -1;\n  },\n  recv : function(sckt, maxLen) {\n    // Receive data. Returns a string (even if empty).\n    // If non-string returned, socket is then closed\n    return null;//or \"\";\n  },\n  send : function(sckt, data) {\n    // Send data (as string). Returns the number of bytes sent - 0 is ok.\n    // Less than 0\n    return data.length;\n  }\n});\n```",
+      "!doc": "Initialise the network using the callbacks given and return the first argument. For instance:\n\n```\nrequire(\"NetworkJS\").create({\n  create : function(host,port) {\n    // Create a socket and return its index, host is a string, port is an integer.\n    // If host isn't defined, create a server socket\n    console.log(\"Create\",host,port);\n    return 1;\n  },\n  close : function(sckt) {\n    // Close the socket. returns nothing\n  },\n  accept : function(sckt) {\n    // Accept the connection on the server socket. Returns socket number or -1 if no connection\n    return -1;\n  },\n  recv : function(sckt, maxLen) {\n    // Receive data. Returns a string (even if empty).\n    // If non-string returned, socket is then closed\n    return null;//or \"\";\n  },\n  send : function(sckt, data) {\n    // Send data (as string). Returns the number of bytes sent - 0 is ok.\n    // Less than 0\n    return data.length;\n  }\n});\n```",
       "!url": "http://www.espruino.com/Reference#l_NetworkJS_create"
     }
   },
@@ -295,12 +295,12 @@
     "prototype": {
       "getIP": {
         "!type": "fn() -> ?",
-        "!doc": "Get the current IP address",
+        "!doc": "Get the current IP address, subnet, gateway and mac address.",
         "!url": "http://www.espruino.com/Reference#l_Ethernet_getIP"
       },
       "setIP": {
         "!type": "fn(options: ?) -> bool",
-        "!doc": "Set the current IP address for get an IP from DHCP (if no options object is specified)",
+        "!doc": "Set the current IP address or get an IP from DHCP (if no options object is specified)\n\nIf 'mac' is specified as an option, it must be a string of the form `\"00:01:02:03:04:05\"`",
         "!url": "http://www.espruino.com/Reference#l_Ethernet_setIP"
       }
     }
@@ -311,7 +311,7 @@
     "!url": "http://www.espruino.com/Reference#l_tv_undefined",
     "setup": {
       "!type": "fn(options: ?, width: number) -> ?",
-      "!doc": "This initialises the TV output. Options for PAL are as follows:\n\n```\nvar g = require('tv').setup({ type : \"pal\",\n  video : A7, // Pin - SPI MOSI Pin for Video output (MUST BE SPI1)\n  sync : A6, // Pin - Timer pin to use for video sync\n  width : 384,\n  height : 270, // max 270\n});\n```\n\nand for VGA:\n\n\n```\nvar g = require('tv').setup({ type : \"vga\",\n  video : A7, // Pin - SPI MOSI Pin for Video output (MUST BE SPI1)\n  hsync : A6, // Pin - Timer pin to use for video sync\n  vsync : A5, // Pin - pin to use for video sync\n  width : 220,\n  height : 480,\n});\n```\n\nSee the [[Television]] page for more information.",
+      "!doc": "This initialises the TV output. Options for PAL are as follows:\n\n```\nvar g = require('tv').setup({ type : \"pal\",\n  video : A7, // Pin - SPI MOSI Pin for Video output (MUST BE SPI1)\n  sync : A6, // Pin - Timer pin to use for video sync\n  width : 384,\n  height : 270, // max 270\n});\n```\n\nand for VGA:\n\n```\nvar g = require('tv').setup({ type : \"vga\",\n  video : A7, // Pin - SPI MOSI Pin for Video output (MUST BE SPI1)\n  hsync : A6, // Pin - Timer pin to use for video sync\n  vsync : A5, // Pin - pin to use for video sync\n  width : 220,\n  height : 240,\n  repeat : 2, // amount of times to repeat each line\n});\n```\n\nor\n\n```\nvar g = require('tv').setup({ type : \"vga\",\n  video : A7, // Pin - SPI MOSI Pin for Video output (MUST BE SPI1)\n  hsync : A6, // Pin - Timer pin to use for video sync\n  vsync : A5, // Pin - pin to use for video sync\n  width : 220,\n  height : 480,\n  repeat : 1, // amount of times to repeat each line\n});\n```\n\nSee the [[Television]] page for more information.",
       "!url": "http://www.espruino.com/Reference#l_tv_setup"
     }
   },
@@ -544,7 +544,7 @@
   },
   "Graphics": {
     "!type": "fn()",
-    "!doc": "This class provides Graphics operations that can be applied to a surface.\n\nUse Graphics.createXXX to create a graphics object that renders in the way you want.\n\nNOTE: On boards that contain an LCD, there is a built-in 'LCD' object of type Graphics. For instance to draw a line you'd type: ```LCD.drawLine(0,0,100,100)```",
+    "!doc": "This class provides Graphics operations that can be applied to a surface.\n\nUse Graphics.createXXX to create a graphics object that renders in the way you want. See [the Graphics page](/Graphics) for more information.\n\n**Note:** On boards that contain an LCD, there is a built-in 'LCD' object of type Graphics. For instance to draw a line you'd type: ```LCD.drawLine(0,0,100,100)```",
     "!url": "http://www.espruino.com/Reference#Graphics",
     "createArrayBuffer": {
       "!type": "fn(width: number, height: number, bpp: number, options: ?) -> +Graphics",
@@ -606,16 +606,6 @@
         "!type": "fn(r: ?, g: ?, b: ?)",
         "!doc": "Set the background color to use for subsequent drawing operations",
         "!url": "http://www.espruino.com/Reference#l_Graphics_setBgColor"
-      },
-      "setColorHSV": {
-        "!type": "fn(h: ?, s: ?, v: ?)",
-        "!doc": "Set the HSV color to use for subsequent drawing operations",
-        "!url": "http://www.espruino.com/Reference#l_Graphics_setColorHSV"
-      },
-      "setBgColorHSV": {
-        "!type": "fn(h: ?, s: ?, v: ?)",
-        "!doc": "Set the background HSV color to use for subsequent drawing operations",
-        "!url": "http://www.espruino.com/Reference#l_Graphics_setBgColorHSV"
       },
       "getColor": {
         "!type": "fn() -> number",
@@ -903,7 +893,7 @@
   },
   "SPI": {
     "!type": "fn()",
-    "!doc": "Create a software SPI port. This has limited functionality (no baud rate), but it can work on any pins.",
+    "!doc": "Create a software SPI port. This has limited functionality (no baud rate), but it can work on any pins.\n\nUse `SPI.setup` to configure this port.",
     "!url": "http://www.espruino.com/Reference#l_SPI_SPI",
     "prototype": {
       "setup": {
@@ -913,7 +903,7 @@
       },
       "send": {
         "!type": "fn(data: ?, nss_pin: +Pin) -> ?",
-        "!doc": "Send data down SPI, and return the result\n\nSending multiple bytes in one call to send is preferable as they can then be transmitted end to end. Using multiple calls to send() will result in significantly slower transmission speeds.\n\nFor maximum speeds, please pass either Strings or Typed Arrays as arguments.",
+        "!doc": "Send data down SPI, and return the result. Sending an integer will return an integer, a String will return a String, and anything else will return a Uint8Array.\n\nSending multiple bytes in one call to send is preferable as they can then be transmitted end to end. Using multiple calls to send() will result in significantly slower transmission speeds.\n\nFor maximum speeds, please pass either Strings or Typed Arrays as arguments. Note that you can even pass arrays of arrays, like `[1,[2,3,4],5]`",
         "!url": "http://www.espruino.com/Reference#l_SPI_send"
       },
       "write": {
@@ -1413,17 +1403,17 @@
       },
       "print": {
         "!type": "fn(string: ?)",
-        "!doc": "Print a string to the serial port - without a line feed",
+        "!doc": "Print a string to the serial port - without a line feed\n\n**Note:** This function replaces any occurances of `\\n` in the string with `\\r\\n`. To avoid this, use `Serial.write`.",
         "!url": "http://www.espruino.com/Reference#l_Serial_print"
       },
       "println": {
         "!type": "fn(string: ?)",
-        "!doc": "Print a line to the serial port (newline character sent are '\r\n')",
+        "!doc": "Print a line to the serial port with a newline (`\\r\\n`) at the end of it.\n\n**Note:** This function converts data to a string first, eg `Serial.print([1,2,3])` is equivalent to `Serial.print(\"1,2,3\"). If you'd like to write raw bytes, use `Serial.write`.",
         "!url": "http://www.espruino.com/Reference#l_Serial_println"
       },
       "write": {
         "!type": "fn(data: ?)",
-        "!doc": "Write a character or array of characters to the serial port - without a line feed",
+        "!doc": "Write a character or array of data to the serial port\n\nThis method writes unmodified data, eg `Serial.write([1,2,3])` is equivalent to `Serial.write(\"\\1\\2\\3\")`. If you'd like data converted to a string first, use `Serial.print`.",
         "!url": "http://www.espruino.com/Reference#l_Serial_write"
       },
       "onData": {
@@ -1522,28 +1512,38 @@
     "prototype": {
       "read": {
         "!type": "fn() -> bool",
-        "!doc": "Returns the input state of the pin as a boolean",
+        "!doc": "Returns the input state of the pin as a boolean.\n\n**Note:** if you didn't call `pinMode` beforehand then this function will also reset pin's state to `\"input\"`",
         "!url": "http://www.espruino.com/Reference#l_Pin_read"
       },
       "set": {
         "!type": "fn()",
-        "!doc": "Sets the output state of the pin to a 1",
+        "!doc": "Sets the output state of the pin to a 1\n\n**Note:** if you didn't call `pinMode` beforehand then this function will also reset pin's state to `\"output\"`",
         "!url": "http://www.espruino.com/Reference#l_Pin_set"
       },
       "reset": {
         "!type": "fn()",
-        "!doc": "Sets the output state of the pin to a 0",
+        "!doc": "Sets the output state of the pin to a 0\n\n**Note:** if you didn't call `pinMode` beforehand then this function will also reset pin's state to `\"output\"`",
         "!url": "http://www.espruino.com/Reference#l_Pin_reset"
       },
       "write": {
         "!type": "fn(value: bool)",
-        "!doc": "Sets the output state of the pin to the parameter given",
+        "!doc": "Sets the output state of the pin to the parameter given\n\n**Note:** if you didn't call `pinMode` beforehand then this function will also reset pin's state to `\"output\"`",
         "!url": "http://www.espruino.com/Reference#l_Pin_write"
       },
       "writeAtTime": {
         "!type": "fn(value: bool, time: number)",
-        "!doc": "Sets the output state of the pin to the parameter given at the specified time. Note that this doesn't change the mode of the pin to an output. To do that, you need to use `pin.write(0)` or `pinMode(pin, 'output')`.",
+        "!doc": "Sets the output state of the pin to the parameter given at the specified time.\n\n**Note:** this **doesn't** change the mode of the pin to an output. To do that, you need to use `pin.write(0)` or `pinMode(pin, 'output')` first.",
         "!url": "http://www.espruino.com/Reference#l_Pin_writeAtTime"
+      },
+      "getMode": {
+        "!type": "fn() -> ?",
+        "!doc": "Return the current mode of the given pin. See `pinMode` for more information.",
+        "!url": "http://www.espruino.com/Reference#l_Pin_getMode"
+      },
+      "mode": {
+        "!type": "fn(mode: ?)",
+        "!doc": "Set the mode of the given pin. See [`pinMode`](#l__global_pinMode) for more information on pin modes.",
+        "!url": "http://www.espruino.com/Reference#l_Pin_mode"
       }
     }
   },
@@ -1621,7 +1621,7 @@
     }
   },
   "Function": {
-    "!type": "fn(code: ?) -> ?",
+    "!type": "fn(args: ?) -> ?",
     "!doc": "Creates a function",
     "!url": "http://www.espruino.com/Reference#l_Function_Function",
     "prototype": {
@@ -1640,6 +1640,11 @@
         "!type": "fn(this: ?, args: ?) -> ?",
         "!doc": "This executes the function with the supplied 'this' argument and parameters",
         "!url": "http://www.espruino.com/Reference#l_Function_apply"
+      },
+      "bind": {
+        "!type": "fn(this: ?, params: ?) -> ?",
+        "!doc": "This executes the function with the supplied 'this' argument and parameters",
+        "!url": "http://www.espruino.com/Reference#l_Function_bind"
       }
     }
   },
@@ -1812,6 +1817,11 @@
         "!type": "fn() -> ?",
         "!doc": "",
         "!url": "http://www.espruino.com/Reference#l_String_toUpperCase"
+      },
+      "trim": {
+        "!type": "fn() -> +String",
+        "!doc": "Return the integer value of a single character at the given position in the String.\n\nNote that this returns 0 not 'NaN' for out of bounds characters",
+        "!url": "http://www.espruino.com/Reference#l_String_trim"
       }
     },
     "fromCharCode": {
@@ -1846,7 +1856,7 @@
     },
     "getAnalogVRef": {
       "!type": "fn() -> number",
-      "!doc": "Check the internal voltage reference. To work out an actual voltage of an input pin, you can use `analogRead(pin)*E.getAnalogVRef()` \n\nWhile this is implemented on Espruino boards, it may not be implemented on other devices. If so it'll return NaN.",
+      "!doc": "Check the internal voltage reference. To work out an actual voltage of an input pin, you can use `analogRead(pin)*E.getAnalogVRef()`\n\n**Note:** This value is calculated by reading the voltage on an internal voltage reference with the ADC.\nIt will be slightly noisy, so if you need this for accurate measurements we'd recommend that you call\nthis function several times and average the results.\n\nWhile this is implemented on Espruino boards, it may not be implemented on other devices. If so it'll return NaN.",
       "!url": "http://www.espruino.com/Reference#l_E_getAnalogVRef"
     },
     "nativeCall": {
@@ -1906,7 +1916,7 @@
     },
     "toString": {
       "!type": "fn(args: ?) -> +String",
-      "!doc": "This creates a string from the given arguments. If an argument is a String or an Array,\neach element is traversed and added as an 8 bit character. If it is anything else, it is\nconverted to a character directly.",
+      "!doc": "Returns a 'flat' string representing the data in the arguments.\n\nThis creates a string from the given arguments. If an argument is a String or an Array,\neach element is traversed and added as an 8 bit character. If it is anything else, it is\nconverted to a character directly.",
       "!url": "http://www.espruino.com/Reference#l_E_toString"
     },
     "toUint8Array": {
@@ -1928,6 +1938,61 @@
       "!type": "fn(v: ?) -> number",
       "!doc": "Return the number of Variable Blocks used by the supplied variable. This is useful if you're running out of memory and you want to be able to see what is taking up most of the available space.\n\nSee http://www.espruino.com/Internals for more information",
       "!url": "http://www.espruino.com/Reference#l_E_getSizeOf"
+    },
+    "mapInPlace": {
+      "!type": "fn(from: ?, to: ?, map: ?, bits: number)",
+      "!doc": "Take each element of the `from` array, look it up in `map` (or call the \nfunction with it as a first argument), and write it into the corresponding\nelement in the `to` array.",
+      "!url": "http://www.espruino.com/Reference#l_E_mapInPlace"
+    },
+    "srand": {
+      "!type": "fn(v: number)",
+      "!doc": "Set the seed for the random number generator used by `Math.random()`.",
+      "!url": "http://www.espruino.com/Reference#l_E_srand"
+    },
+    "hwRand": {
+      "!type": "fn() -> number",
+      "!doc": "Unlike 'Math.random()' which uses a pseudo-random number generator, this\nmethod reads from the internal voltage reference several times, xoring and\nrotating to try and make a relatively random value from the noise in the\nsignal.",
+      "!url": "http://www.espruino.com/Reference#l_E_hwRand"
+    },
+    "HSBtoRGB": {
+      "!type": "fn(hue: number, sat: number, bri: number) -> number",
+      "!doc": "Convert hue, saturation and brightness to red, green and blue (packed into an integer)\n\nThis replaces `Graphics.setColorHSB` and `Graphics.setBgColorHSB`. On devices with 24 bit colour it can\nbe used as: `Graphics.setColorHSB(E.HSBtoRGB(h, s, b))`",
+      "!url": "http://www.espruino.com/Reference#l_E_HSBtoRGB"
+    },
+    "setUSBHID": {
+      "!type": "fn(opts: ?)",
+      "!doc": "USB HID will only take effect next time you unplug and re-plug your Espruino. If you're\ndisconnecting it from power you'll have to make sure you have `save()`d after calling\nthis function.",
+      "!url": "http://www.espruino.com/Reference#l_E_setUSBHID"
+    },
+    "sendUSBHID": {
+      "!type": "fn(data: ?) -> bool",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_E_sendUSBHID"
+    }
+  },
+  "Flash": {
+    "!type": "fn()",
+    "!doc": "This module allows access to read and write the STM32's flash memory.\n\nIt should be used with extreme caution, as it is easy to overwrite parts of Flash\nmemory belonging to Espruino or even its bootloader. If you damage the bootloader\nthen you may need external hardware such as a USB-TTL converter to restore it. For\nmore information on restoring the bootloader see `Advanced Reflashing` in your\nboard's reference pages.\n\nTo see which areas of memory you can and can't overwrite, look at the values\nreported by `process.memory()`.",
+    "!url": "http://www.espruino.com/Reference#l_Flash_undefined",
+    "getPage": {
+      "!type": "fn(addr: number) -> ?",
+      "!doc": "Returns the start and length of the flash page containing the given address.",
+      "!url": "http://www.espruino.com/Reference#l_Flash_getPage"
+    },
+    "erasePage": {
+      "!type": "fn(addr: number)",
+      "!doc": "Erase a page of flash memory",
+      "!url": "http://www.espruino.com/Reference#l_Flash_erasePage"
+    },
+    "write": {
+      "!type": "fn(data: ?, addr: number)",
+      "!doc": "Write data into memory at the given address - IN MULTIPLES OF 4 BYTES.\n\nIn flash memory you may only turn bits that are 1 into bits that are 0. If\nyou're writing data into an area that you have already written (so `read`\ndoesn't return all `0xFF`) you'll need to call `erasePage` to clear the\nentire page.",
+      "!url": "http://www.espruino.com/Reference#l_Flash_write"
+    },
+    "read": {
+      "!type": "fn(length: number, addr: number) -> ?",
+      "!doc": "Read flash memory from the given address",
+      "!url": "http://www.espruino.com/Reference#l_Flash_read"
     }
   },
   "process": {
@@ -2091,13 +2156,13 @@
     "!url": "http://www.espruino.com/Reference#l__global_getSerial"
   },
   "setInterval": {
-    "!type": "fn(function: ?, timeout: number) -> ?",
-    "!doc": "Call the function specified REPEATEDLY after the timeout in milliseconds.\n\nThe function that is being called may also take an argument, which is an object containing a field called 'time' (the time in seconds at which the timer happened)\n\nfor example: ```setInterval(function (e) { print(e.time); }, 1000);```\n\nThis can also be removed using clearInterval\n\n**Note:** If `setDeepSleep(true)` has been called and the interval is greater than 5 seconds, Espruino may execute the interval up to 1 second late. This is because Espruino can only wake from deep sleep every second - and waking early would cause Espruino to waste power while it waited for the correct time.",
+    "!type": "fn(function: ?, timeout: number, args: ?) -> ?",
+    "!doc": "Call the function specified REPEATEDLY after the timeout in milliseconds.\n\nYou can also specify extra arguments that will be sent to the function when it is executed. For example:\n\n```\nsetInterval(function (a,b) {\n  console.log(a+\" \"+b);\n}, 1000, \"Hello\", \"World\");\n// prints 'Hello World'\n```\n\nIf you want to stop your function from being called, pass the number that\nwas returned by `setInterval` into the `clearInterval` function.\n\n**Note:** If `setDeepSleep(true)` has been called and the interval is greater than 5 seconds, Espruino may execute the interval up to 1 second late. This is because Espruino can only wake from deep sleep every second - and waking early would cause Espruino to waste power while it waited for the correct time.",
     "!url": "http://www.espruino.com/Reference#l__global_setInterval"
   },
   "setTimeout": {
-    "!type": "fn(function: ?, timeout: number) -> ?",
-    "!doc": "Call the function specified ONCE after the timeout in milliseconds.\n\nThe function that is being called may also take an argument, which is an object containing a field called 'time' (the time in seconds at which the timer happened)\n\nfor example: ```setTimeout(function (e) { print(e.time); }, 1000);```\n\nThis can also be removed using clearTimeout\n\n**Note:** If `setDeepSleep(true)` has been called and the interval is greater than 5 seconds, Espruino may execute the interval up to 1 second late. This is because Espruino can only wake from deep sleep every second - and waking early would cause Espruino to waste power while it waited for the correct time.",
+    "!type": "fn(function: ?, timeout: number, args: ?) -> ?",
+    "!doc": "Call the function specified ONCE after the timeout in milliseconds.\n\nYou can also specify extra arguments that will be sent to the function when it is executed. For example:\n\n```\nsetTimeout(function (a,b) {\n  console.log(a+\" \"+b);\n}, 1000, \"Hello\", \"World\");\n// prints 'Hello World'\n```\n\nIf you want to stop the function from being called, pass the number that\nwas returned by `setTimeout` into the `clearInterval` function.\n\n**Note:** If `setDeepSleep(true)` has been called and the interval is greater than 5 seconds, Espruino may execute the interval up to 1 second late. This is because Espruino can only wake from deep sleep every second - and waking early would cause Espruino to waste power while it waited for the correct time.",
     "!url": "http://www.espruino.com/Reference#l__global_setTimeout"
   },
   "clearInterval": {
@@ -2147,42 +2212,42 @@
   },
   "analogRead": {
     "!type": "fn(pin: +Pin) -> number",
-    "!doc": "Get the analog value of the given pin\n\nThis is different to Arduino which only returns an integer between 0 and 1023\n\nHowever only pins connected to an ADC will work (see the datasheet)",
+    "!doc": "Get the analog value of the given pin\n\nThis is different to Arduino which only returns an integer between 0 and 1023\n\nHowever only pins connected to an ADC will work (see the datasheet)\n\n**Note:** if you didn't call `pinMode` beforehand then this function will also reset pin's state to `\"analog\"`",
     "!url": "http://www.espruino.com/Reference#l__global_analogRead"
   },
   "analogWrite": {
     "!type": "fn(pin: +Pin, value: number, options: ?)",
-    "!doc": "Set the analog Value of a pin. It will be output using PWM",
+    "!doc": "Set the analog Value of a pin. It will be output using PWM.\n\n**Note:** if you didn't call `pinMode` beforehand then this function will also reset pin's state to `\"output\"`",
     "!url": "http://www.espruino.com/Reference#l__global_analogWrite"
   },
   "digitalPulse": {
     "!type": "fn(pin: +Pin, value: bool, time: ?)",
-    "!doc": "Pulse the pin with the value for the given time in milliseconds. It uses a hardware timer to produce accurate pulses, and returns immediately (before the pulse has finished). Use `digitalPulse(A0,1,0)` to wait until a previous pulse has finished.\n\neg. `digitalPulse(A0,1,5);` pulses A0 high for 5ms. `digitalPulse(A0,1,[5,2,4]);` pulses A0 high for 5ms, low for 2ms, and high for 4ms\n\ndigitalPulse is for SHORT pulses that need to be very accurate. If you're doing anything over a few milliseconds, use setTimeout instead.",
+    "!doc": "Pulse the pin with the value for the given time in milliseconds. It uses a hardware timer to produce accurate pulses, and returns immediately (before the pulse has finished). Use `digitalPulse(A0,1,0)` to wait until a previous pulse has finished.\n\neg. `digitalPulse(A0,1,5);` pulses A0 high for 5ms. `digitalPulse(A0,1,[5,2,4]);` pulses A0 high for 5ms, low for 2ms, and high for 4ms\n\n**Note:** if you didn't call `pinMode` beforehand then this function will also reset pin's state to `\"output\"`\n\ndigitalPulse is for SHORT pulses that need to be very accurate. If you're doing anything over a few milliseconds, use setTimeout instead.",
     "!url": "http://www.espruino.com/Reference#l__global_digitalPulse"
   },
   "digitalWrite": {
     "!type": "fn(pin: +Pin, value: number)",
-    "!doc": "Set the digital value of the given pin\n\nIf pin argument is an array of pins (eg. `[A2,A1,A0]`) the value argument will be treated as an array of bits where the last array element is the least significant bit. \n\nIn this case, pin values are set last significant bit first (from the right-hand side of the array of pins). This means you can use the same pin multiple times, for example `digitalWrite([A1,A1,A0,A0],0b0101)` would pulse A0 followed by A1.",
+    "!doc": "Set the digital value of the given pin.\n\n**Note:** if you didn't call `pinMode` beforehand then this function will also reset pin's state to `\"output\"`\n\nIf pin argument is an array of pins (eg. `[A2,A1,A0]`) the value argument will be treated as an array of bits where the last array element is the least significant bit. \n\nIn this case, pin values are set last significant bit first (from the right-hand side of the array of pins). This means you can use the same pin multiple times, for example `digitalWrite([A1,A1,A0,A0],0b0101)` would pulse A0 followed by A1.",
     "!url": "http://www.espruino.com/Reference#l__global_digitalWrite"
   },
   "digitalRead": {
     "!type": "fn(pin: +Pin) -> number",
-    "!doc": "Get the digital value of the given pin\n\nIf the pin argument is an array of pins (eg. `[A2,A1,A0]`) the value returned will be an number where the last array element is the least significant bit, for example if `A0=A1=1` and `A2=0`, `digitalRead([A2,A1,A0]) == 0b011`",
+    "!doc": "Get the digital value of the given pin. \n\n**Note:** if you didn't call `pinMode` beforehand then this function will also reset pin's state to `\"input\"`\n\nIf the pin argument is an array of pins (eg. `[A2,A1,A0]`) the value returned will be an number where the last array element is the least significant bit, for example if `A0=A1=1` and `A2=0`, `digitalRead([A2,A1,A0]) == 0b011`",
     "!url": "http://www.espruino.com/Reference#l__global_digitalRead"
   },
   "pinMode": {
     "!type": "fn(pin: +Pin, mode: ?)",
-    "!doc": "Set the mode of the given pin - note that digitalRead/digitalWrite/etc set this automatically unless pinMode has been called first. If you want digitalRead/etc to set the pin mode automatically after you have called pinMode, simply call it again with no mode argument: ```pinMode(pin)```",
+    "!doc": "Set the mode of the given pin.\n\n* `analog` - Analog input\n* `input` - Digital input\n* `input_pullup` - Digital input with internal ~40k pull-up resistor\n* `input_pulldown` - Digital input with internal ~40k pull-down resistor\n* `output` - Digital output\n* `opendrain` - Digital output that only ever pulls down to 0v. Sending a logical `1` leaves the pin open circuit\n* `af_output` - Digital output from built-in peripheral\n* `af_opendrain` - Digital output from built-in peripheral that only ever pulls down to 0v. Sending a logical `1` leaves the pin open circuit\n\n**Note:** `digitalRead`/`digitalWrite`/etc set the pin mode automatically *unless* `pinMode` has been called first. If you want `digitalRead`/etc to set the pin mode automatically after you have called `pinMode`, simply call it again with no mode argument: `pinMode(pin)`",
     "!url": "http://www.espruino.com/Reference#l__global_pinMode"
   },
   "getPinMode": {
     "!type": "fn(pin: +Pin) -> ?",
-    "!doc": "Return the current mode of the given pin. See `pinMode`",
+    "!doc": "Return the current mode of the given pin. See `pinMode` for more information.",
     "!url": "http://www.espruino.com/Reference#l__global_getPinMode"
   },
   "setWatch": {
     "!type": "fn(function: ?, pin: +Pin, options: ?) -> ?",
-    "!doc": "Call the function specified when the pin changes\n\nThe function may also take an argument, which is an object of type `{time:float, lastTime:float, state:bool}`.\n\n`time` is the time in seconds at which the pin changed state, `lastTime` is the time in seconds at which the pin last changed state, and `state` is the current state of the pin.\n\nFor instance, if you want to measure the length of a positive pulse you could use: ```setWatch(function(e) { console.log(e.time-e.lastTime); }, BTN, { repeat:true, edge:'falling' });```\n\nIf the callback is a native function `void (bool state)`\nthen you can also add `irq:true` to options, which will cause the function to be\ncalled from within the IRQ. When doing this, interruptions will happen on both\nedges and there will be no debouncing.\n\nWatches set with `setWatch` can be removed using `clearWatch`",
+    "!doc": "Call the function specified when the pin changes. Watches set with `setWatch` can be removed using `clearWatch`.\n\nThe function may also take an argument, which is an object of type `{state:bool, time:float, lastTime:float}`.\n\n* `state` is whether the pin is currently a `1` or a `0`\n* `time` is the time in seconds at which the pin changed state\n* `lastTime` is the time in seconds at which the **pin last changed state**. When using `edge:'rising'` or `edge:'falling'`, this is not the same as when the function was last called. \n\nFor instance, if you want to measure the length of a positive pulse you could use `setWatch(function(e) { console.log(e.time-e.lastTime); }, BTN, { repeat:true, edge:'falling' });`. \nThis will only be called on the falling edge of the pulse, but will be able to measure the width of the pulse because `e.lastTime` is the time of the rising edge.\n\nInternally, an interrupt writes the time of the pin's state change into a queue, and the function\nsupplied to `setWatch` is executed only from the main message loop. However, if the callback is a \nnative function `void (bool state)` then you can add `irq:true` to options, which will cause the \nfunction to be called from within the IRQ. When doing this, interrupts will happen on both edges \nand there will be no debouncing.",
     "!url": "http://www.espruino.com/Reference#l__global_setWatch"
   },
   "clearWatch": {
