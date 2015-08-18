@@ -47,7 +47,7 @@
     });
     // When things have changed...
     codeMirror.on("change", function(cm, changeObj) {
-      // If pasting, make sure we ignore `&shm;` - which gets inserted
+      // If pasting, make sure we ignore `&shy;` - which gets inserted
       // by the forum's code formatter
       if (changeObj.origin == "paste") {
         cm.setValue(cm.getValue().replace(/\u00AD/g,''));
