@@ -50,7 +50,9 @@
       // If pasting, make sure we ignore `&shy;` - which gets inserted
       // by the forum's code formatter
       if (changeObj.origin == "paste") {
+        var c = cm.getCursor();
         cm.setValue(cm.getValue().replace(/\u00AD/g,''));
+        cm.setCursor(c);
       }
       // write the modified code into local storage
       if (chrome && chrome.storage && chrome.storage.local)
