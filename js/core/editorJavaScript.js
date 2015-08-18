@@ -45,8 +45,14 @@
         }
       }
     });
-    // When things have changed, write the modified code into local storage
+    // When things have changed...
     codeMirror.on("change", function(cm, changeObj) {
+      // If pasting, make sure we ignore `&shm;` - which gets inserted
+      // by the forum's code formatter
+      if (changeObj.origin == "paste") {
+        cm.setValue(cm.getValue().replace(/\u00AD/g,''));
+      }
+      // write the modified code into local storage
       if (chrome && chrome.storage && chrome.storage.local)
         chrome.storage.local.set({"CODE_JS": cm.getValue()});
     });
