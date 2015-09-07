@@ -33,13 +33,13 @@ Blockly.Blocks.robot_motor_l = {
   init: function() {
       this.appendValueInput('VAL')
           .setCheck(['Number','Boolean'])
-          .appendField('Set Left Motor Speed');
+          .appendField('Set Left Servo Speed');
     robotStatement(this, 'Changes the speed of the motor');
   }
 };
 Blockly.JavaScript.robot_motor_l = function() {
   var val = Blockly.JavaScript.valueToCode(this, 'VAL', Blockly.JavaScript.ORDER_ASSIGNMENT) || '0';
-  return "analogWrite(B13, (1.5+0.7*("+val+"))/20, {freq:50});\n";
+  return "if (Math.abs("+val+")<0.05) digitalWrite(B13,0); else analogWrite(B13, (1.5+0.7*("+val+"))/20, {freq:50});\n";
 };
 // ----------------------------------------------------------
 Blockly.Blocks.robot_motor_r = {
@@ -47,13 +47,13 @@ Blockly.Blocks.robot_motor_r = {
   init: function() {
       this.appendValueInput('VAL')
           .setCheck(['Number','Boolean'])
-          .appendField('Set Right Motor Speed');
+          .appendField('Set Right Servo Speed');
     robotStatement(this, 'Changes the speed of the motor');
   }
 };
 Blockly.JavaScript.robot_motor_r = function() {
   var val = Blockly.JavaScript.valueToCode(this, 'VAL', Blockly.JavaScript.ORDER_ASSIGNMENT) || '0';
-  return "analogWrite(B14, (1.5-0.7*("+val+"))/20, {freq:50});\n";
+  return "if (Math.abs("+val+")<0.05) digitalWrite(B14,0); else analogWrite(B14, (1.5-0.7*("+val+"))/20, {freq:50});\n";
 };
 // ----------------------------------------------------------
 Blockly.Blocks.robot_led_l = {
@@ -101,7 +101,7 @@ Blockly.JavaScript.robot_led_r = function() {
 Blockly.Blocks.robot_ldr_ul = {
   category: 'Robot',
   init: function() {
-      this.appendDummyInput().appendField('Upper Left Light');
+      this.appendDummyInput().appendField('Upper Left LDR');
     robotInput(this, 'Get the amount of light falling on the sensor');
   }
 };
@@ -110,7 +110,7 @@ Blockly.JavaScript.robot_ldr_ul = function() {return ["analogRead(B1)\n", Blockl
 Blockly.Blocks.robot_ldr_ll = {
   category: 'Robot',
   init: function() {
-      this.appendDummyInput().appendField('Lower Left Light');
+      this.appendDummyInput().appendField('Lower Left LDR');
     robotInput(this, 'Get the amount of light falling on the sensor');
   }
 };
@@ -119,7 +119,7 @@ Blockly.JavaScript.robot_ldr_ll = function() {return ["analogRead(A7)\n", Blockl
 Blockly.Blocks.robot_ldr_ur = {
   category: 'Robot',
   init: function() {
-      this.appendDummyInput().appendField('Upper Right Light');
+      this.appendDummyInput().appendField('Upper Right LDR');
     robotInput(this, 'Get the amount of light falling on the sensor');
   }
 };
@@ -128,7 +128,7 @@ Blockly.JavaScript.robot_ldr_ur = function() {return ["analogRead(A5)\n", Blockl
 Blockly.Blocks.robot_ldr_lr = {
   category: 'Robot',
   init: function() {
-      this.appendDummyInput().appendField('Lower Right Light');
+      this.appendDummyInput().appendField('Lower Right LDR');
     robotInput(this, 'Get the amount of light falling on the sensor');
   }
 };
