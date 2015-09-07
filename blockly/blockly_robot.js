@@ -28,109 +28,69 @@ function robotInput(blk, comment) {
 }
 
 // ----------------------------------------------------------
-Blockly.Blocks.robot_motor_l = {
+Blockly.Blocks.robot_motor = {
   category: 'Robot',
   init: function() {
+    var dropdown = new Blockly.FieldDropdown([
+        ['Left', 'B13'], 
+        ['Right', 'B14'], 
+        ]);
       this.appendValueInput('VAL')
           .setCheck(['Number','Boolean'])
-          .appendField('Set Left Servo Speed');
+          .appendField('Set')
+          .appendField(dropdown, 'PIN')
+          .appendField('Servo Speed');
     robotStatement(this, 'Changes the speed of the motor');
   }
 };
-Blockly.JavaScript.robot_motor_l = function() {
+Blockly.JavaScript.robot_motor = function() {
+  var pin = this.getTitleValue('PIN');
+  var mul = (pin=="B14") ? "-0.7" : "+0.7";
   var val = Blockly.JavaScript.valueToCode(this, 'VAL', Blockly.JavaScript.ORDER_ASSIGNMENT) || '0';
-  return "if (Math.abs("+val+")<0.05) digitalWrite(B13,0); else analogWrite(B13, (1.5+0.7*("+val+"))/20, {freq:50});\n";
+  return "var x = "+val+";\nif (Math.abs(x)<0.05) digitalWrite("+pin+",0); else analogWrite("+pin+", (1.5"+mul+"*x)/20, {freq:50});\n";
 };
 // ----------------------------------------------------------
-Blockly.Blocks.robot_motor_r = {
+Blockly.Blocks.robot_led = {
   category: 'Robot',
   init: function() {
-      this.appendValueInput('VAL')
-          .setCheck(['Number','Boolean'])
-          .appendField('Set Right Servo Speed');
-    robotStatement(this, 'Changes the speed of the motor');
-  }
-};
-Blockly.JavaScript.robot_motor_r = function() {
-  var val = Blockly.JavaScript.valueToCode(this, 'VAL', Blockly.JavaScript.ORDER_ASSIGNMENT) || '0';
-  return "if (Math.abs("+val+")<0.05) digitalWrite(B14,0); else analogWrite(B14, (1.5-0.7*("+val+"))/20, {freq:50});\n";
-};
-// ----------------------------------------------------------
-Blockly.Blocks.robot_led_l = {
-  category: 'Robot',
-  init: function() {
-      this.appendValueInput('VAL')
-          .setCheck(['Number','Boolean'])
-          .appendField('Set Left LED');
+    var dropdown = new Blockly.FieldDropdown([
+        ['Left', 'B7'], 
+        ['Middle', 'B5'],
+        ['Right', 'B6'], 
+        ['Green (on Pico)', 'LED2'],
+        ['Red (on Pico)', 'LED1'],
+        ]);
+    this.appendValueInput('VAL')
+         .setCheck(['Number','Boolean'])
+         .appendField('Set')
+         .appendField(dropdown, 'PIN')
+         .appendField('LED');
     robotStatement(this, 'Turns the LED Light on or off');
   }
 };
-Blockly.JavaScript.robot_led_l = function() {
+Blockly.JavaScript.robot_led = function() {
+  var pin = this.getTitleValue('PIN');
   var val = Blockly.JavaScript.valueToCode(this, 'VAL', Blockly.JavaScript.ORDER_ASSIGNMENT) || '0';
-  return "digitalWrite(B7, "+val+");\n";
+  return "digitalWrite("+pin+", "+val+");\n";
 };
 // ----------------------------------------------------------
-Blockly.Blocks.robot_led_m = {
+Blockly.Blocks.robot_ldr = {
   category: 'Robot',
   init: function() {
-      this.appendValueInput('VAL')
-          .setCheck(['Number','Boolean'])
-          .appendField('Set Middle LED');
-    robotStatement(this, 'Turns the LED Light on or off');
-  }
-};
-Blockly.JavaScript.robot_led_m = function() {
-  var val = Blockly.JavaScript.valueToCode(this, 'VAL', Blockly.JavaScript.ORDER_ASSIGNMENT) || '0';
-  return "digitalWrite(B5, "+val+");\n";
-};
-// ----------------------------------------------------------
-Blockly.Blocks.robot_led_r = {
-  category: 'Robot',
-  init: function() {
-      this.appendValueInput('VAL')
-          .setCheck(['Number','Boolean'])
-          .appendField('Set Right LED');
-    robotStatement(this, 'Turns the LED Light on or off');
-  }
-};
-Blockly.JavaScript.robot_led_r = function() {
-  var val = Blockly.JavaScript.valueToCode(this, 'VAL', Blockly.JavaScript.ORDER_ASSIGNMENT) || '0';
-  return "digitalWrite(B6, "+val+");\n";
-};
-// ----------------------------------------------------------
-Blockly.Blocks.robot_ldr_ul = {
-  category: 'Robot',
-  init: function() {
-      this.appendDummyInput().appendField('Upper Left LDR');
+    var dropdown = new Blockly.FieldDropdown([
+        ['Upper Left', 'B1'], 
+        ['Upper Right', 'A5'],
+        ['Lower Left', 'A7'], 
+        ['Lower Right', 'A6'],
+        ]);
+    this.appendDummyInput()
+         .appendField(dropdown, 'PIN')
+         .appendField('LDR');
     robotInput(this, 'Get the amount of light falling on the sensor');
   }
 };
-Blockly.JavaScript.robot_ldr_ul = function() {return ["analogRead(B1)\n", Blockly.JavaScript.ORDER_ATOMIC]; };
-// ----------------------------------------------------------
-Blockly.Blocks.robot_ldr_ll = {
-  category: 'Robot',
-  init: function() {
-      this.appendDummyInput().appendField('Lower Left LDR');
-    robotInput(this, 'Get the amount of light falling on the sensor');
-  }
+Blockly.JavaScript.robot_ldr = function() {
+  var pin = this.getTitleValue('PIN');
+  return ["analogRead("+pin+")", Blockly.JavaScript.ORDER_ATOMIC]; 
+  //return ["(Math.max(0,analogRead("+pin+")-0.25)/0.75)", Blockly.JavaScript.ORDER_ATOMIC]; 
 };
-Blockly.JavaScript.robot_ldr_ll = function() {return ["analogRead(A7)\n", Blockly.JavaScript.ORDER_ATOMIC]; };
-// ----------------------------------------------------------
-Blockly.Blocks.robot_ldr_ur = {
-  category: 'Robot',
-  init: function() {
-      this.appendDummyInput().appendField('Upper Right LDR');
-    robotInput(this, 'Get the amount of light falling on the sensor');
-  }
-};
-Blockly.JavaScript.robot_ldr_ur = function() {return ["analogRead(A5)\n", Blockly.JavaScript.ORDER_ATOMIC]; };
-// ----------------------------------------------------------
-Blockly.Blocks.robot_ldr_lr = {
-  category: 'Robot',
-  init: function() {
-      this.appendDummyInput().appendField('Lower Right LDR');
-    robotInput(this, 'Get the amount of light falling on the sensor');
-  }
-};
-Blockly.JavaScript.robot_ldr_lr = function() {return ["analogRead(A6)\n", Blockly.JavaScript.ORDER_ATOMIC]; };
-
