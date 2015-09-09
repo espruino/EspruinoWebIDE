@@ -49,7 +49,7 @@
     codeMirror.on("change", function(cm, changeObj) {
       // If pasting, make sure we ignore `&shy;` - which gets inserted
       // by the forum's code formatter
-      if (changeObj.origin == "paste") {
+      if (changeObj.origin == "paste" && cm.getValue().indexOf("\u00AD")>=0) {
         var c = cm.getCursor();
         cm.setValue(cm.getValue().replace(/\u00AD/g,''));
         cm.setCursor(c);
