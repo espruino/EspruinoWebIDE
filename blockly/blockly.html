@@ -6,6 +6,7 @@
     <script type="text/javascript" src="en.js"></script>
     <script type="text/javascript" src="javascript_compressed.js"></script>
     <script type="text/javascript" src="blockly_espruino.js"></script>
+    <script type="text/javascript" src="blockly_robot.js"></script>
     <script type="text/javascript" src="field_textarea.js"></script>
     <style>
       html, body {
@@ -33,6 +34,15 @@
       <block type="logic_ternary"></block>
     </category>
     <category name="Control">      
+      <block type="espruino_delay">
+        <value name="SECONDS"><block type="math_number"><title name="NUM">1</title></block></value>
+      </block>
+      <block type="espruino_timeout">
+        <value name="SECONDS"><block type="math_number"><title name="NUM">1</title></block></value>
+      </block>
+      <block type="espruino_interval">
+        <value name="SECONDS"><block type="math_number"><title name="NUM">1</title></block></value>
+      </block>
       <block type="controls_repeat_ext">
         <value name="TIMES">
           <block type="math_number">
@@ -256,12 +266,6 @@
       TODO - need to auto-add calls here?? 
     </category> -->
     <category name="Espruino">
-      <block type="espruino_timeout">
-        <value name="SECONDS"><block type="math_number"><title name="NUM">1</title></block></value>
-      </block>
-      <block type="espruino_interval">
-        <value name="SECONDS"><block type="math_number"><title name="NUM">1</title></block></value>
-      </block>
       <block type="espruino_getTime"></block>
       <block type="espruino_pin"></block>
       <block type="espruino_watch">
@@ -286,6 +290,24 @@
       </block>
       <block type="espruino_code">
       </block>
+    </category>
+    <category name="Hardware">
+      <block type="hw_servoMove">
+        <value name="PIN"><block type="espruino_pin"><title name="PIN">B13</title></block></value>
+        <value name="VAL"><block type="math_number"><title name="NUM">1</title></block></value>
+      </block>
+      <block type="hw_servoStop">
+        <value name="PIN"><block type="espruino_pin"><title name="PIN">B13</title></block></value>
+      </block>
+      <block type="hw_ultrasonic">
+        <value name="TRIG"><block type="espruino_pin"><title name="PIN">B4</title></block></value>
+        <value name="ECHO"><block type="espruino_pin"><title name="PIN">B3</title></block></value>
+      </block>
+    </category>
+    <category name="Robot">
+      <block type="robot_motor"></block>
+      <block type="robot_led"></block>
+      <block type="robot_ldr"></block>
     </category>
     <category name="Functions" custom="PROCEDURE"></category>
   </xml>
