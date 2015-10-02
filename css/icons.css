@@ -21,7 +21,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    background: transparent url(/img/icons.png) left top;
+    background: transparent url(../img/icons.png) left top;
 }
 
 a[class*="icon-"]
