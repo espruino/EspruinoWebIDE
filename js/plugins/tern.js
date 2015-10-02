@@ -28,9 +28,9 @@
   
     var server;
     var espruinoJSON;
-    getURL(/*"http://ternjs.net/defs/ecma5.json"*/"/data/espruino.json", function(err, code) {
+    getURL(/*"http://ternjs.net/defs/ecma5.json"*/"data/espruino.json", function(err, code) {
       var codeMirror = Espruino.Core.EditorJavaScript.getCodeMirror();
-      if (err) throw new Error("Request for ecma5.json: " + err);
+      if (err) throw new Error("Request for ecma5.json failed: " + err);
       espruinoJSON = code;
       server = new CodeMirror.TernServer({defs: [JSON.parse(espruinoJSON)]});
       var k = codeMirror.getOption("extraKeys");
