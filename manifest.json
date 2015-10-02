@@ -15,12 +15,14 @@
   },
   "permissions" : [
     "serial",
+    "audioCapture",
     "videoCapture",
     {"fileSystem": ["write", "retainEntries", "directory"]},
     "storage",
     "http://*/",
     "https://*/"
   ],
+  "sockets": { "tcp" : { "connect": "*" } },
   "manifest_version": 2,
   "url_handlers": {
     "espruino_code": {
