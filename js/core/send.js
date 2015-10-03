@@ -25,7 +25,8 @@
       }, 
       click: function() {
         Espruino.Core.MenuPortSelector.ensureConnected(function() {
-          Espruino.Core.Terminal.focus(); // give the terminal focus
+          if (Espruino.Core.Terminal.isVisible()) 
+            Espruino.Core.Terminal.focus(); // give the terminal focus
           Espruino.callProcessor("sending");
           Espruino.Core.Code.getEspruinoCode(Espruino.Core.CodeWriter.writeToEspruino);
         });
