@@ -27,7 +27,6 @@
    */
   function init()
   {
-    // Hookup window buttons
     Espruino.Core.App.addIcon({
       id:'minimize',
       icon: 'minus',
@@ -216,8 +215,10 @@
    * Add an icon to the window in the specified area
    * 
    * options = {
-   *   area : splitter | left | middle | right
-   *   name : icon name - corresponds to icons.css
+   *   id    : a unique ID for this icon
+   *   icon  : the icon type to use
+   *   area  : splitter | left | middle | right
+   *   name  : icon name - corresponds to icons.css
    *   title : nice title for tooltips
    *   order : integer specifying the order. After icons have been added they'll be sorted so this is ascending
    */
@@ -262,7 +263,8 @@
     var elementClass = 'icon-'+ options.icon;
     
     // remove old icon if there was one
-    //$(container, "."+elementClass).remove();
+    var c = container.children("."+elementClass);
+    c.remove();
     
     // add the element
     var element = $('<a id="icon-'+ options.id +'" class="'+ elementClass +' '+ iconSize +' '+ additionalClasses +'" title="'+ options.title +'" data-icon-order="'+ order +'"></a>').appendTo(container);
