@@ -1,0 +1,14 @@
+{
+  "name": "espruino-webide",
+  "main": "index.html",
+  "window": {
+    "title": "Espruino Web IDE",
+    "toolbar": false,
+    "frame": false,
+    "show": true,
+    "fullscreen": false,
+    "width": 1024,
+    "height": 600,
+    "position": "center"
+  }
+}

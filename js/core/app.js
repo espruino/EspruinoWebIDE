@@ -13,6 +13,12 @@
 
 (function() {
 
+  var nwwindow = undefined;
+  var nwmaximised = false;
+  if ("undefined"!=typeof require) {
+    nwwindow = require('nw.gui').Window.get();
+  }
+
   var defaultIcon = {
     area: {
       name: "toolbar",
@@ -38,7 +44,11 @@
         position: "right"
       },
       click: function(){
-        chrome.app.window.current().minimize();
+        if (nwwindow) {
+          nwwindow.minimize();
+        } else {
+          chrome.app.window.current().minimize();
+        }
       }
     });
 
@@ -53,10 +63,20 @@
         position: "right"
       },
       click: function(){
-        if(chrome.app.window.current().isMaximized()) {
-          chrome.app.window.current().restore();
+        if (nwwindow) {
+          if (nwmaximised) {
+            nwmaximised = false;
+            nwwindow.unmaximize();
+          } else {
+            nwmaximised = true;
+            nwwindow.maximize();
+          }
         } else {
-          chrome.app.window.current().maximize();
+          if(chrome.app.window.current().isMaximized) {
+            chrome.app.window.current().restore();
+          } else {
+            chrome.app.window.current().maximize();
+          }
         }
       }
     });
@@ -72,7 +92,11 @@
         position: "right"
       },
       click: function(){
-        chrome.app.window.current().close();
+        if (nwwindow) {
+          nwwindow.close();
+        } else {
+          chrome.app.window.current().close();
+        }
       }
     });
 
