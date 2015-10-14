@@ -3,8 +3,8 @@ Espruino Web IDE
 
 A VT100 Serial Terminal as a Chrome Web App (with both syntax highlighted and graphical editors) - designed for writing code on microcontrollers that use the [Espruino JavaScript interpreter](http://www.espruino.com).
 
-[![ScreenShot](https://raw.github.com/espruino/EspruinoWebIDE/master/extras/screenshot.png)](http://youtu.be/Fjju_QhzL-c)
-[![ScreenShot](https://raw.github.com/espruino/EspruinoWebIDE/master/extras/screenshot2.png)](http://youtu.be/Fjju_QhzL-c)
+[![ScreenShot](https://raw.github.com/espruino/EspruinoWebIDE/gh-pages/extras/screenshot.png)](http://youtu.be/Fjju_QhzL-c)
+[![ScreenShot](https://raw.github.com/espruino/EspruinoWebIDE/gh-pages/extras/screenshot2.png)](http://youtu.be/Fjju_QhzL-c)
 
 This is a Chrome Web App that uses [chome.serial](https://developer.chrome.com/apps/serial) to access your PC's serial port. You can download it from the Chrome Web Store: https://chrome.google.com/webstore/detail/espruino-serial-terminal/bleoifhkdalbjfbobjackfdifdneehpo
 
@@ -22,7 +22,7 @@ Installing from GitHub (Latest Version)
 ---------------------------------------
 
 * Install the [Chrome Web Browser](https://www.google.com/intl/en/chrome/browser/)
-* Download the files in [EspruinoWebIDE](https://github.com/espruino/EspruinoWebIDE) to an `EspruinoWebIDE` directory on your PC (either as a [ZIP File](https://github.com/espruino/EspruinoWebIDE/archive/master.zip), or using git)
+* Download the files in [EspruinoWebIDE](https://github.com/espruino/EspruinoWebIDE) to an `EspruinoWebIDE` directory on your PC (either as a [ZIP File](https://github.com/espruino/EspruinoWebIDE/archive/gh-pages.zip), or using git)
 * Download the files in [EspruinoTools](https://github.com/espruino/EspruinoTools) into the `EspruinoWebIDE/EspruinoTools` on your PC (either as a [ZIP File](https://github.com/espruino/EspruinoTools/archive/gh-pages.zip), or using git)
 * Click the menu icon in the top right
 * Click 'Settings'
