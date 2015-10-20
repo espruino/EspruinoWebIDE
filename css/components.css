@@ -492,6 +492,11 @@ a:hover > .menu
     background-repeat: repeat-x;
 }
 
+.cm-DebugLineBg {
+	background-color: #FF7F7F;
+}
+
+
 /* Settings */
 .settings {
   position:relative; 
