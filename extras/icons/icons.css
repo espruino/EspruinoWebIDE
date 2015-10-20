@@ -1,0 +1,66 @@
+/* 
+    ===================================================
+    Icons
+    ===================================================
+ */
+
+[class*="icon-"] 
+{
+    display: inline-block;
+    position: relative;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+}
+
+[class*="icon-"]:before 
+{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: transparent url(../img/icons.png) left top;
+}
+
+a[class*="icon-"]
+{
+    cursor: pointer;
+}
+
+a[class*="icon-"]:hover
+{
+    background-color: rgba(0,0,0,.15);
+}
+
+a.icon-connect { background-color: #f1c40f; }
+a.icon-disconnect { background-color: #2ecc71; }
+a.icon-connect:hover { background-color: #f39c12; }
+a.icon-disconnect:hover { background-color: #27ae60; }
+
+a.title-bar__button--alert { background-color: #f1c40f; }
+a.title-bar__button--alert:hover { background-color: #f39c12; }
+
+[class*="icon-"].lrg,
+[class*="icon-"].lrg:before
+{
+    width: 60px;
+    height: 60px;
+}
+
+[class*="icon-"].sml,
+[class*="icon-"].sml:before,
+.compact [class*="icon-"].lrg,
+.compact [class*="icon-"].lrg:before
+{
+    width: 30px;
+    height: 30px;
+}
+
+.icon--divide-right { border-right: solid 1px rgba(255,255,255,0.3); }
+.icon--divide-left { border-left: solid 1px rgba(255,255,255,0.3); }
+.icon--divide-bottom { border-bottom: solid 1px rgba(255,255,255,0.3); }
+.icon--divide-top { border-top: solid 1px rgba(255,255,255,0.3); }
+
+
