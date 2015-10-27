@@ -241,7 +241,7 @@
    * options = {
    *   id    : a unique ID for this icon
    *   icon  : the icon type to use
-   *   area  : splitter | left | middle | right
+   *   area  : { name : titlebar | toolbar | terminal | code,  position : left | middle | right | top | bottom }
    *   name  : icon name - corresponds to icons.css
    *   title : nice title for tooltips
    *   order : integer specifying the order. After icons have been added they'll be sorted so this is ascending
