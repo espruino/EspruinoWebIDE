@@ -18,6 +18,7 @@
   var currentDebugLine = undefined;
   var callbackOnEqualsLine = undefined; // fn to call when we get `=xxx` - used for variable tooltips
   var equalsLineContents = ""; // for multiple line '=' data, this is what we have so far
+  var knownValues = {};
   var icons = {};
   
   function init() {
@@ -101,6 +102,7 @@
   function setDebugMode(isDbg) {
     if (inDebugMode != isDbg) {
       inDebugMode = isDbg;
+      knownValues = {};
       if (inDebugMode) {
         addIcons();
       } else {
@@ -114,6 +116,7 @@
   function setDebugLine(line) {
     var cm = Espruino.Core.EditorJavaScript.getCodeMirror();
     if (currentDebugLine!==undefined) {
+      knownValues = {};
       cm.removeLineClass(currentDebugLine, "background", CSS_BG_CLASS);
     }
     if (line!==undefined) {
@@ -123,19 +126,36 @@
   }    
   
   function onEditorHover(info, callback) {
-    if (inDebugMode) {
-      // TODO: when we get `cm-property` we could work back and find the full expression
-      if (info.node.className=="cm-variable") {
-        var name = info.node.textContent;
-        
-        equalsLineContents = undefined;
-        callbackOnEqualsLine = function(value) {
+    if (inDebugMode && !callbackOnEqualsLine) {
+      var name;
+      if (info.node.className=="cm-variable" ||
+          info.node.className=="cm-def") {
+        name = info.node.textContent;
+      }
+      if (info.node.className=="cm-property") {
+        // get 'a.b' type stuff. There must be a better way :)
+        if (info.node.previousSibling &&
+            info.node.previousSibling.textContent=="." &&
+            info.node.previousSibling.previousSibling &&
+            info.node.previousSibling.previousSibling.className == "cm-variable") {
+          name = info.node.previousSibling.previousSibling.textContent + "." + info.node.textContent;
+        }
+      }
+      if (name) { 
+        function setTooltip(value) {
+          knownValues[name] = value;
           var tip = document.createElement("div");
           tip.className = "CodeMirror-debug-tooltip";
           tip.appendChild(document.createTextNode(name + " = " + value));      
           info.showTooltip(tip);
         };
-        debugCmd("p "+name);
+        if (name in knownValues) {
+          setTooltip(knownValues[name]);
+        } else {
+          equalsLineContents = undefined;
+          callbackOnEqualsLine = setTooltip;
+          debugCmd("p "+name);
+        }
       }
     }
     callback(info);
