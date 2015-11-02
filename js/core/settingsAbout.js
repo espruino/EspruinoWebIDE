@@ -31,7 +31,7 @@
         description : "About the Espruino Web IDE v"+ version,
         sortOrder : -1000,
         getHTML : function(callback) {      
-          $.get("/data/settings_about.html", function(data) {
+          $.get("data/settings_about.html", function(data) {
             callback(data);
             var html;
             if (Object.keys(Espruino.Core.Env.getBoardData()).length > 0)
