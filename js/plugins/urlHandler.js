@@ -22,6 +22,14 @@
       case "code":
         Espruino.Core.EditorJavaScript.setCode(val);
         break;
+      case "codeurl":
+        Espruino.Core.EditorJavaScript.setCode("Loading from "+val+"...");
+        $.get(val, function(data){
+          Espruino.Core.EditorJavaScript.setCode(data);
+        }).error(function(){
+          Espruino.Core.EditorJavaScript.setCode("ERROR");
+        });
+        break;
       case "upload":
         Espruino.Core.MenuPortSelector.ensureConnected(function() {
           Espruino.Core.Terminal.focus(); // give the terminal focus
