@@ -47,6 +47,26 @@
       codeMirror.setOption("extraKeys", k);
       codeMirror.on("cursorActivity", function(cm) { server.updateArgHints(cm); });
     });
+
+    /* Ideally espruino.json has:
+
+      "require": {
+         "!type": "fn(moduleName: ?) -> !custom:require_handler",
+
+      .. and then this handler gets called and sets the correct return type
+      when someone uses `require()`.
+
+      The type is in espruino.json at the root level at the moment, so
+      require("http") => "http" object. But what I'm doing below isn't working :(
+     */
+    /*var infer = tern;
+    infer.registerFunction("require_handler", function(self, args, argNodes) {
+      if (argNodes.length!=1 || argNodes[0].type!="Literal") return;
+      var moduleName = argNodes[0].value;
+      var moduleType = new infer.Obj(null, moduleName); // broken
+      self.propagate(moduleType); 
+      return infer.ANull;
+    });*/
     
     /* When we connect to a board and we load its description,
      go through an add all the pins as variables so Tern cal autocomplete */ 
