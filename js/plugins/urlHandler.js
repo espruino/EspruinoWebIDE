@@ -19,18 +19,18 @@
   function handleQuery(key, val) {
     Espruino.Core.Code.switchToCode(); // if in blockly
     switch(key){
-      case "code":
+      case "code": // Passing "encodedURIcomponent code" within the URL
         Espruino.Core.EditorJavaScript.setCode(val);
         break;
-      case "codeurl":
-        Espruino.Core.EditorJavaScript.setCode("Loading from "+val+"...");
-        $.get(val, function(data){
+      case "codeurl": // Passing a URL for code within the URL
+        Espruino.Core.EditorJavaScript.setCode("// Loading from "+val+"...");
+        $.ajax({ url: val, cache: false }).done(function( data ) { 
           Espruino.Core.EditorJavaScript.setCode(data);
         }).error(function(){
-          Espruino.Core.EditorJavaScript.setCode("ERROR");
+          Espruino.Core.EditorJavaScript.setCode("// Error loading "+val);
         });
         break;
-      case "upload":
+      case "upload": // Get "encodedURIcomponent code" from URL and upload it
         Espruino.Core.MenuPortSelector.ensureConnected(function() {
           Espruino.Core.Terminal.focus(); // give the terminal focus
           Espruino.callProcessor("sending");
@@ -38,8 +38,8 @@
           Espruino.Core.EditorJavaScript.setCode(val);
         });        
         break;
-      case "gist":
-        Espruino.Core.EditorJavaScript.setCode("Loading...");
+      case "gist": // Get code from a gist number in the URL
+        Espruino.Core.EditorJavaScript.setCode("// Loading Gist "+val+"...");
         $.getJSON("https://api.github.com/gists/"+ val, function(data){
           if(data && data.files){
             var keys = Object.keys(data.files);
@@ -48,7 +48,7 @@
             }
           }
         }).error(function(){
-          Espruino.Core.EditorJavaScript.setCode("ERROR");
+          Espruino.Core.EditorJavaScript.setCode("// Error loading Gist "+val);
         });
         break;
     }
