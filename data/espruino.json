@@ -1,192 +1,38 @@
 {
   "!name": "Espruino",
-  "Nucleo": {
+  "crypto": {
     "!type": "fn()",
-    "!doc": "This is the built-in class for the Arduino-style pin namings on ST Nucleo boards",
-    "!url": "http://www.espruino.com/Reference#Nucleo",
-    "A0": {
-      "!type": "+Pin",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_Nucleo_A0"
+    "!doc": "Cryptographic functions\n\n**Note:** This library is currently only included in builds for the Espruino Pico.\nFor other boards you will have to make build your own firmware, and you may need\nto remove other features in order to make room.",
+    "!url": "http://www.espruino.com/Reference#l_crypto_undefined",
+    "AES": {
+      "!type": "?",
+      "!doc": "Class containing AES encryption/decryption",
+      "!url": "http://www.espruino.com/Reference#l_crypto_AES"
     },
-    "A1": {
-      "!type": "+Pin",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_Nucleo_A1"
+    "SHA1": {
+      "!type": "fn(message: ?) -> +ArrayBuffer",
+      "!doc": "Performs a SHA1 hash and returns the result as a 20 byte ArrayBuffer",
+      "!url": "http://www.espruino.com/Reference#l_crypto_SHA1"
     },
-    "A2": {
-      "!type": "+Pin",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_Nucleo_A2"
-    },
-    "A3": {
-      "!type": "+Pin",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_Nucleo_A3"
-    },
-    "A4": {
-      "!type": "+Pin",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_Nucleo_A4"
-    },
-    "A5": {
-      "!type": "+Pin",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_Nucleo_A5"
-    },
-    "D0": {
-      "!type": "+Pin",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_Nucleo_D0"
-    },
-    "D1": {
-      "!type": "+Pin",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_Nucleo_D1"
-    },
-    "D2": {
-      "!type": "+Pin",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_Nucleo_D2"
-    },
-    "D3": {
-      "!type": "+Pin",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_Nucleo_D3"
-    },
-    "D4": {
-      "!type": "+Pin",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_Nucleo_D4"
-    },
-    "D5": {
-      "!type": "+Pin",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_Nucleo_D5"
-    },
-    "D6": {
-      "!type": "+Pin",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_Nucleo_D6"
-    },
-    "D7": {
-      "!type": "+Pin",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_Nucleo_D7"
-    },
-    "D8": {
-      "!type": "+Pin",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_Nucleo_D8"
-    },
-    "D9": {
-      "!type": "+Pin",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_Nucleo_D9"
-    },
-    "D10": {
-      "!type": "+Pin",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_Nucleo_D10"
-    },
-    "D11": {
-      "!type": "+Pin",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_Nucleo_D11"
-    },
-    "D12": {
-      "!type": "+Pin",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_Nucleo_D12"
-    },
-    "D13": {
-      "!type": "+Pin",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_Nucleo_D13"
-    },
-    "D14": {
-      "!type": "+Pin",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_Nucleo_D14"
-    },
-    "D15": {
-      "!type": "+Pin",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_Nucleo_D15"
+    "PBKDF2": {
+      "!type": "fn(passphrase: ?, salt: ?, options: ?) -> +ArrayBuffer",
+      "!doc": "Password-Based Key Derivation Function 2 algorithm.",
+      "!url": "http://www.espruino.com/Reference#l_crypto_PBKDF2"
     }
   },
-  "url": {
+  "AES": {
     "!type": "fn()",
-    "!doc": "This class helps to convert URLs into Objects of information ready for http.request/get",
-    "!url": "http://www.espruino.com/Reference#url",
-    "parse": {
-      "!type": "fn(urlStr: ?, parseQuery: bool) -> ?",
-      "!doc": "A utility function to split a URL into parts\n\nThis is useful in web servers for instance when handling a request.\n\nFor instance `url.parse(\"/a?b=c&d=e\",true)` returns `{\"method\":\"GET\",\"host\":\"\",\"path\":\"/a?b=c&d=e\",\"pathname\":\"/a\",\"search\":\"?b=c&d=e\",\"port\":80,\"query\":{\"b\":\"c\",\"d\":\"e\"}}`",
-      "!url": "http://www.espruino.com/Reference#l_url_parse"
-    }
-  },
-  "net": {
-    "!type": "fn()",
-    "!doc": "This library allows you to create TCPIP servers and clients\n\nIn order to use this, you will need an extra module to get network connectivity.\n\nThis is designed to be a cut-down version of the [node.js library](http://nodejs.org/api/net.html). Please see the [Internet](/Internet) page for more information on how to use it.",
-    "!url": "http://www.espruino.com/Reference#l_net_undefined",
-    "createServer": {
-      "!type": "fn(callback: ?) -> +Server",
-      "!doc": "Create a Server\n\nWhen a request to the server is made, the callback is called. In the callback you can use the methods on the connection to send data. You can also add `connection.on('data',function() { ... })` to listen for received data",
-      "!url": "http://www.espruino.com/Reference#l_net_createServer"
+    "!doc": "Class containing AES encryption/decryption",
+    "!url": "http://www.espruino.com/Reference#AES",
+    "encrypt": {
+      "!type": "fn(passphrase: ?, key: ?, options: ?) -> +ArrayBuffer",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_AES_encrypt"
     },
-    "connect": {
-      "!type": "fn(options: ?, callback: ?) -> +Socket",
-      "!doc": "Create a socket connection",
-      "!url": "http://www.espruino.com/Reference#l_net_connect"
-    }
-  },
-  "Server": {
-    "!type": "fn()",
-    "!doc": "The socket server created by `require('net').createServer`",
-    "!url": "http://www.espruino.com/Reference#Server",
-    "prototype": {
-      "listen": {
-        "!type": "fn(port: number)",
-        "!doc": "Start listening for new connections on the given port",
-        "!url": "http://www.espruino.com/Reference#l_Server_listen"
-      },
-      "close": {
-        "!type": "fn()",
-        "!doc": "Stop listening for new connections",
-        "!url": "http://www.espruino.com/Reference#l_Server_close"
-      }
-    }
-  },
-  "Socket": {
-    "!type": "fn()",
-    "!doc": "An actual socket connection - allowing transmit/receive of TCP data",
-    "!url": "http://www.espruino.com/Reference#Socket",
-    "prototype": {
-      "available": {
-        "!type": "fn() -> number",
-        "!doc": "Return how many bytes are available to read. If there is already a listener for data, this will always return 0.",
-        "!url": "http://www.espruino.com/Reference#l_Socket_available"
-      },
-      "read": {
-        "!type": "fn(chars: number) -> ?",
-        "!doc": "Return a string containing characters that have been received",
-        "!url": "http://www.espruino.com/Reference#l_Socket_read"
-      },
-      "pipe": {
-        "!type": "fn(destination: ?, options: ?)",
-        "!doc": "Pipe this to a stream (an object with a 'write' method)",
-        "!url": "http://www.espruino.com/Reference#l_Socket_pipe"
-      },
-      "write": {
-        "!type": "fn(data: ?) -> bool",
-        "!doc": "",
-        "!url": "http://www.espruino.com/Reference#l_Socket_write"
-      },
-      "end": {
-        "!type": "fn(data: ?)",
-        "!doc": "Close this socket - optional data to append as an argument",
-        "!url": "http://www.espruino.com/Reference#l_Socket_end"
-      }
+    "decrypt": {
+      "!type": "fn(passphrase: ?, key: ?, options: ?) -> +ArrayBuffer",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_AES_decrypt"
     }
   },
   "ESP8266": {
@@ -218,6 +64,11 @@
       "!doc": "* Update the operating frequency of the ESP8266 processor.",
       "!url": "http://www.espruino.com/Reference#l_ESP8266_updateCPUFreq"
     },
+    "getState": {
+      "!type": "fn() -> ?",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_ESP8266_getState"
+    },
     "getHostByName": {
       "!type": "fn(hostname: ?, callback: ?)",
       "!doc": "* Lookup the hostname and invoke a callback when the IP address is known.",
@@ -232,6 +83,11 @@
       "!type": "fn(socketId: ?)",
       "!doc": "",
       "!url": "http://www.espruino.com/Reference#l_ESP8266_dumpSocket"
+    },
+    "dumpAllSocketData": {
+      "!type": "fn()",
+      "!doc": "* Write all the socket data structures to the debug log.\n* This is purely a diagnostic function.",
+      "!url": "http://www.espruino.com/Reference#l_ESP8266_dumpAllSocketData"
     }
   },
   "wifi": {
@@ -239,18 +95,18 @@
     "!doc": "",
     "!url": "http://www.espruino.com/Reference#l_wifi_undefined",
     "disconnect": {
-      "!type": "fn(callback: ?)",
-      "!doc": "",
+      "!type": "fn(options: ?, callback: ?)",
+      "!doc": "* The options is a JavaScript object that contains the following properties:\n* * `default` - If set to true, then auto connect of this device as a station will be\n* disabled.  The default of `default` is false.",
       "!url": "http://www.espruino.com/Reference#l_wifi_disconnect"
     },
     "stopAP": {
-      "!type": "fn(callback: ?)",
-      "!doc": "* Stop being an access point.",
+      "!type": "fn(options: ?, callback: ?)",
+      "!doc": "* Stop being an access point.\n* The options contain:\n* * default - A boolean.  If set to true, then the access point will be stopped at boot time.\n* The default for `default` is false which means that the start/stop of an access point at boot time\n* will not be changed.",
       "!url": "http://www.espruino.com/Reference#l_wifi_stopAP"
     },
     "connect": {
       "!type": "fn(ssid: ?, password: ?, options: ?, callback: ?)",
-      "!doc": "* Connect to an access point as a station.\n* When the outcome is known, the callback function is invoked.  The options object contains\n* properties that control the connection.  Included in this object are:\n* * autoConnect (Boolean) - When true, these settings will be used to autoConnect on next boot.",
+      "!doc": "* Connect to an access point as a station.\n* When the outcome is known, the callback function is invoked.  The options object contains\n* properties that control the connection.  Included in this object are:\n* * default (Boolean) - When true, these settings will be used to connect on next boot.\n* * dnsServers (array of String) - An array of up to two DNS servers in dotted decimal format string.",
       "!url": "http://www.espruino.com/Reference#l_wifi_connect"
     },
     "scan": {
@@ -260,8 +116,13 @@
     },
     "createAP": {
       "!type": "fn(ssid: ?, password: ?, options: ?, callback: ?)",
-      "!doc": "* Create a logical access point allowing WiFi stations to connect.\n* The `options` object can contain the following properties.\n* * authMode - The authentication mode to use.  Can be one of \"open\", \"wpa2\", \"wpa\", \"wpa_wpa2\".",
+      "!doc": "* Create a logical access point allowing WiFi stations to connect.\n* The `options` object can contain the following properties.\n* * authMode - The authentication mode to use.  Can be one of \"open\", \"wpa2\", \"wpa\", \"wpa_wpa2\".\n* * `default` - When true, sets the creation of an access point as the default at boot.",
       "!url": "http://www.espruino.com/Reference#l_wifi_createAP"
+    },
+    "getStatus": {
+      "!type": "fn() -> ?",
+      "!doc": "* Retrieve the status of the current WiFi environment.\n* The object returned by this function will have some or all of the following properties:\n* * `isStation` - True if the ESP8266 is being a Station\n* * `isAP` - True if the ESP8266 is being an Access Point.\n* * `connectedStations` - An array of the stations connected to us if we are being an access point.  This\n* array may be empty.  Each entry in the array will itself be an object describing the station which,\n* at a minimum will contain `ip` being the IP address of the station.",
+      "!url": "http://www.espruino.com/Reference#l_wifi_getStatus"
     },
     "getIP": {
       "!type": "fn() -> ?",
@@ -318,11 +179,6 @@
       "!doc": "",
       "!url": "http://www.espruino.com/Reference#l_ESP8266WiFi_getAutoConnect"
     },
-    "getState": {
-      "!type": "fn() -> +ESP8266State",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_ESP8266WiFi_getState"
-    },
     "getAddressAsString": {
       "!type": "fn(address: ?) -> ?",
       "!doc": "* Deprecated by jswrap_ESP8266_getAddressAsString",
@@ -377,33 +233,6 @@
       "!type": "fn(socket: ?, data: ?)",
       "!doc": "",
       "!url": "http://www.espruino.com/Reference#l_ESP8266WiFi_socketEnd"
-    }
-  },
-  "WIZnet": {
-    "!type": "fn()",
-    "!doc": "Library for communication with the WIZnet Ethernet module",
-    "!url": "http://www.espruino.com/Reference#l_WIZnet_undefined",
-    "connect": {
-      "!type": "fn(spi: ?, cs: +Pin) -> +Ethernet",
-      "!doc": "Initialise the WIZnet module and return an Ethernet object",
-      "!url": "http://www.espruino.com/Reference#l_WIZnet_connect"
-    }
-  },
-  "Ethernet": {
-    "!type": "fn()",
-    "!doc": "An instantiation of an Ethernet network adaptor",
-    "!url": "http://www.espruino.com/Reference#Ethernet",
-    "prototype": {
-      "getIP": {
-        "!type": "fn() -> ?",
-        "!doc": "Get the current IP address, subnet, gateway and mac address.",
-        "!url": "http://www.espruino.com/Reference#l_Ethernet_getIP"
-      },
-      "setIP": {
-        "!type": "fn(options: ?) -> bool",
-        "!doc": "Set the current IP address or get an IP from DHCP (if no options object is specified)\n\nIf 'mac' is specified as an option, it must be a string of the form `\"00:01:02:03:04:05\"`",
-        "!url": "http://www.espruino.com/Reference#l_Ethernet_setIP"
-      }
     }
   },
   "http": {
@@ -526,16 +355,6 @@
       }
     }
   },
-  "NetworkJS": {
-    "!type": "fn()",
-    "!doc": "Library that initialises a network device that calls into JavaScript",
-    "!url": "http://www.espruino.com/Reference#l_NetworkJS_undefined",
-    "create": {
-      "!type": "fn(obj: ?) -> ?",
-      "!doc": "Initialise the network using the callbacks given and return the first argument. For instance:\n\n```\nrequire(\"NetworkJS\").create({\n  create : function(host,port) {\n    // Create a socket and return its index, host is a string, port is an integer.\n    // If host isn't defined, create a server socket\n    console.log(\"Create\",host,port);\n    return 1;\n  },\n  close : function(sckt) {\n    // Close the socket. returns nothing\n  },\n  accept : function(sckt) {\n    // Accept the connection on the server socket. Returns socket number or -1 if no connection\n    return -1;\n  },\n  recv : function(sckt, maxLen) {\n    // Receive data. Returns a string (even if empty).\n    // If non-string returned, socket is then closed\n    return null;//or \"\";\n  },\n  send : function(sckt, data) {\n    // Send data (as string). Returns the number of bytes sent - 0 is ok.\n    // Less than 0\n    return data.length;\n  }\n});\n```",
-      "!url": "http://www.espruino.com/Reference#l_NetworkJS_create"
-    }
-  },
   "CC3000": {
     "!type": "fn()",
     "!doc": "",
@@ -578,186 +397,115 @@
       }
     }
   },
-  "Bluetooth": {
+  "NetworkJS": {
     "!type": "fn()",
-    "!doc": "",
-    "!url": "http://www.espruino.com/Reference#Bluetooth",
-    "init": {
-      "!type": "fn()",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_Bluetooth_init"
-    },
-    "send_string": {
-      "!type": "fn(string_to_send: ?) -> number",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_Bluetooth_send_string"
-    },
-    "enable_com": {
-      "!type": "fn()",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_Bluetooth_enable_com"
-    },
-    "disable_com": {
-      "!type": "fn()",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_Bluetooth_disable_com"
-    },
-    "sleep": {
-      "!type": "fn()",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_Bluetooth_sleep"
-    },
-    "wake": {
-      "!type": "fn()",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_Bluetooth_wake"
+    "!doc": "Library that initialises a network device that calls into JavaScript",
+    "!url": "http://www.espruino.com/Reference#l_NetworkJS_undefined",
+    "create": {
+      "!type": "fn(obj: ?) -> ?",
+      "!doc": "Initialise the network using the callbacks given and return the first argument. For instance:\n\n```\nrequire(\"NetworkJS\").create({\n  create : function(host,port) {\n    // Create a socket and return its index, host is a string, port is an integer.\n    // If host isn't defined, create a server socket\n    console.log(\"Create\",host,port);\n    return 1;\n  },\n  close : function(sckt) {\n    // Close the socket. returns nothing\n  },\n  accept : function(sckt) {\n    // Accept the connection on the server socket. Returns socket number or -1 if no connection\n    return -1;\n  },\n  recv : function(sckt, maxLen) {\n    // Receive data. Returns a string (even if empty).\n    // If non-string returned, socket is then closed\n    return null;//or \"\";\n  },\n  send : function(sckt, data) {\n    // Send data (as string). Returns the number of bytes sent - 0 is ok.\n    // Less than 0\n    return data.length;\n  }\n});\n```",
+      "!url": "http://www.espruino.com/Reference#l_NetworkJS_create"
     }
   },
-  "fs": {
+  "url": {
     "!type": "fn()",
-    "!doc": "This library handles interfacing with a FAT32 filesystem on an SD card. The API is designed to be similar to node.js's - However Espruino does not currently support asynchronous file IO, so the functions behave like node.js's xxxxSync functions. Versions of the functions with 'Sync' after them are also provided for compatibility.\n\nCurrently this provides minimal file IO - it's great for logging and loading/saving settings, but not good for loading large amounts of data as you will soon fill your memory up.\n\nIt is currently only available on boards that contain an SD card slot, such as the Olimexino and the HY. It can not currently be added to boards that did not ship with a card slot.\n\nTo use this, you must type ```var fs = require('fs')``` to get access to the library",
-    "!url": "http://www.espruino.com/Reference#l_fs_undefined",
-    "readdir": {
-      "!type": "fn(path: ?) -> ?",
-      "!doc": "List all files in the supplied directory, returning them as an array of strings.\n\nNOTE: Espruino does not yet support Async file IO, so this function behaves like the 'Sync' version.",
-      "!url": "http://www.espruino.com/Reference#l_fs_readdir"
-    },
-    "readdirSync": {
-      "!type": "fn(path: ?) -> ?",
-      "!doc": "List all files in the supplied directory, returning them as an array of strings.",
-      "!url": "http://www.espruino.com/Reference#l_fs_readdirSync"
-    },
-    "writeFile": {
-      "!type": "fn(path: ?, data: ?) -> bool",
-      "!doc": "Write the data to the given file\n\nNOTE: Espruino does not yet support Async file IO, so this function behaves like the 'Sync' version.",
-      "!url": "http://www.espruino.com/Reference#l_fs_writeFile"
-    },
-    "writeFileSync": {
-      "!type": "fn(path: ?, data: ?) -> bool",
-      "!doc": "Write the data to the given file",
-      "!url": "http://www.espruino.com/Reference#l_fs_writeFileSync"
-    },
-    "appendFile": {
-      "!type": "fn(path: ?, data: ?) -> bool",
-      "!doc": "Append the data to the given file, created a new file if it doesn't exist\n\nNOTE: Espruino does not yet support Async file IO, so this function behaves like the 'Sync' version.",
-      "!url": "http://www.espruino.com/Reference#l_fs_appendFile"
-    },
-    "appendFileSync": {
-      "!type": "fn(path: ?, data: ?) -> bool",
-      "!doc": "Append the data to the given file, created a new file if it doesn't exist",
-      "!url": "http://www.espruino.com/Reference#l_fs_appendFileSync"
-    },
-    "readFile": {
-      "!type": "fn(path: ?) -> ?",
-      "!doc": "Read all data from a file and return as a string\n\nNOTE: Espruino does not yet support Async file IO, so this function behaves like the 'Sync' version.",
-      "!url": "http://www.espruino.com/Reference#l_fs_readFile"
-    },
-    "readFileSync": {
-      "!type": "fn(path: ?) -> ?",
-      "!doc": "Read all data from a file and return as a string.\n\n**Note:** The size of files you can load using this method is limited by the amount of available RAM. To read files a bit at a time, see the `File` class.",
-      "!url": "http://www.espruino.com/Reference#l_fs_readFileSync"
-    },
-    "unlink": {
-      "!type": "fn(path: ?) -> bool",
-      "!doc": "Delete the given file\n\nNOTE: Espruino does not yet support Async file IO, so this function behaves like the 'Sync' version.",
-      "!url": "http://www.espruino.com/Reference#l_fs_unlink"
-    },
-    "unlinkSync": {
-      "!type": "fn(path: ?) -> bool",
-      "!doc": "Delete the given file",
-      "!url": "http://www.espruino.com/Reference#l_fs_unlinkSync"
-    },
-    "statSync": {
-      "!type": "fn(path: ?) -> ?",
-      "!doc": "Return information on the given file. This returns an object with the following\nfields:\n\nsize: size in bytes\ndir: a boolean specifying if the file is a directory or not\nmtime: A Date structure specifying the time the file was last modified",
-      "!url": "http://www.espruino.com/Reference#l_fs_statSync"
-    },
-    "pipe": {
-      "!type": "fn(source: ?, destination: ?, options: ?)",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_fs_pipe"
+    "!doc": "This class helps to convert URLs into Objects of information ready for http.request/get",
+    "!url": "http://www.espruino.com/Reference#url",
+    "parse": {
+      "!type": "fn(urlStr: ?, parseQuery: bool) -> ?",
+      "!doc": "A utility function to split a URL into parts\n\nThis is useful in web servers for instance when handling a request.\n\nFor instance `url.parse(\"/a?b=c&d=e\",true)` returns `{\"method\":\"GET\",\"host\":\"\",\"path\":\"/a?b=c&d=e\",\"pathname\":\"/a\",\"search\":\"?b=c&d=e\",\"port\":80,\"query\":{\"b\":\"c\",\"d\":\"e\"}}`",
+      "!url": "http://www.espruino.com/Reference#l_url_parse"
     }
   },
-  "File": {
+  "net": {
     "!type": "fn()",
-    "!doc": "This is the File object - it allows you to stream data to and from files (As opposed to the `require('fs').readFile(..)` style functions that read an entire file).\n\nTo create a File object, you must type ```var fd = E.openFile('filepath','mode')``` - see [E.openFile](#l_E_openFile) for more information.\n\n**Note:** If you want to remove an SD card after you have started using it, you *must* call `E.unmountSD()` or you may cause damage to the card.",
-    "!url": "http://www.espruino.com/Reference#File",
+    "!doc": "This library allows you to create TCPIP servers and clients\n\nIn order to use this, you will need an extra module to get network connectivity.\n\nThis is designed to be a cut-down version of the [node.js library](http://nodejs.org/api/net.html). Please see the [Internet](/Internet) page for more information on how to use it.",
+    "!url": "http://www.espruino.com/Reference#l_net_undefined",
+    "createServer": {
+      "!type": "fn(callback: ?) -> +Server",
+      "!doc": "Create a Server\n\nWhen a request to the server is made, the callback is called. In the callback you can use the methods on the connection to send data. You can also add `connection.on('data',function() { ... })` to listen for received data",
+      "!url": "http://www.espruino.com/Reference#l_net_createServer"
+    },
+    "connect": {
+      "!type": "fn(options: ?, callback: ?) -> +Socket",
+      "!doc": "Create a socket connection",
+      "!url": "http://www.espruino.com/Reference#l_net_connect"
+    }
+  },
+  "Server": {
+    "!type": "fn()",
+    "!doc": "The socket server created by `require('net').createServer`",
+    "!url": "http://www.espruino.com/Reference#Server",
     "prototype": {
+      "listen": {
+        "!type": "fn(port: number)",
+        "!doc": "Start listening for new connections on the given port",
+        "!url": "http://www.espruino.com/Reference#l_Server_listen"
+      },
       "close": {
         "!type": "fn()",
-        "!doc": "Close an open file.",
-        "!url": "http://www.espruino.com/Reference#l_File_close"
-      },
-      "write": {
-        "!type": "fn(buffer: ?) -> number",
-        "!doc": "write data to a file",
-        "!url": "http://www.espruino.com/Reference#l_File_write"
-      },
-      "read": {
-        "!type": "fn(length: number) -> ?",
-        "!doc": "Read data in a file in byte size chunks",
-        "!url": "http://www.espruino.com/Reference#l_File_read"
-      },
-      "skip": {
-        "!type": "fn(nBytes: number)",
-        "!doc": "Skip the specified number of bytes forward in the file",
-        "!url": "http://www.espruino.com/Reference#l_File_skip"
-      },
-      "seek": {
-        "!type": "fn(nBytes: number)",
-        "!doc": "Seek to a certain position in the file",
-        "!url": "http://www.espruino.com/Reference#l_File_seek"
-      },
-      "pipe": {
-        "!type": "fn(destination: ?, options: ?)",
-        "!doc": "Pipe this file to a stream (an object with a 'write' method)",
-        "!url": "http://www.espruino.com/Reference#l_File_pipe"
+        "!doc": "Stop listening for new connections",
+        "!url": "http://www.espruino.com/Reference#l_Server_close"
       }
     }
   },
-  "Trig": {
+  "Socket": {
     "!type": "fn()",
-    "!doc": "This class exists in order to interface Espruino with fast-moving trigger wheels. Trigger wheels are physical discs with evenly spaced teeth cut into them, and often with one or two teeth next to each other missing. A sensor sends a signal whenever a tooth passed by, and this allows a device to measure not only RPM, but absolute position.\n\nThis class is currently in testing - it is NOT AVAILABLE on normal boards.",
-    "!url": "http://www.espruino.com/Reference#Trig",
-    "getPosAtTime": {
-      "!type": "fn(time: number) -> number",
-      "!doc": "Get the position of the trigger wheel at the given time (from getTime)",
-      "!url": "http://www.espruino.com/Reference#l_Trig_getPosAtTime"
-    },
-    "setup": {
-      "!type": "fn(pin: +Pin, options: ?)",
-      "!doc": "Initialise the trigger class",
-      "!url": "http://www.espruino.com/Reference#l_Trig_setup"
-    },
-    "setTrigger": {
-      "!type": "fn(num: number, pos: number, pins: ?, pulseLength: number)",
-      "!doc": "Set a trigger for a certain point in the cycle",
-      "!url": "http://www.espruino.com/Reference#l_Trig_setTrigger"
-    },
-    "killTrigger": {
-      "!type": "fn(num: number)",
-      "!doc": "Disable a trigger",
-      "!url": "http://www.espruino.com/Reference#l_Trig_killTrigger"
-    },
-    "getTrigger": {
-      "!type": "fn(num: number) -> ?",
-      "!doc": "Get the current state of a trigger",
-      "!url": "http://www.espruino.com/Reference#l_Trig_getTrigger"
-    },
-    "getRPM": {
-      "!type": "fn() -> number",
-      "!doc": "Get the RPM of the trigger wheel",
-      "!url": "http://www.espruino.com/Reference#l_Trig_getRPM"
-    },
-    "getErrors": {
-      "!type": "fn() -> number",
-      "!doc": "Get the current error flags from the trigger wheel - and zero them",
-      "!url": "http://www.espruino.com/Reference#l_Trig_getErrors"
-    },
-    "getErrorArray": {
-      "!type": "fn() -> ?",
-      "!doc": "Get the current error flags from the trigger wheel - and zero them",
-      "!url": "http://www.espruino.com/Reference#l_Trig_getErrorArray"
+    "!doc": "An actual socket connection - allowing transmit/receive of TCP data",
+    "!url": "http://www.espruino.com/Reference#Socket",
+    "prototype": {
+      "available": {
+        "!type": "fn() -> number",
+        "!doc": "Return how many bytes are available to read. If there is already a listener for data, this will always return 0.",
+        "!url": "http://www.espruino.com/Reference#l_Socket_available"
+      },
+      "read": {
+        "!type": "fn(chars: number) -> ?",
+        "!doc": "Return a string containing characters that have been received",
+        "!url": "http://www.espruino.com/Reference#l_Socket_read"
+      },
+      "pipe": {
+        "!type": "fn(destination: ?, options: ?)",
+        "!doc": "Pipe this to a stream (an object with a 'write' method)",
+        "!url": "http://www.espruino.com/Reference#l_Socket_pipe"
+      },
+      "write": {
+        "!type": "fn(data: ?) -> bool",
+        "!doc": "",
+        "!url": "http://www.espruino.com/Reference#l_Socket_write"
+      },
+      "end": {
+        "!type": "fn(data: ?)",
+        "!doc": "Close this socket - optional data to append as an argument",
+        "!url": "http://www.espruino.com/Reference#l_Socket_end"
+      }
+    }
+  },
+  "WIZnet": {
+    "!type": "fn()",
+    "!doc": "Library for communication with the WIZnet Ethernet module",
+    "!url": "http://www.espruino.com/Reference#l_WIZnet_undefined",
+    "connect": {
+      "!type": "fn(spi: ?, cs: +Pin) -> +Ethernet",
+      "!doc": "Initialise the WIZnet module and return an Ethernet object",
+      "!url": "http://www.espruino.com/Reference#l_WIZnet_connect"
+    }
+  },
+  "Ethernet": {
+    "!type": "fn()",
+    "!doc": "An instantiation of an Ethernet network adaptor",
+    "!url": "http://www.espruino.com/Reference#Ethernet",
+    "prototype": {
+      "getIP": {
+        "!type": "fn() -> ?",
+        "!doc": "Get the current IP address, subnet, gateway and mac address.",
+        "!url": "http://www.espruino.com/Reference#l_Ethernet_getIP"
+      },
+      "setIP": {
+        "!type": "fn(options: ?) -> bool",
+        "!doc": "Set the current IP address or get an IP from DHCP (if no options object is specified)\n\nIf 'mac' is specified as an option, it must be a string of the form `\"00:01:02:03:04:05\"`",
+        "!url": "http://www.espruino.com/Reference#l_Ethernet_setIP"
+      }
     }
   },
   "tv": {
@@ -915,6 +663,113 @@
       "!url": "http://www.espruino.com/Reference#l_Math_max"
     }
   },
+  "NRF": {
+    "!type": "fn()",
+    "!doc": "",
+    "!url": "http://www.espruino.com/Reference#NRF",
+    "init": {
+      "!type": "fn()",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_NRF_init"
+    },
+    "sleep": {
+      "!type": "fn()",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_NRF_sleep"
+    },
+    "wake": {
+      "!type": "fn()",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_NRF_wake"
+    }
+  },
+  "Bluetooth": {
+    "!type": "+Serial",
+    "!doc": "The USB Serial port",
+    "!url": "http://www.espruino.com/Reference#l__global_Bluetooth"
+  },
+  "hashlib": {
+    "!type": "fn()",
+    "!doc": "**Note:** This library is currently only included in builds for the original Espruino boards.\nFor other boards you will have to make build your own firmware.",
+    "!url": "http://www.espruino.com/Reference#l_hashlib_undefined",
+    "sha224": {
+      "!type": "fn(message: ?) -> +HASH",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_hashlib_sha224"
+    },
+    "sha256": {
+      "!type": "fn(message: ?) -> +HASH",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_hashlib_sha256"
+    }
+  },
+  "HASH": {
+    "!type": "fn()",
+    "!doc": "**Note:** This class is currently only included in builds for the original Espruino boards.\nFor other boards you will have to make build your own firmware.",
+    "!url": "http://www.espruino.com/Reference#HASH",
+    "prototype": {
+      "update": {
+        "!type": "fn(message: ?)",
+        "!doc": "",
+        "!url": "http://www.espruino.com/Reference#l_HASH_update"
+      },
+      "digest": {
+        "!type": "fn(message: ?) -> ?",
+        "!doc": "",
+        "!url": "http://www.espruino.com/Reference#l_HASH_digest"
+      },
+      "hexdigest": {
+        "!type": "fn(message: ?) -> ?",
+        "!doc": "",
+        "!url": "http://www.espruino.com/Reference#l_HASH_hexdigest"
+      }
+    }
+  },
+  "Trig": {
+    "!type": "fn()",
+    "!doc": "This class exists in order to interface Espruino with fast-moving trigger wheels. Trigger wheels are physical discs with evenly spaced teeth cut into them, and often with one or two teeth next to each other missing. A sensor sends a signal whenever a tooth passed by, and this allows a device to measure not only RPM, but absolute position.\n\nThis class is currently in testing - it is NOT AVAILABLE on normal boards.",
+    "!url": "http://www.espruino.com/Reference#Trig",
+    "getPosAtTime": {
+      "!type": "fn(time: number) -> number",
+      "!doc": "Get the position of the trigger wheel at the given time (from getTime)",
+      "!url": "http://www.espruino.com/Reference#l_Trig_getPosAtTime"
+    },
+    "setup": {
+      "!type": "fn(pin: +Pin, options: ?)",
+      "!doc": "Initialise the trigger class",
+      "!url": "http://www.espruino.com/Reference#l_Trig_setup"
+    },
+    "setTrigger": {
+      "!type": "fn(num: number, pos: number, pins: ?, pulseLength: number)",
+      "!doc": "Set a trigger for a certain point in the cycle",
+      "!url": "http://www.espruino.com/Reference#l_Trig_setTrigger"
+    },
+    "killTrigger": {
+      "!type": "fn(num: number)",
+      "!doc": "Disable a trigger",
+      "!url": "http://www.espruino.com/Reference#l_Trig_killTrigger"
+    },
+    "getTrigger": {
+      "!type": "fn(num: number) -> ?",
+      "!doc": "Get the current state of a trigger",
+      "!url": "http://www.espruino.com/Reference#l_Trig_getTrigger"
+    },
+    "getRPM": {
+      "!type": "fn() -> number",
+      "!doc": "Get the RPM of the trigger wheel",
+      "!url": "http://www.espruino.com/Reference#l_Trig_getRPM"
+    },
+    "getErrors": {
+      "!type": "fn() -> number",
+      "!doc": "Get the current error flags from the trigger wheel - and zero them",
+      "!url": "http://www.espruino.com/Reference#l_Trig_getErrors"
+    },
+    "getErrorArray": {
+      "!type": "fn() -> ?",
+      "!doc": "Get the current error flags from the trigger wheel - and zero them",
+      "!url": "http://www.espruino.com/Reference#l_Trig_getErrorArray"
+    }
+  },
   "Graphics": {
     "!type": "fn()",
     "!doc": "This class provides Graphics operations that can be applied to a surface.\n\nUse Graphics.createXXX to create a graphics object that renders in the way you want. See [the Graphics page](/Graphics) for more information.\n\n**Note:** On boards that contain an LCD, there is a built-in 'LCD' object of type Graphics. For instance to draw a line you'd type: ```LCD.drawLine(0,0,100,100)```",
@@ -1052,42 +907,383 @@
       }
     }
   },
-  "hashlib": {
+  "File": {
     "!type": "fn()",
-    "!doc": "**Note:** This library is currently only included in builds for the original Espruino boards.\nFor other boards you will have to make build your own firmware.",
-    "!url": "http://www.espruino.com/Reference#l_hashlib_undefined",
-    "sha224": {
-      "!type": "fn(message: ?) -> +HASH",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_hashlib_sha224"
-    },
-    "sha256": {
-      "!type": "fn(message: ?) -> +HASH",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_hashlib_sha256"
-    }
-  },
-  "HASH": {
-    "!type": "fn()",
-    "!doc": "**Note:** This class is currently only included in builds for the original Espruino boards.\nFor other boards you will have to make build your own firmware.",
-    "!url": "http://www.espruino.com/Reference#HASH",
+    "!doc": "This is the File object - it allows you to stream data to and from files (As opposed to the `require('fs').readFile(..)` style functions that read an entire file).\n\nTo create a File object, you must type ```var fd = E.openFile('filepath','mode')``` - see [E.openFile](#l_E_openFile) for more information.\n\n**Note:** If you want to remove an SD card after you have started using it, you *must* call `E.unmountSD()` or you may cause damage to the card.",
+    "!url": "http://www.espruino.com/Reference#File",
     "prototype": {
-      "update": {
-        "!type": "fn(message: ?)",
-        "!doc": "",
-        "!url": "http://www.espruino.com/Reference#l_HASH_update"
+      "close": {
+        "!type": "fn()",
+        "!doc": "Close an open file.",
+        "!url": "http://www.espruino.com/Reference#l_File_close"
       },
-      "digest": {
-        "!type": "fn(message: ?) -> ?",
-        "!doc": "",
-        "!url": "http://www.espruino.com/Reference#l_HASH_digest"
+      "write": {
+        "!type": "fn(buffer: ?) -> number",
+        "!doc": "write data to a file",
+        "!url": "http://www.espruino.com/Reference#l_File_write"
       },
-      "hexdigest": {
-        "!type": "fn(message: ?) -> ?",
-        "!doc": "",
-        "!url": "http://www.espruino.com/Reference#l_HASH_hexdigest"
+      "read": {
+        "!type": "fn(length: number) -> ?",
+        "!doc": "Read data in a file in byte size chunks",
+        "!url": "http://www.espruino.com/Reference#l_File_read"
+      },
+      "skip": {
+        "!type": "fn(nBytes: number)",
+        "!doc": "Skip the specified number of bytes forward in the file",
+        "!url": "http://www.espruino.com/Reference#l_File_skip"
+      },
+      "seek": {
+        "!type": "fn(nBytes: number)",
+        "!doc": "Seek to a certain position in the file",
+        "!url": "http://www.espruino.com/Reference#l_File_seek"
+      },
+      "pipe": {
+        "!type": "fn(destination: ?, options: ?)",
+        "!doc": "Pipe this file to a stream (an object with a 'write' method)",
+        "!url": "http://www.espruino.com/Reference#l_File_pipe"
       }
     }
+  },
+  "fs": {
+    "!type": "fn()",
+    "!doc": "This library handles interfacing with a FAT32 filesystem on an SD card. The API is designed to be similar to node.js's - However Espruino does not currently support asynchronous file IO, so the functions behave like node.js's xxxxSync functions. Versions of the functions with 'Sync' after them are also provided for compatibility.\n\nCurrently this provides minimal file IO - it's great for logging and loading/saving settings, but not good for loading large amounts of data as you will soon fill your memory up.\n\nIt is currently only available on boards that contain an SD card slot, such as the Olimexino and the HY. It can not currently be added to boards that did not ship with a card slot.\n\nTo use this, you must type ```var fs = require('fs')``` to get access to the library",
+    "!url": "http://www.espruino.com/Reference#l_fs_undefined",
+    "readdir": {
+      "!type": "fn(path: ?) -> ?",
+      "!doc": "List all files in the supplied directory, returning them as an array of strings.\n\nNOTE: Espruino does not yet support Async file IO, so this function behaves like the 'Sync' version.",
+      "!url": "http://www.espruino.com/Reference#l_fs_readdir"
+    },
+    "readdirSync": {
+      "!type": "fn(path: ?) -> ?",
+      "!doc": "List all files in the supplied directory, returning them as an array of strings.",
+      "!url": "http://www.espruino.com/Reference#l_fs_readdirSync"
+    },
+    "writeFile": {
+      "!type": "fn(path: ?, data: ?) -> bool",
+      "!doc": "Write the data to the given file\n\nNOTE: Espruino does not yet support Async file IO, so this function behaves like the 'Sync' version.",
+      "!url": "http://www.espruino.com/Reference#l_fs_writeFile"
+    },
+    "writeFileSync": {
+      "!type": "fn(path: ?, data: ?) -> bool",
+      "!doc": "Write the data to the given file",
+      "!url": "http://www.espruino.com/Reference#l_fs_writeFileSync"
+    },
+    "appendFile": {
+      "!type": "fn(path: ?, data: ?) -> bool",
+      "!doc": "Append the data to the given file, created a new file if it doesn't exist\n\nNOTE: Espruino does not yet support Async file IO, so this function behaves like the 'Sync' version.",
+      "!url": "http://www.espruino.com/Reference#l_fs_appendFile"
+    },
+    "appendFileSync": {
+      "!type": "fn(path: ?, data: ?) -> bool",
+      "!doc": "Append the data to the given file, created a new file if it doesn't exist",
+      "!url": "http://www.espruino.com/Reference#l_fs_appendFileSync"
+    },
+    "readFile": {
+      "!type": "fn(path: ?) -> ?",
+      "!doc": "Read all data from a file and return as a string\n\nNOTE: Espruino does not yet support Async file IO, so this function behaves like the 'Sync' version.",
+      "!url": "http://www.espruino.com/Reference#l_fs_readFile"
+    },
+    "readFileSync": {
+      "!type": "fn(path: ?) -> ?",
+      "!doc": "Read all data from a file and return as a string.\n\n**Note:** The size of files you can load using this method is limited by the amount of available RAM. To read files a bit at a time, see the `File` class.",
+      "!url": "http://www.espruino.com/Reference#l_fs_readFileSync"
+    },
+    "unlink": {
+      "!type": "fn(path: ?) -> bool",
+      "!doc": "Delete the given file\n\nNOTE: Espruino does not yet support Async file IO, so this function behaves like the 'Sync' version.",
+      "!url": "http://www.espruino.com/Reference#l_fs_unlink"
+    },
+    "unlinkSync": {
+      "!type": "fn(path: ?) -> bool",
+      "!doc": "Delete the given file",
+      "!url": "http://www.espruino.com/Reference#l_fs_unlinkSync"
+    },
+    "statSync": {
+      "!type": "fn(path: ?) -> ?",
+      "!doc": "Return information on the given file. This returns an object with the following\nfields:\n\nsize: size in bytes\ndir: a boolean specifying if the file is a directory or not\nmtime: A Date structure specifying the time the file was last modified",
+      "!url": "http://www.espruino.com/Reference#l_fs_statSync"
+    },
+    "pipe": {
+      "!type": "fn(source: ?, destination: ?, options: ?)",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_fs_pipe"
+    }
+  },
+  "Nucleo": {
+    "!type": "fn()",
+    "!doc": "This is the built-in class for the Arduino-style pin namings on ST Nucleo boards",
+    "!url": "http://www.espruino.com/Reference#Nucleo",
+    "A0": {
+      "!type": "+Pin",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Nucleo_A0"
+    },
+    "A1": {
+      "!type": "+Pin",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Nucleo_A1"
+    },
+    "A2": {
+      "!type": "+Pin",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Nucleo_A2"
+    },
+    "A3": {
+      "!type": "+Pin",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Nucleo_A3"
+    },
+    "A4": {
+      "!type": "+Pin",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Nucleo_A4"
+    },
+    "A5": {
+      "!type": "+Pin",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Nucleo_A5"
+    },
+    "D0": {
+      "!type": "+Pin",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Nucleo_D0"
+    },
+    "D1": {
+      "!type": "+Pin",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Nucleo_D1"
+    },
+    "D2": {
+      "!type": "+Pin",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Nucleo_D2"
+    },
+    "D3": {
+      "!type": "+Pin",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Nucleo_D3"
+    },
+    "D4": {
+      "!type": "+Pin",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Nucleo_D4"
+    },
+    "D5": {
+      "!type": "+Pin",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Nucleo_D5"
+    },
+    "D6": {
+      "!type": "+Pin",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Nucleo_D6"
+    },
+    "D7": {
+      "!type": "+Pin",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Nucleo_D7"
+    },
+    "D8": {
+      "!type": "+Pin",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Nucleo_D8"
+    },
+    "D9": {
+      "!type": "+Pin",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Nucleo_D9"
+    },
+    "D10": {
+      "!type": "+Pin",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Nucleo_D10"
+    },
+    "D11": {
+      "!type": "+Pin",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Nucleo_D11"
+    },
+    "D12": {
+      "!type": "+Pin",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Nucleo_D12"
+    },
+    "D13": {
+      "!type": "+Pin",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Nucleo_D13"
+    },
+    "D14": {
+      "!type": "+Pin",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Nucleo_D14"
+    },
+    "D15": {
+      "!type": "+Pin",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Nucleo_D15"
+    }
+  },
+  "SPI": {
+    "!type": "fn()",
+    "!doc": "Create a software SPI port. This has limited functionality (no baud rate), but it can work on any pins.\n\nUse `SPI.setup` to configure this port.",
+    "!url": "http://www.espruino.com/Reference#l_SPI_SPI",
+    "find": {
+      "!type": "fn(pin: +Pin) -> ?",
+      "!doc": "Try and find an SPI hardware device that will work on this pin (eg. `SPI1`)\n\nMay return undefined if no device can be found.",
+      "!url": "http://www.espruino.com/Reference#l_SPI_find"
+    },
+    "prototype": {
+      "setup": {
+        "!type": "fn(options: ?)",
+        "!doc": "Set up this SPI port as an SPI Master.",
+        "!url": "http://www.espruino.com/Reference#l_SPI_setup"
+      },
+      "send": {
+        "!type": "fn(data: ?, nss_pin: +Pin) -> ?",
+        "!doc": "Send data down SPI, and return the result. Sending an integer will return an integer, a String will return a String, and anything else will return a Uint8Array.\n\nSending multiple bytes in one call to send is preferable as they can then be transmitted end to end. Using multiple calls to send() will result in significantly slower transmission speeds.\n\nFor maximum speeds, please pass either Strings or Typed Arrays as arguments. Note that you can even pass arrays of arrays, like `[1,[2,3,4],5]`",
+        "!url": "http://www.espruino.com/Reference#l_SPI_send"
+      },
+      "write": {
+        "!type": "fn(data: ?)",
+        "!doc": "Write a character or array of characters to SPI - without reading the result back.\n\nFor maximum speeds, please pass either Strings or Typed Arrays as arguments.",
+        "!url": "http://www.espruino.com/Reference#l_SPI_write"
+      },
+      "send4bit": {
+        "!type": "fn(data: ?, bit0: number, bit1: number, nss_pin: +Pin)",
+        "!doc": "Send data down SPI, using 4 bits for each 'real' bit (MSB first). This can be useful for faking one-wire style protocols\n\nSending multiple bytes in one call to send is preferable as they can then be transmitted end to end. Using multiple calls to send() will result in significantly slower transmission speeds.",
+        "!url": "http://www.espruino.com/Reference#l_SPI_send4bit"
+      },
+      "send8bit": {
+        "!type": "fn(data: ?, bit0: number, bit1: number, nss_pin: +Pin)",
+        "!doc": "Send data down SPI, using 8 bits for each 'real' bit (MSB first). This can be useful for faking one-wire style protocols\n\nSending multiple bytes in one call to send is preferable as they can then be transmitted end to end. Using multiple calls to send() will result in significantly slower transmission speeds.",
+        "!url": "http://www.espruino.com/Reference#l_SPI_send8bit"
+      }
+    }
+  },
+  "SPI1": {
+    "!type": "+SPI",
+    "!doc": "The first SPI port",
+    "!url": "http://www.espruino.com/Reference#l__global_SPI1"
+  },
+  "SPI2": {
+    "!type": "+SPI",
+    "!doc": "The second SPI port",
+    "!url": "http://www.espruino.com/Reference#l__global_SPI2"
+  },
+  "SPI3": {
+    "!type": "+SPI",
+    "!doc": "The third SPI port",
+    "!url": "http://www.espruino.com/Reference#l__global_SPI3"
+  },
+  "I2C": {
+    "!type": "fn()",
+    "!doc": "This class allows use of the built-in I2C ports. Currently it allows I2C Master mode only.\n\nAll addresses are in 7 bit format. If you have an 8 bit address then you need to shift it one bit to the right.",
+    "!url": "http://www.espruino.com/Reference#I2C",
+    "find": {
+      "!type": "fn(pin: +Pin) -> ?",
+      "!doc": "Try and find an I2C hardware device that will work on this pin (eg. `I2C1`)\n\nMay return undefined if no device can be found.",
+      "!url": "http://www.espruino.com/Reference#l_I2C_find"
+    },
+    "prototype": {
+      "setup": {
+        "!type": "fn(options: ?)",
+        "!doc": "Set up this I2C port\n\nIf not specified in options, the default pins are used (usually the lowest numbered pins on the lowest port that supports this peripheral)",
+        "!url": "http://www.espruino.com/Reference#l_I2C_setup"
+      },
+      "writeTo": {
+        "!type": "fn(address: ?, data: ?)",
+        "!doc": "Transmit to the slave device with the given address. This is like Arduino's beginTransmission, write, and endTransmission rolled up into one.",
+        "!url": "http://www.espruino.com/Reference#l_I2C_writeTo"
+      },
+      "readFrom": {
+        "!type": "fn(address: ?, quantity: number) -> +Uint8Array",
+        "!doc": "Request bytes from the given slave device, and return them as a Uint8Array (packed array of bytes). This is like using Arduino Wire's requestFrom, available and read functions.  Sends a STOP",
+        "!url": "http://www.espruino.com/Reference#l_I2C_readFrom"
+      }
+    }
+  },
+  "I2C1": {
+    "!type": "+I2C",
+    "!doc": "The first I2C port",
+    "!url": "http://www.espruino.com/Reference#l__global_I2C1"
+  },
+  "I2C2": {
+    "!type": "+I2C",
+    "!doc": "The second I2C port",
+    "!url": "http://www.espruino.com/Reference#l__global_I2C2"
+  },
+  "I2C3": {
+    "!type": "+I2C",
+    "!doc": "The third I2C port",
+    "!url": "http://www.espruino.com/Reference#l__global_I2C3"
+  },
+  "OneWire": {
+    "!type": "fn(pin: +Pin) -> ?",
+    "!doc": "Create a software OneWire implementation on the given pin",
+    "!url": "http://www.espruino.com/Reference#l_OneWire_OneWire",
+    "prototype": {
+      "reset": {
+        "!type": "fn() -> bool",
+        "!doc": "Perform a reset cycle",
+        "!url": "http://www.espruino.com/Reference#l_OneWire_reset"
+      },
+      "select": {
+        "!type": "fn(rom: ?)",
+        "!doc": "Select a ROM - reset needs to be done first",
+        "!url": "http://www.espruino.com/Reference#l_OneWire_select"
+      },
+      "skip": {
+        "!type": "fn()",
+        "!doc": "Skip a ROM",
+        "!url": "http://www.espruino.com/Reference#l_OneWire_skip"
+      },
+      "write": {
+        "!type": "fn(data: ?, power: bool)",
+        "!doc": "Write one or more bytes",
+        "!url": "http://www.espruino.com/Reference#l_OneWire_write"
+      },
+      "read": {
+        "!type": "fn(count: ?) -> ?",
+        "!doc": "Read a byte",
+        "!url": "http://www.espruino.com/Reference#l_OneWire_read"
+      },
+      "search": {
+        "!type": "fn(command: number) -> ?",
+        "!doc": "Search for devices",
+        "!url": "http://www.espruino.com/Reference#l_OneWire_search"
+      }
+    }
+  },
+  "Modules": {
+    "!type": "fn()",
+    "!doc": "Built-in class that caches the modules used by the `require` command",
+    "!url": "http://www.espruino.com/Reference#Modules",
+    "getCached": {
+      "!type": "fn() -> ?",
+      "!doc": "Return an array of module names that have been cached",
+      "!url": "http://www.espruino.com/Reference#l_Modules_getCached"
+    },
+    "removeCached": {
+      "!type": "fn(id: ?)",
+      "!doc": "Remove the given module from the list of cached modules",
+      "!url": "http://www.espruino.com/Reference#l_Modules_removeCached"
+    },
+    "removeAllCached": {
+      "!type": "fn()",
+      "!doc": "Remove all cached modules",
+      "!url": "http://www.espruino.com/Reference#l_Modules_removeAllCached"
+    },
+    "addCached": {
+      "!type": "fn(id: ?, sourcecode: ?)",
+      "!doc": "Add the given module to the cache",
+      "!url": "http://www.espruino.com/Reference#l_Modules_addCached"
+    }
+  },
+  "Pipe": {
+    "!type": "fn()",
+    "!doc": "This is the Pipe container for async related IO.",
+    "!url": "http://www.espruino.com/Reference#l_Pipe_undefined"
   },
   "Array": {
     "!type": "fn(args: ?) -> ?",
@@ -1200,6 +1396,88 @@
       "!type": "fn(var: ?) -> bool",
       "!doc": "Returns true if the provided object is an array",
       "!url": "http://www.espruino.com/Reference#l_Array_isArray"
+    }
+  },
+  "Date": {
+    "!type": "fn(args: ?) -> +Date",
+    "!doc": "Creates a date object",
+    "!url": "http://www.espruino.com/Reference#l_Date_Date",
+    "now": {
+      "!type": "fn() -> number",
+      "!doc": "Get the number of milliseconds elapsed since 1970 (or on embedded platforms, since startup)",
+      "!url": "http://www.espruino.com/Reference#l_Date_now"
+    },
+    "prototype": {
+      "getTimezoneOffset": {
+        "!type": "fn() -> number",
+        "!doc": "The getTimezoneOffset() method returns the time-zone offset from UTC, in minutes, for the current locale.",
+        "!url": "http://www.espruino.com/Reference#l_Date_getTimezoneOffset"
+      },
+      "getTime": {
+        "!type": "fn() -> number",
+        "!doc": "Return the number of milliseconds since 1970",
+        "!url": "http://www.espruino.com/Reference#l_Date_getTime"
+      },
+      "valueOf": {
+        "!type": "fn() -> number",
+        "!doc": "Return the number of milliseconds since 1970",
+        "!url": "http://www.espruino.com/Reference#l_Date_valueOf"
+      },
+      "getHours": {
+        "!type": "fn() -> number",
+        "!doc": "0..23",
+        "!url": "http://www.espruino.com/Reference#l_Date_getHours"
+      },
+      "getMinutes": {
+        "!type": "fn() -> number",
+        "!doc": "0..59",
+        "!url": "http://www.espruino.com/Reference#l_Date_getMinutes"
+      },
+      "getSeconds": {
+        "!type": "fn() -> number",
+        "!doc": "0..59",
+        "!url": "http://www.espruino.com/Reference#l_Date_getSeconds"
+      },
+      "getMilliseconds": {
+        "!type": "fn() -> number",
+        "!doc": "0..999",
+        "!url": "http://www.espruino.com/Reference#l_Date_getMilliseconds"
+      },
+      "getDay": {
+        "!type": "fn() -> number",
+        "!doc": "Day of the week (0=sunday, 1=monday, etc)",
+        "!url": "http://www.espruino.com/Reference#l_Date_getDay"
+      },
+      "getDate": {
+        "!type": "fn() -> number",
+        "!doc": "Day of the month 1..31",
+        "!url": "http://www.espruino.com/Reference#l_Date_getDate"
+      },
+      "getMonth": {
+        "!type": "fn() -> number",
+        "!doc": "Month of the year 0..11",
+        "!url": "http://www.espruino.com/Reference#l_Date_getMonth"
+      },
+      "getFullYear": {
+        "!type": "fn() -> number",
+        "!doc": "The year, eg. 2014",
+        "!url": "http://www.espruino.com/Reference#l_Date_getFullYear"
+      },
+      "toString": {
+        "!type": "fn() -> ?",
+        "!doc": "Converts to a String, eg: `Fri Jun 20 2014 14:52:20 GMT+0000`\n\n **Note:** This always assumes a timezone of GMT+0000",
+        "!url": "http://www.espruino.com/Reference#l_Date_toString"
+      },
+      "toUTCString": {
+        "!type": "fn() -> ?",
+        "!doc": "Converts to a String, eg: `Fri, 20 Jun 2014 14:52:20 GMT`\n\n **Note:** This always assumes a timezone of GMT",
+        "!url": "http://www.espruino.com/Reference#l_Date_toUTCString"
+      }
+    },
+    "parse": {
+      "!type": "fn(str: ?) -> number",
+      "!doc": "Parse a date string and return milliseconds since 1970. Data can be either '2011-10-20T14:48:00', '2011-10-20' or 'Mon, 25 Dec 1995 13:30:00 +0430'",
+      "!url": "http://www.espruino.com/Reference#l_Date_parse"
     }
   },
   "ArrayBuffer": {
@@ -1351,355 +1629,6 @@
       "!proto": "ArrayBufferView.prototype"
     }
   },
-  "SPI": {
-    "!type": "fn()",
-    "!doc": "Create a software SPI port. This has limited functionality (no baud rate), but it can work on any pins.\n\nUse `SPI.setup` to configure this port.",
-    "!url": "http://www.espruino.com/Reference#l_SPI_SPI",
-    "find": {
-      "!type": "fn(pin: +Pin) -> ?",
-      "!doc": "Try and find an SPI hardware device that will work on this pin (eg. `SPI1`)\n\nMay return undefined if no device can be found.",
-      "!url": "http://www.espruino.com/Reference#l_SPI_find"
-    },
-    "prototype": {
-      "setup": {
-        "!type": "fn(options: ?)",
-        "!doc": "Set up this SPI port as an SPI Master.",
-        "!url": "http://www.espruino.com/Reference#l_SPI_setup"
-      },
-      "send": {
-        "!type": "fn(data: ?, nss_pin: +Pin) -> ?",
-        "!doc": "Send data down SPI, and return the result. Sending an integer will return an integer, a String will return a String, and anything else will return a Uint8Array.\n\nSending multiple bytes in one call to send is preferable as they can then be transmitted end to end. Using multiple calls to send() will result in significantly slower transmission speeds.\n\nFor maximum speeds, please pass either Strings or Typed Arrays as arguments. Note that you can even pass arrays of arrays, like `[1,[2,3,4],5]`",
-        "!url": "http://www.espruino.com/Reference#l_SPI_send"
-      },
-      "write": {
-        "!type": "fn(data: ?)",
-        "!doc": "Write a character or array of characters to SPI - without reading the result back.\n\nFor maximum speeds, please pass either Strings or Typed Arrays as arguments.",
-        "!url": "http://www.espruino.com/Reference#l_SPI_write"
-      },
-      "send4bit": {
-        "!type": "fn(data: ?, bit0: number, bit1: number, nss_pin: +Pin)",
-        "!doc": "Send data down SPI, using 4 bits for each 'real' bit (MSB first). This can be useful for faking one-wire style protocols\n\nSending multiple bytes in one call to send is preferable as they can then be transmitted end to end. Using multiple calls to send() will result in significantly slower transmission speeds.",
-        "!url": "http://www.espruino.com/Reference#l_SPI_send4bit"
-      },
-      "send8bit": {
-        "!type": "fn(data: ?, bit0: number, bit1: number, nss_pin: +Pin)",
-        "!doc": "Send data down SPI, using 8 bits for each 'real' bit (MSB first). This can be useful for faking one-wire style protocols\n\nSending multiple bytes in one call to send is preferable as they can then be transmitted end to end. Using multiple calls to send() will result in significantly slower transmission speeds.",
-        "!url": "http://www.espruino.com/Reference#l_SPI_send8bit"
-      }
-    }
-  },
-  "SPI1": {
-    "!type": "+SPI",
-    "!doc": "The first SPI port",
-    "!url": "http://www.espruino.com/Reference#l__global_SPI1"
-  },
-  "SPI2": {
-    "!type": "+SPI",
-    "!doc": "The second SPI port",
-    "!url": "http://www.espruino.com/Reference#l__global_SPI2"
-  },
-  "SPI3": {
-    "!type": "+SPI",
-    "!doc": "The third SPI port",
-    "!url": "http://www.espruino.com/Reference#l__global_SPI3"
-  },
-  "I2C": {
-    "!type": "fn()",
-    "!doc": "This class allows use of the built-in I2C ports. Currently it allows I2C Master mode only.\n\nAll addresses are in 7 bit format. If you have an 8 bit address then you need to shift it one bit to the right.",
-    "!url": "http://www.espruino.com/Reference#I2C",
-    "find": {
-      "!type": "fn(pin: +Pin) -> ?",
-      "!doc": "Try and find an I2C hardware device that will work on this pin (eg. `I2C1`)\n\nMay return undefined if no device can be found.",
-      "!url": "http://www.espruino.com/Reference#l_I2C_find"
-    },
-    "prototype": {
-      "setup": {
-        "!type": "fn(options: ?)",
-        "!doc": "Set up this I2C port\n\nIf not specified in options, the default pins are used (usually the lowest numbered pins on the lowest port that supports this peripheral)",
-        "!url": "http://www.espruino.com/Reference#l_I2C_setup"
-      },
-      "writeTo": {
-        "!type": "fn(address: ?, data: ?)",
-        "!doc": "Transmit to the slave device with the given address. This is like Arduino's beginTransmission, write, and endTransmission rolled up into one.",
-        "!url": "http://www.espruino.com/Reference#l_I2C_writeTo"
-      },
-      "readFrom": {
-        "!type": "fn(address: ?, quantity: number) -> +Uint8Array",
-        "!doc": "Request bytes from the given slave device, and return them as a Uint8Array (packed array of bytes). This is like using Arduino Wire's requestFrom, available and read functions.  Sends a STOP",
-        "!url": "http://www.espruino.com/Reference#l_I2C_readFrom"
-      }
-    }
-  },
-  "I2C1": {
-    "!type": "+I2C",
-    "!doc": "The first I2C port",
-    "!url": "http://www.espruino.com/Reference#l__global_I2C1"
-  },
-  "I2C2": {
-    "!type": "+I2C",
-    "!doc": "The second I2C port",
-    "!url": "http://www.espruino.com/Reference#l__global_I2C2"
-  },
-  "I2C3": {
-    "!type": "+I2C",
-    "!doc": "The third I2C port",
-    "!url": "http://www.espruino.com/Reference#l__global_I2C3"
-  },
-  "Flash": {
-    "!type": "fn()",
-    "!doc": "This module allows access to read and write the STM32's flash memory.\n\nIt should be used with extreme caution, as it is easy to overwrite parts of Flash\nmemory belonging to Espruino or even its bootloader. If you damage the bootloader\nthen you may need external hardware such as a USB-TTL converter to restore it. For\nmore information on restoring the bootloader see `Advanced Reflashing` in your\nboard's reference pages.\n\nTo see which areas of memory you can and can't overwrite, look at the values\nreported by `process.memory()`.",
-    "!url": "http://www.espruino.com/Reference#l_Flash_undefined",
-    "getPage": {
-      "!type": "fn(addr: number) -> ?",
-      "!doc": "Returns the start and length of the flash page containing the given address.",
-      "!url": "http://www.espruino.com/Reference#l_Flash_getPage"
-    },
-    "erasePage": {
-      "!type": "fn(addr: ?)",
-      "!doc": "Erase a page of flash memory",
-      "!url": "http://www.espruino.com/Reference#l_Flash_erasePage"
-    },
-    "write": {
-      "!type": "fn(data: ?, addr: number)",
-      "!doc": "Write data into memory at the given address - IN MULTIPLES OF 4 BYTES.\n\nIn flash memory you may only turn bits that are 1 into bits that are 0. If\nyou're writing data into an area that you have already written (so `read`\ndoesn't return all `0xFF`) you'll need to call `erasePage` to clear the\nentire page.",
-      "!url": "http://www.espruino.com/Reference#l_Flash_write"
-    },
-    "read": {
-      "!type": "fn(length: number, addr: number) -> ?",
-      "!doc": "Read flash memory from the given address",
-      "!url": "http://www.espruino.com/Reference#l_Flash_read"
-    }
-  },
-  "process": {
-    "!type": "fn()",
-    "!doc": "This class contains information about Espruino itself",
-    "!url": "http://www.espruino.com/Reference#process",
-    "version": {
-      "!type": "?",
-      "!doc": "Returns the version of Espruino as a String",
-      "!url": "http://www.espruino.com/Reference#l_process_version"
-    },
-    "env": {
-      "!type": "?",
-      "!doc": "Returns an Object containing various pre-defined variables. standard ones are BOARD, VERSION",
-      "!url": "http://www.espruino.com/Reference#l_process_env"
-    },
-    "memory": {
-      "!type": "fn() -> ?",
-      "!doc": "Run a Garbage Collection pass, and return an object containing information on memory usage.\n\nfree : Memory that is available to be used\n\nusage : Memory that has been used\n\ntotal : Total memory\n\nhistory : Memory used for command history - that is freed if memory is low. Note that this is INCLUDED in the figure for 'free'\n\nstackEndAddress : (on ARM) the address (that can be used with peek/poke/etc) of the END of the stack. The stack grows down, so unless you do a lot of recursion the bytes above this can be used.\n\nMemory units are specified in 'blocks', which are around 16 bytes each (depending on your device). See http://www.espruino.com/Performance for more information.",
-      "!url": "http://www.espruino.com/Reference#l_process_memory"
-    }
-  },
-  "Pipe": {
-    "!type": "fn()",
-    "!doc": "This is the Pipe container for async related IO.",
-    "!url": "http://www.espruino.com/Reference#l_Pipe_undefined"
-  },
-  "Error": {
-    "!type": "fn(message: ?) -> ?",
-    "!doc": "Creates an Error object",
-    "!url": "http://www.espruino.com/Reference#l_Error_Error",
-    "prototype": {
-      "toString": {
-        "!type": "fn() -> ?",
-        "!doc": "",
-        "!url": "http://www.espruino.com/Reference#l_Error_toString"
-      }
-    }
-  },
-  "SyntaxError": {
-    "!type": "fn(message: ?) -> ?",
-    "!doc": "Creates a SyntaxError object",
-    "!url": "http://www.espruino.com/Reference#l_SyntaxError_SyntaxError",
-    "prototype": {
-      "toString": {
-        "!type": "fn() -> ?",
-        "!doc": "",
-        "!url": "http://www.espruino.com/Reference#l_SyntaxError_toString"
-      }
-    }
-  },
-  "TypeError": {
-    "!type": "fn(message: ?) -> ?",
-    "!doc": "Creates a TypeError object",
-    "!url": "http://www.espruino.com/Reference#l_TypeError_TypeError",
-    "prototype": {
-      "toString": {
-        "!type": "fn() -> ?",
-        "!doc": "",
-        "!url": "http://www.espruino.com/Reference#l_TypeError_toString"
-      }
-    }
-  },
-  "InternalError": {
-    "!type": "fn(message: ?) -> ?",
-    "!doc": "Creates an InternalError object",
-    "!url": "http://www.espruino.com/Reference#l_InternalError_InternalError",
-    "prototype": {
-      "toString": {
-        "!type": "fn() -> ?",
-        "!doc": "",
-        "!url": "http://www.espruino.com/Reference#l_InternalError_toString"
-      }
-    }
-  },
-  "ReferenceError": {
-    "!type": "fn(message: ?) -> ?",
-    "!doc": "Creates a ReferenceError object",
-    "!url": "http://www.espruino.com/Reference#l_ReferenceError_ReferenceError",
-    "prototype": {
-      "toString": {
-        "!type": "fn() -> ?",
-        "!doc": "",
-        "!url": "http://www.espruino.com/Reference#l_ReferenceError_toString"
-      }
-    }
-  },
-  "Date": {
-    "!type": "fn(args: ?) -> +Date",
-    "!doc": "Creates a date object",
-    "!url": "http://www.espruino.com/Reference#l_Date_Date",
-    "now": {
-      "!type": "fn() -> number",
-      "!doc": "Get the number of milliseconds elapsed since 1970 (or on embedded platforms, since startup)",
-      "!url": "http://www.espruino.com/Reference#l_Date_now"
-    },
-    "prototype": {
-      "getTimezoneOffset": {
-        "!type": "fn() -> number",
-        "!doc": "The getTimezoneOffset() method returns the time-zone offset from UTC, in minutes, for the current locale.",
-        "!url": "http://www.espruino.com/Reference#l_Date_getTimezoneOffset"
-      },
-      "getTime": {
-        "!type": "fn() -> number",
-        "!doc": "Return the number of milliseconds since 1970",
-        "!url": "http://www.espruino.com/Reference#l_Date_getTime"
-      },
-      "valueOf": {
-        "!type": "fn() -> number",
-        "!doc": "Return the number of milliseconds since 1970",
-        "!url": "http://www.espruino.com/Reference#l_Date_valueOf"
-      },
-      "getHours": {
-        "!type": "fn() -> number",
-        "!doc": "0..23",
-        "!url": "http://www.espruino.com/Reference#l_Date_getHours"
-      },
-      "getMinutes": {
-        "!type": "fn() -> number",
-        "!doc": "0..59",
-        "!url": "http://www.espruino.com/Reference#l_Date_getMinutes"
-      },
-      "getSeconds": {
-        "!type": "fn() -> number",
-        "!doc": "0..59",
-        "!url": "http://www.espruino.com/Reference#l_Date_getSeconds"
-      },
-      "getMilliseconds": {
-        "!type": "fn() -> number",
-        "!doc": "0..999",
-        "!url": "http://www.espruino.com/Reference#l_Date_getMilliseconds"
-      },
-      "getDay": {
-        "!type": "fn() -> number",
-        "!doc": "Day of the week (0=sunday, 1=monday, etc)",
-        "!url": "http://www.espruino.com/Reference#l_Date_getDay"
-      },
-      "getDate": {
-        "!type": "fn() -> number",
-        "!doc": "Day of the month 1..31",
-        "!url": "http://www.espruino.com/Reference#l_Date_getDate"
-      },
-      "getMonth": {
-        "!type": "fn() -> number",
-        "!doc": "Month of the year 0..11",
-        "!url": "http://www.espruino.com/Reference#l_Date_getMonth"
-      },
-      "getFullYear": {
-        "!type": "fn() -> number",
-        "!doc": "The year, eg. 2014",
-        "!url": "http://www.espruino.com/Reference#l_Date_getFullYear"
-      },
-      "toString": {
-        "!type": "fn() -> ?",
-        "!doc": "Converts to a String, eg: `Fri Jun 20 2014 14:52:20 GMT+0000`\n\n **Note:** This always assumes a timezone of GMT+0000",
-        "!url": "http://www.espruino.com/Reference#l_Date_toString"
-      },
-      "toUTCString": {
-        "!type": "fn() -> ?",
-        "!doc": "Converts to a String, eg: `Fri, 20 Jun 2014 14:52:20 GMT`\n\n **Note:** This always assumes a timezone of GMT",
-        "!url": "http://www.espruino.com/Reference#l_Date_toUTCString"
-      }
-    },
-    "parse": {
-      "!type": "fn(str: ?) -> number",
-      "!doc": "Parse a date string and return milliseconds since 1970. Data can be either '2011-10-20T14:48:00', '2011-10-20' or 'Mon, 25 Dec 1995 13:30:00 +0430'",
-      "!url": "http://www.espruino.com/Reference#l_Date_parse"
-    }
-  },
-  "console": {
-    "!type": "fn()",
-    "!doc": "An Object that contains functions for writing to the interactive console",
-    "!url": "http://www.espruino.com/Reference#console",
-    "log": {
-      "!type": "fn(text: ?)",
-      "!doc": "Print the supplied string(s) to the console\n\n **Note:** If you're connected to a computer (not a wall adaptor) via USB but **you are not running a terminal app** then when you print data Espruino may pause execution and wait until the computer requests the data it is trying to print.",
-      "!url": "http://www.espruino.com/Reference#l_console_log"
-    }
-  },
-  "JSON": {
-    "!type": "fn()",
-    "!doc": "An Object that handles conversion to and from the JSON data interchange format",
-    "!url": "http://www.espruino.com/Reference#JSON",
-    "stringify": {
-      "!type": "fn(data: ?) -> ?",
-      "!doc": "Convert the given object into a JSON string which can subsequently be parsed with JSON.parse or eval",
-      "!url": "http://www.espruino.com/Reference#l_JSON_stringify"
-    },
-    "parse": {
-      "!type": "fn(string: ?) -> ?",
-      "!doc": "Parse the given JSON string into a JavaScript object\n\nNOTE: This implementation uses eval() internally, and as such it is unsafe as it can allow arbitrary JS commands to be executed.",
-      "!url": "http://www.espruino.com/Reference#l_JSON_parse"
-    }
-  },
-  "Number": {
-    "!type": "fn(value: ?) -> ?",
-    "!doc": "Creates a number",
-    "!url": "http://www.espruino.com/Reference#l_Number_Number",
-    "NaN": {
-      "!type": "number",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_Number_NaN"
-    },
-    "MAX_VALUE": {
-      "!type": "number",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_Number_MAX_VALUE"
-    },
-    "MIN_VALUE": {
-      "!type": "number",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_Number_MIN_VALUE"
-    },
-    "NEGATIVE_INFINITY": {
-      "!type": "number",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_Number_NEGATIVE_INFINITY"
-    },
-    "POSITIVE_INFINITY": {
-      "!type": "number",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_Number_POSITIVE_INFINITY"
-    },
-    "prototype": {
-      "!stdProto": "Number",
-      "toFixed": {
-        "!type": "fn(decimalPlaces: number) -> ?",
-        "!doc": "Format the number as a fixed point number",
-        "!url": "http://www.espruino.com/Reference#l_Number_toFixed"
-      }
-    }
-  },
   "Serial": {
     "!type": "fn()",
     "!doc": "This class allows use of the built-in USARTs\n\nMethods may be called on the USB, Serial1, Serial2, Serial3, Serial4, Serial5 and Serial6 objects. While different processors provide different numbers of USARTs, you can always rely on at least Serial1 and Serial2",
@@ -1801,213 +1730,6 @@
     "!type": "+Serial",
     "!doc": "A loopback serial device. Data sent to LoopbackA comes out of LoopbackB and vice versa",
     "!url": "http://www.espruino.com/Reference#l__global_LoopbackB"
-  },
-  "E": {
-    "!type": "fn()",
-    "!doc": "This is the built-in JavaScript class for Espruino utility functions.",
-    "!url": "http://www.espruino.com/Reference#E",
-    "connectSDCard": {
-      "!type": "fn(spi: ?, csPin: +Pin)",
-      "!doc": "Setup the filesystem so that subsequent calls to `E.openFile` and `require('fs').*` will use an SD card on the supplied SPI device and pin.\n\nIt can even work using software SPI - for instance:\n\n```\nvar spi = new SPI();\nspi.setup({mosi:C7,miso:C8,sck:C9});\nE.connectSDCard(spi,C6);\nconsole.log(require(\"fs\").readdirSync());\n```",
-      "!url": "http://www.espruino.com/Reference#l_E_connectSDCard"
-    },
-    "unmountSD": {
-      "!type": "fn()",
-      "!doc": "Unmount the SD card, so it can be removed. If you remove the SD card without calling this you may cause corruption, and you will be unable to access another SD card until you reset Espruino or call `E.unmountSD()`.",
-      "!url": "http://www.espruino.com/Reference#l_E_unmountSD"
-    },
-    "openFile": {
-      "!type": "fn(path: ?, mode: ?) -> +File",
-      "!doc": "Open a file",
-      "!url": "http://www.espruino.com/Reference#l_E_openFile"
-    },
-    "getTemperature": {
-      "!type": "fn() -> number",
-      "!doc": "Use the STM32's internal thermistor to work out the temperature.\n\nWhile this is implemented on Espruino boards, it may not be implemented on other devices. If so it'll return NaN.\n\n **Note:** This is not entirely accurate and varies by a few degrees from chip to chip. It measures the **die temperature**, so when connected to USB it could be reading 10 over degrees C above ambient temperature. When running from battery with `setDeepSleep(true)` it is much more accurate though.",
-      "!url": "http://www.espruino.com/Reference#l_E_getTemperature"
-    },
-    "getAnalogVRef": {
-      "!type": "fn() -> number",
-      "!doc": "Check the internal voltage reference. To work out an actual voltage of an input pin, you can use `analogRead(pin)*E.getAnalogVRef()`\n\n **Note:** This value is calculated by reading the voltage on an internal voltage reference with the ADC.\nIt will be slightly noisy, so if you need this for accurate measurements we'd recommend that you call\nthis function several times and average the results.\n\nWhile this is implemented on Espruino boards, it may not be implemented on other devices. If so it'll return NaN.",
-      "!url": "http://www.espruino.com/Reference#l_E_getAnalogVRef"
-    },
-    "nativeCall": {
-      "!type": "fn(addr: number, sig: ?, data: ?) -> ?",
-      "!doc": "ADVANCED: This is a great way to crash Espruino if you're not sure what you are doing\n\nCreate a native function that executes the code at the given address. Eg. `E.nativeCall(0x08012345,'double (double,double)')(1.1, 2.2)` \n\nIf you're executing a thumb function, you'll almost certainly need to set the bottom bit of the address to 1.\n\nNote it's not guaranteed that the call signature you provide can be used - there are limits on the number of arguments allowed.\n\nWhen supplying `data`, if it is a 'flat string' then it will be used directly, otherwise it'll be converted to a flat string and used.",
-      "!url": "http://www.espruino.com/Reference#l_E_nativeCall"
-    },
-    "clip": {
-      "!type": "fn(x: number, min: number, max: number) -> number",
-      "!doc": "Clip a number to be between min and max (inclusive)",
-      "!url": "http://www.espruino.com/Reference#l_E_clip"
-    },
-    "sum": {
-      "!type": "fn(arr: ?) -> number",
-      "!doc": "Sum the contents of the given Array, String or ArrayBuffer and return the result",
-      "!url": "http://www.espruino.com/Reference#l_E_sum"
-    },
-    "variance": {
-      "!type": "fn(arr: ?, mean: number) -> number",
-      "!doc": "Work out the variance of the contents of the given Array, String or ArrayBuffer and return the result. This is equivalent to `v=0;for (i in arr) v+=Math.pow(mean-arr[i],2)`",
-      "!url": "http://www.espruino.com/Reference#l_E_variance"
-    },
-    "convolve": {
-      "!type": "fn(arr1: ?, arr2: ?, offset: number) -> number",
-      "!doc": "Convolve arr1 with arr2. This is equivalent to `v=0;for (i in arr1) v+=arr1[i] * arr2[(i+offset) % arr2.length]`",
-      "!url": "http://www.espruino.com/Reference#l_E_convolve"
-    },
-    "FFT": {
-      "!type": "fn(arrReal: ?, arrImage: ?, inverse: bool)",
-      "!doc": "Performs a Fast Fourier Transform (fft) on the supplied data and writes it back into the original arrays. Note that if only one array is supplied, the data written back is the modulus of the complex result `sqrt(r*r+i*i)`.",
-      "!url": "http://www.espruino.com/Reference#l_E_FFT"
-    },
-    "interpolate": {
-      "!type": "fn(array: ?, index: number) -> number",
-      "!doc": "Interpolate between two adjacent values in the Typed Array",
-      "!url": "http://www.espruino.com/Reference#l_E_interpolate"
-    },
-    "interpolate2d": {
-      "!type": "fn(array: ?, width: number, x: number, y: number) -> number",
-      "!doc": "Interpolate between four adjacent values in the Typed Array, in 2D.",
-      "!url": "http://www.espruino.com/Reference#l_E_interpolate2d"
-    },
-    "enableWatchdog": {
-      "!type": "fn(timeout: number)",
-      "!doc": "Enable the watchdog timer. This will reset Espruino if it isn't able to return to the idle loop within the timeout. NOTE: This will not work with `setDeepSleep` unless you explicitly wake Espruino up with an interval of less than the timeout.",
-      "!url": "http://www.espruino.com/Reference#l_E_enableWatchdog"
-    },
-    "getErrorFlags": {
-      "!type": "fn() -> ?",
-      "!doc": "Get and reset the error flags. Returns an array that can contain:\n\n`'FIFO_FULL'`: The receive FIFO filled up and data was lost. This could be state transitions for setWatch, or received characters.\n\n`'BUFFER_FULL'`: A buffer for a stream filled up and characters were lost. This can happen to any stream - Serial,HTTP,etc.\n\n`'CALLBACK'`: A callback (s`etWatch`, `setInterval`, `on('data',...)`) caused an error and so was removed.\n\n`'LOW_MEMORY'`: Memory is running low - Espruino had to run a garbage collection pass or remove some of the command history\n\n`'MEMORY'`: Espruino ran out of memory and was unable to allocate some data that it needed.",
-      "!url": "http://www.espruino.com/Reference#l_E_getErrorFlags"
-    },
-    "toArrayBuffer": {
-      "!type": "fn(str: ?) -> +ArrayBufferView",
-      "!doc": "Create an ArrayBuffer from the given string. This is done via a reference, not a copy - so it is very fast and memory efficient.\n\nNote that this is an ArrayBuffer, not a Uint8Array. To get one of those, do: `new Uint8Array(E.toArrayBuffer('....'))`.",
-      "!url": "http://www.espruino.com/Reference#l_E_toArrayBuffer"
-    },
-    "toString": {
-      "!type": "fn(args: ?) -> +String",
-      "!doc": "Returns a 'flat' string representing the data in the arguments.\n\nThis creates a string from the given arguments. If an argument is a String or an Array,\neach element is traversed and added as an 8 bit character. If it is anything else, it is\nconverted to a character directly.",
-      "!url": "http://www.espruino.com/Reference#l_E_toString"
-    },
-    "toUint8Array": {
-      "!type": "fn(args: ?) -> +Uint8Array",
-      "!doc": "This creates a Uint8Array from the given arguments. If an argument is a String or an Array,\neach element is traversed and added as if it were an 8 bit value. If it is anything else, it is\nconverted to an 8 bit value directly.",
-      "!url": "http://www.espruino.com/Reference#l_E_toUint8Array"
-    },
-    "reverseByte": {
-      "!type": "fn(x: number) -> number",
-      "!doc": "Reverse the 8 bits in a byte, swapping MSB and LSB.\n\nFor example, `E.reverseByte(0b10010000) == 0b00001001`.\n\nNote that you can reverse all the bytes in an array with: `arr = arr.map(E.reverseByte)`",
-      "!url": "http://www.espruino.com/Reference#l_E_reverseByte"
-    },
-    "dumpTimers": {
-      "!type": "fn()",
-      "!doc": "Output the current list of Utility Timer Tasks - for debugging only",
-      "!url": "http://www.espruino.com/Reference#l_E_dumpTimers"
-    },
-    "getSizeOf": {
-      "!type": "fn(v: ?, depth: number) -> ?",
-      "!doc": "Return the number of variable blocks used by the supplied variable. This is\nuseful if you're running out of memory and you want to be able to see what\nis taking up most of the available space.\n\nIf `depth>0` and the variable can be recursed into, an array listing all property\nnames (including internal Espruino names) and their sizes is returned. If\n`depth>1` there is also a `more` field that inspects the objects's children's\nchildren.\n\nFor instance `E.getSizeOf(function(a,b) { })` returns `5`.\n\nBut `E.getSizeOf(E.getSizeOf(function(a,b) { }), 1)` returns:\n\n```\n [\n  {\n    \"name\": \"a\",\n    \"size\": 1 },\n  {\n    \"name\": \"b\",\n    \"size\": 1 },\n  {\n    \"name\": \"\\xFFcod\",\n    \"size\": 2 }\n ]\n```\n\nIn this case setting depth to `2` will make no difference as there are\nno more children to traverse.\n\nSee http://www.espruino.com/Internals for more information",
-      "!url": "http://www.espruino.com/Reference#l_E_getSizeOf"
-    },
-    "mapInPlace": {
-      "!type": "fn(from: ?, to: ?, map: ?, bits: number)",
-      "!doc": "Take each element of the `from` array, look it up in `map` (or call the \nfunction with it as a first argument), and write it into the corresponding\nelement in the `to` array.",
-      "!url": "http://www.espruino.com/Reference#l_E_mapInPlace"
-    },
-    "dumpStr": {
-      "!type": "fn() -> +String",
-      "!doc": "Get the current interpreter state in a text form such that it can be copied to a new device",
-      "!url": "http://www.espruino.com/Reference#l_E_dumpStr"
-    },
-    "srand": {
-      "!type": "fn(v: number)",
-      "!doc": "Set the seed for the random number generator used by `Math.random()`.",
-      "!url": "http://www.espruino.com/Reference#l_E_srand"
-    },
-    "hwRand": {
-      "!type": "fn() -> number",
-      "!doc": "Unlike 'Math.random()' which uses a pseudo-random number generator, this\nmethod reads from the internal voltage reference several times, xoring and\nrotating to try and make a relatively random value from the noise in the\nsignal.",
-      "!url": "http://www.espruino.com/Reference#l_E_hwRand"
-    },
-    "HSBtoRGB": {
-      "!type": "fn(hue: number, sat: number, bri: number) -> number",
-      "!doc": "Convert hue, saturation and brightness to red, green and blue (packed into an integer)\n\nThis replaces `Graphics.setColorHSB` and `Graphics.setBgColorHSB`. On devices with 24 bit colour it can\nbe used as: `Graphics.setColorHSB(E.HSBtoRGB(h, s, b))`",
-      "!url": "http://www.espruino.com/Reference#l_E_HSBtoRGB"
-    },
-    "setUSBHID": {
-      "!type": "fn(opts: ?)",
-      "!doc": "USB HID will only take effect next time you unplug and re-plug your Espruino. If you're\ndisconnecting it from power you'll have to make sure you have `save()`d after calling\nthis function.",
-      "!url": "http://www.espruino.com/Reference#l_E_setUSBHID"
-    },
-    "sendUSBHID": {
-      "!type": "fn(data: ?) -> bool",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_E_sendUSBHID"
-    }
-  },
-  "Modules": {
-    "!type": "fn()",
-    "!doc": "Built-in class that caches the modules used by the `require` command",
-    "!url": "http://www.espruino.com/Reference#Modules",
-    "getCached": {
-      "!type": "fn() -> ?",
-      "!doc": "Return an array of module names that have been cached",
-      "!url": "http://www.espruino.com/Reference#l_Modules_getCached"
-    },
-    "removeCached": {
-      "!type": "fn(id: ?)",
-      "!doc": "Remove the given module from the list of cached modules",
-      "!url": "http://www.espruino.com/Reference#l_Modules_removeCached"
-    },
-    "removeAllCached": {
-      "!type": "fn()",
-      "!doc": "Remove all cached modules",
-      "!url": "http://www.espruino.com/Reference#l_Modules_removeAllCached"
-    },
-    "addCached": {
-      "!type": "fn(id: ?, sourcecode: ?)",
-      "!doc": "Add the given module to the cache",
-      "!url": "http://www.espruino.com/Reference#l_Modules_addCached"
-    }
-  },
-  "OneWire": {
-    "!type": "fn(pin: +Pin) -> ?",
-    "!doc": "Create a software OneWire implementation on the given pin",
-    "!url": "http://www.espruino.com/Reference#l_OneWire_OneWire",
-    "prototype": {
-      "reset": {
-        "!type": "fn() -> bool",
-        "!doc": "Perform a reset cycle",
-        "!url": "http://www.espruino.com/Reference#l_OneWire_reset"
-      },
-      "select": {
-        "!type": "fn(rom: ?)",
-        "!doc": "Select a ROM - reset needs to be done first",
-        "!url": "http://www.espruino.com/Reference#l_OneWire_select"
-      },
-      "skip": {
-        "!type": "fn()",
-        "!doc": "Skip a ROM",
-        "!url": "http://www.espruino.com/Reference#l_OneWire_skip"
-      },
-      "write": {
-        "!type": "fn(data: ?, power: bool)",
-        "!doc": "Write one or more bytes",
-        "!url": "http://www.espruino.com/Reference#l_OneWire_write"
-      },
-      "read": {
-        "!type": "fn(count: ?) -> ?",
-        "!doc": "Read a byte",
-        "!url": "http://www.espruino.com/Reference#l_OneWire_read"
-      },
-      "search": {
-        "!type": "fn(command: number) -> ?",
-        "!doc": "Search for devices",
-        "!url": "http://www.espruino.com/Reference#l_OneWire_search"
-      }
-    }
   },
   "Waveform": {
     "!type": "fn(samples: number, options: ?) -> ?",
@@ -2189,6 +1911,129 @@
       }
     }
   },
+  "Error": {
+    "!type": "fn(message: ?) -> ?",
+    "!doc": "Creates an Error object",
+    "!url": "http://www.espruino.com/Reference#l_Error_Error",
+    "prototype": {
+      "toString": {
+        "!type": "fn() -> ?",
+        "!doc": "",
+        "!url": "http://www.espruino.com/Reference#l_Error_toString"
+      }
+    }
+  },
+  "SyntaxError": {
+    "!type": "fn(message: ?) -> ?",
+    "!doc": "Creates a SyntaxError object",
+    "!url": "http://www.espruino.com/Reference#l_SyntaxError_SyntaxError",
+    "prototype": {
+      "toString": {
+        "!type": "fn() -> ?",
+        "!doc": "",
+        "!url": "http://www.espruino.com/Reference#l_SyntaxError_toString"
+      }
+    }
+  },
+  "TypeError": {
+    "!type": "fn(message: ?) -> ?",
+    "!doc": "Creates a TypeError object",
+    "!url": "http://www.espruino.com/Reference#l_TypeError_TypeError",
+    "prototype": {
+      "toString": {
+        "!type": "fn() -> ?",
+        "!doc": "",
+        "!url": "http://www.espruino.com/Reference#l_TypeError_toString"
+      }
+    }
+  },
+  "InternalError": {
+    "!type": "fn(message: ?) -> ?",
+    "!doc": "Creates an InternalError object",
+    "!url": "http://www.espruino.com/Reference#l_InternalError_InternalError",
+    "prototype": {
+      "toString": {
+        "!type": "fn() -> ?",
+        "!doc": "",
+        "!url": "http://www.espruino.com/Reference#l_InternalError_toString"
+      }
+    }
+  },
+  "ReferenceError": {
+    "!type": "fn(message: ?) -> ?",
+    "!doc": "Creates a ReferenceError object",
+    "!url": "http://www.espruino.com/Reference#l_ReferenceError_ReferenceError",
+    "prototype": {
+      "toString": {
+        "!type": "fn() -> ?",
+        "!doc": "",
+        "!url": "http://www.espruino.com/Reference#l_ReferenceError_toString"
+      }
+    }
+  },
+  "Number": {
+    "!type": "fn(value: ?) -> ?",
+    "!doc": "Creates a number",
+    "!url": "http://www.espruino.com/Reference#l_Number_Number",
+    "NaN": {
+      "!type": "number",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Number_NaN"
+    },
+    "MAX_VALUE": {
+      "!type": "number",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Number_MAX_VALUE"
+    },
+    "MIN_VALUE": {
+      "!type": "number",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Number_MIN_VALUE"
+    },
+    "NEGATIVE_INFINITY": {
+      "!type": "number",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Number_NEGATIVE_INFINITY"
+    },
+    "POSITIVE_INFINITY": {
+      "!type": "number",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Number_POSITIVE_INFINITY"
+    },
+    "prototype": {
+      "!stdProto": "Number",
+      "toFixed": {
+        "!type": "fn(decimalPlaces: number) -> ?",
+        "!doc": "Format the number as a fixed point number",
+        "!url": "http://www.espruino.com/Reference#l_Number_toFixed"
+      }
+    }
+  },
+  "console": {
+    "!type": "fn()",
+    "!doc": "An Object that contains functions for writing to the interactive console",
+    "!url": "http://www.espruino.com/Reference#console",
+    "log": {
+      "!type": "fn(text: ?)",
+      "!doc": "Print the supplied string(s) to the console\n\n **Note:** If you're connected to a computer (not a wall adaptor) via USB but **you are not running a terminal app** then when you print data Espruino may pause execution and wait until the computer requests the data it is trying to print.",
+      "!url": "http://www.espruino.com/Reference#l_console_log"
+    }
+  },
+  "JSON": {
+    "!type": "fn()",
+    "!doc": "An Object that handles conversion to and from the JSON data interchange format",
+    "!url": "http://www.espruino.com/Reference#JSON",
+    "stringify": {
+      "!type": "fn(data: ?) -> ?",
+      "!doc": "Convert the given object into a JSON string which can subsequently be parsed with JSON.parse or eval",
+      "!url": "http://www.espruino.com/Reference#l_JSON_stringify"
+    },
+    "parse": {
+      "!type": "fn(string: ?) -> ?",
+      "!doc": "Parse the given JSON string into a JavaScript object\n\nNOTE: This implementation uses eval() internally, and as such it is unsafe as it can allow arbitrary JS commands to be executed.",
+      "!url": "http://www.espruino.com/Reference#l_JSON_parse"
+    }
+  },
   "String": {
     "!type": "fn(str: ?) -> ?",
     "!doc": "Create a new String",
@@ -2257,7 +2102,7 @@
       },
       "trim": {
         "!type": "fn() -> +String",
-        "!doc": "Return the integer value of a single character at the given position in the String.\n\nNote that this returns 0 not 'NaN' for out of bounds characters",
+        "!doc": "Return a new string with any whitespace (tabs, space, form feed, newline,\ncarriage return, etc) removed from the beginning and end.",
         "!url": "http://www.espruino.com/Reference#l_String_trim"
       }
     },
@@ -2267,85 +2112,265 @@
       "!url": "http://www.espruino.com/Reference#l_String_fromCharCode"
     }
   },
-  "peek8": {
-    "!type": "fn(addr: number, count: number) -> ?",
-    "!doc": "Read 8 bits of memory at the given location - DANGEROUS!",
-    "!url": "http://www.espruino.com/Reference#l__global_peek8"
+  "E": {
+    "!type": "fn()",
+    "!doc": "This is the built-in JavaScript class for Espruino utility functions.",
+    "!url": "http://www.espruino.com/Reference#E",
+    "connectSDCard": {
+      "!type": "fn(spi: ?, csPin: +Pin)",
+      "!doc": "Setup the filesystem so that subsequent calls to `E.openFile` and `require('fs').*` will use an SD card on the supplied SPI device and pin.\n\nIt can even work using software SPI - for instance:\n\n```\nvar spi = new SPI();\nspi.setup({mosi:C7,miso:C8,sck:C9});\nE.connectSDCard(spi,C6);\nconsole.log(require(\"fs\").readdirSync());\n```",
+      "!url": "http://www.espruino.com/Reference#l_E_connectSDCard"
+    },
+    "unmountSD": {
+      "!type": "fn()",
+      "!doc": "Unmount the SD card, so it can be removed. If you remove the SD card without calling this you may cause corruption, and you will be unable to access another SD card until you reset Espruino or call `E.unmountSD()`.",
+      "!url": "http://www.espruino.com/Reference#l_E_unmountSD"
+    },
+    "openFile": {
+      "!type": "fn(path: ?, mode: ?) -> +File",
+      "!doc": "Open a file",
+      "!url": "http://www.espruino.com/Reference#l_E_openFile"
+    },
+    "getTemperature": {
+      "!type": "fn() -> number",
+      "!doc": "Use the STM32's internal thermistor to work out the temperature.\n\nWhile this is implemented on Espruino boards, it may not be implemented on other devices. If so it'll return NaN.\n\n **Note:** This is not entirely accurate and varies by a few degrees from chip to chip. It measures the **die temperature**, so when connected to USB it could be reading 10 over degrees C above ambient temperature. When running from battery with `setDeepSleep(true)` it is much more accurate though.",
+      "!url": "http://www.espruino.com/Reference#l_E_getTemperature"
+    },
+    "getAnalogVRef": {
+      "!type": "fn() -> number",
+      "!doc": "Check the internal voltage reference. To work out an actual voltage of an input pin, you can use `analogRead(pin)*E.getAnalogVRef()`\n\n **Note:** This value is calculated by reading the voltage on an internal voltage reference with the ADC.\nIt will be slightly noisy, so if you need this for accurate measurements we'd recommend that you call\nthis function several times and average the results.\n\nWhile this is implemented on Espruino boards, it may not be implemented on other devices. If so it'll return NaN.",
+      "!url": "http://www.espruino.com/Reference#l_E_getAnalogVRef"
+    },
+    "nativeCall": {
+      "!type": "fn(addr: number, sig: ?, data: ?) -> ?",
+      "!doc": "ADVANCED: This is a great way to crash Espruino if you're not sure what you are doing\n\nCreate a native function that executes the code at the given address. Eg. `E.nativeCall(0x08012345,'double (double,double)')(1.1, 2.2)` \n\nIf you're executing a thumb function, you'll almost certainly need to set the bottom bit of the address to 1.\n\nNote it's not guaranteed that the call signature you provide can be used - there are limits on the number of arguments allowed.\n\nWhen supplying `data`, if it is a 'flat string' then it will be used directly, otherwise it'll be converted to a flat string and used.",
+      "!url": "http://www.espruino.com/Reference#l_E_nativeCall"
+    },
+    "clip": {
+      "!type": "fn(x: number, min: number, max: number) -> number",
+      "!doc": "Clip a number to be between min and max (inclusive)",
+      "!url": "http://www.espruino.com/Reference#l_E_clip"
+    },
+    "sum": {
+      "!type": "fn(arr: ?) -> number",
+      "!doc": "Sum the contents of the given Array, String or ArrayBuffer and return the result",
+      "!url": "http://www.espruino.com/Reference#l_E_sum"
+    },
+    "variance": {
+      "!type": "fn(arr: ?, mean: number) -> number",
+      "!doc": "Work out the variance of the contents of the given Array, String or ArrayBuffer and return the result. This is equivalent to `v=0;for (i in arr) v+=Math.pow(mean-arr[i],2)`",
+      "!url": "http://www.espruino.com/Reference#l_E_variance"
+    },
+    "convolve": {
+      "!type": "fn(arr1: ?, arr2: ?, offset: number) -> number",
+      "!doc": "Convolve arr1 with arr2. This is equivalent to `v=0;for (i in arr1) v+=arr1[i] * arr2[(i+offset) % arr2.length]`",
+      "!url": "http://www.espruino.com/Reference#l_E_convolve"
+    },
+    "FFT": {
+      "!type": "fn(arrReal: ?, arrImage: ?, inverse: bool)",
+      "!doc": "Performs a Fast Fourier Transform (fft) on the supplied data and writes it back into the original arrays. Note that if only one array is supplied, the data written back is the modulus of the complex result `sqrt(r*r+i*i)`.",
+      "!url": "http://www.espruino.com/Reference#l_E_FFT"
+    },
+    "interpolate": {
+      "!type": "fn(array: ?, index: number) -> number",
+      "!doc": "Interpolate between two adjacent values in the Typed Array",
+      "!url": "http://www.espruino.com/Reference#l_E_interpolate"
+    },
+    "interpolate2d": {
+      "!type": "fn(array: ?, width: number, x: number, y: number) -> number",
+      "!doc": "Interpolate between four adjacent values in the Typed Array, in 2D.",
+      "!url": "http://www.espruino.com/Reference#l_E_interpolate2d"
+    },
+    "enableWatchdog": {
+      "!type": "fn(timeout: number)",
+      "!doc": "Enable the watchdog timer. This will reset Espruino if it isn't able to return to the idle loop within the timeout. NOTE: This will not work with `setDeepSleep` unless you explicitly wake Espruino up with an interval of less than the timeout.",
+      "!url": "http://www.espruino.com/Reference#l_E_enableWatchdog"
+    },
+    "getErrorFlags": {
+      "!type": "fn() -> ?",
+      "!doc": "Get and reset the error flags. Returns an array that can contain:\n\n`'FIFO_FULL'`: The receive FIFO filled up and data was lost. This could be state transitions for setWatch, or received characters.\n\n`'BUFFER_FULL'`: A buffer for a stream filled up and characters were lost. This can happen to any stream - Serial,HTTP,etc.\n\n`'CALLBACK'`: A callback (s`etWatch`, `setInterval`, `on('data',...)`) caused an error and so was removed.\n\n`'LOW_MEMORY'`: Memory is running low - Espruino had to run a garbage collection pass or remove some of the command history\n\n`'MEMORY'`: Espruino ran out of memory and was unable to allocate some data that it needed.",
+      "!url": "http://www.espruino.com/Reference#l_E_getErrorFlags"
+    },
+    "toArrayBuffer": {
+      "!type": "fn(str: ?) -> +ArrayBufferView",
+      "!doc": "Create an ArrayBuffer from the given string. This is done via a reference, not a copy - so it is very fast and memory efficient.\n\nNote that this is an ArrayBuffer, not a Uint8Array. To get one of those, do: `new Uint8Array(E.toArrayBuffer('....'))`.",
+      "!url": "http://www.espruino.com/Reference#l_E_toArrayBuffer"
+    },
+    "toString": {
+      "!type": "fn(args: ?) -> +String",
+      "!doc": "Returns a 'flat' string representing the data in the arguments.\n\nThis creates a string from the given arguments. If an argument is a String or an Array,\neach element is traversed and added as an 8 bit character. If it is anything else, it is\nconverted to a character directly.",
+      "!url": "http://www.espruino.com/Reference#l_E_toString"
+    },
+    "toUint8Array": {
+      "!type": "fn(args: ?) -> +Uint8Array",
+      "!doc": "This creates a Uint8Array from the given arguments. If an argument is a String or an Array,\neach element is traversed and added as if it were an 8 bit value. If it is anything else, it is\nconverted to an 8 bit value directly.",
+      "!url": "http://www.espruino.com/Reference#l_E_toUint8Array"
+    },
+    "reverseByte": {
+      "!type": "fn(x: number) -> number",
+      "!doc": "Reverse the 8 bits in a byte, swapping MSB and LSB.\n\nFor example, `E.reverseByte(0b10010000) == 0b00001001`.\n\nNote that you can reverse all the bytes in an array with: `arr = arr.map(E.reverseByte)`",
+      "!url": "http://www.espruino.com/Reference#l_E_reverseByte"
+    },
+    "dumpTimers": {
+      "!type": "fn()",
+      "!doc": "Output the current list of Utility Timer Tasks - for debugging only",
+      "!url": "http://www.espruino.com/Reference#l_E_dumpTimers"
+    },
+    "getSizeOf": {
+      "!type": "fn(v: ?, depth: number) -> ?",
+      "!doc": "Return the number of variable blocks used by the supplied variable. This is\nuseful if you're running out of memory and you want to be able to see what\nis taking up most of the available space.\n\nIf `depth>0` and the variable can be recursed into, an array listing all property\nnames (including internal Espruino names) and their sizes is returned. If\n`depth>1` there is also a `more` field that inspects the objects's children's\nchildren.\n\nFor instance `E.getSizeOf(function(a,b) { })` returns `5`.\n\nBut `E.getSizeOf(E.getSizeOf(function(a,b) { }), 1)` returns:\n\n```\n [\n  {\n    \"name\": \"a\",\n    \"size\": 1 },\n  {\n    \"name\": \"b\",\n    \"size\": 1 },\n  {\n    \"name\": \"\\xFFcod\",\n    \"size\": 2 }\n ]\n```\n\nIn this case setting depth to `2` will make no difference as there are\nno more children to traverse.\n\nSee http://www.espruino.com/Internals for more information",
+      "!url": "http://www.espruino.com/Reference#l_E_getSizeOf"
+    },
+    "mapInPlace": {
+      "!type": "fn(from: ?, to: ?, map: ?, bits: number)",
+      "!doc": "Take each element of the `from` array, look it up in `map` (or call the \nfunction with it as a first argument), and write it into the corresponding\nelement in the `to` array.",
+      "!url": "http://www.espruino.com/Reference#l_E_mapInPlace"
+    },
+    "dumpStr": {
+      "!type": "fn() -> +String",
+      "!doc": "Get the current interpreter state in a text form such that it can be copied to a new device",
+      "!url": "http://www.espruino.com/Reference#l_E_dumpStr"
+    },
+    "srand": {
+      "!type": "fn(v: number)",
+      "!doc": "Set the seed for the random number generator used by `Math.random()`.",
+      "!url": "http://www.espruino.com/Reference#l_E_srand"
+    },
+    "hwRand": {
+      "!type": "fn() -> number",
+      "!doc": "Unlike 'Math.random()' which uses a pseudo-random number generator, this\nmethod reads from the internal voltage reference several times, xoring and\nrotating to try and make a relatively random value from the noise in the\nsignal.",
+      "!url": "http://www.espruino.com/Reference#l_E_hwRand"
+    },
+    "HSBtoRGB": {
+      "!type": "fn(hue: number, sat: number, bri: number) -> number",
+      "!doc": "Convert hue, saturation and brightness to red, green and blue (packed into an integer)\n\nThis replaces `Graphics.setColorHSB` and `Graphics.setBgColorHSB`. On devices with 24 bit colour it can\nbe used as: `Graphics.setColorHSB(E.HSBtoRGB(h, s, b))`",
+      "!url": "http://www.espruino.com/Reference#l_E_HSBtoRGB"
+    },
+    "setUSBHID": {
+      "!type": "fn(opts: ?)",
+      "!doc": "USB HID will only take effect next time you unplug and re-plug your Espruino. If you're\ndisconnecting it from power you'll have to make sure you have `save()`d after calling\nthis function.",
+      "!url": "http://www.espruino.com/Reference#l_E_setUSBHID"
+    },
+    "sendUSBHID": {
+      "!type": "fn(data: ?) -> bool",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_E_sendUSBHID"
+    }
   },
-  "poke8": {
-    "!type": "fn(addr: number, value: ?)",
-    "!doc": "Write 8 bits of memory at the given location - VERY DANGEROUS!",
-    "!url": "http://www.espruino.com/Reference#l__global_poke8"
+  "Flash": {
+    "!type": "fn()",
+    "!doc": "This module allows access to read and write the STM32's flash memory.\n\nIt should be used with extreme caution, as it is easy to overwrite parts of Flash\nmemory belonging to Espruino or even its bootloader. If you damage the bootloader\nthen you may need external hardware such as a USB-TTL converter to restore it. For\nmore information on restoring the bootloader see `Advanced Reflashing` in your\nboard's reference pages.\n\nTo see which areas of memory you can and can't overwrite, look at the values\nreported by `process.memory()`.",
+    "!url": "http://www.espruino.com/Reference#l_Flash_undefined",
+    "getPage": {
+      "!type": "fn(addr: number) -> ?",
+      "!doc": "Returns the start and length of the flash page containing the given address.",
+      "!url": "http://www.espruino.com/Reference#l_Flash_getPage"
+    },
+    "erasePage": {
+      "!type": "fn(addr: ?)",
+      "!doc": "Erase a page of flash memory",
+      "!url": "http://www.espruino.com/Reference#l_Flash_erasePage"
+    },
+    "write": {
+      "!type": "fn(data: ?, addr: number)",
+      "!doc": "Write data into memory at the given address - IN MULTIPLES OF 4 BYTES.\n\nIn flash memory you may only turn bits that are 1 into bits that are 0. If\nyou're writing data into an area that you have already written (so `read`\ndoesn't return all `0xFF`) you'll need to call `erasePage` to clear the\nentire page.",
+      "!url": "http://www.espruino.com/Reference#l_Flash_write"
+    },
+    "read": {
+      "!type": "fn(length: number, addr: number) -> ?",
+      "!doc": "Read flash memory from the given address",
+      "!url": "http://www.espruino.com/Reference#l_Flash_read"
+    }
   },
-  "peek16": {
-    "!type": "fn(addr: number, count: number) -> ?",
-    "!doc": "Read 16 bits of memory at the given location - DANGEROUS!",
-    "!url": "http://www.espruino.com/Reference#l__global_peek16"
+  "process": {
+    "!type": "fn()",
+    "!doc": "This class contains information about Espruino itself",
+    "!url": "http://www.espruino.com/Reference#process",
+    "version": {
+      "!type": "?",
+      "!doc": "Returns the version of Espruino as a String",
+      "!url": "http://www.espruino.com/Reference#l_process_version"
+    },
+    "env": {
+      "!type": "?",
+      "!doc": "Returns an Object containing various pre-defined variables. standard ones are BOARD, VERSION",
+      "!url": "http://www.espruino.com/Reference#l_process_env"
+    },
+    "memory": {
+      "!type": "fn() -> ?",
+      "!doc": "Run a Garbage Collection pass, and return an object containing information on memory usage.\n\n* `free` : Memory that is available to be used (in blocks)\n* `usage` : Memory that has been used (in blocks)\n* `total` : Total memory (in blocks)\n* `history` : Memory used for command history - that is freed if memory is low. Note that this is INCLUDED in the figure for 'free'\n* `stackEndAddress` : (on ARM) the address (that can be used with peek/poke/etc) of the END of the stack. The stack grows down, so unless you do a lot of recursion the bytes above this can be used.\n* `flash_start` : (on ARM) the address of the start of flash memory (usually `0x8000000`)\n* `flash_binary_end` : (on ARM) the address in flash memory of the end of Espruino's firmware.\n* `flash_code_start` : (on ARM) the address in flash memory of pages that store any code that you save with `save()`.\n* `flash_length` : (on ARM) the amount of flash memory this firmware was built for (in bytes). **Note:** Some STM32 chips actually have more memory than is advertised.\n\nMemory units are specified in 'blocks', which are around 16 bytes each (depending on your device). See http://www.espruino.com/Performance for more information.",
+      "!url": "http://www.espruino.com/Reference#l_process_memory"
+    }
   },
-  "poke16": {
-    "!type": "fn(addr: number, value: ?)",
-    "!doc": "Write 16 bits of memory at the given location - VERY DANGEROUS!",
-    "!url": "http://www.espruino.com/Reference#l__global_poke16"
+  "arguments": {
+    "!type": "?",
+    "!doc": "A variable containing the arguments given to the function",
+    "!url": "http://www.espruino.com/Reference#l__global_arguments"
   },
-  "peek32": {
-    "!type": "fn(addr: number, count: number) -> ?",
-    "!doc": "Read 32 bits of memory at the given location - DANGEROUS!",
-    "!url": "http://www.espruino.com/Reference#l__global_peek32"
+  "eval": {
+    "!type": "fn(code: ?) -> ?",
+    "!doc": "Evaluate a string containing JavaScript code",
+    "!url": "http://www.espruino.com/Reference#l__global_eval"
   },
-  "poke32": {
-    "!type": "fn(addr: number, value: ?)",
-    "!doc": "Write 32 bits of memory at the given location - VERY DANGEROUS!",
-    "!url": "http://www.espruino.com/Reference#l__global_poke32"
+  "parseInt": {
+    "!type": "fn(string: ?, radix: ?) -> ?",
+    "!doc": "Convert a string representing a number into an integer",
+    "!url": "http://www.espruino.com/Reference#l__global_parseInt"
   },
-  "analogRead": {
-    "!type": "fn(pin: +Pin) -> number",
-    "!doc": "Get the analog value of the given pin\n\nThis is different to Arduino which only returns an integer between 0 and 1023\n\nHowever only pins connected to an ADC will work (see the datasheet)\n\n **Note:** if you didn't call `pinMode` beforehand then this function will also reset pin's state to `\"analog\"`",
-    "!url": "http://www.espruino.com/Reference#l__global_analogRead"
+  "parseFloat": {
+    "!type": "fn(string: ?) -> number",
+    "!doc": "Convert a string representing a number into an float",
+    "!url": "http://www.espruino.com/Reference#l__global_parseFloat"
   },
-  "analogWrite": {
-    "!type": "fn(pin: +Pin, value: number, options: ?)",
-    "!doc": "Set the analog Value of a pin. It will be output using PWM.\n\nObjects can contain:\n\n* `freq` - pulse frequency in Hz, eg. ```analogWrite(A0,0.5,{ freq : 10 });``` - specifying a frequency will force PWM output, even if the pin has a DAC\n* `soft` - boolean, If true software PWM is used if available.\n* `forceSoft` - boolean, If true software PWM is used even\n\n **Note:** if you didn't call `pinMode` beforehand then this function will also reset pin's state to `\"output\"`",
-    "!url": "http://www.espruino.com/Reference#l__global_analogWrite"
+  "isNaN": {
+    "!type": "fn(x: ?) -> bool",
+    "!doc": "Whether the x is NaN (Not a Number) or not",
+    "!url": "http://www.espruino.com/Reference#l__global_isNaN"
   },
-  "digitalPulse": {
-    "!type": "fn(pin: +Pin, value: bool, time: ?)",
-    "!doc": "Pulse the pin with the value for the given time in milliseconds. It uses a hardware timer to produce accurate pulses, and returns immediately (before the pulse has finished). Use `digitalPulse(A0,1,0)` to wait until a previous pulse has finished.\n\neg. `digitalPulse(A0,1,5);` pulses A0 high for 5ms. `digitalPulse(A0,1,[5,2,4]);` pulses A0 high for 5ms, low for 2ms, and high for 4ms\n\n **Note:** if you didn't call `pinMode` beforehand then this function will also reset pin's state to `\"output\"`\n\ndigitalPulse is for SHORT pulses that need to be very accurate. If you're doing anything over a few milliseconds, use setTimeout instead.",
-    "!url": "http://www.espruino.com/Reference#l__global_digitalPulse"
+  "btoa": {
+    "!type": "fn(binaryData: ?) -> ?",
+    "!doc": "Convert the supplied string (or array) into a base64 string",
+    "!url": "http://www.espruino.com/Reference#l__global_btoa"
   },
-  "digitalWrite": {
-    "!type": "fn(pin: +Pin, value: number)",
-    "!doc": "Set the digital value of the given pin.\n\n **Note:** if you didn't call `pinMode` beforehand then this function will also reset pin's state to `\"output\"`\n\nIf pin argument is an array of pins (eg. `[A2,A1,A0]`) the value argument will be treated\nas an array of bits where the last array element is the least significant bit.\n\nIn this case, pin values are set least significant bit first (from the right-hand side\nof the array of pins). This means you can use the same pin multiple times, for\nexample `digitalWrite([A1,A1,A0,A0],0b0101)` would pulse A0 followed by A1.",
-    "!url": "http://www.espruino.com/Reference#l__global_digitalWrite"
+  "atob": {
+    "!type": "fn(binaryData: ?) -> ?",
+    "!doc": "Convert the supplied base64 string into a base64 string",
+    "!url": "http://www.espruino.com/Reference#l__global_atob"
   },
-  "digitalRead": {
-    "!type": "fn(pin: +Pin) -> number",
-    "!doc": "Get the digital value of the given pin. \n\n **Note:** if you didn't call `pinMode` beforehand then this function will also reset pin's state to `\"input\"`\n\nIf the pin argument is an array of pins (eg. `[A2,A1,A0]`) the value returned will be an number where\nthe last array element is the least significant bit, for example if `A0=A1=1` and `A2=0`, `digitalRead([A2,A1,A0]) == 0b011`",
-    "!url": "http://www.espruino.com/Reference#l__global_digitalRead"
+  "encodeURIComponent": {
+    "!type": "fn(str: ?) -> ?",
+    "!doc": "Convert a string with any character not alphanumeric or `- _ . ! ~ * ' ( )` converted to the form `%XY` where `XY` is its hexadecimal representation",
+    "!url": "http://www.espruino.com/Reference#l__global_encodeURIComponent"
   },
-  "pinMode": {
-    "!type": "fn(pin: +Pin, mode: ?)",
-    "!doc": "Set the mode of the given pin.\n\n * `analog` - Analog input\n * `input` - Digital input\n * `input_pullup` - Digital input with internal ~40k pull-up resistor\n * `input_pulldown` - Digital input with internal ~40k pull-down resistor\n * `output` - Digital output\n * `opendrain` - Digital output that only ever pulls down to 0v. Sending a logical `1` leaves the pin open circuit\n * `af_output` - Digital output from built-in peripheral\n * `af_opendrain` - Digital output from built-in peripheral that only ever pulls down to 0v.\n * Sending a logical `1` leaves the pin open circuit\n\n **Note:** `digitalRead`/`digitalWrite`/etc set the pin mode automatically *unless* `pinMode` has been called first.  If you want `digitalRead`/etc to set the pin mode automatically after you have called `pinMode`, simply call it again with no mode argument: `pinMode(pin)`",
-    "!url": "http://www.espruino.com/Reference#l__global_pinMode"
+  "require": {
+    "!type": "fn(moduleName: ?) -> ?",
+    "!doc": "Load the given module, and return the exported functions",
+    "!url": "http://www.espruino.com/Reference#l__global_require"
   },
-  "getPinMode": {
-    "!type": "fn(pin: +Pin) -> ?",
-    "!doc": "Return the current mode of the given pin. See `pinMode` for more information.",
-    "!url": "http://www.espruino.com/Reference#l__global_getPinMode"
+  "Boolean": {
+    "!type": "fn(value: ?) -> bool",
+    "!doc": "Creates a number",
+    "!url": "http://www.espruino.com/Reference#l_Boolean_Boolean"
   },
-  "shiftOut": {
-    "!type": "fn(pins: ?, options: ?, data: ?)",
-    "!doc": "Shift an array of data out using the pins supplied, for example:\n\n```\n// shift out to single clk+data (like software SPI)\nshiftOut(A0, { clk : A1 }, [1,2,3,4]);\n\n// shift out to multiple data pins\nshiftOut([A3,A2,A1,A0], { clk : A4 }, [1,2,3,4]);\n```\n\n`options` is an object of the form:\n\n```\n{\n  clk : pin, // a pin to use as the clock (undefined = no pin)\n  clkPol : bool, // clock polarity - default is 0 (so 1 normally, pulsing to 0 to clock data in)\n}\n```\n\nEach item in the `data` array will be output to the pins, with the first\npin in the array being the MSB and the last the LSB, then the clock will be\npulsed in the polarity given.",
-    "!url": "http://www.espruino.com/Reference#l__global_shiftOut"
+  "NaN": {
+    "!type": "number",
+    "!doc": "",
+    "!url": "http://www.espruino.com/Reference#l__global_NaN"
   },
-  "setWatch": {
-    "!type": "fn(function: ?, pin: +Pin, options: ?) -> ?",
-    "!doc": "Call the function specified when the pin changes. Watches set with `setWatch` can be removed using `clearWatch`.\n\nThe function may also take an argument, which is an object of type `{state:bool, time:float, lastTime:float}`.\n\n * `state` is whether the pin is currently a `1` or a `0`\n * `time` is the time in seconds at which the pin changed state\n * `lastTime` is the time in seconds at which the **pin last changed state**. When using `edge:'rising'` or `edge:'falling'`, this is not the same as when the function was last called.\n\nFor instance, if you want to measure the length of a positive pulse you could use `setWatch(function(e) { console.log(e.time-e.lastTime); }, BTN, { repeat:true, edge:'falling' });`. \nThis will only be called on the falling edge of the pulse, but will be able to measure the width of the pulse because `e.lastTime` is the time of the rising edge.\n\nInternally, an interrupt writes the time of the pin's state change into a queue, and the function\nsupplied to `setWatch` is executed only from the main message loop. However, if the callback is a \nnative function `void (bool state)` then you can add `irq:true` to options, which will cause the \nfunction to be called from within the IRQ. When doing this, interrupts will happen on both edges \nand there will be no debouncing.\n\n**Note:** The STM32 chip (used in the [Espruino Board](/EspruinoBoard) and [Pico](/Pico)) cannot\nwatch two pins with the same number - eg `A0` and `B0`.",
-    "!url": "http://www.espruino.com/Reference#l__global_setWatch"
+  "Infinity": {
+    "!type": "number",
+    "!doc": "",
+    "!url": "http://www.espruino.com/Reference#l__global_Infinity"
   },
-  "clearWatch": {
-    "!type": "fn(id: ?)",
-    "!doc": "Clear the Watch that was created with setWatch. If no parameter is supplied, all watches will be removed.",
-    "!url": "http://www.espruino.com/Reference#l__global_clearWatch"
+  "HIGH": {
+    "!type": "number",
+    "!doc": "",
+    "!url": "http://www.espruino.com/Reference#l__global_HIGH"
+  },
+  "LOW": {
+    "!type": "number",
+    "!doc": "",
+    "!url": "http://www.espruino.com/Reference#l__global_LOW"
   },
   "global": {
     "!type": "?",
@@ -2447,74 +2472,84 @@
     "!doc": "Change the Interval on a callback created with setInterval, for example:\n\n```var id = setInterval(function () { print('foo'); }, 1000); // every second```\n\n```changeInterval(id, 1500); // now runs every 1.5 seconds```\n\nThis takes effect the next time the callback is called (so it is not immediate).",
     "!url": "http://www.espruino.com/Reference#l__global_changeInterval"
   },
-  "NaN": {
-    "!type": "number",
-    "!doc": "",
-    "!url": "http://www.espruino.com/Reference#l__global_NaN"
+  "peek8": {
+    "!type": "fn(addr: number, count: number) -> ?",
+    "!doc": "Read 8 bits of memory at the given location - DANGEROUS!",
+    "!url": "http://www.espruino.com/Reference#l__global_peek8"
   },
-  "Infinity": {
-    "!type": "number",
-    "!doc": "",
-    "!url": "http://www.espruino.com/Reference#l__global_Infinity"
+  "poke8": {
+    "!type": "fn(addr: number, value: ?)",
+    "!doc": "Write 8 bits of memory at the given location - VERY DANGEROUS!",
+    "!url": "http://www.espruino.com/Reference#l__global_poke8"
   },
-  "HIGH": {
-    "!type": "number",
-    "!doc": "",
-    "!url": "http://www.espruino.com/Reference#l__global_HIGH"
+  "peek16": {
+    "!type": "fn(addr: number, count: number) -> ?",
+    "!doc": "Read 16 bits of memory at the given location - DANGEROUS!",
+    "!url": "http://www.espruino.com/Reference#l__global_peek16"
   },
-  "LOW": {
-    "!type": "number",
-    "!doc": "",
-    "!url": "http://www.espruino.com/Reference#l__global_LOW"
+  "poke16": {
+    "!type": "fn(addr: number, value: ?)",
+    "!doc": "Write 16 bits of memory at the given location - VERY DANGEROUS!",
+    "!url": "http://www.espruino.com/Reference#l__global_poke16"
   },
-  "arguments": {
-    "!type": "?",
-    "!doc": "A variable containing the arguments given to the function",
-    "!url": "http://www.espruino.com/Reference#l__global_arguments"
+  "peek32": {
+    "!type": "fn(addr: number, count: number) -> ?",
+    "!doc": "Read 32 bits of memory at the given location - DANGEROUS!",
+    "!url": "http://www.espruino.com/Reference#l__global_peek32"
   },
-  "eval": {
-    "!type": "fn(code: ?) -> ?",
-    "!doc": "Evaluate a string containing JavaScript code",
-    "!url": "http://www.espruino.com/Reference#l__global_eval"
+  "poke32": {
+    "!type": "fn(addr: number, value: ?)",
+    "!doc": "Write 32 bits of memory at the given location - VERY DANGEROUS!",
+    "!url": "http://www.espruino.com/Reference#l__global_poke32"
   },
-  "parseInt": {
-    "!type": "fn(string: ?, radix: ?) -> ?",
-    "!doc": "Convert a string representing a number into an integer",
-    "!url": "http://www.espruino.com/Reference#l__global_parseInt"
+  "analogRead": {
+    "!type": "fn(pin: +Pin) -> number",
+    "!doc": "Get the analog value of the given pin\n\nThis is different to Arduino which only returns an integer between 0 and 1023\n\nHowever only pins connected to an ADC will work (see the datasheet)\n\n **Note:** if you didn't call `pinMode` beforehand then this function will also reset pin's state to `\"analog\"`",
+    "!url": "http://www.espruino.com/Reference#l__global_analogRead"
   },
-  "parseFloat": {
-    "!type": "fn(string: ?) -> number",
-    "!doc": "Convert a string representing a number into an float",
-    "!url": "http://www.espruino.com/Reference#l__global_parseFloat"
+  "analogWrite": {
+    "!type": "fn(pin: +Pin, value: number, options: ?)",
+    "!doc": "Set the analog Value of a pin. It will be output using PWM.\n\nObjects can contain:\n\n* `freq` - pulse frequency in Hz, eg. ```analogWrite(A0,0.5,{ freq : 10 });``` - specifying a frequency will force PWM output, even if the pin has a DAC\n* `soft` - boolean, If true software PWM is used if available.\n* `forceSoft` - boolean, If true software PWM is used even\n\n **Note:** if you didn't call `pinMode` beforehand then this function will also reset pin's state to `\"output\"`",
+    "!url": "http://www.espruino.com/Reference#l__global_analogWrite"
   },
-  "isNaN": {
-    "!type": "fn(x: ?) -> bool",
-    "!doc": "Whether the x is NaN (Not a Number) or not",
-    "!url": "http://www.espruino.com/Reference#l__global_isNaN"
+  "digitalPulse": {
+    "!type": "fn(pin: +Pin, value: bool, time: ?)",
+    "!doc": "Pulse the pin with the value for the given time in milliseconds. It uses a hardware timer to produce accurate pulses, and returns immediately (before the pulse has finished). Use `digitalPulse(A0,1,0)` to wait until a previous pulse has finished.\n\neg. `digitalPulse(A0,1,5);` pulses A0 high for 5ms. `digitalPulse(A0,1,[5,2,4]);` pulses A0 high for 5ms, low for 2ms, and high for 4ms\n\n **Note:** if you didn't call `pinMode` beforehand then this function will also reset pin's state to `\"output\"`\n\ndigitalPulse is for SHORT pulses that need to be very accurate. If you're doing anything over a few milliseconds, use setTimeout instead.",
+    "!url": "http://www.espruino.com/Reference#l__global_digitalPulse"
   },
-  "btoa": {
-    "!type": "fn(binaryData: ?) -> ?",
-    "!doc": "Convert the supplied string (or array) into a base64 string",
-    "!url": "http://www.espruino.com/Reference#l__global_btoa"
+  "digitalWrite": {
+    "!type": "fn(pin: +Pin, value: number)",
+    "!doc": "Set the digital value of the given pin.\n\n **Note:** if you didn't call `pinMode` beforehand then this function will also reset pin's state to `\"output\"`\n\nIf pin argument is an array of pins (eg. `[A2,A1,A0]`) the value argument will be treated\nas an array of bits where the last array element is the least significant bit.\n\nIn this case, pin values are set least significant bit first (from the right-hand side\nof the array of pins). This means you can use the same pin multiple times, for\nexample `digitalWrite([A1,A1,A0,A0],0b0101)` would pulse A0 followed by A1.",
+    "!url": "http://www.espruino.com/Reference#l__global_digitalWrite"
   },
-  "atob": {
-    "!type": "fn(binaryData: ?) -> ?",
-    "!doc": "Convert the supplied base64 string into a base64 string",
-    "!url": "http://www.espruino.com/Reference#l__global_atob"
+  "digitalRead": {
+    "!type": "fn(pin: +Pin) -> number",
+    "!doc": "Get the digital value of the given pin. \n\n **Note:** if you didn't call `pinMode` beforehand then this function will also reset pin's state to `\"input\"`\n\nIf the pin argument is an array of pins (eg. `[A2,A1,A0]`) the value returned will be an number where\nthe last array element is the least significant bit, for example if `A0=A1=1` and `A2=0`, `digitalRead([A2,A1,A0]) == 0b011`",
+    "!url": "http://www.espruino.com/Reference#l__global_digitalRead"
   },
-  "encodeURIComponent": {
-    "!type": "fn(str: ?) -> ?",
-    "!doc": "Convert a string with any character not alphanumeric or `- _ . ! ~ * ' ( )` converted to the form `%XY` where `XY` is its hexadecimal representation",
-    "!url": "http://www.espruino.com/Reference#l__global_encodeURIComponent"
+  "pinMode": {
+    "!type": "fn(pin: +Pin, mode: ?)",
+    "!doc": "Set the mode of the given pin.\n\n * `analog` - Analog input\n * `input` - Digital input\n * `input_pullup` - Digital input with internal ~40k pull-up resistor\n * `input_pulldown` - Digital input with internal ~40k pull-down resistor\n * `output` - Digital output\n * `opendrain` - Digital output that only ever pulls down to 0v. Sending a logical `1` leaves the pin open circuit\n * `af_output` - Digital output from built-in peripheral\n * `af_opendrain` - Digital output from built-in peripheral that only ever pulls down to 0v.\n * Sending a logical `1` leaves the pin open circuit\n\n **Note:** `digitalRead`/`digitalWrite`/etc set the pin mode automatically *unless* `pinMode` has been called first.  If you want `digitalRead`/etc to set the pin mode automatically after you have called `pinMode`, simply call it again with no mode argument: `pinMode(pin)`",
+    "!url": "http://www.espruino.com/Reference#l__global_pinMode"
   },
-  "require": {
-    "!type": "fn(moduleName: ?) -> ?",
-    "!doc": "Load the given module, and return the exported functions",
-    "!url": "http://www.espruino.com/Reference#l__global_require"
+  "getPinMode": {
+    "!type": "fn(pin: +Pin) -> ?",
+    "!doc": "Return the current mode of the given pin. See `pinMode` for more information.",
+    "!url": "http://www.espruino.com/Reference#l__global_getPinMode"
   },
-  "Boolean": {
-    "!type": "fn(value: ?) -> bool",
-    "!doc": "Creates a number",
-    "!url": "http://www.espruino.com/Reference#l_Boolean_Boolean"
+  "shiftOut": {
+    "!type": "fn(pins: ?, options: ?, data: ?)",
+    "!doc": "Shift an array of data out using the pins supplied, for example:\n\n```\n// shift out to single clk+data (like software SPI)\nshiftOut(A0, { clk : A1 }, [1,2,3,4]);\n\n// shift out to multiple data pins\nshiftOut([A3,A2,A1,A0], { clk : A4 }, [1,2,3,4]);\n```\n\n`options` is an object of the form:\n\n```\n{\n  clk : pin, // a pin to use as the clock (undefined = no pin)\n  clkPol : bool, // clock polarity - default is 0 (so 1 normally, pulsing to 0 to clock data in)\n}\n```\n\nEach item in the `data` array will be output to the pins, with the first\npin in the array being the MSB and the last the LSB, then the clock will be\npulsed in the polarity given.",
+    "!url": "http://www.espruino.com/Reference#l__global_shiftOut"
+  },
+  "setWatch": {
+    "!type": "fn(function: ?, pin: +Pin, options: ?) -> ?",
+    "!doc": "Call the function specified when the pin changes. Watches set with `setWatch` can be removed using `clearWatch`.\n\nThe function may also take an argument, which is an object of type `{state:bool, time:float, lastTime:float}`.\n\n * `state` is whether the pin is currently a `1` or a `0`\n * `time` is the time in seconds at which the pin changed state\n * `lastTime` is the time in seconds at which the **pin last changed state**. When using `edge:'rising'` or `edge:'falling'`, this is not the same as when the function was last called.\n\nFor instance, if you want to measure the length of a positive pulse you could use `setWatch(function(e) { console.log(e.time-e.lastTime); }, BTN, { repeat:true, edge:'falling' });`. \nThis will only be called on the falling edge of the pulse, but will be able to measure the width of the pulse because `e.lastTime` is the time of the rising edge.\n\nInternally, an interrupt writes the time of the pin's state change into a queue, and the function\nsupplied to `setWatch` is executed only from the main message loop. However, if the callback is a \nnative function `void (bool state)` then you can add `irq:true` to options, which will cause the \nfunction to be called from within the IRQ. When doing this, interrupts will happen on both edges \nand there will be no debouncing.\n\n**Note:** The STM32 chip (used in the [Espruino Board](/EspruinoBoard) and [Pico](/Pico)) cannot\nwatch two pins with the same number - eg `A0` and `B0`.",
+    "!url": "http://www.espruino.com/Reference#l__global_setWatch"
+  },
+  "clearWatch": {
+    "!type": "fn(id: ?)",
+    "!doc": "Clear the Watch that was created with setWatch. If no parameter is supplied, all watches will be removed.",
+    "!url": "http://www.espruino.com/Reference#l__global_clearWatch"
   }
 }
