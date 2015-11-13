@@ -9,3 +9,4 @@ EspruinoTools/.git*
 extras*
 unused/*
 img/bak/*
+node_modules/*
