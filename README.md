@@ -6,7 +6,7 @@ A VT100 Serial Terminal as a Chrome Web App (with both syntax highlighted and gr
 [![ScreenShot](https://raw.github.com/espruino/EspruinoWebIDE/gh-pages/extras/screenshot.png)](http://youtu.be/Fjju_QhzL-c)
 [![ScreenShot](https://raw.github.com/espruino/EspruinoWebIDE/gh-pages/extras/screenshot2.png)](http://youtu.be/Fjju_QhzL-c)
 
-This is a Chrome Web App([*](#full_web_version)) that uses [chome.serial](https://developer.chrome.com/apps/serial) to access your PC's serial port. You can download it from the Chrome Web Store: https://chrome.google.com/webstore/detail/espruino-serial-terminal/bleoifhkdalbjfbobjackfdifdneehpo
+This is a Chrome Web App ([mainly](#full-web-version)) that uses [chome.serial](https://developer.chrome.com/apps/serial) to access your PC's serial port. You can download it from the Chrome Web Store: https://chrome.google.com/webstore/detail/espruino-serial-terminal/bleoifhkdalbjfbobjackfdifdneehpo
 
 It implements basic VT100 terminal features (up/down/left/right/etc) - enough for you to write code using the Espruino. You can also use the right-hand pane to write JavaScript code on the PC, and can then click the 'transfer' icon to send that code directly down the Serial Port.
 
