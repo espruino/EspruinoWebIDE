@@ -1,4 +1,4 @@
-Espruino Web IDE
+Espruino Web IDE  [![Join the chat at https://gitter.im/espruino/Espruino](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/espruino/Espruino?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 ======================
 
 A VT100 Serial Terminal as a Chrome Web App (with both syntax highlighted and graphical editors) - designed for writing code on microcontrollers that use the [Espruino JavaScript interpreter](http://www.espruino.com).
@@ -6,9 +6,10 @@ A VT100 Serial Terminal as a Chrome Web App (with both syntax highlighted and gr
 [![ScreenShot](https://raw.github.com/espruino/EspruinoWebIDE/gh-pages/extras/screenshot.png)](http://youtu.be/Fjju_QhzL-c)
 [![ScreenShot](https://raw.github.com/espruino/EspruinoWebIDE/gh-pages/extras/screenshot2.png)](http://youtu.be/Fjju_QhzL-c)
 
-This is a Chrome Web App that uses [chome.serial](https://developer.chrome.com/apps/serial) to access your PC's serial port. You can download it from the Chrome Web Store: https://chrome.google.com/webstore/detail/espruino-serial-terminal/bleoifhkdalbjfbobjackfdifdneehpo
+This is a Chrome Web App([*](#full_web_version)) that uses [chome.serial](https://developer.chrome.com/apps/serial) to access your PC's serial port. You can download it from the Chrome Web Store: https://chrome.google.com/webstore/detail/espruino-serial-terminal/bleoifhkdalbjfbobjackfdifdneehpo
 
 It implements basic VT100 terminal features (up/down/left/right/etc) - enough for you to write code using the Espruino. You can also use the right-hand pane to write JavaScript code on the PC, and can then click the 'transfer' icon to send that code directly down the Serial Port.
+
 
 Installing From Chrome Web Store
 ----------------------------
@@ -17,6 +18,7 @@ Installing From Chrome Web Store
 * [Go Here](https://chrome.google.com/webstore/detail/espruino-serial-terminal/bleoifhkdalbjfbobjackfdifdneehpo) to find the app in the Chrome Web Store
 * Click 'Install'
 * Click 'Launch App'
+
 
 Installing from GitHub (Latest Version)
 ---------------------------------------
@@ -31,19 +33,36 @@ Installing from GitHub (Latest Version)
 * Navigate to the `EspruinoWebIDE` Directory and click Ok
 * Job Done. It'll now appear as an app with the 'Unpacked' banner so you can tell it apart from the normal Web IDE. You can start it easily by clicking the 'Launch' link on the extensions page, or whenever you open a new tab.
 
-Permissions
-----------
+
+Chrome Permissions
+------------------
 
 This web app requires the following permissions:
 * *Serial port access* : So that it can access the Espruino board via USB/Serial
 * *Webcam access* : So that when you click the little person icon in the top-right of the terminal window, you can overlay the terminal on a live video feed
+* *Audio access*: if you want to [communicate with Espruino using your headphone jack](http://www.espruino.com/Headphone)
 * *Filesystem/storage access* : For loading/saving your JavaScript files to your local disk
+
 
 Using
 -----
 
 * Run the Web app
 * Click the `Help` (?) icon, then the `Tour` button to get a guided tour.
+
+
+Full Web Version
+----------------
+
+There is also [a web-only version of the Web IDE](http://espruino.github.io/EspruinoWebIDE/) served from GitHub.
+
+Web browser permissions stop this accessing the Serial port, but it can:
+
+* Use the Web Audio API to [fake a serial port over your headphone jack](http://www.espruino.com/Headphone)
+* Use [Web Bluetooth API](https://webbluetoothcg.github.io/web-bluetooth/) on compatible devices to communicate with Espruino via devices that implement a Nordic BLE UART
+
+Potentially it could also communicate directly with Espruino boards via WebSockets or even AJAX, but this isn't implemented yet
+.
 
 Contributing
 ------------
