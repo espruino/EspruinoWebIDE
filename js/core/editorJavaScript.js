@@ -55,7 +55,7 @@
         cm.setCursor(c);
       }
       // write the modified code into local storage
-      if (chrome && chrome.storage && chrome.storage.local)
+      if ((typeof chrome!="undefined") && chrome.storage && chrome.storage.local)
         chrome.storage.local.set({"CODE_JS": cm.getValue()});
     });
     // Handle hovering
