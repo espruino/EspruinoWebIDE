@@ -566,6 +566,29 @@ a:hover > .menu
     padding: 15px 30px;
 }
 
+.board_info
+{
+  /* allow select */
+  -o-user-select: text;
+  -moz-user-select: text;
+  -webkit-user-select: text;  
+  user-select: text;
+}
+
+.console
+{
+  border:1px solid #EEEEEE; 
+  width: 100%;
+  padding: 6px; 
+  word-wrap:break-word;
+  font-family: monospace;
+
+  -o-user-select: text;
+  -moz-user-select: text;
+  -webkit-user-select: text;  
+  user-select: text;
+}
+
 /* Compact */
 .compact .toolbar { height: 30px; }
 .compact .toolbar .toolbar__buttons--left .menu { top: 30px; }
