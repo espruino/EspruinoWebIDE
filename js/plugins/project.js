@@ -57,6 +57,8 @@
       findBinary(code,callback);
     });
     Espruino.addProcessor("getBinary",function(option,callback){
+      if (option.binary === undefined)
+        return callback(option);
       getProjectSubDir("binary",function(dirEntry){
         checkFileExists(
           dirEntry,
