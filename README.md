@@ -64,6 +64,9 @@ Web browser permissions stop this accessing the Serial port, but it can:
 Potentially it could also communicate directly with Espruino boards via WebSockets or even AJAX, but this isn't implemented yet
 .
 
+**Note:** Sadly Apple have chosen not to implement `getUserMedia` on their iOS devices at the moment, so Serial over Audio won't work on iPhone/iPad/etc. (The menu item won't appear in the settings page)
+
+
 Contributing
 ------------
 
