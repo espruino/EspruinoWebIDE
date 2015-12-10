@@ -118,7 +118,7 @@
         tok = lex.next();
       }
     }
-    if(binarys.length === 0){ callback(code);}
+    if(binarys.length === 0){ return callback(code);}
     replaceAllBinaries(code,binarys,callback);
   }
   function replaceAllBinaries(code,binarys,callback){
