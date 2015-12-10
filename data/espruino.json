@@ -2,7 +2,7 @@
   "!name": "Espruino",
   "crypto": {
     "!type": "fn()",
-    "!doc": "Cryptographic functions\n\n**Note:** This library is currently only included in builds for the Espruino Pico.\nFor other boards you will have to make build your own firmware, and you may need\nto remove other features in order to make room.",
+    "!doc": "Cryptographic functions\n\n**Note:** This library is currently only included in builds for the Espruino Pico. For other boards you will have to make build your own firmware, and you may need to remove other features in order to make room.",
     "!url": "http://www.espruino.com/Reference#l_crypto_undefined",
     "AES": {
       "!type": "?",
@@ -14,15 +14,35 @@
       "!doc": "Performs a SHA1 hash and returns the result as a 20 byte ArrayBuffer",
       "!url": "http://www.espruino.com/Reference#l_crypto_SHA1"
     },
+    "SHA224": {
+      "!type": "fn(message: ?) -> +ArrayBuffer",
+      "!doc": "Performs a SHA224 hash and returns the result as a 28 byte ArrayBuffer",
+      "!url": "http://www.espruino.com/Reference#l_crypto_SHA224"
+    },
+    "SHA256": {
+      "!type": "fn(message: ?) -> +ArrayBuffer",
+      "!doc": "Performs a SHA256 hash and returns the result as a 32 byte ArrayBuffer",
+      "!url": "http://www.espruino.com/Reference#l_crypto_SHA256"
+    },
+    "SHA384": {
+      "!type": "fn(message: ?) -> +ArrayBuffer",
+      "!doc": "Performs a SHA384 hash and returns the result as a 48 byte ArrayBuffer",
+      "!url": "http://www.espruino.com/Reference#l_crypto_SHA384"
+    },
+    "SHA512": {
+      "!type": "fn(message: ?) -> +ArrayBuffer",
+      "!doc": "Performs a SHA512 hash and returns the result as a 64 byte ArrayBuffer",
+      "!url": "http://www.espruino.com/Reference#l_crypto_SHA512"
+    },
     "PBKDF2": {
       "!type": "fn(passphrase: ?, salt: ?, options: ?) -> +ArrayBuffer",
-      "!doc": "Password-Based Key Derivation Function 2 algorithm.",
+      "!doc": "Password-Based Key Derivation Function 2 algorithm, using SHA512",
       "!url": "http://www.espruino.com/Reference#l_crypto_PBKDF2"
     }
   },
   "AES": {
     "!type": "fn()",
-    "!doc": "Class containing AES encryption/decryption",
+    "!doc": "Class containing AES encryption/decryption\n\n**Note:** This library is currently only included in builds for the Espruino Pico. For other boards you will have to make build your own firmware, and you may need to remove other features in order to make room.",
     "!url": "http://www.espruino.com/Reference#AES",
     "encrypt": {
       "!type": "fn(passphrase: ?, key: ?, options: ?) -> +ArrayBuffer",
@@ -37,203 +57,143 @@
   },
   "ESP8266": {
     "!type": "fn()",
-    "!doc": "",
+    "!doc": "The ESP8266 library is specific to the ESP8266 version of Espruino, i.e., running Espruino on an ESP8266 module (not to be confused with using the ESP8266 as Wifi add-on to an Espruino board).  This library contains functions to handle ESP8266-specific actions.\nFor example: `var esp8266 = require('ESP8266'); esp8266.reboot();` performs a hardware reset of the module.",
     "!url": "http://www.espruino.com/Reference#l_ESP8266_undefined",
-    "getAddressAsString": {
-      "!type": "fn(address: ?) -> ?",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_ESP8266_getAddressAsString"
+    "ping": {
+      "!type": "fn(ipAddr: ?, pingCallback: ?)",
+      "!doc": "Perform a network ping request. The parameter can be either a String or a numeric IP address.\n**Note:** This function should probably be removed, or should it be part of the wifi library?",
+      "!url": "http://www.espruino.com/Reference#l_ESP8266_ping"
     },
-    "restart": {
+    "reboot": {
       "!type": "fn()",
-      "!doc": "* Ask the physical ESP8266 device to restart itself.",
-      "!url": "http://www.espruino.com/Reference#l_ESP8266_restart"
+      "!doc": "Perform a hardware reset/reboot of the esp8266.",
+      "!url": "http://www.espruino.com/Reference#l_ESP8266_reboot"
     },
-    "getRstInfo": {
-      "!type": "fn() -> +Restart",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_ESP8266_getRstInfo"
+    "getResetInfo": {
+      "!type": "fn() -> +RstInfo",
+      "!doc": "At boot time the esp8266's firmware captures the cause of the reset/reboot.  This function returns this information in an object with the following fields:\n\n* `reason`: \"power on\", \"wdt reset\", \"exception\", \"soft wdt\", \"restart\", \"deep sleep\", or \"reset pin\"\n* `exccause`: exception cause\n* `epc1`, `epc2`, `epc3`: instruction pointers\n* `excvaddr`: address being accessed\n* `depc`: (?)",
+      "!url": "http://www.espruino.com/Reference#l_ESP8266_getResetInfo"
     },
     "logDebug": {
       "!type": "fn(enable: ?)",
-      "!doc": "* Enable or disable the logging of debug information.  A value of `true` enables\n * debug logging while a value of `false` disables debug logging.  Debug output is sent\n * to UART1.",
+      "!doc": "Enable or disable the logging of debug information.  A value of `true` enables debug logging while a value of `false` disables debug logging.  Debug output is sent to UART1 (gpio2).",
       "!url": "http://www.espruino.com/Reference#l_ESP8266_logDebug"
     },
-    "updateCPUFreq": {
+    "setCPUFreq": {
       "!type": "fn(freq: ?)",
-      "!doc": "* Update the operating frequency of the ESP8266 processor.",
-      "!url": "http://www.espruino.com/Reference#l_ESP8266_updateCPUFreq"
+      "!doc": "Set the operating frequency of the ESP8266 processor.",
+      "!url": "http://www.espruino.com/Reference#l_ESP8266_setCPUFreq"
     },
     "getState": {
       "!type": "fn() -> ?",
-      "!doc": "",
+      "!doc": "Returns an object that contains details about the state of the ESP8266 with the following fields:\n\n* `sdkVersion`   - Version of the SDK.\n* `cpuFrequency` - CPU operating frequency in Mhz.\n* `freeHeap`     - Amount of free heap in bytes.\n* `maxCon`       - Maximum number of concurrent connections.\n* `flashMap`     - Configured flash size&map: '512KB:256/256' .. '4MB:512/512'\n* `flashKB`      - Configured flash size in KB as integer\n* `flashChip`    - Type of flash chip as string with manufacturer & chip, ex: '0xEF 0x4016`",
       "!url": "http://www.espruino.com/Reference#l_ESP8266_getState"
     },
-    "getHostByName": {
-      "!type": "fn(hostname: ?, callback: ?)",
-      "!doc": "* Lookup the hostname and invoke a callback when the IP address is known.",
-      "!url": "http://www.espruino.com/Reference#l_ESP8266_getHostByName"
-    },
-    "ping": {
-      "!type": "fn(ipAddr: ?, pingCallback: ?)",
+    "getFreeFlash": {
+      "!type": "fn() -> ?",
       "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_ESP8266_ping"
+      "!url": "http://www.espruino.com/Reference#l_ESP8266_getFreeFlash"
     },
-    "dumpSocket": {
-      "!type": "fn(socketId: ?)",
+    "crc32": {
+      "!type": "fn(arrayOfData: ?) -> ?",
       "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_ESP8266_dumpSocket"
+      "!url": "http://www.espruino.com/Reference#l_ESP8266_crc32"
     },
-    "dumpAllSocketData": {
-      "!type": "fn()",
-      "!doc": "* Write all the socket data structures to the debug log.\n* This is purely a diagnostic function.",
-      "!url": "http://www.espruino.com/Reference#l_ESP8266_dumpAllSocketData"
+    "neopixelWrite": {
+      "!type": "fn(pin: +Pin, arrayOfData: ?)",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_ESP8266_neopixelWrite"
     }
   },
-  "wifi": {
+  "Wifi": {
     "!type": "fn()",
-    "!doc": "",
-    "!url": "http://www.espruino.com/Reference#l_wifi_undefined",
+    "!doc": "The wifi library is a generic cross-platform library to control the Wifi interface.  It supports functionality such as connecting to wifi networks, getting network information, starting and access point, etc.\n**Currently this library is ESP8266 specific** and needs to be ported to other Espruino platforms.\n\nTo get started and connect to your local access point all you need is\n```\nvar wifi = require(\"Wifi\");\nwifi.connect(\"my-ssid\", {password:\"my-pwd\"}, function(ap){ console.log(\"connected:\", ap); });\n```\nIf you want the connection to happen automatically at boot, add `wifi.save();`.",
+    "!url": "http://www.espruino.com/Reference#l_Wifi_undefined",
     "disconnect": {
-      "!type": "fn(options: ?, callback: ?)",
-      "!doc": "* The options is a JavaScript object that contains the following properties:\n* * `default` - If set to true, then auto connect of this device as a station will be\n* disabled.  The default of `default` is false.",
-      "!url": "http://www.espruino.com/Reference#l_wifi_disconnect"
+      "!type": "fn(callback: ?)",
+      "!doc": "Disconnect the wifi station from an access point and disable the station mode. It is OK to call `disconnect` to turn off station mode even if no connection exists (for example, connection attempts may be failing). Station mode can be re-enabled by calling `connect` or `scan`.",
+      "!url": "http://www.espruino.com/Reference#l_Wifi_disconnect"
     },
     "stopAP": {
-      "!type": "fn(options: ?, callback: ?)",
-      "!doc": "* Stop being an access point.\n* The options contain:\n* * default - A boolean.  If set to true, then the access point will be stopped at boot time.\n* The default for `default` is false which means that the start/stop of an access point at boot time\n* will not be changed.",
-      "!url": "http://www.espruino.com/Reference#l_wifi_stopAP"
+      "!type": "fn(callback: ?)",
+      "!doc": "Stop being an access point and disable the AP operation mode. Ap mode can be re-enabled by calling `startAP`.",
+      "!url": "http://www.espruino.com/Reference#l_Wifi_stopAP"
     },
     "connect": {
-      "!type": "fn(ssid: ?, password: ?, options: ?, callback: ?)",
-      "!doc": "* Connect to an access point as a station.\n* When the outcome is known, the callback function is invoked.  The options object contains\n* properties that control the connection.  Included in this object are:\n* * default (Boolean) - When true, these settings will be used to connect on next boot.\n* * dnsServers (array of String) - An array of up to two DNS servers in dotted decimal format string.",
-      "!url": "http://www.espruino.com/Reference#l_wifi_connect"
+      "!type": "fn(ssid: ?, options: ?, callback: ?)",
+      "!doc": "Connect to an access point as a station. If there is an existing connection to an AP it is first disconnected if the SSID or password are different from those passed as parameters. Put differently, if the passed SSID and password are identical to the currently connected AP then nothing is changed.\nWhen the connection attempt completes the callback function is invoked with one `err` parameter, which is NULL if there is no error and a string message if there is an error. If DHCP is enabled the callback occurs once an IP addres has been obtained, if a static IP is set the callback occurs once the AP's network has been joined.  The callback is also invoked if a connection already exists and does not need to be changed.\n\nThe options properties may contain:\n\n* `password` - Password string to be used to access the network.\n* `dnsServers` (array of String) - An array of up to two DNS servers in dotted decimal format string.\n\nNotes:\n\n* the options should include the ability to set a static IP and associated netmask and gateway, this is a future enhancement.\n* the only error reported in the callback is \"Bad password\", all other errors (such as access point not found or DHCP timeout) just cause connection retries. If the reporting of such temporary errors is desired, the caller must use its own timeout and the `getDetails().status` field.\n* the `connect` call automatically enabled station mode, it can be disabled again by calling `disconnect`.",
+      "!url": "http://www.espruino.com/Reference#l_Wifi_connect"
     },
     "scan": {
       "!type": "fn(callback: ?)",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_wifi_scan"
+      "!doc": "Perform a scan for access points. This will enable the station mode if it is not currently enabled. Once the scan is complete the callback function is called with an array of APs found, each AP is an object with:\n\n* `ssid`: SSID string.\n* `mac`: access point MAC address in 00:00:00:00:00:00 format.\n* `authMode`: `open`, `wep`, `wpa`, `wpa2`, or `wpa_wpa2`.\n* `channel`: wifi channel 1..13.\n* `hidden`: true if the SSID is hidden.\n* `rssi`: signal strength in dB in the range -110..0.\n\nNotes:\n* in order to perform the scan the station mode is turned on and remains on, use Wifi.disconnect() to turn it off again, if desired.\n* only one scan can be in progress at a time.",
+      "!url": "http://www.espruino.com/Reference#l_Wifi_scan"
     },
-    "createAP": {
-      "!type": "fn(ssid: ?, password: ?, options: ?, callback: ?)",
-      "!doc": "* Create a logical access point allowing WiFi stations to connect.\n* The `options` object can contain the following properties.\n* * authMode - The authentication mode to use.  Can be one of \"open\", \"wpa2\", \"wpa\", \"wpa_wpa2\".\n* * `default` - When true, sets the creation of an access point as the default at boot.",
-      "!url": "http://www.espruino.com/Reference#l_wifi_createAP"
+    "startAP": {
+      "!type": "fn(ssid: ?, options: ?, callback: ?)",
+      "!doc": "Create a WiFi access point allowing stations to connect. If the password is NULL or an empty string the access point is open, otherwise it is encrypted.\nThe callback function is invoked once the access point is set-up and receives one `err` argument, which is NULL on success and contains an error message string otherwise.\n\nThe `options` object can contain the following properties.\n\n* `authMode` - The authentication mode to use.  Can be one of \"open\", \"wpa2\", \"wpa\", \"wpa_wpa2\". The default is open (but open access points are not recommended).\n* `password` - The password for connecting stations if authMode is not open.\n* `channel` - The channel to be used for the access point in the range 1..13. If the device is also connected to an access point as a station then that access point determines the channel.\n\nNotes:\n\n* the options should include the ability to set the AP IP and associated netmask, this is a future enhancement.\n* the `startAP` call automatically enables AP mode. It can be disabled again by calling `stopAP`.",
+      "!url": "http://www.espruino.com/Reference#l_Wifi_startAP"
     },
     "getStatus": {
-      "!type": "fn() -> ?",
-      "!doc": "* Retrieve the status of the current WiFi environment.\n* The object returned by this function will have some or all of the following properties:\n* * `isStation` - True if the ESP8266 is being a Station\n* * `isAP` - True if the ESP8266 is being an Access Point.\n* * `connectedStations` - An array of the stations connected to us if we are being an access point.  This\n* array may be empty.  Each entry in the array will itself be an object describing the station which,\n* at a minimum will contain `ip` being the IP address of the station.",
-      "!url": "http://www.espruino.com/Reference#l_wifi_getStatus"
+      "!type": "fn(callback: ?) -> ?",
+      "!doc": "Retrieve the current overall WiFi configuration. This call provides general information that pertains to both station and access point modes. The getDetails and getAPDetails calls provide more in-depth information about the station and access point configurations, respectively. The status object has the following properties:\n\n* `station` - Status of the wifi station: `off`, `connecting`, ...\n* `ap` - Status of the wifi access point: `disabled`, `enabled`.\n* `mode` - The current operation mode: `off`, `sta`, `ap`, `sta+ap`.\n* `phy` - Modulation standard configured: `11b`, `11g`, `11n` (the esp8266 docs are not very clear, but it is assumed that 11n means b/g/n). This setting limits the modulations that the radio will use, it does not indicate the current modulation used with a specific access point.\n* `powersave` - Power saving mode: `none` (radio is on all the time), `ps-poll` (radio is off between beacons as determined by the access point's DTIM setting). Note that in 'ap' and 'sta+ap' modes the radio is always on, i.e., no power saving is possible.\n* `savedMode` - The saved operation mode which will be applied at boot time: `off`, `sta`, `ap`, `sta+ap`.",
+      "!url": "http://www.espruino.com/Reference#l_Wifi_getStatus"
+    },
+    "setConfig": {
+      "!type": "fn(settings: ?)",
+      "!doc": "Sets a number of global wifi configuration settings. All parameters are optional and which are passed determines which settings are updated.\nThe settings available are:\n\n* `phy` - Modulation standard to allow: `11b`, `11g`, `11n` (the esp8266 docs are not very clear, but it is assumed that 11n means b/g/n).\n* `powersave` - Power saving mode: `none` (radio is on all the time), `ps-poll` (radio is off between beacons as determined by the access point's DTIM setting). Note that in 'ap' and 'sta+ap' modes the radio is always on, i.e., no power saving is possible.\n\nNote: esp8266 SDK programmers may be missing an \"opmode\" option to set the sta/ap/sta+ap operation mode. Please use connect/scan/disconnect/startAP/stopAP, which all set the esp8266 opmode indirectly.",
+      "!url": "http://www.espruino.com/Reference#l_Wifi_setConfig"
+    },
+    "getDetails": {
+      "!type": "fn(callback: ?) -> ?",
+      "!doc": "Retrieve the wifi station configuration and status details. The details object has the following properties:\n\n* `status` - Details about the wifi station connection, one of `off`, `connecting`, `wrong_password`, `no_ap_found`, `connect_fail`, or `connected`. The off, bad_password and connected states are stable, the other states are transient. The connecting state will either result in connected or one of the error states (bad_password, no_ap_found, connect_fail) and the no_ap_found and connect_fail states will result in a reconnection attempt after some interval.\n* `rssi` - signal strength of the connected access point in dB, typically in the range -110 to 0, with anything greater than -30 being an excessively strong signal.\n* `ssid` - SSID of the access point.\n* `password` - the password used to connect to the access point.\n* `authMode` - the authentication used: `open`, `wpa`, `wpa2`, `wpa_wpa2` (not currently supported).\n* `savedSsid` - the SSID to connect to automatically at boot time, null if none.",
+      "!url": "http://www.espruino.com/Reference#l_Wifi_getDetails"
+    },
+    "getAPDetails": {
+      "!type": "fn(callback: ?) -> ?",
+      "!doc": "Retrieve the current access point configuration and status.  The details object has the following properties:\n\n* `status` - Current access point status: `enabled` or `disabled`\n* `stations` - an array of the stations connected to the access point.  This array may be empty.  Each entry in the array is an object describing the station which, at a minimum contains `ip` being the IP address of the station.\n* `ssid` - SSID to broadcast.\n* `password` - Password for authentication.\n* `authMode` - the authentication required of stations: `open`, `wpa`, `wpa2`, `wpa_wpa2`.\n* `hidden` - True if the SSID is hidden, false otherwise.\n* `maxConn` - Max number of station connections supported.\n* `savedSsid` - the SSID to broadcast automatically at boot time, null if the access point is to be disabled at boot.",
+      "!url": "http://www.espruino.com/Reference#l_Wifi_getAPDetails"
+    },
+    "save": {
+      "!type": "fn(what: ?)",
+      "!doc": "Save the current wifi configuration (station and access point) to flash and automatically apply this configuration at boot time, unless `what==\"clear\"`, in which case the saved configuration is cleared such that wifi remains disabled at boot. The saved configuration includes:\n\n* mode (off/sta/ap/sta+ap)\n* SSIDs & passwords\n* phy (11b/g/n)\n* powersave setting\n* DHCP hostname",
+      "!url": "http://www.espruino.com/Reference#l_Wifi_save"
+    },
+    "restore": {
+      "!type": "fn()",
+      "!doc": "Restores the saved Wifi configuration from flash. See `Wifi.save()`.",
+      "!url": "http://www.espruino.com/Reference#l_Wifi_restore"
     },
     "getIP": {
-      "!type": "fn() -> ?",
-      "!doc": "* Return IP information in an object which contains:\n* * ip - IP address\n* * netmask - The interface netmask\n* * gw - The network gateway",
-      "!url": "http://www.espruino.com/Reference#l_wifi_getIP"
+      "!type": "fn(callback: ?) -> ?",
+      "!doc": "Return the station IP information in an object as follows:\n\n* ip - IP address as string (e.g. \"192.168.1.5\")\n* netmask - The interface netmask as string\n* gw - The network gateway as string\n* mac - The MAC address as string of the form 00:00:00:00:00:00\n\nNote that the `ip`, `netmask`, and `gw` fields are omitted if no connection is established:",
+      "!url": "http://www.espruino.com/Reference#l_Wifi_getIP"
+    },
+    "getAPIP": {
+      "!type": "fn(callback: ?) -> ?",
+      "!doc": "Return the access point IP information in an object which contains:\n\n* ip - IP address as string (typ \"192.168.4.1\")\n* netmask - The interface netmask as string\n* gw - The network gateway as string\n* mac - The MAC address as string of the form 00:00:00:00:00:00",
+      "!url": "http://www.espruino.com/Reference#l_Wifi_getAPIP"
+    },
+    "getHostByName": {
+      "!type": "fn(hostname: ?, callback: ?)",
+      "!doc": "Lookup the hostname and invoke a callback with the IP address as integer argument. If the lookup fails, the callback is invoked with a null argument.\n**Note:** only a single hostname lookup can be made at a time, concurrent lookups are not supported.",
+      "!url": "http://www.espruino.com/Reference#l_Wifi_getHostByName"
+    },
+    "getDHCPHostname": {
+      "!type": "fn(callback: ?) -> ?",
+      "!doc": "Returns the hostname announced to the DHCP server when connecting to an access point.",
+      "!url": "http://www.espruino.com/Reference#l_Wifi_getDHCPHostname"
+    },
+    "setDHCPHostname": {
+      "!type": "fn(hostname: ?)",
+      "!doc": "Set the hostname sent with every DHCP request, this may be visible in the access point and may be forwarded into DNS as hostname.local.\nIf a DHCP lease currently exists changing the hostname will cause a disconnect and reconnect in order to transmit the change to the DHCP server.",
+      "!url": "http://www.espruino.com/Reference#l_Wifi_setDHCPHostname"
     }
   },
   "ESP8266WiFi": {
     "!type": "fn()",
-    "!doc": "",
-    "!url": "http://www.espruino.com/Reference#ESP8266WiFi",
-    "connect": {
-      "!type": "fn(ssid: ?, password: ?, gotIpCallback: ?)",
-      "!doc": "* Deprecated by jswrap_ESP8266_wifi_connect\n * Connect the station to an access point.",
-      "!url": "http://www.espruino.com/Reference#l_ESP8266WiFi_connect"
-    },
-    "stopAP": {
-      "!type": "fn()",
-      "!doc": "* Stop being an access point.",
-      "!url": "http://www.espruino.com/Reference#l_ESP8266WiFi_stopAP"
-    },
-    "beAccessPoint": {
-      "!type": "fn(jsv_ssid: ?, jsv_password: ?)",
-      "!doc": "* Deprecated by jswrap_ESP8266_wifi_createAP",
-      "!url": "http://www.espruino.com/Reference#l_ESP8266WiFi_beAccessPoint"
-    },
-    "getAccessPoints": {
-      "!type": "fn(callback: ?)",
-      "!doc": "* Deprecated by jswrap_ESP8266_wifi_scan",
-      "!url": "http://www.espruino.com/Reference#l_ESP8266WiFi_getAccessPoints"
-    },
-    "mdnsInit": {
-      "!type": "fn()",
-      "!doc": "* Initial testing for mDNS support",
-      "!url": "http://www.espruino.com/Reference#l_ESP8266WiFi_mdnsInit"
-    },
-    "disconnect": {
-      "!type": "fn()",
-      "!doc": "* Deprecated by jswrap_ESP8266_wifi_disconnect",
-      "!url": "http://www.espruino.com/Reference#l_ESP8266WiFi_disconnect"
-    },
-    "onWiFiEvent": {
-      "!type": "fn(callback: ?)",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_ESP8266WiFi_onWiFiEvent"
-    },
-    "setAutoConnect": {
-      "!type": "fn(autoconnect: ?)",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_ESP8266WiFi_setAutoConnect"
-    },
-    "getAutoConnect": {
-      "!type": "fn() -> ?",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_ESP8266WiFi_getAutoConnect"
-    },
-    "getAddressAsString": {
-      "!type": "fn(address: ?) -> ?",
-      "!doc": "* Deprecated by jswrap_ESP8266_getAddressAsString",
-      "!url": "http://www.espruino.com/Reference#l_ESP8266WiFi_getAddressAsString"
-    },
-    "getIPInfo": {
-      "!type": "fn() -> +IPInfo",
-      "!doc": "* Deprecated by jswrap_ESP8266_wifi_getIP",
-      "!url": "http://www.espruino.com/Reference#l_ESP8266WiFi_getIPInfo"
-    },
-    "getStationConfig": {
-      "!type": "fn() -> +StationConfig",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_ESP8266WiFi_getStationConfig"
-    },
-    "getConnectedStations": {
-      "!type": "fn() -> ?",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_ESP8266WiFi_getConnectedStations"
-    },
-    "getDHCPHostname": {
-      "!type": "fn() -> ?",
-      "!doc": "* Get the current DHCP hostname.",
-      "!url": "http://www.espruino.com/Reference#l_ESP8266WiFi_getDHCPHostname"
-    },
-    "setDHCPHostname": {
-      "!type": "fn(hostname: ?)",
-      "!doc": "* Set the DHCP hostname.",
-      "!url": "http://www.espruino.com/Reference#l_ESP8266WiFi_setDHCPHostname"
-    },
-    "getRSSI": {
-      "!type": "fn() -> ?",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_ESP8266WiFi_getRSSI"
-    },
-    "init": {
-      "!type": "fn()",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_ESP8266WiFi_init"
-    },
-    "getConnectStatus": {
-      "!type": "fn() -> ?",
-      "!doc": "Retrieve the connection status.  The return is an object that contains:\n\n* status - The status code from ESP8266\n* statusMsg - The description of the code",
-      "!url": "http://www.espruino.com/Reference#l_ESP8266WiFi_getConnectStatus"
-    },
-    "socketConnect": {
-      "!type": "fn(options: ?, callback: ?) -> ?",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_ESP8266WiFi_socketConnect"
-    },
-    "socketEnd": {
-      "!type": "fn(socket: ?, data: ?)",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_ESP8266WiFi_socketEnd"
-    }
+    "!doc": "The ESP8266WiFi library is to be removed.",
+    "!url": "http://www.espruino.com/Reference#l_ESP8266WiFi_undefined"
   },
   "http": {
     "!type": "fn()",
@@ -246,7 +206,7 @@
     },
     "request": {
       "!type": "fn(options: ?, callback: ?) -> +httpCRq",
-      "!doc": "Create an HTTP Request - `end()` must be called on it to complete the operation. `options` is of the form:\n\n```\nvar options = {\n    host: 'example.com', // host name\n    port: 80,            // (optional) port, defaults to 80\n    path: '/',           // path sent to server\n    method: 'GET',       // HTTP command sent to server (must be uppercase 'GET', 'POST', etc)\n    headers: { key : value, key : value } // (optional) HTTP headers\n  };\nrequire(\"http\").request(options, function(res) {\n  res.on('data', function(data) {\n    console.log(\"HTTP> \"+data);\n  });\n  res.on('close', function(data) {\n    console.log(\"Connection closed\");\n  });\n});\n```\n\nYou can easily pre-populate `options` from a URL using `var options = url.parse(\"http://www.example.com/foo.html\")`",
+      "!doc": "Create an HTTP Request - `end()` must be called on it to complete the operation. `options` is of the form:\n\n```\nvar options = {\n    host: 'example.com', // host name\n    port: 80,            // (optional) port, defaults to 80\n    path: '/',           // path sent to server\n    method: 'GET',       // HTTP command sent to server (must be uppercase 'GET', 'POST', etc)\n    headers: { key : value, key : value } // (optional) HTTP headers\n  };\nrequire(\"http\").request(options, function(res) {\n  res.on('data', function(data) {\n    console.log(\"HTTP> \"+data);\n  });\n  res.on('close', function(data) {\n    console.log(\"Connection closed\");\n  });\n});\n```\n\nYou can easily pre-populate `options` from a URL using `var options = url.parse(\"http://www.example.com/foo.html\")`\n\n**Note:** if TLS/HTTPS is enabled, options can have `ca`, `key` and `cert` fields. See `tls.connect` for\nmore information about these and how to use them.",
       "!url": "http://www.espruino.com/Reference#l_http_request"
     },
     "get": {
@@ -481,6 +441,16 @@
       }
     }
   },
+  "tls": {
+    "!type": "fn()",
+    "!doc": "This library allows you to create TCPIP servers and clients using TLS encryption\n\nIn order to use this, you will need an extra module to get network connectivity.\n\nThis is designed to be a cut-down version of the [node.js library](http://nodejs.org/api/tls.html). Please see the [Internet](/Internet) page for more information on how to use it.",
+    "!url": "http://www.espruino.com/Reference#l_tls_undefined",
+    "connect": {
+      "!type": "fn(options: ?, callback: ?) -> +Socket",
+      "!doc": "Create a socket connection using TLS\n\nOptions can have `ca`, `key` and `cert` fields, which should be the decoded content of the certificate.\n\n```\nvar options = url.parse(\"https://localhost\");\noptions.key = atob(\"MIIJKQ ... OZs08C\");\noptions.cert = atob(\"MIIFi ... Uf93rN+\");\noptions.ca = atob(\"MIIFgDCC ... GosQML4sc=\");\nrequire(\"http\").request(options, ... );\n```\n\nIf you have the certificates as `.pem` files, you need to load these files, take the\ninformation between the lines beginning with `----`, remove the newlines from it\nso you have raw base64, and then feed it into `atob` as above.\n\nFor more information about generating and using certificates, see:\n\nhttps://engineering.circle.com/https-authorized-certs-with-node-js/",
+      "!url": "http://www.espruino.com/Reference#l_tls_connect"
+    }
+  },
   "WIZnet": {
     "!type": "fn()",
     "!doc": "Library for communication with the WIZnet Ethernet module",
@@ -667,11 +637,6 @@
     "!type": "fn()",
     "!doc": "",
     "!url": "http://www.espruino.com/Reference#NRF",
-    "init": {
-      "!type": "fn()",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_NRF_init"
-    },
     "sleep": {
       "!type": "fn()",
       "!doc": "",
@@ -681,6 +646,16 @@
       "!type": "fn()",
       "!doc": "",
       "!url": "http://www.espruino.com/Reference#l_NRF_wake"
+    },
+    "getBattery": {
+      "!type": "fn() -> number",
+      "!doc": "Get the battery level in volts",
+      "!url": "http://www.espruino.com/Reference#l_NRF_getBattery"
+    },
+    "setAdvertising": {
+      "!type": "fn(data: ?)",
+      "!doc": "Data is of the form `{ UUID : data_as_byte_array }`. For example to return battery level at 95%, do:\n\n```\nNRF.setAdvertising({\n  0x180F : [95]\n});\n```\n\nOr you could report the current temperature:\n\n```\nsetInterval(function() {\n  NRF.setAdvertising({\n    0x1809 : [0|E.getTemperature()]\n  });\n}, 30000);\n```",
+      "!url": "http://www.espruino.com/Reference#l_NRF_setAdvertising"
     }
   },
   "Bluetooth": {
@@ -1313,12 +1288,12 @@
       },
       "push": {
         "!type": "fn(arguments: ?) -> number",
-        "!doc": "Push a new value onto the end of this array'",
+        "!doc": "Push a new value onto the end of this array'\n\nThis is the opposite of `[1,2,3].unshift(0)`, which adds one or more elements to the beginning of the array.",
         "!url": "http://www.espruino.com/Reference#l_Array_push"
       },
       "pop": {
         "!type": "fn() -> ?",
-        "!doc": "Pop a new value off of the end of this array",
+        "!doc": "Remove and return the value on the end of this array.\n\nThis is the opposite of `[1,2,3].shift()`, which removes an element from the beginning of the array.",
         "!url": "http://www.espruino.com/Reference#l_Array_pop"
       },
       "map": {
@@ -1358,12 +1333,12 @@
       },
       "shift": {
         "!type": "fn() -> ?",
-        "!doc": "Remove the first element of the array, and return it",
+        "!doc": "Remove and return the first element of the array.\n\nThis is the opposite of `[1,2,3].pop()`, which takes an element off the end.",
         "!url": "http://www.espruino.com/Reference#l_Array_shift"
       },
       "unshift": {
         "!type": "fn(elements: ?) -> number",
-        "!doc": "Remove the first element of the array, and return it",
+        "!doc": "Add one or more items to the start of the array, and return its new length.\n\nThis is the opposite of `[1,2,3].push(4)`, which puts one or more elements on the end.",
         "!url": "http://www.espruino.com/Reference#l_Array_unshift"
       },
       "slice": {
@@ -2302,6 +2277,11 @@
       "!url": "http://www.espruino.com/Reference#l_process_memory"
     }
   },
+  "show": {
+    "!type": "fn(image: ?)",
+    "!doc": "Show an image on the in-built 5x5 LED screen.\n\nImage can be:\n\n* A number where each bit represents a pixel (so 25 bits)",
+    "!url": "http://www.espruino.com/Reference#l__global_show"
+  },
   "arguments": {
     "!type": "?",
     "!doc": "A variable containing the arguments given to the function",
@@ -2469,7 +2449,7 @@
   },
   "changeInterval": {
     "!type": "fn(id: ?, time: number)",
-    "!doc": "Change the Interval on a callback created with setInterval, for example:\n\n```var id = setInterval(function () { print('foo'); }, 1000); // every second```\n\n```changeInterval(id, 1500); // now runs every 1.5 seconds```\n\nThis takes effect the next time the callback is called (so it is not immediate).",
+    "!doc": "Change the Interval on a callback created with setInterval, for example:\n\n```var id = setInterval(function () { print('foo'); }, 1000); // every second```\n\n```changeInterval(id, 1500); // now runs every 1.5 seconds```\n\nThis takes effect immediately and resets the timeout, so in the example above,\nregardless of when you call `changeInterval`, the next interval will occur 1500ms\nafter it.",
     "!url": "http://www.espruino.com/Reference#l__global_changeInterval"
   },
   "peek8": {
@@ -2539,7 +2519,7 @@
   },
   "shiftOut": {
     "!type": "fn(pins: ?, options: ?, data: ?)",
-    "!doc": "Shift an array of data out using the pins supplied, for example:\n\n```\n// shift out to single clk+data (like software SPI)\nshiftOut(A0, { clk : A1 }, [1,2,3,4]);\n\n// shift out to multiple data pins\nshiftOut([A3,A2,A1,A0], { clk : A4 }, [1,2,3,4]);\n```\n\n`options` is an object of the form:\n\n```\n{\n  clk : pin, // a pin to use as the clock (undefined = no pin)\n  clkPol : bool, // clock polarity - default is 0 (so 1 normally, pulsing to 0 to clock data in)\n}\n```\n\nEach item in the `data` array will be output to the pins, with the first\npin in the array being the MSB and the last the LSB, then the clock will be\npulsed in the polarity given.",
+    "!doc": "Shift an array of data out using the pins supplied *least significant bit first*,\nfor example:\n\n```\n// shift out to single clk+data\nshiftOut(A0, { clk : A1 }, [1,0,1,0]);\n\n// shift out a whole byte (like software SPI)\nshiftOut(A0, { clk : A1, repeat: 8 }, [1,2,3,4]);\n\n// shift out via 4 data pins\nshiftOut([A3,A2,A1,A0], { clk : A4 }, [1,2,3,4]);\n```\n\n`options` is an object of the form:\n\n```\n{\n  clk : pin, // a pin to use as the clock (undefined = no pin)\n  clkPol : bool, // clock polarity - default is 0 (so 1 normally, pulsing to 0 to clock data in)\n  repeat : int, // number of clocks per array item\n}\n```\n\nEach item in the `data` array will be output to the pins, with the first\npin in the array being the MSB and the last the LSB, then the clock will be\npulsed in the polarity given.\n\n`repeat` is the amount of times shift data out for each array item. For instance\nwe may want to shift 8 bits out through 2 pins - in which case we need to set\nrepeat to 4.",
     "!url": "http://www.espruino.com/Reference#l__global_shiftOut"
   },
   "setWatch": {
