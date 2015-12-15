@@ -18,6 +18,18 @@ chrome.app.runtime.onLaunched.addListener(function(launchData) {
         });
       });
     });
+    // ---------------------------------------------------------- CLOSE SERIAL ON EXIT
+    win.onClosed.addListener(function() {
+      // Background script keeps running even after window close
+      // for a few seconds. So serial connection keeped open and
+      // we can't connect to the board again after quick IDE restart
+      chrome.serial.getConnections(function(connections) {
+        connections.forEach(function(c) {
+          chrome.serial.disconnect(c.connectionId, function() {});
+        });
+      });
+    });
+
     // ---------------------------------------------------------- URL LAUNCH
     if (launchData.id) {
       // We are called to handle a URL that matches one of our url_handlers.
