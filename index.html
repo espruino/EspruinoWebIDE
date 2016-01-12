@@ -26,6 +26,13 @@
   <link rel="stylesheet" href="js/libs/toastr/toastr.css" />
   <link rel="stylesheet" href="js/libs/guiders/guiders.css" />
 
+  <script>
+    // Force HTTPS - needed for web bluetooth
+    var l = window.location.toString();
+    if (l.substr(0,7)=="http://")
+      window.location = "https://"+l.substr(7);
+  </script>
+
   <script src="js/libs/jquery-1.11.0.js"></script>
   <script src="js/libs/jquery-ui-1.10.1.custom.js"></script>
   <script src="js/libs/jquery.treeview.js"></script>
