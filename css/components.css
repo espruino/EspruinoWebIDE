@@ -273,23 +273,27 @@ a:hover > .menu
 	list-style: none;
 }
 
-  .port-list 
-  {
+.port-list 
+{
     margin: 10px;
-  }
+}
 
-	.port-list__item
-	{
-		margin-bottom: 10px;
-	}
+.port-list__item
+{
+        margin-bottom: 10px;
+        overflow: hidden;
+}
 
-	.port-list__item__name
-	{
-		font-weight: normal;
-    font-size: 150%;
-    line-height: 40px;
-    padding-left: 5px;
-	}
+.port-list__item__name
+{
+        font-weight: normal;
+        font-size: 150%;    
+        padding-left: 5px;
+        padding-right: 5px;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+}
 
   .port-list__no-results
   {
