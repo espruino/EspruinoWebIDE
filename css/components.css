@@ -293,6 +293,13 @@ a:hover > .menu
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
+        margin-bottom: 0px;
+}
+
+.port-list__item__desc
+{
+        font-size: 70%;    
+        color : #666;
 }
 
 .port-list__no-results
