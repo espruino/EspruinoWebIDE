@@ -185,45 +185,45 @@ a:hover > .menu
 /* Status */
 .status 
 {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background: #42484a;
-  color: #fff;
-  height: 30px;
-  width: 100%;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background: #42484a;
+        color: #fff;
+        height: 30px;
+        width: 100%;
 }
 
-  .status__message 
-  {
-    display: inline-block;
-    font-size: 100%;
-    line-height: 30px;
-    text-transform: uppercase;
-    margin: 0;
-    padding: 0 10px;
-  }
+.status__message 
+{
+        display: inline-block;
+        font-size: 100%;
+        line-height: 30px;
+        text-transform: uppercase;
+        margin: 0;
+        padding: 0 10px;
+}
 
 /* Progress */
 .status__progress
 {
-  position: relative;
-  display: inline-block;
-  width: 180px; 
-  height: 4px;
-  margin: 13px 13px;
-  vertical-align: middle;
-  background: rgba(0,0,0,0.2);
+        position: relative;
+        display: inline-block;
+        width: 180px; 
+        height: 4px;
+        margin: 13px 13px;
+        vertical-align: middle;
+        background: rgba(0,0,0,0.2);
 }
 
-  .status__progress-bar
-  {
-    background: #2ecc71;
-    width: 0%;
-    height: 4px;
-    max-width: 100% !important;
-  }
+.status__progress-bar
+{
+        background: #2ecc71;
+        width: 0%;
+        height: 4px;
+        max-width: 100% !important;
+}
 
 /* Editor Wrapper */
 .editor
@@ -233,22 +233,22 @@ a:hover > .menu
 	height: 100%;
 }
 
-	.editor__sidebar
-	{
-		position: absolute;
-		top: 0;
-		left: 0;
-	}
+.editor__sidebar
+{
+	position: absolute;
+	top: 0;
+	left: 0;
+}
 
-	.editor__canvas
-	{
-		position: absolute;
-		top: 0;
-		left: 60px;
-		right: 0;
-		bottom: 0;
-    overflow: hidden;
-	}
+.editor__canvas
+{
+        position: absolute;
+        top: 0;
+        left: 60px;
+        right: 0;
+        bottom: 0;
+        overflow: hidden;
+}
 
 /* Sidebar */
 .sidebar
@@ -259,10 +259,10 @@ a:hover > .menu
 	overflow: visible;
 }
 
-	.sidebar .v-split 
-	{
-		background: #42484a;
-	}
+.sidebar .v-split 
+{
+	background: #42484a;
+}
 
 /* Port List */
 .port-list,
@@ -275,7 +275,7 @@ a:hover > .menu
 
 .port-list 
 {
-    margin: 10px;
+        margin: 10px;
 }
 
 .port-list__item
@@ -295,42 +295,42 @@ a:hover > .menu
         transform: translateY(-50%);
 }
 
-  .port-list__no-results
-  {
-    color: #333;
-    font-size: 120%;
-    text-transform: uppercase;
-    text-align: center;
-    line-height: 60px;
-  }
+.port-list__no-results
+{
+        color: #333;
+        font-size: 120%;
+        text-transform: uppercase;
+        text-align: center;
+        line-height: 60px;
+}
 
 /* Snippets list */
 
-  .terminalSnippets 
-  {
-    padding-left: 15px;
-  }
+.terminalSnippets 
+{
+paddi   ng-left: 15px;
+}
 
-  .terminalSnippet 
-  {
-    position: relative;
-    display: inline-block;
-    background: #ccc;
-    border-left: 10px solid #999; 
-    cursor: pointer;
-    padding: 2px;
-    padding-left: 8px;
-    margin: 1px;
-    height: 20px;
-    width: 320px;
-  }
+.terminalSnippet 
+{
+        position: relative;
+        display: inline-block;
+        background: #ccc;
+        border-left: 10px solid #999; 
+        cursor: pointer;
+        padding: 2px;
+        padding-left: 8px;
+        margin: 1px;
+        height: 20px;
+        width: 320px;
+}
 
-  .terminalSnippet:hover 
-  {
-    color: #fff !important;
-    border-left-color: #27ae60;
-    background: #2ecc71;
-  }
+.terminalSnippet:hover 
+{
+        color: #fff !important;
+        border-left-color: #27ae60;
+        background: #2ecc71;
+}
 
 
 /* Terminal */
