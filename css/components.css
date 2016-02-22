@@ -612,4 +612,5 @@ paddi   ng-left: 15px;
 .compact .button { height: 30px; padding: 0; }
 .compact .button--icon { border-left-width: 30px; }
 .compact .button--icon .button__icon { left: -30px; }
-.compact .port-list__item__name { font-size: 100%; line-height: 30px; }
+.compact .port-list__item__name { font-size: 100%; }
+.compact .port-list__item { margin-bottom: 2px; }
