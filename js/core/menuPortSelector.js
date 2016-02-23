@@ -77,9 +77,12 @@
           for (var i in items) {
             var port = items[i];
             html += '<li class="port-list__item">'+
-                      '<a title="'+ port +'" class="button button--icon button--wide" data-port="'+ port +'">'+
+                      '<a title="'+ port.path +'" class="button button--icon button--wide" data-port="'+ port.path +'">'+
                         '<i class="icon-usb lrg button__icon"></i>'+
-                        '<span class="port-list__item__name">'+ port +'</span>'+
+                        '<span class="port-list__item__name">'+ port.path;
+            if (port.description) 
+              html += '</br><span class="port-list__item__desc">' + port.description + '</span>';
+            html += '</span>'+
                       '</a>'+
                     '</li>';
           }
