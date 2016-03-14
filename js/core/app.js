@@ -15,8 +15,11 @@
 
   var nwwindow = undefined;
   var nwmaximised = false;
-  if ("undefined"!=typeof require) {
-    nwwindow = require('nw.gui').Window.get();
+  if ("undefined" != typeof require) {
+    if (process.versions.electron)
+      nwwindow = require('remote').getCurrentWindow();    
+    else
+      nwwindow = require('nw.gui').Window.get();
   }
 
   var defaultIcon = {

@@ -79,9 +79,29 @@
       "!doc": "Enable or disable the logging of debug information.  A value of `true` enables debug logging while a value of `false` disables debug logging.  Debug output is sent to UART1 (gpio2).",
       "!url": "http://www.espruino.com/Reference#l_ESP8266_logDebug"
     },
+    "setLog": {
+      "!type": "fn(mode: ?)",
+      "!doc": "Set the debug logging mode. It can be disabled (which frees ~1.2KB of heap), enabled in-memory only, or in-memory and output to a UART.",
+      "!url": "http://www.espruino.com/Reference#l_ESP8266_setLog"
+    },
+    "printLog": {
+      "!type": "fn()",
+      "!doc": "Prints the contents of the debug log to the console.",
+      "!url": "http://www.espruino.com/Reference#l_ESP8266_printLog"
+    },
+    "readLog": {
+      "!type": "fn()",
+      "!doc": "Returns one line from the log or up to 128 characters.",
+      "!url": "http://www.espruino.com/Reference#l_ESP8266_readLog"
+    },
+    "dumpSocketInfo": {
+      "!type": "fn()",
+      "!doc": "Dumps info about all sockets to the log. This is for troubleshooting the socket implementation.",
+      "!url": "http://www.espruino.com/Reference#l_ESP8266_dumpSocketInfo"
+    },
     "setCPUFreq": {
       "!type": "fn(freq: ?)",
-      "!doc": "Set the operating frequency of the ESP8266 processor.",
+      "!doc": "Set the operating frequency of the ESP8266 processor. The default is 160Mhz.\n\n**Warning**: changing the cpu frequency affects the timing of some I/O operations, notably of software SPI and I2C, so things may be a bit slower at 80Mhz.",
       "!url": "http://www.espruino.com/Reference#l_ESP8266_setCPUFreq"
     },
     "getState": {
@@ -181,19 +201,29 @@
     },
     "getDHCPHostname": {
       "!type": "fn(callback: ?) -> ?",
-      "!doc": "Returns the hostname announced to the DHCP server when connecting to an access point.",
+      "!doc": "Deprecated, please use getHostname.",
       "!url": "http://www.espruino.com/Reference#l_Wifi_getDHCPHostname"
+    },
+    "getHostname": {
+      "!type": "fn(callback: ?) -> ?",
+      "!doc": "Returns the hostname announced to the DHCP server and broadcast via mDNS when connecting to an access point.",
+      "!url": "http://www.espruino.com/Reference#l_Wifi_getHostname"
     },
     "setDHCPHostname": {
       "!type": "fn(hostname: ?)",
-      "!doc": "Set the hostname sent with every DHCP request, this may be visible in the access point and may be forwarded into DNS as hostname.local.\nIf a DHCP lease currently exists changing the hostname will cause a disconnect and reconnect in order to transmit the change to the DHCP server.",
+      "!doc": "Deprecated, please use setHostname instead.",
       "!url": "http://www.espruino.com/Reference#l_Wifi_setDHCPHostname"
+    },
+    "setHostname": {
+      "!type": "fn(hostname: ?)",
+      "!doc": "Set the hostname. Depending on implemenation, the hostname is sent with every DHCP request and is broadcast via mDNS. The DHCP hostname may be visible in the access point and may be forwarded into DNS as hostname.local.\nIf a DHCP lease currently exists changing the hostname will cause a disconnect and reconnect in order to transmit the change to the DHCP server.\nThe mDNS announcement also includes an announcement for the \"espruino\" service.",
+      "!url": "http://www.espruino.com/Reference#l_Wifi_setHostname"
+    },
+    "setSNTP": {
+      "!type": "fn(server: ?, tz_offset: ?)",
+      "!doc": "Starts the SNTP (Simple Network Time Protocol) service to keep the clock synchronized with the specified server. Note that the time zone is really just an offset to UTC and doesn't handle daylight savings time.\nThe interval determines how often the time server is queried and Espruino's time is synchronized. The initial synchronization occurs asynchronously after setSNTP returns.",
+      "!url": "http://www.espruino.com/Reference#l_Wifi_setSNTP"
     }
-  },
-  "ESP8266WiFi": {
-    "!type": "fn()",
-    "!doc": "The ESP8266WiFi library is to be removed.",
-    "!url": "http://www.espruino.com/Reference#l_ESP8266WiFi_undefined"
   },
   "http": {
     "!type": "fn()",
@@ -278,7 +308,7 @@
   },
   "httpCRq": {
     "!type": "fn()",
-    "!doc": "The HTTP client request",
+    "!doc": "The HTTP client request, returned by `http.request()` and `http.get()`.",
     "!url": "http://www.espruino.com/Reference#httpCRq",
     "prototype": {
       "write": {
@@ -295,12 +325,12 @@
   },
   "httpCRs": {
     "!type": "fn()",
-    "!doc": "The HTTP client response",
+    "!doc": "The HTTP client response, passed to the callback of `http.request()` an `http.get()`.",
     "!url": "http://www.espruino.com/Reference#httpCRs",
     "prototype": {
       "available": {
         "!type": "fn() -> number",
-        "!doc": "Return how many bytes are available to read. If there is already a listener for data, this will always return 0.",
+        "!doc": "Return how many bytes are available to read. If there is a 'data' event handler, this will always return 0.",
         "!url": "http://www.espruino.com/Reference#l_httpCRs_available"
       },
       "read": {
@@ -447,7 +477,7 @@
     "!url": "http://www.espruino.com/Reference#l_tls_undefined",
     "connect": {
       "!type": "fn(options: ?, callback: ?) -> +Socket",
-      "!doc": "Create a socket connection using TLS\n\nOptions can have `ca`, `key` and `cert` fields, which should be the decoded content of the certificate.\n\n```\nvar options = url.parse(\"https://localhost\");\noptions.key = atob(\"MIIJKQ ... OZs08C\");\noptions.cert = atob(\"MIIFi ... Uf93rN+\");\noptions.ca = atob(\"MIIFgDCC ... GosQML4sc=\");\nrequire(\"http\").request(options, ... );\n```\n\nIf you have the certificates as `.pem` files, you need to load these files, take the\ninformation between the lines beginning with `----`, remove the newlines from it\nso you have raw base64, and then feed it into `atob` as above.\n\nFor more information about generating and using certificates, see:\n\nhttps://engineering.circle.com/https-authorized-certs-with-node-js/",
+      "!doc": "Create a socket connection using TLS\n\nOptions can have `ca`, `key` and `cert` fields, which should be the decoded content of the certificate.\n\n```\nvar options = url.parse(\"localhost:1234\");\noptions.key = atob(\"MIIJKQ ... OZs08C\");\noptions.cert = atob(\"MIIFi ... Uf93rN+\");\noptions.ca = atob(\"MIIFgDCC ... GosQML4sc=\");\nrequire(\"tls\").connect(options, ... );\n```\n\nIf you have the certificates as `.pem` files, you need to load these files, take the information between the lines beginning with `----`, remove the newlines from it so you have raw base64, and then feed it into `atob` as above.\n\nYou can also:\n* Just specify the filename (<=100 characters) and it will be loaded and parsed if you have an SD card connected. For instance `options.key = \"key.pem\";`\n* Specify a function, which will be called to retrieve the data.  For instance `options.key = function() { eeprom.load_my_info(); };\n\nFor more information about generating and using certificates, see:\n\nhttps://engineering.circle.com/https-authorized-certs-with-node-js/",
       "!url": "http://www.espruino.com/Reference#l_tls_connect"
     }
   },
@@ -476,6 +506,16 @@
         "!doc": "Set the current IP address or get an IP from DHCP (if no options object is specified)\n\nIf 'mac' is specified as an option, it must be a string of the form `\"00:01:02:03:04:05\"`",
         "!url": "http://www.espruino.com/Reference#l_Ethernet_setIP"
       }
+    }
+  },
+  "Telnet": {
+    "!type": "fn()",
+    "!doc": "This library implements a telnet console for the Espruino interpreter. It requires a network\nconnection, e.g. Wifi, and **current only functions on the ESP8266 and on Linux **. It uses\nport 23 on the ESP8266 and port 2323 on Linux.",
+    "!url": "http://www.espruino.com/Reference#l_Telnet_undefined",
+    "setOptions": {
+      "!type": "fn(options: ?)",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Telnet_setOptions"
     }
   },
   "tv": {
@@ -656,6 +696,11 @@
       "!type": "fn(data: ?)",
       "!doc": "Data is of the form `{ UUID : data_as_byte_array }`. For example to return battery level at 95%, do:\n\n```\nNRF.setAdvertising({\n  0x180F : [95]\n});\n```\n\nOr you could report the current temperature:\n\n```\nsetInterval(function() {\n  NRF.setAdvertising({\n    0x1809 : [0|E.getTemperature()]\n  });\n}, 30000);\n```",
       "!url": "http://www.espruino.com/Reference#l_NRF_setAdvertising"
+    },
+    "setScan": {
+      "!type": "fn(callback: ?)",
+      "!doc": "Start/stop listening for BLE advertising packets within range...\n\n```\n// Start scanning\nNRF.setScan(function(d) {\n  console.log(JSON.stringify(d,null,2));\n});\n// prints {\"rssi\":-72, \"addr\":\"##:##:##:##:##:##\", \"data\":new ArrayBuffer([2,1,6,...])}\n\n// Stop Scanning\nNRF.setScan(false);\n```",
+      "!url": "http://www.espruino.com/Reference#l_NRF_setScan"
     }
   },
   "Bluetooth": {
@@ -1099,6 +1144,71 @@
       "!url": "http://www.espruino.com/Reference#l_Nucleo_D15"
     }
   },
+  "NodeMCU": {
+    "!type": "fn()",
+    "!doc": "This is a built-in class to allow you to use the ESP8266 NodeMCU boards's pin namings to access pins. It is only available on ESP8266-based boards.",
+    "!url": "http://www.espruino.com/Reference#NodeMCU",
+    "A0": {
+      "!type": "+Pin",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_NodeMCU_A0"
+    },
+    "D0": {
+      "!type": "+Pin",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_NodeMCU_D0"
+    },
+    "D1": {
+      "!type": "+Pin",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_NodeMCU_D1"
+    },
+    "D2": {
+      "!type": "+Pin",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_NodeMCU_D2"
+    },
+    "D3": {
+      "!type": "+Pin",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_NodeMCU_D3"
+    },
+    "D4": {
+      "!type": "+Pin",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_NodeMCU_D4"
+    },
+    "D5": {
+      "!type": "+Pin",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_NodeMCU_D5"
+    },
+    "D6": {
+      "!type": "+Pin",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_NodeMCU_D6"
+    },
+    "D7": {
+      "!type": "+Pin",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_NodeMCU_D7"
+    },
+    "D8": {
+      "!type": "+Pin",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_NodeMCU_D8"
+    },
+    "D9": {
+      "!type": "+Pin",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_NodeMCU_D9"
+    },
+    "D10": {
+      "!type": "+Pin",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_NodeMCU_D10"
+    }
+  },
   "SPI": {
     "!type": "fn()",
     "!doc": "Create a software SPI port. This has limited functionality (no baud rate), but it can work on any pins.\n\nUse `SPI.setup` to configure this port.",
@@ -1205,7 +1315,7 @@
       },
       "select": {
         "!type": "fn(rom: ?)",
-        "!doc": "Select a ROM - reset needs to be done first",
+        "!doc": "Select a ROM - always performs a reset first",
         "!url": "http://www.espruino.com/Reference#l_OneWire_select"
       },
       "skip": {
@@ -1254,11 +1364,6 @@
       "!doc": "Add the given module to the cache",
       "!url": "http://www.espruino.com/Reference#l_Modules_addCached"
     }
-  },
-  "Pipe": {
-    "!type": "fn()",
-    "!doc": "This is the Pipe container for async related IO.",
-    "!url": "http://www.espruino.com/Reference#l_Pipe_undefined"
   },
   "Array": {
     "!type": "fn(args: ?) -> ?",
@@ -1775,11 +1880,6 @@
       }
     }
   },
-  "Hardware": {
-    "!type": "fn()",
-    "!doc": "This is the built-in class for the Espruino device. It is the 'root scope', as 'Window' is for JavaScript on the desktop.",
-    "!url": "http://www.espruino.com/Reference#Hardware"
-  },
   "Object": {
     "!type": "fn(value: ?) -> ?",
     "!doc": "Creates an Object from the supplied argument",
@@ -2181,6 +2281,11 @@
       "!doc": "This creates a Uint8Array from the given arguments. If an argument is a String or an Array,\neach element is traversed and added as if it were an 8 bit value. If it is anything else, it is\nconverted to an 8 bit value directly.",
       "!url": "http://www.espruino.com/Reference#l_E_toUint8Array"
     },
+    "memoryArea": {
+      "!type": "fn(addr: number, len: number) -> +String",
+      "!doc": "This creates and returns a special type of string, which actually references\na specific memory address. It can be used in order to use sections of\nFlash memory directly in Espruino (for example to execute code straight\nfrom flash memory with `eval(E.memoryArea( ... ))`)\n\n**Note:** This is only tested on STM32-based platforms (Espruino Original\nand Espruino Pico) at the moment.",
+      "!url": "http://www.espruino.com/Reference#l_E_memoryArea"
+    },
     "reverseByte": {
       "!type": "fn(x: number) -> number",
       "!doc": "Reverse the 8 bits in a byte, swapping MSB and LSB.\n\nFor example, `E.reverseByte(0b10010000) == 0b00001001`.\n\nNote that you can reverse all the bytes in an array with: `arr = arr.map(E.reverseByte)`",
@@ -2279,8 +2384,18 @@
   },
   "show": {
     "!type": "fn(image: ?)",
-    "!doc": "Show an image on the in-built 5x5 LED screen.\n\nImage can be:\n\n* A number where each bit represents a pixel (so 25 bits)",
+    "!doc": "**Note:** This function is only available on the [BBC micro:bit](/MicroBit) board\n\nShow an image on the in-built 5x5 LED screen.\n\nImage can be:\n\n* A number where each bit represents a pixel (so 25 bits)",
     "!url": "http://www.espruino.com/Reference#l__global_show"
+  },
+  "acceleration": {
+    "!type": "fn() -> ?",
+    "!doc": "**Note:** This function is only available on the [BBC micro:bit](/MicroBit) board\n\nGet the current acceleration of the micro:bit from the on-board accelerometer",
+    "!url": "http://www.espruino.com/Reference#l__global_acceleration"
+  },
+  "compass": {
+    "!type": "fn() -> ?",
+    "!doc": "**Note:** This function is only available on the [BBC micro:bit](/MicroBit) board\n\nGet the current compass position for the micro:bit from the on-board magnetometer",
+    "!url": "http://www.espruino.com/Reference#l__global_compass"
   },
   "arguments": {
     "!type": "?",
@@ -2309,18 +2424,23 @@
   },
   "btoa": {
     "!type": "fn(binaryData: ?) -> ?",
-    "!doc": "Convert the supplied string (or array) into a base64 string",
+    "!doc": "Encode the supplied string (or array) into a base64 string",
     "!url": "http://www.espruino.com/Reference#l__global_btoa"
   },
   "atob": {
     "!type": "fn(binaryData: ?) -> ?",
-    "!doc": "Convert the supplied base64 string into a base64 string",
+    "!doc": "Decode the supplied base64 string into a normal string",
     "!url": "http://www.espruino.com/Reference#l__global_atob"
   },
   "encodeURIComponent": {
     "!type": "fn(str: ?) -> ?",
     "!doc": "Convert a string with any character not alphanumeric or `- _ . ! ~ * ' ( )` converted to the form `%XY` where `XY` is its hexadecimal representation",
     "!url": "http://www.espruino.com/Reference#l__global_encodeURIComponent"
+  },
+  "decodeURIComponent": {
+    "!type": "fn(str: ?) -> ?",
+    "!doc": "Convert any groups of characters of the form '%ZZ', into characters with hex code '0xZZ'",
+    "!url": "http://www.espruino.com/Reference#l__global_decodeURIComponent"
   },
   "require": {
     "!type": "fn(moduleName: ?) -> ?",
