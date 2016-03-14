@@ -11,3 +11,9 @@ extras*
 unused/*
 img/bak/*
 node_modules/*
+
+# Electron/nw.js stuff
+package.json
+electron-loader.js
+electron-app.js
+index.html

@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 /* Initialisation code for running the Web IDE as a 'native' app under Electron */
 'use strict';
 

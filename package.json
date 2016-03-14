@@ -1,13 +1,13 @@
 {
-  "name": "EspruinoWebIDE",
+  "name": "espruino-web-ide",
   "version": "0.60.0",
   "description": "A Terminal and Graphical code Editor for Espruino JavaScript Microcontrollers",
   "main": "index.js",
   "bin": {
-    "espruinowebide": "./index.js"
+    "espruino-web-ide": "./electron-loader.js"
   },
   "scripts": {
-    "start": "electron index.js"
+    "start": "electron electron-app.js"
   },
   "repository": {
     "type": "git",
@@ -29,9 +29,10 @@
     "acorn": ">=0.6.0",
     "esprima": "",
     "esmangle": "",
-    "escodegen": ""
+    "escodegen": "",
+    "electron-prebuilt": "^0.36.9"
   },
   "devDependencies": {
-    "electron-prebuilt": "^0.36.9"
+    
   }
 }
