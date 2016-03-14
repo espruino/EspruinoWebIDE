@@ -17,7 +17,7 @@
     "espruino"
   ],
   "author": "Gordon Williams <gw@pur3.co.uk> (http://espruino.com)",
-  "license": "Apache",
+  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/espruino/EspruinoWebIDE/issues"
   },
