@@ -12,7 +12,7 @@ It implements basic VT100 terminal features (up/down/left/right/etc) - enough fo
 
 | Version | Communications | Benefits |
 |---------|----------------|----------|
-| [Chrome Web App](#installing-from-chrome-web-store) | USB, Serial, [Audio](http://www.espruino.com/Headphone) | Easy to install from [Chrome Web Store](https://chrome.google.com/webstore/detail/espruino-serial-terminal/bleoifhkdalbjfbobjackfdifdneehpo) |
+| [Chrome Web App](#installing-from-chrome-web-store) | USB, Serial, [Audio](http://www.espruino.com/Headphone), TCP/IP | Easy to install from [Chrome Web Store](https://chrome.google.com/webstore/detail/espruino-serial-terminal/bleoifhkdalbjfbobjackfdifdneehpo) |
 | [Node.js App](#installing-from-npm) | USB, Serial, Bluetooth Low Energy | Can be run of systems without Chrome web browser |
 | [Web Version](#full-web-version) | [Audio](http://www.espruino.com/Headphone), Bluetooth Low Energy (via [Web Bluetooth](https://webbluetoothcg.github.io/web-bluetooth/)) | Just go to [a URL](https://espruino.github.io/EspruinoWebIDE/) |
 
