@@ -1,0 +1,37 @@
+{
+  "name": "EspruinoWebIDE",
+  "version": "0.60.0",
+  "description": "A Terminal and Graphical code Editor for Espruino JavaScript Microcontrollers",
+  "main": "index.js",
+  "bin": {
+    "espruinowebide": "./index.js"
+  },
+  "scripts": {
+    "start": "electron index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Espruino/EspruinoWebIDE.git"
+  },
+  "keywords": [
+    "espruino"
+  ],
+  "author": "Gordon Williams <gw@pur3.co.uk> (http://espruino.com)",
+  "license": "Apache",
+  "bugs": {
+    "url": "https://github.com/espruino/EspruinoWebIDE/issues"
+  },
+  "homepage": "https://github.com/espruino/EspruinoWebIDE#readme",
+  "dependencies": {
+    "es6-shim": "",
+    "bleat": "",
+    "serialport": ">=1.2.5",
+    "acorn": ">=0.6.0",
+    "esprima": "",
+    "esmangle": "",
+    "escodegen": ""
+  },
+  "devDependencies": {
+    "electron-prebuilt": "^0.36.9"
+  }
+}

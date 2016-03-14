@@ -50,20 +50,37 @@
   
   function createPortSelector(callback) {
     var checkInt, popup;
+    var isChecking = false;
+    var callWhenGotPorts;
 
     function selectPort() {
+      var port = $(this).data("port");
+      if (checkInt) clearInterval(checkInt);
+      checkInt = undefined;
+      popup.setContents('<h2 class="port-list__no-results">Connecting...</h2>');   
       Espruino.Core.Status.setStatus("Connecting...");
-      connectToPort($(this).data("port"), function(success){
-        if(success){
-          popup.close();
-          $(".window--modal").off("click", ".port-list__item a", selectPort);
-          if (callback!==undefined) callback();
-        }
-      });
+      function connect() {
+        connectToPort(port, function(success){
+          if(success){
+            popup.close();
+            $(".window--modal").off("click", ".port-list__item a", selectPort);
+            if (callback!==undefined) callback();
+          }
+        });
+      }
+      // make sure we only try and connect AFTER we've finished scanning all ports
+      if (isChecking) callWhenGotPorts = connect;
+      else connect();
     }
 
+    var searchHtml = '<h2 class="port-list__no-results">Searching...</h2>';
+
     function getPorts() {
+
+      isChecking = true;
       Espruino.Core.Serial.getPorts(function(items) {
+        isChecking = false;
+        if (callWhenGotPorts) return callWhenGotPorts();
 
         if (items.toString() == lastContents) 
           return; // same... don't update
@@ -88,11 +105,10 @@
           }
           html += '</ul>';   
         } else {
-          html = "<h2 class='port-list__no-results'>Searching...</h2>"
+          html = searchHtml;
         } 
 
         popup.setContents(html);   
-
       });
     }
 
@@ -101,23 +117,23 @@
     // Launch the popup
     popup = Espruino.Core.App.openPopup({
       title: "Select a port...",
-      contents: "Loading...",
+      contents: searchHtml,
       position: "center",
     });
 
     $(".window--modal").on("click", ".port-list__item a", selectPort);
 
     // Setup checker interval
-    checkInt = setInterval(getPorts, 1000);
+    checkInt = setInterval(getPorts, 2000);
     getPorts();
 
 
     // Make sure any calls to close popup, also clear
     // the port check interval
     var oldPopupClose = popup.close;
-    popup.close = function()
-    {
-      clearInterval(checkInt);
+    popup.close = function() {
+      if (checkInt) clearInterval(checkInt);
+      checkInt = undefined;
       oldPopupClose();
       popup.close = oldPopupClose;
     }
