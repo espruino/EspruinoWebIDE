@@ -34,7 +34,6 @@ If you have an up to date version of [Node.js](https://nodejs.org/en/) and [NPM]
 
 **Note:** For command-line access you might also want to take a look at [EspruinoTools](https://github.com/espruino/EspruinoTools)
 
-
 Installing from GitHub (Latest Version)
 ---------------------------------------
 
@@ -73,6 +72,8 @@ Using
 
 * Run the Web app
 * Click the `Help` (?) icon, then the `Tour` button to get a guided tour.
+
+**Running with Node.js/Electron and don't see any ports when you try and connect?** You're probably using a version of Node.js that doesn't match Electron. This causes NPM to load binary modules (for `serialport` and `bleat`) that are for the old version of Node and that won't work in Electron. To fix it, update Node.js, delete `node_modules` and run `npm install` again.
 
 
 Full Web Version
