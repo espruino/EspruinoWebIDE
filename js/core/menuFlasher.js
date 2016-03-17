@@ -63,11 +63,11 @@
         boardList = data;
         html = "<select>";
         for (var boardId in data) {
-          //if (data[boardId]["json"]["info"]["serial_bootloader"]) {
-          if (boardId.indexOf("ESPRUINO")==0 || boardId.indexOf("PICO")==0) { // currently the flasher doesn't flash other boards properly because it starts at 0x08002800
+          var boardJson = data[boardId]["json"];
+          if (boardJson.info.bootloader) {
             //html += '<img src="data:image/png;base64,'+data[boardId]["thumb_b64"]+'" alt="'+boardId+'"/>';
             try {
-              html += '  <option name="'+boardId+'">'+data[boardId]["json"]["info"]["name"]+'</option>';
+              html += '  <option name="'+boardId+'">'+boardJson.info.name+'</option>';
             } catch (e) {
               console.warn(e);
             }
