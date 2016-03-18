@@ -24,7 +24,7 @@
       if (env!==undefined &&
           env.info!==undefined &&
           env.info.binary_url!==undefined) {
-        stepSelectBinary(env.BOARD, env.info);
+        stepSelectBinary(env.BOARD, env.info, env.chip);
         return;
       }
     }     
@@ -48,11 +48,11 @@
         if (boardId===undefined || boardList[boardId]===undefined)
           console.error("No board ID found! Looks like no option selected");
         else {
-          var boardInfo = boardList[boardId]["json"]["info"];
+          var boardJson = boardList[boardId]["json"];
           if (urlOrNothing)
-            stepReset( { binary_url : urlOrNothing, board_id : boardId } );
+            stepReset( { binary_url : urlOrNothing, board_id : boardId, board_chip : boardJson.chip } );
           else
-            stepSelectBinary( boardId, boardInfo );
+            stepSelectBinary( boardId, boardJson.info, boardJson.chip );
         }
       }
     });
@@ -63,11 +63,11 @@
         boardList = data;
         html = "<select>";
         for (var boardId in data) {
-          //if (data[boardId]["json"]["info"]["serial_bootloader"]) {
-          if (boardId.indexOf("ESPRUINO")==0 || boardId.indexOf("PICO")==0) { // currently the flasher doesn't flash other boards properly because it starts at 0x08002800
+          var boardJson = data[boardId]["json"];
+          if (boardJson.info.bootloader) {
             //html += '<img src="data:image/png;base64,'+data[boardId]["thumb_b64"]+'" alt="'+boardId+'"/>';
             try {
-              html += '  <option name="'+boardId+'">'+data[boardId]["json"]["info"]["name"]+'</option>';
+              html += '  <option name="'+boardId+'">'+boardJson.info.name+'</option>';
             } catch (e) {
               console.warn(e);
             }
@@ -81,10 +81,10 @@
     
   }
 
-  function stepSelectBinary(boardId, boardInfo) {
+  function stepSelectBinary(boardId, boardInfo, boardChip) {
     // Just one firmware image - go to next!
     if (boardInfo["binaries"]===undefined) {
-      stepReset( { binary_url : boardInfo["binary_url"], board_id : boardId } );
+      stepReset( { binary_url : boardInfo["binary_url"], board_id : boardId, board_chip : boardChip } );
       return;
     }
     // More than one...
@@ -117,7 +117,7 @@
           base_url = base_url.substr(0,base_url.lastIndexOf("/")+1);          
           var binary_url = base_url+binary_filename.replace("%v", boardInfo["binary_version"]);
           console.log("Choosing "+binary_url);
-          stepReset( { binary_url : binary_url, board_id : boardId } );
+          stepReset( { binary_url : binary_url, board_id : boardId, board_chip : boardChip } );
         }
       }
     });
@@ -144,6 +144,7 @@
     Espruino.Core.MenuPortSelector.ensureConnected(function() {
       console.log("stepFlash: ",data);
       var url = data.binary_url;
+      var flashOffset = data.board_chip.place_text_section;
       
       var popup = Espruino.Core.App.openPopup({
         title: "Firmware Update",
@@ -153,7 +154,7 @@
         position: "center",
       });
     
-      Espruino.Core.Flasher.flashDevice(url ,function (err) {
+      Espruino.Core.Flasher.flashDevice(url, flashOffset, function (err) {
         Espruino.Core.Terminal.grabSerialPort();
         Espruino.Core.MenuPortSelector.disconnect();
         popup.close();
