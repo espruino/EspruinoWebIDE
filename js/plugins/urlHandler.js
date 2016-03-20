@@ -51,6 +51,9 @@
           Espruino.Core.EditorJavaScript.setCode("// Error loading Gist "+val);
         });
         break;
+      case "settings":
+        Espruino.Plugins.SettingsProfile.updateFromJson(val);
+        break;
     }
   }
   
