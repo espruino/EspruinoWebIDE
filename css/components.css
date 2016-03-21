@@ -600,6 +600,30 @@ paddi   ng-left: 15px;
   user-select: text;
 }
 
+.settingsProfile__popup
+{
+    padding: 15px;
+}
+
+    .settingsProfile__popup p,
+    .settingsProfile__popup table
+    {
+        margin-top: 1em;
+    }
+
+    .settingsProfile__popup th,
+    .settingsProfile__popup td
+    {
+        text-align: left;
+        padding: 5px;
+    }
+
+    .settingsProfile__popup th:first-child,
+    .settingsProfile__popup td:first-child
+    {
+        padding-left: 0;
+    }
+
 /* Compact */
 .compact .toolbar { height: 30px; }
 .compact .toolbar .toolbar__buttons--left .menu { top: 30px; }
