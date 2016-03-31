@@ -1,5 +1,6 @@
 /**
- Copyright 2014,2015 Juergen Marsch (juergenmarsch@googlemail.com)
+ Copyright 2014-2016 Juergen Marsch (juergenmarsch@googlemail.com),
+                     Roman Sorokin (roman@amperka.ru)
 
  This Source Code is subject to the terms of the Mozilla Public
  License, v2.0. If a copy of the MPL was not distributed with this
@@ -31,27 +32,31 @@
     });
  
     Espruino.addProcessor("getModule", function (module, callback) {
-      getProjectSubDir("modules",getModules);
-      var t = setTimeout(function(){callback(module);},500);
-      function getModules(subDirEntry){
-        var fnd = false;
-        var dirReader = subDirEntry.createReader();
-        dirReader.readEntries(function(results){
-          for(var i = 0; i < results.length; i++){
-            if(results[i].name === module.moduleName + ".js"){
-              fnd = true;
-              readFilefromEntry(results[i],gotModule);
-              break;
+      var getSubEntry = function(parentDirEntry, moduleName, callback) {
+        var reader = parentDirEntry.createReader();
+        reader.readEntries(function(entries){
+          var moduleNameArr = moduleName.split('/');
+          var moduleNameHead = moduleNameArr[0];
+          var found = false;
+          entries.forEach(function(entry){
+            if (moduleNameArr.length === 1 && entry.name === moduleNameHead + '.js') {
+              found = true;
+              readFilefromEntry(entry, function(data) {
+                module.moduleCode = data;
+                callback(module);
+              });
+            } else if (moduleNameArr.length > 1 && entry.name === moduleNameHead && entry.isDirectory) {
+              found = true;
+              getSubEntry(entry, moduleName.substr(moduleNameHead.length + 1), callback);
             }
-          }
-          if(!fnd){callback(module);}
+          });
+          if (!found) callback(module);
         });
+
       }
-      function gotModule(data){
-        clearTimeout(t);
-        module.moduleCode = data;
-        callback(module);
-      }
+      getProjectSubDir("modules", function(subDirEntry) {
+        getSubEntry(subDirEntry, module.moduleName, callback);
+      });
     });
     Espruino.addProcessor("transformForEspruino", function(code, callback) {
       findBinary(code,callback);
