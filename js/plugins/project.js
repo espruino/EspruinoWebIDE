@@ -55,6 +55,11 @@
 
       }
       getProjectSubDir("modules", function(subDirEntry) {
+        if (!subDirEntry) {
+          callback(module);
+          return;
+        }
+
         getSubEntry(subDirEntry, module.moduleName, callback);
       });
     });
@@ -231,7 +236,12 @@
     }      
   }
   function getProjectSubDir(name,callback){
-    checkEntry(Espruino.Config.projectEntry,getSubTree);
+    if (!Espruino.Config.projectEntry) {
+      callback(false);
+      return;
+    }
+
+    checkEntry(Espruino.Config.projectEntry,getSubTree,handleBadEntry);
     function getSubTree(entry){
       var dirReader = entry.createReader();
       dirReader.readEntries (function(results) {
@@ -241,17 +251,26 @@
             return;
           }
         }
-        console.warn("getProjectSubDir("+name+") failed");
-        callback(false);
-      });
+        handleBadEntry();
+      }, handleBadEntry /* failed to read entries */);
+    }
+
+    function handleBadEntry(){
+      console.warn("getProjectSubDir("+name+") failed");
+      callback(false);
     }
   }
-  function checkEntry(entry,callback){
+  function checkEntry(entry,callback,errback){
     if(entry){
       chrome.fileSystem.isRestorable(entry, function(bIsRestorable){
         chrome.fileSystem.restoreEntry(entry, function(theEntry) { 
-          if(theEntry){ callback(theEntry);}
-          else{Espruino.Status.setError("Project not found");}
+          if(theEntry){
+            callback(theEntry);
+          }
+          else{
+            if(errback){errback();}
+            else{Espruino.Status.setError("Project not found");}
+          }
         });
       });
     }
