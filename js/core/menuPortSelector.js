@@ -61,9 +61,9 @@
       Espruino.Core.Status.setStatus("Connecting...");
       function connect() {
         connectToPort(port, function(success){
+          popup.close();
+          $(".window--modal").off("click", ".port-list__item a", selectPort);
           if(success){
-            popup.close();
-            $(".window--modal").off("click", ".port-list__item a", selectPort);
             if (callback!==undefined) callback();
           }
         });
