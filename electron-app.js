@@ -2,10 +2,20 @@
 /* Initialisation code for running the Web IDE as a 'native' app under Electron */
 'use strict';
 
-var DEV = false; // are we developing? Adds frame and dev tools
+var DEV = true; // are we developing? Adds frame and dev tools
 
-global.electron = require('electron');
+try {
+  global.electron = require('electron');
+} catch (e) {
+  console.warn("require('electron') doesn't work! Try running 'electron-loader.js' instead.");
+  return;
+}
 var app = electron.app;
+
+if (!app) {
+  console.warn("'electron.app' doesn't exist! Try 'npm remove electron' and be sure to run 'electron-loader.js' instead.");
+  return;
+}
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.

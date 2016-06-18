@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-/* This uses node.s to launch electron, so we can use NPM to
+/* This uses node.js to launch electron, so we can use NPM to
 run this as a command (see package.json) */
 
 // It just returns a path
