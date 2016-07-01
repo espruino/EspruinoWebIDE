@@ -140,6 +140,7 @@
         ) {
       var name;
       if (info.node.className=="cm-variable" ||
+          info.node.className=="cm-variable-2" ||
           info.node.className=="cm-def") {
         name = info.node.textContent;
       }
