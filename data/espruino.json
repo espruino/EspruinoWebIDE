@@ -75,12 +75,12 @@
       "!url": "http://www.espruino.com/Reference#l_ESP8266_getResetInfo"
     },
     "logDebug": {
-      "!type": "fn(enable: ?)",
+      "!type": "fn(enable: bool)",
       "!doc": "Enable or disable the logging of debug information.  A value of `true` enables debug logging while a value of `false` disables debug logging.  Debug output is sent to UART1 (gpio2).",
       "!url": "http://www.espruino.com/Reference#l_ESP8266_logDebug"
     },
     "setLog": {
-      "!type": "fn(mode: ?)",
+      "!type": "fn(mode: number)",
       "!doc": "Set the debug logging mode. It can be disabled (which frees ~1.2KB of heap), enabled in-memory only, or in-memory and output to a UART.",
       "!url": "http://www.espruino.com/Reference#l_ESP8266_setLog"
     },
@@ -101,7 +101,7 @@
     },
     "setCPUFreq": {
       "!type": "fn(freq: ?)",
-      "!doc": "Set the operating frequency of the ESP8266 processor. The default is 160Mhz.\n\n**Warning**: changing the cpu frequency affects the timing of some I/O operations, notably of software SPI and I2C, so things may be a bit slower at 80Mhz.",
+      "!doc": "**Note:** This is deprecated. Use `E.setClock(80/160)`\n**Note:**\nSet the operating frequency of the ESP8266 processor. The default is 160Mhz.\n\n**Warning**: changing the cpu frequency affects the timing of some I/O operations, notably of software SPI and I2C, so things may be a bit slower at 80Mhz.",
       "!url": "http://www.espruino.com/Reference#l_ESP8266_setCPUFreq"
     },
     "getState": {
@@ -111,7 +111,7 @@
     },
     "getFreeFlash": {
       "!type": "fn() -> ?",
-      "!doc": "",
+      "!doc": "**Note:** This is deprecated. Use `require(\"flash\").getFree()`",
       "!url": "http://www.espruino.com/Reference#l_ESP8266_getFreeFlash"
     },
     "crc32": {
@@ -123,6 +123,11 @@
       "!type": "fn(pin: +Pin, arrayOfData: ?)",
       "!doc": "",
       "!url": "http://www.espruino.com/Reference#l_ESP8266_neopixelWrite"
+    },
+    "deepSleep": {
+      "!type": "fn(micros: ?)",
+      "!doc": "Put the ESP8266 into 'deep sleep' for the given number of microseconds,\nreducing power consumption drastically.\n\n**Note:** unlike normal Espruino boards' 'deep sleep' mode, ESP8266\ndeep sleep actually turns off the processor. After the given number of\nmicroseconds have elapsed, the ESP8266 will restart as if power had been\nturned off and then back on. *All contents of RAM will be lost*.",
+      "!url": "http://www.espruino.com/Reference#l_ESP8266_deepSleep"
     }
   },
   "Wifi": {
@@ -509,9 +514,8 @@
     }
   },
   "Telnet": {
-    "!type": "fn()",
-    "!doc": "This library implements a telnet console for the Espruino interpreter. It requires a network\nconnection, e.g. Wifi, and **current only functions on the ESP8266 and on Linux **. It uses\nport 23 on the ESP8266 and port 2323 on Linux.",
-    "!url": "http://www.espruino.com/Reference#l_Telnet_undefined",
+    "!doc": "A telnet serial device that maps to the built-in telnet console server (devices that have\nbuilt-in wifi only).",
+    "!url": "http://www.espruino.com/Reference#l__global_Telnet",
     "setOptions": {
       "!type": "fn(options: ?)",
       "!doc": "",
@@ -675,16 +679,21 @@
   },
   "NRF": {
     "!type": "fn()",
-    "!doc": "",
+    "!doc": "The NRF class is for controlling functionality of the Nordic nRF51/nRF52 chips. Currently these are only used in the [BBC micro:bit](/MicroBit).\n\nThe main part of this is control of Bluetooth Smart - both searching for devices, and changing advertising data.",
     "!url": "http://www.espruino.com/Reference#NRF",
+    "setName": {
+      "!type": "fn(name: ?)",
+      "!doc": "Set the Name that will appear when another device searches\nfor Bluetooth devices.\n\n**Note:** This clears any advertising data that was set - you'll\nneed to call `NRF.setAdvertising({...})` after to restore the data\nif you had something set previously.",
+      "!url": "http://www.espruino.com/Reference#l_NRF_setName"
+    },
     "sleep": {
       "!type": "fn()",
-      "!doc": "",
+      "!doc": "Disable Bluetooth communications",
       "!url": "http://www.espruino.com/Reference#l_NRF_sleep"
     },
     "wake": {
       "!type": "fn()",
-      "!doc": "",
+      "!doc": "Enable Bluetooth communications (they are enabled by default)",
       "!url": "http://www.espruino.com/Reference#l_NRF_wake"
     },
     "getBattery": {
@@ -694,19 +703,68 @@
     },
     "setAdvertising": {
       "!type": "fn(data: ?)",
-      "!doc": "Data is of the form `{ UUID : data_as_byte_array }`. For example to return battery level at 95%, do:\n\n```\nNRF.setAdvertising({\n  0x180F : [95]\n});\n```\n\nOr you could report the current temperature:\n\n```\nsetInterval(function() {\n  NRF.setAdvertising({\n    0x1809 : [0|E.getTemperature()]\n  });\n}, 30000);\n```",
+      "!doc": "Change the data that Espruino advertises.\n\nData is of the form `{ UUID : data_as_byte_array }`. The UUID should be a [Bluetooth Service ID](https://developer.bluetooth.org/gatt/services/Pages/ServicesHome.aspx).\n\nFor example to return battery level at 95%, do:\n\n```\nNRF.setAdvertising({\n  0x180F : [95]\n});\n```\n\nOr you could report the current temperature:\n\n```\nsetInterval(function() {\n  NRF.setAdvertising({\n    0x1809 : [Math,round(E.getTemperature())]\n  });\n}, 30000);\n```\n\n**Note:** Currently only standardised bluetooth UUIDs are allowed (see the\nlist above).",
       "!url": "http://www.espruino.com/Reference#l_NRF_setAdvertising"
+    },
+    "setServices": {
+      "!type": "fn(data: ?)",
+      "!doc": "BETA: This only partially works at the moment\n\nChange the services and characteristics Espruino advertises.\n\n```\nNRF.setServices({\n  0xBCDE : {\n    0xABCD : {\n      value : \"Hello\", // optional\n      maxLen : 5, // optional (otherwise is length of initial value)\n      broadcast : false, // optional, default is false\n      readable : true,   // optional, default is false\n      writable : true,   // optional, default is false\n      onWrite : function(evt) { // optional\n        console.log(\"Got \", evt.data);\n      }\n    }\n    // more characteristics allowed\n  }\n  // more services allowed\n});\n```\n\n**Note:** UUIDs can be integers between `0` and `0xFFFF`, strings of\nthe form `\"0xABCD\"`, or strings of the form `\"\"ABCDABCD-ABCD-ABCD-ABCD-ABCDABCDABCD\"\"`",
+      "!url": "http://www.espruino.com/Reference#l_NRF_setServices"
     },
     "setScan": {
       "!type": "fn(callback: ?)",
-      "!doc": "Start/stop listening for BLE advertising packets within range...\n\n```\n// Start scanning\nNRF.setScan(function(d) {\n  console.log(JSON.stringify(d,null,2));\n});\n// prints {\"rssi\":-72, \"addr\":\"##:##:##:##:##:##\", \"data\":new ArrayBuffer([2,1,6,...])}\n\n// Stop Scanning\nNRF.setScan(false);\n```",
+      "!doc": "Start/stop listening for BLE advertising packets within range.\n\n```\n// Start scanning\nNRF.setScan(function(d) {\n  console.log(JSON.stringify(d,null,2));\n});\n// prints {\"rssi\":-72, \"addr\":\"##:##:##:##:##:##\", \"data\":new ArrayBuffer([2,1,6,...])}\n\n// Stop Scanning\nNRF.setScan(false);\n```",
       "!url": "http://www.espruino.com/Reference#l_NRF_setScan"
+    },
+    "setTxPower": {
+      "!type": "fn(power: number)",
+      "!doc": "Set the BLE radio transmit power. The default TX power is 0 dBm.",
+      "!url": "http://www.espruino.com/Reference#l_NRF_setTxPower"
+    },
+    "connect": {
+      "!type": "fn(mac: ?)",
+      "!doc": "Connect to a BLE device by MAC address\n\n**Note:** This is only available on some devices",
+      "!url": "http://www.espruino.com/Reference#l_NRF_connect"
+    },
+    "disconnect": {
+      "!type": "fn()",
+      "!doc": "Disconnect from a previously connected BLE device connected with\n`NRF.connect` - this does not disconnect from something that has\nconnected to the Espruino.\n\n**Note:** This is only available on some devices",
+      "!url": "http://www.espruino.com/Reference#l_NRF_disconnect"
+    },
+    "discoverServices": {
+      "!type": "fn()",
+      "!doc": "**Note:** This is only available on some devices",
+      "!url": "http://www.espruino.com/Reference#l_NRF_discoverServices"
     }
   },
   "Bluetooth": {
     "!type": "+Serial",
-    "!doc": "The USB Serial port",
+    "!doc": "The Bluetooth Serial port - used when data is sent or received over Bluetooth Smart on nRF51/nRF52 chips.",
     "!url": "http://www.espruino.com/Reference#l__global_Bluetooth"
+  },
+  "BLEService": {
+    "!type": "fn()",
+    "!doc": "**Note:** This is only available on some devices",
+    "!url": "http://www.espruino.com/Reference#BLEService",
+    "prototype": {
+      "discoverCharacteristics": {
+        "!type": "fn()",
+        "!doc": "**Note:** This is only available on some devices",
+        "!url": "http://www.espruino.com/Reference#l_BLEService_discoverCharacteristics"
+      }
+    }
+  },
+  "BLECharacteristic": {
+    "!type": "fn()",
+    "!doc": "**Note:** This is only available on some devices",
+    "!url": "http://www.espruino.com/Reference#BLECharacteristic",
+    "prototype": {
+      "write": {
+        "!type": "fn(data: ?)",
+        "!doc": "**Note:** This is only available on some devices",
+        "!url": "http://www.espruino.com/Reference#l_BLECharacteristic_write"
+      }
+    }
   },
   "hashlib": {
     "!type": "fn()",
@@ -867,17 +925,17 @@
       },
       "setFontBitmap": {
         "!type": "fn()",
-        "!doc": "Set Graphics to draw with a Bitmapped Font",
+        "!doc": "Make subsequent calls to `drawString` use the built-in 4x6 pixel bitmapped Font",
         "!url": "http://www.espruino.com/Reference#l_Graphics_setFontBitmap"
       },
       "setFontVector": {
         "!type": "fn(size: number)",
-        "!doc": "Set Graphics to draw with a Vector Font of the given size",
+        "!doc": "Make subsequent calls to `drawString` use a Vector Font of the given height",
         "!url": "http://www.espruino.com/Reference#l_Graphics_setFontVector"
       },
       "setFontCustom": {
         "!type": "fn(bitmap: ?, firstChar: number, width: ?, height: number)",
-        "!doc": "Set Graphics to draw with a Custom Font",
+        "!doc": "Make subsequent calls to `drawString` use a Custom Font of the given height. See the [Fonts page](http://www.espruino.com/Fonts) for more\ninformation about custom fonts and how to create them.",
         "!url": "http://www.espruino.com/Reference#l_Graphics_setFontCustom"
       },
       "drawString": {
@@ -1720,8 +1778,8 @@
     },
     "prototype": {
       "setConsole": {
-        "!type": "fn()",
-        "!doc": "Set this Serial port as the port for the console",
+        "!type": "fn(force: bool)",
+        "!doc": "Set this Serial port as the port for the JavaScript console (REPL).\n\nUnless `force` is set to true, changes in the connection state of the board\n(for instance plugging in USB) will cause the console to change.",
         "!url": "http://www.espruino.com/Reference#l_Serial_setConsole"
       },
       "setup": {
@@ -1921,6 +1979,11 @@
         "!doc": "Call the event listeners for this object, for instance ```http.emit('data', 'Foo')```. See Node.js's EventEmitter.",
         "!url": "http://www.espruino.com/Reference#l_Object_emit"
       },
+      "removeListener": {
+        "!type": "fn(event: ?, listener: ?)",
+        "!doc": "Removes the specified event listener.\n\n```\nfunction foo(d) {\n  console.log(d);\n}\nSerial1.on(\"data\", foo);\nSerial1.removeListener(\"data\", foo);\n```",
+        "!url": "http://www.espruino.com/Reference#l_Object_removeListener"
+      },
       "removeAllListeners": {
         "!type": "fn(event: ?)",
         "!doc": "Removes all listeners, or those of the specified event.",
@@ -1938,7 +2001,7 @@
       "!url": "http://www.espruino.com/Reference#l_Object_getOwnPropertyNames"
     },
     "create": {
-      "!type": "fn(proto: ?) -> ?",
+      "!type": "fn(proto: ?, propertiesObject: ?) -> ?",
       "!doc": "Creates a new object with the specified prototype object and properties. properties are currently unsupported.",
       "!url": "http://www.espruino.com/Reference#l_Object_create"
     },
@@ -1956,6 +2019,16 @@
       "!type": "fn(obj: ?, props: ?) -> ?",
       "!doc": "Adds new properties to the Object. See `Object.defineProperty` for more information",
       "!url": "http://www.espruino.com/Reference#l_Object_defineProperties"
+    },
+    "getPrototypeOf": {
+      "!type": "fn(object: ?) -> ?",
+      "!doc": "Get the prototype of the given object - this is like writing `object.__proto__`\nbut is the 'proper' ES6 way of doing it",
+      "!url": "http://www.espruino.com/Reference#l_Object_getPrototypeOf"
+    },
+    "setPrototypeOf": {
+      "!type": "fn(object: ?, prototype: ?) -> ?",
+      "!doc": "Set the prototype of the given object - this is like writing\n`object.__proto__ = prototype` but is the 'proper' ES6 way of doing it",
+      "!url": "http://www.espruino.com/Reference#l_Object_setPrototypeOf"
     }
   },
   "Function": {
@@ -2257,9 +2330,14 @@
       "!url": "http://www.espruino.com/Reference#l_E_interpolate2d"
     },
     "enableWatchdog": {
-      "!type": "fn(timeout: number)",
-      "!doc": "Enable the watchdog timer. This will reset Espruino if it isn't able to return to the idle loop within the timeout. NOTE: This will not work with `setDeepSleep` unless you explicitly wake Espruino up with an interval of less than the timeout.",
+      "!type": "fn(timeout: number, isAuto: ?)",
+      "!doc": "Enable the watchdog timer. This will reset Espruino if it isn't able to return to the idle loop within the timeout.\n\nIf `isAuto` is false, you must call `E.kickWatchdog()` yourself every so often or the chip will reset.\n\n**NOTE:** This will not work with `setDeepSleep` unless you explicitly wake Espruino up with an interval of less than the timeout.\n\n**NOTE:** This is only implemented on STM32 devices.",
       "!url": "http://www.espruino.com/Reference#l_E_enableWatchdog"
+    },
+    "kickWatchdog": {
+      "!type": "fn()",
+      "!doc": "Kicks a Watchdog timer set up with `E.enableWatchdog(..., false)`. See\n`E.enableWatchdog` for more information.\n\n**NOTE:** This is only implemented on STM32 devices.",
+      "!url": "http://www.espruino.com/Reference#l_E_kickWatchdog"
     },
     "getErrorFlags": {
       "!type": "fn() -> ?",
@@ -2285,6 +2363,16 @@
       "!type": "fn(addr: number, len: number) -> +String",
       "!doc": "This creates and returns a special type of string, which actually references\na specific memory address. It can be used in order to use sections of\nFlash memory directly in Espruino (for example to execute code straight\nfrom flash memory with `eval(E.memoryArea( ... ))`)\n\n**Note:** This is only tested on STM32-based platforms (Espruino Original\nand Espruino Pico) at the moment.",
       "!url": "http://www.espruino.com/Reference#l_E_memoryArea"
+    },
+    "setBootCode": {
+      "!type": "fn(code: ?, alwaysExec: bool)",
+      "!doc": "This writes JavaScript code into Espruino's flash memory, to be executed on\nstartup. It differs from `save()` in that `save()` saves the whole state of\nthe interpreter, whereas this just saves JS code that is executed at boot.\n\nCode will be executed before `onInit()` and `E.on('init', ...)`.\n\nIf `alwaysExec` is `true`, the code will be executed even after a call to\n`reset()`. This is useful if you're making something that you want to\nprogram, but you want some code that is always built in (for instance\nsetting up a display or keyboard).\n\nTo remove boot code that has been saved previously, use `E.setBootCode(\"\")`\n\n**Note:** this removes any code that was previously saved with `save()`",
+      "!url": "http://www.espruino.com/Reference#l_E_setBootCode"
+    },
+    "setClock": {
+      "!type": "fn(options: ?) -> number",
+      "!doc": "This sets the clock frequency of Espruino's processor. It will return `0` if\nit is unimplemented or the clock speed cannot be changed.\n\n**Note:** On pretty much all boards, UART, SPI, I2C, PWM, etc will change\nfrequency and will need setting up again in order to work.\n\n### STM32F4\n\nOptions is of the form `{ M: int, N: int, P: int, Q: int }` - see the 'Clocks'\nsection of the microcontroller's reference manual for what these mean.\n\n* System clock = 8Mhz * N / ( M * P )\n* USB clock (should be 48Mhz) = 8Mhz * N / ( M * Q )\n\nOptional arguments are:\n\n* `latency` - flash latency from 0..15\n* `PCLK1` - Peripheral clock 1 divisor (default: 2)\n* `PCLK2` - Peripheral clock 2 divisor (default: 4)\n\nThe Pico's default is `{M:8, N:336, P:4, Q:7, PCLK1:2, PCLK2:4}`, use\n`{M:8, N:336, P:8, Q:7, PCLK:1, PCLK2:2}` to halve the system clock speed\nwhile keeping the peripherals running at the same speed (omitting PCLK1/2\nwill lead to the peripherals changing speed too).\n\nOn STM32F4 boards (eg. Espruino Pico), the USB clock needs to be kept at 48Mhz\nor USB will fail to work. You'll also experience USB instability if the processor\nclock falls much below 48Mhz.\n\n### ESP8266\n\nJust specify an integer value, either 80 or 160 (for 80 or 160Mhz)",
+      "!url": "http://www.espruino.com/Reference#l_E_setClock"
     },
     "reverseByte": {
       "!type": "fn(x: number) -> number",
@@ -2337,6 +2425,38 @@
       "!url": "http://www.espruino.com/Reference#l_E_sendUSBHID"
     }
   },
+  "Promise": {
+    "!type": "fn(executor: ?) -> ?",
+    "!doc": "Create a new Promise. The executor function is executed immediately (before the constructor even returns)\nand",
+    "!url": "http://www.espruino.com/Reference#l_Promise_Promise",
+    "all": {
+      "!type": "fn(promises: ?) -> ?",
+      "!doc": "Return a new promise that is resolved when all promises in the supplied\narray are resolved.",
+      "!url": "http://www.espruino.com/Reference#l_Promise_all"
+    },
+    "resolve": {
+      "!type": "fn(promises: ?) -> ?",
+      "!doc": "Return a new promise that is already resolved (at idle it'll\ncall `.then`)",
+      "!url": "http://www.espruino.com/Reference#l_Promise_resolve"
+    },
+    "reject": {
+      "!type": "fn(promises: ?) -> ?",
+      "!doc": "Return a new promise that is already rejected (at idle it'll\ncall `.catch`)",
+      "!url": "http://www.espruino.com/Reference#l_Promise_reject"
+    },
+    "prototype": {
+      "then": {
+        "!type": "fn(callback: ?) -> ?",
+        "!doc": "",
+        "!url": "http://www.espruino.com/Reference#l_Promise_then"
+      },
+      "catch": {
+        "!type": "fn(callback: ?) -> ?",
+        "!doc": "",
+        "!url": "http://www.espruino.com/Reference#l_Promise_catch"
+      }
+    }
+  },
   "Flash": {
     "!type": "fn()",
     "!doc": "This module allows access to read and write the STM32's flash memory.\n\nIt should be used with extreme caution, as it is easy to overwrite parts of Flash\nmemory belonging to Espruino or even its bootloader. If you damage the bootloader\nthen you may need external hardware such as a USB-TTL converter to restore it. For\nmore information on restoring the bootloader see `Advanced Reflashing` in your\nboard's reference pages.\n\nTo see which areas of memory you can and can't overwrite, look at the values\nreported by `process.memory()`.",
@@ -2345,6 +2465,11 @@
       "!type": "fn(addr: number) -> ?",
       "!doc": "Returns the start and length of the flash page containing the given address.",
       "!url": "http://www.espruino.com/Reference#l_Flash_getPage"
+    },
+    "getFree": {
+      "!type": "fn() -> ?",
+      "!doc": "This method returns an array of objects of the form `{addr : #, length : #}`, representing\ncontiguous areas of flash memory in the chip that are not used for anything.\n\nThe memory areas returned are on page boundaries. This means that you can\nsafely erase the page containing any address here, and you won't risk\ndeleting part of the Espruino firmware.",
+      "!url": "http://www.espruino.com/Reference#l_Flash_getFree"
     },
     "erasePage": {
       "!type": "fn(addr: ?)",
@@ -2378,13 +2503,13 @@
     },
     "memory": {
       "!type": "fn() -> ?",
-      "!doc": "Run a Garbage Collection pass, and return an object containing information on memory usage.\n\n* `free` : Memory that is available to be used (in blocks)\n* `usage` : Memory that has been used (in blocks)\n* `total` : Total memory (in blocks)\n* `history` : Memory used for command history - that is freed if memory is low. Note that this is INCLUDED in the figure for 'free'\n* `stackEndAddress` : (on ARM) the address (that can be used with peek/poke/etc) of the END of the stack. The stack grows down, so unless you do a lot of recursion the bytes above this can be used.\n* `flash_start` : (on ARM) the address of the start of flash memory (usually `0x8000000`)\n* `flash_binary_end` : (on ARM) the address in flash memory of the end of Espruino's firmware.\n* `flash_code_start` : (on ARM) the address in flash memory of pages that store any code that you save with `save()`.\n* `flash_length` : (on ARM) the amount of flash memory this firmware was built for (in bytes). **Note:** Some STM32 chips actually have more memory than is advertised.\n\nMemory units are specified in 'blocks', which are around 16 bytes each (depending on your device). See http://www.espruino.com/Performance for more information.",
+      "!doc": "Run a Garbage Collection pass, and return an object containing information on memory usage.\n\n* `free` : Memory that is available to be used (in blocks)\n* `usage` : Memory that has been used (in blocks)\n* `total` : Total memory (in blocks)\n* `history` : Memory used for command history - that is freed if memory is low. Note that this is INCLUDED in the figure for 'free'\n* `stackEndAddress` : (on ARM) the address (that can be used with peek/poke/etc) of the END of the stack. The stack grows down, so unless you do a lot of recursion the bytes above this can be used.\n* `flash_start` : (on ARM) the address of the start of flash memory (usually `0x8000000`)\n* `flash_binary_end` : (on ARM) the address in flash memory of the end of Espruino's firmware.\n* `flash_code_start` : (on ARM) the address in flash memory of pages that store any code that you save with `save()`.\n* `flash_length` : (on ARM) the amount of flash memory this firmware was built for (in bytes). **Note:** Some STM32 chips actually have more memory than is advertised.\n\nMemory units are specified in 'blocks', which are around 16 bytes each (depending on your device). See http://www.espruino.com/Performance for more information.\n\n**Note:** To find free areas of flash memory, see `require('Flash').getFree()`",
       "!url": "http://www.espruino.com/Reference#l_process_memory"
     }
   },
   "show": {
     "!type": "fn(image: ?)",
-    "!doc": "**Note:** This function is only available on the [BBC micro:bit](/MicroBit) board\n\nShow an image on the in-built 5x5 LED screen.\n\nImage can be:\n\n* A number where each bit represents a pixel (so 25 bits)",
+    "!doc": "**Note:** This function is only available on the [BBC micro:bit](/MicroBit) board\n\nShow an image on the in-built 5x5 LED screen.\n\nImage can be:\n\n* A number where each bit represents a pixel (so 25 bits). eg. `5` or `0x1FFFFFF`\n* A string, eg: `show(\"10001\")`. Newlines are ignored, and anything that is not\na space or `0` is treated as a 1.\n* An array of 4 bytes (more will be ignored), eg `show([1,2,3,0])`\n\nFor instance the following works for images:\n\n```\nshow(\"#   #\"+\n     \"  #  \"+\n     \"  #  \"+\n     \"#   #\"+\n     \" ### \")\n```\n\nThis means you can also use Espruino's graphics library:\n\n```\nvar g = Graphics.createArrayBuffer(5,5,1)\ng.drawString(\"E\",0,0)\nshow(g.buffer)\n```",
     "!url": "http://www.espruino.com/Reference#l__global_show"
   },
   "acceleration": {
@@ -2504,7 +2629,7 @@
   },
   "load": {
     "!type": "fn()",
-    "!doc": "Load program memory out of flash\n\nThis command only executes when the Interpreter returns to the Idle state - for\ninstance ```a=1;load();a=2;``` will still leave 'a' as undefined (or what it was\nset to in the saved program).\n\nEspruino will resume from where it was when you last typed `save()`.\nIf you want code to be executed right after loading (for instance to initialise\ndevices connected to Espruino), add an `init` event handler to `E` with\n`E.on('init', function() { ... your_code ... });`. This will then be automatically\nexecuted by Espruino every time it starts.",
+    "!doc": "Restart and load the program out of flash - this has an effect similar to\ncompletely rebooting Espruino (power off/power on), but without actually\nperforming a full reset of the hardware.\n\nThis command only executes when the Interpreter returns to the Idle state - for\ninstance ```a=1;load();a=2;``` will still leave 'a' as undefined (or what it was\nset to in the saved program).\n\nEspruino will resume from where it was when you last typed `save()`.\nIf you want code to be executed right after loading (for instance to initialise\ndevices connected to Espruino), add an `init` event handler to `E` with\n`E.on('init', function() { ... your_code ... });`. This will then be automatically\nexecuted by Espruino every time it starts.",
     "!url": "http://www.espruino.com/Reference#l__global_load"
   },
   "save": {
