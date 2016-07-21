@@ -2,7 +2,7 @@
 /* Initialisation code for running the Web IDE as a 'native' app under Electron */
 'use strict';
 
-var DEV = true; // are we developing? Adds frame and dev tools
+var DEV = false; // are we developing? Adds frame and dev tools
 
 try {
   global.electron = require('electron');

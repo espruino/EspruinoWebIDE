@@ -135,7 +135,7 @@ wsServer.on('request', function(request) {
       });
     }, function() {
       if (connection) connection.close();
-      console.log(device + "Disconnected");
+      console.log(device + " Disconnected");
       connection = undefined;
     });
 });
