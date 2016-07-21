@@ -7,6 +7,7 @@
     <script type="text/javascript" src="javascript_compressed.js"></script>
     <script type="text/javascript" src="blockly_espruino.js"></script>
     <script type="text/javascript" src="blockly_robot.js"></script>
+    <script type="text/javascript" src="blockly_ble.js"></script>
     <script type="text/javascript" src="field_textarea.js"></script>
     <style>
       html, body {
@@ -308,6 +309,15 @@
       <block type="robot_motor"></block>
       <block type="robot_led"></block>
       <block type="robot_ldr"></block>
+    </category>
+    <category name="Bluetooth Smart">
+      <block type="ble_connected"></block>
+      <block type="ble_disconnected"></block>
+      <block type="ble_setchar"><value name="ADDR"><block type="text" id="92"><field name="TEXT">00:00:00:00:00:00</field></block></value></block>
+      <block type="ble_getchar"><value name="ADDR"><block type="text" id="92"><field name="TEXT">00:00:00:00:00:00</field></block></value></block>
+      <block type="ble_write"></block>
+      <block type="ble_written"></block>
+      <block type="ble_value"></block>
     </category>
     <category name="Functions" custom="PROCEDURE"></category>
   </xml>
