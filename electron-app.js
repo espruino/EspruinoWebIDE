@@ -4,6 +4,26 @@
 
 var DEV = false; // are we developing? Adds frame and dev tools
 
+// ----------------------------------------------------
+function help() {
+  console.log("Espruino Web IDE");
+  console.log("   USAGE:");
+  console.log("      --help        This help screen");
+  console.log("      --dev         Enable developer tools");
+  process.exit(0);
+}
+// ---------------------------------------------------- arg parsing
+for (var i=2;i<process.argv.length;i++) {
+  var arg = process.argv[i];
+  if (arg=="--dev") {
+    DEV = true;
+  } else {
+    if (arg!="--help") console.log("Unknown argument "+arg);
+    help();
+  }
+}
+// ----------------------------------------------------
+
 try {
   global.electron = require('electron');
 } catch (e) {

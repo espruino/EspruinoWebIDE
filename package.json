@@ -4,7 +4,8 @@
   "description": "A Terminal and Graphical code Editor for Espruino JavaScript Microcontrollers",
   "main": "index.js",
   "bin": {
-    "espruino-web-ide": "./electron-loader.js"
+    "espruino-web-ide": "./electron-loader.js",
+    "espruino-server": "./server.js"
   },
   "scripts": {
     "start": "electron ./electron-app.js"
