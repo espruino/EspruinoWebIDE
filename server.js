@@ -46,9 +46,12 @@ Espruino.Core.Status = {
  incrementProgress : function(amt) {}
 };
 
-eval(require("fs").readFileSync("EspruinoTools/core/serial.js").toString());
-eval(require("fs").readFileSync("EspruinoTools/core/serial_nodeserial.js").toString());
-eval(require("fs").readFileSync("EspruinoTools/core/serial_bleat.js").toString());
+function readEspruinoToolsFile(p) {
+  return require("fs").readFileSync(__dirname+"/EspruinoTools/"+p).toString();
+}
+eval(readEspruinoToolsFile("core/serial.js"));
+eval(readEspruinoToolsFile("core/serial_nodeserial.js"));
+eval(readEspruinoToolsFile("core/serial_bleat.js"));
 
 function ab2str(buf) {
   return String.fromCharCode.apply(null, new Uint8Array(buf));
