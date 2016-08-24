@@ -17,7 +17,6 @@ this.addEventListener('install', function(event) {
         'EspruinoTools/plugins/uiMode.js',
         'EspruinoTools/plugins/getGitHub.js',
         'EspruinoTools/plugins/npmModules.js',
-        'EspruinoTools/plugins/_examplePlugin.js',
         'EspruinoTools/plugins/setTime.js',
         'EspruinoTools/package.json',
         'EspruinoTools/libs/esprima/escodegen.js',
