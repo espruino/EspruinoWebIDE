@@ -227,3 +227,10 @@ this.addEventListener('install', function(event) {
     })
   );
 });
+
+// Simply use cache
+this.addEventListener('fetch', function(event) {
+  event.respondWith(
+    caches.match(event.request)
+  );
+});
