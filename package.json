@@ -1,6 +1,6 @@
 {
   "name": "espruino-web-ide",
-  "version": "0.62.0u",
+  "version": "0.62.0v",
   "description": "A Terminal and Graphical code Editor for Espruino JavaScript Microcontrollers",
   "main": "index.js",
   "bin": {
@@ -31,7 +31,8 @@
     "escodegen": "",
     "esmangle": "",
     "esprima": "",
-    "serialport": ">=1.2.5"
+    "serialport": ">=1.2.5",
+    "websocket": "^1.0.23"
   },
   "devDependencies": {}
 }
