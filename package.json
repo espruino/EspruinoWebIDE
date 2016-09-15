@@ -25,14 +25,16 @@
   "homepage": "https://github.com/espruino/EspruinoWebIDE#readme",
   "dependencies": {
     "acorn": ">=0.6.0",
-    "bleat": "",
     "electron-prebuilt": "^0.36.9",
     "es6-shim": "",
     "escodegen": "",
     "esmangle": "",
     "esprima": "",
-    "serialport": ">=1.2.5",
     "websocket": "^1.0.23"
+  },
+  "optionalDependencies": {
+    "bleat": "",
+    "serialport": ">=1.2.5"
   },
   "devDependencies": {}
 }
