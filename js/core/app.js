@@ -16,9 +16,13 @@
   var nwwindow = undefined;
   var nwmaximised = false;
   if ("undefined" != typeof require) {
-    if (process.versions.electron)
-      nwwindow = require('remote').getCurrentWindow();    
-    else
+    if (process.versions.electron) {
+      // Thanks electon :(
+      if (require('electron').remote)
+        nwwindow = require('electron').remote.getCurrentWindow(); // new
+      else
+        nwwindow = require('remote').getCurrentWindow(); // old
+    } else
       nwwindow = require('nw.gui').Window.get();
   }
 
