@@ -679,13 +679,8 @@
   },
   "NRF": {
     "!type": "fn()",
-    "!doc": "The NRF class is for controlling functionality of the Nordic nRF51/nRF52 chips. Currently these are only used in the [BBC micro:bit](/MicroBit).\n\nThe main part of this is control of Bluetooth Smart - both searching for devices, and changing advertising data.",
+    "!doc": "The NRF class is for controlling functionality of the Nordic nRF51/nRF52 chips. Currently these only used in [Puck.js](http://puck-js.com) and the [BBC micro:bit](/MicroBit).\n\nThe main part of this is control of Bluetooth Low Energy - both searching for devices, and changing advertising data.",
     "!url": "http://www.espruino.com/Reference#NRF",
-    "setName": {
-      "!type": "fn(name: ?)",
-      "!doc": "Set the Name that will appear when another device searches\nfor Bluetooth devices.\n\n**Note:** This clears any advertising data that was set - you'll\nneed to call `NRF.setAdvertising({...})` after to restore the data\nif you had something set previously.",
-      "!url": "http://www.espruino.com/Reference#l_NRF_setName"
-    },
     "sleep": {
       "!type": "fn()",
       "!doc": "Disable Bluetooth communications",
@@ -702,13 +697,13 @@
       "!url": "http://www.espruino.com/Reference#l_NRF_getBattery"
     },
     "setAdvertising": {
-      "!type": "fn(data: ?)",
-      "!doc": "Change the data that Espruino advertises.\n\nData is of the form `{ UUID : data_as_byte_array }`. The UUID should be a [Bluetooth Service ID](https://developer.bluetooth.org/gatt/services/Pages/ServicesHome.aspx).\n\nFor example to return battery level at 95%, do:\n\n```\nNRF.setAdvertising({\n  0x180F : [95]\n});\n```\n\nOr you could report the current temperature:\n\n```\nsetInterval(function() {\n  NRF.setAdvertising({\n    0x1809 : [Math,round(E.getTemperature())]\n  });\n}, 30000);\n```\n\n**Note:** Currently only standardised bluetooth UUIDs are allowed (see the\nlist above).",
+      "!type": "fn(data: ?, options: ?)",
+      "!doc": "Change the data that Espruino advertises.\n\nData can be of the form `{ UUID : data_as_byte_array }`. The UUID should be a [Bluetooth Service ID](https://developer.bluetooth.org/gatt/services/Pages/ServicesHome.aspx).\n\nFor example to return battery level at 95%, do:\n\n```\nNRF.setAdvertising({\n  0x180F : [95]\n});\n```\n\nOr you could report the current temperature:\n\n```\nsetInterval(function() {\n  NRF.setAdvertising({\n    0x1809 : [Math.round(E.getTemperature())]\n  });\n}, 30000);\n```\n\n**Note:** Currently only standardised bluetooth UUIDs are allowed (see the\nlist above).\n\nYou can also supply the raw advertising data in an array. For example to advertise as an Eddystone beacon:\n\n```\nNRF.setAdvertising([0x03,  // Length of Service List\n  0x03,  // Param: Service List\n  0xAA, 0xFE,  // Eddystone ID\n  0x13,  // Length of Service Data\n  0x16,  // Service Data\n  0xAA, 0xFE, // Eddystone ID\n  0x10,  // Frame type: URL\n  0xF8, // Power\n  0x03, // https://\n  'g','o','o','.','g','l','/','B','3','J','0','O','c'],\n    {interval:100});\n```\n\n`options` is an object, which can contain:\n\n```\n{\n  name: \"Hello\" // The name of the device\n  showName: true/false // include full name, or nothing\n  discoverable: true/false // general discoverable, or limited - default is limited\n  interval: 600 // Advertising interval in msec, between 20 and 10000\n}` to avoid adding the Nordic UART service\n```",
       "!url": "http://www.espruino.com/Reference#l_NRF_setAdvertising"
     },
     "setServices": {
       "!type": "fn(data: ?)",
-      "!doc": "BETA: This only partially works at the moment\n\nChange the services and characteristics Espruino advertises.\n\n```\nNRF.setServices({\n  0xBCDE : {\n    0xABCD : {\n      value : \"Hello\", // optional\n      maxLen : 5, // optional (otherwise is length of initial value)\n      broadcast : false, // optional, default is false\n      readable : true,   // optional, default is false\n      writable : true,   // optional, default is false\n      onWrite : function(evt) { // optional\n        console.log(\"Got \", evt.data);\n      }\n    }\n    // more characteristics allowed\n  }\n  // more services allowed\n});\n```\n\n**Note:** UUIDs can be integers between `0` and `0xFFFF`, strings of\nthe form `\"0xABCD\"`, or strings of the form `\"\"ABCDABCD-ABCD-ABCD-ABCD-ABCDABCDABCD\"\"`",
+      "!doc": "BETA: This only partially works at the moment\n\nChange the services and characteristics Espruino advertises.\n\n```\nNRF.setServices({\n  0xBCDE : {\n    0xABCD : {\n      value : \"Hello\", // optional\n      maxLen : 5, // optional (otherwise is length of initial value)\n      broadcast : false, // optional, default is false\n      readable : true,   // optional, default is false\n      writable : true,   // optional, default is false\n      notify : true,   // optional, default is false\n      onWrite : function(evt) { // optional\n        console.log(\"Got \", evt.data);\n      }\n    }\n    // more characteristics allowed\n  }\n  // more services allowed\n});\n```\n\n**Note:** UUIDs can be integers between `0` and `0xFFFF`, strings of\nthe form `\"0xABCD\"`, or strings of the form `\"\"ABCDABCD-ABCD-ABCD-ABCD-ABCDABCDABCD\"\"`",
       "!url": "http://www.espruino.com/Reference#l_NRF_setServices"
     },
     "setScan": {
@@ -735,6 +730,11 @@
       "!type": "fn()",
       "!doc": "**Note:** This is only available on some devices",
       "!url": "http://www.espruino.com/Reference#l_NRF_discoverServices"
+    },
+    "nfcURL": {
+      "!type": "fn(url: ?)",
+      "!doc": "Enables NFC and starts advertising the given URL. For example:\n\n```\nNRF.nrfURL(\"http://espruino.com\");\n```\n\n**Note:** This is only available on nRF52-based devices",
+      "!url": "http://www.espruino.com/Reference#l_NRF_nfcURL"
     }
   },
   "Bluetooth": {
@@ -892,6 +892,16 @@
         "!type": "fn(x1: number, y1: number, x2: number, y2: number)",
         "!doc": "Draw an unfilled rectangle 1px wide in the Foreground Color",
         "!url": "http://www.espruino.com/Reference#l_Graphics_drawRect"
+      },
+      "fillCircle": {
+        "!type": "fn(x: number, y: number, rad: number)",
+        "!doc": "Draw a filled circle in the Foreground Color",
+        "!url": "http://www.espruino.com/Reference#l_Graphics_fillCircle"
+      },
+      "drawCircle": {
+        "!type": "fn(x: number, y: number, rad: number)",
+        "!doc": "Draw an unfilled circle 1px wide in the Foreground Color",
+        "!url": "http://www.espruino.com/Reference#l_Graphics_drawCircle"
       },
       "getPixel": {
         "!type": "fn(x: number, y: number) -> number",
@@ -2413,6 +2423,11 @@
       "!type": "fn(hue: number, sat: number, bri: number) -> number",
       "!doc": "Convert hue, saturation and brightness to red, green and blue (packed into an integer)\n\nThis replaces `Graphics.setColorHSB` and `Graphics.setBgColorHSB`. On devices with 24 bit colour it can\nbe used as: `Graphics.setColorHSB(E.HSBtoRGB(h, s, b))`",
       "!url": "http://www.espruino.com/Reference#l_E_HSBtoRGB"
+    },
+    "setPassword": {
+      "!type": "fn(opts: ?)",
+      "!doc": "Set a password on the console (REPL). When powered on, Espruino will\nthen demand a password before the console can be used.\n\nTo remove the password, call this function with no arguments.\n\n**Note:** There is no protection against multiple password attempts, so someone\ncould conceivably try every password in a dictionary.\n\n**Note:** This password is stored in memory in plain text. If someone is able\nto execute arbitrary JavaScript code on the device (eg, you use `eval` on input\nfrom unknown sources) or read the device's firmware then they may be able to\nobtain it.",
+      "!url": "http://www.espruino.com/Reference#l_E_setPassword"
     },
     "setUSBHID": {
       "!type": "fn(opts: ?)",
