@@ -1,4 +1,4 @@
-/* 
+/*
   ===================================================
   Components
   ===================================================
@@ -41,7 +41,7 @@
     max-height: 400px;
   }
 
-  .window__title-bar 
+  .window__title-bar
   {
     position: absolute;
     top: 0;
@@ -68,7 +68,7 @@
     overflow: auto;
   }
 
-  .window__overlay 
+  .window__overlay
   {
   	display: table;
 	position: absolute;
@@ -113,14 +113,14 @@
     right: 0;
   }
 
-  .title-bar__button 
+  .title-bar__button
   {
     display: inline-block;
     -webkit-app-region: no-drag
   }
 
 /* Toolbar */
-.toolbar 
+.toolbar
 {
   position: relative;
   background: #3498db;
@@ -129,7 +129,7 @@
 }
 
 /* Menu */
-a:hover > .menu 
+a:hover > .menu
 {
   display: block;
 }
@@ -144,7 +144,7 @@ a:hover > .menu
   z-index: 2000;
 }
 
-  .menu a 
+  .menu a
   {
     color: #fff;
     font-weight: bold;
@@ -153,12 +153,12 @@ a:hover > .menu
     line-height: 30px;
   }
 
-  .menu a:hover 
+  .menu a:hover
   {
     background: rgba(0,0,0,0.3);
   }
 
-  .menu a i 
+  .menu a i
   {
     vertical-align: middle;
   }
@@ -183,7 +183,7 @@ a:hover > .menu
 }
 
 /* Status */
-.status 
+.status
 {
         position: absolute;
         left: 0;
@@ -195,7 +195,7 @@ a:hover > .menu
         width: 100%;
 }
 
-.status__message 
+.status__message
 {
         display: inline-block;
         font-size: 100%;
@@ -210,7 +210,7 @@ a:hover > .menu
 {
         position: relative;
         display: inline-block;
-        width: 180px; 
+        width: 180px;
         height: 4px;
         margin: 13px 13px;
         vertical-align: middle;
@@ -259,7 +259,7 @@ a:hover > .menu
 	overflow: visible;
 }
 
-.sidebar .v-split 
+.sidebar .v-split
 {
 	background: #42484a;
 }
@@ -273,7 +273,7 @@ a:hover > .menu
 	list-style: none;
 }
 
-.port-list 
+.port-list
 {
         margin: 10px;
 }
@@ -287,7 +287,7 @@ a:hover > .menu
 .port-list__item__name
 {
         font-weight: normal;
-        font-size: 150%;    
+        font-size: 150%;
         padding-left: 5px;
         padding-right: 5px;
         position: absolute;
@@ -298,7 +298,7 @@ a:hover > .menu
 
 .port-list__item__desc
 {
-        font-size: 70%;    
+        font-size: 70%;
         color : #666;
 }
 
@@ -308,22 +308,29 @@ a:hover > .menu
         font-size: 120%;
         text-transform: uppercase;
         text-align: center;
-        line-height: 60px;
+        line-height: 40px;
+}
+
+.port-list__no-results-help
+{
+        color: #333;
+        text-align: center;
+        line-height: 30px;
 }
 
 /* Snippets list */
 
-.terminalSnippets 
+.terminalSnippets
 {
 paddi   ng-left: 15px;
 }
 
-.terminalSnippet 
+.terminalSnippet
 {
         position: relative;
         display: inline-block;
         background: #ccc;
-        border-left: 10px solid #999; 
+        border-left: 10px solid #999;
         cursor: pointer;
         padding: 2px;
         padding-left: 8px;
@@ -332,7 +339,7 @@ paddi   ng-left: 15px;
         width: 320px;
 }
 
-.terminalSnippet:hover 
+.terminalSnippet:hover
 {
         color: #fff !important;
         border-left-color: #27ae60;
@@ -344,7 +351,7 @@ paddi   ng-left: 15px;
 /* ----------------------------------------------------- */
 
 
-.terminal 
+.terminal
 {
   font-family: Fixed, monospace;
   font-size: 12px;
@@ -361,19 +368,19 @@ paddi   ng-left: 15px;
   top: 0px;
   bottom: 0px;
   right: 0px;
-  
+
   -o-user-select: text;
   -moz-user-select: text;
-  -webkit-user-select: text;  
+  -webkit-user-select: text;
   user-select: text;
 }
 
-.terminal.focus 
+.terminal.focus
 {
   background-color: #333;
 }
 
-.terminal__focus 
+.terminal__focus
 {
   position: absolute;
   top: -100px;  /* hide it */
@@ -404,24 +411,24 @@ paddi   ng-left: 15px;
   background: transparent;
 }
 
-.terminal a 
+.terminal a
 {
   color:#88F;
 }
-.terminal a:visited 
+.terminal a:visited
 {
   color:#88F;
 }
 
-.terminal--connected.focus .terminal__cursor 
+.terminal--connected.focus .terminal__cursor
 {
   -webkit-animation: blink 1s step-end 0s infinite;
   animation: blink 1s step-end 0s infinite;
 }
 
-.terminal--webcam.focus .terminal__cursor 
+.terminal--webcam.focus .terminal__cursor
 {
-  text-shadow: none; 
+  text-shadow: none;
 }
 
 @keyframes blink {
@@ -480,7 +487,7 @@ paddi   ng-left: 15px;
   overflow-x: auto;
 }
 
-.blocky 
+.blocky
 {
   width: 100%;
   height: 100%;
@@ -510,12 +517,12 @@ paddi   ng-left: 15px;
 
 /* Settings */
 .settings {
-  position:relative; 
+  position:relative;
   height:100%;
   overflow: hidden;
 }
 
-  .settings .sections 
+  .settings .sections
   {
     position: absolute;
     top: 0;
@@ -525,18 +532,18 @@ paddi   ng-left: 15px;
     height: 100%;
   }
 
-    .settings .sections a 
+    .settings .sections a
     {
         display: block;
         color: #fff;
         font-size: 12px;
         font-weight: bold;
         text-transform: uppercase;
-        height: 30px;  
+        height: 30px;
         cursor: pointer;
     }
 
-    .settings .sections a:hover 
+    .settings .sections a:hover
     {
       background: rgba(0,0,0,0.4);
     }
@@ -546,13 +553,13 @@ paddi   ng-left: 15px;
       vertical-align: middle;
     }
 
-    .settings .sections a.current 
+    .settings .sections a.current
     {
       position: relative;
       background-color: #2ecc71;
     }
 
-    .settings .sections a.current:after 
+    .settings .sections a.current:after
     {
       content: '';
       position: absolute;
@@ -566,9 +573,9 @@ paddi   ng-left: 15px;
       top: 10px;
     }
 
-.settings .currentsection 
+.settings .currentsection
 {
-    position:absolute; 
+    position:absolute;
     top: 0;
     left: 180px;
     right: 0px;
@@ -582,21 +589,21 @@ paddi   ng-left: 15px;
   /* allow select */
   -o-user-select: text;
   -moz-user-select: text;
-  -webkit-user-select: text;  
+  -webkit-user-select: text;
   user-select: text;
 }
 
 .console
 {
-  border:1px solid #EEEEEE; 
+  border:1px solid #EEEEEE;
   width: 100%;
-  padding: 6px; 
+  padding: 6px;
   word-wrap:break-word;
   font-family: monospace;
 
   -o-user-select: text;
   -moz-user-select: text;
-  -webkit-user-select: text;  
+  -webkit-user-select: text;
   user-select: text;
 }
 

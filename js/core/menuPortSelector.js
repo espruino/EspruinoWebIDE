@@ -4,31 +4,31 @@
  This Source Code is subject to the terms of the Mozilla Public
  License, v2.0. If a copy of the MPL was not distributed with this
  file, You can obtain one at http://mozilla.org/MPL/2.0/.
- 
+
  ------------------------------------------------------------------
   List of Serial Ports, and handles connection and disconnection
  ------------------------------------------------------------------
 **/
 "use strict";
 (function(){
-  
+
   var connectButton;
   var lastContents = undefined;
-  
-  function init() 
+
+  function init()
   {
-    connectButton = Espruino.Core.App.addIcon({ 
+    connectButton = Espruino.Core.App.addIcon({
       id: "connection",
-      icon: "connect", 
-      title : "Connect / Disconnect", 
-      order: -1000, 
+      icon: "connect",
+      title : "Connect / Disconnect",
+      order: -1000,
       area: {
         name: "toolbar",
         position: "left"
       },
       click: toggleConnection
     });
-    
+
     Espruino.addProcessor("connected", function(data, callback) {
       connectButton.setIcon("disconnect");
       callback(data);
@@ -37,9 +37,9 @@
     Espruino.addProcessor("disconnected", function(data, callback) {
       connectButton.setIcon("connect");
       callback(data);
-    });    
+    });
   }
- 
+
   function toggleConnection() {
     if (Espruino.Core.Serial.isConnected()) {
       disconnect();
@@ -47,7 +47,7 @@
       createPortSelector();
     }
   }
-  
+
   function createPortSelector(callback) {
     var checkInt, popup;
     var isChecking = false;
@@ -57,7 +57,7 @@
       var port = $(this).data("port");
       if (checkInt) clearInterval(checkInt);
       checkInt = undefined;
-      popup.setContents('<h2 class="port-list__no-results">Connecting...</h2>');   
+      popup.setContents('<h2 class="port-list__no-results">Connecting...</h2>');
       Espruino.Core.Status.setStatus("Connecting...");
       function connect() {
         connectToPort(port, function(success){
@@ -82,10 +82,10 @@
         isChecking = false;
         if (callWhenGotPorts) return callWhenGotPorts();
 
-        if (items.toString() == lastContents) 
+        if (items.toString() == lastContents)
           return; // same... don't update
         lastContents = items.toString();
-      
+
 
         var html;
 
@@ -97,18 +97,18 @@
                       '<a title="'+ port.path +'" class="button button--icon button--wide" data-port="'+ port.path +'">'+
                         '<i class="icon-usb lrg button__icon"></i>'+
                         '<span class="port-list__item__name">'+ port.path;
-            if (port.description) 
+            if (port.description)
               html += '</br><span class="port-list__item__desc">' + port.description + '</span>';
             html += '</span>'+
                       '</a>'+
                     '</li>';
           }
-          html += '</ul>';   
+          html += '</ul>';
         } else {
-          html = searchHtml;
-        } 
+          html = '<h2 class="port-list__no-results">Searching... No ports found</h2><div class="port-list__no-results-help">Have you tried <a href="http://www.espruino.com/Troubleshooting" target="_blank">Troubleshooting</a>?</div>';
+        }
 
-        popup.setContents(html);   
+        popup.setContents(html);
       });
     }
 
@@ -140,7 +140,7 @@
 
   }
 
-  function connectToPort(serialPort, callback) 
+  function connectToPort(serialPort, callback)
   {
     if (!serialPort) {
       Espruino.Core.Notifications.error("Invalid Serial Port");
@@ -150,7 +150,7 @@
     Espruino.Core.Serial.setSlowWrite(true);
     Espruino.Core.Serial.open(serialPort, function(cInfo) {
       if (cInfo!=undefined) {
-        console.log("Device found (connectionId="+ cInfo.connectionId +")");        
+        console.log("Device found (connectionId="+ cInfo.connectionId +")");
         Espruino.Core.Notifications.success("Connected to port "+ serialPort, true);
         callback(true);
       } else {
@@ -179,10 +179,10 @@
   {
     Espruino.Core.Serial.close();
   }
-  
+
   Espruino.Core.MenuPortSelector = {
       init : init,
-      
+
       ensureConnected : ensureConnected,
       disconnect : disconnect,
       showPortSelector: createPortSelector
