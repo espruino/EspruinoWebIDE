@@ -25,7 +25,7 @@ for (var i=2;i<process.argv.length;i++) {
   if (arg=="--port") {
     SERVER_PORT = parseInt(process.argv[++i]);
     if (!(SERVER_PORT>0 && SERVER_PORT<65536)) {
-      console.log("Invalid port "+JSON.stringify(process.argv[i])); 
+      console.log("Invalid port "+JSON.stringify(process.argv[i]));
       help();
     }
   } else {
@@ -67,7 +67,7 @@ function str2ab(str) {
 }
 
 Espruino.Core.Serial.startListening(function(data) {
-  if (connection) connection.sendUTF(ab2str(data));
+  if (connection) connection.sendUTF("R"+ab2str(data));
 });
 
 var server = http.createServer(function(request, response) {
@@ -101,7 +101,7 @@ var server = http.createServer(function(request, response) {
         if (mime) response.setHeader("Content-Type", mime);
         if (url == "/main.html") {
           // make sure we load the websocket library
-          
+
           blob = blob.toString();
           if (blob.indexOf("<!-- SERIAL_INTERFACES -->")<0) throw new Error("Expecing <!-- SERIAL_INTERFACES --> in main.html");
           blob = blob.replace("<!-- SERIAL_INTERFACES -->", '<script src="EspruinoTools/core/serial_websocket.js"></script>');
@@ -111,8 +111,8 @@ var server = http.createServer(function(request, response) {
         response.end(blob);
       });
       return;
-    } 
-       
+    }
+
     console.log(path);
     response.writeHead(404);
     response.end();
@@ -154,7 +154,9 @@ wsServer.on('request', function(request) {
       console.log((new Date()) + ' Connection accepted.');
       connection.on('message', function(message) {
         console.log('Received Message: ' + message.type + " - " + message.utf8Data);
-        Espruino.Core.Serial.write(message.utf8Data);
+        Espruino.Core.Serial.write(message.utf8Data, false, function() {
+          connection.sendUTF("W"); // send write ack
+        });
       });
       connection.on('close', function(reasonCode, description) {
         console.log((new Date()) + ' Peer disconnected.');
