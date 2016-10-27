@@ -1,6 +1,6 @@
 {
   "name": "espruino-web-ide",
-  "version": "0.64.0",
+  "version": "0.64.1",
   "description": "A Terminal and Graphical code Editor for Espruino JavaScript Microcontrollers",
   "//1": "-------------------------------------------------------- nw.js",
   "main": "main.html",
@@ -18,7 +18,7 @@
   "//chromium-args": "--enable-logging=stderr --enable-web-bluetooth",
   "//2": "-------------------------------------------------------- NPM",
   "bin": {
-    "espruino-web-ide": "nw .",
+    "espruino-web-ide": "./nw-loader.js",
     "espruino-server": "./server.js"
   },
   "scripts": {
