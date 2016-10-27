@@ -2,7 +2,22 @@
   "name": "espruino-web-ide",
   "version": "0.63.0",
   "description": "A Terminal and Graphical code Editor for Espruino JavaScript Microcontrollers",
-  "main": "index.js",
+
+  "//1": "-------------------------------------------------------- nw.js",
+  "main": "main.html",
+  "window": {
+    "title": "Espruino Web IDE",
+    "toolbar": false,
+    "frame": false,
+    "show": true,
+    "fullscreen": false,
+    "width": 1024,
+    "height": 600,
+    "position": "center"
+  },
+  "chromium-args": "--enable-logging=stderr",
+
+  "//2": "-------------------------------------------------------- NPM",
   "bin": {
     "espruino-web-ide": "./electron-loader.js",
     "espruino-server": "./server.js"
