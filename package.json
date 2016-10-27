@@ -15,7 +15,7 @@
     "height": 600,
     "position": "center"
   },
-  "chromium-args": "--enable-logging=stderr",
+  "chromium-args": "--enable-logging=stderr --enable-web-bluetooth",
 
   "//2": "-------------------------------------------------------- NPM",
   "bin": {

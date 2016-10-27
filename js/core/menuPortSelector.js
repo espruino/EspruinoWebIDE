@@ -50,8 +50,6 @@
 
   function createPortSelector(callback) {
     var checkInt, popup;
-    var isChecking = false;
-    var callWhenGotPorts;
 
     function selectPort() {
       var port = $(this).data("port");
@@ -68,20 +66,13 @@
           }
         });
       }
-      // make sure we only try and connect AFTER we've finished scanning all ports
-      if (isChecking) callWhenGotPorts = connect;
-      else connect();
+      connect();
     }
 
     var searchHtml = '<h2 class="port-list__no-results">Searching...</h2>';
 
     function getPorts() {
-
-      isChecking = true;
       Espruino.Core.Serial.getPorts(function(items) {
-        isChecking = false;
-        if (callWhenGotPorts) return callWhenGotPorts();
-
         if (items.toString() == lastContents)
           return; // same... don't update
         lastContents = items.toString();

@@ -38,7 +38,6 @@ this.addEventListener('install', function(event) {
         'EspruinoTools/core/serial_chrome.js',
         'EspruinoTools/core/serial_audio.js',
         'EspruinoTools/core/env.js',
-        'EspruinoTools/core/serial_chrome_pre_m33.js',
         'EspruinoTools/core/serial_socket.js',
         'EspruinoTools/core/modules.js',
         'EspruinoTools/core/utils.js',
