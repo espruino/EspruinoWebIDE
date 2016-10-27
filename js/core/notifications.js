@@ -43,7 +43,7 @@
       },
       error: function(msg, setStatus)
       {
-        console.err("[notify_error] "+msg);;
+        console.error("[notify_error] "+msg);;
         toastr.error(msg);
         Espruino.callProcessor("notification",{type:"error",msg:msg},function(){});
         if(setStatus)
