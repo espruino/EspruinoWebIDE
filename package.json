@@ -48,7 +48,7 @@
     "websocket": "^1.0.23"
   },
   "optionalDependencies": {
-    "bleat": "",
+    "noble": "^1.7.0",
     "serialport": ">=1.2.5"
   },
   "devDependencies": {}
