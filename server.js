@@ -51,7 +51,7 @@ function readEspruinoToolsFile(p) {
 }
 eval(readEspruinoToolsFile("core/serial.js"));
 eval(readEspruinoToolsFile("core/serial_nodeserial.js"));
-eval(readEspruinoToolsFile("core/serial_bleat.js"));
+eval(readEspruinoToolsFile("core/serial_noble.js"));
 
 function ab2str(buf) {
   return String.fromCharCode.apply(null, new Uint8Array(buf));
