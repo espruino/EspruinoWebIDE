@@ -50,8 +50,13 @@
       // If pasting, make sure text gets pasted in the right format
       if (changeObj.origin == "paste") {
         var c = cm.getCursor();
-        cm.setValue(Espruino.Core.Utils.fixBrokenCode(cm.getValue()));
-        cm.setCursor(c);
+        var code = cm.getValue();
+	var newcode = Espruino.Core.Utils.fixBrokenCode(code);
+	if (newcode!=code) {
+          // Only set if code has changed, as it moves the scrollbar location :(
+          cm.setValue(newcode);
+          cm.setCursor(c);
+        }
       }
       // write the modified code into local storage
       if ((typeof chrome!="undefined") && chrome.storage && chrome.storage.local)
