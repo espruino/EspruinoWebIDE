@@ -48,7 +48,7 @@
   },
   "optionalDependencies": {
     "noble": "^1.7.0",
-    "serialport": ">=1.2.5"
+    "serialport": "^4.0.4"
   },
   "devDependencies": {}
 }
