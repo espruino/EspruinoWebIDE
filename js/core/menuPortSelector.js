@@ -22,9 +22,12 @@
       icon: "connect",
       title : "Connect / Disconnect",
       order: -1000,
-      area: {
+      area: document.getElementsByClassName("toolbar").length ? {
         name: "toolbar",
         position: "left"
+      } : {
+        name: "terminal",
+        position: "top"
       },
       click: toggleConnection
     });
@@ -51,8 +54,7 @@
   function createPortSelector(callback) {
     var checkInt, popup;
 
-    function selectPort() {
-      var port = $(this).data("port");
+    function selectPortInternal(port) {
       if (checkInt) clearInterval(checkInt);
       checkInt = undefined;
       popup.setContents('<h2 class="port-list__no-results">Connecting...</h2>');
@@ -69,10 +71,18 @@
       connect();
     }
 
+    function selectPort() {
+      selectPortInternal($(this).data("port"));
+    }
+
     var searchHtml = '<h2 class="port-list__no-results">Searching...</h2>';
 
     function getPorts() {
       Espruino.Core.Serial.getPorts(function(items) {
+        if (items.length==1 && items[0].path=="Web Bluetooth") {
+          return selectPortInternal(items[0].path);
+        }
+
         if (items.toString() == lastContents)
           return; // same... don't update
         lastContents = items.toString();

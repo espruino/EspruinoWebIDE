@@ -171,6 +171,17 @@ a:hover > .menu
   .sidebar .sidebar__buttons--top .menu { top: 0; left: 60px; }
   .sidebar .sidebar__buttons--bottom .menu { bottom: 0; left: 60px; }
 
+  /* Full (un-split) Pane */
+  .full-pane
+  {
+  	position: absolute;
+  	margin-top: 60px;
+  	top: 0;
+  	right: 0;
+  	bottom: 30px;
+  	left: 0;
+  }
+
 /* Split Pane */
 .split-pane
 {
@@ -457,7 +468,7 @@ paddi   ng-left: 15px;
     background-color : #222;
     border: 1px solid #888;
     border-radius: 10px;
-    padding: 4px;
+    padding: 8px;
     margin-left: 16px;
     margin-right: 16px;
     margin-top: 8px;
@@ -475,10 +486,23 @@ paddi   ng-left: 15px;
     background-color : #333;
     border: 1px solid #888;
     border-radius: 5px;
-    padding: 4px;
+    padding: 8px;
     margin-top: 8px;
     font-weight: bold;
     color: #CFC;
+}
+
+/* Other notifications */
+.notification_text {
+    background-color : #145931;
+    border: 1px solid #1b7a43;
+    border-radius: 10px;
+    padding: 8px;
+    padding-left: 8px;
+    margin-left: 16px;
+    margin-right: 16px;
+    margin-top: 8px;
+    margin-bottom: 8px;
 }
 
 /* Code Editors */
