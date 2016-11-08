@@ -27,6 +27,9 @@ Installing From Chrome Web Store
 Installing from NPM
 -------------------
 
+If you need access to Bluetooth Low Energy devices using Windows then you'll need to watch [this video](https://www.youtube.com/watch?v=mL9B8wuEdms).
+It's an extremely lengthy process, and it may not work on built-in Bluetooth LE adaptors.
+
 If you have an up to date version of [Node.js](https://nodejs.org/en/) and [NPM](https://www.npmjs.com/), you can execute the commands:
 
 * `sudo npm install espruino-web-ide -g`
@@ -108,7 +111,7 @@ git submodule add git@github.com:espruino/EspruinoTools.git
 
  * Please stick to a [K&R style](http://en.wikipedia.org/wiki/1_true_brace_style#K.26R_style) with no tabs and 2 spaces per indent
  * Filenames should start with a lowerCase letter, and different words should be capitalised, not split with underscores
- 
+
 ### Code Outline
 
  * Core functionality goes in `js/core`, Plugins go in `js/plugins`. See `plugins/_examplePlugin.js` for an example layout
@@ -117,4 +120,3 @@ git submodule add git@github.com:espruino/EspruinoTools.git
  * Icons are added using `Espruino.Core.App.addIcon` and are generally added from JsvaScript file that performs the operation
  * Config is stored in `Espruino.Config.FOO` and is changed with `Espruino.Config.set("FOO", value)`. `Espruino.Core.Config.add` can be used to add an option to the Settings menu.
  * Annoyingly, right now plugins still have to be loaded via a `<script>` tag in `main.html`
-
