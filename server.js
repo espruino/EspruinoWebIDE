@@ -150,6 +150,9 @@ wsServer.on('request', function(request) {
         console.log("Failed to open port");
         return;
       }
+      /* force slow write off. Slow write is the problem of the Web IDE
+      running on the client :) */
+      Espruino.Core.Serial.setSlowWrite(false, true);
       connection = request.accept('serial', request.origin);
       console.log((new Date()) + ' Connection accepted.');
       connection.on('message', function(message) {
