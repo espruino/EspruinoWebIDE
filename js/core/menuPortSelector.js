@@ -57,12 +57,12 @@
     function selectPortInternal(port) {
       if (checkInt) clearInterval(checkInt);
       checkInt = undefined;
-      popup.setContents('<h2 class="port-list__no-results">Connecting...</h2>');
+      popup.setContents('<h2 class="list__no-results">Connecting...</h2>');
       Espruino.Core.Status.setStatus("Connecting...");
       function connect() {
         connectToPort(port, function(success){
           popup.close();
-          $(".window--modal").off("click", ".port-list__item a", selectPort);
+          $(".window--modal").off("click", ".list__item a", selectPort);
           if(success){
             if (callback!==undefined) callback();
           }
@@ -75,7 +75,7 @@
       selectPortInternal($(this).data("port"));
     }
 
-    var searchHtml = '<h2 class="port-list__no-results">Searching...</h2>';
+    var searchHtml = '<h2 class="list__no-results">Searching...</h2>';
 
     function getPorts() {
       Espruino.Core.Serial.getPorts(function(items) {
@@ -91,22 +91,22 @@
         var html;
 
         if(items && items.length > 0){
-          html = '<ul class="port-list">';
+          html = '<ul class="list">';
           for (var i in items) {
             var port = items[i];
-            html += '<li class="port-list__item">'+
+            html += '<li class="list__item">'+
                       '<a title="'+ port.path +'" class="button button--icon button--wide" data-port="'+ port.path +'">'+
                         '<i class="icon-usb lrg button__icon"></i>'+
-                        '<span class="port-list__item__name">'+ port.path;
+                        '<span class="list__item__name">'+ port.path;
             if (port.description)
-              html += '</br><span class="port-list__item__desc">' + port.description + '</span>';
+              html += '</br><span class="list__item__desc">' + port.description + '</span>';
             html += '</span>'+
                       '</a>'+
                     '</li>';
           }
           html += '</ul>';
         } else {
-          html = '<h2 class="port-list__no-results">Searching... No ports found</h2><div class="port-list__no-results-help">Have you tried <a href="http://www.espruino.com/Troubleshooting" target="_blank">Troubleshooting</a>?</div>';
+          html = '<h2 class="list__no-results">Searching... No ports found</h2><div class="list__no-results-help">Have you tried <a href="http://www.espruino.com/Troubleshooting" target="_blank">Troubleshooting</a>?</div>';
         }
 
         popup.setContents(html);
@@ -122,7 +122,7 @@
       position: "center",
     });
 
-    $(".window--modal").on("click", ".port-list__item a", selectPort);
+    $(".window--modal").on("click", ".list__item a", selectPort);
 
     // Setup checker interval
     checkInt = setInterval(getPorts, 2000);

@@ -275,27 +275,27 @@ a:hover > .menu
 	background: #42484a;
 }
 
-/* Port List */
-.port-list,
-.port-list__item
+/* Lists */
+.list,
+.list__item
 {
 	margin: 0;
 	padding: 0;
 	list-style: none;
 }
 
-.port-list
+.list
 {
         margin: 10px;
 }
 
-.port-list__item
+.list__item
 {
         margin-bottom: 10px;
         overflow: hidden;
 }
 
-.port-list__item__name
+.list__item__name
 {
         font-weight: normal;
         font-size: 150%;
@@ -307,13 +307,13 @@ a:hover > .menu
         margin-bottom: 0px;
 }
 
-.port-list__item__desc
+.list__item__desc
 {
         font-size: 70%;
         color : #666;
 }
 
-.port-list__no-results
+.list__no-results
 {
         color: #333;
         font-size: 120%;
@@ -322,12 +322,14 @@ a:hover > .menu
         line-height: 40px;
 }
 
-.port-list__no-results-help
+.list__no-results-help
 {
         color: #333;
         text-align: center;
         line-height: 30px;
 }
+
+
 
 /* Snippets list */
 
@@ -667,5 +669,5 @@ paddi   ng-left: 15px;
 .compact .button { height: 30px; padding: 0; }
 .compact .button--icon { border-left-width: 30px; }
 .compact .button--icon .button__icon { left: -30px; }
-.compact .port-list__item__name { font-size: 100%; }
-.compact .port-list__item { margin-bottom: 2px; }
+.compact .list__item__name { font-size: 100%; }
+.compact .list__item { margin-bottom: 2px; }
