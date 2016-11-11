@@ -4,7 +4,7 @@
  This Source Code is subject to the terms of the Mozilla Public
  License, v2.0. If a copy of the MPL was not distributed with this
  file, You can obtain one at http://mozilla.org/MPL/2.0/.
- 
+
  ------------------------------------------------------------------
   Testing Plugin
  ------------------------------------------------------------------
@@ -37,9 +37,9 @@
     , flotDatasetOptions = {lines:{ show:true},clickable:false,hoverable:false}
     , flotDatasetOptionsText = {points:{ show:true},yaxis:2,clickable:false,hoverable:true}
     ;
-  
+
   // ========== Action ==========
-          
+
   function Actionpoint(newValue) { // constructor / state
     var i,cmd = "";
     for(i in newValue){this[i] = newValue[i];}
@@ -49,8 +49,8 @@
   p = Actionpoint.prototype;
   p.getValueField = function(label) { return $("input[label='" + label + "']")[0];}
   p.setLocation = function(x,y) {this.x = x;this.y = y;};
-  p.update = function(expression,type) { 
-    this.expression = expression; 
+  p.update = function(expression,type) {
+    this.expression = expression;
     this.type = type;
   };
   p.assign = function() {
@@ -70,7 +70,7 @@
         break;
     }
     if (Espruino.Core.Serial.isConnected()) {
-      Espruino.Core.Serial.write('\x03echo(0);\n' + cmd + '\necho(1);\n');
+      Espruino.Core.Serial.write('\x03\x10' + cmd + '\n');
     } else {
       notification("E","nc");
     }
@@ -101,13 +101,13 @@
   p.getSetxyHtml = function(i) {
     var html = "";
     html += '<tr><th class="ap_class" pnt="' + i + '">Assign</th>';
-    html += '<td colspan="2" title="' + this.expression + '">' + this.label + '</td></tr>';      
+    html += '<td colspan="2" title="' + this.expression + '">' + this.label + '</td></tr>';
     return html;
   };
   // /Action
 
   // ========== Datapoint ==========
-  
+
   function Datapoint(newValue) { // constructor / state
     var i;
     for(i in newValue){this[i] = newValue[i];}
@@ -128,7 +128,7 @@
     html += '<tr>';
     html += '<td class="alterDataPoint" title="' + this.expression + '\n' + this.type + '">' + this.label + '</td>';
     html += '<th><button class="dropDataPoint" i="' + i.toString() + '">Drop</button></th>';
-    html += '<tr>';      
+    html += '<tr>';
     return html;
   };
   p.getSetxyHtml = function(i){
@@ -138,7 +138,7 @@
     dpHtml += '<option value="G">Gauge<option value="SP">Speech<option value="SW">Switch Testing</select>';
     html += '<tr><th class="dp_class" pnt="' + i + '" title="' + this.x + ',' + this.y + '"><u>Assign</u></th>';
     html += '<td title="' + this.expression + '">' + this.label  + '</td>';
-    html += '<td>'+ dpHtml.replace(/DPid_/,"DPid_" + i) + '</td></tr>';      
+    html += '<td>'+ dpHtml.replace(/DPid_/,"DPid_" + i) + '</td></tr>';
     return html;
   };
 
@@ -164,7 +164,7 @@
             a.assign();
           }
         }
-      }    
+      }
     }
     this.drawPoints = function(dt){
       var d,v,i,j;
@@ -172,7 +172,7 @@
       for(i in dt){
         v = dt[i];
         for(j = 0; j < datapoints.length; j++){
-          d = datapoints[j]; 
+          d = datapoints[j];
           if(d.label === i){
             switch(d.display){
               case "A":this.drawAlarm(d,v); break;
@@ -241,18 +241,18 @@
       }).drawArc({
         strokeStyle:s.strokeBackground,strokeWidth:9,
         x:s.x,y:s.y,radius:s.width / 2 * 0.8,
-        start:-s.angle/2,end:s.angle/2        
+        start:-s.angle/2,end:s.angle/2
       }).drawArc({
         strokeStyle:s.strokeValue,strokeWidth:4,
         x:s.x,y:s.y,radius:s.width / 2 * 0.8,
         start:-s.angle/2,end:-s.angle/2 + v/100*s.angle
       }).drawEllipse({
         strokeStyle:s.strokePointer,strokeWidth:1,
-        x:s.x,y:s.y,width:s.width / 20,height:s.height / 20     
+        x:s.x,y:s.y,width:s.width / 20,height:s.height / 20
       }).drawLine({
         strokeStyle:s.strokePointer,strokeWidth: 2,
         rounded: true,endArrow: true,arrowRadius: 5,arrowAngle: 60,
-        x1:s.x,y1:s.y,x2:ePX,y2:ePY    
+        x1:s.x,y1:s.y,x2:ePX,y2:ePY
       });
     };
     this.bind = function(){
@@ -272,12 +272,12 @@
       if(fileName !== testingFile){
         stopGetExpression();
         setTimeout(function(){
-          newTestingFile(fileName,function(){runGetExpression();});         
+          newTestingFile(fileName,function(){runGetExpression();});
         },100);
       }
     };
   }
-  
+
   function notification(type,pnt){
     var t;
     switch(pnt){
@@ -298,7 +298,7 @@
       default: Espruino.Core.Notifications.info(t);break;
     }
   }
-  
+
   function replaceNonAlphaNumeric(v){
     var r = v;
     if(r.match(/\W+/g, "_")){
@@ -348,7 +348,7 @@
     loadInitial(resetForm);
     function resetForm(){ showDataPoints();showActionPoints(); }
   }
-  
+
   function loadInitial(callback){
     $('<div id="divTesting" class="Testing" style="display:none;border:none;height:100%;width:100%;"></div>').appendTo(".editor--terminal .editor__canvas");
     $.get("data/testing_initial.html",function(data){
@@ -365,15 +365,15 @@
         showDataChart();
       },50);
     },"html");
-    if(callback){ callback(); }        
+    if(callback){ callback(); }
   }
-  
+
   function testingSaveAs(){
     resetAllDataPoints();
     if (polling) {
       notification("W","nrm");
     } else {
-      var html 
+      var html
         = '<table width="100%">'
         +   '<tr><th>Name</th></tr>'
         +   '<tr><td><input id="saveTestingName" type="text" value="'
@@ -389,11 +389,11 @@
         contents: html
       });
       setTimeout(function(){
-        $(".saveTestingBtn").button({ text:true, icons: { primary: "ui-icon-disk"} }).click(testingSaveAsDo);       
+        $(".saveTestingBtn").button({ text:true, icons: { primary: "ui-icon-disk"} }).click(testingSaveAsDo);
       },10);
     }
   } // /testingSaveAs
-  
+
   function testingSaveAsDo() {
     var fileName = $("#saveTestingName").val();
     $("#testingName").html("(<i><b>" + fileName + "</b></i>)");
@@ -402,16 +402,16 @@
       testDescription:testDescription,testProject:testProject,
       debug:testDebug,dataPoints:datapoints,actionPoints:actionpoints };
     Espruino.Plugins.Project.saveFile("testing/" + fileName + ".json",JSON.stringify(dt,null,2));
-    Espruino.Core.App.closePopup();      
+    Espruino.Core.App.closePopup();
   } // /testingSaveAsDo
-  
+
   function loadTesting() {
     if (polling) {
       notification("W","nrm");
     } else {
       var header = '<table width="100%">';
       // uses loadDirHtml() aka getProjectTable() from projects.js - in a nutshell:
-      // in list row template $name0 (display, without extension, $fileentry,  
+      // in list row template $name0 (display, without extension, $fileentry,
       // and $name are replaced for each *.json ext file found in directory.
       var row
         = '<tr"><th class="loadTestingEntry" title="load testing file" fileentry="$fileentry" filename="$name">'
@@ -434,21 +434,21 @@
       });
     }
   }
-  
+
   function loadTestingFile() {
     var fileName = $(this).attr("filename");
     newTestingFile(fileName,loadProject);
     Espruino.Core.App.closePopup();
   }
-  
+
   function loadProject() {
     if(testProject !== ""){
       Espruino.Plugins.Project.loadFile("projects/" + testProject + ".js",function(data){
         Espruino.Core.EditorJavaScript.setCode(data);
-      });            
+      });
     }
   }
-  
+
   function newTestingFile(fileName,callback){
     Espruino.Plugins.Project.loadFile("testing/" + fileName,function(data){
       var i,dt = JSON.parse(data);
@@ -468,17 +468,17 @@
       $("#testMode").val(testMode);
       testingFile = fileName;
       showTesting();
-      if(callback) {callback();}        
-    });    
+      if(callback) {callback();}
+    });
   }
-  
+
   function showTesting(){
     switch(testMode){
       case "Image": showDataImage(imageUrl); break;
       case "Form": showDataChart(); break;
-    }    
+    }
   }
-  
+
   function showTestingProperties() {
     // #muet! needs styling - in general, need testing.css for styling in general
     var html = "";
@@ -503,7 +503,7 @@
                     function(html){
         html +=     '</th></tr>';
         html +=     '<tr><th>Debug mode</th><th><input type="checkbox" id="testDebug"></th></tr>';
-        if (!polling) { 
+        if (!polling) {
           html +=   '<tr><th colspan="2" style="border-top:1px #CFCFCF solid;"><button id="hideAndStoreTestingPropertiesBtn">OK</button></th></tr>';
         }
         html += '</table>';
@@ -524,7 +524,7 @@
       }); // /loadDirHTML callback for .js for project
     }); // /loadDirHTML callback for .jpg for image
   }
-  
+
   function hideAndStoreTestingProperties(){
     var val;
     testDescription = $("#testDescription").val();
@@ -533,9 +533,9 @@
     activePoll = $("#testPollActive")[0].checked;
     testProject = ((val = $("#projectUrlList").val()) == '- none -') ? "" : val.split(".")[0];
     testDebug = $("#testDebug")[0].checked;
-    Espruino.Core.App.closePopup();  
+    Espruino.Core.App.closePopup();
   }
-  
+
   function switchLogging(){
     if(polling){notification("W","nsl");this.checked = testLogging;}
     else{testLogging = this.checked;}
@@ -544,7 +544,7 @@
   function openTestingLog(){
     var url = "data/app/openTestingLog.html?entry=" + Espruino.Config.projectEntry.split(":")[0];
     url += "&directory=" + Espruino.Config.projectEntry.split(":")[1];
-    chrome.app.window.create(url, {innerBounds: {width: 620,height: 430}}); 
+    chrome.app.window.create(url, {innerBounds: {width: 620,height: 430}});
   }
 
   function showActionPoints(){
@@ -561,7 +561,7 @@
     $("#testingSetClear").button({ text:false, icons:{primary:"ui-icon-minusthick"}}).unbind().click(dropAllAction);
     $("#testingAddAction").button({ text:false, icons: { primary: "ui-icon-circle-plus"} }).unbind().click(addActionPoint);
   }
-  
+
   function dropAllAction(){
     if(!polling){
       actionpoints = [];
@@ -569,7 +569,7 @@
     }
     else {notification("W","nrm");}
   }
-  
+
   function dropActionPoint(){
     if(!polling){
       actionpoints.splice($(this).attr("i"),1);
@@ -577,7 +577,7 @@
     }
     else {notification("E","nrm");}
   }
-  
+
   function runActionPoint(){
     // if (polling) { #jj? why restrict - #muet?
       actionpoints[$(this).attr("i")].assign();
@@ -585,19 +585,19 @@
     //  notification("W","orm");
     // }
   }
-  
+
   function addActionPoint(){
     var i,label = replaceNonAlphaNumeric($("#actionName").val());
     if(!polling){
       i = actionPointExists(label);
       if(i){ notification("I","apc");actionpoints[i].update($("#actionExpression").val(),$("#actionType").val());}
       else{ actionpoints.push(new Actionpoint({label:label,expression:$("#actionExpression").val(),type:$("#actionType").val()}));}
-      
+
       showActionPoints();
     }
     else {notification("W","nrm");}
   }
-  
+
   function actionPointExists(label){
     var i;
     for(i = 0; i < actionpoints.length; i++){
@@ -605,12 +605,12 @@
     }
     return false;
   }
-  
+
   function copyAP2input(){
     var t = $(this)[0];
     $("#actionName").val(t.innerText);
     $("#actionExpression").val(t.title.split("\n")[0]);
-    $("#actionType").val(t.title.split("\n")[1]);    
+    $("#actionType").val(t.title.split("\n")[1]);
   }
 
   function showDataPoints(){
@@ -629,7 +629,7 @@
     $("#testingExpressionReset").button({ text:false, icons:{primary:"ui-icon-seek-first"}}).unbind().click(resetAllDataPoints);
     $("#testingAdd").button({ text:false, icons: { primary: "ui-icon-circle-plus"} }).unbind().click(addDataPoint);
   }
-  
+
   function dropDataPoint(){
     if(!polling){
       datapoints.splice($(this).attr("i"),1);
@@ -637,7 +637,7 @@
     }
     else{notification("W","nrm")}
   }
-  
+
   function dropAllDataPoints(){
     if(!polling){
       datapoints = [];
@@ -645,7 +645,7 @@
     }
     else{notification("W","nrm")}
   }
-  
+
   function resetAllDataPoints(){
     if(!polling){
       for(var i = 0; i < datapoints.length; i++){
@@ -655,7 +655,7 @@
     }
     else{notification("W","nrm")}
   }
-  
+
   function addDataPoint(){
     var i,label = replaceNonAlphaNumeric($("#testingLabel").val());
     if(!polling){
@@ -666,7 +666,7 @@
     }
     else{notification("W","nrm")}
   }
-  
+
   function dataPointExists(label){
     var i;
     for(i = 0; i < datapoints.length; i++){
@@ -674,20 +674,20 @@
     }
     return false;
   }
-  
+
   function copyDP2input(){
     var t = $(this)[0];
     $("#testingLabel").val(t.innerText);
     $("#testingExpression").val(t.title.split("\n")[0]);
     $("#testingType").val(t.title.split("\n")[1]);
   }
-  
+
   function showDataImage(url){
     var el,t,h,w;
     t = $("#testingForm");
     t.html("");
     $.get("data/testing_image.html",function(data){
-      t.html(data);    
+      t.html(data);
       setTimeout(function(){
         h = t[0].clientHeight;w = t[0].clientWidth;
         $("#divImage").css({"height":h + "px","width":w + "px"});
@@ -703,7 +703,7 @@
       overlay.bind();
     }
   }
-  
+
   function showDataChart(){
     $.get("data/testing_form.html",function(data){
       $("#testingForm").html(data);
@@ -716,7 +716,7 @@
             if(imageUrl !== "" && imageUrl !== null){testMode = "Image";showTesting();}
             else{
               notification("W","nid");
-              $("#testMode").val(testMode);                          
+              $("#testMode").val(testMode);
             }
             break;
           case "Form":
@@ -724,10 +724,10 @@
             showTesting();
             break;
         }
-      });    
+      });
     },"html");
   }
-  
+
   function assignImageXYtoTestingItem(x,y){
     var i,html = "";
     html = "Please assign click to datapoint or action";
@@ -753,14 +753,14 @@
         Espruino.Core.App.closePopup();
       });
       $(".ap_class").unbind().click(function(){
-        i = parseInt($(this).attr("pnt"));      
+        i = parseInt($(this).attr("pnt"));
         actionpoints[i]["x"] = x;
         actionpoints[i]["y"] = y;
         Espruino.Core.App.closePopup();
       });
     },50);
   }
-  
+
   function imageAction(x,y){
     var d,i,a;
     for(i = 0; i < actionpoints.length;i++){
@@ -771,7 +771,7 @@
           a.assign();
         }
       }
-    }    
+    }
   }
 
   function runGetExpression(){
@@ -794,18 +794,18 @@
         Espruino.Plugins.Project.appendFile(testLoggingName,s);
       }
     }
-    else{notification("E","nc");}    
+    else{notification("E","nc");}
   }
-  
+
   function stopGetExpression(){
     if(activePoll){ clearInterval(pollPnt)};
     Espruino.Core.Serial.write("echo(1);\n");
     $("#testingExpressionStop").button( "option", "disabled", true);
-    $("#testingExpressionRun").button( "option", "disabled", false); 
+    $("#testingExpressionRun").button( "option", "disabled", false);
     polling = false;
-    Espruino.Core.Serial.write("echo(1);\n");   
+    Espruino.Core.Serial.write("echo(1);\n");
   }
-  
+
   function showFlotCharts(){
     var d,dp,lastData;
     flotData = [];
@@ -825,7 +825,7 @@
             if(dp[1] && (dp[1] != lastData)){
               d.data.push([dp[0],1,dp[1]]);
               lastData = dp[1];
-            }      
+            }
           }
           $.extend(true,d,flotDatasetOptionsText);
           break;
@@ -842,10 +842,10 @@
             .fadeIn(200);
           } else {$("#flottooltip").hide();}
         });
-      }        
+      }
     },100);
   }
-  
+
   function setTestingValues(data){
     var i,j,dt,utc;
     utc = new Date().getTime();
@@ -856,7 +856,7 @@
     if(typeof dt === "object"){
       for(i in dt){
         for(j = 0; j < datapoints.length;j++){
-          if(i === datapoints[j].label){       
+          if(i === datapoints[j].label){
             datapoints[j].addValue([utc,dt[i]]);
           }
         }
@@ -867,7 +867,7 @@
       case "Image":overlay.drawPoints(dt);break;
     }
   }
-  
+
   function pollData(){
     var cmd;
     cmd = "function " + intervalName + "(){"
@@ -905,33 +905,33 @@
       if (icon!==undefined) icon.remove();
     }
   }
-  
+
   function openTestingWindow(){
     if (isInTesting()) {
       switchToCode();
       Espruino.Core.EditorJavaScript.madeVisible();
-    } 
+    }
     else { switchToTesting();}
   }
-  
+
   function switchToTesting() {
     $("#terminal").hide();
     $("#divTesting").show();
     icon.setIcon("eye");
   }
-  
+
   function switchToCode() {
     $("#divTesting").hide();
     $("#terminal").show();
     icon.setIcon("code");
-  } 
+  }
 
   function isInTesting() {
     return $("#divTesting").is(":visible");
   }
-  
+
   Espruino.Plugins.Testing = {
     init : init
   };
-  
+
 }());

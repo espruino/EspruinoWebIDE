@@ -84,8 +84,6 @@
   <script src="js/core/notifications.js"></script>
   <script src="js/core/status.js"></script>
   <script src="js/core/app.js"></script>
-  <script src="js/core/file.js"></script>
-  <script src="js/core/code.js"></script>
 
   <script src="EspruinoTools/core/serial.js"></script>
   <script src="EspruinoTools/core/serial_chrome.js"></script>
@@ -100,18 +98,10 @@
   <script src="EspruinoTools/core/flasher.js"></script>
 
   <script src="js/core/editorBlockly.js"></script>
-  <script src="js/core/editorJavaScript.js"></script>
-  <script src="js/core/send.js"></script>
-
 
   <!-- Popup Windows -->
   <script src="js/core/menuPortSelector.js"></script>
-  <script src="js/core/menuSettings.js"></script>
-  <script src="js/core/menuFlasher.js"></script>
-  <!-- Special pages in Settings Window -->
-  <script src="js/core/settingsAbout.js"></script>
-  <script src="js/core/settingsFlasher.js"></script>
-  <script src="js/core/settingsConsole.js"></script>
+<!--  <script src="js/core/menuSettings.js"></script> -->
 
   <!-- Non-vital Plugins -->
   <script src="EspruinoTools/plugins/boardJSON.js"></script>
@@ -131,19 +121,10 @@
   <script src="EspruinoTools/libs/esprima/escodegen.js"></script> <!-- needed for minify -->
   <script src="EspruinoTools/plugins/minify.js"></script>
 
-  <script src="js/plugins/tutorial.js"></script>
-  <script src="js/plugins/webcam.js"></script>
   <script src="js/plugins/fontSize.js"></script>
   <script src="js/plugins/uiMode.js"></script>
   <script src="js/plugins/urlHandler.js"></script>
   <script src="js/plugins/fileReload.js"></script>
-  <script src="js/plugins/codeLink.js"></script>
-  <script src="js/plugins/project.js"></script>
-  <script src="js/plugins/testing.js"></script>
-  <script src="js/plugins/notification_sound.js"></script>
-  <script src="js/plugins/tern.js"></script> <!-- smart autocomplete -->
-  <script src="js/plugins/debugger.js"></script>
-  <script src="js/plugins/tour.js"></script>
 
   <!-- <script src="js/plugins/_examplePlugin.js"></script> -->
 
@@ -165,33 +146,15 @@
   };
   </script>
 
-  <title>Espruino Web IDE</title>
+  <title>Espruino Uploader</title>
 </head>
 <body>
-
-  <div class="window window--app">
-
-    <!-- Title Bar -->
-    <div class="window__title-bar title-bar" style="-webkit-app-region: drag">
-      <h5 class="title-bar__title">Espruino Web IDE</h5>
-      <div class="title-bar__buttons"></div>
-    </div>
+  <div class="window window--app" style="padding-top: 0px;">
 
     <!-- Viewport -->
     <div class="window__viewport">
-
-      <!-- Toolbar -->
-      <div class="toolbar">
-        <div class="h-split">
-          <div class="h-split__left toolbar__buttons toolbar__buttons--left"></div>
-          <div class="h-split__right toolbar__buttons toolbar__buttons--right"></div>
-        </div>
-      </div>
-
       <!-- Splitter -->
-      <div class="split-pane">
-
-        <div class="split-pane__left">
+      <div class="full-pane" style="margin-top: 0px;">
 
           <div class="editor editor--terminal">
             <div class="sidebar editor__sidebar">
@@ -202,22 +165,6 @@
             </div>
             <div class="canvas editor__canvas"></div>
           </div>
-
-        </div>
-
-        <div class="split-pane__right">
-
-          <div class="editor editor--code">
-            <div class="sidebar editor__sidebar">
-              <div class="v-split">
-                <div class="v-split__top sidebar__buttons sidebar__buttons--top"></div>
-                <div class="v-split__bottom sidebar__buttons sidebar__buttons--bottom"></div>
-              </div>
-            </div>
-            <div class="canvas editor__canvas"></div>
-          </div>
-
-        </div>
 
       </div>
 
@@ -230,6 +177,47 @@
       </div>
 
     </div>
+
+<script>
+  var uploadCode;
+  if (window.location.search && window.location.search[0]=="?") {
+    var querys = window.location.search.substr(1).split("&");
+    querys.forEach(function(query) {
+      if (query.substr(0,5)=="code=") {
+        uploadCode = decodeURIComponent(query.substr(5));
+      }
+    });
+  }
+  function sendUploadedCode() {
+    Espruino.Core.MenuPortSelector.ensureConnected(function() {
+      Espruino.callProcessor("sending");
+      Espruino.callProcessor("transformForEspruino", uploadCode, function(code) {
+        Espruino.Core.CodeWriter.writeToEspruino(code, function() {
+          Espruino.Core.Terminal.addNotification("Uploaded!");
+        });
+      });
+    });
+  }
+
+  if (uploadCode) {
+    Espruino.Plugins.Uploader = {
+      init : function() {
+        Espruino.Core.App.addIcon({
+          id: "deploy",
+          icon: "deploy",
+          title : "Send to Espruino",
+          order: 400,
+          area: {
+            name: "terminal",
+            position: "top"
+          },
+          click: sendUploadedCode
+        });
+        sendUploadedCode();
+      }
+    }
+  }
+</script>
 
 </body>
 </html>

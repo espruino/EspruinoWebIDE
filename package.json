@@ -1,13 +1,28 @@
 {
   "name": "espruino-web-ide",
-  "version": "0.60.5",
+  "version": "0.64.3",
   "description": "A Terminal and Graphical code Editor for Espruino JavaScript Microcontrollers",
-  "main": "index.js",
+  "//1": "-------------------------------------------------------- nw.js",
+  "main": "main.html",
+  "window": {
+    "title": "Espruino Web IDE",
+    "toolbar": false,
+    "frame": false,
+    "show": true,
+    "fullscreen": false,
+    "width": 1024,
+    "height": 600,
+    "position": "center"
+  },
+  "chromium-args": "--enable-web-bluetooth",
+  "//chromium-args": "--enable-logging=stderr --enable-web-bluetooth",
+  "//2": "-------------------------------------------------------- NPM",
   "bin": {
-    "espruino-web-ide": "./electron-loader.js"
+    "espruino-web-ide": "./nw-loader.js",
+    "espruino-server": "./server.js"
   },
   "scripts": {
-    "start": "electron ./electron-app.js"
+    "start": "nw ."
   },
   "repository": {
     "type": "git",
@@ -24,13 +39,16 @@
   "homepage": "https://github.com/espruino/EspruinoWebIDE#readme",
   "dependencies": {
     "acorn": ">=0.6.0",
-    "bleat": "",
-    "electron-prebuilt": "^0.36.9",
     "es6-shim": "",
     "escodegen": "",
     "esmangle": "",
     "esprima": "",
-    "serialport": ">=1.2.5"
+    "nw": "^0.18.3",
+    "websocket": "^1.0.23"
+  },
+  "optionalDependencies": {
+    "noble": "^1.7.0",
+    "serialport": "^4.0.4"
   },
   "devDependencies": {}
 }

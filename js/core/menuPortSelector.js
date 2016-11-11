@@ -4,31 +4,34 @@
  This Source Code is subject to the terms of the Mozilla Public
  License, v2.0. If a copy of the MPL was not distributed with this
  file, You can obtain one at http://mozilla.org/MPL/2.0/.
- 
+
  ------------------------------------------------------------------
   List of Serial Ports, and handles connection and disconnection
  ------------------------------------------------------------------
 **/
 "use strict";
 (function(){
-  
+
   var connectButton;
   var lastContents = undefined;
-  
-  function init() 
+
+  function init()
   {
-    connectButton = Espruino.Core.App.addIcon({ 
+    connectButton = Espruino.Core.App.addIcon({
       id: "connection",
-      icon: "connect", 
-      title : "Connect / Disconnect", 
-      order: -1000, 
-      area: {
+      icon: "connect",
+      title : "Connect / Disconnect",
+      order: -1000,
+      area: document.getElementsByClassName("toolbar").length ? {
         name: "toolbar",
         position: "left"
+      } : {
+        name: "terminal",
+        position: "top"
       },
       click: toggleConnection
     });
-    
+
     Espruino.addProcessor("connected", function(data, callback) {
       connectButton.setIcon("disconnect");
       callback(data);
@@ -37,9 +40,9 @@
     Espruino.addProcessor("disconnected", function(data, callback) {
       connectButton.setIcon("connect");
       callback(data);
-    });    
+    });
   }
- 
+
   function toggleConnection() {
     if (Espruino.Core.Serial.isConnected()) {
       disconnect();
@@ -47,68 +50,66 @@
       createPortSelector();
     }
   }
-  
+
   function createPortSelector(callback) {
     var checkInt, popup;
-    var isChecking = false;
-    var callWhenGotPorts;
 
-    function selectPort() {
-      var port = $(this).data("port");
+    function selectPortInternal(port) {
       if (checkInt) clearInterval(checkInt);
       checkInt = undefined;
-      popup.setContents('<h2 class="port-list__no-results">Connecting...</h2>');   
+      popup.setContents('<h2 class="list__no-results">Connecting...</h2>');
       Espruino.Core.Status.setStatus("Connecting...");
       function connect() {
         connectToPort(port, function(success){
           popup.close();
-          $(".window--modal").off("click", ".port-list__item a", selectPort);
+          $(".window--modal").off("click", ".list__item a", selectPort);
           if(success){
             if (callback!==undefined) callback();
           }
         });
       }
-      // make sure we only try and connect AFTER we've finished scanning all ports
-      if (isChecking) callWhenGotPorts = connect;
-      else connect();
+      connect();
     }
 
-    var searchHtml = '<h2 class="port-list__no-results">Searching...</h2>';
+    function selectPort() {
+      selectPortInternal($(this).data("port"));
+    }
+
+    var searchHtml = '<h2 class="list__no-results">Searching...</h2>';
 
     function getPorts() {
-
-      isChecking = true;
       Espruino.Core.Serial.getPorts(function(items) {
-        isChecking = false;
-        if (callWhenGotPorts) return callWhenGotPorts();
+        if (items.length==1 && items[0].path=="Web Bluetooth") {
+          return selectPortInternal(items[0].path);
+        }
 
-        if (items.toString() == lastContents) 
+        if (items.toString() == lastContents)
           return; // same... don't update
         lastContents = items.toString();
-      
+
 
         var html;
 
         if(items && items.length > 0){
-          html = '<ul class="port-list">';
+          html = '<ul class="list">';
           for (var i in items) {
             var port = items[i];
-            html += '<li class="port-list__item">'+
+            html += '<li class="list__item">'+
                       '<a title="'+ port.path +'" class="button button--icon button--wide" data-port="'+ port.path +'">'+
                         '<i class="icon-usb lrg button__icon"></i>'+
-                        '<span class="port-list__item__name">'+ port.path;
-            if (port.description) 
-              html += '</br><span class="port-list__item__desc">' + port.description + '</span>';
+                        '<span class="list__item__name">'+ port.path;
+            if (port.description)
+              html += '</br><span class="list__item__desc">' + port.description + '</span>';
             html += '</span>'+
                       '</a>'+
                     '</li>';
           }
-          html += '</ul>';   
+          html += '</ul>';
         } else {
-          html = searchHtml;
-        } 
+          html = '<h2 class="list__no-results">Searching... No ports found</h2><div class="list__no-results-help">Have you tried <a href="http://www.espruino.com/Troubleshooting" target="_blank">Troubleshooting</a>?</div>';
+        }
 
-        popup.setContents(html);   
+        popup.setContents(html);
       });
     }
 
@@ -121,7 +122,7 @@
       position: "center",
     });
 
-    $(".window--modal").on("click", ".port-list__item a", selectPort);
+    $(".window--modal").on("click", ".list__item a", selectPort);
 
     // Setup checker interval
     checkInt = setInterval(getPorts, 2000);
@@ -140,7 +141,7 @@
 
   }
 
-  function connectToPort(serialPort, callback) 
+  function connectToPort(serialPort, callback)
   {
     if (!serialPort) {
       Espruino.Core.Notifications.error("Invalid Serial Port");
@@ -150,7 +151,7 @@
     Espruino.Core.Serial.setSlowWrite(true);
     Espruino.Core.Serial.open(serialPort, function(cInfo) {
       if (cInfo!=undefined) {
-        console.log("Device found (connectionId="+ cInfo.connectionId +")");        
+        console.log("Device found (connectionId="+ cInfo.connectionId +")");
         Espruino.Core.Notifications.success("Connected to port "+ serialPort, true);
         callback(true);
       } else {
@@ -179,10 +180,10 @@
   {
     Espruino.Core.Serial.close();
   }
-  
+
   Espruino.Core.MenuPortSelector = {
       init : init,
-      
+
       ensureConnected : ensureConnected,
       disconnect : disconnect,
       showPortSelector: createPortSelector

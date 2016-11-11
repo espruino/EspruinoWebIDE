@@ -4,7 +4,7 @@
  This Source Code is subject to the terms of the Mozilla Public
  License, v2.0. If a copy of the MPL was not distributed with this
  file, You can obtain one at http://mozilla.org/MPL/2.0/.
- 
+
  ------------------------------------------------------------------
   Display Notifications
  ------------------------------------------------------------------
@@ -35,6 +35,7 @@
       init : init,
       success: function(msg, setStatus)
       {
+        console.log("[success] "+msg);;
         toastr.success(msg);
         Espruino.callProcessor("notification",{type:"success",msg:msg},function(){});
         if(setStatus)
@@ -42,6 +43,7 @@
       },
       error: function(msg, setStatus)
       {
+        console.error("[notify_error] "+msg);;
         toastr.error(msg);
         Espruino.callProcessor("notification",{type:"error",msg:msg},function(){});
         if(setStatus)
@@ -49,6 +51,7 @@
       },
       warning: function(msg, setStatus)
       {
+        console.warn("[notify_warn] "+msg);;
         Espruino.callProcessor("notification",{type:"warning",msg:msg},function(){});
         toastr.warning(msg);
         if(setStatus)
@@ -56,11 +59,12 @@
       },
       info: function(msg, setStatus)
       {
+        console.log("[notify_info] "+msg);;
         Espruino.callProcessor("notification",{type:"info",msg:msg},function(){});
         toastr.info(msg);
         if(setStatus)
           Espruino.Core.Status.setStatus(msg);
       }
   };
-  
+
 })();

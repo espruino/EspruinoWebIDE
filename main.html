@@ -10,8 +10,8 @@
   <link href="css/abstracts.css" rel="stylesheet" media="all"></link>
   <link href="css/components.css" rel="stylesheet" media="all"></link>
   <link href="css/icons.css" rel="stylesheet" media="all"></link>
-  
-  <link rel="stylesheet" href="js/libs/codemirror/css/codemirror.css">  
+
+  <link rel="stylesheet" href="js/libs/codemirror/css/codemirror.css">
   <link rel="stylesheet" href="css/libs/jquery.treeview.css"></link>
   <link rel="stylesheet" href="js/libs/codemirror/addon/lint/lint.css">
   <link rel="stylesheet" href="js/libs/codemirror/addon/hint/show-hint.css">
@@ -34,7 +34,7 @@
   <script src="js/libs/flot/jquery.flot.js"></script>
   <script src="js/libs/flot/jquery.flot.time.js"></script>
   <script src="js/libs/jcanvas/jcanvas.min.js"></script>
-  
+
   <script src="js/libs/codemirror/codemirror.js"></script>
   <script src="js/libs/codemirror/codemirror-javascript.js"></script>
   <script src="js/libs/codemirror/addon/dialog/dialog.js"></script>
@@ -65,7 +65,7 @@
 <script src="js/libs/acorn/doc_comment.js"></script>
 
   <script src="EspruinoTools/espruino.js"></script>
-  
+
   <script src="EspruinoTools/core/utils.js"></script>
   <script src="EspruinoTools/core/config.js"></script>
   <script src="js/core/notifications.js"></script>
@@ -75,12 +75,12 @@
   <script src="js/core/code.js"></script>
 
   <script src="EspruinoTools/core/serial.js"></script>
-  <script src="EspruinoTools/core/serial_chrome.js"></script>
-  <script src="EspruinoTools/core/serial_chrome_pre_m33.js"></script>
+  <script src="EspruinoTools/core/serial_chrome.js"></script> <!-- Web App -->
+  <script src="EspruinoTools/core/serial_socket.js"></script> <!-- Web App -->
+  <script src="EspruinoTools/core/serial_nodeserial.js"></script> <!-- Electron / nw.js -->
+  <script src="EspruinoTools/core/serial_noble.js"></script> <!-- Electron / nw.js -->
   <script src="EspruinoTools/core/serial_audio.js"></script>
-  <script src="EspruinoTools/core/serial_socket.js"></script>
-  <script src="EspruinoTools/core/serial_bleat.js"></script>
-  <script src="EspruinoTools/core/serial_nodeserial.js"></script>
+  <script src="EspruinoTools/core/serial_web_bluetooth.js"></script>
   <!-- SERIAL_INTERFACES -->
 
   <script src="EspruinoTools/core/terminal.js"></script>
@@ -88,12 +88,12 @@
   <script src="EspruinoTools/core/modules.js"></script>
   <script src="EspruinoTools/core/env.js"></script>
   <script src="EspruinoTools/core/flasher.js"></script>
-  
-  <script src="js/core/editorBlockly.js"></script> 
-  <script src="js/core/editorJavaScript.js"></script> 
+
+  <script src="js/core/editorBlockly.js"></script>
+  <script src="js/core/editorJavaScript.js"></script>
   <script src="js/core/send.js"></script>
-  
-  
+
+
   <!-- Popup Windows -->
   <script src="js/core/menuPortSelector.js"></script>
   <script src="js/core/menuSettings.js"></script>
@@ -120,25 +120,25 @@
   <script src="EspruinoTools/libs/esprima/esmangle.js"></script> <!-- needed for minify -->
   <script src="EspruinoTools/libs/esprima/escodegen.js"></script> <!-- needed for minify -->
   <script src="EspruinoTools/plugins/minify.js"></script>
-  
+
   <script src="js/plugins/tutorial.js"></script>
   <script src="js/plugins/webcam.js"></script>
   <script src="js/plugins/fontSize.js"></script>
   <script src="js/plugins/uiMode.js"></script>
-  <script src="js/plugins/urlHandler.js"></script>   
+  <script src="js/plugins/urlHandler.js"></script>
   <script src="js/plugins/fileReload.js"></script>
   <script src="js/plugins/codeLink.js"></script>
   <script src="js/plugins/project.js"></script>
   <script src="js/plugins/testing.js"></script>
-  <script src="js/plugins/notification_sound.js"></script> 
+  <script src="js/plugins/notification_sound.js"></script>
   <script src="js/plugins/tern.js"></script> <!-- smart autocomplete -->
   <script src="js/plugins/debugger.js"></script>
   <script src="js/plugins/tour.js"></script>
-  <script src="js/plugins/settingsProfile.js"></script>   
-      
-  
+  <script src="js/plugins/settingsProfile.js"></script>
+
+
   <!-- <script src="js/plugins/_examplePlugin.js"></script> -->
-  
+
   <title>Espruino Web IDE</title>
 </head>
 <body>

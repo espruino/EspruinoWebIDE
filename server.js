@@ -7,13 +7,38 @@ Just start with `node server.js`, then navigate to `localhost:8080` in a web bro
 The Web IDE should start up over the network and work like normal.
 
 */
+var Espruino = { Config : {}, Core : {}, Plugins : {} };
+var SERVER_PORT = 8080;
+Espruino.Config.BLUETOOTH_LOW_ENERGY = true;
+
+// ----------------------------------------------------
+function help() {
+  console.log("Espruino Web IDE Server");
+  console.log("   USAGE:");
+  console.log("      --help        This help screen");
+  console.log("      --port ###    Listen on the given port (default 8080)");
+  process.exit(0);
+}
+// ---------------------------------------------------- arg parsing
+for (var i=2;i<process.argv.length;i++) {
+  var arg = process.argv[i];
+  if (arg=="--port") {
+    SERVER_PORT = parseInt(process.argv[++i]);
+    if (!(SERVER_PORT>0 && SERVER_PORT<65536)) {
+      console.log("Invalid port "+JSON.stringify(process.argv[i]));
+      help();
+    }
+  } else {
+    if (arg!="--help") console.log("Unknown argument "+arg);
+    help();
+  }
+}
+// ----------------------------------------------------
+
+
 var WebSocketServer = require('websocket').server;
 var http = require('http');
-
 var connection;
-
-var Espruino = { Config : {}, Core : {}, Plugins : {} };
-Espruino.Config.BLUETOOTH_LOW_ENERGY = true;
 
 Espruino.callProcessor = function(a,b,cb) { cb(); }
 Espruino.Core.Status = {
@@ -21,9 +46,12 @@ Espruino.Core.Status = {
  incrementProgress : function(amt) {}
 };
 
-eval(require("fs").readFileSync("EspruinoTools/core/serial.js").toString());
-eval(require("fs").readFileSync("EspruinoTools/core/serial_nodeserial.js").toString());
-eval(require("fs").readFileSync("EspruinoTools/core/serial_bleat.js").toString());
+function readEspruinoToolsFile(p) {
+  return require("fs").readFileSync(__dirname+"/EspruinoTools/"+p).toString();
+}
+eval(readEspruinoToolsFile("core/serial.js"));
+eval(readEspruinoToolsFile("core/serial_nodeserial.js"));
+eval(readEspruinoToolsFile("core/serial_noble.js"));
 
 function ab2str(buf) {
   return String.fromCharCode.apply(null, new Uint8Array(buf));
@@ -39,11 +67,11 @@ function str2ab(str) {
 }
 
 Espruino.Core.Serial.startListening(function(data) {
-  if (connection) connection.sendUTF(ab2str(data));
+  if (connection) connection.sendUTF("R"+ab2str(data));
 });
 
 var server = http.createServer(function(request, response) {
-    console.log((new Date()) + ' Received request for ' + request.url);
+    console.log((new Date()) + ' HTTP '+request.method+' ' + request.url);
     var url = request.url.toString();
     if (url == "/") url = "/main.html";
     if (url == "/serial/ports") {
@@ -63,7 +91,7 @@ var server = http.createServer(function(request, response) {
     }
 
     if (require("fs").existsSync(path)) {
-      console.log("Serving file ",path);
+      //console.log("Serving file ",path);
       require("fs").readFile(path, function(err, blob) {
         var mime;
         if (path.substr(-4)==".css") mime = "text/css";
@@ -73,7 +101,7 @@ var server = http.createServer(function(request, response) {
         if (mime) response.setHeader("Content-Type", mime);
         if (url == "/main.html") {
           // make sure we load the websocket library
-          
+
           blob = blob.toString();
           if (blob.indexOf("<!-- SERIAL_INTERFACES -->")<0) throw new Error("Expecing <!-- SERIAL_INTERFACES --> in main.html");
           blob = blob.replace("<!-- SERIAL_INTERFACES -->", '<script src="EspruinoTools/core/serial_websocket.js"></script>');
@@ -83,14 +111,15 @@ var server = http.createServer(function(request, response) {
         response.end(blob);
       });
       return;
-    } 
-       
+    }
+
     console.log(path);
     response.writeHead(404);
     response.end();
 });
-server.listen(8080, function() {
-    console.log((new Date()) + ' Server is listening on port 8080');
+
+server.listen(SERVER_PORT, function() {
+    console.log((new Date()) + ' Server is listening on port '+SERVER_PORT);
 });
 
 wsServer = new WebSocketServer({
@@ -105,7 +134,6 @@ function originIsAllowed(origin) {
 
 wsServer.on('request', function(request) {
     if (!originIsAllowed(request.origin)) {
-      // Make sure we only accept requests from an allowed origin
       request.reject();
       console.log((new Date()) + ' Connection from origin ' + request.origin + ' rejected.');
       return;
@@ -122,11 +150,16 @@ wsServer.on('request', function(request) {
         console.log("Failed to open port");
         return;
       }
+      /* force slow write off. Slow write is the problem of the Web IDE
+      running on the client :) */
+      Espruino.Core.Serial.setSlowWrite(false, true);
       connection = request.accept('serial', request.origin);
       console.log((new Date()) + ' Connection accepted.');
       connection.on('message', function(message) {
         console.log('Received Message: ' + message.type + " - " + message.utf8Data);
-        Espruino.Core.Serial.write(message.utf8Data);
+        Espruino.Core.Serial.write(message.utf8Data, false, function() {
+          connection.sendUTF("W"); // send write ack
+        });
       });
       connection.on('close', function(reasonCode, description) {
         console.log((new Date()) + ' Peer disconnected.');
@@ -135,7 +168,7 @@ wsServer.on('request', function(request) {
       });
     }, function() {
       if (connection) connection.close();
-      console.log(device + "Disconnected");
+      console.log(device + " Disconnected");
       connection = undefined;
     });
 });
