@@ -42,6 +42,13 @@ If you have an up to date version of [Node.js](https://nodejs.org/en/) and [NPM]
 Installing from GitHub (Latest Version)
 ---------------------------------------
 
+You need to obtain both the EspruinoWebIDE repository and the EspruinoTools repository, a submodule used in the Web IDE.
+A simple way to obtain both repositories is via the git command:
+
+```git clone --recursive https://github.com/espruino/EspruinoWebIDE.git```
+
+This will clone both the EspruinoWebIDE repository and the submodule dependencies. Alternatively, you can download or clone both repositories individually following the steps below:
+
 * Download the files in [EspruinoWebIDE](https://github.com/espruino/EspruinoWebIDE) to an `EspruinoWebIDE` directory on your PC (either as a [ZIP File](https://github.com/espruino/EspruinoWebIDE/archive/gh-pages.zip), or using git)
 * Download the files in [EspruinoTools](https://github.com/espruino/EspruinoTools) into the `EspruinoWebIDE/EspruinoTools` on your PC (either as a [ZIP File](https://github.com/espruino/EspruinoTools/archive/gh-pages.zip), or using git)
 
