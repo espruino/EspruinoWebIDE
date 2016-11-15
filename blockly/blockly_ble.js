@@ -30,7 +30,9 @@ function bleInput(blk, comment, type) {
 var BLE_CHARACTERISTICS = [
         ['Digital', ['0001','2A56']],
         ['Analog', ['0001','2A58']],
-        ['Temperature', ['0001','2A6E']]
+        ['Temperature', ['0001','2A6E']],
+        ['UART TX', ['6e400001b5a3f393e0a9e50e24dcca9e','6e400002b5a3f393e0a9e50e24dcca9e']],
+        ['UART RX', ['6e400001b5a3f393e0a9e50e24dcca9e','6e400003b5a3f393e0a9e50e24dcca9e']]
 ];
 
 function bleUpdateServices(service) {
@@ -148,7 +150,7 @@ Blockly.Blocks.ble_characteristic_dropdown = {
   category: 'BLE',
   init: function() {
     this.appendDummyInput()
-        .appendField('[BLE] Characteristic ')
+        .appendField('Characteristic ')
       .appendField(new Blockly.FieldDropdown(BLE_CHARACTERISTICS), 'CHAR')
     bleInput(this, '', 'BLECharacteristic');
   }
@@ -163,7 +165,7 @@ Blockly.Blocks.ble_setchar = {
   init: function() {
       this.appendValueInput('CHAR').setCheck(['BLECharacteristic']).appendField('[BLE] Set');
       this.appendValueInput('DEV').setCheck(['BLEDevice']).appendField('on');
-      this.appendValueInput('VAL').setCheck(['Number','Boolean']).appendField('to');
+      this.appendValueInput('VAL').setCheck(['Number','Boolean','String']).appendField('to');
       this.appendStatementInput('DO').appendField('then');
     bleStatement(this, 'Sets a value on a BLE device');
   }
