@@ -27,9 +27,6 @@ Installing From Chrome Web Store
 Installing from NPM
 -------------------
 
-If you need access to Bluetooth Low Energy devices using Windows then you'll need to watch [this video](https://www.youtube.com/watch?v=mL9B8wuEdms).
-It's an extremely lengthy process, and it may not work on built-in Bluetooth LE adaptors.
-
 If you have an up to date version of [Node.js](https://nodejs.org/en/) and [NPM](https://www.npmjs.com/), you can execute the commands:
 
 * On Linux, `sudo apt-get install build-essential`
@@ -39,8 +36,24 @@ If you have an up to date version of [Node.js](https://nodejs.org/en/) and [NPM]
 
 **Note:** For command-line access you might also want to take a look at [EspruinoTools](https://github.com/espruino/EspruinoTools)
 
+**Note 2:** If you're not seeing any options for devices to connect to, it might be because your `nw.js` and node versions don't match. If that's the case you need to manually rebuild all the 'native' modules.
+
+```
+npm install -g nw-gyp
+# Now, for directory in node_modules with a binding.gyp file...
+# target should match the nw.js version in node_modules/nw/package.json
+nw-gyp rebuild --target=0.18.6 --arch=x64
+```
+
 Installing from GitHub (Latest Version)
 ---------------------------------------
+
+You need to obtain both the EspruinoWebIDE repository and the EspruinoTools repository, a submodule used in the Web IDE.
+A simple way to obtain both repositories is via the git command:
+
+```git clone --recursive https://github.com/espruino/EspruinoWebIDE.git```
+
+This will clone both the EspruinoWebIDE repository and the submodule dependencies. Alternatively, you can download or clone both repositories individually following the steps below:
 
 * Download the files in [EspruinoWebIDE](https://github.com/espruino/EspruinoWebIDE) to an `EspruinoWebIDE` directory on your PC (either as a [ZIP File](https://github.com/espruino/EspruinoWebIDE/archive/gh-pages.zip), or using git)
 * Download the files in [EspruinoTools](https://github.com/espruino/EspruinoTools) into the `EspruinoWebIDE/EspruinoTools` on your PC (either as a [ZIP File](https://github.com/espruino/EspruinoTools/archive/gh-pages.zip), or using git)
