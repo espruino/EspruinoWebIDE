@@ -79,7 +79,9 @@
 
     function getPorts() {
       Espruino.Core.Serial.getPorts(function(items) {
-        if (items.length==1 && items[0].path=="Web Bluetooth") {
+
+        if (window.location.toString().substr(0,7)=="http://" &&
+            items.length==1 && items[0].path=="Web Bluetooth") {
           return selectPortInternal(items[0].path);
         }
 
