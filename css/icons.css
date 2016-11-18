@@ -221,3 +221,23 @@ a.title-bar__button--alert:hover { background-color: #f39c12; }
 .compact .icon-debug-over.lrg:before,
 .icon-debug-over.sml:before { background-position: -60px -2280px }
 
+.icon-book.lrg:before { background-position: 0 -2340px }
+.compact .icon-book.lrg:before,
+.icon-book.sml:before { background-position: -60px -2340px }
+
+.icon-chat.lrg:before { background-position: 0 -2400px }
+.compact .icon-chat.lrg:before,
+.icon-chat.sml:before { background-position: -60px -2400px }
+
+.icon-bluetooth.lrg:before { background-position: 0 -2460px }
+.compact .icon-bluetooth.lrg:before,
+.icon-bluetooth.sml:before { background-position: -60px -2460px }
+
+.icon-headphone.lrg:before { background-position: 0 -2520px }
+.compact .icon-headphone.lrg:before,
+.icon-headphone.sml:before { background-position: -60px -2520px }
+
+.icon-network.lrg:before { background-position: 0 -2580px }
+.compact .icon-network.lrg:before,
+.icon-network.sml:before { background-position: -60px -2580px }
+

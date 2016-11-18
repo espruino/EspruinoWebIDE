@@ -96,9 +96,13 @@
           html = '<ul class="list">';
           for (var i in items) {
             var port = items[i];
+            var icon = "icon-usb";
+            if (port.type=="bluetooth") icon = "icon-bluetooth";
+            if (port.type=="socket") icon = "icon-network";
+            if (port.type=="audio") icon = "icon-headphone";
             html += '<li class="list__item">'+
                       '<a title="'+ port.path +'" class="button button--icon button--wide" data-port="'+ port.path +'">'+
-                        '<i class="icon-usb lrg button__icon"></i>'+
+                        '<i class="'+icon+' lrg button__icon"></i>'+
                         '<span class="list__item__name">'+ port.path;
             if (port.description)
               html += '</br><span class="list__item__desc">' + port.description + '</span>';

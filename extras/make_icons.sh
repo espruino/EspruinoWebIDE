@@ -2,6 +2,8 @@
 
 # Extract icons from http://modernuiicons.com/ into an directory called 'svg'
 # needs imagemagick to be installed
+#
+# apt-get install librsvg2-bin
 
 cd `dirname $0`
 Y=0
@@ -35,19 +37,19 @@ function i {
 
   convert $IMG -resize 60x60\! a.png
   convert $IMG -resize 30x30\! b.png
-convert a.png b.png +append -negate -alpha copy -channel RGB -level 100,100 $TEMPIMG
+  convert a.png b.png -background transparent +append -negate  -level 100,100 $TEMPIMG
 
 #  convert a.png b.png +append -negate -fuzz 100% -transparent black $TEMPIMG
   rm a.png b.png
   IMAGES="$IMAGES $TEMPIMG"
-} 
+}
 
 # list of OLD icons (in order)
 # We do this because old icons looked good, and recreating
 # the image from SVG causes icons to be all different sizes :(
 o svg/appbar.close cross
 o svg/appbar.app window
-o svg/appbar.minus minus 
+o svg/appbar.minus minus
 o svg/appbar.add plus
 o svg/appbar.chevron.left back
 o svg/appbar.chevron.right forward
@@ -87,6 +89,11 @@ i svg/appbar.control.stop debug-stop
 i svg/appbar.debug.step.into debug-into
 i svg/appbar.debug.step.out debug-out
 i svg/appbar.debug.step.over debug-over
+i svg/appbar.book.hardcover.open book
+i svg/appbar.chat chat
+i svg/appbar.connection.bluetooth bluetooth
+i svg/appbar.hardware.headphones headphone
+i svg/appbar.network network
 
 # Now put them all together into one file
 convert icons/oldicons.png $IMAGES -append $ICONFILE
