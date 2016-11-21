@@ -11,19 +11,19 @@
  ------------------------------------------------------------------
 **/    
 
-var ROBOT_COL = 170;
+var AMPERKA_MOTORSHIELD_COL = 200;
 
 
 function amperka_motorshieldStatement(blk, comment) {
   blk.setPreviousStatement(true);
   blk.setNextStatement(true);
-  blk.setColour(ROBOT_COL);
+  blk.setColour(AMPERKA_MOTORSHIELD_COL);
   blk.setInputsInline(true);
   blk.setTooltip(comment);
 }
 function amperka_motorshieldInput(blk, comment) {
   blk.setOutput(true, 'Number');
-  blk.setColour(ROBOT_COL);
+  blk.setColour(AMPERKA_MOTORSHIELD_COL);
   blk.setInputsInline(true);
   blk.setTooltip(comment);
 }
