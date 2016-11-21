@@ -37,10 +37,10 @@ Blockly.Blocks.amperka_motorshield_motor = {
         ['Left(M1)', 'B1'], 
         ]);
       this.appendValueInput('VAL')
-          .setCheck(['Number','Boolean'])
+          .setCheck(['Number'])
           .appendField('Set')
           .appendField(dropdown, 'PIN')
-          .appendField('Servo Speed');
+          .appendField('Motor Speed');
     amperka_motorshieldStatement(this, 'Changes the speed of the motor');
   }
 };
@@ -59,10 +59,10 @@ Blockly.Blocks.amperka_motorshield_motor_dir = {
         ['Left', 'C3'], 
         ]);
       this.appendValueInput('VAL')
-          .setCheck(['Number','Boolean'])
+          .setCheck(['Boolean'])
           .appendField('Set')
           .appendField(dropdown, 'PIN')
-          .appendField('Servo Direction');
+          .appendField('Motor Direction');
     amperka_motorshieldStatement(this, 'Changes the direction of the motor');
   }
 };
@@ -70,8 +70,8 @@ Blockly.JavaScript.amperka_motorshield_motor = function() {
   var pin = this.getTitleValue('PIN');
   var m1 = (pin=="C3") ? "1" : "0";
   var m2 = (pin=="C3") ? "0" : "1";
-  var val = Blockly.JavaScript.valueToCode(this, 'VAL', Blockly.JavaScript.ORDER_ASSIGNMENT) || '0';
-  return "var x = "+val+";\nif (Math.abs(x)<0.5) digitalWrite("+pin+","+m1+"); else digitalWrite("+pin+", "+m2+");\n";
+  var val = Blockly.JavaScript.valueToCode(this, 'VAL', Blockly.JavaScript.ORDER_ASSIGNMENT) || 'false';
+  return "var x = "+val+";\nif (x) digitalWrite("+pin+","+m1+"); else digitalWrite("+pin+", "+m2+");\n";
 };
 
 
