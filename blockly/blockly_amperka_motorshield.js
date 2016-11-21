@@ -34,39 +34,42 @@ Blockly.Blocks.amperka_motorshield_motor = {
   init: function() {
     var dropdown = new Blockly.FieldDropdown([
         ['Right(M2)', 'B0'], 
-        ['Left(M1)', 'B1'], 
+        ['Left(M1)', 'B1'] 
         ]);
       this.appendValueInput('VAL')
           .setCheck(['Number'])
           .appendField('Set')
           .appendField(dropdown, 'PIN')
-          .appendField('Motor Speed');
-    amperka_motorshieldStatement(this, 'Changes the speed of the motor');
+          .appendField('Motor Speed')
+          .appendField(new Blockly.FieldImage("media/speed.png",16,16, ".:"));
+    amperka_motorshieldStatement(this, 'Changes the speed of the motor (values from 0.0 to 1.0)');
   }
 };
 Blockly.JavaScript.amperka_motorshield_motor = function() {
   var pin = this.getTitleValue('PIN');
   var mul = (pin=="B1") ? "-1" : "+1";
+  
   var val = Blockly.JavaScript.valueToCode(this, 'VAL', Blockly.JavaScript.ORDER_ASSIGNMENT) || '0';
-  return "var x = "+val+";\nanalogWrite("+pin+", "+mul+"*x);\n";
+  return "var x = "+val+";\nanalogWrite("+pin+", x);\n";
 };
 // ----------------------------------------------------------
 Blockly.Blocks.amperka_motorshield_motor_dir = {
   category: 'MotorShield',
   init: function() {
     var dropdown = new Blockly.FieldDropdown([
-        ['Right', 'C2'], 
-        ['Left', 'C3'], 
+        ['Right(M2)', 'C2'], 
+        ['Left(M1)', 'C3'] 
         ]);
       this.appendValueInput('VAL')
           .setCheck(['Boolean'])
           .appendField('Set')
           .appendField(dropdown, 'PIN')
-          .appendField('Motor Direction');
-    amperka_motorshieldStatement(this, 'Changes the direction of the motor');
+          .appendField('Motor Direction')
+          .appendField(new Blockly.FieldImage("media/direction.png",16,16, "<->"));
+    amperka_motorshieldStatement(this, 'Changes the direction of the motor(true/false)');
   }
 };
-Blockly.JavaScript.amperka_motorshield_motor = function() {
+Blockly.JavaScript.amperka_motorshield_motor_dir = function() {
   var pin = this.getTitleValue('PIN');
   var m1 = (pin=="C3") ? "1" : "0";
   var m2 = (pin=="C3") ? "0" : "1";
