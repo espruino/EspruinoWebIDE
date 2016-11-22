@@ -536,6 +536,11 @@ paddi   ng-left: 15px;
     background-repeat: repeat-x;
 }
 
+.CodeMirror-Tern-tooltip {
+  max-width: 400px;
+  overflow-x : scroll;
+}
+
 .cm-DebugLineBg {
 	background-color: #FF7F7F;
 }

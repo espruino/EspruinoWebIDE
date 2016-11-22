@@ -26,7 +26,6 @@
       lineWrapping: true,
       showTrailingSpace: true,
       lint: {
-        es5         : true, // if ES5 syntax should be allowed
         esversion   : 6,    // Enable ES6 for literals, arrow fns, binary
         evil        : true, // don't warn on use of strings in setInterval
         laxbreak    : true,  // don't warn about newlines in expressions

@@ -11,16 +11,9 @@
 
   <link rel="icon" href="favicon.ico">
 
-  <link href="css/ui-lightness/jquery-ui-1.10.1.custom.css" rel="stylesheet">
-  <link href="css/reset.css" rel="stylesheet" media="all"></link>
-  <link href="css/main.css" rel="stylesheet" media="all"></link>
-  <link href="css/typography.css" rel="stylesheet" media="all"></link>
-  <link href="css/abstracts.css" rel="stylesheet" media="all"></link>
-  <link href="css/components.css" rel="stylesheet" media="all"></link>
-  <link href="css/icons.css" rel="stylesheet" media="all"></link>
-
-  <link rel="stylesheet" href="js/libs/codemirror/css/codemirror.css">
+  <link rel="stylesheet" href="css/ui-lightness/jquery-ui-1.10.1.custom.css">
   <link rel="stylesheet" href="css/libs/jquery.treeview.css"></link>
+  <link rel="stylesheet" href="js/libs/codemirror/codemirror.css">
   <link rel="stylesheet" href="js/libs/codemirror/addon/lint/lint.css">
   <link rel="stylesheet" href="js/libs/codemirror/addon/hint/show-hint.css">
   <link rel="stylesheet" href="js/libs/codemirror/addon/dialog/dialog.css">
@@ -29,6 +22,13 @@
   <link rel="stylesheet" href="js/libs/splitster/splitster.css" />
   <link rel="stylesheet" href="js/libs/toastr/toastr.css" />
   <link rel="stylesheet" href="js/libs/guiders/guiders.css" />
+
+  <link href="css/reset.css" rel="stylesheet" media="all"></link>
+  <link href="css/main.css" rel="stylesheet" media="all"></link>
+  <link href="css/typography.css" rel="stylesheet" media="all"></link>
+  <link href="css/abstracts.css" rel="stylesheet" media="all"></link>
+  <link href="css/components.css" rel="stylesheet" media="all"></link>
+  <link href="css/icons.css" rel="stylesheet" media="all"></link>
 
   <script>
     // Force HTTPS - needed for web bluetooth
@@ -49,33 +49,34 @@
   <script src="js/libs/jcanvas/jcanvas.min.js"></script>
 
   <script src="js/libs/codemirror/codemirror.js"></script>
-  <script src="js/libs/codemirror/codemirror-javascript.js"></script>
+  <script src="js/libs/codemirror/javascript.js"></script>
+  <script src="js/libs/codemirror/jshint.js"></script>
   <script src="js/libs/codemirror/addon/dialog/dialog.js"></script>
   <script src="js/libs/codemirror/addon/hint/show-hint.js"></script>
+  <script src="js/libs/codemirror/addon/hint/javascript-hint.js"></script>
+  <script src="js/libs/codemirror/addon/lint/lint.js"></script>
+  <script src="js/libs/codemirror/addon/lint/javascript-lint.js"></script>
   <script src="js/libs/codemirror/addon/fold/foldcode.js"></script>
   <script src="js/libs/codemirror/addon/fold/foldgutter.js"></script>
   <script src="js/libs/codemirror/addon/fold/brace-fold.js"></script>
   <script src="js/libs/codemirror/addon/fold/comment-fold.js"></script>
   <script src="js/libs/codemirror/addon/tern/tern.js"></script>
   <script src="js/libs/codemirror/addon/edit/closebrackets.js"></script>
+  <script src="js/libs/codemirror/addon/edit/trailingspace.js"></script>
   <script src="js/libs/codemirror/addon/search/searchcursor.js"></script>
   <script src="js/libs/codemirror/addon/search/match-highlighter.js"></script>
-  <script src="js/libs/codemirror/addon/jshint/jshint.js"></script>
-  <script src="js/libs/codemirror/addon/lint/lint.js"></script>
-  <script src="js/libs/codemirror/addon/lint/javascript-lint.js"></script>
-  <script src="js/libs/codemirror/addon/edit/trailingspace.js"></script>
   <script src="js/libs/codemirror/addon/search/searchcursor.js"></script>
   <script src="js/libs/codemirror/addon/search/search.js"></script>
 
-<script src="js/libs/acorn/acorn.js"></script>
-<script src="js/libs/acorn/acorn_loose.js"></script>
-<script src="js/libs/acorn/walk.js"></script>
-<script src="js/libs/acorn/signal.js"></script>
-<script src="js/libs/acorn/tern.js"></script>
-<script src="js/libs/acorn/def.js"></script>
-<script src="js/libs/acorn/comment.js"></script>
-<script src="js/libs/acorn/infer.js"></script>
-<script src="js/libs/acorn/doc_comment.js"></script>
+  <script src="js/libs/acorn/acorn.js"></script>
+  <script src="js/libs/acorn/acorn_loose.js"></script>
+  <script src="js/libs/acorn/walk.js"></script>
+  <script src="js/libs/acorn/signal.js"></script>
+  <script src="js/libs/acorn/tern.js"></script>
+  <script src="js/libs/acorn/def.js"></script>
+  <script src="js/libs/acorn/comment.js"></script>
+  <script src="js/libs/acorn/infer.js"></script>
+  <script src="js/libs/acorn/doc_comment.js"></script>
 
   <script src="EspruinoTools/espruino.js"></script>
   <!-- load console here, so we get any messages while loading -->
