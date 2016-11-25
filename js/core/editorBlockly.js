@@ -45,10 +45,23 @@
       type : "boolean",
       defaultValue : false, 
     });          
-    
+   
+    Espruino.Core.Config.add("BLOCKLY_ALT_HTML", {
+      section : "General",
+      name : "Use local configuration for Graphical Editor - stored in blockly/blockly.local.html",
+      description : "You can copy blockly/blockly.html into blockly/blockly.local.html and adjust the set of modules, which get displayed in Graphical Editor",
+      type : "boolean",
+      defaultValue : false,
+    }); 
     // Add the HTML we need
-    $('<iframe id="divblockly" class="blocky" style="display:none;border:none;" src="blockly/blockly.html"></iframe>').appendTo(".editor--code .editor__canvas");
-    
+    Espruino.addProcessor("initialised", function(data,callback) {
+      if(Espruino.Config.BLOCKLY_ALT_HTML) {
+         $('<iframe id="divblockly" class="blocky" style="display:none;border:none;" src="blockly/blockly.local.html"></iframe>').appendTo(".editor--code .editor__canvas");
+      } else {
+         $('<iframe id="divblockly" class="blocky" style="display:none;border:none;" src="blockly/blockly.html"></iframe>').appendTo(".editor--code .editor__canvas");
+      };
+    });
+
     // Handle the 'sending' processor so we can update the JS if we need to...
     Espruino.addProcessor("sending", function(data, callback) {
       if(Espruino.Config.BLOCKLY_TO_JS && Espruino.Core.Code.isInBlockly())

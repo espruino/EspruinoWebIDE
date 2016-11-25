@@ -33,16 +33,16 @@ Blockly.Blocks.amperka_motorshield_motor = {
   category: 'MotorShield',
   init: function() {
     var dropdown = new Blockly.FieldDropdown([
-        ['Right(M2)', 'B0'], 
-        ['Left(M1)', 'B1'] 
+        [Blockly.Msg.AMPERKA_MOTORSHIELD_RIGHT , 'B0'], 
+        [Blockly.Msg.AMPERKA_MOTORSHIELD_LEFT, 'B1'] 
         ]);
       this.appendValueInput('VAL')
           .setCheck(['Number'])
-          .appendField('Set')
+          .appendField(Blockly.Msg.AMPERKA_MOTORSHIELD_SET)
           .appendField(dropdown, 'PIN')
-          .appendField('Motor Speed')
+          .appendField(Blockly.Msg.AMPERKA_MOTORSHIELD_SPEED)
           .appendField(new Blockly.FieldImage("media/speed.png",16,16, ".:"));
-    amperka_motorshieldStatement(this, 'Changes the speed of the motor (values from 0.0 to 1.0)');
+    amperka_motorshieldStatement(this, Blockly.Msg.AMPERKA_MOTORSHIELD_SPEED_TOOLTIP);
   }
 };
 Blockly.JavaScript.amperka_motorshield_motor = function() {
@@ -57,16 +57,16 @@ Blockly.Blocks.amperka_motorshield_motor_dir = {
   category: 'MotorShield',
   init: function() {
     var dropdown = new Blockly.FieldDropdown([
-        ['Right(M2)', 'C2'], 
-        ['Left(M1)', 'C3'] 
+        [Blockly.Msg.AMPERKA_MOTORSHIELD_RIGHT, 'C2'], 
+        [Blockly.Msg.AMPERKA_MOTORSHIELD_LEFT, 'C3'] 
         ]);
       this.appendValueInput('VAL')
           .setCheck(['Boolean'])
-          .appendField('Set')
+          .appendField(Blockly.Msg.AMPERKA_MOTORSHIELD_SET)
           .appendField(dropdown, 'PIN')
           .appendField('Motor Direction')
           .appendField(new Blockly.FieldImage("media/direction.png",16,16, "<->"));
-    amperka_motorshieldStatement(this, 'Changes the direction of the motor(true/false)');
+    amperka_motorshieldStatement(this,Blockly.Msg.AMPERKA_MOTORSHIELD_DIRECTION_TOOLTIP );
   }
 };
 Blockly.JavaScript.amperka_motorshield_motor_dir = function() {
