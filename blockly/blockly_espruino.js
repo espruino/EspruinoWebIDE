@@ -12,10 +12,28 @@
 
 // --------------------------------- Blockly init code - see /js/core/editorBlockly.js
 window.onload = function() {
-  Blockly.inject(document.body,{path: '', toolbox: document.getElementById('toolbox')});
+  var toolbox = document.getElementById('toolbox');
+  // Remove any stuff we don't want from the toolbox...
+  for (var i=0;i<toolbox.children.length;i++) {
+    var enable_if = toolbox.children[i].attributes["enable_if"];
+    if (enable_if) { 
+      var keep = false;
+      if (window.location.search && window.location.search.indexOf("%7C"+enable_if.value+"%7C")>=0)
+        keep = true;
+      if (!keep) {
+        toolbox.removeChild(toolbox.children[i]);
+        i--;
+      }
+    }
+  }
+  // Set up blockly from toolbox
+  Blockly.inject(document.body,{path: '', toolbox: toolbox});
+  // Set up initial code
   Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, document.getElementById('blocklyInitial')); 
+  // Notify parent
   window.parent.blocklyLoaded(Blockly, window); // see core/editorBlockly.js
 };
+
 // When we have JSON from the board, use it to
 // update our list of available pins
 Blockly.setBoardJSON = function(info) {

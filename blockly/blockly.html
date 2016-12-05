@@ -4,7 +4,7 @@
     <script type="text/javascript" src="blockly_compressed.js"></script>
     <script type="text/javascript" src="blocks_compressed.js"></script>
     <script type="text/javascript" src="en.js"></script>
-    <!-- <script type="text/javascript" src="ru.js"></script> -->
+    <script type="text/javascript" src="ru.js"></script>
     <script type="text/javascript" src="javascript_compressed.js"></script>
     <script type="text/javascript" src="blockly_espruino.js"></script>
     <script type="text/javascript" src="blockly_robot.js"></script>
@@ -307,19 +307,19 @@
         <value name="ECHO"><block type="espruino_pin"><title name="PIN">B3</title></block></value>
       </block>
     </category>
-    <category name="Robot">
+    <category name="Robot" enable_if="robot">
       <block type="robot_motor"></block>
       <block type="robot_led"></block>
       <block type="robot_ldr"></block>
     </category>
     <!-- Amperka's MotorShield -->
-    <category name="MotorShield">
+    <category name="MotorShield" enable_if="motorshield">
       <block type="amperka_motorshield_motor"></block>
       <block type="amperka_motorshield_motor_dir"></block>
     </category>
     <!-- /Amperka's MotorShield -->
 
-    <category name="Bluetooth">
+    <category name="Bluetooth" enable_if="bluetooth">
       <block type="ble_connected"></block>
       <block type="ble_disconnected"></block>
 

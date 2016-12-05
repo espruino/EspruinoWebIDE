@@ -2,6 +2,8 @@
 
 'use strict';
 
+if (window.location.href.indexOf("lang=en")>=0) {
+
 goog.provide('Blockly.Msg.en');
 
 goog.require('Blockly.Msg');
@@ -431,3 +433,4 @@ Blockly.Msg.AMPERKA_MOTORSHIELD_SPEED_TOOLTIP = 'Changes the speed of the motor 
 Blockly.Msg.AMPERKA_MOTORSHIELD_DIRECTION = 'Motor Direction';
 Blockly.Msg.AMPERKA_MOTORSHIELD_DIRECTION_TOOLTIP =  'Changes the direction of the motor(true/false)';
 
+}

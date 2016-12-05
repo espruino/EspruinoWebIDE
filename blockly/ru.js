@@ -2,6 +2,8 @@
 
 'use strict';
 
+if (window.location.href.indexOf("lang=ru")>=0) {
+
 goog.provide('Blockly.Msg.ru');
 
 goog.require('Blockly.Msg');
@@ -435,3 +437,4 @@ Blockly.Msg.AMPERKA_MOTORSHIELD_SPEED_TOOLTIP = 'Устанавливает ск
 Blockly.Msg.AMPERKA_MOTORSHIELD_DIRECTION = 'Направление вращения';
 Blockly.Msg.AMPERKA_MOTORSHIELD_DIRECTION_TOOLTIP =  'Устанавливает направление вращения мотора (true-истина/false-ложь)';
 
+}
