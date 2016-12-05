@@ -58,15 +58,15 @@ Blockly.Blocks.espruino_delay = {
   init: function() {
       this.appendValueInput('SECONDS')
           .setCheck('Number')
-          .appendField('wait');
+          .appendField(Blockly.Msg.ESPRUINO_WAIT);
       this.appendDummyInput()
-          .appendField("seconds");
+          .appendField(Blockly.Msg.ESPRUINO_SECONDS);
 
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setColour(ESPRUINO_COL);
     this.setInputsInline(true);
-    this.setTooltip('Delay for a certain amount of time');
+    this.setTooltip(Blockly.Msg.ESPRUINO_WAIT_TOOLTIP);
   }
 };
 Blockly.Blocks.espruino_timeout = {
@@ -74,17 +74,18 @@ Blockly.Blocks.espruino_timeout = {
   init: function() {
       this.appendValueInput('SECONDS')
           .setCheck('Number')
-          .appendField('after');
+          .appendField(Blockly.Msg.ESPRUINO_AFTER);
       this.appendDummyInput()
-          .appendField("seconds");
+          .appendField(Blockly.Msg.ESPRUINO_SECONDS);
       this.appendStatementInput('DO')
-           .appendField('do');
+          .appendField(Blockly.Msg.CONTROLS_REPEAT_INPUT_DO);
+        
 
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setColour(ESPRUINO_COL);
     this.setInputsInline(true);
-    this.setTooltip('Waits for a certain period before running code');
+    this.setTooltip(Blockly.Msg.ESPRUINO_AFTER_TOOLTIP);
   }
 };
 Blockly.Blocks.espruino_interval = {
@@ -92,17 +93,17 @@ Blockly.Blocks.espruino_interval = {
   init: function() {
       this.appendValueInput('SECONDS')
           .setCheck('Number')
-          .appendField('every');
+          .appendField(Blockly.Msg.ESPRUINO_EVERY);
       this.appendDummyInput()
-          .appendField("seconds");
+          .appendField(Blockly.Msg.ESPRUINO_SECONDS);
       this.appendStatementInput('DO')
-           .appendField('do');
+           .appendField(Blockly.Msg.CONTROLS_REPEAT_INPUT_DO);
 
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setColour(ESPRUINO_COL);
     this.setInputsInline(true);
-    this.setTooltip('Runs code repeatedly, every so many seconds');
+    this.setTooltip(Blockly.Msg.ESPRUINO_EVERY_TOOLTIP );
   }
 };
 
@@ -116,16 +117,16 @@ Blockly.Blocks.espruino_pin = {
     var listGen = function() {
       originalPin = this.value_;
       var list = PINS.slice(start, start+incrementStep);
-      if (start>0) list.unshift(['Back...', 'Back']);
-      if (start+incrementStep<PINS.length) list.push(['More...', 'More']);        
+      if (start>0) list.unshift([Blockly.Msg.ESPRUINO_BACK+"...", Blockly.Msg.ESPRUINO_BACK]);
+      if (start+incrementStep<PINS.length) list.push([Blockly.Msg.ESPRUINO_MORE + '...', Blockly.Msg.ESPRUINO_MORE]);        
       return list;
     };    
     
     var pinSelector = new Blockly.FieldDropdown(listGen, function(selection){
       var ret = undefined;
       
-      if (selection == "More" || selection == "Back") {  
-        if (selection == "More")
+      if (selection == Blockly.Msg.ESPRUINO_MORE || selection == Blockly.Msg.ESPRUINO_BACK) {  
+        if (selection == Blockly.Msg.ESPRUINO_MORE)
           start += incrementStep;
         else
           start -= incrementStep;
@@ -140,7 +141,7 @@ Blockly.Blocks.espruino_pin = {
     this.setColour(ESPRUINO_COL);
     this.setOutput(true, 'Pin');
     this.appendDummyInput().appendField(pinSelector, 'PIN');
-    this.setTooltip('The Name of a Pin');
+    this.setTooltip(Blockly.Msg.ESPRUINO_PIN_NAME);
   },
 };
 
@@ -150,17 +151,17 @@ Blockly.Blocks.espruino_watch = {
   init: function() {
       this.appendValueInput('PIN')
           .setCheck('Pin')
-          .appendField('watch');
+          .appendField(Blockly.Msg.ESPRUINO_WATCH);
       this.appendDummyInput()
            .appendField(new Blockly.FieldDropdown(this.EDGES), 'EDGE').appendField('edge');;
       this.appendStatementInput('DO')
-           .appendField('do');
+           .appendField(Blockly.Msg.CONTROLS_REPEAT_INPUT_DO);
 
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setColour(ESPRUINO_COL);
     this.setInputsInline(true);
-    this.setTooltip('Runs code when an input changes');
+    this.setTooltip(Blockly.Msg.ESPRUINO_WATCH_TOOLTIP);
   },
 EDGES: [
 ["both", 'both'],
@@ -172,11 +173,11 @@ EDGES: [
 Blockly.Blocks.espruino_getTime = {
     category: 'Espruino',
     init: function() {
-      this.appendDummyInput().appendField('Time');
+      this.appendDummyInput().appendField(Blockly.Msg.ESPRUINO_TIME);
       this.setOutput(true, 'Number');
       this.setColour(230/*Number*/);
       this.setInputsInline(true);
-      this.setTooltip('Read the current time in seconds');
+      this.setTooltip(Blockly.Msg.ESPRUINO_TIME_TOOLTIP);
     }
   };
 
@@ -186,16 +187,16 @@ Blockly.Blocks.espruino_digitalWrite = {
   init: function() {
       this.appendValueInput('PIN')
           .setCheck('Pin')
-          .appendField('digitalWrite Pin');
+          .appendField(Blockly.Msg.ESPRUINO_DIGITALWRITE);
       this.appendValueInput('VAL')
           .setCheck(['Number','Boolean'])
-          .appendField('Value');
+          .appendField(Blockly.Msg.ESPRUINO_VALUE);
 
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setColour(ESPRUINO_COL);
     this.setInputsInline(true);
-    this.setTooltip('Writes a Digital Value to a Pin');
+    this.setTooltip(Blockly.Msg.ESPRUINO_DIGITALWRITE_TOOLTIP);
   }
 };
 Blockly.Blocks.espruino_digitalPulse = {
@@ -203,18 +204,18 @@ Blockly.Blocks.espruino_digitalPulse = {
     init: function() {
         this.appendValueInput('PIN')
             .setCheck('Pin')
-            .appendField('digitalPulse Pin');
+            .appendField(Blockly.Msg.ESPRUINO_DIGITALPULSE);
         this.appendValueInput('VAL')
             .setCheck(['Boolean']);
         this.appendValueInput('TIME')
             .setCheck(['Number'])
-            .appendField('Milliseconds');
+            .appendField(Blockly.Msg.ESPRUINO_MILLISECONDS);
 
       this.setPreviousStatement(true);
       this.setNextStatement(true);
       this.setColour(ESPRUINO_COL);
       this.setInputsInline(true);
-      this.setTooltip('Pulses a pin for the given number of milliseconds');
+      this.setTooltip(Blockly.Msg.ESPRUINO_DIGITALPULSE_TOOLTIP);
     }
   };
 Blockly.Blocks.espruino_digitalRead = {
@@ -222,12 +223,12 @@ Blockly.Blocks.espruino_digitalRead = {
   init: function() {
       this.appendValueInput('PIN')
           .setCheck('Pin')
-          .appendField('digitalRead Pin');
+          .appendField(Blockly.Msg.ESPRUINO_DIGITALREAD);
 
     this.setOutput(true, 'Boolean');
     this.setColour(ESPRUINO_COL);
     this.setInputsInline(true);
-    this.setTooltip('Read a Digital Value from a Pin');
+    this.setTooltip(Blockly.Msg.ESPRUINO_DIGITALREAD_TOOLTIP); 
   }
 };
 
@@ -236,16 +237,16 @@ Blockly.Blocks.espruino_analogWrite = {
     init: function() {
         this.appendValueInput('PIN')
             .setCheck('Pin')
-            .appendField('analogWrite Pin');
+            .appendField(Blockly.Msg.ESPRUINO_ANALOGWRITE);
         this.appendValueInput('VAL')
             .setCheck(['Number','Boolean'])
-            .appendField('Value');
+            .appendField(Blockly.Msg.ESPRUINO_VALUE);
 
       this.setPreviousStatement(true);
       this.setNextStatement(true);
       this.setColour(ESPRUINO_COL);
       this.setInputsInline(true);
-      this.setTooltip('Writes an Analog Value to a Pin');
+      this.setTooltip(Blockly.Msg.ESPRUINO_ANALOGWRITE_TOOLTIP);
     }
   };
 Blockly.Blocks.espruino_analogRead = {
@@ -253,12 +254,12 @@ Blockly.Blocks.espruino_analogRead = {
     init: function() {
         this.appendValueInput('PIN')
             .setCheck('Pin')
-            .appendField('analogRead Pin');
+            .appendField(Blockly.Msg.ESPRUINO_ANALOGREAD);
 
       this.setOutput(true, 'Number');
       this.setColour(ESPRUINO_COL);
       this.setInputsInline(true);
-      this.setTooltip('Read an Analog Value from a Pin');
+      this.setTooltip(Blockly.Msg.ESPRUINO_ANALOGREAD_TOOLTIP);
     }
   };
 
@@ -271,7 +272,7 @@ Blockly.Blocks.espruino_code = {
       this.setNextStatement(true);
       this.setColour(ESPRUINO_COL);
       this.setInputsInline(true);
-      this.setTooltip('Executes the given JavaScript code');
+      this.setTooltip(Blockly.Msg.ESPRUINO_JS_TOOLTIP);
     }
   };
 // -----------------------------------------------------------------------------------
@@ -280,16 +281,16 @@ Blockly.Blocks.hw_servoMove = {
   init: function() {
     this.appendValueInput('PIN')
         .setCheck('Pin')
-        .appendField('Move Servo on Pin');
+        .appendField(Blockly.Msg.ESPRUINO_MOVE_SERVO);
     this.appendValueInput('VAL')
         .setCheck(['Number','Boolean'])
-        .appendField('to');
+        .appendField(Blockly.Msg.ESPRUINO_TO);
 
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setColour(ESPRUINO_COL);
     this.setInputsInline(true);
-    this.setTooltip('Start moving the servo motor - position between -1 and 1');
+    this.setTooltip(Blockly.Msg.ESPRUINO_MOVE_SERVO_TOOLTIP);
   }
 };
 Blockly.Blocks.hw_servoStop = {
@@ -297,13 +298,14 @@ Blockly.Blocks.hw_servoStop = {
   init: function() {
     this.appendValueInput('PIN')
         .setCheck('Pin')
-        .appendField('Stop Servo on Pin');
+        .appendField(Blockly.Msg.ESPRUINO_STOP_SERVO);
 
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setColour(ESPRUINO_COL);
     this.setInputsInline(true);
-    this.setTooltip('Stop moving the servo motor');
+    this.setTooltip(Blockly.Msg.ESPRUINO_STOP_SERVO_TOOLTIP);
+
   }
 };
 Blockly.Blocks.hw_ultrasonic = {
@@ -311,14 +313,14 @@ Blockly.Blocks.hw_ultrasonic = {
     init: function() {
       this.appendValueInput('TRIG')
           .setCheck('Pin')
-          .appendField('Get distance, trigger');
+          .appendField(Blockly.Msg.ESPRUINO_ULTRASONIC_GET_TRIG);
       this.appendValueInput('ECHO')
           .setCheck('Pin')
-          .appendField(', echo');
+          .appendField(Blockly.Msg.ESPRUINO_ULTRASONIC_ECHO);
       this.setOutput(true, 'Number');
       this.setColour(ESPRUINO_COL);
       this.setInputsInline(true);
-      this.setTooltip('Return distance in centimetres from the ultrasonic sensor');
+      this.setTooltip(Blockly.Msg.ESPRUINO_ULTRASONIC_TOOLTIP);
     }
   };
 
