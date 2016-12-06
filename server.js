@@ -73,6 +73,10 @@ Espruino.Core.Serial.startListening(function(data) {
 var server = http.createServer(function(request, response) {
     console.log((new Date()) + ' HTTP '+request.method+' ' + request.url);
     var url = request.url.toString();
+    // ignore query string
+    if (url.indexOf("?")>=0)
+      url = url.substr(0,url.indexOf("?"));
+    // special files
     if (url == "/") url = "/main.html";
     if (url == "/serial/ports") {
       Espruino.Core.Serial.getPorts(function(ports) {
@@ -81,7 +85,7 @@ var server = http.createServer(function(request, response) {
       });
       return;
     }
-
+    // load filesystem file
     var path =  require('path').resolve(__dirname, "."+url);
     if (path.substr(0,__dirname.length)!=__dirname) {
       console.warn("Hacking attempt? ", url);
