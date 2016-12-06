@@ -1,6 +1,6 @@
 {
   "name": "espruino-web-ide",
-  "version": "0.65.3",
+  "version": "0.65.4",
   "description": "A Terminal and Graphical code Editor for Espruino JavaScript Microcontrollers",
   "//1": "-------------------------------------------------------- nw.js",
   "main": "main.html",
@@ -37,8 +37,8 @@
     "url": "https://github.com/espruino/EspruinoWebIDE/issues"
   },
   "homepage": "https://github.com/espruino/EspruinoWebIDE#readme",
+  "//nw": "^0.18.6 - you can still use a global nw, or just the server",
   "dependencies": {
-    "nw": "^0.18.6",
     "websocket": "^1.0.23"
   },
   "optionalDependencies": {
