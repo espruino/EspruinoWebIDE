@@ -4,11 +4,11 @@
  This Source Code is subject to the terms of the Mozilla Public
  License, v2.0. If a copy of the MPL was not distributed with this
  file, You can obtain one at http://mozilla.org/MPL/2.0/.
- 
+
  ------------------------------------------------------------------
   Blockly blocks for Espruino
  ------------------------------------------------------------------
-**/    
+**/
 
 // --------------------------------- Blockly init code - see /js/core/editorBlockly.js
 window.onload = function() {
@@ -16,7 +16,7 @@ window.onload = function() {
   // Remove any stuff we don't want from the toolbox...
   for (var i=0;i<toolbox.children.length;i++) {
     var enable_if = toolbox.children[i].attributes["enable_if"];
-    if (enable_if) { 
+    if (enable_if) {
       var keep = false;
       if (window.location.search && window.location.search.indexOf("%7C"+enable_if.value+"%7C")>=0)
         keep = true;
@@ -29,10 +29,13 @@ window.onload = function() {
   // Set up blockly from toolbox
   Blockly.inject(document.body,{path: '', toolbox: toolbox});
   // Set up initial code
-  Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, document.getElementById('blocklyInitial')); 
+  Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, document.getElementById('blocklyInitial'));
   // Notify parent
   window.parent.blocklyLoaded(Blockly, window); // see core/editorBlockly.js
 };
+
+/* TODO: Looks like we could use Blockly.JavaScript.indentLines(code, Blockly.JavaScript.INDENT)
+to properly sort out the padding of all this stuff */
 
 // When we have JSON from the board, use it to
 // update our list of available pins
@@ -41,7 +44,7 @@ Blockly.setBoardJSON = function(info) {
   if (!("pins" in info)) return;
   if (!("devices" in info)) return;
   PINS = [];
-  var i,s; 
+  var i,s;
   for (i=1;i<8;i++) {
     s = "LED"+i;
     if (s in info.devices) PINS.push([s,s]);
@@ -52,8 +55,8 @@ Blockly.setBoardJSON = function(info) {
   }
   for (i in info.pins)
     PINS.push([info.pins[i].name, info.pins[i].name]);
-  
-  
+
+
 };
 // ---------------------------------
 
@@ -97,7 +100,7 @@ Blockly.Blocks.espruino_timeout = {
           .appendField(Blockly.Msg.ESPRUINO_SECONDS);
       this.appendStatementInput('DO')
           .appendField(Blockly.Msg.CONTROLS_REPEAT_INPUT_DO);
-        
+
 
     this.setPreviousStatement(true);
     this.setNextStatement(true);
@@ -128,7 +131,7 @@ Blockly.Blocks.espruino_interval = {
 Blockly.Blocks.espruino_pin = {
 //      category: 'Espruino',
   init: function() {
-    
+
     var start = 0;
     var incrementStep = 10;
     var originalPin = undefined;
@@ -136,26 +139,26 @@ Blockly.Blocks.espruino_pin = {
       originalPin = this.value_;
       var list = PINS.slice(start, start+incrementStep);
       if (start>0) list.unshift([Blockly.Msg.ESPRUINO_BACK+"...", Blockly.Msg.ESPRUINO_BACK]);
-      if (start+incrementStep<PINS.length) list.push([Blockly.Msg.ESPRUINO_MORE + '...', Blockly.Msg.ESPRUINO_MORE]);        
+      if (start+incrementStep<PINS.length) list.push([Blockly.Msg.ESPRUINO_MORE + '...', Blockly.Msg.ESPRUINO_MORE]);
       return list;
-    };    
-    
+    };
+
     var pinSelector = new Blockly.FieldDropdown(listGen, function(selection){
       var ret = undefined;
-      
-      if (selection == Blockly.Msg.ESPRUINO_MORE || selection == Blockly.Msg.ESPRUINO_BACK) {  
+
+      if (selection == Blockly.Msg.ESPRUINO_MORE || selection == Blockly.Msg.ESPRUINO_BACK) {
         if (selection == Blockly.Msg.ESPRUINO_MORE)
           start += incrementStep;
         else
           start -= incrementStep;
-        
+
         var t = this;
         setTimeout(function(){t.showEditor_();},1);
 
         return originalPin;
-      }      
+      }
     });
-    
+
     this.setColour(ESPRUINO_COL);
     this.setOutput(true, 'Pin');
     this.appendDummyInput().appendField(pinSelector, 'PIN');
@@ -246,7 +249,7 @@ Blockly.Blocks.espruino_digitalRead = {
     this.setOutput(true, 'Boolean');
     this.setColour(ESPRUINO_COL);
     this.setInputsInline(true);
-    this.setTooltip(Blockly.Msg.ESPRUINO_DIGITALREAD_TOOLTIP); 
+    this.setTooltip(Blockly.Msg.ESPRUINO_DIGITALREAD_TOOLTIP);
   }
 };
 
@@ -284,7 +287,7 @@ Blockly.Blocks.espruino_analogRead = {
 Blockly.Blocks.espruino_code = {
     category: 'Espruino',
     init: function() {
-      this.appendDummyInput().appendField(new Blockly.FieldTextArea("// Enter JavaScript Code Here"),"CODE");
+      this.appendDummyInput().appendField(new Blockly.FieldTextArea("// Enter JavaScript Statements Here"),"CODE");
 
       this.setPreviousStatement(true);
       this.setNextStatement(true);
@@ -293,6 +296,17 @@ Blockly.Blocks.espruino_code = {
       this.setTooltip(Blockly.Msg.ESPRUINO_JS_TOOLTIP);
     }
   };
+
+  Blockly.Blocks.espruino_jsexpression = {
+      category: 'Espruino',
+      init: function() {
+        this.appendDummyInput().appendField(new Blockly.FieldTextInput('"A JavaScript "+"Expression"'),"EXPR");
+        this.setOutput(true, 'String');
+        this.setColour(ESPRUINO_COL);
+        this.setInputsInline(true);
+        this.setTooltip(Blockly.Msg.ESPRUINO_JSEXPR_TOOLTIP);
+      }
+    };
 // -----------------------------------------------------------------------------------
 Blockly.Blocks.hw_servoMove = {
   category: 'Espruino',
@@ -412,6 +426,10 @@ Blockly.JavaScript.espruino_code = function() {
   var code = JSON.stringify(this.getFieldValue("CODE"));
   return "eval("+code+");\n";
 };
+Blockly.JavaScript.espruino_jsexpression = function() {
+  var code = this.getFieldValue("EXPR");
+  return [code, Blockly.JavaScript.ORDER_ATOMIC];
+};
 // -----------------------------------------------------------------------------------
 Blockly.JavaScript.hw_servoMove = function() {
   var pin = Blockly.JavaScript.valueToCode(this, 'PIN', Blockly.JavaScript.ORDER_ASSIGNMENT) || '0';
@@ -430,7 +448,7 @@ Blockly.JavaScript.hw_ultrasonic = function() {
   var watchVar = "isListening"+trig+echo;
   var functionName = Blockly.JavaScript.provideFunction_(
     funcVar,
-    [ "function " + Blockly.JavaScript.FUNCTION_NAME_PLACEHOLDER_ + "() {",       
+    [ "function " + Blockly.JavaScript.FUNCTION_NAME_PLACEHOLDER_ + "() {",
       "  if (!global."+distanceVar+") {",
       "    "+distanceVar+"=[0];",
       "    setWatch(",

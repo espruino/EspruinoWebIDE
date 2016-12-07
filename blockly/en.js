@@ -415,6 +415,7 @@ Blockly.Msg.ESPRUINO_ANALOGWRITE_TOOLTIP = 'Writes an Analog Value to a Pin';
 Blockly.Msg.ESPRUINO_ANALOGREAD = 'analogRead Pin';
 Blockly.Msg.ESPRUINO_ANALOGREAD_TOOLTIP = 'Read an Analog Value from a Pin';
 Blockly.Msg.ESPRUINO_JS_TOOLTIP = 'Executes the given JavaScript code';
+Blockly.Msg.ESPRUINO_JSEXPR_TOOLTIP = 'Executes the given JavaScript code as an expression';
 Blockly.Msg.ESPRUINO_MOVE_SERVO = 'Move Servo on Pin';
 Blockly.Msg.ESPRUINO_TO = 'to';
 Blockly.Msg.ESPRUINO_MOVE_SERVO_TOOLTIP = 'Start moving the servo motor - position between -1 and 1';

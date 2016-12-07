@@ -28,11 +28,11 @@ function bleInput(blk, comment, type) {
 }
 
 var BLE_CHARACTERISTICS = [
-        ['Digital', ['0001','2A56']],
-        ['Analog', ['0001','2A58']],
-        ['Temperature', ['0001','2A6E']],
-        ['UART TX', ['6e400001b5a3f393e0a9e50e24dcca9e','6e400002b5a3f393e0a9e50e24dcca9e']],
-        ['UART RX', ['6e400001b5a3f393e0a9e50e24dcca9e','6e400003b5a3f393e0a9e50e24dcca9e']]
+        ['Digital', '0001,2A56'],
+        ['Analog', '0001,2A58'],
+        ['Temperature', '0001,2A6E'],
+        ['UART TX', '6e400001b5a3f393e0a9e50e24dcca9e,6e400002b5a3f393e0a9e50e24dcca9e'],
+        ['UART RX', '6e400001b5a3f393e0a9e50e24dcca9e,6e400003b5a3f393e0a9e50e24dcca9e']
 ];
 
 function bleUpdateServices(service) {
@@ -41,12 +41,28 @@ function bleUpdateServices(service) {
     currService = {};
   } else {
     currService = currService.substring("NRF.setServices(".length, currService.length-2)
+    currService = currService.replace(/"onWrite":function\(v\){ble_value=v.data.toString\(\);([a-zA-Z0-9]*)\(\);}/g,'"onWrite":"$1"');
     currService = JSON.parse(currService);
   }
   for (var n in service)
     currService[n] = service[n];
+  var str = JSON.stringify(currService);
+  str = str.replace(/"onWrite":"([a-zA-Z0-9]*)"/g,'"onWrite":function(v){ble_value=v.data.toString();$1();}');
   Blockly.JavaScript.definitions_["NRF.setServices"] =
-    "NRF.setServices("+JSON.stringify(currService)+");";
+    "NRF.setServices("+str+");";
+}
+
+function formatCharacteristic(c) {
+  // Sadly we need this because devices shipped with 1v88 not 1v89 :(
+  if ("string"==typeof c &&
+      c.length==4)
+    return "0x"+c;
+  return JSON.stringify(c);
+}
+
+function splitCharacteristic(char) {
+  var c = char.split(",");
+  return [formatCharacteristic(c[0]), formatCharacteristic(c[1])];
 }
 
 // ----------------------------------------------------------
@@ -90,9 +106,9 @@ Blockly.JavaScript.ble_dev_name = function() {
   var name = this.getFieldValue('NAME');
   return ["NRF.requestDevice({ filters: [{ name: "+JSON.stringify(name)+" }] }).then(function(device) {\n"+
   "  return device.gatt.connect();\n"+
-  "})", Blockly.JavaScript.ORDER_ATOMIC];
+  "});", Blockly.JavaScript.ORDER_ATOMIC];
 };
-
+prefixLines
 // ----------------------------------------------------------
 
 Blockly.Blocks.ble_dev_prefix = {
@@ -108,7 +124,7 @@ Blockly.JavaScript.ble_dev_prefix = function() {
   var name = this.getFieldValue('NAME');
   return ["NRF.requestDevice({ filters: [{ namePrefix: "+JSON.stringify(name)+" }] }).then(function(device) {\n"+
   "  return device.gatt.connect();\n"+
-  "})", Blockly.JavaScript.ORDER_ATOMIC];
+  "});", Blockly.JavaScript.ORDER_ATOMIC];
 };
 
 // ----------------------------------------------------------
@@ -141,7 +157,7 @@ Blockly.Blocks.ble_characteristic = {
   }
 };
 Blockly.JavaScript.ble_characteristic = function() {
-  return [[this.getFieldValue('SERV'), this.getFieldValue('CHAR')], Blockly.JavaScript.ORDER_ATOMIC];
+  return [this.getFieldValue('SERV')+","+this.getFieldValue('CHAR'), Blockly.JavaScript.ORDER_ATOMIC];
 };
 
 // ----------------------------------------------------------
@@ -176,17 +192,17 @@ Blockly.JavaScript.ble_setchar = function() {
   var val = Blockly.JavaScript.valueToCode(this, 'VAL', Blockly.JavaScript.ORDER_ASSIGNMENT) || '0';
   var code = Blockly.JavaScript.statementToCode(this, 'DO');
   if (!dev || !char) return "";
-  char = char.split(",");
+  char = splitCharacteristic(char);
   if (!code) code="";
   return "(function() {\n"+
 "  var gatt;\n"+
 "  "+dev+".then(function(g) {\n"+
 "    gatt = g;\n"+
-"    return gatt.getPrimaryService("+JSON.stringify(char[0])+");\n"+
+"    return gatt.getPrimaryService("+char[0]+");\n"+
 "  }).then(function(service) {\n"+
-"    return service.getCharacteristic("+JSON.stringify(char[1])+");\n"+
+"    return service.getCharacteristic("+char[1]+");\n"+
 "  }).then(function(characteristic) {\n"+
-"    characteristic.writeValue("+JSON.stringify(val)+");\n"+
+"    characteristic.writeValue("+val+");\n"+
 "  }).then(function() {\n"+
 "    gatt.disconnect();\n"+
 "    "+code+"\n"+
@@ -208,15 +224,15 @@ Blockly.JavaScript.ble_getchar = function() {
   var dev = Blockly.JavaScript.valueToCode(this, 'DEV', Blockly.JavaScript.ORDER_ASSIGNMENT);
   var code = Blockly.JavaScript.statementToCode(this, 'DO');
   if (!dev || !char) return "";
-  char = char.split(",");
+  char = splitCharacteristic(char);
   if (!code) code="";
   return "(function() {\n"+
 "  var gatt;\n"+
 "  "+dev+".then(function(g) {\n"+
 "    gatt = g;\n"+
-"    return gatt.getPrimaryService("+JSON.stringify(char[0])+");\n"+
+"    return gatt.getPrimaryService("+char[0]+");\n"+
 "  }).then(function(service) {\n"+
-"    return service.getCharacteristic("+JSON.stringify(char[1])+");\n"+
+"    return service.getCharacteristic("+char[1]+");\n"+
 "  }).then(function(characteristic) {\n"+
 "    characteristic.readValue();\n"+
 "  }).then(function(value) {\n"+
@@ -239,7 +255,7 @@ Blockly.JavaScript.ble_write = function() {
   var char = Blockly.JavaScript.valueToCode(this, 'CHAR', Blockly.JavaScript.ORDER_ASSIGNMENT);
   var value = Blockly.JavaScript.valueToCode(this, 'VAL', Blockly.JavaScript.ORDER_ASSIGNMENT) || '0';
   if (!char) return "";
-  char = char.split(",");
+  char = splitCharacteristic(char);
   var service = {};
   service[char[0]] = {};
   service[char[0]][char[1]] = {
@@ -248,8 +264,8 @@ Blockly.JavaScript.ble_write = function() {
   };
   bleUpdateServices(service);
   return "NRF.updateServices({\n"+
-"  "+JSON.stringify(char[0])+" : {\n"+
-"    "+JSON.stringify(char[1])+" : {\n"+
+"  "+char[0]+" : {\n"+
+"    "+char[1]+" : {\n"+
 "      value : "+value+",\n"+
 "      notify: true\n"+
 "    }\n"+
@@ -269,18 +285,21 @@ Blockly.JavaScript.ble_onwritten = function() {
   var char = Blockly.JavaScript.valueToCode(this, 'CHAR', Blockly.JavaScript.ORDER_ASSIGNMENT);
   var code = Blockly.JavaScript.statementToCode(this, 'DO');
   if (!char) return "";
-  char = char.split(",");
+  char = splitCharacteristic(char);
+
+  var callbackVar = Blockly.JavaScript.variableDB_.getDistinctName(
+      'onWriteCallback', Blockly.Variables.NAME_TYPE);
+
+  var service = {};
   service[char[0]] = {};
   service[char[0]][char[1]] = {
     readable : true,
     writable : true,
     notify : true,
-    onWrite : function(value) { //FIXME: won't work with JSON.parse
-      ble_value = value
-    }
+    onWrite : callbackVar // this gets replaced by bleUpdateServices
   };
   bleUpdateServices(service);
-  return "";
+  return "function "+callbackVar+"() {\n  "+code+"\n}";
 };
 // ----------------------------------------------------------
 Blockly.Blocks.ble_value = {
@@ -291,5 +310,5 @@ Blockly.Blocks.ble_value = {
   }
 };
 Blockly.JavaScript.ble_value = function() {
-  return "ble_value";
+  return ["ble_value", Blockly.JavaScript.ORDER_ATOMIC];
 };

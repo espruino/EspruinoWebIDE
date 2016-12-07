@@ -417,6 +417,7 @@ Blockly.Msg.ESPRUINO_ANALOGWRITE_TOOLTIP = 'Записать аналогово�
 Blockly.Msg.ESPRUINO_ANALOGREAD = 'analogRead Pin (прочитать аналог) ';
 Blockly.Msg.ESPRUINO_ANALOGREAD_TOOLTIP = 'Прочитать аналоговое значение из Пина';
 Blockly.Msg.ESPRUINO_JS_TOOLTIP = 'Запустить кусочек JavaScript';
+Blockly.Msg.ESPRUINO_JSEXPR_TOOLTIP = 'Запустить кусочек JavaScript';
 Blockly.Msg.ESPRUINO_MOVE_SERVO = 'Move Servo on Pin (Переместить серво на пине)';
 Blockly.Msg.ESPRUINO_TO = 'to (в)';
 Blockly.Msg.ESPRUINO_MOVE_SERVO_TOOLTIP = 'Запустить серво привод на пине в позицию между -1 и 1';
