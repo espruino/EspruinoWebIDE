@@ -108,7 +108,7 @@ Blockly.JavaScript.ble_dev_name = function() {
   "  return device.gatt.connect();\n"+
   "});", Blockly.JavaScript.ORDER_ATOMIC];
 };
-prefixLines
+
 // ----------------------------------------------------------
 
 Blockly.Blocks.ble_dev_prefix = {

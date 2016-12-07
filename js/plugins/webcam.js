@@ -26,15 +26,20 @@
       section : "General",
       name : "Webcam Icon",
       description : "Show an icon that allows the terminal to be overlaid on the view from a Webcam",
-      type : "boolean",
-      defaultValue : false,
+      type : { 0 : "No",
+               1 : "Yes",
+               2 : "Yes, add 50% brightness",
+               3 : "Yes, add 100% brightness" },
+      defaultValue : 0,
       onChange : function(newValue) { showIcon(newValue); }
     });
-
     showIcon(Espruino.Config.SHOW_WEBCAM_ICON);
   }
 
   function showIcon(show) {
+    show = 0|show;
+    var hadWebCam = hasWebCam();
+    if (hadWebCam) toggleWebCam();
     if (show) {
       icon = Espruino.Core.App.addIcon({
         id: "webcam",
@@ -47,12 +52,17 @@
         },
         click: toggleWebCam
       });
-      $('<video autoplay id="videotag" style="background-color:black;position: absolute;left:0;top:0;width:100%;height:100%;"></video>').prependTo(".editor--terminal .editor__canvas");
+      var filters = "";
+      if (show==2) filters = "filter: brightness(150%);";
+      if (show==3) filters = "filter: brightness(200%);";
+      $('video').remove();
+      $('<video autoplay id="videotag" style="background-color:black;position: absolute;left:0;top:0;width:100%;height:100%;'+filters+'"></video>').prependTo(".editor--terminal .editor__canvas");
     } else {
-      if (hasWebCam()) toggleWebCam();
+      hadWebCam = false;
       if (icon!==undefined) icon.remove();
       $('video').remove();
     }
+    if (hadWebCam) toggleWebCam();
   }
 
   function hasWebCam() {
