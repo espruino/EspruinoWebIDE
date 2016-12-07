@@ -106,7 +106,7 @@ Blockly.JavaScript.ble_dev_name = function() {
   var name = this.getFieldValue('NAME');
   return ["NRF.requestDevice({ filters: [{ name: "+JSON.stringify(name)+" }] }).then(function(device) {\n"+
   "  return device.gatt.connect();\n"+
-  "});", Blockly.JavaScript.ORDER_ATOMIC];
+  "})", Blockly.JavaScript.ORDER_ATOMIC];
 };
 
 // ----------------------------------------------------------
@@ -124,7 +124,7 @@ Blockly.JavaScript.ble_dev_prefix = function() {
   var name = this.getFieldValue('NAME');
   return ["NRF.requestDevice({ filters: [{ namePrefix: "+JSON.stringify(name)+" }] }).then(function(device) {\n"+
   "  return device.gatt.connect();\n"+
-  "});", Blockly.JavaScript.ORDER_ATOMIC];
+  "})", Blockly.JavaScript.ORDER_ATOMIC];
 };
 
 // ----------------------------------------------------------
@@ -207,7 +207,7 @@ Blockly.JavaScript.ble_setchar = function() {
 "    gatt.disconnect();\n"+
 "    "+code+"\n"+
 "  });\n"+
-"})()"
+"})();"
 };
 // ----------------------------------------------------------
 Blockly.Blocks.ble_getchar = {
@@ -240,7 +240,7 @@ Blockly.JavaScript.ble_getchar = function() {
 "    gatt.disconnect();\n"+
 "    "+code+"\n"+
 "  });\n"+
-"})()\n";
+"})();\n";
 };
 // ----------------------------------------------------------
 Blockly.Blocks.ble_write = {
