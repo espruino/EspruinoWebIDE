@@ -83,7 +83,10 @@
 
 
   function getCode() {
-    return codeMirror.getValue();
+    var code = codeMirror.getValue();
+    // replace the Non-breaking space character with space. This seems to be an odd Android thing
+    code = code.replace(/\xA0/g," ");
+    return code;
   }
 
   function setCode(code) {
