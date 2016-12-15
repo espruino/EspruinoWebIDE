@@ -32,6 +32,23 @@
     stepSelectBoard(urlOrNothing);
   }
 
+  function checkBoard(boardId) {
+    if (boardId=="PUCKJS") {
+      var popup = Espruino.Core.App.openPopup({
+      title: "Firmware Update",
+      padding: true,
+      contents: '<p>Puck.js firmware can\'t be updated from the IDE at the moment.</p>'+
+                '<p>Please see <a href="http://www.espruino.com/Puck.js#firmware-updates" target="_blank">the Puck.js page</a> for more instructions.</p>' ,
+      position: "center",
+      ok : function() {
+        popup.close();
+      }
+    });
+      return false;
+    }
+    return true;
+  }
+
   function stepSelectBoard( urlOrNothing ) {
     var boardList;
 
@@ -47,7 +64,7 @@
         popup.close();
         if (boardId===undefined || boardList[boardId]===undefined)
           console.error("No board ID found! Looks like no option selected");
-        else {
+        else if (checkBoard(boardId)) {
           var boardJson = boardList[boardId]["json"];
           if (urlOrNothing)
             stepReset( { binary_url : urlOrNothing, board_id : boardId, board_chip : boardJson.chip } );

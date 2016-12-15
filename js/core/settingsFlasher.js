@@ -34,7 +34,6 @@
             Espruino.Core.MenuFlasher.showFlasher();
           });
           // Advanced start
-
           $('.flash_start_advanced').click( function() {
             var url = $('.flash_url').val();
             if (url!="") {
