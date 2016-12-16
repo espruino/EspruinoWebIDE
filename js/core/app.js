@@ -80,7 +80,7 @@
               nwwindow.maximize();
             }
           } else {
-            if(chrome.app.window.current().isMaximized) {
+            if(chrome.app.window.current().isMaximized()) {
               chrome.app.window.current().restore();
             } else {
               chrome.app.window.current().maximize();
