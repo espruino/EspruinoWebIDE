@@ -58,6 +58,7 @@
     var fileLoader = document.createElement("input");
     fileLoader.setAttribute("id", "fileLoader");
     fileLoader.setAttribute("type", "file");
+    fileLoader.setAttribute("style", "z-index:-2000;position:absolute;top:0px;left:0px;");
     fileLoader.addEventListener('change', function(e) {
       if (!loadFileCallback) return;
       var files = e.target.files;
