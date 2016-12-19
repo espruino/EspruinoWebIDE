@@ -1508,6 +1508,11 @@
     "!type": "fn()",
     "!doc": "<p>The NRF class is for controlling functionality of the Nordic nRF51/nRF52 chips. Currently these only used in <a href=\"http://puck-js.com\">Puck.js</a> and the <a href=\"/MicroBit\">BBC micro:bit</a>.</p>\n<p>The main part of this is control of Bluetooth Low Energy - both searching for devices, and changing advertising data.</p>\n",
     "!url": "http://www.espruino.com/Reference#NRF",
+    "disconnect": {
+      "!type": "fn()",
+      "!doc": "<p>If a device is connected to Espruino, disconnect from it.</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_NRF_disconnect"
+    },
     "sleep": {
       "!type": "fn()",
       "!doc": "<p>Disable Bluetooth communications</p>\n",
@@ -1560,7 +1565,7 @@
     },
     "nfcURL": {
       "!type": "fn(url: ?)",
-      "!doc": "<p>Enables NFC and starts advertising the given URL. For example:</p>\n<pre><code>NRF.nrfURL(<span class=\"hljs-string\">\"http://espruino.com\"</span>)<span class=\"hljs-comment\">;</span>\n</code></pre><p><strong>Note:</strong> This is only available on nRF52-based devices</p>\n",
+      "!doc": "<p>Enables NFC and starts advertising the given URL. For example:</p>\n<pre><code>NRF.nfcURL(<span class=\"hljs-string\">\"http://espruino.com\"</span>)<span class=\"hljs-comment\">;</span>\n</code></pre><p><strong>Note:</strong> This is only available on nRF52-based devices</p>\n",
       "!url": "http://www.espruino.com/Reference#l_NRF_nfcURL"
     },
     "sendHIDReport": {
@@ -1575,7 +1580,7 @@
     },
     "connect": {
       "!type": "fn(mac: ?) -> ?",
-      "!doc": "<p>Connect to a BLE device by MAC address. Returns a promise,\nthe argument of which is the <code>BluetoothRemoteGATTServer</code> connection.</p>\n<pre><code>NRF.connect(<span class=\"hljs-string\">\"aa:bb:cc:dd:ee\"</span>).<span class=\"hljs-keyword\">then</span>(<span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span><span class=\"hljs-params\">(server)</span> {</span>\n  <span class=\"hljs-comment\">// ...</span>\n});\n</code></pre><p><strong>Note:</strong> This is only available on some devices</p>\n",
+      "!doc": "<p>Connect to a BLE device by MAC address. Returns a promise,\nthe argument of which is the <code>BluetoothRemoteGATTServer</code> connection.</p>\n<pre><code>NRF.connect(<span class=\"hljs-string\">\"aa:bb:cc:dd:ee\"</span>).<span class=\"hljs-keyword\">then</span>(<span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span><span class=\"hljs-params\">(server)</span> {</span>\n  <span class=\"hljs-comment\">// ...</span>\n});\n</code></pre><p>You can use it as follows - this would connect to another Puck device and turn its LED on:</p>\n<pre><code>var gatt;\nNRF.connect(<span class=\"hljs-string\">\"aa:bb:cc:dd:ee\"</span>).<span class=\"hljs-keyword\">then</span>(<span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span><span class=\"hljs-params\">(g)</span> {</span>\n  gatt = g;\n  <span class=\"hljs-keyword\">return</span> gatt.getPrimaryService(<span class=\"hljs-string\">\"6e400001-b5a3-f393-e0a9-e50e24dcca9e\"</span>);\n}).<span class=\"hljs-keyword\">then</span>(<span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span><span class=\"hljs-params\">(service)</span> {</span>\n  <span class=\"hljs-keyword\">return</span> service.getCharacteristic(<span class=\"hljs-string\">\"6e400002-b5a3-f393-e0a9-e50e24dcca9e\"</span>);\n}).<span class=\"hljs-keyword\">then</span>(<span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span><span class=\"hljs-params\">(characteristic)</span> {</span>\n  characteristic.writeValue(<span class=\"hljs-string\">\"LED1.set()\\n\"</span>);\n}).<span class=\"hljs-keyword\">then</span>(<span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span><span class=\"hljs-params\">()</span> {</span>\n  gatt.disconnect();\n  console.<span class=\"hljs-built_in\">log</span>(<span class=\"hljs-string\">\"Done!\"</span>);\n});\n</code></pre><p><strong>Note:</strong> This is only available on some devices</p>\n",
       "!url": "http://www.espruino.com/Reference#l_NRF_connect"
     }
   },
