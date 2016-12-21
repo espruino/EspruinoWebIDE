@@ -305,12 +305,14 @@ a:hover > .menu
         top: 50%;
         transform: translateY(-50%);
         margin-bottom: 0px;
+        white-space: nowrap;
 }
 
 .list__item__desc
 {
         font-size: 70%;
         color : #666;
+        white-space: nowrap;
 }
 
 .list__no-results
