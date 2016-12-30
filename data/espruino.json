@@ -2663,7 +2663,7 @@
   },
   "Boolean": {
     "!type": "fn(value: ?) -> bool",
-    "!doc": "<p>Creates a number</p>\n",
+    "!doc": "<p>Creates a boolean</p>\n",
     "!url": "http://www.espruino.com/Reference#l_Boolean_Boolean"
   },
   "require": {
