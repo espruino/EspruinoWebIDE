@@ -39,7 +39,7 @@
    * Initialize the window
    */
   function init() {
-    if ((nwwindow || (chrome && chrome.app && chrome.app.window)) &&
+    if ((nwwindow || ((typeof chrome!="undefined") && chrome.app && chrome.app.window)) &&
         document.getElementsByClassName("title-bar").length) {
       Espruino.Core.App.addIcon({
         id:'minimize',
