@@ -2,12 +2,10 @@
 <html><!-- index for ws.js or totally online Web IDE -->
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=1280, initial-scale=1, maximum-scale=1"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <meta name="apple-mobile-web-app-capable" content="yes"/>
   <meta name="mobile-web-app-capable" content="yes"/>
   <meta name=apple-mobile-web-app-status-bar-style content="black">
-<!-- Origin Trial Token, feature = Web Bluetooth, origin = https://espruino.github.io, expires = 2016-10-18 -->
-<meta http-equiv="origin-trial" data-feature="Web Bluetooth" data-expires="2016-10-18" content="Aimu+DCu8dcEU53MgAEp0SZz4hglbZNSnPDOiOCbYjCRKgZvidg7ePVwqQGWM5xbNSJzUMySfp0dh0O7dHzKyAIAAABdeyJvcmlnaW4iOiAiaHR0cHM6Ly9lc3BydWluby5naXRodWIuaW86NDQzIiwgImZlYXR1cmUiOiAiV2ViQmx1ZXRvb3RoIiwgImV4cGlyeSI6IDE0NzY4MTU2Njh9">
 
   <link rel="icon" href="favicon.ico">
 
@@ -219,9 +217,7 @@
             </div>
             <div class="canvas editor__canvas"></div>
           </div>
-
         </div>
-
       </div>
 
       <!-- Status -->
@@ -241,6 +237,13 @@
   })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
   ga('create', 'UA-46537227-2', 'auto');
   ga('send', 'pageview');
+</script>
+
+<script>
+  // Stop touch to drag on iDevices
+  document.ontouchmove = function(event){
+      event.preventDefault();
+  }
 </script>
 
 </body>
