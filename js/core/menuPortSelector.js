@@ -113,8 +113,7 @@
           html += '</ul>';
         } else {
           html = '<h2 class="list__no-results">Searching... No ports found</h2>';
-          var iOS = (typeof navigator!="undefined") && (typeof window!="undefined") && /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-          if (iOS)
+          if (Espruino.Core.Utils.isAppleDevice())
             html += '<div class="list__no-results-help">As you\'re using an iDevice<br/>you need <a href="https://itunes.apple.com/us/app/webble/id1193531073" target="_blank">to use the WebBLE app</a></div>';
           else
             html += '<div class="list__no-results-help">Have you tried <a href="http://www.espruino.com/Troubleshooting" target="_blank">Troubleshooting</a>?</div>';
