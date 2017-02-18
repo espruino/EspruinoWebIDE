@@ -174,7 +174,7 @@ Blockly.Blocks.espruino_watch = {
           .setCheck('Pin')
           .appendField(Blockly.Msg.ESPRUINO_WATCH);
       this.appendDummyInput()
-           .appendField(new Blockly.FieldDropdown(this.EDGES), 'EDGE').appendField('edge');;
+           .appendField(new Blockly.FieldDropdown(this.EDGES), 'EDGE').appendField('edge');
       this.appendStatementInput('DO')
            .appendField(Blockly.Msg.CONTROLS_REPEAT_INPUT_DO);
 
@@ -283,6 +283,27 @@ Blockly.Blocks.espruino_analogRead = {
       this.setTooltip(Blockly.Msg.ESPRUINO_ANALOGREAD_TOOLTIP);
     }
   };
+Blockly.Blocks.espruino_pinMode = {
+    category: 'Espruino',
+    init: function() {
+        this.appendValueInput('PIN')
+            .setCheck('Pin')
+            .appendField(Blockly.Msg.ESPRUINO_PINMODE);
+        this.appendDummyInput()
+            .appendField(new Blockly.FieldDropdown(this.PINMODES), 'MODE');
+
+      this.setPreviousStatement(true);
+      this.setNextStatement(true);
+      this.setColour(ESPRUINO_COL);
+      this.setInputsInline(true);
+      this.setTooltip(Blockly.Msg.ESPRUINO_PINODE_TOOLTIP);
+    },
+  PINMODES: [
+  ["input", 'input'],
+  ["input_pulldown", 'input_pulldown'],
+  ["input_pullup", 'input_pullup'],
+  ["output", 'output']]
+};
 
 Blockly.Blocks.espruino_code = {
     category: 'Espruino',
@@ -422,6 +443,11 @@ Blockly.JavaScript.espruino_analogRead = function() {
   var pin = Blockly.JavaScript.valueToCode(this, 'PIN', Blockly.JavaScript.ORDER_ASSIGNMENT) || '0';
   return ["analogRead("+pin+")\n", Blockly.JavaScript.ORDER_ATOMIC];
 };
+Blockly.JavaScript.espruino_pinMode = function() {
+  var pin = Blockly.JavaScript.valueToCode(this, 'PIN', Blockly.JavaScript.ORDER_ASSIGNMENT) || '0';
+  var mode = this.getTitleValue('MODE');
+  return "pinMode("+pin+", "+JSON.stringify(mode)+");\n";
+}
 Blockly.JavaScript.espruino_code = function() {
   var code = JSON.stringify(this.getFieldValue("CODE"));
   return "eval("+code+");\n";
