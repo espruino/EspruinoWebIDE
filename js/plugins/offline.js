@@ -12,8 +12,24 @@
 "use strict";
 (function(){
 
+  if (typeof chrome=="undefined" || !chrome.storage || !chrome.storage.local) {
+    console.log("No chrome.storage API - disabling Offline mode");
+    return;
+  }
+
+  var OFFLINE_DATA;
+
   function init() {
     Espruino.addProcessor("getURL", getOffline);
+
+    chrome.storage.local.get( "OFFLINE_DATA", function (data) {
+      var dataHex = data["OFFLINE_DATA"];
+      console.log("GET chrome.storage.local.OFFLINE_DATA = "+(dataHex?dataHex.length:0)+" bytes");
+      var data = new Uint8Array(dataHex.length/2);
+      for (var i=0;i<data.length;i++) // TODO: something wrong here?
+        data[i] = parseInt(dataHex.substr(i*2,2),16);
+      OFFLINE_DATA = data.buffer;
+    });
 
     Espruino.Core.Config.addSection("Offline Mode", {
       sortOrder:500,
@@ -29,7 +45,7 @@
       defaultValue : false,
       onChange : function(newValue) {
         if (newValue) {
-          if (!Espruino.Config.OFFLINE_DATA) {
+          if (!OFFLINE_DATA) {
             getOfflineData();
           }
         }
@@ -50,7 +66,7 @@
     var url = "http://localhost/espruino/files/offline.zip";
     Espruino.Core.Status.setStatus("Downloading offline data");
     /*Espruino.Core.Utils.getURL(url, function(data) {
-      Espruino.Config.OFFLINE_DATA = data;
+      OFFLINE_DATA = data;
       Espruino.Core.Status.setStatus("Loaded data - "+data.length+" bytes");
       for (var i=0;i<16;i++)
         console.log(data.charCodeAt(i).toString(16));
@@ -59,9 +75,14 @@
     xhr.responseType = "arraybuffer";
     xhr.addEventListener("load", function () {
       if (xhr.status === 200) {
-        Espruino.Core.Status.setStatus("Done.");
+        Espruino.Core.Status.setStatus("Downloaded "+data.length+" bytes. Saving to local storage");
         var data = xhr.response;
-        Espruino.Config.OFFLINE_DATA = data;
+        var dataHex = "";
+        for (var i=0;i<data.length;i++)
+          dataHex += (256+data[i]).toString(16).substr(-2);
+        OFFLINE_DATA = data;
+        chrome.storage.local.set({ OFFLINE_DATA : dataHex });
+        Espruino.Core.Status.setStatus("Done.");
       } else
         Espruino.Core.Notifications.error("Error downloading file - HTTP "+xhr.status);
     });
@@ -89,7 +110,7 @@
       fileName = "json/"+url.substr(urlBase.length);
     console.log("Searching for "+fileName);
     var zip = new JSZip();
-    zip.loadAsync(Espruino.Config.OFFLINE_DATA).then(function(zip) {
+    zip.loadAsync(OFFLINE_DATA).then(function(zip) {
       var f = zip.file(fileName);
       if (f) {
         console.log(fileName+" found in offline archive");
@@ -107,7 +128,7 @@
 
   function getOffline(data, callback) {
     if (!Espruino.Config.OFFLINE_ENABLED ||
-        !Espruino.Config.OFFLINE_DATA)
+        !OFFLINE_DATA)
       return callback(data); // continue as normal
 
     findOffline(data.url, function(result) {
