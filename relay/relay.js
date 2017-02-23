@@ -8,6 +8,7 @@ Packets Sent:
 '\x01' - data from server -> BLE
 '\x02' - server -> BLE write complete
 '\x10' - connection key
+'\x20' - client connected
 
 
 */
@@ -34,13 +35,10 @@ Packets Sent:
     Espruino.Core.Config.add("RELAY_KEY", {
       section : "Communications",
       name : "Relay Key",
-      description : "The key used when using https://www.espruino.com/ide/relay on a phone to use the Web IDE on your PC",
+      description : "The key used for relaying Web IDE between devices",
       type : "string",
       defaultValue : getUID()
     });
-    if (!Espruino.Config.RELAY_KEY || 
-        Espruino.Config.RELAY_KEY.length!=8)
-      Espruino.Config.RELAY_KEY = getUID();
     connectButton = Espruino.Core.App.addIcon({
       id: "connection",
       icon: "connect",
@@ -91,6 +89,7 @@ Packets Sent:
         }
       }, function () {
         console.log("Disconnect callback...");
+        term("Bluetooth connection closed");
         Espruino.Core.Notifications.warning("Disconnected", true);
       });
     }
@@ -112,17 +111,21 @@ Packets Sent:
     socket.addEventListener('open', function (event) {
       Espruino.Core.Notifications.success("Websocket connection open", true);
       term("Websocket connection open");
-      term("");
+      term(" ");
       term("=============================");
       term("| RELAY KEY is    "+Espruino.Config.RELAY_KEY+"  |");
       term("=============================");
-      term("");
+      term(" ");
+      term("Please enter this in the Communications -> Relay Key");
+      term("entry for the Web IDE on your PC.");
+      term(" ");
       socket.send('\x10'+Espruino.Config.RELAY_KEY);
     });
     socket.addEventListener('close', function (event) {
       socket = undefined;
       Espruino.Core.Notifications.warning("Websocket connection closed", true);
       term("Websocket connection closed");
+      Espruino.Core.Serial.close();
     });
     // Listen for messages
     socket.addEventListener('message', function (event) {
@@ -131,19 +134,21 @@ Packets Sent:
 
     function BLEToSocket(data) {
       data = ab2str(data);
-      term("BLE -> "+JSON.stringify(data));
+      console.log("BLE -> "+JSON.stringify(data));
       if (socket)
         socket.send('\x00'+data);
     }
 
     function socketToBLE(data) {
       if (data[0]=="\x01") {
-        term("BLE <- "+JSON.stringify(data.substr(1)));
+        console.log("BLE <- "+JSON.stringify(data.substr(1)));
         // Data to send
         Espruino.Core.Serial.write(data.substr(1), false, function() {
-          term("BLE sent.");
+          console.log("BLE sent.");
           if (socket) socket.send('\x02'); // write complete message
         });
+      } else if (data[0]=="\x20") {
+        term("New client connected");
       } else term("Unknown packet type "+JSON.stringify(data[0]));
     }
   }

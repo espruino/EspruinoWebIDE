@@ -2,6 +2,7 @@
 <html><!-- index for Chrome Web IDE -->
 <head>
   <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <link rel="stylesheet" href="../css/ui-lightness/jquery-ui-1.10.1.custom.css">
   <link rel="stylesheet" href="../css/libs/jquery.treeview.css"></link>
@@ -15,6 +16,13 @@
   <link href="../css/components.css" rel="stylesheet" media="all"></link>
   <link href="../css/icons.css" rel="stylesheet" media="all"></link>
 
+  <script>
+    // Force HTTPS - needed for web bluetooth
+    var l = window.location.toString();
+    if (l.substr(0,7)=="http://")
+      window.location = "https://"+l.substr(7);
+  </script>
+
   <script src="../js/libs/jquery-1.11.0.js"></script>
   <script src="../js/libs/toastr/toastr.min.js"></script>
 
@@ -26,6 +34,7 @@
   <script src="../js/core/notifications.js"></script>
   <script src="../js/core/status.js"></script>
   <script src="../js/core/app.js"></script>
+  <script src="../js/core/menuSettings.js"></script>
   <script src="../EspruinoTools/core/serial.js"></script>
   <script src="../EspruinoTools/core/serial_web_bluetooth.js"></script>
   <script src="../EspruinoTools/core/terminal.js"></script>
