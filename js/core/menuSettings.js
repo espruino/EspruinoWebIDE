@@ -38,7 +38,7 @@
       '<div class="settings">'+
         '<div class="sections">';
     for (var i in sections) {
-      var sectionHasEntries = false;
+      var sectionHasEntries = sections[i].getHTML!==undefined;
       var sectionName = sections[i].name;
       var configItems = Espruino.Core.Config.data;
       for (var configName in configItems) {

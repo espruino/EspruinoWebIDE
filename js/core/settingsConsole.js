@@ -44,7 +44,6 @@
     Espruino.Core.Config.addSection("Console", {
       description : "The last "+MAX_LINES+" lines of log messages made by the Web IDE. This is only useful when trying to debug potential problems with the IDE or Espruino board itself.",
       sortOrder : 10000,
-      alwaysShow : true,
       getHTML : function(callback) {
         var html = '<div class="console">';
         if (linesClipped) html += '<span style="color:#808080">'+linesClipped+' lines not displayed...</span><br/>'
