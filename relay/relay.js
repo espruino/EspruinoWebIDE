@@ -116,8 +116,8 @@ Packets Sent:
       term("| RELAY KEY is    "+Espruino.Config.RELAY_KEY+"  |");
       term("=============================");
       term(" ");
-      term("Please enter this in the Communications -> Relay Key");
-      term("entry for the Web IDE on your PC.");
+      term("Please enter this in Communications -> Relay Key");
+      term("in the settings for the Web IDE on your PC.");
       term(" ");
       socket.send('\x10'+Espruino.Config.RELAY_KEY);
     });
