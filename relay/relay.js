@@ -32,6 +32,9 @@ Packets Sent:
   }
 
   function init() {
+    Espruino.Config.FONT_SIZE = 24;
+    $("#terminal").css("font-size", Espruino.Config.FONT_SIZE+"px");
+
     Espruino.Core.Config.add("RELAY_KEY", {
       section : "Communications",
       name : "Relay Key",
