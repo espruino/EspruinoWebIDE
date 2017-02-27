@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html><!-- index for Chrome Web IDE -->
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=350, height=device-height, initial-scale=1">
+
+  <link rel="stylesheet" href="../css/ui-lightness/jquery-ui-1.10.1.custom.css">
+  <link rel="stylesheet" href="../css/libs/jquery.treeview.css"></link>
+  <link rel="stylesheet" href="../js/libs/toastr/toastr.css" />
+  <link rel="stylesheet" href="../js/libs/guiders/guiders.css" />
+
+  <link href="../css/reset.css" rel="stylesheet" media="all"></link>
+  <link href="../css/main.css" rel="stylesheet" media="all"></link>
+  <link href="../css/typography.css" rel="stylesheet" media="all"></link>
+  <link href="../css/abstracts.css" rel="stylesheet" media="all"></link>
+  <link href="../css/components.css" rel="stylesheet" media="all"></link>
+  <link href="../css/icons.css" rel="stylesheet" media="all"></link>
+
+  <script>
+    // Force HTTPS - needed for web bluetooth
+    var l = window.location.toString();
+    if (l.substr(0,7)=="http://")
+      window.location = "https://"+l.substr(7);
+  </script>
+
+  <script src="../js/libs/jquery-1.11.0.js"></script>
+  <script src="../js/libs/toastr/toastr.min.js"></script>
+
+  <script src="../EspruinoTools/espruino.js"></script>
+  <!-- load console here, so we get any messages while loading -->
+  <script src="../js/core/settingsConsole.js"></script>
+  <script src="../EspruinoTools/core/utils.js"></script>
+  <script src="../EspruinoTools/core/config.js"></script>
+  <script src="../js/core/notifications.js"></script>
+  <script src="../js/core/status.js"></script>
+  <script src="../js/core/app.js"></script>
+  <script src="../js/core/menuSettings.js"></script>
+  <script src="../EspruinoTools/core/serial.js"></script>
+  <script src="../EspruinoTools/core/serial_web_bluetooth.js"></script>
+  <script src="../EspruinoTools/core/terminal.js"></script>
+  <script src="relay.js"></script>
+
+  <title>Espruino IDE Relay</title>
+</head>
+<body>
+
+  <div class="window window--app">
+
+    <!-- Title Bar -->
+    <div class="window__title-bar title-bar">
+      <h5 class="title-bar__title">Espruino IDE Relay</h5>
+      <div class="title-bar__buttons"></div>
+    </div>
+
+    <!-- Viewport -->
+    <div class="window__viewport">
+
+      <!-- Toolbar -->
+      <div class="toolbar">
+        <div class="h-split">
+          <div class="h-split__left toolbar__buttons toolbar__buttons--left"></div>
+          <div class="h-split__right toolbar__buttons toolbar__buttons--right"></div>
+        </div>
+      </div>
+
+      <div class="editor editor--terminal">
+        <div class="sidebar editor__sidebar">
+          <div class="v-split">
+            <div class="v-split__top sidebar__buttons sidebar__buttons--top"></div>
+            <div class="v-split__bottom sidebar__buttons sidebar__buttons--bottom"></div>
+          </div>
+        </div>
+        <div class="canvas editor__canvas"></div>
+      </div>
+
+      <!-- Status -->
+      <div class="status">
+        <div class="h-split">
+          <div class="h-split__left status__left"></div>
+          <div class="h-split__right status__right"></div>
+        </div>
+      </div>
+
+    </div>
+
+</body>
+</html>

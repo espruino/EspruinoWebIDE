@@ -4,9 +4,9 @@
  This Source Code is subject to the terms of the Mozilla Public
  License, v2.0. If a copy of the MPL was not distributed with this
  file, You can obtain one at http://mozilla.org/MPL/2.0/.
- 
+
  ------------------------------------------------------------------
-  'About' Settings Page 
+  'Console' Settings Page showing console.log output
  ------------------------------------------------------------------
 **/
 "use strict";
@@ -44,7 +44,7 @@
     Espruino.Core.Config.addSection("Console", {
       description : "The last "+MAX_LINES+" lines of log messages made by the Web IDE. This is only useful when trying to debug potential problems with the IDE or Espruino board itself.",
       sortOrder : 10000,
-      getHTML : function(callback) {      
+      getHTML : function(callback) {
         var html = '<div class="console">';
         if (linesClipped) html += '<span style="color:#808080">'+linesClipped+' lines not displayed...</span><br/>'
         html += lines.join('<br/>\n');
@@ -53,7 +53,7 @@
       }
     });
   }
-  
+
   Espruino.Core.SettingsConsole = {
     init : init,
   };

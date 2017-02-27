@@ -186,8 +186,7 @@
     }
   }
 
-  function disconnect()
-  {
+  function disconnect() {
     Espruino.Core.Serial.close();
   }
 

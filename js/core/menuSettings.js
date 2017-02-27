@@ -4,19 +4,19 @@
  This Source Code is subject to the terms of the Mozilla Public
  License, v2.0. If a copy of the MPL was not distributed with this
  file, You can obtain one at http://mozilla.org/MPL/2.0/.
- 
+
  ------------------------------------------------------------------
   An Example Plugin
  ------------------------------------------------------------------
 **/
 "use strict";
 (function(){
-  
+
   function init() {
-    Espruino.Core.App.addIcon({ 
+    Espruino.Core.App.addIcon({
       id: "settings",
-      icon: "settings", 
-      title : "Settings", 
+      icon: "settings",
+      title : "Settings",
       order: -100,
       area: {
         name: "toolbar",
@@ -27,19 +27,31 @@
       }
     });
   }
-  
+
   function createSettingsWindow(initialSection) {
     if (initialSection==undefined)
       initialSection = "About";
     // Get sections
     var sections = Espruino.Core.Config.getSections();
     // Write list of sections
-    var html = 
+    var html =
       '<div class="settings">'+
-        '<div class="sections">';   
-    for (var i in sections)
-      html += '<a name="'+sections[i].name+'" title="'+ sections[i].description +'"><div class="icon-forward sml"></div><span>'+sections[i].name+'</span></a>';
-    html +=    
+        '<div class="sections">';
+    for (var i in sections) {
+      var sectionHasEntries = sections[i].getHTML!==undefined;
+      var sectionName = sections[i].name;
+      var configItems = Espruino.Core.Config.data;
+      for (var configName in configItems) {
+        var configItem = configItems[configName];
+        if (configItem.section == sectionName) {
+          sectionHasEntries = true;
+          break;
+        }
+      }
+      if (sectionHasEntries || sections[i].alwaysShow)
+        html += '<a name="'+sectionName+'" title="'+ sections[i].description +'"><div class="icon-forward sml"></div><span>'+sectionName+'</span></a>';
+    }
+    html +=
         '</div>'+
         '<div class="currentsection">'+
         '</div>'+
@@ -57,11 +69,11 @@
     // Show initial section
     showSettingsSection(initialSection);
   }
-  
+
   function showSettingsSection(sectionName) {
     $(".settings .sections a").removeClass("current");
     getSettingsSection(sectionName, function(data) {
-      $(".settings .currentsection").html(data);      
+      $(".settings .currentsection").html(data);
       $(".settings .sections a[name='"+sectionName+"']").addClass("current");
       $(".tour_link").click(function(e) {
         e.preventDefault();
@@ -70,7 +82,7 @@
       });
     });
   }
-  
+
   function getSettingsSection(sectionName, callback) {
     var section = Espruino.Core.Config.getSection(sectionName);
     if (section===undefined) {
@@ -78,7 +90,7 @@
       callback("");
       return;
     }
-    
+
     var html = "<h1>"+sectionName+"</h1>";
     if (section.descriptionHTML!==undefined)
       html += "<p>"+section.descriptionHTML+"<p>";
@@ -87,9 +99,9 @@
     if (section.tours!==undefined) {
       html += "<p>See the ";
       var tours = [];
-      for (var tourName in section.tours) 
+      for (var tourName in section.tours)
         tours.push('<a href="#" class="tour_link" tour_name="'+section.tours[tourName]+'">'+tourName+'</a>');
-      
+
       if (tours.length==1)
         html += tours[0];
       else
@@ -104,13 +116,13 @@
         html += getHtmlForConfigItem(configName, configItem);
       }
     }
-    
+
     if (section.getHTML!==undefined) {
       section.getHTML(function (data) {
-        callback(html + data);        
+        callback(html + data);
       });
     } else {
-      callback(html); 
+      callback(html);
     }
 
    $(".settings .currentsection input,select").change(function() {
@@ -124,12 +136,12 @@
      } else
        console.warn("Config named '"+configName+"' not found");
    });
-    
+
   }
-  
+
   function getHtmlForConfigItem(configName, config) {
     var value = Espruino.Config[configName];
-    var html = 
+    var html =
       '<h3>'+Espruino.Core.Utils.escapeHTML(config.name)+'</h3>';
     var desc = "";
     if (config.descriptionHTML!==undefined)
@@ -152,14 +164,14 @@
       html += '</select>';
       html += desc;
     } else
-      console.warn("Unknown config type '"+config.type+"' for Config."+configName);    
-      
+      console.warn("Unknown config type '"+config.type+"' for Config."+configName);
+
     return html;
   }
-  
+
   Espruino.Core.MenuSettings = {
     init : init,
-    
+
     show : createSettingsWindow,
   };
 }());

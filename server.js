@@ -67,7 +67,7 @@ function str2ab(str) {
 }
 
 Espruino.Core.Serial.startListening(function(data) {
-  if (connection) connection.sendUTF("R"+ab2str(data));
+  if (connection) connection.sendUTF("\x00"+ab2str(data));
 });
 
 var server = http.createServer(function(request, response) {
@@ -160,10 +160,13 @@ wsServer.on('request', function(request) {
       connection = request.accept('serial', request.origin);
       console.log((new Date()) + ' Connection accepted.');
       connection.on('message', function(message) {
-        console.log('Received Message: ' + message.type + " - " + message.utf8Data);
-        Espruino.Core.Serial.write(message.utf8Data, false, function() {
-          connection.sendUTF("W"); // send write ack
-        });
+        var d = message.utf8Data;
+        console.log('Received Message: ' + message.type + " - " + JSON.stringify(d));
+        if (d[0]=="\x01") { // IDE -> BLE
+          Espruino.Core.Serial.write(d.substr(1), false, function() {
+            connection.sendUTF("\x02"); // send write ack
+          });
+        }
       });
       connection.on('close', function(reasonCode, description) {
         console.log((new Date()) + ' Peer disconnected.');
