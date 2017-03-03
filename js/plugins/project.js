@@ -246,6 +246,9 @@
         }
         console.warn("getProjectSubDir("+name+") failed");
         callback(false);
+      }, function() { // error callback
+        console.warn("getProjectSubDir("+name+") failed");
+        callback(false);
       });
     }
   }
@@ -378,7 +381,7 @@
         for(var i = 0; i < results.length;i++){
           if(!results[i].isDirectory){
             name = results[i].name.split(".");
-            if(name.length > 0){
+            if(name.length > 1){
               if(name[1].toUpperCase() === ext){
                 lrow = row.replace("$name0",name[0]);
                 lrow = lrow.replace("$fileentry",chrome.fileSystem.retainEntry(results[i]));
