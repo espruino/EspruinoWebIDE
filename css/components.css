@@ -206,12 +206,23 @@ a:hover > .menu
         width: 100%;
 }
 
-.status__message
+.status h5
 {
         display: inline-block;
         font-size: 100%;
         line-height: 30px;
         text-transform: uppercase;
+}
+
+
+.status__port
+{
+        margin: 0;
+        padding: 0 10px;
+}
+
+.status__message
+{
         margin: 0;
         padding: 0 10px;
 }
@@ -219,11 +230,12 @@ a:hover > .menu
 /* Progress */
 .status__progress
 {
-        position: relative;
         display: inline-block;
+        position: relative;
         width: 180px;
         height: 4px;
-        margin: 13px 13px;
+        top: -1px;
+        margin: 0px;
         vertical-align: middle;
         background: rgba(0,0,0,0.2);
 }
