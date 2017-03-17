@@ -12,6 +12,8 @@
 "use strict";
 (function(){
 
+  var currentSection;
+
   function init() {
     Espruino.Core.App.addIcon({
       id: "settings",
@@ -30,7 +32,7 @@
 
   function createSettingsWindow(initialSection) {
     if (initialSection==undefined)
-      initialSection = "About";
+      initialSection = "About";    
     // Get sections
     var sections = Espruino.Core.Config.getSections();
     // Write list of sections
@@ -59,6 +61,7 @@
   }
 
   function showSettingsSection(sectionName) {
+    currentSection = sectionName;
     $(".settings .sections a").removeClass("current");
     getSettingsSection(sectionName, function(data) {
       $(".settings .currentsection").html(data);
@@ -83,7 +86,7 @@
     if (section.descriptionHTML!==undefined)
       html += "<p>"+section.descriptionHTML+"<p>";
     if (section.description!==undefined)
-      html += "<p>"+Espruino.Core.Utils.escapeHTML(section.description, false).replace("\n","</p><p>") +"<p>";
+      html += "<p>"+Espruino.Core.Utils.escapeHTML(section.description, false).replace("\n","</p><p>") +"<p>";      
     if (section.tours!==undefined) {
       html += "<p>See the ";
       var tours = [];
@@ -140,6 +143,8 @@
     var desc = "";
     if (config.descriptionHTML!==undefined)
       desc += "<p>"+config.descriptionHTML+"<p>";
+    if (config.getDescriptionHTML!==undefined)
+      html += "<p>"+config.getDescriptionHTML()+"<p>";
     if (config.description!==undefined)
       desc += '<p>'+Espruino.Core.Utils.escapeHTML(config.description, false).replace("\n","</p><p>")+'</p>';
     // type : "int"/"boolean"/"string"/{ value1:niceName, value2:niceName },
@@ -166,10 +171,15 @@
 
     return html;
   }
+  
+  function refresh() {
+    showSettingsSection(currentSection);
+  }
 
   Espruino.Core.MenuSettings = {
     init : init,
 
     show : createSettingsWindow,
+    refresh : refresh,
   };
 }());
