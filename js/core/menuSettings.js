@@ -12,6 +12,11 @@
 "use strict";
 (function(){
 
+<<<<<<< HEAD
+=======
+  var currentSection;
+
+>>>>>>> offline
   function init() {
     Espruino.Core.App.addIcon({
       id: "settings",
@@ -30,13 +35,14 @@
 
   function createSettingsWindow(initialSection) {
     if (initialSection==undefined)
-      initialSection = "About";
+      initialSection = "About";    
     // Get sections
     var sections = Espruino.Core.Config.getSections();
     // Write list of sections
     var html =
       '<div class="settings">'+
         '<div class="sections">';
+<<<<<<< HEAD
     for (var i in sections) {
       var sectionHasEntries = sections[i].getHTML!==undefined;
       var sectionName = sections[i].name;
@@ -51,6 +57,10 @@
       if (sectionHasEntries || sections[i].alwaysShow)
         html += '<a name="'+sectionName+'" title="'+ sections[i].description +'"><div class="icon-forward sml"></div><span>'+sectionName+'</span></a>';
     }
+=======
+    for (var i in sections)
+      html += '<a name="'+sections[i].name+'" title="'+ sections[i].description +'"><div class="icon-forward sml"></div><span>'+sections[i].name+'</span></a>';
+>>>>>>> offline
     html +=
         '</div>'+
         '<div class="currentsection">'+
@@ -71,6 +81,7 @@
   }
 
   function showSettingsSection(sectionName) {
+    currentSection = sectionName;
     $(".settings .sections a").removeClass("current");
     getSettingsSection(sectionName, function(data) {
       $(".settings .currentsection").html(data);
@@ -95,7 +106,7 @@
     if (section.descriptionHTML!==undefined)
       html += "<p>"+section.descriptionHTML+"<p>";
     if (section.description!==undefined)
-      html += "<p>"+Espruino.Core.Utils.escapeHTML(section.description, false).replace("\n","</p><p>") +"<p>";
+      html += "<p>"+Espruino.Core.Utils.escapeHTML(section.description, false).replace("\n","</p><p>") +"<p>";      
     if (section.tours!==undefined) {
       html += "<p>See the ";
       var tours = [];
@@ -136,7 +147,12 @@
      } else
        console.warn("Config named '"+configName+"' not found");
    });
-
+   $(".settings .currentsection button").click(function() {
+     var key = $(this).attr("name");
+     if (Espruino.Core.Config.data[key] !== undefined &&
+         Espruino.Core.Config.data[key].onClick !== undefined)
+       Espruino.Core.Config.data[key].onClick();
+   });
   }
 
   function getHtmlForConfigItem(configName, config) {
@@ -146,6 +162,8 @@
     var desc = "";
     if (config.descriptionHTML!==undefined)
       desc += "<p>"+config.descriptionHTML+"<p>";
+    if (config.getDescriptionHTML!==undefined)
+      html += "<p>"+config.getDescriptionHTML()+"<p>";
     if (config.description!==undefined)
       desc += '<p>'+Espruino.Core.Utils.escapeHTML(config.description, false).replace("\n","</p><p>")+'</p>';
     // type : "int"/"boolean"/"string"/{ value1:niceName, value2:niceName },
@@ -163,15 +181,24 @@
                 '</option>';
       html += '</select>';
       html += desc;
+    } else if (config.type == "button") {
+      var label = config.label || "Go";
+      html += '<button name="'+configName+'" style="float: right;" '+(value?"checked":"")+'>'+label+'</button>';
+      html += desc;
     } else
       console.warn("Unknown config type '"+config.type+"' for Config."+configName);
 
     return html;
+  }
+  
+  function refresh() {
+    showSettingsSection(currentSection);
   }
 
   Espruino.Core.MenuSettings = {
     init : init,
 
     show : createSettingsWindow,
+    refresh : refresh,
   };
 }());

@@ -35,15 +35,15 @@
   function checkBoard(boardId) {
     if (boardId=="PUCKJS") {
       var popup = Espruino.Core.App.openPopup({
-      title: "Firmware Update",
-      padding: true,
-      contents: '<p>Puck.js firmware can\'t be updated from the IDE at the moment.</p>'+
-                '<p>Please see <a href="http://www.espruino.com/Puck.js#firmware-updates" target="_blank">the Puck.js page</a> for more instructions.</p>' ,
-      position: "center",
-      ok : function() {
-        popup.close();
-      }
-    });
+        title: "Firmware Update",
+        padding: true,
+        contents: '<p>Puck.js firmware can\'t be updated from the IDE at the moment.</p>'+
+                  '<p>Please see <a href="http://www.espruino.com/Puck.js#firmware-updates" target="_blank">the Puck.js page</a> for more instructions.</p>' ,
+        position: "center",
+        ok : function() {
+          popup.close();
+        }
+      });
       return false;
     }
     return true;
