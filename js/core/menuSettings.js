@@ -12,11 +12,8 @@
 "use strict";
 (function(){
 
-<<<<<<< HEAD
-=======
   var currentSection;
 
->>>>>>> offline
   function init() {
     Espruino.Core.App.addIcon({
       id: "settings",
@@ -42,7 +39,6 @@
     var html =
       '<div class="settings">'+
         '<div class="sections">';
-<<<<<<< HEAD
     for (var i in sections) {
       var sectionHasEntries = sections[i].getHTML!==undefined;
       var sectionName = sections[i].name;
@@ -57,10 +53,6 @@
       if (sectionHasEntries || sections[i].alwaysShow)
         html += '<a name="'+sectionName+'" title="'+ sections[i].description +'"><div class="icon-forward sml"></div><span>'+sectionName+'</span></a>';
     }
-=======
-    for (var i in sections)
-      html += '<a name="'+sections[i].name+'" title="'+ sections[i].description +'"><div class="icon-forward sml"></div><span>'+sections[i].name+'</span></a>';
->>>>>>> offline
     html +=
         '</div>'+
         '<div class="currentsection">'+
