@@ -14,6 +14,15 @@
 (function(){
   
   function init() {
+    // Try and automatically handle the URL if we're served from somewhere we know
+    if (typeof window!=="undefined" && 
+        window.location &&
+        (window.location.origin=="https://localhost" ||
+         window.location.origin=="https://www.espruino.com")) {
+      setTimeout(function() {
+        handle(window.location.href);
+      }, 200);
+    }
   }
   
   function handleQuery(key, val) {
@@ -60,7 +69,15 @@
   function handle(url) {    
     console.log("Handling URL "+JSON.stringify(url));
     url = (url);
+    var h = url.indexOf("#");    
     var q = url.indexOf("?");
+    if (h>=0) {
+      var hash = (q>h) ? url.substr(h+1,q) : url.substr(h+1);
+      if (hash.substr(0,7)=="http://" ||
+          hash.substr(0,8)=="https://") {
+        handleQuery("codeurl",hash);
+      }
+    }
     if (q<0) return;
     var query = url.substr(q+1).split("&");
     for (var i in query) {
@@ -71,7 +88,7 @@
         handleQuery(decodeURIComponent(eq[0]),decodeURIComponent(eq[1]));
       else
         console.warn("Didn't understand query section "+JSON.stringify(query[i]));
-    }
+    }    
   }
     
 
