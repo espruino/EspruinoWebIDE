@@ -1,5 +1,7 @@
 // Service worker for Offline Web IDE
-const CACHE_NAME = 'espruino-web-ide-v2';
+const VERSION = 'v2';
+
+const CACHE_NAME = 'espruino-web-ide-' + VERSION;
 
 const FILES_TO_CACHE = [
   'EspruinoTools/index.js',
@@ -16,14 +18,12 @@ const FILES_TO_CACHE = [
   'EspruinoTools/plugins/getGitHub.js',
   'EspruinoTools/plugins/npmModules.js',
   'EspruinoTools/plugins/setTime.js',
-  'EspruinoTools/package.json',
   'EspruinoTools/libs/esprima/escodegen.js',
   'EspruinoTools/libs/esprima/esmangle.js',
   'EspruinoTools/libs/esprima/esprima.js',
   'EspruinoTools/libs/targz.js',
   'EspruinoTools/libs/utf8.js',
   'EspruinoTools/bin/espruino-cli.js',
-  'EspruinoTools/LICENSE',
   'EspruinoTools/core/terminal.js',
   'EspruinoTools/core/serial_nodeserial.js',
   'EspruinoTools/core/config.js',
@@ -245,7 +245,7 @@ this.addEventListener('install', function(event) {
 // Use the cache, fallback to network
 this.addEventListener('fetch', function(event) {
   event.respondWith(
-    caches.match(event.request, {ignoreSearch: true}).then(function(response){
+    caches.match(event.request, {ignoreSearch: true}).then(function(response) {
       return response || fetch(event.request);
     })
   );
