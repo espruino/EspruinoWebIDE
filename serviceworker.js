@@ -1,8 +1,7 @@
 // Service worker for Offline Web IDE
-const CACHE_NAME = 'v1';
+const CACHE_NAME = 'espruino-web-ide-v2';
 
 const FILES_TO_CACHE = [
-  'favicon.ico',
   'EspruinoTools/index.js',
   'EspruinoTools/espruino.js',
   'EspruinoTools/plugins/minify.js',
@@ -229,6 +228,7 @@ const FILES_TO_CACHE = [
   'css/images/treeview-famfamfam.gif',
   'img/icons.png',
   'img/icon_128.png',
+  'favicon.ico',
   'manifest.json',
   'index.html',
   './'
@@ -242,8 +242,7 @@ this.addEventListener('install', function(event) {
   );
 });
 
-
-// Use the cache, fall-back to network
+// Use the cache, fallback to network
 this.addEventListener('fetch', function(event) {
   event.respondWith(
     caches.match(event.request, {ignoreSearch: true}).then(function(response){
