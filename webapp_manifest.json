@@ -1,0 +1,23 @@
+{
+  "name": "Espruino Web IDE",
+  "short_name": "Espruino IDE",
+  "description": "A Terminal and Graphical code Editor for Espruino JavaScript Microcontrollers",
+  "display": "standalone",
+  "icons": [
+    {
+      "sizes": "128x128",
+      "src": "img/icon_128.png",
+      "type": "image/png"
+    },
+    {
+      "sizes": "256x256",
+      "src": "img/icon_256.png",
+      "type": "image/png"
+    },
+    {
+      "sizes": "512x512",
+      "src": "img/icon_512.png",
+      "type": "image/png"
+    }
+  ]
+}
