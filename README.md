@@ -29,9 +29,9 @@ Installing from NPM
 
 If you have an up to date version of [Node.js](https://nodejs.org/en/) and [NPM](https://www.npmjs.com/), you can execute the commands:
 
-* On Linux, `sudo apt-get install build-essential`
+* On Linux, `sudo apt-get install build-essential libudev-dev`
 * `sudo npm install espruino-web-ide -g`
-* To enable BLE support: `sudo setcap cap_net_raw+eip $(eval readlink -f `which node`)`
+* To enable BLE support: `sudo setcap cap_net_raw+eip $(eval readlink -f $(which node))`
 * `espruino-web-ide`
 
 **Note:** For command-line access you might also want to take a look at [EspruinoTools](https://github.com/espruino/EspruinoTools)
