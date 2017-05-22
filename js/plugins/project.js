@@ -40,14 +40,16 @@
       function getModules(subDirEntry){
         var fnd = false;
         var dirReader = subDirEntry.createReader();
-        dirReader.readEntries(function(results){
+        dirReader.readEntries(function dirReadHandler(results){
           for(var i = 0; i < results.length; i++){
             if(results[i].name === module.moduleName + ".js"){
               fnd = true;
               readFilefromEntry(results[i],gotModule);
-              break;
             }
           }
+          // if more than 100 entries, chrome will limit it
+          if (results.length)
+            dirReader.readEntries(dirReadHandler);
         });
       }
       function gotModule(data){
