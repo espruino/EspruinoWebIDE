@@ -54,23 +54,6 @@
           saveFile(Espruino.Core.EditorJavaScript.getCode(), currentJSFileName);
       }
     });
-
-    var fileLoader = document.createElement("input");
-    fileLoader.setAttribute("id", "fileLoader");
-    fileLoader.setAttribute("type", "file");
-    fileLoader.setAttribute("style", "z-index:-2000;position:absolute;top:0px;left:0px;");
-    fileLoader.addEventListener('change', function(e) {
-      if (!loadFileCallback) return;
-      var files = e.target.files;
-      var reader = new FileReader();
-      reader.onload = function(e) {
-        loadFileCallback(convertFromOS(e.target.result));
-        loadFileCallback = undefined;
-      };
-      // Read in the image file as a data URL.
-      reader.readAsText(files[0]);
-    }, false)
-    document.body.appendChild(fileLoader);
   }
 
   function setCurrentFileName(filename) {
@@ -111,9 +94,9 @@
         });
       });
     } else {
-      loadFileCallback = callback;
-      var fileLoader = document.getElementById("fileLoader");
-      fileLoader.click();
+      Espruino.Core.Utils.fileOpenDialog("code", "text", function(data) {
+        callback(convertFromOS(data));
+      });
     }
   }
 

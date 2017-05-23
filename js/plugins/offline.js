@@ -50,7 +50,7 @@
     Espruino.Core.Config.add("OFFLINE_ENABLED", {
       section : "Offline Mode",
       name : "Enable offline mode",
-      description : "Enable offline mode - if we have the required files",
+      description : "Check the button to the right to enable offline mode - if we have the required files (shown below)",
       type : "boolean",
       defaultValue : false,
       onChange : function(newValue) {
@@ -65,18 +65,70 @@
       section : "Offline Mode",
       name : "Offline Data",
       getDescriptionHTML : function() {
-        var html;
         if (OFFLINE_DATE)
-          html += "Offline data last downloaded "+OFFLINE_DATE
+          return "Offline data last downloaded "+OFFLINE_DATE
         else
-          html += "No Offline data"
-        html += "<br>Click the button to the right to download new offline data"
-        return html;
+          return "No Offline data"
       },
+      type : "none",
+      defaultValue : '',
+    });
+    Espruino.Core.Config.add("OFFLINE_DATA_DOWNLOAD", {
+      section : "Offline Mode",
+      name : "Download offline data",
+      description : "Click this button to automatically download new offline data "+
+                    "if you have an internet connection",
       type : "button",
-      label : "Get offline data",
+      label : "Download offline data",
       defaultValue : '',
       onClick : getOfflineData
+    });
+    Espruino.Core.Config.add("OFFLINE_DATA_UPLOAD", {
+      section : "Offline Mode",
+      name : "Upload offline data from file",
+      descriptionHTML : "If you're behind a firewall the Web IDE may be unable to "+
+      "download files from the internet. If so, you'll need to manually download "+
+      '<a href="http://www.espruino.com/files/offline.zip">http://www.espruino.com/files/offline.zip</a> to your computer, click this button '+
+      "and select it from your local disk.",
+      type : "button",
+      label : "Upload offline data from local file",
+      defaultValue : '',
+      onClick : uploadOfflineData
+    });
+  }
+  
+  function offlineDataLoaded(data /*Uint8Array*/) {
+    Espruino.Core.Status.setStatus("Downloaded "+data.length+" bytes. Saving to local storage");    
+    OFFLINE_DATE = (new Date()).toLocaleString("en-US");
+    OFFLINE_DATA = data?data.buffer:undefined;
+    
+    var urlBase = Espruino.Config.BOARD_JSON_URL;
+    if (urlBase[urlBase.length-1]!="/")
+      urlBase += "/";
+    
+    // do a quick sanity test
+    findOffline(urlBase+"espruino.json", function(d) {
+      if (d===undefined) {
+        OFFLINE_DATE = undefined;
+        OFFLINE_DATA = undefined;
+        var popup = Espruino.Core.App.openPopup({
+          title: "Offline Mode",
+          padding: true,
+          contents: "<p><b>The offline file couldn't be found or was corrupt.</b><p>",
+          position: "center",
+          ok : function() {
+            popup.close();
+          }
+        });
+      } else {
+        var dataHex = OFFLINE_DATE+DATA_SEPARATOR;
+        for (var i=0;i<data.length;i++)
+          dataHex += (256+data[i]).toString(16).substr(-2);
+        console.log("SET chrome.storage.local.OFFLINE_DATA = "+(dataHex?dataHex.length:0)+" bytes");
+        chrome.storage.local.set({ OFFLINE_DATA : dataHex });
+        Espruino.Core.Status.setStatus("Done.");
+        Espruino.Core.MenuSettings.refresh();
+      }
     });
   }
 
@@ -93,17 +145,7 @@
     xhr.addEventListener("load", function () {
       if (xhr.status === 200) {        
         var data = new Uint8Array(xhr.response);
-        Espruino.Core.Status.setStatus("Downloaded "+data.length+" bytes. Saving to local storage");
-        var dataHex = "";
-        for (var i=0;i<data.length;i++)
-          dataHex += (256+data[i]).toString(16).substr(-2);
-        OFFLINE_DATE = (new Date()).toLocaleString("en-US");
-        OFFLINE_DATA = data.buffer;
-        dataHex = OFFLINE_DATE+DATA_SEPARATOR+dataHex;
-        console.log("SET chrome.storage.local.OFFLINE_DATA = "+(dataHex?dataHex.length:0)+" bytes");
-        chrome.storage.local.set({ OFFLINE_DATA : dataHex });
-        Espruino.Core.Status.setStatus("Done.");
-        Espruino.Core.MenuSettings.refresh();
+        offlineDataLoaded(data);        
       } else
         Espruino.Core.Notifications.error("Error downloading file - HTTP "+xhr.status);
     });
@@ -112,6 +154,13 @@
     });
     xhr.open("GET", OFFLINE_URL, true);
     xhr.send(null);
+  }
+  
+  function uploadOfflineData() {
+    Espruino.Core.Utils.fileOpenDialog("offline", "arraybuffer", function(data) {
+      if (data===undefined) return;
+      offlineDataLoaded(new Uint8Array(data));
+    });
   }
 
   function findOffline(url, callback) {

@@ -150,7 +150,7 @@
   function getHtmlForConfigItem(configName, config) {
     var value = Espruino.Config[configName];
     var html =
-      '<h3>'+Espruino.Core.Utils.escapeHTML(config.name)+'</h3>';
+      '<h3 style="clear:both">'+Espruino.Core.Utils.escapeHTML(config.name)+'</h3>';
     var desc = "";
     if (config.descriptionHTML!==undefined)
       desc += "<p>"+config.descriptionHTML+"<p>";
@@ -159,7 +159,8 @@
     if (config.description!==undefined)
       desc += '<p>'+Espruino.Core.Utils.escapeHTML(config.description, false).replace("\n","</p><p>")+'</p>';
     // type : "int"/"boolean"/"string"/{ value1:niceName, value2:niceName },
-    if (config.type == "boolean") {
+    if (config.type == "none") {
+    } else if (config.type == "boolean") {
       html += '<input name="'+configName+'" type="checkbox" style="float: right;" '+(value?"checked":"")+'/>';
       html += desc;
     } else if (config.type == "string") {
