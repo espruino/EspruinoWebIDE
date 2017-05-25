@@ -180,6 +180,82 @@
       "!url": "http://www.espruino.com/Reference#l_NodeMCU_D10"
     }
   },
+  "Queue": {
+    "!type": "fn(queueName: ?) -> ?",
+    "!doc": "<p>Creates a Queue Object</p>\n",
+    "!url": "http://www.espruino.com/Reference#l_Queue_Queue",
+    "prototype": {
+      "read": {
+        "!type": "fn()",
+        "!doc": "<p>reads one character from queue, if available</p>\n",
+        "!url": "http://www.espruino.com/Reference#l_Queue_read"
+      },
+      "writeChar": {
+        "!type": "fn(char: ?)",
+        "!doc": "<p>Writes one character to queue</p>\n",
+        "!url": "http://www.espruino.com/Reference#l_Queue_writeChar"
+      },
+      "log": {
+        "!type": "fn()",
+        "!doc": "<p>logs list of queues</p>\n",
+        "!url": "http://www.espruino.com/Reference#l_Queue_log"
+      }
+    }
+  },
+  "Task": {
+    "!type": "fn(taskName: ?) -> ?",
+    "!doc": "<p>Creates a Task Object</p>\n",
+    "!url": "http://www.espruino.com/Reference#l_Task_Task",
+    "prototype": {
+      "suspend": {
+        "!type": "fn()",
+        "!doc": "<p>Suspend task, be careful not to suspend Espruino task itself</p>\n",
+        "!url": "http://www.espruino.com/Reference#l_Task_suspend"
+      },
+      "resume": {
+        "!type": "fn()",
+        "!doc": "<p>Resumes a suspended task</p>\n",
+        "!url": "http://www.espruino.com/Reference#l_Task_resume"
+      },
+      "getCurrent": {
+        "!type": "fn() -> ?",
+        "!doc": "<p>returns name of actual task</p>\n",
+        "!url": "http://www.espruino.com/Reference#l_Task_getCurrent"
+      },
+      "notify": {
+        "!type": "fn()",
+        "!doc": "<p>Sends a binary notify to task</p>\n",
+        "!url": "http://www.espruino.com/Reference#l_Task_notify"
+      },
+      "log": {
+        "!type": "fn()",
+        "!doc": "<p>logs list of tasks</p>\n",
+        "!url": "http://www.espruino.com/Reference#l_Task_log"
+      }
+    }
+  },
+  "Timer": {
+    "!type": "fn(timerName: ?, group: number, index: number, isrIndex: number) -> ?",
+    "!doc": "<p>Creates a Timer Object</p>\n",
+    "!url": "http://www.espruino.com/Reference#l_Timer_Timer",
+    "prototype": {
+      "start": {
+        "!type": "fn(duration: number)",
+        "!doc": "<p>Starts a timer</p>\n",
+        "!url": "http://www.espruino.com/Reference#l_Timer_start"
+      },
+      "reschedule": {
+        "!type": "fn(duration: number)",
+        "!doc": "<p>Reschedules a timer, needs to be started at least once</p>\n",
+        "!url": "http://www.espruino.com/Reference#l_Timer_reschedule"
+      },
+      "log": {
+        "!type": "fn()",
+        "!doc": "<p>logs list of timers</p>\n",
+        "!url": "http://www.espruino.com/Reference#l_Timer_log"
+      }
+    }
+  },
   "process": {
     "!type": "fn()",
     "!doc": "<p>This class contains information about Espruino itself</p>\n",
@@ -390,11 +466,6 @@
         "!doc": "<p>Call the event listeners for this object, for instance <code>http.emit(&#39;data&#39;, &#39;Foo&#39;)</code>. See Node.js&#39;s EventEmitter.</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Object_emit"
       },
-      "removeListener": {
-        "!type": "fn(event: ?, listener: ?)",
-        "!doc": "<p>Removes the specified event listener.</p>\n<pre><code><span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span> <span class=\"hljs-title\">foo</span>(<span class=\"hljs-params\">d</span>) </span>{\n  <span class=\"hljs-built_in\">console</span>.log(d);\n}\nSerial1.on(<span class=\"hljs-string\">\"data\"</span>, foo);\nSerial1.removeListener(<span class=\"hljs-string\">\"data\"</span>, foo);\n</code></pre>",
-        "!url": "http://www.espruino.com/Reference#l_Object_removeListener"
-      },
       "removeAllListeners": {
         "!type": "fn(event: ?)",
         "!doc": "<p>Removes all listeners, or those of the specified event.</p>\n",
@@ -408,7 +479,7 @@
     },
     "getOwnPropertyNames": {
       "!type": "fn(object: ?) -> ?",
-      "!doc": "<p>Returns an array of all properties (enumerable or not) found directly on a given object.</p>\n<p> <strong>Note:</strong> This doesn&#39;t currently work as it should for built-in objects and their prototypes. See bug #380</p>\n",
+      "!doc": "<p>Returns an array of all properties (enumerable or not) found directly on a given object.</p>\n",
       "!url": "http://www.espruino.com/Reference#l_Object_getOwnPropertyNames"
     },
     "create": {
@@ -487,7 +558,7 @@
       },
       "setup": {
         "!type": "fn(baudrate: ?, options: ?)",
-        "!doc": "<p>Setup this Serial port with the given baud rate and options.</p>\n<p>If not specified in options, the default pins are used (usually the lowest numbered pins on the lowest port that supports this peripheral)</p>\n",
+        "!doc": "<p>Setup this Serial port with the given baud rate and options.</p>\n<p>If not specified in options, the default pins are used (usually the lowest numbered pins on the lowest port that supports this peripheral).</p>\n<p>Flow control can be xOn/xOff (<code>flow:&#39;xon&#39;</code>) or hardware flow control\n(receive only) if <code>cts</code> is specified. If <code>cts</code> is set to a pin, the\npin&#39;s value will be 0 when Espruino is ready for data and 1 when it isn&#39;t.</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Serial_setup"
       },
       "print": {
@@ -650,6 +721,11 @@
         "!type": "fn() -> ?",
         "!doc": "<p>Converts to a String, eg: <code>Fri, 20 Jun 2014 14:52:20 GMT</code></p>\n<p> <strong>Note:</strong> This always assumes a timezone of GMT</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Date_toUTCString"
+      },
+      "toISOString": {
+        "!type": "fn() -> ?",
+        "!doc": "<p>Converts to a ISO 8601 String, eg: <code>2014-06-20T14:52:20.123Z</code></p>\n<p> <strong>Note:</strong> This always assumes a timezone of GMT</p>\n",
+        "!url": "http://www.espruino.com/Reference#l_Date_toISOString"
       }
     },
     "parse": {
@@ -802,11 +878,6 @@
       "!doc": "<p>Dump any locked variables that aren&#39;t referenced from <code>global</code> - for debugging memory leaks only.</p>\n",
       "!url": "http://www.espruino.com/Reference#l_E_dumpLockedVars"
     },
-    "getSizeOf": {
-      "!type": "fn(v: ?, depth: number) -> ?",
-      "!doc": "<p>Return the number of variable blocks used by the supplied variable. This is\nuseful if you&#39;re running out of memory and you want to be able to see what\nis taking up most of the available space.</p>\n<p>If <code>depth&gt;0</code> and the variable can be recursed into, an array listing all property\nnames (including internal Espruino names) and their sizes is returned. If\n<code>depth&gt;1</code> there is also a <code>more</code> field that inspects the objects&#39;s children&#39;s\nchildren.</p>\n<p>For instance <code>E.getSizeOf(function(a,b) { })</code> returns <code>5</code>.</p>\n<p>But <code>E.getSizeOf(function(a,b) { }, 1)</code> returns:</p>\n<pre><code> [\n  {\n    <span class=\"hljs-attr\">\"name\"</span>: <span class=\"hljs-string\">\"a\"</span>,\n    <span class=\"hljs-attr\">\"size\"</span>: <span class=\"hljs-number\">1</span> },\n  {\n    <span class=\"hljs-attr\">\"name\"</span>: <span class=\"hljs-string\">\"b\"</span>,\n    <span class=\"hljs-attr\">\"size\"</span>: <span class=\"hljs-number\">1</span> },\n  {\n    <span class=\"hljs-attr\">\"name\"</span>: <span class=\"hljs-string\">\"\\xFFcod\"</span>,\n    <span class=\"hljs-attr\">\"size\"</span>: <span class=\"hljs-number\">2</span> }\n ]\n</code></pre><p>In this case setting depth to <code>2</code> will make no difference as there are\nno more children to traverse.</p>\n<p>See <a href=\"http://www.espruino.com/Internals\">http://www.espruino.com/Internals</a> for more information</p>\n",
-      "!url": "http://www.espruino.com/Reference#l_E_getSizeOf"
-    },
     "mapInPlace": {
       "!type": "fn(from: ?, to: ?, map: ?, bits: number)",
       "!doc": "<p>Take each element of the <code>from</code> array, look it up in <code>map</code> (or call the\nfunction with it as a first argument), and write it into the corresponding\nelement in the <code>to</code> array.</p>\n",
@@ -833,8 +904,8 @@
       "!url": "http://www.espruino.com/Reference#l_E_HSBtoRGB"
     },
     "setPassword": {
-      "!type": "fn(opts: ?)",
-      "!doc": "<p>Set a password on the console (REPL). When powered on, Espruino will\nthen demand a password before the console can be used. If you want to\nlock the console immediately after this you can call <code>&quot;E.lockConsole()</code></p>\n<p>To remove the password, call this function with no arguments.</p>\n<p><strong>Note:</strong> There is no protection against multiple password attempts, so someone\ncould conceivably try every password in a dictionary.</p>\n<p><strong>Note:</strong> This password is stored in memory in plain text. If someone is able\nto execute arbitrary JavaScript code on the device (eg, you use <code>eval</code> on input\nfrom unknown sources) or read the device&#39;s firmware then they may be able to\nobtain it.</p>\n",
+      "!type": "fn(password: ?)",
+      "!doc": "<p>Set a password on the console (REPL). When powered on, Espruino will\nthen demand a password before the console can be used. If you want to\nlock the console immediately after this you can call <code>E.lockConsole()</code></p>\n<p>To remove the password, call this function with no arguments.</p>\n<p><strong>Note:</strong> There is no protection against multiple password attempts, so someone\ncould conceivably try every password in a dictionary.</p>\n<p><strong>Note:</strong> This password is stored in memory in plain text. If someone is able\nto execute arbitrary JavaScript code on the device (eg, you use <code>eval</code> on input\nfrom unknown sources) or read the device&#39;s firmware then they may be able to\nobtain it.</p>\n",
       "!url": "http://www.espruino.com/Reference#l_E_setPassword"
     },
     "lockConsole": {
@@ -851,11 +922,6 @@
       "!type": "fn(data: ?) -> bool",
       "!doc": "",
       "!url": "http://www.espruino.com/Reference#l_E_sendUSBHID"
-    },
-    "connectSDCard": {
-      "!type": "fn(spi: ?, csPin: +Pin)",
-      "!doc": "<p>Setup the filesystem so that subsequent calls to <code>E.openFile</code> and <code>require(&#39;fs&#39;).*</code> will use an SD card on the supplied SPI device and pin.</p>\n<p>It can even work using software SPI - for instance:</p>\n<pre><code><span class=\"hljs-keyword\">var</span> spi = <span class=\"hljs-function\"><span class=\"hljs-keyword\">new</span> <span class=\"hljs-title\">SPI</span>();\n<span class=\"hljs-title\">spi</span>.<span class=\"hljs-title\">setup</span>({mosi:<span class=\"hljs-type\">C7</span>,miso:<span class=\"hljs-type\">C8</span>,sck:<span class=\"hljs-type\">C9</span>});\n<span class=\"hljs-title\">E</span>.<span class=\"hljs-title\">connectSDCard</span>(spi,<span class=\"hljs-type\">C6</span>);\n<span class=\"hljs-title\">console</span>.<span class=\"hljs-title\">log</span>(require(\"fs\").<span class=\"hljs-title\">readdirSync</span>());</span>\n</code></pre>",
-      "!url": "http://www.espruino.com/Reference#l_E_connectSDCard"
     },
     "unmountSD": {
       "!type": "fn()",
@@ -945,7 +1011,7 @@
         "!url": "http://www.espruino.com/Reference#l_Array_length"
       },
       "indexOf": {
-        "!type": "fn(value: ?) -> ?",
+        "!type": "fn(value: ?, startIndex: number) -> ?",
         "!doc": "<p>Return the index of the value in the array, or -1</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Array_indexOf"
       },
@@ -1126,22 +1192,22 @@
     "prototype": {
       "read": {
         "!type": "fn() -> bool",
-        "!doc": "<p>Returns the input state of the pin as a boolean.</p>\n<p> <strong>Note:</strong> if you didn&#39;t call <code>pinMode</code> beforehand then this function will also reset pin&#39;s state to <code>&quot;input&quot;</code></p>\n",
+        "!doc": "<p>Returns the input state of the pin as a boolean.</p>\n<p> <strong>Note:</strong> if you didn&#39;t call <code>pinMode</code> beforehand then this function will also reset the pin&#39;s state to <code>&quot;input&quot;</code></p>\n",
         "!url": "http://www.espruino.com/Reference#l_Pin_read"
       },
       "set": {
         "!type": "fn()",
-        "!doc": "<p>Sets the output state of the pin to a 1</p>\n<p> <strong>Note:</strong> if you didn&#39;t call <code>pinMode</code> beforehand then this function will also reset pin&#39;s state to <code>&quot;output&quot;</code></p>\n",
+        "!doc": "<p>Sets the output state of the pin to a 1</p>\n<p> <strong>Note:</strong> if you didn&#39;t call <code>pinMode</code> beforehand then this function will also reset the pin&#39;s state to <code>&quot;output&quot;</code></p>\n",
         "!url": "http://www.espruino.com/Reference#l_Pin_set"
       },
       "reset": {
         "!type": "fn()",
-        "!doc": "<p>Sets the output state of the pin to a 0</p>\n<p> <strong>Note:</strong> if you didn&#39;t call <code>pinMode</code> beforehand then this function will also reset pin&#39;s state to <code>&quot;output&quot;</code></p>\n",
+        "!doc": "<p>Sets the output state of the pin to a 0</p>\n<p> <strong>Note:</strong> if you didn&#39;t call <code>pinMode</code> beforehand then this function will also reset the pin&#39;s state to <code>&quot;output&quot;</code></p>\n",
         "!url": "http://www.espruino.com/Reference#l_Pin_reset"
       },
       "write": {
         "!type": "fn(value: bool)",
-        "!doc": "<p>Sets the output state of the pin to the parameter given</p>\n<p> <strong>Note:</strong> if you didn&#39;t call <code>pinMode</code> beforehand then this function will also reset pin&#39;s state to <code>&quot;output&quot;</code></p>\n",
+        "!doc": "<p>Sets the output state of the pin to the parameter given</p>\n<p> <strong>Note:</strong> if you didn&#39;t call <code>pinMode</code> beforehand then this function will also reset the pin&#39;s state to <code>&quot;output&quot;</code></p>\n",
         "!url": "http://www.espruino.com/Reference#l_Pin_write"
       },
       "writeAtTime": {
@@ -1159,10 +1225,10 @@
         "!doc": "<p>Set the mode of the given pin. See <a href=\"#l__global_pinMode\"><code>pinMode</code></a> for more information on pin modes.</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Pin_mode"
       },
-      "getInfo": {
-        "!type": "fn() -> ?",
-        "!doc": "<p>Get information about this pin and its capabilities. Of the form:</p>\n<pre><code>{\n  <span class=\"hljs-string\">\"port\"</span>      : <span class=\"hljs-string\">\"A\"</span>, <span class=\"hljs-comment\">// the Pin's port on the chip</span>\n  <span class=\"hljs-string\">\"num\"</span>       : <span class=\"hljs-number\">12</span>, <span class=\"hljs-comment\">// the Pin's number</span>\n  <span class=\"hljs-string\">\"in_addr\"</span>   : <span class=\"hljs-number\">0</span>x..., <span class=\"hljs-comment\">// (if available) the address of the pin's input address in bit-banded memory (can be used with peek)</span>\n  <span class=\"hljs-string\">\"out_addr\"</span>  : <span class=\"hljs-number\">0</span>x..., <span class=\"hljs-comment\">// (if available) the address of the pin's output address in bit-banded memory (can be used with poke)</span>\n  <span class=\"hljs-string\">\"analog\"</span>    : { ADCs : [<span class=\"hljs-number\">1</span>], channel : <span class=\"hljs-number\">12</span> }, <span class=\"hljs-comment\">// If analog input is available</span>\n  <span class=\"hljs-string\">\"functions\"</span> : {\n    <span class=\"hljs-string\">\"TIM1\"</span>:{<span class=\"hljs-class\"><span class=\"hljs-keyword\">type</span>:\"<span class=\"hljs-title\">CH1</span>, <span class=\"hljs-title\">af</span>:0},</span>\n    <span class=\"hljs-string\">\"I2C3\"</span>:{<span class=\"hljs-class\"><span class=\"hljs-keyword\">type</span>:\"<span class=\"hljs-title\">SCL</span>\", <span class=\"hljs-title\">af</span>:1}</span>\n  }\n}\n</code></pre><p>Will return undefined if pin is not valid.</p>\n",
-        "!url": "http://www.espruino.com/Reference#l_Pin_getInfo"
+      "toggle": {
+        "!type": "fn() -> bool",
+        "!doc": "<p>Toggles the state of the pin from off to on, or from on to off.</p>\n<p><strong>Note:</strong> This method doesn&#39;t currently work on the ESP8266 port of Espruino.</p>\n<p><strong>Note:</strong> if you didn&#39;t call <code>pinMode</code> beforehand then this function will also reset the pin&#39;s state to <code>&quot;output&quot;</code></p>\n",
+        "!url": "http://www.espruino.com/Reference#l_Pin_toggle"
       }
     }
   },
@@ -1220,6 +1286,93 @@
         "!type": "fn(onRejected: ?) -> ?",
         "!doc": "",
         "!url": "http://www.espruino.com/Reference#l_Promise_catch"
+      }
+    }
+  },
+  "DataView": {
+    "!type": "fn(buffer: ?, byteOffset: number, byteLength: number) -> +DataView",
+    "!doc": "<p>Create a DataView object</p>\n",
+    "!url": "http://www.espruino.com/Reference#l_DataView_DataView",
+    "prototype": {
+      "getFloat32": {
+        "!type": "fn(byteOffset: number, littleEndian: bool) -> ?",
+        "!doc": "",
+        "!url": "http://www.espruino.com/Reference#l_DataView_getFloat32"
+      },
+      "getFloat64": {
+        "!type": "fn(byteOffset: number, littleEndian: bool) -> ?",
+        "!doc": "",
+        "!url": "http://www.espruino.com/Reference#l_DataView_getFloat64"
+      },
+      "getInt8": {
+        "!type": "fn(byteOffset: number, littleEndian: bool) -> ?",
+        "!doc": "",
+        "!url": "http://www.espruino.com/Reference#l_DataView_getInt8"
+      },
+      "getInt16": {
+        "!type": "fn(byteOffset: number, littleEndian: bool) -> ?",
+        "!doc": "",
+        "!url": "http://www.espruino.com/Reference#l_DataView_getInt16"
+      },
+      "getInt32": {
+        "!type": "fn(byteOffset: number, littleEndian: bool) -> ?",
+        "!doc": "",
+        "!url": "http://www.espruino.com/Reference#l_DataView_getInt32"
+      },
+      "getUint8": {
+        "!type": "fn(byteOffset: number, littleEndian: bool) -> ?",
+        "!doc": "",
+        "!url": "http://www.espruino.com/Reference#l_DataView_getUint8"
+      },
+      "getUint16": {
+        "!type": "fn(byteOffset: number, littleEndian: bool) -> ?",
+        "!doc": "",
+        "!url": "http://www.espruino.com/Reference#l_DataView_getUint16"
+      },
+      "getUint32": {
+        "!type": "fn(byteOffset: number, littleEndian: bool) -> ?",
+        "!doc": "",
+        "!url": "http://www.espruino.com/Reference#l_DataView_getUint32"
+      },
+      "setFloat32": {
+        "!type": "fn(byteOffset: number, value: ?, littleEndian: bool)",
+        "!doc": "",
+        "!url": "http://www.espruino.com/Reference#l_DataView_setFloat32"
+      },
+      "setFloat64": {
+        "!type": "fn(byteOffset: number, value: ?, littleEndian: bool)",
+        "!doc": "",
+        "!url": "http://www.espruino.com/Reference#l_DataView_setFloat64"
+      },
+      "setInt8": {
+        "!type": "fn(byteOffset: number, value: ?, littleEndian: bool)",
+        "!doc": "",
+        "!url": "http://www.espruino.com/Reference#l_DataView_setInt8"
+      },
+      "setInt16": {
+        "!type": "fn(byteOffset: number, value: ?, littleEndian: bool)",
+        "!doc": "",
+        "!url": "http://www.espruino.com/Reference#l_DataView_setInt16"
+      },
+      "setInt32": {
+        "!type": "fn(byteOffset: number, value: ?, littleEndian: bool)",
+        "!doc": "",
+        "!url": "http://www.espruino.com/Reference#l_DataView_setInt32"
+      },
+      "setUint8": {
+        "!type": "fn(byteOffset: number, value: ?, littleEndian: bool)",
+        "!doc": "",
+        "!url": "http://www.espruino.com/Reference#l_DataView_setUint8"
+      },
+      "setUint16": {
+        "!type": "fn(byteOffset: number, value: ?, littleEndian: bool)",
+        "!doc": "",
+        "!url": "http://www.espruino.com/Reference#l_DataView_setUint16"
+      },
+      "setUint32": {
+        "!type": "fn(byteOffset: number, value: ?, littleEndian: bool)",
+        "!doc": "",
+        "!url": "http://www.espruino.com/Reference#l_DataView_setUint32"
       }
     }
   },
@@ -1442,12 +1595,7 @@
   "tv": {
     "!type": "fn()",
     "!doc": "<p>This library provides TV out capability on the Espruino and Espruino Pico.</p>\n<p>See the [[Television]] page for more information.</p>\n",
-    "!url": "http://www.espruino.com/Reference#l_tv_undefined",
-    "setup": {
-      "!type": "fn(options: ?, width: number) -> ?",
-      "!doc": "<p>This initialises the TV output. Options for PAL are as follows:</p>\n<pre><code>var g = require(<span class=\"hljs-symbol\">'tv</span>').setup({ <span class=\"hljs-keyword\">type</span> <span class=\"hljs-type\">: </span><span class=\"hljs-string\">\"pal\"</span>,\n  video : <span class=\"hljs-type\">A7</span>, // Pin - SPI MOSI Pin <span class=\"hljs-keyword\">for</span> Video output (MUST BE SPI1)\n  sync : <span class=\"hljs-type\">A6</span>, // Pin - Timer pin to <span class=\"hljs-keyword\">use</span> <span class=\"hljs-keyword\">for</span> video sync\n  width : 384,\n  height : 270, // <span class=\"hljs-type\">max</span> <span class=\"hljs-number\">270</span>\n});\n</code></pre><p>and for VGA:</p>\n<pre><code>var g = require(<span class=\"hljs-symbol\">'tv</span>').setup({ <span class=\"hljs-keyword\">type</span> <span class=\"hljs-type\">: </span><span class=\"hljs-string\">\"vga\"</span>,\n  video : <span class=\"hljs-type\">A7</span>, // Pin - SPI MOSI Pin <span class=\"hljs-keyword\">for</span> Video output (MUST BE SPI1)\n  hsync : <span class=\"hljs-type\">A6</span>, // Pin - Timer pin to <span class=\"hljs-keyword\">use</span> <span class=\"hljs-keyword\">for</span> video sync\n  vsync : <span class=\"hljs-type\">A5</span>, // Pin - pin to <span class=\"hljs-keyword\">use</span> <span class=\"hljs-keyword\">for</span> video sync\n  width : 220,\n  height : 240,\n  repeat : 2, // <span class=\"hljs-type\">amount</span> <span class=\"hljs-keyword\">of</span> times to repeat each line\n});\n</code></pre><p>or</p>\n<pre><code>var g = require(<span class=\"hljs-symbol\">'tv</span>').setup({ <span class=\"hljs-keyword\">type</span> <span class=\"hljs-type\">: </span><span class=\"hljs-string\">\"vga\"</span>,\n  video : <span class=\"hljs-type\">A7</span>, // Pin - SPI MOSI Pin <span class=\"hljs-keyword\">for</span> Video output (MUST BE SPI1)\n  hsync : <span class=\"hljs-type\">A6</span>, // Pin - Timer pin to <span class=\"hljs-keyword\">use</span> <span class=\"hljs-keyword\">for</span> video sync\n  vsync : <span class=\"hljs-type\">A5</span>, // Pin - pin to <span class=\"hljs-keyword\">use</span> <span class=\"hljs-keyword\">for</span> video sync\n  width : 220,\n  height : 480,\n  repeat : 1, // <span class=\"hljs-type\">amount</span> <span class=\"hljs-keyword\">of</span> times to repeat each line\n});\n</code></pre><p>See the [[Television]] page for more information.</p>\n",
-      "!url": "http://www.espruino.com/Reference#l_tv_setup"
-    }
+    "!url": "http://www.espruino.com/Reference#l_tv_undefined"
   },
   "crypto": {
     "!type": "fn()",
@@ -1523,65 +1671,35 @@
       "!doc": "<p>Enable Bluetooth communications (they are enabled by default)</p>\n",
       "!url": "http://www.espruino.com/Reference#l_NRF_wake"
     },
+    "restart": {
+      "!type": "fn()",
+      "!doc": "<p>Restart the Bluetooth softdevice (if there is currently a BLE connection,\nit will queue a restart to be done when the connection closes).</p>\n<p>You shouldn&#39;t need to call this function in normal usage. However, Nordic&#39;s\nBLE softdevice has some settings that cannot be reset. For example there\nare only a certain number of unique UUIDs. Once these are all used the\nonly option is to restart the softdevice to clear them all out.</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_NRF_restart"
+    },
+    "getAddress": {
+      "!type": "fn() -> ?",
+      "!doc": "<p>Get this device&#39;s Bluetooth MAC address.</p>\n<p>For Puck.js, the last 5 characters of this (eg. <code>ee:ff</code>)\nare used in the device&#39;s advertised Bluetooth name.</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_NRF_getAddress"
+    },
     "getBattery": {
       "!type": "fn() -> number",
-      "!doc": "<p>Get the battery level in volts</p>\n",
+      "!doc": "<p>Get the battery level in volts (the voltage that the NRF chip is running off of).</p>\n<p>This is the battery level of the device itself - it has nothing to with any\ndevice that might be connected.</p>\n",
       "!url": "http://www.espruino.com/Reference#l_NRF_getBattery"
-    },
-    "setAdvertising": {
-      "!type": "fn(data: ?, options: ?)",
-      "!doc": "<p>Change the data that Espruino advertises.</p>\n<p>Data can be of the form <code>{ UUID : data_as_byte_array }</code>. The UUID should be a <a href=\"https://developer.bluetooth.org/gatt/services/Pages/ServicesHome.aspx\">Bluetooth Service ID</a>.</p>\n<p>For example to return battery level at 95%, do:</p>\n<pre><code>NRF.setAdvertising({\n  0x180F : <span class=\"hljs-string\">[95]</span>\n});\n</code></pre><p>Or you could report the current temperature:</p>\n<pre><code>setInterval(<span class=\"hljs-name\">function</span>() {\n  NRF.setAdvertising({\n    <span class=\"hljs-number\">0</span>x1809 : [Math.round(<span class=\"hljs-name\">E</span>.getTemperature())]\n  })<span class=\"hljs-comment\">;</span>\n}, <span class=\"hljs-number\">30000</span>)<span class=\"hljs-comment\">;</span>\n</code></pre><p><strong>Note:</strong> Currently only standardised bluetooth UUIDs are allowed (see the\nlist above).</p>\n<p>You can also supply the raw advertising data in an array. For example to advertise as an Eddystone beacon:</p>\n<pre><code>NRF.setAdvertising([<span class=\"hljs-number\">0</span>x03,  <span class=\"hljs-regexp\">//</span> Length of Service List\n  <span class=\"hljs-number\">0</span>x03,  <span class=\"hljs-regexp\">//</span> Param: Service List\n  <span class=\"hljs-number\">0</span>xAA, <span class=\"hljs-number\">0</span>xFE,  <span class=\"hljs-regexp\">//</span> Eddystone ID\n  <span class=\"hljs-number\">0</span>x13,  <span class=\"hljs-regexp\">//</span> Length of Service Data\n  <span class=\"hljs-number\">0</span>x16,  <span class=\"hljs-regexp\">//</span> Service Data\n  <span class=\"hljs-number\">0</span>xAA, <span class=\"hljs-number\">0</span>xFE, <span class=\"hljs-regexp\">//</span> Eddystone ID\n  <span class=\"hljs-number\">0</span>x10,  <span class=\"hljs-regexp\">//</span> Frame type: URL\n  <span class=\"hljs-number\">0</span>xF8, <span class=\"hljs-regexp\">//</span> Power\n  <span class=\"hljs-number\">0</span>x03, <span class=\"hljs-regexp\">//</span> https:<span class=\"hljs-regexp\">//</span>\n  <span class=\"hljs-string\">'g'</span>,<span class=\"hljs-string\">'o'</span>,<span class=\"hljs-string\">'o'</span>,<span class=\"hljs-string\">'.'</span>,<span class=\"hljs-string\">'g'</span>,<span class=\"hljs-string\">'l'</span>,<span class=\"hljs-string\">'/'</span>,<span class=\"hljs-string\">'B'</span>,<span class=\"hljs-string\">'3'</span>,<span class=\"hljs-string\">'J'</span>,<span class=\"hljs-string\">'0'</span>,<span class=\"hljs-string\">'O'</span>,<span class=\"hljs-string\">'c'</span>],\n    {interval:<span class=\"hljs-number\">100</span>});\n</code></pre><p><code>options</code> is an object, which can contain:</p>\n<pre><code>{\n  name: <span class=\"hljs-string\">\"Hello\"</span> // The name <span class=\"hljs-keyword\">of</span> the device\n  showName: <span class=\"hljs-literal\">true</span>/<span class=\"hljs-literal\">false</span> // include full name, <span class=\"hljs-keyword\">or</span> nothing\n  discoverable: <span class=\"hljs-literal\">true</span>/<span class=\"hljs-literal\">false</span> // general discoverable, <span class=\"hljs-keyword\">or</span> <span class=\"hljs-keyword\">limited</span> - default <span class=\"hljs-keyword\">is</span> <span class=\"hljs-keyword\">limited</span>\n  interval: <span class=\"hljs-number\">600</span> // Advertising interval <span class=\"hljs-keyword\">in</span> msec, between <span class=\"hljs-number\">20</span> <span class=\"hljs-keyword\">and</span> <span class=\"hljs-number\">10000</span>\n}\n</code></pre>",
-      "!url": "http://www.espruino.com/Reference#l_NRF_setAdvertising"
-    },
-    "setServices": {
-      "!type": "fn(data: ?, options: ?)",
-      "!doc": "<p>Change the services and characteristics Espruino advertises.</p>\n<p>To expose some information on Characteristic <code>ABCD</code> on service <code>BCDE</code> you could do:</p>\n<pre><code><span class=\"hljs-selector-tag\">NRF</span><span class=\"hljs-selector-class\">.setServices</span>({\n  <span class=\"hljs-attribute\">0xBCDE </span>: {\n    <span class=\"hljs-number\">0</span><span class=\"hljs-attribute\">xABCD </span>: {\n      <span class=\"hljs-attribute\">value </span>: <span class=\"hljs-string\">\"Hello\"</span>,\n      <span class=\"hljs-attribute\">readable </span>: true\n    }\n  }\n});\n</code></pre><p>Or to allow the 3 LEDs to be controlled by writing numbers 0 to 7 to a\ncharacteristic, you can do the following. <code>evt.data</code> is an array of\nbytes.</p>\n<pre><code>NRF.setServices({\n  <span class=\"hljs-number\">0</span>xBCDE : {\n    <span class=\"hljs-number\">0</span>xABCD : {\n      writable : <span class=\"hljs-type\">true</span>,\n      onWrite : <span class=\"hljs-keyword\"><span class=\"hljs-keyword\">function</span></span>(<span class=\"hljs-type\">evt</span>) {\n        digitalWrite([LED3,LED2,LED1], evt.data[<span class=\"hljs-number\">0</span>]);\n      }\n    }\n  }\n});\n</code></pre><p>You can supply many different options:</p>\n<pre><code>NRF.setServices({\n  <span class=\"hljs-number\">0xBCDE</span> : {\n    <span class=\"hljs-number\">0xABCD</span> : {\n      <span class=\"hljs-string\">value :</span> <span class=\"hljs-string\">\"Hello\"</span>, <span class=\"hljs-comment\">// optional</span>\n      <span class=\"hljs-string\">maxLen :</span> <span class=\"hljs-number\">5</span>, <span class=\"hljs-comment\">// optional (otherwise is length of initial value)</span>\n      <span class=\"hljs-string\">broadcast :</span> <span class=\"hljs-literal\">false</span>, <span class=\"hljs-comment\">// optional, default is false</span>\n      <span class=\"hljs-string\">readable :</span> <span class=\"hljs-literal\">true</span>,   <span class=\"hljs-comment\">// optional, default is false</span>\n      <span class=\"hljs-string\">writable :</span> <span class=\"hljs-literal\">true</span>,   <span class=\"hljs-comment\">// optional, default is false</span>\n      <span class=\"hljs-string\">notify :</span> <span class=\"hljs-literal\">true</span>,   <span class=\"hljs-comment\">// optional, default is false</span>\n      <span class=\"hljs-string\">indicate :</span> <span class=\"hljs-literal\">true</span>,   <span class=\"hljs-comment\">// optional, default is false</span>\n      <span class=\"hljs-string\">onWrite :</span> function(evt) { <span class=\"hljs-comment\">// optional</span>\n        console.log(<span class=\"hljs-string\">\"Got \"</span>, evt.data);\n      }\n    }\n    <span class=\"hljs-comment\">// more characteristics allowed</span>\n  }\n  <span class=\"hljs-comment\">// more services allowed</span>\n});\n</code></pre><p><strong>Note:</strong> UUIDs can be integers between <code>0</code> and <code>0xFFFF</code>, strings of\nthe form <code>&quot;ABCD&quot;</code>, or strings of the form <code>&quot;ABCDABCD-ABCD-ABCD-ABCD-ABCDABCDABCD&quot;</code></p>\n<p><strong>Note:</strong> Currently, services/characteristics can&#39;t be removed once added.\nAs a result, calling setServices multiple times will cause characteristics\nto either be updated (value only) or ignored.</p>\n<p><code>options</code> can be of the form:</p>\n<pre><code><span class=\"hljs-selector-tag\">NRF</span><span class=\"hljs-selector-class\">.setServices</span>(<span class=\"hljs-selector-tag\">undefined</span>, {\n  <span class=\"hljs-attribute\">hid </span>: new <span class=\"hljs-built_in\">Uint8Array</span>(...), // optional, default is undefined. Enable BLE HID support\n  uart : true, // optional, default is true. Enable BLE UART support\n});\n</code></pre><p>To enable BLE HID, you must set <code>hid</code> to an array which is the BLE report\ndescriptor. The easiest way to do this is to use the <code>ble_hid_controls</code>\nor <code>ble_hid_keyboard</code> modules.</p>\n",
-      "!url": "http://www.espruino.com/Reference#l_NRF_setServices"
-    },
-    "updateServices": {
-      "!type": "fn(data: ?)",
-      "!doc": "<p>Update values for the services and characteristics Espruino advertises.\nOnly services and characteristics previously declared using <code>setServices</code> are affected.</p>\n<p>To update the &#39;0xABCD&#39; characteristic in the &#39;0xBCDE&#39; service:</p>\n<pre><code><span class=\"hljs-selector-tag\">NRF</span><span class=\"hljs-selector-class\">.updateServices</span>({\n  <span class=\"hljs-attribute\">0xBCDE </span>: {\n    <span class=\"hljs-number\">0</span><span class=\"hljs-attribute\">xABCD </span>: {\n      <span class=\"hljs-attribute\">value </span>: <span class=\"hljs-string\">\"World\"</span>\n    }\n  }\n});\n</code></pre><p>To notify connected clients of a change to the &#39;0xABCD&#39; characteristic in the &#39;0xBCDE&#39; service:</p>\n<pre><code><span class=\"hljs-selector-tag\">NRF</span><span class=\"hljs-selector-class\">.updateServices</span>({\n  <span class=\"hljs-attribute\">0xBCDE </span>: {\n    <span class=\"hljs-number\">0</span><span class=\"hljs-attribute\">xABCD </span>: {\n      <span class=\"hljs-attribute\">value </span>: <span class=\"hljs-string\">\"World\"</span>,\n      <span class=\"hljs-attribute\">notify</span>: true\n    }\n  }\n});\n</code></pre><p>This only works if the characteristic was created with <code>notify: true</code> using <code>setServices</code>,\notherwise the characteristic will be updated but no notification will be sent.</p>\n<p>To indicate (i.e. notify with ACK) connected clients of a change to the &#39;0xABCD&#39; characteristic in the &#39;0xBCDE&#39; service:</p>\n<pre><code><span class=\"hljs-selector-tag\">NRF</span><span class=\"hljs-selector-class\">.updateServices</span>({\n  <span class=\"hljs-attribute\">0xBCDE </span>: {\n    <span class=\"hljs-number\">0</span><span class=\"hljs-attribute\">xABCD </span>: {\n      <span class=\"hljs-attribute\">value </span>: <span class=\"hljs-string\">\"World\"</span>,\n      <span class=\"hljs-attribute\">indicate</span>: true\n    }\n  }\n});\n</code></pre><p>This only works if the characteristic was created with <code>indicate: true</code> using <code>setServices</code>,\notherwise the characteristic will be updated but no notification will be sent.</p>\n<p><strong>Note:</strong> See <code>setServices</code> for more information</p>\n",
-      "!url": "http://www.espruino.com/Reference#l_NRF_updateServices"
-    },
-    "setScan": {
-      "!type": "fn(callback: ?)",
-      "!doc": "<p>Start/stop listening for BLE advertising packets within range. Returns a\n<code>BluetoothDevice</code> for each advertsing packet</p>\n<pre><code><span class=\"hljs-comment\">// Start scanning</span>\npackets=<span class=\"hljs-number\">10</span>;\nNRF.setScan(<span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span>(<span class=\"hljs-params\">d</span>) </span>{\n  packets--;\n  <span class=\"hljs-built_in\">console</span>.log(d); <span class=\"hljs-comment\">// print packet info</span>\n  <span class=\"hljs-keyword\">if</span> (packets&lt;=<span class=\"hljs-number\">0</span>)\n    NRF.setScan(); <span class=\"hljs-comment\">// stop scanning</span>\n});\n</code></pre><p><strong>Note:</strong> BLE advertising packets can arrive quickly - faster than you&#39;ll\nbe able to print them to the console. It&#39;s best only to print a few, or\nto use a function like <code>NRF.findDevices(..)</code> which will collate a list\nof available devices.</p>\n",
-      "!url": "http://www.espruino.com/Reference#l_NRF_setScan"
-    },
-    "findDevices": {
-      "!type": "fn(callback: ?, time: ?)",
-      "!doc": "<p>Utility function to return a list of BLE devices detected in range.</p>\n<pre><code>NRF.findDevices(<span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span><span class=\"hljs-params\">(devices)</span></span> {\n  console.<span class=\"hljs-built_in\">log</span>(devices);\n}, <span class=\"hljs-number\">1000</span>);\n</code></pre><p>prints something like:</p>\n<pre><code>[\n  BluetoothDevice {\n    <span class=\"hljs-attr\">\"id\"</span>: <span class=\"hljs-string\">\"e7:e0:57:ad:36:a2 random\"</span>,\n    <span class=\"hljs-attr\">\"rssi\"</span>: <span class=\"hljs-number\">-45</span>,\n    <span class=\"hljs-attr\">\"services\"</span>: [  ],\n    <span class=\"hljs-attr\">\"data\"</span>: new ArrayBuffer([ ... ]),\n    <span class=\"hljs-attr\">\"name\"</span>: <span class=\"hljs-string\">\"Puck.js 36a2\"</span>\n   },\n  BluetoothDevice {\n    <span class=\"hljs-attr\">\"id\"</span>: <span class=\"hljs-string\">\"c0:52:3f:50:42:c9 random\"</span>,\n    <span class=\"hljs-attr\">\"rssi\"</span>: <span class=\"hljs-number\">-65</span>,\n    <span class=\"hljs-attr\">\"services\"</span>: [  ],\n    <span class=\"hljs-attr\">\"data\"</span>: new ArrayBuffer([ ... ]),\n    <span class=\"hljs-attr\">\"name\"</span>: <span class=\"hljs-string\">\"Puck.js 8f57\"</span>\n   }\n ]\n</code></pre><p>You could then use <a href=\"/Reference#l_BluetoothRemoteGATTServer_connect\"><code>BluetoothDevice.gatt.connect(...)</code></a> on\nthe device returned, to make a connection.</p>\n<p>You can also use <a href=\"/Reference#l_NRF_connect\"><code>NRF.connect(...)</code></a> on just the <code>id</code> string returned, which\nmay be useful if you always want to connect to a specific device.</p>\n",
-      "!url": "http://www.espruino.com/Reference#l_NRF_findDevices"
-    },
-    "setRSSIHandler": {
-      "!type": "fn(callback: ?)",
-      "!doc": "<p>Start/stop listening for RSSI values on the currently active connection</p>\n<p>RSSI is the &#39;Received Signal Strength Indication&#39; in dBm</p>\n<pre><code><span class=\"hljs-comment\">// Start scanning</span>\nNRF.setRSSIHandler(<span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span>(<span class=\"hljs-params\">rssi</span>) </span>{\n  <span class=\"hljs-built_in\">console</span>.log(rssi);\n});\n<span class=\"hljs-comment\">// prints -85 (or similar)</span>\n\n<span class=\"hljs-comment\">// Stop Scanning</span>\nNRF.setRSSIHandler();\n</code></pre>",
-      "!url": "http://www.espruino.com/Reference#l_NRF_setRSSIHandler"
     },
     "setTxPower": {
       "!type": "fn(power: number)",
       "!doc": "<p>Set the BLE radio transmit power. The default TX power is 0 dBm.</p>\n",
       "!url": "http://www.espruino.com/Reference#l_NRF_setTxPower"
     },
-    "nfcURL": {
-      "!type": "fn(url: ?)",
-      "!doc": "<p>Enables NFC and starts advertising the given URL. For example:</p>\n<pre><code>NRF.nfcURL(<span class=\"hljs-string\">\"http://espruino.com\"</span>)<span class=\"hljs-comment\">;</span>\n</code></pre><p><strong>Note:</strong> This is only available on nRF52-based devices</p>\n",
-      "!url": "http://www.espruino.com/Reference#l_NRF_nfcURL"
+    "setLowPowerConnection": {
+      "!type": "fn(lowPower: bool)",
+      "!doc": "<p>This sets the connection parameters - these affect the transfer speed and\npower usage when the device is connected.</p>\n<ul>\n<li>When not low power, the connection interval is between 7.5 and 20ms</li>\n<li>When low power, the connection interval is between 500 and 1000ms</li>\n</ul>\n<p>When low power connection is enabled, transfers of data over Bluetooth\nwill be very slow, however power usage while connected will be drastically\ndecreased.</p>\n<p>This will only take effect after the connection is disconnected and\nre-established.</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_NRF_setLowPowerConnection"
     },
     "sendHIDReport": {
       "!type": "fn(data: ?, callback: ?)",
       "!doc": "<p>Send a USB HID report. HID must first be enabled with <code>NRF.setServices({}, {hid: hid_report})</code></p>\n",
       "!url": "http://www.espruino.com/Reference#l_NRF_sendHIDReport"
-    },
-    "requestDevice": {
-      "!type": "fn(options: ?) -> ?",
-      "!doc": "<p>Search for available devices matching the given filters. Since we have no UI here,\nEspruino will pick the FIRST device it finds, or it&#39;ll call <code>catch</code>.</p>\n<p>The following filter types are implemented:</p>\n<ul>\n<li><code>services</code> - list of services as strings (all of which must match). 128 bit services must be in the form &#39;01230123-0123-0123-0123-012301230123&#39;</li>\n<li><code>name</code> - exact device name</li>\n<li><code>namePrefix</code> - starting characters of device name</li>\n</ul>\n<pre><code><span class=\"hljs-selector-tag\">NRF</span><span class=\"hljs-selector-class\">.requestDevice</span>({ <span class=\"hljs-attribute\">filters</span>: [{ <span class=\"hljs-attribute\">namePrefix</span>: <span class=\"hljs-string\">'Puck.js'</span> }] })<span class=\"hljs-selector-class\">.then</span>(function(device) { ... });\n<span class=\"hljs-comment\">// or</span>\n<span class=\"hljs-selector-tag\">NRF</span><span class=\"hljs-selector-class\">.requestDevice</span>({ <span class=\"hljs-attribute\">filters</span>: [{ <span class=\"hljs-attribute\">services</span>: [<span class=\"hljs-string\">'1823'</span>] }] })<span class=\"hljs-selector-class\">.then</span>(function(device) { ... });\n</code></pre><p>You can also specify a timeout to wait for devices in milliseconds. The default is 2 seconds (2000):</p>\n<pre><code><span class=\"hljs-selector-tag\">NRF</span><span class=\"hljs-selector-class\">.requestDevice</span>({ <span class=\"hljs-attribute\">timeout</span>:<span class=\"hljs-number\">2000</span>, filters: [ ... ] })\n</code></pre><p>As a full example, to send data to another Puck.js to turn an LED on:</p>\n<pre><code>var gatt;\nNRF.requestDevice({ filters: [{ namePrefix: <span class=\"hljs-string\">'Puck.js'</span> }] }).<span class=\"hljs-keyword\">then</span>(<span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span><span class=\"hljs-params\">(device)</span> {</span>\n  <span class=\"hljs-keyword\">return</span> device.gatt.connect();\n}).<span class=\"hljs-keyword\">then</span>(<span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span><span class=\"hljs-params\">(g)</span> {</span>\n  gatt = g;\n  <span class=\"hljs-keyword\">return</span> gatt.getPrimaryService(<span class=\"hljs-string\">\"6e400001-b5a3-f393-e0a9-e50e24dcca9e\"</span>);\n}).<span class=\"hljs-keyword\">then</span>(<span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span><span class=\"hljs-params\">(service)</span> {</span>\n  <span class=\"hljs-keyword\">return</span> service.getCharacteristic(<span class=\"hljs-string\">\"6e400002-b5a3-f393-e0a9-e50e24dcca9e\"</span>);\n}).<span class=\"hljs-keyword\">then</span>(<span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span><span class=\"hljs-params\">(characteristic)</span> {</span>\n  characteristic.writeValue(<span class=\"hljs-string\">\"LED1.set()\\n\"</span>);\n}).<span class=\"hljs-keyword\">then</span>(<span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span><span class=\"hljs-params\">()</span> {</span>\n  gatt.disconnect();\n  console.<span class=\"hljs-built_in\">log</span>(<span class=\"hljs-string\">\"Done!\"</span>);\n});\n</code></pre><p>Or slightly more concisely, using ES6 arrow functions:</p>\n<pre><code><span class=\"hljs-keyword\">var</span> gatt;\nNRF.requestDevice({ <span class=\"hljs-attr\">filters</span>: [{ <span class=\"hljs-attr\">namePrefix</span>: <span class=\"hljs-string\">'Puck.js'</span> }]}).then(\n  <span class=\"hljs-function\"><span class=\"hljs-params\">device</span> =&gt;</span> device.gatt.connect()).then(\n  <span class=\"hljs-function\"><span class=\"hljs-params\">g</span> =&gt;</span> (gatt=g).getPrimaryService(<span class=\"hljs-string\">\"6e400001-b5a3-f393-e0a9-e50e24dcca9e\"</span>)).then(\n  <span class=\"hljs-function\"><span class=\"hljs-params\">service</span> =&gt;</span> service.getCharacteristic(<span class=\"hljs-string\">\"6e400002-b5a3-f393-e0a9-e50e24dcca9e\"</span>)).then(\n  <span class=\"hljs-function\"><span class=\"hljs-params\">characteristic</span> =&gt;</span> characteristic.writeValue(<span class=\"hljs-string\">\"LED1.reset()\\n\"</span>)).then(\n  <span class=\"hljs-function\"><span class=\"hljs-params\">()</span> =&gt;</span> { gatt.disconnect(); <span class=\"hljs-built_in\">console</span>.log(<span class=\"hljs-string\">\"Done!\"</span>); } );\n</code></pre><p>Note that you&#39;ll have to keep track of the <code>gatt</code> variable so that you can\ndisconnect the Bluetooth connection when you&#39;re done.</p>\n<p><strong>Note:</strong> This is only available on some devices</p>\n",
-      "!url": "http://www.espruino.com/Reference#l_NRF_requestDevice"
-    },
-    "connect": {
-      "!type": "fn(mac: ?) -> ?",
-      "!doc": "<p>Connect to a BLE device by MAC address. Returns a promise,\nthe argument of which is the <code>BluetoothRemoteGATTServer</code> connection.</p>\n<pre><code>NRF.connect(<span class=\"hljs-string\">\"aa:bb:cc:dd:ee\"</span>).<span class=\"hljs-keyword\">then</span>(<span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span><span class=\"hljs-params\">(server)</span> {</span>\n  <span class=\"hljs-comment\">// ...</span>\n});\n</code></pre><p>You can use it as follows - this would connect to another Puck device and turn its LED on:</p>\n<pre><code>var gatt;\nNRF.connect(<span class=\"hljs-string\">\"aa:bb:cc:dd:ee\"</span>).<span class=\"hljs-keyword\">then</span>(<span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span><span class=\"hljs-params\">(g)</span> {</span>\n  gatt = g;\n  <span class=\"hljs-keyword\">return</span> gatt.getPrimaryService(<span class=\"hljs-string\">\"6e400001-b5a3-f393-e0a9-e50e24dcca9e\"</span>);\n}).<span class=\"hljs-keyword\">then</span>(<span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span><span class=\"hljs-params\">(service)</span> {</span>\n  <span class=\"hljs-keyword\">return</span> service.getCharacteristic(<span class=\"hljs-string\">\"6e400002-b5a3-f393-e0a9-e50e24dcca9e\"</span>);\n}).<span class=\"hljs-keyword\">then</span>(<span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span><span class=\"hljs-params\">(characteristic)</span> {</span>\n  characteristic.writeValue(<span class=\"hljs-string\">\"LED1.set()\\n\"</span>);\n}).<span class=\"hljs-keyword\">then</span>(<span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span><span class=\"hljs-params\">()</span> {</span>\n  gatt.disconnect();\n  console.<span class=\"hljs-built_in\">log</span>(<span class=\"hljs-string\">\"Done!\"</span>);\n});\n</code></pre><p><strong>Note:</strong> This is only available on some devices</p>\n",
-      "!url": "http://www.espruino.com/Reference#l_NRF_connect"
     }
   },
   "Bluetooth": {
@@ -1650,21 +1768,6 @@
     "!doc": "<p>Web Bluetooth-style GATT characteristic - get this using <code>BluetoothRemoteGATTService.getCharacteristic(s)</code></p>\n<p><a href=\"https://webbluetoothcg.github.io/web-bluetooth/#bluetoothremotegattcharacteristic\">https://webbluetoothcg.github.io/web-bluetooth/#bluetoothremotegattcharacteristic</a></p>\n",
     "!url": "http://www.espruino.com/Reference#BluetoothRemoteGATTCharacteristic",
     "prototype": {
-      "writeValue": {
-        "!type": "fn(data: ?) -> ?",
-        "!doc": "<p>Write a characteristic&#39;s value</p>\n<pre><code>var device;\nNRF.connect(device_address).<span class=\"hljs-keyword\">then</span>(<span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span><span class=\"hljs-params\">(d)</span> {</span>\n  device = d;\n  <span class=\"hljs-keyword\">return</span> d.getPrimaryService(<span class=\"hljs-string\">\"service_uuid\"</span>);\n}).<span class=\"hljs-keyword\">then</span>(<span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span><span class=\"hljs-params\">(s)</span> {</span>\n  console.<span class=\"hljs-built_in\">log</span>(<span class=\"hljs-string\">\"Service \"</span>,s);\n  <span class=\"hljs-keyword\">return</span> s.getCharacteristic(<span class=\"hljs-string\">\"characteristic_uuid\"</span>);\n}).<span class=\"hljs-keyword\">then</span>(<span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span><span class=\"hljs-params\">(c)</span> {</span>\n  <span class=\"hljs-keyword\">return</span> c.writeValue(<span class=\"hljs-string\">\"Hello\"</span>);\n}).<span class=\"hljs-keyword\">then</span>(<span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span><span class=\"hljs-params\">(d)</span> {</span>\n  device.disconnect();\n}).<span class=\"hljs-keyword\">catch</span>(<span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span><span class=\"hljs-params\">()</span> {</span>\n  console.<span class=\"hljs-built_in\">log</span>(<span class=\"hljs-string\">\"Something'</span>s broken.<span class=\"hljs-string\">\");\n});</span>\n</code></pre><p><strong>Note:</strong> This is only available on some devices</p>\n",
-        "!url": "http://www.espruino.com/Reference#l_BluetoothRemoteGATTCharacteristic_writeValue"
-      },
-      "readValue": {
-        "!type": "fn() -> ?",
-        "!doc": "<p>Read a characteristic&#39;s value</p>\n<pre><code>var device;\nNRF.connect(device_address).<span class=\"hljs-keyword\">then</span>(<span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span><span class=\"hljs-params\">(d)</span> {</span>\n  device = d;\n  <span class=\"hljs-keyword\">return</span> d.getPrimaryService(<span class=\"hljs-string\">\"service_uuid\"</span>);\n}).<span class=\"hljs-keyword\">then</span>(<span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span><span class=\"hljs-params\">(s)</span> {</span>\n  console.<span class=\"hljs-built_in\">log</span>(<span class=\"hljs-string\">\"Service \"</span>,s);\n  <span class=\"hljs-keyword\">return</span> s.getCharacteristic(<span class=\"hljs-string\">\"characteristic_uuid\"</span>);\n}).<span class=\"hljs-keyword\">then</span>(<span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span><span class=\"hljs-params\">(c)</span> {</span>\n  <span class=\"hljs-keyword\">return</span> c.readValue();\n}).<span class=\"hljs-keyword\">then</span>(<span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span><span class=\"hljs-params\">(d)</span> {</span>\n  console.<span class=\"hljs-built_in\">log</span>(<span class=\"hljs-string\">\"Got:\"</span>, JSON.stringify(d));\n  device.disconnect();\n}).<span class=\"hljs-keyword\">catch</span>(<span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span><span class=\"hljs-params\">()</span> {</span>\n  console.<span class=\"hljs-built_in\">log</span>(<span class=\"hljs-string\">\"Something'</span>s broken.<span class=\"hljs-string\">\");\n});</span>\n</code></pre><p><strong>Note:</strong> This is only available on some devices</p>\n",
-        "!url": "http://www.espruino.com/Reference#l_BluetoothRemoteGATTCharacteristic_readValue"
-      },
-      "startNotifications": {
-        "!type": "fn() -> ?",
-        "!doc": "<p>Starts notifications - whenever this characteristic&#39;s value changes, a <code>characteristicvaluechanged</code> event is fired.</p>\n<pre><code>var device;\nNRF.connect(device_address).<span class=\"hljs-keyword\">then</span>(<span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span><span class=\"hljs-params\">(d)</span> {</span>\n  device = d;\n  <span class=\"hljs-keyword\">return</span> d.getPrimaryService(<span class=\"hljs-string\">\"service_uuid\"</span>);\n}).<span class=\"hljs-keyword\">then</span>(<span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span><span class=\"hljs-params\">(s)</span> {</span>\n  console.<span class=\"hljs-built_in\">log</span>(<span class=\"hljs-string\">\"Service \"</span>,s);\n  <span class=\"hljs-keyword\">return</span> s.getCharacteristic(<span class=\"hljs-string\">\"characteristic_uuid\"</span>);\n}).<span class=\"hljs-keyword\">then</span>(<span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span><span class=\"hljs-params\">(c)</span> {</span>\n  c.on(<span class=\"hljs-string\">'characteristicvaluechanged'</span>, <span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span><span class=\"hljs-params\">(event)</span> {</span>\n    console.<span class=\"hljs-built_in\">log</span>(<span class=\"hljs-string\">\"-&gt; \"</span>+event.target.value);\n  });\n  <span class=\"hljs-keyword\">return</span> c.startNotifications();\n}).<span class=\"hljs-keyword\">then</span>(<span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span><span class=\"hljs-params\">(d)</span> {</span>\n  console.<span class=\"hljs-built_in\">log</span>(<span class=\"hljs-string\">\"Waiting for notifications\"</span>));\n}).<span class=\"hljs-keyword\">catch</span>(<span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span><span class=\"hljs-params\">()</span> {</span>\n  console.<span class=\"hljs-built_in\">log</span>(<span class=\"hljs-string\">\"Something'</span>s broken.<span class=\"hljs-string\">\");\n});</span>\n</code></pre><p><strong>Note:</strong> This is only available on some devices</p>\n",
-        "!url": "http://www.espruino.com/Reference#l_BluetoothRemoteGATTCharacteristic_startNotifications"
-      },
       "stopNotifications": {
         "!type": "fn() -> ?",
         "!doc": "<p><strong>Note:</strong> This is only available on some devices</p>\n",
@@ -1862,6 +1965,11 @@
       "!url": "http://www.espruino.com/Reference#l_Math_max"
     }
   },
+  "neopixel": {
+    "!type": "fn()",
+    "!doc": "<p>This library allows you to write to Neopixel/WS281x/APA10x LED strips</p>\n<p>These use a high speed single-wire protocol which needs platform-specific\nimplementation on some devices - hence this library to simplify things.</p>\n",
+    "!url": "http://www.espruino.com/Reference#l_neopixel_undefined"
+  },
   "ESP8266": {
     "!type": "fn()",
     "!doc": "<p>The ESP8266 library is specific to the ESP8266 version of Espruino, i.e., running Espruino on an ESP8266 module (not to be confused with using the ESP8266 as Wifi add-on to an Espruino board).  This library contains functions to handle ESP8266-specific actions.\nFor example: <code>var esp8266 = require(&#39;ESP8266&#39;); esp8266.reboot();</code> performs a hardware reset of the module.</p>\n",
@@ -1923,118 +2031,18 @@
     },
     "neopixelWrite": {
       "!type": "fn(pin: +Pin, arrayOfData: ?)",
-      "!doc": "",
+      "!doc": "<p><strong>This function is deprecated.</strong> Please use <code>require(&quot;neopixel&quot;).write(pin, data)</code> instead</p>\n",
       "!url": "http://www.espruino.com/Reference#l_ESP8266_neopixelWrite"
     },
     "deepSleep": {
-      "!type": "fn(micros: ?)",
-      "!doc": "<p>Put the ESP8266 into &#39;deep sleep&#39; for the given number of microseconds,\nreducing power consumption drastically.</p>\n<p><strong>Note:</strong> unlike normal Espruino boards&#39; &#39;deep sleep&#39; mode, ESP8266\ndeep sleep actually turns off the processor. After the given number of\nmicroseconds have elapsed, the ESP8266 will restart as if power had been\nturned off and then back on. <em>All contents of RAM will be lost</em>.</p>\n",
+      "!type": "fn(micros: ?, option: ?)",
+      "!doc": "<p>Put the ESP8266 into &#39;deep sleep&#39; for the given number of microseconds, \nreducing power consumption drastically. </p>\n<p>meaning of option values:</p>\n<p>0 - the 108th Byte of init parameter decides whether RF calibration will be performed or not.</p>\n<p>1 - run RF calibration after waking up. Power consumption is high.</p>\n<p>2 - no RF calibration after waking up. Power consumption is low.</p>\n<p>4 - no RF after waking up. Power consumption is the lowest.</p>\n<p><strong>Note:</strong> unlike normal Espruino boards&#39; &#39;deep sleep&#39; mode, ESP8266 deep sleep actually turns off the processor. After the given number of microseconds have elapsed, the ESP8266 will restart as if power had been turned off and then back on. <em>All contents of RAM will be lost</em>. \nConnect GPIO 16 to RST to enable wakeup.</p>\n<p><strong>Special:</strong> 0 microseconds cause sleep forever until external wakeup RST pull down occurs.</p>\n",
       "!url": "http://www.espruino.com/Reference#l_ESP8266_deepSleep"
     },
     "ping": {
       "!type": "fn(ipAddr: ?, pingCallback: ?)",
       "!doc": "<p>Perform a network ping request. The parameter can be either a String or a numeric IP address.\n<strong>Note:</strong> This function should probably be removed, or should it be part of the wifi library?</p>\n",
       "!url": "http://www.espruino.com/Reference#l_ESP8266_ping"
-    }
-  },
-  "Wifi": {
-    "!type": "fn()",
-    "!doc": "<p>The wifi library is a generic cross-platform library to control the Wifi interface.  It supports functionality such as connecting to wifi networks, getting network information, starting and access point, etc.\n<strong>Currently this library is ESP8266 specific</strong> and needs to be ported to other Espruino platforms.</p>\n<p>To get started and connect to your local access point all you need is</p>\n<pre><code><span class=\"hljs-keyword\">var</span> wifi = <span class=\"hljs-built_in\">require</span>(<span class=\"hljs-string\">\"Wifi\"</span>);\nwifi.connect(<span class=\"hljs-string\">\"my-ssid\"</span>, {<span class=\"hljs-attr\">password</span>:<span class=\"hljs-string\">\"my-pwd\"</span>}, <span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span>(<span class=\"hljs-params\">ap</span>)</span>{ <span class=\"hljs-built_in\">console</span>.log(<span class=\"hljs-string\">\"connected:\"</span>, ap); });\n</code></pre><p>If you want the connection to happen automatically at boot, add <code>wifi.save();</code>.</p>\n",
-    "!url": "http://www.espruino.com/Reference#l_Wifi_undefined",
-    "disconnect": {
-      "!type": "fn(callback: ?)",
-      "!doc": "<p>Disconnect the wifi station from an access point and disable the station mode. It is OK to call <code>disconnect</code> to turn off station mode even if no connection exists (for example, connection attempts may be failing). Station mode can be re-enabled by calling <code>connect</code> or <code>scan</code>.</p>\n",
-      "!url": "http://www.espruino.com/Reference#l_Wifi_disconnect"
-    },
-    "stopAP": {
-      "!type": "fn(callback: ?)",
-      "!doc": "<p>Stop being an access point and disable the AP operation mode. Ap mode can be re-enabled by calling <code>startAP</code>.</p>\n",
-      "!url": "http://www.espruino.com/Reference#l_Wifi_stopAP"
-    },
-    "connect": {
-      "!type": "fn(ssid: ?, options: ?, callback: ?)",
-      "!doc": "<p>Connect to an access point as a station. If there is an existing connection to an AP it is first disconnected if the SSID or password are different from those passed as parameters. Put differently, if the passed SSID and password are identical to the currently connected AP then nothing is changed.\nWhen the connection attempt completes the callback function is invoked with one <code>err</code> parameter, which is NULL if there is no error and a string message if there is an error. If DHCP is enabled the callback occurs once an IP addres has been obtained, if a static IP is set the callback occurs once the AP&#39;s network has been joined.  The callback is also invoked if a connection already exists and does not need to be changed.</p>\n<p>The options properties may contain:</p>\n<ul>\n<li><code>password</code> - Password string to be used to access the network.</li>\n<li><code>dnsServers</code> (array of String) - An array of up to two DNS servers in dotted decimal format string.</li>\n</ul>\n<p>Notes:</p>\n<ul>\n<li>the options should include the ability to set a static IP and associated netmask and gateway, this is a future enhancement.</li>\n<li>the only error reported in the callback is &quot;Bad password&quot;, all other errors (such as access point not found or DHCP timeout) just cause connection retries. If the reporting of such temporary errors is desired, the caller must use its own timeout and the <code>getDetails().status</code> field.</li>\n<li>the <code>connect</code> call automatically enabled station mode, it can be disabled again by calling <code>disconnect</code>.</li>\n</ul>\n",
-      "!url": "http://www.espruino.com/Reference#l_Wifi_connect"
-    },
-    "scan": {
-      "!type": "fn(callback: ?)",
-      "!doc": "<p>Perform a scan for access points. This will enable the station mode if it is not currently enabled. Once the scan is complete the callback function is called with an array of APs found, each AP is an object with:</p>\n<ul>\n<li><code>ssid</code>: SSID string.</li>\n<li><code>mac</code>: access point MAC address in 00:00:00:00:00:00 format.</li>\n<li><code>authMode</code>: <code>open</code>, <code>wep</code>, <code>wpa</code>, <code>wpa2</code>, or <code>wpa_wpa2</code>.</li>\n<li><code>channel</code>: wifi channel 1..13.</li>\n<li><code>hidden</code>: true if the SSID is hidden.</li>\n<li><code>rssi</code>: signal strength in dB in the range -110..0.</li>\n</ul>\n<p>Notes:</p>\n<ul>\n<li>in order to perform the scan the station mode is turned on and remains on, use Wifi.disconnect() to turn it off again, if desired.</li>\n<li>only one scan can be in progress at a time.</li>\n</ul>\n",
-      "!url": "http://www.espruino.com/Reference#l_Wifi_scan"
-    },
-    "startAP": {
-      "!type": "fn(ssid: ?, options: ?, callback: ?)",
-      "!doc": "<p>Create a WiFi access point allowing stations to connect. If the password is NULL or an empty string the access point is open, otherwise it is encrypted.\nThe callback function is invoked once the access point is set-up and receives one <code>err</code> argument, which is NULL on success and contains an error message string otherwise.</p>\n<p>The <code>options</code> object can contain the following properties.</p>\n<ul>\n<li><code>authMode</code> - The authentication mode to use.  Can be one of &quot;open&quot;, &quot;wpa2&quot;, &quot;wpa&quot;, &quot;wpa_wpa2&quot;. The default is open (but open access points are not recommended).</li>\n<li><code>password</code> - The password for connecting stations if authMode is not open.</li>\n<li><code>channel</code> - The channel to be used for the access point in the range 1..13. If the device is also connected to an access point as a station then that access point determines the channel.</li>\n</ul>\n<p>Notes:</p>\n<ul>\n<li>the options should include the ability to set the AP IP and associated netmask, this is a future enhancement.</li>\n<li>the <code>startAP</code> call automatically enables AP mode. It can be disabled again by calling <code>stopAP</code>.</li>\n</ul>\n",
-      "!url": "http://www.espruino.com/Reference#l_Wifi_startAP"
-    },
-    "getStatus": {
-      "!type": "fn(callback: ?) -> ?",
-      "!doc": "<p>Retrieve the current overall WiFi configuration. This call provides general information that pertains to both station and access point modes. The getDetails and getAPDetails calls provide more in-depth information about the station and access point configurations, respectively. The status object has the following properties:</p>\n<ul>\n<li><code>station</code> - Status of the wifi station: <code>off</code>, <code>connecting</code>, ...</li>\n<li><code>ap</code> - Status of the wifi access point: <code>disabled</code>, <code>enabled</code>.</li>\n<li><code>mode</code> - The current operation mode: <code>off</code>, <code>sta</code>, <code>ap</code>, <code>sta+ap</code>.</li>\n<li><code>phy</code> - Modulation standard configured: <code>11b</code>, <code>11g</code>, <code>11n</code> (the esp8266 docs are not very clear, but it is assumed that 11n means b/g/n). This setting limits the modulations that the radio will use, it does not indicate the current modulation used with a specific access point.</li>\n<li><code>powersave</code> - Power saving mode: <code>none</code> (radio is on all the time), <code>ps-poll</code> (radio is off between beacons as determined by the access point&#39;s DTIM setting). Note that in &#39;ap&#39; and &#39;sta+ap&#39; modes the radio is always on, i.e., no power saving is possible.</li>\n<li><code>savedMode</code> - The saved operation mode which will be applied at boot time: <code>off</code>, <code>sta</code>, <code>ap</code>, <code>sta+ap</code>.</li>\n</ul>\n",
-      "!url": "http://www.espruino.com/Reference#l_Wifi_getStatus"
-    },
-    "setConfig": {
-      "!type": "fn(settings: ?)",
-      "!doc": "<p>Sets a number of global wifi configuration settings. All parameters are optional and which are passed determines which settings are updated.\nThe settings available are:</p>\n<ul>\n<li><code>phy</code> - Modulation standard to allow: <code>11b</code>, <code>11g</code>, <code>11n</code> (the esp8266 docs are not very clear, but it is assumed that 11n means b/g/n).</li>\n<li><code>powersave</code> - Power saving mode: <code>none</code> (radio is on all the time), <code>ps-poll</code> (radio is off between beacons as determined by the access point&#39;s DTIM setting). Note that in &#39;ap&#39; and &#39;sta+ap&#39; modes the radio is always on, i.e., no power saving is possible.</li>\n</ul>\n<p>Note: esp8266 SDK programmers may be missing an &quot;opmode&quot; option to set the sta/ap/sta+ap operation mode. Please use connect/scan/disconnect/startAP/stopAP, which all set the esp8266 opmode indirectly.</p>\n",
-      "!url": "http://www.espruino.com/Reference#l_Wifi_setConfig"
-    },
-    "getDetails": {
-      "!type": "fn(callback: ?) -> ?",
-      "!doc": "<p>Retrieve the wifi station configuration and status details. The details object has the following properties:</p>\n<ul>\n<li><code>status</code> - Details about the wifi station connection, one of <code>off</code>, <code>connecting</code>, <code>wrong_password</code>, <code>no_ap_found</code>, <code>connect_fail</code>, or <code>connected</code>. The off, bad_password and connected states are stable, the other states are transient. The connecting state will either result in connected or one of the error states (bad_password, no_ap_found, connect_fail) and the no_ap_found and connect_fail states will result in a reconnection attempt after some interval.</li>\n<li><code>rssi</code> - signal strength of the connected access point in dB, typically in the range -110 to 0, with anything greater than -30 being an excessively strong signal.</li>\n<li><code>ssid</code> - SSID of the access point.</li>\n<li><code>password</code> - the password used to connect to the access point.</li>\n<li><code>authMode</code> - the authentication used: <code>open</code>, <code>wpa</code>, <code>wpa2</code>, <code>wpa_wpa2</code> (not currently supported).</li>\n<li><code>savedSsid</code> - the SSID to connect to automatically at boot time, null if none.</li>\n</ul>\n",
-      "!url": "http://www.espruino.com/Reference#l_Wifi_getDetails"
-    },
-    "getAPDetails": {
-      "!type": "fn(callback: ?) -> ?",
-      "!doc": "<p>Retrieve the current access point configuration and status.  The details object has the following properties:</p>\n<ul>\n<li><code>status</code> - Current access point status: <code>enabled</code> or <code>disabled</code></li>\n<li><code>stations</code> - an array of the stations connected to the access point.  This array may be empty.  Each entry in the array is an object describing the station which, at a minimum contains <code>ip</code> being the IP address of the station.</li>\n<li><code>ssid</code> - SSID to broadcast.</li>\n<li><code>password</code> - Password for authentication.</li>\n<li><code>authMode</code> - the authentication required of stations: <code>open</code>, <code>wpa</code>, <code>wpa2</code>, <code>wpa_wpa2</code>.</li>\n<li><code>hidden</code> - True if the SSID is hidden, false otherwise.</li>\n<li><code>maxConn</code> - Max number of station connections supported.</li>\n<li><code>savedSsid</code> - the SSID to broadcast automatically at boot time, null if the access point is to be disabled at boot.</li>\n</ul>\n",
-      "!url": "http://www.espruino.com/Reference#l_Wifi_getAPDetails"
-    },
-    "save": {
-      "!type": "fn(what: ?)",
-      "!doc": "<p>Save the current wifi configuration (station and access point) to flash and automatically apply this configuration at boot time, unless <code>what==&quot;clear&quot;</code>, in which case the saved configuration is cleared such that wifi remains disabled at boot. The saved configuration includes:</p>\n<ul>\n<li>mode (off/sta/ap/sta+ap)</li>\n<li>SSIDs &amp; passwords</li>\n<li>phy (11b/g/n)</li>\n<li>powersave setting</li>\n<li>DHCP hostname</li>\n</ul>\n",
-      "!url": "http://www.espruino.com/Reference#l_Wifi_save"
-    },
-    "restore": {
-      "!type": "fn()",
-      "!doc": "<p>Restores the saved Wifi configuration from flash. See <code>Wifi.save()</code>.</p>\n",
-      "!url": "http://www.espruino.com/Reference#l_Wifi_restore"
-    },
-    "getIP": {
-      "!type": "fn(callback: ?) -> ?",
-      "!doc": "<p>Return the station IP information in an object as follows:</p>\n<ul>\n<li>ip - IP address as string (e.g. &quot;192.168.1.5&quot;)</li>\n<li>netmask - The interface netmask as string</li>\n<li>gw - The network gateway as string</li>\n<li>mac - The MAC address as string of the form 00:00:00:00:00:00</li>\n</ul>\n<p>Note that the <code>ip</code>, <code>netmask</code>, and <code>gw</code> fields are omitted if no connection is established:</p>\n",
-      "!url": "http://www.espruino.com/Reference#l_Wifi_getIP"
-    },
-    "getAPIP": {
-      "!type": "fn(callback: ?) -> ?",
-      "!doc": "<p>Return the access point IP information in an object which contains:</p>\n<ul>\n<li>ip - IP address as string (typ &quot;192.168.4.1&quot;)</li>\n<li>netmask - The interface netmask as string</li>\n<li>gw - The network gateway as string</li>\n<li>mac - The MAC address as string of the form 00:00:00:00:00:00</li>\n</ul>\n",
-      "!url": "http://www.espruino.com/Reference#l_Wifi_getAPIP"
-    },
-    "getHostByName": {
-      "!type": "fn(hostname: ?, callback: ?)",
-      "!doc": "<p>Lookup the hostname and invoke a callback with the IP address as integer argument. If the lookup fails, the callback is invoked with a null argument.\n<strong>Note:</strong> only a single hostname lookup can be made at a time, concurrent lookups are not supported.</p>\n",
-      "!url": "http://www.espruino.com/Reference#l_Wifi_getHostByName"
-    },
-    "getDHCPHostname": {
-      "!type": "fn(callback: ?) -> ?",
-      "!doc": "<p>Deprecated, please use getHostname.</p>\n",
-      "!url": "http://www.espruino.com/Reference#l_Wifi_getDHCPHostname"
-    },
-    "getHostname": {
-      "!type": "fn(callback: ?) -> ?",
-      "!doc": "<p>Returns the hostname announced to the DHCP server and broadcast via mDNS when connecting to an access point.</p>\n",
-      "!url": "http://www.espruino.com/Reference#l_Wifi_getHostname"
-    },
-    "setDHCPHostname": {
-      "!type": "fn(hostname: ?)",
-      "!doc": "<p>Deprecated, please use setHostname instead.</p>\n",
-      "!url": "http://www.espruino.com/Reference#l_Wifi_setDHCPHostname"
-    },
-    "setHostname": {
-      "!type": "fn(hostname: ?)",
-      "!doc": "<p>Set the hostname. Depending on implemenation, the hostname is sent with every DHCP request and is broadcast via mDNS. The DHCP hostname may be visible in the access point and may be forwarded into DNS as hostname.local.\nIf a DHCP lease currently exists changing the hostname will cause a disconnect and reconnect in order to transmit the change to the DHCP server.\nThe mDNS announcement also includes an announcement for the &quot;espruino&quot; service.</p>\n",
-      "!url": "http://www.espruino.com/Reference#l_Wifi_setHostname"
-    },
-    "setSNTP": {
-      "!type": "fn(server: ?, tz_offset: ?)",
-      "!doc": "<p>Starts the SNTP (Simple Network Time Protocol) service to keep the clock synchronized with the specified server. Note that the time zone is really just an offset to UTC and doesn&#39;t handle daylight savings time.\nThe interval determines how often the time server is queried and Espruino&#39;s time is synchronized. The initial synchronization occurs asynchronously after setSNTP returns.</p>\n",
-      "!url": "http://www.espruino.com/Reference#l_Wifi_setSNTP"
     }
   },
   "http": {
@@ -2045,16 +2053,6 @@
       "!type": "fn(callback: ?) -> +httpSrv",
       "!doc": "<p>Create an HTTP Server</p>\n<p>When a request to the server is made, the callback is called. In the callback you can use the methods on the response (httpSRs) to send data. You can also add <code>request.on(&#39;data&#39;,function() { ... })</code> to listen for POSTed data</p>\n",
       "!url": "http://www.espruino.com/Reference#l_http_createServer"
-    },
-    "request": {
-      "!type": "fn(options: ?, callback: ?) -> +httpCRq",
-      "!doc": "<p>Create an HTTP Request - <code>end()</code> must be called on it to complete the operation. <code>options</code> is of the form:</p>\n<pre><code><span class=\"hljs-keyword\">var</span> options = {\n    <span class=\"hljs-attr\">host</span>: <span class=\"hljs-string\">'example.com'</span>, <span class=\"hljs-comment\">// host name</span>\n    port: <span class=\"hljs-number\">80</span>,            <span class=\"hljs-comment\">// (optional) port, defaults to 80</span>\n    path: <span class=\"hljs-string\">'/'</span>,           <span class=\"hljs-comment\">// path sent to server</span>\n    method: <span class=\"hljs-string\">'GET'</span>,       <span class=\"hljs-comment\">// HTTP command sent to server (must be uppercase 'GET', 'POST', etc)</span>\n    headers: { <span class=\"hljs-attr\">key</span> : value, <span class=\"hljs-attr\">key</span> : value } <span class=\"hljs-comment\">// (optional) HTTP headers</span>\n  };\n<span class=\"hljs-built_in\">require</span>(<span class=\"hljs-string\">\"http\"</span>).request(options, <span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span>(<span class=\"hljs-params\">res</span>) </span>{\n  res.on(<span class=\"hljs-string\">'data'</span>, <span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span>(<span class=\"hljs-params\">data</span>) </span>{\n    <span class=\"hljs-built_in\">console</span>.log(<span class=\"hljs-string\">\"HTTP&gt; \"</span>+data);\n  });\n  res.on(<span class=\"hljs-string\">'close'</span>, <span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span>(<span class=\"hljs-params\">data</span>) </span>{\n    <span class=\"hljs-built_in\">console</span>.log(<span class=\"hljs-string\">\"Connection closed\"</span>);\n  });\n});\n</code></pre><p>You can easily pre-populate <code>options</code> from a URL using <code>var options = url.parse(&quot;http://www.example.com/foo.html&quot;)</code></p>\n<p><strong>Note:</strong> if TLS/HTTPS is enabled, options can have <code>ca</code>, <code>key</code> and <code>cert</code> fields. See <code>tls.connect</code> for\nmore information about these and how to use them.</p>\n",
-      "!url": "http://www.espruino.com/Reference#l_http_request"
-    },
-    "get": {
-      "!type": "fn(options: ?, callback: ?) -> +httpCRq",
-      "!doc": "<p>Request a webpage over HTTP - a convenience function for <code>http.request()</code> that makes sure the HTTP command is &#39;GET&#39;, and that calls <code>end</code> automatically.</p>\n<pre><code><span class=\"hljs-built_in\">require</span>(<span class=\"hljs-string\">\"http\"</span>).get(<span class=\"hljs-string\">\"http://pur3.co.uk/hello.txt\"</span>, <span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span>(<span class=\"hljs-params\">res</span>) </span>{\n  res.on(<span class=\"hljs-string\">'data'</span>, <span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span>(<span class=\"hljs-params\">data</span>) </span>{\n    <span class=\"hljs-built_in\">console</span>.log(<span class=\"hljs-string\">\"HTTP&gt; \"</span>+data);\n  });\n  res.on(<span class=\"hljs-string\">'close'</span>, <span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span>(<span class=\"hljs-params\">data</span>) </span>{\n    <span class=\"hljs-built_in\">console</span>.log(<span class=\"hljs-string\">\"Connection closed\"</span>);\n  });\n});\n</code></pre><p>See <code>http.request()</code> and <a href=\"/Internet\">the Internet page</a> and ` for more usage examples.</p>\n",
-      "!url": "http://www.espruino.com/Reference#l_http_get"
     }
   },
   "httpSrv": {
@@ -2103,12 +2101,12 @@
     "prototype": {
       "write": {
         "!type": "fn(data: ?) -> bool",
-        "!doc": "",
+        "!doc": "<p>This function writes the <code>data</code> argument as a string. Data that is passed in\n(including arrays) will be converted to a string with the normal JavaScript \n<code>toString</code> method. For more information about sending binary data see <code>Socket.write</code></p>\n",
         "!url": "http://www.espruino.com/Reference#l_httpSRs_write"
       },
       "end": {
         "!type": "fn(data: ?)",
-        "!doc": "",
+        "!doc": "<p>See <code>Socket.write</code> for more information about the data argument</p>\n",
         "!url": "http://www.espruino.com/Reference#l_httpSRs_end"
       },
       "writeHead": {
@@ -2125,12 +2123,12 @@
     "prototype": {
       "write": {
         "!type": "fn(data: ?) -> bool",
-        "!doc": "",
+        "!doc": "<p>This function writes the <code>data</code> argument as a string. Data that is passed in\n(including arrays) will be converted to a string with the normal JavaScript \n<code>toString</code> method. For more information about sending binary data see <code>Socket.write</code></p>\n",
         "!url": "http://www.espruino.com/Reference#l_httpCRq_write"
       },
       "end": {
         "!type": "fn(data: ?)",
-        "!doc": "<p>Finish this HTTP request - optional data to append as an argument</p>\n",
+        "!doc": "<p>Finish this HTTP request - optional data to append as an argument</p>\n<p>See <code>Socket.write</code> for more information about the data argument</p>\n",
         "!url": "http://www.espruino.com/Reference#l_httpCRq_end"
       }
     }
@@ -2239,12 +2237,7 @@
   "NetworkJS": {
     "!type": "fn()",
     "!doc": "<p>Library that initialises a network device that calls into JavaScript</p>\n",
-    "!url": "http://www.espruino.com/Reference#l_NetworkJS_undefined",
-    "create": {
-      "!type": "fn(obj: ?) -> ?",
-      "!doc": "<p>Initialise the network using the callbacks given and return the first argument. For instance:</p>\n<pre><code><span class=\"hljs-built_in\">require</span>(<span class=\"hljs-string\">\"NetworkJS\"</span>).create({\n  <span class=\"hljs-attr\">create</span> : <span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span>(<span class=\"hljs-params\">host,port</span>) </span>{\n    <span class=\"hljs-comment\">// Create a socket and return its index, host is a string, port is an integer.</span>\n    <span class=\"hljs-comment\">// If host isn't defined, create a server socket</span>\n    <span class=\"hljs-built_in\">console</span>.log(<span class=\"hljs-string\">\"Create\"</span>,host,port);\n    <span class=\"hljs-keyword\">return</span> <span class=\"hljs-number\">1</span>;\n  },\n  <span class=\"hljs-attr\">close</span> : <span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span>(<span class=\"hljs-params\">sckt</span>) </span>{\n    <span class=\"hljs-comment\">// Close the socket. returns nothing</span>\n  },\n  <span class=\"hljs-attr\">accept</span> : <span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span>(<span class=\"hljs-params\">sckt</span>) </span>{\n    <span class=\"hljs-comment\">// Accept the connection on the server socket. Returns socket number or -1 if no connection</span>\n    <span class=\"hljs-keyword\">return</span> <span class=\"hljs-number\">-1</span>;\n  },\n  <span class=\"hljs-attr\">recv</span> : <span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span>(<span class=\"hljs-params\">sckt, maxLen</span>) </span>{\n    <span class=\"hljs-comment\">// Receive data. Returns a string (even if empty).</span>\n    <span class=\"hljs-comment\">// If non-string returned, socket is then closed</span>\n    <span class=\"hljs-keyword\">return</span> <span class=\"hljs-literal\">null</span>;<span class=\"hljs-comment\">//or \"\";</span>\n  },\n  <span class=\"hljs-attr\">send</span> : <span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span>(<span class=\"hljs-params\">sckt, data</span>) </span>{\n    <span class=\"hljs-comment\">// Send data (as string). Returns the number of bytes sent - 0 is ok.</span>\n    <span class=\"hljs-comment\">// Less than 0</span>\n    <span class=\"hljs-keyword\">return</span> data.length;\n  }\n});\n</code></pre>",
-      "!url": "http://www.espruino.com/Reference#l_NetworkJS_create"
-    }
+    "!url": "http://www.espruino.com/Reference#l_NetworkJS_undefined"
   },
   "url": {
     "!type": "fn()",
@@ -2308,14 +2301,9 @@
         "!doc": "<p>Pipe this to a stream (an object with a &#39;write&#39; method)</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Socket_pipe"
       },
-      "write": {
-        "!type": "fn(data: ?) -> bool",
-        "!doc": "",
-        "!url": "http://www.espruino.com/Reference#l_Socket_write"
-      },
       "end": {
         "!type": "fn(data: ?)",
-        "!doc": "<p>Close this socket - optional data to append as an argument</p>\n",
+        "!doc": "<p>Close this socket - optional data to append as an argument.</p>\n<p>See <code>Socket.write</code> for more information about the data argument</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Socket_end"
       }
     }
@@ -2323,12 +2311,7 @@
   "tls": {
     "!type": "fn()",
     "!doc": "<p>This library allows you to create TCPIP servers and clients using TLS encryption</p>\n<p>In order to use this, you will need an extra module to get network connectivity.</p>\n<p>This is designed to be a cut-down version of the <a href=\"http://nodejs.org/api/tls.html\">node.js library</a>. Please see the <a href=\"/Internet\">Internet</a> page for more information on how to use it.</p>\n",
-    "!url": "http://www.espruino.com/Reference#l_tls_undefined",
-    "connect": {
-      "!type": "fn(options: ?, callback: ?) -> +Socket",
-      "!doc": "<p>Create a socket connection using TLS</p>\n<p>Options can have <code>ca</code>, <code>key</code> and <code>cert</code> fields, which should be the decoded content of the certificate.</p>\n<pre><code>var <span class=\"hljs-keyword\">options</span> = url.parse(<span class=\"hljs-string\">\"localhost:1234\"</span>);\n<span class=\"hljs-keyword\">options</span>.key = atob(<span class=\"hljs-string\">\"MIIJKQ ... OZs08C\"</span>);\n<span class=\"hljs-keyword\">options</span>.cert = atob(<span class=\"hljs-string\">\"MIIFi ... Uf93rN+\"</span>);\n<span class=\"hljs-keyword\">options</span>.ca = atob(<span class=\"hljs-string\">\"MIIFgDCC ... GosQML4sc=\"</span>);\nrequire(<span class=\"hljs-string\">\"tls\"</span>).connect(<span class=\"hljs-keyword\">options</span>, ... );\n</code></pre><p>If you have the certificates as <code>.pem</code> files, you need to load these files, take the information between the lines beginning with <code>----</code>, remove the newlines from it so you have raw base64, and then feed it into <code>atob</code> as above.</p>\n<p>You can also:</p>\n<ul>\n<li>Just specify the filename (&lt;=100 characters) and it will be loaded and parsed if you have an SD card connected. For instance <code>options.key = &quot;key.pem&quot;;</code></li>\n<li>Specify a function, which will be called to retrieve the data.  For instance `options.key = function() { eeprom.load_my_info(); };</li>\n</ul>\n<p>For more information about generating and using certificates, see:</p>\n<p><a href=\"https://engineering.circle.com/https-authorized-certs-with-node-js/\">https://engineering.circle.com/https-authorized-certs-with-node-js/</a></p>\n<p>(You&#39;ll need to use 2048 bit certificates as opposed to 4096 bit shown above)</p>\n",
-      "!url": "http://www.espruino.com/Reference#l_tls_connect"
-    }
+    "!url": "http://www.espruino.com/Reference#l_tls_undefined"
   },
   "hashlib": {
     "!type": "fn()",
@@ -2430,6 +2413,16 @@
       "!type": "fn(path: ?) -> ?",
       "!doc": "<p>Return information on the given file. This returns an object with the following\nfields:</p>\n<p>size: size in bytes\ndir: a boolean specifying if the file is a directory or not\nmtime: A Date structure specifying the time the file was last modified</p>\n",
       "!url": "http://www.espruino.com/Reference#l_fs_statSync"
+    },
+    "mkdir": {
+      "!type": "fn(path: ?) -> bool",
+      "!doc": "<p>Create the directory</p>\n<p>NOTE: Espruino does not yet support Async file IO, so this function behaves like the &#39;Sync&#39; version.</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_fs_mkdir"
+    },
+    "mkdirSync": {
+      "!type": "fn(path: ?) -> bool",
+      "!doc": "<p>Create the directory</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_fs_mkdirSync"
     }
   },
   "File": {
@@ -2625,34 +2618,29 @@
       "!doc": "<p>Turn on the magnetometer, take a single reading, and then turn it off again.</p>\n<p>An object of the form <code>{x,y,z}</code> is returned containing magnetometer readings.\nDue to residual magnetism in the Puck and magnetometer itself, with\nno magnetic field the Puck will not return <code>{x:0,y:0,z:0}</code>.</p>\n<p>Instead, it&#39;s up to you to figure out what the &#39;zero value&#39; is for your\nPuck in your location and to then subtract that from the value returned. If\nyou&#39;re not trying to measure the Earth&#39;s magnetic field then it&#39;s a good idea\nto just take a reading at startup and use that.</p>\n<p>With the aerial at the top of the board, the <code>y</code> reading is vertical, <code>x</code> is\nhorizontal, and <code>z</code> is through the board.</p>\n<p>Readings are in increments of 0.1 micro Tesla (uT). The Earth&#39;s magnetic field\nvaries from around 25-60 uT, so the reading will vary by 250 to 600 depending\non location.</p>\n",
       "!url": "http://www.espruino.com/Reference#l_Puck_mag"
     },
-    "magOn": {
-      "!type": "fn(samplerate: number)",
-      "!doc": "<p>Turn the magnetometer on and configure it. Samples will then cause\na &#39;mag&#39; event on &#39;Puck&#39;:</p>\n<pre><code>Puck.magOn();\nPuck.<span class=\"hljs-keyword\">on</span>(<span class=\"hljs-string\">'mag'</span>, <span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span><span class=\"hljs-params\">(xyz)</span> <span class=\"hljs-comment\">{\n  console.log(xyz);\n}</span>);</span>\n<span class=\"hljs-comment\">// Turn events off with Puck.magOff();</span>\n</code></pre><p>This call will be ignored if the magnetometer is already on.</p>\n<p>If given an argument, the sample rate is set (if not, it&#39;s at 0.63Hz). The sample rate should be one of the following:</p>\n<ul>\n<li>80 Hz -  900uA</li>\n<li>40 Hz -  550uA</li>\n<li>20 Hz -  275uA</li>\n<li>10 Hz -  137uA</li>\n<li>5 Hz -  69uA</li>\n<li>2.5 Hz -  34uA</li>\n<li>1.25 Hz -  17uA</li>\n<li>0.63 Hz -  8uA</li>\n<li>0.31 Hz -  8uA</li>\n<li>0.16 Hz -  8uA</li>\n<li>0.08 Hz - 8uA</li>\n</ul>\n",
-      "!url": "http://www.espruino.com/Reference#l_Puck_magOn"
-    },
     "magOff": {
       "!type": "fn()",
       "!doc": "<p>Turn the magnetometer off</p>\n",
       "!url": "http://www.espruino.com/Reference#l_Puck_magOff"
     },
     "IR": {
-      "!type": "fn(data: ?)",
-      "!doc": "<p>Transmit the given set of IR pulses - data should be an array of pulse times\nin milliseconds (as <code>[on, off, on, off, on, etc]</code>).</p>\n",
+      "!type": "fn(data: ?, cathode: +Pin, anode: +Pin)",
+      "!doc": "<p>Transmit the given set of IR pulses - data should be an array of pulse times\nin milliseconds (as <code>[on, off, on, off, on, etc]</code>).</p>\n<p>For example <code>Puck.IR(pulseTimes)</code> - see <a href=\"http://www.espruino.com/Puck.js+Infrared\">http://www.espruino.com/Puck.js+Infrared</a>\nfor a full example.</p>\n<p>You can also attach an external LED to Puck.js, in which case\nyou can just execute <code>Puck.IR(pulseTimes, led_cathode, led_anode)</code></p>\n",
       "!url": "http://www.espruino.com/Reference#l_Puck_IR"
     },
     "capSense": {
       "!type": "fn(tx: +Pin, rx: +Pin) -> number",
-      "!doc": "<p>Capacitive sense. TX must be connected to RX pin and sense plate via 1MOhm resistor.</p>\n<p>If no pins are supplied, the NFC ring is used for capacitive sense.</p>\n",
+      "!doc": "<p>Capacitive sense - the higher the capacitance, the higher the number returned.</p>\n<p>If called without arguments, a value depending on the capacitance of what is \nattached to pin D11 will be returned. If you attach a length of wire to D11,\nyou&#39;ll be able to see a higher value returned when your hand is near the wire\nthan when it is away.</p>\n<p>You can also supply pins to use yourself, however if you do this then\nthe TX pin must be connected to RX pin and sense plate via a roughly 1MOhm \nresistor.</p>\n<p>When not supplying pins, Puck.js uses an internal resistor between D12(tx)\nand D11(rx).</p>\n",
       "!url": "http://www.espruino.com/Reference#l_Puck_capSense"
     },
     "light": {
       "!type": "fn() -> number",
-      "!doc": "<p>Read a light value based on the light the red LED is seeing</p>\n",
+      "!doc": "<p>Return a light value based on the light the red LED is seeing.</p>\n<p><strong>Note:</strong> If called more than 5 times per second, the received light value\nmay not be accurate.</p>\n",
       "!url": "http://www.espruino.com/Reference#l_Puck_light"
     },
     "getBatteryPercentage": {
       "!type": "fn() -> number",
-      "!doc": "<p>Return an approximate battery percentage remaining based on\na normal CR2032 battery (2.8 - 2.0v)</p>\n",
+      "!doc": "<p>Return an approximate battery percentage remaining based on\na normal CR2032 battery (2.8 - 2.2v)</p>\n",
       "!url": "http://www.espruino.com/Reference#l_Puck_getBatteryPercentage"
     },
     "selfTest": {
@@ -2663,7 +2651,7 @@
   },
   "Boolean": {
     "!type": "fn(value: ?) -> bool",
-    "!doc": "<p>Creates a number</p>\n",
+    "!doc": "<p>Creates a boolean</p>\n",
     "!url": "http://www.espruino.com/Reference#l_Boolean_Boolean"
   },
   "require": {
@@ -2756,11 +2744,6 @@
     "!doc": "<p>Return the current mode of the given pin. See <code>pinMode</code> for more information on returned values.</p>\n",
     "!url": "http://www.espruino.com/Reference#l__global_getPinMode"
   },
-  "shiftOut": {
-    "!type": "fn(pins: ?, options: ?, data: ?)",
-    "!doc": "<p>Shift an array of data out using the pins supplied <em>least significant bit first</em>,\nfor example:</p>\n<pre><code><span class=\"hljs-comment\">// shift out to single clk+data</span>\n<span class=\"hljs-selector-tag\">shiftOut</span>(A0, { <span class=\"hljs-attribute\">clk </span>: A1 }, <span class=\"hljs-selector-attr\">[1,0,1,0]</span>);\n\n<span class=\"hljs-comment\">// shift out a whole byte (like software SPI)</span>\n<span class=\"hljs-selector-tag\">shiftOut</span>(A0, { <span class=\"hljs-attribute\">clk </span>: A1, <span class=\"hljs-attribute\">repeat</span>: <span class=\"hljs-number\">8</span> }, <span class=\"hljs-selector-attr\">[1,2,3,4]</span>);\n\n<span class=\"hljs-comment\">// shift out via 4 data pins</span>\n<span class=\"hljs-selector-tag\">shiftOut</span>([A3,A2,A1,A0], { <span class=\"hljs-attribute\">clk </span>: A4 }, <span class=\"hljs-selector-attr\">[1,2,3,4]</span>);\n</code></pre><p><code>options</code> is an object of the form:</p>\n<pre><code>{\n  <span class=\"hljs-string\">clk :</span> pin, <span class=\"hljs-comment\">// a pin to use as the clock (undefined = no pin)</span>\n  <span class=\"hljs-string\">clkPol :</span> bool, <span class=\"hljs-comment\">// clock polarity - default is 0 (so 1 normally, pulsing to 0 to clock data in)</span>\n  <span class=\"hljs-string\">repeat :</span> <span class=\"hljs-keyword\">int</span>, <span class=\"hljs-comment\">// number of clocks per array item</span>\n}\n</code></pre><p>Each item in the <code>data</code> array will be output to the pins, with the first\npin in the array being the MSB and the last the LSB, then the clock will be\npulsed in the polarity given.</p>\n<p><code>repeat</code> is the amount of times shift data out for each array item. For instance\nwe may want to shift 8 bits out through 2 pins - in which case we need to set\nrepeat to 4.</p>\n",
-    "!url": "http://www.espruino.com/Reference#l__global_shiftOut"
-  },
   "setWatch": {
     "!type": "fn(function: ?, pin: +Pin, options: ?) -> ?",
     "!doc": "<p>Call the function specified when the pin changes. Watches set with <code>setWatch</code> can be removed using <code>clearWatch</code>.</p>\n<p>The function may also take an argument, which is an object of type <code>{state:bool, time:float, lastTime:float}</code>.</p>\n<ul>\n<li><code>state</code> is whether the pin is currently a <code>1</code> or a <code>0</code></li>\n<li><code>time</code> is the time in seconds at which the pin changed state</li>\n<li><code>lastTime</code> is the time in seconds at which the <strong>pin last changed state</strong>. When using <code>edge:&#39;rising&#39;</code> or <code>edge:&#39;falling&#39;</code>, this is not the same as when the function was last called.</li>\n</ul>\n<p>For instance, if you want to measure the length of a positive pulse you could use <code>setWatch(function(e) { console.log(e.time-e.lastTime); }, BTN, { repeat:true, edge:&#39;falling&#39; });</code>.\nThis will only be called on the falling edge of the pulse, but will be able to measure the width of the pulse because <code>e.lastTime</code> is the time of the rising edge.</p>\n<p>Internally, an interrupt writes the time of the pin&#39;s state change into a queue, and the function\nsupplied to <code>setWatch</code> is executed only from the main message loop. However, if the callback is a\nnative function <code>void (bool state)</code> then you can add <code>irq:true</code> to options, which will cause the\nfunction to be called from within the IRQ. When doing this, interrupts will happen on both edges\nand there will be no debouncing.</p>\n<p><strong>Note:</strong> The STM32 chip (used in the <a href=\"/EspruinoBoard\">Espruino Board</a> and <a href=\"/Pico\">Pico</a>) cannot\nwatch two pins with the same number - eg <code>A0</code> and <code>B0</code>.</p>\n",
@@ -2846,16 +2829,6 @@
     "!doc": "<p>Get the serial number of this board</p>\n",
     "!url": "http://www.espruino.com/Reference#l__global_getSerial"
   },
-  "setInterval": {
-    "!type": "fn(function: ?, timeout: number, args: ?) -> ?",
-    "!doc": "<p>Call the function (or evaluate the string) specified REPEATEDLY after the timeout in milliseconds.</p>\n<p>For instance:</p>\n<pre><code>setInterval(<span class=\"hljs-name\">function</span> () {\n  console.log(<span class=\"hljs-string\">\"Hello World\"</span>)<span class=\"hljs-comment\">;</span>\n}, <span class=\"hljs-number\">1000</span>)<span class=\"hljs-comment\">;</span>\n// or\nsetInterval('console.log(<span class=\"hljs-string\">\"Hello World\"</span>)<span class=\"hljs-comment\">;', 1000);</span>\n// both print 'Hello World' every second\n</code></pre><p>You can also specify extra arguments that will be sent to the function when it is executed. For example:</p>\n<pre><code>setInterval(<span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span> (<span class=\"hljs-params\">a,b</span>) </span>{\n  <span class=\"hljs-built_in\">console</span>.log(a+<span class=\"hljs-string\">\" \"</span>+b);\n}, <span class=\"hljs-number\">1000</span>, <span class=\"hljs-string\">\"Hello\"</span>, <span class=\"hljs-string\">\"World\"</span>);\n<span class=\"hljs-comment\">// prints 'Hello World' every second</span>\n</code></pre><p>If you want to stop your function from being called, pass the number that\nwas returned by <code>setInterval</code> into the <code>clearInterval</code> function.</p>\n<p> <strong>Note:</strong> If <code>setDeepSleep(true)</code> has been called and the interval is greater than 5 seconds, Espruino may execute the interval up to 1 second late. This is because Espruino can only wake from deep sleep every second - and waking early would cause Espruino to waste power while it waited for the correct time.</p>\n",
-    "!url": "http://www.espruino.com/Reference#l__global_setInterval"
-  },
-  "setTimeout": {
-    "!type": "fn(function: ?, timeout: number, args: ?) -> ?",
-    "!doc": "<p>Call the function (or evaluate the string) specified ONCE after the timeout in milliseconds.</p>\n<p>For instance:</p>\n<pre><code>setTimeout(<span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span> <span class=\"hljs-params\">()</span> {</span>\n  console.<span class=\"hljs-built_in\">log</span>(<span class=\"hljs-string\">\"Hello World\"</span>);\n}, <span class=\"hljs-number\">1000</span>);\n<span class=\"hljs-comment\">// or</span>\nsetTimeout('console.<span class=\"hljs-built_in\">log</span>(<span class=\"hljs-string\">\"Hello World\"</span>);', <span class=\"hljs-number\">1000</span>);\n<span class=\"hljs-comment\">// both print 'Hello World' after a second</span>\n</code></pre><p>You can also specify extra arguments that will be sent to the function when it is executed. For example:</p>\n<pre><code>setTimeout(<span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span> (<span class=\"hljs-params\">a,b</span>) </span>{\n  <span class=\"hljs-built_in\">console</span>.log(a+<span class=\"hljs-string\">\" \"</span>+b);\n}, <span class=\"hljs-number\">1000</span>, <span class=\"hljs-string\">\"Hello\"</span>, <span class=\"hljs-string\">\"World\"</span>);\n<span class=\"hljs-comment\">// prints 'Hello World' after 1 second</span>\n</code></pre><p>If you want to stop the function from being called, pass the number that\nwas returned by <code>setTimeout</code> into the <code>clearInterval</code> function.</p>\n<p> <strong>Note:</strong> If <code>setDeepSleep(true)</code> has been called and the interval is greater than 5 seconds, Espruino may execute the interval up to 1 second late. This is because Espruino can only wake from deep sleep every second - and waking early would cause Espruino to waste power while it waited for the correct time.</p>\n",
-    "!url": "http://www.espruino.com/Reference#l__global_setTimeout"
-  },
   "clearInterval": {
     "!type": "fn(id: ?)",
     "!doc": "<p>Clear the Interval that was created with setInterval, for example:</p>\n<p><code>var id = setInterval(function () { print(&#39;foo&#39;); }, 1000);</code></p>\n<p><code>clearInterval(id);</code></p>\n<p>If no argument is supplied, all timers and intervals are stopped</p>\n",
@@ -2915,11 +2888,6 @@
     "!type": "fn(str: ?) -> ?",
     "!doc": "<p>Convert any groups of characters of the form &#39;%ZZ&#39;, into characters with hex code &#39;0xZZ&#39;</p>\n",
     "!url": "http://www.espruino.com/Reference#l__global_decodeURIComponent"
-  },
-  "show": {
-    "!type": "fn(image: ?)",
-    "!doc": "<p><strong>Note:</strong> This function is only available on the <a href=\"/MicroBit\">BBC micro:bit</a> board</p>\n<p>Show an image on the in-built 5x5 LED screen.</p>\n<p>Image can be:</p>\n<ul>\n<li>A number where each bit represents a pixel (so 25 bits). eg. <code>5</code> or <code>0x1FFFFFF</code></li>\n<li>A string, eg: <code>show(&quot;10001&quot;)</code>. Newlines are ignored, and anything that is not\na space or <code>0</code> is treated as a 1.</li>\n<li>An array of 4 bytes (more will be ignored), eg <code>show([1,2,3,0])</code></li>\n</ul>\n<p>For instance the following works for images:</p>\n<pre><code><span class=\"hljs-function\"><span class=\"hljs-title\">show</span><span class=\"hljs-params\">(<span class=\"hljs-string\">\"#   #\"</span>+\n     <span class=\"hljs-string\">\"  #  \"</span>+\n     <span class=\"hljs-string\">\"  #  \"</span>+\n     <span class=\"hljs-string\">\"#   #\"</span>+\n     <span class=\"hljs-string\">\" ### \"</span>)</span></span>\n</code></pre><p>This means you can also use Espruino&#39;s graphics library:</p>\n<pre><code>var g = Graphics.createArrayBuffer(<span class=\"hljs-number\">5</span>,<span class=\"hljs-number\">5</span>,<span class=\"hljs-number\">1</span>)\ng.drawString(<span class=\"hljs-string\">\"E\"</span>,<span class=\"hljs-number\">0</span>,<span class=\"hljs-number\">0</span>)\nshow(g.buffer)\n</code></pre>",
-    "!url": "http://www.espruino.com/Reference#l__global_show"
   },
   "acceleration": {
     "!type": "fn() -> ?",
