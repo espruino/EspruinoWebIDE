@@ -13,8 +13,10 @@ It implements basic VT100 terminal features (up/down/left/right/etc) - enough fo
 | Version | Communications | Benefits |
 |---------|----------------|----------|
 | [Chrome Web App](#installing-from-chrome-web-store) | USB, Serial, [Audio](http://www.espruino.com/Headphone), TCP/IP | Easy to install from [Chrome Web Store](https://chrome.google.com/webstore/detail/espruino-serial-terminal/bleoifhkdalbjfbobjackfdifdneehpo) |
-| [Node.js App](#installing-from-npm) | USB, Serial, Bluetooth Low Energy | Can be run of systems without Chrome web browser |
+| [Node.js App](#installing-from-npm) / NW.js app | USB, Serial, Bluetooth Low Energy | Can be run of systems without Chrome web browser |
 | [Web Version](#full-web-version) | [Audio](http://www.espruino.com/Headphone), Bluetooth Low Energy (via [Web Bluetooth](https://webbluetoothcg.github.io/web-bluetooth/)) | Just go to [a URL](https://espruino.github.io/EspruinoWebIDE/) |
+
+The development of this app is supported by [purchases of official Espruino boards](http://www.espruino.com/Order) as well as the generous donations of my supporters on [Patreon](PATREON.md)
 
 Installing From Chrome Web Store
 ----------------------------
@@ -98,12 +100,13 @@ Using
 Full Web Version
 ----------------
 
-There is also [a web-only version of the Web IDE](https://espruino.github.io/EspruinoWebIDE/) served directly from GitHub.
+The Web IDE is [hosted on the Espruino Website](https://www.espruino.com/ide/) and can use Web Bluetooth to communicate with [Puck.js devices](http://www.espruino.com/Puck.js). There is also [a version served straight from GitHub](https://espruino.github.io/EspruinoWebIDE/).
 
 Web browser permissions stop this accessing the Serial port, but it can:
 
-* Use the Web Audio API to [fake a serial port over your headphone jack](http://www.espruino.com/Headphone) - this must be turned on using the Web IDE's settings icon first
 * Use [Web Bluetooth API](https://webbluetoothcg.github.io/web-bluetooth/) on compatible devices like the [BBC micro:bit](http://www.espruino.com/MicroBit) to communicate with Espruino via devices that implement a Nordic BLE UART
+* Use the Web Audio API to [fake a serial port over your headphone jack](http://www.espruino.com/Headphone) - this must be turned on using the Web IDE's settings icon first
+* Forward the connection [through a device that does have Web Bluetooth](http://forum.espruino.com/conversations/300770/)
 
 Potentially it could also communicate directly with Espruino boards via WebSockets or even AJAX, but this isn't implemented yet.
 

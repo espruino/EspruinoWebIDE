@@ -24,15 +24,14 @@
   }
 
   function init() {
-
     getVersion(function(version){
-
       Espruino.Core.Config.addSection("About", {
         description : undefined,
         sortOrder : -1000,
         getHTML : function(callback) {
           $.get("data/settings_about.html", function(data) {
             callback(data);
+            $(".webide_version").html("Web IDE version "+version);
             var html;
             if (Object.keys(Espruino.Core.Env.getBoardData()).length > 0) {
               var d = Espruino.Core.Env.getBoardData();
@@ -45,6 +44,9 @@
             } else
               html = "<p>Unable to get board information. Please connect to an Espruino board first.</p>";
             $('.board_info').html( html );
+          });
+          $.get("PATREON.md", function(data) {
+            $(".patreon").html(Espruino.Core.Utils.markdownToHTML(data));
           });
         }
       });
