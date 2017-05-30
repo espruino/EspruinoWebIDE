@@ -21,7 +21,6 @@ const CACHED_RESOURCES = [
   'EspruinoTools/libs/esprima/esprima.js',
   'EspruinoTools/libs/targz.js',
   'EspruinoTools/libs/utf8.js',
-  'EspruinoTools/bin/espruino-cli.js',
   'EspruinoTools/core/terminal.js',
   'EspruinoTools/core/serial_nodeserial.js',
   'EspruinoTools/core/config.js',
