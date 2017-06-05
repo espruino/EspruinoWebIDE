@@ -34,7 +34,27 @@
       onChange : function(newValue) { showIcon(newValue); }
     });
     showIcon(Espruino.Config.SHOW_WEBCAM_ICON);
+    Espruino.Core.Config.add("WEBCAM_CONSTRAINTS", {
+      section : "General",
+      name : "Webcam Resolution",
+      description : "When using the Webcam, should we request a specific resolution?",
+      type : { 0 : "Default",
+               1 : "Request 720p (broken on Chrome 57)",
+               2 : "Request 1080p (broken on Chrome 57)",
+               3 : "Force 720p (will fail if unsupported)",
+               4 : "Force 1080p (will fail if unsupported)" },
+      defaultValue : 0,
+      onChange : function(newValue) { showIcon(newValue); }
+    });
   }
+
+  var CONSTRAINTS = {
+        0 : {},
+        1 : { width: {ideal: 1280, max:1920}, height: {ideal: 720, max:1080} },
+        2 : { width: {ideal: 1920, max:1920}, height: {ideal: 1080, max:1080} },
+        3 : { width: {exact: 1280, max:1920}, height: {exact: 720, max:1080} },
+        4 : { width: {exact: 1920, max:1920}, height: {exact: 1080, max:1080} },
+  };
 
   function showIcon(show) {
     show = 0|show;
@@ -73,12 +93,27 @@
     var window_url = window.URL || window.webkitURL;
     navigator.getUserMedia(constraints, function(stream) {
       webCamStream = stream;
-      $('video').attr('src', window_url.createObjectURL(stream));
+      var vid = $('video');
+      vid.attr('src', window_url.createObjectURL(stream));
+      console.log("Webcam started");
+      setTimeout(function cb() {
+        if (vid[0].videoWidth)
+          console.log("Webcam video dimensions: "+vid[0].videoWidth+"x"+vid[0].videoHeight);
+        else
+          setTimeout(cb, 1000);
+      }, 1000);
       $("#terminal").addClass("terminal--webcam");
     }, function(e) {
       console.log('onError!', e);
       Espruino.Core.Notifications.error("Problem initialising WebCam");
     });
+  }
+
+  function getVideoConstraints() {
+    var i = 0|Espruino.Config.WEBCAM_CONSTRAINTS;
+    if (i<0 || i>=CONSTRAINTS.length) i=0;
+    // parse and stringify -> clone object
+    return JSON.parse(JSON.stringify(CONSTRAINTS[i]));
   }
 
   function showWebCamChooser(sources) {
@@ -100,18 +135,18 @@
     });
     $(".window--modal").on("click", ".list__item a", function() {
       var id = $(this).data("id");
+      var videoConstraints = getVideoConstraints();
+      videoConstraints.deviceId = { exact: id };
       enableWebCam({
           audio: false,
-          video: {
-              optional: [{ sourceId: id }]
-          }
+          video: videoConstraints
       });
     });
   }
 
   function enableWebCamOrChoose(sources) {
     if (sources.length == 1) {
-      enableWebCam({audio: false, video: true});
+      enableWebCam({audio: false, video: getVideoConstraints()});
     } else {
       showWebCamChooser(sources);
     }
@@ -143,7 +178,7 @@
           enableWebCamOrChoose(sources);
         });*/
       }, function(e) {
-        console.log('onError!', e);
+        console.log('WebCam Error!', e.toString());
         Espruino.Core.Notifications.error("Problem initialising WebCam");
       });
     } else {
