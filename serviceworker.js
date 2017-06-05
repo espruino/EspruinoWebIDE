@@ -1,5 +1,5 @@
 // Service worker for Offline Web IDE
-const VERSION = 'v2';
+const VERSION = 'v3';
 
 const CACHED_RESOURCES = [
   'EspruinoTools/index.js',
@@ -14,7 +14,6 @@ const CACHED_RESOURCES = [
   'EspruinoTools/plugins/localModules.js',
   'EspruinoTools/plugins/uiMode.js',
   'EspruinoTools/plugins/getGitHub.js',
-  'EspruinoTools/plugins/npmModules.js',
   'EspruinoTools/plugins/setTime.js',
   'EspruinoTools/libs/esprima/escodegen.js',
   'EspruinoTools/libs/esprima/esmangle.js',
