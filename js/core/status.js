@@ -20,7 +20,9 @@
     $("<h5 class='status__port'></h5>").appendTo(".status__right");
     $("<div class='status__progress'><div class='status__progress-bar' /></div>").appendTo(".status__right").hide();
     Espruino.addProcessor("connected", function(data, callback) {
-      setConnectedPort(data.port);
+      var name = data.port;
+      if (data.portName) name = data.portName;
+      setConnectedPort(name);
       callback(data);
     });
 
