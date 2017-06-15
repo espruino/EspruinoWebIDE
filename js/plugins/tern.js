@@ -89,7 +89,14 @@
      go through an add all the pins as variables so Tern cal autocomplete */
     Espruino.addProcessor("boardJSONLoaded", function (data, callback) {
       if (espruinoJSON !== undefined) {
-        var defs = JSON.parse(espruinoJSON);
+        var defs;
+        try {
+          defs = JSON.parse(espruinoJSON);
+        } catch (e) {
+          console.log("ERROR: boardJSONLoaded, ", e.toString());
+          callback(data);
+          return;
+        }
         if ("pins" in data) {
           data.pins.forEach(function(pin) {
             var functions = [];
