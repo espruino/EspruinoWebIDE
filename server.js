@@ -138,12 +138,12 @@ function originIsAllowed(origin) {
 
 wsServer.on('request', function(request) {
     if (!originIsAllowed(request.origin)) {
-      request.reject();
+      try { request.reject(); } catch (e) {}
       console.log((new Date()) + ' Connection from origin ' + request.origin + ' rejected.');
       return;
     }
     if (request.httpRequest.url[0]!="/") {
-      request.reject();
+      try { request.reject(); } catch (e) {}
       console.log("Invalid connection URL "+request.httpRequest.url);
       return;
     }
