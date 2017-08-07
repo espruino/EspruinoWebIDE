@@ -1,5 +1,5 @@
 // Service worker for Offline Web IDE
-const VERSION = 'v5';
+const VERSION = 'v6';
 
 const CACHED_RESOURCES = [
   'EspruinoTools/index.js',
