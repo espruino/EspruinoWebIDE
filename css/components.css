@@ -193,6 +193,16 @@ a:hover > .menu
 	left: 0;
 }
 
+/* Loading indicator */
+.split-pane__loading {
+  position:absolute;
+  top:50%;left:50%;
+  transform: translate(-50%,-50%);
+  font-size:24px;
+  font-weight: bold;
+  color:#888;"
+}
+
 /* Status */
 .status
 {
