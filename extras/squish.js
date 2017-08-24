@@ -126,8 +126,8 @@ function processHTML(infile, outfile) {
   }    
   
   fs.writeFileSync(outfile, html);
-  console.log("Success!);
-  if (squishedFiles.length) {
+  console.log("Success!");
+  if (deleteSquished && squishedFiles.length) {
     console.log("Deleting used files");
     squishedFiles.forEach(function(fn) {
       console.log("Deleting",fn);

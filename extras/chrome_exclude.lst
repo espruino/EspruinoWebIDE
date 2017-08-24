@@ -29,6 +29,7 @@ package.json
 nw-loader.js
 electron-loader.js
 electron-app.js
+js/electron-hacks.js
 js/plugins/_examplePlugin.js
 /index.html
 /upload.html
