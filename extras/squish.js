@@ -11,17 +11,47 @@ Yes, I could use Grunt or something, but this 'just works'.
  
 */
 
-var fs = require("fs");
-if (process.argv.length!=4) {
+var inputFile, outputFile;
+var deleteSquished = false;
+var argumentError = false;
+
+for (var i=2;i<process.argv.length;i++) {
+  var arg = process.argv[i];
+  if (arg[0]=="-") {
+    if (arg=="--delete-squished") {
+      deleteSquished = true;
+    } else {
+      console.log("Unknown argument ",arg);
+      argumentError = true;
+    } 
+  } else {
+    if (!inputFile) inputFile = arg;
+    else if (!outputFile) outputFile = arg;
+    else {
+      console.log("Too many filenames supplied ",arg);
+      argumentError = true;
+    }
+  }
+}
+
+if (argumentError || !inputFile || !outputFile) {
   console.log(
     "--== SQUISH ==--\n"+
-    "USAGE: node squish.js from.html to.html");
-    process.exit(1);
+    "USAGE: node squish.js from.html to.html\n"+
+    "\n"+
+    "Optional Arguments:\n"+
+    "  --delete-squished  - delete any JS or CSS files that are merged\n"
+  );  
+  process.exit(1);
 }
-processHTML(process.argv[2], process.argv[3]);
+
+
+var fs = require("fs");
+processHTML(inputFile, outputFile);
 
 
 function processHTML(infile, outfile) {
+  var squishedFiles = [];
   console.log("Squishing "+infile+" to "+outfile);
   var baseName = infile.substr(0, infile.lastIndexOf("."));
   if (baseName.indexOf("/")>=0) baseName=baseName.substring(baseName.lastIndexOf("/")+1);
@@ -49,6 +79,7 @@ function processHTML(infile, outfile) {
     css += "   -------------------------------------------------------------- */\n";
     if (cssfilename[0]!="/") cssfilename=baseDirIn+cssfilename;
     var csscontents = fs.readFileSync(cssfilename).toString().trim()+"\n";
+    squishedFiles.push(cssfilename);
     csscontents = csscontents.replace(/url\(([^\)]*)\)/g, function(fullmatch,url) {
       if (url[0]=="\"") url=url.slice(1,-1);
       if (url.substr(0,5)=="data:") return fullmatch; // don't replace
@@ -81,6 +112,7 @@ function processHTML(infile, outfile) {
     js += "   -------------------------------------------------------------- */\n";
     if (jsfilename[0]!="/") jsfilename=baseDirIn+jsfilename;
     js += fs.readFileSync(jsfilename).toString().trim()+"\n";
+    squishedFiles.push(jsfilename);
     html = html.substr(0,match.index)+html.substr(match.index+len);
   }  
 
@@ -94,4 +126,21 @@ function processHTML(infile, outfile) {
   }    
   
   fs.writeFileSync(outfile, html);
+  console.log("Success!);
+  if (squishedFiles.length) {
+    console.log("Deleting used files");
+    squishedFiles.forEach(function(fn) {
+      console.log("Deleting",fn);
+      fs.unlinkSync(fn);
+      var minfn;
+      if (fn.indexOf(".min.js")>=0) minfn = fn.substr(0,fn.indexOf(".min.js"))+".js";
+      if (fn.indexOf(".min.css")>=0) minfn = fn.substr(0,fn.indexOf(".min.css"))+".css";
+      if (fn.indexOf(".js")>=0) minfn = fn.substr(0,fn.indexOf(".js"))+".min.js";
+      if (fn.indexOf(".css")>=0) minfn = fn.substr(0,fn.indexOf(".css"))+".min.css";
+      if (minfn && fs.existsSync(minfn)) {
+        console.log(" - deleting minified/unminified variant",minfn);
+        fs.unlinkSync(minfn);
+      }
+    });
+  }
 }

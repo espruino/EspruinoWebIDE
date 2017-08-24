@@ -1,5 +1,6 @@
 Thumbs.db
 *~
+*.test
 .git*
 .gitignore
 .project
@@ -8,6 +9,7 @@ Thumbs.db
 .externalToolBuilders/*
 EspruinoSerialTerminal.zip
 EspruinoTools/.git*
+EspruinoTools/plugins/_examplePlugin.js
 EspruinoTools/node_modules/*
 extras*
 unused/*
@@ -15,17 +17,22 @@ unused
 img/bak/*
 node_modules/*
 node_modules
+js/plugins/_examplePlugin.js
 
+# CLI suff
+EspruinoTools/index.js
+EspruinoTools/bin/espruino-cli.js
+EspruinoTools/plugins/localModules.js
+EspruinoTools/core/notifications.js
 # Electron/nw.js stuff
 package.json
 nw-loader.js
 electron-loader.js
 electron-app.js
-js/electron-hacks.js
+js/plugins/_examplePlugin.js
 /index.html
 /upload.html
 server.js
-EspruinoTools/bin/espruino-cli.js
 serviceworker.js
 *.sh
 EspruinoWebIDE.zip
