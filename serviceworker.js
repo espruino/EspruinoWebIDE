@@ -1,5 +1,5 @@
 // Service worker for Offline Web IDE
-const VERSION = 'v8';
+const VERSION = 'v9';
 
 const CACHED_RESOURCES = [
   'blockly/blockly.html',
@@ -90,6 +90,8 @@ const CACHED_RESOURCES = [
   'img/icon_128.png',
   'favicon.ico',
   'manifest.json',
+  'index.js',  // auto-generated file of squished JS
+  'index.css', // auto-generated file of squished CSS
   'index.html',
   './'
 ];
