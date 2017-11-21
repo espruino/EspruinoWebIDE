@@ -272,7 +272,7 @@
     },
     "memory": {
       "!type": "fn() -> ?",
-      "!doc": "<p>Run a Garbage Collection pass, and return an object containing information on memory usage.</p>\n<ul>\n<li><code>free</code> : Memory that is available to be used (in blocks)</li>\n<li><code>usage</code> : Memory that has been used (in blocks)</li>\n<li><code>total</code> : Total memory (in blocks)</li>\n<li><code>history</code> : Memory used for command history - that is freed if memory is low. Note that this is INCLUDED in the figure for &#39;free&#39;</li>\n<li><code>stackEndAddress</code> : (on ARM) the address (that can be used with peek/poke/etc) of the END of the stack. The stack grows down, so unless you do a lot of recursion the bytes above this can be used.</li>\n<li><code>flash_start</code> : (on ARM) the address of the start of flash memory (usually <code>0x8000000</code>)</li>\n<li><code>flash_binary_end</code> : (on ARM) the address in flash memory of the end of Espruino&#39;s firmware.</li>\n<li><code>flash_code_start</code> : (on ARM) the address in flash memory of pages that store any code that you save with <code>save()</code>.</li>\n<li><code>flash_length</code> : (on ARM) the amount of flash memory this firmware was built for (in bytes). <strong>Note:</strong> Some STM32 chips actually have more memory than is advertised.</li>\n</ul>\n<p>Memory units are specified in &#39;blocks&#39;, which are around 16 bytes each (depending on your device). See <a href=\"http://www.espruino.com/Performance\">http://www.espruino.com/Performance</a> for more information.</p>\n<p><strong>Note:</strong> To find free areas of flash memory, see <code>require(&#39;Flash&#39;).getFree()</code></p>\n",
+      "!doc": "<p>Run a Garbage Collection pass, and return an object containing information on memory usage.</p>\n<ul>\n<li><code>free</code>  : Memory that is available to be used (in blocks)</li>\n<li><code>usage</code> : Memory that has been used (in blocks)</li>\n<li><code>total</code> : Total memory (in blocks)</li>\n<li><code>history</code> : Memory used for command history - that is freed if memory is low. Note that this is INCLUDED in the figure for &#39;free&#39;</li>\n<li><code>gc</code>      : Memory freed during the GC pass</li>\n<li><code>gctime</code>  : Time taken for GC pass (in milliseconds)</li>\n<li><code>stackEndAddress</code> : (on ARM) the address (that can be used with peek/poke/etc) of the END of the stack. The stack grows down, so unless you do a lot of recursion the bytes above this can be used.</li>\n<li><code>flash_start</code>      : (on ARM) the address of the start of flash memory (usually <code>0x8000000</code>)</li>\n<li><code>flash_binary_end</code> : (on ARM) the address in flash memory of the end of Espruino&#39;s firmware.</li>\n<li><code>flash_code_start</code> : (on ARM) the address in flash memory of pages that store any code that you save with <code>save()</code>.</li>\n<li><code>flash_length</code> : (on ARM) the amount of flash memory this firmware was built for (in bytes). <strong>Note:</strong> Some STM32 chips actually have more memory than is advertised.</li>\n</ul>\n<p>Memory units are specified in &#39;blocks&#39;, which are around 16 bytes each (depending on your device). See <a href=\"http://www.espruino.com/Performance\">http://www.espruino.com/Performance</a> for more information.</p>\n<p><strong>Note:</strong> To find free areas of flash memory, see <code>require(&#39;Flash&#39;).getFree()</code></p>\n",
       "!url": "http://www.espruino.com/Reference#l_process_memory"
     }
   },
@@ -511,6 +511,11 @@
       "!type": "fn(object: ?, prototype: ?) -> ?",
       "!doc": "<p>Set the prototype of the given object - this is like writing\n<code>object.__proto__ = prototype</code> but is the &#39;proper&#39; ES6 way of doing it</p>\n",
       "!url": "http://www.espruino.com/Reference#l_Object_setPrototypeOf"
+    },
+    "assign": {
+      "!type": "fn(args: ?) -> ?",
+      "!doc": "<p>Appends all keys and values in any subsequent objects to the first object</p>\n<p><strong>Note:</strong> Unlike the standard ES6 <code>Object.assign</code>, this will throw an exception\nif given raw strings, bools or numbers rather than objects.</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_Object_assign"
     }
   },
   "Function": {
@@ -855,7 +860,7 @@
     },
     "getErrorFlags": {
       "!type": "fn() -> ?",
-      "!doc": "<p>Get and reset the error flags. Returns an array that can contain:</p>\n<p><code>&#39;FIFO_FULL&#39;</code>: The receive FIFO filled up and data was lost. This could be state transitions for setWatch, or received characters.</p>\n<p><code>&#39;BUFFER_FULL&#39;</code>: A buffer for a stream filled up and characters were lost. This can happen to any stream - Serial,HTTP,etc.</p>\n<p><code>&#39;CALLBACK&#39;</code>: A callback (s<code>etWatch</code>, <code>setInterval</code>, <code>on(&#39;data&#39;,...)</code>) caused an error and so was removed.</p>\n<p><code>&#39;LOW_MEMORY&#39;</code>: Memory is running low - Espruino had to run a garbage collection pass or remove some of the command history</p>\n<p><code>&#39;MEMORY&#39;</code>: Espruino ran out of memory and was unable to allocate some data that it needed.</p>\n",
+      "!doc": "<p>Get and reset the error flags. Returns an array that can contain:</p>\n<p><code>&#39;FIFO_FULL&#39;</code>: The receive FIFO filled up and data was lost. This could be state transitions for setWatch, or received characters.</p>\n<p><code>&#39;BUFFER_FULL&#39;</code>: A buffer for a stream filled up and characters were lost. This can happen to any stream - Serial,HTTP,etc.</p>\n<p><code>&#39;CALLBACK&#39;</code>: A callback (<code>setWatch</code>, <code>setInterval</code>, <code>on(&#39;data&#39;,...)</code>) caused an error and so was removed.</p>\n<p><code>&#39;LOW_MEMORY&#39;</code>: Memory is running low - Espruino had to run a garbage collection pass or remove some of the command history</p>\n<p><code>&#39;MEMORY&#39;</code>: Espruino ran out of memory and was unable to allocate some data that it needed.</p>\n<p><code>&#39;UART_OVERFLOW&#39;</code> : A UART received data but it was not read in time and was lost</p>\n",
       "!url": "http://www.espruino.com/Reference#l_E_getErrorFlags"
     },
     "getFlags": {
@@ -864,7 +869,7 @@
       "!url": "http://www.espruino.com/Reference#l_E_getFlags"
     },
     "setFlags": {
-      "!type": "fn(str: ?)",
+      "!type": "fn(flags: ?)",
       "!doc": "<p>Set the Espruino interpreter flags that control the way it handles your JavaScript code.</p>\n<p>Run <code>E.getFlags()</code> and check its description for a list of available flags and their values.</p>\n",
       "!url": "http://www.espruino.com/Reference#l_E_setFlags"
     },
@@ -912,6 +917,11 @@
       "!type": "fn()",
       "!doc": "<p>Dump any locked variables that aren&#39;t referenced from <code>global</code> - for debugging memory leaks only.</p>\n",
       "!url": "http://www.espruino.com/Reference#l_E_dumpLockedVars"
+    },
+    "getAddressOf": {
+      "!type": "fn(v: ?, flatAddress: bool) -> number",
+      "!doc": "<p>Return the address in memory of the given variable. This can then\nbe used with <code>peek</code> and <code>poke</code> functions. However, changing data in\nJS variables directly (flatAddress=false) will most likely result in a crash.</p>\n<p>This functions exists to allow embedded targets to set up\nperipherals such as DMA so that they write directly to\nJS variables.</p>\n<p>See <a href=\"http://www.espruino.com/Internals\">http://www.espruino.com/Internals</a> for more information</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_E_getAddressOf"
     },
     "mapInPlace": {
       "!type": "fn(from: ?, to: ?, map: ?, bits: number)",
@@ -1145,6 +1155,19 @@
       "!type": "fn(var: ?) -> bool",
       "!doc": "<p>Returns true if the provided object is an array</p>\n",
       "!url": "http://www.espruino.com/Reference#l_Array_isArray"
+    }
+  },
+  "RegExp": {
+    "!type": "fn(regex: ?, regex: ?) -> +RegExp",
+    "!doc": "<p>Creates a RegExp object, for handling Regular Expressions</p>\n",
+    "!url": "http://www.espruino.com/Reference#l_RegExp_RegExp",
+    "prototype": {
+      "!stdProto": "RegExp",
+      "test": {
+        "!type": "fn(str: ?) -> bool",
+        "!doc": "<p>Test this regex on a string - returns <code>true</code> on a successful match, or <code>false</code> otherwise</p>\n",
+        "!url": "http://www.espruino.com/Reference#l_RegExp_test"
+      }
     }
   },
   "String": {
@@ -2111,7 +2134,7 @@
     "!url": "http://www.espruino.com/Reference#httpSrv",
     "prototype": {
       "listen": {
-        "!type": "fn(port: number)",
+        "!type": "fn(port: number) -> ?",
         "!doc": "<p>Start listening for new HTTP connections on the given port</p>\n",
         "!url": "http://www.espruino.com/Reference#l_httpSrv_listen"
       },
@@ -2310,7 +2333,7 @@
     },
     "connect": {
       "!type": "fn(options: ?, callback: ?) -> +Socket",
-      "!doc": "<p>Create a socket connection</p>\n",
+      "!doc": "<p>Create a TCP socket connection</p>\n",
       "!url": "http://www.espruino.com/Reference#l_net_connect"
     }
   },
@@ -2320,7 +2343,7 @@
     "!url": "http://www.espruino.com/Reference#Server",
     "prototype": {
       "listen": {
-        "!type": "fn(port: number)",
+        "!type": "fn(port: number) -> ?",
         "!doc": "<p>Start listening for new connections on the given port</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Server_listen"
       },
@@ -2355,6 +2378,43 @@
         "!type": "fn(data: ?)",
         "!doc": "<p>Close this socket - optional data to append as an argument.</p>\n<p>See <code>Socket.write</code> for more information about the data argument</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Socket_end"
+      }
+    }
+  },
+  "dgram": {
+    "!type": "fn()",
+    "!doc": "<p>This library allows you to create UDP/DATAGRAM servers and clients</p>\n<p>In order to use this, you will need an extra module to get network connectivity.</p>\n<p>This is designed to be a cut-down version of the <a href=\"http://nodejs.org/api/dgram.html\">node.js library</a>. Please see the <a href=\"/Internet\">Internet</a> page for more information on how to use it.</p>\n",
+    "!url": "http://www.espruino.com/Reference#l_dgram_undefined",
+    "createSocket": {
+      "!type": "fn(type: ?, callback: ?) -> +dgramSocket",
+      "!doc": "<p>Create a UDP socket</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_dgram_createSocket"
+    }
+  },
+  "dgramSocket": {
+    "!type": "fn()",
+    "!doc": "<p>An actual socket connection - allowing transmit/receive of TCP data</p>\n",
+    "!url": "http://www.espruino.com/Reference#dgramSocket",
+    "prototype": {
+      "send": {
+        "!type": "fn(message: ?, port: number, host: ?) -> bool",
+        "!doc": "",
+        "!url": "http://www.espruino.com/Reference#l_dgramSocket_send"
+      },
+      "bind": {
+        "!type": "fn(port: number, callback: ?)",
+        "!doc": "",
+        "!url": "http://www.espruino.com/Reference#l_dgramSocket_bind"
+      },
+      "close": {
+        "!type": "fn()",
+        "!doc": "<p>Close the socket</p>\n",
+        "!url": "http://www.espruino.com/Reference#l_dgramSocket_close"
+      },
+      "addMembership": {
+        "!type": "fn(group: ?, ip: ?)",
+        "!doc": "",
+        "!url": "http://www.espruino.com/Reference#l_dgramSocket_addMembership"
       }
     }
   },
@@ -2398,6 +2458,56 @@
         "!doc": "",
         "!url": "http://www.espruino.com/Reference#l_HASH_hexdigest"
       }
+    }
+  },
+  "WioLTE": {
+    "!type": "fn()",
+    "!doc": "<p>Class containing utility functions for the Seeed WIO LTE board</p>\n",
+    "!url": "http://www.espruino.com/Reference#WioLTE",
+    "LED": {
+      "!type": "fn(red: number, green: number, blue: number)",
+      "!doc": "<p>Set the WIO&#39;s LED</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_WioLTE_LED"
+    },
+    "setGrovePower": {
+      "!type": "fn(onoff: bool)",
+      "!doc": "<p>Set the power of Grove connectors, except for <code>D38</code> and <code>D39</code> which are always on.</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_WioLTE_setGrovePower"
+    },
+    "setLEDPower": {
+      "!type": "fn(onoff: bool)",
+      "!doc": "<p>Turn power to the WIO&#39;s LED on or off.</p>\n<p>Turning the LED on won&#39;t immediately display a color - that must be done with <code>WioLTE.LED(r,g,b)</code></p>\n",
+      "!url": "http://www.espruino.com/Reference#l_WioLTE_setLEDPower"
+    },
+    "D38": {
+      "!type": "?",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_WioLTE_D38"
+    },
+    "D20": {
+      "!type": "?",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_WioLTE_D20"
+    },
+    "A6": {
+      "!type": "?",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_WioLTE_A6"
+    },
+    "I2C": {
+      "!type": "?",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_WioLTE_I2C"
+    },
+    "UART": {
+      "!type": "?",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_WioLTE_UART"
+    },
+    "A4": {
+      "!type": "?",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_WioLTE_A4"
     }
   },
   "fs": {
@@ -2704,6 +2814,26 @@
       "!url": "http://www.espruino.com/Reference#l_Puck_selfTest"
     }
   },
+  "Badge": {
+    "!type": "fn()",
+    "!doc": "<p>Class containing utility functions for accessing IO on the hexagonal badge</p>\n",
+    "!url": "http://www.espruino.com/Reference#Badge",
+    "capSense": {
+      "!type": "fn(corner: number) -> number",
+      "!doc": "<p>Capacitive sense - the higher the capacitance, the higher the number returned.</p>\n<p>Supply a corner number between 1 and 6, and an integer value will be returned that is proportional to the capacitance</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_Badge_capSense"
+    },
+    "getBatteryPercentage": {
+      "!type": "fn() -> number",
+      "!doc": "<p>Return an approximate battery percentage remaining based on\na normal CR2032 battery (2.8 - 2.2v)</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_Badge_getBatteryPercentage"
+    },
+    "setContrast": {
+      "!type": "fn(c: number)",
+      "!doc": "<p>Set the LCD&#39;s contrast</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_Badge_setContrast"
+    }
+  },
   "Boolean": {
     "!type": "fn(value: ?) -> bool",
     "!doc": "<p>Creates a boolean</p>\n",
@@ -2781,12 +2911,12 @@
   },
   "digitalWrite": {
     "!type": "fn(pin: +Pin, value: number)",
-    "!doc": "<p>Set the digital value of the given pin.</p>\n<p> <strong>Note:</strong> if you didn&#39;t call <code>pinMode</code> beforehand then this function will also reset pin&#39;s state to <code>&quot;output&quot;</code></p>\n<p>If pin argument is an array of pins (eg. <code>[A2,A1,A0]</code>) the value argument will be treated\nas an array of bits where the last array element is the least significant bit.</p>\n<p>In this case, pin values are set least significant bit first (from the right-hand side\nof the array of pins). This means you can use the same pin multiple times, for\nexample <code>digitalWrite([A1,A1,A0,A0],0b0101)</code> would pulse A0 followed by A1.</p>\n",
+    "!doc": "<p>Set the digital value of the given pin.</p>\n<p> <strong>Note:</strong> if you didn&#39;t call <code>pinMode</code> beforehand then this function will also reset pin&#39;s state to <code>&quot;output&quot;</code></p>\n<p>If pin argument is an array of pins (eg. <code>[A2,A1,A0]</code>) the value argument will be treated\nas an array of bits where the last array element is the least significant bit.</p>\n<p>In this case, pin values are set least significant bit first (from the right-hand side\nof the array of pins). This means you can use the same pin multiple times, for\nexample <code>digitalWrite([A1,A1,A0,A0],0b0101)</code> would pulse A0 followed by A1.</p>\n<p>If the pin argument is an object with a <code>write</code> method, the <code>write</code> method will\nbe called with the value passed through.</p>\n",
     "!url": "http://www.espruino.com/Reference#l__global_digitalWrite"
   },
   "digitalRead": {
     "!type": "fn(pin: +Pin) -> number",
-    "!doc": "<p>Get the digital value of the given pin.</p>\n<p> <strong>Note:</strong> if you didn&#39;t call <code>pinMode</code> beforehand then this function will also reset pin&#39;s state to <code>&quot;input&quot;</code></p>\n<p>If the pin argument is an array of pins (eg. <code>[A2,A1,A0]</code>) the value returned will be an number where\nthe last array element is the least significant bit, for example if <code>A0=A1=1</code> and <code>A2=0</code>, <code>digitalRead([A2,A1,A0]) == 0b011</code></p>\n",
+    "!doc": "<p>Get the digital value of the given pin.</p>\n<p> <strong>Note:</strong> if you didn&#39;t call <code>pinMode</code> beforehand then this function will also reset pin&#39;s state to <code>&quot;input&quot;</code></p>\n<p>If the pin argument is an array of pins (eg. <code>[A2,A1,A0]</code>) the value returned will be an number where\nthe last array element is the least significant bit, for example if <code>A0=A1=1</code> and <code>A2=0</code>, <code>digitalRead([A2,A1,A0]) == 0b011</code></p>\n<p>If the pin argument is an object with a <code>read</code> method, the <code>read</code> method will be called and the integer value it returns\npassed back.</p>\n",
     "!url": "http://www.espruino.com/Reference#l__global_digitalRead"
   },
   "pinMode": {
@@ -2801,7 +2931,7 @@
   },
   "setWatch": {
     "!type": "fn(function: ?, pin: +Pin, options: ?) -> ?",
-    "!doc": "<p>Call the function specified when the pin changes. Watches set with <code>setWatch</code> can be removed using <code>clearWatch</code>.</p>\n<p>The function may also take an argument, which is an object of type <code>{state:bool, time:float, lastTime:float}</code>.</p>\n<ul>\n<li><code>state</code> is whether the pin is currently a <code>1</code> or a <code>0</code></li>\n<li><code>time</code> is the time in seconds at which the pin changed state</li>\n<li><code>lastTime</code> is the time in seconds at which the <strong>pin last changed state</strong>. When using <code>edge:&#39;rising&#39;</code> or <code>edge:&#39;falling&#39;</code>, this is not the same as when the function was last called.</li>\n</ul>\n<p>For instance, if you want to measure the length of a positive pulse you could use <code>setWatch(function(e) { console.log(e.time-e.lastTime); }, BTN, { repeat:true, edge:&#39;falling&#39; });</code>.\nThis will only be called on the falling edge of the pulse, but will be able to measure the width of the pulse because <code>e.lastTime</code> is the time of the rising edge.</p>\n<p>Internally, an interrupt writes the time of the pin&#39;s state change into a queue, and the function\nsupplied to <code>setWatch</code> is executed only from the main message loop. However, if the callback is a\nnative function <code>void (bool state)</code> then you can add <code>irq:true</code> to options, which will cause the\nfunction to be called from within the IRQ. When doing this, interrupts will happen on both edges\nand there will be no debouncing.</p>\n<p><strong>Note:</strong> The STM32 chip (used in the <a href=\"/EspruinoBoard\">Espruino Board</a> and <a href=\"/Pico\">Pico</a>) cannot\nwatch two pins with the same number - eg <code>A0</code> and <code>B0</code>.</p>\n",
+    "!doc": "<p>Call the function specified when the pin changes. Watches set with <code>setWatch</code> can be removed using <code>clearWatch</code>.</p>\n<p>The function may also take an argument, which is an object of type <code>{state:bool, time:float, lastTime:float}</code>.</p>\n<ul>\n<li><code>state</code> is whether the pin is currently a <code>1</code> or a <code>0</code></li>\n<li><code>time</code> is the time in seconds at which the pin changed state</li>\n<li><code>lastTime</code> is the time in seconds at which the <strong>pin last changed state</strong>. When using <code>edge:&#39;rising&#39;</code> or <code>edge:&#39;falling&#39;</code>, this is not the same as when the function was last called.</li>\n</ul>\n<p>For instance, if you want to measure the length of a positive pulse you could use <code>setWatch(function(e) { console.log(e.time-e.lastTime); }, BTN, { repeat:true, edge:&#39;falling&#39; });</code>.\nThis will only be called on the falling edge of the pulse, but will be able to measure the width of the pulse because <code>e.lastTime</code> is the time of the rising edge.</p>\n<p>Internally, an interrupt writes the time of the pin&#39;s state change into a queue, and the function\nsupplied to <code>setWatch</code> is executed only from the main message loop. However, if the callback is a\nnative function <code>void (bool state)</code> then you can add <code>irq:true</code> to options, which will cause the\nfunction to be called from within the IRQ. When doing this, interrupts will happen on both edges\nand there will be no debouncing.</p>\n<p><strong>Note:</strong> if you didn&#39;t call <code>pinMode</code> beforehand then this function will reset pin&#39;s state to <code>&quot;input&quot;</code></p>\n<p><strong>Note:</strong> The STM32 chip (used in the <a href=\"/EspruinoBoard\">Espruino Board</a> and <a href=\"/Pico\">Pico</a>) cannot\nwatch two pins with the same number - eg <code>A0</code> and <code>B0</code>.</p>\n",
     "!url": "http://www.espruino.com/Reference#l__global_setWatch"
   },
   "clearWatch": {
@@ -2850,8 +2980,8 @@
     "!url": "http://www.espruino.com/Reference#l__global_save"
   },
   "reset": {
-    "!type": "fn()",
-    "!doc": "<p>Reset the interpreter - clear program memory, and do not load a saved program from flash. This does NOT reset the underlying hardware (which allows you to reset the device without it disconnecting from USB).</p>\n<p>This command only executes when the Interpreter returns to the Idle state - for instance <code>a=1;reset();a=2;</code> will still leave &#39;a&#39; as undefined.</p>\n<p>The safest way to do a full reset is to hit the reset button.</p>\n",
+    "!type": "fn(clearFlash: bool)",
+    "!doc": "<p>Reset the interpreter - clear program memory in RAM, and do not load a saved program from flash. This does NOT reset the underlying hardware (which allows you to reset the device without it disconnecting from USB).</p>\n<p>This command only executes when the Interpreter returns to the Idle state - for instance <code>a=1;reset();a=2;</code> will still leave &#39;a&#39; as undefined.</p>\n<p>The safest way to do a full reset is to hit the reset button.</p>\n<p>If <code>reset()</code> is called with no arguments, it will reset the board&#39;s state in\nRAM but will not reset the state in flash. When next powered on (or when\n<code>load()</code> is called) the board will load the previously saved code.</p>\n<p>Calling <code>reset(true)</code> will cause <em>all saved code in flash memory to\nbe cleared as well</em>.</p>\n",
     "!url": "http://www.espruino.com/Reference#l__global_reset"
   },
   "print": {
@@ -2930,7 +3060,7 @@
     "!url": "http://www.espruino.com/Reference#l__global_btoa"
   },
   "atob": {
-    "!type": "fn(binaryData: ?) -> ?",
+    "!type": "fn(base64Data: ?) -> ?",
     "!doc": "<p>Decode the supplied base64 string into a normal string</p>\n",
     "!url": "http://www.espruino.com/Reference#l__global_atob"
   },
@@ -2953,5 +3083,65 @@
     "!type": "fn() -> ?",
     "!doc": "<p><strong>Note:</strong> This function is only available on the <a href=\"/MicroBit\">BBC micro:bit</a> board</p>\n<p>Get the current compass position for the micro:bit from the on-board magnetometer</p>\n",
     "!url": "http://www.espruino.com/Reference#l__global_compass"
+  },
+  "BTNA": {
+    "!type": "+Pin",
+    "!doc": "<p>The pin connected to the &#39;A&#39; button. Reads as <code>1</code> when pressed, <code>0</code> when not</p>\n",
+    "!url": "http://www.espruino.com/Reference#l__global_BTNA"
+  },
+  "BTNB": {
+    "!type": "+Pin",
+    "!doc": "<p>The pin connected to the &#39;B&#39; button. Reads as <code>1</code> when pressed, <code>0</code> when not</p>\n",
+    "!url": "http://www.espruino.com/Reference#l__global_BTNB"
+  },
+  "BTNU": {
+    "!type": "+Pin",
+    "!doc": "<p>The pin connected to the up button. Reads as <code>1</code> when pressed, <code>0</code> when not</p>\n",
+    "!url": "http://www.espruino.com/Reference#l__global_BTNU"
+  },
+  "BTND": {
+    "!type": "+Pin",
+    "!doc": "<p>The pin connected to the down button. Reads as <code>1</code> when pressed, <code>0</code> when not</p>\n",
+    "!url": "http://www.espruino.com/Reference#l__global_BTND"
+  },
+  "BTNL": {
+    "!type": "+Pin",
+    "!doc": "<p>The pin connected to the left button. Reads as <code>1</code> when pressed, <code>0</code> when not</p>\n",
+    "!url": "http://www.espruino.com/Reference#l__global_BTNL"
+  },
+  "BTNR": {
+    "!type": "+Pin",
+    "!doc": "<p>The pin connected to the right button. Reads as <code>1</code> when pressed, <code>0</code> when not</p>\n",
+    "!url": "http://www.espruino.com/Reference#l__global_BTNR"
+  },
+  "CORNER1": {
+    "!type": "+Pin",
+    "!doc": "<p>The pin connected to Corner #1</p>\n",
+    "!url": "http://www.espruino.com/Reference#l__global_CORNER1"
+  },
+  "CORNER2": {
+    "!type": "+Pin",
+    "!doc": "<p>The pin connected to Corner #2</p>\n",
+    "!url": "http://www.espruino.com/Reference#l__global_CORNER2"
+  },
+  "CORNER3": {
+    "!type": "+Pin",
+    "!doc": "<p>The pin connected to Corner #3</p>\n",
+    "!url": "http://www.espruino.com/Reference#l__global_CORNER3"
+  },
+  "CORNER4": {
+    "!type": "+Pin",
+    "!doc": "<p>The pin connected to Corner #4</p>\n",
+    "!url": "http://www.espruino.com/Reference#l__global_CORNER4"
+  },
+  "CORNER5": {
+    "!type": "+Pin",
+    "!doc": "<p>The pin connected to Corner #5</p>\n",
+    "!url": "http://www.espruino.com/Reference#l__global_CORNER5"
+  },
+  "CORNER6": {
+    "!type": "+Pin",
+    "!doc": "<p>The pin connected to Corner #6</p>\n",
+    "!url": "http://www.espruino.com/Reference#l__global_CORNER6"
   }
 }
