@@ -6,5 +6,5 @@ donations from many supporters on <a href="https://www.patreon.com/espruino" tar
 
 Supporters that pay $10/month or more to help support Espruino are:
 
-Matt Eckman, Eric Betts, Andreas Dröscher, James Palmer, Sacha Gloor,
-Paul Moore, Spence Konde, MaBe
+Matt Eckman, Orry S, Daniel Zivkovic, James Seigel, Eric Betts, Andreas Dröscher, James Palmer, Sacha Gloor,
+John Kovach, Tom Gidden, Spence Konde, MaBe
