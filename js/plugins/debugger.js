@@ -211,8 +211,11 @@
             callbackOnEqualsLine = undefined;
           }
         }
-      } else
-        setDebugLine(undefined);
+      } else {
+        // we're not sure what's going on (an unexpected print, or an exception)
+        // but let's keep the highlighted line anyway
+        // setDebugLine(undefined); // remove highlighted line
+      }
     }
     callback(lastLine);
   }
