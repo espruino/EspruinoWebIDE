@@ -74,6 +74,8 @@
     $("#divcode").hide();
     $("#divblockly").show();
     viewModeButton.setIcon("block");
+    // Hack around issues Blockly have if we initialise when the window isn't visible
+    Espruino.Core.EditorBlockly.setVisible();    
   }
 
   function switchToCode() {

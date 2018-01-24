@@ -2,7 +2,8 @@
 
 'use strict';
 
-if (window.location.href.indexOf("lang=en")>=0) {
+if (window.location.href.indexOf("lang=en")>=0 ||
+    window.location.href.indexOf("lang=")==-1) {
 
 goog.provide('Blockly.Msg.en');
 

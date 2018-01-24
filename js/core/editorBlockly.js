@@ -94,10 +94,16 @@
     Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, Blockly.Xml.textToDom(xml));
   }
   
+  // Hack around issues Blockly have if we initialise when the window isn't visible
+  function setVisible() {
+    Blockly.setVisible();
+  }
+  
   Espruino.Core.EditorBlockly = {
     init : init,
     getCode : getCode,
     getXML : getXML,
     setXML : setXML,
+    setVisible : setVisible,
   };
 }());

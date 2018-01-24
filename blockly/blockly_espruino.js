@@ -10,7 +10,12 @@
  ------------------------------------------------------------------
 **/
 
-// --------------------------------- Blockly init code - see /js/core/editorBlockly.js
+
+/* Has Blockly been made visible yet? If not, we can't
+add any content because blockly will break all the sizing */
+var blocklyVisible = false;
+
+// --------------------------------- Blockly init code - 
 window.onload = function() {
   var toolbox = document.getElementById('toolbox');
   // Remove any stuff we don't want from the toolbox...
@@ -28,14 +33,22 @@ window.onload = function() {
   }
   // Set up blockly from toolbox
   Blockly.inject(document.body,{path: '', toolbox: toolbox});
-  // Set up initial code
-  Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, document.getElementById('blocklyInitial'));
-  // Notify parent
-  window.parent.blocklyLoaded(Blockly, window); // see core/editorBlockly.js
+  
+  // Notify parent - see /js/core/editorBlockly.js
+  if (window.parent.blocklyLoaded)
+    window.parent.blocklyLoaded(Blockly, window); // see core/editorBlockly.js
 };
 
 /* TODO: Looks like we could use Blockly.JavaScript.indentLines(code, Blockly.JavaScript.INDENT)
 to properly sort out the padding of all this stuff */
+
+// Hack around issues Blockly have if we initialise when the window isn't visible
+Blockly.setVisible = function(info) {
+  if (blocklyVisible) return;
+  blocklyVisible = true;
+  // Set up initial code
+  Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, document.getElementById('blocklyInitial'));  
+};
 
 // When we have JSON from the board, use it to
 // update our list of available pins
