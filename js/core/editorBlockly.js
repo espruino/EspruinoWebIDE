@@ -56,8 +56,12 @@
     Espruino.Core.Config.add("BLOCKLY_EXTENSIONS", {
       section : "General",
       name : "Graphical Editor Extensions",
-      description : "A pipe-separated list of extensions to use. Available are `|bluetooth|` for Puck.js Bluetooth, `|robot|` for the Espruino Pico Robot, and `|motorshield|` for the Amperka Motor shield (Requires Restart)" ,
-      type : "string",
+      description : "Which extra types of blocks to display in the graphical editor (Requires Restart)" ,
+      type : { "multi_select":true,
+       "bluetooth":"Bluetooth LE (Puck.js)", 
+       "robot":"Espruino Pico Robot",
+       "motorshield":"Amperka Motor shield"
+      },
       defaultValue : "|bluetooth|robot|",
     }); 
     // Add the HTML we need        
