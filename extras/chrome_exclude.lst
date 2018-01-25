@@ -24,6 +24,9 @@ EspruinoTools/index.js
 EspruinoTools/bin/espruino-cli.js
 EspruinoTools/plugins/localModules.js
 EspruinoTools/core/notifications.js
+# Online stuff
+relay
+webapp_manifest.json
 # Electron/nw.js stuff
 package.json
 nw-loader.js
