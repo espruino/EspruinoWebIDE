@@ -11,6 +11,7 @@ EspruinoSerialTerminal.zip
 EspruinoTools/.git*
 EspruinoTools/plugins/_examplePlugin.js
 EspruinoTools/node_modules/*
+tmp
 extras*
 unused/*
 unused
