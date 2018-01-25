@@ -865,7 +865,7 @@
     },
     "getFlags": {
       "!type": "fn() -> ?",
-      "!doc": "<p>Get Espruino&#39;s interpreter flags that control the way it handles your JavaScript code.</p>\n<ul>\n<li><code>deepSleep</code> - Allow deep sleep modes (also set by setDeepSleep)</li>\n<li><code>pretokenise</code> - When adding functions, pre-minify them and tokenise reserved words</li>\n</ul>\n",
+      "!doc": "<p>Get Espruino&#39;s interpreter flags that control the way it handles your JavaScript code.</p>\n<ul>\n<li><code>deepSleep</code> - Allow deep sleep modes (also set by setDeepSleep)</li>\n<li><code>pretokenise</code> - When adding functions, pre-minify them and tokenise reserved words</li>\n<li><code>unsafeFlash</code> - Some platforms stop writes/erases to interpreter memory to stop you bricking the device accidentally - this removes that protection</li>\n<li><code>unsyncFiles</code> - When writing files, <em>don&#39;t</em> flush all data to the SD card after each command (the default is <em>to</em> flush). This is much faster, but can cause filesystem damage if power is lost without the filesystem unmounted.</li>\n</ul>\n",
       "!url": "http://www.espruino.com/Reference#l_E_getFlags"
     },
     "setFlags": {
@@ -944,8 +944,8 @@
       "!url": "http://www.espruino.com/Reference#l_E_hwRand"
     },
     "HSBtoRGB": {
-      "!type": "fn(hue: number, sat: number, bri: number) -> number",
-      "!doc": "<p>Convert hue, saturation and brightness to red, green and blue (packed into an integer)</p>\n<p>This replaces <code>Graphics.setColorHSB</code> and <code>Graphics.setBgColorHSB</code>. On devices with 24 bit colour it can\nbe used as: <code>Graphics.setColorHSB(E.HSBtoRGB(h, s, b))</code></p>\n",
+      "!type": "fn(hue: number, sat: number, bri: number, asArray: bool) -> ?",
+      "!doc": "<p>Convert hue, saturation and brightness to red, green and blue (packed into an integer if <code>asArray==false</code> or an array if <code>asArray==true</code>).</p>\n<p>This replaces <code>Graphics.setColorHSB</code> and <code>Graphics.setBgColorHSB</code>. On devices with 24 bit colour it can\nbe used as: <code>Graphics.setColor(E.HSBtoRGB(h, s, b))</code></p>\n<p>You can quickly set RGB items in an Array or Typed Array using <code>array.set(E.HSBtoRGB(h, s, b,true), offset)</code>,\nwhich can be useful with arrays used with <code>require(&quot;neopixel&quot;).write</code>.</p>\n",
       "!url": "http://www.espruino.com/Reference#l_E_HSBtoRGB"
     },
     "setPassword": {
@@ -1605,7 +1605,7 @@
   },
   "I2C": {
     "!type": "fn()",
-    "!doc": "<p>Create a software I2C port. This has limited functionality (no baud rate), but it can work on any pins.</p>\n<p>Use <code>SPI.setup</code> to configure this port.</p>\n",
+    "!doc": "<p>Create a software I2C port. This has limited functionality (no baud rate), but it can work on any pins.</p>\n<p>Use <code>I2C.setup</code> to configure this port.</p>\n",
     "!url": "http://www.espruino.com/Reference#l_I2C_I2C",
     "find": {
       "!type": "fn(pin: +Pin) -> ?",
@@ -2397,12 +2397,12 @@
     "!url": "http://www.espruino.com/Reference#dgramSocket",
     "prototype": {
       "send": {
-        "!type": "fn(message: ?, port: number, host: ?) -> bool",
+        "!type": "fn(buffer: ?, offset: ?, length: ?, args: ?)",
         "!doc": "",
         "!url": "http://www.espruino.com/Reference#l_dgramSocket_send"
       },
       "bind": {
-        "!type": "fn(port: number, callback: ?)",
+        "!type": "fn(port: number, callback: ?) -> ?",
         "!doc": "",
         "!url": "http://www.espruino.com/Reference#l_dgramSocket_bind"
       },
@@ -2597,7 +2597,7 @@
       },
       "write": {
         "!type": "fn(buffer: ?) -> number",
-        "!doc": "<p>write data to a file</p>\n",
+        "!doc": "<p>Write data to a file.</p>\n<p><strong>Note:</strong> By default this function flushes all changes to the\nSD card, which makes it slow (but also safe!). You can use\n<code>E.setFlags({unsyncFiles:1})</code> to disable this behaviour and\nreally speed up writes - but then you must be sure to close\nall files you are writing before power is lost or you will\ncause damage to your SD card&#39;s filesystem.</p>\n",
         "!url": "http://www.espruino.com/Reference#l_File_write"
       },
       "read": {
@@ -3073,6 +3073,46 @@
     "!type": "fn(str: ?) -> ?",
     "!doc": "<p>Convert any groups of characters of the form &#39;%ZZ&#39;, into characters with hex code &#39;0xZZ&#39;</p>\n",
     "!url": "http://www.espruino.com/Reference#l__global_decodeURIComponent"
+  },
+  "MOS1": {
+    "!type": "+Pin",
+    "!doc": "",
+    "!url": "http://www.espruino.com/Reference#l__global_MOS1"
+  },
+  "MOS2": {
+    "!type": "+Pin",
+    "!doc": "",
+    "!url": "http://www.espruino.com/Reference#l__global_MOS2"
+  },
+  "MOS3": {
+    "!type": "+Pin",
+    "!doc": "",
+    "!url": "http://www.espruino.com/Reference#l__global_MOS3"
+  },
+  "MOS4": {
+    "!type": "+Pin",
+    "!doc": "",
+    "!url": "http://www.espruino.com/Reference#l__global_MOS4"
+  },
+  "IOEXT0": {
+    "!type": "+Pin",
+    "!doc": "",
+    "!url": "http://www.espruino.com/Reference#l__global_IOEXT0"
+  },
+  "IOEXT1": {
+    "!type": "+Pin",
+    "!doc": "",
+    "!url": "http://www.espruino.com/Reference#l__global_IOEXT1"
+  },
+  "IOEXT2": {
+    "!type": "+Pin",
+    "!doc": "",
+    "!url": "http://www.espruino.com/Reference#l__global_IOEXT2"
+  },
+  "IOEXT3": {
+    "!type": "+Pin",
+    "!doc": "",
+    "!url": "http://www.espruino.com/Reference#l__global_IOEXT3"
   },
   "acceleration": {
     "!type": "fn() -> ?",
