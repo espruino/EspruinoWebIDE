@@ -141,6 +141,14 @@ function processHTML(infile, outfile) {
         console.log(" - deleting minified/unminified variant",minfn);
         fs.unlinkSync(minfn);
       }
+      var folder = fn.substr(0,fn.lastIndexOf("/"));
+      while (folder && 
+             fs.statSync(folder).isDirectory() &&
+             fs.readdirSync(folder).length==0) {
+        console.log("Removing directory "+folder);
+        fs.rmdirSync(folder);
+        folder = folder.substr(0,folder.lastIndexOf("/"));
+      }
     });
   }
 }
