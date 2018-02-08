@@ -386,13 +386,9 @@ paddi   ng-left: 15px;
 
 /* Terminal */
 /* ----------------------------------------------------- */
-
-
 .terminal
 {
-  font-family: Fixed, monospace;
   font-size: 12px;
-  tab-size: 4;
   background-color: #222;
   color: white;
   display: block;
@@ -410,6 +406,12 @@ paddi   ng-left: 15px;
   -moz-user-select: text;
   -webkit-user-select: text;
   user-select: text;
+}
+
+.termLine {
+  font-family: Fixed, monospace;
+  tab-size: 4;
+
 }
 
 .terminal.focus

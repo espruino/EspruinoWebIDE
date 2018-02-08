@@ -12,19 +12,8 @@
 "use strict";
 (function(){
 
-  function getVersion(callback)
-  {
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open('GET', 'manifest.json');
-    xmlhttp.onload = function (e) {
-        var manifest = JSON.parse(xmlhttp.responseText);
-        callback(manifest.version);
-    };
-    xmlhttp.send(null);
-  }
-
   function init() {
-    getVersion(function(version){
+    Espruino.Core.Utils.getVersion(function(version){
       Espruino.Core.Config.addSection("About", {
         description : undefined,
         sortOrder : -1000,

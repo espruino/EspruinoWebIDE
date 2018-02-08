@@ -4,7 +4,7 @@
  This Source Code is subject to the terms of the Mozilla Public
  License, v2.0. If a copy of the MPL was not distributed with this
  file, You can obtain one at http://mozilla.org/MPL/2.0/.
- 
+
  ------------------------------------------------------------------
   Guided tour
  ------------------------------------------------------------------
@@ -41,7 +41,7 @@
     },
     {
       title: "Select your port",
-      description: "Connect your Espruino to an available USB port and select the port from the list.",
+      description: "Connect your Espruino to an available port and select the port from the list.",
       attachTo: ".window--modal",
       position: "bottom",
       onShow: function(){
@@ -81,7 +81,7 @@
         if(isInBlockly){
           Espruino.Core.Code.switchToCode();
         }
-      }, 
+      },
       onHide: function(){
         if(isInBlockly)
           Espruino.Core.Code.switchToBlockly();
@@ -97,7 +97,7 @@
         if(!isInBlockly){
             Espruino.Core.Code.switchToBlockly();
         }
-      }, 
+      },
       onHide: function(){
         if(!isInBlockly)
           Espruino.Core.Code.switchToCode();
@@ -111,7 +111,7 @@
     },
     {
       title: "Go wild!",
-      description: "And those are the basics of the Espruino Web IDE.<br /><br />For more helpful guides and tutorials, be sure to checkout the <a href='http://www.espruino.com/Tutorials' target='_blank'>Tutorials</a> section on the Espruino website, or if you have any questions, why not head on over to the <a href='http://forum.espruino.com/' target='_blank'>Forums</a>.<br /><br />We hope you enjoy your Espruino!"
+      description: "And those are the basics of the Espruino Web IDE.<br /><br />For more helpful guides and tutorials, be sure to check out the <a href='http://www.espruino.com/Tutorials' target='_blank'>Tutorials</a> section on the Espruino website, or if you have any questions, why not head on over to the <a href='http://forum.espruino.com/' target='_blank'>Forums</a>.<br /><br />We hope you enjoy your Espruino!"
     }
   ];
 
@@ -148,15 +148,15 @@
       guiders.show("g1");
     }
 
-    
+
     // If this is our first run, prompt about the Tour
-    Espruino.addProcessor("initialised", function(data, callback) {      
+    Espruino.addProcessor("initialised", function(data, callback) {
       if (!Espruino.Config.NOT_FIRST_RUN) {
-        Espruino.Config.set("NOT_FIRST_RUN", true);         
+        Espruino.Config.set("NOT_FIRST_RUN", true);
         guiders.show("g0");
       }
-      
-      callback(data); 
+
+      callback(data);
     });
   }
   function prepareSlides(slideId,slides){
@@ -207,7 +207,7 @@
         if(opts.buttons == undefined){
           opts.buttons = [{ name: "Next" }];
         }
-      }       
+      }
       if(!guiders.get(opts.id)) { guiders.createGuider(opts); }
     });
   }
@@ -218,7 +218,7 @@
           title: "Tour can't run",
           padding: true,
           contents: '<p>This tour needs a connection to an Espruino board</p>'+
-                    '<p>Please connect your board and then click the \'Connect\' icon in the top right</p>' ,                    
+                    '<p>Please connect your board and then click the \'Connect\' icon in the top right</p>' ,
           position: "center",
           ok: function() { Espruino.Core.App.closePopup(); }
         });
@@ -227,20 +227,20 @@
           title: "Tour can't run",
           padding: true,
           contents: '<p>This tour needs a Project directory to be defined.</p>'+
-                    '<p>Please go to <b>Settings</b>, then <b>Project</b>, and follow the <b>Project Tour</b>.</p>' ,                    
+                    '<p>Please go to <b>Settings</b>, then <b>Project</b>, and follow the <b>Project Tour</b>.</p>' ,
           position: "center",
           ok: function() { Espruino.Core.App.closePopup(); }
-        });      
+        });
       } else if (tour.needsTestingSetting && !Espruino.Config.ENABLE_Testing) {
         var popup = Espruino.Core.App.openPopup({
           title: "Tour can't run",
           padding: true,
           contents: '<p>This tour needs Testing to be enabled.</p>'+
-                    '<p>Please go to <b>Settings</b>, then <b>Testing</b>, and follow the <b>Testing Tour</b>.</p>' ,                    
+                    '<p>Please go to <b>Settings</b>, then <b>Testing</b>, and follow the <b>Testing Tour</b>.</p>' ,
           position: "center",
           ok: function() { Espruino.Core.App.closePopup(); }
-        });          
-      } else {        
+        });
+      } else {
         prepareSlides(tour.id, tour.slides);
         guiders.show(tour.id + "1");
       }
@@ -257,7 +257,7 @@
           order: 3,
           click: function(){
             runTour(tourUrl);
-          } 
+          }
         });
       });
     }
