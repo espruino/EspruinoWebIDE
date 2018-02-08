@@ -109,7 +109,7 @@ Packets Sent:
     console.log("Starting Websocket connection");
     term("Starting Websocket connection");
     // Create WebSocket connection.
-    const socket = new WebSocket(WS_HOST, 'espruino');
+    var socket = new WebSocket(WS_HOST, 'espruino');
 
     socket.addEventListener('open', function (event) {
       Espruino.Core.Notifications.success("Websocket connection open", true);
