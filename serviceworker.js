@@ -34,7 +34,6 @@ const CACHED_RESOURCES = [
   'data/app/openTestingLog.js',
   'data/app/openTestingLog.html',
   'data/testing_initial.html',
-  'data/terminal_initial.html',
   'data/sounds/doorbell2.wav',
   'data/sounds/car_horn_x.wav',
   'data/sounds/sirens_x.wav',
@@ -88,6 +87,10 @@ const CACHED_RESOURCES = [
   'css/images/treeview-famfamfam.gif',
   'img/icons.png',
   'img/icon_128.png',
+  'img/icon_patreon.png',
+  'img/icon_twitter.png',
+  'img/icon_youtube.png',
+  'img/ide_logo.png',
   'favicon.ico',
   'manifest.json',
   'index.js',  // auto-generated file of squished JS
