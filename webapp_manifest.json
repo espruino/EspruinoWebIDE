@@ -3,6 +3,7 @@
   "short_name": "Espruino IDE",
   "description": "A Terminal and Graphical code Editor for Espruino JavaScript Microcontrollers",
   "display": "standalone",
+  "start_url": ".",
   "icons": [
     {
       "sizes": "128x128",

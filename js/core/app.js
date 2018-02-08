@@ -39,8 +39,13 @@
    * Initialize the window
    */
   function init() {
-    if ((nwwindow || ((typeof chrome!="undefined") && chrome.app && chrome.app.window)) &&
-        document.getElementsByClassName("title-bar").length) {
+    // If we have no native title bar, make sure we remove it from the app
+    if (Espruino.Core.Utils.hasNativeTitleBar()) {
+      document.getElementsByClassName("title-bar")[0].remove();
+      document.getElementsByClassName("window")[0].classList.remove("window--app");
+    }
+    // check again, just in case it's removed from the HTML
+    if (document.getElementsByClassName("title-bar").length) {
       Espruino.Core.App.addIcon({
         id:'minimize',
         icon: 'minus',
@@ -198,7 +203,7 @@
     }
 
     // Append the modal overlay
-    $('<div class="window__overlay"><div class="window__overlay-inner"></div></div>').appendTo(".window--app > .window__viewport").click(function(){
+    $('<div class="window__overlay"><div class="window__overlay-inner"></div></div>').appendTo(".window > .window__viewport").click(function(){
       api.close();
     });
     var optid = (options.id) ? 'id="' + options.id + '"' : '';
@@ -356,6 +361,36 @@
     return api;
   }
 
+  /**
+   * Add an icon to the window somewhere that'll alert the user
+   *
+   * options = {
+   *   id    : a unique ID for this icon
+   *   icon  : the icon type to use
+   *   area  : { name : titlebar | toolbar | terminal | code,  position : left | middle | right | top | bottom }
+   *   name  : icon name - corresponds to icons.css
+   *   title : nice title for tooltips
+   */
+  function addAlertIcon(options)
+  {
+    options.icon = 'alert';
+    options.order = 999;
+    options.cssClass = 'icon-alert';
+    if (Espruino.Core.Utils.hasNativeTitleBar()) {
+      // Then we don't have a toolbar :(
+      options.area = {
+        name: "toolbar",
+        position: "right"
+      };
+    } else {
+      options.area = {
+        name: "titlebar",
+        position: "right"
+      };
+    }
+    return addIcon(options);
+  }
+
   function findIcon(id)
   {
     return $("#icon-"+ id).data("api");
@@ -366,6 +401,7 @@
       openPopup: openPopup,
       closePopup: closePopup,
       addIcon: addIcon,
+      addAlertIcon : addAlertIcon,
       findIcon: findIcon
   };
 

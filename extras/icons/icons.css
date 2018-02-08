@@ -1,10 +1,10 @@
-/* 
+/*
     ===================================================
     Icons
     ===================================================
  */
 
-[class*="icon-"] 
+[class*="icon-"]
 {
     display: inline-block;
     position: relative;
@@ -15,7 +15,7 @@
     text-transform: none;
 }
 
-[class*="icon-"]:before 
+[class*="icon-"]:before
 {
     content: "";
     position: absolute;
@@ -39,8 +39,8 @@ a.icon-disconnect { background-color: #2ecc71; }
 a.icon-connect:hover { background-color: #f39c12; }
 a.icon-disconnect:hover { background-color: #27ae60; }
 
-a.title-bar__button--alert { background-color: #f1c40f; }
-a.title-bar__button--alert:hover { background-color: #f39c12; }
+a.icon-alert { background-color: #f1c40f; }
+a.icon-alert:hover { background-color: #f39c12; }
 
 [class*="icon-"].lrg,
 [class*="icon-"].lrg:before
@@ -62,5 +62,3 @@ a.title-bar__button--alert:hover { background-color: #f39c12; }
 .icon--divide-left { border-left: solid 1px rgba(255,255,255,0.3); }
 .icon--divide-bottom { border-bottom: solid 1px rgba(255,255,255,0.3); }
 .icon--divide-top { border-top: solid 1px rgba(255,255,255,0.3); }
-
-
