@@ -10,6 +10,7 @@
     <script type="text/javascript" src="blockly_robot.js"></script>
     <script type="text/javascript" src="blockly_amperka_motorshield.js"></script>
     <script type="text/javascript" src="blockly_ble.js"></script>
+    <script type="text/javascript" src="blockly_nordic_thingy.js"></script>
     <script type="text/javascript" src="field_textarea.js"></script>
     <style>
       html, body {
@@ -318,12 +319,17 @@
       <block type="robot_ldr"></block>
     </category>
     <!-- Amperka's MotorShield -->
-    <category name="MotorShield" enable_if="motorshield">
+    <category name="Amperka Motor Shield" enable_if="motorshield">
       <block type="amperka_motorshield_motor"></block>
       <block type="amperka_motorshield_motor_dir"></block>
     </category>
     <!-- /Amperka's MotorShield -->
-
+    <category name="Nordic Thingy:52" enable_if="nordic_thingy">
+      <block type="thingy_sound_play"></block>
+      <block type="thingy_sensor_once"></block>
+      <block type="thingy_sensor_many"></block>
+      <block type="thingy_result"></block>
+    </category>
     <category name="Bluetooth" enable_if="bluetooth">
       <block type="ble_connected"></block>
       <block type="ble_disconnected"></block>

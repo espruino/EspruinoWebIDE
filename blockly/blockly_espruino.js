@@ -14,8 +14,10 @@
 /* Has Blockly been made visible yet? If not, we can't
 add any content because blockly will break all the sizing */
 var blocklyVisible = false;
+/* Include this and the next blocks will magically appear inside the function */
+var MAGIC_CALLBACK_CODE = "function(){NEXT_BLOCKS}";
 
-// --------------------------------- Blockly init code - 
+// --------------------------------- Blockly init code -
 window.onload = function() {
   var toolbox = document.getElementById('toolbox');
   // Remove any stuff we don't want from the toolbox...
@@ -33,11 +35,24 @@ window.onload = function() {
   }
   // Set up blockly from toolbox
   Blockly.inject(document.body,{path: '', toolbox: toolbox});
-  
+
   // Notify parent - see /js/core/editorBlockly.js
   if (window.parent.blocklyLoaded)
     window.parent.blocklyLoaded(Blockly, window); // see core/editorBlockly.js
 };
+
+// Patch up scrub_ to allow nested callbacks for stuff like 'wait'
+Blockly.JavaScript.scrub__ = Blockly.JavaScript.scrub_;
+Blockly.JavaScript.scrub_ = function(block, code) {
+  var callbackIdx = goog.isString(code) ? code.indexOf(MAGIC_CALLBACK_CODE) : -1;
+  if (callbackIdx>=0) {
+    var nextBlock = block.nextConnection && block.nextConnection.targetBlock();
+    var nextCode = Blockly.JavaScript.blockToCode(nextBlock);
+    return code.substr(0,callbackIdx)+"function() {\n"+
+             "  "+nextCode+"}"+code.substr(callbackIdx+MAGIC_CALLBACK_CODE.length);
+  } else
+    return Blockly.JavaScript.scrub__(block,code);
+}
 
 /* TODO: Looks like we could use Blockly.JavaScript.indentLines(code, Blockly.JavaScript.INDENT)
 to properly sort out the padding of all this stuff */
@@ -47,7 +62,7 @@ Blockly.setVisible = function(info) {
   if (blocklyVisible) return;
   blocklyVisible = true;
   // Set up initial code
-  Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, document.getElementById('blocklyInitial'));  
+  Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, document.getElementById('blocklyInitial'));
 };
 
 // When we have JSON from the board, use it to
@@ -403,7 +418,7 @@ Blockly.JavaScript.text_print = function() {
 Blockly.JavaScript.espruino_delay = function() {
   var seconds = Blockly.JavaScript.valueToCode(this, 'SECONDS',
       Blockly.JavaScript.ORDER_ASSIGNMENT) || '1';
-  return "var t=getTime()+"+seconds+";while(getTime()<t);\n"
+  return "setTimeout("+MAGIC_CALLBACK_CODE+", 1000*"+seconds+");\n"
 };
 Blockly.JavaScript.espruino_timeout = function() {
   var seconds = Blockly.JavaScript.valueToCode(this, 'SECONDS',
