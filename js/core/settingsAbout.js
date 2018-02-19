@@ -22,16 +22,19 @@
             callback(data);
             $(".webide_version").html("Web IDE version "+version);
             var html;
+            var strData = {};
             if (Object.keys(Espruino.Core.Env.getBoardData()).length > 0) {
               var d = Espruino.Core.Env.getBoardData();
               for (var k in d) {
-                if ("string" != typeof d[k])
-                  d[k] = JSON.stringify(d[k]);
-                if (d[k].length>80) d[k]=d[k].substr(0,77)+" ...";
+                var v = d[k];
+                if ("string" != typeof v)
+                  v = JSON.stringify(v);
+                if (v.length>80) v=v.substr(0,77)+" ...";
+                strData[k] = v;
               }
-              html = Espruino.Core.Utils.htmlTable(d);
+              html = Espruino.Core.Utils.htmlTable(strData);
             } else
-              html = "<p>Unable to get board information. Please connect to an Espruino board first.</p>";
+              html = "<p>No board information available. Please connect to an Espruino board first.</p>";
             $('.board_info').html( html );
           });
           $.get("PATREON.md", function(data) {
