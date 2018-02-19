@@ -532,12 +532,37 @@ paddi   ng-left: 15px;
     border: 1px solid #1b7a43;
     border-radius: 10px;
     padding: 8px;
-    padding-left: 8px;
     margin-left: 16px;
     margin-right: 16px;
     margin-top: 8px;
     margin-bottom: 8px;
 }
+
+/* Other notifications */
+.terminal-status-container {
+  min-height: 34px;
+}
+.terminal-status {
+  float:right;
+  border-radius: 5px;
+  padding: 6px;
+  margin-top: 2px;
+}
+/* Other notifications */
+.terminal-status-success {
+  background-color: #2ecc71;
+}
+.terminal-status-error {
+  background-color: #e74c3c;
+}
+.terminal-status-info {
+  background-color: #3498db;
+}
+.terminal-status-warning {
+  background-color: #f39c12;
+}
+
+
 
 /* Code Editors */
 #divcode {
