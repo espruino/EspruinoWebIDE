@@ -526,7 +526,7 @@
       "!stdProto": "Function",
       "replaceWith": {
         "!type": "fn(newFunc: ?)",
-        "!doc": "<p>This replaces the function with the one in the argument - while keeping the old function&#39;s scope. This allows inner functions to be edited, and is used when edit() is called on an inner function.</p>\n",
+        "!doc": "<p>This replaces the function with the one in the argument - while keeping the old function&#39;s scope.\nThis allows inner functions to be edited, and is used when edit() is called on an inner function.</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Function_replaceWith"
       },
       "call": {
@@ -771,7 +771,7 @@
   },
   "Flash": {
     "!type": "fn()",
-    "!doc": "<p>This module allows access to read and write the STM32&#39;s flash memory.</p>\n<p>It should be used with extreme caution, as it is easy to overwrite parts of Flash\nmemory belonging to Espruino or even its bootloader. If you damage the bootloader\nthen you may need external hardware such as a USB-TTL converter to restore it. For\nmore information on restoring the bootloader see <code>Advanced Reflashing</code> in your\nboard&#39;s reference pages.</p>\n<p>To see which areas of memory you can and can&#39;t overwrite, look at the values\nreported by <code>process.memory()</code>.</p>\n",
+    "!doc": "<p>This module allows you to read and write the nonvolatile flash memory of your device.</p>\n<p>Also see the <code>Storage</code> library, which provides a safer file-like\ninterface to nonvolatile storage.</p>\n<p>It should be used with extreme caution, as it is easy to overwrite parts of Flash\nmemory belonging to Espruino or even its bootloader. If you damage the bootloader\nthen you may need external hardware such as a USB-TTL converter to restore it. For\nmore information on restoring the bootloader see <code>Advanced Reflashing</code> in your\nboard&#39;s reference pages.</p>\n<p>To see which areas of memory you can and can&#39;t overwrite, look at the values\nreported by <code>process.memory()</code>.</p>\n<p><strong>Note:</strong> On Nordic platforms there are checks in place to help you avoid\n&#39;bricking&#39; your device be damaging the bootloader. You can disable these with <code>E.setFlags({unsafeFlash:1})</code></p>\n",
     "!url": "http://www.espruino.com/Reference#l_Flash_undefined",
     "getPage": {
       "!type": "fn(addr: number) -> ?",
@@ -797,6 +797,51 @@
       "!type": "fn(length: number, addr: number) -> ?",
       "!doc": "<p>Read flash memory from the given address</p>\n",
       "!url": "http://www.espruino.com/Reference#l_Flash_read"
+    }
+  },
+  "Storage": {
+    "!type": "fn()",
+    "!doc": "<p>This module allows you to read and write part of the nonvolatile flash\nmemory of your device using a filesystem-like API.</p>\n<p>Also see the <code>Flash</code> library, which provides a low level, more dangerous way\nto access all parts of your flash memory.</p>\n",
+    "!url": "http://www.espruino.com/Reference#l_Storage_undefined",
+    "eraseAll": {
+      "!type": "fn()",
+      "!doc": "<p>Erase the flash storage area. This will remove all files\ncreated with <code>require(&quot;Storage&quot;).write(...)</code> as well\nas any code saved with <code>save()</code> or <code>E.setBootCode()</code>.</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_Storage_eraseAll"
+    },
+    "erase": {
+      "!type": "fn(name: ?)",
+      "!doc": "<p>Erase a single file from the flash storage area.</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_Storage_erase"
+    },
+    "read": {
+      "!type": "fn(name: ?) -> ?",
+      "!doc": "<p>Read a file from the flash storage area that has\nbeen written with <code>require(&quot;Storage&quot;).write(...)</code>.</p>\n<p>This function returns a String that points to the actual\nmemory area in read-only memory, so it won&#39;t use up RAM.</p>\n<p>If you evaluate this string with <code>eval</code>, any functions\ncontained in the String will keep their code stored\nin flash memory.</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_Storage_read"
+    },
+    "readJSON": {
+      "!type": "fn(name: ?) -> ?",
+      "!doc": "<p>Read a file from the flash storage area that has\nbeen written with <code>require(&quot;Storage&quot;).write(...)</code>,\nand parse JSON in it into a JavaScript object.</p>\n<p>This is identical to <code>JSON.parse(require(&quot;Storage&quot;).read(...))</code></p>\n",
+      "!url": "http://www.espruino.com/Reference#l_Storage_readJSON"
+    },
+    "readArrayBuffer": {
+      "!type": "fn(name: ?) -> ?",
+      "!doc": "<p>Read a file from the flash storage area that has\nbeen written with <code>require(&quot;Storage&quot;).write(...)</code>,\nand return the raw binary data as an ArrayBuffer.</p>\n<p>This can be used:</p>\n<ul>\n<li>In a <code>DataView</code> with <code>new DataView(require(&quot;Storage&quot;).readArrayBuffer(&quot;x&quot;))</code></li>\n<li>In a <code>Uint8Array/Float32Array/etc</code> with <code>new Uint8Array(require(&quot;Storage&quot;).readArrayBuffer(&quot;x&quot;))</code></li>\n</ul>\n",
+      "!url": "http://www.espruino.com/Reference#l_Storage_readArrayBuffer"
+    },
+    "list": {
+      "!type": "fn() -> ?",
+      "!doc": "<p>List all files in the flash storage area. An array of Strings is returned.</p>\n<p><strong>Note:</strong> This will output system files (eg. saved code) as well as\nfiles that you may have written.</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_Storage_list"
+    },
+    "compact": {
+      "!type": "fn()",
+      "!doc": "<p>The Flash Storage system is journaling. To make the most of the limited\nwrite cycles of Flash memory, Espruino marks deleted/replaced files as\ngarbage and moves on to a fresh part of flash memory. Espruino only\nfully erases those files when it is running low on flash, or when\n<code>compactFiles</code> is called.</p>\n<p><code>compactFiles</code> may fail if there isn&#39;t enough RAM free on the stack to\nuse as swap space, however in this case it will not lose data.</p>\n<p><strong>Note:</strong> <code>compactFiles</code> rearranges the contents of memory. If code is\nreferencing that memory (eg. functions that have their code stored in flash)\nthen they may become garbled when compaction happens. To avoid this,\ncall <code>eraseFiles</code> before uploading data that you intend to reference to\nensure that uploaded files are right at the start of flash and cannot be\ncompacted further.</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_Storage_compact"
+    },
+    "debug": {
+      "!type": "fn()",
+      "!doc": "<p>This writes information about all blocks in flash\nmemory to the console - and is only useful for debugging\nflash storage.</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_Storage_debug"
     }
   },
   "E": {
@@ -880,7 +925,7 @@
     },
     "toString": {
       "!type": "fn(args: ?) -> +String",
-      "!doc": "<p>Returns a &#39;flat&#39; string representing the data in the arguments.</p>\n<p>This creates a string from the given arguments. If an argument is a String or an Array,\neach element is traversed and added as an 8 bit character. If it is anything else, it is\nconverted to a character directly.</p>\n",
+      "!doc": "<p>Returns a &#39;flat&#39; string representing the data in the arguments, or return <code>undefined</code>\nif a flat string cannot be created.</p>\n<p>This creates a string from the given arguments. If an argument is a String or an Array,\neach element is traversed and added as an 8 bit character. If it is anything else, it is\nconverted to a character directly.</p>\n<p>In the case where there&#39;s one argument which is an 8 bit typed array backed by a\nflat string of the same length, the backing string will be returned without doing\na copy or other allocation. The same applies if there&#39;s a single argument which\nis itself a flat string.</p>\n",
       "!url": "http://www.espruino.com/Reference#l_E_toString"
     },
     "toUint8Array": {
@@ -917,6 +962,11 @@
       "!type": "fn()",
       "!doc": "<p>Dump any locked variables that aren&#39;t referenced from <code>global</code> - for debugging memory leaks only.</p>\n",
       "!url": "http://www.espruino.com/Reference#l_E_dumpLockedVars"
+    },
+    "dumpFreeList": {
+      "!type": "fn()",
+      "!doc": "<p>Dump any locked variables that aren&#39;t referenced from <code>global</code> - for debugging memory leaks only.</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_E_dumpFreeList"
     },
     "getAddressOf": {
       "!type": "fn(v: ?, flatAddress: bool) -> number",
@@ -960,8 +1010,13 @@
     },
     "setTimeZone": {
       "!type": "fn(zone: number)",
-      "!doc": "<p>Set the time zone to be used with <code>Date</code> objects.</p>\n<p>For example <code>E.setTimeZone(1)</code> will be GMT+0100</p>\n",
+      "!doc": "<p>Set the time zone to be used with <code>Date</code> objects.</p>\n<p>For example <code>E.setTimeZone(1)</code> will be GMT+0100</p>\n<p>Time can be set with <code>setTime</code>.</p>\n",
       "!url": "http://www.espruino.com/Reference#l_E_setTimeZone"
+    },
+    "asm": {
+      "!type": "fn(callspec: ?, assemblycode: ?)",
+      "!doc": "<p>Provide assembly to Espruino.</p>\n<p><strong>This function is not part of Espruino</strong>. Instead, it is detected\nby the Espruino IDE (or command-line tools) at upload time and is\nreplaced with machine code and an <code>E.nativeCall</code> call.</p>\n<p>See <a href=\"http://www.espruino.com/Assembler\">the documentation on the Assembler</a> for more information.</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_E_asm"
     },
     "setUSBHID": {
       "!type": "fn(opts: ?)",
@@ -1780,41 +1835,29 @@
     "!doc": "<p>The Bluetooth Serial port - used when data is sent or received over Bluetooth Smart on nRF51/nRF52 chips.</p>\n",
     "!url": "http://www.espruino.com/Reference#l__global_Bluetooth"
   },
-  "BluetoothDevice": {
-    "!type": "fn()",
-    "!doc": "<p>Web Bluetooth-style device - get this using <code>NRF.requestDevice(address)</code></p>\n",
-    "!url": "http://www.espruino.com/Reference#BluetoothDevice",
-    "prototype": {
-      "gatt": {
-        "!type": "?",
-        "!doc": "<p><strong>Note:</strong> This is only available on some devices</p>\n",
-        "!url": "http://www.espruino.com/Reference#l_BluetoothDevice_gatt"
-      }
-    }
-  },
   "BluetoothRemoteGATTServer": {
     "!type": "fn()",
-    "!doc": "<p>Web Bluetooth-style GATT server - get this using <code>NRF.connect(address)</code>\nor <code>NRF.requestDevice(options)</code> then <code>response.gatt.connect</code></p>\n<p><a href=\"https://webbluetoothcg.github.io/web-bluetooth/#bluetoothremotegattserver\">https://webbluetoothcg.github.io/web-bluetooth/#bluetoothremotegattserver</a></p>\n",
+    "!doc": "<p>Web Bluetooth-style GATT server - get this using <code>NRF.connect(address)</code>\nor <code>NRF.requestDevice(options)</code> and <code>response.gatt.connect</code></p>\n<p><a href=\"https://webbluetoothcg.github.io/web-bluetooth/#bluetoothremotegattserver\">https://webbluetoothcg.github.io/web-bluetooth/#bluetoothremotegattserver</a></p>\n",
     "!url": "http://www.espruino.com/Reference#BluetoothRemoteGATTServer",
     "prototype": {
       "connect": {
         "!type": "fn() -> ?",
-        "!doc": "<p>Connect to a BLE device - returns a promise,\nthe argument of which is the <code>BluetoothRemoteGATTServer</code> connection.</p>\n<p>See <a href=\"/Reference#l_NRF_requestDevice\"><code>NRF.requestDevice</code></a> for usage examples.</p>\n<p><strong>Note:</strong> This is only available on some devices</p>\n",
+        "!doc": "<p>Connect to a BLE device - returns a promise,\nthe argument of which is the <code>BluetoothRemoteGATTServer</code> connection.</p>\n<p>See <a href=\"/Reference#l_NRF_requestDevice\"><code>NRF.requestDevice</code></a> for usage examples.</p>\n",
         "!url": "http://www.espruino.com/Reference#l_BluetoothRemoteGATTServer_connect"
       },
       "disconnect": {
         "!type": "fn()",
-        "!doc": "<p>Disconnect from a previously connected BLE device connected with\n<code>NRF.connect</code> - this does not disconnect from something that has\nconnected to the Espruino.</p>\n<p><strong>Note:</strong> This is only available on some devices</p>\n",
+        "!doc": "<p>Disconnect from a previously connected BLE device connected with\n<code>NRF.connect</code> - this does not disconnect from something that has\nconnected to the Espruino.</p>\n",
         "!url": "http://www.espruino.com/Reference#l_BluetoothRemoteGATTServer_disconnect"
       },
       "getPrimaryService": {
         "!type": "fn(service: ?) -> ?",
-        "!doc": "<p><strong>Note:</strong> This is only available on some devices</p>\n",
+        "!doc": "<p>See <code>NRF.connect</code> for usage examples.</p>\n",
         "!url": "http://www.espruino.com/Reference#l_BluetoothRemoteGATTServer_getPrimaryService"
       },
       "getPrimaryServices": {
         "!type": "fn() -> ?",
-        "!doc": "<p><strong>Note:</strong> This is only available on some devices</p>\n",
+        "!doc": "",
         "!url": "http://www.espruino.com/Reference#l_BluetoothRemoteGATTServer_getPrimaryServices"
       }
     }
@@ -1826,12 +1869,12 @@
     "prototype": {
       "getCharacteristic": {
         "!type": "fn(characteristic: ?) -> ?",
-        "!doc": "<p><strong>Note:</strong> This is only available on some devices</p>\n",
+        "!doc": "<p>See <code>NRF.connect</code> for usage examples.</p>\n",
         "!url": "http://www.espruino.com/Reference#l_BluetoothRemoteGATTService_getCharacteristic"
       },
       "getCharacteristics": {
         "!type": "fn() -> ?",
-        "!doc": "<p><strong>Note:</strong> This is only available on some devices</p>\n",
+        "!doc": "",
         "!url": "http://www.espruino.com/Reference#l_BluetoothRemoteGATTService_getCharacteristics"
       }
     }
@@ -1843,7 +1886,7 @@
     "prototype": {
       "stopNotifications": {
         "!type": "fn() -> ?",
-        "!doc": "<p><strong>Note:</strong> This is only available on some devices</p>\n",
+        "!doc": "<p>Stop notifications (that were requested with <code>BluetoothRemoteGATTCharacteristic.startNotifications</code>)</p>\n",
         "!url": "http://www.espruino.com/Reference#l_BluetoothRemoteGATTCharacteristic_stopNotifications"
       }
     }
@@ -2038,6 +2081,26 @@
       "!url": "http://www.espruino.com/Reference#l_Math_max"
     }
   },
+  "Pixl": {
+    "!type": "fn()",
+    "!doc": "<p>Class containing utility functions for <a href=\"http://www.espruino.com/Pixl.js\">Pixl.js</a></p>\n",
+    "!url": "http://www.espruino.com/Reference#Pixl",
+    "getBatteryPercentage": {
+      "!type": "fn() -> number",
+      "!doc": "<p>Return an approximate battery percentage remaining based on\na normal CR2032 battery (2.8 - 2.2v)</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_Pixl_getBatteryPercentage"
+    },
+    "setContrast": {
+      "!type": "fn(c: number)",
+      "!doc": "<p>Set the LCD&#39;s contrast</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_Pixl_setContrast"
+    },
+    "lcdw": {
+      "!type": "fn(c: number)",
+      "!doc": "<p>Writes a command directly to the ST7567 LCD controller</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_Pixl_lcdw"
+    }
+  },
   "neopixel": {
     "!type": "fn()",
     "!doc": "<p>This library allows you to write to Neopixel/WS281x/APA10x LED strips</p>\n<p>These use a high speed single-wire protocol which needs platform-specific\nimplementation on some devices - hence this library to simplify things.</p>\n",
@@ -2114,7 +2177,7 @@
     },
     "ping": {
       "!type": "fn(ipAddr: ?, pingCallback: ?)",
-      "!doc": "<p>Perform a network ping request. The parameter can be either a String or a numeric IP address.\n<strong>Note:</strong> This function should probably be removed, or should it be part of the wifi library?</p>\n",
+      "!doc": "<p><strong>DEPRECATED</strong> - please use <code>Wifi.ping</code> instead.</p>\n<p>Perform a network ping request. The parameter can be either a String or a numeric IP address.</p>\n",
       "!url": "http://www.espruino.com/Reference#l_ESP8266_ping"
     }
   },
@@ -2512,7 +2575,7 @@
   },
   "fs": {
     "!type": "fn()",
-    "!doc": "<p>This library handles interfacing with a FAT32 filesystem on an SD card. The API is designed to be similar to node.js&#39;s - However Espruino does not currently support asynchronous file IO, so the functions behave like node.js&#39;s xxxxSync functions. Versions of the functions with &#39;Sync&#39; after them are also provided for compatibility.</p>\n<p>Currently this provides minimal file IO - it&#39;s great for logging and loading/saving settings, but not good for loading large amounts of data as you will soon fill your memory up.</p>\n<p>It is currently only available on boards that contain an SD card slot, such as the Olimexino and the HY. It can not currently be added to boards that did not ship with a card slot.</p>\n<p>To use this, you must type <code>var fs = require(&#39;fs&#39;)</code> to get access to the library</p>\n",
+    "!doc": "<p>This library handles interfacing with a FAT32 filesystem on an SD card. The API is designed to be similar to node.js&#39;s - However Espruino does not currently support asynchronous file IO, so the functions behave like node.js&#39;s xxxxSync functions. Versions of the functions with &#39;Sync&#39; after them are also provided for compatibility.</p>\n<p>To use this, you must type <code>var fs = require(&#39;fs&#39;)</code> to get access to the library</p>\n<p>See <a href=\"http://www.espruino.com/File+IO\">the page on File IO</a> for more information, and for examples on wiring up an SD card if your device doesn&#39;t come with one.</p>\n<p><strong>Note:</strong> If you want to remove an SD card after you have started using it, you <em>must</em> call <code>E.unmountSD()</code> or you may cause damage to the card.</p>\n",
     "!url": "http://www.espruino.com/Reference#l_fs_undefined",
     "pipe": {
       "!type": "fn(source: ?, destination: ?, options: ?)",
@@ -2621,6 +2684,11 @@
         "!url": "http://www.espruino.com/Reference#l_File_pipe"
       }
     }
+  },
+  "Terminal": {
+    "!type": "+Serial",
+    "!doc": "<p>A simple VT100 terminal emulator.</p>\n<p>When data is sent to this, it searches for a Graphics variable called either\n<code>g</code> or <code>LCD</code> and starts writing characters to it.</p>\n",
+    "!url": "http://www.espruino.com/Reference#l__global_Terminal"
   },
   "Graphics": {
     "!type": "fn()",
@@ -2766,6 +2834,11 @@
         "!type": "fn(reset: bool) -> ?",
         "!doc": "<p>Return the area of the Graphics canvas that has been modified, and optionally clear\nthe modified area to 0.</p>\n<p>For instance if <code>g.setPixel(10,20)</code> was called, this would return <code>{x1:10, y1:20, x2:10, y2:20}</code></p>\n",
         "!url": "http://www.espruino.com/Reference#l_Graphics_getModified"
+      },
+      "scroll": {
+        "!type": "fn(x: number, y: number)",
+        "!doc": "<p>Scroll the contents of this graphics in a certain direction. The remaining area\nis filled with the background color.</p>\n<p>Note: This uses repeated pixel reads and writes, so will not work on platforms that\ndon&#39;t support pixel reads.</p>\n",
+        "!url": "http://www.espruino.com/Reference#l_Graphics_scroll"
       }
     }
   },
@@ -2929,11 +3002,6 @@
     "!doc": "<p>Return the current mode of the given pin. See <code>pinMode</code> for more information on returned values.</p>\n",
     "!url": "http://www.espruino.com/Reference#l__global_getPinMode"
   },
-  "setWatch": {
-    "!type": "fn(function: ?, pin: +Pin, options: ?) -> ?",
-    "!doc": "<p>Call the function specified when the pin changes. Watches set with <code>setWatch</code> can be removed using <code>clearWatch</code>.</p>\n<p>The function may also take an argument, which is an object of type <code>{state:bool, time:float, lastTime:float}</code>.</p>\n<ul>\n<li><code>state</code> is whether the pin is currently a <code>1</code> or a <code>0</code></li>\n<li><code>time</code> is the time in seconds at which the pin changed state</li>\n<li><code>lastTime</code> is the time in seconds at which the <strong>pin last changed state</strong>. When using <code>edge:&#39;rising&#39;</code> or <code>edge:&#39;falling&#39;</code>, this is not the same as when the function was last called.</li>\n</ul>\n<p>For instance, if you want to measure the length of a positive pulse you could use <code>setWatch(function(e) { console.log(e.time-e.lastTime); }, BTN, { repeat:true, edge:&#39;falling&#39; });</code>.\nThis will only be called on the falling edge of the pulse, but will be able to measure the width of the pulse because <code>e.lastTime</code> is the time of the rising edge.</p>\n<p>Internally, an interrupt writes the time of the pin&#39;s state change into a queue, and the function\nsupplied to <code>setWatch</code> is executed only from the main message loop. However, if the callback is a\nnative function <code>void (bool state)</code> then you can add <code>irq:true</code> to options, which will cause the\nfunction to be called from within the IRQ. When doing this, interrupts will happen on both edges\nand there will be no debouncing.</p>\n<p><strong>Note:</strong> if you didn&#39;t call <code>pinMode</code> beforehand then this function will reset pin&#39;s state to <code>&quot;input&quot;</code></p>\n<p><strong>Note:</strong> The STM32 chip (used in the <a href=\"/EspruinoBoard\">Espruino Board</a> and <a href=\"/Pico\">Pico</a>) cannot\nwatch two pins with the same number - eg <code>A0</code> and <code>B0</code>.</p>\n",
-    "!url": "http://www.espruino.com/Reference#l__global_setWatch"
-  },
   "clearWatch": {
     "!type": "fn(id: ?)",
     "!doc": "<p>Clear the Watch that was created with setWatch. If no parameter is supplied, all watches will be removed.</p>\n",
@@ -3006,7 +3074,7 @@
   },
   "setTime": {
     "!type": "fn(time: number)",
-    "!doc": "<p>Set the current system time in seconds (to the nearest second)</p>\n",
+    "!doc": "<p>Set the current system time in seconds (to the nearest second).</p>\n<p>This is used with <code>getTime</code>, the time reported from <code>setWatch</code>, as\nwell as when using <code>new Date()</code>.</p>\n<p>To set the timezone for all new Dates, use <code>E.setTimeZone(hours)</code>.</p>\n",
     "!url": "http://www.espruino.com/Reference#l__global_setTime"
   },
   "getSerial": {
@@ -3028,11 +3096,6 @@
     "!type": "fn(id: ?, time: number)",
     "!doc": "<p>Change the Interval on a callback created with setInterval, for example:</p>\n<p><code>var id = setInterval(function () { print(&#39;foo&#39;); }, 1000); // every second</code></p>\n<p><code>changeInterval(id, 1500); // now runs every 1.5 seconds</code></p>\n<p>This takes effect immediately and resets the timeout, so in the example above,\nregardless of when you call <code>changeInterval</code>, the next interval will occur 1500ms\nafter it.</p>\n",
     "!url": "http://www.espruino.com/Reference#l__global_changeInterval"
-  },
-  "arguments": {
-    "!type": "?",
-    "!doc": "<p>A variable containing the arguments given to the function</p>\n",
-    "!url": "http://www.espruino.com/Reference#l__global_arguments"
   },
   "eval": {
     "!type": "fn(code: ?) -> ?",
