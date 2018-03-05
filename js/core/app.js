@@ -22,8 +22,17 @@
         nwwindow = require('electron').remote.getCurrentWindow(); // new
       else
         nwwindow = require('remote').getCurrentWindow(); // old
-    } else
+    } else {
       nwwindow = require('nw.gui').Window.get();
+      /* When new windows are loaded in nw.js they're loaded like the current
+      frame - with no navigation or title bar. Stop this behaviour and load
+      the system web browser instead (fix #187) */
+      nwwindow.on('new-win-policy', function (frame, url, policy) {
+        //policy.setNewWindowManifest({toolbar:true,frame:true}); // looks grim
+        policy.ignore();
+        require('nw.gui').Shell.openExternal( url );
+      });
+    }
   }
 
   var defaultIcon = {
