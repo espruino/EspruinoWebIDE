@@ -31,12 +31,18 @@
     });
 
     Espruino.addProcessor("getModule", function (module, callback) {
+      // If projects not enabled/setup skip immediately
+      if (!Espruino.Config.projectEntry) {
+        callback(module);
+        return;
+      }
+      // otherwise...
       getProjectSubDir("modules",getModules);
       var t = setTimeout(function(){
         // in case we were unable to find anything
         t = undefined;
         callback(module);
-      }, 50);
+      }, 250);
       function getModules(subDirEntry){
         var fnd = false;
         var dirReader = subDirEntry.createReader();
