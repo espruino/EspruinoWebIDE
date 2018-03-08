@@ -32,7 +32,7 @@
 
   function createSettingsWindow(initialSection) {
     if (initialSection==undefined)
-      initialSection = "About";    
+      initialSection = "About";
     // Get sections
     var sections = Espruino.Core.Config.getSections();
     // Write list of sections
@@ -98,7 +98,7 @@
     if (section.descriptionHTML!==undefined)
       html += "<p>"+section.descriptionHTML+"<p>";
     if (section.description!==undefined)
-      html += "<p>"+Espruino.Core.Utils.escapeHTML(section.description, false).replace("\n","</p><p>") +"<p>";      
+      html += "<p>"+Espruino.Core.Utils.escapeHTML(section.description, false).replace("\n","</p><p>") +"<p>";
     if (section.tours!==undefined) {
       html += "<p>See the ";
       var tours = [];
@@ -131,11 +131,11 @@
    $(".settings .currentsection input,select").change(function() {
      // First, check for multi_select
      var configGroup = $(this).attr("configGroup");
-     if (configGroup && configItems[configGroup] !== undefined) {       
+     if (configGroup && configItems[configGroup] !== undefined) {
        var checked = [];
        $(this).parent().children().each(function() {
          if ($(this).is(':checked')) checked.push($(this).val());
-       });       
+       });
       Espruino.Config.set(configGroup, "|"+checked.join("|")+"|");
       return;
      }
@@ -170,7 +170,8 @@
     if (config.description!==undefined)
       desc += '<p>'+Espruino.Core.Utils.escapeHTML(config.description, false).replace("\n","</p><p>")+'</p>';
     // type : "int"/"boolean"/"string"/{ value1:niceName, value2:niceName },
-    if (config.type == "none") {
+    if (config.type == "none" || config.type===undefined) {
+      html += desc;
     } else if (config.type == "boolean") {
       html += '<input name="'+configName+'" type="checkbox" style="float: right;" '+(value?"checked":"")+'/>';
       html += desc;
@@ -187,8 +188,8 @@
           html += '<input type="checkbox" id="'+id+'" configGroup="'+configName+'" name="'+id+'" value="'+key+'" '+(checked?"checked":"")+'>'+
                   '<label for="'+id+'">'+Espruino.Core.Utils.escapeHTML(config.type[key])+'</label><br/>';
         }
-        html += '</div>';        
-      } else {        
+        html += '</div>';
+      } else {
         html += '<select name="'+configName+'" style="float: right;">';
         for (var key in config.type)
           html += '<option value="'+Espruino.Core.Utils.escapeHTML(key)+'" '+(key==value?"selected":"")+'>'+
@@ -206,7 +207,7 @@
     }
     return html;
   }
-  
+
   function refresh() {
     showSettingsSection(currentSection);
   }
