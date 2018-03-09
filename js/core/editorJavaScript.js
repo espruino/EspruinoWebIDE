@@ -65,7 +65,7 @@
         chrome.storage.local.set({"CODE_JS": cm.getValue()});
     });
     // Handle hovering
-    CodeMirror.on(codeMirror.getWrapperElement(), "mouseover", function(e) {
+    CodeMirror.on(codeMirror.getWrapperElement(), "mouseover", function(e) {      
       var node = e.target || e.srcElement;
       if (node) {
         var stillInNode = true;
@@ -149,6 +149,11 @@
   }
 
   function showTooltipFor(e, content, node) {
+    // remove any existing codemirror tooltips
+    var tooltips = document.getElementsByClassName('CodeMirror-Tern-tooltip');
+    while(tooltips.length)
+      tooltips[0].parentNode.removeChild(tooltips[0]);
+
     var tooltip = showTooltip(e, content);
     function hide() {
       CodeMirror.off(node, "mouseout", hide);
