@@ -576,11 +576,6 @@
         "!doc": "<p>Write a character or array of data to the serial port</p>\n<p>This method writes unmodified data, eg <code>Serial.write([1,2,3])</code> is equivalent to <code>Serial.write(&quot;\\1\\2\\3&quot;)</code>. If you&#39;d like data converted to a string first, use <code>Serial.print</code>.</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Serial_write"
       },
-      "onData": {
-        "!type": "fn(function: ?)",
-        "!doc": "<p>Serial.onData(func) has now been replaced with the event Serial.on(<code>data</code>, func)</p>\n",
-        "!url": "http://www.espruino.com/Reference#l_Serial_onData"
-      },
       "available": {
         "!type": "fn() -> number",
         "!doc": "<p>Return how many bytes are available to read. If there is already a listener for data, this will always return 0.</p>\n",

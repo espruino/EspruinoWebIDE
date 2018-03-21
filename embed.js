@@ -8,7 +8,6 @@ Use for (for example) serving up the IDE directly from an Espruino board.
 function EspruinoIDE(ideframe) {
   function post(msg) {
     msg.for="ide";
-    console.log("Posting",msg);
     ideframe.contentWindow.postMessage(msg,"*");
   }
   window.addEventListener('message', function(e) {
