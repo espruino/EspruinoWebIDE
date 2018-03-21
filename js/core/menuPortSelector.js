@@ -58,7 +58,6 @@
       if (checkInt) clearInterval(checkInt);
       checkInt = undefined;
       popup.setContents('<h2 class="list__no-results">Connecting...</h2>');
-      Espruino.Core.Status.setStatus("Connecting...");
       function connect() {
         connectToPort(port, function(success){
           popup.close();
@@ -154,10 +153,10 @@
   function connectToPort(serialPort, callback)
   {
     if (!serialPort) {
-      Espruino.Core.Notifications.error("Invalid Serial Port");
+      Espruino.Core.Notifications.error("Invalid Serial Port ");
       return;
     }
-
+    Espruino.Core.Status.setStatus("Connecting...");
     Espruino.Core.Serial.setSlowWrite(true);
     Espruino.Core.Serial.open(serialPort, function(cInfo) {
       if (cInfo!=undefined) {
@@ -194,6 +193,7 @@
       init : init,
 
       ensureConnected : ensureConnected,
+      connectToPort : connectToPort,
       disconnect : disconnect,
       showPortSelector: createPortSelector
   };
