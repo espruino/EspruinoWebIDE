@@ -49,6 +49,7 @@ Espruino.Core.Status = {
 function readEspruinoToolsFile(p) {
   return require("fs").readFileSync(__dirname+"/EspruinoTools/"+p).toString();
 }
+eval(readEspruinoToolsFile("core/utils.js"));
 eval(readEspruinoToolsFile("core/serial.js"));
 eval(readEspruinoToolsFile("core/serial_node_serial.js"));
 eval(readEspruinoToolsFile("core/serial_noble.js"));
