@@ -228,7 +228,7 @@
       if (data.board_id.substr(0,4)=="PICO" ||
           data.board_id=="ESPRUINOWIFI") {
         html =
-          '<p><b>Please put your board into bootloader mode.</b> Plug it into USB with the button held down, and then release the button as soon as the LEDs light.</p>'+
+          '<p><b>Please put your board into bootloader mode.</b> Hold down the button, plug into USB, and then immediately release it.</p>'+
           '<p>When the red and green LEDs start pulsing on and off, click \'Next\'...</p>'+
           '<p>If the LEDs are not pulsing, please see the <a href="http://www.espruino.com/Troubleshooting" target="_blank">Troubleshooting page</a></p>';
       } else {
