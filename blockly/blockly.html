@@ -325,7 +325,8 @@
     </category>
     <!-- /Amperka's MotorShield -->
     <category name="Nordic Thingy:52" enable_if="nordic_thingy">
-      <block type="thingy_sound_play"></block>
+      <block type="thingy_sound_play"><value name="SAMPLERATE"><block type="math_number"><title name="NUM">4000</title></block></value></block>
+      <block type="thingy_sound_record"><value name="LEN"><block type="math_number"><title name="NUM">1000</title></block></value></block>
       <block type="thingy_sensor_once"></block>
       <block type="thingy_sensor_many"></block>
       <block type="thingy_result"></block>

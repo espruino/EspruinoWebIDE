@@ -12,15 +12,23 @@
 
 var THINGY_COL = 250;
 var THINGY_SENSORS = [
+    ['Temperature (C)', 'Pressure|d.temperature'],
+    ['Pressure (hPa)', 'Pressure|d.pressure'],
+    ['eCO2', 'Gas|d.eCO2'],
+    ['TVOC', 'Gas|d.TVOC'],
     ['Acceleration (List of X,Y,Z)', 'Acceleration|[d.x,d.y,d.z]'],
     ['Acceleration X', 'Acceleration|d.x'],
     ['Acceleration Y', 'Acceleration|d.y'],
     ['Acceleration Z', 'Acceleration|d.z'],
     ['Acceleration Magnitude', 'Acceleration|Math.sqrt(d.x*d.x+d.y*d.y+d.z*d.z)'],
-    ['Temperature (C)', 'Pressure|d.temperature'],
-    ['Pressure (hPa)', 'Pressure|d.pressure'],
-    ['eCO2', 'Gas|d.eCO2'],
-    ['TVOC', 'Gas|d.TVOC'],
+    ['Gyro X', 'MPU|d.gyro.x'],
+    ['Gyro Y', 'MPU|d.gyro.y'],
+    ['Gyro Z', 'MPU|d.gyro.z'],
+    ['Gyro Magnitude', 'Acceleration|Math.sqrt(d.gyro.x*d.gyro.x+d.gyro.y*d.gyro.y+d.gyro.z*d.gyro.z)'],
+    ['Magnetometer X', 'MPU|d.mag.x'],
+    ['Magnetometer Y', 'MPU|d.mag.y'],
+    ['Magnetometer Z', 'MPU|d.mag.z'],
+    ['Magnetometer Magnitude', 'Acceleration|Math.sqrt(d.mag.x*d.mag.x+d.mag.y*d.mag.y+d.mag.z*d.mag.z)'],
     ['Color (List of R,G,B,Clear)', 'Color|[d.r,d.g,d.b,d.c]'],
     ['Color Red', 'Color|d.r'],
     ['Color Green', 'Color|d.g'],
@@ -36,7 +44,8 @@ var THINGY_SOUNDS = [
   ['Pickup 1', 'pickup1'],
   ['Pickup 2', 'pickup3'],
   ['Shoot 1', 'shoot0'],
-  ['Shoot 2', 'shoot1']
+  ['Shoot 2', 'shoot1'],
+  ['Recorded Sound', 'recorded']
 ];
 
 function thingyStatement(blk, comment) {
@@ -60,11 +69,13 @@ Blockly.Blocks.thingy_sound_play = {
     this.appendDummyInput()
          .appendField('Play Sound')
          .appendField(new Blockly.FieldDropdown(THINGY_SOUNDS), 'SOUND');
-   this.appendValueInput('SAMPLERATE')
-       .setCheck('Number')
-       .appendField("at sample rate");
+    this.appendValueInput('SAMPLERATE')
+         .setCheck('Number')
+         .appendField("at");
+    this.appendDummyInput()
+         .appendField('samples/sec');
     this.appendStatementInput('DO')
-        .appendField("when finished");
+         .appendField("when finished");
     robotStatement(this, 'Play a sound at a specific sample rate');
   }
 };
@@ -73,8 +84,32 @@ Blockly.JavaScript.thingy_sound_play = function() {
   var pitch = Blockly.JavaScript.valueToCode(this, 'SAMPLERATE', Blockly.JavaScript.ORDER_ASSIGNMENT) || '4000';
   var branch = Blockly.JavaScript.statementToCode(this, 'DO');
   var sound_var = "wave_"+sound_id;
-  Blockly.JavaScript.definitions_[sound_var] = "var "+sound_var+"=atob(\""+THINGY_SOUND_DATA[sound_id]+"\");";
-  return "Thingy.sound("+sound_var+","+pitch+",function() {\n"+branch+"});";
+  if (sound_id=="recorded") Blockly.JavaScript.definitions_["wave_recorded"] = "var wave_recorded = [];";
+  else Blockly.JavaScript.definitions_[sound_var] = "var "+sound_var+"=atob(\""+THINGY_SOUND_DATA[sound_id]+"\");";
+  return "Thingy.sound("+sound_var+","+pitch+",function() {\n"+branch+"});\n";
+};
+// ----------------------------------------------------------
+Blockly.Blocks.thingy_sound_record = {
+  category: 'Thingy',
+  init: function() {
+    this.appendDummyInput()
+         .appendField('Record Sound for')
+    this.appendValueInput('LEN')
+        .setCheck('Number');
+    this.appendDummyInput()
+        .appendField('milliseconds');
+    this.appendStatementInput('DO')
+        .appendField("when finished");
+    robotStatement(this, 'Record a sound at a 8192Hz sample rate. Max 1 second');
+  }
+};
+Blockly.JavaScript.thingy_sound_record = function() {
+  var millisecs = Blockly.JavaScript.valueToCode(this, 'LEN', Blockly.JavaScript.ORDER_ASSIGNMENT) || '1000';
+  var branch = Blockly.JavaScript.statementToCode(this, 'DO');
+  Blockly.JavaScript.definitions_["wave_recorded"] = "var wave_recorded = [];";
+  return "wave_recorded = [];\n"+ // ensure memory is freed before we start recording
+         "if ("+millisecs+">1000) console.log('Can only record 1 second or less');\n"+
+         "else Thingy.record(parseInt(("+millisecs+")*8192/1000),function(_d) {\nwave_recorded=_d;\n"+branch+"});\n";
 };
 // ----------------------------------------------------------
 Blockly.Blocks.thingy_sensor_once = {
@@ -91,7 +126,7 @@ Blockly.Blocks.thingy_sensor_once = {
 Blockly.JavaScript.thingy_sensor_once = function() {
   var arg = this.getTitleValue('SENSOR').split("|");
   var branch = Blockly.JavaScript.statementToCode(this, 'DO');
-  return "Thingy.get"+arg[0]+"(function(d) {\n_result="+arg[1]+";\n"+branch+"});";
+  return "Thingy.get"+arg[0]+"(function(d) {\n_result="+arg[1]+";\n"+branch+"});\n";
 };
 // ----------------------------------------------------------
 Blockly.Blocks.thingy_sensor_many = {
@@ -108,8 +143,15 @@ Blockly.Blocks.thingy_sensor_many = {
 };
 Blockly.JavaScript.thingy_sensor_many = function() {
   var arg = this.getTitleValue('SENSOR').split("|");
+  var sType = arg[0];
+  var sArg = arg[1];
   var branch = Blockly.JavaScript.statementToCode(this, 'DO');
-  return "Thingy.on"+arg[0]+"(function(d) {\n_result="+arg[1]+";\n"+branch+"});";
+  /* slightly odd behaviour here allows us to have *multiple* callbacks
+   for the same device. Only downside is it'll turn the relevant device
+   on right at the start. */
+  Blockly.JavaScript.definitions_["sType"] =
+     "Thingy.on"+sType+"(function(d) {\nThingy.emit('"+sType+"',d);\n});";
+  return "Thingy.on('"+sType+"',function(d) {\n_result="+sArg+";\n"+branch+"});\n";
 };
 // ----------------------------------------------------------
 Blockly.Blocks.thingy_result = {
