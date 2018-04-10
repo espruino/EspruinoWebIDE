@@ -1,5 +1,5 @@
 // Service worker for Offline Web IDE
-const VERSION = 'v17';
+const VERSION = 'v18';
 
 const CACHED_RESOURCES = [
   'blockly/blockly.html',
