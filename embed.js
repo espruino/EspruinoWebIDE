@@ -36,8 +36,18 @@ function EspruinoIDE(ideframe) {
         break;
       case "write": // data to write
         if (typeof event.data!="string") throw new Error("write event should have been given a string");
-        if (Espruino.onwrite)
-          Espruino.onwrite(event.data);
+        if (Espruino.onwritecb) {
+          Espruino.onwritecb(event.data, function() {
+            post({type:"written"});
+          });
+        } else {
+          if (Espruino.onwrite)
+            Espruino.onwrite(event.data);
+          // post that we've written, but after a delay
+          setTimeout(function() {
+            post({type:"written"});
+          }, 100);
+        }
         break;
       default:
         console.error("Unknown event type ",event.type);
@@ -62,8 +72,10 @@ function EspruinoIDE(ideframe) {
     onready : undefined,
     // should return a list of available ports
     onports : undefined,
-    // called when data should be written to the device
+    // called with (data) when data should be written to the device
     onwrite : undefined,
+    // called with (data,callback) when data should be written to the device. callback should be called when data has been written
+    onwritecb : undefined,
     // called when the user requests a disconnect
     ondisconnect : undefined,
   };
