@@ -279,11 +279,18 @@
   "ArrayBuffer": {
     "!type": "fn(byteLength: number) -> ?",
     "!doc": "<p>Create an Array Buffer object</p>\n",
-    "!url": "http://www.espruino.com/Reference#l_ArrayBuffer_ArrayBuffer"
+    "!url": "http://www.espruino.com/Reference#l_ArrayBuffer_ArrayBuffer",
+    "prototype": {
+      "byteLength": {
+        "!type": "number",
+        "!doc": "<p>The length, in bytes, of the ArrayBuffer</p>\n",
+        "!url": "http://www.espruino.com/Reference#l_ArrayBuffer_byteLength"
+      }
+    }
   },
   "ArrayBufferView": {
     "!type": "fn()",
-    "!doc": "<p>This is the built-in JavaScript class that is the prototype for Uint8Array / Float32Array / etc</p>\n",
+    "!doc": "<p>This is the built-in JavaScript class that is the prototype for:</p>\n<ul>\n<li><a href=\"/Reference#Uint8Array\">Uint8Array</a></li>\n<li><a href=\"/Reference#UintClamped8Array\">UintClamped8Array</a></li>\n<li><a href=\"/Reference#Int8Array\">Int8Array</a></li>\n<li><a href=\"/Reference#Uint16Array\">Uint16Array</a></li>\n<li><a href=\"/Reference#Int16Array\">Int16Array</a></li>\n<li><a href=\"/Reference#Uint32Array\">Uint32Array</a></li>\n<li><a href=\"/Reference#Int32Array\">Int32Array</a></li>\n<li><a href=\"/Reference#Float32Array\">Float32Array</a></li>\n<li><a href=\"/Reference#Float64Array\">Float64Array</a></li>\n</ul>\n<p>If you want to access arrays of differing types of data\nyou may also find <a href=\"/Reference#DataView\">DataView</a> useful.</p>\n",
     "!url": "http://www.espruino.com/Reference#ArrayBufferView",
     "prototype": {
       "buffer": {
@@ -658,14 +665,19 @@
         "!url": "http://www.espruino.com/Reference#l_Date_getTimezoneOffset"
       },
       "getTime": {
-        "!type": "fn(timeValue: number) -> number",
-        "!doc": "<p>Set the time/date of this Date class</p>\n",
+        "!type": "fn() -> number",
+        "!doc": "<p>Return the number of milliseconds since 1970</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Date_getTime"
       },
       "valueOf": {
         "!type": "fn() -> number",
         "!doc": "<p>Return the number of milliseconds since 1970</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Date_valueOf"
+      },
+      "setTime": {
+        "!type": "fn(timeValue: number) -> number",
+        "!doc": "<p>Set the time/date of this Date class</p>\n",
+        "!url": "http://www.espruino.com/Reference#l_Date_setTime"
       },
       "getHours": {
         "!type": "fn() -> number",
@@ -1013,6 +1025,11 @@
       "!doc": "<p>Provide assembly to Espruino.</p>\n<p><strong>This function is not part of Espruino</strong>. Instead, it is detected\nby the Espruino IDE (or command-line tools) at upload time and is\nreplaced with machine code and an <code>E.nativeCall</code> call.</p>\n<p>See <a href=\"http://www.espruino.com/Assembler\">the documentation on the Assembler</a> for more information.</p>\n",
       "!url": "http://www.espruino.com/Reference#l_E_asm"
     },
+    "reboot": {
+      "!type": "fn()",
+      "!doc": "<p>Forces a hard reboot of the microcontroller - as close as possible\nto if the reset pin had been toggled.</p>\n<p><strong>Note:</strong> This is different to <code>reset()</code>, which performs a software\nreset of Espruino (resetting the interpreter and pin states, but not\nall the hardware)</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_E_reboot"
+    },
     "setUSBHID": {
       "!type": "fn(opts: ?)",
       "!doc": "<p>USB HID will only take effect next time you unplug and re-plug your Espruino. If you&#39;re\ndisconnecting it from power you&#39;ll have to make sure you have <code>save()</code>d after calling\nthis function.</p>\n",
@@ -1022,6 +1039,11 @@
       "!type": "fn(data: ?) -> bool",
       "!doc": "",
       "!url": "http://www.espruino.com/Reference#l_E_sendUSBHID"
+    },
+    "getBattery": {
+      "!type": "fn() -> number",
+      "!doc": "<p>In devices that come with batteries, this function returns\nthe battery charge percentage as an integer between 0 and 100.</p>\n<p><strong>Note:</strong> this is an estimation only, based on battery voltage.\nThe temperature of the battery (as well as the load being drawn\nfrom it at the time <code>E.getBattery</code> is called) will affect the\nreadings.</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_E_getBattery"
     },
     "unmountSD": {
       "!type": "fn()",
@@ -1250,6 +1272,11 @@
         "!type": "fn(substring: ?, fromIndex: ?) -> number",
         "!doc": "<p>Return the last index of substring in this string, or -1 if not found</p>\n",
         "!url": "http://www.espruino.com/Reference#l_String_lastIndexOf"
+      },
+      "match": {
+        "!type": "fn(subStr: ?) -> ?",
+        "!doc": "<p>Matches <code>subStr</code> occurrence in the string.</p>\n",
+        "!url": "http://www.espruino.com/Reference#l_String_match"
       },
       "replace": {
         "!type": "fn(subStr: ?, newSubStr: ?) -> ?",
@@ -1613,7 +1640,7 @@
     "prototype": {
       "setup": {
         "!type": "fn(options: ?)",
-        "!doc": "<p>Set up this SPI port as an SPI Master.</p>\n",
+        "!doc": "<p>Set up this SPI port as an SPI Master.</p>\n<p><strong>Note:</strong> When using Software SPI, the baud rate will be ignored - data is sent as fast as possible.</p>\n",
         "!url": "http://www.espruino.com/Reference#l_SPI_setup"
       },
       "send": {
@@ -1767,7 +1794,7 @@
   },
   "NRF": {
     "!type": "fn()",
-    "!doc": "<p>The NRF class is for controlling functionality of the Nordic nRF51/nRF52 chips. Currently these only used in <a href=\"http://puck-js.com\">Puck.js</a> and the <a href=\"/MicroBit\">BBC micro:bit</a>.</p>\n<p>The main part of this is control of Bluetooth Low Energy - both searching for devices, and changing advertising data.</p>\n",
+    "!doc": "<p>The NRF class is for controlling functionality of the Nordic nRF51/nRF52 chips. This is used in <a href=\"http://puck-js.com\">Puck.js</a>, <a href=\"http://espruino.com/Pixl.js\">Pixl.js</a>, <a href=\"http://espruino.com/MDBT42Q\">MDBT42Q</a>, and a variety of other Bluetooth-based boards.</p>\n<p>Most functionality is related to Bluetooth Low Energy, however there are also some functions related to NFC that apply to NRF52-based devices.</p>\n",
     "!url": "http://www.espruino.com/Reference#NRF",
     "disconnect": {
       "!type": "fn()",
@@ -1791,7 +1818,7 @@
     },
     "getAddress": {
       "!type": "fn() -> ?",
-      "!doc": "<p>Get this device&#39;s Bluetooth MAC address.</p>\n<p>For Puck.js, the last 5 characters of this (eg. <code>ee:ff</code>)\nare used in the device&#39;s advertised Bluetooth name.</p>\n",
+      "!doc": "<p>Get this device&#39;s default Bluetooth MAC address.</p>\n<p>For Puck.js, the last 5 characters of this (eg. <code>ee:ff</code>)\nare used in the device&#39;s advertised Bluetooth name.</p>\n",
       "!url": "http://www.espruino.com/Reference#l_NRF_getAddress"
     },
     "getBattery": {
@@ -2082,7 +2109,7 @@
     "!url": "http://www.espruino.com/Reference#Pixl",
     "getBatteryPercentage": {
       "!type": "fn() -> number",
-      "!doc": "<p>Return an approximate battery percentage remaining based on\na normal CR2032 battery (2.8 - 2.2v)</p>\n",
+      "!doc": "<p>DEPRECATED - Please use <code>E.getBattery()</code> instead.</p>\n<p>Return an approximate battery percentage remaining based on\na normal CR2032 battery (2.8 - 2.2v)</p>\n",
       "!url": "http://www.espruino.com/Reference#l_Pixl_getBatteryPercentage"
     },
     "setContrast": {
@@ -2152,7 +2179,7 @@
     },
     "getFreeFlash": {
       "!type": "fn() -> ?",
-      "!doc": "<p><strong>Note:</strong> This is deprecated. Use <code>require(&quot;flash&quot;).getFree()</code></p>\n",
+      "!doc": "<p><strong>Note:</strong> This is deprecated. Use <code>require(&quot;Flash&quot;).getFree()</code></p>\n",
       "!url": "http://www.espruino.com/Reference#l_ESP8266_getFreeFlash"
     },
     "crc32": {
@@ -2682,13 +2709,18 @@
   },
   "Terminal": {
     "!type": "+Serial",
-    "!doc": "<p>A simple VT100 terminal emulator.</p>\n<p>When data is sent to this, it searches for a Graphics variable called either\n<code>g</code> or <code>LCD</code> and starts writing characters to it.</p>\n",
+    "!doc": "<p>A simple VT100 terminal emulator.</p>\n<p>When data is sent to the <code>Terminal</code> object, <code>Graphics.getInstance()</code>\nis called and if an instance of <code>Graphics</code> is found then characters\nare written to it.</p>\n",
     "!url": "http://www.espruino.com/Reference#l__global_Terminal"
   },
   "Graphics": {
     "!type": "fn()",
     "!doc": "<p>This class provides Graphics operations that can be applied to a surface.</p>\n<p>Use Graphics.createXXX to create a graphics object that renders in the way you want. See <a href=\"/Graphics\">the Graphics page</a> for more information.</p>\n<p><strong>Note:</strong> On boards that contain an LCD, there is a built-in &#39;LCD&#39; object of type Graphics. For instance to draw a line you&#39;d type: <code>LCD.drawLine(0,0,100,100)</code></p>\n",
     "!url": "http://www.espruino.com/Reference#Graphics",
+    "getInstance": {
+      "!type": "fn() -> ?",
+      "!doc": "<p>On devices like Pixl.js or HYSTM boards that contain a built-in display\nthis will return an instance of the graphics class that can be used to\naccess that display.</p>\n<p>Internally, this is stored as a member called <code>gfx</code> inside the &#39;hiddenRoot&#39;.</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_Graphics_getInstance"
+    },
     "createArrayBuffer": {
       "!type": "fn(width: number, height: number, bpp: number, options: ?) -> +Graphics",
       "!doc": "<p>Create a Graphics object that renders to an Array Buffer. This will have a field called &#39;buffer&#39; that can get used to get at the buffer itself</p>\n",
@@ -2785,6 +2817,11 @@
         "!doc": "<p>Make subsequent calls to <code>drawString</code> use a Custom Font of the given height. See the <a href=\"http://www.espruino.com/Fonts\">Fonts page</a> for more\ninformation about custom fonts and how to create them.</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Graphics_setFontCustom"
       },
+      "setFontAlign": {
+        "!type": "fn(x: number, y: number, rotation: number)",
+        "!doc": "<p>Set the alignment for subsequent calls to <code>drawString</code></p>\n",
+        "!url": "http://www.espruino.com/Reference#l_Graphics_setFontAlign"
+      },
       "drawString": {
         "!type": "fn(str: ?, x: number, y: number)",
         "!doc": "<p>Draw a string of text in the current font</p>\n",
@@ -2873,7 +2910,7 @@
     },
     "getBatteryPercentage": {
       "!type": "fn() -> number",
-      "!doc": "<p>Return an approximate battery percentage remaining based on\na normal CR2032 battery (2.8 - 2.2v)</p>\n",
+      "!doc": "<p>DEPRECATED - Please use <code>E.getBattery()</code> instead.</p>\n<p>Return an approximate battery percentage remaining based on\na normal CR2032 battery (2.8 - 2.2v).</p>\n",
       "!url": "http://www.espruino.com/Reference#l_Puck_getBatteryPercentage"
     },
     "selfTest": {
@@ -3019,7 +3056,7 @@
   },
   "setDeepSleep": {
     "!type": "fn(sleep: bool)",
-    "!doc": "<p>Set whether we can enter deep sleep mode, which reduces power consumption to around 100uA. This only works on STM32 Espruino Boards.</p>\n<p>Please see <a href=\"http://www.espruino.com/Power+Consumption\">http://www.espruino.com/Power+Consumption</a> for more details on this.</p>\n",
+    "!doc": "<p>Set whether we can enter deep sleep mode, which reduces power consumption to around 100uA. This only works on STM32 Espruino Boards (nRF52 boards sleep automatically).</p>\n<p>Please see <a href=\"http://www.espruino.com/Power+Consumption\">http://www.espruino.com/Power+Consumption</a> for more details on this.</p>\n",
     "!url": "http://www.espruino.com/Reference#l__global_setDeepSleep"
   },
   "trace": {
@@ -3131,6 +3168,16 @@
     "!type": "fn(str: ?) -> ?",
     "!doc": "<p>Convert any groups of characters of the form &#39;%ZZ&#39;, into characters with hex code &#39;0xZZ&#39;</p>\n",
     "!url": "http://www.espruino.com/Reference#l__global_decodeURIComponent"
+  },
+  "SDA": {
+    "!type": "+Pin",
+    "!doc": "<p>The pin marked SDA on the Arduino pin footprint. This is connected directly to pin A4.</p>\n",
+    "!url": "http://www.espruino.com/Reference#l__global_SDA"
+  },
+  "SCL": {
+    "!type": "+Pin",
+    "!doc": "<p>The pin marked SDA on the Arduino pin footprint. This is connected directly to pin A5.</p>\n",
+    "!url": "http://www.espruino.com/Reference#l__global_SCL"
   },
   "MOS1": {
     "!type": "+Pin",
