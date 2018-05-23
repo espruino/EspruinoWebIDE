@@ -32,13 +32,25 @@
     stepSelectBoard(urlOrNothing);
   }
 
-  function checkBoard(boardId) {
+  function checkBoard(boardId, json) {
+    var msg;
     if (boardId=="PUCKJS") {
+      msg = '<p>Puck.js firmware can\'t be updated from the IDE at the moment.</p>'+
+            '<p>Please see <a href="http://www.espruino.com/Puck.js#firmware-updates" target="_blank">the Puck.js page</a> for more instructions.</p>';
+    } else if (boardId=="PIXLJS") {
+      msg = '<p>Pixl.js firmware can\'t be updated from the IDE at the moment.</p>'+
+            '<p>Please see <a href="http://www.espruino.com/Pixl.js#firmware-updates" target="_blank">the Pixl.js page</a> for more instructions.</p>';
+    } else if (boardId=="MDBT42Q") {
+      msg = '<p>MDBT42Q firmware can\'t be updated from the IDE at the moment.</p>'+
+            '<p>Please see <a href="http://www.espruino.com/MDBT42Q#firmware-updates" target="_blank">the MDBT42Q page</a> for more instructions.</p>';
+    } else if (json && json.chip && json.chip.family && ["NRF51","NRF52"].indexOf(json.chip.family)>=0) {
+      msg = '<p>The firmware forthis device can\'t be updated from the IDE at the moment.</p>';
+    }
+    if (msg) {
       var popup = Espruino.Core.App.openPopup({
         title: "Firmware Update",
         padding: true,
-        contents: '<p>Puck.js firmware can\'t be updated from the IDE at the moment.</p>'+
-                  '<p>Please see <a href="http://www.espruino.com/Puck.js#firmware-updates" target="_blank">the Puck.js page</a> for more instructions.</p>' ,
+        contents: msg,
         position: "center",
         ok : function() {
           popup.close();
@@ -46,6 +58,7 @@
       });
       return false;
     }
+
     return true;
   }
 
@@ -64,7 +77,7 @@
         popup.close();
         if (boardId===undefined || boardList[boardId]===undefined)
           console.error("No board ID found! Looks like no option selected");
-        else if (checkBoard(boardId)) {
+        else if (checkBoard(boardId, boardList[boardId]["json"])) {
           var boardJson = boardList[boardId]["json"];
           if (urlOrNothing)
             stepReset( { binary_url : urlOrNothing, board_id : boardId, board_chip : boardJson.chip } );
