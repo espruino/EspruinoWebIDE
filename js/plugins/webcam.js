@@ -52,8 +52,8 @@
         0 : {},
         1 : { width: {ideal: 1280, max:1920}, height: {ideal: 720, max:1080} },
         2 : { width: {ideal: 1920, max:1920}, height: {ideal: 1080, max:1080} },
-        3 : { width: {exact: 1280, max:1920}, height: {exact: 720, max:1080} },
-        4 : { width: {exact: 1920, max:1920}, height: {exact: 1080, max:1080} },
+        3 : { width: {exact: 1280}, height: {exact: 720} },
+        4 : { width: {exact: 1920}, height: {exact: 1080} },
   };
 
   function showIcon(show) {
@@ -110,10 +110,23 @@
   }
 
   function getVideoConstraints() {
+    var term = document.querySelector(".editor__canvas__terminal");
+    if (term)
+      CONSTRAINTS[0] =  { width: {ideal: term.clientWidth}, height: {ideal: term.clientHeight} };
     var i = 0|Espruino.Config.WEBCAM_CONSTRAINTS;
     if (i<0 || i>=CONSTRAINTS.length) i=0;
     // parse and stringify -> clone object
     return JSON.parse(JSON.stringify(CONSTRAINTS[i]));
+  }
+
+  function enableWebCamDeviceId(id) {
+    var videoConstraints = getVideoConstraints();
+    videoConstraints.deviceId = { exact: id };
+    console.log("Requesting WebCam ", videoConstraints);
+    enableWebCam({
+        audio: false,
+        video: videoConstraints
+    });
   }
 
   function showWebCamChooser(sources) {
@@ -134,19 +147,13 @@
       position: "center",
     });
     $(".window--modal").on("click", ".list__item a", function() {
-      var id = $(this).data("id");
-      var videoConstraints = getVideoConstraints();
-      videoConstraints.deviceId = { exact: id };
-      enableWebCam({
-          audio: false,
-          video: videoConstraints
-      });
+      enableWebCamDeviceId($(this).data("id"));
     });
   }
 
   function enableWebCamOrChoose(sources) {
     if (sources.length == 1) {
-      enableWebCam({audio: false, video: getVideoConstraints()});
+      enableWebCamDeviceId(sources[0].id);
     } else {
       showWebCamChooser(sources);
     }
