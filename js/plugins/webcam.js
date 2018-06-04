@@ -39,10 +39,11 @@
       name : "Webcam Resolution",
       description : "When using the Webcam, should we request a specific resolution?",
       type : { 0 : "Default",
-               1 : "Request 720p (broken on Chrome 57)",
-               2 : "Request 1080p (broken on Chrome 57)",
+               1 : "Request 720p",
+               2 : "Request 1080p",
                3 : "Force 720p (will fail if unsupported)",
-               4 : "Force 1080p (will fail if unsupported)" },
+               4 : "Force 1080p (will fail if unsupported)",
+               5 : "Force 1080p25 (will fail if unsupported)" },
       defaultValue : 0,
       onChange : function(newValue) { showIcon(newValue); }
     });
@@ -50,16 +51,19 @@
 
   var CONSTRAINTS = {
         0 : {},
-        1 : { width: {ideal: 1280, max:1920}, height: {ideal: 720, max:1080} },
-        2 : { width: {ideal: 1920, max:1920}, height: {ideal: 1080, max:1080} },
-        3 : { width: {exact: 1280}, height: {exact: 720} },
-        4 : { width: {exact: 1920}, height: {exact: 1080} },
+        1 : { width: {ideal:1280}, height: {ideal:720} },
+        2 : { width: {ideal:1920}, height: {ideal:1080} },
+        3 : { width: {exact:1280}, height: {exact:720}, },
+        4 : { width: {exact:1920}, height: {exact:1080}, },
+        5 : { width: {exact:1920}, height: {exact:1080}, frameRate: {exact:25} }, 
   };
 
   function showIcon(show) {
     show = 0|show;
     var hadWebCam = hasWebCam();
     if (hadWebCam) toggleWebCam();
+    var vid = document.getElementById("videotag");
+    if (vid) vid.remove();
     if (show) {
       icon = Espruino.Core.App.addIcon({
         id: "webcam",
@@ -72,15 +76,14 @@
         },
         click: toggleWebCam
       });
-      var filters = "";
-      if (show==2) filters = "filter: brightness(150%);";
-      if (show==3) filters = "filter: brightness(200%);";
-      $('video').remove();
-      $('<video autoplay id="videotag" style="background-color:black;position: absolute;left:0;top:0;width:100%;height:100%;'+filters+'"></video>').prependTo(".editor--terminal .editor__canvas");
+      var filters = "background-color:black;position:absolute;left:0;top:0;width:100%;height:100%;";
+      filters += "object-fit:cover;";
+      if (show==2) filters += "filter: brightness(150%);";
+      if (show==3) filters += "filter: brightness(200%);";
+      $('<video autoplay id="videotag" style="'+filters+'"></video>').prependTo(".editor--terminal .editor__canvas");
     } else {
       hadWebCam = false;
       if (icon!==undefined) icon.remove();
-      $('video').remove();
     }
     if (hadWebCam) toggleWebCam();
   }
@@ -91,14 +94,19 @@
 
   function enableWebCam(constraints) {
     var window_url = window.URL || window.webkitURL;
-    navigator.getUserMedia(constraints, function(stream) {
-      webCamStream = stream;
-      var vid = $('video');
-      vid.attr('src', window_url.createObjectURL(stream));
+    var vid = document.getElementById("videotag");
+    console.log("Requesting WebCam ", constraints);
+    navigator.getUserMedia(constraints, function(mediaSource) {
+      webCamStream = mediaSource;      
+      try {
+          vid.srcObject = mediaSource;
+        } catch (error) {
+          vid.src = URL.createObjectURL(mediaSource);
+        }      
       console.log("Webcam started");
       setTimeout(function cb() {
-        if (vid[0].videoWidth)
-          console.log("Webcam video dimensions: "+vid[0].videoWidth+"x"+vid[0].videoHeight);
+        if (vid.videoWidth)
+          console.log("Webcam video dimensions: "+vid.videoWidth+"x"+vid.videoHeight);
         else
           setTimeout(cb, 1000);
       }, 1000);
@@ -112,17 +120,15 @@
   function getVideoConstraints() {
     var term = document.querySelector(".editor__canvas__terminal");
     if (term)
-      CONSTRAINTS[0] =  { width: {ideal: term.clientWidth}, height: {ideal: term.clientHeight} };
+      CONSTRAINTS[0] =  { width: term.clientWidth, height: term.clientHeight };
     var i = 0|Espruino.Config.WEBCAM_CONSTRAINTS;
     if (i<0 || i>=CONSTRAINTS.length) i=0;
-    // parse and stringify -> clone object
-    return JSON.parse(JSON.stringify(CONSTRAINTS[i]));
+    return CONSTRAINTS[i];
   }
 
   function enableWebCamDeviceId(id) {
     var videoConstraints = getVideoConstraints();
     videoConstraints.deviceId = { exact: id };
-    console.log("Requesting WebCam ", videoConstraints);
     enableWebCam({
         audio: false,
         video: videoConstraints
@@ -161,32 +167,16 @@
 
   function toggleWebCam() {
     if (!hasWebCam()) {
-      navigator.getUserMedia({audio: false, video: true}, function(stream) {
-        navigator.mediaDevices.enumerateDevices().then(function(data){
-          var sources = [];
-          for (var i = 0; i < data.length; i++) {
-            if (data[i].kind == "videoinput")
-              sources.push({
-                id : data[i].deviceId,
-                label : data[i].label.length ? data[i].label : "Video Device "+(sources.length+1)
-              });
-          }
-          enableWebCamOrChoose(sources);
-        });
-        /*MediaStreamTrack.getSources(function (data) {
-          var sources = [];
-          for (var i = 0; i < data.length; i++) {
-            if (data[i].kind == "video")
-              sources.push({
-                id : data[i].id,
-                label : data[i].label.length ? data[i].label : "Video Device "+(sources.length+1)
-              });
-          }
-          enableWebCamOrChoose(sources);
-        });*/
-      }, function(e) {
-        console.log('WebCam Error!', e.toString());
-        Espruino.Core.Notifications.error("Problem initialising WebCam");
+      navigator.mediaDevices.enumerateDevices().then(function(data){
+        var sources = [];
+        for (var i = 0; i < data.length; i++) {
+          if (data[i].kind == "videoinput")
+            sources.push({
+              id : data[i].deviceId,
+              label : data[i].label.length ? data[i].label : "Video Device "+(sources.length+1)
+            });
+        }
+        enableWebCamOrChoose(sources);
       });
     } else {
       if (webCamStream.stop) webCamStream.stop();
