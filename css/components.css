@@ -289,6 +289,12 @@ a:hover > .menu
         overflow: hidden;
 }
 
+.editor__canvas__fullscreen
+{
+  left: 0;
+  z-index:  100;
+}
+
 /* Sidebar */
 .sidebar
 {
