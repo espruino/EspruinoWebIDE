@@ -34,7 +34,10 @@ window.onload = function() {
     }
   }
   // Set up blockly from toolbox
-  Blockly.inject(document.body,{path: '', toolbox: toolbox});
+  Blockly.inject(document.body,{
+    toolbox: toolbox,
+    media: 'media/',
+  });
 
   // Notify parent - see /js/core/editorBlockly.js
   if (window.parent.blocklyLoaded)
@@ -436,12 +439,12 @@ Blockly.JavaScript.espruino_interval = function() {
   return "setInterval(function() {\n"+branch+" }, "+seconds+"*1000.0);\n";
 };
 Blockly.JavaScript.espruino_pin = function() {
-  var code = this.getTitleValue('PIN');
+  var code = this.getFieldValue('PIN');
   return [code, Blockly.JavaScript.ORDER_ATOMIC];
 };
 Blockly.JavaScript.espruino_watch = function() {
   var pin = Blockly.JavaScript.valueToCode(this, 'PIN', Blockly.JavaScript.ORDER_ASSIGNMENT) || '0';
-  var edge = this.getTitleValue('EDGE');
+  var edge = this.getFieldValue('EDGE');
   var branch = Blockly.JavaScript.statementToCode(this, 'DO');
   var json = { repeat : true, edge : edge };
   if (pin=="BTN1") json.debounce = 10;
@@ -473,7 +476,7 @@ Blockly.JavaScript.espruino_analogRead = function() {
 };
 Blockly.JavaScript.espruino_pinMode = function() {
   var pin = Blockly.JavaScript.valueToCode(this, 'PIN', Blockly.JavaScript.ORDER_ASSIGNMENT) || '0';
-  var mode = this.getTitleValue('MODE');
+  var mode = this.getFieldValue('MODE');
   return "pinMode("+pin+", "+JSON.stringify(mode)+");\n";
 }
 Blockly.JavaScript.espruino_code = function() {

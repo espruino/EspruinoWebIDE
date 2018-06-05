@@ -44,7 +44,7 @@ Blockly.Blocks.robot_motor = {
   }
 };
 Blockly.JavaScript.robot_motor = function() {
-  var pin = this.getTitleValue('PIN');
+  var pin = this.getFieldValue('PIN');
   var mul = (pin=="B14") ? "-0.7" : "+0.7";
   var val = Blockly.JavaScript.valueToCode(this, 'VAL', Blockly.JavaScript.ORDER_ASSIGNMENT) || '0';
   return "var x = "+val+";\nif (Math.abs(x)<0.05) digitalWrite("+pin+",0); else analogWrite("+pin+", (1.5"+mul+"*x)/20, {freq:50});\n";
@@ -69,7 +69,7 @@ Blockly.Blocks.robot_led = {
   }
 };
 Blockly.JavaScript.robot_led = function() {
-  var pin = this.getTitleValue('PIN');
+  var pin = this.getFieldValue('PIN');
   var val = Blockly.JavaScript.valueToCode(this, 'VAL', Blockly.JavaScript.ORDER_ASSIGNMENT) || '0';
   return "digitalWrite("+pin+", "+val+");\n";
 };
@@ -90,7 +90,7 @@ Blockly.Blocks.robot_ldr = {
   }
 };
 Blockly.JavaScript.robot_ldr = function() {
-  var pin = this.getTitleValue('PIN');
+  var pin = this.getFieldValue('PIN');
   return ["analogRead("+pin+")", Blockly.JavaScript.ORDER_ATOMIC]; 
   //return ["(Math.max(0,analogRead("+pin+")-0.25)/0.75)", Blockly.JavaScript.ORDER_ATOMIC]; 
 };

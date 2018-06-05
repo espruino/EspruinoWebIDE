@@ -46,7 +46,7 @@ Blockly.Blocks.amperka_motorshield_motor = {
   }
 };
 Blockly.JavaScript.amperka_motorshield_motor = function() {
-  var pin = this.getTitleValue('PIN');
+  var pin = this.getFieldValue('PIN');
   var mul = (pin=="B1") ? "-1" : "+1";
   
   var val = Blockly.JavaScript.valueToCode(this, 'VAL', Blockly.JavaScript.ORDER_ASSIGNMENT) || '0';
@@ -70,7 +70,7 @@ Blockly.Blocks.amperka_motorshield_motor_dir = {
   }
 };
 Blockly.JavaScript.amperka_motorshield_motor_dir = function() {
-  var pin = this.getTitleValue('PIN');
+  var pin = this.getFieldValue('PIN');
   var m1 = (pin=="C3") ? "1" : "0";
   var m2 = (pin=="C3") ? "0" : "1";
   var val = Blockly.JavaScript.valueToCode(this, 'VAL', Blockly.JavaScript.ORDER_ASSIGNMENT) || 'false';

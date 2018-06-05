@@ -3,7 +3,9 @@
  * Visual Blocks Editor
  *
  * Copyright 2012 Google Inc.
- * https://blockly.googlecode.com/
+ * https://developers.google.com/blockly/
+ *
+ * Modified by Gordon Williams (gw@pur3.co.uk) for Espruino
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +22,7 @@
 
 /**
  * @fileoverview Text input field.
- * @author fraser@google.com (Neil Fraser)
+ * @author primary.edw@gmail.com (Andrew Mee) based on work in field_textinput by fraser@google.com (Neil Fraser)
  */
 'use strict';
 
@@ -47,7 +49,7 @@ Blockly.FieldTextArea = function(text, opt_changeHandler) {
 
   this.changeHandler_ = opt_changeHandler;
 };
-goog.inherits(Blockly.FieldTextArea, Blockly.Field);
+goog.inherits(Blockly.FieldTextArea, Blockly.FieldTextInput);
 
 /**
  * Clone this FieldTextArea.
@@ -72,68 +74,31 @@ Blockly.FieldTextArea.prototype.dispose = function() {
 };
 
 /**
- * Set the text in this field.
- * @param {?string} text New text.
- * @override
+ * Get the text from this field as displayed on screen.  May differ from getText
+ * due to ellipsis, and other formatting.
+ * @return {string} Currently displayed text.
+ * @private
  */
-Blockly.FieldTextArea.prototype.setText = function(text) {
-  if (text === null) {
-    // No change if null.
-    return;
+Blockly.FieldTextArea.prototype.getDisplayText_ = function() {
+  var text = this.text_;
+  if (!text) {
+    // Prevent the field from disappearing if empty.
+    return Blockly.Field.NBSP;
   }
-  if (this.changeHandler_) {
-    var validated = this.changeHandler_(text);
-    // If the new text is invalid, validation returns null.
-    // In this case we still want to display the illegal result.
-    if (validated !== null && validated !== undefined) {
-      text = validated;
+  text = text.split("\n").map(function(text) {
+    if (text.length > this.maxDisplayLength) {
+      // Truncate displayed string and add an ellipsis ('...').
+      text = text.substring(0, this.maxDisplayLength - 2) + '\u2026';
     }
-  }
-  //Blockly.Field.prototype.setText.call(this, text);
-  if (text === null || text === this.text_) {
-    // No change if null.
-    return;
-  }
-  this.text_ = text;
-  
-  // Empty the text element.
-  goog.dom.removeChildren(/** @type {!Element} */ (this.textElement_));
-  // Replace whitespace with non-breaking spaces so the text doesn't collapse.
-  
-  if (Blockly.RTL && text) {
+    // Replace whitespace with non-breaking spaces so the text doesn't collapse - keep newline.
+    text = text.replace(/\s/g, Blockly.Field.NBSP);
+    return text;
+  }.bind(this)).join("\n");
+  if (this.sourceBlock_.RTL) {
     // The SVG is LTR, force text to be RTL.
     text += '\u200F';
   }
-  if (!text) {
-    // Prevent the field from disappearing if empty.
-    text = Blockly.Field.NBSP;
-  }
-  //text = text.replace(/\s/g, Blockly.Field.NBSP);
-  
-	/*<text x="10" y="20" style="fill:red;">Several lines:
-    <tspan x="10" y="45">First line.</tspan>
-    <tspan x="10" y="70">Second line.</tspan>
-  </text>*/
-  var y=2;
-  var that=this;
-  //var textNode = document.createTextNode(text);
-  text.split(/\n/).map(function(textline){
-	  textline = textline.replace(/\s/g, Blockly.Field.NBSP);
-		var tspan = Blockly.createSvgElement('tspan', {x:0,y:y}, that.textElement_)
-			  .appendChild(document.createTextNode(textline));
-		y+=20;
-  });
-  
-  //this.textElement_.appendChild(textNode);
-
-  // Cached width is obsolete.  Clear it.
-  this.size_.width = 0;
-
-  if (this.sourceBlock_ && this.sourceBlock_.rendered) {
-    this.sourceBlock_.render();
-    this.sourceBlock_.bumpNeighbours_();
-    this.sourceBlock_.workspace.fireChangeEvent();
-  }
+  return text;
 };
 
 /**
@@ -142,54 +107,58 @@ Blockly.FieldTextArea.prototype.setText = function(text) {
  * @private
  */
 Blockly.FieldTextArea.prototype.render_ = function() {
-
-this.size_.width = this.textElement_.getBBox().width + 5;
-
- this.size_.height= (this.text_.split(/\n/).length ||1)*20 + (Blockly.BlockSvg.SEP_SPACE_Y+5) ;
-	
-  if (this.borderRect_) {
-    this.borderRect_.setAttribute('width',
-         this.size_.width + Blockly.BlockSvg.SEP_SPACE_X);
-	this.borderRect_.setAttribute('height',
-         this.size_.height -  (Blockly.BlockSvg.SEP_SPACE_Y+5));
-  }
-
-};
-	
-
-
-/**
- * Show the inline free-text editor on top of the text.
- * @param {boolean=} opt_quietInput True if editor should be created without
- *     focus.  Defaults to false.
- * @private
- */
-Blockly.FieldTextArea.prototype.showEditor_ = function(opt_quietInput) {
-  var quietInput = opt_quietInput || false;
-  if (!quietInput && (goog.userAgent.MOBILE || goog.userAgent.ANDROID ||
-                      goog.userAgent.IPAD)) {
-    // Mobile browsers have issues with in-line textareas (focus & keyboards).
-    var newValue = window.prompt(Blockly.Msg.CHANGE_VALUE_TITLE, this.text_);
-    if (this.changeHandler_) {
-      var override = this.changeHandler_(newValue);
-      if (override !== undefined) {
-        newValue = override;
-      }
-    }
-    if (newValue !== null) {
-      this.setText(newValue);
-    }
+  if (!this.visible_) {
+    this.size_.width = 0;
     return;
   }
 
-  Blockly.WidgetDiv.show(this, this.widgetDispose_());
+  // Replace the text.
+  var textElement = this.textElement_;
+  goog.dom.removeChildren(/** @type {!Element} */ (textElement));
+  var txt = this.getDisplayText_();
+  var y = 0;
+  var yoffset = 14; // 12.5 is hard-coded in Blockly.Field
+  var txtLines = txt.split("\n");
+  txtLines.forEach(function(t) {
+    Blockly.utils.createSvgElement('tspan', {x:0,y:y+yoffset}, textElement)
+			  .appendChild(document.createTextNode(t));
+    y += 20;
+  });
+  if (txtLines.length==0) y+=20;
+
+  // set up widths
+  this.size_.width = this.textElement_.getBBox().width + 5;
+  this.size_.height= y + (Blockly.BlockSvg.SEP_SPACE_Y+5) ;
+
+  if (this.borderRect_) {
+    this.borderRect_.setAttribute('width',
+           this.size_.width + Blockly.BlockSvg.SEP_SPACE_X);
+   	this.borderRect_.setAttribute('height',
+           this.size_.height - (Blockly.BlockSvg.SEP_SPACE_Y+5));
+  }
+};
+
+
+/**
+ * Create and show a text input editor that sits directly over the text input.
+ * @param {boolean} quietInput True if editor should be created without
+ *     focus.
+ * @private
+ */
+Blockly.FieldTextArea.prototype.showInlineEditor_ = function(quietInput) {
+  Blockly.WidgetDiv.show(this, this.sourceBlock_.RTL, this.widgetDispose_());
   var div = Blockly.WidgetDiv.DIV;
   // Create the input.
-  var htmlInput = goog.dom.createDom('textarea', 'blocklyHtmlInput');
-  Blockly.FieldTextArea.htmlInput_ = htmlInput;
-  htmlInput.style.resize = 'none';
-  htmlInput.style['line-height'] = '20px';
-  htmlInput.style.height = '100%';//this.size_.height - Blockly.BlockSvg.SEP_SPACE_Y + 'px';
+  var htmlInput =
+      goog.dom.createDom("TEXTAREA", 'blocklyHtmlInput');
+  htmlInput.setAttribute('spellcheck', this.spellcheck_);
+  var fontSize =
+      (Blockly.FieldTextInput.FONTSIZE * this.workspace_.scale) + 'pt';
+  div.style.fontSize = fontSize;
+  htmlInput.style.fontSize = fontSize;
+  htmlInput.style.marginTop="2px"; // hack so we don't have to change resizeEditor_
+
+  Blockly.FieldTextInput.htmlInput_ = htmlInput;
   div.appendChild(htmlInput);
 
   htmlInput.value = htmlInput.defaultValue = this.text_;
@@ -201,118 +170,16 @@ Blockly.FieldTextArea.prototype.showEditor_ = function(opt_quietInput) {
     htmlInput.select();
   }
 
-  // Bind to keyup -- trap Enter and Esc; resize after every keystroke.
-  htmlInput.onKeyUpWrapper_ =
-      Blockly.bindEvent_(htmlInput, 'keyup', this, this.onHtmlInputChange_);
-  // Bind to keyPress -- repeatedly resize when holding down a key.
-  htmlInput.onKeyPressWrapper_ =
-      Blockly.bindEvent_(htmlInput, 'keypress', this, this.onHtmlInputChange_);
-  var workspaceSvg = this.sourceBlock_.workspace.getCanvas();
-  htmlInput.onWorkspaceChangeWrapper_ =
-      Blockly.bindEvent_(workspaceSvg, 'blocklyWorkspaceChange', this,
-      this.resizeEditor_);
+  this.bindEvents_(htmlInput);
 };
 
 /**
- * Handle a change to the editor.
+ * Handle key down to the editor.
  * @param {!Event} e Keyboard event.
  * @private
  */
-Blockly.FieldTextArea.prototype.onHtmlInputChange_ = function(e) {
-  var htmlInput = Blockly.FieldTextArea.htmlInput_;
-  if (e.keyCode == 27) {
-    // Esc
-    this.setText(htmlInput.defaultValue);
-    Blockly.WidgetDiv.hide();
-  } else {
-    // Update source block.
-	var text = htmlInput.value;
-    if (text !== htmlInput.oldValue_) {
-      htmlInput.oldValue_ = text;
-      this.setText(text);
-      this.validate_();
-    } else if (goog.userAgent.WEBKIT) {
-      // Cursor key.  Render the source block to show the caret moving.
-      // Chrome only (version 26, OS X).
-      this.sourceBlock_.render();
-    }
-	this.resizeEditor_();
-  }
+Blockly.FieldTextArea.prototype.onHtmlInputKeyDown_ = function(e) {
+  var enterKey = 13
+  if (e.keyCode == enterKey) return;
+  Blockly.FieldTextInput.prototype.onHtmlInputKeyDown_.call(this, e);
 };
-
-/**
- * Check to see if the contents of the editor validates.
- * Style the editor accordingly.
- * @private
- */
-Blockly.FieldTextArea.prototype.validate_ = function() {
-  var valid = true;
-  goog.asserts.assertObject(Blockly.FieldTextArea.htmlInput_);
-  var htmlInput = /** @type {!Element} */ (Blockly.FieldTextArea.htmlInput_);
-  if (this.changeHandler_) {
-    valid = this.changeHandler_(htmlInput.value);
-  }
-  if (valid === null) {
-    Blockly.addClass_(htmlInput, 'blocklyInvalidInput');
-  } else {
-    Blockly.removeClass_(htmlInput, 'blocklyInvalidInput');
-  }
-};
-
-/**
- * Resize the editor and the underlying block to fit the text.
- * @private
- */
-Blockly.FieldTextArea.prototype.resizeEditor_ = function() {
-  var div = Blockly.WidgetDiv.DIV;
-  var bBox = this.fieldGroup_.getBBox();
-  div.style.width = bBox.width + 'px';
-  div.style.height = bBox.height + 'px';
-  var xy = Blockly.getAbsoluteXY_(/** @type {!Element} */ (this.borderRect_));
-  // In RTL mode block fields and LTR input fields the left edge moves,
-  // whereas the right edge is fixed.  Reposition the editor.
-  if (Blockly.RTL) {
-    var borderBBox = this.borderRect_.getBBox();
-    xy.x += borderBBox.width;
-    xy.x -= div.offsetWidth;
-  }
-  // Shift by a few pixels to line up exactly.
-  xy.y += 1;
-  if (goog.userAgent.WEBKIT) {
-    xy.y -= 3;
-  }
-  div.style.left = xy.x + 'px';
-  div.style.top = xy.y + 'px';
-};
-
-/**
- * Close the editor, save the results, and dispose of the editable
- * text field's elements.
- * @return {!Function} Closure to call on destruction of the WidgetDiv.
- * @private
- */
-Blockly.FieldTextArea.prototype.widgetDispose_ = function() {
-  var thisField = this;
-  return function() {
-    var htmlInput = Blockly.FieldTextArea.htmlInput_;
-    // Save the edit (if it validates).
-    var text = htmlInput.value;
-    if (thisField.changeHandler_) {
-      text = thisField.changeHandler_(text);
-      if (text === null) {
-        // Invalid edit.
-        text = htmlInput.defaultValue;
-      }
-    }
-    thisField.setText(text);
-	thisField.sourceBlock_.rendered && thisField.sourceBlock_.render();
-    Blockly.unbindEvent_(htmlInput.onKeyUpWrapper_);
-    Blockly.unbindEvent_(htmlInput.onKeyPressWrapper_);
-    Blockly.unbindEvent_(htmlInput.onWorkspaceChangeWrapper_);
-    Blockly.FieldTextArea.htmlInput_ = null;
-    // Delete the width property.
-    Blockly.WidgetDiv.DIV.style.width = 'auto';
-  };
-};
-
-

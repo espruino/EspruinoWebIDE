@@ -106,7 +106,7 @@
   }
 
   function getCode() {
-    return Blockly.JavaScript.workspaceToCode('JavaScript');
+    return Blockly.JavaScript.workspaceToCode(Blockly.mainWorkspace);
   }
 
   function getXML() {

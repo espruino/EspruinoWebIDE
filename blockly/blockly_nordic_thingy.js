@@ -80,7 +80,7 @@ Blockly.Blocks.thingy_sound_play = {
   }
 };
 Blockly.JavaScript.thingy_sound_play = function() {
-  var sound_id = this.getTitleValue('SOUND');
+  var sound_id = this.getFieldValue('SOUND');
   var pitch = Blockly.JavaScript.valueToCode(this, 'SAMPLERATE', Blockly.JavaScript.ORDER_ASSIGNMENT) || '4000';
   var branch = Blockly.JavaScript.statementToCode(this, 'DO');
   var sound_var = "wave_"+sound_id;
@@ -124,7 +124,7 @@ Blockly.Blocks.thingy_sensor_once = {
   }
 };
 Blockly.JavaScript.thingy_sensor_once = function() {
-  var arg = this.getTitleValue('SENSOR').split("|");
+  var arg = this.getFieldValue('SENSOR').split("|");
   var branch = Blockly.JavaScript.statementToCode(this, 'DO');
   return "Thingy.get"+arg[0]+"(function(d) {\n_result="+arg[1]+";\n"+branch+"});\n";
 };
@@ -142,7 +142,7 @@ Blockly.Blocks.thingy_sensor_many = {
   }
 };
 Blockly.JavaScript.thingy_sensor_many = function() {
-  var arg = this.getTitleValue('SENSOR').split("|");
+  var arg = this.getFieldValue('SENSOR').split("|");
   var sType = arg[0];
   var sArg = arg[1];
   var branch = Blockly.JavaScript.statementToCode(this, 'DO');
