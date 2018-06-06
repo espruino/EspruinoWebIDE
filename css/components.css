@@ -473,18 +473,18 @@ paddi   ng-left: 15px;
 
 .terminal--connected.focus .terminal__cursor
 {
-  -webkit-animation: blink 1s step-end 0s infinite;
   animation: blink 1s step-end 0s infinite;
 }
 
 .terminal--webcam.focus .terminal__cursor
 {
   text-shadow: none;
+  animation: blink_webcam 1s step-end 0s infinite;
 }
 
 @keyframes blink {
   0%, 100% {
-        background-color: #fff; /* not #aaa because it's seem there is Google Chrome bug */
+        background-color: #fff;
         color: #000;
   }
   50% {
@@ -492,16 +492,18 @@ paddi   ng-left: 15px;
         color: #aaa;
   }
 }
-@-webkit-keyframes blink {
+
+@keyframes blink_webcam {
   0%, 100% {
-        background-color: #ffffff; /* not #aaa because it's seem there is Google Chrome bug */
-        color: #000000;
+        background-color: #ffffffC0;
+        color: #000;
   }
   50% {
-        background-color: transparent;
-        color: #aaaaaa;
+        background-color: #000000C0;
+        color: #fff;
   }
 }
+
 
 /* Tutorial */
 .tutorial_text {
