@@ -68,6 +68,11 @@ function EspruinoIDE(ideframe) {
       if (typeof d!="string") throw new Error("Espruino.received should be given a string");
       post({type:"receive",data:d});
     },
+    // Set the maximum number of bytes that 'onwrite/onwritecb' should be called with 
+    setMaxWriteLength : function(l) {
+      if (typeof l!="number") throw new Error("Espruino.received should be given a number");
+      post({type:"setMaxWriteLength",data:l});
+    },
     // called when the IDE is ready
     onready : undefined,
     // should return a list of available ports

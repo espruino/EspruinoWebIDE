@@ -31,7 +31,7 @@
   <script>
     // Force HTTPS - needed for web bluetooth
     var l = window.location.toString();
-    if (l.substr(0,7)=="http://")
+    if (l.substr(0,7)=="http://" && !window.location.port)
       window.location = "https://"+l.substr(7);
   </script>
 

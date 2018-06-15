@@ -78,12 +78,6 @@
 
     function getPorts() {
       Espruino.Core.Serial.getPorts(function(items) {
-
-        if (window.location.toString().substr(0,7)=="http://" &&
-            items.length==1 && items[0].path=="Web Bluetooth") {
-          return selectPortInternal(items[0].path);
-        }
-
         if (items.toString() == lastContents)
           return; // same... don't update
         lastContents = items.toString();
@@ -95,6 +89,10 @@
           html = '<ul class="list">';
           for (var i in items) {
             var port = items[i];
+            // if autoconnect is set on this, just automatically connect, without displaying the window
+            if (port.autoconnect)
+              return selectPortInternal(port.path);
+
             var icon = "icon-usb";
             if (port.type=="bluetooth") icon = "icon-bluetooth";
             if (port.type=="socket") icon = "icon-network";
