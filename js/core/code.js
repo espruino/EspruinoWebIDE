@@ -4,14 +4,14 @@
  This Source Code is subject to the terms of the Mozilla Public
  License, v2.0. If a copy of the MPL was not distributed with this
  file, You can obtain one at http://mozilla.org/MPL/2.0/.
- 
+
  ------------------------------------------------------------------
   Handling the getting and setting of code
  ------------------------------------------------------------------
 **/
 "use strict";
 (function(){
-  
+
   var viewModeButton;
 
   function init() {
@@ -21,15 +21,15 @@
       name : "Auto Save",
       description : "Save code to Chrome's cloud storage when clicking 'Send to Espruino'?",
       type : "boolean",
-      defaultValue : true, 
-    });    
+      defaultValue : true,
+    });
 
     // Setup code mode button
-    viewModeButton = Espruino.Core.App.addIcon({ 
+    viewModeButton = Espruino.Core.App.addIcon({
       id: "code",
-      icon: "code", 
-      title : "Switch between Code and Graphical Designer", 
-      order: 0, 
+      icon: "code",
+      title : "Switch between Code and Graphical Designer",
+      order: 0,
       area: {
         name: "code",
         position: "bottom"
@@ -57,15 +57,23 @@
       Espruino.Core.EditorJavaScript.setCode(code);
       callback(data);
     });
-    
-    
+
+
     Espruino.addProcessor("sending", function(data, callback) {
       if(Espruino.Config.AUTO_SAVE_CODE)
         Espruino.Config.set("CODE", Espruino.Core.EditorJavaScript.getCode()); // save the code
       callback(data);
     });
+    // try and save code when window closes
+    function saveCode(e) {
+      if(Espruino.Config.AUTO_SAVE_CODE)
+        Espruino.Config.set("CODE", Espruino.Core.EditorJavaScript.getCode());
+    }
+    window.addEventListener("close", saveCode);
+    if (!Espruino.Core.Utils.isChromeWebApp()) // chrome complains if we use this
+      window.addEventListener("beforeunload", saveCode);
   }
-  
+
   function isInBlockly() { // TODO: we should really enumerate views - we might want another view?
     return $("#divblockly").is(":visible");
   };
@@ -75,7 +83,7 @@
     $("#divblockly").show();
     viewModeButton.setIcon("block");
     // Hack around issues Blockly have if we initialise when the window isn't visible
-    Espruino.Core.EditorBlockly.setVisible();    
+    Espruino.Core.EditorBlockly.setVisible();
   }
 
   function switchToCode() {
@@ -87,7 +95,7 @@
   function getEspruinoCode(callback) {
     Espruino.callProcessor("transformForEspruino", getCurrentCode(), callback);
   }
-  
+
   function getCurrentCode() {
     if (isInBlockly()) {
       return Espruino.Core.EditorBlockly.getCode();
@@ -95,7 +103,7 @@
       return Espruino.Core.EditorJavaScript.getCode();
     }
   }
-  
+
   Espruino.Core.Code = {
     init : init,
     getEspruinoCode : getEspruinoCode, // get the currently selected bit of code ready to send to Espruino (including Modules)
