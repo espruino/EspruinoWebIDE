@@ -329,7 +329,7 @@
       popup.setStatus(x);
     }
     // Actually start DFU
-   const dfu = new SecureDfu(CRC32.buf);
+   const dfu = new SecureDfu(/* no CRC32 - no validation */);
    var popup = stepShowProgress();
    if (!Espruino.Core.Status.hasProgress())
      Espruino.Core.Status.setStatus("Initialising...");
