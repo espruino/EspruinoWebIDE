@@ -189,7 +189,8 @@
   }
 
   function disconnect() {
-    Espruino.Core.Serial.close();
+    if (Espruino.Core.Serial.isConnected())
+      Espruino.Core.Serial.close();
   }
 
   Espruino.Core.MenuPortSelector = {

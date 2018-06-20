@@ -65,7 +65,7 @@
         chrome.storage.local.set({"CODE_JS": cm.getValue()});
     });
     // Handle hovering
-    CodeMirror.on(codeMirror.getWrapperElement(), "mouseover", function(e) {      
+    CodeMirror.on(codeMirror.getWrapperElement(), "mouseover", function(e) {
       var node = e.target || e.srcElement;
       if (node) {
         var stillInNode = true;
