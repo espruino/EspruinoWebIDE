@@ -12,6 +12,8 @@
 "use strict";
 (function(){
 
+  var isFlashing = false; // are we currently trying to update flash?
+
   function init() {
   }
 
@@ -178,6 +180,7 @@
   }
 
   function stepFlash(data) {
+    isFlashing = true;
     Espruino.Core.MenuPortSelector.ensureConnected(function() {
       console.log("stepFlash: ",data);
       var url = data.binary_url;
@@ -192,6 +195,7 @@
       });
 
       Espruino.Core.Flasher.flashDevice(url, flashOffset, function (err) {
+        isFlashing = false;
         Espruino.Core.Terminal.grabSerialPort();
         Espruino.Core.MenuPortSelector.disconnect();
         popup.close();
@@ -269,7 +273,8 @@
 
   Espruino.Core.MenuFlasher = {
       init : init,
-      showFlasher : showFlasher
+      showFlasher : showFlasher,
+      isFlashing : function() { return isFlashing; } // are we currently trying to update flash?
   };
 
 }());

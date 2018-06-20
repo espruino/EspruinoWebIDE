@@ -158,8 +158,13 @@
     Espruino.Core.Serial.setSlowWrite(true);
     Espruino.Core.Serial.open(serialPort, function(cInfo) {
       if (cInfo!=undefined) {
-        console.log("Device found (connectionId="+ cInfo.connectionId +")");
-        Espruino.Core.Notifications.success("Connected to port "+ serialPort, true);
+        console.log("Device found "+JSON.stringify(cInfo));
+        var name = serialPort;
+        if (cInfo.portName) name+=", "+cInfo.portName;
+        var boardData = Espruino.Core.Env.getBoardData();
+        if (!boardData.BOARD || !boardData.VERSION)
+          name += " (No response from board)";
+        Espruino.Core.Notifications.success("Connected to "+name, true);
         callback(true);
       } else {
         // fail
