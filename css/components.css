@@ -570,7 +570,11 @@ paddi   ng-left: 15px;
   background-color: #f39c12;
 }
 
-
+.terminal-inline-image {
+  border: 1px solid #666;
+  padding: 8px;
+  margin: 8px;
+}
 
 /* Code Editors */
 #divcode {
