@@ -24,10 +24,21 @@ function EspruinoIDE(ideframe) {
           Espruino.onready();
         break;
       case "getPorts": // get port data
-        post({type:"ports",data: Espruino.onports?Espruino.onports():[]});
+        if (Espruino.onportscb) {
+          Espruino.onportscb(function(ports) {
+            post({type:"ports", data: ports});
+          });
+        } else
+          post({type:"ports", data: Espruino.onports?Espruino.onports():[]});
         break;
       case "connect": // request to connect
-        post({type:"connected"}); // let's just say we were connected immediately
+        if (Espruino.onconnect) {
+          Espruino.onconnect(/*path*/event.data, function() {
+            post({type:"connected"})
+          });
+        } else {
+          post({type:"connected"}); // let's just say we were connected immediately
+        }
         break;
       case "disconnect": // request to disconnect
         post({type:"disconnected"}); // let's just say we were disconnected immediately
@@ -68,18 +79,23 @@ function EspruinoIDE(ideframe) {
       if (typeof d!="string") throw new Error("Espruino.received should be given a string");
       post({type:"receive",data:d});
     },
-    // Set the maximum number of bytes that 'onwrite/onwritecb' should be called with 
+    // Set the maximum number of bytes that 'onwrite/onwritecb' should be called with
     setMaxWriteLength : function(l) {
       if (typeof l!="number") throw new Error("Espruino.received should be given a number");
       post({type:"setMaxWriteLength",data:l});
     },
+    // ------------------ all the below are optional
     // called when the IDE is ready
     onready : undefined,
-    // should return a list of available ports
+    // called with (path, callback) when IDE requests a connection. Should call callback when connected
+    onconnect : undefined,
+    // should return a list of available ports. Use this or `onportscb`
     onports : undefined,
-    // called with (data) when data should be written to the device
+    // called with (callback) - return a list of available ports via callback. Use this or `onports`
+    onportscb : undefined,
+    // called with (data) when data should be written to the device. Use this or `onwritecb`
     onwrite : undefined,
-    // called with (data,callback) when data should be written to the device. callback should be called when data has been written
+    // called with (data,callback) when data should be written to the device. callback should be called when data has been written. Use this or `onwrite`
     onwritecb : undefined,
     // called when the user requests a disconnect
     ondisconnect : undefined,
