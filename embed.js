@@ -22,6 +22,7 @@ function EspruinoIDE(ideframe) {
         console.log("IDE frame initialised");
         if (Espruino.onready)
           Espruino.onready();
+        post({type:"initialised"});
         break;
       case "getPorts": // get port data
         if (Espruino.onportscb) {
