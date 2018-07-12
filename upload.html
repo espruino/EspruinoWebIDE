@@ -126,24 +126,6 @@
 
   <!-- <script src="js/plugins/_examplePlugin.js"></script> -->
 
-
-  <script>
-  // register service worker
-  if (false) {//'serviceWorker' in navigator) {
-    navigator.serviceWorker.register('serviceworker.js', { /*scope: '/'*/ }).then(function(reg) {
-      if(reg.installing) {
-        console.log('Service worker installing');
-      } else if(reg.waiting) {
-        console.log('Service worker installed');
-      } else if(reg.active) {
-        console.log('Service worker active');
-      }
-    }).catch(function(error) {
-      console.log('Service worker registration failed with ' + error);
-    });
-  };
-  </script>
-
   <title>Espruino Uploader</title>
 </head>
 <body>

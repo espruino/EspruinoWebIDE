@@ -1,35 +1,35 @@
 // Service worker for Offline Web IDE
-const VERSION = 'v26';
+const VERSION = 'v27';
 
 const CACHED_RESOURCES = [
-  'blockly/blockly.html',
-  'blockly/blockly_ble.js',
-  'blockly/ru.js',
-  'blockly/en.js',
+  'blockly/blockly_espruino.js',
+  'blockly/blockly_amperka_motorshield.js',
   'blockly/blockly_robot.js',
   'blockly/blocks_compressed.js',
-  'blockly/field_textarea.js',
   'blockly/javascript_compressed.js',
-  'blockly/blockly_amperka_motorshield.js',
+  'blockly/blockly.html',
+  'blockly/en.js',
+  'blockly/field_textarea.js',
+  'blockly/blockly_ble.js',
   'blockly/blockly_compressed.js',
-  'blockly/blockly_espruino.js',
+  'blockly/ru.js',
+  'blockly/blockly_nordic_thingy.js',
   'blockly/media/handclosed.cur',
-  'blockly/media/tree.png',
-  'blockly/media/trashlid.png',
-  'blockly/media/1x1.gif',
-  'blockly/media/delete.mp3',
-  'blockly/media/trashbody.png',
-  'blockly/media/delete.ogg',
-  'blockly/media/anon.jpeg',
+  'blockly/media/quote0.png',
   'blockly/media/sprites.png',
   'blockly/media/handopen.cur',
+  'blockly/media/disconnect.wav',
+  'blockly/media/disconnect.mp3',
   'blockly/media/quote1.png',
-  'blockly/media/click.wav',
-  'blockly/media/progress.gif',
-  'blockly/media/quote0.png',
-  'blockly/media/click.ogg',
+  'blockly/media/1x1.gif',
+  'blockly/media/delete.mp3',
   'blockly/media/delete.wav',
+  'blockly/media/delete.ogg',
+  'blockly/media/handdelete.cur',
   'blockly/media/click.mp3',
+  'blockly/media/disconnect.ogg',
+  'blockly/media/click.ogg',
+  'blockly/media/click.wav',
   'data/espruino.json',
   'data/app/openTestingLog.js',
   'data/app/openTestingLog.html',
@@ -103,6 +103,10 @@ const CACHE_PREFIX = 'espruino-web-ide-';
 const CACHE_NAME = CACHE_PREFIX + VERSION;
 
 self.addEventListener('install', function(event) {
+  console.log('serviceworker> '+VERSION+' installing.');
+  // force the waiting service worker to become the active service worker.
+  self.skipWaiting();
+  // Load cache
   event.waitUntil(
     caches.open(CACHE_NAME).then(function(cache) {
       return cache.addAll(CACHED_RESOURCES);
@@ -125,11 +129,13 @@ self.addEventListener('activate', function(event) {
     caches.keys().then(function(cacheNames) {
       return Promise.all(
         cacheNames.map(function(cacheName) {
-          if (cacheName.startsWith(CACHE_PREFIX) && CACHE_NAME !== cacheName) {
+          if (CACHE_NAME !== cacheName) {
             return caches.delete(cacheName);
           }
         })
       );
+    }).then(() => {
+      console.log('serviceworker> '+VERSION+' now ready to handle fetches');
     })
   );
 });

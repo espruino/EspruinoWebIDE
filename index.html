@@ -235,14 +235,14 @@
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('serviceworker.js').then(function(reg) {
         if(reg.installing) {
-          console.log('Service worker installing');
+          console.log('serviceworker> installing');
         } else if(reg.waiting) {
-          console.log('Service worker installed');
+          console.log('serviceworker> installed');
         } else if(reg.active) {
-          console.log('Service worker active');
+          console.log('serviceworker> active');
         }
       }).catch(function(error) {
-        console.log('Service worker registration failed with ' + error);
+        console.log('serviceworker> registration failed with ' + error);
       });
     }
   }
