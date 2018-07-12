@@ -179,7 +179,10 @@
         enableWebCamOrChoose(sources);
       });
     } else {
-      if (webCamStream.stop) webCamStream.stop();
+      if (webCamStream.stop) // deprecated
+        webCamStream.stop();
+      if (webCamStream.getTracks) // new hotness
+        webCamStream.getTracks().forEach(track => track.stop())
       $('video').attr('src', "");
       $("#terminal").removeClass("terminal--webcam");
     }
