@@ -267,7 +267,7 @@
     },
     "env": {
       "!type": "?",
-      "!doc": "<p>Returns an Object containing various pre-defined variables. standard ones are BOARD, VERSION</p>\n",
+      "!doc": "<p>Returns an Object containing various pre-defined variables. standard ones are BOARD, VERSION, FLASH, RAM, MODULES.</p>\n<p>For example, to get a list of built-in modules, you can use <code>process.env.MODULES.split(&#39;,&#39;)</code></p>\n",
       "!url": "http://www.espruino.com/Reference#l_process_env"
     },
     "memory": {
@@ -283,14 +283,14 @@
     "prototype": {
       "byteLength": {
         "!type": "number",
-        "!doc": "<p>The length, in bytes, of the ArrayBuffer</p>\n",
+        "!doc": "<p>The length, in bytes, of the <code>ArrayBuffer</code></p>\n",
         "!url": "http://www.espruino.com/Reference#l_ArrayBuffer_byteLength"
       }
     }
   },
   "ArrayBufferView": {
     "!type": "fn()",
-    "!doc": "<p>This is the built-in JavaScript class that is the prototype for:</p>\n<ul>\n<li><a href=\"/Reference#Uint8Array\">Uint8Array</a></li>\n<li><a href=\"/Reference#UintClamped8Array\">UintClamped8Array</a></li>\n<li><a href=\"/Reference#Int8Array\">Int8Array</a></li>\n<li><a href=\"/Reference#Uint16Array\">Uint16Array</a></li>\n<li><a href=\"/Reference#Int16Array\">Int16Array</a></li>\n<li><a href=\"/Reference#Uint32Array\">Uint32Array</a></li>\n<li><a href=\"/Reference#Int32Array\">Int32Array</a></li>\n<li><a href=\"/Reference#Float32Array\">Float32Array</a></li>\n<li><a href=\"/Reference#Float64Array\">Float64Array</a></li>\n</ul>\n<p>If you want to access arrays of differing types of data\nyou may also find <a href=\"/Reference#DataView\">DataView</a> useful.</p>\n",
+    "!doc": "<p>This is the built-in JavaScript class that is the prototype for:</p>\n<ul>\n<li><a href=\"/Reference#Uint8Array\">Uint8Array</a></li>\n<li><a href=\"/Reference#UintClamped8Array\">UintClamped8Array</a></li>\n<li><a href=\"/Reference#Int8Array\">Int8Array</a></li>\n<li><a href=\"/Reference#Uint16Array\">Uint16Array</a></li>\n<li><a href=\"/Reference#Int16Array\">Int16Array</a></li>\n<li><a href=\"/Reference#Uint24Array\">Uint24Array</a> (Espruino-specific - not standard JS)</li>\n<li><a href=\"/Reference#Uint32Array\">Uint32Array</a></li>\n<li><a href=\"/Reference#Int32Array\">Int32Array</a></li>\n<li><a href=\"/Reference#Float32Array\">Float32Array</a></li>\n<li><a href=\"/Reference#Float64Array\">Float64Array</a></li>\n</ul>\n<p>If you want to access arrays of differing types of data\nyou may also find <code>DataView</code> useful.</p>\n",
     "!url": "http://www.espruino.com/Reference#ArrayBufferView",
     "prototype": {
       "buffer": {
@@ -300,12 +300,12 @@
       },
       "byteLength": {
         "!type": "number",
-        "!doc": "<p>The length, in bytes, of the view</p>\n",
+        "!doc": "<p>The length, in bytes, of the <code>ArrayBufferView</code></p>\n",
         "!url": "http://www.espruino.com/Reference#l_ArrayBufferView_byteLength"
       },
       "byteOffset": {
         "!type": "number",
-        "!doc": "<p>The offset, in bytes, to the first byte of the view within the ArrayBuffer</p>\n",
+        "!doc": "<p>The offset, in bytes, to the first byte of the view within the backing <code>ArrayBuffer</code></p>\n",
         "!url": "http://www.espruino.com/Reference#l_ArrayBufferView_byteOffset"
       },
       "set": {
@@ -315,12 +315,12 @@
       },
       "map": {
         "!type": "fn(function: ?, thisArg: ?) -> +ArrayBufferView",
-        "!doc": "<p>Return an array which is made from the following: <code>A.map(function) = [function(A[0]), function(A[1]), ...]</code></p>\n<p> <strong>Note:</strong> This returns an ArrayBuffer of the same type it was called on. To get an Array, use <code>Array.prototype.map</code></p>\n",
+        "!doc": "<p>Return an array which is made from the following: <code>A.map(function) = [function(A[0]), function(A[1]), ...]</code></p>\n<p> <strong>Note:</strong> This returns an <code>ArrayBuffer</code> of the same type it was called on. To get an <code>Array</code>, use <code>Array.map</code>, eg. <code>[].map.call(myArray, x=&gt;x+1)</code></p>\n",
         "!url": "http://www.espruino.com/Reference#l_ArrayBufferView_map"
       },
       "indexOf": {
-        "!type": "fn(value: ?) -> ?",
-        "!doc": "<p>Return the index of the value in the array, or -1</p>\n",
+        "!type": "fn(value: ?, startIndex: number) -> ?",
+        "!doc": "<p>Return the index of the value in the array, or <code>-1</code></p>\n",
         "!url": "http://www.espruino.com/Reference#l_ArrayBufferView_indexOf"
       },
       "join": {
@@ -348,21 +348,36 @@
         "!doc": "<p>Fill this array with the given value, for every index <code>&gt;= start</code> and <code>&lt; end</code></p>\n",
         "!url": "http://www.espruino.com/Reference#l_ArrayBufferView_fill"
       },
+      "filter": {
+        "!type": "fn(function: ?, thisArg: ?) -> ?",
+        "!doc": "<p>Return an array which contains only those elements for which the callback function returns &#39;true&#39;</p>\n",
+        "!url": "http://www.espruino.com/Reference#l_ArrayBufferView_filter"
+      },
+      "find": {
+        "!type": "fn(function: ?) -> ?",
+        "!doc": "<p>Return the array element where <code>function</code> returns <code>true</code>, or <code>undefined</code> if it doesn&#39;t returns <code>true</code> for any element.</p>\n",
+        "!url": "http://www.espruino.com/Reference#l_ArrayBufferView_find"
+      },
+      "findIndex": {
+        "!type": "fn(function: ?) -> ?",
+        "!doc": "<p>Return the array element&#39;s index where <code>function</code> returns <code>true</code>, or <code>-1</code> if it doesn&#39;t returns <code>true</code> for any element.</p>\n",
+        "!url": "http://www.espruino.com/Reference#l_ArrayBufferView_findIndex"
+      },
       "reverse": {
         "!type": "fn() -> +ArrayBufferView",
-        "!doc": "<p>Reverse the contents of this arraybuffer in-place</p>\n",
+        "!doc": "<p>Reverse the contents of this <code>ArrayBufferView</code> in-place</p>\n",
         "!url": "http://www.espruino.com/Reference#l_ArrayBufferView_reverse"
       },
       "slice": {
         "!type": "fn(start: number, end: ?) -> +Array",
-        "!doc": "<p>Return a copy of a portion of this array (in a new array).</p>\n<p> <strong>Note:</strong> This currently returns a normal Array, not an ArrayBuffer</p>\n",
+        "!doc": "<p>Return a copy of a portion of this array (in a new array).</p>\n<p> <strong>Note:</strong> This currently returns a normal <code>Array</code>, not an <code>ArrayBuffer</code></p>\n",
         "!url": "http://www.espruino.com/Reference#l_ArrayBufferView_slice"
       }
     }
   },
   "Uint8Array": {
     "!type": "fn(arr: ?, byteOffset: number, length: number) -> +ArrayBufferView",
-    "!doc": "<p>Create a typed array based on the given input. Either an existing Array Buffer, an Integer as a Length, or a simple array. If an ArrayBuffer view (eg. Uint8Array rather than ArrayBuffer) is given, it will be completely copied rather than referenced.</p>\n",
+    "!doc": "<p>Create a typed array based on the given input. Either an existing Array Buffer, an Integer as a Length, or a simple array. If an <code>ArrayBufferView</code> (eg. <code>Uint8Array</code> rather than <code>ArrayBuffer</code>) is given, it will be completely copied rather than referenced.</p>\n",
     "!url": "http://www.espruino.com/Reference#l_Uint8Array_Uint8Array",
     "prototype": {
       "!proto": "ArrayBufferView.prototype"
@@ -370,7 +385,7 @@
   },
   "Uint8ClampedArray": {
     "!type": "fn(arr: ?, byteOffset: number, length: number) -> +ArrayBufferView",
-    "!doc": "<p>Create a typed array based on the given input. Either an existing Array Buffer, an Integer as a Length, or a simple array. If an ArrayBuffer view (eg. Uint8Array rather than ArrayBuffer) is given, it will be completely copied rather than referenced.</p>\n<p>Clamped arrays clamp their values to the allowed range, rather than &#39;wrapping&#39;. e.g. after <code>a[0]=12345;</code>, <code>a[0]==255</code>.</p>\n",
+    "!doc": "<p>Create a typed array based on the given input. Either an existing Array Buffer, an Integer as a Length, or a simple array. If an <code>ArrayBufferView</code> (eg. <code>Uint8Array</code> rather than <code>ArrayBuffer</code>) is given, it will be completely copied rather than referenced.</p>\n<p>Clamped arrays clamp their values to the allowed range, rather than &#39;wrapping&#39;. e.g. after <code>a[0]=12345;</code>, <code>a[0]==255</code>.</p>\n",
     "!url": "http://www.espruino.com/Reference#l_Uint8ClampedArray_Uint8ClampedArray",
     "prototype": {
       "!proto": "ArrayBufferView.prototype"
@@ -378,7 +393,7 @@
   },
   "Int8Array": {
     "!type": "fn(arr: ?, byteOffset: number, length: number) -> +ArrayBufferView",
-    "!doc": "<p>Create a typed array based on the given input. Either an existing Array Buffer, an Integer as a Length, or a simple array. If an ArrayBuffer view (eg. Uint8Array rather than ArrayBuffer) is given, it will be completely copied rather than referenced.</p>\n",
+    "!doc": "<p>Create a typed array based on the given input. Either an existing Array Buffer, an Integer as a Length, or a simple array. If an <code>ArrayBufferView</code> (eg. <code>Uint8Array</code> rather than <code>ArrayBuffer</code>) is given, it will be completely copied rather than referenced.</p>\n",
     "!url": "http://www.espruino.com/Reference#l_Int8Array_Int8Array",
     "prototype": {
       "!proto": "ArrayBufferView.prototype"
@@ -386,7 +401,7 @@
   },
   "Uint16Array": {
     "!type": "fn(arr: ?, byteOffset: number, length: number) -> +ArrayBufferView",
-    "!doc": "<p>Create a typed array based on the given input. Either an existing Array Buffer, an Integer as a Length, or a simple array. If an ArrayBuffer view (eg. Uint8Array rather than ArrayBuffer) is given, it will be completely copied rather than referenced.</p>\n",
+    "!doc": "<p>Create a typed array based on the given input. Either an existing Array Buffer, an Integer as a Length, or a simple array. If an <code>ArrayBufferView</code> (eg. <code>Uint8Array</code> rather than <code>ArrayBuffer</code>) is given, it will be completely copied rather than referenced.</p>\n",
     "!url": "http://www.espruino.com/Reference#l_Uint16Array_Uint16Array",
     "prototype": {
       "!proto": "ArrayBufferView.prototype"
@@ -394,15 +409,23 @@
   },
   "Int16Array": {
     "!type": "fn(arr: ?, byteOffset: number, length: number) -> +ArrayBufferView",
-    "!doc": "<p>Create a typed array based on the given input. Either an existing Array Buffer, an Integer as a Length, or a simple array. If an ArrayBuffer view (eg. Uint8Array rather than ArrayBuffer) is given, it will be completely copied rather than referenced.</p>\n",
+    "!doc": "<p>Create a typed array based on the given input. Either an existing Array Buffer, an Integer as a Length, or a simple array. If an <code>ArrayBufferView</code> (eg. <code>Uint8Array</code> rather than <code>ArrayBuffer</code>) is given, it will be completely copied rather than referenced.</p>\n",
     "!url": "http://www.espruino.com/Reference#l_Int16Array_Int16Array",
+    "prototype": {
+      "!proto": "ArrayBufferView.prototype"
+    }
+  },
+  "Uint24Array": {
+    "!type": "fn(arr: ?, byteOffset: number, length: number) -> +ArrayBufferView",
+    "!doc": "<p>Create a typed array based on the given input. Either an existing Array Buffer, an Integer as a Length, or a simple array. If an <code>ArrayBufferView</code> (eg. <code>Uint8Array</code> rather than <code>ArrayBuffer</code>) is given, it will be completely copied rather than referenced.</p>\n",
+    "!url": "http://www.espruino.com/Reference#l_Uint24Array_Uint24Array",
     "prototype": {
       "!proto": "ArrayBufferView.prototype"
     }
   },
   "Uint32Array": {
     "!type": "fn(arr: ?, byteOffset: number, length: number) -> +ArrayBufferView",
-    "!doc": "<p>Create a typed array based on the given input. Either an existing Array Buffer, an Integer as a Length, or a simple array. If an ArrayBuffer view (eg. Uint8Array rather than ArrayBuffer) is given, it will be completely copied rather than referenced.</p>\n",
+    "!doc": "<p>Create a typed array based on the given input. Either an existing Array Buffer, an Integer as a Length, or a simple array. If an <code>ArrayBufferView</code> (eg. <code>Uint8Array</code> rather than <code>ArrayBuffer</code>) is given, it will be completely copied rather than referenced.</p>\n",
     "!url": "http://www.espruino.com/Reference#l_Uint32Array_Uint32Array",
     "prototype": {
       "!proto": "ArrayBufferView.prototype"
@@ -410,7 +433,7 @@
   },
   "Int32Array": {
     "!type": "fn(arr: ?, byteOffset: number, length: number) -> +ArrayBufferView",
-    "!doc": "<p>Create a typed array based on the given input. Either an existing Array Buffer, an Integer as a Length, or a simple array. If an ArrayBuffer view (eg. Uint8Array rather than ArrayBuffer) is given, it will be completely copied rather than referenced.</p>\n",
+    "!doc": "<p>Create a typed array based on the given input. Either an existing Array Buffer, an Integer as a Length, or a simple array. If an <code>ArrayBufferView</code> (eg. <code>Uint8Array</code> rather than <code>ArrayBuffer</code>) is given, it will be completely copied rather than referenced.</p>\n",
     "!url": "http://www.espruino.com/Reference#l_Int32Array_Int32Array",
     "prototype": {
       "!proto": "ArrayBufferView.prototype"
@@ -418,7 +441,7 @@
   },
   "Float32Array": {
     "!type": "fn(arr: ?, byteOffset: number, length: number) -> +ArrayBufferView",
-    "!doc": "<p>Create a typed array based on the given input. Either an existing Array Buffer, an Integer as a Length, or a simple array. If an ArrayBuffer view (eg. Uint8Array rather than ArrayBuffer) is given, it will be completely copied rather than referenced.</p>\n",
+    "!doc": "<p>Create a typed array based on the given input. Either an existing Array Buffer, an Integer as a Length, or a simple array. If an <code>ArrayBufferView</code> (eg. <code>Uint8Array</code> rather than <code>ArrayBuffer</code>) is given, it will be completely copied rather than referenced.</p>\n",
     "!url": "http://www.espruino.com/Reference#l_Float32Array_Float32Array",
     "prototype": {
       "!proto": "ArrayBufferView.prototype"
@@ -426,7 +449,7 @@
   },
   "Float64Array": {
     "!type": "fn(arr: ?, byteOffset: number, length: number) -> +ArrayBufferView",
-    "!doc": "<p>Create a typed array based on the given input. Either an existing Array Buffer, an Integer as a Length, or a simple array. If an ArrayBuffer view (eg. Uint8Array rather than ArrayBuffer) is given, it will be completely copied rather than referenced.</p>\n",
+    "!doc": "<p>Create a typed array based on the given input. Either an existing Array Buffer, an Integer as a Length, or a simple array. If an <code>ArrayBufferView</code> (eg. <code>Uint8Array</code> rather than <code>ArrayBuffer</code>) is given, it will be completely copied rather than referenced.</p>\n",
     "!url": "http://www.espruino.com/Reference#l_Float64Array_Float64Array",
     "prototype": {
       "!proto": "ArrayBufferView.prototype"
@@ -501,7 +524,7 @@
     },
     "defineProperty": {
       "!type": "fn(obj: ?, name: ?, desc: ?) -> ?",
-      "!doc": "<p>Add a new property to the Object. &#39;Desc&#39; is an object with the following fields:</p>\n<ul>\n<li><code>configurable</code> (bool = false) - can this property be changed/deleted</li>\n<li><code>enumerable</code> (bool = false) - can this property be enumerated</li>\n<li><code>value</code> (anything) - the value of this property</li>\n<li><code>writable</code> (bool = false) - can the value be changed with the assignment operator?</li>\n<li><code>get</code> (function) - the getter function, or undefined if no getter</li>\n<li><code>set</code> (function) - the setter function, or undefined if no setter\n<em>\n<em>*Note:</em></em> <code>configurable</code>, <code>enumerable</code>, <code>writable</code>, <code>get</code>, and <code>set</code> are not implemented and will be ignored.</li>\n</ul>\n",
+      "!doc": "<p>Add a new property to the Object. &#39;Desc&#39; is an object with the following fields:</p>\n<ul>\n<li><code>configurable</code> (bool = false) - can this property be changed/deleted</li>\n<li><code>enumerable</code> (bool = false) - can this property be enumerated</li>\n<li><code>value</code> (anything) - the value of this property</li>\n<li><code>writable</code> (bool = false) - can the value be changed with the assignment operator?</li>\n<li><code>get</code> (function) - the getter function, or undefined if no getter (only supported on some platforms)</li>\n<li><code>set</code> (function) - the setter function, or undefined if no setter (only supported on some platforms)</li>\n</ul>\n<p><strong>Note:</strong> <code>configurable</code>, <code>enumerable</code>, <code>writable</code>, <code>get</code>, and <code>set</code> are not implemented and will be ignored.</p>\n",
       "!url": "http://www.espruino.com/Reference#l_Object_defineProperty"
     },
     "defineProperties": {
@@ -555,8 +578,8 @@
   },
   "Serial": {
     "!type": "fn()",
-    "!doc": "<p>This class allows use of the built-in USARTs</p>\n<p>Methods may be called on the USB, Serial1, Serial2, Serial3, Serial4, Serial5 and Serial6 objects. While different processors provide different numbers of USARTs, you can always rely on at least Serial1 and Serial2</p>\n",
-    "!url": "http://www.espruino.com/Reference#Serial",
+    "!doc": "<p>Create a software Serial port. This has limited functionality (only low baud rates), but it can work on any pins.</p>\n<p>Use <code>Serial.setup</code> to configure this port.</p>\n",
+    "!url": "http://www.espruino.com/Reference#l_Serial_Serial",
     "find": {
       "!type": "fn(pin: +Pin) -> ?",
       "!doc": "<p>Try and find a USART (Serial) hardware device that will work on this pin (eg. <code>Serial1</code>)</p>\n<p>May return undefined if no device can be found.</p>\n",
@@ -567,6 +590,11 @@
         "!type": "fn(force: bool)",
         "!doc": "<p>Set this Serial port as the port for the JavaScript console (REPL).</p>\n<p>Unless <code>force</code> is set to true, changes in the connection state of the board\n(for instance plugging in USB) will cause the console to change.</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Serial_setConsole"
+      },
+      "unsetup": {
+        "!type": "fn()",
+        "!doc": "<p>If the serial (or software serial) device was set up,\nuninitialise it.</p>\n",
+        "!url": "http://www.espruino.com/Reference#l_Serial_unsetup"
       },
       "print": {
         "!type": "fn(string: ?)",
@@ -637,12 +665,12 @@
   },
   "LoopbackA": {
     "!type": "+Serial",
-    "!doc": "<p>A loopback serial device. Data sent to LoopbackA comes out of LoopbackB and vice versa</p>\n",
+    "!doc": "<p>A loopback serial device. Data sent to <code>LoopbackA</code> comes out of <code>LoopbackB</code> and vice versa</p>\n",
     "!url": "http://www.espruino.com/Reference#l__global_LoopbackA"
   },
   "LoopbackB": {
     "!type": "+Serial",
-    "!doc": "<p>A loopback serial device. Data sent to LoopbackA comes out of LoopbackB and vice versa</p>\n",
+    "!doc": "<p>A loopback serial device. Data sent to <code>LoopbackA</code> comes out of <code>LoopbackB</code> and vice versa</p>\n",
     "!url": "http://www.espruino.com/Reference#l__global_LoopbackB"
   },
   "Telnet": {
@@ -849,6 +877,11 @@
       "!type": "fn()",
       "!doc": "<p>This writes information about all blocks in flash\nmemory to the console - and is only useful for debugging\nflash storage.</p>\n",
       "!url": "http://www.espruino.com/Reference#l_Storage_debug"
+    },
+    "getFree": {
+      "!type": "fn() -> number",
+      "!doc": "<p>Return the amount of free bytes available in\nStorage. Due to fragmentation there may be more\nbytes available, but this represents the maximum\nsize of file that can be written.</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_Storage_getFree"
     }
   },
   "E": {
@@ -892,7 +925,7 @@
     },
     "FFT": {
       "!type": "fn(arrReal: ?, arrImage: ?, inverse: bool)",
-      "!doc": "<p>Performs a Fast Fourier Transform (fft) on the supplied data and writes it back into the original arrays. Note that if only one array is supplied, the data written back is the modulus of the complex result <code>sqrt(r*r+i*i)</code>.</p>\n",
+      "!doc": "<p>Performs a Fast Fourier Transform (FFT) in 32 bit floats on the supplied data and writes it back into the\noriginal arrays. Note that if only one array is supplied, the data written back is the modulus of the complex\nresult <code>sqrt(r*r+i*i)</code>.</p>\n<p>In order to perform the FFT, there has to be enough room on the stack to allocate two arrays of 32 bit\nfloating point numbers - this will limit the maximum size of FFT possible to around 1024 items on\nmost platforms.</p>\n",
       "!url": "http://www.espruino.com/Reference#l_E_FFT"
     },
     "interpolate": {
@@ -925,6 +958,11 @@
       "!doc": "<p>Set the Espruino interpreter flags that control the way it handles your JavaScript code.</p>\n<p>Run <code>E.getFlags()</code> and check its description for a list of available flags and their values.</p>\n",
       "!url": "http://www.espruino.com/Reference#l_E_setFlags"
     },
+    "pipe": {
+      "!type": "fn(source: ?, destination: ?, options: ?)",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_E_pipe"
+    },
     "toArrayBuffer": {
       "!type": "fn(str: ?) -> +ArrayBufferView",
       "!doc": "<p>Create an ArrayBuffer from the given string. This is done via a reference, not a copy - so it is very fast and memory efficient.</p>\n<p>Note that this is an ArrayBuffer, not a Uint8Array. To get one of those, do: <code>new Uint8Array(E.toArrayBuffer(&#39;....&#39;))</code>.</p>\n",
@@ -939,6 +977,11 @@
       "!type": "fn(args: ?) -> +Uint8Array",
       "!doc": "<p>This creates a Uint8Array from the given arguments. If an argument is a String or an Array,\neach element is traversed and added as if it were an 8 bit value. If it is anything else, it is\nconverted to an 8 bit value directly.</p>\n",
       "!url": "http://www.espruino.com/Reference#l_E_toUint8Array"
+    },
+    "toJS": {
+      "!type": "fn(arg: ?) -> +String",
+      "!doc": "<p>This performs the same basic function as <code>JSON.stringify</code>,\nhowever <code>JSON.stringify</code> adds extra characters to conform\nto the JSON spec which aren&#39;t required if outputting JS.</p>\n<p><code>E.toJS</code> will also stringify JS functions, whereas\n<code>JSON.stringify</code> ignores them.</p>\n<p>For example:</p>\n<ul>\n<li><code>JSON.stringify({a:1,b:2}) == &#39;{&quot;a&quot;:1,&quot;b&quot;:2}&#39;</code></li>\n<li><code>E.toJS({a:1,b:2}) == &#39;{a:1,b:2}&#39;</code></li>\n</ul>\n<p><strong>Note:</strong> Strings generated with <code>E.toJS</code> can&#39;t be\nreliably parsed by <code>JSON.parse</code> - however they are\nvalid JS so will work with <code>eval</code> (but this has security\nimplications if you don&#39;t trust the source of the string).</p>\n<p>On the desktop <a href=\"https://github.com/json5/json5\">JSON5 parsers</a>\nwill parse the strings produced by <code>E.toJS</code> without trouble.</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_E_toJS"
     },
     "memoryArea": {
       "!type": "fn(addr: number, len: number) -> +String",
@@ -980,10 +1023,10 @@
       "!doc": "<p>Return the address in memory of the given variable. This can then\nbe used with <code>peek</code> and <code>poke</code> functions. However, changing data in\nJS variables directly (flatAddress=false) will most likely result in a crash.</p>\n<p>This functions exists to allow embedded targets to set up\nperipherals such as DMA so that they write directly to\nJS variables.</p>\n<p>See <a href=\"http://www.espruino.com/Internals\">http://www.espruino.com/Internals</a> for more information</p>\n",
       "!url": "http://www.espruino.com/Reference#l_E_getAddressOf"
     },
-    "mapInPlace": {
-      "!type": "fn(from: ?, to: ?, map: ?, bits: number)",
-      "!doc": "<p>Take each element of the <code>from</code> array, look it up in <code>map</code> (or call the\nfunction with it as a first argument), and write it into the corresponding\nelement in the <code>to</code> array.</p>\n",
-      "!url": "http://www.espruino.com/Reference#l_E_mapInPlace"
+    "lookupNoCase": {
+      "!type": "fn(haystack: ?, needle: ?, returnKey: bool) -> ?",
+      "!doc": "<p>Search in an Object, Array, or Function</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_E_lookupNoCase"
     },
     "dumpStr": {
       "!type": "fn() -> +String",
@@ -1317,6 +1360,21 @@
         "!type": "fn() -> +String",
         "!doc": "<p>Return a new string with any whitespace (tabs, space, form feed, newline,\ncarriage return, etc) removed from the beginning and end.</p>\n",
         "!url": "http://www.espruino.com/Reference#l_String_trim"
+      },
+      "startsWith": {
+        "!type": "fn(searchString: ?, position: number) -> bool",
+        "!doc": "",
+        "!url": "http://www.espruino.com/Reference#l_String_startsWith"
+      },
+      "endsWith": {
+        "!type": "fn(searchString: ?, length: ?) -> bool",
+        "!doc": "",
+        "!url": "http://www.espruino.com/Reference#l_String_endsWith"
+      },
+      "includes": {
+        "!type": "fn(substring: ?, fromIndex: ?) -> bool",
+        "!doc": "",
+        "!url": "http://www.espruino.com/Reference#l_String_includes"
       }
     },
     "fromCharCode": {
@@ -1794,7 +1852,7 @@
   },
   "NRF": {
     "!type": "fn()",
-    "!doc": "<p>The NRF class is for controlling functionality of the Nordic nRF51/nRF52 chips. This is used in <a href=\"http://puck-js.com\">Puck.js</a>, <a href=\"http://espruino.com/Pixl.js\">Pixl.js</a>, <a href=\"http://espruino.com/MDBT42Q\">MDBT42Q</a>, and a variety of other Bluetooth-based boards.</p>\n<p>Most functionality is related to Bluetooth Low Energy, however there are also some functions related to NFC that apply to NRF52-based devices.</p>\n",
+    "!doc": "<p>The NRF class is for controlling functionality of the Nordic nRF51/nRF52 chips.</p>\n<p>Most functionality is related to Bluetooth Low Energy, however there are also some functions related to NFC that apply to NRF52-based devices.</p>\n",
     "!url": "http://www.espruino.com/Reference#NRF",
     "disconnect": {
       "!type": "fn()",
@@ -1838,7 +1896,7 @@
     },
     "setLowPowerConnection": {
       "!type": "fn(lowPower: bool)",
-      "!doc": "<p>This sets the connection parameters - these affect the transfer speed and\npower usage when the device is connected.</p>\n<ul>\n<li>When not low power, the connection interval is between 7.5 and 20ms</li>\n<li>When low power, the connection interval is between 500 and 1000ms</li>\n</ul>\n<p>When low power connection is enabled, transfers of data over Bluetooth\nwill be very slow, however power usage while connected will be drastically\ndecreased.</p>\n<p>This will only take effect after the connection is disconnected and\nre-established.</p>\n",
+      "!doc": "<p><strong>THIS IS DEPRECATED</strong> - please use <code>NRF.setConnectionInterval</code> for\nperipheral and <code>NRF.connect(addr, options)</code>/<code>BluetoothRemoteGATTServer.connect(options)</code>\nfor central connections.</p>\n<p>This sets the connection parameters - these affect the transfer speed and\npower usage when the device is connected.</p>\n<ul>\n<li>When not low power, the connection interval is between 7.5 and 20ms</li>\n<li>When low power, the connection interval is between 500 and 1000ms</li>\n</ul>\n<p>When low power connection is enabled, transfers of data over Bluetooth\nwill be very slow, however power usage while connected will be drastically\ndecreased.</p>\n<p>This will only take effect after the connection is disconnected and\nre-established.</p>\n",
       "!url": "http://www.espruino.com/Reference#l_NRF_setLowPowerConnection"
     },
     "sendHIDReport": {
@@ -1850,6 +1908,11 @@
       "!type": "fn(whitelisting: bool)",
       "!doc": "<p>If set to true, whenever a device bonds it will be added to the\nwhitelist.</p>\n<p>When set to false, the whitelist is cleared and newly bonded\ndevices will not be added to the whitelist.</p>\n<p><strong>Note:</strong> This is remembered between <code>reset()</code>s but isn&#39;t\nremembered after power-on (you&#39;ll have to add it to <code>onInit()</code>.</p>\n",
       "!url": "http://www.espruino.com/Reference#l_NRF_setWhitelist"
+    },
+    "setConnectionInterval": {
+      "!type": "fn(interval: ?)",
+      "!doc": "<p>When connected, Bluetooth LE devices communicate at a set interval.\nLowering the interval (eg. more packets/second) means a lower delay when\nsending data, higher bandwidth, but also more power consumption.</p>\n<p>By default, when connected as a peripheral Espruino automatically adjusts the\nconnection interval. When connected it&#39;s as fast as possible (7.5ms) but when idle\nfor over a minute it drops to 200ms. On continued activity (&gt;1 BLE operation) the\ninterval is raised to 7.5ms again.</p>\n<p>The options for <code>interval</code> are:</p>\n<ul>\n<li><code>undefined</code> / <code>&quot;auto&quot;</code> : (default) automatically adjust connection interval</li>\n<li><code>100</code> : set min and max connection interval to the same number (between 7.5ms and 4000ms)</li>\n<li><code>{minInterval:20, maxInterval:100}</code> : set min and max connection interval as a range</li>\n</ul>\n<p>This configuration is not remembered during a <code>save()</code> - you will have to\nre-set it via <code>onInit</code>.</p>\n<p><strong>Note:</strong> If connecting to another device (as Central), you can use\nan extra argument to <code>NRF.connect</code> or <code>BluetoothRemoteGATTServer.connect</code>\nto specify a connection interval.</p>\n<p><strong>Note:</strong> This overwrites any changes imposed by the deprecated <code>NRF.setLowPowerConnection</code></p>\n",
+      "!url": "http://www.espruino.com/Reference#l_NRF_setConnectionInterval"
     }
   },
   "Bluetooth": {
@@ -1862,11 +1925,6 @@
     "!doc": "<p>Web Bluetooth-style GATT server - get this using <code>NRF.connect(address)</code>\nor <code>NRF.requestDevice(options)</code> and <code>response.gatt.connect</code></p>\n<p><a href=\"https://webbluetoothcg.github.io/web-bluetooth/#bluetoothremotegattserver\">https://webbluetoothcg.github.io/web-bluetooth/#bluetoothremotegattserver</a></p>\n",
     "!url": "http://www.espruino.com/Reference#BluetoothRemoteGATTServer",
     "prototype": {
-      "connect": {
-        "!type": "fn() -> ?",
-        "!doc": "<p>Connect to a BLE device - returns a promise,\nthe argument of which is the <code>BluetoothRemoteGATTServer</code> connection.</p>\n<p>See <a href=\"/Reference#l_NRF_requestDevice\"><code>NRF.requestDevice</code></a> for usage examples.</p>\n",
-        "!url": "http://www.espruino.com/Reference#l_BluetoothRemoteGATTServer_connect"
-      },
       "disconnect": {
         "!type": "fn()",
         "!doc": "<p>Disconnect from a previously connected BLE device connected with\n<code>NRF.connect</code> - this does not disconnect from something that has\nconnected to the Espruino.</p>\n",
@@ -2116,6 +2174,11 @@
       "!type": "fn(c: number)",
       "!doc": "<p>Set the LCD&#39;s contrast</p>\n",
       "!url": "http://www.espruino.com/Reference#l_Pixl_setContrast"
+    },
+    "setLCDPower": {
+      "!type": "fn(isOn: bool)",
+      "!doc": "<p>This function can be used to turn Pixl.js&#39;s LCD off or on.</p>\n<ul>\n<li>With the LCD off, Pixl.js draws around 0.1mA</li>\n<li>With the LCD on, Pixl.js draws around 0.25mA</li>\n</ul>\n",
+      "!url": "http://www.espruino.com/Reference#l_Pixl_setLCDPower"
     },
     "lcdw": {
       "!type": "fn(c: number)",
@@ -2381,12 +2444,12 @@
     "!url": "http://www.espruino.com/Reference#Ethernet",
     "prototype": {
       "getIP": {
-        "!type": "fn() -> ?",
+        "!type": "fn(options: ?) -> ?",
         "!doc": "<p>Get the current IP address, subnet, gateway and mac address.</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Ethernet_getIP"
       },
       "setIP": {
-        "!type": "fn(options: ?) -> bool",
+        "!type": "fn(options: ?, options: ?) -> bool",
         "!doc": "<p>Set the current IP address or get an IP from DHCP (if no options object is specified)</p>\n<p>If &#39;mac&#39; is specified as an option, it must be a string of the form <code>&quot;00:01:02:03:04:05&quot;</code></p>\n",
         "!url": "http://www.espruino.com/Reference#l_Ethernet_setIP"
       }
@@ -2784,12 +2847,12 @@
       },
       "setColor": {
         "!type": "fn(r: ?, g: ?, b: ?)",
-        "!doc": "<p>Set the color to use for subsequent drawing operations</p>\n",
+        "!doc": "<p>Set the color to use for subsequent drawing operations</p>\n<p><strong>Note:</strong> On devices with low flash memory, <code>r</code> <strong>must</strong> be an integer representing the color in the current bit depth. It cannot\nbe a floating point value, and <code>g</code> and <code>b</code> are ignored.</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Graphics_setColor"
       },
       "setBgColor": {
         "!type": "fn(r: ?, g: ?, b: ?)",
-        "!doc": "<p>Set the background color to use for subsequent drawing operations</p>\n",
+        "!doc": "<p>Set the background color to use for subsequent drawing operations</p>\n<p><strong>Note:</strong> On devices with low flash memory, <code>r</code> <strong>must</strong> be an integer representing the color in the current bit depth. It cannot\nbe a floating point value, and <code>g</code> and <code>b</code> are ignored.</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Graphics_setBgColor"
       },
       "getColor": {
@@ -2847,6 +2910,11 @@
         "!doc": "<p>Move the cursor to a position - see lineTo</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Graphics_moveTo"
       },
+      "drawPoly": {
+        "!type": "fn(poly: ?, closed: bool)",
+        "!doc": "<p>Draw a polyline (lines between each of the points in <code>poly</code>) in the current foreground color</p>\n",
+        "!url": "http://www.espruino.com/Reference#l_Graphics_drawPoly"
+      },
       "fillPoly": {
         "!type": "fn(poly: ?)",
         "!doc": "<p>Draw a filled polygon in the current foreground color</p>\n",
@@ -2862,6 +2930,11 @@
         "!doc": "<p>Draw an image at the specified position. If the image is 1 bit, the graphics foreground/background colours will be used. Otherwise color data will be copied as-is. Bitmaps are rendered MSB-first</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Graphics_drawImage"
       },
+      "asImage": {
+        "!type": "fn() -> ?",
+        "!doc": "<p>Return this Graphics object as an Image that can be used with <code>Graphics.drawImage</code>.\nWill return undefined if data can&#39;t be allocated for it.</p>\n",
+        "!url": "http://www.espruino.com/Reference#l_Graphics_asImage"
+      },
       "getModified": {
         "!type": "fn(reset: bool) -> ?",
         "!doc": "<p>Return the area of the Graphics canvas that has been modified, and optionally clear\nthe modified area to 0.</p>\n<p>For instance if <code>g.setPixel(10,20)</code> was called, this would return <code>{x1:10, y1:20, x2:10, y2:20}</code></p>\n",
@@ -2871,6 +2944,21 @@
         "!type": "fn(x: number, y: number)",
         "!doc": "<p>Scroll the contents of this graphics in a certain direction. The remaining area\nis filled with the background color.</p>\n<p>Note: This uses repeated pixel reads and writes, so will not work on platforms that\ndon&#39;t support pixel reads.</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Graphics_scroll"
+      },
+      "asBMP": {
+        "!type": "fn() -> ?",
+        "!doc": "<p>Create a Windows BMP file from this Graphics instance, and return it as a String.</p>\n",
+        "!url": "http://www.espruino.com/Reference#l_Graphics_asBMP"
+      },
+      "asURL": {
+        "!type": "fn() -> ?",
+        "!doc": "<p>Create a URL of the form <code>data:image/bmp;base64,...</code> that can be pasted into the browser.</p>\n<p>The Espruino Web IDE can detect this data on the console and render the image inline automatically.</p>\n",
+        "!url": "http://www.espruino.com/Reference#l_Graphics_asURL"
+      },
+      "dump": {
+        "!type": "fn()",
+        "!doc": "<p>Output this image as a bitmap URL. The Espruino Web IDE can detect the data on the console and render the image inline automatically.</p>\n<p>This is identical to <code>console.log(g.asURL())</code> - it is just a convenient function for easy debugging.</p>\n",
+        "!url": "http://www.espruino.com/Reference#l_Graphics_dump"
       }
     }
   },
@@ -3006,7 +3094,7 @@
   },
   "analogWrite": {
     "!type": "fn(pin: +Pin, value: number, options: ?)",
-    "!doc": "<p>Set the analog Value of a pin. It will be output using PWM.</p>\n<p>Objects can contain:</p>\n<ul>\n<li><code>freq</code> - pulse frequency in Hz, eg. <code>analogWrite(A0,0.5,{ freq : 10 });</code> - specifying a frequency will force PWM output, even if the pin has a DAC</li>\n<li><code>soft</code> - boolean, If true software PWM is used if available.</li>\n<li><p><code>forceSoft</code> - boolean, If true software PWM is used even</p>\n<p><strong>Note:</strong> if you didn&#39;t call <code>pinMode</code> beforehand then this function will also reset pin&#39;s state to <code>&quot;output&quot;</code></p>\n</li>\n</ul>\n",
+    "!doc": "<p>Set the analog Value of a pin. It will be output using PWM.</p>\n<p>Objects can contain:</p>\n<ul>\n<li><code>freq</code> - pulse frequency in Hz, eg. <code>analogWrite(A0,0.5,{ freq : 10 });</code> - specifying a frequency will force PWM output, even if the pin has a DAC</li>\n<li><code>soft</code> - boolean, If true software PWM is used if hardware is not available.</li>\n<li><p><code>forceSoft</code> - boolean, If true software PWM is used even if hardware PWM or a DAC is available</p>\n<p><strong>Note:</strong> if you didn&#39;t call <code>pinMode</code> beforehand then this function will also reset pin&#39;s state to <code>&quot;output&quot;</code></p>\n</li>\n</ul>\n",
     "!url": "http://www.espruino.com/Reference#l__global_analogWrite"
   },
   "digitalPulse": {
@@ -3096,7 +3184,7 @@
   },
   "echo": {
     "!type": "fn(echoOn: bool)",
-    "!doc": "<p>Should TinyJS echo what you type back to you? true = yes (Default), false = no. When echo is off, the result of executing a command is not returned. Instead, you must use &#39;print&#39; to send output.</p>\n",
+    "!doc": "<p>Should Espruino echo what you type back to you? true = yes (Default), false = no. When echo is off, the result of executing a command is not returned. Instead, you must use &#39;print&#39; to send output.</p>\n",
     "!url": "http://www.espruino.com/Reference#l__global_echo"
   },
   "getTime": {
@@ -3116,17 +3204,17 @@
   },
   "clearInterval": {
     "!type": "fn(id: ?)",
-    "!doc": "<p>Clear the Interval that was created with setInterval, for example:</p>\n<p><code>var id = setInterval(function () { print(&#39;foo&#39;); }, 1000);</code></p>\n<p><code>clearInterval(id);</code></p>\n<p>If no argument is supplied, all timers and intervals are stopped</p>\n",
+    "!doc": "<p>Clear the Interval that was created with <code>setInterval</code>, for example:</p>\n<p><code>var id = setInterval(function () { print(&#39;foo&#39;); }, 1000);</code></p>\n<p><code>clearInterval(id);</code></p>\n<p>If no argument is supplied, all timers and intervals are stopped</p>\n",
     "!url": "http://www.espruino.com/Reference#l__global_clearInterval"
   },
   "clearTimeout": {
     "!type": "fn(id: ?)",
-    "!doc": "<p>Clear the Timeout that was created with setTimeout, for example:</p>\n<p><code>var id = setTimeout(function () { print(&#39;foo&#39;); }, 1000);</code></p>\n<p><code>clearTimeout(id);</code></p>\n<p>If no argument is supplied, all timers and intervals are stopped</p>\n",
+    "!doc": "<p>Clear the Timeout that was created with <code>setTimeout</code>, for example:</p>\n<p><code>var id = setTimeout(function () { print(&#39;foo&#39;); }, 1000);</code></p>\n<p><code>clearTimeout(id);</code></p>\n<p>If no argument is supplied, all timers and intervals are stopped</p>\n",
     "!url": "http://www.espruino.com/Reference#l__global_clearTimeout"
   },
   "changeInterval": {
     "!type": "fn(id: ?, time: number)",
-    "!doc": "<p>Change the Interval on a callback created with setInterval, for example:</p>\n<p><code>var id = setInterval(function () { print(&#39;foo&#39;); }, 1000); // every second</code></p>\n<p><code>changeInterval(id, 1500); // now runs every 1.5 seconds</code></p>\n<p>This takes effect immediately and resets the timeout, so in the example above,\nregardless of when you call <code>changeInterval</code>, the next interval will occur 1500ms\nafter it.</p>\n",
+    "!doc": "<p>Change the Interval on a callback created with <code>setInterval</code>, for example:</p>\n<p><code>var id = setInterval(function () { print(&#39;foo&#39;); }, 1000); // every second</code></p>\n<p><code>changeInterval(id, 1500); // now runs every 1.5 seconds</code></p>\n<p>This takes effect immediately and resets the timeout, so in the example above,\nregardless of when you call <code>changeInterval</code>, the next interval will occur 1500ms\nafter it.</p>\n",
     "!url": "http://www.espruino.com/Reference#l__global_changeInterval"
   },
   "eval": {
@@ -3143,6 +3231,11 @@
     "!type": "fn(string: ?) -> number",
     "!doc": "<p>Convert a string representing a number into an float</p>\n",
     "!url": "http://www.espruino.com/Reference#l__global_parseFloat"
+  },
+  "isFinite": {
+    "!type": "fn(x: ?) -> bool",
+    "!doc": "<p>Is the parameter a finite num,ber or not? If needed, the parameter is first converted to a number.</p>\n",
+    "!url": "http://www.espruino.com/Reference#l__global_isFinite"
   },
   "isNaN": {
     "!type": "fn(x: ?) -> bool",
