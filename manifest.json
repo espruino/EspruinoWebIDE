@@ -2,7 +2,7 @@
   "name": "Espruino Web IDE",
   "short_name": "Espruino IDE",
   "description": "A Terminal and Graphical code Editor for Espruino JavaScript Microcontrollers",
-  "version": "0.70.3",
+  "version": "0.70.4",
   "app": {
     "background": {
       "scripts": ["js/background.js"]
