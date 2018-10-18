@@ -689,7 +689,7 @@
     "prototype": {
       "getTimezoneOffset": {
         "!type": "fn() -> number",
-        "!doc": "<p>The getTimezoneOffset() method returns the time-zone offset from UTC, in minutes, for the current locale.</p>\n",
+        "!doc": "<p>This returns Espruino&#39;s time-zone offset from UTC, in minutes.</p>\n<p>This is set with <code>E.setTimeZone</code> and is System-wide. The value returned\nhas nothing to do with the instance of <code>Date</code> that it is called on.</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Date_getTimezoneOffset"
       },
       "getTime": {
@@ -925,7 +925,7 @@
     },
     "FFT": {
       "!type": "fn(arrReal: ?, arrImage: ?, inverse: bool)",
-      "!doc": "<p>Performs a Fast Fourier Transform (FFT) in 32 bit floats on the supplied data and writes it back into the\noriginal arrays. Note that if only one array is supplied, the data written back is the modulus of the complex\nresult <code>sqrt(r*r+i*i)</code>.</p>\n<p>In order to perform the FFT, there has to be enough room on the stack to allocate two arrays of 32 bit\nfloating point numbers - this will limit the maximum size of FFT possible to around 1024 items on\nmost platforms.</p>\n",
+      "!doc": "<p>Performs a Fast Fourier Transform (FFT) in 32 bit floats on the supplied data and writes it back into the\noriginal arrays. Note that if only one array is supplied, the data written back is the modulus of the complex\nresult <code>sqrt(r*r+i*i)</code>.</p>\n<p>In order to perform the FFT, there has to be enough room on the stack to allocate two arrays of 32 bit\nfloating point numbers - this will limit the maximum size of FFT possible to around 1024 items on\nmost platforms.</p>\n<p><strong>Note:</strong> on the Original Espruino board, FFTs are performed in 64bit arithmetic as there isn&#39;t\nspace to include the 32 bit maths routines (2x more RAM is required).</p>\n",
       "!url": "http://www.espruino.com/Reference#l_E_FFT"
     },
     "interpolate": {
@@ -1067,6 +1067,11 @@
       "!type": "fn(callspec: ?, assemblycode: ?)",
       "!doc": "<p>Provide assembly to Espruino.</p>\n<p><strong>This function is not part of Espruino</strong>. Instead, it is detected\nby the Espruino IDE (or command-line tools) at upload time and is\nreplaced with machine code and an <code>E.nativeCall</code> call.</p>\n<p>See <a href=\"http://www.espruino.com/Assembler\">the documentation on the Assembler</a> for more information.</p>\n",
       "!url": "http://www.espruino.com/Reference#l_E_asm"
+    },
+    "compiledC": {
+      "!type": "fn(code: ?)",
+      "!doc": "<p>Provides the ability to write C code inside your JavaScript file.</p>\n<p><strong>This function is not part of Espruino</strong>. Instead, it is detected\nby the Espruino IDE (or command-line tools) at upload time, is sent\nto our web service to be compiled, and is replaced with machine code\nand an <code>E.nativeCall</code> call.</p>\n<p>See <a href=\"http://www.espruino.com/InlineC\">the documentation on Inline C</a> for more information and examples.</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_E_compiledC"
     },
     "reboot": {
       "!type": "fn()",
@@ -1375,6 +1380,11 @@
         "!type": "fn(substring: ?, fromIndex: ?) -> bool",
         "!doc": "",
         "!url": "http://www.espruino.com/Reference#l_String_includes"
+      },
+      "repeat": {
+        "!type": "fn(count: number) -> +String",
+        "!doc": "<p>Repeat this string the given number of times.</p>\n",
+        "!url": "http://www.espruino.com/Reference#l_String_repeat"
       }
     },
     "fromCharCode": {
@@ -1489,8 +1499,8 @@
   },
   "DataView": {
     "!type": "fn(buffer: ?, byteOffset: number, byteLength: number) -> +DataView",
-    "!doc": "<p>Create a DataView object</p>\n",
-    "!url": "http://www.espruino.com/Reference#l_DataView_DataView",
+    "!doc": "<p>This class helps</p>\n",
+    "!url": "http://www.espruino.com/Reference#DataView",
     "prototype": {
       "getFloat32": {
         "!type": "fn(byteOffset: number, littleEndian: bool) -> ?",
@@ -1696,11 +1706,6 @@
       "!url": "http://www.espruino.com/Reference#l_SPI_find"
     },
     "prototype": {
-      "setup": {
-        "!type": "fn(options: ?)",
-        "!doc": "<p>Set up this SPI port as an SPI Master.</p>\n<p><strong>Note:</strong> When using Software SPI, the baud rate will be ignored - data is sent as fast as possible.</p>\n",
-        "!url": "http://www.espruino.com/Reference#l_SPI_setup"
-      },
       "send": {
         "!type": "fn(data: ?, nss_pin: +Pin) -> ?",
         "!doc": "<p>Send data down SPI, and return the result. Sending an integer will return an integer, a String will return a String, and anything else will return a Uint8Array.</p>\n<p>Sending multiple bytes in one call to send is preferable as they can then be transmitted end to end. Using multiple calls to send() will result in significantly slower transmission speeds.</p>\n<p>For maximum speeds, please pass either Strings or Typed Arrays as arguments. Note that you can even pass arrays of arrays, like <code>[1,[2,3,4],5]</code></p>\n",
@@ -1797,7 +1802,7 @@
   },
   "crypto": {
     "!type": "fn()",
-    "!doc": "<p>Cryptographic functions</p>\n<p><strong>Note:</strong> This library is currently only included in builds for the Espruino Pico and Espruino WiFi. For other boards you will have to make build your own firmware, and you may need to remove other features in order to make room.</p>\n",
+    "!doc": "<p>Cryptographic functions</p>\n<p><strong>Note:</strong> This library is currently only included in builds for boards where there is space. For other boards there is <code>crypto.js</code> which implements SHA1 in JS.</p>\n",
     "!url": "http://www.espruino.com/Reference#l_crypto_undefined",
     "AES": {
       "!type": "?",
@@ -1806,7 +1811,7 @@
     },
     "SHA1": {
       "!type": "fn(message: ?) -> +ArrayBuffer",
-      "!doc": "<p>Performs a SHA1 hash and returns the result as a 20 byte ArrayBuffer</p>\n",
+      "!doc": "<p>Performs a SHA1 hash and returns the result as a 20 byte ArrayBuffer.</p>\n<p><strong>Note:</strong> On some boards (currently only Espruino Original) there\nisn&#39;t space for a fully unrolled SHA1 implementation so a slower\nall-JS implementation is used instead.</p>\n",
       "!url": "http://www.espruino.com/Reference#l_crypto_SHA1"
     },
     "SHA224": {
@@ -1837,7 +1842,7 @@
   },
   "AES": {
     "!type": "fn()",
-    "!doc": "<p>Class containing AES encryption/decryption</p>\n<p><strong>Note:</strong> This library is currently only included in builds for the Espruino Pico and Espruino WiFi. For other boards you will have to make build your own firmware, and you may need to remove other features in order to make room.</p>\n",
+    "!doc": "<p>Class containing AES encryption/decryption</p>\n<p><strong>Note:</strong> This library is currently only included in builds for boards where there is space. For other boards there is <code>crypto.js</code> which implements SHA1 in JS.</p>\n",
     "!url": "http://www.espruino.com/Reference#AES",
     "encrypt": {
       "!type": "fn(passphrase: ?, key: ?, options: ?) -> +ArrayBuffer",
@@ -2159,6 +2164,21 @@
       "!type": "fn(args: ?) -> number",
       "!doc": "<p>Find the maximum of a series of numbers</p>\n",
       "!url": "http://www.espruino.com/Reference#l_Math_max"
+    }
+  },
+  "heatshrink": {
+    "!type": "fn()",
+    "!doc": "<p>Simple library for compression/decompression using <a href=\"https://github.com/atomicobject/heatshrink\">heatshrink</a>, an <a href=\"https://en.wikipedia.org/wiki/Lempel%E2%80%93Ziv%E2%80%93Storer%E2%80%93Szymanski\">LZSS</a> compression tool.</p>\n<p>Espruino uses heatshrink internally to compress RAM down to fit in Flash memory when <code>save()</code> is used. This just exposes that functionality.</p>\n<p>Functions here take and return buffers of data. There is no support for streaming, so both the compressed and decompressed data must be able to fit in memory at the same time.</p>\n",
+    "!url": "http://www.espruino.com/Reference#l_heatshrink_undefined",
+    "compress": {
+      "!type": "fn(data: ?) -> +ArrayBuffer",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_heatshrink_compress"
+    },
+    "decompress": {
+      "!type": "fn(data: ?) -> +ArrayBuffer",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_heatshrink_decompress"
     }
   },
   "Pixl": {
@@ -2571,43 +2591,6 @@
     "!doc": "<p>This library allows you to create TCPIP servers and clients using TLS encryption</p>\n<p>In order to use this, you will need an extra module to get network connectivity.</p>\n<p>This is designed to be a cut-down version of the <a href=\"http://nodejs.org/api/tls.html\">node.js library</a>. Please see the <a href=\"/Internet\">Internet</a> page for more information on how to use it.</p>\n",
     "!url": "http://www.espruino.com/Reference#l_tls_undefined"
   },
-  "hashlib": {
-    "!type": "fn()",
-    "!doc": "<p><strong>Note:</strong> This library is currently only included in builds for the original Espruino boards.\nFor other boards you will have to make build your own firmware.</p>\n",
-    "!url": "http://www.espruino.com/Reference#l_hashlib_undefined",
-    "sha224": {
-      "!type": "fn(message: ?) -> +HASH",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_hashlib_sha224"
-    },
-    "sha256": {
-      "!type": "fn(message: ?) -> +HASH",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_hashlib_sha256"
-    }
-  },
-  "HASH": {
-    "!type": "fn()",
-    "!doc": "<p><strong>Note:</strong> This class is currently only included in builds for the original Espruino boards.\nFor other boards you will have to make build your own firmware.</p>\n",
-    "!url": "http://www.espruino.com/Reference#HASH",
-    "prototype": {
-      "update": {
-        "!type": "fn(message: ?)",
-        "!doc": "",
-        "!url": "http://www.espruino.com/Reference#l_HASH_update"
-      },
-      "digest": {
-        "!type": "fn(message: ?) -> ?",
-        "!doc": "",
-        "!url": "http://www.espruino.com/Reference#l_HASH_digest"
-      },
-      "hexdigest": {
-        "!type": "fn(message: ?) -> ?",
-        "!doc": "",
-        "!url": "http://www.espruino.com/Reference#l_HASH_hexdigest"
-      }
-    }
-  },
   "WioLTE": {
     "!type": "fn()",
     "!doc": "<p>Class containing utility functions for the Seeed WIO LTE board</p>\n",
@@ -2847,12 +2830,12 @@
       },
       "setColor": {
         "!type": "fn(r: ?, g: ?, b: ?)",
-        "!doc": "<p>Set the color to use for subsequent drawing operations</p>\n<p><strong>Note:</strong> On devices with low flash memory, <code>r</code> <strong>must</strong> be an integer representing the color in the current bit depth. It cannot\nbe a floating point value, and <code>g</code> and <code>b</code> are ignored.</p>\n",
+        "!doc": "<p>Set the color to use for subsequent drawing operations.</p>\n<p>If just <code>r</code> is specified as an integer, the numeric value will be written directly into a pixel. eg. On a 24 bit <code>Graphics</code> instance you set bright blue with either <code>g.setColor(0,0,1)</code> or <code>g.setColor(0x0000FF)</code>.</p>\n<p>The mapping is as follows:</p>\n<ul>\n<li>32 bit: <code>r,g,b</code> =&gt; <code>0xFFrrggbb</code></li>\n<li>24 bit: <code>r,g,b</code> =&gt; <code>0xrrggbb</code></li>\n<li>16 bit: <code>r,g,b</code> =&gt; <code>0brrrrrggggggbbbbb</code> (RGB565)</li>\n<li>Other bpp: <code>r,g,b</code> =&gt; white if <code>r+g+b &gt; 50%</code>, otherwise black (use <code>r</code> on its own as an integer)</li>\n</ul>\n<p>If you specified <code>color_order</code> when creating the <code>Graphics</code> instance, <code>r</code>,<code>g</code> and <code>b</code> will be swapped as you specified.</p>\n<p><strong>Note:</strong> On devices with low flash memory, <code>r</code> <strong>must</strong> be an integer representing the color in the current bit depth. It cannot\nbe a floating point value, and <code>g</code> and <code>b</code> are ignored.</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Graphics_setColor"
       },
       "setBgColor": {
         "!type": "fn(r: ?, g: ?, b: ?)",
-        "!doc": "<p>Set the background color to use for subsequent drawing operations</p>\n<p><strong>Note:</strong> On devices with low flash memory, <code>r</code> <strong>must</strong> be an integer representing the color in the current bit depth. It cannot\nbe a floating point value, and <code>g</code> and <code>b</code> are ignored.</p>\n",
+        "!doc": "<p>Set the background color to use for subsequent drawing operations. </p>\n<p>See <code>Graphics.setColor</code> for more information on the mapping of <code>r</code>, <code>g</code>, and <code>b</code> to pixel values.</p>\n<p><strong>Note:</strong> On devices with low flash memory, <code>r</code> <strong>must</strong> be an integer representing the color in the current bit depth. It cannot\nbe a floating point value, and <code>g</code> and <code>b</code> are ignored.</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Graphics_setBgColor"
       },
       "getColor": {
@@ -3031,11 +3014,6 @@
     "!type": "fn(value: ?) -> bool",
     "!doc": "<p>Creates a boolean</p>\n",
     "!url": "http://www.espruino.com/Reference#l_Boolean_Boolean"
-  },
-  "require": {
-    "!type": "fn(moduleName: ?) -> ?",
-    "!doc": "<p>Load the given module, and return the exported functions</p>\n",
-    "!url": "http://www.espruino.com/Reference#l__global_require"
   },
   "NaN": {
     "!type": "number",
