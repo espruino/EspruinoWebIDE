@@ -11,6 +11,11 @@
 **/
 "use strict";
 (function(){
+  if (!chrome || !chrome.fileSystem) {
+    console.log("No chrome.fileSystem - Projects disabled");
+    return;
+  }
+
   var iconFolder,iconSnippet,actualProject = "";
   var snippets = JSON.parse('{ "Reset":"reset();","Memory":"process.memory();","ClearInterval":"clearInterval();"}');
   function init() {
