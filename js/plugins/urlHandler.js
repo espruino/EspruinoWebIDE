@@ -4,7 +4,7 @@
  This Source Code is subject to the terms of the Mozilla Public
  License, v2.0. If a copy of the MPL was not distributed with this
  file, You can obtain one at http://mozilla.org/MPL/2.0/.
- 
+
  ------------------------------------------------------------------
   Handle URLS of the form http://www.espruino.com/webide?...
   These are sent from background.js and are picked up by the Web IDE
@@ -12,19 +12,20 @@
 **/
 "use strict";
 (function(){
-  
+
   function init() {
     // Try and automatically handle the URL if we're served from somewhere we know
-    if (typeof window!=="undefined" && 
+    if (typeof window!=="undefined" &&
         window.location &&
         (window.location.origin=="https://localhost" ||
+         window.location.origin=="https://espruino.github.io" ||
          window.location.origin=="https://www.espruino.com")) {
       setTimeout(function() {
         handle(window.location.href);
       }, 200);
     }
   }
-  
+
   function handleQuery(key, val) {
     Espruino.Core.Code.switchToCode(); // if in blockly
     switch(key){
@@ -33,7 +34,7 @@
         break;
       case "codeurl": // Passing a URL for code within the URL
         Espruino.Core.EditorJavaScript.setCode("// Loading from "+val+"...");
-        $.ajax({ url: val, cache: false }).done(function( data ) { 
+        $.ajax({ url: val, cache: false }).done(function( data ) {
           Espruino.Core.EditorJavaScript.setCode(data);
         }).error(function(){
           Espruino.Core.EditorJavaScript.setCode("// Error loading "+val);
@@ -45,7 +46,7 @@
           Espruino.callProcessor("sending");
           Espruino.Core.CodeWriter.writeToEspruino(val);
           Espruino.Core.EditorJavaScript.setCode(val);
-        });        
+        });
         break;
       case "gist": // Get code from a gist number in the URL
         Espruino.Core.EditorJavaScript.setCode("// Loading Gist "+val+"...");
@@ -65,11 +66,11 @@
         break;
     }
   }
-  
-  function handle(url) {    
+
+  function handle(url) {
     console.log("Handling URL "+JSON.stringify(url));
     url = (url);
-    var h = url.indexOf("#");    
+    var h = url.indexOf("#");
     var q = url.indexOf("?");
     if (h>=0) {
       var hash = (q>h) ? url.substr(h+1,q) : url.substr(h+1);
@@ -88,13 +89,13 @@
         handleQuery(decodeURIComponent(eq[0]),decodeURIComponent(eq[1]));
       else
         console.warn("Didn't understand query section "+JSON.stringify(query[i]));
-    }    
+    }
   }
-    
+
 
   Espruino.Plugins.URLHandler = {
     init : init,
-    
+
     handle : handle, // handle a URL
   };
 }());
