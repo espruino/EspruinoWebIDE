@@ -43,7 +43,7 @@
     "websocket": "^1.0.23"
   },
   "optionalDependencies": {
-    "noble": "^1.7.0",
+    "noble": "^1.9.1",
     "serialport": "^4.0.4",
     "winnus": ""
   },
