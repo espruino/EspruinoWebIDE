@@ -5,14 +5,14 @@
  This Source Code is subject to the terms of the Mozilla Public
  License, v2.0. If a copy of the MPL was not distributed with this
  file, You can obtain one at http://mozilla.org/MPL/2.0/.
- 
+
  ------------------------------------------------------------------
   Settings profile (mass options update) plugin
  ------------------------------------------------------------------
 **/
 "use strict";
 (function(){
-  
+
   function init() {
   }
 
@@ -48,7 +48,10 @@
 
     var $tbody = $('tbody', $table);
 
+    var isAltered = false;
     Object.keys(obj).forEach(function(key) {
+      if (Espruino.Config[key]!=obj[key])
+        isAltered = true;
       $([
         '<tr>',
           '<td>', key, '</td>',
@@ -56,6 +59,9 @@
         '</tr>'
       ].join('')).appendTo($tbody);
     });
+
+    // Nothing has changed - don't bother prompting the user.
+    if (!isAltered) return;
 
     var popup = Espruino.Core.App.openPopup({
       title: "Confirm setting update...",
@@ -67,7 +73,7 @@
       }
     });
   }
-  
+
   Espruino.Plugins.SettingsProfile = {
     init : init,
     updateFromJson: updateFromJson
