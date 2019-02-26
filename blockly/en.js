@@ -478,6 +478,25 @@ if (window.location.href.indexOf("lang=en")>=0 ||
       /** @export */ Blockly.Msg.ESPRUINO_ULTRASONIC_ECHO = ', echo';
       /** @export */ Blockly.Msg.ESPRUINO_ULTRASONIC_TOOLTIP = 'Return distance in centimetres from the ultrasonic sensor';
 
+      /** @export */ Blockly.Msg.SMARTIBOT_M1FWD = 'M1 ---> Power:';
+      /** @export */ Blockly.Msg.SMARTIBOT_M1BWD = 'M1 <--- Power:';
+      /** @export */ Blockly.Msg.SMARTIBOT_M2FWD = 'M2 ---> Power:';
+      /** @export */ Blockly.Msg.SMARTIBOT_M2BWD = 'M2 <--- Power:';
+      /** @export */ Blockly.Msg.SMARTIBOT_M3FWD = 'M3 ---> Power:';
+      /** @export */ Blockly.Msg.SMARTIBOT_M3BWD = 'M3 <--- Power:';
+      /** @export */ Blockly.Msg.SMARTIBOT_M4FWD = 'M4 ---> Power:';
+      /** @export */ Blockly.Msg.SMARTIBOT_M4BWD = 'M4 <--- Power:';
+
+      /** @export */ Blockly.Msg.SMARTIBOT_LED1 = 'EYES Left - R:';
+      /** @export */ Blockly.Msg.SMARTIBOT_LED1G = 'G:';
+      /** @export */ Blockly.Msg.SMARTIBOT_LED1B = 'B:';
+      /** @export */ Blockly.Msg.SMARTIBOT_LED2 = 'Right - R:';
+      /** @export */ Blockly.Msg.SMARTIBOT_LED2G = 'G:';
+      /** @export */ Blockly.Msg.SMARTIBOT_LED2B = 'B:';
+
+      /** @export */ Blockly.Msg.SMARTIBOT_LEDORANGE = 'EYES Orange Brightness:';
+      /** @export */ Blockly.Msg.SMARTIBOT_LEDPINK = 'EYES Pink Brightness:';
+      /** @export */ Blockly.Msg.SMARTIBOT_LEDBLUE = 'EYES Blue Brightness:';
 
       /** @export */ Blockly.Msg.AMPERKA_MOTORSHIELD_RIGHT = 'Right(M2)';
       /** @export */ Blockly.Msg.AMPERKA_MOTORSHIELD_LEFT = 'Left(M1)';

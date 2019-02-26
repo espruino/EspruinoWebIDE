@@ -14,18 +14,27 @@
 /* Has Blockly been made visible yet? If not, we can't
 add any content because blockly will break all the sizing */
 var blocklyVisible = false;
+/* ID of XML block to use for initial code */
+var blocklyInitialBlocks = document.getElementById('blocklyInitial');
 /* Include this and the next blocks will magically appear inside the function */
 var MAGIC_CALLBACK_CODE = "function(){NEXT_BLOCKS}";
 
-// --------------------------------- Blockly init code -
+// --------------------------------- Blockly init code
 window.onload = function() {
+  var path = window.location.search;
+  console.log("window.onload", path);
+  // if we have smartibot blocks enabled, make the example code the smartibot one
+  if (path.indexOf("%7Csmartibot%7C")<0)
+    blocklyInitialBlocks = document.getElementById('blocklyInitial'); // default
+  else
+    blocklyInitialBlocks = document.getElementById('blocklyInitial_smartibot'); // smartibot
+  // Remove any stuff we don't want from the toolbox based on the quert string for this page...
   var toolbox = document.getElementById('toolbox');
-  // Remove any stuff we don't want from the toolbox...
   for (var i=0;i<toolbox.children.length;i++) {
     var enable_if = toolbox.children[i].attributes["enable_if"];
     if (enable_if) {
       var keep = false;
-      if (window.location.search && window.location.search.indexOf("%7C"+enable_if.value+"%7C")>=0)
+      if (path && path.indexOf("%7C"+enable_if.value+"%7C")>=0)
         keep = true;
       if (!keep) {
         toolbox.removeChild(toolbox.children[i]);
@@ -65,7 +74,7 @@ Blockly.setVisible = function(info) {
   if (blocklyVisible) return;
   blocklyVisible = true;
   // Set up initial code
-  Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, document.getElementById('blocklyInitial'));
+  Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, blocklyInitialBlocks);
 };
 
 // When we have JSON from the board, use it to
@@ -90,6 +99,9 @@ Blockly.setBoardJSON = function(info) {
 
 };
 // ---------------------------------
+
+//Blockly.HSV_SATURATION = 1; // 0 (inclusive) to 1 (exclusive), defaulting to 0.45
+//Blockly.HSV_VALUE = 0.8; // 0 (inclusive) to 1 (exclusive), defaulting to 0.65
 
 var ESPRUINO_COL = 190;
 

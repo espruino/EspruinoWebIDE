@@ -11,6 +11,7 @@
     <script type="text/javascript" src="blockly_amperka_motorshield.js"></script>
     <script type="text/javascript" src="blockly_ble.js"></script>
     <script type="text/javascript" src="blockly_nordic_thingy.js"></script>
+    <script type="text/javascript" src="blockly_smartibot.js"></script>
     <script type="text/javascript" src="field_textarea.js"></script>
     <style>
       html, body {
@@ -323,7 +324,7 @@
       <block type="amperka_motorshield_motor"></block>
       <block type="amperka_motorshield_motor_dir"></block>
     </category>
-    <!-- /Amperka's MotorShield -->
+    <!-- Nordic Thingy:52 -->
     <category name="Nordic Thingy:52" enable_if="nordic_thingy">
       <block type="thingy_sound_play"><value name="SAMPLERATE"><block type="math_number"><title name="NUM">4000</title></block></value></block>
       <block type="thingy_sound_record"><value name="LEN"><block type="math_number"><title name="NUM">1000</title></block></value></block>
@@ -331,6 +332,57 @@
       <block type="thingy_sensor_many"></block>
       <block type="thingy_result"></block>
     </category>
+
+   <category name="Smartibot Motors" enable_if="smartibot">
+      <block type="smartibot_M1Fwd">
+        <value name="VAL"><block type="math_number"><title name="NUM">0.5</title></block></value>
+      </block>
+       <block type="smartibot_M1Bwd">
+        <value name="VAL"><block type="math_number"><title name="NUM">0.5</title></block></value>
+      </block>
+          <block type="smartibot_M2Fwd">
+        <value name="VAL"><block type="math_number"><title name="NUM">0.5</title></block></value>
+      </block>
+       <block type="smartibot_M2Bwd">
+        <value name="VAL"><block type="math_number"><title name="NUM">0.5</title></block></value>
+      </block>
+      <block type="smartibot_M3Fwd">
+        <value name="VAL"><block type="math_number"><title name="NUM">0.5</title></block></value>
+      </block>
+       <block type="smartibot_M3Bwd">
+        <value name="VAL"><block type="math_number"><title name="NUM">0.5</title></block></value>
+      </block>
+          <block type="smartibot_M4Fwd">
+        <value name="VAL"><block type="math_number"><title name="NUM">0.5</title></block></value>
+      </block>
+       <block type="smartibot_M4Bwd">
+        <value name="VAL"><block type="math_number"><title name="NUM">0.5</title></block></value>
+      </block>
+    </category>
+
+    <category name="Smartiboard" enable_if="smartibot">
+      <block type="smartibot_LED">
+        <value name="VAL"><block type="math_number"><title name="NUM">50</title></block></value>
+        <value name="VAL2"><block type="math_number"><title name="NUM">50</title></block></value>
+        <value name="VAL3"><block type="math_number"><title name="NUM">50</title></block></value>
+        <value name="VAL4"><block type="math_number"><title name="NUM">50</title></block></value>
+        <value name="VAL5"><block type="math_number"><title name="NUM">50</title></block></value>
+        <value name="VAL6"><block type="math_number"><title name="NUM">50</title></block></value>
+      </block>
+      <block type="smartibot_LEDorange">
+        <value name="VAL"><block type="math_number"><title name="NUM">0.9</title></block></value>
+      </block>
+       <block type="smartibot_LEDpink">
+        <value name="VAL"><block type="math_number"><title name="NUM">0.9</title></block></value>
+      </block>
+        <block type="smartibot_LEDblue">
+        <value name="VAL"><block type="math_number"><title name="NUM">0.9</title></block></value>
+      </block>
+      <block type="espruino_watch">
+        <value name="PIN"><block type="espruino_pin"><title name="PIN">BTN1</title></block></value>
+      </block>
+    </category>
+
     <category name="Bluetooth" enable_if="bluetooth">
       <block type="ble_connected"></block>
       <block type="ble_disconnected"></block>
@@ -354,6 +406,9 @@
     <!-- Blockly initial code -->
 <xml id="blocklyInitial" style="display: none">
   <block type="espruino_watch" inline="true"  ><title name="EDGE">rising</title><value name="PIN"><block type="espruino_pin"><title name="PIN">BTN1</title></block></value><statement name="DO"><block type="espruino_digitalWrite" inline="true"><value name="PIN"><block type="espruino_pin"><title name="PIN">LED1</title></block></value><value name="VAL"><block type="logic_boolean"><title name="BOOL">TRUE</title></block></value><next><block type="espruino_timeout" inline="true"><value name="SECONDS"><block type="math_number"><title name="NUM">1</title></block></value><statement name="DO"><block type="espruino_digitalWrite" inline="true"><value name="PIN"><block type="espruino_pin"><title name="PIN">LED1</title></block></value><value name="VAL"><block type="logic_boolean"><title name="BOOL">FALSE</title></block></value></block></statement></block></next></block></statement></block>
+</xml>
+<xml id="blocklyInitial_smartibot" style="display: none">
+<block type="espruino_interval" id="@nX^A01+C{ieu:UEyhWj" x="27" y="-9"><value name="SECONDS"><block type="math_number" id="iHMiWHiuTzz=+tMH@Wvi"><field name="NUM">5</field></block></value><statement name="DO"><block type="smartibot_M1Fwd" id="ug#@+wF{8$2ADJ4Hbn`9"><value name="VAL"><block type="math_number" id="ak8{o0.tRD+qnfKn/9h/"><field name="NUM">0.5</field></block></value><next><block type="smartibot_M2Bwd" id="*s4-j6eHqw%}OUuE$J]*"><value name="VAL"><block type="math_number" id="}2J^{TO/YZg/n|fr$E[,"><field name="NUM">0.5</field></block></value><next><block type="smartibot_LEDpink" id="0p1k?L./it!=jb1#xi=$"><value name="VAL"><block type="math_number" id="zZsdDq)0,u0tG^=HDm$Z"><field name="NUM">0.9</field></block></value><next><block type="espruino_timeout" id="CGDM6aplVq~Dhcb(RuA+"><value name="SECONDS"><block type="math_number" id="@CVla^6.w%#c1mJ3Q@om"><field name="NUM">1</field></block></value><statement name="DO"><block type="smartibot_M1Bwd" id="_p~-wI/d`MzW.c#|FW:$"><value name="VAL"><block type="math_number" id="3r|HjT|j1x1rT!2FSW,N"><field name="NUM">0.5</field></block></value><next><block type="smartibot_M2Fwd" id="+V}t%5g)Y[Ed3+;W0~#4"><value name="VAL"><block type="math_number" id="KL.e?Y:G_g?;1WMdQa%p"><field name="NUM">0.5</field></block></value><next><block type="smartibot_LEDblue" id="w(0W*Y9Z$MRqjLSgWGPT"><value name="VAL"><block type="math_number" id="ZTi]KrZ)p7Z:?Pp]`QHy"><field name="NUM">0.9</field></block></value></block></next></block></next></block></statement><next><block type="espruino_timeout" id="fulIYVvp{r36A*#0]0@%"><value name="SECONDS"><block type="math_number" id="h/Vs]Y!ZbcEI+@kRtB[^"><field name="NUM">2</field></block></value><statement name="DO"><block type="smartibot_M1Fwd" id="?k@VKX=ycyiB=#xC-yg/"><value name="VAL"><block type="math_number" id="}3opMRo3#=#f#pVesGtI"><field name="NUM">0.5</field></block></value><next><block type="smartibot_M2Fwd" id="Vb[emar=x*s}W|@^mPJ_"><value name="VAL"><block type="math_number" id="3uy0BxO6%ZG*%gyNln|T"><field name="NUM">0.5</field></block></value><next><block type="smartibot_LEDpink" id="0iN1ac!;C8zy?E0Kft7y"><value name="VAL"><block type="math_number" id="@Bo)r`wXeQ0sbFs,z*hH"><field name="NUM">0.9</field></block></value></block></next></block></next></block></statement><next><block type="espruino_timeout" id="bYNg42w=EVbk*8cG8E@N"><value name="SECONDS"><block type="math_number" id="1vSLYN{XJoP*+LIiefxF"><field name="NUM">3</field></block></value><statement name="DO"><block type="smartibot_M1Bwd" id="H+(qq52x:x:3:$7Y9mTF"><value name="VAL"><block type="math_number" id=";u#nH~Suvfk,yRJKf:Cs"><field name="NUM">0.5</field></block></value><next><block type="smartibot_M2Bwd" id="Z~|66_s5]Z]e$}9gZr#@"><value name="VAL"><block type="math_number" id="tIar:6zP@##?Pw^l]tVK"><field name="NUM">0.5</field></block></value><next><block type="smartibot_LEDblue" id="_vSX5;8R[7x-;nTyCQ8]"><value name="VAL"><block type="math_number" id=";Oz.+kiU4fjs{$B;c9FY"><field name="NUM">0.9</field></block></value></block></next></block></next></block></statement><next><block type="espruino_timeout" id=",Wfuzk}VJXxd}!?T99ox"><value name="SECONDS"><block type="math_number" id="mWW1/fNW+]?`wCV-IGTg"><field name="NUM">4</field></block></value><statement name="DO"><block type="smartibot_M1Fwd" id="H@o5s#*`s*|qAWUO7l+)"><value name="VAL"><block type="math_number" id="/38Pg]/tBQe@p|s7_1=2"><field name="NUM">0</field></block></value><next><block type="smartibot_M2Bwd" id="BlVOd[YG-X|(/:-`(wo."><value name="VAL"><block type="math_number" id="SE,K$*:@V_qv(bOQGtGJ"><field name="NUM">0</field></block></value><next><block type="smartibot_LEDorange" id="h3f`fJx(f8i(l|0BVU|_"><value name="VAL"><block type="math_number" id="I7!:[Rt5ET99:!tn^v#E"><field name="NUM">0.9</field></block></value></block></next></block></next></block></statement></block></next></block></next></block></next></block></next></block></next></block></next></block></statement></block><block type="smartibot_LEDpink" id="oklDHG2#m}-!R6wN#}Mv" x="101" y="1001"><value name="VAL"><block type="math_number" id="^:75I$C]N,1[v{aF.775"><field name="NUM">0.9</field></block></value></block>
 </xml>
 
   </body>
