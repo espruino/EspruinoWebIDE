@@ -27,7 +27,7 @@ Blockly.Blocks.smartibot_M1Fwd = {
     this.setNextStatement(true);
     this.setColour(SMARTIBOT_COL);
     this.setInputsInline(true);
-    this.setTooltip(Blockly.Msg.ESPRUINO_M1FWD_TOOLTIP);
+    //this.setTooltip(Blockly.Msg.ESPRUINO_M1FWD_TOOLTIP);
   }
 };
 
@@ -43,7 +43,7 @@ Blockly.Blocks.smartibot_M1Bwd = {
     this.setNextStatement(true);
     this.setColour(SMARTIBOT_COL);
     this.setInputsInline(true);
-    this.setTooltip(Blockly.Msg.ESPRUINO_M1BWD_TOOLTIP);
+    //this.setTooltip(Blockly.Msg.ESPRUINO_M1BWD_TOOLTIP);
   }
 };
 
@@ -58,7 +58,7 @@ Blockly.Blocks.smartibot_M2Fwd = {
     this.setNextStatement(true);
     this.setColour(SMARTIBOT_COL);
     this.setInputsInline(true);
-    this.setTooltip(Blockly.Msg.ESPRUINO_M2FWD_TOOLTIP);
+    //this.setTooltip(Blockly.Msg.ESPRUINO_M2FWD_TOOLTIP);
   }
 };
 
@@ -74,7 +74,7 @@ Blockly.Blocks.smartibot_M2Bwd = {
     this.setNextStatement(true);
     this.setColour(SMARTIBOT_COL);
     this.setInputsInline(true);
-    this.setTooltip(Blockly.Msg.ESPRUINO_M2BWD_TOOLTIP);
+    //this.setTooltip(Blockly.Msg.ESPRUINO_M2BWD_TOOLTIP);
   }
 };
 
@@ -89,7 +89,7 @@ Blockly.Blocks.smartibot_M3Fwd = {
     this.setNextStatement(true);
     this.setColour(SMARTIBOT_COL);
     this.setInputsInline(true);
-    this.setTooltip(Blockly.Msg.ESPRUINO_M3FWD_TOOLTIP);
+    //this.setTooltip(Blockly.Msg.ESPRUINO_M3FWD_TOOLTIP);
   }
 };
 
@@ -104,7 +104,7 @@ Blockly.Blocks.smartibot_M3Bwd = {
     this.setNextStatement(true);
     this.setColour(SMARTIBOT_COL);
     this.setInputsInline(true);
-    this.setTooltip(Blockly.Msg.ESPRUINO_M3BWD_TOOLTIP);
+    //this.setTooltip(Blockly.Msg.ESPRUINO_M3BWD_TOOLTIP);
   }
 };
 
@@ -119,7 +119,7 @@ Blockly.Blocks.smartibot_M4Fwd = {
     this.setNextStatement(true);
     this.setColour(SMARTIBOT_COL);
     this.setInputsInline(true);
-    this.setTooltip(Blockly.Msg.ESPRUINO_M4FWD_TOOLTIP);
+    //this.setTooltip(Blockly.Msg.ESPRUINO_M4FWD_TOOLTIP);
   }
 };
 
@@ -135,7 +135,7 @@ Blockly.Blocks.smartibot_M4Bwd = {
     this.setNextStatement(true);
     this.setColour(SMARTIBOT_COL);
     this.setInputsInline(true);
-    this.setTooltip(Blockly.Msg.ESPRUINO_M4BWD_TOOLTIP);
+    //this.setTooltip(Blockly.Msg.ESPRUINO_M4BWD_TOOLTIP);
   }
 };
 
@@ -167,7 +167,7 @@ Blockly.Blocks.smartibot_LED = {
     this.setNextStatement(true);
     this.setColour(SMARTIBOT_COL);
     this.setInputsInline(true);
-    this.setTooltip(Blockly.Msg.ESPRUINO_M4BWD_TOOLTIP);
+    //this.setTooltip(Blockly.Msg.ESPRUINO_M4BWD_TOOLTIP);
   }
 };
 
@@ -182,7 +182,7 @@ Blockly.Blocks.smartibot_LEDorange = {
     this.setNextStatement(true);
     this.setColour(35);
     this.setInputsInline(true);
-    this.setTooltip(Blockly.Msg.ESPRUINO_M4BWD_TOOLTIP);
+    //this.setTooltip(Blockly.Msg.ESPRUINO_M4BWD_TOOLTIP);
   }
 };
 
@@ -197,7 +197,7 @@ Blockly.Blocks.smartibot_LEDpink = {
     this.setNextStatement(true);
     this.setColour(310);
     this.setInputsInline(true);
-    this.setTooltip(Blockly.Msg.ESPRUINO_M4BWD_TOOLTIP);
+    //this.setTooltip(Blockly.Msg.ESPRUINO_M4BWD_TOOLTIP);
   }
 };
 
@@ -212,7 +212,7 @@ Blockly.Blocks.smartibot_LEDblue = {
     this.setNextStatement(true);
     this.setColour(190);
     this.setInputsInline(true);
-    this.setTooltip(Blockly.Msg.ESPRUINO_M4BWD_TOOLTIP);
+    //this.setTooltip(Blockly.Msg.ESPRUINO_M4BWD_TOOLTIP);
   }
 };
 
