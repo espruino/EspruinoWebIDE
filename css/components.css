@@ -555,6 +555,7 @@ paddi   ng-left: 15px;
   border-radius: 5px;
   padding: 6px;
   margin-top: 2px;
+  clear: both;
 }
 /* Other notifications */
 .terminal-status-success {
