@@ -270,7 +270,7 @@
       </block>
       TODO - need to auto-add calls here??
     </category> -->
-    <category name="Espruino">
+    <category name="Espruino" disable_if="smartibot">
       <block type="espruino_getTime"></block>
       <block type="espruino_pin"></block>
       <block type="espruino_watch">
@@ -301,7 +301,7 @@
       <block type="espruino_jsexpression">
       </block>
     </category>
-    <category name="Hardware">
+    <category name="Hardware" disable_if="smartibot">
       <block type="hw_servoMove">
         <value name="PIN"><block type="espruino_pin"><title name="PIN">B13</title></block></value>
         <value name="VAL"><block type="math_number"><title name="NUM">1</title></block></value>

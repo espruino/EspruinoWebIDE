@@ -32,14 +32,20 @@ window.onload = function() {
   var toolbox = document.getElementById('toolbox');
   for (var i=0;i<toolbox.children.length;i++) {
     var enable_if = toolbox.children[i].attributes["enable_if"];
+    var disable_if = toolbox.children[i].attributes["disable_if"];
+    var keep = true;
+    if (disable_if) {
+      if (path && path.indexOf("%7C"+disable_if.value+"%7C")>=0)
+        keep = false;
+    }
     if (enable_if) {
-      var keep = false;
+      keep = false;
       if (path && path.indexOf("%7C"+enable_if.value+"%7C")>=0)
         keep = true;
-      if (!keep) {
-        toolbox.removeChild(toolbox.children[i]);
-        i--;
-      }
+    }
+    if (!keep) {
+      toolbox.removeChild(toolbox.children[i]);
+      i--;
     }
   }
   // Set up blockly from toolbox
