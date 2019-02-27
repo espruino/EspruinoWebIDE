@@ -101,7 +101,7 @@ Blockly.Blocks.smartibot_LED = {
 Blockly.Blocks.smartibot_LEDcol = {
   category: 'Smartibot',
   init: function() {
-    this.appendDummyInput().appendField("EYES Left -")
+    this.appendDummyInput().appendField("EYES")
          .appendField(new Blockly.FieldDropdown(SMARTIBOT_COLORS), 'COL')
          .appendField("Brightness:");
     this.appendValueInput('BRIGHT').setCheck(['Number']);
