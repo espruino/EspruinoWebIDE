@@ -27,7 +27,7 @@
   }
 
   function handleQuery(key, val) {
-    Espruino.Core.Code.switchToCode(); // if in blockly
+    //Espruino.Core.Code.switchToCode(); // if in blockly
     switch(key){
       case "code": // Passing "encodedURIcomponent code" within the URL
         Espruino.Core.EditorJavaScript.setCode(val);
