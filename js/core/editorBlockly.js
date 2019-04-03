@@ -86,6 +86,19 @@
         Blockly.setBoardJSON(data);
       callback(data);
     });
+    // When we connect, see what board we're connected to
+    Espruino.addProcessor("environmentVar", function(env, callback) {
+      callback(env);
+      if (env && env.BOARD=="SMARTIBOT" && Espruino.Config.BLOCKLY_EXTENSIONS.indexOf("|smartibot|")==-1) {
+        Espruino.Core.Terminal.addNotification('Looks like you\'re using <a href="https://www.espruino.com/Smartibot" target="_blank">Smartibot</a>!<br>'+
+                                               '<button id="addblocklyblocks">Click here</button> to enable Smartibot Blockly blocks.');
+        setTimeout(function() {
+          var links = document.querySelectorAll("#addblocklyblocks");
+          for (var i=0;i<links.length;i++)
+            links[i].onclick = function() { Espruino.Core.EditorBlockly.addBlocksFor('smartibot'); };
+        }, 500);
+      }
+    });
   }
 
   function updateBlocklyURL() {
@@ -124,11 +137,22 @@
     Blockly.setVisible();
   }
 
+  // Add blocks for something specific to BLOCKLY_EXTENSIONS
+  function addBlocksFor(id) {
+    if (Espruino.Config.BLOCKLY_EXTENSIONS.indexOf("|"+id+"|")==-1) {
+      var e = Espruino.Config.BLOCKLY_EXTENSIONS;
+      if (!e.length) e="|"+id+"|";
+      else e += id+"|";
+      Espruino.Config.set("BLOCKLY_EXTENSIONS", e);
+    }
+  }
+
   Espruino.Core.EditorBlockly = {
     init : init,
     getCode : getCode,
     getXML : getXML,
     setXML : setXML,
     setVisible : setVisible,
+    addBlocksFor : addBlocksFor
   };
 }());
