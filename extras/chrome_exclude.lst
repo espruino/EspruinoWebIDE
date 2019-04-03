@@ -18,6 +18,8 @@ unused
 img/bak/*
 node_modules/*
 node_modules
+package-lock.json
+.npmignore
 js/plugins/_examplePlugin.js
 
 # CLI suff
