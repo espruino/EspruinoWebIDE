@@ -1,0 +1,9 @@
+.git
+.gitmodules
+.project
+CONTRIBUTING.md
+embed.js 
+extras/*
+unused/*
+relay/*
+
