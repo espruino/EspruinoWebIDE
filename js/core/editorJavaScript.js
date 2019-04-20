@@ -34,8 +34,9 @@
       showTrailingSpace: true,
       lint: lintFlags,
       highlightSelectionMatches: {showToken: /\w/},
-      foldGutter: {rangeFinder: new CodeMirror.fold.combine(CodeMirror.fold.brace, CodeMirror.fold.comment)},
+      foldGutter: {rangeFinder: new CodeMirror.fold.combine(CodeMirror.fold.brace, CodeMirror.fold.comment, CodeMirror.fold.indent)},
       gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter", "CodeMirror-lint-markers"],
+      keyMap: "sublime",
       extraKeys: {
         "Tab" : function(cm) {
           if (cm.somethingSelected()) {
