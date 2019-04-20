@@ -36,7 +36,7 @@
       highlightSelectionMatches: {showToken: /\w/},
       foldGutter: {rangeFinder: new CodeMirror.fold.combine(CodeMirror.fold.brace, CodeMirror.fold.comment, CodeMirror.fold.indent)},
       gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter", "CodeMirror-lint-markers"],
-      keyMap: "sublime",
+      keyMap: Espruino.Config.KEYMAP,
       extraKeys: {
         "Tab" : function(cm) {
           if (cm.somethingSelected()) {
@@ -87,7 +87,16 @@
         while(tooltips.length)
           tooltips[0].parentNode.removeChild(tooltips[0]);
     });
+
     // Options
+    Espruino.Core.Config.add("KEYMAP", {
+      section : "General",
+      name : "JavaScript Editor Keymap",
+      description : "Changes the keymap for the JavaScript editor.",
+      type : { "emacs": "Emacs", "vim": "Vim", "sublime": "Sublime" },
+      defaultValue : "sublime",
+      onChange : function() { codeMirror.keyMap = Espruino.Config.KEYMAP }
+    });
     Espruino.Core.Config.add("DISABLE_CODE_HINTS", {
       section : "General",
       name : "Disable Code Hints",
