@@ -15,6 +15,25 @@
   var codeMirrorDirty = false;
 
   function init() {
+    // Options
+    Espruino.Core.Config.add("KEYMAP", {
+      section : "General",
+      name : "JavaScript Editor Keymap",
+      description : "Changes the keymap for the JavaScript editor.",
+      type : { "emacs": "Emacs", "vim": "Vim", "sublime": "Sublime" },
+      defaultValue : "sublime",
+      onChange : function(newValue) { codeMirror.keyMap = Espruino.Config.KEYMAP }
+    });
+    Espruino.Core.Config.add("DISABLE_CODE_HINTS", {
+      section : "General",
+      name : "Disable Code Hints",
+      description : "Disable code hints in the editor. BE CAREFUL - they're there "+
+      "for a reason. If your code is creating warnings then it may well not work "+
+      "on Espruino! (needs a restart to take effect)",
+      type : "boolean",
+      defaultValue : false,
+    });
+
     $('<div id="divcode" style="width:100%;height:100%;"><textarea id="code" name="code"></textarea></div>').appendTo(".editor--code .editor__canvas");
     // The code editor
     var lintFlags = {
@@ -54,8 +73,8 @@
       if (changeObj.origin == "paste") {
         var c = cm.getCursor();
         var code = cm.getValue();
-	var newcode = Espruino.Core.Utils.fixBrokenCode(code);
-	if (newcode!=code) {
+	      var newcode = Espruino.Core.Utils.fixBrokenCode(code);
+	      if (newcode!=code) {
           // Only set if code has changed, as it moves the scrollbar location :(
           cm.setValue(newcode);
           cm.setCursor(c);
@@ -86,25 +105,6 @@
       var tooltips = document.getElementsByClassName('CodeMirror-Tern-tooltip');
         while(tooltips.length)
           tooltips[0].parentNode.removeChild(tooltips[0]);
-    });
-
-    // Options
-    Espruino.Core.Config.add("KEYMAP", {
-      section : "General",
-      name : "JavaScript Editor Keymap",
-      description : "Changes the keymap for the JavaScript editor.",
-      type : { "emacs": "Emacs", "vim": "Vim", "sublime": "Sublime" },
-      defaultValue : "sublime",
-      onChange : function() { codeMirror.keyMap = Espruino.Config.KEYMAP }
-    });
-    Espruino.Core.Config.add("DISABLE_CODE_HINTS", {
-      section : "General",
-      name : "Disable Code Hints",
-      description : "Disable code hints in the editor. BE CAREFUL - they're there "+
-      "for a reason. If your code is creating warnings then it may well not work "+
-      "on Espruino! (needs a restart to take effect)",
-      type : "boolean",
-      defaultValue : false,
     });
   }
 
