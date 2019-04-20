@@ -13,6 +13,7 @@ const CACHED_RESOURCES = [
   'blockly/blockly_ble.js',
   'blockly/blockly_compressed.js',
   'blockly/ru.js',
+  'blockly/de.js',
   'blockly/blockly_nordic_thingy.js',
   'blockly/blockly_smartibot.js',
   'blockly/media/handclosed.cur',
