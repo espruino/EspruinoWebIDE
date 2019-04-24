@@ -44,7 +44,7 @@
   },
   "optionalDependencies": {
     "noble": "^1.9.1",
-    "serialport": "^4.0.4",
+    "serialport": "^7.1.4",
     "winnus": ""
   },
   "devDependencies": {}
