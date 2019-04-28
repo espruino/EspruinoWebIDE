@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html><!-- sandbox for Chrome Web IDE -->
+<head>
+  <meta charset="utf-8" />
+
+  <title>Espruino Web IDE Sandbox</title>
+</head>
+<body>
+
+    <script src="EspruinoTools/libs/rollup/espruino-rollup.browser.js"></script> <!-- needed for rollup/terser -->
+    <script src="EspruinoTools/libs/rollup/index.js"></script> <!-- needed for rollup/terser -->
+
+    <script src="js/sandbox.js"></script>
+    <script>
+
+    var Espruino = {
+        callProcessor(processor, data, callback) {
+            sandbox.invoke(sandbox.callerWindow, 'Espruino.callProcessor', processor, data)
+              .then(callback)
+              .catch(() => callback(data));
+        },
+        get Config() {
+            return sandbox.context.Config;
+        },
+        Core: {
+            Utils: {
+                getURL(url, callback) {
+                    sandbox.invoke(sandbox.callerWindow, 'Espruino.Core.Utils.getURL', url)
+                      .then(callback)
+                      .catch(() => callback(undefined));
+                }
+            },
+            Env: {
+                getBoardData() {
+                    return sandbox.context.Core_Env.board;
+                },
+                getData() {
+                    return sandbox.context.Core_Env.data;
+                }
+            }
+        }
+    };
+
+    sandbox.id = 'espruino';
+    sandbox.wrap('rollupTools.loadModulesRollup', rollupTools.loadModulesRollup);
+    sandbox.wrap('rollupTools.minifyCodeTerser', rollupTools.minifyCodeTerser);
+
+    </script>
+</body>
+</html>

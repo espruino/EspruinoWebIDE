@@ -22,6 +22,9 @@
     "http://*/",
     "https://*/"
   ],
+  "sandbox": {
+    "pages": ["sandbox.html"]
+  },
   "sockets": { "tcp" : { "connect": "*" } },
   "manifest_version": 2,
   "url_handlers": {
