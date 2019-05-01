@@ -870,7 +870,7 @@
     },
     "compact": {
       "!type": "fn()",
-      "!doc": "<p>The Flash Storage system is journaling. To make the most of the limited\nwrite cycles of Flash memory, Espruino marks deleted/replaced files as\ngarbage and moves on to a fresh part of flash memory. Espruino only\nfully erases those files when it is running low on flash, or when\n<code>compactFiles</code> is called.</p>\n<p><code>compactFiles</code> may fail if there isn&#39;t enough RAM free on the stack to\nuse as swap space, however in this case it will not lose data.</p>\n<p><strong>Note:</strong> <code>compactFiles</code> rearranges the contents of memory. If code is\nreferencing that memory (eg. functions that have their code stored in flash)\nthen they may become garbled when compaction happens. To avoid this,\ncall <code>eraseFiles</code> before uploading data that you intend to reference to\nensure that uploaded files are right at the start of flash and cannot be\ncompacted further.</p>\n",
+      "!doc": "<p>The Flash Storage system is journaling. To make the most of the limited\nwrite cycles of Flash memory, Espruino marks deleted/replaced files as\ngarbage and moves on to a fresh part of flash memory. Espruino only\nfully erases those files when it is running low on flash, or when\n<code>compact</code> is called.</p>\n<p><code>compact</code> may fail if there isn&#39;t enough RAM free on the stack to\nuse as swap space, however in this case it will not lose data.</p>\n<p><strong>Note:</strong> <code>compact</code> rearranges the contents of memory. If code is\nreferencing that memory (eg. functions that have their code stored in flash)\nthen they may become garbled when compaction happens. To avoid this,\ncall <code>eraseFiles</code> before uploading data that you intend to reference to\nensure that uploaded files are right at the start of flash and cannot be\ncompacted further.</p>\n",
       "!url": "http://www.espruino.com/Reference#l_Storage_compact"
     },
     "debug": {
@@ -973,11 +973,6 @@
       "!doc": "<p>Returns a &#39;flat&#39; string representing the data in the arguments, or return <code>undefined</code>\nif a flat string cannot be created.</p>\n<p>This creates a string from the given arguments. If an argument is a String or an Array,\neach element is traversed and added as an 8 bit character. If it is anything else, it is\nconverted to a character directly.</p>\n<p>In the case where there&#39;s one argument which is an 8 bit typed array backed by a\nflat string of the same length, the backing string will be returned without doing\na copy or other allocation. The same applies if there&#39;s a single argument which\nis itself a flat string.</p>\n",
       "!url": "http://www.espruino.com/Reference#l_E_toString"
     },
-    "toUint8Array": {
-      "!type": "fn(args: ?) -> +Uint8Array",
-      "!doc": "<p>This creates a Uint8Array from the given arguments. If an argument is a String or an Array,\neach element is traversed and added as if it were an 8 bit value. If it is anything else, it is\nconverted to an 8 bit value directly.</p>\n",
-      "!url": "http://www.espruino.com/Reference#l_E_toUint8Array"
-    },
     "toJS": {
       "!type": "fn(arg: ?) -> +String",
       "!doc": "<p>This performs the same basic function as <code>JSON.stringify</code>,\nhowever <code>JSON.stringify</code> adds extra characters to conform\nto the JSON spec which aren&#39;t required if outputting JS.</p>\n<p><code>E.toJS</code> will also stringify JS functions, whereas\n<code>JSON.stringify</code> ignores them.</p>\n<p>For example:</p>\n<ul>\n<li><code>JSON.stringify({a:1,b:2}) == &#39;{&quot;a&quot;:1,&quot;b&quot;:2}&#39;</code></li>\n<li><code>E.toJS({a:1,b:2}) == &#39;{a:1,b:2}&#39;</code></li>\n</ul>\n<p><strong>Note:</strong> Strings generated with <code>E.toJS</code> can&#39;t be\nreliably parsed by <code>JSON.parse</code> - however they are\nvalid JS so will work with <code>eval</code> (but this has security\nimplications if you don&#39;t trust the source of the string).</p>\n<p>On the desktop <a href=\"https://github.com/json5/json5\">JSON5 parsers</a>\nwill parse the strings produced by <code>E.toJS</code> without trouble.</p>\n",
@@ -1017,6 +1012,11 @@
       "!type": "fn()",
       "!doc": "<p>Dump any locked variables that aren&#39;t referenced from <code>global</code> - for debugging memory leaks only.</p>\n",
       "!url": "http://www.espruino.com/Reference#l_E_dumpFreeList"
+    },
+    "dumpFragmentation": {
+      "!type": "fn()",
+      "!doc": "<p>Show fragmentation</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_E_dumpFragmentation"
     },
     "getAddressOf": {
       "!type": "fn(v: ?, flatAddress: bool) -> number",
@@ -1092,6 +1092,11 @@
       "!type": "fn() -> number",
       "!doc": "<p>In devices that come with batteries, this function returns\nthe battery charge percentage as an integer between 0 and 100.</p>\n<p><strong>Note:</strong> this is an estimation only, based on battery voltage.\nThe temperature of the battery (as well as the load being drawn\nfrom it at the time <code>E.getBattery</code> is called) will affect the\nreadings.</p>\n",
       "!url": "http://www.espruino.com/Reference#l_E_getBattery"
+    },
+    "getRTCPrescaler": {
+      "!type": "fn(calibrate: bool) -> number",
+      "!doc": "<p>Gets the RTC&#39;s current prescaler value if <code>calibrate</code> is undefined or false.</p>\n<p>If <code>calibrate</code> is true, the low speed oscillator&#39;s speed is calibrated against the high speed\noscillator (usually +/- 20 ppm) and a suggested value to be fed into <code>E.setRTCPrescaler(...)</code> is returned.</p>\n<p>See <code>E.setRTCPrescaler</code> for more information.</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_E_getRTCPrescaler"
     },
     "unmountSD": {
       "!type": "fn()",
@@ -1348,7 +1353,7 @@
       },
       "split": {
         "!type": "fn(separator: ?) -> ?",
-        "!doc": "<p>Return an array made by splitting this string up by the separator. eg. <code>&#39;1,2,3&#39;.split(&#39;,&#39;)==[1,2,3]</code></p>\n",
+        "!doc": "<p>Return an array made by splitting this string up by the separator. eg. <code>&#39;1,2,3&#39;.split(&#39;,&#39;)==[&#39;1&#39;, &#39;2&#39;, &#39;3&#39;]</code></p>\n<p>Regular Expressions can also be used to split strings, eg. <code>&#39;1a2b3 4&#39;.split(/[^0-9]/)==[&#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;]</code>.</p>\n",
         "!url": "http://www.espruino.com/Reference#l_String_split"
       },
       "toLowerCase": {
@@ -1931,17 +1936,17 @@
     "!url": "http://www.espruino.com/Reference#BluetoothRemoteGATTServer",
     "prototype": {
       "disconnect": {
-        "!type": "fn()",
-        "!doc": "<p>Disconnect from a previously connected BLE device connected with\n<code>NRF.connect</code> - this does not disconnect from something that has\nconnected to the Espruino.</p>\n",
+        "!type": "fn() -> +Promise",
+        "!doc": "<p>Disconnect from a previously connected BLE device connected with\n<code>BluetoothRemoteGATTServer.connect</code> - this does not disconnect from something that has\nconnected to the Espruino.</p>\n<p><strong>Note:</strong> While <code>.disconnect</code> is standard Web Bluetooth, in the spec it\nreturns undefined not a <code>Promise</code> for implementation reasons. In Espruino\nwe return a <code>Promise</code> to make it easier to detect when Espruino is free\nto connect to something else.</p>\n",
         "!url": "http://www.espruino.com/Reference#l_BluetoothRemoteGATTServer_disconnect"
       },
       "getPrimaryService": {
-        "!type": "fn(service: ?) -> ?",
+        "!type": "fn(service: ?) -> +Promise",
         "!doc": "<p>See <code>NRF.connect</code> for usage examples.</p>\n",
         "!url": "http://www.espruino.com/Reference#l_BluetoothRemoteGATTServer_getPrimaryService"
       },
       "getPrimaryServices": {
-        "!type": "fn() -> ?",
+        "!type": "fn() -> +Promise",
         "!doc": "",
         "!url": "http://www.espruino.com/Reference#l_BluetoothRemoteGATTServer_getPrimaryServices"
       }
@@ -1953,12 +1958,12 @@
     "!url": "http://www.espruino.com/Reference#BluetoothRemoteGATTService",
     "prototype": {
       "getCharacteristic": {
-        "!type": "fn(characteristic: ?) -> ?",
+        "!type": "fn(characteristic: ?) -> +Promise",
         "!doc": "<p>See <code>NRF.connect</code> for usage examples.</p>\n",
         "!url": "http://www.espruino.com/Reference#l_BluetoothRemoteGATTService_getCharacteristic"
       },
       "getCharacteristics": {
-        "!type": "fn() -> ?",
+        "!type": "fn() -> +Promise",
         "!doc": "",
         "!url": "http://www.espruino.com/Reference#l_BluetoothRemoteGATTService_getCharacteristics"
       }
@@ -1970,7 +1975,7 @@
     "!url": "http://www.espruino.com/Reference#BluetoothRemoteGATTCharacteristic",
     "prototype": {
       "stopNotifications": {
-        "!type": "fn() -> ?",
+        "!type": "fn() -> +Promise",
         "!doc": "<p>Stop notifications (that were requested with <code>BluetoothRemoteGATTCharacteristic.startNotifications</code>)</p>\n",
         "!url": "http://www.espruino.com/Reference#l_BluetoothRemoteGATTCharacteristic_stopNotifications"
       }
@@ -2152,7 +2157,7 @@
     },
     "wrap": {
       "!type": "fn(x: number, max: number) -> number",
-      "!doc": "<p>Wrap a number around if it is less than 0 or greater than or equal to max. For instance you might do: <code>Math.wrap(angleInDegrees, 360)</code></p>\n",
+      "!doc": "<p>DEPRECATED - This is not part of standard JavaScript libraries</p>\n<p>Wrap a number around if it is less than 0 or greater than or equal to max. For instance you might do: <code>Math.wrap(angleInDegrees, 360)</code></p>\n",
       "!url": "http://www.espruino.com/Reference#l_Math_wrap"
     },
     "min": {
@@ -2208,7 +2213,7 @@
   },
   "neopixel": {
     "!type": "fn()",
-    "!doc": "<p>This library allows you to write to Neopixel/WS281x/APA10x LED strips</p>\n<p>These use a high speed single-wire protocol which needs platform-specific\nimplementation on some devices - hence this library to simplify things.</p>\n",
+    "!doc": "<p>This library allows you to write to Neopixel/WS281x/APA10x/SK6812 LED strips</p>\n<p>These use a high speed single-wire protocol which needs platform-specific\nimplementation on some devices - hence this library to simplify things.</p>\n",
     "!url": "http://www.espruino.com/Reference#l_neopixel_undefined"
   },
   "ESP8266": {
@@ -2292,7 +2297,7 @@
     "!url": "http://www.espruino.com/Reference#l_http_undefined",
     "createServer": {
       "!type": "fn(callback: ?) -> +httpSrv",
-      "!doc": "<p>Create an HTTP Server</p>\n<p>When a request to the server is made, the callback is called. In the callback you can use the methods on the response (httpSRs) to send data. You can also add <code>request.on(&#39;data&#39;,function() { ... })</code> to listen for POSTed data</p>\n",
+      "!doc": "<p>Create an HTTP Server</p>\n<p>When a request to the server is made, the callback is called. In the callback you can use the methods on the response (<code>httpSRs</code>) to send data. You can also add <code>request.on(&#39;data&#39;,function() { ... })</code> to listen for POSTed data</p>\n",
       "!url": "http://www.espruino.com/Reference#l_http_createServer"
     }
   },
@@ -2318,6 +2323,21 @@
     "!doc": "<p>The HTTP server request</p>\n",
     "!url": "http://www.espruino.com/Reference#httpSRq",
     "prototype": {
+      "headers": {
+        "!type": "?",
+        "!doc": "<p>The headers to sent to the server with this HTTP request.</p>\n",
+        "!url": "http://www.espruino.com/Reference#l_httpSRq_headers"
+      },
+      "method": {
+        "!type": "?",
+        "!doc": "<p>The HTTP method used with this request. Often <code>&quot;GET&quot;</code>.</p>\n",
+        "!url": "http://www.espruino.com/Reference#l_httpSRq_method"
+      },
+      "url": {
+        "!type": "?",
+        "!doc": "<p>The URL requested in this HTTP request, for instance:</p>\n<ul>\n<li><code>&quot;/&quot;</code> - the main page</li>\n<li><code>&quot;/favicon.ico&quot;</code> - the web page&#39;s icon</li>\n</ul>\n",
+        "!url": "http://www.espruino.com/Reference#l_httpSRq_url"
+      },
       "available": {
         "!type": "fn() -> number",
         "!doc": "<p>Return how many bytes are available to read. If there is already a listener for data, this will always return 0.</p>\n",
@@ -2352,8 +2372,13 @@
       },
       "writeHead": {
         "!type": "fn(statusCode: number, headers: ?)",
-        "!doc": "",
+        "!doc": "<p>Send the given status code and headers. If not explicitly called\nthis will be done automatically the first time data is written\nto the response.</p>\n<p>This cannot be called twice, or after data has already been sent\nin the response.</p>\n",
         "!url": "http://www.espruino.com/Reference#l_httpSRs_writeHead"
+      },
+      "setHeader": {
+        "!type": "fn(name: ?, value: ?)",
+        "!doc": "<p>Set a value to send in the header of this HTTP response. This updates the <code>httpSRs.headers</code> property.</p>\n<p>Any headers supplied to <code>writeHead</code> will overwrite any headers with the same name.</p>\n",
+        "!url": "http://www.espruino.com/Reference#l_httpSRs_setHeader"
       }
     }
   },
@@ -2379,6 +2404,26 @@
     "!doc": "<p>The HTTP client response, passed to the callback of <code>http.request()</code> an <code>http.get()</code>.</p>\n",
     "!url": "http://www.espruino.com/Reference#httpCRs",
     "prototype": {
+      "headers": {
+        "!type": "?",
+        "!doc": "<p>The headers received along with the HTTP response</p>\n",
+        "!url": "http://www.espruino.com/Reference#l_httpCRs_headers"
+      },
+      "statusCode": {
+        "!type": "?",
+        "!doc": "<p>The HTTP response&#39;s status code - usually <code>&quot;200&quot;</code> if all went well</p>\n",
+        "!url": "http://www.espruino.com/Reference#l_httpCRs_statusCode"
+      },
+      "statusMessage": {
+        "!type": "?",
+        "!doc": "<p>The HTTP response&#39;s status message - Usually <code>&quot;OK&quot;</code> if all went well</p>\n",
+        "!url": "http://www.espruino.com/Reference#l_httpCRs_statusMessage"
+      },
+      "httpVersion": {
+        "!type": "?",
+        "!doc": "<p>The HTTP version reported back by the server - usually <code>&quot;1.1&quot;</code></p>\n",
+        "!url": "http://www.espruino.com/Reference#l_httpCRs_httpVersion"
+      },
       "available": {
         "!type": "fn() -> number",
         "!doc": "<p>Return how many bytes are available to read. If there is a &#39;data&#39; event handler, this will always return 0.</p>\n",
@@ -2794,29 +2839,39 @@
         "!url": "http://www.espruino.com/Reference#l_Graphics_getHeight"
       },
       "clear": {
-        "!type": "fn()",
+        "!type": "fn(reset: bool) -> +Graphics",
         "!doc": "<p>Clear the LCD with the Background Color</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Graphics_clear"
       },
       "fillRect": {
-        "!type": "fn(x1: number, y1: number, x2: number, y2: number)",
+        "!type": "fn(x1: number, y1: number, x2: number, y2: number) -> +Graphics",
         "!doc": "<p>Fill a rectangular area in the Foreground Color</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Graphics_fillRect"
       },
       "drawRect": {
-        "!type": "fn(x1: number, y1: number, x2: number, y2: number)",
+        "!type": "fn(x1: number, y1: number, x2: number, y2: number) -> +Graphics",
         "!doc": "<p>Draw an unfilled rectangle 1px wide in the Foreground Color</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Graphics_drawRect"
       },
       "fillCircle": {
-        "!type": "fn(x: number, y: number, rad: number)",
+        "!type": "fn(x: number, y: number, rad: number) -> +Graphics",
         "!doc": "<p>Draw a filled circle in the Foreground Color</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Graphics_fillCircle"
       },
       "drawCircle": {
-        "!type": "fn(x: number, y: number, rad: number)",
+        "!type": "fn(x: number, y: number, rad: number) -> +Graphics",
         "!doc": "<p>Draw an unfilled circle 1px wide in the Foreground Color</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Graphics_drawCircle"
+      },
+      "fillEllipse": {
+        "!type": "fn(x1: number, y1: number, x2: number, y2: number) -> +Graphics",
+        "!doc": "<p>Draw a filled ellipse in the Foreground Color</p>\n",
+        "!url": "http://www.espruino.com/Reference#l_Graphics_fillEllipse"
+      },
+      "drawEllipse": {
+        "!type": "fn(x1: number, y1: number, x2: number, y2: number) -> +Graphics",
+        "!doc": "<p>Draw an ellipse in the Foreground Color</p>\n",
+        "!url": "http://www.espruino.com/Reference#l_Graphics_drawEllipse"
       },
       "getPixel": {
         "!type": "fn(x: number, y: number) -> number",
@@ -2824,17 +2879,17 @@
         "!url": "http://www.espruino.com/Reference#l_Graphics_getPixel"
       },
       "setPixel": {
-        "!type": "fn(x: number, y: number, col: ?)",
+        "!type": "fn(x: number, y: number, col: ?) -> +Graphics",
         "!doc": "<p>Set a pixel&#39;s color</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Graphics_setPixel"
       },
       "setColor": {
-        "!type": "fn(r: ?, g: ?, b: ?)",
+        "!type": "fn(r: ?, g: ?, b: ?) -> +Graphics",
         "!doc": "<p>Set the color to use for subsequent drawing operations.</p>\n<p>If just <code>r</code> is specified as an integer, the numeric value will be written directly into a pixel. eg. On a 24 bit <code>Graphics</code> instance you set bright blue with either <code>g.setColor(0,0,1)</code> or <code>g.setColor(0x0000FF)</code>.</p>\n<p>The mapping is as follows:</p>\n<ul>\n<li>32 bit: <code>r,g,b</code> =&gt; <code>0xFFrrggbb</code></li>\n<li>24 bit: <code>r,g,b</code> =&gt; <code>0xrrggbb</code></li>\n<li>16 bit: <code>r,g,b</code> =&gt; <code>0brrrrrggggggbbbbb</code> (RGB565)</li>\n<li>Other bpp: <code>r,g,b</code> =&gt; white if <code>r+g+b &gt; 50%</code>, otherwise black (use <code>r</code> on its own as an integer)</li>\n</ul>\n<p>If you specified <code>color_order</code> when creating the <code>Graphics</code> instance, <code>r</code>,<code>g</code> and <code>b</code> will be swapped as you specified.</p>\n<p><strong>Note:</strong> On devices with low flash memory, <code>r</code> <strong>must</strong> be an integer representing the color in the current bit depth. It cannot\nbe a floating point value, and <code>g</code> and <code>b</code> are ignored.</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Graphics_setColor"
       },
       "setBgColor": {
-        "!type": "fn(r: ?, g: ?, b: ?)",
+        "!type": "fn(r: ?, g: ?, b: ?) -> +Graphics",
         "!doc": "<p>Set the background color to use for subsequent drawing operations. </p>\n<p>See <code>Graphics.setColor</code> for more information on the mapping of <code>r</code>, <code>g</code>, and <code>b</code> to pixel values.</p>\n<p><strong>Note:</strong> On devices with low flash memory, <code>r</code> <strong>must</strong> be an integer representing the color in the current bit depth. It cannot\nbe a floating point value, and <code>g</code> and <code>b</code> are ignored.</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Graphics_setBgColor"
       },
@@ -2849,27 +2904,27 @@
         "!url": "http://www.espruino.com/Reference#l_Graphics_getBgColor"
       },
       "setFontBitmap": {
-        "!type": "fn()",
+        "!type": "fn() -> +Graphics",
         "!doc": "<p>Make subsequent calls to <code>drawString</code> use the built-in 4x6 pixel bitmapped Font</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Graphics_setFontBitmap"
       },
       "setFontVector": {
-        "!type": "fn(size: number)",
+        "!type": "fn(size: number) -> +Graphics",
         "!doc": "<p>Make subsequent calls to <code>drawString</code> use a Vector Font of the given height</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Graphics_setFontVector"
       },
       "setFontCustom": {
-        "!type": "fn(bitmap: ?, firstChar: number, width: ?, height: number)",
+        "!type": "fn(bitmap: ?, firstChar: number, width: ?, height: number) -> +Graphics",
         "!doc": "<p>Make subsequent calls to <code>drawString</code> use a Custom Font of the given height. See the <a href=\"http://www.espruino.com/Fonts\">Fonts page</a> for more\ninformation about custom fonts and how to create them.</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Graphics_setFontCustom"
       },
       "setFontAlign": {
-        "!type": "fn(x: number, y: number, rotation: number)",
+        "!type": "fn(x: number, y: number, rotation: number) -> +Graphics",
         "!doc": "<p>Set the alignment for subsequent calls to <code>drawString</code></p>\n",
         "!url": "http://www.espruino.com/Reference#l_Graphics_setFontAlign"
       },
       "drawString": {
-        "!type": "fn(str: ?, x: number, y: number)",
+        "!type": "fn(str: ?, x: number, y: number) -> +Graphics",
         "!doc": "<p>Draw a string of text in the current font</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Graphics_drawString"
       },
@@ -2879,37 +2934,37 @@
         "!url": "http://www.espruino.com/Reference#l_Graphics_stringWidth"
       },
       "drawLine": {
-        "!type": "fn(x1: number, y1: number, x2: number, y2: number)",
+        "!type": "fn(x1: number, y1: number, x2: number, y2: number) -> +Graphics",
         "!doc": "<p>Draw a line between x1,y1 and x2,y2 in the current foreground color</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Graphics_drawLine"
       },
       "lineTo": {
-        "!type": "fn(x: number, y: number)",
+        "!type": "fn(x: number, y: number) -> +Graphics",
         "!doc": "<p>Draw a line from the last position of lineTo or moveTo to this position</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Graphics_lineTo"
       },
       "moveTo": {
-        "!type": "fn(x: number, y: number)",
+        "!type": "fn(x: number, y: number) -> +Graphics",
         "!doc": "<p>Move the cursor to a position - see lineTo</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Graphics_moveTo"
       },
       "drawPoly": {
-        "!type": "fn(poly: ?, closed: bool)",
+        "!type": "fn(poly: ?, closed: bool) -> +Graphics",
         "!doc": "<p>Draw a polyline (lines between each of the points in <code>poly</code>) in the current foreground color</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Graphics_drawPoly"
       },
       "fillPoly": {
-        "!type": "fn(poly: ?)",
+        "!type": "fn(poly: ?) -> +Graphics",
         "!doc": "<p>Draw a filled polygon in the current foreground color</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Graphics_fillPoly"
       },
       "setRotation": {
-        "!type": "fn(rotation: number, reflect: bool)",
+        "!type": "fn(rotation: number, reflect: bool) -> +Graphics",
         "!doc": "<p>Set the current rotation of the graphics device.</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Graphics_setRotation"
       },
       "drawImage": {
-        "!type": "fn(image: ?, x: number, y: number)",
+        "!type": "fn(image: ?, x: number, y: number) -> +Graphics",
         "!doc": "<p>Draw an image at the specified position. If the image is 1 bit, the graphics foreground/background colours will be used. Otherwise color data will be copied as-is. Bitmaps are rendered MSB-first</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Graphics_drawImage"
       },
@@ -2924,7 +2979,7 @@
         "!url": "http://www.espruino.com/Reference#l_Graphics_getModified"
       },
       "scroll": {
-        "!type": "fn(x: number, y: number)",
+        "!type": "fn(x: number, y: number) -> +Graphics",
         "!doc": "<p>Scroll the contents of this graphics in a certain direction. The remaining area\nis filled with the background color.</p>\n<p>Note: This uses repeated pixel reads and writes, so will not work on platforms that\ndon&#39;t support pixel reads.</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Graphics_scroll"
       },
@@ -3142,7 +3197,7 @@
   },
   "save": {
     "!type": "fn()",
-    "!doc": "<p>Save program memory into flash. It will then be loaded automatically every time\nEspruino powers on or is hard-reset.</p>\n<p>This command only executes when the Interpreter returns to the Idle state - for\ninstance <code>a=1;save();a=2;</code> will save &#39;a&#39; as 2.</p>\n<p>When Espruino powers on, it will resume from where it was when you typed <code>save()</code>.\nIf you want code to be executed right after loading (for instance to initialise\ndevices connected to Espruino), add an <code>init</code> event handler to <code>E</code> with\n<code>E.on(&#39;init&#39;, function() { ... your_code ... });</code>. This will then be automatically\nexecuted by Espruino every time it starts.</p>\n<p>In order to stop the program saved with this command being loaded automatically,\nhold down Button 1 while also pressing reset. On some boards, Button 1 enters\nbootloader mode, so you will need to press Reset with Button 1 raised, and then\nhold Button 1 down a fraction of a second later.</p>\n",
+    "!doc": "<p>Save the state of the interpreter into flash (including the results of calling\n<code>setWatch</code>, <code>setInterval</code>, <code>pinMode</code>, and any listeners). The state will then be loaded automatically\n every time Espruino powers on or is hard-reset. To see what will get saved you can call <code>dump()</code>.</p>\n<p><strong>Note:</strong> If you set up intervals/etc in <code>onInit()</code> and you have already called <code>onInit</code>\nbefore running <code>save()</code>, when Espruino resumes there will be two copies of your intervals -\nthe ones from before the save, and the ones from after - which may cause you problems.</p>\n<p>For more information about this and other options for saving, please see\nthe <a href=\"https://www.espruino.com/Saving\">Saving code on Espruino</a> page.</p>\n<p>This command only executes when the Interpreter returns to the Idle state - for\ninstance <code>a=1;save();a=2;</code> will save &#39;a&#39; as 2.</p>\n<p>When Espruino powers on, it will resume from where it was when you typed <code>save()</code>.\nIf you want code to be executed right after loading (for instance to initialise\ndevices connected to Espruino), add a function called <code>onInit</code>, or add a <code>init</code>\nevent handler to <code>E</code> with <code>E.on(&#39;init&#39;, function() { ... your_code ... });</code>.\nThis will then be automatically executed by Espruino every time it starts.</p>\n<p>In order to stop the program saved with this command being loaded automatically,\ncheck out <a href=\"https://www.espruino.com/Troubleshooting#espruino-stopped-working-after-i-typed-save-\">the Troubleshooting guide</a></p>\n",
     "!url": "http://www.espruino.com/Reference#l__global_save"
   },
   "reset": {
@@ -3169,11 +3224,6 @@
     "!type": "fn() -> number",
     "!doc": "<p>Return the current system time in Seconds (as a floating point number)</p>\n",
     "!url": "http://www.espruino.com/Reference#l__global_getTime"
-  },
-  "setTime": {
-    "!type": "fn(time: number)",
-    "!doc": "<p>Set the current system time in seconds (to the nearest second).</p>\n<p>This is used with <code>getTime</code>, the time reported from <code>setWatch</code>, as\nwell as when using <code>new Date()</code>.</p>\n<p>To set the timezone for all new Dates, use <code>E.setTimeZone(hours)</code>.</p>\n",
-    "!url": "http://www.espruino.com/Reference#l__global_setTime"
   },
   "getSerial": {
     "!type": "fn() -> ?",
