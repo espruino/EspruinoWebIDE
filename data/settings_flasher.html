@@ -12,7 +12,9 @@
  <p class="flash_info"></p>
 
  <h3>Advanced Firmware Update</h3>
- <p>If you know the exact URL of the binary you wish to update (for instance from a <a href="http://www.espruino.com/binaries/travis/master" target="_blank">cutting-edge build</a>), please enter it below and click the button:</p>
+ <p>If you know the exact URL of the binary you wish to update (for instance from <a href="http://www.espruino.com/Download" target="_blank">&quot;Find a binary&quot; on the Download page</a>), please enter it below and click 'Flash from URL':</p>
  <p>
-  <input type="text" class="flash_url" size="70" value=""/><button class="flash_start_advanced">Advanced Flash Firmware</button>
+  <input type="text" class="flash_url" size="70" placeholder="https://....." value=""/><button class="flash_start_url">Flash from URL</button>
  </p>
+ <p>If you have the file on your computer, click <button class="flash_start_file">Flash from File</button> and you'll be able to choose the file to upload.</p>
+<p><b>NOTE:</b> STM32-based boards need to be flashed with <code>.bin</code> files, and nRF52 boards need <code>.zip</code> files (not <code>.hex</code>)</p>

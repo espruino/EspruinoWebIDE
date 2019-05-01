@@ -17,11 +17,11 @@
   function init() {
   }
 
-  function showFlasher(urlOrNothing) {
+  function showFlasher(urlOrNothing, binaryOrNothing) {
     if (urlOrNothing) urlOrNothing = urlOrNothing.trim();
     if (urlOrNothing=="") urlOrNothing=undefined;
 
-    if (!urlOrNothing) {
+    if (!urlOrNothing && !binaryOrNothing) {
       var env = Espruino.Core.Env.getData();
       if (env!==undefined &&
           env.info!==undefined &&
@@ -40,12 +40,12 @@
       }
     }
 
-    stepSelectBoard(urlOrNothing);
+    stepSelectBoard(urlOrNothing, binaryOrNothing);
   }
 
   function getBoardFlashingFunction(boardId) {
     var msg;
-    if (["PUCKJS","PIXLJS","MDBT42Q","RUUVITAG"].indexOf(boardId)>=0) {
+    if (["PUCKJS","PIXLJS","MDBT42Q","RUUVITAG","SMARTIBOT"].indexOf(boardId)>=0) {
       if (navigator && navigator.bluetooth &&
           !(window && window.location && window.location.protocol=="http:"))
         return stepFlashNordicDFU;
@@ -68,7 +68,7 @@
     return undefined;
   }
 
-  function stepSelectBoard( urlOrNothing ) {
+  function stepSelectBoard( urlOrNothing, binaryOrNothing) {
     var boardList;
 
     var popup = Espruino.Core.App.openPopup({
@@ -89,11 +89,12 @@
             var boardJson = boardList[boardId]["json"];
             var flashInfo = {
               binary_url : urlOrNothing,
+              binary : binaryOrNothing,
               board_id : boardId,
               board_info : boardJson.info,
               board_chip : boardJson.chip,
               flashFn : flashFn };
-            if (urlOrNothing)
+            if (urlOrNothing || binaryOrNothing)
               stepDownload( flashInfo );
             else
               stepSelectBinary( flashInfo );
@@ -190,9 +191,15 @@
   // ===========================================================================
   // data = { binary_url, board_id, board_info, board_chip, flashFn }
   function stepFlashSTM32(data) {
+    if (data.binary)
+      return doFlash();    
     Espruino.Core.Utils.getBinaryURL(data.binary_url, function (err, binary) {
       if (err) return stepError("Unable to download "+data.binary_url);
       data.binary = binary;
+      doFlash();
+    });
+
+    function doFlash() {
       Espruino.Core.MenuPortSelector.disconnect();
       var popup = Espruino.Core.App.openPopup({
         title: "Firmware Update",
@@ -204,7 +211,7 @@
           stepFlashSTM32_2(data);
         }
       });
-    });
+    }
   }
 
   // data = { binary, binary_url, board_id, board_info, board_chip, flashFn }
@@ -292,13 +299,18 @@
 
   // data = { binary_url, board_id, board_info, board_chip, flashFn }
   function stepFlashNordicDFU(data) {
+    if (data.binary)
+      return doFlash();
     /* Hack because we have different binaries - hex and zip - depending
     on how firmware is written. We need zips for Nordic DFU */
     data.binary_url = data.binary_url.replace(/\.hex$/,".zip");
     Espruino.Core.Utils.getBinaryURL(data.binary_url, function (err, binary) {
       if (err) return stepError("Unable to download "+data.binary_url);
       data.binary = binary;
+      doFlash();
+    });
 
+    function doFlash() {
       data.firmwarePackage = new SecureDfuPackage(data.binary);
       data.firmwarePackage.load().then(function() {
         Espruino.Core.MenuPortSelector.disconnect();
@@ -315,8 +327,7 @@
       }).catch(function(error) {
         stepError(error);
       });
-    });
-
+    }
   }
 
   // data = { binary, binary_url, board_id, board_info, board_chip, flashFn }

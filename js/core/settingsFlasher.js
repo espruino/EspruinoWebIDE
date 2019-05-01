@@ -34,12 +34,18 @@
             Espruino.Core.MenuFlasher.showFlasher();
           });
           // Advanced start
-          $('.flash_start_advanced').click( function() {
+          $('.flash_start_url').click( function() {
             var url = $('.flash_url').val();
             if (url!="") {
               Espruino.Core.App.closePopup();
               Espruino.Core.MenuFlasher.showFlasher( url );
             }
+          });
+          $('.flash_start_file').click( function() {
+            Espruino.Core.Utils.fileOpenDialog("flasher","arraybuffer",function(buffer) {
+              Espruino.Core.App.closePopup();
+              Espruino.Core.MenuFlasher.showFlasher( undefined, buffer );
+            });
           });
         });
       }
