@@ -3157,7 +3157,7 @@
   },
   "clearWatch": {
     "!type": "fn(id: ?)",
-    "!doc": "<p>Clear the Watch that was created with setWatch. If no parameter is supplied, all watches will be removed.</p>\n",
+    "!doc": "<p>Clear the Watch that was created with setWatch. If no parameter is supplied, all watches will be removed.</p>\n<p>To avoid accidentally deleting all Watches, if a parameter is supplied but is <code>undefined</code> then an Exception will be thrown.</p>\n",
     "!url": "http://www.espruino.com/Reference#l__global_clearWatch"
   },
   "global": {
@@ -3232,12 +3232,12 @@
   },
   "clearInterval": {
     "!type": "fn(id: ?)",
-    "!doc": "<p>Clear the Interval that was created with <code>setInterval</code>, for example:</p>\n<p><code>var id = setInterval(function () { print(&#39;foo&#39;); }, 1000);</code></p>\n<p><code>clearInterval(id);</code></p>\n<p>If no argument is supplied, all timers and intervals are stopped</p>\n",
+    "!doc": "<p>Clear the Interval that was created with <code>setInterval</code>, for example:</p>\n<p><code>var id = setInterval(function () { print(&#39;foo&#39;); }, 1000);</code></p>\n<p><code>clearInterval(id);</code></p>\n<p>If no argument is supplied, all timeouts and intervals are stopped.</p>\n<p>To avoid accidentally deleting all Intervals, if a parameter is supplied but is <code>undefined</code> then an Exception will be thrown.</p>\n",
     "!url": "http://www.espruino.com/Reference#l__global_clearInterval"
   },
   "clearTimeout": {
     "!type": "fn(id: ?)",
-    "!doc": "<p>Clear the Timeout that was created with <code>setTimeout</code>, for example:</p>\n<p><code>var id = setTimeout(function () { print(&#39;foo&#39;); }, 1000);</code></p>\n<p><code>clearTimeout(id);</code></p>\n<p>If no argument is supplied, all timers and intervals are stopped</p>\n",
+    "!doc": "<p>Clear the Timeout that was created with <code>setTimeout</code>, for example:</p>\n<p><code>var id = setTimeout(function () { print(&#39;foo&#39;); }, 1000);</code></p>\n<p><code>clearTimeout(id);</code></p>\n<p>If no argument is supplied, all timeouts and intervals are stopped.</p>\n<p>To avoid accidentally deleting all Timeouts, if a parameter is supplied but is <code>undefined</code> then an Exception will be thrown.</p>\n",
     "!url": "http://www.espruino.com/Reference#l__global_clearTimeout"
   },
   "changeInterval": {

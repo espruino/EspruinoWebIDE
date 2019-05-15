@@ -28,7 +28,7 @@
               for (var k in d) {
                 var v = d[k];
                 if ("string" != typeof v)
-                  v = JSON.stringify(v);
+                  v = ""+JSON.stringify(v);
                 if (v.length>80) v=v.substr(0,77)+" ...";
                 strData[k] = v;
               }
