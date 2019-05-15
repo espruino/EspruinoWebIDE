@@ -309,6 +309,12 @@ a:hover > .menu
 	background: #42484a;
 }
 
+.splitster__bar--ghost
+{
+	background: #3498db;
+  opacity: 0.5;
+}
+
 /* Lists */
 .list,
 .list__item
