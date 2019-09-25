@@ -96,6 +96,7 @@ Using
 
 **Running with Node.js/Electron and don't see any ports when you try and connect?** You're probably using a version of Node.js that doesn't match Electron. This causes NPM to load binary modules (for `serialport` and `bleat`) that are for the old version of Node and that won't work in Electron. To fix it, update Node.js, delete `node_modules` and run `npm install` again.
 
+**Debugging with NW** In order to debug the WebIDE using DevTools you need to install the SDK flavor of nw. This can be done with `npm install -g nw --nwjs_build_type=sdk` instead of just `npm install -g nw`. Once the SDK flavor is installed you can specify a remote-debug port like this `nw --remote-debugging-port=9222 `.
 
 Full Web Version
 ----------------
