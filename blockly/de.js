@@ -13,8 +13,8 @@ if (window.location.href.indexOf("lang=de")>=0) {
   /** @export */ Blockly.Msg["CHANGE_VALUE_TITLE"] = "Wert ändern:";
   /** @export */ Blockly.Msg["CLEAN_UP"] = "Bausteine aufräumen";
   /** @export */ Blockly.Msg["COLLAPSED_WARNINGS_WARNING"] = "Eingeklappte Blöcke enthalten Warnungen.";
-  /** @export */ Blockly.Msg["COLLAPSE_ALL"] = "Alle Bausteine zusammenfalten";
-  /** @export */ Blockly.Msg["COLLAPSE_BLOCK"] = "Baustein zusammenfalten";
+  /** @export */ Blockly.Msg["COLLAPSE_ALL"] = "Alle Bausteine zusammenklappen";
+  /** @export */ Blockly.Msg["COLLAPSE_BLOCK"] = "Baustein zusammenklappen";
   /** @export */ Blockly.Msg["COLOUR_BLEND_COLOUR1"] = "Farbe 1";
   /** @export */ Blockly.Msg["COLOUR_BLEND_COLOUR2"] = "und Farbe 2";
   /** @export */ Blockly.Msg["COLOUR_BLEND_HELPURL"] = "http://meyerweb.com/eric/tools/color-blend/";
@@ -475,15 +475,15 @@ if (window.location.href.indexOf("lang=de")>=0) {
   /** @export */ Blockly.Msg.ESPRUINO_MOVE_SERVO_TOOLTIP = 'Starte die Bewegung des Servomotors - Position zwischen -1 and 1';
   /** @export */ Blockly.Msg.ESPRUINO_STOP_SERVO = 'Stoppt den Servo an Pin';
   /** @export */ Blockly.Msg.ESPRUINO_STOP_SERVO_TOOLTIP = 'Stoppe die Bewegung des Servomotors';
-  /** @export */ Blockly.Msg.ESPRUINO_ULTRASONIC_GET_TRIG = 'Holde die Distance, trigger';
+  /** @export */ Blockly.Msg.ESPRUINO_ULTRASONIC_GET_TRIG = 'Holde die Entfernung, trigger';
   /** @export */ Blockly.Msg.ESPRUINO_ULTRASONIC_ECHO = ', echo';
-  /** @export */ Blockly.Msg.ESPRUINO_ULTRASONIC_TOOLTIP = 'Liefere die Distance in Zentimeter von dem Ultraschallsensor';
+  /** @export */ Blockly.Msg.ESPRUINO_ULTRASONIC_TOOLTIP = 'Liefere die Entfernung in Zentimeter von dem Ultraschallsensor';
 
   /** @export */ Blockly.Msg.AMPERKA_MOTORSHIELD_RIGHT = 'Rechts(M2)';
   /** @export */ Blockly.Msg.AMPERKA_MOTORSHIELD_LEFT = 'Links(M1)';
   /** @export */ Blockly.Msg.AMPERKA_MOTORSHIELD_SET = 'Setze';
   /** @export */ Blockly.Msg.AMPERKA_MOTORSHIELD_SPEED = 'Motor Geschwindigkeit';
-  /** @export */ Blockly.Msg.AMPERKA_MOTORSHIELD_SPEED_TOOLTIP = 'Changes the speed of the motor (values from 0.0 to 1.0)';
+  /** @export */ Blockly.Msg.AMPERKA_MOTORSHIELD_SPEED_TOOLTIP = 'Ändere die Geschwindigkeit des motors (Werte von 0.0 bis 1.0)';
   /** @export */ Blockly.Msg.AMPERKA_MOTORSHIELD_DIRECTION = 'Motor Richtung';
   /** @export */ Blockly.Msg.AMPERKA_MOTORSHIELD_DIRECTION_TOOLTIP =  'Wechsle die Richtung vom Motor (wahr/falsch)';
 }
