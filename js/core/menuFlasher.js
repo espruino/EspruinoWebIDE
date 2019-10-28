@@ -45,12 +45,16 @@
 
   function getBoardFlashingFunction(boardId) {
     var msg;
-    if (["PUCKJS","PIXLJS","MDBT42Q","RUUVITAG","SMARTIBOT"].indexOf(boardId)>=0) {
+    if (["PUCKJS","PIXLJS","MDBT42Q","RUUVITAG","SMARTIBOT","BANGLEJS","RAK8211","RAK8212"].indexOf(boardId)>=0) {
       if (navigator && navigator.bluetooth &&
-          !(window && window.location && window.location.protocol=="http:"))
+          !(window && window.location && window.location.protocol=="http:")) {
+
         return stepFlashNordicDFU;
-      else
-        msg = '<p>The firmware for this device can only be written via Web Bluetooth (or a phone app). See the device\'s reference page for more information.</p>';
+      } else if (Espruino.Core.Utils.isWindows()) {
+        msg = '<p>Unfortunately Bluetooth firmware updates are not possible from Windows at the moment. Please see you device\'s reference page for more information on firmware updates.</p>';
+      } else {
+        msg = '<p>The firmware for this device can only be written via Web Bluetooth (or a phone app). Please see you device\'s reference page for more information on firmware updates.</p>';
+      }
     } else if (["PICO_R1_3","ESPRUINOBOARD","ESPRUINOWIFI"].indexOf(boardId)>=0) {
       return stepFlashSTM32;
     } else {
@@ -192,7 +196,7 @@
   // data = { binary_url, board_id, board_info, board_chip, flashFn }
   function stepFlashSTM32(data) {
     if (data.binary)
-      return doFlash();    
+      return doFlash();
     Espruino.Core.Utils.getBinaryURL(data.binary_url, function (err, binary) {
       if (err) return stepError("Unable to download "+data.binary_url);
       data.binary = binary;
