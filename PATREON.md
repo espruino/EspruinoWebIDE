@@ -8,5 +8,5 @@ Supporters that pay $10/month or more to help support Espruino are:
 
 Matt Eckman, Michael Leibman, Orry S, Eric Betts, MaBe, Sacha Gloor, INT3GRATION, James Palmer, Andreas Dröscher, 
 Dimitri Deniusov, John Kovach, Spence Konde, Ron Cromberge, Noah A Neibaron, Joshua Taylor, Thomas Smith, Ryan Paull,
-Gito Nirmolo
+Gito Nirmolo, Chaz
 
