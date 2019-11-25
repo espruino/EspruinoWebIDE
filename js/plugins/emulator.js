@@ -8,8 +8,18 @@ Use embed.js on the client side to link this in.
 */
 
 var DEVICE = 20; // USB
+var BTN1 = 24;
+var BTN2 = 22;
+var BTN3 = 23;
+var BTN4 = 11;
+var BTN5 = 16;
 var jsRXCallback;
 var jsIdleInterval;
+// used to interface to Espruino emscripten...
+var hwPinValue = new Uint8Array(32);
+function hwSetPinValue(pin,v) { hwPinValue[pin] = v; }
+function hwGetPinValue(pin) { return hwPinValue[pin]; }
+
 function jsHandleIO() {
   var device;
   var l = "";
@@ -32,6 +42,11 @@ function jsTransmitChar(c) {
   Module.ccall('jshPushIOCharEvent', 'number', ['number','number'], [DEVICE,c]);
   jsIdle();
 }
+function jsTransmitPinEvent(pin) {
+  //console.log("TX -> ",c);
+  Module.ccall('jsSendPinWatchEvent', 'number', ['number'], [pin]);
+  jsIdle();
+}
 function jsIdle() {
   var msToNext = Module.ccall('jsIdle', 'number', [], []);
   // msToNext seems broken...
@@ -39,7 +54,7 @@ function jsIdle() {
   jsUpdateGfx();
 }
 function jsUpdateGfx() {
-  var changed = true;//Module.ccall('jsGfxChanged', 'number', [], []);
+  var changed = Module.ccall('jsGfxChanged', 'number', [], []);
   if (changed) {
     var p = Module.ccall('jsGfxGetPtr', 'number', [], [])>>1;
     var canvas = document.getElementById('gfxcanvas');
@@ -60,10 +75,34 @@ function jsUpdateGfx() {
 }
 function jsInit() {
   var div = document.createElement("div");
-  div.style = "position:absolute;top:0px;right:0px;z-index:100;border: 2px solid white;";
-  div.innerHTML = `<canvas id="gfxcanvas" width="240" height="240">`;
+  div.id = "gfxdiv";
+  div.style = "position:absolute;top:0px;right:0px;z-index:100;border: 2px solid white;width:264px;height:244px;";
+  div.style = "position:absolute;top:0px;right:0px;z-index:100;border: 2px solid white;width:264px;height:244px;";
+  div.innerHTML = `<canvas id="gfxcanvas" width="240" height="240"></canvas>
+<button id="BTN1" style="width:20px;height:80px;position:absolute;right:0px;top:0px;">1</button>
+<button id="BTN2" style="width:20px;height:80px;position:absolute;right:0px;top:80px;">2</button>
+<button id="BTN3" style="width:20px;height:80px;position:absolute;right:0px;top:160px;">3</button>
+<div id="BTN4" style="width:120px;height:240px;position:absolute;left:0px;top:0px;">
+<div id="BTN5" style="width:120px;height:240px;position:absolute;left:120px;top:0px;">`;
   var terminal = document.getElementsByClassName("editor__canvas__terminal")[0];
   terminal.appendChild(div);
+  function handleButton(n, pin) {
+    hwPinValue[pin]=1; // inverted
+    var btn = document.getElementById("BTN"+n);
+    btn.addEventListener('mousedown', e => {
+      hwPinValue[pin]=0; // inverted
+      jsTransmitPinEvent(pin);
+    });
+    btn.addEventListener('mouseup', e => {
+      hwPinValue[pin]=1; // inverted
+      jsTransmitPinEvent(pin);
+    });
+  }
+  handleButton(1,BTN1);
+  handleButton(2,BTN2);
+  handleButton(3,BTN3);
+  handleButton(4,BTN4);
+  handleButton(5,BTN5);
 
   Module.ccall('jsInit', 'number', [], []);
   jsHandleIO();
@@ -101,6 +140,8 @@ function jsInit() {
         clearInterval(jsIdleInterval);
         jsIdleInterval = undefined;
       }
+      var d = document.getElementById("gfxdiv");
+      if (d) d.remove();
       callbacks.disconnected();
     },
   };
