@@ -107,6 +107,11 @@ function jsInit() {
   Module.ccall('jsInit', 'number', [], []);
   jsHandleIO();
 }
+function jsKill() {
+  var d = document.getElementById("gfxdiv");
+  if (d) d.remove();
+  Module.ccall('jsKill', 'number', [], []);
+}
 
 (function() {
   var callbacks = {};
@@ -140,8 +145,7 @@ function jsInit() {
         clearInterval(jsIdleInterval);
         jsIdleInterval = undefined;
       }
-      var d = document.getElementById("gfxdiv");
-      if (d) d.remove();
+      jsKill();
       callbacks.disconnected();
     },
   };

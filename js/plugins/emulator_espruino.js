@@ -5341,8 +5341,7 @@ function jsiIdle() {
   jsiSetBusy(1, 1);
   HEAP16[$0 + 6 >> 1] = HEAPU16[96494];
   if ((HEAPU16[$0 + 6 >> 1] & 128) == 128) {
-   jsiSoftKill();
-   jspKill();
+   jsiKill();
    jshResetDevices();
    jsvInit();
    jsiSemiInit(0);
@@ -47801,6 +47800,23 @@ function jsvGetFlatStringPointer($0) {
  global$0 = $1 + 16 | 0;
  return HEAP32[$1 + 12 >> 2];
 }
+function jshInit() {
+ var $0 = 0;
+ $0 = global$0 - 16 | 0;
+ global$0 = $0;
+ HEAP32[$0 + 12 >> 2] = 0;
+ while (1) {
+  if (HEAP32[$0 + 12 >> 2] < 16) {
+   HEAP8[HEAP32[$0 + 12 >> 2] + 195424 | 0] = 255;
+   HEAP32[$0 + 12 >> 2] = HEAP32[$0 + 12 >> 2] + 1;
+   continue;
+  }
+  break;
+ }
+ jshResetDevices();
+ HEAP8[37612] = 1;
+ global$0 = $0 + 16 | 0;
+}
 function jspeStatementThrow() {
  var $0 = 0;
  $0 = global$0 - 16 | 0;
@@ -48168,22 +48184,6 @@ function _jswrap_serial_inject_cb($0, $1) {
  HEAP8[$2 + 7 | 0] = HEAPU8[HEAP32[$2 + 8 >> 2]];
  jshPushIOCharEvent(HEAPU8[$2 + 7 | 0], HEAP32[$2 + 12 >> 2] << 24 >> 24);
  global$0 = $2 + 16 | 0;
-}
-function jshInit() {
- var $0 = 0;
- $0 = global$0 - 16 | 0;
- global$0 = $0;
- HEAP32[$0 + 12 >> 2] = 0;
- while (1) {
-  if (HEAP32[$0 + 12 >> 2] < 16) {
-   HEAP8[HEAP32[$0 + 12 >> 2] + 195424 | 0] = 255;
-   HEAP32[$0 + 12 >> 2] = HEAP32[$0 + 12 >> 2] + 1;
-   continue;
-  }
-  break;
- }
- jshResetDevices();
- global$0 = $0 + 16 | 0;
 }
 function jshGetDeviceToTransmit() {
  var $0 = 0;
@@ -51169,6 +51169,10 @@ function gen_jswrap_dump() {
 function gen_jswrap_Infinity() {
  return infinity;
 }
+function jsiKill() {
+ jsiSoftKill();
+ jspKill();
+}
 function __errno_location() {
  return 195440;
 }
@@ -51201,6 +51205,9 @@ function gen_jswrap_HIGH() {
 }
 function gen_jswrap_BTN() {
  return 24;
+}
+function jsKill() {
+ jsiKill();
 }
 
 // EMSCRIPTEN_END_FUNCS
@@ -51695,6 +51702,7 @@ function gen_jswrap_BTN() {
   "jsGfxChanged": jsGfxChanged, 
   "jsGfxGetPtr": jsGfxGetPtr, 
   "jsSendPinWatchEvent": jsSendPinWatchEvent, 
+  "jsKill": jsKill, 
   "htons": htons, 
   "ntohs": htons, 
   "htonl": htonl, 
@@ -53470,6 +53478,13 @@ asm["jsSendPinWatchEvent"] = function() {
   return real__jsSendPinWatchEvent.apply(null, arguments);
 };
 
+var real__jsKill = asm["jsKill"];
+asm["jsKill"] = function() {
+  assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+  assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+  return real__jsKill.apply(null, arguments);
+};
+
 var real__htons = asm["htons"];
 asm["htons"] = function() {
   assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
@@ -53852,6 +53867,12 @@ var _jsSendPinWatchEvent = Module["_jsSendPinWatchEvent"] = function() {
   assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
   assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
   return Module["asm"]["jsSendPinWatchEvent"].apply(null, arguments)
+};
+
+var _jsKill = Module["_jsKill"] = function() {
+  assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+  assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+  return Module["asm"]["jsKill"].apply(null, arguments)
 };
 
 var _htons = Module["_htons"] = function() {
