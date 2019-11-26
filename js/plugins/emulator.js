@@ -14,7 +14,7 @@ var BTN3 = 23;
 var BTN4 = 11;
 var BTN5 = 16;
 var jsRXCallback;
-var jsIdleInterval;
+var jsIdleTimeout;
 // used to interface to Espruino emscripten...
 var hwPinValue = new Uint8Array(32);
 function hwSetPinValue(pin,v) { hwPinValue[pin] = v; }
@@ -48,9 +48,18 @@ function jsTransmitPinEvent(pin) {
   jsIdle();
 }
 function jsIdle() {
-  var msToNext = Module.ccall('jsIdle', 'number', [], []);
-  // msToNext seems broken...
-  jsHandleIO();
+  if (jsIdleTimeout) {
+    clearTimeout(jsIdleTimeout);
+    jsIdleTimeout = undefined;
+  }
+  var tries = 5;
+  var msToNext = -1;
+  while (tries-- && msToNext<0) {
+    msToNext = Module.ccall('jsIdle', 'number', [], []);
+    jsHandleIO();
+  }
+  if (msToNext<10) msToNext=10;
+  jsIdleTimeout = setTimeout(jsIdle,msToNext);
   jsUpdateGfx();
 }
 function jsUpdateGfx() {
@@ -82,8 +91,8 @@ function jsInit() {
 <button id="BTN1" style="width:20px;height:80px;position:absolute;right:0px;top:0px;">1</button>
 <button id="BTN2" style="width:20px;height:80px;position:absolute;right:0px;top:80px;">2</button>
 <button id="BTN3" style="width:20px;height:80px;position:absolute;right:0px;top:160px;">3</button>
-<div id="BTN4" style="width:120px;height:240px;position:absolute;left:0px;top:0px;">
-<div id="BTN5" style="width:120px;height:240px;position:absolute;left:120px;top:0px;">`;
+<div id="BTN4" style="width:120px;height:240px;position:absolute;left:0px;top:0px;"></div>
+<div id="BTN5" style="width:120px;height:240px;position:absolute;left:120px;top:0px;"></div>`;
   var terminal = document.getElementsByClassName("editor__canvas__terminal")[0];
   terminal.appendChild(div);
   function handleButton(n, pin) {
@@ -130,7 +139,7 @@ function jsKill() {
       callbacks.disconnected = disconnectCallback;
       setTimeout(function() {
         jsInit();
-        jsIdleInterval = setInterval(jsIdle,100);
+        jsIdle();
         openCallback("Hello");
       },500);
     },
@@ -141,10 +150,6 @@ function jsKill() {
       setTimeout(callback,10);
     },
     "close": function() {
-      if (jsIdleInterval) {
-        clearInterval(jsIdleInterval);
-        jsIdleInterval = undefined;
-      }
       jsKill();
       callbacks.disconnected();
     },
