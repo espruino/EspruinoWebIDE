@@ -1,10 +1,14 @@
 // Service worker for Offline Web IDE
-const VERSION = 'v46';
+const VERSION = 'v47';
 
 const CACHED_RESOURCES = [
   'blockly/blockly_espruino.js',
   'blockly/blockly_amperka_motorshield.js',
   'blockly/blockly_robot.js',
+  'blockly/blockly_gfx.js',
+  'blockly/blockly_menu.js',
+  'blockly/blockly_nordic_thingy.js',
+  'blockly/blockly_smartibot.js',
   'blockly/blocks_compressed.js',
   'blockly/javascript_compressed.js',
   'blockly/blockly.html',
