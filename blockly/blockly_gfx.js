@@ -6,7 +6,7 @@
  file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
  ------------------------------------------------------------------
-  Blockly blocks for Espruino Robot
+  Blockly blocks for Espruino Graphics (global variable g)
  ------------------------------------------------------------------
 **/
 
@@ -108,7 +108,7 @@ Blockly.Blocks.gfx_drawString = {
   category: 'Graphics',
   init: function() {
     this.appendValueInput('TEXT')
-        .setCheck(['String'])
+        .setCheck(['String','Number','Boolean'])
         .appendField('Draw Text')
     this.appendValueInput('X')
         .setCheck(['Number'])

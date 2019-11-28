@@ -6,7 +6,7 @@
  file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
  ------------------------------------------------------------------
-  Blockly blocks for Espruino Robot
+  Blockly blocks for Espruino Menus (E.show*)
  ------------------------------------------------------------------
 **/
 
@@ -32,10 +32,10 @@ Blockly.Blocks.menu_message = {
   category: 'Graphics',
   init: function() {
     this.appendValueInput('TEXT')
-        .setCheck(['String'])
+        .setCheck(['String','Number','Boolean'])
         .appendField('Show')
     this.appendValueInput('TITLE')
-        .setCheck(['String'])
+        .setCheck(['String','Number','Boolean'])
         .appendField('with title');
     menuStatement(this, 'Show a message on the screen');
   }
@@ -43,17 +43,17 @@ Blockly.Blocks.menu_message = {
 Blockly.JavaScript.menu_message = function() {
   var text = Blockly.JavaScript.valueToCode(this, 'TEXT', Blockly.JavaScript.ORDER_ASSIGNMENT) || '""';
   var title = Blockly.JavaScript.valueToCode(this, 'TITLE', Blockly.JavaScript.ORDER_ASSIGNMENT) || '""';
-  return `E.showMessage(${text},${title})\n`;
+  return `E.showMessage(""+${text},""+${title})\n`;
 };
 // ----------------------------------------------------------
 Blockly.Blocks.menu_alert = {
   category: 'Espruino',
   init: function() {
     this.appendValueInput('TEXT')
-        .setCheck('String')
+        .setCheck(['String','Number','Boolean'])
         .appendField('Show');
     this.appendValueInput('TITLE')
-        .setCheck(['String'])
+        .setCheck(['String','Number','Boolean'])
         .appendField('with title');
     this.appendStatementInput('DO')
          .appendField('when ok');
@@ -64,17 +64,17 @@ Blockly.JavaScript.menu_alert = function() {
   var text = Blockly.JavaScript.valueToCode(this, 'TEXT', Blockly.JavaScript.ORDER_ASSIGNMENT) || '""';
   var title = Blockly.JavaScript.valueToCode(this, 'TITLE', Blockly.JavaScript.ORDER_ASSIGNMENT) || '""';
   var branch = Blockly.JavaScript.statementToCode(this, 'DO');
-  return `E.showAlert(${text},${title}).then(function() {\n${branch}});\n`;
+  return `E.showAlert(""+${text},""+${title}).then(function() {\n${branch}});\n`;
 };
 // ----------------------------------------------------------
 Blockly.Blocks.menu_prompt = {
   category: 'Espruino',
   init: function() {
     this.appendValueInput('TEXT')
-        .setCheck('String')
+        .setCheck(['String','Number','Boolean'])
         .appendField('Ask');
     this.appendValueInput('TITLE')
-        .setCheck(['String'])
+        .setCheck(['String','Number','Boolean'])
         .appendField('with title');
     this.appendStatementInput('YES')
          .appendField('if yes');
@@ -88,5 +88,5 @@ Blockly.JavaScript.menu_prompt = function() {
   var title = Blockly.JavaScript.valueToCode(this, 'TITLE', Blockly.JavaScript.ORDER_ASSIGNMENT) || '""';
   var yes = Blockly.JavaScript.statementToCode(this, 'YES') || '{}';
   var no = Blockly.JavaScript.statementToCode(this, 'NO') || '{}';
-  return `E.showPrompt(${text},{title:${title}}).then(function(a) {\nif (a) { ${yes} } else { ${no} }});\n`;
+  return `E.showPrompt(""+${text},{title:""+${title}}).then(function(a) {\nif (a) { ${yes} } else { ${no} }});\n`;
 };
