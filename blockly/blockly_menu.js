@@ -43,7 +43,7 @@ Blockly.Blocks.menu_message = {
 Blockly.JavaScript.menu_message = function() {
   var text = Blockly.JavaScript.valueToCode(this, 'TEXT', Blockly.JavaScript.ORDER_ASSIGNMENT) || '""';
   var title = Blockly.JavaScript.valueToCode(this, 'TITLE', Blockly.JavaScript.ORDER_ASSIGNMENT) || '""';
-  return `E.showMessage(""+${text},""+${title})\n`;
+  return `E.showMessage(""+${text},""+${title});\n`;
 };
 // ----------------------------------------------------------
 Blockly.Blocks.menu_alert = {

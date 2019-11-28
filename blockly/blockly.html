@@ -416,6 +416,15 @@
       <block type="ble_connected"></block>
       <block type="ble_disconnected"></block>
 
+      <block type="ble_uart_write">
+        <value name="VAL"><block type="text"><title name="TEXT">LED.toggle()</title></block></value>
+        <value name="DEV"><block type="ble_dev_name"></block></value>
+      </block>
+      <block type="ble_advertise">
+        <value name="VAL"><block type="text"><title name="TEXT">Hello</title></block></value>
+      </block>
+      <block type="ble_on_advertise"></block>
+
       <block type="ble_dev_name"></block>
       <block type="ble_dev_prefix"></block>
       <block type="ble_dev_address"></block>
@@ -423,10 +432,21 @@
       <block type="ble_characteristic"></block>
       <block type="ble_characteristic_dropdown"></block>
 
-      <block type="ble_setchar"></block>
-      <block type="ble_getchar"></block>
-      <block type="ble_write"></block>
-      <block type="ble_onwritten"></block>
+      <block type="ble_setchar">
+        <value name="CHAR"><block type="ble_characteristic_dropdown"></block></value>
+        <value name="DEV"><block type="ble_dev_name"></block></value>
+      </block>
+      <block type="ble_getchar">
+        <value name="CHAR"><block type="ble_characteristic_dropdown"></block></value>
+        <value name="DEV"><block type="ble_dev_name"></block></value>
+      </block>
+      <block type="ble_write">
+        <value name="CHAR"><block type="ble_characteristic_dropdown"></block></value>
+        <value name="VAL"><block type="math_number"><title name="NUM">50</title></block></value>
+      </block>
+      <block type="ble_onwritten">
+        <value name="CHAR"><block type="ble_characteristic_dropdown"></block></value>
+      </block>
       <block type="ble_value"></block>
     </category>
     <category name="Functions" custom="PROCEDURE"></category>

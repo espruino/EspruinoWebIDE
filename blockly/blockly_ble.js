@@ -75,7 +75,7 @@ Blockly.Blocks.ble_connected = {
   }
 };
 Blockly.JavaScript.ble_connected = function() {
-  var code = Blockly.JavaScript.statementToCode(this, 'DO');
+  var code = Blockly.JavaScript.statementToCode(this, 'DO') || "";
   return "NRF.on('connect', function() {\n"+code+"});\n";
 };
 // ----------------------------------------------------------
@@ -88,9 +88,80 @@ Blockly.Blocks.ble_disconnected = {
   }
 };
 Blockly.JavaScript.ble_disconnected = function() {
-  var code = Blockly.JavaScript.statementToCode(this, 'DO');
+  var code = Blockly.JavaScript.statementToCode(this, 'DO') || "";
   return "NRF.on('disconnect', function() {\n"+code+"});\n";
 };
+// ----------------------------------------------------------
+Blockly.Blocks.ble_advertise = {
+  category: 'BLE',
+  init: function() {
+    this.appendValueInput('VAL')
+      .setCheck(['String','Number','Boolean']).appendField('[BLE] Advertise');;
+    bleStatement(this, "Advertise on Espruino's manufacturer data");
+  }
+};
+Blockly.JavaScript.ble_advertise = function() {
+  var data = Blockly.JavaScript.valueToCode(this, 'VAL', Blockly.JavaScript.ORDER_ASSIGNMENT) || undefined;
+  return "NRF.setAdvertising({},{manufacturer: 0x0590, manufacturerData:"+data+"});\n";
+};
+// ----------------------------------------------------------
+Blockly.Blocks.ble_on_advertise = {
+  category: 'BLE',
+  init: function() {
+    this.appendDummyInput().appendField('[BLE] On Advertising');
+    this.appendStatementInput('DO').appendField('do');
+    bleStatement(this, "When an advertisement with Espruino's manufacturer data is detected");
+  }
+};
+Blockly.JavaScript.ble_on_advertise = function() {
+  var data = Blockly.JavaScript.valueToCode(this, 'DATA', Blockly.JavaScript.ORDER_ASSIGNMENT) || undefined;
+  var code = Blockly.JavaScript.statementToCode(this, 'DO') || "";
+  return "NRF.setScan(function(dev) {var ble_value=dev.manufacturerData;"+code+"}, { filters: [{ manufacturerData:{0x0590:{}} }] });\n";
+};
+// ----------------------------------------------------------
+Blockly.Blocks.ble_uart_write = {
+  category: 'BLE',
+  init: function() {
+    this.appendValueInput('VAL').setCheck(['Number','Boolean','String']).appendField('[BLE] Send');
+    this.appendValueInput('DEV').setCheck(['BLEDevice']).appendField('to UART on');
+    this.appendStatementInput('DO').appendField('then');
+    bleStatement(this, 'Sends data to the UART on a Bluetooth device - adds a newline');
+  }
+};
+Blockly.JavaScript.ble_uart_write = function() {
+  var dev = Blockly.JavaScript.valueToCode(this, 'DEV', Blockly.JavaScript.ORDER_ASSIGNMENT) || "Promise.reject()";
+  var val = Blockly.JavaScript.valueToCode(this, 'VAL', Blockly.JavaScript.ORDER_ASSIGNMENT)+'+"\\n"';
+  var code = Blockly.JavaScript.statementToCode(this, 'DO') || "";
+  if (!dev) return "";
+  return `(function(){
+  var gatt;
+  var text = ${val};
+  ${dev}.then(function(g) {
+    gatt = g;
+    return g.getPrimaryService("6e400001-b5a3-f393-e0a9-e50e24dcca9e");
+  }).then(function(s) {
+    return s.getCharacteristic("6e400002-b5a3-f393-e0a9-e50e24dcca9e");
+  }).then(function(c) {
+    function sender(resolve, reject) {
+      if (text.length) {
+        var d = text.substr(0,20);
+        text = text.substr(20);
+        c.writeValue(d).then(function() {
+          sender(resolve, reject);
+        },reject);
+      } else  {
+        resolve();
+      }
+    }
+    return new Promise(sender);
+  }).then(function() {
+    return gatt.disconnect();
+  }).then(function() {
+    ${code}
+  });
+})();`;
+};
+
 // ============================================================================
 
 Blockly.Blocks.ble_dev_name = {
@@ -188,26 +259,26 @@ Blockly.Blocks.ble_setchar = {
 };
 Blockly.JavaScript.ble_setchar = function() {
   var char = Blockly.JavaScript.valueToCode(this, 'CHAR', Blockly.JavaScript.ORDER_ASSIGNMENT);
-  var dev = Blockly.JavaScript.valueToCode(this, 'DEV', Blockly.JavaScript.ORDER_ASSIGNMENT);
+  var dev = Blockly.JavaScript.valueToCode(this, 'DEV', Blockly.JavaScript.ORDER_ASSIGNMENT) || "Promise.reject()";
   var val = Blockly.JavaScript.valueToCode(this, 'VAL', Blockly.JavaScript.ORDER_ASSIGNMENT) || '0';
-  var code = Blockly.JavaScript.statementToCode(this, 'DO');
+  var code = Blockly.JavaScript.statementToCode(this, 'DO') || "";
   if (!dev || !char) return "";
   char = splitCharacteristic(char);
-  if (!code) code="";
-  return "(function() {\n"+
-"  var gatt;\n"+
-"  "+dev+".then(function(g) {\n"+
-"    gatt = g;\n"+
-"    return gatt.getPrimaryService("+char[0]+");\n"+
-"  }).then(function(service) {\n"+
-"    return service.getCharacteristic("+char[1]+");\n"+
-"  }).then(function(characteristic) {\n"+
-"    characteristic.writeValue("+val+");\n"+
-"  }).then(function() {\n"+
-"    gatt.disconnect();\n"+
-"    "+code+"\n"+
-"  });\n"+
-"})();"
+  return `(function() {
+  var gatt;
+  ${dev}.then(function(g) {
+    gatt = g;
+    return gatt.getPrimaryService(${char[0]});
+  }).then(function(service) {
+    return service.getCharacteristic((${char[1]});
+  }).then(function(characteristic) {
+    characteristic.writeValue((${val});
+  }).then(function() {
+    return gatt.disconnect();
+  }).then(function() {
+    ${code}
+  });
+})();`;
 };
 // ----------------------------------------------------------
 Blockly.Blocks.ble_getchar = {
@@ -221,26 +292,26 @@ Blockly.Blocks.ble_getchar = {
 };
 Blockly.JavaScript.ble_getchar = function() {
   var char = Blockly.JavaScript.valueToCode(this, 'CHAR', Blockly.JavaScript.ORDER_ASSIGNMENT);
-  var dev = Blockly.JavaScript.valueToCode(this, 'DEV', Blockly.JavaScript.ORDER_ASSIGNMENT);
-  var code = Blockly.JavaScript.statementToCode(this, 'DO');
+  var dev = Blockly.JavaScript.valueToCode(this, 'DEV', Blockly.JavaScript.ORDER_ASSIGNMENT) || "Promise.reject()";
+  var code = Blockly.JavaScript.statementToCode(this, 'DO') || "";
   if (!dev || !char) return "";
   char = splitCharacteristic(char);
-  if (!code) code="";
-  return "(function() {\n"+
-"  var gatt;\n"+
-"  "+dev+".then(function(g) {\n"+
-"    gatt = g;\n"+
-"    return gatt.getPrimaryService("+char[0]+");\n"+
-"  }).then(function(service) {\n"+
-"    return service.getCharacteristic("+char[1]+");\n"+
-"  }).then(function(characteristic) {\n"+
-"    characteristic.readValue();\n"+
-"  }).then(function(value) {\n"+
-"    ble_value = value;\n"+
-"    gatt.disconnect();\n"+
-"    "+code+"\n"+
-"  });\n"+
-"})();\n";
+  return `(function() {
+  var gatt;
+  ${dev}.then(function(g) {
+    gatt = g;
+    return gatt.getPrimaryService(${char[0]});
+  }).then(function(service) {
+    return service.getCharacteristic((${char[1]});
+  }).then(function(characteristic) {
+    return characteristic.readValue();\n"+
+  }).then(function(value) {
+    ble_value = value;
+    return gatt.disconnect();
+  }).then(function() {
+    ${code}
+  });
+})();`;
 };
 // ----------------------------------------------------------
 Blockly.Blocks.ble_write = {
@@ -283,7 +354,7 @@ Blockly.Blocks.ble_onwritten = {
 };
 Blockly.JavaScript.ble_onwritten = function() {
   var char = Blockly.JavaScript.valueToCode(this, 'CHAR', Blockly.JavaScript.ORDER_ASSIGNMENT);
-  var code = Blockly.JavaScript.statementToCode(this, 'DO');
+  var code = Blockly.JavaScript.statementToCode(this, 'DO') || "";
   if (!char) return "";
   char = splitCharacteristic(char);
 

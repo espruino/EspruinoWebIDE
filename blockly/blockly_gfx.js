@@ -36,7 +36,7 @@ Blockly.Blocks.gfx_clear = {
   }
 };
 Blockly.JavaScript.gfx_clear = function() {
-  return `g.clear()\n`;
+  return `g.clear();\n`;
 };
 // ----------------------------------------------------------
 Blockly.Blocks.gfx_setColor = {
@@ -53,7 +53,7 @@ Blockly.JavaScript.gfx_setColor = function() {
   var r = parseInt(c.substr(1,2),16)/255,
       g = parseInt(c.substr(3,2),16)/255,
       b = parseInt(c.substr(5,2),16)/255;
-  return `g.setColor(${r},${g},${b})\n`;
+  return `g.setColor(${r},${g},${b});\n`;
 };
 // ----------------------------------------------------------
 Blockly.Blocks.gfx_setBgColor = {
@@ -70,7 +70,7 @@ Blockly.JavaScript.gfx_setBgColor = function() {
   var r = parseInt(c.substr(1,2),16)/255,
       g = parseInt(c.substr(3,2),16)/255,
       b = parseInt(c.substr(5,2),16)/255;
-  return `g.setBgColor(${r},${g},${b})\n`;
+  return `g.setBgColor(${r},${g},${b});\n`;
 };
 // ----------------------------------------------------------
 Blockly.Blocks.gfx_setFont = {
@@ -123,7 +123,7 @@ Blockly.JavaScript.gfx_drawString = function() {
   var text = Blockly.JavaScript.valueToCode(this, 'TEXT', Blockly.JavaScript.ORDER_ASSIGNMENT) || '""';
   var x = Blockly.JavaScript.valueToCode(this, 'X', Blockly.JavaScript.ORDER_ASSIGNMENT) || 0;
   var y = Blockly.JavaScript.valueToCode(this, 'Y', Blockly.JavaScript.ORDER_ASSIGNMENT) || 0;
-  return `g.drawString(${text},${x},${y},true)\n`;
+  return `g.drawString(${text},${x},${y},true);\n`;
 };
 // ----------------------------------------------------------
 Blockly.Blocks.gfx_moveTo = {
@@ -142,7 +142,7 @@ Blockly.Blocks.gfx_moveTo = {
 Blockly.JavaScript.gfx_moveTo = function() {
   var x = Blockly.JavaScript.valueToCode(this, 'X', Blockly.JavaScript.ORDER_ASSIGNMENT) || 0;
   var y = Blockly.JavaScript.valueToCode(this, 'Y', Blockly.JavaScript.ORDER_ASSIGNMENT) || 0;
-  return `g.moveTo(${x},${y})\n`;
+  return `g.moveTo(${x},${y});\n`;
 };
 Blockly.Blocks.gfx_lineTo = {
   category: 'Graphics',
@@ -160,7 +160,7 @@ Blockly.Blocks.gfx_lineTo = {
 Blockly.JavaScript.gfx_lineTo = function() {
   var x = Blockly.JavaScript.valueToCode(this, 'X', Blockly.JavaScript.ORDER_ASSIGNMENT) || 0;
   var y = Blockly.JavaScript.valueToCode(this, 'Y', Blockly.JavaScript.ORDER_ASSIGNMENT) || 0;
-  return `g.lineTo(${x},${y})\n`;
+  return `g.lineTo(${x},${y});\n`;
 };
 // ----------------------------------------------------------
 Blockly.Blocks.gfx_draw = {
@@ -194,5 +194,5 @@ Blockly.JavaScript.gfx_draw = function() {
   var y = Blockly.JavaScript.valueToCode(this, 'Y', Blockly.JavaScript.ORDER_ASSIGNMENT) || 0;
   var x2 = Blockly.JavaScript.valueToCode(this, 'X2', Blockly.JavaScript.ORDER_ASSIGNMENT) || 0;
   var y2 = Blockly.JavaScript.valueToCode(this, 'Y2', Blockly.JavaScript.ORDER_ASSIGNMENT) || 0;
-  return `g.${cmd}(${x},${y},${x2},${y2})\n`;
+  return `g.${cmd}(${x},${y},${x2},${y2});\n`;
 };
