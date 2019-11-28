@@ -97,11 +97,11 @@ Blockly.Blocks.gfx_setFont = {
   }
 };
 Blockly.JavaScript.gfx_setFont = function() {
-  var font = this.getFieldValue('COL');
+  var font = this.getFieldValue('STYLE');
   var size = Blockly.JavaScript.valueToCode(this, 'SIZE', Blockly.JavaScript.ORDER_ASSIGNMENT) || 0;
   var x = this.getFieldValue('X');
   var y = this.getFieldValue('Y');
-  return `g.setFont("6x8",${size});g.setFontAlign(${x},${y});\n`;
+  return `g.setFont("${font}",${size});g.setFontAlign(${x},${y});\n`;
 };
 // ----------------------------------------------------------
 Blockly.Blocks.gfx_drawString = {

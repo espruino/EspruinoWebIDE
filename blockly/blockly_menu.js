@@ -88,5 +88,5 @@ Blockly.JavaScript.menu_prompt = function() {
   var title = Blockly.JavaScript.valueToCode(this, 'TITLE', Blockly.JavaScript.ORDER_ASSIGNMENT) || '""';
   var yes = Blockly.JavaScript.statementToCode(this, 'YES') || '{}';
   var no = Blockly.JavaScript.statementToCode(this, 'NO') || '{}';
-  return `E.showPrompt(${text},{title:${title}}).then(function(a) {\nif (a) ${yes} else ${no}});\n`;
+  return `E.showPrompt(${text},{title:${title}}).then(function(a) {\nif (a) { ${yes} } else { ${no} }});\n`;
 };
