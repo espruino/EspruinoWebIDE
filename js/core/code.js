@@ -9,7 +9,6 @@
   Handling the getting and setting of code
  ------------------------------------------------------------------
 **/
-"use strict";
 (function(){
 
   var viewModeButton;
@@ -51,7 +50,7 @@
         code = Espruino.Config.CODE;
         console.log("Loaded code from storage.");
       } else {
-        code = "var  on = false;\nsetInterval(function() {\n  on = !on;\n  LED1.write(on);\n}, 500);";
+        code = Espruino.Core.Code.DEFAULT_CODE;
         console.log("No code in storage.");
       }
       Espruino.Core.EditorJavaScript.setCode(code);
@@ -110,6 +109,7 @@
     getCurrentCode : getCurrentCode, // get the currently selected bit of code (either blockly or javascript editor)
     isInBlockly: isInBlockly,
     switchToCode: switchToCode,
-    switchToBlockly: switchToBlockly
+    switchToBlockly: switchToBlockly,
+    DEFAULT_CODE : "var  on = false;\nsetInterval(function() {\n  on = !on;\n  LED1.write(on);\n}, 500);"
   };
 }());

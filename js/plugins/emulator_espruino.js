@@ -22250,6 +22250,164 @@ function tflite__ops__micro__activations__SoftmaxEval_28TfLiteContext__2c_20TfLi
  global$0 = $2 + 80 | 0;
  return HEAP32[$2 + 76 >> 2];
 }
+function terminalSendChar($0) {
+ var $1 = 0, $2 = 0;
+ $1 = global$0 - 144 | 0;
+ global$0 = $1;
+ HEAP8[$1 + 143 | 0] = $0;
+ label$1 : {
+  if (!HEAP8[290086]) {
+   if (HEAP8[$1 + 143 | 0] == 8) {
+    if (HEAPU8[290084] > 0) {
+     HEAP8[290084] = HEAPU8[290084] + -1;
+    }
+    break label$1;
+   }
+   label$5 : {
+    if (HEAP8[$1 + 143 | 0] == 10) {
+     HEAP8[290084] = 0;
+     HEAP8[52936] = HEAPU8[52936] + 1;
+     while (1) {
+      if (HEAPU8[52936] >= 30) {
+       terminalScroll();
+       continue;
+      }
+      break;
+     }
+     break label$5;
+    }
+    label$9 : {
+     if (HEAP8[$1 + 143 | 0] == 13) {
+      HEAP8[290084] = 0;
+      break label$9;
+     }
+     label$11 : {
+      if (HEAP8[$1 + 143 | 0] == 27) {
+       HEAP8[290086] = 27;
+       break label$11;
+      }
+      if (!(HEAP8[$1 + 143 | 0] == 19 | HEAP8[$1 + 143 | 0] == 17)) {
+       if (terminalGetGFX($1 + 80 | 0) & 1) {
+        HEAP16[$1 + 78 >> 1] = Math_imul(HEAPU8[290084], 6);
+        HEAP16[$1 + 76 >> 1] = ((HEAPU8[$1 + 94 | 0] | HEAPU8[$1 + 95 | 0] << 8) + (HEAPU8[52936] << 3) | 0) - 240;
+        $0 = $1 + 80 | 0;
+        graphicsDrawChar6x8($0, HEAP16[$1 + 78 >> 1], HEAP16[$1 + 76 >> 1], HEAP8[$1 + 143 | 0], 1, 1);
+        terminalSetGFX($0);
+       }
+       if (HEAPU8[290084] < 255) {
+        HEAP8[290084] = HEAPU8[290084] + 1;
+       }
+      }
+     }
+    }
+   }
+   break label$1;
+  }
+  label$17 : {
+   if (HEAP8[290086] == 27) {
+    if (HEAP8[290087] == 91) {
+     if (HEAP8[290088] == 63) {
+      if (HEAP8[290089] == 55) {
+       terminalControlCharsReset();
+       break label$17;
+      }
+      label$22 : {
+       if (HEAP8[$1 + 143 | 0] == 55) {
+        HEAP8[290089] = 55;
+        break label$22;
+       }
+       terminalControlCharsReset();
+      }
+      break label$17;
+     }
+     label$24 : {
+      if (HEAP8[$1 + 143 | 0] == 63) {
+       HEAP8[290088] = 63;
+       break label$24;
+      }
+      terminalControlCharsReset();
+      $0 = HEAP8[$1 + 143 | 0] + -65 | 0;
+      label$26 : {
+       if ($0 >>> 0 > 9) {
+        break label$26;
+       }
+       label$27 : {
+        switch ($0 - 1 | 0) {
+        default:
+         if (HEAPU8[52936] > 0) {
+          HEAP8[52936] = HEAPU8[52936] + -1;
+         }
+         break label$26;
+        case 0:
+         HEAP8[52936] = HEAPU8[52936] + 1;
+         while (1) {
+          if (HEAPU8[52936] >= 30) {
+           terminalScroll();
+           continue;
+          }
+          break;
+         }
+         break label$26;
+        case 1:
+         if (HEAPU8[290084] < 255) {
+          HEAP8[290084] = HEAPU8[290084] + 1;
+         }
+         break label$26;
+        case 2:
+         if (HEAPU8[290084] > 0) {
+          HEAP8[290084] = HEAPU8[290084] + -1;
+         }
+         break label$26;
+        case 3:
+        case 4:
+        case 5:
+        case 6:
+        case 7:
+         break label$26;
+        case 8:
+         break label$27;
+        }
+       }
+       if (terminalGetGFX($1 + 8 | 0) & 1) {
+        HEAP16[$1 + 6 >> 1] = Math_imul(HEAPU8[290084], 6);
+        HEAP16[$1 + 4 >> 1] = ((HEAPU8[$1 + 22 | 0] | HEAPU8[$1 + 23 | 0] << 8) + (HEAPU8[52936] << 3) | 0) - 240;
+        $0 = $1;
+        if ((HEAPU8[$1 + 16 | 0] | HEAPU8[$1 + 17 | 0] << 8 | (HEAPU8[$1 + 18 | 0] << 16 | HEAPU8[$1 + 19 | 0] << 24)) & 16) {
+         $2 = HEAPU8[$1 + 22 | 0] | HEAPU8[$1 + 23 | 0] << 8;
+        } else {
+         $2 = HEAPU8[$1 + 20 | 0] | HEAPU8[$1 + 21 | 0] << 8;
+        }
+        HEAP16[$0 + 2 >> 1] = $2;
+        $0 = $1;
+        if ((HEAPU8[$1 + 16 | 0] | HEAPU8[$1 + 17 | 0] << 8 | (HEAPU8[$1 + 18 | 0] << 16 | HEAPU8[$1 + 19 | 0] << 24)) & 16) {
+         $2 = HEAPU8[$1 + 20 | 0] | HEAPU8[$1 + 21 | 0] << 8;
+        } else {
+         $2 = HEAPU8[$1 + 22 | 0] | HEAPU8[$1 + 23 | 0] << 8;
+        }
+        HEAP16[$0 >> 1] = $2;
+        $0 = $1 + 8 | 0;
+        graphicsFillRect($0, HEAP16[$1 + 6 >> 1], HEAP16[$1 + 4 >> 1], HEAP16[$1 + 2 >> 1] - 1 | 0, HEAP16[$1 + 4 >> 1] + 7 | 0, HEAPU8[$1 + 29 | 0] | HEAPU8[$1 + 30 | 0] << 8 | (HEAPU8[$1 + 31 | 0] << 16 | HEAPU8[$1 + 32 | 0] << 24));
+        graphicsFillRect($0, 0, HEAP16[$1 + 4 >> 1] + 8 | 0, HEAP16[$1 + 2 >> 1] - 1 | 0, HEAP16[$1 >> 1] - 1 | 0, HEAPU8[$1 + 29 | 0] | HEAPU8[$1 + 30 | 0] << 8 | (HEAPU8[$1 + 31 | 0] << 16 | HEAPU8[$1 + 32 | 0] << 24));
+        terminalSetGFX($0);
+       }
+      }
+     }
+     break label$17;
+    }
+    label$42 : {
+     if (HEAP8[$1 + 143 | 0] == 91) {
+      HEAP8[290087] = 91;
+      break label$42;
+     }
+     terminalControlCharsReset();
+    }
+    break label$17;
+   }
+   terminalControlCharsReset();
+  }
+ }
+ global$0 = $1 + 144 | 0;
+}
 function jsvCopy($0, $1) {
  var $2 = 0, $3 = 0;
  $2 = global$0 + -64 | 0;
@@ -23717,164 +23875,6 @@ function void_20tflite__reference_ops__BroadcastComparison4DSlowWithScaling_sign
  }
  tflite__RuntimeShape___RuntimeShape_28_29($7 + 144 | 0);
  global$0 = $7 + 192 | 0;
-}
-function terminalSendChar($0) {
- var $1 = 0, $2 = 0;
- $1 = global$0 - 144 | 0;
- global$0 = $1;
- HEAP8[$1 + 143 | 0] = $0;
- label$1 : {
-  if (!HEAP8[290086]) {
-   if (HEAP8[$1 + 143 | 0] == 8) {
-    if (HEAPU8[290084] > 0) {
-     HEAP8[290084] = HEAPU8[290084] + -1;
-    }
-    break label$1;
-   }
-   label$5 : {
-    if (HEAP8[$1 + 143 | 0] == 10) {
-     HEAP8[290084] = 0;
-     HEAP8[52936] = HEAPU8[52936] + 1;
-     while (1) {
-      if (HEAPU8[52936] >= 30) {
-       terminalScroll();
-       continue;
-      }
-      break;
-     }
-     break label$5;
-    }
-    label$9 : {
-     if (HEAP8[$1 + 143 | 0] == 13) {
-      HEAP8[290084] = 0;
-      break label$9;
-     }
-     label$11 : {
-      if (HEAP8[$1 + 143 | 0] == 27) {
-       HEAP8[290086] = 27;
-       break label$11;
-      }
-      if (!(HEAP8[$1 + 143 | 0] == 19 | HEAP8[$1 + 143 | 0] == 17)) {
-       if (terminalGetGFX($1 + 80 | 0) & 1) {
-        HEAP16[$1 + 78 >> 1] = Math_imul(HEAPU8[290084], 6);
-        HEAP16[$1 + 76 >> 1] = HEAPU8[52936] << 3;
-        $0 = $1 + 80 | 0;
-        graphicsDrawChar6x8($0, HEAP16[$1 + 78 >> 1], HEAP16[$1 + 76 >> 1], HEAP8[$1 + 143 | 0], 1, 1);
-        terminalSetGFX($0);
-       }
-       if (HEAPU8[290084] < 255) {
-        HEAP8[290084] = HEAPU8[290084] + 1;
-       }
-      }
-     }
-    }
-   }
-   break label$1;
-  }
-  label$17 : {
-   if (HEAP8[290086] == 27) {
-    if (HEAP8[290087] == 91) {
-     if (HEAP8[290088] == 63) {
-      if (HEAP8[290089] == 55) {
-       terminalControlCharsReset();
-       break label$17;
-      }
-      label$22 : {
-       if (HEAP8[$1 + 143 | 0] == 55) {
-        HEAP8[290089] = 55;
-        break label$22;
-       }
-       terminalControlCharsReset();
-      }
-      break label$17;
-     }
-     label$24 : {
-      if (HEAP8[$1 + 143 | 0] == 63) {
-       HEAP8[290088] = 63;
-       break label$24;
-      }
-      terminalControlCharsReset();
-      $0 = HEAP8[$1 + 143 | 0] + -65 | 0;
-      label$26 : {
-       if ($0 >>> 0 > 9) {
-        break label$26;
-       }
-       label$27 : {
-        switch ($0 - 1 | 0) {
-        default:
-         if (HEAPU8[52936] > 0) {
-          HEAP8[52936] = HEAPU8[52936] + -1;
-         }
-         break label$26;
-        case 0:
-         HEAP8[52936] = HEAPU8[52936] + 1;
-         while (1) {
-          if (HEAPU8[52936] >= 30) {
-           terminalScroll();
-           continue;
-          }
-          break;
-         }
-         break label$26;
-        case 1:
-         if (HEAPU8[290084] < 255) {
-          HEAP8[290084] = HEAPU8[290084] + 1;
-         }
-         break label$26;
-        case 2:
-         if (HEAPU8[290084] > 0) {
-          HEAP8[290084] = HEAPU8[290084] + -1;
-         }
-         break label$26;
-        case 3:
-        case 4:
-        case 5:
-        case 6:
-        case 7:
-         break label$26;
-        case 8:
-         break label$27;
-        }
-       }
-       if (terminalGetGFX($1 + 8 | 0) & 1) {
-        HEAP16[$1 + 6 >> 1] = Math_imul(HEAPU8[290084], 6);
-        HEAP16[$1 + 4 >> 1] = HEAPU8[52936] << 3;
-        $0 = $1;
-        if ((HEAPU8[$1 + 16 | 0] | HEAPU8[$1 + 17 | 0] << 8 | (HEAPU8[$1 + 18 | 0] << 16 | HEAPU8[$1 + 19 | 0] << 24)) & 16) {
-         $2 = HEAPU8[$1 + 22 | 0] | HEAPU8[$1 + 23 | 0] << 8;
-        } else {
-         $2 = HEAPU8[$1 + 20 | 0] | HEAPU8[$1 + 21 | 0] << 8;
-        }
-        HEAP16[$0 + 2 >> 1] = $2;
-        $0 = $1;
-        if ((HEAPU8[$1 + 16 | 0] | HEAPU8[$1 + 17 | 0] << 8 | (HEAPU8[$1 + 18 | 0] << 16 | HEAPU8[$1 + 19 | 0] << 24)) & 16) {
-         $2 = HEAPU8[$1 + 20 | 0] | HEAPU8[$1 + 21 | 0] << 8;
-        } else {
-         $2 = HEAPU8[$1 + 22 | 0] | HEAPU8[$1 + 23 | 0] << 8;
-        }
-        HEAP16[$0 >> 1] = $2;
-        $0 = $1 + 8 | 0;
-        graphicsFillRect($0, HEAP16[$1 + 6 >> 1], HEAP16[$1 + 4 >> 1], HEAP16[$1 + 2 >> 1] - 1 | 0, HEAP16[$1 + 4 >> 1] + 7 | 0, HEAPU8[$1 + 29 | 0] | HEAPU8[$1 + 30 | 0] << 8 | (HEAPU8[$1 + 31 | 0] << 16 | HEAPU8[$1 + 32 | 0] << 24));
-        graphicsFillRect($0, 0, HEAP16[$1 + 4 >> 1] + 8 | 0, HEAP16[$1 + 2 >> 1] - 1 | 0, HEAP16[$1 >> 1] - 1 | 0, HEAPU8[$1 + 29 | 0] | HEAPU8[$1 + 30 | 0] << 8 | (HEAPU8[$1 + 31 | 0] << 16 | HEAPU8[$1 + 32 | 0] << 24));
-        terminalSetGFX($0);
-       }
-      }
-     }
-     break label$17;
-    }
-    label$42 : {
-     if (HEAP8[$1 + 143 | 0] == 91) {
-      HEAP8[290087] = 91;
-      break label$42;
-     }
-     terminalControlCharsReset();
-    }
-    break label$17;
-   }
-   terminalControlCharsReset();
-  }
- }
- global$0 = $1 + 144 | 0;
 }
 function jspeStatement() {
  var $0 = 0, $1 = 0;
@@ -67709,31 +67709,6 @@ function heatshrink_decoder_reset($0) {
  HEAP16[HEAP32[$1 + 12 >> 2] + 8 >> 1] = 0;
  global$0 = $1 + 16 | 0;
 }
-function lcdST7789_scroll($0, $1, $2) {
- $0 = $0 | 0;
- $1 = $1 | 0;
- $2 = $2 | 0;
- var $3 = 0;
- $3 = global$0 - 16 | 0;
- global$0 = $3;
- HEAP32[$3 + 12 >> 2] = $0;
- HEAP32[$3 + 8 >> 2] = $1;
- HEAP32[$3 + 4 >> 2] = $2;
- if (!HEAP32[24320]) {
-  HEAP32[$3 >> 2] = Math_imul(HEAP32[$3 + 4 >> 2], 480);
-  label$2 : {
-   if (HEAP32[$3 >> 2] < 0) {
-    memcpy(97296 - HEAP32[$3 >> 2] | 0, 97296, Math_imul(HEAP32[$3 >> 2] + 240 | 0, 480));
-    break label$2;
-   }
-   if (HEAP32[$3 >> 2] > 0) {
-    memcpy(97296, HEAP32[$3 >> 2] + 97296 | 0, Math_imul(240 - HEAP32[$3 >> 2] | 0, 480));
-   }
-  }
-  HEAP8[289296] = 1;
- }
- global$0 = $3 + 16 | 0;
-}
 function tflite__CalculateActivationRangeUint8_28TfLiteFusedActivation_2c_20TfLiteTensor__2c_20int__2c_20int__29($0, $1, $2, $3) {
  var $4 = 0;
  $4 = global$0 - 32 | 0;
@@ -68348,6 +68323,31 @@ function tflite__RuntimeShape__SetDim_28int_2c_20int_29($0, $1, $2) {
   }
   HEAP32[($0 + 4 | 0) + (HEAP32[$3 + 8 >> 2] << 2) >> 2] = HEAP32[$3 + 4 >> 2];
  }
+}
+function lcdST7789_scroll($0, $1, $2) {
+ $0 = $0 | 0;
+ $1 = $1 | 0;
+ $2 = $2 | 0;
+ var $3 = 0;
+ $3 = global$0 - 16 | 0;
+ global$0 = $3;
+ HEAP32[$3 + 12 >> 2] = $0;
+ HEAP32[$3 + 8 >> 2] = $1;
+ HEAP32[$3 + 4 >> 2] = $2;
+ if (!HEAP32[24320]) {
+  HEAP32[$3 >> 2] = Math_imul(HEAP32[$3 + 4 >> 2], 480);
+  label$2 : {
+   if (HEAP32[$3 >> 2] > 0) {
+    memcpy(HEAP32[$3 >> 2] + 97296 | 0, 97296, 115200 - HEAP32[$3 >> 2] | 0);
+    break label$2;
+   }
+   if (HEAP32[$3 >> 2] < 0) {
+    memcpy(97296, 97296 - HEAP32[$3 >> 2] | 0, HEAP32[$3 >> 2] + 115200 | 0);
+   }
+  }
+  HEAP8[289296] = 1;
+ }
+ global$0 = $3 + 16 | 0;
 }
 function int_20gemmlowp__SelectUsingMask_int__28int_2c_20int_2c_20int_29($0, $1, $2) {
  var $3 = 0;
