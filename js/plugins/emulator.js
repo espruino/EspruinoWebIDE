@@ -91,20 +91,37 @@ function jsInit() {
 <button id="BTN1" style="width:20px;height:80px;position:absolute;right:0px;top:0px;">1</button>
 <button id="BTN2" style="width:20px;height:80px;position:absolute;right:0px;top:80px;">2</button>
 <button id="BTN3" style="width:20px;height:80px;position:absolute;right:0px;top:160px;">3</button>
-<div id="BTN4" style="width:120px;height:240px;position:absolute;left:0px;top:0px;"></div>
-<div id="BTN5" style="width:120px;height:240px;position:absolute;left:120px;top:0px;"></div>`;
+<div id="BTN4" style="width:125px;height:240px;position:absolute;left:0px;top:0px;"></div>
+<div id="BTN5" style="width:125px;height:240px;position:absolute;left:120px;top:0px;"></div>`;
   var terminal = document.getElementsByClassName("editor__canvas__terminal")[0];
   terminal.appendChild(div);
   function handleButton(n, pin) {
     hwPinValue[pin]=1; // inverted
     var btn = document.getElementById("BTN"+n);
     btn.addEventListener('mousedown', e => {
+      e.preventDefault();
       hwPinValue[pin]=0; // inverted
       jsTransmitPinEvent(pin);
     });
     btn.addEventListener('mouseup', e => {
       hwPinValue[pin]=1; // inverted
       jsTransmitPinEvent(pin);
+    });
+    btn.addEventListener('mouseenter', e => {
+      if (e.buttons) {
+        hwPinValue[pin]=0; // inverted
+        jsTransmitPinEvent(pin);
+      }
+    });
+    btn.addEventListener('mouseleave', e => {
+      // mouseleave comes *before* mouseenter usually - so delay it
+      // in order to get overlap when swiping to make Bangle.js screen swipes work
+      setTimeout(function() {
+        if (!hwPinValue[pin]) {
+          hwPinValue[pin]=1; // inverted
+          jsTransmitPinEvent(pin);
+        }
+      },10);
     });
   }
   handleButton(1,BTN1);
