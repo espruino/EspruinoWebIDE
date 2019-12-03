@@ -36,12 +36,14 @@
       case "codeurl": // Passing a URL for code within the URL
         promise = promise.then(new Promise(function(resolve,reject) {
           Espruino.Core.EditorJavaScript.setCode("// Loading from "+val+"...");
-          $.ajax({ url: val, cache: false }).done(function( data ) {
-            Espruino.Core.EditorJavaScript.setCode(data);
-            resolve();
-          }).error(function(){
-            Espruino.Core.EditorJavaScript.setCode("// Error loading "+val);
-            reject();
+          Espruino.Core.Utils.getURL(val, function(data) {
+            if (data!==undefined) {
+              Espruino.Core.EditorJavaScript.setCode(data);
+              resolve();
+            } else {
+              Espruino.Core.EditorJavaScript.setCode("// Error loading "+val);
+              reject();
+            }
           });
         }));
         break;
@@ -61,17 +63,17 @@
       case "gist": // Get code from a gist number in the URL
         promise = promise.then(new Promise(function(resolve,reject) {
           Espruino.Core.EditorJavaScript.setCode("// Loading Gist "+val+"...");
-          $.getJSON("https://api.github.com/gists/"+ val, function(data){
+          Espruino.Core.Utils.getJSONURL("https://api.github.com/gists/"+ val, function(data){
             if(data && data.files){
               var keys = Object.keys(data.files);
               if(keys.length > 0){
                 Espruino.Core.EditorJavaScript.setCode(data.files[keys[0]].content);
                 resolve();
               } else reject();
+            } else {
+              Espruino.Core.EditorJavaScript.setCode("// Error loading Gist "+val);
+              reject();
             }
-          }).error(function(){
-            Espruino.Core.EditorJavaScript.setCode("// Error loading Gist "+val);
-            reject();
           });
         }));
         break;
