@@ -7,7 +7,7 @@ to work by passing messages using window.postMessage.
 Use embed.js on the client side to link this in.
 */
 
-var DEVICE = 20; // USB
+var DEVICE = 21; // USB
 var BTN1 = 24;
 var BTN2 = 22;
 var BTN3 = 23;
