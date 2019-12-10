@@ -71,8 +71,8 @@ function jsUpdateGfx() {
     var rgba = imgData.data;
     var i = 0;
     for (var y=0;y<240;y++) {
-      for (var x=0;x<240;x++) {
-        var p = Module.ccall('jsGfxGetPtr', 'number', ['number'], [y])>>1;
+      var p = Module.ccall('jsGfxGetPtr', 'number', ['number'], [y])>>1;
+      for (var x=0;x<240;x++) {        
         var c = p ? Module.HEAP16[p+x] : 0;
         rgba[i++]=(c>>8)&0xF8;
         rgba[i++]=(c>>3)&0xFC;
