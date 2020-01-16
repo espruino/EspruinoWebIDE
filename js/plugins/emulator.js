@@ -72,7 +72,7 @@ function jsUpdateGfx() {
     var i = 0;
     for (var y=0;y<240;y++) {
       var p = Module.ccall('jsGfxGetPtr', 'number', ['number'], [y])>>1;
-      for (var x=0;x<240;x++) {        
+      for (var x=0;x<240;x++) {
         var c = p ? Module.HEAP16[p+x] : 0;
         rgba[i++]=(c>>8)&0xF8;
         rgba[i++]=(c>>3)&0xFC;
@@ -91,9 +91,10 @@ function jsInit() {
   div.style = "position:absolute;top:0px;right:0px;z-index:100;border: 2px solid white;width:264px;height:244px;";
   div.style = "position:absolute;top:0px;right:0px;z-index:100;border: 2px solid white;width:264px;height:244px;";
   div.innerHTML = `<canvas id="gfxcanvas" width="240" height="240"></canvas>
-<button id="BTN1" style="width:20px;height:80px;position:absolute;right:0px;top:0px;">1</button>
-<button id="BTN2" style="width:20px;height:80px;position:absolute;right:0px;top:80px;">2</button>
-<button id="BTN3" style="width:20px;height:80px;position:absolute;right:0px;top:160px;">3</button>
+<button id="BTN1" style="width:20px;height:73px;position:absolute;right:0px;top:0px;">1</button>
+<button id="BTN2" style="width:20px;height:73px;position:absolute;right:0px;top:73px;">2</button>
+<button id="BTN3" style="width:20px;height:73px;position:absolute;right:0px;top:146px;">3</button>
+<a id="screenshot" style="width:20px;height:21px;position:absolute;right:0px;top:219px;color:white;text-decoration:none;background-color:black;">&#x1F4F7;</a>
 <div id="BTN4" style="width:125px;height:240px;position:absolute;left:0px;top:0px;"></div>
 <div id="BTN5" style="width:125px;height:240px;position:absolute;left:120px;top:0px;"></div>`;
   var terminal = document.getElementsByClassName("editor__canvas__terminal")[0];
@@ -132,6 +133,10 @@ function jsInit() {
   handleButton(3,BTN3);
   handleButton(4,BTN4);
   handleButton(5,BTN5);
+  document.getElementById("screenshot").addEventListener('click', e => {
+    document.getElementById("screenshot").href = document.getElementById("gfxcanvas").toDataURL();
+    document.getElementById("screenshot").download = "screenshot.png";
+  });
 
   Module.ccall('jsInit', 'number', [], []);
   jsHandleIO();
