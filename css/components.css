@@ -371,7 +371,21 @@ a:hover > .menu
         line-height: 30px;
 }
 
-
+.list__itemicon-right {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    background-color: #aaa;
+    cursor: pointer;
+}
+.loading-text
+{
+        color: #333;
+        font-size: 120%;
+        text-transform: uppercase;
+        text-align: center;
+        line-height: 40px;
+}
 
 /* Snippets list */
 

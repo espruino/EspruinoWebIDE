@@ -124,6 +124,7 @@
     lastContents = undefined;
     // Launch the popup
     popup = Espruino.Core.App.openPopup({
+      id: "portselector",
       title: "Select a port...",
       contents: searchHtml,
       position: "center",

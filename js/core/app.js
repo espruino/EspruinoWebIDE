@@ -43,6 +43,7 @@
     menu: []
   };
   var initialised = false;
+  var _idcounter = 1;
 
   /**
    * Initialize the window
@@ -193,31 +194,44 @@
         api.close();
   }
 
-  /**
-   * Open a popup window
-   */
+/**
+  * Open a popup window
+  *
+  * options = {
+  *   id    : a unique ID for this window
+  *   position  : "center" / "stretch"
+  *   padding  : bool - add padding or not?
+  *   width / height : set size in pixels
+  *   title : title text
+  *   contents : html contents
+  *   ok : callback - add 'ok' button and call callback when clicked
+  *   next : callback - add 'next' button and call callback when clicked
+  *
+  * returns : {setContents, close}
+  */
   function openPopup(options)
   {
+    if (!options.id) options.id = "_popup"+_idcounter++;
     // Declare API first, as we need to make sure the close button / overlay click
     // call the methods on the API object, rathert than a copy of the close method
     // so that the close method can be overridden with extra logic if needed.
     var api = {
       setContents : function(contents)
       {
-        $(".window--modal > .window__viewport").html(contents);
+        document.querySelector("#"+options.id+".window--modal .window__viewport").innerHTML = contents;
       },
       close : function(){
         $(".window__overlay").remove();
       }
     }
 
+
     // Append the modal overlay
     $('<div class="window__overlay"><div class="window__overlay-inner"></div></div>').appendTo(".window > .window__viewport").click(function(){
       api.close();
     });
-    var optid = (options.id) ? 'id="' + options.id + '"' : '';
     // Append the popup window
-    $('<div class="window window--modal window--'+ options.position +'"' + optid + '>'+
+    $('<div class="window window--modal window--'+ options.position +'" id="' + options.id + '">'+
           '<div class="window__title-bar title-bar">'+
             '<h5 class="title-bar__title">'+ options.title +'</h5>'+
             '<div class="title-bar__buttons"></div>'+
@@ -268,7 +282,7 @@
    *   icon  : the icon type to use (corresponds to icons.css)
    *   area  : {
    *             name : titlebar | toolbar | terminal | code,
-   *             position : left | middle | right | top | bottom 
+   *             position : left | middle | right | top | bottom
    *           }
    *   title : nice title for tooltips
    *   order : integer specifying the order. After icons have been added they'll be sorted so this is ascending

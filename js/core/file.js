@@ -49,9 +49,9 @@
       },
       click: function() {
         if (Espruino.Core.Code.isInBlockly())
-          saveFile(Espruino.Core.EditorBlockly.getXML(), currentXMLFileName);
+          Espruino.Core.Utils.fileSaveDialog(Espruino.Core.EditorBlockly.getXML(), currentXMLFileName);
         else
-          saveFile(Espruino.Core.EditorJavaScript.getCode(), currentJSFileName);
+          Espruino.Core.Utils.fileSaveDialog(Espruino.Core.EditorJavaScript.getCode(), currentJSFileName);
       }
     });
   }
@@ -100,48 +100,6 @@
     }
   }
 
-  function saveFile(data, filename) {
-    //saveAs(new Blob([convertToOS(data)], { type: "text/plain" }), filename); // using FileSaver.min.js
-
-    function errorHandler() {
-      Espruino.Core.Notifications.error("Error Saving", true);
-    }
-
-    if (chrome.fileSystem) {
-      // Chrome Web App / NW.js
-      chrome.fileSystem.chooseEntry({type: 'saveFile', suggestedName:filename}, function(writableFileEntry) {
-        if (writableFileEntry.name)
-          setCurrentFileName(writableFileEntry.name);
-        writableFileEntry.createWriter(function(writer) {
-          var blob = new Blob([convertToOS(data)],{ type: "text/plain"} );
-          writer.onerror = errorHandler;
-          // when truncation has finished, write
-          writer.onwriteend = function(e) {
-            writer.onwriteend = function(e) {
-              console.log('FileWriter: complete');
-            };
-            console.log('FileWriter: writing');
-            writer.write(blob);
-          };
-          // truncate
-          console.log('FileWriter: truncating');
-          writer.truncate(blob.size);
-        }, errorHandler);
-      });
-    } else {
-      var a = document.createElement("a"),
-          file = new Blob([data], {type: "text/plain"});
-      var url = URL.createObjectURL(file);
-      a.href = url;
-      a.download = filename;
-      document.body.appendChild(a);
-      a.click();
-      setTimeout(function() {
-          document.body.removeChild(a);
-          window.URL.revokeObjectURL(url);
-      }, 0);
-    }
-  };
 
   Espruino.Core.File = {
     init : init
