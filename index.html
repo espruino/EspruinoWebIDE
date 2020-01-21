@@ -246,8 +246,7 @@
   ga('send', 'pageview');
 
   // register service worker on known origins
-  if (window.location.origin == "https://www.espruino.com" ||
-      window.location.origin == "https://espruino.github.io") {
+  if (window.location.origin == "https://www.espruino.com") {
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('serviceworker.js').then(function(reg) {
         if(reg.installing) {
