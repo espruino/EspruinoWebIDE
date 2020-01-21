@@ -84,6 +84,7 @@
   .button--wide
   {
     width: 100%;
+    min-width: 350px;
   }
 
   .button--icon

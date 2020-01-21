@@ -189,9 +189,11 @@
    */
   function closePopup()
   {
-    var api = $(".window--modal").data("api");
-    if(api)
-        api.close();
+    var win = document.querySelector(".window--modal");
+    if (win) {
+      var api = win.data_api;
+      if(api) api.close();
+    }
   }
 
 /**
@@ -199,15 +201,25 @@
   *
   * options = {
   *   id    : a unique ID for this window
-  *   position  : "center" / "stretch"
+  *   position  : "center" // middle of screen, small
+                  "stretch" // across the screen
+                  "auto"    // full height, auto width
   *   padding  : bool - add padding or not?
   *   width / height : set size in pixels
   *   title : title text
   *   contents : html contents
   *   ok : callback - add 'ok' button and call callback when clicked
-  *   next : callback - add 'next' button and call callback when clicked
+  *   cancel : callback - add 'cancel' button and...
+  *   next : callback - add 'next' button and...
+  *   yes : callback - add 'yes' button and...
+  *   no : callback - add 'no' button and...
   *
-  * returns : {setContents, close}
+  *
+  * returns : {
+  *  setContents, // set window contents
+  *  close, // close this window
+  *  window  // the window's dom element
+  * }
   */
   function openPopup(options)
   {
@@ -216,22 +228,23 @@
     // call the methods on the API object, rathert than a copy of the close method
     // so that the close method can be overridden with extra logic if needed.
     var api = {
-      setContents : function(contents)
-      {
-        document.querySelector("#"+options.id+".window--modal .window__viewport").innerHTML = contents;
+      setContents : function(contents) {
+        winModal.querySelector(".window__viewport").innerHTML = contents;
       },
-      close : function(){
-        $(".window__overlay").remove();
+      close : function() {
+        winOverlay.remove();
       }
     }
 
 
     // Append the modal overlay
-    $('<div class="window__overlay"><div class="window__overlay-inner"></div></div>').appendTo(".window > .window__viewport").click(function(){
-      api.close();
+    var winOverlay = Espruino.Core.Utils.domElement('<div class="window__overlay"><div class="window__overlay-inner"></div></div>');
+    document.querySelector(".window > .window__viewport").append(winOverlay);
+    winOverlay.addEventListener("click", function(w) {
+      api.close()
     });
     // Append the popup window
-    $('<div class="window window--modal window--'+ options.position +'" id="' + options.id + '">'+
+    var winModal = Espruino.Core.Utils.domElement('<div class="window window--modal window--'+ options.position +'" id="' + options.id + '">'+
           '<div class="window__title-bar title-bar">'+
             '<h5 class="title-bar__title">'+ options.title +'</h5>'+
             '<div class="title-bar__buttons"></div>'+
@@ -241,35 +254,64 @@
             options.contents +
             (options.padding ? '</div>':'')+
           '</div>'+
-        '</div>').appendTo(".window__overlay-inner").click(function(e){ e.stopPropagation(); })
-
-    // Append close button
-    $('<a class="icon-cross sml title-bar__button title-bar__button--close" title="Close"></a>').appendTo(".window--modal .title-bar__buttons").click(function(){
-      api.close();
+        '</div>');
+    winModal.addEventListener("click", function(e) {
+      e.stopPropagation();
+    });
+    winOverlay.querySelector(".window__overlay-inner").append(winModal);
+    winOverlay.addEventListener("click", function(e) {
+      e.stopPropagation();
     });
 
+    // Append close button
+    var winClose = Espruino.Core.Utils.domElement('<a class="icon-cross sml title-bar__button title-bar__button--close" title="Close"></a>');
+    winClose.addEventListener("click", function(e) {
+      api.close();
+    });
+    winModal.querySelector(".title-bar__buttons").append(winClose);
+
     // Append 'next'/'ok' button if we registered a callback
+    var buttoncontainer;
+    if (options.next || options.ok || options.cancel || options.yes || options.no) {
+      buttoncontainer = Espruino.Core.Utils.domElement(
+        '<div class="guiders_buttons_container" style="padding: 10px 10px 10px 10px;bottom:10px;">');
+      winModal.querySelector(".window__viewport").append(buttoncontainer);
+    }
     if (options.next) {
-      $('<div class="guiders_buttons_container" style="padding: 10px 10px 10px 10px;bottom:10px;"><a class="guiders_button" href="#">Next</a></div>')
-        .appendTo(".window--modal .window__viewport").click(options.next);
+      var btn = Espruino.Core.Utils.domElement('<a class="guiders_button" href="#">Next</a>');
+      btn.addEventListener("click", options.next);
+      buttoncontainer.append(btn);
+    }
+    if (options.cancel) {
+      var btn = Espruino.Core.Utils.domElement('<a class="guiders_button" href="#">Cancel</a>');
+      btn.addEventListener("click", options.cancel);
+      buttoncontainer.append(btn);
     }
     if (options.ok) {
-      $('<div class="guiders_buttons_container" style="padding: 10px 10px 10px 10px;bottom:10px;"><a class="guiders_button" href="#">Ok</a></div>')
-        .appendTo(".window--modal .window__viewport").click(options.ok);
+      var btn = Espruino.Core.Utils.domElement('<a class="guiders_button" href="#">Ok</a>');
+      btn.addEventListener("click", options.ok);
+      buttoncontainer.append(btn);
+    }
+    if (options.no) {
+      var btn = Espruino.Core.Utils.domElement('<a class="guiders_button" href="#">No</a>');
+      btn.addEventListener("click", options.no);
+      buttoncontainer.append(btn);
+    }
+    if (options.yes) {
+      var btn = Espruino.Core.Utils.domElement('<a class="guiders_button" href="#">Yes</a>');
+      btn.addEventListener("click", options.yes);
+      buttoncontainer.append(btn);
     }
 
     // Apply dimensions
     if(options.width)
-    {
-      $(".window--modal").width(options.width);
-    }
+      winModal.width(options.width);
 
     if(options.height)
-    {
-      $(".window--modal").height(options.height);
-    }
+      winModal.height(options.height);
 
-    $(".window--modal").data("api", api);
+    winModal.data_api = api;
+    api.window = winModal;
 
     return api;
   }
