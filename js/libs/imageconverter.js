@@ -287,7 +287,7 @@ return c;
     writeImage(pixels);
 
     var strCmd;
-    if (options.output=="string") {
+    if ((options.output=="string") || (options.output=="raw")) {
       var transparent = transparentCol!==undefined;
       var headerSize = transparent?4:3;
       var imgData = new Uint8Array(bitData.length + headerSize);
@@ -308,7 +308,9 @@ return c;
     for (n=0; n<bitData.length; n++)
       str += String.fromCharCode(bitData[n]);
     var imgstr;
-    if (options.output=="object") {
+    if (options.output=="raw") {
+      imgstr = str;
+    } else if (options.output=="object") {
       imgstr = "{\n";
       imgstr += "  width : "+options.width+", height : "+options.height+", bpp : "+bpp+",\n";
       if (transparentCol!==undefined) imgstr += "  transparent : "+transparentCol+",\n";
@@ -382,7 +384,7 @@ return c;
       transparent : "bool",
       brightness : "int",
       mode : Object.keys(COL_BPP),
-      output : ["object","string"],
+      output : ["object","string","raw"],
       inverted : "bool",
     }
   }
