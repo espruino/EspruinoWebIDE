@@ -397,7 +397,7 @@
     var popup = Espruino.Core.App.openPopup({
       title: "Firmware Update",
       padding: true,
-      contents: '<div class="status__progress" style="width:100%;margin-top:10px;"><div class="status__progress-bar" /></div>'+
+      contents: '<div class="status__progress" style="width:100%;margin-top:10px;"><div class="status__progress-bar"></div></div>'+
                 '<p><b>Your firmware is now being updated</b>... <span class="flash_status"></span></p>',
       position: "center",
     });
