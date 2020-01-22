@@ -22,12 +22,12 @@
   function init() {
     Espruino.Core.App.addIcon({
       id: "storage",
-      icon: "star",
-      title : "Access files on device",
-      order: 300,
+      icon: "storage",
+      title : "Access files in device's storage",
+      order: 400,
       area: {
         name: "code",
-        position: "bottom"
+        position: "top"
       },
       click: function() {
         Espruino.Core.MenuPortSelector.ensureConnected(function() {

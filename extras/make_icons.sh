@@ -94,6 +94,7 @@ i svg/appbar.chat chat
 i svg/appbar.connection.bluetooth bluetooth
 i svg/appbar.hardware.headphones headphone
 i svg/appbar.network network
+i svg/appbar.database storage
 
 # Now put them all together into one file
 convert icons/oldicons.png $IMAGES -append $ICONFILE
