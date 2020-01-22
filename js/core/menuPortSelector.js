@@ -100,9 +100,9 @@
             html += '<li class="list__item">'+
                       '<a title="'+ port.path +'" class="button button--icon button--wide" data-port="'+ port.path +'">'+
                         '<i class="'+icon+' lrg button__icon"></i>'+
-                        '<span class="list__item__name">'+ port.path;
+                        '<div class="list__item__name">'+ port.path+'</div>';
             if (port.description)
-              html += '</br><span class="list__item__desc">' + port.description + '</span>';
+              html += '<div class="list__item__desc">' + port.description + '</div>';
             html += '</span>'+
                       '</a>'+
                     '</li>';

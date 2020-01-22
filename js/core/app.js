@@ -176,12 +176,13 @@
       return;
     }
 
-    var mylist = typeof container === "string" ? $(container) : container;
-    var listitems = mylist.children(/*'a'*/).get();
+    var mylist = typeof container === "string" ? document.querySelector(container) : container;
+    if (!mylist) return;
+    var listitems = Espruino.Core.Utils.domToArray(mylist.children);
     listitems.sort(function(a, b) {
-       return parseFloat($(a).data("icon-order")) - parseFloat($(b).data("icon-order"));
+       return parseFloat(a.getAttribute("data-icon-order")) - parseFloat(b.getAttribute("data-icon-order"));
     });
-    $.each(listitems, function(idx, itm) { mylist.append(itm); });
+    listitems.forEach(function(itm) { mylist.append(itm); });
   }
 
   /**
@@ -328,6 +329,18 @@
    *           }
    *   title : nice title for tooltips
    *   order : integer specifying the order. After icons have been added they'll be sorted so this is ascending
+   *   click : callback when icon clicked
+   *   more  : add down-arrow in bottom right of icon and callback when clicked
+   *   info  : info text at bottom of the button
+   *
+   * returns:
+   *
+   * {
+   *   setIcon     // update the icon
+   *   setInfo     // update the info text
+   *   remove
+   *   addMenuItem
+   * }
    */
   function addIcon(options)
   {
@@ -356,9 +369,8 @@
     if(options.cssClass)
       additionalClasses += ' '+ options.cssClass;
 
-    var container = $(selector);
-    if(container.length == 0)
-    {
+    var container = document.querySelector(selector);
+    if (!container) {
       console.warn("App.addIcon unknown area: "+ selector);
       return;
     }
@@ -370,26 +382,46 @@
     var elementClass = 'icon-'+ options.icon;
 
     // remove old icon if there was one
-    var c = container.children("."+elementClass);
-    c.remove();
+    var c = container.querySelectorAll("."+elementClass);
+    for (var i=0;i<c.length;i++) c[i].remove();
+
+    if (options.info)
+      additionalClasses += " icon--hasinfo";
 
     // add the element
-    var element = $('<a id="icon-'+ options.id +'" class="'+ elementClass +' '+ iconSize +' '+ additionalClasses +'" title="'+ options.title +'" data-icon-order="'+ order +'"></a>').appendTo(container);
+    var element = Espruino.Core.Utils.domElement('<a id="icon-'+ options.id +'" class="'+ elementClass +' '+ iconSize +' '+ additionalClasses +'" title="'+ options.title +'" data-icon-order="'+ order +'"></a>');
+    container.append(element);
+    if (options.more) {
+      var more = Espruino.Core.Utils.domElement('<span class="icon__more">&#9660</span>');
+      element.append(more);
+      more.addEventListener("click", function(e) {
+        e.stopPropagation();
+        options.more(e)
+      });
+    }
+    var info;
+    if (options.info) {
+      info = Espruino.Core.Utils.domElement('<span class="icon__info">'+options.info+'</span>');
+      element.append(info);
+    }
 
     if(options.divider)
-      element.addClass("icon--divide-"+ options.divider);
+      element.classList.add("icon--divide-"+ options.divider);
 
     if(options.click)
-      element.on("click", options.click);
+      element.addEventListener("click", options.click);
 
     if (initialised)
       sortIcons(selector);
 
     var api = {
       setIcon : function(icon) {
-        element.removeClass(elementClass);
+        element.classList.remove(elementClass);
         elementClass = 'icon-'+ icon;
-        element.addClass(elementClass);
+        element.classList.add(elementClass);
+      },
+      setInfo : function(text) {
+        if (info) info.innerHTML = text;
       },
       remove : function() {
         element.off(); // Remove all event handlers
@@ -397,17 +429,20 @@
       },
       addMenuItem: function(options)
       {
-        var menuEl = element.find(".menu");
-        if(menuEl.length == 0)
-           menuEl = $('<div class="menu"></div>').appendTo(element)
+        var menuEl = element.querySelector(".menu");
+        if(!menuEl) {
+          menuEl = Espruino.Core.Utils.domElement('<div class="menu"></div>');
+          element.append(menuEl);
+        }
 
         var order = 0;
         if (options.order !== undefined)
           order = options.order;
 
-        var menuItemEl = $('<a id="icon-'+ options.id +'" title="'+ options.title +'" data-icon-order="'+ order +'"><i class="icon-'+ options.icon +' sml"></i> '+ options.title +'</a>').appendTo(menuEl);
+        var menuItemEl = Espruino.Core.Utils.domElement('<a id="icon-'+ options.id +'" title="'+ options.title +'" data-icon-order="'+ order +'"><i class="icon-'+ options.icon +' sml"></i> '+ options.title +'</a>');
+        menuEl.append(menuItemEl);
         if(options.click)
-          menuItemEl.click(function(e){
+          menuItemEl.addEventListener("click", function(e){
             e.stopPropagation();
             options.click(e);
           });
@@ -423,7 +458,7 @@
       });
     }
 
-    element.data("api", api);
+    element.data_api = api;
 
     return api;
   }
@@ -460,7 +495,8 @@
 
   function findIcon(id)
   {
-    return $("#icon-"+ id).data("api");
+    var icon = document.querySelector("#icon-"+ id);
+    return icon ? icon.data_api : undefined;
   }
 
   Espruino.Core.App = {
