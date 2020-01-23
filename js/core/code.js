@@ -103,6 +103,15 @@
     }
   }
 
+  function focus() {
+    if (isInBlockly()) {
+      document.querySelector("#divblockly").focus();
+    } else {
+      //document.querySelector(".CodeMirror").focus();
+      Espruino.Core.EditorJavaScript.getCodeMirror().focus()
+    }
+  }
+
   Espruino.Core.Code = {
     init : init,
     getEspruinoCode : getEspruinoCode, // get the currently selected bit of code ready to send to Espruino (including Modules)
@@ -110,6 +119,7 @@
     isInBlockly: isInBlockly,
     switchToCode: switchToCode,
     switchToBlockly: switchToBlockly,
+    focus : focus, // give focus to the current code editor
     DEFAULT_CODE : "var  on = false;\nsetInterval(function() {\n  on = !on;\n  LED1.write(on);\n}, 500);"
   };
 }());

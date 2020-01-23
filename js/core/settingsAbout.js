@@ -19,8 +19,11 @@
         sortOrder : -1000,
         getHTML : function(callback) {
           $.get("data/settings_about.html", function(data) {
+            // set contents
             callback(data);
+            // IDE version
             $(".webide_version").html("Web IDE version "+version);
+            // Board info
             var html;
             var strData = {};
             if (Object.keys(Espruino.Core.Env.getBoardData()).length > 0) {
@@ -36,10 +39,20 @@
             } else
               html = "<p>No board information available. Please connect to an Espruino board first.</p>";
             $('.board_info').html( html );
-          });
-          $.get("PATREON.md", function(data) {
-            $(".patreon").html(Espruino.Core.HTML.markdownToHTML(data));
-          });
+            // Patreon
+            $.get("PATREON.md", function(data) {
+              $(".patreon").html(Espruino.Core.HTML.markdownToHTML(data));
+            });
+            // Key Shortcuts
+            var keyShortcuts = Espruino.Plugins.KeyShortcuts.getShortcutDescriptions();
+            html = "<dl>";
+            Object.keys(keyShortcuts).forEach(function(key) {
+              html += "<dt>"+Espruino.Core.Utils.escapeHTML(key)+"</dt><dd>"+
+                            Espruino.Core.Utils.escapeHTML(keyShortcuts[key])+"</dd>\n";
+            });
+            html += "</dl>";
+            $('.shorcut_info').html( html );
+          });          
         }
       });
     });
