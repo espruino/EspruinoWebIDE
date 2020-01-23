@@ -40,7 +40,7 @@
   /* Return the HTML to display a loading indicator */
   function htmlLoading() {
     // <span class="spin-animation">&#x21bb;</span>
-    return '<h2 class="list__no-results">Connecting...</h2>';
+    return '<h2 class="list__no-results">Loading...</h2>';
   }
 
   // Convert a HTML element list to an array
