@@ -157,7 +157,10 @@
   }
 
   function uploadOfflineData() {
-    Espruino.Core.Utils.fileOpenDialog("offline", "arraybuffer", function(data) {
+    Espruino.Core.Utils.fileOpenDialog({
+        id:"offline",
+        type:"arraybuffer",
+        mimeType:".zip,application/zip"} function(data) {
       if (data===undefined) return;
       offlineDataLoaded(new Uint8Array(data));
     });

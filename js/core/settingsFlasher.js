@@ -42,7 +42,10 @@
             }
           });
           $('.flash_start_file').click( function() {
-            Espruino.Core.Utils.fileOpenDialog("flasher","arraybuffer",function(buffer) {
+            Espruino.Core.Utils.fileOpenDialog({
+                id:"flasher",
+                type:"arraybuffer",
+                mimeType:".bin,.zip,application/zip"},function(buffer) {
               Espruino.Core.App.closePopup();
               Espruino.Core.MenuFlasher.showFlasher( undefined, buffer );
             });

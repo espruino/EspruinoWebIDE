@@ -125,7 +125,11 @@
   }
 
   function showUploadFileDialog() {
-    Espruino.Core.Utils.fileOpenDialog("storage","text",function(contents, mimeType, fileName) {
+    Espruino.Core.Utils.fileOpenDialog({
+        id:"storage",
+        type:"text"
+        // mineType : anything
+      },function(contents, mimeType, fileName) {
       var contentsToUpload = contents;
       var imageTypes = ['image/gif', 'image/jpeg', 'image/png'];
       var isImage = imageTypes.includes(mimeType);

@@ -16,6 +16,9 @@
   var currentXMLFileName = "code_blocks.xml";
   var loadFileCallback;
 
+  const MIMETYPE_JS = ".js,.txt,application/javascript,text/plain";
+  const MIMETYPE_XML = ".xml,text/xml";
+
   function init() {
     // Configuration
 
@@ -32,9 +35,9 @@
       },
       click: function() {
         if (Espruino.Core.Code.isInBlockly())
-          loadFile(Espruino.Core.EditorBlockly.setXML, currentXMLFileName);
+          loadFile(Espruino.Core.EditorBlockly.setXML, currentXMLFileName, MIMETYPE_XML);
         else
-          loadFile(Espruino.Core.EditorJavaScript.setCode, currentJSFileName);
+          loadFile(Espruino.Core.EditorJavaScript.setCode, currentJSFileName, MIMETYPE_JS);
       }
     });
 
@@ -76,7 +79,7 @@
    return chars.replace(/\r\n/g,"\n").replace(/\n/g,"\r\n");
   };
 
-  function loadFile(callback, filename) {
+  function loadFile(callback, filename, mimeType) {
     if (chrome.fileSystem) {
       // Chrome Web App / NW.js
       chrome.fileSystem.chooseEntry({type: 'openFile', suggestedName:filename}, function(fileEntry) {
@@ -94,7 +97,8 @@
         });
       });
     } else {
-      Espruino.Core.Utils.fileOpenDialog("code", "text", function(data) {
+      Espruino.Core.Utils.fileOpenDialog({id:"code",type:"text",mimeType:mimeType}, function(data, mimeType, fileName) {
+        if (fileName) setCurrentFileName(fileName);
         callback(convertFromOS(data));
       });
     }
