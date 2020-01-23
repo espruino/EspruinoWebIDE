@@ -11,13 +11,9 @@
 **/
 "use strict";
 (function(){
-
-  // TODO:
-  //   Icon + placement
-  //   Handle 'StorageFile' chunked files correctly
-
   /// Chunk size the files are downloaded in
   var CHUNKSIZE = 384;// or any multiple of 96 for atob/btoa
+  var STORAGEFILE_POSTFIX = " (StorageFile)";
 
   function init() {
     Espruino.Core.App.addIcon({
@@ -37,16 +33,36 @@
     });
   }
 
+  function formatFilename(fileName) {
+    if (!Espruino.Core.Utils.isASCII(fileName))
+      return JSON.stringify(fileName);
+    return fileName;
+  }
+
   function downloadFile(fileName, callback) {
-    //callback("Lots of text here");
-    //Espruino.Core.Utils.executeExpression("btoa(require('Storage').read("+JSON.stringify(fileName)+"))", function(contents) {
-    Espruino.Core.Utils.executeStatement(`(function(filename) {
+    if (fileName.endsWith(STORAGEFILE_POSTFIX)) {
+      fileName = fileName.substr(0, fileName.length-STORAGEFILE_POSTFIX.length);
+      Espruino.Core.Utils.executeStatement(`(function(filename) {
+  var f = require("Storage").open(filename,"r");
+  var d = f.read(${CHUNKSIZE});
+  while (d!==undefined) {
+    console.log(btoa(d));
+    d = f.read(${CHUNKSIZE});
+  }
+})(${JSON.stringify(fileName)});`, function(contents) {
+        // atob doesn't care about the newlines
+        callback(contents ? atob(contents) : undefined);
+      });
+    } else { // a normal file
+      //Espruino.Core.Utils.executeExpression("btoa(require('Storage').read("+JSON.stringify(fileName)+"))", function(contents) {
+      Espruino.Core.Utils.executeStatement(`(function(filename) {
   var s = require("Storage").read(filename);
   for (var i=0;i<s.length;i+=${CHUNKSIZE}) console.log(btoa(s.substr(i,${CHUNKSIZE})));
 })(${JSON.stringify(fileName)});`, function(contents) {
-      // atob doesn't care about the newlines
-      callback(contents ? atob(contents) : undefined);
-    });
+        // atob doesn't care about the newlines
+        callback(contents ? atob(contents) : undefined);
+      });
+    }
 
   }
 
@@ -76,9 +92,10 @@
       var fileList = [];
       try {
         fileList = JSON.parse(files);
+        fileList = fileList.map(fileName => Espruino.Core.Utils.parseJSONish(fileName))
         // fileList.sort(); // ideally should ignore first char for sorting
       } catch (e) {
-        console.log(e);
+        console.log("getFileList",e);
         fileList = [];
       }
       callback(fileList);
@@ -257,6 +274,7 @@
         Espruino.Core.Utils.escapeHTML(contents).replace(/\n/g,"<br>")+'</div>';
         buttons.push({ name:"Copy to Editor", callback : function() {
           Espruino.Core.EditorJavaScript.setCode(contents);
+          popup.close();
         }});
     } else {
       var img = imageconverter.stringToImageHTML(contents,{transparent:false});
@@ -269,9 +287,13 @@
           Espruino.Core.Utils.escapeHTML(decodeHexDump(contents)).replace(/\n/g,"<br>")+'</div>';
       }
     }
+    buttons.push({ name:"Save", callback : function() {
+      popup.close();
+      Espruino.Core.Utils.fileSaveDialog(contents, fileName);
+    }});
     var popup = Espruino.Core.App.openPopup({
       id: "storagefileview",
-      title: "Contents of "+fileName,
+      title: "Contents of "+formatFilename(fileName),
       padding: true,
       contents: html,
       position: "auto",
@@ -279,15 +301,15 @@
     });
     }
 
-  function showDeleteFileDialog(fileName, actualFileName) {
+  function showDeleteFileDialog(fileName) {
     var popup = Espruino.Core.App.openPopup({
       id: "storagefiledelete",
-      title: "Really remove "+fileName+"?",
+      title: "Really remove "+formatFilename(fileName)+"?",
       padding: true,
       contents: "Do you really want to remove this file?",
       position: "auto",
       buttons : [{ name:"Yes", callback : function() {
-        deleteFile(actualFileName, function() {
+        deleteFile(fileName, function() {
           Espruino.Core.Status.setStatus("File deleted.");
         });
         popup.close();
@@ -328,15 +350,23 @@
         }]
       }];
 
+      fileList.filter(fileName=>{
+        return fileName.endsWith("\u0001");
+      }).forEach(fileName=>{
+        var prefix = fileName.slice(0,-1);
+        console.log("Found StorageFile "+prefix);
+        // filter out any files with the same name
+        fileList = fileList.filter(f=>f.slice(0,-1) != prefix);
+        // Add out new file
+        fileList.push(prefix+STORAGEFILE_POSTFIX);
+      });
+
       fileList.forEach(function(fileName) {
-        // fileName is pre-quoted
-        var actualFileName = Espruino.Core.Utils.parseJSONish(fileName);
-        // actualFileName is unquoted
         items.push({
-          title : fileName,
+          title : formatFilename(fileName),
           right: [{ title:"View", icon:"icon-eye",
             callback : function() { // view the file
-              downloadFile(actualFileName, function(contents) {
+              downloadFile(fileName, function(contents) {
                 showViewFileDialog(fileName, contents);
               });
             }
@@ -349,14 +379,14 @@
             }
           },{ title:"Save", icon:"icon-save",
             callback : function() { // Save the file
-              downloadFile(actualFileName, function(contents) {
-                Espruino.Core.Utils.fileSaveDialog(contents, actualFileName);
+              downloadFile(fileName, function(contents) {
+                Espruino.Core.Utils.fileSaveDialog(contents, fileName);
               });
             }
           },{ title:"Delete", icon:"icon-bin",
             callback : function() { // Delete the file
               popup.close();
-              showDeleteFileDialog(fileName, actualFileName);
+              showDeleteFileDialog(fileName);
             }
           }]
         });
