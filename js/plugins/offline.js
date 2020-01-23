@@ -19,10 +19,10 @@
 
   var OFFLINE_URL = "https://www.espruino.com/files/offline.zip"
   var DATA_SEPARATOR = "|";
-  
+
   var OFFLINE_DATA;
   var OFFLINE_DATE;
-    
+
 
   function init() {
     Espruino.addProcessor("getURL", getOffline);
@@ -33,11 +33,11 @@
       if (dataHex) {
         var colon = dataHex.indexOf(DATA_SEPARATOR);
         if (colon>=0) OFFLINE_DATE = dataHex.substr(0,colon);
-        dataHex = dataHex.substr(colon+1);      
+        dataHex = dataHex.substr(colon+1);
         var data = new Uint8Array(dataHex.length/2);
-        for (var i=0;i<data.length;i++) 
+        for (var i=0;i<data.length;i++)
           data[i] = parseInt(dataHex.substr(i*2,2),16);
-        OFFLINE_DATA = data.buffer;      
+        OFFLINE_DATA = data.buffer;
       }
     });
 
@@ -96,16 +96,16 @@
       onClick : uploadOfflineData
     });
   }
-  
+
   function offlineDataLoaded(data /*Uint8Array*/) {
-    Espruino.Core.Status.setStatus("Downloaded "+data.length+" bytes. Saving to local storage");    
+    Espruino.Core.Status.setStatus("Downloaded "+data.length+" bytes. Saving to local storage");
     OFFLINE_DATE = (new Date()).toLocaleString("en-US");
     OFFLINE_DATA = data?data.buffer:undefined;
-    
+
     var urlBase = Espruino.Config.BOARD_JSON_URL;
     if (urlBase[urlBase.length-1]!="/")
       urlBase += "/";
-    
+
     // do a quick sanity test
     findOffline(urlBase+"espruino.json", function(d) {
       if (d===undefined) {
@@ -116,9 +116,9 @@
           padding: true,
           contents: "<p><b>The offline file couldn't be found or was corrupt.</b><p>",
           position: "center",
-          ok : function() {
+          buttons : [{ name:"Ok", callback : function() {
             popup.close();
-          }
+          }}]
         });
       } else {
         var dataHex = OFFLINE_DATE+DATA_SEPARATOR;
@@ -143,9 +143,9 @@
     var xhr = new XMLHttpRequest();
     xhr.responseType = "arraybuffer";
     xhr.addEventListener("load", function () {
-      if (xhr.status === 200) {        
+      if (xhr.status === 200) {
         var data = new Uint8Array(xhr.response);
-        offlineDataLoaded(data);        
+        offlineDataLoaded(data);
       } else
         Espruino.Core.Notifications.error("Error downloading file - HTTP "+xhr.status);
     });
@@ -155,7 +155,7 @@
     xhr.open("GET", OFFLINE_URL, true);
     xhr.send(null);
   }
-  
+
   function uploadOfflineData() {
     Espruino.Core.Utils.fileOpenDialog("offline", "arraybuffer", function(data) {
       if (data===undefined) return;

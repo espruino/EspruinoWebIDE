@@ -220,7 +220,7 @@
           contents: '<p>This tour needs a connection to an Espruino board</p>'+
                     '<p>Please connect your board and then click the \'Connect\' icon in the top right</p>' ,
           position: "center",
-          ok: function() { Espruino.Core.App.closePopup(); }
+          buttons : [{ name:"Ok", callback : function() { Espruino.Core.App.closePopup(); }}]
         });
       } else if (tour.needsProjectSetting && !Espruino.Config.projectEntry) {
         var popup = Espruino.Core.App.openPopup({
@@ -229,7 +229,7 @@
           contents: '<p>This tour needs a Project directory to be defined.</p>'+
                     '<p>Please go to <b>Settings</b>, then <b>Project</b>, and follow the <b>Project Tour</b>.</p>' ,
           position: "center",
-          ok: function() { Espruino.Core.App.closePopup(); }
+          buttons : [{ name:"Ok", callback : function() { Espruino.Core.App.closePopup(); }}]
         });
       } else if (tour.needsTestingSetting && !Espruino.Config.ENABLE_Testing) {
         var popup = Espruino.Core.App.openPopup({
@@ -238,7 +238,7 @@
           contents: '<p>This tour needs Testing to be enabled.</p>'+
                     '<p>Please go to <b>Settings</b>, then <b>Testing</b>, and follow the <b>Testing Tour</b>.</p>' ,
           position: "center",
-          ok: function() { Espruino.Core.App.closePopup(); }
+          buttons : [{ name:"Ok", callback : function() { Espruino.Core.App.closePopup(); }}]
         });
       } else {
         prepareSlides(tour.id, tour.slides);

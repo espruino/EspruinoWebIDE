@@ -67,10 +67,10 @@
       title: "Confirm setting update...",
       contents: $content.html(),
       position: "center",
-      ok: function() {
+      buttons : [{ name:"Ok", callback : function() {
         popup.close();
         confirmCallback();
-      }
+      }}]
     });
   }
 

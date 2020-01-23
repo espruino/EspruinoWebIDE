@@ -155,7 +155,7 @@
         padding: true,
         contents: html,
         position: "auto",
-        ok : function() {
+        buttons : [{ name:"Ok", callback : function() {
           var filename = popup.window.querySelector(".filenameinput").value;
           if (!filename.length) {
             Espruino.Core.Notifications.error("You must supply a filename")
@@ -170,8 +170,7 @@
             console.log("Upload complete!");
           });
           popup.close();
-        },
-        cancel : function() { popup.close(); },
+        }}, { name:"Cancel", callback : function() { popup.close(); }}]
       });
       if (isImage) {
         var controls = {
@@ -251,11 +250,15 @@
 
   function showViewFileDialog(fileName, actualFileName) {
     console.log("View",fileName);
+    var buttons = [{ name:"Ok", callback : function() { popup.close(); }}];
     downloadFile(actualFileName, function(contents) {
       var html;
       if (Espruino.Core.Utils.isASCII(contents)) {
         html = '<div style="overflow-y:auto;font-family: monospace;">'+
           Espruino.Core.Utils.escapeHTML(contents).replace(/\n/g,"<br>")+'</div>';
+          buttons.push({ name:"Copy to Editor", callback : function() {
+            Espruino.Core.EditorJavaScript.setCode(contents);
+          }});
       } else {
         var img = imageconverter.stringToImageHTML(contents,{transparent:false});
         if (img) { // it's a valid image
@@ -273,25 +276,24 @@
         padding: true,
         contents: html,
         position: "auto",
-        ok : function() { popup.close(); }
+        buttons : buttons
       });
     });
   }
 
   function showDeleteFileDialog(fileName, actualFileName) {
-    var deletepopup = Espruino.Core.App.openPopup({
+    var popup = Espruino.Core.App.openPopup({
       id: "storagefiledelete",
       title: "Really remove "+fileName+"?",
       padding: true,
       contents: "Do you really want to remove this file?",
       position: "auto",
-      yes : function() {
+      buttons : [{ name:"Yes", callback : function() {
         deleteFile(actualFileName, function() {
           Espruino.Core.Status.setStatus("File deleted.");
         });
-        deletepopup.close();
-      },
-      no : function() { deletepopup.close(); }
+        popup.close();
+      }},{ name:"No", callback : function() { popup.close(); }}]
     });
   }
 

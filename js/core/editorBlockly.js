@@ -24,11 +24,12 @@
           contents: '<p>'+Espruino.Core.Utils.escapeHTML(title)+'</p>'+
                      '<input id="promptinput" value="'+Espruino.Core.Utils.escapeHTML(value)+'" style="width:100%"/>' ,
           position: "center",
-          next : function() {
-            var value = $('#promptinput').val();
-            popup.close();
-            callback(value);
-          }
+          buttons : [
+            { name:"Next", callback : function() {
+              var value = $('#promptinput').val();
+              popup.close();
+              callback(value);
+            }}]
         });
         $('#promptinput').focus();
 

@@ -209,12 +209,7 @@
   *   width / height : set size in pixels
   *   title : title text
   *   contents : html contents
-  *   ok : callback - add 'ok' button and call callback when clicked
-  *   cancel : callback - add 'cancel' button and...
-  *   next : callback - add 'next' button and...
-  *   yes : callback - add 'yes' button and...
-  *   no : callback - add 'no' button and...
-  *
+  *   buttons : [ {name, callback}, ... ] - add  button and call callback when clicked
   *
   * returns : {
   *  setContents, // set window contents
@@ -272,36 +267,18 @@
     winModal.querySelector(".title-bar__buttons").append(winClose);
 
     // Append 'next'/'ok' button if we registered a callback
+
     var buttoncontainer;
-    if (options.next || options.ok || options.cancel || options.yes || options.no) {
-      buttoncontainer = Espruino.Core.Utils.domElement(
+    if (options.buttons) {
+      var buttoncontainer = Espruino.Core.Utils.domElement(
         '<div class="guiders_buttons_container" style="padding: 10px 10px 10px 10px;bottom:10px;">');
       winModal.querySelector(".window__viewport").append(buttoncontainer);
-    }
-    if (options.next) {
-      var btn = Espruino.Core.Utils.domElement('<a class="guiders_button" href="#">Next</a>');
-      btn.addEventListener("click", options.next);
-      buttoncontainer.append(btn);
-    }
-    if (options.cancel) {
-      var btn = Espruino.Core.Utils.domElement('<a class="guiders_button" href="#">Cancel</a>');
-      btn.addEventListener("click", options.cancel);
-      buttoncontainer.append(btn);
-    }
-    if (options.ok) {
-      var btn = Espruino.Core.Utils.domElement('<a class="guiders_button" href="#">Ok</a>');
-      btn.addEventListener("click", options.ok);
-      buttoncontainer.append(btn);
-    }
-    if (options.no) {
-      var btn = Espruino.Core.Utils.domElement('<a class="guiders_button" href="#">No</a>');
-      btn.addEventListener("click", options.no);
-      buttoncontainer.append(btn);
-    }
-    if (options.yes) {
-      var btn = Espruino.Core.Utils.domElement('<a class="guiders_button" href="#">Yes</a>');
-      btn.addEventListener("click", options.yes);
-      buttoncontainer.append(btn);
+
+      options.buttons.forEach(function(btn) {
+        var domBtn = Espruino.Core.Utils.domElement('<a class="guiders_button" href="#">'+btn.name+'</a>');
+        domBtn.addEventListener("click", btn.callback);
+        buttoncontainer.prepend(domBtn);
+      });
     }
 
     // Apply dimensions

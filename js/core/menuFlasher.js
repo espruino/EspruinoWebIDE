@@ -65,9 +65,9 @@
       padding: true,
       contents: msg,
       position: "center",
-      ok : function() {
+      buttons : [{ name:"Ok", callback : function() {
         popup.close();
-      }
+      }}]
     });
     return undefined;
   }
@@ -82,7 +82,7 @@
                 '<div class="board_list">Loading...</div>'+
                 '<p>If you don\'t see your board here, you can\'t update the firmware on it from the IDE. Please click outside this window to close it, and <a href="http://www.espruino.com/Download" target="_blank">see the download page</a> for more instructions.</p>' ,
       position: "center",
-      next : function() {
+      buttons : [{ name:"Next", callback : function() {
         var boardId = $('.board_list option:selected').attr("name");
         popup.close();
         if (boardId===undefined || boardList[boardId]===undefined)
@@ -103,8 +103,7 @@
             else
               stepSelectBinary( flashInfo );
           }
-        }
-      }
+      }}}]
     });
 
     Espruino.Core.Env.getBoardList(function(data) {
@@ -168,7 +167,7 @@
                 '<p><b>Note:</b> If you don\'t need any of the features listed, you can choose any firmware.</p>'+
                 html,
       position: "center",
-      next : function() {
+      buttons : [{ name:"Next", callback : function() {
         var binary_filename = $('.fw_list option:selected').attr("filename");
         popup.close();
         if (binary_filename===undefined)
@@ -178,7 +177,7 @@
           console.log("Choosing "+flashInfo.binary_url);
           stepDownload( flashInfo );
         }
-      }
+      }}]
     });
 
   }
@@ -210,10 +209,10 @@
         padding: true,
         contents: "<p>Firmware downloaded successfully.</p>"+getDocs(data, "reset"),
         position: "center",
-        next : function() {
+        buttons : [{ name:"Next", callback : function() {
           popup.close();
           stepFlashSTM32_2(data);
-        }
+        }}]
       });
     }
   }
@@ -323,10 +322,10 @@
           padding: true,
           contents: "<p>Firmware downloaded successfully.</p>"+getDocs(data, "reset"),
           position: "center",
-          next : function() {
-            popup.close();
-            stepFlashNordicDFU_2(data);
-          }
+          buttons : [{ name:"Next", callback : function() {
+              popup.close();
+              stepFlashNordicDFU_2(data);
+          }}]
         });
       }).catch(function(error) {
         stepError(error);
@@ -415,9 +414,9 @@
       contents: '<p><b>The Firmware was updated successfully!</b><p>'+
                 getDocs(data, "success"),
       position: "center",
-      next : function() {
+      buttons : [{ name:"Next", callback : function() {
         popup.close();
-      }
+      }}]
     });
   }
 
@@ -429,9 +428,9 @@
                 '<p>The error was: <i>'+err+'</i></p>'+
                 '<p>Please try again, or check out the <a href="http://www.espruino.com/Troubleshooting" target="_blank">Troubleshooting page</a> for what to do next.</p>',
       position: "center",
-      next : function() {
+      buttons : [{ name:"Next", callback : function() {
         popup.close();
-      }
+      }}]
     });
   }
 
