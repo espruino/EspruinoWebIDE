@@ -40,6 +40,7 @@
   }
 
   function downloadFile(fileName, callback) {
+    Espruino.Core.Status.showStatusWindow("Device Storage","Downloading "+JSON.stringify(fileName));
     if (fileName.endsWith(STORAGEFILE_POSTFIX)) {
       fileName = fileName.substr(0, fileName.length-STORAGEFILE_POSTFIX.length);
       Espruino.Core.Utils.executeStatement(`(function(filename) {
@@ -50,6 +51,7 @@
     d = f.read(${CHUNKSIZE});
   }
 })(${JSON.stringify(fileName)});`, function(contents) {
+        Espruino.Core.Status.hideStatusWindow();
         // atob doesn't care about the newlines
         callback(contents ? atob(contents) : undefined);
       });
@@ -59,6 +61,7 @@
   var s = require("Storage").read(filename);
   for (var i=0;i<s.length;i+=${CHUNKSIZE}) console.log(btoa(s.substr(i,${CHUNKSIZE})));
 })(${JSON.stringify(fileName)});`, function(contents) {
+        Espruino.Core.Status.hideStatusWindow();
         // atob doesn't care about the newlines
         callback(contents ? atob(contents) : undefined);
       });
@@ -67,6 +70,7 @@
   }
 
   function uploadFile(fileName, contents, callback) {
+    Espruino.Core.Status.showStatusWindow("Device Storage","Uploading "+JSON.stringify(fileName));
     var js = "";
     if ("string" != typeof contents)
       throw new Error("Expecting a string for contents");
@@ -78,7 +82,10 @@
       var part = contents.substr(i,CHUNKSIZE);
       js += `\n\x10require("Storage").write(${fn},atob(${JSON.stringify(Espruino.Core.Utils.btoa(part))}),${i}${(i==0)?","+contents.length:""})`;
     }
-    Espruino.Core.Utils.executeStatement(js, callback);
+    Espruino.Core.Utils.executeStatement(js, function() {
+      Espruino.Core.Status.hideStatusWindow();
+      callback();
+    });
   }
 
   function deleteFile(fileName, callback) {
@@ -377,8 +384,8 @@
           },{ title:"Run file", icon:"icon-debug-go",
             callback : function() { // Save the file
               popup.close();
-              Espruino.Core.Serial.write(`\x03\x10load(${fileName})\n`, function() {
-                // done...
+              Espruino.Core.Serial.write(`\x03\x10load(${JSON.stringify(fileName)})\n`, false, function() {
+                Espruino.Core.Notifications.success(`${JSON.stringify(fileName)} loaded`, true);
               });
             }
           },{ title:"Save", icon:"icon-save",

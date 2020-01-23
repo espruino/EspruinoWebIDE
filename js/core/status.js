@@ -13,6 +13,7 @@
 (function(){
 
   var progressAmt, progressMax = 0;
+  var statusWindow;
 
   function init()
   {
@@ -75,10 +76,29 @@
     $(".status__port").html(port);
   };
 
+  function showStatusWindow(title, message) {
+    if (statusWindow) statusWindow.close();
+    statusWindow = Espruino.Core.App.openPopup({
+      title: title,
+      padding: true,
+      contents: '<div class="status__progress" style="width:100%;margin-top:10px;"><div class="status__progress-bar"></div></div>'+
+                '<p><b>'+message+'</b>... <span class="status__message"></span></p>',
+      position: "center",
+    });
+  }
+  function hideStatusWindow() {
+    if (statusWindow) {
+      statusWindow.close();
+      statusWindow = undefined;
+    }
+  }
+
   Espruino.Core.Status = {
       init : init,
       setStatus : setStatus,
       hasProgress : hasProgress,
-      incrementProgress : incrementProgress
+      incrementProgress : incrementProgress,
+      showStatusWindow : showStatusWindow,
+      hideStatusWindow : hideStatusWindow
   };
 }());

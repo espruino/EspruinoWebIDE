@@ -191,6 +191,12 @@
     data.flashFn(data);
   }
 
+  function setStatus(x) {
+    Espruino.Core.Notifications.success(x, true);
+    if (!Espruino.Core.Status.hasProgress())
+      Espruino.Core.Status.setStatus(x);
+  }
+
   // ===========================================================================
   // data = { binary_url, board_id, board_info, board_chip, flashFn }
   function stepFlashSTM32(data) {
@@ -223,24 +229,24 @@
     Espruino.Core.MenuPortSelector.ensureConnected(function() {
       console.log("stepFlashSTM32: ",data);
       var flashOffset = data.board_chip.place_text_section;
-      var popup = stepShowProgress();
+      Espruino.Core.Status.showStatusWindow("Firmware Update","Your firmware is now being updated");
 
       Espruino.Core.Flasher.flashBinaryToDevice(data.binary, flashOffset, function (err) {
         isFlashing = false;
         Espruino.Core.Terminal.grabSerialPort();
         Espruino.Core.MenuPortSelector.disconnect();
-        popup.close();
+        Espruino.Core.Status.hideStatusWindow();
         if (err) {
           Espruino.Core.Notifications.error("Error Flashing: "+ err, true);
           console.log(err);
           stepError(err);
         } else {
-          Espruino.Core.Notifications.success("Flashing Complete", true);
+          setStatus("Flashing Complete");
           Espruino.callProcessor("flashComplete");
           stepSuccess(data);
         }
       }, function(status) {
-        popup.setStatus(status);
+        setStatus(status);
       });
     });
   }
@@ -336,17 +342,11 @@
   // data = { binary, binary_url, board_id, board_info, board_chip, flashFn }
   function stepFlashNordicDFU_2(data) {
     console.log("stepFlashNordicDFU: ",data);
-    function setStatus(x) {
-      Espruino.Core.Notifications.success(x, true);
-      if (!Espruino.Core.Status.hasProgress())
-        Espruino.Core.Status.setStatus(x);
-      popup.setStatus(x);
-    }
+
     // Actually start DFU
    const dfu = new SecureDfu(/* no CRC32 - no validation */);
-   var popup = stepShowProgress();
-   if (!Espruino.Core.Status.hasProgress())
-     Espruino.Core.Status.setStatus("Initialising...");
+   Espruino.Core.Status.showStatusWindow("Firmware Update","Your firmware is now being updated");
+   setStatus("Initialising...");
 
    dfu.addEventListener("log", function(event) {
        console.log(event.message);
@@ -382,10 +382,11 @@
            }
        })
    }).then(function() {
-     popup.close();
+     setStatus("Flashing Complete");
+     Espruino.Core.Status.hideStatusWindow();
      stepSuccess(data);
    }).catch(function(error) {
-     popup.close();
+     Espruino.Core.Status.hideStatusWindow();
      stepError(error);
    });
   }
