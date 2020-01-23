@@ -160,7 +160,7 @@
     Espruino.Core.Utils.fileOpenDialog({
         id:"offline",
         type:"arraybuffer",
-        mimeType:".zip,application/zip"} function(data) {
+        mimeType:".zip,application/zip"}, function(data) {
       if (data===undefined) return;
       offlineDataLoaded(new Uint8Array(data));
     });
