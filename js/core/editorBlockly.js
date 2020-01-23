@@ -17,7 +17,7 @@
   window.blocklyLoaded = function(blockly, blocklyWindow) { // see blockly/blockly.html
     Blockly = blockly;
     if (blocklyWindow) {
-      blocklyWindow.promptAsync = function(title,value,callback) {
+      blocklyWindow.Blockly.prompt = function(title,value,callback) {
         var popup = Espruino.Core.App.openPopup({
           title: "Graphical Editor:",
           padding: true,
