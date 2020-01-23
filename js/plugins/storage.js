@@ -248,38 +248,36 @@
     });
   }
 
-  function showViewFileDialog(fileName, actualFileName) {
+  function showViewFileDialog(fileName, contents) {
     console.log("View",fileName);
     var buttons = [{ name:"Ok", callback : function() { popup.close(); }}];
-    downloadFile(actualFileName, function(contents) {
-      var html;
-      if (Espruino.Core.Utils.isASCII(contents)) {
-        html = '<div style="overflow-y:auto;font-family: monospace;">'+
-          Espruino.Core.Utils.escapeHTML(contents).replace(/\n/g,"<br>")+'</div>';
-          buttons.push({ name:"Copy to Editor", callback : function() {
-            Espruino.Core.EditorJavaScript.setCode(contents);
-          }});
+    var html;
+    if (Espruino.Core.Utils.isASCII(contents)) {
+      html = '<div style="overflow-y:auto;font-family: monospace;">'+
+        Espruino.Core.Utils.escapeHTML(contents).replace(/\n/g,"<br>")+'</div>';
+        buttons.push({ name:"Copy to Editor", callback : function() {
+          Espruino.Core.EditorJavaScript.setCode(contents);
+        }});
+    } else {
+      var img = imageconverter.stringToImageHTML(contents,{transparent:false});
+      if (img) { // it's a valid image
+        html = '<div style="text-align:center;padding-top:10px;min-width:200px;">'+
+                '<a href="'+imageconverter.stringToImageURL(contents,{transparent:true})+'" download="image.png">'+
+                img+'</a></div>';
       } else {
-        var img = imageconverter.stringToImageHTML(contents,{transparent:false});
-        if (img) { // it's a valid image
-          html = '<div style="text-align:center;padding-top:10px;min-width:200px;">'+
-                  '<a href="'+imageconverter.stringToImageURL(contents,{transparent:true})+'" download="image.png">'+
-                  img+'</a></div>';
-        } else {
-          html = '<div style="overflow:auto;font-family: monospace;">'+
-            Espruino.Core.Utils.escapeHTML(decodeHexDump(contents)).replace(/\n/g,"<br>")+'</div>';
-        }
+        html = '<div style="overflow:auto;font-family: monospace;">'+
+          Espruino.Core.Utils.escapeHTML(decodeHexDump(contents)).replace(/\n/g,"<br>")+'</div>';
       }
-      var popup = Espruino.Core.App.openPopup({
-        id: "storagefileview",
-        title: "Contents of "+fileName,
-        padding: true,
-        contents: html,
-        position: "auto",
-        buttons : buttons
-      });
+    }
+    var popup = Espruino.Core.App.openPopup({
+      id: "storagefileview",
+      title: "Contents of "+fileName,
+      padding: true,
+      contents: html,
+      position: "auto",
+      buttons : buttons
     });
-  }
+    }
 
   function showDeleteFileDialog(fileName, actualFileName) {
     var popup = Espruino.Core.App.openPopup({
@@ -302,10 +300,9 @@
       id: "storage",
       title: "Device Storage",
       padding: false,
-      contents: Espruino.Core.Utils.htmlLoading(),
+      contents: Espruino.Core.HTML.htmlLoading(),
       position: "auto",
     });
-
     getFileList(function(fileList) {
       var items = [{
         title: "Upload a file",
@@ -314,6 +311,21 @@
           popup.close();
           showUploadFileDialog();
         }
+      }, {
+        title : "Download from RAM",
+        right: [{ title:"View", icon:"icon-eye",
+          callback : function() { // view the file
+            Espruino.Core.Utils.executeStatement(`dump();`, function(contents) {
+              showViewFileDialog("RAM", contents);
+            });
+          }
+        },{ title:"Save", icon:"icon-save",
+          callback : function() { // Save the file
+            Espruino.Core.Utils.executeStatement(`dump();`, function(contents) {
+              Espruino.Core.Utils.fileSaveDialog(contents, "espruino.js");
+            });
+          }
+        }]
       }];
 
       fileList.forEach(function(fileName) {
@@ -324,7 +336,9 @@
           title : fileName,
           right: [{ title:"View", icon:"icon-eye",
             callback : function() { // view the file
-              showViewFileDialog(fileName, actualFileName);
+              downloadFile(actualFileName, function(contents) {
+                showViewFileDialog(fileName, contents);
+              });
             }
           },{ title:"Run file", icon:"icon-debug-go",
             callback : function() { // Save the file
@@ -348,7 +362,7 @@
         });
       });
 
-      popup.setContents(Espruino.Core.Utils.domList(items));
+      popup.setContents(Espruino.Core.HTML.domList(items));
 
     });
   }

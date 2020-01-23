@@ -389,6 +389,7 @@ a:hover > .menu
         text-transform: uppercase;
         text-align: center;
         line-height: 40px;
+        min-width: 300px;
 }
 
 .list__no-results-help

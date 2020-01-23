@@ -99,7 +99,7 @@
               }
             }
           });
-          popup.setContents(Espruino.Core.Utils.domList(listItems));
+          popup.setContents(Espruino.Core.HTML.domList(listItems));
         } else {
           var html = '<h2 class="list__no-results">Searching... No ports found</h2>';
           if (Espruino.Core.Utils.isAppleDevice())

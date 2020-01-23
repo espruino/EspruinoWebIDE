@@ -77,7 +77,7 @@
       contents: "",
       position: "auto",
     });
-    popup.window.append(Espruino.Core.Utils.domList(items));
+    popup.window.append(Espruino.Core.HTML.domList(items));
     function choose(x) {
       popup.close();
       Espruino.Config.set("SAVE_ON_SEND",x);

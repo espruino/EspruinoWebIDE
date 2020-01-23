@@ -138,7 +138,7 @@
   function showWebCamChooser(sources) {
     var popup = Espruino.Core.App.openPopup({
       title: "Select a webcam...",
-      contents: Espruino.Core.Utils.htmlLoading(),
+      contents: Espruino.Core.HTML.htmlLoading(),
       position: "center",
     });
     var items = sources.map(function(source) {
@@ -160,7 +160,7 @@
         }
       }];
 
-    popup.setContents(Espruino.Core.Utils.domList(items));
+    popup.setContents(Espruino.Core.HTML.domList(items));
   }
 
   function enableWebCamOrChoose(sources) {

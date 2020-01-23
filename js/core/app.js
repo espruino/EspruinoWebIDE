@@ -178,7 +178,7 @@
 
     var mylist = typeof container === "string" ? document.querySelector(container) : container;
     if (!mylist) return;
-    var listitems = Espruino.Core.Utils.domToArray(mylist.children);
+    var listitems = Espruino.Core.HTML.domToArray(mylist.children);
     listitems.sort(function(a, b) {
        return parseFloat(a.getAttribute("data-icon-order")) - parseFloat(b.getAttribute("data-icon-order"));
     });
@@ -241,13 +241,13 @@
 
 
     // Append the modal overlay
-    var winOverlay = Espruino.Core.Utils.domElement('<div class="window__overlay"><div class="window__overlay-inner"></div></div>');
+    var winOverlay = Espruino.Core.HTML.domElement('<div class="window__overlay"><div class="window__overlay-inner"></div></div>');
     document.querySelector(".window > .window__viewport").append(winOverlay);
     winOverlay.addEventListener("click", function(w) {
       api.close()
     });
     // Append the popup window
-    var winModal = Espruino.Core.Utils.domElement('<div class="window window--modal window--'+ options.position +'" id="' + options.id + '">'+
+    var winModal = Espruino.Core.HTML.domElement('<div class="window window--modal window--'+ options.position +'" id="' + options.id + '">'+
           '<div class="window__title-bar title-bar">'+
             '<h5 class="title-bar__title">'+ options.title +'</h5>'+
             '<div class="title-bar__buttons"></div>'+
@@ -267,7 +267,7 @@
     });
 
     // Append close button
-    var winClose = Espruino.Core.Utils.domElement('<a class="icon-cross sml title-bar__button title-bar__button--close" title="Close"></a>');
+    var winClose = Espruino.Core.HTML.domElement('<a class="icon-cross sml title-bar__button title-bar__button--close" title="Close"></a>');
     winClose.addEventListener("click", function(e) {
       api.close();
     });
@@ -277,12 +277,12 @@
 
     var buttoncontainer;
     if (options.buttons) {
-      var buttoncontainer = Espruino.Core.Utils.domElement(
+      var buttoncontainer = Espruino.Core.HTML.domElement(
         '<div class="guiders_buttons_container" style="padding: 10px 10px 10px 10px;bottom:10px;">');
       winModal.querySelector(".window__viewport").append(buttoncontainer);
 
       options.buttons.forEach(function(btn) {
-        var domBtn = Espruino.Core.Utils.domElement('<a class="guiders_button" href="#">'+btn.name+'</a>');
+        var domBtn = Espruino.Core.HTML.domElement('<a class="guiders_button" href="#">'+btn.name+'</a>');
         domBtn.addEventListener("click", btn.callback);
         buttoncontainer.prepend(domBtn);
       });
@@ -373,10 +373,10 @@
       additionalClasses += " icon--hasinfo";
 
     // add the element
-    var element = Espruino.Core.Utils.domElement('<a id="icon-'+ options.id +'" class="'+ elementClass +' '+ iconSize +' '+ additionalClasses +'" title="'+ options.title +'" data-icon-order="'+ order +'"></a>');
+    var element = Espruino.Core.HTML.domElement('<a id="icon-'+ options.id +'" class="'+ elementClass +' '+ iconSize +' '+ additionalClasses +'" title="'+ options.title +'" data-icon-order="'+ order +'"></a>');
     container.append(element);
     if (options.more) {
-      var more = Espruino.Core.Utils.domElement('<span class="icon__more">&#9660</span>');
+      var more = Espruino.Core.HTML.domElement('<span class="icon__more">&#9660</span>');
       element.append(more);
       more.addEventListener("click", function(e) {
         e.stopPropagation();
@@ -385,7 +385,7 @@
     }
     var info;
     if (options.info) {
-      info = Espruino.Core.Utils.domElement('<span class="icon__info">'+options.info+'</span>');
+      info = Espruino.Core.HTML.domElement('<span class="icon__info">'+options.info+'</span>');
       element.append(info);
     }
 
@@ -415,7 +415,7 @@
       {
         var menuEl = element.querySelector(".menu");
         if(!menuEl) {
-          menuEl = Espruino.Core.Utils.domElement('<div class="menu"></div>');
+          menuEl = Espruino.Core.HTML.domElement('<div class="menu"></div>');
           element.append(menuEl);
         }
 
@@ -423,7 +423,7 @@
         if (options.order !== undefined)
           order = options.order;
 
-        var menuItemEl = Espruino.Core.Utils.domElement('<a id="icon-'+ options.id +'" title="'+ options.title +'" data-icon-order="'+ order +'"><i class="icon-'+ options.icon +' sml"></i> '+ options.title +'</a>');
+        var menuItemEl = Espruino.Core.HTML.domElement('<a id="icon-'+ options.id +'" title="'+ options.title +'" data-icon-order="'+ order +'"><i class="icon-'+ options.icon +' sml"></i> '+ options.title +'</a>');
         menuEl.append(menuItemEl);
         if(options.click)
           menuItemEl.addEventListener("click", function(e){

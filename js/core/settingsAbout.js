@@ -32,13 +32,13 @@
                 if (v.length>80) v=v.substr(0,77)+" ...";
                 strData[k] = v;
               }
-              html = Espruino.Core.Utils.htmlTable(strData);
+              html = Espruino.Core.HTML.htmlTable(strData);
             } else
               html = "<p>No board information available. Please connect to an Espruino board first.</p>";
             $('.board_info').html( html );
           });
           $.get("PATREON.md", function(data) {
-            $(".patreon").html(Espruino.Core.Utils.markdownToHTML(data));
+            $(".patreon").html(Espruino.Core.HTML.markdownToHTML(data));
           });
         }
       });
