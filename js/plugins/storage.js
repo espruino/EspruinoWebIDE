@@ -322,12 +322,21 @@
       }];
 
       fileList.forEach(function(fileName) {
+        // fileName is pre-quoted
         var actualFileName = Espruino.Core.Utils.parseJSONish(fileName);
+        // actualFileName is unquoted
         items.push({
           title : fileName,
           right: [{ title:"View", icon:"icon-eye",
             callback : function() { // view the file
               showViewFileDialog(fileName, actualFileName);
+            }
+          },{ title:"Run file", icon:"icon-debug-go",
+            callback : function() { // Save the file
+              popup.close();
+              Espruino.Core.Serial.write(`\x03\x10load(${fileName})\n`, function() {
+                // done...
+              });
             }
           },{ title:"Save", icon:"icon-save",
             callback : function() { // Save the file
