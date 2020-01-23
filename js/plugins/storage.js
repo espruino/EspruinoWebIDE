@@ -24,7 +24,7 @@
       id: "storage",
       icon: "storage",
       title : "Access files in device's storage",
-      order: 400,
+      order: 300,
       area: {
         name: "code",
         position: "top"
@@ -298,16 +298,11 @@
   }
 
   function showStorage() {
-    var html = `
-      <div style="height:100%;min-height:200px;min-width:300px;position:relative;top:0px;left:0px;bottom:0px;right:50%;padding:10px 10px 10px 10px;overflow-y:scroll;" class="devicefiles">
-      ${Espruino.Core.Utils.htmlLoading()}
-    </div>
-    `;
     var popup = Espruino.Core.App.openPopup({
       id: "storage",
       title: "Device Storage",
       padding: false,
-      contents: html,
+      contents: Espruino.Core.Utils.htmlLoading(),
       position: "auto",
     });
 
@@ -353,9 +348,7 @@
         });
       });
 
-      var deviceFileList = document.querySelector("#storage .devicefiles");
-      deviceFileList.innerHTML = "";
-      deviceFileList.append(Espruino.Core.Utils.domList(items));
+      popup.setContents(Espruino.Core.Utils.domList(items));
 
     });
   }

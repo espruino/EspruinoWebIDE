@@ -225,7 +225,14 @@
     // so that the close method can be overridden with extra logic if needed.
     var api = {
       setContents : function(contents) {
-        winModal.querySelector(".window__viewport").innerHTML = contents;
+        var viewport = winModal.querySelector(".window__viewport");
+        if ("string" == typeof contents)
+          viewport.innerHTML = contents;
+        else {
+          while (viewport.lastElementChild!==null)
+            viewport.lastElementChild.remove();
+          viewport.append(contents);
+        }
       },
       close : function() {
         winOverlay.remove();

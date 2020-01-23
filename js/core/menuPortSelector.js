@@ -61,17 +61,12 @@
       function connect() {
         connectToPort(port, function(success){
           popup.close();
-          $(".window--modal").off("click", ".list__item a", selectPort);
           if(success){
             if (callback!==undefined) callback();
           }
         });
       }
       connect();
-    }
-
-    function selectPort() {
-      selectPortInternal($(this).data("port"));
     }
 
     var searchHtml = '<h2 class="list__no-results">Searching...</h2>';
@@ -83,40 +78,36 @@
         lastContents = items.toString();
 
 
-        var html;
-
-        if(items && items.length > 0){
-          html = '<ul class="list">';
-          for (var i in items) {
-            var port = items[i];
-            // if autoconnect is set on this, just automatically connect, without displaying the window
-            if (port.autoconnect)
-              return selectPortInternal(port.path);
-
+        if(items && items.length > 0) {
+          // if autoconnect is set on this, just automatically connect, without displaying the window
+          var autoconnect = items.find(port=>port.autoconnect);
+          if (autoconnect)
+            return selectPortInternal(autoconnect.path);
+          //  work out list of items
+          var listItems = items.map(function(port) {
             var icon = "icon-usb";
             if (port.type=="bluetooth") icon = "icon-bluetooth";
             if (port.type=="socket") icon = "icon-network";
             if (port.type=="audio") icon = "icon-headphone";
-            html += '<li class="list__item">'+
-                      '<a title="'+ port.path +'" class="button button--icon button--wide" data-port="'+ port.path +'">'+
-                        '<i class="'+icon+' lrg button__icon"></i>'+
-                        '<div class="list__item__name">'+ port.path+'</div>';
-            if (port.description)
-              html += '<div class="list__item__desc">' + port.description + '</div>';
-            html += '</span>'+
-                      '</a>'+
-                    '</li>';
-          }
-          html += '</ul>';
+
+            return {
+              icon : icon,
+              title : port.path,
+              description : port.description,
+              callback : function() {
+                selectPortInternal(port.path);
+              }
+            }
+          });
+          popup.setContents(Espruino.Core.Utils.domList(listItems));
         } else {
-          html = '<h2 class="list__no-results">Searching... No ports found</h2>';
+          var html = '<h2 class="list__no-results">Searching... No ports found</h2>';
           if (Espruino.Core.Utils.isAppleDevice())
             html += '<div class="list__no-results-help">As you\'re using an iDevice<br/>you need <a href="https://itunes.apple.com/us/app/webble/id1193531073" target="_blank">to use the WebBLE app</a></div>';
           else
             html += '<div class="list__no-results-help">Have you tried <a href="http://www.espruino.com/Troubleshooting" target="_blank">Troubleshooting</a>?</div>';
+          popup.setContents(html);
         }
-
-        popup.setContents(html);
       });
     }
 
@@ -130,12 +121,9 @@
       position: "center",
     });
 
-    $(".window--modal").on("click", ".list__item a", selectPort);
-
     // Setup checker interval
     checkInt = setInterval(getPorts, 2000);
     getPorts();
-
 
     // Make sure any calls to close popup, also clear
     // the port check interval

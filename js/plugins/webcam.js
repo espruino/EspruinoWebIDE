@@ -55,7 +55,7 @@
         2 : { width: {ideal:1920}, height: {ideal:1080} },
         3 : { width: {exact:1280}, height: {exact:720}, },
         4 : { width: {exact:1920}, height: {exact:1080}, },
-        5 : { width: {exact:1920}, height: {exact:1080}, frameRate: {exact:25} }, 
+        5 : { width: {exact:1920}, height: {exact:1080}, frameRate: {exact:25} },
   };
 
   function showIcon(show) {
@@ -97,12 +97,12 @@
     var vid = document.getElementById("videotag");
     console.log("Requesting WebCam ", constraints);
     navigator.getUserMedia(constraints, function(mediaSource) {
-      webCamStream = mediaSource;      
+      webCamStream = mediaSource;
       try {
           vid.srcObject = mediaSource;
         } catch (error) {
           vid.src = URL.createObjectURL(mediaSource);
-        }      
+        }
       console.log("Webcam started");
       setTimeout(function cb() {
         if (vid.videoWidth)
@@ -136,25 +136,31 @@
   }
 
   function showWebCamChooser(sources) {
-    var html = '<ul class="list">';
-    for (var i in sources) {
-      html += '<li class="list__item">'+
-                '<a title="'+ sources[i].label +'" class="button button--icon button--wide" data-id="'+ sources[i].id +'">'+
-                  '<i class="icon-webcam lrg button__icon"></i>'+
-                  '<span class="list__item__name">'+ sources[i].label;
-     html += '</span>'+
-                '</a>'+
-              '</li>';
-    }
-    html += '</ul>'
     var popup = Espruino.Core.App.openPopup({
       title: "Select a webcam...",
-      contents: html,
+      contents: Espruino.Core.Utils.htmlLoading(),
       position: "center",
     });
-    $(".window--modal").on("click", ".list__item a", function() {
-      enableWebCamDeviceId($(this).data("id"));
+    var items = sources.map(function(source) {
+      return {
+        icon : "icon-webcam",
+        title : source.label,
+        callback : function() {
+          popup.close();
+          enableWebCamDeviceId(source.id);
+        }
+      };
     });
+    if (!items.length)
+      items = [{
+        icon : "icon-webcam",
+        title : "No Webcams found",
+        callback : function() {
+          popup.close();
+        }
+      }];
+
+    popup.setContents(Espruino.Core.Utils.domList(items));
   }
 
   function enableWebCamOrChoose(sources) {
