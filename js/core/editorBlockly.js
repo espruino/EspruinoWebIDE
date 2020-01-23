@@ -92,12 +92,11 @@
       callback(env);
       if (env && env.BOARD=="SMARTIBOT" && Espruino.Config.BLOCKLY_EXTENSIONS.indexOf("|smartibot|")==-1) {
         Espruino.Core.Terminal.addNotification('Looks like you\'re using <a href="https://www.espruino.com/Smartibot" target="_blank">Smartibot</a>!<br>'+
-                                               '<button id="addblocklyblocks">Click here</button> to enable Smartibot Blockly blocks.');
-        setTimeout(function() {
-          var links = document.querySelectorAll("#addblocklyblocks");
-          for (var i=0;i<links.length;i++)
-            links[i].onclick = function() { Espruino.Core.EditorBlockly.addBlocksFor('smartibot'); };
-        }, 500);
+                                               '<button>Click here</button> to enable Smartibot Blockly blocks.',
+                                               { buttonclick : function() {
+                                                   Espruino.Core.EditorBlockly.addBlocksFor('smartibot');
+                                                 }
+                                               });
       }
     });
   }
