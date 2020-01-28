@@ -52,9 +52,9 @@
       },
       click: function() {
         if (Espruino.Core.Code.isInBlockly())
-          Espruino.Core.Utils.fileSaveDialog(Espruino.Core.EditorBlockly.getXML(), currentXMLFileName);
+          Espruino.Core.Utils.fileSaveDialog(convertToOS(Espruino.Core.EditorBlockly.getXML()), currentXMLFileName, setCurrentFileName);
         else
-          Espruino.Core.Utils.fileSaveDialog(Espruino.Core.EditorJavaScript.getCode(), currentJSFileName);
+          Espruino.Core.Utils.fileSaveDialog(convertToOS(Espruino.Core.EditorJavaScript.getCode()), currentJSFileName, setCurrentFileName);
       }
     });
   }
