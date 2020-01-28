@@ -129,7 +129,7 @@
 
   function setXML(xml) {
     Blockly.mainWorkspace.clear();
-    Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, Blockly.Xml.textToDom(xml));
+    Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(xml), Blockly.mainWorkspace);
   }
 
   // Hack around issues Blockly have if we initialise when the window isn't visible

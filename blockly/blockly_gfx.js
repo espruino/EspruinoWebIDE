@@ -39,6 +39,18 @@ Blockly.JavaScript.gfx_clear = function() {
   return `g.clear();\n`;
 };
 // ----------------------------------------------------------
+Blockly.Blocks.gfx_flip = {
+  category: 'Graphics',
+  init: function() {
+    this.appendDummyInput()
+        .appendField('Update Screen');
+    gfxStatement(this, 'Update (flip) the screen to show what was just drawn (not needed on Bangle.js)');
+  }
+};
+Blockly.JavaScript.gfx_flip = function() {
+  return `g.flip();\n`;
+};
+// ----------------------------------------------------------
 Blockly.Blocks.gfx_setColor = {
   category: 'Graphics',
   init: function() {

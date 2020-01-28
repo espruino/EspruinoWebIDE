@@ -80,7 +80,7 @@ Blockly.setVisible = function(info) {
   if (blocklyVisible) return;
   blocklyVisible = true;
   // Set up initial code
-  Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, blocklyInitialBlocks);
+  Blockly.Xml.domToWorkspace(blocklyInitialBlocks, Blockly.mainWorkspace);
 };
 
 // When we have JSON from the board, use it to
