@@ -208,3 +208,77 @@ Blockly.JavaScript.gfx_draw = function() {
   var y2 = Blockly.JavaScript.valueToCode(this, 'Y2', Blockly.JavaScript.ORDER_ASSIGNMENT) || 0;
   return `g.${cmd}(${x},${y},${x2},${y2});\n`;
 };
+// ----------------------------------------------------------
+Blockly.Blocks.gfx_image = {
+  category: 'Graphics',
+  init: function() {
+    var block = this;
+    var defaultImage = "media/espruino.png";
+    var fi = new Blockly.FieldImage(
+      defaultImage,
+      64,64,"*", // width & height
+      onChooseImage);
+    fi.name = "IMAGE";
+    fi.EDITABLE = true;
+    this.appendDummyInput('IMAGE')
+        .appendField("image:")
+        .appendField(fi);
+    this.appendValueInput('X')
+        .setCheck(['Number'])
+        .appendField('at X');
+    this.appendValueInput('Y')
+        .setCheck(['Number'])
+        .appendField('Y');
+    gfxStatement(this, 'Draw an image');
+
+    function onChooseImage(field) {
+      //this.getSourceBlock()
+      var loaderId = "GfxImageLoader";
+      var fileLoader = document.getElementById(loaderId);
+      if (!fileLoader) {
+        fileLoader = document.createElement("input");
+        fileLoader.setAttribute("id", loaderId);
+        fileLoader.setAttribute("type", "file");
+        fileLoader.setAttribute("style", "z-index:-2000;position:absolute;top:0px;left:0px;");
+        fileLoader.setAttribute("accept","image/*");
+        fileLoader.addEventListener('click', function(e) {
+          e.target.value = ''; // handle repeated upload of the same file
+        });
+        fileLoader.onchange = function(e) {
+          var reader = new FileReader();
+          reader.onload = function(e) {
+            fi.setValue(reader.result);
+            loadImage(reader.result);
+          };
+          reader.readAsDataURL(e.target.files[0]);
+        };
+        document.body.appendChild(fileLoader);
+      }
+      fileLoader.click();
+    }
+
+    function loadImage(url) {
+      var img = new Image();
+      img.src = url
+      img.onload = function () {
+        // Add a check for width and height here??
+        var str = imageconverter.imagetoString(img, {
+          mode:"4bitmac", // 1 bit on Pixl.js?
+          diffusion:"error",
+          transparent:true
+          //compression:true,
+        });
+        block.IMAGESTR = str;
+      }
+    }
+    loadImage(defaultImage);
+  }
+};
+Blockly.JavaScript.gfx_image = function() {
+  var cmd = this.getFieldValue('IMAGE');
+  var x = Blockly.JavaScript.valueToCode(this, 'X', Blockly.JavaScript.ORDER_ASSIGNMENT) || 0;
+  var y = Blockly.JavaScript.valueToCode(this, 'Y', Blockly.JavaScript.ORDER_ASSIGNMENT) || 0;
+  var img = this.IMAGESTR;
+
+  return `g.drawImage(${img}, ${x},${y});\n`;
+};
