@@ -408,7 +408,7 @@
         if (info) info.innerHTML = text;
       },
       remove : function() {
-        element.off(); // Remove all event handlers
+        // Is there a leak if we don't remove event handlers?
         element.remove();
       },
       addMenuItem: function(options)
