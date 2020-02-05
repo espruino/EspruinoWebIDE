@@ -83,6 +83,7 @@ a span.icon__more {
   position : absolute;
   right : 0px;
   bottom : 0px;
+  padding-left:10px;padding-right:10px;/* make it easier to click*/
 }
 .compact a .icon__info {
   left : 50%;
@@ -95,6 +96,7 @@ a span.icon__more {
   left : 50%;
   transform: translate(-50%,0%);
   font-size : 12px;
+  padding-left:0px;padding-right:0px;
 }
 
 a .icon__more:hover {
