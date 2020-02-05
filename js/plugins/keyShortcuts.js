@@ -13,8 +13,15 @@
 (function(){
 
   var SHORTCUTS = {
+    // Map key combination to an ACTION (below)
     "Ctrl + `" : "TOGGLE_TERMINAL_EDITOR",
+    "Ctrl + U" : "ICON_DEPLOY"
   };
+/* ACTIONS:
+     Are either implemented in `action` function.
+     or `ICON_` prefixed actions, eg `ICON-DEPLOY` will 'click' the relevant icon
+*/
+
   var BUILTIN_SHORTCUTS = {
     "Ctrl + C / Cmd-C" : "Copy (simple drag and release copies from the Terminal Window)",
     "Ctrl + V / Cmd-V" : "Paste",
@@ -34,12 +41,12 @@
 
   function init() {
     window.addEventListener("keydown",function(e) {
-      var key = e.key;
+      var key = (""+e.key).toUpperCase();
       if (e.shiftKey) key = "Shift + "+key;
       if (e.altKey) key = "Alt + "+key;
       if (e.ctrlKey) key = "Ctrl + "+key;
       if (e.metaKey) key = "Cmd + "+key;
-      //console.log(str);
+      //console.log(key);
       var actionName = SHORTCUTS[key];
       if (actionName!==undefined) {
         console.log("Key Shortcut "+key+" => "+actionName);
@@ -49,6 +56,15 @@
   }
 
   function action(name, getDescription) {
+    if (name.startsWith("ICON_")) {
+      var iconid = "icon-" + name.substr(5).toLowerCase();
+      var icon = document.getElementById(iconid);
+      if (icon!==null) {
+        if (getDescription) return icon.getAttribute("title");
+        else icon.click();
+        return;
+      }
+    }
     switch (name) {
       case "TOGGLE_TERMINAL_EDITOR":
         if(getDescription) return "Toggle between typing in the Terminal or Code Editor";
