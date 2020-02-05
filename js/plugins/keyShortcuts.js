@@ -15,11 +15,13 @@
   var SHORTCUTS = {
     // Map key combination to an ACTION (below)
     "Ctrl + `" : "TOGGLE_TERMINAL_EDITOR",
-    "Ctrl + U" : "ICON_DEPLOY"
+    "Ctrl + O" : "icon-openFile",
+    "Ctrl + S" : "icon-saveFile",
+    "Ctrl + U" : "icon-deploy"
   };
 /* ACTIONS:
      Are either implemented in `action` function.
-     or `ICON_` prefixed actions, eg `ICON-DEPLOY` will 'click' the relevant icon
+     or `icon-` prefixed actions, eg `icon-deploy` will 'click' the relevant icon
 */
 
   var BUILTIN_SHORTCUTS = {
@@ -49,6 +51,7 @@
       //console.log(key);
       var actionName = SHORTCUTS[key];
       if (actionName!==undefined) {
+        e.preventDefault();
         console.log("Key Shortcut "+key+" => "+actionName);
         action(actionName);
       }
@@ -56,9 +59,8 @@
   }
 
   function action(name, getDescription) {
-    if (name.startsWith("ICON_")) {
-      var iconid = "icon-" + name.substr(5).toLowerCase();
-      var icon = document.getElementById(iconid);
+    if (name.startsWith("icon-")) {
+      var icon = document.getElementById(name);
       if (icon!==null) {
         if (getDescription) return icon.getAttribute("title");
         else icon.click();
