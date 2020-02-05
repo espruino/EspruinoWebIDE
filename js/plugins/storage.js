@@ -408,7 +408,86 @@
     });
   }
 
+  /** Pop up a file selector for files in Storage... Must be connected
+  options = {
+    title // title for window
+    allowNew // add an option to type in a new filename
+  }
+  */
+  function showFileChooser(options, callback) {
+    var popup = Espruino.Core.App.openPopup({
+      id: "storagefilechooser",
+      title: options.title,
+      padding: false,
+      contents: Espruino.Core.HTML.htmlLoading(),
+      position: "auto",
+    });
+    getFileList(function(fileList) {
+      var items = [];
+
+      if (options.allowNew) {
+        items.push({
+          title: "New file",
+          icon : "icon-folder-open",
+          callback : function() {
+            popup.close();
+            popup = Espruino.Core.App.openPopup({
+              id: "storagefilenew",
+              title: "New file",
+              padding: true,
+              contents: `<label for="filename">Filename (max 8 chars)</label><br/>
+              <input name="filename" class="filenameinput" type="text" maxlength="8" style="border: 2px solid #ccc;" value=""></input>`,
+              position: "auto",
+              buttons : [{ name:"Ok", callback : function() {
+                var filename = popup.window.querySelector(".filenameinput").value;
+                if (!filename.length) {
+                  Espruino.Core.Notifications.error("You must supply a filename")
+                  return;
+                }
+                if (filename.length>8) {
+                  Espruino.Core.Notifications.error("Filename greater than 8 characters")
+                  return;
+                }
+                popup.close();
+                callback(filename);
+              }}, { name:"Cancel", callback : function() { popup.close(); }}]
+            });
+          }
+        });
+      }
+
+      // filter out any 'StorageFile' files
+      fileList.filter(fileName=>{
+        return fileName.endsWith("\u0001");
+      }).forEach(fileName=>{
+        var prefix = fileName.slice(0,-1);
+        fileList = fileList.filter(f=>f.slice(0,-1) != prefix);
+      });
+
+      fileList.forEach(function(fileName) {
+        items.push({
+          title : formatFilename(fileName),
+          //icon : "icon-...",
+          callback : function() {
+            popup.close();
+            callback(fileName);
+          }
+        });
+      });
+      if (fileList.length==0) {
+        items.push({
+          title : "No files found",
+          callback : function() {
+            popup.close();
+          }
+        });
+      }
+      popup.setContents(Espruino.Core.HTML.domList(items));
+    });
+  }
+
   Espruino.Plugins.Storage = {
     init : init,
+    showFileChooser : showFileChooser
   };
 }());

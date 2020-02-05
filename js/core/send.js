@@ -16,8 +16,17 @@
   var NAMES = [
     "RAM",
     "Flash",
-    "&#9888;Flash"
+    "&#9888;Flash",
+    ""
   ];
+
+  function updateIconInfo() {
+    var n = Espruino.Config.SAVE_ON_SEND|0;
+    var txt = NAMES[n];
+    if (n==3)
+      txt = /*"&#x1f5ce;"+*/Espruino.Config.SAVE_STORAGE_FILE;
+    sendIcon.setInfo(txt);
+  }
 
   function init() {
     // Add stuff we need
@@ -41,8 +50,9 @@
       more: function() {
         chooseSendMethod();
       },
-      info : NAMES[Espruino.Config.SAVE_ON_SEND]
+      info : "---"
     });
+    updateIconInfo();
 
     Espruino.addProcessor("connected", function(data, callback) {
       $(".send").button( "option", "disabled", false);
@@ -68,8 +78,22 @@
       title: "Flash (always)",
       description : "Executed even after `reset()` is called. USE WITH CARE",
       callback : function() { choose(2) }
-    },
-    ];
+    }];
+    if (Espruino.Plugins.Storage)
+      items.push({
+      title: "Storage",
+      description : "Choose a file in Storage to save to",
+      callback : function() {
+        popup.close();
+        Espruino.Core.MenuPortSelector.ensureConnected(function() {
+          Espruino.Plugins.Storage.showFileChooser({title:"Choose Storage file...", allowNew:true}, function(filename) {
+            Espruino.Config.set("SAVE_ON_SEND",3);
+            Espruino.Config.set("SAVE_STORAGE_FILE",filename);
+            updateIconInfo();
+          });
+        });
+      }
+    });
     var popup = Espruino.Core.App.openPopup({
       id: "sendmethod",
       title: "Upload Destination",
@@ -81,9 +105,12 @@
     function choose(x) {
       popup.close();
       Espruino.Config.set("SAVE_ON_SEND",x);
-      sendIcon.setInfo(NAMES[x]);
+      Espruino.Config.set("SAVE_STORAGE_FILE","");
+      updateIconInfo();
     }
   }
+
+
 
   Espruino.Core.Send = {
     init : init,
