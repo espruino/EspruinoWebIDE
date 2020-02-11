@@ -70,7 +70,7 @@ a.icon-alert:hover { background-color: #f39c12; }
 }
 
 a span.icon__info {
-  color : white;
+  color : #888;
   padding : 1px;
   font-size : 12px;
   font-weight:bold;
@@ -83,7 +83,8 @@ a span.icon__more {
   position : absolute;
   right : 0px;
   bottom : 0px;
-  padding-left:10px;padding-right:10px;/* make it easier to click*/
+  padding-left:10px;
+  padding-top: 10px;/* make it easier to click*/
 }
 .compact a .icon__info {
   left : 50%;
