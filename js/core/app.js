@@ -375,6 +375,13 @@
     // add the element
     var element = Espruino.Core.HTML.domElement('<a id="icon-'+ options.id +'" class="'+ elementClass +' '+ iconSize +' '+ additionalClasses +'" title="'+ options.title +'" data-icon-order="'+ order +'"></a>');
     container.append(element);
+
+    var info;
+    if (options.info) {
+      info = Espruino.Core.HTML.domElement('<span class="icon__info">'+options.info+'</span>');
+      element.append(info);
+    }
+
     if (options.more) {
       var more = Espruino.Core.HTML.domElement('<span class="icon__more">&#9660</span>');
       element.append(more);
@@ -382,11 +389,6 @@
         e.stopPropagation();
         options.more(e)
       });
-    }
-    var info;
-    if (options.info) {
-      info = Espruino.Core.HTML.domElement('<span class="icon__info">'+options.info+'</span>');
-      element.append(info);
     }
 
     if(options.divider)
