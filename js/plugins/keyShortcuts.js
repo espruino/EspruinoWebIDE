@@ -17,7 +17,8 @@
     "Ctrl + `" : "TOGGLE_TERMINAL_EDITOR",
     "Ctrl + O" : "icon-openFile",
     "Ctrl + S" : "icon-saveFile",
-    "Ctrl + U" : "icon-deploy"
+    "Ctrl + U" : "icon-deploy",
+    "Ctrl + \\" : "UPLOAD_SELECTED"
   };
 /* ACTIONS:
      Are either implemented in `action` function.
@@ -75,6 +76,22 @@
         else
           Espruino.Core.Terminal.focus();
         break;
+      case "UPLOAD_SELECTED":
+        if(getDescription) return "Upload just the text that is selected in the editor pane";
+        if (Espruino.Core.Code.isInBlockly()) return;
+        var selectedCode = Espruino.Core.EditorJavaScript.getSelectedCode();
+        Espruino.Core.MenuPortSelector.ensureConnected(function() {
+          var old_RESET_BEFORE_SEND = Espruino.Config.RESET_BEFORE_SEND;
+          /* No need to tweak SAVE_ON_SEND/etc because by calling
+          writeToEspruino we skip the usual pipeline of code
+          modifications. But maybe we shouldn't? Could then do
+          compiled code/etc on demand too. */
+          Espruino.Config.RESET_BEFORE_SEND = false;
+          Espruino.Core.CodeWriter.writeToEspruino(selectedCode,function(){
+            Espruino.Config.RESET_BEFORE_SEND = old_RESET_BEFORE_SEND;
+          });
+        });
+        break;
       default:
         console.log("keyShortcuts.js: Unknown Action "+JSON.stringify(name));
     }
@@ -94,6 +111,7 @@
   Espruino.Plugins.KeyShortcuts = {
     init : init,
     action : action, // perform action, or using action("...",true) get the description
-    getShortcutDescriptions : getShortcutDescriptions // get a map of shortcut key -> description
+    getShortcutDescriptions : getShortcutDescriptions, // get a map of shortcut key -> description
+    SHORTCUTS : SHORTCUTS, // public to allow shortcuts to be added easily
   };
 }());

@@ -116,6 +116,13 @@
     return code;
   }
 
+  function getSelectedCode() {
+    var code = codeMirror.getSelection();
+    // replace the Non-breaking space character with space. This seems to be an odd Android thing
+    code = code.replace(/\xA0/g," ");
+    return code;
+  }
+
   function setCode(code) {
     codeMirror.setValue(code);
     codeMirrorDirty = true;
@@ -191,6 +198,7 @@
   Espruino.Core.EditorJavaScript = {
     init : init,
     getCode : getCode,
+    getSelectedCode : getSelectedCode, // get the currently highlighted bit of code
     setCode : setCode,
     madeVisible : madeVisible,
     getCodeMirror : function () { return codeMirror; }
