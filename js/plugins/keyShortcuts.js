@@ -18,7 +18,7 @@
     "Ctrl + O" : "icon-openFile",
     "Ctrl + S" : "icon-saveFile",
     "Ctrl + U" : "icon-deploy",
-    "Ctrl + \\" : "UPLOAD_SELECTED"
+    "Shift + ENTER" : "UPLOAD_SELECTED"
   };
 /* ACTIONS:
      Are either implemented in `action` function.
@@ -26,8 +26,9 @@
 */
 
   var BUILTIN_SHORTCUTS = {
-    "Ctrl + C / Cmd-C" : "Copy (simple drag and release copies from the Terminal Window)",
-    "Ctrl + V / Cmd-V" : "Paste",
+    "Ctrl + C / Cmd + C" : "Copy (simple drag and release copies from the Terminal Window)",
+    "Ctrl + V / Cmd + V" : "Paste",
+    "Alt + ENTER" : "(In REPL) Create new line without executing",
 
     "Ctrl + F / Cmd-F" : "Start searching (in editor), Fullscreen (in terminal)",
     "Ctrl + G / Cmd-G" : "Find next",
@@ -79,18 +80,20 @@
       case "UPLOAD_SELECTED":
         if(getDescription) return "Upload just the text that is selected in the editor pane";
         if (Espruino.Core.Code.isInBlockly()) return;
-        var selectedCode = Espruino.Core.EditorJavaScript.getSelectedCode();
-        Espruino.Core.MenuPortSelector.ensureConnected(function() {
-          var old_RESET_BEFORE_SEND = Espruino.Config.RESET_BEFORE_SEND;
-          /* No need to tweak SAVE_ON_SEND/etc because by calling
-          writeToEspruino we skip the usual pipeline of code
-          modifications. But maybe we shouldn't? Could then do
-          compiled code/etc on demand too. */
-          Espruino.Config.RESET_BEFORE_SEND = false;
-          Espruino.Core.CodeWriter.writeToEspruino(selectedCode,function(){
-            Espruino.Config.RESET_BEFORE_SEND = old_RESET_BEFORE_SEND;
+        var selectedCode = Espruino.Core.EditorJavaScript.getSelectedCode().trim();
+        if (selectedCode) {
+          Espruino.Core.MenuPortSelector.ensureConnected(function() {
+            var old_RESET_BEFORE_SEND = Espruino.Config.RESET_BEFORE_SEND;
+            /* No need to tweak SAVE_ON_SEND/etc because by calling
+            writeToEspruino we skip the usual pipeline of code
+            modifications. But maybe we shouldn't? Could then do
+            compiled code/etc on demand too. */
+            Espruino.Config.RESET_BEFORE_SEND = false;
+            Espruino.Core.CodeWriter.writeToEspruino(selectedCode,function(){
+              Espruino.Config.RESET_BEFORE_SEND = old_RESET_BEFORE_SEND;
+            });
           });
-        });
+        }
         break;
       default:
         console.log("keyShortcuts.js: Unknown Action "+JSON.stringify(name));
