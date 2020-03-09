@@ -53,8 +53,10 @@
   }
 })(${JSON.stringify(fileName)});`, function(contents) {
         Espruino.Core.Status.hideStatusWindow();
+        if (contents===undefined)
+          return Espruino.Core.Notifications.error("Timed out receiving file")
         // atob doesn't care about the newlines
-        callback(contents ? atob(contents) : undefined);
+        callback(atob(contents));
       });
     } else { // a normal file
       //Espruino.Core.Utils.executeExpression("btoa(require('Storage').read("+JSON.stringify(fileName)+"))", function(contents) {
@@ -63,8 +65,10 @@
   for (var i=0;i<s.length;i+=${CHUNKSIZE}) console.log(btoa(s.substr(i,${CHUNKSIZE})));
 })(${JSON.stringify(fileName)});`, function(contents) {
         Espruino.Core.Status.hideStatusWindow();
+        if (contents===undefined)
+          return Espruino.Core.Notifications.error("Timed out receiving file")
         // atob doesn't care about the newlines
-        callback(contents ? atob(contents) : undefined);
+        callback(atob(contents));
       });
     }
 
