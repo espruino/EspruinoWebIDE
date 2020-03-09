@@ -13,6 +13,7 @@
 (function(){
   /// Chunk size the files are downloaded in
   var CHUNKSIZE = 384;// or any multiple of 96 for atob/btoa
+  var MAX_FILENAME_LEN = 28; // 28 on 2v05 and newer, 8 on 2v04 and older
   var STORAGEFILE_POSTFIX = " (StorageFile)";
 
   function init() {
@@ -74,7 +75,7 @@
     var js = "";
     if ("string" != typeof contents)
       throw new Error("Expecting a string for contents");
-    if (fileName.length==0 || fileName.length>8)
+    if (fileName.length==0 || fileName.length>MAX_FILENAME_LEN)
       throw new Error("Invalid filename length");
 
     var fn = JSON.stringify(fileName);
@@ -89,8 +90,12 @@
   }
 
   function deleteFile(fileName, callback) {
-    var fn = JSON.stringify(fileName);
-    Espruino.Core.Utils.executeStatement(`require("Storage").erase(${fn})\n`, callback);
+    if (fileName.endsWith(STORAGEFILE_POSTFIX)) {
+      fileName = fileName.substr(0, fileName.length-STORAGEFILE_POSTFIX.length);
+      Espruino.Core.Utils.executeStatement(`require("Storage").open(${JSON.stringify(fileName)},"r").erase()\n`, callback);
+    } else {
+      Espruino.Core.Utils.executeStatement(`require("Storage").erase(${JSON.stringify(fileName)})\n`, callback);
+    }
   }
 
   function getFileList(callback) {
@@ -142,8 +147,8 @@
       var isImage = imageTypes.includes(mimeType);
       var html = `<div>
       <p>Uploading <span id="ressize">${contents.length}</span> bytes to Storage.</p>
-      <label for="filename">Filename (max 8 chars)</label><br/>
-      <input name="filename" class="filenameinput" type="text" maxlength="8" style="border: 2px solid #ccc;" value="${Espruino.Core.Utils.escapeHTML(fileName.substr(0,8))}"></input>
+      <label for="filename">Filename (max ${MAX_FILENAME_LEN} chars)</label><br/>
+      <input name="filename" class="filenameinput" type="text" maxlength="${MAX_FILENAME_LEN}" style="border: 2px solid #ccc;" value="${Espruino.Core.Utils.escapeHTML(fileName.substr(0,MAX_FILENAME_LEN))}"></input>
       `;
       if (isImage) {
         html += `<p>The file you uploaded is an image...</p>
@@ -189,8 +194,8 @@
             Espruino.Core.Notifications.error("You must supply a filename")
             return;
           }
-          if (filename.length>8) {
-            Espruino.Core.Notifications.error("Filename greater than 8 characters")
+          if (filename.length>MAX_FILENAME_LEN) {
+            Espruino.Core.Notifications.error("Filename greater than "+MAX_FILENAME_LEN+" characters")
             return;
           }
           console.log("Write file to Storage as "+JSON.stringify(filename));
@@ -435,8 +440,8 @@
               id: "storagefilenew",
               title: "New file",
               padding: true,
-              contents: `<label for="filename">Filename (max 8 chars)</label><br/>
-              <input name="filename" class="filenameinput" type="text" maxlength="8" style="border: 2px solid #ccc;" value=""></input>`,
+              contents: `<label for="filename">Filename (max ${MAX_FILENAME_LEN} chars)</label><br/>
+              <input name="filename" class="filenameinput" type="text" maxlength="${MAX_FILENAME_LEN}" style="border: 2px solid #ccc;" value=""></input>`,
               position: "auto",
               buttons : [{ name:"Ok", callback : function() {
                 var filename = popup.window.querySelector(".filenameinput").value;
@@ -444,8 +449,8 @@
                   Espruino.Core.Notifications.error("You must supply a filename")
                   return;
                 }
-                if (filename.length>8) {
-                  Espruino.Core.Notifications.error("Filename greater than 8 characters")
+                if (filename.length>MAX_FILENAME_LEN) {
+                  Espruino.Core.Notifications.error(`Filename greater than ${MAX_FILENAME_LEN} characters`)
                   return;
                 }
                 popup.close();
