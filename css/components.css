@@ -471,7 +471,7 @@ paddi   ng-left: 15px;
 .termLine {
   font-family: Fixed, monospace;
   tab-size: 4;
-
+  min-height: 1em;
 }
 
 .terminal.focus
