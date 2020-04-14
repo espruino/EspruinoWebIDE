@@ -749,8 +749,8 @@ function asmFunc(global, env, buffer) {
  var legalimport$__wasi_fd_seek = env.fd_seek;
  var emscripten_asm_const_iii = env.emscripten_asm_const_iii;
  var emscripten_asm_const_dii = env.emscripten_asm_const_dii;
- var global$0 = 5500896;
- var global$1 = 258008;
+ var global$0 = 5499856;
+ var global$1 = 256968;
  var i64toi32_i32$HIGH_BITS = 0;
  // EMSCRIPTEN_START_FUNCS
 function jswCallFunctionHack($0, $1, $2, $3, $4) {
@@ -3159,7 +3159,7 @@ function jswCallFunctionHack($0, $1, $2, $3, $4) {
    break label$1;
   }
   HEAP32[$5 >> 2] = HEAPU16[$5 + 534 >> 1];
-  jsExceptionHere(1, 19308, $5);
+  jsExceptionHere(1, 18302, $5);
   HEAP32[$5 + 540 >> 2] = 0;
  }
  global$0 = $5 + 544 | 0;
@@ -3384,7 +3384,7 @@ function tflite__ParseOpData_28tflite__Operator_20const__2c_20tflite__BuiltinOpe
          HEAP32[std____2__unique_ptr_TfLiteConvParams_2c_20tflite___28anonymous_20namespace_29__SafeBuiltinDataAllocator__BuiltinDataDeleter___operator___28_29_20const($5 + 600 | 0) + 4 >> 2] = 1;
          break label$69;
         }
-        tflite__ErrorReporter__Report_28char_20const__2c_20____29(HEAP32[$5 + 832 >> 2], 52730, 0);
+        tflite__ErrorReporter__Report_28char_20const__2c_20____29(HEAP32[$5 + 832 >> 2], 51690, 0);
         HEAP32[$5 + 844 >> 2] = 1;
         HEAP32[$5 + 736 >> 2] = 1;
         break label$67;
@@ -3536,14 +3536,14 @@ function tflite__ParseOpData_28tflite__Operator_20const__2c_20tflite__BuiltinOpe
          }
          $0 = HEAP32[$5 + 832 >> 2];
          HEAP32[$5 >> 2] = tflite__Conv2DOptions__fused_activation_function_28_29_20const(HEAP32[$5 + 452 >> 2]);
-         tflite__ErrorReporter__Report_28char_20const__2c_20____29($0, 52772, $5);
+         tflite__ErrorReporter__Report_28char_20const__2c_20____29($0, 51732, $5);
          HEAP32[$5 + 844 >> 2] = 1;
          HEAP32[$5 + 736 >> 2] = 1;
          break label$80;
         }
         break label$81;
        }
-       tflite__ErrorReporter__Report_28char_20const__2c_20____29(HEAP32[$5 + 832 >> 2], 52803, 0);
+       tflite__ErrorReporter__Report_28char_20const__2c_20____29(HEAP32[$5 + 832 >> 2], 51763, 0);
        HEAP32[$5 + 844 >> 2] = 1;
        HEAP32[$5 + 736 >> 2] = 1;
        break label$80;
@@ -3622,7 +3622,7 @@ function tflite__ParseOpData_28tflite__Operator_20const__2c_20tflite__BuiltinOpe
      label$89 : {
       if (HEAP32[$5 + 380 >> 2]) {
        HEAP32[$5 + 376 >> 2] = tflite__Tensor__shape_28_29_20const(HEAP32[$5 + 380 >> 2]);
-       if (tflite___28anonymous_20namespace_29__FlatBufferIntVectorToArray_28int_2c_20flatbuffers__Vector_int__20const__2c_20int__2c_20tflite__ErrorReporter__2c_20char_20const__29(HEAP32[$5 + 376 >> 2], std____2__unique_ptr_TfLiteConvParams_2c_20tflite___28anonymous_20namespace_29__SafeBuiltinDataAllocator__BuiltinDataDeleter___operator___28_29_20const($5 + 384 | 0), HEAP32[$5 + 832 >> 2], 52839)) {
+       if (tflite___28anonymous_20namespace_29__FlatBufferIntVectorToArray_28int_2c_20flatbuffers__Vector_int__20const__2c_20int__2c_20tflite__ErrorReporter__2c_20char_20const__29(HEAP32[$5 + 376 >> 2], std____2__unique_ptr_TfLiteConvParams_2c_20tflite___28anonymous_20namespace_29__SafeBuiltinDataAllocator__BuiltinDataDeleter___operator___28_29_20const($5 + 384 | 0), HEAP32[$5 + 832 >> 2], 51799)) {
         HEAP32[$5 + 844 >> 2] = 1;
         HEAP32[$5 + 736 >> 2] = 1;
         break label$89;
@@ -3748,7 +3748,7 @@ function tflite__ParseOpData_28tflite__Operator_20const__2c_20tflite__BuiltinOpe
       if (HEAP32[$5 + 252 >> 2]) {
        HEAP32[$5 + 244 >> 2] = tflite__Tensor__shape_28_29_20const(HEAP32[$5 + 252 >> 2]);
        HEAP32[$5 + 248 >> 2] = $5 + 244;
-       if (tflite___28anonymous_20namespace_29__FlatBufferIntVectorToArray_28int_2c_20flatbuffers__Vector_int__20const__2c_20int__2c_20tflite__ErrorReporter__2c_20char_20const__29(HEAP32[HEAP32[$5 + 248 >> 2] >> 2], std____2__unique_ptr_TfLiteConvParams_2c_20tflite___28anonymous_20namespace_29__SafeBuiltinDataAllocator__BuiltinDataDeleter___operator___28_29_20const($5 + 256 | 0), HEAP32[$5 + 832 >> 2], 52847)) {
+       if (tflite___28anonymous_20namespace_29__FlatBufferIntVectorToArray_28int_2c_20flatbuffers__Vector_int__20const__2c_20int__2c_20tflite__ErrorReporter__2c_20char_20const__29(HEAP32[HEAP32[$5 + 248 >> 2] >> 2], std____2__unique_ptr_TfLiteConvParams_2c_20tflite___28anonymous_20namespace_29__SafeBuiltinDataAllocator__BuiltinDataDeleter___operator___28_29_20const($5 + 256 | 0), HEAP32[$5 + 832 >> 2], 51807)) {
         HEAP32[$5 + 844 >> 2] = 1;
         HEAP32[$5 + 736 >> 2] = 1;
         break label$99;
@@ -3868,7 +3868,7 @@ function tflite__ParseOpData_28tflite__Operator_20const__2c_20tflite__BuiltinOpe
      std____2__unique_ptr_TfLiteConvParams_2c_20tflite___28anonymous_20namespace_29__SafeBuiltinDataAllocator__BuiltinDataDeleter____unique_ptr_28_29($0);
      break label$2;
     case 50:
-     tflite__ErrorReporter__Report_28char_20const__2c_20____29(HEAP32[$5 + 832 >> 2], 52855, 0);
+     tflite__ErrorReporter__Report_28char_20const__2c_20____29(HEAP32[$5 + 832 >> 2], 51815, 0);
      HEAP32[$5 + 844 >> 2] = 1;
      break label$1;
     case 79:
@@ -4079,22 +4079,22 @@ function dlmalloc($0) {
    label$3 : {
     label$4 : {
      if ($0 >>> 0 <= 244) {
-      $4 = HEAP32[64376];
+      $4 = HEAP32[64116];
       $6 = $0 >>> 0 < 11 ? 16 : $0 + 11 & -8;
       $0 = $6 >>> 3;
       $1 = $4 >>> $0;
       if ($1 & 3) {
        $2 = $0 + (($1 ^ -1) & 1) | 0;
        $3 = $2 << 3;
-       $1 = HEAP32[$3 + 257552 >> 2];
+       $1 = HEAP32[$3 + 256512 >> 2];
        $0 = HEAP32[$1 + 8 >> 2];
-       $3 = $3 + 257544 | 0;
+       $3 = $3 + 256504 | 0;
        label$7 : {
         if (($0 | 0) == ($3 | 0)) {
-         HEAP32[64376] = __wasm_rotl_i32($2) & $4;
+         HEAP32[64116] = __wasm_rotl_i32($2) & $4;
          break label$7;
         }
-        if (($1 | 0) != HEAP32[$0 + 12 >> 2] | HEAPU32[64380] > $0 >>> 0) {
+        if (($1 | 0) != HEAP32[$0 + 12 >> 2] | HEAPU32[64120] > $0 >>> 0) {
          break label$3;
         }
         HEAP32[$0 + 12 >> 2] = $3;
@@ -4107,7 +4107,7 @@ function dlmalloc($0) {
        HEAP32[$1 + 4 >> 2] = HEAP32[$1 + 4 >> 2] | 1;
        break label$1;
       }
-      $9 = HEAP32[64378];
+      $9 = HEAP32[64118];
       if ($6 >>> 0 <= $9 >>> 0) {
        break label$4;
       }
@@ -4130,16 +4130,16 @@ function dlmalloc($0) {
        $1 = $0 >>> 1 & 1;
        $2 = ($2 | $1) + ($0 >>> $1) | 0;
        $3 = $2 << 3;
-       $1 = HEAP32[$3 + 257552 >> 2];
+       $1 = HEAP32[$3 + 256512 >> 2];
        $0 = HEAP32[$1 + 8 >> 2];
-       $3 = $3 + 257544 | 0;
+       $3 = $3 + 256504 | 0;
        label$10 : {
         if (($0 | 0) == ($3 | 0)) {
          $4 = __wasm_rotl_i32($2) & $4;
-         HEAP32[64376] = $4;
+         HEAP32[64116] = $4;
          break label$10;
         }
-        if (($1 | 0) != HEAP32[$0 + 12 >> 2] | HEAPU32[64380] > $0 >>> 0) {
+        if (($1 | 0) != HEAP32[$0 + 12 >> 2] | HEAPU32[64120] > $0 >>> 0) {
          break label$3;
         }
         HEAP32[$0 + 12 >> 2] = $3;
@@ -4153,17 +4153,17 @@ function dlmalloc($0) {
        HEAP32[$0 + $1 >> 2] = $3;
        if ($9) {
         $5 = $9 >>> 3;
-        $0 = ($5 << 3) + 257544 | 0;
-        $2 = HEAP32[64381];
+        $0 = ($5 << 3) + 256504 | 0;
+        $2 = HEAP32[64121];
         $5 = 1 << $5;
         label$13 : {
          if (!($5 & $4)) {
-          HEAP32[64376] = $5 | $4;
+          HEAP32[64116] = $5 | $4;
           $5 = $0;
           break label$13;
          }
          $5 = HEAP32[$0 + 8 >> 2];
-         if (HEAPU32[64380] > $5 >>> 0) {
+         if (HEAPU32[64120] > $5 >>> 0) {
           break label$3;
          }
         }
@@ -4173,11 +4173,11 @@ function dlmalloc($0) {
         HEAP32[$2 + 8 >> 2] = $5;
        }
        $0 = $1 + 8 | 0;
-       HEAP32[64381] = $7;
-       HEAP32[64378] = $3;
+       HEAP32[64121] = $7;
+       HEAP32[64118] = $3;
        break label$1;
       }
-      $10 = HEAP32[64377];
+      $10 = HEAP32[64117];
       if (!$10) {
        break label$4;
       }
@@ -4195,7 +4195,7 @@ function dlmalloc($0) {
       $2 = $2 | $1;
       $0 = $0 >>> $1;
       $1 = $0 >>> 1 & 1;
-      $1 = HEAP32[(($2 | $1) + ($0 >>> $1) << 2) + 257808 >> 2];
+      $1 = HEAP32[(($2 | $1) + ($0 >>> $1) << 2) + 256768 >> 2];
       $3 = (HEAP32[$1 + 4 >> 2] & -8) - $6 | 0;
       $2 = $1;
       while (1) {
@@ -4216,7 +4216,7 @@ function dlmalloc($0) {
        }
        break;
       }
-      $13 = HEAP32[64380];
+      $13 = HEAP32[64120];
       if ($13 >>> 0 > $1 >>> 0) {
        break label$3;
       }
@@ -4274,17 +4274,17 @@ function dlmalloc($0) {
         break label$23;
        }
        $0 = HEAP32[$1 + 28 >> 2];
-       $2 = ($0 << 2) + 257808 | 0;
+       $2 = ($0 << 2) + 256768 | 0;
        label$24 : {
         if (HEAP32[$2 >> 2] == ($1 | 0)) {
          HEAP32[$2 >> 2] = $5;
          if ($5) {
           break label$24;
          }
-         HEAP32[64377] = __wasm_rotl_i32($0) & $10;
+         HEAP32[64117] = __wasm_rotl_i32($0) & $10;
          break label$23;
         }
-        if (HEAPU32[64380] > $8 >>> 0) {
+        if (HEAPU32[64120] > $8 >>> 0) {
          break label$3;
         }
         HEAP32[$8 + (HEAP32[$8 + 16 >> 2] == ($1 | 0) ? 16 : 20) >> 2] = $5;
@@ -4292,7 +4292,7 @@ function dlmalloc($0) {
          break label$23;
         }
        }
-       $2 = HEAP32[64380];
+       $2 = HEAP32[64120];
        if ($2 >>> 0 > $5 >>> 0) {
         break label$3;
        }
@@ -4309,7 +4309,7 @@ function dlmalloc($0) {
        if (!$0) {
         break label$23;
        }
-       if (HEAPU32[64380] > $0 >>> 0) {
+       if (HEAPU32[64120] > $0 >>> 0) {
         break label$3;
        }
        HEAP32[$5 + 20 >> 2] = $0;
@@ -4328,17 +4328,17 @@ function dlmalloc($0) {
        HEAP32[$3 + $11 >> 2] = $3;
        if ($9) {
         $5 = $9 >>> 3;
-        $0 = ($5 << 3) + 257544 | 0;
-        $2 = HEAP32[64381];
+        $0 = ($5 << 3) + 256504 | 0;
+        $2 = HEAP32[64121];
         $5 = 1 << $5;
         label$30 : {
          if (!($5 & $4)) {
-          HEAP32[64376] = $5 | $4;
+          HEAP32[64116] = $5 | $4;
           $6 = $0;
           break label$30;
          }
          $6 = HEAP32[$0 + 8 >> 2];
-         if (HEAPU32[64380] > $6 >>> 0) {
+         if (HEAPU32[64120] > $6 >>> 0) {
           break label$3;
          }
         }
@@ -4347,8 +4347,8 @@ function dlmalloc($0) {
         HEAP32[$2 + 12 >> 2] = $0;
         HEAP32[$2 + 8 >> 2] = $6;
        }
-       HEAP32[64381] = $11;
-       HEAP32[64378] = $3;
+       HEAP32[64121] = $11;
+       HEAP32[64118] = $3;
       }
       $0 = $1 + 8 | 0;
       break label$1;
@@ -4359,7 +4359,7 @@ function dlmalloc($0) {
      }
      $1 = $0 + 11 | 0;
      $6 = $1 & -8;
-     $8 = HEAP32[64377];
+     $8 = HEAP32[64117];
      if (!$8) {
       break label$4;
      }
@@ -4382,7 +4382,7 @@ function dlmalloc($0) {
       $0 = ($4 << $1 >>> 15) - ($1 | ($0 | $3)) | 0;
       $4 = ($0 << 1 | $6 >>> $0 + 21 & 1) + 28 | 0;
      }
-     $3 = HEAP32[($4 << 2) + 257808 >> 2];
+     $3 = HEAP32[($4 << 2) + 256768 >> 2];
      label$32 : {
       label$33 : {
        label$34 : {
@@ -4437,7 +4437,7 @@ function dlmalloc($0) {
         $3 = $3 | $1;
         $0 = $0 >>> $1;
         $1 = $0 >>> 1 & 1;
-        $0 = HEAP32[(($3 | $1) + ($0 >>> $1) << 2) + 257808 >> 2];
+        $0 = HEAP32[(($3 | $1) + ($0 >>> $1) << 2) + 256768 >> 2];
        }
        if (!$0) {
         break label$32;
@@ -4460,10 +4460,10 @@ function dlmalloc($0) {
        break;
       }
      }
-     if (!$5 | $2 >>> 0 >= HEAP32[64378] - $6 >>> 0) {
+     if (!$5 | $2 >>> 0 >= HEAP32[64118] - $6 >>> 0) {
       break label$4;
      }
-     $10 = HEAP32[64380];
+     $10 = HEAP32[64120];
      if ($10 >>> 0 > $5 >>> 0) {
       break label$3;
      }
@@ -4521,7 +4521,7 @@ function dlmalloc($0) {
        break label$48;
       }
       $0 = HEAP32[$5 + 28 >> 2];
-      $3 = ($0 << 2) + 257808 | 0;
+      $3 = ($0 << 2) + 256768 | 0;
       label$49 : {
        if (HEAP32[$3 >> 2] == ($5 | 0)) {
         HEAP32[$3 >> 2] = $1;
@@ -4529,10 +4529,10 @@ function dlmalloc($0) {
          break label$49;
         }
         $8 = __wasm_rotl_i32($0) & $8;
-        HEAP32[64377] = $8;
+        HEAP32[64117] = $8;
         break label$48;
        }
-       if (HEAPU32[64380] > $9 >>> 0) {
+       if (HEAPU32[64120] > $9 >>> 0) {
         break label$3;
        }
        HEAP32[$9 + (HEAP32[$9 + 16 >> 2] == ($5 | 0) ? 16 : 20) >> 2] = $1;
@@ -4540,7 +4540,7 @@ function dlmalloc($0) {
         break label$48;
        }
       }
-      $3 = HEAP32[64380];
+      $3 = HEAP32[64120];
       if ($3 >>> 0 > $1 >>> 0) {
        break label$3;
       }
@@ -4557,7 +4557,7 @@ function dlmalloc($0) {
       if (!$0) {
        break label$48;
       }
-      if (HEAPU32[64380] > $0 >>> 0) {
+      if (HEAPU32[64120] > $0 >>> 0) {
        break label$3;
       }
       HEAP32[$1 + 20 >> 2] = $0;
@@ -4576,17 +4576,17 @@ function dlmalloc($0) {
       HEAP32[$2 + $4 >> 2] = $2;
       if ($2 >>> 0 <= 255) {
        $1 = $2 >>> 3;
-       $0 = ($1 << 3) + 257544 | 0;
-       $2 = HEAP32[64376];
+       $0 = ($1 << 3) + 256504 | 0;
+       $2 = HEAP32[64116];
        $1 = 1 << $1;
        label$55 : {
         if (!($2 & $1)) {
-         HEAP32[64376] = $1 | $2;
+         HEAP32[64116] = $1 | $2;
          $3 = $0;
          break label$55;
         }
         $3 = HEAP32[$0 + 8 >> 2];
-        if (HEAPU32[64380] > $3 >>> 0) {
+        if (HEAPU32[64120] > $3 >>> 0) {
          break label$3;
         }
        }
@@ -4618,12 +4618,12 @@ function dlmalloc($0) {
       HEAP32[$1 + 28 >> 2] = $0;
       HEAP32[$4 + 16 >> 2] = 0;
       HEAP32[$4 + 20 >> 2] = 0;
-      $1 = ($0 << 2) + 257808 | 0;
+      $1 = ($0 << 2) + 256768 | 0;
       label$58 : {
        $3 = 1 << $0;
        label$59 : {
         if (!($3 & $8)) {
-         HEAP32[64377] = $3 | $8;
+         HEAP32[64117] = $3 | $8;
          HEAP32[$1 >> 2] = $4;
          break label$59;
         }
@@ -4643,7 +4643,7 @@ function dlmalloc($0) {
          }
          break;
         }
-        if (HEAPU32[64380] > $3 >>> 0) {
+        if (HEAPU32[64120] > $3 >>> 0) {
          break label$3;
         }
         HEAP32[$3 >> 2] = $4;
@@ -4653,7 +4653,7 @@ function dlmalloc($0) {
        HEAP32[$4 + 8 >> 2] = $4;
        break label$52;
       }
-      $2 = HEAP32[64380];
+      $2 = HEAP32[64120];
       $0 = HEAP32[$1 + 8 >> 2];
       if ($2 >>> 0 > $0 >>> 0 | $2 >>> 0 > $1 >>> 0) {
        break label$3;
@@ -4667,22 +4667,22 @@ function dlmalloc($0) {
      $0 = $5 + 8 | 0;
      break label$1;
     }
-    $1 = HEAP32[64378];
+    $1 = HEAP32[64118];
     if ($1 >>> 0 >= $6 >>> 0) {
-     $0 = HEAP32[64381];
+     $0 = HEAP32[64121];
      $2 = $1 - $6 | 0;
      label$63 : {
       if ($2 >>> 0 >= 16) {
-       HEAP32[64378] = $2;
+       HEAP32[64118] = $2;
        $3 = $0 + $6 | 0;
-       HEAP32[64381] = $3;
+       HEAP32[64121] = $3;
        HEAP32[$3 + 4 >> 2] = $2 | 1;
        HEAP32[$0 + $1 >> 2] = $2;
        HEAP32[$0 + 4 >> 2] = $6 | 3;
        break label$63;
       }
-      HEAP32[64381] = 0;
-      HEAP32[64378] = 0;
+      HEAP32[64121] = 0;
+      HEAP32[64118] = 0;
       HEAP32[$0 + 4 >> 2] = $1 | 3;
       $1 = $0 + $1 | 0;
       HEAP32[$1 + 4 >> 2] = HEAP32[$1 + 4 >> 2] | 1;
@@ -4690,13 +4690,13 @@ function dlmalloc($0) {
      $0 = $0 + 8 | 0;
      break label$1;
     }
-    $3 = HEAP32[64379];
+    $3 = HEAP32[64119];
     if ($3 >>> 0 > $6 >>> 0) {
      $1 = $3 - $6 | 0;
-     HEAP32[64379] = $1;
-     $0 = HEAP32[64382];
+     HEAP32[64119] = $1;
+     $0 = HEAP32[64122];
      $2 = $0 + $6 | 0;
-     HEAP32[64382] = $2;
+     HEAP32[64122] = $2;
      HEAP32[$2 + 4 >> 2] = $1 | 1;
      HEAP32[$0 + 4 >> 2] = $6 | 3;
      $0 = $0 + 8 | 0;
@@ -4705,16 +4705,16 @@ function dlmalloc($0) {
     $0 = 0;
     $5 = $6 + 47 | 0;
     $2 = $5;
-    if (HEAP32[64494]) {
-     $1 = HEAP32[64496];
+    if (HEAP32[64234]) {
+     $1 = HEAP32[64236];
     } else {
-     HEAP32[64497] = -1;
-     HEAP32[64498] = -1;
-     HEAP32[64495] = 4096;
-     HEAP32[64496] = 4096;
-     HEAP32[64494] = $12 + 12 & -16 ^ 1431655768;
-     HEAP32[64499] = 0;
-     HEAP32[64487] = 0;
+     HEAP32[64237] = -1;
+     HEAP32[64238] = -1;
+     HEAP32[64235] = 4096;
+     HEAP32[64236] = 4096;
+     HEAP32[64234] = $12 + 12 & -16 ^ 1431655768;
+     HEAP32[64239] = 0;
+     HEAP32[64227] = 0;
      $1 = 4096;
     }
     $4 = $2 + $1 | 0;
@@ -4723,23 +4723,23 @@ function dlmalloc($0) {
     if ($2 >>> 0 <= $6 >>> 0) {
      break label$1;
     }
-    $1 = HEAP32[64486];
+    $1 = HEAP32[64226];
     if ($1) {
-     $8 = HEAP32[64484];
+     $8 = HEAP32[64224];
      $9 = $8 + $2 | 0;
      if ($9 >>> 0 <= $8 >>> 0 | $9 >>> 0 > $1 >>> 0) {
       break label$1;
      }
     }
     label$69 : {
-     if (!(HEAPU8[257948] & 4)) {
+     if (!(HEAPU8[256908] & 4)) {
       label$71 : {
        label$72 : {
         label$73 : {
          label$74 : {
-          $1 = HEAP32[64382];
+          $1 = HEAP32[64122];
           if ($1) {
-           $0 = 257952;
+           $0 = 256912;
            while (1) {
             $8 = HEAP32[$0 >> 2];
             if ($8 + HEAP32[$0 + 4 >> 2] >>> 0 > $1 >>> 0 ? $8 >>> 0 <= $1 >>> 0 : 0) {
@@ -4757,7 +4757,7 @@ function dlmalloc($0) {
            break label$71;
           }
           $4 = $2;
-          $0 = HEAP32[64495];
+          $0 = HEAP32[64235];
           $3 = $0 + -1 | 0;
           if ($3 & $1) {
            $4 = ($2 - $1 | 0) + ($1 + $3 & 0 - $0) | 0;
@@ -4765,9 +4765,9 @@ function dlmalloc($0) {
           if ($4 >>> 0 <= $6 >>> 0 | $4 >>> 0 > 2147483646) {
            break label$71;
           }
-          $0 = HEAP32[64486];
+          $0 = HEAP32[64226];
           if ($0) {
-           $3 = HEAP32[64484];
+           $3 = HEAP32[64224];
            $7 = $3 + $4 | 0;
            if ($7 >>> 0 <= $3 >>> 0 | $7 >>> 0 > $0 >>> 0) {
             break label$71;
@@ -4791,7 +4791,7 @@ function dlmalloc($0) {
         }
         $1 = $0;
         if (!($6 + 48 >>> 0 <= $4 >>> 0 | $4 >>> 0 > 2147483646 | ($0 | 0) == -1)) {
-         $0 = HEAP32[64496];
+         $0 = HEAP32[64236];
          $0 = $0 + ($5 - $4 | 0) & 0 - $0;
          if ($0 >>> 0 > 2147483646) {
           break label$69;
@@ -4812,7 +4812,7 @@ function dlmalloc($0) {
         break label$69;
        }
       }
-      HEAP32[64487] = HEAP32[64487] | 4;
+      HEAP32[64227] = HEAP32[64227] | 4;
      }
      if ($2 >>> 0 > 2147483646) {
       break label$2;
@@ -4827,17 +4827,17 @@ function dlmalloc($0) {
       break label$2;
      }
     }
-    $0 = HEAP32[64484] + $4 | 0;
-    HEAP32[64484] = $0;
-    if ($0 >>> 0 > HEAPU32[64485]) {
-     HEAP32[64485] = $0;
+    $0 = HEAP32[64224] + $4 | 0;
+    HEAP32[64224] = $0;
+    if ($0 >>> 0 > HEAPU32[64225]) {
+     HEAP32[64225] = $0;
     }
     label$83 : {
      label$84 : {
       label$85 : {
-       $3 = HEAP32[64382];
+       $3 = HEAP32[64122];
        if ($3) {
-        $0 = 257952;
+        $0 = 256912;
         while (1) {
          $2 = HEAP32[$0 >> 2];
          $5 = HEAP32[$0 + 4 >> 2];
@@ -4852,21 +4852,21 @@ function dlmalloc($0) {
         }
         break label$84;
        }
-       $0 = HEAP32[64380];
+       $0 = HEAP32[64120];
        if (!($1 >>> 0 >= $0 >>> 0 ? $0 : 0)) {
-        HEAP32[64380] = $1;
+        HEAP32[64120] = $1;
        }
        $0 = 0;
-       HEAP32[64489] = $4;
-       HEAP32[64488] = $1;
-       HEAP32[64384] = -1;
-       HEAP32[64385] = HEAP32[64494];
-       HEAP32[64491] = 0;
+       HEAP32[64229] = $4;
+       HEAP32[64228] = $1;
+       HEAP32[64124] = -1;
+       HEAP32[64125] = HEAP32[64234];
+       HEAP32[64231] = 0;
        while (1) {
         $2 = $0 << 3;
-        $3 = $2 + 257544 | 0;
-        HEAP32[$2 + 257552 >> 2] = $3;
-        HEAP32[$2 + 257556 >> 2] = $3;
+        $3 = $2 + 256504 | 0;
+        HEAP32[$2 + 256512 >> 2] = $3;
+        HEAP32[$2 + 256516 >> 2] = $3;
         $0 = $0 + 1 | 0;
         if (($0 | 0) != 32) {
          continue;
@@ -4876,12 +4876,12 @@ function dlmalloc($0) {
        $0 = $4 + -40 | 0;
        $2 = $1 + 8 & 7 ? -8 - $1 & 7 : 0;
        $3 = $0 - $2 | 0;
-       HEAP32[64379] = $3;
+       HEAP32[64119] = $3;
        $2 = $1 + $2 | 0;
-       HEAP32[64382] = $2;
+       HEAP32[64122] = $2;
        HEAP32[$2 + 4 >> 2] = $3 | 1;
        HEAP32[($0 + $1 | 0) + 4 >> 2] = 40;
-       HEAP32[64383] = HEAP32[64498];
+       HEAP32[64123] = HEAP32[64238];
        break label$83;
       }
       if (HEAPU8[$0 + 12 | 0] & 8 | $1 >>> 0 <= $3 >>> 0 | $2 >>> 0 > $3 >>> 0) {
@@ -4890,22 +4890,22 @@ function dlmalloc($0) {
       HEAP32[$0 + 4 >> 2] = $5 + $4;
       $0 = $3 + 8 & 7 ? -8 - $3 & 7 : 0;
       $1 = $0 + $3 | 0;
-      HEAP32[64382] = $1;
-      $2 = HEAP32[64379] + $4 | 0;
+      HEAP32[64122] = $1;
+      $2 = HEAP32[64119] + $4 | 0;
       $0 = $2 - $0 | 0;
-      HEAP32[64379] = $0;
+      HEAP32[64119] = $0;
       HEAP32[$1 + 4 >> 2] = $0 | 1;
       HEAP32[($2 + $3 | 0) + 4 >> 2] = 40;
-      HEAP32[64383] = HEAP32[64498];
+      HEAP32[64123] = HEAP32[64238];
       break label$83;
      }
-     $5 = HEAP32[64380];
+     $5 = HEAP32[64120];
      if ($1 >>> 0 < $5 >>> 0) {
-      HEAP32[64380] = $1;
+      HEAP32[64120] = $1;
       $5 = $1;
      }
      $2 = $1 + $4 | 0;
-     $0 = 257952;
+     $0 = 256912;
      label$91 : {
       label$92 : {
        label$93 : {
@@ -4923,7 +4923,7 @@ function dlmalloc($0) {
          break label$92;
         }
        }
-       $0 = 257952;
+       $0 = 256912;
        while (1) {
         $2 = HEAP32[$0 >> 2];
         if ($2 >>> 0 <= $3 >>> 0) {
@@ -4945,16 +4945,16 @@ function dlmalloc($0) {
       $7 = $6 + $9 | 0;
       label$98 : {
        if (($1 | 0) == ($3 | 0)) {
-        HEAP32[64382] = $7;
-        $0 = HEAP32[64379] + $0 | 0;
-        HEAP32[64379] = $0;
+        HEAP32[64122] = $7;
+        $0 = HEAP32[64119] + $0 | 0;
+        HEAP32[64119] = $0;
         HEAP32[$7 + 4 >> 2] = $0 | 1;
         break label$98;
        }
-       if (HEAP32[64381] == ($1 | 0)) {
-        HEAP32[64381] = $7;
-        $0 = HEAP32[64378] + $0 | 0;
-        HEAP32[64378] = $0;
+       if (HEAP32[64121] == ($1 | 0)) {
+        HEAP32[64121] = $7;
+        $0 = HEAP32[64118] + $0 | 0;
+        HEAP32[64118] = $0;
         HEAP32[$7 + 4 >> 2] = $0 | 1;
         HEAP32[$0 + $7 >> 2] = $0;
         break label$98;
@@ -4966,12 +4966,12 @@ function dlmalloc($0) {
           $2 = HEAP32[$1 + 12 >> 2];
           $3 = HEAP32[$1 + 8 >> 2];
           $6 = $10 >>> 3;
-          $4 = ($6 << 3) + 257544 | 0;
+          $4 = ($6 << 3) + 256504 | 0;
           if (HEAP32[$3 + 12 >> 2] != ($1 | 0) | $5 >>> 0 > $3 >>> 0 ? ($3 | 0) != ($4 | 0) : 0) {
            break label$3;
           }
           if (($2 | 0) == ($3 | 0)) {
-           HEAP32[64376] = HEAP32[64376] & __wasm_rotl_i32($6);
+           HEAP32[64116] = HEAP32[64116] & __wasm_rotl_i32($6);
            break label$102;
           }
           if (HEAP32[$2 + 8 >> 2] != ($1 | 0) | $5 >>> 0 > $2 >>> 0 ? ($2 | 0) != ($4 | 0) : 0) {
@@ -5031,17 +5031,17 @@ function dlmalloc($0) {
           break label$102;
          }
          $2 = HEAP32[$1 + 28 >> 2];
-         $3 = ($2 << 2) + 257808 | 0;
+         $3 = ($2 << 2) + 256768 | 0;
          label$111 : {
           if (HEAP32[$3 >> 2] == ($1 | 0)) {
            HEAP32[$3 >> 2] = $4;
            if ($4) {
             break label$111;
            }
-           HEAP32[64377] = HEAP32[64377] & __wasm_rotl_i32($2);
+           HEAP32[64117] = HEAP32[64117] & __wasm_rotl_i32($2);
            break label$102;
           }
-          if (HEAPU32[64380] > $8 >>> 0) {
+          if (HEAPU32[64120] > $8 >>> 0) {
            break label$3;
           }
           HEAP32[$8 + (HEAP32[$8 + 16 >> 2] == ($1 | 0) ? 16 : 20) >> 2] = $4;
@@ -5049,7 +5049,7 @@ function dlmalloc($0) {
            break label$102;
           }
          }
-         $3 = HEAP32[64380];
+         $3 = HEAP32[64120];
          if ($3 >>> 0 > $4 >>> 0) {
           break label$3;
          }
@@ -5066,7 +5066,7 @@ function dlmalloc($0) {
          if (!$2) {
           break label$102;
          }
-         if (HEAPU32[64380] > $2 >>> 0) {
+         if (HEAPU32[64120] > $2 >>> 0) {
           break label$3;
          }
          HEAP32[$4 + 20 >> 2] = $2;
@@ -5081,17 +5081,17 @@ function dlmalloc($0) {
        HEAP32[$0 + $7 >> 2] = $0;
        if ($0 >>> 0 <= 255) {
         $1 = $0 >>> 3;
-        $0 = ($1 << 3) + 257544 | 0;
-        $2 = HEAP32[64376];
+        $0 = ($1 << 3) + 256504 | 0;
+        $2 = HEAP32[64116];
         $1 = 1 << $1;
         label$115 : {
          if (!($2 & $1)) {
-          HEAP32[64376] = $1 | $2;
+          HEAP32[64116] = $1 | $2;
           $3 = $0;
           break label$115;
          }
          $3 = HEAP32[$0 + 8 >> 2];
-         if (HEAPU32[64380] > $3 >>> 0) {
+         if (HEAPU32[64120] > $3 >>> 0) {
           break label$3;
          }
         }
@@ -5123,13 +5123,13 @@ function dlmalloc($0) {
        HEAP32[$2 + 28 >> 2] = $1;
        HEAP32[$7 + 16 >> 2] = 0;
        HEAP32[$7 + 20 >> 2] = 0;
-       $2 = ($1 << 2) + 257808 | 0;
+       $2 = ($1 << 2) + 256768 | 0;
        label$118 : {
-        $3 = HEAP32[64377];
+        $3 = HEAP32[64117];
         $5 = 1 << $1;
         label$119 : {
          if (!($3 & $5)) {
-          HEAP32[64377] = $3 | $5;
+          HEAP32[64117] = $3 | $5;
           HEAP32[$2 >> 2] = $7;
           break label$119;
          }
@@ -5149,7 +5149,7 @@ function dlmalloc($0) {
           }
           break;
          }
-         if (HEAPU32[64380] > $5 >>> 0) {
+         if (HEAPU32[64120] > $5 >>> 0) {
           break label$3;
          }
          HEAP32[$5 >> 2] = $7;
@@ -5159,7 +5159,7 @@ function dlmalloc($0) {
         HEAP32[$7 + 8 >> 2] = $7;
         break label$98;
        }
-       $1 = HEAP32[64380];
+       $1 = HEAP32[64120];
        $0 = HEAP32[$2 + 8 >> 2];
        if ($1 >>> 0 > $0 >>> 0 | $1 >>> 0 > $2 >>> 0) {
         break label$3;
@@ -5176,25 +5176,25 @@ function dlmalloc($0) {
      $0 = $4 + -40 | 0;
      $2 = $1 + 8 & 7 ? -8 - $1 & 7 : 0;
      $7 = $0 - $2 | 0;
-     HEAP32[64379] = $7;
+     HEAP32[64119] = $7;
      $2 = $1 + $2 | 0;
-     HEAP32[64382] = $2;
+     HEAP32[64122] = $2;
      HEAP32[$2 + 4 >> 2] = $7 | 1;
      HEAP32[($0 + $1 | 0) + 4 >> 2] = 40;
-     HEAP32[64383] = HEAP32[64498];
+     HEAP32[64123] = HEAP32[64238];
      $0 = ($5 + ($5 + -39 & 7 ? 39 - $5 & 7 : 0) | 0) + -47 | 0;
      $2 = $0 >>> 0 < $3 + 16 >>> 0 ? $3 : $0;
      HEAP32[$2 + 4 >> 2] = 27;
-     $0 = HEAP32[64491];
-     HEAP32[$2 + 16 >> 2] = HEAP32[64490];
+     $0 = HEAP32[64231];
+     HEAP32[$2 + 16 >> 2] = HEAP32[64230];
      HEAP32[$2 + 20 >> 2] = $0;
-     $0 = HEAP32[64489];
-     HEAP32[$2 + 8 >> 2] = HEAP32[64488];
+     $0 = HEAP32[64229];
+     HEAP32[$2 + 8 >> 2] = HEAP32[64228];
      HEAP32[$2 + 12 >> 2] = $0;
-     HEAP32[64490] = $2 + 8;
-     HEAP32[64489] = $4;
-     HEAP32[64488] = $1;
-     HEAP32[64491] = 0;
+     HEAP32[64230] = $2 + 8;
+     HEAP32[64229] = $4;
+     HEAP32[64228] = $1;
+     HEAP32[64231] = 0;
      $0 = $2 + 24 | 0;
      while (1) {
       HEAP32[$0 + 4 >> 2] = 7;
@@ -5214,17 +5214,17 @@ function dlmalloc($0) {
      HEAP32[$2 >> 2] = $5;
      if ($5 >>> 0 <= 255) {
       $1 = $5 >>> 3;
-      $0 = ($1 << 3) + 257544 | 0;
-      $2 = HEAP32[64376];
+      $0 = ($1 << 3) + 256504 | 0;
+      $2 = HEAP32[64116];
       $1 = 1 << $1;
       label$124 : {
        if (!($2 & $1)) {
-        HEAP32[64376] = $1 | $2;
+        HEAP32[64116] = $1 | $2;
         $2 = $0;
         break label$124;
        }
        $2 = HEAP32[$0 + 8 >> 2];
-       if (HEAPU32[64380] > $2 >>> 0) {
+       if (HEAPU32[64120] > $2 >>> 0) {
         break label$3;
        }
       }
@@ -5256,13 +5256,13 @@ function dlmalloc($0) {
       $0 = ($0 << 1 | $5 >>> $0 + 21 & 1) + 28 | 0;
      }
      HEAP32[$1 + 28 >> 2] = $0;
-     $1 = ($0 << 2) + 257808 | 0;
+     $1 = ($0 << 2) + 256768 | 0;
      label$127 : {
-      $2 = HEAP32[64377];
+      $2 = HEAP32[64117];
       $4 = 1 << $0;
       label$128 : {
        if (!($2 & $4)) {
-        HEAP32[64377] = $2 | $4;
+        HEAP32[64117] = $2 | $4;
         HEAP32[$1 >> 2] = $3;
         HEAP32[$3 + 24 >> 2] = $1;
         break label$128;
@@ -5283,7 +5283,7 @@ function dlmalloc($0) {
         }
         break;
        }
-       if (HEAPU32[64380] > $4 >>> 0) {
+       if (HEAPU32[64120] > $4 >>> 0) {
         break label$3;
        }
        HEAP32[$4 >> 2] = $3;
@@ -5293,7 +5293,7 @@ function dlmalloc($0) {
       HEAP32[$3 + 8 >> 2] = $3;
       break label$83;
      }
-     $1 = HEAP32[64380];
+     $1 = HEAP32[64120];
      $0 = HEAP32[$2 + 8 >> 2];
      if ($1 >>> 0 > $0 >>> 0 | $1 >>> 0 > $2 >>> 0) {
       break label$3;
@@ -5304,15 +5304,15 @@ function dlmalloc($0) {
      HEAP32[$3 + 12 >> 2] = $2;
      HEAP32[$3 + 8 >> 2] = $0;
     }
-    $0 = HEAP32[64379];
+    $0 = HEAP32[64119];
     if ($0 >>> 0 <= $6 >>> 0) {
      break label$2;
     }
     $1 = $0 - $6 | 0;
-    HEAP32[64379] = $1;
-    $0 = HEAP32[64382];
+    HEAP32[64119] = $1;
+    $0 = HEAP32[64122];
     $2 = $0 + $6 | 0;
-    HEAP32[64382] = $2;
+    HEAP32[64122] = $2;
     HEAP32[$2 + 4 >> 2] = $1 | 1;
     HEAP32[$0 + 4 >> 2] = $6 | 3;
     $0 = $0 + 8 | 0;
@@ -5321,7 +5321,7 @@ function dlmalloc($0) {
    abort();
    abort();
   }
-  HEAP32[64357] = 48;
+  HEAP32[64097] = 48;
   $0 = 0;
  }
  global$0 = $12 + 16 | 0;
@@ -5351,16 +5351,16 @@ function jswrap_graphics_drawImage($0, $1, $2, $3, $4) {
   HEAP32[$5 + 316 >> 2] = 0;
   label$3 : {
    if (jsvIsObject(HEAP32[$5 + 436 >> 2]) & 1) {
-    HEAP32[$5 + 348 >> 2] = jsvGetIntegerAndUnLock(jsvObjectGetChild(HEAP32[$5 + 436 >> 2], 42850, 0));
-    HEAP32[$5 + 344 >> 2] = jsvGetIntegerAndUnLock(jsvObjectGetChild(HEAP32[$5 + 436 >> 2], 42856, 0));
-    HEAP32[$5 + 340 >> 2] = jsvGetIntegerAndUnLock(jsvObjectGetChild(HEAP32[$5 + 436 >> 2], 43162, 0));
+    HEAP32[$5 + 348 >> 2] = jsvGetIntegerAndUnLock(jsvObjectGetChild(HEAP32[$5 + 436 >> 2], 41810, 0));
+    HEAP32[$5 + 344 >> 2] = jsvGetIntegerAndUnLock(jsvObjectGetChild(HEAP32[$5 + 436 >> 2], 41816, 0));
+    HEAP32[$5 + 340 >> 2] = jsvGetIntegerAndUnLock(jsvObjectGetChild(HEAP32[$5 + 436 >> 2], 42122, 0));
     if (HEAP32[$5 + 340 >> 2] <= 0) {
      HEAP32[$5 + 340 >> 2] = 1;
     }
-    HEAP32[$5 + 304 >> 2] = jsvObjectGetChild(HEAP32[$5 + 436 >> 2], 43166, 0);
+    HEAP32[$5 + 304 >> 2] = jsvObjectGetChild(HEAP32[$5 + 436 >> 2], 42126, 0);
     HEAP8[$5 + 339 | 0] = HEAP32[$5 + 304 >> 2] != 0;
     HEAP32[$5 + 332 >> 2] = jsvGetIntegerAndUnLock(HEAP32[$5 + 304 >> 2]);
-    HEAP32[$5 + 304 >> 2] = jsvObjectGetChild(HEAP32[$5 + 436 >> 2], 43178, 0);
+    HEAP32[$5 + 304 >> 2] = jsvObjectGetChild(HEAP32[$5 + 436 >> 2], 42138, 0);
     if (HEAP32[$5 + 304 >> 2]) {
      label$7 : {
       if (!(!(jsvIsArrayBuffer(HEAP32[$5 + 304 >> 2]) & 1) | HEAPU16[HEAP32[$5 + 304 >> 2] + 4 >> 1] != 2)) {
@@ -5379,12 +5379,12 @@ function jswrap_graphics_drawImage($0, $1, $2, $3, $4) {
       jsvUnLock(HEAP32[$5 + 304 >> 2]);
      }
      if (!HEAP32[$5 + 320 >> 2]) {
-      jsExceptionHere(1, 43186, 0);
+      jsExceptionHere(1, 42146, 0);
       HEAP32[$5 + 444 >> 2] = 0;
       break label$1;
      }
     }
-    HEAP32[$5 + 328 >> 2] = jsvObjectGetChild(HEAP32[$5 + 436 >> 2], 42863, 0);
+    HEAP32[$5 + 328 >> 2] = jsvObjectGetChild(HEAP32[$5 + 436 >> 2], 41823, 0);
     HEAP32[$5 + 324 >> 2] = 0;
     break label$3;
    }
@@ -5422,7 +5422,7 @@ function jswrap_graphics_drawImage($0, $1, $2, $3, $4) {
      }
      break label$13;
     }
-    jsExceptionHere(1, 43259, 0);
+    jsExceptionHere(1, 42219, 0);
     HEAP32[$5 + 444 >> 2] = 0;
     break label$1;
    }
@@ -5465,18 +5465,18 @@ function jswrap_graphics_drawImage($0, $1, $2, $3, $4) {
      }
      label$27 : {
       if (!(HEAPU8[$5 + 368 | 0] != 16 | HEAP32[$5 + 340 >> 2] != 4)) {
-       HEAP32[$5 + 320 >> 2] = 41936;
+       HEAP32[$5 + 320 >> 2] = 40896;
        HEAP32[$5 + 316 >> 2] = 15;
        break label$27;
       }
       label$29 : {
        if (!(HEAPU8[$5 + 368 | 0] != 16 | HEAP32[$5 + 340 >> 2] != 8)) {
-        HEAP32[$5 + 320 >> 2] = 41968;
+        HEAP32[$5 + 320 >> 2] = 40928;
         HEAP32[$5 + 316 >> 2] = 255;
         break label$29;
        }
        if (!(HEAPU8[$5 + 368 | 0] != 8 | HEAP32[$5 + 340 >> 2] != 4)) {
-        HEAP32[$5 + 320 >> 2] = 42480;
+        HEAP32[$5 + 320 >> 2] = 41440;
         HEAP32[$5 + 316 >> 2] = 15;
        }
       }
@@ -5498,7 +5498,7 @@ function jswrap_graphics_drawImage($0, $1, $2, $3, $4) {
      break label$32;
     }
    }
-   jsExceptionHere(1, 43312, 0);
+   jsExceptionHere(1, 42272, 0);
    jsvUnLock(HEAP32[$5 + 328 >> 2]);
    HEAP32[$5 + 444 >> 2] = 0;
    break label$1;
@@ -5641,13 +5641,13 @@ function jswrap_graphics_drawImage($0, $1, $2, $3, $4) {
    }
    if (jsvIsObject(HEAP32[$5 + 424 >> 2]) & 1) {
     HEAP32[$5 + 168 >> 2] = Math_imul(HEAP32[$5 + 348 >> 2], HEAP32[$5 + 340 >> 2]) + 7 >> 3;
-    HEAPF64[$5 + 160 >> 3] = jsvGetFloatAndUnLock(jsvObjectGetChild(HEAP32[$5 + 424 >> 2], 43354, 0));
+    HEAPF64[$5 + 160 >> 3] = jsvGetFloatAndUnLock(jsvObjectGetChild(HEAP32[$5 + 424 >> 2], 42314, 0));
     $0 = __DOUBLE_BITS(HEAPF64[$5 + 160 >> 3]);
     $1 = i64toi32_i32$HIGH_BITS & 2147483647;
     if (!(HEAPF64[$5 + 160 >> 3] <= 0 ? 0 : !(($1 | 0) == 2146435072 & $0 >>> 0 >= 0 | $1 >>> 0 > 2146435072))) {
      HEAPF64[$5 + 160 >> 3] = 1;
     }
-    HEAPF64[$5 + 152 >> 3] = jsvGetFloatAndUnLock(jsvObjectGetChild(HEAP32[$5 + 424 >> 2], 43360, 0));
+    HEAPF64[$5 + 152 >> 3] = jsvGetFloatAndUnLock(jsvObjectGetChild(HEAP32[$5 + 424 >> 2], 42320, 0));
     $0 = __DOUBLE_BITS(HEAPF64[$5 + 152 >> 3]);
     $1 = i64toi32_i32$HIGH_BITS & 2147483647;
     HEAP8[$5 + 151 | 0] = ($1 | 0) == 2146435072 & $0 >>> 0 < 0 | $1 >>> 0 < 2146435072;
@@ -5919,11 +5919,11 @@ function tflite__ops__micro__svdf__Prepare_28TfLiteContext__2c_20TfLiteNode__29(
    $3 = HEAP32[HEAP32[HEAP32[$2 + 1236 >> 2] >> 2] >> 2];
    HEAP32[$2 + 20 >> 2] = 6;
    HEAP32[$2 + 16 >> 2] = $3;
-   HEAP32[$2 + 12 >> 2] = 49918;
-   HEAP32[$2 + 8 >> 2] = 49899;
+   HEAP32[$2 + 12 >> 2] = 48878;
+   HEAP32[$2 + 8 >> 2] = 48859;
    HEAP32[$2 + 4 >> 2] = 318;
-   HEAP32[$2 >> 2] = 49804;
-   FUNCTION_TABLE[$0]($1, 49778, $2);
+   HEAP32[$2 >> 2] = 48764;
+   FUNCTION_TABLE[$0]($1, 48738, $2);
    HEAP32[$2 + 1244 >> 2] = 1;
    break label$1;
   }
@@ -5942,11 +5942,11 @@ function tflite__ops__micro__svdf__Prepare_28TfLiteContext__2c_20TfLiteNode__29(
    $3 = HEAP32[$2 + 1196 >> 2] % HEAP32[$2 + 1208 >> 2] | 0;
    HEAP32[$2 + 52 >> 2] = 0;
    HEAP32[$2 + 48 >> 2] = $3;
-   HEAP32[$2 + 44 >> 2] = 49939;
-   HEAP32[$2 + 40 >> 2] = 49920;
+   HEAP32[$2 + 44 >> 2] = 48899;
+   HEAP32[$2 + 40 >> 2] = 48880;
    HEAP32[$2 + 36 >> 2] = 333;
-   HEAP32[$2 + 32 >> 2] = 49804;
-   FUNCTION_TABLE[$0]($1, 49778, $2 + 32 | 0);
+   HEAP32[$2 + 32 >> 2] = 48764;
+   FUNCTION_TABLE[$0]($1, 48738, $2 + 32 | 0);
    HEAP32[$2 + 1244 >> 2] = 1;
    break label$1;
   }
@@ -5958,11 +5958,11 @@ function tflite__ops__micro__svdf__Prepare_28TfLiteContext__2c_20TfLiteNode__29(
    $3 = HEAP32[HEAP32[$2 + 1228 >> 2] >> 2];
    HEAP32[$2 + 84 >> 2] = 1;
    HEAP32[$2 + 80 >> 2] = $3;
-   HEAP32[$2 + 76 >> 2] = 49953;
-   HEAP32[$2 + 72 >> 2] = 49941;
+   HEAP32[$2 + 76 >> 2] = 48913;
+   HEAP32[$2 + 72 >> 2] = 48901;
    HEAP32[$2 + 68 >> 2] = 338;
-   HEAP32[$2 + 64 >> 2] = 49804;
-   FUNCTION_TABLE[$0]($1, 49778, $2 - -64 | 0);
+   HEAP32[$2 + 64 >> 2] = 48764;
+   FUNCTION_TABLE[$0]($1, 48738, $2 - -64 | 0);
    HEAP32[$2 + 1244 >> 2] = 1;
    break label$1;
   }
@@ -5972,11 +5972,11 @@ function tflite__ops__micro__svdf__Prepare_28TfLiteContext__2c_20TfLiteNode__29(
    $3 = tflite__NumDimensions_28TfLiteTensor_20const__29(HEAP32[$2 + 1228 >> 2]);
    HEAP32[$2 + 116 >> 2] = 2;
    HEAP32[$2 + 112 >> 2] = $3;
-   HEAP32[$2 + 108 >> 2] = 49989;
-   HEAP32[$2 + 104 >> 2] = 49968;
+   HEAP32[$2 + 108 >> 2] = 48949;
+   HEAP32[$2 + 104 >> 2] = 48928;
    HEAP32[$2 + 100 >> 2] = 339;
-   HEAP32[$2 + 96 >> 2] = 49804;
-   FUNCTION_TABLE[$0]($1, 49778, $2 + 96 | 0);
+   HEAP32[$2 + 96 >> 2] = 48764;
+   FUNCTION_TABLE[$0]($1, 48738, $2 + 96 | 0);
    HEAP32[$2 + 1244 >> 2] = 1;
    break label$1;
   }
@@ -5986,11 +5986,11 @@ function tflite__ops__micro__svdf__Prepare_28TfLiteContext__2c_20TfLiteNode__29(
    $3 = tflite__NumDimensions_28TfLiteTensor_20const__29(HEAP32[$2 + 1224 >> 2]);
    HEAP32[$2 + 148 >> 2] = 2;
    HEAP32[$2 + 144 >> 2] = $3;
-   HEAP32[$2 + 140 >> 2] = 49989;
-   HEAP32[$2 + 136 >> 2] = 49991;
+   HEAP32[$2 + 140 >> 2] = 48949;
+   HEAP32[$2 + 136 >> 2] = 48951;
    HEAP32[$2 + 132 >> 2] = 342;
-   HEAP32[$2 + 128 >> 2] = 49804;
-   FUNCTION_TABLE[$0]($1, 49778, $2 + 128 | 0);
+   HEAP32[$2 + 128 >> 2] = 48764;
+   FUNCTION_TABLE[$0]($1, 48738, $2 + 128 | 0);
    HEAP32[$2 + 1244 >> 2] = 1;
    break label$1;
   }
@@ -6000,11 +6000,11 @@ function tflite__ops__micro__svdf__Prepare_28TfLiteContext__2c_20TfLiteNode__29(
    $3 = HEAP32[HEAP32[HEAP32[$2 + 1224 >> 2] + 8 >> 2] + 8 >> 2];
    HEAP32[$2 + 180 >> 2] = HEAP32[$2 + 1204 >> 2];
    HEAP32[$2 + 176 >> 2] = $3;
-   HEAP32[$2 + 172 >> 2] = 50053;
-   HEAP32[$2 + 168 >> 2] = 50022;
+   HEAP32[$2 + 172 >> 2] = 49013;
+   HEAP32[$2 + 168 >> 2] = 48982;
    HEAP32[$2 + 164 >> 2] = 343;
-   HEAP32[$2 + 160 >> 2] = 49804;
-   FUNCTION_TABLE[$0]($1, 49778, $2 + 160 | 0);
+   HEAP32[$2 + 160 >> 2] = 48764;
+   FUNCTION_TABLE[$0]($1, 48738, $2 + 160 | 0);
    HEAP32[$2 + 1244 >> 2] = 1;
    break label$1;
   }
@@ -6014,11 +6014,11 @@ function tflite__ops__micro__svdf__Prepare_28TfLiteContext__2c_20TfLiteNode__29(
    $3 = tflite__NumDimensions_28TfLiteTensor_20const__29(HEAP32[$2 + 1220 >> 2]);
    HEAP32[$2 + 212 >> 2] = 2;
    HEAP32[$2 + 208 >> 2] = $3;
-   HEAP32[$2 + 204 >> 2] = 49989;
-   HEAP32[$2 + 200 >> 2] = 50064;
+   HEAP32[$2 + 204 >> 2] = 48949;
+   HEAP32[$2 + 200 >> 2] = 49024;
    HEAP32[$2 + 196 >> 2] = 346;
-   HEAP32[$2 + 192 >> 2] = 49804;
-   FUNCTION_TABLE[$0]($1, 49778, $2 + 192 | 0);
+   HEAP32[$2 + 192 >> 2] = 48764;
+   FUNCTION_TABLE[$0]($1, 48738, $2 + 192 | 0);
    HEAP32[$2 + 1244 >> 2] = 1;
    break label$1;
   }
@@ -6028,11 +6028,11 @@ function tflite__ops__micro__svdf__Prepare_28TfLiteContext__2c_20TfLiteNode__29(
    $3 = HEAP32[HEAP32[HEAP32[$2 + 1220 >> 2] + 8 >> 2] + 4 >> 2];
    HEAP32[$2 + 244 >> 2] = HEAP32[$2 + 1196 >> 2];
    HEAP32[$2 + 240 >> 2] = $3;
-   HEAP32[$2 + 236 >> 2] = 50120;
-   HEAP32[$2 + 232 >> 2] = 50092;
+   HEAP32[$2 + 236 >> 2] = 49080;
+   HEAP32[$2 + 232 >> 2] = 49052;
    HEAP32[$2 + 228 >> 2] = 347;
-   HEAP32[$2 + 224 >> 2] = 49804;
-   FUNCTION_TABLE[$0]($1, 49778, $2 + 224 | 0);
+   HEAP32[$2 + 224 >> 2] = 48764;
+   FUNCTION_TABLE[$0]($1, 48738, $2 + 224 | 0);
    HEAP32[$2 + 1244 >> 2] = 1;
    break label$1;
   }
@@ -6042,11 +6042,11 @@ function tflite__ops__micro__svdf__Prepare_28TfLiteContext__2c_20TfLiteNode__29(
    $3 = HEAP32[HEAP32[HEAP32[$2 + 1220 >> 2] + 8 >> 2] + 8 >> 2];
    HEAP32[$2 + 276 >> 2] = HEAP32[$2 + 1188 >> 2];
    HEAP32[$2 + 272 >> 2] = $3;
-   HEAP32[$2 + 268 >> 2] = 50160;
-   HEAP32[$2 + 264 >> 2] = 50132;
+   HEAP32[$2 + 268 >> 2] = 49120;
+   HEAP32[$2 + 264 >> 2] = 49092;
    HEAP32[$2 + 260 >> 2] = 348;
-   HEAP32[$2 + 256 >> 2] = 49804;
-   FUNCTION_TABLE[$0]($1, 49778, $2 + 256 | 0);
+   HEAP32[$2 + 256 >> 2] = 48764;
+   FUNCTION_TABLE[$0]($1, 48738, $2 + 256 | 0);
    HEAP32[$2 + 1244 >> 2] = 1;
    break label$1;
   }
@@ -6057,11 +6057,11 @@ function tflite__ops__micro__svdf__Prepare_28TfLiteContext__2c_20TfLiteNode__29(
     $3 = HEAP32[HEAP32[HEAP32[$2 + 1216 >> 2] + 8 >> 2] + 4 >> 2];
     HEAP32[$2 + 308 >> 2] = HEAP32[$2 + 1192 >> 2];
     HEAP32[$2 + 304 >> 2] = $3;
-    HEAP32[$2 + 300 >> 2] = 50192;
-    HEAP32[$2 + 296 >> 2] = 50172;
+    HEAP32[$2 + 300 >> 2] = 49152;
+    HEAP32[$2 + 296 >> 2] = 49132;
     HEAP32[$2 + 292 >> 2] = 352;
-    HEAP32[$2 + 288 >> 2] = 49804;
-    FUNCTION_TABLE[$0]($1, 49778, $2 + 288 | 0);
+    HEAP32[$2 + 288 >> 2] = 48764;
+    FUNCTION_TABLE[$0]($1, 48738, $2 + 288 | 0);
     HEAP32[$2 + 1244 >> 2] = 1;
     break label$1;
    }
@@ -6071,11 +6071,11 @@ function tflite__ops__micro__svdf__Prepare_28TfLiteContext__2c_20TfLiteNode__29(
     $3 = HEAP32[HEAP32[$2 + 1216 >> 2] >> 2];
     HEAP32[$2 + 340 >> 2] = 1;
     HEAP32[$2 + 336 >> 2] = $3;
-    HEAP32[$2 + 332 >> 2] = 49953;
-    HEAP32[$2 + 328 >> 2] = 50202;
+    HEAP32[$2 + 332 >> 2] = 48913;
+    HEAP32[$2 + 328 >> 2] = 49162;
     HEAP32[$2 + 324 >> 2] = 353;
-    HEAP32[$2 + 320 >> 2] = 49804;
-    FUNCTION_TABLE[$0]($1, 49778, $2 + 320 | 0);
+    HEAP32[$2 + 320 >> 2] = 48764;
+    FUNCTION_TABLE[$0]($1, 48738, $2 + 320 | 0);
     HEAP32[$2 + 1244 >> 2] = 1;
     break label$1;
    }
@@ -6086,11 +6086,11 @@ function tflite__ops__micro__svdf__Prepare_28TfLiteContext__2c_20TfLiteNode__29(
    $3 = HEAP32[HEAP32[$2 + 1212 >> 2] >> 2];
    HEAP32[$2 + 372 >> 2] = 1;
    HEAP32[$2 + 368 >> 2] = $3;
-   HEAP32[$2 + 364 >> 2] = 49953;
-   HEAP32[$2 + 360 >> 2] = 50213;
+   HEAP32[$2 + 364 >> 2] = 48913;
+   HEAP32[$2 + 360 >> 2] = 49173;
    HEAP32[$2 + 356 >> 2] = 357;
-   HEAP32[$2 + 352 >> 2] = 49804;
-   FUNCTION_TABLE[$0]($1, 49778, $2 + 352 | 0);
+   HEAP32[$2 + 352 >> 2] = 48764;
+   FUNCTION_TABLE[$0]($1, 48738, $2 + 352 | 0);
    HEAP32[$2 + 1244 >> 2] = 1;
    break label$1;
   }
@@ -6100,11 +6100,11 @@ function tflite__ops__micro__svdf__Prepare_28TfLiteContext__2c_20TfLiteNode__29(
    $3 = tflite__NumDimensions_28TfLiteTensor_20const__29(HEAP32[$2 + 1212 >> 2]);
    HEAP32[$2 + 404 >> 2] = 2;
    HEAP32[$2 + 400 >> 2] = $3;
-   HEAP32[$2 + 396 >> 2] = 49989;
-   HEAP32[$2 + 392 >> 2] = 50236;
+   HEAP32[$2 + 396 >> 2] = 48949;
+   HEAP32[$2 + 392 >> 2] = 49196;
    HEAP32[$2 + 388 >> 2] = 358;
-   HEAP32[$2 + 384 >> 2] = 49804;
-   FUNCTION_TABLE[$0]($1, 49778, $2 + 384 | 0);
+   HEAP32[$2 + 384 >> 2] = 48764;
+   FUNCTION_TABLE[$0]($1, 48738, $2 + 384 | 0);
    HEAP32[$2 + 1244 >> 2] = 1;
    break label$1;
   }
@@ -6114,11 +6114,11 @@ function tflite__ops__micro__svdf__Prepare_28TfLiteContext__2c_20TfLiteNode__29(
    $3 = HEAP32[HEAP32[HEAP32[$2 + 1212 >> 2] + 8 >> 2] + 4 >> 2];
    HEAP32[$2 + 436 >> 2] = HEAP32[$2 + 1200 >> 2];
    HEAP32[$2 + 432 >> 2] = $3;
-   HEAP32[$2 + 428 >> 2] = 50300;
-   HEAP32[$2 + 424 >> 2] = 50268;
+   HEAP32[$2 + 428 >> 2] = 49260;
+   HEAP32[$2 + 424 >> 2] = 49228;
    HEAP32[$2 + 420 >> 2] = 359;
-   HEAP32[$2 + 416 >> 2] = 49804;
-   FUNCTION_TABLE[$0]($1, 49778, $2 + 416 | 0);
+   HEAP32[$2 + 416 >> 2] = 48764;
+   FUNCTION_TABLE[$0]($1, 48738, $2 + 416 | 0);
    HEAP32[$2 + 1244 >> 2] = 1;
    break label$1;
   }
@@ -6128,11 +6128,11 @@ function tflite__ops__micro__svdf__Prepare_28TfLiteContext__2c_20TfLiteNode__29(
    $3 = HEAP32[HEAP32[HEAP32[$2 + 1212 >> 2] + 8 >> 2] + 8 >> 2];
    HEAP32[$2 + 468 >> 2] = Math_imul(HEAP32[$2 + 1188 >> 2], HEAP32[$2 + 1196 >> 2]);
    HEAP32[$2 + 464 >> 2] = $3;
-   HEAP32[$2 + 460 >> 2] = 50343;
-   HEAP32[$2 + 456 >> 2] = 50311;
+   HEAP32[$2 + 460 >> 2] = 49303;
+   HEAP32[$2 + 456 >> 2] = 49271;
    HEAP32[$2 + 452 >> 2] = 361;
-   HEAP32[$2 + 448 >> 2] = 49804;
-   FUNCTION_TABLE[$0]($1, 49778, $2 + 448 | 0);
+   HEAP32[$2 + 448 >> 2] = 48764;
+   FUNCTION_TABLE[$0]($1, 48738, $2 + 448 | 0);
    HEAP32[$2 + 1244 >> 2] = 1;
    break label$1;
   }
@@ -6143,11 +6143,11 @@ function tflite__ops__micro__svdf__Prepare_28TfLiteContext__2c_20TfLiteNode__29(
    $3 = HEAP32[HEAP32[$2 + 1184 >> 2] >> 2];
    HEAP32[$2 + 500 >> 2] = 1;
    HEAP32[$2 + 496 >> 2] = $3;
-   HEAP32[$2 + 492 >> 2] = 49953;
-   HEAP32[$2 + 488 >> 2] = 50369;
+   HEAP32[$2 + 492 >> 2] = 48913;
+   HEAP32[$2 + 488 >> 2] = 49329;
    HEAP32[$2 + 484 >> 2] = 372;
-   HEAP32[$2 + 480 >> 2] = 49804;
-   FUNCTION_TABLE[$0]($1, 49778, $2 + 480 | 0);
+   HEAP32[$2 + 480 >> 2] = 48764;
+   FUNCTION_TABLE[$0]($1, 48738, $2 + 480 | 0);
    HEAP32[$2 + 1244 >> 2] = 1;
    break label$1;
   }
@@ -6157,11 +6157,11 @@ function tflite__ops__micro__svdf__Prepare_28TfLiteContext__2c_20TfLiteNode__29(
    $3 = tflite__NumDimensions_28TfLiteTensor_20const__29(HEAP32[$2 + 1184 >> 2]);
    HEAP32[$2 + 532 >> 2] = 2;
    HEAP32[$2 + 528 >> 2] = $3;
-   HEAP32[$2 + 524 >> 2] = 49989;
-   HEAP32[$2 + 520 >> 2] = 50390;
+   HEAP32[$2 + 524 >> 2] = 48949;
+   HEAP32[$2 + 520 >> 2] = 49350;
    HEAP32[$2 + 516 >> 2] = 373;
-   HEAP32[$2 + 512 >> 2] = 49804;
-   FUNCTION_TABLE[$0]($1, 49778, $2 + 512 | 0);
+   HEAP32[$2 + 512 >> 2] = 48764;
+   FUNCTION_TABLE[$0]($1, 48738, $2 + 512 | 0);
    HEAP32[$2 + 1244 >> 2] = 1;
    break label$1;
   }
@@ -6171,11 +6171,11 @@ function tflite__ops__micro__svdf__Prepare_28TfLiteContext__2c_20TfLiteNode__29(
    $3 = HEAP32[HEAP32[HEAP32[$2 + 1184 >> 2] + 8 >> 2] + 4 >> 2];
    HEAP32[$2 + 564 >> 2] = HEAP32[$2 + 1200 >> 2];
    HEAP32[$2 + 560 >> 2] = $3;
-   HEAP32[$2 + 556 >> 2] = 50300;
-   HEAP32[$2 + 552 >> 2] = 50420;
+   HEAP32[$2 + 556 >> 2] = 49260;
+   HEAP32[$2 + 552 >> 2] = 49380;
    HEAP32[$2 + 548 >> 2] = 374;
-   HEAP32[$2 + 544 >> 2] = 49804;
-   FUNCTION_TABLE[$0]($1, 49778, $2 + 544 | 0);
+   HEAP32[$2 + 544 >> 2] = 48764;
+   FUNCTION_TABLE[$0]($1, 48738, $2 + 544 | 0);
    HEAP32[$2 + 1244 >> 2] = 1;
    break label$1;
   }
@@ -6185,11 +6185,11 @@ function tflite__ops__micro__svdf__Prepare_28TfLiteContext__2c_20TfLiteNode__29(
    $3 = HEAP32[HEAP32[HEAP32[$2 + 1184 >> 2] + 8 >> 2] + 8 >> 2];
    HEAP32[$2 + 596 >> 2] = HEAP32[$2 + 1196 >> 2];
    HEAP32[$2 + 592 >> 2] = $3;
-   HEAP32[$2 + 588 >> 2] = 50120;
-   HEAP32[$2 + 584 >> 2] = 50450;
+   HEAP32[$2 + 588 >> 2] = 49080;
+   HEAP32[$2 + 584 >> 2] = 49410;
    HEAP32[$2 + 580 >> 2] = 375;
-   HEAP32[$2 + 576 >> 2] = 49804;
-   FUNCTION_TABLE[$0]($1, 49778, $2 + 576 | 0);
+   HEAP32[$2 + 576 >> 2] = 48764;
+   FUNCTION_TABLE[$0]($1, 48738, $2 + 576 | 0);
    HEAP32[$2 + 1244 >> 2] = 1;
    break label$1;
   }
@@ -6199,20 +6199,20 @@ function tflite__ops__micro__svdf__Prepare_28TfLiteContext__2c_20TfLiteNode__29(
     if (!(HEAP32[HEAP32[$2 + 1224 >> 2] >> 2] == 3 | HEAP32[HEAP32[$2 + 1224 >> 2] >> 2] == 9)) {
      $0 = HEAP32[HEAP32[$2 + 1240 >> 2] + 20 >> 2];
      $1 = HEAP32[$2 + 1240 >> 2];
-     HEAP32[$2 + 1096 >> 2] = 50503;
+     HEAP32[$2 + 1096 >> 2] = 49463;
      HEAP32[$2 + 1092 >> 2] = 383;
-     HEAP32[$2 + 1088 >> 2] = 49804;
-     FUNCTION_TABLE[$0]($1, 50480, $2 + 1088 | 0);
+     HEAP32[$2 + 1088 >> 2] = 48764;
+     FUNCTION_TABLE[$0]($1, 49440, $2 + 1088 | 0);
      HEAP32[$2 + 1244 >> 2] = 1;
      break label$1;
     }
     if (!(HEAP32[HEAP32[$2 + 1220 >> 2] >> 2] == 3 | HEAP32[HEAP32[$2 + 1220 >> 2] >> 2] == 9)) {
      $0 = HEAP32[HEAP32[$2 + 1240 >> 2] + 20 >> 2];
      $1 = HEAP32[$2 + 1240 >> 2];
-     HEAP32[$2 + 1080 >> 2] = 50581;
+     HEAP32[$2 + 1080 >> 2] = 49541;
      HEAP32[$2 + 1076 >> 2] = 385;
-     HEAP32[$2 + 1072 >> 2] = 49804;
-     FUNCTION_TABLE[$0]($1, 50480, $2 + 1072 | 0);
+     HEAP32[$2 + 1072 >> 2] = 48764;
+     FUNCTION_TABLE[$0]($1, 49440, $2 + 1072 | 0);
      HEAP32[$2 + 1244 >> 2] = 1;
      break label$1;
     }
@@ -6222,11 +6222,11 @@ function tflite__ops__micro__svdf__Prepare_28TfLiteContext__2c_20TfLiteNode__29(
      $3 = HEAP32[HEAP32[HEAP32[$2 + 1236 >> 2] + 12 >> 2] >> 2];
      HEAP32[$2 + 628 >> 2] = 4;
      HEAP32[$2 + 624 >> 2] = $3;
-     HEAP32[$2 + 620 >> 2] = 50677;
-     HEAP32[$2 + 616 >> 2] = 50653;
+     HEAP32[$2 + 620 >> 2] = 49637;
+     HEAP32[$2 + 616 >> 2] = 49613;
      HEAP32[$2 + 612 >> 2] = 392;
-     HEAP32[$2 + 608 >> 2] = 49804;
-     FUNCTION_TABLE[$0]($1, 49778, $2 + 608 | 0);
+     HEAP32[$2 + 608 >> 2] = 48764;
+     FUNCTION_TABLE[$0]($1, 48738, $2 + 608 | 0);
      HEAP32[$2 + 1244 >> 2] = 1;
      break label$1;
     }
@@ -6236,10 +6236,10 @@ function tflite__ops__micro__svdf__Prepare_28TfLiteContext__2c_20TfLiteNode__29(
     if (!(HEAP32[HEAP32[$2 + 1176 >> 2] >> 2] == 3 | HEAP32[HEAP32[$2 + 1176 >> 2] >> 2] == 9)) {
      $0 = HEAP32[HEAP32[$2 + 1240 >> 2] + 20 >> 2];
      $1 = HEAP32[$2 + 1240 >> 2];
-     HEAP32[$2 + 1064 >> 2] = 50679;
+     HEAP32[$2 + 1064 >> 2] = 49639;
      HEAP32[$2 + 1060 >> 2] = 399;
-     HEAP32[$2 + 1056 >> 2] = 49804;
-     FUNCTION_TABLE[$0]($1, 50480, $2 + 1056 | 0);
+     HEAP32[$2 + 1056 >> 2] = 48764;
+     FUNCTION_TABLE[$0]($1, 49440, $2 + 1056 | 0);
      HEAP32[$2 + 1244 >> 2] = 1;
      break label$1;
     }
@@ -6249,11 +6249,11 @@ function tflite__ops__micro__svdf__Prepare_28TfLiteContext__2c_20TfLiteNode__29(
      $3 = HEAP32[HEAP32[HEAP32[$2 + 1176 >> 2] + 8 >> 2] + 4 >> 2];
      HEAP32[$2 + 660 >> 2] = HEAP32[$2 + 1200 >> 2];
      HEAP32[$2 + 656 >> 2] = $3;
-     HEAP32[$2 + 652 >> 2] = 50300;
-     HEAP32[$2 + 648 >> 2] = 50773;
+     HEAP32[$2 + 652 >> 2] = 49260;
+     HEAP32[$2 + 648 >> 2] = 49733;
      HEAP32[$2 + 644 >> 2] = 401;
-     HEAP32[$2 + 640 >> 2] = 49804;
-     FUNCTION_TABLE[$0]($1, 49778, $2 + 640 | 0);
+     HEAP32[$2 + 640 >> 2] = 48764;
+     FUNCTION_TABLE[$0]($1, 48738, $2 + 640 | 0);
      HEAP32[$2 + 1244 >> 2] = 1;
      break label$1;
     }
@@ -6263,11 +6263,11 @@ function tflite__ops__micro__svdf__Prepare_28TfLiteContext__2c_20TfLiteNode__29(
      $3 = HEAP32[HEAP32[$2 + 1172 >> 2] >> 2];
      HEAP32[$2 + 692 >> 2] = 1;
      HEAP32[$2 + 688 >> 2] = $3;
-     HEAP32[$2 + 684 >> 2] = 49953;
-     HEAP32[$2 + 680 >> 2] = 50812;
+     HEAP32[$2 + 684 >> 2] = 48913;
+     HEAP32[$2 + 680 >> 2] = 49772;
      HEAP32[$2 + 676 >> 2] = 404;
-     HEAP32[$2 + 672 >> 2] = 49804;
-     FUNCTION_TABLE[$0]($1, 49778, $2 + 672 | 0);
+     HEAP32[$2 + 672 >> 2] = 48764;
+     FUNCTION_TABLE[$0]($1, 48738, $2 + 672 | 0);
      HEAP32[$2 + 1244 >> 2] = 1;
      break label$1;
     }
@@ -6277,11 +6277,11 @@ function tflite__ops__micro__svdf__Prepare_28TfLiteContext__2c_20TfLiteNode__29(
      $3 = tflite__NumDimensions_28TfLiteTensor_20const__29(HEAP32[$2 + 1172 >> 2]);
      HEAP32[$2 + 724 >> 2] = 1;
      HEAP32[$2 + 720 >> 2] = $3;
-     HEAP32[$2 + 716 >> 2] = 50881;
-     HEAP32[$2 + 712 >> 2] = 50842;
+     HEAP32[$2 + 716 >> 2] = 49841;
+     HEAP32[$2 + 712 >> 2] = 49802;
      HEAP32[$2 + 708 >> 2] = 405;
-     HEAP32[$2 + 704 >> 2] = 49804;
-     FUNCTION_TABLE[$0]($1, 49778, $2 + 704 | 0);
+     HEAP32[$2 + 704 >> 2] = 48764;
+     FUNCTION_TABLE[$0]($1, 48738, $2 + 704 | 0);
      HEAP32[$2 + 1244 >> 2] = 1;
      break label$1;
     }
@@ -6291,11 +6291,11 @@ function tflite__ops__micro__svdf__Prepare_28TfLiteContext__2c_20TfLiteNode__29(
      $3 = HEAP32[HEAP32[HEAP32[$2 + 1172 >> 2] + 8 >> 2] + 4 >> 2];
      HEAP32[$2 + 756 >> 2] = HEAP32[$2 + 1200 >> 2];
      HEAP32[$2 + 752 >> 2] = $3;
-     HEAP32[$2 + 748 >> 2] = 50300;
-     HEAP32[$2 + 744 >> 2] = 50883;
+     HEAP32[$2 + 748 >> 2] = 49260;
+     HEAP32[$2 + 744 >> 2] = 49843;
      HEAP32[$2 + 740 >> 2] = 407;
-     HEAP32[$2 + 736 >> 2] = 49804;
-     FUNCTION_TABLE[$0]($1, 49778, $2 + 736 | 0);
+     HEAP32[$2 + 736 >> 2] = 48764;
+     FUNCTION_TABLE[$0]($1, 48738, $2 + 736 | 0);
      HEAP32[$2 + 1244 >> 2] = 1;
      break label$1;
     }
@@ -6305,11 +6305,11 @@ function tflite__ops__micro__svdf__Prepare_28TfLiteContext__2c_20TfLiteNode__29(
      $3 = HEAP32[HEAP32[$2 + 1168 >> 2] >> 2];
      HEAP32[$2 + 788 >> 2] = 1;
      HEAP32[$2 + 784 >> 2] = $3;
-     HEAP32[$2 + 780 >> 2] = 49953;
-     HEAP32[$2 + 776 >> 2] = 50922;
+     HEAP32[$2 + 780 >> 2] = 48913;
+     HEAP32[$2 + 776 >> 2] = 49882;
      HEAP32[$2 + 772 >> 2] = 411;
-     HEAP32[$2 + 768 >> 2] = 49804;
-     FUNCTION_TABLE[$0]($1, 49778, $2 + 768 | 0);
+     HEAP32[$2 + 768 >> 2] = 48764;
+     FUNCTION_TABLE[$0]($1, 48738, $2 + 768 | 0);
      HEAP32[$2 + 1244 >> 2] = 1;
      break label$1;
     }
@@ -6319,11 +6319,11 @@ function tflite__ops__micro__svdf__Prepare_28TfLiteContext__2c_20TfLiteNode__29(
      $3 = tflite__NumDimensions_28TfLiteTensor_20const__29(HEAP32[$2 + 1168 >> 2]);
      HEAP32[$2 + 820 >> 2] = 2;
      HEAP32[$2 + 816 >> 2] = $3;
-     HEAP32[$2 + 812 >> 2] = 49989;
-     HEAP32[$2 + 808 >> 2] = 50955;
+     HEAP32[$2 + 812 >> 2] = 48949;
+     HEAP32[$2 + 808 >> 2] = 49915;
      HEAP32[$2 + 804 >> 2] = 412;
-     HEAP32[$2 + 800 >> 2] = 49804;
-     FUNCTION_TABLE[$0]($1, 49778, $2 + 800 | 0);
+     HEAP32[$2 + 800 >> 2] = 48764;
+     FUNCTION_TABLE[$0]($1, 48738, $2 + 800 | 0);
      HEAP32[$2 + 1244 >> 2] = 1;
      break label$1;
     }
@@ -6333,11 +6333,11 @@ function tflite__ops__micro__svdf__Prepare_28TfLiteContext__2c_20TfLiteNode__29(
      $3 = HEAP32[HEAP32[HEAP32[$2 + 1168 >> 2] + 8 >> 2] + 4 >> 2];
      HEAP32[$2 + 852 >> 2] = HEAP32[$2 + 1196 >> 2];
      HEAP32[$2 + 848 >> 2] = $3;
-     HEAP32[$2 + 844 >> 2] = 50120;
-     HEAP32[$2 + 840 >> 2] = 50997;
+     HEAP32[$2 + 844 >> 2] = 49080;
+     HEAP32[$2 + 840 >> 2] = 49957;
      HEAP32[$2 + 836 >> 2] = 414;
-     HEAP32[$2 + 832 >> 2] = 49804;
-     FUNCTION_TABLE[$0]($1, 49778, $2 + 832 | 0);
+     HEAP32[$2 + 832 >> 2] = 48764;
+     FUNCTION_TABLE[$0]($1, 48738, $2 + 832 | 0);
      HEAP32[$2 + 1244 >> 2] = 1;
      break label$1;
     }
@@ -6347,11 +6347,11 @@ function tflite__ops__micro__svdf__Prepare_28TfLiteContext__2c_20TfLiteNode__29(
      $3 = HEAP32[HEAP32[HEAP32[$2 + 1168 >> 2] + 8 >> 2] + 8 >> 2];
      HEAP32[$2 + 884 >> 2] = HEAP32[$2 + 1188 >> 2];
      HEAP32[$2 + 880 >> 2] = $3;
-     HEAP32[$2 + 876 >> 2] = 50160;
-     HEAP32[$2 + 872 >> 2] = 51039;
+     HEAP32[$2 + 876 >> 2] = 49120;
+     HEAP32[$2 + 872 >> 2] = 49999;
      HEAP32[$2 + 868 >> 2] = 416;
-     HEAP32[$2 + 864 >> 2] = 49804;
-     FUNCTION_TABLE[$0]($1, 49778, $2 + 864 | 0);
+     HEAP32[$2 + 864 >> 2] = 48764;
+     FUNCTION_TABLE[$0]($1, 48738, $2 + 864 | 0);
      HEAP32[$2 + 1244 >> 2] = 1;
      break label$1;
     }
@@ -6365,11 +6365,11 @@ function tflite__ops__micro__svdf__Prepare_28TfLiteContext__2c_20TfLiteNode__29(
     $3 = HEAP32[HEAP32[$2 + 1224 >> 2] >> 2];
     HEAP32[$2 + 1124 >> 2] = 1;
     HEAP32[$2 + 1120 >> 2] = $3;
-    HEAP32[$2 + 1116 >> 2] = 49953;
-    HEAP32[$2 + 1112 >> 2] = 51081;
+    HEAP32[$2 + 1116 >> 2] = 48913;
+    HEAP32[$2 + 1112 >> 2] = 50041;
     HEAP32[$2 + 1108 >> 2] = 436;
-    HEAP32[$2 + 1104 >> 2] = 49804;
-    FUNCTION_TABLE[$0]($1, 49778, $2 + 1104 | 0);
+    HEAP32[$2 + 1104 >> 2] = 48764;
+    FUNCTION_TABLE[$0]($1, 48738, $2 + 1104 | 0);
     HEAP32[$2 + 1244 >> 2] = 1;
     break label$1;
    }
@@ -6379,11 +6379,11 @@ function tflite__ops__micro__svdf__Prepare_28TfLiteContext__2c_20TfLiteNode__29(
     $3 = HEAP32[HEAP32[$2 + 1220 >> 2] >> 2];
     HEAP32[$2 + 1156 >> 2] = 1;
     HEAP32[$2 + 1152 >> 2] = $3;
-    HEAP32[$2 + 1148 >> 2] = 49953;
-    HEAP32[$2 + 1144 >> 2] = 51103;
+    HEAP32[$2 + 1148 >> 2] = 48913;
+    HEAP32[$2 + 1144 >> 2] = 50063;
     HEAP32[$2 + 1140 >> 2] = 437;
-    HEAP32[$2 + 1136 >> 2] = 49804;
-    FUNCTION_TABLE[$0]($1, 49778, $2 + 1136 | 0);
+    HEAP32[$2 + 1136 >> 2] = 48764;
+    FUNCTION_TABLE[$0]($1, 48738, $2 + 1136 | 0);
     HEAP32[$2 + 1244 >> 2] = 1;
     break label$1;
    }
@@ -6394,11 +6394,11 @@ function tflite__ops__micro__svdf__Prepare_28TfLiteContext__2c_20TfLiteNode__29(
    $3 = HEAP32[HEAP32[HEAP32[$2 + 1236 >> 2] + 4 >> 2] >> 2];
    HEAP32[$2 + 916 >> 2] = 1;
    HEAP32[$2 + 912 >> 2] = $3;
-   HEAP32[$2 + 908 >> 2] = 50881;
-   HEAP32[$2 + 904 >> 2] = 51122;
+   HEAP32[$2 + 908 >> 2] = 49841;
+   HEAP32[$2 + 904 >> 2] = 50082;
    HEAP32[$2 + 900 >> 2] = 448;
-   HEAP32[$2 + 896 >> 2] = 49804;
-   FUNCTION_TABLE[$0]($1, 49778, $2 + 896 | 0);
+   HEAP32[$2 + 896 >> 2] = 48764;
+   FUNCTION_TABLE[$0]($1, 48738, $2 + 896 | 0);
    HEAP32[$2 + 1244 >> 2] = 1;
    break label$1;
   }
@@ -6409,11 +6409,11 @@ function tflite__ops__micro__svdf__Prepare_28TfLiteContext__2c_20TfLiteNode__29(
    $3 = HEAP32[HEAP32[$2 + 1160 >> 2] >> 2];
    HEAP32[$2 + 948 >> 2] = 1;
    HEAP32[$2 + 944 >> 2] = $3;
-   HEAP32[$2 + 940 >> 2] = 49953;
-   HEAP32[$2 + 936 >> 2] = 51142;
+   HEAP32[$2 + 940 >> 2] = 48913;
+   HEAP32[$2 + 936 >> 2] = 50102;
    HEAP32[$2 + 932 >> 2] = 450;
-   HEAP32[$2 + 928 >> 2] = 49804;
-   FUNCTION_TABLE[$0]($1, 49778, $2 + 928 | 0);
+   HEAP32[$2 + 928 >> 2] = 48764;
+   FUNCTION_TABLE[$0]($1, 48738, $2 + 928 | 0);
    HEAP32[$2 + 1244 >> 2] = 1;
    break label$1;
   }
@@ -6423,11 +6423,11 @@ function tflite__ops__micro__svdf__Prepare_28TfLiteContext__2c_20TfLiteNode__29(
    $3 = tflite__NumDimensions_28TfLiteTensor_20const__29(HEAP32[$2 + 1160 >> 2]);
    HEAP32[$2 + 980 >> 2] = 2;
    HEAP32[$2 + 976 >> 2] = $3;
-   HEAP32[$2 + 972 >> 2] = 49989;
-   HEAP32[$2 + 968 >> 2] = 51155;
+   HEAP32[$2 + 972 >> 2] = 48949;
+   HEAP32[$2 + 968 >> 2] = 50115;
    HEAP32[$2 + 964 >> 2] = 451;
-   HEAP32[$2 + 960 >> 2] = 49804;
-   FUNCTION_TABLE[$0]($1, 49778, $2 + 960 | 0);
+   HEAP32[$2 + 960 >> 2] = 48764;
+   FUNCTION_TABLE[$0]($1, 48738, $2 + 960 | 0);
    HEAP32[$2 + 1244 >> 2] = 1;
    break label$1;
   }
@@ -6437,11 +6437,11 @@ function tflite__ops__micro__svdf__Prepare_28TfLiteContext__2c_20TfLiteNode__29(
    $3 = HEAP32[HEAP32[HEAP32[$2 + 1160 >> 2] + 8 >> 2] + 4 >> 2];
    HEAP32[$2 + 1012 >> 2] = HEAP32[$2 + 1200 >> 2];
    HEAP32[$2 + 1008 >> 2] = $3;
-   HEAP32[$2 + 1004 >> 2] = 50300;
-   HEAP32[$2 + 1e3 >> 2] = 51177;
+   HEAP32[$2 + 1004 >> 2] = 49260;
+   HEAP32[$2 + 1e3 >> 2] = 50137;
    HEAP32[$2 + 996 >> 2] = 452;
-   HEAP32[$2 + 992 >> 2] = 49804;
-   FUNCTION_TABLE[$0]($1, 49778, $2 + 992 | 0);
+   HEAP32[$2 + 992 >> 2] = 48764;
+   FUNCTION_TABLE[$0]($1, 48738, $2 + 992 | 0);
    HEAP32[$2 + 1244 >> 2] = 1;
    break label$1;
   }
@@ -6451,11 +6451,11 @@ function tflite__ops__micro__svdf__Prepare_28TfLiteContext__2c_20TfLiteNode__29(
    $3 = HEAP32[HEAP32[HEAP32[$2 + 1160 >> 2] + 8 >> 2] + 8 >> 2];
    HEAP32[$2 + 1044 >> 2] = HEAP32[$2 + 1192 >> 2];
    HEAP32[$2 + 1040 >> 2] = $3;
-   HEAP32[$2 + 1036 >> 2] = 50192;
-   HEAP32[$2 + 1032 >> 2] = 51199;
+   HEAP32[$2 + 1036 >> 2] = 49152;
+   HEAP32[$2 + 1032 >> 2] = 50159;
    HEAP32[$2 + 1028 >> 2] = 453;
-   HEAP32[$2 + 1024 >> 2] = 49804;
-   FUNCTION_TABLE[$0]($1, 49778, $2 + 1024 | 0);
+   HEAP32[$2 + 1024 >> 2] = 48764;
+   FUNCTION_TABLE[$0]($1, 48738, $2 + 1024 | 0);
    HEAP32[$2 + 1244 >> 2] = 1;
    break label$1;
   }
@@ -6468,7 +6468,7 @@ function printf_core($0, $1, $2, $3) {
  var $4 = 0, $5 = 0, $6 = 0, $7 = 0, $8 = 0, $9 = 0, $10 = 0, $11 = 0, $12 = 0, $13 = 0, $14 = 0, $15 = 0, $16 = 0, $17 = 0, $18 = 0, $19 = 0;
  $5 = global$0 - 80 | 0;
  global$0 = $5;
- HEAP32[$5 + 76 >> 2] = 54364;
+ HEAP32[$5 + 76 >> 2] = 53324;
  $19 = $5 + 55 | 0;
  $16 = $5 + 56 | 0;
  label$1 : {
@@ -6479,7 +6479,7 @@ function printf_core($0, $1, $2, $3) {
       break label$4;
      }
      if (($4 | 0) > (2147483647 - $14 | 0)) {
-      HEAP32[64357] = 61;
+      HEAP32[64097] = 61;
       $14 = -1;
       break label$4;
      }
@@ -6672,7 +6672,7 @@ function printf_core($0, $1, $2, $3) {
                       HEAP32[$5 + 76 >> 2] = $12;
                       $6 = HEAP8[$4 | 0];
                       $4 = $12;
-                      $6 = HEAPU8[($6 + Math_imul($18, 58) | 0) + 53775 | 0];
+                      $6 = HEAPU8[($6 + Math_imul($18, 58) | 0) + 52735 | 0];
                       if ($6 + -1 >>> 0 < 8) {
                        continue;
                       }
@@ -6714,7 +6714,7 @@ function printf_core($0, $1, $2, $3) {
                      $10 = $8 & -65537;
                      $8 = $8 & 8192 ? $10 : $8;
                      $11 = 0;
-                     $15 = 53816;
+                     $15 = 52776;
                      $6 = $16;
                      $4 = HEAP8[$12 + -1 | 0];
                      $4 = $18 ? ($4 & 15) == 3 ? $4 & -33 : $4 : $4;
@@ -6906,7 +6906,7 @@ function printf_core($0, $1, $2, $3) {
                 continue;
                }
                $4 = HEAP32[$5 + 64 >> 2];
-               $9 = $4 ? $4 : 53826;
+               $9 = $4 ? $4 : 52786;
                $4 = memchr($9, $7);
                $6 = $4 ? $4 : $7 + $9 | 0;
                $8 = $10;
@@ -6928,16 +6928,16 @@ function printf_core($0, $1, $2, $3) {
               HEAP32[$5 + 64 >> 2] = $9;
               HEAP32[$5 + 68 >> 2] = $4;
               $11 = 1;
-              $15 = 53816;
+              $15 = 52776;
               break label$9;
              }
              if ($8 & 2048) {
               $11 = 1;
-              $15 = 53817;
+              $15 = 52777;
               break label$9;
              }
              $11 = $8 & 1;
-             $15 = $11 ? 53818 : 53816;
+             $15 = $11 ? 52778 : 52776;
              break label$9;
             }
             $9 = fmt_o(HEAP32[$5 + 64 >> 2], HEAP32[$5 + 68 >> 2], $16);
@@ -6956,7 +6956,7 @@ function printf_core($0, $1, $2, $3) {
           if (!($8 & 8) | !(HEAP32[$5 + 64 >> 2] | HEAP32[$5 + 68 >> 2])) {
            break label$8;
           }
-          $15 = ($4 >>> 4) + 53816 | 0;
+          $15 = ($4 >>> 4) + 52776 | 0;
           $11 = 2;
           break label$8;
          }
@@ -7000,7 +7000,7 @@ function printf_core($0, $1, $2, $3) {
         }
         $9 = HEAP32[$5 + 64 >> 2];
         $4 = HEAP32[$5 + 68 >> 2];
-        $15 = 53816;
+        $15 = 52776;
        }
        $9 = fmt_u($9, $4, $16);
       }
@@ -7044,8 +7044,8 @@ function jsiIdle() {
  var $0 = 0, $1 = 0, $2 = 0, $3 = 0, $4 = 0, $5 = 0;
  $0 = global$0 - 304 | 0;
  global$0 = $0;
- if (HEAPU8[99502] < 255) {
-  HEAP8[99502] = HEAPU8[99502] + 1;
+ if (HEAPU8[98462] < 255) {
+  HEAP8[98462] = HEAPU8[98462] + 1;
  }
  HEAP8[$0 + 303 | 0] = 0;
  HEAP32[$0 + 292 >> 2] = jshGetEventsUsed();
@@ -7061,9 +7061,9 @@ function jsiIdle() {
    jsiSetBusy(1, 1);
    HEAP8[$0 + 303 | 0] = 1;
    HEAP8[$0 + 291 | 0] = HEAPU8[$0 + 296 | 0] & 31;
-   HEAP8[99502] = 0;
+   HEAP8[98462] = 0;
    label$6 : {
-    if (HEAPU8[$0 + 291 | 0] == HEAPU8[57424]) {
+    if (HEAPU8[$0 + 291 | 0] == HEAPU8[56384]) {
      jsiHandleIOEventForConsole($0 + 296 | 0);
      break label$6;
     }
@@ -7082,10 +7082,10 @@ function jsiIdle() {
        HEAP32[$0 + 280 >> 2] = jsvSkipNameAndUnLock(jsiGetClassNameFromDevice(HEAPU8[$0 + 296 | 0] + -1 & 31));
        if (jsvIsObject(HEAP32[$0 + 280 >> 2]) & 1) {
         if (HEAPU8[$0 + 296 | 0] & 32) {
-         jsiExecuteObjectCallbacks(HEAP32[$0 + 280 >> 2], 6008);
+         jsiExecuteObjectCallbacks(HEAP32[$0 + 280 >> 2], 6004);
         }
         if (HEAPU8[$0 + 296 | 0] & 64) {
-         jsiExecuteObjectCallbacks(HEAP32[$0 + 280 >> 2], 6019);
+         jsiExecuteObjectCallbacks(HEAP32[$0 + 280 >> 2], 6015);
         }
        }
        jsvUnLock(HEAP32[$0 + 280 >> 2]);
@@ -7093,7 +7093,7 @@ function jsiIdle() {
       }
       if (!(HEAPU8[$0 + 291 | 0] < 1 | HEAPU8[$0 + 291 | 0] > 16)) {
        $1 = $0 + 272 | 0;
-       HEAP32[$0 + 276 >> 2] = jsvLock(HEAPU16[49741]);
+       HEAP32[$0 + 276 >> 2] = jsvLock(HEAPU16[49221]);
        jsvObjectIteratorNew($1, HEAP32[$0 + 276 >> 2]);
        while (1) {
         if (jsvObjectIteratorHasValue($0 + 272 | 0) & 1) {
@@ -7115,20 +7115,20 @@ function jsiIdle() {
           HEAP32[$0 + 244 >> 2] = $1;
           HEAP8[$0 + 239 | 0] = (HEAPU8[$0 + 296 | 0] & 32) != 0;
           HEAP8[$0 + 238 | 0] = 0;
-          HEAP32[$0 + 232 >> 2] = jsvGetIntegerAndUnLock(jsvObjectGetChild(HEAP32[$0 + 264 >> 2], 6029, 0));
+          HEAP32[$0 + 232 >> 2] = jsvGetIntegerAndUnLock(jsvObjectGetChild(HEAP32[$0 + 264 >> 2], 6025, 0));
           label$21 : {
            if (HEAP32[$0 + 232 >> 2] <= 0) {
             HEAP8[$0 + 238 | 0] = 1;
             break label$21;
            }
-           HEAP8[$0 + 231 | 0] = jsvGetBoolAndUnLock(jsvObjectGetChild(HEAP32[$0 + 264 >> 2], 6038, 0)) & 1;
-           jsvObjectSetChildAndUnLock(HEAP32[$0 + 264 >> 2], 6038, jsvNewFromBool(HEAP8[$0 + 239 | 0] & 1));
-           HEAP32[$0 + 224 >> 2] = jsvObjectGetChild(HEAP32[$0 + 264 >> 2], 6044, 0);
+           HEAP8[$0 + 231 | 0] = jsvGetBoolAndUnLock(jsvObjectGetChild(HEAP32[$0 + 264 >> 2], 6034, 0)) & 1;
+           jsvObjectSetChildAndUnLock(HEAP32[$0 + 264 >> 2], 6034, jsvNewFromBool(HEAP8[$0 + 239 | 0] & 1));
+           HEAP32[$0 + 224 >> 2] = jsvObjectGetChild(HEAP32[$0 + 264 >> 2], 6040, 0);
            label$23 : {
             if (HEAP32[$0 + 224 >> 2]) {
-             $4 = HEAP32[24884];
-             $3 = HEAP32[24885];
-             $1 = jsvGetLongIntegerAndUnLock(jsvObjectGetChild(HEAP32[$0 + 224 >> 2], 6052, 0));
+             $4 = HEAP32[24624];
+             $3 = HEAP32[24625];
+             $1 = jsvGetLongIntegerAndUnLock(jsvObjectGetChild(HEAP32[$0 + 224 >> 2], 6048, 0));
              $3 = i64toi32_i32$HIGH_BITS + $3 | 0;
              $4 = $1 + $4 | 0;
              if ($4 >>> 0 < $1 >>> 0) {
@@ -7138,11 +7138,11 @@ function jsiIdle() {
              HEAP32[$0 + 220 >> 2] = $3;
              $1 = HEAP32[$0 + 232 >> 2];
              $3 = HEAP32[$0 + 240 >> 2];
-             $4 = HEAP32[24884];
+             $4 = HEAP32[24624];
              $5 = $3 - $4 | 0;
              $2 = $1 + $5 | 0;
-             $1 = (HEAP32[$0 + 244 >> 2] - (HEAP32[24885] + ($3 >>> 0 < $4 >>> 0) | 0) | 0) + ($1 >> 31) | 0;
-             jsvUnLock(jsvObjectSetChild(HEAP32[$0 + 224 >> 2], 6052, jsvNewFromLongInteger($2, $2 >>> 0 < $5 >>> 0 ? $1 + 1 | 0 : $1)));
+             $1 = (HEAP32[$0 + 244 >> 2] - (HEAP32[24625] + ($3 >>> 0 < $4 >>> 0) | 0) | 0) + ($1 >> 31) | 0;
+             jsvUnLock(jsvObjectSetChild(HEAP32[$0 + 224 >> 2], 6048, jsvNewFromLongInteger($2, $2 >>> 0 < $5 >>> 0 ? $1 + 1 | 0 : $1)));
              $1 = HEAP32[$0 + 244 >> 2];
              $2 = HEAP32[$0 + 220 >> 2];
              if (($1 | 0) > ($2 | 0) ? 1 : ($1 | 0) >= ($2 | 0) ? HEAPU32[$0 + 240 >> 2] <= HEAPU32[$0 + 216 >> 2] ? 0 : 1 : 0) {
@@ -7159,19 +7159,19 @@ function jsiIdle() {
             }
             HEAP32[$0 + 224 >> 2] = jsvNewWithFlags(5);
             if (HEAP32[$0 + 224 >> 2]) {
-             jsvObjectSetChild(HEAP32[$0 + 224 >> 2], 6057, HEAP32[$0 + 264 >> 2]);
+             jsvObjectSetChild(HEAP32[$0 + 224 >> 2], 6053, HEAP32[$0 + 264 >> 2]);
              $2 = HEAP32[$0 + 232 >> 2];
              $3 = HEAP32[$0 + 240 >> 2];
-             $4 = HEAP32[24884];
+             $4 = HEAP32[24624];
              $5 = $3 - $4 | 0;
              $1 = $2 + $5 | 0;
-             $3 = (HEAP32[$0 + 244 >> 2] - (HEAP32[24885] + ($3 >>> 0 < $4 >>> 0) | 0) | 0) + ($2 >> 31) | 0;
-             jsvObjectSetChildAndUnLock(HEAP32[$0 + 224 >> 2], 6052, jsvNewFromLongInteger($1, $1 >>> 0 < $5 >>> 0 ? $3 + 1 | 0 : $3));
-             jsvObjectSetChildAndUnLock(HEAP32[$0 + 224 >> 2], 6063, jsvObjectGetChild(HEAP32[$0 + 264 >> 2], 6063, 0));
-             jsvObjectSetChildAndUnLock(HEAP32[$0 + 224 >> 2], 6072, jsvObjectGetChild(HEAP32[$0 + 264 >> 2], 6072, 0));
+             $3 = (HEAP32[$0 + 244 >> 2] - (HEAP32[24625] + ($3 >>> 0 < $4 >>> 0) | 0) | 0) + ($2 >> 31) | 0;
+             jsvObjectSetChildAndUnLock(HEAP32[$0 + 224 >> 2], 6048, jsvNewFromLongInteger($1, $1 >>> 0 < $5 >>> 0 ? $3 + 1 | 0 : $3));
+             jsvObjectSetChildAndUnLock(HEAP32[$0 + 224 >> 2], 6059, jsvObjectGetChild(HEAP32[$0 + 264 >> 2], 6059, 0));
+             jsvObjectSetChildAndUnLock(HEAP32[$0 + 224 >> 2], 6068, jsvObjectGetChild(HEAP32[$0 + 264 >> 2], 6068, 0));
              jsvObjectSetChildAndUnLock(HEAP32[$0 + 224 >> 2], 5259, jsvNewFromPin(HEAPU8[$0 + 263 | 0]));
              jsiTimerAdd(HEAP32[$0 + 224 >> 2]);
-             jsvObjectSetChild(HEAP32[$0 + 264 >> 2], 6044, HEAP32[$0 + 224 >> 2]);
+             jsvObjectSetChild(HEAP32[$0 + 264 >> 2], 6040, HEAP32[$0 + 224 >> 2]);
             }
            }
            jsvUnLock(HEAP32[$0 + 224 >> 2]);
@@ -7179,22 +7179,22 @@ function jsiIdle() {
           if (HEAP8[$0 + 238 | 0] & 1) {
            HEAP32[$0 + 212 >> 2] = jsvNewFromFloat(jshGetMillisecondsFromTime(HEAP32[$0 + 240 >> 2], HEAP32[$0 + 244 >> 2]) / 1e3);
            if (jsiShouldExecuteWatch(HEAP32[$0 + 264 >> 2], HEAP8[$0 + 239 | 0] & 1) & 1) {
-            HEAP32[$0 + 208 >> 2] = jsvObjectGetChild(HEAP32[$0 + 264 >> 2], 6063, 0);
-            HEAP8[$0 + 207 | 0] = jsvGetBoolAndUnLock(jsvObjectGetChild(HEAP32[$0 + 264 >> 2], 6081, 0)) & 1;
+            HEAP32[$0 + 208 >> 2] = jsvObjectGetChild(HEAP32[$0 + 264 >> 2], 6059, 0);
+            HEAP8[$0 + 207 | 0] = jsvGetBoolAndUnLock(jsvObjectGetChild(HEAP32[$0 + 264 >> 2], 6077, 0)) & 1;
             HEAP32[$0 + 200 >> 2] = jsvNewWithFlags(5);
             if (HEAP32[$0 + 200 >> 2]) {
-             jsvObjectSetChildAndUnLock(HEAP32[$0 + 200 >> 2], 6072, jsvObjectGetChild(HEAP32[$0 + 264 >> 2], 6072, 0));
-             jsvObjectSetChild(HEAP32[$0 + 200 >> 2], 6052, HEAP32[$0 + 212 >> 2]);
+             jsvObjectSetChildAndUnLock(HEAP32[$0 + 200 >> 2], 6068, jsvObjectGetChild(HEAP32[$0 + 264 >> 2], 6068, 0));
+             jsvObjectSetChild(HEAP32[$0 + 200 >> 2], 6048, HEAP32[$0 + 212 >> 2]);
              jsvObjectSetChildAndUnLock(HEAP32[$0 + 200 >> 2], 5259, jsvNewFromPin(HEAPU8[$0 + 263 | 0]));
-             jsvObjectSetChildAndUnLock(HEAP32[$0 + 200 >> 2], 6038, jsvNewFromBool(HEAP8[$0 + 239 | 0] & 1));
+             jsvObjectSetChildAndUnLock(HEAP32[$0 + 200 >> 2], 6034, jsvNewFromBool(HEAP8[$0 + 239 | 0] & 1));
              HEAP8[$0 + 199 | 0] = jshGetEventDataPin(HEAPU8[$0 + 291 | 0]);
              if (jshIsPinValid(HEAPU8[$0 + 199 | 0]) & 1) {
-              jsvObjectSetChildAndUnLock(HEAP32[$0 + 200 >> 2], 6087, jsvNewFromBool((HEAPU8[$0 + 296 | 0] & 64) != 0));
+              jsvObjectSetChildAndUnLock(HEAP32[$0 + 200 >> 2], 6083, jsvNewFromBool((HEAPU8[$0 + 296 | 0] & 64) != 0));
              }
             }
             if (!(jsiExecuteEventCallback(0, HEAP32[$0 + 208 >> 2], 1, $0 + 200 | 0) & 1 | !(HEAP8[$0 + 207 | 0] & 1))) {
-             jsError(6092, 0);
-             HEAP8[99447] = HEAPU8[99447] | 4;
+             jsError(6088, 0);
+             HEAP8[98407] = HEAPU8[98407] | 4;
              HEAP8[$0 + 207 | 0] = 0;
             }
             jsvUnLock(HEAP32[$0 + 200 >> 2]);
@@ -7207,7 +7207,7 @@ function jsiIdle() {
             }
             jsvUnLock(HEAP32[$0 + 208 >> 2]);
            }
-           jsvObjectSetChildAndUnLock(HEAP32[$0 + 264 >> 2], 6072, HEAP32[$0 + 212 >> 2]);
+           jsvObjectSetChildAndUnLock(HEAP32[$0 + 264 >> 2], 6068, HEAP32[$0 + 212 >> 2]);
           }
          }
          jsvUnLock(HEAP32[$0 + 264 >> 2]);
@@ -7236,32 +7236,32 @@ function jsiIdle() {
  HEAP32[$0 + 176 >> 2] = jshGetSystemTime();
  HEAP32[$0 + 180 >> 2] = i64toi32_i32$HIGH_BITS;
  $1 = HEAP32[$0 + 176 >> 2];
- $2 = HEAP32[24884];
- $3 = HEAP32[$0 + 180 >> 2] - (HEAP32[24885] + ($1 >>> 0 < $2 >>> 0) | 0) | 0;
+ $2 = HEAP32[24624];
+ $3 = HEAP32[$0 + 180 >> 2] - (HEAP32[24625] + ($1 >>> 0 < $2 >>> 0) | 0) | 0;
  HEAP32[$0 + 168 >> 2] = $1 - $2;
  HEAP32[$0 + 172 >> 2] = $3;
  $1 = HEAP32[$0 + 180 >> 2];
- HEAP32[24884] = HEAP32[$0 + 176 >> 2];
- HEAP32[24885] = $1;
- HEAP32[$0 + 164 >> 2] = HEAP32[24886];
- HEAP32[24886] = HEAP32[24886] + HEAP32[$0 + 168 >> 2];
- if (HEAPU32[$0 + 164 >> 2] > HEAPU32[24886]) {
-  HEAP32[24886] = -1;
+ HEAP32[24624] = HEAP32[$0 + 176 >> 2];
+ HEAP32[24625] = $1;
+ HEAP32[$0 + 164 >> 2] = HEAP32[24626];
+ HEAP32[24626] = HEAP32[24626] + HEAP32[$0 + 168 >> 2];
+ if (HEAPU32[$0 + 164 >> 2] > HEAPU32[24626]) {
+  HEAP32[24626] = -1;
  }
  $1 = $0 + 152 | 0;
- HEAP16[49742] = HEAPU16[49742] & -5;
- HEAP32[$0 + 160 >> 2] = jsvLock(HEAPU16[49740]);
+ HEAP16[49222] = HEAPU16[49222] & -5;
+ HEAP32[$0 + 160 >> 2] = jsvLock(HEAPU16[49220]);
  jsvObjectIteratorNew($1, HEAP32[$0 + 160 >> 2]);
  while (1) {
   if (jsvObjectIteratorHasValue($0 + 152 | 0) & 1) {
-   $2 = (HEAPU16[49742] & 4) != 0 ^ -1;
+   $2 = (HEAPU16[49222] & 4) != 0 ^ -1;
   } else {
    $2 = 0;
   }
   if ($2 & 1) {
    HEAP8[$0 + 151 | 0] = 0;
    HEAP32[$0 + 144 >> 2] = jsvObjectIteratorGetValue($0 + 152 | 0);
-   HEAP32[$0 + 136 >> 2] = jsvGetLongIntegerAndUnLock(jsvObjectGetChild(HEAP32[$0 + 144 >> 2], 6052, 0));
+   HEAP32[$0 + 136 >> 2] = jsvGetLongIntegerAndUnLock(jsvObjectGetChild(HEAP32[$0 + 144 >> 2], 6048, 0));
    HEAP32[$0 + 140 >> 2] = i64toi32_i32$HIGH_BITS;
    $1 = HEAP32[$0 + 136 >> 2];
    $2 = HEAP32[$0 + 168 >> 2];
@@ -7272,29 +7272,29 @@ function jsiIdle() {
    if (($1 | 0) < 0 ? 1 : ($1 | 0) <= 0 ? HEAPU32[$0 + 128 >> 2] > 0 ? 0 : 1 : 0) {
     jsiSetBusy(1, 1);
     HEAP8[$0 + 303 | 0] = 1;
-    HEAP32[$0 + 124 >> 2] = jsvObjectGetChild(HEAP32[$0 + 144 >> 2], 6063, 0);
-    HEAP32[$0 + 120 >> 2] = jsvObjectGetChild(HEAP32[$0 + 144 >> 2], 6057, 0);
+    HEAP32[$0 + 124 >> 2] = jsvObjectGetChild(HEAP32[$0 + 144 >> 2], 6059, 0);
+    HEAP32[$0 + 120 >> 2] = jsvObjectGetChild(HEAP32[$0 + 144 >> 2], 6053, 0);
     HEAP8[$0 + 119 | 0] = 1;
     HEAP32[$0 + 112 >> 2] = 0;
     if (HEAP32[$0 + 120 >> 2]) {
      HEAP32[$0 + 112 >> 2] = jsvNewWithFlags(5);
      if (HEAP32[$0 + 112 >> 2]) {
-      HEAP32[$0 + 108 >> 2] = jsvGetIntegerAndUnLock(jsvObjectGetChild(HEAP32[$0 + 120 >> 2], 6029, 0));
+      HEAP32[$0 + 108 >> 2] = jsvGetIntegerAndUnLock(jsvObjectGetChild(HEAP32[$0 + 120 >> 2], 6025, 0));
       $4 = $0;
-      $1 = HEAP32[24885] + HEAP32[$0 + 132 >> 2] | 0;
+      $1 = HEAP32[24625] + HEAP32[$0 + 132 >> 2] | 0;
       $2 = HEAP32[$0 + 128 >> 2];
-      $3 = $2 + HEAP32[24884] | 0;
+      $3 = $2 + HEAP32[24624] | 0;
       if ($3 >>> 0 < $2 >>> 0) {
        $1 = $1 + 1 | 0;
       }
       $2 = $3;
       $3 = HEAP32[$0 + 108 >> 2];
       HEAP32[$4 + 104 >> 2] = jsvNewFromFloat(jshGetMillisecondsFromTime($2 - $3 | 0, $1 - (($3 >> 31) + ($2 >>> 0 < $3 >>> 0) | 0) | 0) / 1e3);
-      HEAP8[$0 + 103 | 0] = jsvGetBoolAndUnLock(jsvObjectSetChild(HEAP32[$0 + 112 >> 2], 6038, jsvObjectGetChild(HEAP32[$0 + 120 >> 2], 6038, 0))) & 1;
+      HEAP8[$0 + 103 | 0] = jsvGetBoolAndUnLock(jsvObjectSetChild(HEAP32[$0 + 112 >> 2], 6034, jsvObjectGetChild(HEAP32[$0 + 120 >> 2], 6034, 0))) & 1;
       HEAP8[$0 + 119 | 0] = jsiShouldExecuteWatch(HEAP32[$0 + 120 >> 2], HEAP8[$0 + 103 | 0] & 1) & 1;
-      jsvObjectSetChildAndUnLock(HEAP32[$0 + 112 >> 2], 6072, jsvObjectGetChild(HEAP32[$0 + 120 >> 2], 6072, 0));
-      jsvObjectSetChild(HEAP32[$0 + 120 >> 2], 6072, HEAP32[$0 + 104 >> 2]);
-      jsvObjectSetChildAndUnLock(HEAP32[$0 + 112 >> 2], 6052, HEAP32[$0 + 104 >> 2]);
+      jsvObjectSetChildAndUnLock(HEAP32[$0 + 112 >> 2], 6068, jsvObjectGetChild(HEAP32[$0 + 120 >> 2], 6068, 0));
+      jsvObjectSetChild(HEAP32[$0 + 120 >> 2], 6068, HEAP32[$0 + 104 >> 2]);
+      jsvObjectSetChildAndUnLock(HEAP32[$0 + 112 >> 2], 6048, HEAP32[$0 + 104 >> 2]);
      }
     }
     HEAP8[$0 + 102 | 0] = 0;
@@ -7304,27 +7304,27 @@ function jsiIdle() {
        HEAP8[$0 + 101 | 0] = jsiExecuteEventCallback(0, HEAP32[$0 + 124 >> 2], 1, $0 + 112 | 0) & 1;
        break label$45;
       }
-      HEAP32[$0 + 96 >> 2] = jsvObjectGetChild(HEAP32[$0 + 144 >> 2], 5953, 0);
+      HEAP32[$0 + 96 >> 2] = jsvObjectGetChild(HEAP32[$0 + 144 >> 2], 5949, 0);
       HEAP8[$0 + 101 | 0] = jsiExecuteEventCallbackArgsArray(0, HEAP32[$0 + 124 >> 2], HEAP32[$0 + 96 >> 2]) & 1;
       jsvUnLock(HEAP32[$0 + 96 >> 2]);
      }
      if (!(HEAP8[$0 + 101 | 0] & 1)) {
-      HEAP32[$0 + 92 >> 2] = jsvObjectGetChild(HEAP32[$0 + 144 >> 2], 6137, 0);
+      HEAP32[$0 + 92 >> 2] = jsvObjectGetChild(HEAP32[$0 + 144 >> 2], 6133, 0);
       if (HEAP32[$0 + 92 >> 2]) {
        jsvUnLock(HEAP32[$0 + 92 >> 2]);
-       jsError(6146, 0);
-       HEAP8[99447] = HEAPU8[99447] | 4;
+       jsError(6142, 0);
+       HEAP8[98407] = HEAPU8[98407] | 4;
        HEAP8[$0 + 102 | 0] = 1;
       }
      }
     }
     jsvUnLock(HEAP32[$0 + 112 >> 2]);
     if (HEAP32[$0 + 120 >> 2]) {
-     jsvObjectRemoveChild(HEAP32[$0 + 120 >> 2], 6044);
+     jsvObjectRemoveChild(HEAP32[$0 + 120 >> 2], 6040);
      if (HEAP8[$0 + 119 | 0] & 1) {
-      HEAP8[$0 + 91 | 0] = jsvGetBoolAndUnLock(jsvObjectGetChild(HEAP32[$0 + 120 >> 2], 6081, 0)) & 1;
+      HEAP8[$0 + 91 | 0] = jsvGetBoolAndUnLock(jsvObjectGetChild(HEAP32[$0 + 120 >> 2], 6077, 0)) & 1;
       if (!(HEAP8[$0 + 91 | 0] & 1)) {
-       HEAP32[$0 + 84 >> 2] = jsvLock(HEAPU16[49741]);
+       HEAP32[$0 + 84 >> 2] = jsvLock(HEAPU16[49221]);
        HEAP32[$0 + 80 >> 2] = jsvGetIndexOf(HEAP32[$0 + 84 >> 2], HEAP32[$0 + 120 >> 2], 1);
        if (HEAP32[$0 + 80 >> 2]) {
         jsvRemoveChild(HEAP32[$0 + 84 >> 2], HEAP32[$0 + 80 >> 2]);
@@ -7339,7 +7339,7 @@ function jsiIdle() {
      }
      jsvUnLock(HEAP32[$0 + 120 >> 2]);
     }
-    HEAP32[$0 + 72 >> 2] = jsvObjectGetChild(HEAP32[$0 + 144 >> 2], 6137, 0);
+    HEAP32[$0 + 72 >> 2] = jsvObjectGetChild(HEAP32[$0 + 144 >> 2], 6133, 0);
     label$54 : {
      if (!(!HEAP32[$0 + 72 >> 2] | HEAP8[$0 + 102 | 0] & 1)) {
       $4 = HEAP32[$0 + 128 >> 2];
@@ -7377,7 +7377,7 @@ function jsiIdle() {
    }
    if (!(HEAP8[$0 + 151 | 0] & 1)) {
     $1 = $0 + 152 | 0;
-    jsvObjectSetChildAndUnLock(HEAP32[$0 + 144 >> 2], 6052, jsvNewFromLongInteger(HEAP32[$0 + 128 >> 2], HEAP32[$0 + 132 >> 2]));
+    jsvObjectSetChildAndUnLock(HEAP32[$0 + 144 >> 2], 6048, jsvNewFromLongInteger(HEAP32[$0 + 128 >> 2], HEAP32[$0 + 132 >> 2]));
     jsvObjectIteratorNext($1);
    }
    jsvUnLock(HEAP32[$0 + 144 >> 2]);
@@ -7392,11 +7392,11 @@ function jsiIdle() {
  }
  label$59 : {
   if (!(HEAP8[$0 + 303 | 0] & 1)) {
-   if (jsvArrayIsEmpty(HEAP32[24869]) & 1) {
+   if (jsvArrayIsEmpty(HEAP32[24609]) & 1) {
     break label$59;
    }
   }
-  HEAP8[99502] = 0;
+  HEAP8[98462] = 0;
  }
  if (HEAP8[$0 + 303 | 0] & 1) {
   jsiSetBusy(1, 0);
@@ -7404,15 +7404,15 @@ function jsiIdle() {
  if (!(jspIsInterrupted() & 1)) {
   jsiExecuteEvents();
  }
- if (HEAPU16[49742] & 224) {
+ if (HEAPU16[49222] & 224) {
   jsiSetBusy(1, 1);
-  HEAP16[$0 + 70 >> 1] = HEAPU16[49742];
+  HEAP16[$0 + 70 >> 1] = HEAPU16[49222];
   if ((HEAPU16[$0 + 70 >> 1] & 128) == 128) {
    jsiKill();
    jshResetDevices();
    jsvInit();
    jsiSemiInit(0);
-   HEAP16[49742] = HEAPU16[49742] & 65407;
+   HEAP16[49222] = HEAPU16[49222] & 65407;
   }
   if ((HEAPU16[$0 + 70 >> 1] & 32) == 32) {
    jsvGarbageCollect();
@@ -7424,10 +7424,10 @@ function jsiIdle() {
    jsvCreateEmptyVarList();
    jspSoftInit();
    jsiSoftInit(0);
-   HEAP16[49742] = HEAPU16[49742] & 65503;
+   HEAP16[49222] = HEAPU16[49222] & 65503;
   }
   if ((HEAPU16[$0 + 70 >> 1] & 64) == 64) {
-   HEAP32[$0 + 64 >> 2] = jsvObjectGetChild(HEAP32[24863], 6194, 0);
+   HEAP32[$0 + 64 >> 2] = jsvObjectGetChild(HEAP32[24603], 6190, 0);
    label$67 : {
     if (HEAP32[$0 + 64 >> 2]) {
      jsfNameFromVarAndUnLock($0 + 32 | 0, HEAP32[$0 + 64 >> 2]);
@@ -7461,12 +7461,12 @@ function jsiIdle() {
     jspSoftInit();
     jsiSoftInit(0);
    }
-   HEAP16[49742] = HEAPU16[49742] & 65471;
+   HEAP16[49222] = HEAPU16[49222] & 65471;
   }
   jsiSetBusy(1, 0);
  }
  label$70 : {
-  if (HEAPU8[99502] != 1) {
+  if (HEAPU8[98462] != 1) {
    break label$70;
   }
   $1 = HEAP32[$0 + 188 >> 2];
@@ -7480,11 +7480,11 @@ function jsiIdle() {
   }
   jsiSetBusy(1, 1);
   jsvGarbageCollect();
-  HEAP8[99502] = 0;
+  HEAP8[98462] = 0;
   jsiSetBusy(1, 0);
  }
  label$71 : {
-  if (HEAPU8[99502] < 1) {
+  if (HEAPU8[98462] < 1) {
    break label$71;
   }
   if (jshHasEvents() & 1) {
@@ -8212,7 +8212,7 @@ function jspeFunctionCall($0, $1, $2, $3, $4, $5) {
  HEAP32[$6 + 392 >> 2] = $4;
  HEAP32[$6 + 388 >> 2] = $5;
  label$1 : {
-  if (!(HEAP32[$6 + 408 >> 2] | (HEAP32[24866] & 63) != 1)) {
+  if (!(HEAP32[$6 + 408 >> 2] | (HEAP32[24606] & 63) != 1)) {
    label$3 : {
     if (HEAP32[$6 + 404 >> 2]) {
      HEAP32[$6 + 64 >> 2] = HEAP32[$6 + 404 >> 2];
@@ -8225,13 +8225,13 @@ function jspeFunctionCall($0, $1, $2, $3, $4, $5) {
    HEAP32[$6 + 412 >> 2] = 0;
    break label$1;
   }
-  if ((HEAP32[24866] & 63) == 1) {
+  if ((HEAP32[24606] & 63) == 1) {
    if (!(jspCheckStackPosition() & 1)) {
     HEAP32[$6 + 412 >> 2] = 0;
     break label$1;
    }
   }
-  if (!(!HEAP32[$6 + 408 >> 2] | (HEAP32[24866] & 63) != 1)) {
+  if (!(!HEAP32[$6 + 408 >> 2] | (HEAP32[24606] & 63) != 1)) {
    HEAP32[$6 + 384 >> 2] = 0;
    if (!(jsvIsFunction(HEAP32[$6 + 408 >> 2]) & 1)) {
     HEAP32[$6 + 48 >> 2] = HEAP32[$6 + 408 >> 2];
@@ -8325,14 +8325,14 @@ function jspeFunctionCall($0, $1, $2, $3, $4, $5) {
       while (1) {
        $0 = 0;
        label$26 : {
-        if (HEAP32[24866] & 112) {
+        if (HEAP32[24606] & 112) {
          break label$26;
         }
         $0 = 0;
-        if (HEAP16[HEAP32[14856] + 2 >> 1] == 41) {
+        if (HEAP16[HEAP32[14596] + 2 >> 1] == 41) {
          break label$26;
         }
-        $0 = HEAP16[HEAP32[14856] + 2 >> 1];
+        $0 = HEAP16[HEAP32[14596] + 2 >> 1];
        }
        if ($0) {
         if (HEAPU32[$6 + 392 >> 2] >= HEAPU32[$6 + 376 >> 2]) {
@@ -8356,7 +8356,7 @@ function jspeFunctionCall($0, $1, $2, $3, $4, $5) {
         $2 = HEAP32[$6 + 392 >> 2];
         HEAP32[$6 + 392 >> 2] = $2 + 1;
         HEAP32[$1 + ($2 << 2) >> 2] = $0;
-        if (HEAP16[HEAP32[14856] + 2 >> 1] != 41) {
+        if (HEAP16[HEAP32[14596] + 2 >> 1] != 41) {
          if (!(jslMatch(44) & 1)) {
           jsvUnLockMany(HEAP32[$6 + 392 >> 2], HEAP32[$6 + 388 >> 2]);
           jsvUnLock(HEAP32[$6 + 380 >> 2]);
@@ -8375,34 +8375,34 @@ function jspeFunctionCall($0, $1, $2, $3, $4, $5) {
       HEAP32[$6 + 344 >> 2] = HEAP32[$6 + 392 >> 2];
      }
      HEAP32[$6 + 332 >> 2] = jsvGetNativeFunctionPtr(HEAP32[$6 + 408 >> 2]);
-     HEAP32[$6 + 328 >> 2] = HEAP32[24865];
+     HEAP32[$6 + 328 >> 2] = HEAP32[24605];
      label$34 : {
       if (HEAP32[$6 + 380 >> 2]) {
-       HEAP32[24865] = jsvRef(HEAP32[$6 + 380 >> 2]);
+       HEAP32[24605] = jsvRef(HEAP32[$6 + 380 >> 2]);
        break label$34;
       }
       label$36 : {
        if (HEAP32[$6 + 332 >> 2] == 11) {
-        if (HEAP32[24865]) {
-         HEAP32[24865] = jsvRef(HEAP32[24865]);
+        if (HEAP32[24605]) {
+         HEAP32[24605] = jsvRef(HEAP32[24605]);
         }
         break label$36;
        }
-       HEAP32[24865] = jsvRef(HEAP32[24862]);
+       HEAP32[24605] = jsvRef(HEAP32[24602]);
       }
      }
      label$39 : {
-      if (!(!HEAP32[$6 + 332 >> 2] | HEAP32[24866] & 112)) {
+      if (!(!HEAP32[$6 + 332 >> 2] | HEAP32[24606] & 112)) {
        HEAP32[$6 + 384 >> 2] = jsnCallFunction(HEAP32[$6 + 332 >> 2], HEAPU16[HEAP32[$6 + 408 >> 2] + 4 >> 1], HEAP32[$6 + 380 >> 2], HEAP32[$6 + 388 >> 2], HEAP32[$6 + 392 >> 2]);
        break label$39;
       }
       HEAP32[$6 + 384 >> 2] = 0;
      }
      jsvUnLockMany(HEAP32[$6 + 344 >> 2], HEAP32[$6 + 388 >> 2]);
-     if (HEAP32[24865]) {
-      jsvUnRef(HEAP32[24865]);
+     if (HEAP32[24605]) {
+      jsvUnRef(HEAP32[24605]);
      }
-     HEAP32[24865] = HEAP32[$6 + 328 >> 2];
+     HEAP32[24605] = HEAP32[$6 + 328 >> 2];
      break label$11;
     }
     HEAP32[$6 + 324 >> 2] = jsvNewWithFlags(7);
@@ -8442,13 +8442,13 @@ function jspeFunctionCall($0, $1, $2, $3, $4, $5) {
      if (HEAP8[$6 + 399 | 0] & 1) {
       HEAP32[$6 + 292 >> 2] = 0;
       while (1) {
-       if (HEAP32[24866] & 80 ? 0 : HEAP16[HEAP32[14856] + 2 >> 1] != 41) {
+       if (HEAP32[24606] & 80 ? 0 : HEAP16[HEAP32[14596] + 2 >> 1] != 41) {
         HEAP32[$6 + 288 >> 2] = jsvObjectIteratorGetKey($6 + 304 | 0);
         HEAP8[$6 + 287 | 0] = jsvIsFunctionParameter(HEAP32[$6 + 288 >> 2]) & 1;
-        if (!(HEAP8[$6 + 287 | 0] & 1 ? 0 : HEAP16[HEAP32[14856] + 2 >> 1] == 41)) {
+        if (!(HEAP8[$6 + 287 | 0] & 1 ? 0 : HEAP16[HEAP32[14596] + 2 >> 1] == 41)) {
          HEAP32[$6 + 292 >> 2] = HEAP32[$6 + 292 >> 2] + 1;
          HEAP32[$6 + 280 >> 2] = 0;
-         if (HEAP16[HEAP32[14856] + 2 >> 1] != 41) {
+         if (HEAP16[HEAP32[14596] + 2 >> 1] != 41) {
           HEAP32[$6 + 280 >> 2] = __jspeAssignmentExpression(jspeConditionalExpression());
          }
          HEAP32[$6 + 280 >> 2] = jsvSkipNameAndUnLock(HEAP32[$6 + 280 >> 2]);
@@ -8462,7 +8462,7 @@ function jspeFunctionCall($0, $1, $2, $3, $4, $5) {
          }
          jsvAddFunctionParameter($1, $0, HEAP32[$6 + 280 >> 2]);
          jsvUnLock(HEAP32[$6 + 280 >> 2]);
-         if (HEAP16[HEAP32[14856] + 2 >> 1] != 41) {
+         if (HEAP16[HEAP32[14596] + 2 >> 1] != 41) {
           if (!(jslMatch(44) & 1)) {
            HEAP32[$6 + 412 >> 2] = 0;
            break label$1;
@@ -8561,26 +8561,26 @@ function jspeFunctionCall($0, $1, $2, $3, $4, $5) {
      jsvAddName(HEAP32[$6 + 324 >> 2], HEAP32[$6 + 256 >> 2]);
      jsvUnLock2(HEAP32[$6 + 256 >> 2], HEAP32[$6 + 312 >> 2]);
     }
-    if (!(HEAP32[24866] & 112)) {
-     HEAP32[$6 + 252 >> 2] = HEAP32[24864];
-     HEAP32[24864] = 0;
+    if (!(HEAP32[24606] & 112)) {
+     HEAP32[$6 + 252 >> 2] = HEAP32[24604];
+     HEAP32[24604] = 0;
      if (HEAP32[$6 + 320 >> 2]) {
       jspeiLoadScopesFromVar(HEAP32[$6 + 320 >> 2]);
       jsvUnLock(HEAP32[$6 + 320 >> 2]);
      }
      if (jspeiAddScope(HEAP32[$6 + 324 >> 2]) & 1) {
-      HEAP32[$6 + 248 >> 2] = HEAP32[24865];
+      HEAP32[$6 + 248 >> 2] = HEAP32[24605];
       label$85 : {
        if (HEAP32[$6 + 380 >> 2]) {
-        HEAP32[24865] = jsvRef(HEAP32[$6 + 380 >> 2]);
+        HEAP32[24605] = jsvRef(HEAP32[$6 + 380 >> 2]);
         break label$85;
        }
-       HEAP32[24865] = jsvRef(HEAP32[24862]);
+       HEAP32[24605] = jsvRef(HEAP32[24602]);
       }
       if (HEAP32[$6 + 316 >> 2]) {
        HEAP8[$6 + 247 | 0] = 0;
        label$88 : {
-        if (HEAP32[24866] & 16384) {
+        if (HEAP32[24606] & 16384) {
          if (HEAP32[$6 + 404 >> 2]) {
           HEAP32[$6 + 16 >> 2] = HEAP32[$6 + 404 >> 2];
           jsiConsolePrintf(3991, $6 + 16 | 0);
@@ -8590,24 +8590,24 @@ function jspeFunctionCall($0, $1, $2, $3, $4, $5) {
          jsiConsolePrintf(4009, $6 + 32 | 0);
          break label$88;
         }
-        HEAP8[$6 + 247 | 0] = (HEAP32[24866] & 8192) != 0;
+        HEAP8[$6 + 247 | 0] = (HEAP32[24606] & 8192) != 0;
         if (HEAP8[$6 + 247 | 0] & 1) {
-         HEAP32[24866] = HEAP32[24866] & -8193;
+         HEAP32[24606] = HEAP32[24606] & -8193;
         }
        }
        HEAP32[$6 + 108 >> 2] = jslSetLex($6 + 112 | 0);
        jslInit(HEAP32[$6 + 316 >> 2]);
        HEAP16[$6 + 214 >> 1] = HEAPU16[$6 + 310 >> 1];
-       HEAP32[$6 + 104 >> 2] = HEAP32[24866];
-       HEAP32[24866] = HEAP32[24866] & 14448 | 1;
+       HEAP32[$6 + 104 >> 2] = HEAP32[24606];
+       HEAP32[24606] = HEAP32[24606] & 14448 | 1;
        label$92 : {
         if (jsvIsFunctionReturn(HEAP32[$6 + 408 >> 2]) & 1) {
-         if (!(!(HEAP32[24866] & 8192) | (HEAP32[24866] & 63) != 1)) {
-          $0 = jsvStringIteratorGetIndex(HEAP32[14856] + 4 | 0);
-          HEAP32[HEAP32[14856] + 28 >> 2] = $0 - 1;
+         if (!(!(HEAP32[24606] & 8192) | (HEAP32[24606] & 63) != 1)) {
+          $0 = jsvStringIteratorGetIndex(HEAP32[14596] + 4 | 0);
+          HEAP32[HEAP32[14596] + 28 >> 2] = $0 - 1;
           jsiDebuggerLoop();
          }
-         if (!(HEAP16[HEAP32[14856] + 2 >> 1] == 59 | HEAP16[HEAP32[14856] + 2 >> 1] == 125)) {
+         if (!(HEAP16[HEAP32[14596] + 2 >> 1] == 59 | HEAP16[HEAP32[14596] + 2 >> 1] == 125)) {
           HEAP32[$6 + 384 >> 2] = jsvSkipNameAndUnLock(jspeExpression());
          }
          break label$92;
@@ -8619,33 +8619,33 @@ function jspeFunctionCall($0, $1, $2, $3, $4, $5) {
          jsvSetValueOfName(HEAP32[$6 + 100 >> 2], 0);
         }
        }
-       HEAP32[$6 + 96 >> 2] = HEAP32[24866] & 112;
-       HEAP32[24866] = HEAP32[24866] & -1664 | HEAP32[$6 + 104 >> 2] & 1663;
+       HEAP32[$6 + 96 >> 2] = HEAP32[24606] & 112;
+       HEAP32[24606] = HEAP32[24606] & -1664 | HEAP32[$6 + 104 >> 2] & 1663;
        HEAP8[$6 + 95 | 0] = 0;
-       if (HEAP32[24866] & 57344) {
+       if (HEAP32[24606] & 57344) {
         jsiConsolePrintString(4040);
         jsfPrintJSON(HEAP32[$6 + 384 >> 2], 45);
         jsiConsolePrintChar(10);
-        if (HEAP32[24866] & 32768) {
+        if (HEAP32[24606] & 32768) {
          HEAP8[$6 + 95 | 0] = 1;
          jsiDebuggerLoop();
         }
        }
        if (!(!(HEAP8[$6 + 247 | 0] & 1) | HEAP8[$6 + 95 | 0] & 1)) {
-        HEAP32[24866] = HEAP32[24866] | 8192;
+        HEAP32[24606] = HEAP32[24606] | 8192;
        }
        jslKill();
        jslSetLex(HEAP32[$6 + 108 >> 2]);
        if (HEAP32[$6 + 96 >> 2]) {
-        HEAP32[24866] = HEAP32[$6 + 96 >> 2] | HEAP32[24866];
-        HEAP32[$6 + 88 >> 2] = jsvObjectGetChild(HEAP32[24863], 3760, 27);
+        HEAP32[24606] = HEAP32[$6 + 96 >> 2] | HEAP32[24606];
+        HEAP32[$6 + 88 >> 2] = jsvObjectGetChild(HEAP32[24603], 3760, 27);
         if (HEAP32[$6 + 88 >> 2]) {
          $0 = HEAP32[$6 + 88 >> 2];
          $1 = jsvIsString(HEAP32[$6 + 404 >> 2]);
          HEAP32[$6 >> 2] = HEAP32[$6 + 404 >> 2];
          jsvAppendPrintf($0, $1 & 1 ? 4060 : 4088, $6);
          label$102 : {
-          if (HEAP32[14856]) {
+          if (HEAP32[14596]) {
            jspAppendStackTrace(HEAP32[$6 + 88 >> 2]);
            break label$102;
           }
@@ -8655,14 +8655,14 @@ function jspeFunctionCall($0, $1, $2, $3, $4, $5) {
         }
        }
       }
-      if (HEAP32[24865]) {
-       jsvUnRef(HEAP32[24865]);
+      if (HEAP32[24605]) {
+       jsvUnRef(HEAP32[24605]);
       }
-      HEAP32[24865] = HEAP32[$6 + 248 >> 2];
+      HEAP32[24605] = HEAP32[$6 + 248 >> 2];
       jspeiRemoveScope();
      }
-     jsvUnLock(HEAP32[24864]);
-     HEAP32[24864] = HEAP32[$6 + 252 >> 2];
+     jsvUnLock(HEAP32[24604]);
+     HEAP32[24604] = HEAP32[$6 + 252 >> 2];
     }
     jsvUnLock(HEAP32[$6 + 316 >> 2]);
     jsvUnLock(HEAP32[$6 + 324 >> 2]);
@@ -8688,19 +8688,19 @@ function jslGetNextToken() {
  label$1 : {
   while (1) {
    while (1) {
-    if (isWhitespace(HEAP8[HEAP32[14856]]) & 1) {
+    if (isWhitespace(HEAP8[HEAP32[14596]]) & 1) {
      jslGetNextCh();
      continue;
     }
     break;
    }
    label$3 : {
-    if (HEAP8[HEAP32[14856]] != 47) {
+    if (HEAP8[HEAP32[14596]] != 47) {
      break label$3;
     }
     if ((jslNextCh() & 255) == 47) {
      while (1) {
-      if (HEAP8[HEAP32[14856]] ? HEAP8[HEAP32[14856]] != 10 : 0) {
+      if (HEAP8[HEAP32[14596]] ? HEAP8[HEAP32[14596]] != 10 : 0) {
        jslGetNextCh();
        continue;
       }
@@ -8713,8 +8713,8 @@ function jslGetNextToken() {
      jslGetNextCh();
      jslGetNextCh();
      while (1) {
-      if (HEAP8[HEAP32[14856]]) {
-       if (HEAP8[HEAP32[14856]] == 42) {
+      if (HEAP8[HEAP32[14596]]) {
+       if (HEAP8[HEAP32[14596]] == 42) {
         $1 = (jslNextCh() & 255) == 47;
        } else {
         $1 = 0;
@@ -8729,8 +8729,8 @@ function jslGetNextToken() {
       }
       break;
      }
-     if (!HEAPU8[HEAP32[14856]]) {
-      HEAP16[HEAP32[14856] + 2 >> 1] = 137;
+     if (!HEAPU8[HEAP32[14596]]) {
+      HEAP16[HEAP32[14596] + 2 >> 1] = 137;
       break label$1;
      }
      jslGetNextCh();
@@ -8740,30 +8740,30 @@ function jslGetNextToken() {
    }
    break;
   }
-  HEAP32[$0 + 12 >> 2] = HEAP16[HEAP32[14856] + 2 >> 1];
-  HEAP16[HEAP32[14856] + 2 >> 1] = 0;
-  HEAP8[HEAP32[14856] + 100 | 0] = 0;
-  if (HEAP32[HEAP32[14856] + 96 >> 2]) {
-   jsvUnLock(HEAP32[HEAP32[14856] + 96 >> 2]);
-   HEAP32[HEAP32[14856] + 96 >> 2] = 0;
+  HEAP32[$0 + 12 >> 2] = HEAP16[HEAP32[14596] + 2 >> 1];
+  HEAP16[HEAP32[14596] + 2 >> 1] = 0;
+  HEAP8[HEAP32[14596] + 100 | 0] = 0;
+  if (HEAP32[HEAP32[14596] + 96 >> 2]) {
+   jsvUnLock(HEAP32[HEAP32[14596] + 96 >> 2]);
+   HEAP32[HEAP32[14596] + 96 >> 2] = 0;
   }
-  $1 = jsvStringIteratorGetIndex(HEAP32[14856] + 4 | 0) - 1 | 0;
-  HEAP32[HEAP32[14856] + 28 >> 2] = $1;
-  $2 = HEAP32[14856];
+  $1 = jsvStringIteratorGetIndex(HEAP32[14596] + 4 | 0) - 1 | 0;
+  HEAP32[HEAP32[14596] + 28 >> 2] = $1;
+  $2 = HEAP32[14596];
   $3 = HEAP32[$2 + 112 >> 2];
-  $1 = HEAP32[14856];
+  $1 = HEAP32[14596];
   HEAP32[$1 + 4 >> 2] = HEAP32[$2 + 108 >> 2];
   HEAP32[$1 + 8 >> 2] = $3;
   HEAP32[$1 + 20 >> 2] = HEAP32[$2 + 124 >> 2];
   $3 = HEAP32[$2 + 120 >> 2];
   HEAP32[$1 + 12 >> 2] = HEAP32[$2 + 116 >> 2];
   HEAP32[$1 + 16 >> 2] = $3;
-  HEAP8[HEAP32[14856] + 24 | 0] = HEAPU8[HEAP32[14856]];
-  if (!(HEAPU8[HEAP32[14856]] <= 124 ? HEAPU8[HEAP32[14856]] >= 33 : 0)) {
+  HEAP8[HEAP32[14596] + 24 | 0] = HEAPU8[HEAP32[14596]];
+  if (!(HEAPU8[HEAP32[14596]] <= 124 ? HEAPU8[HEAP32[14596]] >= 33 : 0)) {
    jslSingleChar();
    break label$1;
   }
-  $1 = HEAPU8[HEAPU8[HEAP32[14856]] + 1039 | 0];
+  $1 = HEAPU8[HEAPU8[HEAP32[14596]] + 1039 | 0];
   label$22 : {
    if ($1 >>> 0 > 15) {
     break label$22;
@@ -8772,28 +8772,28 @@ function jslGetNextToken() {
     switch ($1 - 1 | 0) {
     default:
      while (1) {
-      $2 = isAlpha(HEAP8[HEAP32[14856]]) & 1;
+      $2 = isAlpha(HEAP8[HEAP32[14596]]) & 1;
       $1 = 1;
       label$40 : {
        if ($2) {
         break label$40;
        }
-       $2 = isNumeric(HEAP8[HEAP32[14856]]) & 1;
+       $2 = isNumeric(HEAP8[HEAP32[14596]]) & 1;
        $1 = 1;
        if ($2) {
         break label$40;
        }
-       $1 = HEAP8[HEAP32[14856]] == 36;
+       $1 = HEAP8[HEAP32[14596]] == 36;
       }
       if ($1) {
-       jslTokenAppendChar(HEAP8[HEAP32[14856]]);
+       jslTokenAppendChar(HEAP8[HEAP32[14596]]);
        jslGetNextCh();
        continue;
       }
       break;
      }
-     HEAP16[HEAP32[14856] + 2 >> 1] = 128;
-     $1 = HEAP8[HEAP32[14856] + 32 | 0] + -98 | 0;
+     HEAP16[HEAP32[14596] + 2 >> 1] = 128;
+     $1 = HEAP8[HEAP32[14596] + 32 | 0] + -98 | 0;
      label$42 : {
       if ($1 >>> 0 > 21) {
        break label$42;
@@ -8802,32 +8802,32 @@ function jslGetNextToken() {
        switch ($1 - 1 | 0) {
        default:
         if (jslIsToken(1164) & 1) {
-         HEAP16[HEAP32[14856] + 2 >> 1] = 168;
+         HEAP16[HEAP32[14596] + 2 >> 1] = 168;
         }
         break label$42;
        case 0:
         label$59 : {
          if (jslIsToken(1170) & 1) {
-          HEAP16[HEAP32[14856] + 2 >> 1] = 188;
+          HEAP16[HEAP32[14596] + 2 >> 1] = 188;
           break label$59;
          }
          label$61 : {
           if (jslIsToken(1175) & 1) {
-           HEAP16[HEAP32[14856] + 2 >> 1] = 178;
+           HEAP16[HEAP32[14596] + 2 >> 1] = 178;
            break label$61;
           }
           label$63 : {
            if (jslIsToken(1181) & 1) {
-            HEAP16[HEAP32[14856] + 2 >> 1] = 194;
+            HEAP16[HEAP32[14596] + 2 >> 1] = 194;
             break label$63;
            }
            label$65 : {
             if (jslIsToken(1187) & 1) {
-             HEAP16[HEAP32[14856] + 2 >> 1] = 174;
+             HEAP16[HEAP32[14596] + 2 >> 1] = 174;
              break label$65;
             }
             if (jslIsToken(1193) & 1) {
-             HEAP16[HEAP32[14856] + 2 >> 1] = 169;
+             HEAP16[HEAP32[14596] + 2 >> 1] = 169;
             }
            }
           }
@@ -8837,21 +8837,21 @@ function jslGetNextToken() {
        case 1:
         label$68 : {
          if (jslIsToken(1202) & 1) {
-          HEAP16[HEAP32[14856] + 2 >> 1] = 189;
+          HEAP16[HEAP32[14596] + 2 >> 1] = 189;
           break label$68;
          }
          label$70 : {
           if (jslIsToken(1210) & 1) {
-           HEAP16[HEAP32[14856] + 2 >> 1] = 190;
+           HEAP16[HEAP32[14596] + 2 >> 1] = 190;
            break label$70;
           }
           label$72 : {
            if (jslIsToken(1217) & 1) {
-            HEAP16[HEAP32[14856] + 2 >> 1] = 165;
+            HEAP16[HEAP32[14596] + 2 >> 1] = 165;
             break label$72;
            }
            if (jslIsToken(1220) & 1) {
-            HEAP16[HEAP32[14856] + 2 >> 1] = 193;
+            HEAP16[HEAP32[14596] + 2 >> 1] = 193;
            }
           }
          }
@@ -8860,32 +8860,32 @@ function jslGetNextToken() {
        case 2:
         label$75 : {
          if (jslIsToken(1229) & 1) {
-          HEAP16[HEAP32[14856] + 2 >> 1] = 164;
+          HEAP16[HEAP32[14596] + 2 >> 1] = 164;
           break label$75;
          }
          if (jslIsToken(1234) & 1) {
-          HEAP16[HEAP32[14856] + 2 >> 1] = 195;
+          HEAP16[HEAP32[14596] + 2 >> 1] = 195;
          }
         }
         break label$42;
        case 3:
         label$78 : {
          if (jslIsToken(1242) & 1) {
-          HEAP16[HEAP32[14856] + 2 >> 1] = 181;
+          HEAP16[HEAP32[14596] + 2 >> 1] = 181;
           break label$78;
          }
          label$80 : {
           if (jslIsToken(1248) & 1) {
-           HEAP16[HEAP32[14856] + 2 >> 1] = 179;
+           HEAP16[HEAP32[14596] + 2 >> 1] = 179;
            break label$80;
           }
           label$82 : {
            if (jslIsToken(1256) & 1) {
-            HEAP16[HEAP32[14856] + 2 >> 1] = 167;
+            HEAP16[HEAP32[14596] + 2 >> 1] = 167;
             break label$82;
            }
            if (jslIsToken(1260) & 1) {
-            HEAP16[HEAP32[14856] + 2 >> 1] = 170;
+            HEAP16[HEAP32[14596] + 2 >> 1] = 170;
            }
           }
          }
@@ -8894,59 +8894,59 @@ function jslGetNextToken() {
        case 6:
         label$85 : {
          if (jslIsToken(1269) & 1) {
-          HEAP16[HEAP32[14856] + 2 >> 1] = 163;
+          HEAP16[HEAP32[14596] + 2 >> 1] = 163;
           break label$85;
          }
          label$87 : {
           if (jslIsToken(1272) & 1) {
-           HEAP16[HEAP32[14856] + 2 >> 1] = 185;
+           HEAP16[HEAP32[14596] + 2 >> 1] = 185;
            break label$87;
           }
           if (jslIsToken(1275) & 1) {
-           HEAP16[HEAP32[14856] + 2 >> 1] = 186;
+           HEAP16[HEAP32[14596] + 2 >> 1] = 186;
           }
          }
         }
         break label$42;
        case 9:
         if (jslIsToken(1286) & 1) {
-         HEAP16[HEAP32[14856] + 2 >> 1] = 173;
+         HEAP16[HEAP32[14596] + 2 >> 1] = 173;
         }
         break label$42;
        case 11:
         label$91 : {
          if (jslIsToken(1290) & 1) {
-          HEAP16[HEAP32[14856] + 2 >> 1] = 184;
+          HEAP16[HEAP32[14596] + 2 >> 1] = 184;
           break label$91;
          }
          if (jslIsToken(1294) & 1) {
-          HEAP16[HEAP32[14856] + 2 >> 1] = 182;
+          HEAP16[HEAP32[14596] + 2 >> 1] = 182;
          }
         }
         break label$42;
        case 12:
         if (jslIsToken(1299) & 1) {
-         HEAP16[HEAP32[14856] + 2 >> 1] = 198;
+         HEAP16[HEAP32[14596] + 2 >> 1] = 198;
         }
         break label$42;
        case 15:
         if (jslIsToken(1302) & 1) {
-         HEAP16[HEAP32[14856] + 2 >> 1] = 171;
+         HEAP16[HEAP32[14596] + 2 >> 1] = 171;
         }
         break label$42;
        case 16:
         label$96 : {
          if (jslIsToken(1309) & 1) {
-          HEAP16[HEAP32[14856] + 2 >> 1] = 197;
+          HEAP16[HEAP32[14596] + 2 >> 1] = 197;
           break label$96;
          }
          label$98 : {
           if (jslIsToken(1316) & 1) {
-           HEAP16[HEAP32[14856] + 2 >> 1] = 196;
+           HEAP16[HEAP32[14596] + 2 >> 1] = 196;
            break label$98;
           }
           if (jslIsToken(1322) & 1) {
-           HEAP16[HEAP32[14856] + 2 >> 1] = 187;
+           HEAP16[HEAP32[14596] + 2 >> 1] = 187;
           }
          }
         }
@@ -8954,26 +8954,26 @@ function jslGetNextToken() {
        case 17:
         label$101 : {
          if (jslIsToken(1329) & 1) {
-          HEAP16[HEAP32[14856] + 2 >> 1] = 175;
+          HEAP16[HEAP32[14596] + 2 >> 1] = 175;
           break label$101;
          }
          label$103 : {
           if (jslIsToken(1334) & 1) {
-           HEAP16[HEAP32[14856] + 2 >> 1] = 176;
+           HEAP16[HEAP32[14596] + 2 >> 1] = 176;
            break label$103;
           }
           label$105 : {
            if (jslIsToken(1340) & 1) {
-            HEAP16[HEAP32[14856] + 2 >> 1] = 180;
+            HEAP16[HEAP32[14596] + 2 >> 1] = 180;
             break label$105;
            }
            label$107 : {
             if (jslIsToken(1345) & 1) {
-             HEAP16[HEAP32[14856] + 2 >> 1] = 177;
+             HEAP16[HEAP32[14596] + 2 >> 1] = 177;
              break label$107;
             }
             if (jslIsToken(1349) & 1) {
-             HEAP16[HEAP32[14856] + 2 >> 1] = 191;
+             HEAP16[HEAP32[14596] + 2 >> 1] = 191;
             }
            }
           }
@@ -8982,12 +8982,12 @@ function jslGetNextToken() {
         break label$42;
        case 18:
         if (jslIsToken(1356) & 1) {
-         HEAP16[HEAP32[14856] + 2 >> 1] = 183;
+         HEAP16[HEAP32[14596] + 2 >> 1] = 183;
         }
         break label$42;
        case 20:
         if (jslIsToken(1366) & 1) {
-         HEAP16[HEAP32[14856] + 2 >> 1] = 166;
+         HEAP16[HEAP32[14596] + 2 >> 1] = 166;
         }
         break label$42;
        case 4:
@@ -9004,11 +9004,11 @@ function jslGetNextToken() {
       }
       label$112 : {
        if (jslIsToken(1372) & 1) {
-        HEAP16[HEAP32[14856] + 2 >> 1] = 172;
+        HEAP16[HEAP32[14596] + 2 >> 1] = 172;
         break label$112;
        }
        if (jslIsToken(1376) & 1) {
-        HEAP16[HEAP32[14856] + 2 >> 1] = 192;
+        HEAP16[HEAP32[14596] + 2 >> 1] = 192;
        }
       }
      }
@@ -9016,84 +9016,84 @@ function jslGetNextToken() {
     case 0:
      HEAP8[$0 + 11 | 0] = 1;
      label$115 : {
-      if (HEAP8[HEAP32[14856]] == 46) {
+      if (HEAP8[HEAP32[14596]] == 46) {
        jslGetNextCh();
        label$117 : {
-        if (isNumeric(HEAP8[HEAP32[14856]]) & 1) {
-         HEAP16[HEAP32[14856] + 2 >> 1] = 130;
+        if (isNumeric(HEAP8[HEAP32[14596]]) & 1) {
+         HEAP16[HEAP32[14596] + 2 >> 1] = 130;
          jslTokenAppendChar(46);
          break label$117;
         }
-        HEAP16[HEAP32[14856] + 2 >> 1] = 46;
+        HEAP16[HEAP32[14596] + 2 >> 1] = 46;
         break label$22;
        }
        break label$115;
       }
-      if (HEAP8[HEAP32[14856]] == 48) {
-       jslTokenAppendChar(HEAP8[HEAP32[14856]]);
+      if (HEAP8[HEAP32[14596]] == 48) {
+       jslTokenAppendChar(HEAP8[HEAP32[14596]]);
        jslGetNextCh();
        label$120 : {
         label$121 : {
-         if (HEAP8[HEAP32[14856]] == 120 | HEAP8[HEAP32[14856]] == 88 | (HEAP8[HEAP32[14856]] == 98 | HEAP8[HEAP32[14856]] == 66)) {
+         if (HEAP8[HEAP32[14596]] == 120 | HEAP8[HEAP32[14596]] == 88 | (HEAP8[HEAP32[14596]] == 98 | HEAP8[HEAP32[14596]] == 66)) {
           break label$121;
          }
-         if (HEAP8[HEAP32[14856]] == 111) {
+         if (HEAP8[HEAP32[14596]] == 111) {
           break label$121;
          }
-         if (HEAP8[HEAP32[14856]] != 79) {
+         if (HEAP8[HEAP32[14596]] != 79) {
           break label$120;
          }
         }
         HEAP8[$0 + 11 | 0] = 0;
-        jslTokenAppendChar(HEAP8[HEAP32[14856]]);
+        jslTokenAppendChar(HEAP8[HEAP32[14596]]);
         jslGetNextCh();
        }
       }
-      HEAP16[HEAP32[14856] + 2 >> 1] = 129;
+      HEAP16[HEAP32[14596] + 2 >> 1] = 129;
       while (1) {
-       if (isNumeric(HEAP8[HEAP32[14856]]) & 1) {
+       if (isNumeric(HEAP8[HEAP32[14596]]) & 1) {
         $1 = 1;
        } else {
         if (HEAP8[$0 + 11 | 0] & 1) {
          $1 = 0;
         } else {
-         $1 = isHexadecimal(HEAP8[HEAP32[14856]]);
+         $1 = isHexadecimal(HEAP8[HEAP32[14596]]);
         }
        }
        if ($1 & 1) {
-        jslTokenAppendChar(HEAP8[HEAP32[14856]]);
+        jslTokenAppendChar(HEAP8[HEAP32[14596]]);
         jslGetNextCh();
         continue;
        }
        break;
       }
-      if (!(!(HEAP8[$0 + 11 | 0] & 1) | HEAP8[HEAP32[14856]] != 46)) {
-       HEAP16[HEAP32[14856] + 2 >> 1] = 130;
+      if (!(!(HEAP8[$0 + 11 | 0] & 1) | HEAP8[HEAP32[14596]] != 46)) {
+       HEAP16[HEAP32[14596] + 2 >> 1] = 130;
        jslTokenAppendChar(46);
        jslGetNextCh();
       }
      }
-     if (HEAP16[HEAP32[14856] + 2 >> 1] == 130) {
+     if (HEAP16[HEAP32[14596] + 2 >> 1] == 130) {
       while (1) {
-       if (isNumeric(HEAP8[HEAP32[14856]]) & 1) {
-        jslTokenAppendChar(HEAP8[HEAP32[14856]]);
+       if (isNumeric(HEAP8[HEAP32[14596]]) & 1) {
+        jslTokenAppendChar(HEAP8[HEAP32[14596]]);
         jslGetNextCh();
         continue;
        }
        break;
       }
      }
-     if (!(!(HEAP8[$0 + 11 | 0] & 1) | (HEAP8[HEAP32[14856]] != 69 ? HEAP8[HEAP32[14856]] != 101 : 0))) {
-      HEAP16[HEAP32[14856] + 2 >> 1] = 130;
-      jslTokenAppendChar(HEAP8[HEAP32[14856]]);
+     if (!(!(HEAP8[$0 + 11 | 0] & 1) | (HEAP8[HEAP32[14596]] != 69 ? HEAP8[HEAP32[14596]] != 101 : 0))) {
+      HEAP16[HEAP32[14596] + 2 >> 1] = 130;
+      jslTokenAppendChar(HEAP8[HEAP32[14596]]);
       jslGetNextCh();
-      if (!(HEAP8[HEAP32[14856]] != 43 ? HEAP8[HEAP32[14856]] != 45 : 0)) {
-       jslTokenAppendChar(HEAP8[HEAP32[14856]]);
+      if (!(HEAP8[HEAP32[14596]] != 43 ? HEAP8[HEAP32[14596]] != 45 : 0)) {
+       jslTokenAppendChar(HEAP8[HEAP32[14596]]);
        jslGetNextCh();
       }
       while (1) {
-       if (isNumeric(HEAP8[HEAP32[14856]]) & 1) {
-        jslTokenAppendChar(HEAP8[HEAP32[14856]]);
+       if (isNumeric(HEAP8[HEAP32[14596]]) & 1) {
+        jslTokenAppendChar(HEAP8[HEAP32[14596]]);
         jslGetNextCh();
         continue;
        }
@@ -9106,11 +9106,11 @@ function jslGetNextToken() {
      break label$22;
     case 3:
      jslSingleChar();
-     if (HEAP8[HEAP32[14856]] == 61) {
-      HEAP16[HEAP32[14856] + 2 >> 1] = 140;
+     if (HEAP8[HEAP32[14596]] == 61) {
+      HEAP16[HEAP32[14596] + 2 >> 1] = 140;
       jslGetNextCh();
-      if (HEAP8[HEAP32[14856]] == 61) {
-       HEAP16[HEAP32[14856] + 2 >> 1] = 141;
+      if (HEAP8[HEAP32[14596]] == 61) {
+       HEAP16[HEAP32[14596] + 2 >> 1] = 141;
        jslGetNextCh();
       }
      }
@@ -9118,13 +9118,13 @@ function jslGetNextToken() {
     case 4:
      jslSingleChar();
      label$140 : {
-      if (HEAP8[HEAP32[14856]] == 61) {
-       HEAP16[HEAP32[14856] + 2 >> 1] = 150;
+      if (HEAP8[HEAP32[14596]] == 61) {
+       HEAP16[HEAP32[14596] + 2 >> 1] = 150;
        jslGetNextCh();
        break label$140;
       }
-      if (HEAP8[HEAP32[14856]] == 43) {
-       HEAP16[HEAP32[14856] + 2 >> 1] = 152;
+      if (HEAP8[HEAP32[14596]] == 43) {
+       HEAP16[HEAP32[14596] + 2 >> 1] = 152;
        jslGetNextCh();
       }
      }
@@ -9132,13 +9132,13 @@ function jslGetNextToken() {
     case 5:
      jslSingleChar();
      label$143 : {
-      if (HEAP8[HEAP32[14856]] == 61) {
-       HEAP16[HEAP32[14856] + 2 >> 1] = 151;
+      if (HEAP8[HEAP32[14596]] == 61) {
+       HEAP16[HEAP32[14596] + 2 >> 1] = 151;
        jslGetNextCh();
        break label$143;
       }
-      if (HEAP8[HEAP32[14856]] == 45) {
-       HEAP16[HEAP32[14856] + 2 >> 1] = 153;
+      if (HEAP8[HEAP32[14596]] == 45) {
+       HEAP16[HEAP32[14596] + 2 >> 1] = 153;
        jslGetNextCh();
       }
      }
@@ -9146,13 +9146,13 @@ function jslGetNextToken() {
     case 6:
      jslSingleChar();
      label$146 : {
-      if (HEAP8[HEAP32[14856]] == 61) {
-       HEAP16[HEAP32[14856] + 2 >> 1] = 157;
+      if (HEAP8[HEAP32[14596]] == 61) {
+       HEAP16[HEAP32[14596] + 2 >> 1] = 157;
        jslGetNextCh();
        break label$146;
       }
-      if (HEAP8[HEAP32[14856]] == 38) {
-       HEAP16[HEAP32[14856] + 2 >> 1] = 158;
+      if (HEAP8[HEAP32[14596]] == 38) {
+       HEAP16[HEAP32[14596] + 2 >> 1] = 158;
        jslGetNextCh();
       }
      }
@@ -9160,28 +9160,28 @@ function jslGetNextToken() {
     case 7:
      jslSingleChar();
      label$149 : {
-      if (HEAP8[HEAP32[14856]] == 61) {
-       HEAP16[HEAP32[14856] + 2 >> 1] = 159;
+      if (HEAP8[HEAP32[14596]] == 61) {
+       HEAP16[HEAP32[14596] + 2 >> 1] = 159;
        jslGetNextCh();
        break label$149;
       }
-      if (HEAP8[HEAP32[14856]] == 124) {
-       HEAP16[HEAP32[14856] + 2 >> 1] = 160;
+      if (HEAP8[HEAP32[14596]] == 124) {
+       HEAP16[HEAP32[14596] + 2 >> 1] = 160;
        jslGetNextCh();
       }
      }
      break label$22;
     case 10:
      jslSingleChar();
-     if (HEAP8[HEAP32[14856]] == 61) {
-      HEAP16[HEAP32[14856] + 2 >> 1] = 161;
+     if (HEAP8[HEAP32[14596]] == 61) {
+      HEAP16[HEAP32[14596] + 2 >> 1] = 161;
       jslGetNextCh();
      }
      break label$22;
     case 9:
      jslSingleChar();
-     if (HEAP8[HEAP32[14856]] == 61) {
-      HEAP16[HEAP32[14856] + 2 >> 1] = 154;
+     if (HEAP8[HEAP32[14596]] == 61) {
+      HEAP16[HEAP32[14596] + 2 >> 1] = 154;
       jslGetNextCh();
      }
      break label$22;
@@ -9215,33 +9215,33 @@ function jslGetNextToken() {
        break label$154;
       }
       jslSingleChar();
-      if (HEAP8[HEAP32[14856]] == 61) {
-       HEAP16[HEAP32[14856] + 2 >> 1] = 155;
+      if (HEAP8[HEAP32[14596]] == 61) {
+       HEAP16[HEAP32[14596] + 2 >> 1] = 155;
        jslGetNextCh();
       }
      }
      break label$22;
     case 8:
      jslSingleChar();
-     if (HEAP8[HEAP32[14856]] == 61) {
-      HEAP16[HEAP32[14856] + 2 >> 1] = 156;
+     if (HEAP8[HEAP32[14596]] == 61) {
+      HEAP16[HEAP32[14596] + 2 >> 1] = 156;
       jslGetNextCh();
      }
      break label$22;
     case 13:
      jslSingleChar();
      label$161 : {
-      if (HEAP8[HEAP32[14856]] == 61) {
-       HEAP16[HEAP32[14856] + 2 >> 1] = 138;
+      if (HEAP8[HEAP32[14596]] == 61) {
+       HEAP16[HEAP32[14596] + 2 >> 1] = 138;
        jslGetNextCh();
-       if (HEAP8[HEAP32[14856]] == 61) {
-        HEAP16[HEAP32[14856] + 2 >> 1] = 139;
+       if (HEAP8[HEAP32[14596]] == 61) {
+        HEAP16[HEAP32[14596] + 2 >> 1] = 139;
         jslGetNextCh();
        }
        break label$161;
       }
-      if (HEAP8[HEAP32[14856]] == 62) {
-       HEAP16[HEAP32[14856] + 2 >> 1] = 162;
+      if (HEAP8[HEAP32[14596]] == 62) {
+       HEAP16[HEAP32[14596] + 2 >> 1] = 162;
        jslGetNextCh();
       }
      }
@@ -9249,16 +9249,16 @@ function jslGetNextToken() {
     case 12:
      jslSingleChar();
      label$165 : {
-      if (HEAP8[HEAP32[14856]] == 61) {
-       HEAP16[HEAP32[14856] + 2 >> 1] = 142;
+      if (HEAP8[HEAP32[14596]] == 61) {
+       HEAP16[HEAP32[14596] + 2 >> 1] = 142;
        jslGetNextCh();
        break label$165;
       }
-      if (HEAP8[HEAP32[14856]] == 60) {
-       HEAP16[HEAP32[14856] + 2 >> 1] = 143;
+      if (HEAP8[HEAP32[14596]] == 60) {
+       HEAP16[HEAP32[14596] + 2 >> 1] = 143;
        jslGetNextCh();
-       if (HEAP8[HEAP32[14856]] == 61) {
-        HEAP16[HEAP32[14856] + 2 >> 1] = 144;
+       if (HEAP8[HEAP32[14596]] == 61) {
+        HEAP16[HEAP32[14596] + 2 >> 1] = 144;
         jslGetNextCh();
        }
       }
@@ -9267,29 +9267,29 @@ function jslGetNextToken() {
     case 14:
      jslSingleChar();
      label$169 : {
-      if (HEAP8[HEAP32[14856]] == 61) {
-       HEAP16[HEAP32[14856] + 2 >> 1] = 145;
+      if (HEAP8[HEAP32[14596]] == 61) {
+       HEAP16[HEAP32[14596] + 2 >> 1] = 145;
        jslGetNextCh();
        break label$169;
       }
-      if (HEAP8[HEAP32[14856]] == 62) {
-       HEAP16[HEAP32[14856] + 2 >> 1] = 146;
+      if (HEAP8[HEAP32[14596]] == 62) {
+       HEAP16[HEAP32[14596] + 2 >> 1] = 146;
        jslGetNextCh();
        label$172 : {
-        if (HEAP8[HEAP32[14856]] == 61) {
-         HEAP16[HEAP32[14856] + 2 >> 1] = 148;
+        if (HEAP8[HEAP32[14596]] == 61) {
+         HEAP16[HEAP32[14596] + 2 >> 1] = 148;
          jslGetNextCh();
          break label$172;
         }
-        if (HEAP8[HEAP32[14856]] == 62) {
+        if (HEAP8[HEAP32[14596]] == 62) {
          jslGetNextCh();
          label$175 : {
-          if (HEAP8[HEAP32[14856]] == 61) {
-           HEAP16[HEAP32[14856] + 2 >> 1] = 149;
+          if (HEAP8[HEAP32[14596]] == 61) {
+           HEAP16[HEAP32[14596] + 2 >> 1] = 149;
            jslGetNextCh();
            break label$175;
           }
-          HEAP16[HEAP32[14856] + 2 >> 1] = 147;
+          HEAP16[HEAP32[14596] + 2 >> 1] = 147;
          }
         }
        }
@@ -9317,15 +9317,15 @@ function jsfGetJSONWithCallback($0, $1, $2, $3, $4, $5) {
  HEAP32[$6 + 280 >> 2] = $5;
  HEAP32[$6 + 276 >> 2] = HEAP32[$6 + 292 >> 2] + 4096;
  if (!HEAP32[$6 + 288 >> 2]) {
-  HEAP32[$6 + 288 >> 2] = 38302;
+  HEAP32[$6 + 288 >> 2] = 37278;
  }
  label$2 : {
   if (jsvIsUndefined(HEAP32[$6 + 300 >> 2]) & 1) {
-   cbprintf(HEAP32[$6 + 284 >> 2], HEAP32[$6 + 280 >> 2], 38305, 0);
+   cbprintf(HEAP32[$6 + 284 >> 2], HEAP32[$6 + 280 >> 2], 37281, 0);
    break label$2;
   }
   if (HEAPU16[HEAP32[$6 + 300 >> 2] + 14 >> 1] & 256) {
-   cbprintf(HEAP32[$6 + 284 >> 2], HEAP32[$6 + 280 >> 2], 38199, 0);
+   cbprintf(HEAP32[$6 + 284 >> 2], HEAP32[$6 + 280 >> 2], 37175, 0);
    break label$2;
   }
   $0 = HEAP32[$6 + 300 >> 2];
@@ -9335,7 +9335,7 @@ function jsfGetJSONWithCallback($0, $1, $2, $3, $4, $5) {
     HEAP32[$6 + 272 >> 2] = jsvGetArrayLength(HEAP32[$6 + 300 >> 2]);
     HEAP8[$6 + 271 | 0] = HEAP32[$6 + 292 >> 2] & 8 ? HEAP32[$6 + 272 >> 2] > 15 : 0;
     HEAP8[$6 + 270 | 0] = 0;
-    cbprintf(HEAP32[$6 + 284 >> 2], HEAP32[$6 + 280 >> 2], HEAP32[$6 + 292 >> 2] & 4 ? 38315 : 38318, 0);
+    cbprintf(HEAP32[$6 + 284 >> 2], HEAP32[$6 + 280 >> 2], HEAP32[$6 + 292 >> 2] & 4 ? 37291 : 37294, 0);
     HEAP32[$6 + 264 >> 2] = -1;
     HEAP8[$6 + 263 | 0] = 1;
     HEAP8[$6 + 262 | 0] = 1;
@@ -9377,11 +9377,11 @@ function jsfGetJSONWithCallback($0, $1, $2, $3, $4, $5) {
           HEAP32[$6 + 264 >> 2] = HEAP32[$6 + 264 >> 2] + 1;
           if (!(HEAP32[$6 + 264 >> 2] < (HEAP32[$6 + 272 >> 2] - 5 | 0) ? !(!(HEAP8[$6 + 271 | 0] & 1) | HEAP32[$6 + 264 >> 2] < 5) : 0)) {
            if (!(HEAP8[$6 + 262 | 0] & 1)) {
-            cbprintf(HEAP32[$6 + 284 >> 2], HEAP32[$6 + 280 >> 2], HEAP32[$6 + 292 >> 2] & 4 ? 38320 : 38239, 0);
+            cbprintf(HEAP32[$6 + 284 >> 2], HEAP32[$6 + 280 >> 2], HEAP32[$6 + 292 >> 2] & 4 ? 37296 : 37215, 0);
            }
            HEAP8[$6 + 262 | 0] = 0;
            if (!(!(HEAP8[$6 + 271 | 0] & 1) | HEAP32[$6 + 264 >> 2] != (HEAP32[$6 + 272 >> 2] - 5 | 0))) {
-            cbprintf(HEAP32[$6 + 284 >> 2], HEAP32[$6 + 280 >> 2], HEAP32[14371], 0);
+            cbprintf(HEAP32[$6 + 284 >> 2], HEAP32[$6 + 280 >> 2], HEAP32[14111], 0);
            }
            $0 = $6;
            if (HEAP32[$6 + 292 >> 2] & 1) {
@@ -9405,7 +9405,7 @@ function jsfGetJSONWithCallback($0, $1, $2, $3, $4, $5) {
              jsvUnLock(HEAP32[$6 + 236 >> 2]);
              break label$28;
             }
-            cbprintf(HEAP32[$6 + 284 >> 2], HEAP32[$6 + 280 >> 2], HEAP32[$6 + 292 >> 2] & 64 ? 38323 : 38305, 0);
+            cbprintf(HEAP32[$6 + 284 >> 2], HEAP32[$6 + 280 >> 2], HEAP32[$6 + 292 >> 2] & 64 ? 37299 : 37281, 0);
            }
            HEAP8[$6 + 270 | 0] = HEAP8[$6 + 243 | 0] & 1;
           }
@@ -9432,7 +9432,7 @@ function jsfGetJSONWithCallback($0, $1, $2, $3, $4, $5) {
     if (HEAP8[$6 + 270 | 0] & 1) {
      jsonNewLine(HEAP32[$6 + 292 >> 2], HEAP32[$6 + 288 >> 2], HEAP32[$6 + 284 >> 2], HEAP32[$6 + 280 >> 2]);
     }
-    cbprintf(HEAP32[$6 + 284 >> 2], HEAP32[$6 + 280 >> 2], HEAP32[$6 + 292 >> 2] & 4 ? 38328 : 38331, 0);
+    cbprintf(HEAP32[$6 + 284 >> 2], HEAP32[$6 + 280 >> 2], HEAP32[$6 + 292 >> 2] & 4 ? 37304 : 37307, 0);
     break label$5;
    }
    label$32 : {
@@ -9458,17 +9458,17 @@ function jsfGetJSONWithCallback($0, $1, $2, $3, $4, $5) {
        $2 = jswGetBasicObjectName(HEAP32[$6 + 300 >> 2]);
        HEAP32[$6 + 20 >> 2] = jsvGetArrayBufferLength(HEAP32[$6 + 300 >> 2]);
        HEAP32[$6 + 16 >> 2] = $2;
-       cbprintf($0, $1, 38333, $6 + 16 | 0);
+       cbprintf($0, $1, 37309, $6 + 16 | 0);
        break label$37;
       }
       HEAP32[$6 + 184 >> 2] = jswGetBasicObjectName(HEAP32[$6 + 300 >> 2]);
-      HEAP8[$6 + 183 | 0] = !strcmp(HEAP32[$6 + 184 >> 2], 38344);
+      HEAP8[$6 + 183 | 0] = !strcmp(HEAP32[$6 + 184 >> 2], 37320);
       if (HEAP8[$6 + 183 | 0] & 1) {
-       HEAP32[$6 + 184 >> 2] = 38356;
+       HEAP32[$6 + 184 >> 2] = 37332;
       }
       $0 = HEAP32[$6 + 284 >> 2];
       $1 = HEAP32[$6 + 280 >> 2];
-      $2 = HEAP8[$6 + 190 | 0] & 1 ? 38318 : 38367;
+      $2 = HEAP8[$6 + 190 | 0] & 1 ? 37294 : 37343;
       HEAP32[$6 >> 2] = HEAP32[$6 + 184 >> 2];
       cbprintf($0, $1, $2, $6);
       if (HEAP32[$6 + 292 >> 2] & 2) {
@@ -9486,13 +9486,13 @@ function jsfGetJSONWithCallback($0, $1, $2, $3, $4, $5) {
        if ($0 & 1) {
         if (!(HEAPU32[$6 + 224 >> 2] < HEAP32[$6 + 176 >> 2] - 5 >>> 0 ? !(!(HEAP8[$6 + 175 | 0] & 1) | HEAPU32[$6 + 224 >> 2] < 5) : 0)) {
          if (HEAPU32[$6 + 224 >> 2] > 0) {
-          cbprintf(HEAP32[$6 + 284 >> 2], HEAP32[$6 + 280 >> 2], HEAP32[$6 + 292 >> 2] & 4 ? 38320 : 38239, 0);
+          cbprintf(HEAP32[$6 + 284 >> 2], HEAP32[$6 + 280 >> 2], HEAP32[$6 + 292 >> 2] & 4 ? 37296 : 37215, 0);
          }
          if (HEAP32[$6 + 292 >> 2] & 2) {
           jsonNewLine(HEAP32[$6 + 276 >> 2], HEAP32[$6 + 288 >> 2], HEAP32[$6 + 284 >> 2], HEAP32[$6 + 280 >> 2]);
          }
          if (!(!(HEAP8[$6 + 175 | 0] & 1) | HEAP32[$6 + 224 >> 2] != (HEAP32[$6 + 176 >> 2] - 5 | 0))) {
-          cbprintf(HEAP32[$6 + 284 >> 2], HEAP32[$6 + 280 >> 2], HEAP32[14371], 0);
+          cbprintf(HEAP32[$6 + 284 >> 2], HEAP32[$6 + 280 >> 2], HEAP32[14111], 0);
          }
          HEAP32[$6 + 168 >> 2] = jsvArrayBufferIteratorGetValue($6 + 192 | 0);
          jsfGetJSONWithCallback(HEAP32[$6 + 168 >> 2], 0, HEAP32[$6 + 276 >> 2], HEAP32[$6 + 288 >> 2], HEAP32[$6 + 284 >> 2], HEAP32[$6 + 280 >> 2]);
@@ -9507,9 +9507,9 @@ function jsfGetJSONWithCallback($0, $1, $2, $3, $4, $5) {
        jsonNewLine(HEAP32[$6 + 292 >> 2], HEAP32[$6 + 288 >> 2], HEAP32[$6 + 284 >> 2], HEAP32[$6 + 280 >> 2]);
       }
       jsvArrayBufferIteratorFree($6 + 192 | 0);
-      cbprintf(HEAP32[$6 + 284 >> 2], HEAP32[$6 + 280 >> 2], HEAP8[$6 + 190 | 0] & 1 ? 38331 : 38376, 0);
+      cbprintf(HEAP32[$6 + 284 >> 2], HEAP32[$6 + 280 >> 2], HEAP8[$6 + 190 | 0] & 1 ? 37307 : 37352, 0);
       if (!(!(HEAP8[$6 + 183 | 0] & 1) | HEAP8[$6 + 190 | 0] & 1)) {
-       cbprintf(HEAP32[$6 + 284 >> 2], HEAP32[$6 + 280 >> 2], 38379, 0);
+       cbprintf(HEAP32[$6 + 284 >> 2], HEAP32[$6 + 280 >> 2], 37355, 0);
       }
      }
      break label$32;
@@ -9530,30 +9530,30 @@ function jsfGetJSONWithCallback($0, $1, $2, $3, $4, $5) {
         $0 = HEAP32[$6 + 284 >> 2];
         $1 = HEAP32[$6 + 280 >> 2];
         HEAP32[$6 + 32 >> 2] = jshGetDeviceString(HEAPU8[$6 + 167 | 0]);
-        cbprintf($0, $1, 38387, $6 + 32 | 0);
+        cbprintf($0, $1, 37363, $6 + 32 | 0);
         break label$58;
        }
        HEAP8[$6 + 166 | 0] = 1;
        if (HEAP32[$6 + 292 >> 2] & 256) {
-        HEAP32[$6 + 160 >> 2] = jsvObjectGetChild(HEAP32[$6 + 300 >> 2], 38390, 0);
+        HEAP32[$6 + 160 >> 2] = jsvObjectGetChild(HEAP32[$6 + 300 >> 2], 37366, 0);
         if (jsvHasChildren(HEAP32[$6 + 160 >> 2]) & 1) {
-         HEAP32[$6 + 156 >> 2] = jsvObjectGetChild(HEAP32[$6 + 160 >> 2], 38400, 0);
+         HEAP32[$6 + 156 >> 2] = jsvObjectGetChild(HEAP32[$6 + 160 >> 2], 37376, 0);
          if (HEAP32[$6 + 156 >> 2]) {
-          HEAP32[$6 + 152 >> 2] = jsvGetIndexOf(HEAP32[24862], HEAP32[$6 + 156 >> 2], 1);
+          HEAP32[$6 + 152 >> 2] = jsvGetIndexOf(HEAP32[24602], HEAP32[$6 + 156 >> 2], 1);
           if (HEAP32[$6 + 152 >> 2]) {
            $0 = HEAP32[$6 + 284 >> 2];
            $1 = HEAP32[$6 + 280 >> 2];
            HEAP32[$6 + 64 >> 2] = HEAP32[$6 + 152 >> 2];
-           cbprintf($0, $1, 38412, $6 - -64 | 0);
+           cbprintf($0, $1, 37388, $6 - -64 | 0);
           }
           jsvUnLock2(HEAP32[$6 + 152 >> 2], HEAP32[$6 + 156 >> 2]);
-          HEAP32[$6 + 148 >> 2] = jspGetNamedField(HEAP32[$6 + 300 >> 2], 38417, 0);
+          HEAP32[$6 + 148 >> 2] = jspGetNamedField(HEAP32[$6 + 300 >> 2], 37393, 0);
           if (!(!(jsvIsFunction(HEAP32[$6 + 148 >> 2]) & 1) | HEAP32[HEAP32[$6 + 148 >> 2] >> 2] == 3)) {
            HEAP32[$6 + 144 >> 2] = jspExecuteFunction(HEAP32[$6 + 148 >> 2], HEAP32[$6 + 300 >> 2], 0, 0);
            $0 = HEAP32[$6 + 284 >> 2];
            $1 = HEAP32[$6 + 280 >> 2];
            HEAP32[$6 + 48 >> 2] = HEAP32[$6 + 144 >> 2];
-           cbprintf($0, $1, 38241, $6 + 48 | 0);
+           cbprintf($0, $1, 37217, $6 + 48 | 0);
            jsvUnLock(HEAP32[$6 + 144 >> 2]);
            HEAP8[$6 + 166 | 0] = 0;
           }
@@ -9565,7 +9565,7 @@ function jsfGetJSONWithCallback($0, $1, $2, $3, $4, $5) {
        if (HEAP8[$6 + 166 | 0] & 1) {
         HEAP32[$6 + 140 >> 2] = 0;
         if (HEAP32[$6 + 292 >> 2] & 2048) {
-         HEAP32[$6 + 140 >> 2] = jspGetNamedField(HEAP32[$6 + 300 >> 2], 38426, 0);
+         HEAP32[$6 + 140 >> 2] = jspGetNamedField(HEAP32[$6 + 300 >> 2], 37402, 0);
         }
         label$67 : {
          if (jsvIsFunction(HEAP32[$6 + 140 >> 2]) & 1) {
@@ -9589,14 +9589,14 @@ function jsfGetJSONWithCallback($0, $1, $2, $3, $4, $5) {
           break label$67;
          }
          jsvObjectIteratorNew($6 + 128 | 0, HEAP32[$6 + 300 >> 2]);
-         cbprintf(HEAP32[$6 + 284 >> 2], HEAP32[$6 + 280 >> 2], HEAP32[$6 + 292 >> 2] & 4 ? 38433 : 38280, 0);
+         cbprintf(HEAP32[$6 + 284 >> 2], HEAP32[$6 + 280 >> 2], HEAP32[$6 + 292 >> 2] & 4 ? 37409 : 37256, 0);
          $0 = $6 + 128 | 0;
          HEAP8[$6 + 127 | 0] = jsfGetJSONForObjectItWithCallback($0, HEAP32[$6 + 292 >> 2], HEAP32[$6 + 288 >> 2], HEAP32[$6 + 276 >> 2], HEAP32[$6 + 284 >> 2], HEAP32[$6 + 280 >> 2], 1) & 1;
          jsvObjectIteratorFree($0);
          if (HEAP8[$6 + 127 | 0] & 1) {
           jsonNewLine(HEAP32[$6 + 292 >> 2], HEAP32[$6 + 288 >> 2], HEAP32[$6 + 284 >> 2], HEAP32[$6 + 280 >> 2]);
          }
-         cbprintf(HEAP32[$6 + 284 >> 2], HEAP32[$6 + 280 >> 2], HEAP32[$6 + 292 >> 2] & 4 ? 38436 : 38295, 0);
+         cbprintf(HEAP32[$6 + 284 >> 2], HEAP32[$6 + 280 >> 2], HEAP32[$6 + 292 >> 2] & 4 ? 37412 : 37271, 0);
         }
         jsvUnLock(HEAP32[$6 + 140 >> 2]);
        }
@@ -9606,10 +9606,10 @@ function jsfGetJSONWithCallback($0, $1, $2, $3, $4, $5) {
      label$73 : {
       if (jsvIsFunction(HEAP32[$6 + 300 >> 2]) & 1) {
        if (HEAP32[$6 + 292 >> 2] & 16) {
-        cbprintf(HEAP32[$6 + 284 >> 2], HEAP32[$6 + 280 >> 2], 38305, 0);
+        cbprintf(HEAP32[$6 + 284 >> 2], HEAP32[$6 + 280 >> 2], 37281, 0);
         break label$73;
        }
-       cbprintf(HEAP32[$6 + 284 >> 2], HEAP32[$6 + 280 >> 2], 38439, 0);
+       cbprintf(HEAP32[$6 + 284 >> 2], HEAP32[$6 + 280 >> 2], 37415, 0);
        jsfGetJSONForFunctionWithCallback(HEAP32[$6 + 300 >> 2], HEAP32[$6 + 276 >> 2], HEAP32[$6 + 284 >> 2], HEAP32[$6 + 280 >> 2]);
        break label$73;
       }
@@ -9634,17 +9634,17 @@ function jsfGetJSONWithCallback($0, $1, $2, $3, $4, $5) {
           $0 = HEAP32[$6 + 284 >> 2];
           $1 = HEAP32[$6 + 280 >> 2];
           $2 = HEAP32[$6 + 120 >> 2];
-          $3 = HEAP32[14371];
+          $3 = HEAP32[14111];
           HEAP32[$6 + 104 >> 2] = HEAP32[$6 + 116 >> 2];
           HEAP32[$6 + 100 >> 2] = $3;
           HEAP32[$6 + 96 >> 2] = $2;
-          cbprintf($0, $1, 38449, $6 + 96 | 0);
+          cbprintf($0, $1, 37425, $6 + 96 | 0);
           jsvUnLock2(HEAP32[$6 + 120 >> 2], HEAP32[$6 + 116 >> 2]);
           break label$78;
          }
          $0 = HEAP32[$6 + 284 >> 2];
          $1 = HEAP32[$6 + 280 >> 2];
-         $2 = HEAP32[$6 + 292 >> 2] & 1024 ? 38456 : 38459;
+         $2 = HEAP32[$6 + 292 >> 2] & 1024 ? 37432 : 37435;
          HEAP32[$6 + 112 >> 2] = HEAP32[$6 + 300 >> 2];
          cbprintf($0, $1, $2, $6 + 112 | 0);
         }
@@ -9653,7 +9653,7 @@ function jsfGetJSONWithCallback($0, $1, $2, $3, $4, $5) {
        $0 = HEAP32[$6 + 284 >> 2];
        $1 = HEAP32[$6 + 280 >> 2];
        HEAP32[$6 + 80 >> 2] = HEAP32[$6 + 300 >> 2];
-       cbprintf($0, $1, 38241, $6 + 80 | 0);
+       cbprintf($0, $1, 37217, $6 + 80 | 0);
       }
      }
     }
@@ -9902,7 +9902,7 @@ function tflite__ops__micro__comparisons___28anonymous_20namespace_29__NotEqualE
    $0 = HEAP32[HEAP32[$2 + 776 >> 2] + 20 >> 2];
    $1 = HEAP32[$2 + 776 >> 2];
    HEAP32[$2 >> 2] = HEAP32[HEAP32[$2 + 768 >> 2] >> 2];
-   FUNCTION_TABLE[$0]($1, 49671, $2);
+   FUNCTION_TABLE[$0]($1, 48631, $2);
    HEAP32[$2 + 780 >> 2] = 1;
    break label$1;
   }
@@ -10149,7 +10149,7 @@ function tflite__ops__micro__comparisons___28anonymous_20namespace_29__EqualEval
    $0 = HEAP32[HEAP32[$2 + 776 >> 2] + 20 >> 2];
    $1 = HEAP32[$2 + 776 >> 2];
    HEAP32[$2 >> 2] = HEAP32[HEAP32[$2 + 768 >> 2] >> 2];
-   FUNCTION_TABLE[$0]($1, 49671, $2);
+   FUNCTION_TABLE[$0]($1, 48631, $2);
    HEAP32[$2 + 780 >> 2] = 1;
    break label$1;
   }
@@ -10163,159 +10163,159 @@ function jswrap_banglejs_idle() {
  $4 = global$0 - 448 | 0;
  $0 = $4;
  global$0 = $0;
- if (HEAP32[63904]) {
-  HEAP32[$0 + 440 >> 2] = jsvObjectGetChild(HEAP32[24862], 32068, 0);
-  if (HEAP32[63904] & 2) {
+ if (HEAP32[63644]) {
+  HEAP32[$0 + 440 >> 2] = jsvObjectGetChild(HEAP32[24602], 31044, 0);
+  if (HEAP32[63644] & 2) {
    jswrap_banglejs_setLCDPower(0);
   }
-  if (HEAP32[63904] & 1) {
+  if (HEAP32[63644] & 1) {
    jswrap_banglejs_setLCDPower(1);
   }
-  if (HEAP32[63904] & 4) {
+  if (HEAP32[63644] & 4) {
    label$5 : {
     if (!HEAP32[$0 + 440 >> 2]) {
      break label$5;
     }
-    if (!(jsiObjectHasCallbacks(HEAP32[$0 + 440 >> 2], 32573) & 1)) {
+    if (!(jsiObjectHasCallbacks(HEAP32[$0 + 440 >> 2], 31545) & 1)) {
      break label$5;
     }
     HEAP32[$0 + 436 >> 2] = jswrap_banglejs_getAccel();
     if (HEAP32[$0 + 436 >> 2]) {
-     jsiQueueObjectCallbacks(HEAP32[$0 + 440 >> 2], 32573, $0 + 436 | 0, 1);
+     jsiQueueObjectCallbacks(HEAP32[$0 + 440 >> 2], 31545, $0 + 436 | 0, 1);
      jsvUnLock(HEAP32[$0 + 436 >> 2]);
     }
    }
    $2 = $0;
    $1 = 0;
    label$7 : {
-    if (HEAP16[127832] >= -6700) {
+    if (HEAP16[127312] >= -6700) {
      break label$7;
     }
     $1 = 0;
-    if (HEAP16[127832] <= -9e3) {
+    if (HEAP16[127312] <= -9e3) {
      break label$7;
     }
-    $3 = (abs(HEAP16[127830]) | 0) >= 2048;
+    $3 = (abs(HEAP16[127310]) | 0) >= 2048;
     $1 = 0;
     if ($3) {
      break label$7;
     }
-    $1 = (abs(HEAP16[127831]) | 0) < 2048;
+    $1 = (abs(HEAP16[127311]) | 0) < 2048;
    }
    HEAP8[$2 + 435 | 0] = $1;
-   if ((HEAP8[$0 + 435 | 0] & 1) != (HEAP8[255692] & 1)) {
-    HEAP8[255693] = 0;
-    HEAP8[255692] = HEAP8[$0 + 435 | 0] & 1;
+   if ((HEAP8[$0 + 435 | 0] & 1) != (HEAP8[254652] & 1)) {
+    HEAP8[254653] = 0;
+    HEAP8[254652] = HEAP8[$0 + 435 | 0] & 1;
    }
-   if (HEAPU8[255693] < 255) {
-    HEAP8[255693] = HEAPU8[255693] + 1;
+   if (HEAPU8[254653] < 255) {
+    HEAP8[254653] = HEAPU8[254653] + 1;
    }
-   if (HEAPU8[255693] == 3) {
+   if (HEAPU8[254653] == 3) {
     if (HEAP32[$0 + 440 >> 2]) {
      $1 = $0 + 428 | 0;
      HEAP32[$0 + 428 >> 2] = jsvNewFromBool(HEAP8[$0 + 435 | 0] & 1);
-     jsiQueueObjectCallbacks(HEAP32[$0 + 440 >> 2], 32582, $1, 1);
+     jsiQueueObjectCallbacks(HEAP32[$0 + 440 >> 2], 31554, $1, 1);
      jsvUnLock(HEAP32[$0 + 428 >> 2]);
     }
-    if (!(!(HEAP8[$0 + 435 | 0] & 1) | !HEAP32[63901] | (!(HEAP32[63903] & 1) | HEAP8[255608] & 1))) {
+    if (!(!(HEAP8[$0 + 435 | 0] & 1) | !HEAP32[63641] | (!(HEAP32[63643] & 1) | HEAP8[254568] & 1))) {
      jswrap_banglejs_setLCDPower(1);
-     HEAP16[127805] = 0;
+     HEAP16[127285] = 0;
     }
    }
   }
-  if (!(!HEAP32[$0 + 440 >> 2] | !(HEAP32[63904] & 8))) {
+  if (!(!HEAP32[$0 + 440 >> 2] | !(HEAP32[63644] & 8))) {
    HEAP32[$0 + 424 >> 2] = jsvNewWithFlags(5);
    if (HEAP32[$0 + 424 >> 2]) {
-    HEAP32[$0 + 420 >> 2] = 32537;
-    if (HEAP8[255694] & 1) {
-     HEAP32[$0 + 420 >> 2] = 32592;
+    HEAP32[$0 + 420 >> 2] = 31513;
+    if (HEAP8[254654] & 1) {
+     HEAP32[$0 + 420 >> 2] = 31564;
     }
-    if (HEAPU8[255694] & 2) {
-     HEAP32[$0 + 420 >> 2] = 32598;
+    if (HEAPU8[254654] & 2) {
+     HEAP32[$0 + 420 >> 2] = 31570;
     }
-    if (HEAPU8[255694] & 4) {
-     HEAP32[$0 + 420 >> 2] = 32603;
+    if (HEAPU8[254654] & 4) {
+     HEAP32[$0 + 420 >> 2] = 31575;
     }
-    if (HEAPU8[255694] & 8) {
-     HEAP32[$0 + 420 >> 2] = 32610;
+    if (HEAPU8[254654] & 8) {
+     HEAP32[$0 + 420 >> 2] = 31582;
     }
-    if (HEAPU8[255694] & 16) {
-     HEAP32[$0 + 420 >> 2] = 32614;
+    if (HEAPU8[254654] & 16) {
+     HEAP32[$0 + 420 >> 2] = 31586;
     }
-    if (HEAPU8[255694] & 32) {
-     HEAP32[$0 + 420 >> 2] = 32620;
+    if (HEAPU8[254654] & 32) {
+     HEAP32[$0 + 420 >> 2] = 31592;
     }
-    HEAP32[$0 + 416 >> 2] = HEAPU8[255694] & 128 ? 2 : 1;
-    jsvObjectSetChildAndUnLock(HEAP32[$0 + 424 >> 2], 32625, jsvNewFromString(HEAP32[$0 + 420 >> 2]));
-    jsvObjectSetChildAndUnLock(HEAP32[$0 + 424 >> 2], 32629, jsvNewFromBool((HEAPU8[255694] & 128) != 0));
+    HEAP32[$0 + 416 >> 2] = HEAPU8[254654] & 128 ? 2 : 1;
+    jsvObjectSetChildAndUnLock(HEAP32[$0 + 424 >> 2], 31597, jsvNewFromString(HEAP32[$0 + 420 >> 2]));
+    jsvObjectSetChildAndUnLock(HEAP32[$0 + 424 >> 2], 31601, jsvNewFromBool((HEAPU8[254654] & 128) != 0));
     $1 = HEAP32[$0 + 424 >> 2];
-    if (HEAPU8[255694] & 16) {
+    if (HEAPU8[254654] & 16) {
      $2 = 0 - HEAP32[$0 + 416 >> 2] | 0;
     } else {
-     if (HEAPU8[255694] & 32) {
+     if (HEAPU8[254654] & 32) {
       $2 = HEAP32[$0 + 416 >> 2];
      } else {
       $2 = 0;
      }
     }
-    jsvObjectSetChildAndUnLock($1, 32489, jsvNewFromInteger($2));
+    jsvObjectSetChildAndUnLock($1, 31465, jsvNewFromInteger($2));
     $1 = HEAP32[$0 + 424 >> 2];
-    if (HEAPU8[255694] & 4) {
+    if (HEAPU8[254654] & 4) {
      $2 = 0 - HEAP32[$0 + 416 >> 2] | 0;
     } else {
-     if (HEAPU8[255694] & 8) {
+     if (HEAPU8[254654] & 8) {
       $2 = HEAP32[$0 + 416 >> 2];
      } else {
       $2 = 0;
      }
     }
-    jsvObjectSetChildAndUnLock($1, 32491, jsvNewFromInteger($2));
+    jsvObjectSetChildAndUnLock($1, 31467, jsvNewFromInteger($2));
     $1 = $0 + 424 | 0;
     $3 = HEAP32[$0 + 424 >> 2];
-    if (HEAP8[255694] & 1) {
+    if (HEAP8[254654] & 1) {
      $2 = 0 - HEAP32[$0 + 416 >> 2] | 0;
     } else {
-     if (HEAPU8[255694] & 2) {
+     if (HEAPU8[254654] & 2) {
       $2 = HEAP32[$0 + 416 >> 2];
      } else {
       $2 = 0;
      }
     }
-    jsvObjectSetChildAndUnLock($3, 32493, jsvNewFromInteger($2));
-    jsiQueueObjectCallbacks(HEAP32[$0 + 440 >> 2], 32636, $1, 1);
+    jsvObjectSetChildAndUnLock($3, 31469, jsvNewFromInteger($2));
+    jsiQueueObjectCallbacks(HEAP32[$0 + 440 >> 2], 31608, $1, 1);
     jsvUnLock(HEAP32[$0 + 424 >> 2]);
    }
   }
-  if (!(!HEAP32[$0 + 440 >> 2] | !(HEAP32[63904] & 16))) {
+  if (!(!HEAP32[$0 + 440 >> 2] | !(HEAP32[63644] & 16))) {
    HEAP32[$0 + 412 >> 2] = nmea_to_jsVar();
    if (HEAP32[$0 + 412 >> 2]) {
-    jsiQueueObjectCallbacks(HEAP32[$0 + 440 >> 2], 32643, $0 + 412 | 0, 1);
+    jsiQueueObjectCallbacks(HEAP32[$0 + 440 >> 2], 31615, $0 + 412 | 0, 1);
     jsvUnLock(HEAP32[$0 + 412 >> 2]);
    }
   }
-  if (!(!HEAP32[$0 + 440 >> 2] | !(HEAP32[63904] & 32))) {
-   HEAP32[$0 + 408 >> 2] = jsvNewFromString(255760);
+  if (!(!HEAP32[$0 + 440 >> 2] | !(HEAP32[63644] & 32))) {
+   HEAP32[$0 + 408 >> 2] = jsvNewFromString(254720);
    if (HEAP32[$0 + 408 >> 2]) {
-    jsiQueueObjectCallbacks(HEAP32[$0 + 440 >> 2], 32650, $0 + 408 | 0, 1);
+    jsiQueueObjectCallbacks(HEAP32[$0 + 440 >> 2], 31622, $0 + 408 | 0, 1);
    }
    jsvUnLock(HEAP32[$0 + 408 >> 2]);
   }
-  if (!(!HEAP32[$0 + 440 >> 2] | !(HEAP32[63904] & 64))) {
+  if (!(!HEAP32[$0 + 440 >> 2] | !(HEAP32[63644] & 64))) {
    label$38 : {
     if (!HEAP32[$0 + 440 >> 2]) {
      break label$38;
     }
-    if (!(jsiObjectHasCallbacks(HEAP32[$0 + 440 >> 2], 32661) & 1)) {
+    if (!(jsiObjectHasCallbacks(HEAP32[$0 + 440 >> 2], 31633) & 1)) {
      break label$38;
     }
     HEAP32[$0 + 404 >> 2] = jswrap_banglejs_getCompass();
     if (HEAP32[$0 + 404 >> 2]) {
-     jsiQueueObjectCallbacks(HEAP32[$0 + 440 >> 2], 32661, $0 + 404 | 0, 1);
+     jsiQueueObjectCallbacks(HEAP32[$0 + 440 >> 2], 31633, $0 + 404 | 0, 1);
      jsvUnLock(HEAP32[$0 + 404 >> 2]);
     }
    }
   }
-  if (!(!HEAP32[$0 + 440 >> 2] | !(HEAP32[63904] & 32768))) {
+  if (!(!HEAP32[$0 + 440 >> 2] | !(HEAP32[63644] & 32768))) {
    HEAP32[$0 + 400 >> 2] = jsvNewWithFlags(5);
    if (HEAP32[$0 + 400 >> 2]) {
     HEAP32[$0 + 396 >> 2] = 40;
@@ -10332,7 +10332,7 @@ function jswrap_banglejs_idle() {
       HEAP32[$0 + 280 >> 2] = 75;
       while (1) {
        if (HEAP32[$0 + 280 >> 2] < 256) {
-        HEAP32[$0 + 276 >> 2] = HEAP8[HEAP32[$0 + 280 >> 2] + 255856 | 0] - HEAP8[(HEAP32[$0 + 280 >> 2] - HEAP32[$0 + 288 >> 2] | 0) + 255856 | 0];
+        HEAP32[$0 + 276 >> 2] = HEAP8[HEAP32[$0 + 280 >> 2] + 254816 | 0] - HEAP8[(HEAP32[$0 + 280 >> 2] - HEAP32[$0 + 288 >> 2] | 0) + 254816 | 0];
         HEAP32[$0 + 284 >> 2] = HEAP32[$0 + 284 >> 2] + Math_imul(HEAP32[$0 + 276 >> 2], HEAP32[$0 + 276 >> 2]);
         HEAP32[$0 + 280 >> 2] = HEAP32[$0 + 280 >> 2] + 1;
         continue;
@@ -10376,27 +10376,27 @@ function jswrap_banglejs_idle() {
      HEAP32[$0 + 268 >> 2] = 100;
     }
     $1 = $0 + 400 | 0;
-    jsvObjectSetChildAndUnLock(HEAP32[$0 + 400 >> 2], 32668, jsvNewFromInteger(6e4 / (Math_imul(HEAP32[$0 + 292 >> 2], 20) | 0) | 0));
-    jsvObjectSetChildAndUnLock(HEAP32[$0 + 400 >> 2], 32672, jsvNewFromInteger(HEAP32[$0 + 268 >> 2]));
-    HEAP32[$0 + 264 >> 2] = jsvNewNativeString(255856, 256);
+    jsvObjectSetChildAndUnLock(HEAP32[$0 + 400 >> 2], 31640, jsvNewFromInteger(6e4 / (Math_imul(HEAP32[$0 + 292 >> 2], 20) | 0) | 0));
+    jsvObjectSetChildAndUnLock(HEAP32[$0 + 400 >> 2], 31644, jsvNewFromInteger(HEAP32[$0 + 268 >> 2]));
+    HEAP32[$0 + 264 >> 2] = jsvNewNativeString(254816, 256);
     HEAP32[$0 + 260 >> 2] = jsvNewArrayBufferFromString(HEAP32[$0 + 264 >> 2], 0);
-    jsvObjectSetChildAndUnLock(HEAP32[$0 + 400 >> 2], 32683, jswrap_typedarray_constructor(17, HEAP32[$0 + 260 >> 2], 0, 0));
+    jsvObjectSetChildAndUnLock(HEAP32[$0 + 400 >> 2], 31655, jswrap_typedarray_constructor(17, HEAP32[$0 + 260 >> 2], 0, 0));
     jsvUnLock2(HEAP32[$0 + 260 >> 2], HEAP32[$0 + 264 >> 2]);
-    jsiQueueObjectCallbacks(HEAP32[$0 + 440 >> 2], 32687, $1, 1);
+    jsiQueueObjectCallbacks(HEAP32[$0 + 440 >> 2], 31659, $1, 1);
     jsvUnLock(HEAP32[$0 + 400 >> 2]);
    }
   }
-  if (!(!HEAP32[$0 + 440 >> 2] | !(HEAP32[63904] & 256))) {
+  if (!(!HEAP32[$0 + 440 >> 2] | !(HEAP32[63644] & 256))) {
    label$55 : {
     if (!HEAP32[$0 + 440 >> 2]) {
      break label$55;
     }
-    if (!(jsiObjectHasCallbacks(HEAP32[$0 + 440 >> 2], 32694) & 1)) {
+    if (!(jsiObjectHasCallbacks(HEAP32[$0 + 440 >> 2], 31666) & 1)) {
      break label$55;
     }
-    HEAP32[$0 + 256 >> 2] = jsvNewTypedArray(17, Math_imul(HEAPU8[256112], 3));
+    HEAP32[$0 + 256 >> 2] = jsvNewTypedArray(17, Math_imul(HEAPU8[255072], 3));
     if (HEAP32[$0 + 256 >> 2]) {
-     HEAP32[$0 + 252 >> 2] = HEAPU8[256113] - Math_imul(HEAPU8[256112], 3);
+     HEAP32[$0 + 252 >> 2] = HEAPU8[255073] - Math_imul(HEAPU8[255072], 3);
      while (1) {
       if (HEAP32[$0 + 252 >> 2] < 0) {
        HEAP32[$0 + 252 >> 2] = HEAP32[$0 + 252 >> 2] + 150;
@@ -10407,11 +10407,11 @@ function jswrap_banglejs_idle() {
      jsvArrayBufferIteratorNew($0 + 208 | 0, HEAP32[$0 + 256 >> 2], 0);
      HEAP32[$0 + 204 >> 2] = 0;
      while (1) {
-      if (HEAP32[$0 + 204 >> 2] < (Math_imul(HEAPU8[256112], 3) | 0)) {
+      if (HEAP32[$0 + 204 >> 2] < (Math_imul(HEAPU8[255072], 3) | 0)) {
        $3 = HEAP32[$0 + 252 >> 2];
        HEAP32[$0 + 252 >> 2] = $3 + 1;
        $1 = $0 + 208 | 0;
-       jsvArrayBufferIteratorSetByteValue($1, HEAP8[$3 + 256128 | 0]);
+       jsvArrayBufferIteratorSetByteValue($1, HEAP8[$3 + 255088 | 0]);
        jsvArrayBufferIteratorNext($1);
        if (HEAP32[$0 + 252 >> 2] >= 150) {
         HEAP32[$0 + 252 >> 2] = HEAP32[$0 + 252 >> 2] - 150;
@@ -10423,7 +10423,7 @@ function jswrap_banglejs_idle() {
      }
      $1 = $0 + 256 | 0;
      jsvArrayBufferIteratorFree($0 + 208 | 0);
-     jsiQueueObjectCallbacks(HEAP32[$0 + 440 >> 2], 32694, $1, 1);
+     jsiQueueObjectCallbacks(HEAP32[$0 + 440 >> 2], 31666, $1, 1);
      jsvUnLock(HEAP32[$0 + 256 >> 2]);
     }
    }
@@ -10431,10 +10431,10 @@ function jswrap_banglejs_idle() {
     if (!HEAP32[$0 + 440 >> 2]) {
      break label$62;
     }
-    if (!(jsiObjectHasCallbacks(HEAP32[$0 + 440 >> 2], 32705) & 1)) {
+    if (!(jsiObjectHasCallbacks(HEAP32[$0 + 440 >> 2], 31677) & 1)) {
      break label$62;
     }
-    jsfNameFromString($0 + 136 | 0, 32718);
+    jsfNameFromString($0 + 136 | 0, 31690);
     HEAP32[$0 + 24 >> 2] = HEAP32[$0 + 160 >> 2];
     $1 = HEAP32[$0 + 156 >> 2];
     HEAP32[$0 + 16 >> 2] = HEAP32[$0 + 152 >> 2];
@@ -10448,7 +10448,7 @@ function jswrap_banglejs_idle() {
     HEAP32[$0 + 164 >> 2] = jsfFindFile($0, $0 + 168 | 0);
     label$63 : {
      if (!HEAP32[$0 + 164 >> 2]) {
-      jsiConsolePrintf(32727, 0);
+      jsiConsolePrintf(31699, 0);
       break label$63;
      }
      HEAP32[$0 + 132 >> 2] = jsfGetFileSize($0 + 168 | 0);
@@ -10470,7 +10470,7 @@ function jswrap_banglejs_idle() {
       $1 = $0 + 72 | 0;
       HEAP32[$0 + 116 >> 2] = jswrap_tfmicrointerpreter_getInput(HEAP32[$0 + 120 >> 2]);
       jsvArrayBufferIteratorNew($1, HEAP32[$0 + 116 >> 2], 0);
-      HEAP32[$0 + 68 >> 2] = HEAPU8[256113] - Math_imul(HEAPU8[256112], 3);
+      HEAP32[$0 + 68 >> 2] = HEAPU8[255073] - Math_imul(HEAPU8[255072], 3);
       while (1) {
        if (HEAP32[$0 + 68 >> 2] < 0) {
         HEAP32[$0 + 68 >> 2] = HEAP32[$0 + 68 >> 2] + 150;
@@ -10480,11 +10480,11 @@ function jswrap_banglejs_idle() {
       }
       HEAP32[$0 + 64 >> 2] = 0;
       while (1) {
-       if (HEAP32[$0 + 64 >> 2] < (Math_imul(HEAPU8[256112], 3) | 0)) {
+       if (HEAP32[$0 + 64 >> 2] < (Math_imul(HEAPU8[255072], 3) | 0)) {
         $3 = HEAP32[$0 + 68 >> 2];
         HEAP32[$0 + 68 >> 2] = $3 + 1;
         $1 = $0 + 72 | 0;
-        jsvArrayBufferIteratorSetIntegerValue($1, HEAP8[$3 + 256128 | 0]);
+        jsvArrayBufferIteratorSetIntegerValue($1, HEAP8[$3 + 255088 | 0]);
         jsvArrayBufferIteratorNext($1);
         if (HEAP32[$0 + 68 >> 2] >= 150) {
          HEAP32[$0 + 68 >> 2] = HEAP32[$0 + 68 >> 2] - 150;
@@ -10502,47 +10502,47 @@ function jswrap_banglejs_idle() {
       HEAP32[$0 + 116 >> 2] = jswrap_tfmicrointerpreter_getOutput(HEAP32[$0 + 120 >> 2]);
       HEAP32[$0 + 60 >> 2] = jswrap_array_slice(HEAP32[$0 + 116 >> 2], 0, 0);
       jsvUnLock2(HEAP32[$0 + 116 >> 2], HEAP32[$0 + 120 >> 2]);
-      HEAP32[$0 + 56 >> 2] = jspExecuteJSFunction(32748, 1, $1);
+      HEAP32[$0 + 56 >> 2] = jspExecuteJSFunction(31720, 1, $1);
       HEAP32[$0 + 48 >> 2] = HEAP32[$0 + 56 >> 2];
       HEAP32[$0 + 52 >> 2] = HEAP32[$0 + 60 >> 2];
-      jsiQueueObjectCallbacks(HEAP32[$0 + 440 >> 2], 32705, $3, 2);
+      jsiQueueObjectCallbacks(HEAP32[$0 + 440 >> 2], 31677, $3, 2);
       jsvUnLock2(HEAP32[$0 + 56 >> 2], HEAP32[$0 + 60 >> 2]);
      }
     }
    }
   }
-  if (!(!HEAP32[$0 + 440 >> 2] | !(HEAP32[63904] & 512))) {
+  if (!(!HEAP32[$0 + 440 >> 2] | !(HEAP32[63644] & 512))) {
    $1 = $0 + 44 | 0;
-   HEAP32[$0 + 44 >> 2] = jsvNewFromBool(HEAP8[256278] & 1);
-   jsiQueueObjectCallbacks(HEAP32[$0 + 440 >> 2], 32916, $1, 1);
+   HEAP32[$0 + 44 >> 2] = jsvNewFromBool(HEAP8[255238] & 1);
+   jsiQueueObjectCallbacks(HEAP32[$0 + 440 >> 2], 31888, $1, 1);
    jsvUnLock(HEAP32[$0 + 44 >> 2]);
   }
-  if (!(!HEAP32[$0 + 440 >> 2] | !(HEAP32[63904] & 1024))) {
+  if (!(!HEAP32[$0 + 440 >> 2] | !(HEAP32[63644] & 1024))) {
    $1 = $0 + 40 | 0;
-   HEAP32[$0 + 40 >> 2] = jsvNewFromInteger(HEAP32[63919]);
-   jsiQueueObjectCallbacks(HEAP32[$0 + 440 >> 2], 32928, $1, 1);
+   HEAP32[$0 + 40 >> 2] = jsvNewFromInteger(HEAP32[63659]);
+   jsiQueueObjectCallbacks(HEAP32[$0 + 440 >> 2], 31900, $1, 1);
    jsvUnLock(HEAP32[$0 + 40 >> 2]);
   }
-  if (!(!HEAP32[$0 + 440 >> 2] | !(HEAP32[63904] & 65536))) {
-   jsiQueueObjectCallbacks(HEAP32[$0 + 440 >> 2], 32936, 0, 0);
+  if (!(!HEAP32[$0 + 440 >> 2] | !(HEAP32[63644] & 65536))) {
+   jsiQueueObjectCallbacks(HEAP32[$0 + 440 >> 2], 31908, 0, 0);
   }
-  if (!(!HEAP32[$0 + 440 >> 2] | !(HEAP32[63904] & 6144))) {
+  if (!(!HEAP32[$0 + 440 >> 2] | !(HEAP32[63644] & 6144))) {
    $1 = $0 + 36 | 0;
-   HEAP32[$0 + 36 >> 2] = jsvNewFromInteger(HEAP32[63904] & 2048 ? -1 : 1);
-   jsiQueueObjectCallbacks(HEAP32[$0 + 440 >> 2], 32945, $1, 1);
+   HEAP32[$0 + 36 >> 2] = jsvNewFromInteger(HEAP32[63644] & 2048 ? -1 : 1);
+   jsiQueueObjectCallbacks(HEAP32[$0 + 440 >> 2], 31917, $1, 1);
    jsvUnLock(HEAP32[$0 + 36 >> 2]);
   }
-  if (!(!HEAP32[$0 + 440 >> 2] | !(HEAP32[63904] & 24576))) {
+  if (!(!HEAP32[$0 + 440 >> 2] | !(HEAP32[63644] & 24576))) {
    $1 = $0 + 32 | 0;
-   HEAP32[$0 + 32 >> 2] = jsvNewFromInteger((HEAP32[63904] & 8192 ? 1 : 0) | (HEAP32[63904] & 16384 ? 2 : 0));
-   jsiQueueObjectCallbacks(HEAP32[$0 + 440 >> 2], 32954, $1, 1);
+   HEAP32[$0 + 32 >> 2] = jsvNewFromInteger((HEAP32[63644] & 8192 ? 1 : 0) | (HEAP32[63644] & 16384 ? 2 : 0));
+   jsiQueueObjectCallbacks(HEAP32[$0 + 440 >> 2], 31926, $1, 1);
    jsvUnLock(HEAP32[$0 + 32 >> 2]);
   }
-  if (HEAP32[63904] & 128) {
-   HEAP16[49742] = HEAPU16[49742] | 64;
+  if (HEAP32[63644] & 128) {
+   HEAP16[49222] = HEAPU16[49222] | 64;
   }
   jsvUnLock(HEAP32[$0 + 440 >> 2]);
-  HEAP32[63904] = 0;
+  HEAP32[63644] = 0;
  }
  HEAP8[$0 + 447 | 0] = 0;
  global$0 = $0 + 448 | 0;
@@ -10568,16 +10568,16 @@ function fmt_fp($0, $1, $2, $3, $4, $5) {
    $6 = wasm2js_scratch_load_i32(1) | 0;
    wasm2js_scratch_load_i32(0) | 0;
    $21 = 1;
-   $22 = 54320;
+   $22 = 53280;
    break label$1;
   }
   if ($4 & 2048) {
    $21 = 1;
-   $22 = 54323;
+   $22 = 53283;
    break label$1;
   }
   $21 = $4 & 1;
-  $22 = $21 ? 54326 : 54321;
+  $22 = $21 ? 53286 : 53281;
  }
  label$4 : {
   if (($6 & 2146435072) == 2146435072) {
@@ -10585,7 +10585,7 @@ function fmt_fp($0, $1, $2, $3, $4, $5) {
    pad($0, 32, $2, $10, $4 & -65537);
    out($0, $22, $21);
    $3 = $5 >>> 5 & 1;
-   out($0, $1 != $1 ? $3 ? 54347 : 54351 : $3 ? 54339 : 54343, 3);
+   out($0, $1 != $1 ? $3 ? 53307 : 53311 : $3 ? 53299 : 53303, 3);
    break label$4;
   }
   $1 = frexp($1, $11 + 44 | 0);
@@ -10643,7 +10643,7 @@ function fmt_fp($0, $1, $2, $3, $4, $5) {
     } else {
      $8 = -2147483648;
     }
-    HEAP8[$7 | 0] = $10 | HEAPU8[$8 + 54304 | 0];
+    HEAP8[$7 | 0] = $10 | HEAPU8[$8 + 53264 | 0];
     $7 = $5 + 1 | 0;
     $1 = ($1 - +($8 | 0)) * 16;
     if (!(($7 - ($11 + 16 | 0) | 0) != 1 | ($1 == 0 ? !($6 | ($3 | 0) > 0) : 0))) {
@@ -11029,7 +11029,7 @@ function fmt_fp($0, $1, $2, $3, $4, $5) {
      break;
     }
     if ($9) {
-     out($0, 54355, 1);
+     out($0, 53315, 1);
     }
     label$61 : {
      if (($13 | 0) < 1 | $7 >>> 0 >= $14 >>> 0) {
@@ -11096,7 +11096,7 @@ function fmt_fp($0, $1, $2, $3, $4, $5) {
       if (($13 | 0) < 1 ? !$12 : 0) {
        break label$68;
       }
-      out($0, 54355, 1);
+      out($0, 53315, 1);
      }
      $15 = $6;
      $6 = $16 - $6 | 0;
@@ -11146,9 +11146,9 @@ function jswrap_graphics_drawString($0, $1, $2, $3, $4) {
   HEAP32[$5 + 140 >> 2] = (HEAPU8[$5 + 185 | 0] | HEAPU8[$5 + 186 | 0] << 8) & 57344;
   HEAP16[$5 + 138 >> 1] = (HEAPU8[$5 + 185 | 0] | HEAPU8[$5 + 186 | 0] << 8) & 8191;
   if (HEAP32[$5 + 140 >> 2] == 24576) {
-   HEAP32[$5 + 156 >> 2] = jsvObjectGetChild(HEAP32[$5 + 248 >> 2], 42925, 0);
-   HEAP32[$5 + 152 >> 2] = jsvObjectGetChild(HEAP32[$5 + 248 >> 2], 42930, 0);
-   HEAP32[$5 + 144 >> 2] = jsvGetIntegerAndUnLock(jsvObjectGetChild(HEAP32[$5 + 248 >> 2], 42940, 0));
+   HEAP32[$5 + 156 >> 2] = jsvObjectGetChild(HEAP32[$5 + 248 >> 2], 41885, 0);
+   HEAP32[$5 + 152 >> 2] = jsvObjectGetChild(HEAP32[$5 + 248 >> 2], 41890, 0);
+   HEAP32[$5 + 144 >> 2] = jsvGetIntegerAndUnLock(jsvObjectGetChild(HEAP32[$5 + 248 >> 2], 41900, 0));
   }
   HEAP32[$5 + 132 >> 2] = HEAPU8[$5 + 168 | 0] | HEAPU8[$5 + 169 | 0] << 8 | (HEAPU8[$5 + 170 | 0] << 16 | HEAPU8[$5 + 171 | 0] << 24);
   label$4 : {
@@ -11556,7 +11556,7 @@ function tflite__ops__micro__comparisons___28anonymous_20namespace_29__GreaterEq
    $0 = HEAP32[HEAP32[$2 + 584 >> 2] + 20 >> 2];
    $1 = HEAP32[$2 + 584 >> 2];
    HEAP32[$2 >> 2] = HEAP32[HEAP32[$2 + 576 >> 2] >> 2];
-   FUNCTION_TABLE[$0]($1, 49727, $2);
+   FUNCTION_TABLE[$0]($1, 48687, $2);
    HEAP32[$2 + 588 >> 2] = 1;
    break label$1;
   }
@@ -11754,7 +11754,7 @@ function tflite__ops__micro__comparisons___28anonymous_20namespace_29__LessEqual
    $0 = HEAP32[HEAP32[$2 + 584 >> 2] + 20 >> 2];
    $1 = HEAP32[$2 + 584 >> 2];
    HEAP32[$2 >> 2] = HEAP32[HEAP32[$2 + 576 >> 2] >> 2];
-   FUNCTION_TABLE[$0]($1, 49727, $2);
+   FUNCTION_TABLE[$0]($1, 48687, $2);
    HEAP32[$2 + 588 >> 2] = 1;
    break label$1;
   }
@@ -11952,7 +11952,7 @@ function tflite__ops__micro__comparisons___28anonymous_20namespace_29__GreaterEv
    $0 = HEAP32[HEAP32[$2 + 584 >> 2] + 20 >> 2];
    $1 = HEAP32[$2 + 584 >> 2];
    HEAP32[$2 >> 2] = HEAP32[HEAP32[$2 + 576 >> 2] >> 2];
-   FUNCTION_TABLE[$0]($1, 49727, $2);
+   FUNCTION_TABLE[$0]($1, 48687, $2);
    HEAP32[$2 + 588 >> 2] = 1;
    break label$1;
   }
@@ -12150,7 +12150,7 @@ function tflite__ops__micro__comparisons___28anonymous_20namespace_29__LessEval_
    $0 = HEAP32[HEAP32[$2 + 584 >> 2] + 20 >> 2];
    $1 = HEAP32[$2 + 584 >> 2];
    HEAP32[$2 >> 2] = HEAP32[HEAP32[$2 + 576 >> 2] >> 2];
-   FUNCTION_TABLE[$0]($1, 49727, $2);
+   FUNCTION_TABLE[$0]($1, 48687, $2);
    HEAP32[$2 + 588 >> 2] = 1;
    break label$1;
   }
@@ -12303,38 +12303,38 @@ function jsiHandleChar($0) {
  label$1 : {
   if (jsiPasswordProtected() & 1) {
    if (!(HEAP8[$1 + 31 | 0] != 10 ? HEAP8[$1 + 31 | 0] != 13 : 0)) {
-    HEAP32[$1 + 24 >> 2] = jsvObjectGetChild(HEAP32[24863], 5525, 0);
+    HEAP32[$1 + 24 >> 2] = jsvObjectGetChild(HEAP32[24603], 5525, 0);
     label$5 : {
      if (!HEAP32[$1 + 24 >> 2]) {
       break label$5;
      }
-     if (jsvCompareString(HEAP32[24872], HEAP32[$1 + 24 >> 2], 0, 0)) {
+     if (jsvCompareString(HEAP32[24612], HEAP32[$1 + 24 >> 2], 0, 0)) {
       break label$5;
      }
-     HEAP16[49742] = HEAPU16[49742] & -1025;
+     HEAP16[49222] = HEAPU16[49222] & -1025;
     }
     jsvUnLock(HEAP32[$1 + 24 >> 2]);
     jsiClearInputLine(0);
     label$6 : {
      if (jsiPasswordProtected() & 1) {
-      jsiConsolePrintString(5898);
+      jsiConsolePrintString(5894);
       break label$6;
      }
-     jsiConsolePrintString(5928);
-     HEAP8[99492] = 1;
+     jsiConsolePrintString(5924);
+     HEAP8[98452] = 1;
      jsiConsoleReturnInputLine();
     }
     break label$1;
    }
    HEAP8[$1 + 22 | 0] = HEAPU8[$1 + 31 | 0];
    HEAP8[$1 + 23 | 0] = 0;
-   if (jsvGetStringLength(HEAP32[24872]) >>> 0 < 20) {
+   if (jsvGetStringLength(HEAP32[24612]) >>> 0 < 20) {
     jsiAppendToInputLine($1 + 22 | 0);
    }
    break label$1;
   }
   if (!HEAP8[$1 + 31 | 0]) {
-   HEAP8[99500] = 0;
+   HEAP8[98460] = 0;
    break label$1;
   }
   label$10 : {
@@ -12359,20 +12359,20 @@ function jsiHandleChar($0) {
       }
       label$19 : {
        if (HEAP8[$1 + 31 | 0] == 27) {
-        HEAP8[99500] = 2;
+        HEAP8[98460] = 2;
         break label$19;
        }
        label$21 : {
-        if (HEAPU8[99500] == 2) {
-         HEAP8[99500] = 0;
+        if (HEAPU8[98460] == 2) {
+         HEAP8[98460] = 0;
          label$23 : {
           if (HEAP8[$1 + 31 | 0] == 79) {
-           HEAP8[99500] = 3;
+           HEAP8[98460] = 3;
            break label$23;
           }
           label$25 : {
            if (HEAP8[$1 + 31 | 0] == 91) {
-            HEAP8[99500] = 4;
+            HEAP8[98460] = 4;
             break label$25;
            }
            if (HEAP8[$1 + 31 | 0] == 10) {
@@ -12383,8 +12383,8 @@ function jsiHandleChar($0) {
          break label$21;
         }
         label$28 : {
-         if (HEAPU8[99500] == 3) {
-          HEAP8[99500] = 0;
+         if (HEAPU8[98460] == 3) {
+          HEAP8[98460] = 0;
           label$30 : {
            if (HEAP8[$1 + 31 | 0] == 70) {
             jsiHandleEnd();
@@ -12427,23 +12427,23 @@ function jsiHandleChar($0) {
           break label$28;
          }
          label$43 : {
-          if (HEAPU8[99500] == 4) {
-           HEAP8[99500] = 0;
+          if (HEAPU8[98460] == 4) {
+           HEAP8[98460] = 0;
            label$45 : {
             if (!(HEAP8[$1 + 31 | 0] < 48 | HEAP8[$1 + 31 | 0] > 57)) {
-             HEAP16[49775] = HEAP8[$1 + 31 | 0] - 48;
-             HEAP8[99500] = 5;
+             HEAP16[49255] = HEAP8[$1 + 31 | 0] - 48;
+             HEAP8[98460] = 5;
              break label$45;
             }
             label$47 : {
              if (HEAP8[$1 + 31 | 0] == 68) {
-              if (HEAPU32[24874] <= 0) {
+              if (HEAPU32[24614] <= 0) {
                break label$47;
               }
-              if ((jsvGetCharInString(HEAP32[24872], HEAP32[24874] - 1 | 0) & 255) == 10) {
+              if ((jsvGetCharInString(HEAP32[24612], HEAP32[24614] - 1 | 0) & 255) == 10) {
                break label$47;
               }
-              HEAP32[24874] = HEAP32[24874] + -1;
+              HEAP32[24614] = HEAP32[24614] + -1;
               if (jsiShowInputLine() & 1) {
                jsiConsolePrintString(5206);
               }
@@ -12451,13 +12451,13 @@ function jsiHandleChar($0) {
              }
              label$50 : {
               if (HEAP8[$1 + 31 | 0] == 67) {
-               if (HEAPU32[24874] >= jsvGetStringLength(HEAP32[24872]) >>> 0) {
+               if (HEAPU32[24614] >= jsvGetStringLength(HEAP32[24612]) >>> 0) {
                 break label$50;
                }
-               if ((jsvGetCharInString(HEAP32[24872], HEAP32[24874]) & 255) == 10) {
+               if ((jsvGetCharInString(HEAP32[24612], HEAP32[24614]) & 255) == 10) {
                 break label$50;
                }
-               HEAP32[24874] = HEAP32[24874] + 1;
+               HEAP32[24614] = HEAP32[24614] + 1;
                if (jsiShowInputLine() & 1) {
                 jsiConsolePrintString(5202);
                }
@@ -12465,15 +12465,15 @@ function jsiHandleChar($0) {
               }
               label$53 : {
                if (HEAP8[$1 + 31 | 0] == 65) {
-                HEAP32[$1 + 16 >> 2] = jsvGetStringLength(HEAP32[24872]);
+                HEAP32[$1 + 16 >> 2] = jsvGetStringLength(HEAP32[24612]);
                 label$55 : {
                  label$56 : {
                   if (HEAP32[$1 + 16 >> 2]) {
-                   if (!(jsiIsInHistory(HEAP32[24872]) & 1)) {
+                   if (!(jsiIsInHistory(HEAP32[24612]) & 1)) {
                     break label$56;
                    }
                   }
-                  if (HEAP32[24874] != HEAP32[$1 + 16 >> 2]) {
+                  if (HEAP32[24614] != HEAP32[$1 + 16 >> 2]) {
                    break label$56;
                   }
                   jsiChangeToHistory(1);
@@ -12485,15 +12485,15 @@ function jsiHandleChar($0) {
                }
                label$58 : {
                 if (HEAP8[$1 + 31 | 0] == 66) {
-                 HEAP32[$1 + 12 >> 2] = jsvGetStringLength(HEAP32[24872]);
+                 HEAP32[$1 + 12 >> 2] = jsvGetStringLength(HEAP32[24612]);
                  label$60 : {
                   label$61 : {
                    if (HEAP32[$1 + 12 >> 2]) {
-                    if (!(jsiIsInHistory(HEAP32[24872]) & 1)) {
+                    if (!(jsiIsInHistory(HEAP32[24612]) & 1)) {
                      break label$61;
                     }
                    }
-                   if (HEAP32[24874] != HEAP32[$1 + 12 >> 2]) {
+                   if (HEAP32[24614] != HEAP32[$1 + 12 >> 2]) {
                     break label$61;
                    }
                    jsiChangeToHistory(0);
@@ -12520,45 +12520,45 @@ function jsiHandleChar($0) {
            break label$43;
           }
           label$66 : {
-           if (HEAPU8[99500] == 5) {
+           if (HEAPU8[98460] == 5) {
             if (!(HEAP8[$1 + 31 | 0] < 48 | HEAP8[$1 + 31 | 0] > 57)) {
-             HEAP16[49775] = (HEAP8[$1 + 31 | 0] + Math_imul(HEAPU16[49775], 10) | 0) - 48;
+             HEAP16[49255] = (HEAP8[$1 + 31 | 0] + Math_imul(HEAPU16[49255], 10) | 0) - 48;
              break label$66;
             }
             label$69 : {
              if (HEAP8[$1 + 31 | 0] == 100) {
-              HEAP16[49754] = HEAPU16[49775];
+              HEAP16[49234] = HEAPU16[49255];
               break label$69;
              }
              label$71 : {
               if (HEAP8[$1 + 31 | 0] == 72) {
-               if (HEAPU16[49775] == 2) {
+               if (HEAPU16[49255] == 2) {
                 jsiClearInputLine(1);
                }
                break label$71;
               }
               if (HEAP8[$1 + 31 | 0] == 126) {
                label$75 : {
-                if (HEAPU16[49775] == 1) {
+                if (HEAPU16[49255] == 1) {
                  jsiHandleHome();
                  break label$75;
                 }
                 label$77 : {
-                 if (HEAPU16[49775] == 3) {
+                 if (HEAPU16[49255] == 3) {
                   jsiHandleDelete(0);
                   break label$77;
                  }
                  label$79 : {
-                  if (HEAPU16[49775] == 4) {
+                  if (HEAPU16[49255] == 4) {
                    jsiHandleEnd();
                    break label$79;
                   }
                   label$81 : {
-                   if (HEAPU16[49775] == 5) {
+                   if (HEAPU16[49255] == 5) {
                     jsiHandlePageUpDown(0);
                     break label$81;
                    }
-                   if (HEAPU16[49775] == 6) {
+                   if (HEAPU16[49255] == 6) {
                     jsiHandlePageUpDown(1);
                    }
                   }
@@ -12568,7 +12568,7 @@ function jsiHandleChar($0) {
               }
              }
             }
-            HEAP8[99500] = 0;
+            HEAP8[98460] = 0;
             break label$66;
            }
            label$84 : {
@@ -12576,27 +12576,27 @@ function jsiHandleChar($0) {
              if (HEAP8[$1 + 31 | 0] != 16) {
               break label$85;
              }
-             if (jsvGetStringLength(HEAP32[24872])) {
+             if (jsvGetStringLength(HEAP32[24612])) {
               break label$85;
              }
-             HEAP16[49742] = HEAPU16[49742] | 2;
+             HEAP16[49222] = HEAPU16[49222] | 2;
              break label$84;
             }
-            HEAP8[99500] = 0;
+            HEAP8[98460] = 0;
             label$86 : {
              if (!(HEAP8[$1 + 31 | 0] != 127 ? HEAP8[$1 + 31 | 0] != 8 : 0)) {
               jsiHandleDelete(1);
               break label$86;
              }
              label$89 : {
-              if (!(HEAP8[$1 + 31 | 0] != 10 | HEAPU8[99500] != 1)) {
-               HEAP8[99500] = 0;
+              if (!(HEAP8[$1 + 31 | 0] != 10 | HEAPU8[98460] != 1)) {
+               HEAP8[98460] = 0;
                break label$89;
               }
               label$91 : {
                if (!(HEAP8[$1 + 31 | 0] != 10 ? HEAP8[$1 + 31 | 0] != 13 : 0)) {
                 if (HEAP8[$1 + 31 | 0] == 13) {
-                 HEAP8[99500] = 1;
+                 HEAP8[98460] = 1;
                 }
                 jsiHandleNewLine(1);
                 break label$91;
@@ -12617,7 +12617,7 @@ function jsiHandleChar($0) {
                  HEAP8[$1 + 11 | 0] = 0;
                  $0 = $1;
                  if (HEAP8[$1 + 31 | 0] == 9) {
-                  $2 = 5943;
+                  $2 = 5939;
                  } else {
                   $2 = $1 + 10 | 0;
                  }
@@ -12751,7 +12751,7 @@ function tflite__MicroAllocator__AllocateTensors_28_29($0) {
     if (HEAP8[$1 + 125 | 0] & 1) {
      $0 = HEAP32[$2 + 16 >> 2];
      HEAP32[$1 >> 2] = HEAP32[$1 + 132 >> 2];
-     tflite__ErrorReporter__Report_28char_20const__2c_20____29($0, 46145, $1);
+     tflite__ErrorReporter__Report_28char_20const__2c_20____29($0, 45105, $1);
      HEAP32[$1 + 220 >> 2] = 1;
      break label$1;
     } else {
@@ -12792,7 +12792,7 @@ function tflite__MicroAllocator__AllocateTensors_28_29($0) {
     $2 = tflite__GreedyMemoryPlanner__GetMaximumMemorySize_28_29($1 + 72 | 0);
     HEAP32[$1 + 20 >> 2] = HEAP32[$1 + 112 >> 2];
     HEAP32[$1 + 16 >> 2] = $2;
-    tflite__ErrorReporter__Report_28char_20const__2c_20____29($0, 46210, $1 + 16 | 0);
+    tflite__ErrorReporter__Report_28char_20const__2c_20____29($0, 45170, $1 + 16 | 0);
     HEAP32[$1 + 220 >> 2] = 1;
     break label$33;
    }
@@ -12811,7 +12811,7 @@ function tflite__MicroAllocator__AllocateTensors_28_29($0) {
      }
      if (tflite__Tensor__is_variable_28_29_20const(HEAP32[HEAP32[$1 + 28 >> 2] >> 2]) & 1) {
       if (!HEAP32[HEAP32[HEAP32[$1 + 28 >> 2] + 4 >> 2] + 4 >> 2]) {
-       tflite__ErrorReporter__Report_28char_20const__2c_20____29(HEAP32[$2 + 16 >> 2], 46295, 0);
+       tflite__ErrorReporter__Report_28char_20const__2c_20____29(HEAP32[$2 + 16 >> 2], 45255, 0);
        HEAP32[$1 + 220 >> 2] = 1;
        break label$33;
       }
@@ -12839,7 +12839,7 @@ function dlfree($0) {
     break label$2;
    }
    $3 = $0 + -8 | 0;
-   $8 = HEAP32[64380];
+   $8 = HEAP32[64120];
    if ($3 >>> 0 < $8 >>> 0) {
     break label$1;
    }
@@ -12863,17 +12863,17 @@ function dlfree($0) {
      break label$1;
     }
     $0 = $0 + $1 | 0;
-    if (HEAP32[64381] != ($3 | 0)) {
+    if (HEAP32[64121] != ($3 | 0)) {
      if ($1 >>> 0 <= 255) {
       $5 = HEAP32[$3 + 12 >> 2];
       $4 = HEAP32[$3 + 8 >> 2];
       $2 = $1 >>> 3;
-      $1 = ($2 << 3) + 257544 | 0;
+      $1 = ($2 << 3) + 256504 | 0;
       if (HEAP32[$4 + 12 >> 2] != ($3 | 0) | $8 >>> 0 > $4 >>> 0 ? ($4 | 0) != ($1 | 0) : 0) {
        break label$1;
       }
       if (($4 | 0) == ($5 | 0)) {
-       HEAP32[64376] = HEAP32[64376] & __wasm_rotl_i32($2);
+       HEAP32[64116] = HEAP32[64116] & __wasm_rotl_i32($2);
        break label$3;
       }
       if (HEAP32[$5 + 8 >> 2] != ($3 | 0) | $8 >>> 0 > $5 >>> 0 ? ($1 | 0) != ($5 | 0) : 0) {
@@ -12933,17 +12933,17 @@ function dlfree($0) {
       break label$3;
      }
      $4 = HEAP32[$3 + 28 >> 2];
-     $1 = ($4 << 2) + 257808 | 0;
+     $1 = ($4 << 2) + 256768 | 0;
      label$13 : {
       if (HEAP32[$1 >> 2] == ($3 | 0)) {
        HEAP32[$1 >> 2] = $2;
        if ($2) {
         break label$13;
        }
-       HEAP32[64377] = HEAP32[64377] & __wasm_rotl_i32($4);
+       HEAP32[64117] = HEAP32[64117] & __wasm_rotl_i32($4);
        break label$3;
       }
-      if (HEAPU32[64380] > $7 >>> 0) {
+      if (HEAPU32[64120] > $7 >>> 0) {
        break label$1;
       }
       HEAP32[$7 + (HEAP32[$7 + 16 >> 2] == ($3 | 0) ? 16 : 20) >> 2] = $2;
@@ -12951,7 +12951,7 @@ function dlfree($0) {
        break label$3;
       }
      }
-     $1 = HEAP32[64380];
+     $1 = HEAP32[64120];
      if ($1 >>> 0 > $2 >>> 0) {
       break label$1;
      }
@@ -12968,7 +12968,7 @@ function dlfree($0) {
      if (!$1) {
       break label$3;
      }
-     if (HEAPU32[64380] > $1 >>> 0) {
+     if (HEAPU32[64120] > $1 >>> 0) {
       break label$1;
      }
      HEAP32[$2 + 20 >> 2] = $1;
@@ -12979,7 +12979,7 @@ function dlfree($0) {
     if (($1 & 3) != 3) {
      break label$3;
     }
-    HEAP32[64378] = $0;
+    HEAP32[64118] = $0;
     HEAP32[$6 + 4 >> 2] = $1 & -2;
     HEAP32[$3 + 4 >> 2] = $0 | 1;
     HEAP32[$0 + $3 >> 2] = $0;
@@ -12994,22 +12994,22 @@ function dlfree($0) {
    }
    label$16 : {
     if (!($8 & 2)) {
-     if (HEAP32[64382] == ($6 | 0)) {
-      HEAP32[64382] = $3;
-      $0 = HEAP32[64379] + $0 | 0;
-      HEAP32[64379] = $0;
+     if (HEAP32[64122] == ($6 | 0)) {
+      HEAP32[64122] = $3;
+      $0 = HEAP32[64119] + $0 | 0;
+      HEAP32[64119] = $0;
       HEAP32[$3 + 4 >> 2] = $0 | 1;
-      if (HEAP32[64381] != ($3 | 0)) {
+      if (HEAP32[64121] != ($3 | 0)) {
        break label$2;
       }
-      HEAP32[64378] = 0;
-      HEAP32[64381] = 0;
+      HEAP32[64118] = 0;
+      HEAP32[64121] = 0;
       return;
      }
-     if (HEAP32[64381] == ($6 | 0)) {
-      HEAP32[64381] = $3;
-      $0 = HEAP32[64378] + $0 | 0;
-      HEAP32[64378] = $0;
+     if (HEAP32[64121] == ($6 | 0)) {
+      HEAP32[64121] = $3;
+      $0 = HEAP32[64118] + $0 | 0;
+      HEAP32[64118] = $0;
       HEAP32[$3 + 4 >> 2] = $0 | 1;
       HEAP32[$0 + $3 >> 2] = $0;
       return;
@@ -13019,15 +13019,15 @@ function dlfree($0) {
        $5 = HEAP32[$6 + 12 >> 2];
        $4 = HEAP32[$6 + 8 >> 2];
        $2 = $8 >>> 3;
-       $1 = ($2 << 3) + 257544 | 0;
-       if (HEAP32[$4 + 12 >> 2] != ($6 | 0) | HEAPU32[64380] > $4 >>> 0 ? ($4 | 0) != ($1 | 0) : 0) {
+       $1 = ($2 << 3) + 256504 | 0;
+       if (HEAP32[$4 + 12 >> 2] != ($6 | 0) | HEAPU32[64120] > $4 >>> 0 ? ($4 | 0) != ($1 | 0) : 0) {
         break label$1;
        }
        if (($4 | 0) == ($5 | 0)) {
-        HEAP32[64376] = HEAP32[64376] & __wasm_rotl_i32($2);
+        HEAP32[64116] = HEAP32[64116] & __wasm_rotl_i32($2);
         break label$20;
        }
-       if (HEAP32[$5 + 8 >> 2] != ($6 | 0) | HEAPU32[64380] > $5 >>> 0 ? ($1 | 0) != ($5 | 0) : 0) {
+       if (HEAP32[$5 + 8 >> 2] != ($6 | 0) | HEAPU32[64120] > $5 >>> 0 ? ($1 | 0) != ($5 | 0) : 0) {
         break label$1;
        }
        HEAP32[$4 + 12 >> 2] = $5;
@@ -13039,7 +13039,7 @@ function dlfree($0) {
       label$25 : {
        if (($6 | 0) != ($2 | 0)) {
         $1 = HEAP32[$6 + 8 >> 2];
-        if (HEAPU32[64380] > $1 >>> 0 | HEAP32[$1 + 12 >> 2] != ($6 | 0) | HEAP32[$2 + 8 >> 2] != ($6 | 0)) {
+        if (HEAPU32[64120] > $1 >>> 0 | HEAP32[$1 + 12 >> 2] != ($6 | 0) | HEAP32[$2 + 8 >> 2] != ($6 | 0)) {
          break label$1;
         }
         HEAP32[$1 + 12 >> 2] = $2;
@@ -13075,7 +13075,7 @@ function dlfree($0) {
         }
         break;
        }
-       if (HEAPU32[64380] > $5 >>> 0) {
+       if (HEAPU32[64120] > $5 >>> 0) {
         break label$1;
        }
        HEAP32[$5 >> 2] = 0;
@@ -13084,17 +13084,17 @@ function dlfree($0) {
        break label$20;
       }
       $4 = HEAP32[$6 + 28 >> 2];
-      $1 = ($4 << 2) + 257808 | 0;
+      $1 = ($4 << 2) + 256768 | 0;
       label$29 : {
        if (HEAP32[$1 >> 2] == ($6 | 0)) {
         HEAP32[$1 >> 2] = $2;
         if ($2) {
          break label$29;
         }
-        HEAP32[64377] = HEAP32[64377] & __wasm_rotl_i32($4);
+        HEAP32[64117] = HEAP32[64117] & __wasm_rotl_i32($4);
         break label$20;
        }
-       if (HEAPU32[64380] > $7 >>> 0) {
+       if (HEAPU32[64120] > $7 >>> 0) {
         break label$1;
        }
        HEAP32[$7 + (HEAP32[$7 + 16 >> 2] == ($6 | 0) ? 16 : 20) >> 2] = $2;
@@ -13102,7 +13102,7 @@ function dlfree($0) {
         break label$20;
        }
       }
-      $1 = HEAP32[64380];
+      $1 = HEAP32[64120];
       if ($1 >>> 0 > $2 >>> 0) {
        break label$1;
       }
@@ -13119,7 +13119,7 @@ function dlfree($0) {
       if (!$1) {
        break label$20;
       }
-      if (HEAPU32[64380] > $1 >>> 0) {
+      if (HEAPU32[64120] > $1 >>> 0) {
        break label$1;
       }
       HEAP32[$2 + 20 >> 2] = $1;
@@ -13128,10 +13128,10 @@ function dlfree($0) {
      $0 = ($8 & -8) + $0 | 0;
      HEAP32[$3 + 4 >> 2] = $0 | 1;
      HEAP32[$0 + $3 >> 2] = $0;
-     if (HEAP32[64381] != ($3 | 0)) {
+     if (HEAP32[64121] != ($3 | 0)) {
       break label$16;
      }
-     HEAP32[64378] = $0;
+     HEAP32[64118] = $0;
      return;
     }
     HEAP32[$6 + 4 >> 2] = $8 & -2;
@@ -13140,17 +13140,17 @@ function dlfree($0) {
    }
    if ($0 >>> 0 <= 255) {
     $1 = $0 >>> 3;
-    $0 = ($1 << 3) + 257544 | 0;
-    $2 = HEAP32[64376];
+    $0 = ($1 << 3) + 256504 | 0;
+    $2 = HEAP32[64116];
     $1 = 1 << $1;
     label$33 : {
      if (!($2 & $1)) {
-      HEAP32[64376] = $1 | $2;
+      HEAP32[64116] = $1 | $2;
       $1 = $0;
       break label$33;
      }
      $1 = HEAP32[$0 + 8 >> 2];
-     if (HEAPU32[64380] > $1 >>> 0) {
+     if (HEAPU32[64120] > $1 >>> 0) {
       break label$1;
      }
     }
@@ -13183,12 +13183,12 @@ function dlfree($0) {
     $2 = ($2 << 1 | $0 >>> $2 + 21 & 1) + 28 | 0;
    }
    HEAP32[$1 + 28 >> 2] = $2;
-   $5 = ($2 << 2) + 257808 | 0;
-   $4 = HEAP32[64377];
+   $5 = ($2 << 2) + 256768 | 0;
+   $4 = HEAP32[64117];
    $1 = 1 << $2;
    label$36 : {
     if (!($4 & $1)) {
-     HEAP32[64377] = $1 | $4;
+     HEAP32[64117] = $1 | $4;
      HEAP32[$5 >> 2] = $3;
      HEAP32[$3 + 12 >> 2] = $3;
      HEAP32[$3 + 24 >> 2] = $5;
@@ -13212,7 +13212,7 @@ function dlfree($0) {
       }
       break;
      }
-     if (HEAPU32[64380] > $5 >>> 0) {
+     if (HEAPU32[64120] > $5 >>> 0) {
       break label$1;
      }
      HEAP32[$5 >> 2] = $3;
@@ -13221,7 +13221,7 @@ function dlfree($0) {
      HEAP32[$3 + 8 >> 2] = $3;
      break label$36;
     }
-    $0 = HEAP32[64380];
+    $0 = HEAP32[64120];
     $1 = HEAP32[$4 + 8 >> 2];
     if ($0 >>> 0 > $1 >>> 0 | $0 >>> 0 > $4 >>> 0) {
      break label$1;
@@ -13232,12 +13232,12 @@ function dlfree($0) {
     HEAP32[$3 + 12 >> 2] = $4;
     HEAP32[$3 + 8 >> 2] = $1;
    }
-   $0 = HEAP32[64384] + -1 | 0;
-   HEAP32[64384] = $0;
+   $0 = HEAP32[64124] + -1 | 0;
+   HEAP32[64124] = $0;
    if ($0) {
     break label$2;
    }
-   $3 = 257960;
+   $3 = 256920;
    while (1) {
     $0 = HEAP32[$3 >> 2];
     $3 = $0 + 8 | 0;
@@ -13246,7 +13246,7 @@ function dlfree($0) {
     }
     break;
    }
-   HEAP32[64384] = -1;
+   HEAP32[64124] = -1;
   }
   return;
  }
@@ -13261,13 +13261,13 @@ function __rem_pio2_large($0, $1, $2, $3, $4) {
  $2 = ($2 + -3 | 0) / 24 | 0;
  $18 = ($2 | 0) > 0 ? $2 : 0;
  $15 = $6 + Math_imul($18, -24) | 0;
- $13 = HEAP32[($4 << 2) + 54400 >> 2];
+ $13 = HEAP32[($4 << 2) + 53360 >> 2];
  $9 = $3 + -1 | 0;
  if (($13 + $9 | 0) >= 0) {
   $6 = $3 + $13 | 0;
   $2 = $18 - $9 | 0;
   while (1) {
-   HEAPF64[($7 + 320 | 0) + ($8 << 3) >> 3] = ($2 | 0) < 0 ? 0 : +HEAP32[($2 << 2) + 54416 >> 2];
+   HEAPF64[($7 + 320 | 0) + ($8 << 3) >> 3] = ($2 | 0) < 0 ? 0 : +HEAP32[($2 << 2) + 53376 >> 2];
    $2 = $2 + 1 | 0;
    $8 = $8 + 1 | 0;
    if (($6 | 0) != ($8 | 0)) {
@@ -13485,7 +13485,7 @@ function __rem_pio2_large($0, $1, $2, $3, $4) {
     while (1) {
      $9 = $3 + $6 | 0;
      $6 = $6 + 1 | 0;
-     HEAPF64[($7 + 320 | 0) + ($9 << 3) >> 3] = HEAP32[($18 + $6 << 2) + 54416 >> 2];
+     HEAPF64[($7 + 320 | 0) + ($9 << 3) >> 3] = HEAP32[($18 + $6 << 2) + 53376 >> 2];
      $2 = 0;
      $5 = 0;
      if (($3 | 0) >= 1) {
@@ -13569,7 +13569,7 @@ function __rem_pio2_large($0, $1, $2, $3, $4) {
    $5 = 0;
    $2 = 0;
    while (1) {
-    $5 = $5 + HEAPF64[($2 << 3) + 57184 >> 3] * HEAPF64[($0 + $2 << 3) + $7 >> 3];
+    $5 = $5 + HEAPF64[($2 << 3) + 56144 >> 3] * HEAPF64[($0 + $2 << 3) + $7 >> 3];
     label$51 : {
      if (($2 | 0) >= ($13 | 0)) {
       break label$51;
@@ -13728,22 +13728,22 @@ function jspeStatementFor() {
   if (!(jslMatch(40) & 1)) {
    break label$1;
   }
-  HEAP8[$0 + 315 | 0] = (HEAP32[24866] & 512) != 0;
-  HEAP32[24866] = HEAP32[24866] | 256;
+  HEAP8[$0 + 315 | 0] = (HEAP32[24606] & 512) != 0;
+  HEAP32[24606] = HEAP32[24606] | 256;
   HEAP32[$0 + 308 >> 2] = 0;
-  if (HEAP16[HEAP32[14856] + 2 >> 1] != 59) {
+  if (HEAP16[HEAP32[14596] + 2 >> 1] != 59) {
    HEAP32[$0 + 308 >> 2] = jspeStatement();
   }
   if (jspIsInterrupted() & 1) {
    jsvUnLock(HEAP32[$0 + 308 >> 2]);
    break label$1;
   }
-  HEAP32[24866] = HEAP32[24866] & -257;
+  HEAP32[24606] = HEAP32[24606] & -257;
   label$4 : {
-   if (!(HEAP16[HEAP32[14856] + 2 >> 1] != 198 ? HEAP16[HEAP32[14856] + 2 >> 1] != 185 : 0)) {
-    HEAP8[$0 + 307 | 0] = HEAP16[HEAP32[14856] + 2 >> 1] == 198;
+   if (!(HEAP16[HEAP32[14596] + 2 >> 1] != 198 ? HEAP16[HEAP32[14596] + 2 >> 1] != 185 : 0)) {
+    HEAP8[$0 + 307 | 0] = HEAP16[HEAP32[14596] + 2 >> 1] == 198;
     label$7 : {
-     if ((HEAP32[24866] & 63) != 1) {
+     if ((HEAP32[24606] & 63) != 1) {
       break label$7;
      }
      if (jsvIsName(HEAP32[$0 + 308 >> 2]) & 1) {
@@ -13763,17 +13763,17 @@ function jspeStatementFor() {
      break label$1;
     }
     $1 = $0 + 240 | 0;
-    jslCharPosClone($0 + 272 | 0, HEAP32[14856] + 4 | 0);
-    HEAP32[$0 + 268 >> 2] = HEAP32[24866];
+    jslCharPosClone($0 + 272 | 0, HEAP32[14596] + 4 | 0);
+    HEAP32[$0 + 268 >> 2] = HEAP32[24606];
     jspSetNoExecute();
-    HEAP32[24866] = HEAP32[24866] | 512;
+    HEAP32[24606] = HEAP32[24606] | 512;
     jsvUnLock(jspeBlockOrStatement());
-    jslCharPosClone($1, HEAP32[14856] + 4 | 0);
+    jslCharPosClone($1, HEAP32[14596] + 4 | 0);
     if (!(HEAP8[$0 + 315 | 0] & 1)) {
-     HEAP32[24866] = HEAP32[24866] & -513;
+     HEAP32[24606] = HEAP32[24606] & -513;
     }
-    HEAP32[24866] = HEAP32[24866] & -1664 | HEAP32[$0 + 268 >> 2] & 1663;
-    if ((HEAP32[24866] & 63) == 1) {
+    HEAP32[24606] = HEAP32[24606] & -1664 | HEAP32[$0 + 268 >> 2] & 1663;
+    if ((HEAP32[24606] & 63) == 1) {
      label$11 : {
       if (jsvIsIterable(HEAP32[$0 + 300 >> 2]) & 1) {
        HEAP32[$0 + 236 >> 2] = jsvGetInternalFunctionCheckerFor(HEAP32[$0 + 300 >> 2]);
@@ -13786,7 +13786,7 @@ function jspeStatementFor() {
        while (1) {
         $1 = 0;
         label$15 : {
-         if ((HEAP32[24866] & 63) != 1) {
+         if ((HEAP32[24606] & 63) != 1) {
           break label$15;
          }
          $2 = !(jsvIteratorHasElement($0 + 184 | 0) & 1);
@@ -13839,19 +13839,19 @@ function jspeStatementFor() {
             jsvUnLock(HEAP32[$0 + 168 >> 2]);
            }
            jslSeekToP($0 + 272 | 0);
-           HEAP32[24866] = HEAP32[24866] | 512;
+           HEAP32[24606] = HEAP32[24606] | 512;
            jspDebuggerLoopIfCtrlC();
            jsvUnLock(jspeBlockOrStatement());
            if (!(HEAP8[$0 + 315 | 0] & 1)) {
-            HEAP32[24866] = HEAP32[24866] & -513;
+            HEAP32[24606] = HEAP32[24606] & -513;
            }
            label$28 : {
-            if (HEAP32[24866] & 4) {
-             HEAP32[24866] = 1;
+            if (HEAP32[24606] & 4) {
+             HEAP32[24606] = 1;
              break label$28;
             }
-            if (HEAP32[24866] & 2) {
-             HEAP32[24866] = 1;
+            if (HEAP32[24606] & 2) {
+             HEAP32[24606] = 1;
              HEAP8[$0 + 183 | 0] = 1;
             }
            }
@@ -13896,11 +13896,11 @@ function jspeStatementFor() {
    if (!(jslMatch(59) & 1)) {
     break label$1;
    }
-   jslCharPosClone($0 + 136 | 0, HEAP32[14856] + 4 | 0);
-   if (HEAP16[HEAP32[14856] + 2 >> 1] != 59) {
+   jslCharPosClone($0 + 136 | 0, HEAP32[14596] + 4 | 0);
+   if (HEAP16[HEAP32[14596] + 2 >> 1] != 59) {
     HEAP32[$0 + 132 >> 2] = __jspeAssignmentExpression(jspeConditionalExpression());
     $1 = $0;
-    if ((HEAP32[24866] & 63) == 1) {
+    if ((HEAP32[24606] & 63) == 1) {
      $2 = jsvGetBoolAndUnLock(jsvSkipName(HEAP32[$0 + 132 >> 2]));
     } else {
      $2 = 0;
@@ -13912,12 +13912,12 @@ function jspeStatementFor() {
     jslCharPosFree($0 + 136 | 0);
     break label$1;
    }
-   jslCharPosClone($0 + 104 | 0, HEAP32[14856] + 4 | 0);
-   if (HEAP16[HEAP32[14856] + 2 >> 1] != 41) {
-    HEAP32[$0 + 100 >> 2] = HEAP32[24866];
+   jslCharPosClone($0 + 104 | 0, HEAP32[14596] + 4 | 0);
+   if (HEAP16[HEAP32[14596] + 2 >> 1] != 41) {
+    HEAP32[$0 + 100 >> 2] = HEAP32[24606];
     jspSetNoExecute();
     jsvUnLock(jspeExpression());
-    HEAP32[24866] = HEAP32[24866] & -1664 | HEAP32[$0 + 100 >> 2] & 1663;
+    HEAP32[24606] = HEAP32[24606] & -1664 | HEAP32[$0 + 100 >> 2] & 1663;
    }
    if (!(jslMatch(41) & 1)) {
     $1 = $0 + 104 | 0;
@@ -13925,36 +13925,36 @@ function jspeStatementFor() {
     jslCharPosFree($1);
     break label$1;
    }
-   jslCharPosClone($0 + 72 | 0, HEAP32[14856] + 4 | 0);
-   HEAP32[$0 + 68 >> 2] = HEAP32[24866];
+   jslCharPosClone($0 + 72 | 0, HEAP32[14596] + 4 | 0);
+   HEAP32[$0 + 68 >> 2] = HEAP32[24606];
    if (!(HEAP8[$0 + 163 | 0] & 1)) {
     jspSetNoExecute();
    }
    $1 = $0 + 40 | 0;
-   HEAP32[24866] = HEAP32[24866] | 512;
+   HEAP32[24606] = HEAP32[24606] | 512;
    jsvUnLock(jspeBlockOrStatement());
-   jslCharPosClone($1, HEAP32[14856] + 4 | 0);
+   jslCharPosClone($1, HEAP32[14596] + 4 | 0);
    if (!(HEAP8[$0 + 315 | 0] & 1)) {
-    HEAP32[24866] = HEAP32[24866] & -513;
+    HEAP32[24606] = HEAP32[24606] & -513;
    }
-   if (!((HEAP32[24866] & 63) == 1 ? !(HEAP8[$0 + 163 | 0] & 1) : 0)) {
+   if (!((HEAP32[24606] & 63) == 1 ? !(HEAP8[$0 + 163 | 0] & 1) : 0)) {
     label$43 : {
-     if (HEAP32[24866] & 4) {
-      HEAP32[24866] = 1;
+     if (HEAP32[24606] & 4) {
+      HEAP32[24606] = 1;
       break label$43;
      }
-     if (HEAP32[24866] & 2) {
-      HEAP32[24866] = 1;
+     if (HEAP32[24606] & 2) {
+      HEAP32[24606] = 1;
       HEAP8[$0 + 162 | 0] = 1;
      }
     }
    }
    if (!(HEAP8[$0 + 163 | 0] & 1)) {
-    HEAP32[24866] = HEAP32[24866] & -1664 | HEAP32[$0 + 68 >> 2] & 1663;
+    HEAP32[24606] = HEAP32[24606] & -1664 | HEAP32[$0 + 68 >> 2] & 1663;
    }
    if (HEAP8[$0 + 163 | 0] & 1) {
     jslSeekToP($0 + 104 | 0);
-    if (HEAP16[HEAP32[14856] + 2 >> 1] != 41) {
+    if (HEAP16[HEAP32[14596] + 2 >> 1] != 41) {
      jsvUnLock(jspeExpression());
     }
    }
@@ -13965,7 +13965,7 @@ function jspeStatementFor() {
       break label$50;
      }
      $1 = 0;
-     if ((HEAP32[24866] & 63) != 1) {
+     if ((HEAP32[24606] & 63) != 1) {
       break label$50;
      }
      $1 = HEAPU8[$0 + 163 | 0];
@@ -13973,7 +13973,7 @@ function jspeStatementFor() {
     if ($1 & 1) {
      jslSeekToP($0 + 136 | 0);
      label$52 : {
-      if (HEAP16[HEAP32[14856] + 2 >> 1] == 59) {
+      if (HEAP16[HEAP32[14596] + 2 >> 1] == 59) {
        HEAP8[$0 + 163 | 0] = 1;
        break label$52;
       }
@@ -13981,28 +13981,28 @@ function jspeStatementFor() {
       HEAP8[$0 + 163 | 0] = jsvGetBoolAndUnLock(jsvSkipName(HEAP32[$0 + 36 >> 2])) & 1;
       jsvUnLock(HEAP32[$0 + 36 >> 2]);
      }
-     if (!(!(HEAP8[$0 + 163 | 0] & 1) | (HEAP32[24866] & 63) != 1)) {
+     if (!(!(HEAP8[$0 + 163 | 0] & 1) | (HEAP32[24606] & 63) != 1)) {
       jslSeekToP($0 + 72 | 0);
-      HEAP32[24866] = HEAP32[24866] | 512;
+      HEAP32[24606] = HEAP32[24606] | 512;
       jspDebuggerLoopIfCtrlC();
       jsvUnLock(jspeBlockOrStatement());
       if (!(HEAP8[$0 + 315 | 0] & 1)) {
-       HEAP32[24866] = HEAP32[24866] & -513;
+       HEAP32[24606] = HEAP32[24606] & -513;
       }
       label$56 : {
-       if (HEAP32[24866] & 4) {
-        HEAP32[24866] = 1;
+       if (HEAP32[24606] & 4) {
+        HEAP32[24606] = 1;
         break label$56;
        }
-       if (HEAP32[24866] & 2) {
-        HEAP32[24866] = 1;
+       if (HEAP32[24606] & 2) {
+        HEAP32[24606] = 1;
         HEAP8[$0 + 162 | 0] = 1;
        }
       }
      }
-     if (!(HEAP8[$0 + 162 | 0] & 1 | (!(HEAP8[$0 + 163 | 0] & 1) | (HEAP32[24866] & 63) != 1))) {
+     if (!(HEAP8[$0 + 162 | 0] & 1 | (!(HEAP8[$0 + 163 | 0] & 1) | (HEAP32[24606] & 63) != 1))) {
       jslSeekToP($0 + 104 | 0);
-      if (HEAP16[HEAP32[14856] + 2 >> 1] != 41) {
+      if (HEAP16[HEAP32[14596] + 2 >> 1] != 41) {
        jsvUnLock(jspeExpression());
       }
      }
@@ -14040,22 +14040,22 @@ function dispose_chunk($0, $1) {
     }
     $4 = HEAP32[$0 >> 2];
     $0 = $0 - $4 | 0;
-    $7 = HEAP32[64380];
+    $7 = HEAP32[64120];
     if ($0 >>> 0 < $7 >>> 0) {
      break label$1;
     }
     $1 = $1 + $4 | 0;
-    if (HEAP32[64381] != ($0 | 0)) {
+    if (HEAP32[64121] != ($0 | 0)) {
      if ($4 >>> 0 <= 255) {
       $2 = HEAP32[$0 + 12 >> 2];
       $3 = HEAP32[$0 + 8 >> 2];
       $4 = $4 >>> 3;
-      $6 = ($4 << 3) + 257544 | 0;
+      $6 = ($4 << 3) + 256504 | 0;
       if (HEAP32[$3 + 12 >> 2] != ($0 | 0) | $7 >>> 0 > $3 >>> 0 ? ($3 | 0) != ($6 | 0) : 0) {
        break label$1;
       }
       if (($2 | 0) == ($3 | 0)) {
-       HEAP32[64376] = HEAP32[64376] & __wasm_rotl_i32($4);
+       HEAP32[64116] = HEAP32[64116] & __wasm_rotl_i32($4);
        break label$3;
       }
       if (HEAP32[$2 + 8 >> 2] != ($0 | 0) | $7 >>> 0 > $2 >>> 0 ? ($2 | 0) != ($6 | 0) : 0) {
@@ -14115,17 +14115,17 @@ function dispose_chunk($0, $1) {
       break label$3;
      }
      $3 = HEAP32[$0 + 28 >> 2];
-     $4 = ($3 << 2) + 257808 | 0;
+     $4 = ($3 << 2) + 256768 | 0;
      label$13 : {
       if (HEAP32[$4 >> 2] == ($0 | 0)) {
        HEAP32[$4 >> 2] = $2;
        if ($2) {
         break label$13;
        }
-       HEAP32[64377] = HEAP32[64377] & __wasm_rotl_i32($3);
+       HEAP32[64117] = HEAP32[64117] & __wasm_rotl_i32($3);
        break label$3;
       }
-      if (HEAPU32[64380] > $8 >>> 0) {
+      if (HEAPU32[64120] > $8 >>> 0) {
        break label$1;
       }
       HEAP32[$8 + (HEAP32[$8 + 16 >> 2] == ($0 | 0) ? 16 : 20) >> 2] = $2;
@@ -14133,7 +14133,7 @@ function dispose_chunk($0, $1) {
        break label$3;
       }
      }
-     $4 = HEAP32[64380];
+     $4 = HEAP32[64120];
      if ($4 >>> 0 > $2 >>> 0) {
       break label$1;
      }
@@ -14150,7 +14150,7 @@ function dispose_chunk($0, $1) {
      if (!$3) {
       break label$3;
      }
-     if (HEAPU32[64380] > $3 >>> 0) {
+     if (HEAPU32[64120] > $3 >>> 0) {
       break label$1;
      }
      HEAP32[$2 + 20 >> 2] = $3;
@@ -14161,35 +14161,35 @@ function dispose_chunk($0, $1) {
     if (($2 & 3) != 3) {
      break label$3;
     }
-    HEAP32[64378] = $1;
+    HEAP32[64118] = $1;
     HEAP32[$5 + 4 >> 2] = $2 & -2;
     HEAP32[$0 + 4 >> 2] = $1 | 1;
     HEAP32[$5 >> 2] = $1;
     return;
    }
-   $7 = HEAP32[64380];
+   $7 = HEAP32[64120];
    if ($5 >>> 0 < $7 >>> 0) {
     break label$1;
    }
    $9 = HEAP32[$5 + 4 >> 2];
    label$16 : {
     if (!($9 & 2)) {
-     if (HEAP32[64382] == ($5 | 0)) {
-      HEAP32[64382] = $0;
-      $1 = HEAP32[64379] + $1 | 0;
-      HEAP32[64379] = $1;
+     if (HEAP32[64122] == ($5 | 0)) {
+      HEAP32[64122] = $0;
+      $1 = HEAP32[64119] + $1 | 0;
+      HEAP32[64119] = $1;
       HEAP32[$0 + 4 >> 2] = $1 | 1;
-      if (HEAP32[64381] != ($0 | 0)) {
+      if (HEAP32[64121] != ($0 | 0)) {
        break label$2;
       }
-      HEAP32[64378] = 0;
-      HEAP32[64381] = 0;
+      HEAP32[64118] = 0;
+      HEAP32[64121] = 0;
       return;
      }
-     if (HEAP32[64381] == ($5 | 0)) {
-      HEAP32[64381] = $0;
-      $1 = HEAP32[64378] + $1 | 0;
-      HEAP32[64378] = $1;
+     if (HEAP32[64121] == ($5 | 0)) {
+      HEAP32[64121] = $0;
+      $1 = HEAP32[64118] + $1 | 0;
+      HEAP32[64118] = $1;
       HEAP32[$0 + 4 >> 2] = $1 | 1;
       HEAP32[$0 + $1 >> 2] = $1;
       return;
@@ -14199,12 +14199,12 @@ function dispose_chunk($0, $1) {
        $2 = HEAP32[$5 + 12 >> 2];
        $3 = HEAP32[$5 + 8 >> 2];
        $4 = $9 >>> 3;
-       $6 = ($4 << 3) + 257544 | 0;
+       $6 = ($4 << 3) + 256504 | 0;
        if (HEAP32[$3 + 12 >> 2] != ($5 | 0) | $7 >>> 0 > $3 >>> 0 ? ($3 | 0) != ($6 | 0) : 0) {
         break label$1;
        }
        if (($2 | 0) == ($3 | 0)) {
-        HEAP32[64376] = HEAP32[64376] & __wasm_rotl_i32($4);
+        HEAP32[64116] = HEAP32[64116] & __wasm_rotl_i32($4);
         break label$20;
        }
        if (HEAP32[$2 + 8 >> 2] != ($5 | 0) | $7 >>> 0 > $2 >>> 0 ? ($2 | 0) != ($6 | 0) : 0) {
@@ -14264,17 +14264,17 @@ function dispose_chunk($0, $1) {
        break label$20;
       }
       $3 = HEAP32[$5 + 28 >> 2];
-      $4 = ($3 << 2) + 257808 | 0;
+      $4 = ($3 << 2) + 256768 | 0;
       label$29 : {
        if (HEAP32[$4 >> 2] == ($5 | 0)) {
         HEAP32[$4 >> 2] = $2;
         if ($2) {
          break label$29;
         }
-        HEAP32[64377] = HEAP32[64377] & __wasm_rotl_i32($3);
+        HEAP32[64117] = HEAP32[64117] & __wasm_rotl_i32($3);
         break label$20;
        }
-       if (HEAPU32[64380] > $8 >>> 0) {
+       if (HEAPU32[64120] > $8 >>> 0) {
         break label$1;
        }
        HEAP32[$8 + (HEAP32[$8 + 16 >> 2] == ($5 | 0) ? 16 : 20) >> 2] = $2;
@@ -14282,7 +14282,7 @@ function dispose_chunk($0, $1) {
         break label$20;
        }
       }
-      $4 = HEAP32[64380];
+      $4 = HEAP32[64120];
       if ($4 >>> 0 > $2 >>> 0) {
        break label$1;
       }
@@ -14299,7 +14299,7 @@ function dispose_chunk($0, $1) {
       if (!$3) {
        break label$20;
       }
-      if (HEAPU32[64380] > $3 >>> 0) {
+      if (HEAPU32[64120] > $3 >>> 0) {
        break label$1;
       }
       HEAP32[$2 + 20 >> 2] = $3;
@@ -14308,10 +14308,10 @@ function dispose_chunk($0, $1) {
      $1 = ($9 & -8) + $1 | 0;
      HEAP32[$0 + 4 >> 2] = $1 | 1;
      HEAP32[$0 + $1 >> 2] = $1;
-     if (HEAP32[64381] != ($0 | 0)) {
+     if (HEAP32[64121] != ($0 | 0)) {
       break label$16;
      }
-     HEAP32[64378] = $1;
+     HEAP32[64118] = $1;
      return;
     }
     HEAP32[$5 + 4 >> 2] = $9 & -2;
@@ -14320,17 +14320,17 @@ function dispose_chunk($0, $1) {
    }
    if ($1 >>> 0 <= 255) {
     $2 = $1 >>> 3;
-    $1 = ($2 << 3) + 257544 | 0;
-    $3 = HEAP32[64376];
+    $1 = ($2 << 3) + 256504 | 0;
+    $3 = HEAP32[64116];
     $2 = 1 << $2;
     label$33 : {
      if (!($3 & $2)) {
-      HEAP32[64376] = $2 | $3;
+      HEAP32[64116] = $2 | $3;
       $3 = $1;
       break label$33;
      }
      $3 = HEAP32[$1 + 8 >> 2];
-     if (HEAPU32[64380] > $3 >>> 0) {
+     if (HEAPU32[64120] > $3 >>> 0) {
       break label$1;
      }
     }
@@ -14362,13 +14362,13 @@ function dispose_chunk($0, $1) {
     $2 = ($2 << 1 | $1 >>> $2 + 21 & 1) + 28 | 0;
    }
    HEAP32[$3 + 28 >> 2] = $2;
-   $4 = ($2 << 2) + 257808 | 0;
+   $4 = ($2 << 2) + 256768 | 0;
    label$36 : {
-    $3 = HEAP32[64377];
+    $3 = HEAP32[64117];
     $6 = 1 << $2;
     label$37 : {
      if (!($3 & $6)) {
-      HEAP32[64377] = $3 | $6;
+      HEAP32[64117] = $3 | $6;
       HEAP32[$4 >> 2] = $0;
       break label$37;
      }
@@ -14388,7 +14388,7 @@ function dispose_chunk($0, $1) {
       }
       break;
      }
-     if (HEAPU32[64380] > $6 >>> 0) {
+     if (HEAPU32[64120] > $6 >>> 0) {
       break label$1;
      }
      HEAP32[$6 >> 2] = $0;
@@ -14398,7 +14398,7 @@ function dispose_chunk($0, $1) {
     HEAP32[$0 + 8 >> 2] = $0;
     return;
    }
-   $2 = HEAP32[64380];
+   $2 = HEAP32[64120];
    $1 = HEAP32[$4 + 8 >> 2];
    if ($2 >>> 0 > $1 >>> 0 | $2 >>> 0 > $4 >>> 0) {
     break label$1;
@@ -14454,7 +14454,7 @@ function jswrap_graphics_toColor($0, $1, $2, $3) {
        break label$5;
       }
      }
-     jsExceptionHere(1, 42870, 0);
+     jsExceptionHere(1, 41830, 0);
      HEAP32[$4 + 300 >> 2] = 0;
      break label$1;
     }
@@ -14599,7 +14599,7 @@ function jswrap_graphics_toColor($0, $1, $2, $3) {
          HEAP32[$4 + 128 >> 2] = 0;
          while (1) {
           if (HEAPU32[$4 + 128 >> 2] < 16) {
-           HEAP32[$4 + 124 >> 2] = HEAPU16[(HEAP32[$4 + 128 >> 2] << 1) + 41936 >> 1];
+           HEAP32[$4 + 124 >> 2] = HEAPU16[(HEAP32[$4 + 128 >> 2] << 1) + 40896 >> 1];
            HEAP32[$4 + 120 >> 2] = HEAP32[$4 + 124 >> 2] >> 8 & 248;
            HEAP32[$4 + 116 >> 2] = HEAP32[$4 + 124 >> 2] >> 3 & 252;
            HEAP32[$4 + 112 >> 2] = HEAP32[$4 + 124 >> 2] << 3 & 248;
@@ -14628,7 +14628,7 @@ function jswrap_graphics_toColor($0, $1, $2, $3) {
           HEAP32[$4 + 88 >> 2] = 0;
           while (1) {
            if (HEAP32[$4 + 88 >> 2] < 255) {
-            HEAP32[$4 + 84 >> 2] = HEAPU16[(HEAP32[$4 + 88 >> 2] << 1) + 41968 >> 1];
+            HEAP32[$4 + 84 >> 2] = HEAPU16[(HEAP32[$4 + 88 >> 2] << 1) + 40928 >> 1];
             HEAP32[$4 + 80 >> 2] = HEAP32[$4 + 84 >> 2] >> 8 & 248;
             HEAP32[$4 + 76 >> 2] = HEAP32[$4 + 84 >> 2] >> 3 & 252;
             HEAP32[$4 + 72 >> 2] = HEAP32[$4 + 84 >> 2] << 3 & 248;
@@ -15225,16 +15225,16 @@ function jspeFactor() {
  $0 = global$0 - 96 | 0;
  global$0 = $0;
  label$1 : {
-  if (HEAP16[HEAP32[14856] + 2 >> 1] == 128) {
+  if (HEAP16[HEAP32[14596] + 2 >> 1] == 128) {
    HEAP32[$0 + 88 >> 2] = jspGetNamedVariable(jslGetTokenValueAsString());
    jslGetNextToken();
    label$3 : {
-    if (HEAP16[HEAP32[14856] + 2 >> 1] == 133) {
+    if (HEAP16[HEAP32[14596] + 2 >> 1] == 133) {
      jsExceptionHere(2, 4527, 0);
      break label$3;
     }
     label$5 : {
-     if (HEAP16[HEAP32[14856] + 2 >> 1] != 162) {
+     if (HEAP16[HEAP32[14596] + 2 >> 1] != 162) {
       break label$5;
      }
      if (!(jsvIsName(HEAP32[$0 + 88 >> 2]) & 1)) {
@@ -15248,25 +15248,25 @@ function jspeFactor() {
    HEAP32[$0 + 92 >> 2] = HEAP32[$0 + 88 >> 2];
    break label$1;
   }
-  if (HEAP16[HEAP32[14856] + 2 >> 1] == 129) {
+  if (HEAP16[HEAP32[14596] + 2 >> 1] == 129) {
    HEAP32[$0 + 80 >> 2] = 0;
-   if ((HEAP32[24866] & 63) == 1) {
+   if ((HEAP32[24606] & 63) == 1) {
     HEAP32[$0 + 80 >> 2] = jsvNewFromLongInteger(stringToInt(jslGetTokenValueAsString()), i64toi32_i32$HIGH_BITS);
    }
    jslGetNextToken();
    HEAP32[$0 + 92 >> 2] = HEAP32[$0 + 80 >> 2];
    break label$1;
   }
-  if (HEAP16[HEAP32[14856] + 2 >> 1] == 130) {
+  if (HEAP16[HEAP32[14596] + 2 >> 1] == 130) {
    HEAP32[$0 + 76 >> 2] = 0;
-   if ((HEAP32[24866] & 63) == 1) {
+   if ((HEAP32[24606] & 63) == 1) {
     HEAP32[$0 + 76 >> 2] = jsvNewFromFloat(stringToFloat(jslGetTokenValueAsString()));
    }
    jslGetNextToken();
    HEAP32[$0 + 92 >> 2] = HEAP32[$0 + 76 >> 2];
    break label$1;
   }
-  if (HEAP16[HEAP32[14856] + 2 >> 1] == 40) {
+  if (HEAP16[HEAP32[14596] + 2 >> 1] == 40) {
    jslGetNextToken();
    if (!(jspCheckStackPosition() & 1)) {
     HEAP32[$0 + 92 >> 2] = 0;
@@ -15275,11 +15275,11 @@ function jspeFactor() {
    HEAP32[$0 + 92 >> 2] = jspeExpressionOrArrowFunction();
    break label$1;
   }
-  if (HEAP16[HEAP32[14856] + 2 >> 1] == 180) {
+  if (HEAP16[HEAP32[14596] + 2 >> 1] == 180) {
    jslGetNextToken();
    $2 = $0;
    label$13 : {
-    if ((HEAP32[24866] & 63) == 1) {
+    if ((HEAP32[24606] & 63) == 1) {
      $1 = jsvNewFromBool(1);
      break label$13;
     }
@@ -15288,11 +15288,11 @@ function jspeFactor() {
    HEAP32[$2 + 92 >> 2] = $1;
    break label$1;
   }
-  if (HEAP16[HEAP32[14856] + 2 >> 1] == 181) {
+  if (HEAP16[HEAP32[14596] + 2 >> 1] == 181) {
    jslGetNextToken();
    $2 = $0;
    label$16 : {
-    if ((HEAP32[24866] & 63) == 1) {
+    if ((HEAP32[24606] & 63) == 1) {
      $1 = jsvNewFromBool(0);
      break label$16;
     }
@@ -15301,11 +15301,11 @@ function jspeFactor() {
    HEAP32[$2 + 92 >> 2] = $1;
    break label$1;
   }
-  if (HEAP16[HEAP32[14856] + 2 >> 1] == 182) {
+  if (HEAP16[HEAP32[14596] + 2 >> 1] == 182) {
    jslGetNextToken();
    $2 = $0;
    label$19 : {
-    if ((HEAP32[24866] & 63) == 1) {
+    if ((HEAP32[24606] & 63) == 1) {
      $1 = jsvNewWithFlags(2);
      break label$19;
     }
@@ -15314,25 +15314,25 @@ function jspeFactor() {
    HEAP32[$2 + 92 >> 2] = $1;
    break label$1;
   }
-  if (HEAP16[HEAP32[14856] + 2 >> 1] == 183) {
+  if (HEAP16[HEAP32[14596] + 2 >> 1] == 183) {
    jslGetNextToken();
    HEAP32[$0 + 92 >> 2] = 0;
    break label$1;
   }
-  if (HEAP16[HEAP32[14856] + 2 >> 1] == 131) {
+  if (HEAP16[HEAP32[14596] + 2 >> 1] == 131) {
    HEAP32[$0 + 72 >> 2] = 0;
-   if ((HEAP32[24866] & 63) == 1) {
+   if ((HEAP32[24606] & 63) == 1) {
     HEAP32[$0 + 72 >> 2] = jslGetTokenValueAsVar();
    }
    jslGetNextToken();
    HEAP32[$0 + 92 >> 2] = HEAP32[$0 + 72 >> 2];
    break label$1;
   }
-  if (HEAP16[HEAP32[14856] + 2 >> 1] == 133) {
+  if (HEAP16[HEAP32[14596] + 2 >> 1] == 133) {
    HEAP32[$0 + 92 >> 2] = jspeTemplateLiteral();
    break label$1;
   }
-  if (HEAP16[HEAP32[14856] + 2 >> 1] == 135) {
+  if (HEAP16[HEAP32[14596] + 2 >> 1] == 135) {
    $2 = $0 + 32 | 0;
    HEAP32[$0 + 68 >> 2] = 0;
    HEAP32[$0 + 64 >> 2] = jslGetTokenValueAsVar();
@@ -15362,7 +15362,7 @@ function jspeFactor() {
    HEAP32[$0 + 92 >> 2] = HEAP32[$0 + 68 >> 2];
    break label$1;
   }
-  if (HEAP16[HEAP32[14856] + 2 >> 1] == 123) {
+  if (HEAP16[HEAP32[14596] + 2 >> 1] == 123) {
    if (!(jspCheckStackPosition() & 1)) {
     HEAP32[$0 + 92 >> 2] = 0;
     break label$1;
@@ -15370,7 +15370,7 @@ function jspeFactor() {
    HEAP32[$0 + 92 >> 2] = jspeFactorObject();
    break label$1;
   }
-  if (HEAP16[HEAP32[14856] + 2 >> 1] == 91) {
+  if (HEAP16[HEAP32[14596] + 2 >> 1] == 91) {
    if (!(jspCheckStackPosition() & 1)) {
     HEAP32[$0 + 92 >> 2] = 0;
     break label$1;
@@ -15378,7 +15378,7 @@ function jspeFactor() {
    HEAP32[$0 + 92 >> 2] = jspeFactorArray();
    break label$1;
   }
-  if (HEAP16[HEAP32[14856] + 2 >> 1] == 170) {
+  if (HEAP16[HEAP32[14596] + 2 >> 1] == 170) {
    if (!(jspCheckStackPosition() & 1)) {
     HEAP32[$0 + 92 >> 2] = 0;
     break label$1;
@@ -15387,7 +15387,7 @@ function jspeFactor() {
    HEAP32[$0 + 92 >> 2] = jspeFunctionDefinition(1);
    break label$1;
   }
-  if (HEAP16[HEAP32[14856] + 2 >> 1] == 194) {
+  if (HEAP16[HEAP32[14596] + 2 >> 1] == 194) {
    if (!(jspCheckStackPosition() & 1)) {
     HEAP32[$0 + 92 >> 2] = 0;
     break label$1;
@@ -15396,10 +15396,10 @@ function jspeFactor() {
    HEAP32[$0 + 92 >> 2] = jspeClassDefinition(1);
    break label$1;
   }
-  if (HEAP16[HEAP32[14856] + 2 >> 1] == 196) {
+  if (HEAP16[HEAP32[14596] + 2 >> 1] == 196) {
    jslGetNextToken();
-   if (jsvIsObject(HEAP32[24865]) & 1) {
-    HEAP32[$0 + 20 >> 2] = jsvObjectGetChild(HEAP32[24865], 3684, 0);
+   if (jsvIsObject(HEAP32[24605]) & 1) {
+    HEAP32[$0 + 20 >> 2] = jsvObjectGetChild(HEAP32[24605], 3684, 0);
     $2 = $0;
     label$40 : {
      if (jsvIsObject(HEAP32[$0 + 20 >> 2]) & 1) {
@@ -15415,7 +15415,7 @@ function jspeFactor() {
      HEAP32[$0 + 92 >> 2] = 0;
      break label$1;
     }
-    if (HEAP16[HEAP32[14856] + 2 >> 1] == 40) {
+    if (HEAP16[HEAP32[14596] + 2 >> 1] == 40) {
      HEAP32[$0 + 12 >> 2] = jsvObjectGetChild(HEAP32[$0 + 16 >> 2], 4358, 0);
      jsvUnLock(HEAP32[$0 + 16 >> 2]);
      HEAP32[$0 + 92 >> 2] = HEAP32[$0 + 12 >> 2];
@@ -15424,8 +15424,8 @@ function jspeFactor() {
     HEAP32[$0 + 92 >> 2] = HEAP32[$0 + 16 >> 2];
     break label$1;
    }
-   if (jsvIsFunction(HEAP32[24865]) & 1) {
-    HEAP32[$0 + 8 >> 2] = jsvObjectGetChild(HEAP32[24865], 3674, 0);
+   if (jsvIsFunction(HEAP32[24605]) & 1) {
+    HEAP32[$0 + 8 >> 2] = jsvObjectGetChild(HEAP32[24605], 3674, 0);
     $2 = $0;
     label$45 : {
      if (jsvIsObject(HEAP32[$0 + 8 >> 2]) & 1) {
@@ -15450,18 +15450,18 @@ function jspeFactor() {
    HEAP32[$0 + 92 >> 2] = 0;
    break label$1;
   }
-  if (HEAP16[HEAP32[14856] + 2 >> 1] == 175) {
+  if (HEAP16[HEAP32[14596] + 2 >> 1] == 175) {
    jslGetNextToken();
    $2 = $0;
-   if (HEAP32[24865]) {
-    $1 = HEAP32[24865];
+   if (HEAP32[24605]) {
+    $1 = HEAP32[24605];
    } else {
-    $1 = HEAP32[24862];
+    $1 = HEAP32[24602];
    }
    HEAP32[$2 + 92 >> 2] = jsvLockAgain($1);
    break label$1;
   }
-  if (HEAP16[HEAP32[14856] + 2 >> 1] == 190) {
+  if (HEAP16[HEAP32[14596] + 2 >> 1] == 190) {
    if (!(jspCheckStackPosition() & 1)) {
     HEAP32[$0 + 92 >> 2] = 0;
     break label$1;
@@ -15469,7 +15469,7 @@ function jspeFactor() {
    HEAP32[$0 + 92 >> 2] = jspeFactorDelete();
    break label$1;
   }
-  if (HEAP16[HEAP32[14856] + 2 >> 1] == 191) {
+  if (HEAP16[HEAP32[14596] + 2 >> 1] == 191) {
    if (!(jspCheckStackPosition() & 1)) {
     HEAP32[$0 + 92 >> 2] = 0;
     break label$1;
@@ -15477,7 +15477,7 @@ function jspeFactor() {
    HEAP32[$0 + 92 >> 2] = jspeFactorTypeOf();
    break label$1;
   }
-  if (HEAP16[HEAP32[14856] + 2 >> 1] == 192) {
+  if (HEAP16[HEAP32[14596] + 2 >> 1] == 192) {
    if (!(jspCheckStackPosition() & 1)) {
     HEAP32[$0 + 92 >> 2] = 0;
     break label$1;
@@ -16042,7 +16042,7 @@ function jsiDumpState($0, $1) {
  global$0 = $2;
  HEAP32[$2 + 268 >> 2] = $0;
  HEAP32[$2 + 264 >> 2] = $1;
- jsvObjectIteratorNew($2 + 256 | 0, HEAP32[24862]);
+ jsvObjectIteratorNew($2 + 256 | 0, HEAP32[24602]);
  while (1) {
   if (jsvObjectIteratorHasValue($2 + 256 | 0) & 1) {
    $0 = $2 + 176 | 0;
@@ -16051,7 +16051,7 @@ function jsiDumpState($0, $1) {
    HEAP32[$2 + 248 >> 2] = jsvObjectIteratorGetValue($1);
    jsvGetString(HEAP32[$2 + 252 >> 2], $0, 64);
    HEAP8[$2 + 175 | 0] = 0;
-   HEAP32[$2 + 168 >> 2] = 6199;
+   HEAP32[$2 + 168 >> 2] = 6195;
    while (1) {
     if (HEAPU8[HEAP32[$2 + 168 >> 2]]) {
      if (!strcmp(HEAP32[$2 + 168 >> 2], $2 + 176 | 0)) {
@@ -16084,26 +16084,26 @@ function jsiDumpState($0, $1) {
             $0 = HEAP32[$2 + 268 >> 2];
             $1 = HEAP32[$2 + 264 >> 2];
             HEAP32[$2 >> 2] = HEAP32[$2 + 252 >> 2];
-            cbprintf($0, $1, 6202, $2);
+            cbprintf($0, $1, 6198, $2);
             jsfGetJSONForFunctionWithCallback(HEAP32[$2 + 248 >> 2], 32, HEAP32[$2 + 268 >> 2], HEAP32[$2 + 264 >> 2]);
-            FUNCTION_TABLE[HEAP32[$2 + 268 >> 2]](5716, HEAP32[$2 + 264 >> 2]);
+            FUNCTION_TABLE[HEAP32[$2 + 268 >> 2]](5712, HEAP32[$2 + 264 >> 2]);
             jsiDumpObjectState(HEAP32[$2 + 268 >> 2], HEAP32[$2 + 264 >> 2], HEAP32[$2 + 252 >> 2], HEAP32[$2 + 248 >> 2]);
             break label$15;
            }
            $0 = HEAP32[$2 + 268 >> 2];
            $1 = HEAP32[$2 + 264 >> 2];
            HEAP32[$2 + 32 >> 2] = HEAP32[$2 + 252 >> 2];
-           cbprintf($0, $1, 6214, $2 + 32 | 0);
+           cbprintf($0, $1, 6210, $2 + 32 | 0);
            HEAP8[$2 + 167 | 0] = 0;
            if (jsvIsObject(HEAP32[$2 + 248 >> 2]) & 1) {
-            HEAP32[$2 + 160 >> 2] = jsvObjectGetChild(HEAP32[$2 + 248 >> 2], 6224, 0);
+            HEAP32[$2 + 160 >> 2] = jsvObjectGetChild(HEAP32[$2 + 248 >> 2], 6220, 0);
             if (HEAP32[$2 + 160 >> 2]) {
-             HEAP32[$2 + 156 >> 2] = jsvGetPathTo(HEAP32[24862], HEAP32[$2 + 160 >> 2], HEAP32[$2 + 248 >> 2]);
+             HEAP32[$2 + 156 >> 2] = jsvGetPathTo(HEAP32[24602], HEAP32[$2 + 160 >> 2], HEAP32[$2 + 248 >> 2]);
              if (HEAP32[$2 + 156 >> 2]) {
               $0 = HEAP32[$2 + 268 >> 2];
               $1 = HEAP32[$2 + 264 >> 2];
               HEAP32[$2 + 16 >> 2] = HEAP32[$2 + 156 >> 2];
-              cbprintf($0, $1, 6234, $2 + 16 | 0);
+              cbprintf($0, $1, 6230, $2 + 16 | 0);
               jsiDumpObjectState(HEAP32[$2 + 268 >> 2], HEAP32[$2 + 264 >> 2], HEAP32[$2 + 252 >> 2], HEAP32[$2 + 248 >> 2]);
               HEAP8[$2 + 167 | 0] = 1;
              }
@@ -16130,7 +16130,7 @@ function jsiDumpState($0, $1) {
  }
  $0 = $2 + 256 | 0;
  jsvObjectIteratorFree($0);
- HEAP32[$2 + 152 >> 2] = jsvLock(HEAPU16[49740]);
+ HEAP32[$2 + 152 >> 2] = jsvLock(HEAPU16[49220]);
  jsvObjectIteratorNew($0, HEAP32[$2 + 152 >> 2]);
  jsvUnLock(HEAP32[$2 + 152 >> 2]);
  while (1) {
@@ -16138,9 +16138,9 @@ function jsiDumpState($0, $1) {
    $0 = $2 + 256 | 0;
    HEAP32[$2 + 148 >> 2] = jsvObjectIteratorGetValue($0);
    HEAP32[$2 + 144 >> 2] = jsvObjectIteratorGetKey($0);
-   HEAP32[$2 + 140 >> 2] = jsvSkipOneNameAndUnLock(jsvFindChildFromString(HEAP32[$2 + 148 >> 2], 6063, 0));
-   HEAP32[$2 + 136 >> 2] = jsvObjectGetChild(HEAP32[$2 + 148 >> 2], 6137, 0);
-   FUNCTION_TABLE[HEAP32[$2 + 268 >> 2]](HEAP32[$2 + 136 >> 2] ? 6254 : 6267, HEAP32[$2 + 264 >> 2]);
+   HEAP32[$2 + 140 >> 2] = jsvSkipOneNameAndUnLock(jsvFindChildFromString(HEAP32[$2 + 148 >> 2], 6059, 0));
+   HEAP32[$2 + 136 >> 2] = jsvObjectGetChild(HEAP32[$2 + 148 >> 2], 6133, 0);
+   FUNCTION_TABLE[HEAP32[$2 + 268 >> 2]](HEAP32[$2 + 136 >> 2] ? 6250 : 6263, HEAP32[$2 + 264 >> 2]);
    jsiDumpJSON(HEAP32[$2 + 268 >> 2], HEAP32[$2 + 264 >> 2], HEAP32[$2 + 140 >> 2], 0);
    $3 = HEAP32[$2 + 268 >> 2];
    $4 = HEAP32[$2 + 264 >> 2];
@@ -16150,13 +16150,13 @@ function jsiDumpState($0, $1) {
      $1 = i64toi32_i32$HIGH_BITS;
      break label$23;
     }
-    $0 = jsvGetLongIntegerAndUnLock(jsvObjectGetChild(HEAP32[$2 + 148 >> 2], 6052, 0));
+    $0 = jsvGetLongIntegerAndUnLock(jsvObjectGetChild(HEAP32[$2 + 148 >> 2], 6048, 0));
     $1 = i64toi32_i32$HIGH_BITS;
    }
    $6 = jshGetMillisecondsFromTime($0, $1);
    HEAP32[$2 + 56 >> 2] = HEAP32[$2 + 144 >> 2];
    HEAPF64[$2 + 48 >> 3] = $6;
-   cbprintf($3, $4, 6279, $2 + 48 | 0);
+   cbprintf($3, $4, 6275, $2 + 48 | 0);
    $0 = $2 + 256 | 0;
    jsvUnLock3(HEAP32[$2 + 136 >> 2], HEAP32[$2 + 140 >> 2], HEAP32[$2 + 144 >> 2]);
    jsvUnLock(HEAP32[$2 + 148 >> 2]);
@@ -16167,42 +16167,42 @@ function jsiDumpState($0, $1) {
  }
  $0 = $2 + 256 | 0;
  jsvObjectIteratorFree($0);
- HEAP32[$2 + 132 >> 2] = jsvLock(HEAPU16[49741]);
+ HEAP32[$2 + 132 >> 2] = jsvLock(HEAPU16[49221]);
  jsvObjectIteratorNew($0, HEAP32[$2 + 132 >> 2]);
  jsvUnLock(HEAP32[$2 + 132 >> 2]);
  while (1) {
   if (jsvObjectIteratorHasValue($2 + 256 | 0) & 1) {
    HEAP32[$2 + 128 >> 2] = jsvObjectIteratorGetValue($2 + 256 | 0);
-   HEAP32[$2 + 124 >> 2] = jsvSkipOneNameAndUnLock(jsvFindChildFromString(HEAP32[$2 + 128 >> 2], 6063, 0));
-   HEAP8[$2 + 123 | 0] = jsvGetBoolAndUnLock(jsvObjectGetChild(HEAP32[$2 + 128 >> 2], 6081, 0)) & 1;
-   HEAP32[$2 + 116 >> 2] = jsvGetIntegerAndUnLock(jsvObjectGetChild(HEAP32[$2 + 128 >> 2], 6003, 0));
+   HEAP32[$2 + 124 >> 2] = jsvSkipOneNameAndUnLock(jsvFindChildFromString(HEAP32[$2 + 128 >> 2], 6059, 0));
+   HEAP8[$2 + 123 | 0] = jsvGetBoolAndUnLock(jsvObjectGetChild(HEAP32[$2 + 128 >> 2], 6077, 0)) & 1;
+   HEAP32[$2 + 116 >> 2] = jsvGetIntegerAndUnLock(jsvObjectGetChild(HEAP32[$2 + 128 >> 2], 5999, 0));
    HEAP32[$2 + 112 >> 2] = jsvObjectGetChild(HEAP32[$2 + 128 >> 2], 5259, 0);
-   HEAP32[$2 + 108 >> 2] = jsvGetIntegerAndUnLock(jsvObjectGetChild(HEAP32[$2 + 128 >> 2], 6029, 0));
-   FUNCTION_TABLE[HEAP32[$2 + 268 >> 2]](6293, HEAP32[$2 + 264 >> 2]);
+   HEAP32[$2 + 108 >> 2] = jsvGetIntegerAndUnLock(jsvObjectGetChild(HEAP32[$2 + 128 >> 2], 6025, 0));
+   FUNCTION_TABLE[HEAP32[$2 + 268 >> 2]](6289, HEAP32[$2 + 264 >> 2]);
    jsiDumpJSON(HEAP32[$2 + 268 >> 2], HEAP32[$2 + 264 >> 2], HEAP32[$2 + 124 >> 2], 0);
    $3 = HEAP32[$2 + 268 >> 2];
    $4 = HEAP32[$2 + 264 >> 2];
    $0 = HEAP32[$2 + 112 >> 2];
-   $1 = HEAP8[$2 + 123 | 0] & 1 ? 6332 : 6337;
+   $1 = HEAP8[$2 + 123 | 0] & 1 ? 6328 : 6333;
    $7 = $2;
    if (HEAP32[$2 + 116 >> 2] < 0) {
-    $5 = 6343;
+    $5 = 6339;
    } else {
-    $5 = HEAP32[$2 + 116 >> 2] > 0 ? 6351 : 6358;
+    $5 = HEAP32[$2 + 116 >> 2] > 0 ? 6347 : 6354;
    }
    HEAP32[$7 + 88 >> 2] = $5;
    HEAP32[$2 + 84 >> 2] = $1;
    HEAP32[$2 + 80 >> 2] = $0;
-   cbprintf($3, $4, 6303, $2 + 80 | 0);
+   cbprintf($3, $4, 6299, $2 + 80 | 0);
    if (HEAP32[$2 + 108 >> 2] > 0) {
     $0 = HEAP32[$2 + 268 >> 2];
     $1 = HEAP32[$2 + 264 >> 2];
     $3 = HEAP32[$2 + 108 >> 2];
     HEAPF64[$2 + 64 >> 3] = jshGetMillisecondsFromTime($3, $3 >> 31);
-    cbprintf($0, $1, 6363, $2 - -64 | 0);
+    cbprintf($0, $1, 6359, $2 - -64 | 0);
    }
    $0 = $2 + 256 | 0;
-   FUNCTION_TABLE[HEAP32[$2 + 268 >> 2]](6379, HEAP32[$2 + 264 >> 2]);
+   FUNCTION_TABLE[HEAP32[$2 + 268 >> 2]](6375, HEAP32[$2 + 264 >> 2]);
    jsvUnLock2(HEAP32[$2 + 112 >> 2], HEAP32[$2 + 124 >> 2]);
    jsvUnLock(HEAP32[$2 + 128 >> 2]);
    jsvObjectIteratorNext($0);
@@ -16217,7 +16217,7 @@ function jsiDumpState($0, $1) {
   $0 = HEAP32[$2 + 268 >> 2];
   $1 = HEAP32[$2 + 264 >> 2];
   HEAP32[$2 + 96 >> 2] = HEAP32[$2 + 104 >> 2];
-  cbprintf($0, $1, 6385, $2 + 96 | 0);
+  cbprintf($0, $1, 6381, $2 + 96 | 0);
   jsvUnLock(HEAP32[$2 + 104 >> 2]);
  }
  global$0 = $2 + 272 | 0;
@@ -16230,7 +16230,7 @@ function tflite__MicroInterpreter__Invoke_28_29($0) {
  $0 = HEAP32[$1 + 424 >> 2];
  label$1 : {
   if (HEAP32[$0 + 116 >> 2]) {
-   tflite__ErrorReporter__Report_28char_20const__2c_20____29(HEAP32[$0 + 8 >> 2], 43910, 0);
+   tflite__ErrorReporter__Report_28char_20const__2c_20____29(HEAP32[$0 + 8 >> 2], 42870, 0);
    HEAP32[$1 + 428 >> 2] = 1;
    break label$1;
   }
@@ -16252,7 +16252,7 @@ function tflite__MicroInterpreter__Invoke_28_29($0) {
      }
      $0 = HEAP32[$0 + 8 >> 2];
      HEAP32[$1 >> 2] = HEAP32[$1 + 404 >> 2];
-     tflite__ErrorReporter__Report_28char_20const__2c_20____29($0, 43955, $1);
+     tflite__ErrorReporter__Report_28char_20const__2c_20____29($0, 42915, $1);
      HEAP32[$1 + 428 >> 2] = 1;
      break label$1;
     }
@@ -16267,7 +16267,7 @@ function tflite__MicroInterpreter__Invoke_28_29($0) {
     if (!HEAP32[$1 + 396 >> 2]) {
      $0 = HEAP32[$0 + 8 >> 2];
      HEAP32[$1 + 16 >> 2] = HEAP32[$1 + 404 >> 2];
-     tflite__ErrorReporter__Report_28char_20const__2c_20____29($0, 43997, $1 + 16 | 0);
+     tflite__ErrorReporter__Report_28char_20const__2c_20____29($0, 42957, $1 + 16 | 0);
      HEAP32[$1 + 428 >> 2] = 1;
      break label$1;
     }
@@ -16281,7 +16281,7 @@ function tflite__MicroInterpreter__Invoke_28_29($0) {
      }
      $0 = HEAP32[$0 + 8 >> 2];
      HEAP32[$1 + 32 >> 2] = tflite__EnumNameBuiltinOperator_28tflite__BuiltinOperator_29(HEAP32[$1 + 392 >> 2]);
-     tflite__ErrorReporter__Report_28char_20const__2c_20____29($0, 44030, $1 + 32 | 0);
+     tflite__ErrorReporter__Report_28char_20const__2c_20____29($0, 42990, $1 + 32 | 0);
      HEAP32[$1 + 428 >> 2] = 1;
      break label$1;
     }
@@ -16337,7 +16337,7 @@ function tflite__MicroInterpreter__Invoke_28_29($0) {
        HEAP32[$1 + 56 >> 2] = HEAP32[$1 + 84 >> 2];
        HEAP32[$1 + 52 >> 2] = $4;
        HEAP32[$1 + 48 >> 2] = $3;
-       tflite__ErrorReporter__Report_28char_20const__2c_20____29($2, 44100, $1 + 48 | 0);
+       tflite__ErrorReporter__Report_28char_20const__2c_20____29($2, 43060, $1 + 48 | 0);
        HEAP32[$1 + 428 >> 2] = 1;
        HEAP32[$1 + 232 >> 2] = 1;
        break label$11;
@@ -16352,7 +16352,7 @@ function tflite__MicroInterpreter__Invoke_28_29($0) {
        HEAP32[$1 + 72 >> 2] = HEAP32[$1 + 80 >> 2];
        HEAP32[$1 + 68 >> 2] = $4;
        HEAP32[$1 + 64 >> 2] = $3;
-       tflite__ErrorReporter__Report_28char_20const__2c_20____29($2, 44153, $1 - -64 | 0);
+       tflite__ErrorReporter__Report_28char_20const__2c_20____29($2, 43113, $1 - -64 | 0);
        HEAP32[$1 + 428 >> 2] = 1;
        HEAP32[$1 + 232 >> 2] = 1;
        break label$11;
@@ -16680,7 +16680,7 @@ function tflite__MicroAllocator__InitializeRuntimeTensor_28tflite__Tensor_20cons
     HEAP32[HEAP32[$5 + 72 >> 2] + 32 >> 2] = $0;
     break label$16;
    }
-   HEAP32[HEAP32[$5 + 72 >> 2] + 32 >> 2] = 46321;
+   HEAP32[HEAP32[$5 + 72 >> 2] + 32 >> 2] = 45281;
   }
   HEAP32[HEAP32[$5 + 72 >> 2] + 28 >> 2] = 0;
   HEAP32[HEAP32[$5 + 72 >> 2] + 36 >> 2] = 0;
@@ -17217,11 +17217,11 @@ function tflite__PopulateConvolutionQuantizationParams_28TfLiteContext__2c_20TfL
    $2 = HEAP32[HEAP32[$12 + 292 >> 2] + 48 >> 2];
    HEAP32[$12 + 20 >> 2] = 1;
    HEAP32[$12 + 16 >> 2] = $2;
-   HEAP32[$12 + 12 >> 2] = 53330;
-   HEAP32[$12 + 8 >> 2] = 53305;
+   HEAP32[$12 + 12 >> 2] = 52290;
+   HEAP32[$12 + 8 >> 2] = 52265;
    HEAP32[$12 + 4 >> 2] = 33;
-   HEAP32[$12 >> 2] = 53222;
-   FUNCTION_TABLE[$0]($1, 53196, $12);
+   HEAP32[$12 >> 2] = 52182;
+   FUNCTION_TABLE[$0]($1, 52156, $12);
    HEAP32[$12 + 300 >> 2] = 1;
    break label$1;
   }
@@ -17231,11 +17231,11 @@ function tflite__PopulateConvolutionQuantizationParams_28TfLiteContext__2c_20TfL
    $2 = HEAP32[HEAP32[$12 + 288 >> 2] + 48 >> 2];
    HEAP32[$12 + 52 >> 2] = 1;
    HEAP32[$12 + 48 >> 2] = $2;
-   HEAP32[$12 + 44 >> 2] = 53330;
-   HEAP32[$12 + 40 >> 2] = 53356;
+   HEAP32[$12 + 44 >> 2] = 52290;
+   HEAP32[$12 + 40 >> 2] = 52316;
    HEAP32[$12 + 36 >> 2] = 35;
-   HEAP32[$12 + 32 >> 2] = 53222;
-   FUNCTION_TABLE[$0]($1, 53196, $12 + 32 | 0);
+   HEAP32[$12 + 32 >> 2] = 52182;
+   FUNCTION_TABLE[$0]($1, 52156, $12 + 32 | 0);
    HEAP32[$12 + 300 >> 2] = 1;
    break label$1;
   }
@@ -17243,20 +17243,20 @@ function tflite__PopulateConvolutionQuantizationParams_28TfLiteContext__2c_20TfL
   if (!HEAP32[$12 + 248 >> 2]) {
    $0 = HEAP32[HEAP32[$12 + 296 >> 2] + 20 >> 2];
    $1 = HEAP32[$12 + 296 >> 2];
-   HEAP32[$12 + 184 >> 2] = 53405;
+   HEAP32[$12 + 184 >> 2] = 52365;
    HEAP32[$12 + 180 >> 2] = 45;
-   HEAP32[$12 + 176 >> 2] = 53222;
-   FUNCTION_TABLE[$0]($1, 53382, $12 + 176 | 0);
+   HEAP32[$12 + 176 >> 2] = 52182;
+   FUNCTION_TABLE[$0]($1, 52342, $12 + 176 | 0);
    HEAP32[$12 + 300 >> 2] = 1;
    break label$1;
   }
   if (!HEAP32[HEAP32[$12 + 248 >> 2] >> 2]) {
    $0 = HEAP32[HEAP32[$12 + 296 >> 2] + 20 >> 2];
    $1 = HEAP32[$12 + 296 >> 2];
-   HEAP32[$12 + 168 >> 2] = 53425;
+   HEAP32[$12 + 168 >> 2] = 52385;
    HEAP32[$12 + 164 >> 2] = 46;
-   HEAP32[$12 + 160 >> 2] = 53222;
-   FUNCTION_TABLE[$0]($1, 53382, $12 + 160 | 0);
+   HEAP32[$12 + 160 >> 2] = 52182;
+   FUNCTION_TABLE[$0]($1, 52342, $12 + 160 | 0);
    HEAP32[$12 + 300 >> 2] = 1;
    break label$1;
   }
@@ -17268,11 +17268,11 @@ function tflite__PopulateConvolutionQuantizationParams_28TfLiteContext__2c_20TfL
     $2 = HEAP32[HEAP32[$12 + 292 >> 2] >> 2];
     HEAP32[$12 + 84 >> 2] = 9;
     HEAP32[$12 + 80 >> 2] = $2;
-    HEAP32[$12 + 76 >> 2] = 53464;
-    HEAP32[$12 + 72 >> 2] = 53452;
+    HEAP32[$12 + 76 >> 2] = 52424;
+    HEAP32[$12 + 72 >> 2] = 52412;
     HEAP32[$12 + 68 >> 2] = 50;
-    HEAP32[$12 + 64 >> 2] = 53222;
-    FUNCTION_TABLE[$0]($1, 53196, $12 - -64 | 0);
+    HEAP32[$12 + 64 >> 2] = 52182;
+    FUNCTION_TABLE[$0]($1, 52156, $12 - -64 | 0);
     HEAP32[$12 + 300 >> 2] = 1;
     break label$1;
    }
@@ -17282,11 +17282,11 @@ function tflite__PopulateConvolutionQuantizationParams_28TfLiteContext__2c_20TfL
     $2 = HEAP32[HEAP32[$12 + 288 >> 2] >> 2];
     HEAP32[$12 + 116 >> 2] = 9;
     HEAP32[$12 + 112 >> 2] = $2;
-    HEAP32[$12 + 108 >> 2] = 53464;
-    HEAP32[$12 + 104 >> 2] = 53476;
+    HEAP32[$12 + 108 >> 2] = 52424;
+    HEAP32[$12 + 104 >> 2] = 52436;
     HEAP32[$12 + 100 >> 2] = 51;
-    HEAP32[$12 + 96 >> 2] = 53222;
-    FUNCTION_TABLE[$0]($1, 53196, $12 + 96 | 0);
+    HEAP32[$12 + 96 >> 2] = 52182;
+    FUNCTION_TABLE[$0]($1, 52156, $12 + 96 | 0);
     HEAP32[$12 + 300 >> 2] = 1;
     break label$1;
    }
@@ -17296,11 +17296,11 @@ function tflite__PopulateConvolutionQuantizationParams_28TfLiteContext__2c_20TfL
     $2 = HEAP32[HEAP32[HEAP32[$12 + 248 >> 2] >> 2] >> 2];
     HEAP32[$12 + 148 >> 2] = HEAP32[(HEAP32[HEAP32[$12 + 288 >> 2] + 8 >> 2] + 4 | 0) + (HEAP32[HEAP32[$12 + 248 >> 2] + 8 >> 2] << 2) >> 2];
     HEAP32[$12 + 144 >> 2] = $2;
-    HEAP32[$12 + 140 >> 2] = 53522;
-    HEAP32[$12 + 136 >> 2] = 53489;
+    HEAP32[$12 + 140 >> 2] = 52482;
+    HEAP32[$12 + 136 >> 2] = 52449;
     HEAP32[$12 + 132 >> 2] = 54;
-    HEAP32[$12 + 128 >> 2] = 53222;
-    FUNCTION_TABLE[$0]($1, 53196, $12 + 128 | 0);
+    HEAP32[$12 + 128 >> 2] = 52182;
+    FUNCTION_TABLE[$0]($1, 52156, $12 + 128 | 0);
     HEAP32[$12 + 300 >> 2] = 1;
     break label$1;
    }
@@ -17493,7 +17493,7 @@ function jswrap_string_replace($0, $1, $2) {
     }
     HEAP32[$3 + 168 >> 2] = jsvAsString(HEAP32[$3 + 176 >> 2]);
    }
-   jsvObjectSetChildAndUnLock(HEAP32[$3 + 180 >> 2], 41447, jsvNewFromInteger(0));
+   jsvObjectSetChildAndUnLock(HEAP32[$3 + 180 >> 2], 40419, jsvNewFromInteger(0));
    HEAP8[$3 + 167 | 0] = jswrap_regexp_hasFlag(HEAP32[$3 + 180 >> 2], 103) & 1;
    HEAP32[$3 + 160 >> 2] = jswrap_regexp_exec(HEAP32[$3 + 180 >> 2], HEAP32[$3 + 172 >> 2]);
    while (1) {
@@ -17512,7 +17512,7 @@ function jswrap_string_replace($0, $1, $2) {
     if ($0 & 1) {
      $0 = $3 + 120 | 0;
      HEAP32[$3 + 156 >> 2] = jsvGetArrayItem(HEAP32[$3 + 160 >> 2], 0);
-     HEAP32[$3 + 152 >> 2] = jsvGetIntegerAndUnLock(jsvObjectGetChild(HEAP32[$3 + 160 >> 2], 41457, 0));
+     HEAP32[$3 + 152 >> 2] = jsvGetIntegerAndUnLock(jsvObjectGetChild(HEAP32[$3 + 160 >> 2], 40429, 0));
      HEAP32[$3 + 148 >> 2] = jsvGetStringLength(HEAP32[$3 + 156 >> 2]);
      HEAP32[$3 + 144 >> 2] = jsvNewFromStringVar(HEAP32[$3 + 172 >> 2], 0, HEAP32[$3 + 152 >> 2]);
      jsvStringIteratorNew($0, HEAP32[$3 + 144 >> 2], 0);
@@ -17539,11 +17539,11 @@ function jswrap_string_replace($0, $1, $2) {
        }
        $1 = $3 + 120 | 0;
        $0 = $3 - -64 | 0;
-       $2 = jsvObjectGetChild(HEAP32[$3 + 160 >> 2], 41457, 0);
+       $2 = jsvObjectGetChild(HEAP32[$3 + 160 >> 2], 40429, 0);
        $4 = HEAP32[$3 + 116 >> 2];
        HEAP32[$3 + 116 >> 2] = $4 + 1;
        HEAP32[$0 + ($4 << 2) >> 2] = $2;
-       $2 = jsvObjectGetChild(HEAP32[$3 + 160 >> 2], 41463, 0);
+       $2 = jsvObjectGetChild(HEAP32[$3 + 160 >> 2], 40435, 0);
        $4 = HEAP32[$3 + 116 >> 2];
        HEAP32[$3 + 116 >> 2] = $4 + 1;
        HEAP32[$0 + ($4 << 2) >> 2] = $2;
@@ -17596,7 +17596,7 @@ function jswrap_string_replace($0, $1, $2) {
      jsvUnLock(HEAP32[$3 + 160 >> 2]);
      HEAP32[$3 + 160 >> 2] = 0;
      if (HEAP8[$3 + 167 | 0] & 1) {
-      jsvObjectSetChildAndUnLock(HEAP32[$3 + 180 >> 2], 41447, jsvNewFromInteger(HEAP32[$3 + 20 >> 2]));
+      jsvObjectSetChildAndUnLock(HEAP32[$3 + 180 >> 2], 40419, jsvNewFromInteger(HEAP32[$3 + 20 >> 2]));
       HEAP32[$3 + 160 >> 2] = jswrap_regexp_exec(HEAP32[$3 + 180 >> 2], HEAP32[$3 + 172 >> 2]);
      }
      continue;
@@ -17606,7 +17606,7 @@ function jswrap_string_replace($0, $1, $2) {
    jsvUnLock(HEAP32[$3 + 160 >> 2]);
    jsvUnLock(HEAP32[$3 + 168 >> 2]);
    if (HEAP8[$3 + 167 | 0] & 1) {
-    jsvObjectSetChildAndUnLock(HEAP32[$3 + 180 >> 2], 41447, jsvNewFromInteger(0));
+    jsvObjectSetChildAndUnLock(HEAP32[$3 + 180 >> 2], 40419, jsvNewFromInteger(0));
    }
    break label$1;
   }
@@ -17636,10 +17636,10 @@ function utilTimerInsertTask($0) {
    HEAP8[$4 + 31 | 0] = 0;
    break label$1;
   }
-  HEAP8[$4 + 23 | 0] = HEAPU8[101426];
+  HEAP8[$4 + 23 | 0] = HEAPU8[100386];
   while (1) {
-   if (HEAPU8[$4 + 23 | 0] != HEAPU8[101425]) {
-    $0 = Math_imul(HEAPU8[$4 + 23 | 0], 29) + 101440 | 0;
+   if (HEAPU8[$4 + 23 | 0] != HEAPU8[100385]) {
+    $0 = Math_imul(HEAPU8[$4 + 23 | 0], 29) + 100400 | 0;
     $1 = HEAP32[$4 + 24 >> 2];
     $2 = (HEAPU8[$0 | 0] | HEAPU8[$0 + 1 | 0] << 8 | (HEAPU8[$0 + 2 | 0] << 16 | HEAPU8[$0 + 3 | 0] << 24)) >>> 0 >= (HEAPU8[$1 | 0] | HEAPU8[$1 + 1 | 0] << 8 | (HEAPU8[$1 + 2 | 0] << 16 | HEAPU8[$1 + 3 | 0] << 24)) >>> 0 ? 0 : 1;
     $0 = HEAPU8[$0 + 4 | 0] | HEAPU8[$0 + 5 | 0] << 8 | (HEAPU8[$0 + 6 | 0] << 16 | HEAPU8[$0 + 7 | 0] << 24);
@@ -17654,14 +17654,14 @@ function utilTimerInsertTask($0) {
    }
    break;
   }
-  HEAP8[$4 + 22 | 0] = HEAPU8[$4 + 23 | 0] == HEAPU8[101426];
-  HEAP32[$4 + 16 >> 2] = HEAPU8[101425];
+  HEAP8[$4 + 22 | 0] = HEAPU8[$4 + 23 | 0] == HEAPU8[100386];
+  HEAP32[$4 + 16 >> 2] = HEAPU8[100385];
   while (1) {
    if (HEAP32[$4 + 16 >> 2] != HEAPU8[$4 + 23 | 0]) {
     HEAP8[$4 + 15 | 0] = HEAP32[$4 + 16 >> 2] + 15 & 15;
-    $1 = Math_imul(HEAPU8[$4 + 15 | 0], 29) + 101440 | 0;
+    $1 = Math_imul(HEAPU8[$4 + 15 | 0], 29) + 100400 | 0;
     $3 = HEAPU8[$1 + 4 | 0] | HEAPU8[$1 + 5 | 0] << 8 | (HEAPU8[$1 + 6 | 0] << 16 | HEAPU8[$1 + 7 | 0] << 24);
-    $0 = Math_imul(HEAP32[$4 + 16 >> 2], 29) + 101440 | 0;
+    $0 = Math_imul(HEAP32[$4 + 16 >> 2], 29) + 100400 | 0;
     $2 = HEAPU8[$1 | 0] | HEAPU8[$1 + 1 | 0] << 8 | (HEAPU8[$1 + 2 | 0] << 16 | HEAPU8[$1 + 3 | 0] << 24);
     HEAP8[$0 | 0] = $2;
     HEAP8[$0 + 1 | 0] = $2 >>> 8;
@@ -17708,7 +17708,7 @@ function utilTimerInsertTask($0) {
   }
   $1 = HEAP32[$4 + 24 >> 2];
   $3 = HEAPU8[$1 + 4 | 0] | HEAPU8[$1 + 5 | 0] << 8 | (HEAPU8[$1 + 6 | 0] << 16 | HEAPU8[$1 + 7 | 0] << 24);
-  $0 = Math_imul(HEAPU8[$4 + 23 | 0], 29) + 101440 | 0;
+  $0 = Math_imul(HEAPU8[$4 + 23 | 0], 29) + 100400 | 0;
   $2 = HEAPU8[$1 | 0] | HEAPU8[$1 + 1 | 0] << 8 | (HEAPU8[$1 + 2 | 0] << 16 | HEAPU8[$1 + 3 | 0] << 24);
   HEAP8[$0 | 0] = $2;
   HEAP8[$0 + 1 | 0] = $2 >>> 8;
@@ -17748,10 +17748,10 @@ function utilTimerInsertTask($0) {
   HEAP8[$0 + 13 | 0] = $2 >>> 8;
   HEAP8[$0 + 14 | 0] = $2 >>> 16;
   HEAP8[$0 + 15 | 0] = $2 >>> 24;
-  HEAP8[101425] = HEAPU8[101425] + 1 & 15;
-  if (!(HEAP8[$4 + 22 | 0] & 1 ? 0 : HEAP8[101427] & 1)) {
-   HEAP8[101427] = 1;
-   $1 = Math_imul(HEAPU8[101426], 29) + 101440 | 0;
+  HEAP8[100385] = HEAPU8[100385] + 1 & 15;
+  if (!(HEAP8[$4 + 22 | 0] & 1 ? 0 : HEAP8[100387] & 1)) {
+   HEAP8[100387] = 1;
+   $1 = Math_imul(HEAPU8[100386], 29) + 100400 | 0;
    $0 = HEAPU8[$1 | 0] | HEAPU8[$1 + 1 | 0] << 8 | (HEAPU8[$1 + 2 | 0] << 16 | HEAPU8[$1 + 3 | 0] << 24);
    $2 = HEAPU8[$1 + 4 | 0] | HEAPU8[$1 + 5 | 0] << 8 | (HEAPU8[$1 + 6 | 0] << 16 | HEAPU8[$1 + 7 | 0] << 24);
    $1 = jshGetSystemTime();
@@ -17775,109 +17775,109 @@ function jsiDebuggerLine($0) {
   HEAP32[$1 + 44 >> 2] = jslGetTokenValueAsString();
   label$3 : {
    label$4 : {
-    if (strcmp(HEAP32[$1 + 44 >> 2], 6457)) {
-     if (strcmp(HEAP32[$1 + 44 >> 2], 6462)) {
+    if (strcmp(HEAP32[$1 + 44 >> 2], 6453)) {
+     if (strcmp(HEAP32[$1 + 44 >> 2], 6458)) {
       break label$4;
      }
     }
-    jsiConsolePrintString(6464);
+    jsiConsolePrintString(6460);
     break label$3;
    }
    label$6 : {
     label$7 : {
-     if (strcmp(HEAP32[$1 + 44 >> 2], 6983)) {
-      if (strcmp(HEAP32[$1 + 44 >> 2], 6988)) {
+     if (strcmp(HEAP32[$1 + 44 >> 2], 6979)) {
+      if (strcmp(HEAP32[$1 + 44 >> 2], 6984)) {
        break label$7;
       }
      }
-     HEAP16[49742] = HEAPU16[49742] | 16;
-     HEAP32[24866] = HEAP32[24866] | 16;
+     HEAP16[49222] = HEAPU16[49222] | 16;
+     HEAP32[24606] = HEAP32[24606] | 16;
      break label$6;
     }
     label$9 : {
-     if (!strcmp(HEAP32[$1 + 44 >> 2], 6990)) {
-      HEAP16[49742] = HEAPU16[49742] & -225 | 144;
-      HEAP32[24866] = HEAP32[24866] | 16;
+     if (!strcmp(HEAP32[$1 + 44 >> 2], 6986)) {
+      HEAP16[49222] = HEAPU16[49222] & -225 | 144;
+      HEAP32[24606] = HEAP32[24606] | 16;
       break label$9;
      }
      label$11 : {
       label$12 : {
-       if (strcmp(HEAP32[$1 + 44 >> 2], 6996)) {
-        if (strcmp(HEAP32[$1 + 44 >> 2], 7005)) {
+       if (strcmp(HEAP32[$1 + 44 >> 2], 6992)) {
+        if (strcmp(HEAP32[$1 + 44 >> 2], 7001)) {
          break label$12;
         }
        }
-       HEAP16[49742] = HEAPU16[49742] | 16;
+       HEAP16[49222] = HEAPU16[49222] | 16;
        break label$11;
       }
       label$14 : {
        label$15 : {
-        if (strcmp(HEAP32[$1 + 44 >> 2], 7007)) {
-         if (strcmp(HEAP32[$1 + 44 >> 2], 7012)) {
+        if (strcmp(HEAP32[$1 + 44 >> 2], 7003)) {
+         if (strcmp(HEAP32[$1 + 44 >> 2], 7008)) {
           break label$15;
          }
         }
-        HEAP16[49742] = HEAPU16[49742] | 16;
-        HEAP32[24866] = HEAP32[24866] | 8192;
+        HEAP16[49222] = HEAPU16[49222] | 16;
+        HEAP32[24606] = HEAP32[24606] | 8192;
         break label$14;
        }
        label$17 : {
         label$18 : {
-         if (strcmp(HEAP32[$1 + 44 >> 2], 7014)) {
-          if (strcmp(HEAP32[$1 + 44 >> 2], 7019)) {
+         if (strcmp(HEAP32[$1 + 44 >> 2], 7010)) {
+          if (strcmp(HEAP32[$1 + 44 >> 2], 7015)) {
            break label$18;
           }
          }
-         HEAP16[49742] = HEAPU16[49742] | 16;
-         HEAP32[24866] = HEAP32[24866] | 24576;
+         HEAP16[49222] = HEAPU16[49222] | 16;
+         HEAP32[24606] = HEAP32[24606] | 24576;
          break label$17;
         }
         label$20 : {
          label$21 : {
-          if (strcmp(HEAP32[$1 + 44 >> 2], 7021)) {
-           if (strcmp(HEAP32[$1 + 44 >> 2], 7028)) {
+          if (strcmp(HEAP32[$1 + 44 >> 2], 7017)) {
+           if (strcmp(HEAP32[$1 + 44 >> 2], 7024)) {
             break label$21;
            }
           }
-          HEAP16[49742] = HEAPU16[49742] | 16;
-          HEAP32[24866] = HEAP32[24866] | 32768;
+          HEAP16[49222] = HEAPU16[49222] | 16;
+          HEAP32[24606] = HEAP32[24606] | 32768;
           break label$20;
          }
          label$23 : {
           label$24 : {
-           if (strcmp(HEAP32[$1 + 44 >> 2], 7030)) {
-            if (strcmp(HEAP32[$1 + 44 >> 2], 7036)) {
+           if (strcmp(HEAP32[$1 + 44 >> 2], 7026)) {
+            if (strcmp(HEAP32[$1 + 44 >> 2], 7032)) {
              break label$24;
             }
            }
            $0 = $1 + 24 | 0;
            jslGetNextToken();
-           HEAP32[$0 + 16 >> 2] = HEAP32[24866];
-           $2 = HEAP32[24865];
-           HEAP32[$0 + 8 >> 2] = HEAP32[24864];
+           HEAP32[$0 + 16 >> 2] = HEAP32[24606];
+           $2 = HEAP32[24605];
+           HEAP32[$0 + 8 >> 2] = HEAP32[24604];
            HEAP32[$0 + 12 >> 2] = $2;
-           $2 = HEAP32[24863];
-           HEAP32[$0 >> 2] = HEAP32[24862];
+           $2 = HEAP32[24603];
+           HEAP32[$0 >> 2] = HEAP32[24602];
            HEAP32[$0 + 4 >> 2] = $2;
-           HEAP32[24866] = 1;
+           HEAP32[24606] = 1;
            HEAP32[$1 + 20 >> 2] = jsvSkipNameAndUnLock(jspParse());
            $2 = HEAP32[$0 + 4 >> 2];
-           HEAP32[24862] = HEAP32[$0 >> 2];
-           HEAP32[24863] = $2;
-           HEAP32[24866] = HEAP32[$0 + 16 >> 2];
+           HEAP32[24602] = HEAP32[$0 >> 2];
+           HEAP32[24603] = $2;
+           HEAP32[24606] = HEAP32[$0 + 16 >> 2];
            $2 = HEAP32[$0 + 12 >> 2];
-           HEAP32[24864] = HEAP32[$0 + 8 >> 2];
-           HEAP32[24865] = $2;
+           HEAP32[24604] = HEAP32[$0 + 8 >> 2];
+           HEAP32[24605] = $2;
            jsiConsolePrintChar(61);
            jsfPrintJSON(HEAP32[$1 + 20 >> 2], 301);
-           jsiConsolePrintString(5716);
+           jsiConsolePrintString(5712);
            jsvUnLock(HEAP32[$1 + 20 >> 2]);
            break label$23;
           }
           label$26 : {
            label$27 : {
-            if (strcmp(HEAP32[$1 + 44 >> 2], 7038)) {
-             if (strcmp(HEAP32[$1 + 44 >> 2], 7043)) {
+            if (strcmp(HEAP32[$1 + 44 >> 2], 7034)) {
+             if (strcmp(HEAP32[$1 + 44 >> 2], 7039)) {
               break label$27;
              }
             }
@@ -17885,45 +17885,45 @@ function jsiDebuggerLine($0) {
             HEAP32[$1 + 44 >> 2] = jslGetTokenValueAsString();
             label$29 : {
              label$30 : {
-              if (strcmp(HEAP32[$1 + 44 >> 2], 7045)) {
-               if (strcmp(HEAP32[$1 + 44 >> 2], 7052)) {
+              if (strcmp(HEAP32[$1 + 44 >> 2], 7041)) {
+               if (strcmp(HEAP32[$1 + 44 >> 2], 7048)) {
                 break label$30;
                }
               }
               HEAP32[$1 + 16 >> 2] = jspeiGetTopScope();
               label$32 : {
-               if (HEAP32[$1 + 16 >> 2] == HEAP32[24862]) {
-                jsiConsolePrintString(7054);
+               if (HEAP32[$1 + 16 >> 2] == HEAP32[24602]) {
+                jsiConsolePrintString(7050);
                 break label$32;
                }
-               jsiConsolePrintf(7071, 0);
+               jsiConsolePrintf(7067, 0);
                jsiDebuggerPrintScope(HEAP32[$1 + 16 >> 2]);
-               jsiConsolePrintString(5892);
+               jsiConsolePrintString(5888);
               }
               jsvUnLock(HEAP32[$1 + 16 >> 2]);
               break label$29;
              }
              label$34 : {
               label$35 : {
-               if (strcmp(HEAP32[$1 + 44 >> 2], 7113)) {
-                if (strcmp(HEAP32[$1 + 44 >> 2], 7019)) {
+               if (strcmp(HEAP32[$1 + 44 >> 2], 7109)) {
+                if (strcmp(HEAP32[$1 + 44 >> 2], 7015)) {
                  break label$35;
                 }
                }
                HEAP32[$1 + 12 >> 2] = jspeiGetTopScope();
-               if (HEAP32[$1 + 12 >> 2] == HEAP32[24862]) {
-                jsiConsolePrintString(7124);
+               if (HEAP32[$1 + 12 >> 2] == HEAP32[24602]) {
+                jsiConsolePrintString(7120);
                }
                jsvUnLock(HEAP32[$1 + 12 >> 2]);
-               HEAP32[$1 + 4 >> 2] = jsvGetArrayLength(HEAP32[24864]);
+               HEAP32[$1 + 4 >> 2] = jsvGetArrayLength(HEAP32[24604]);
                HEAP32[$1 + 8 >> 2] = 0;
                while (1) {
                 if (HEAP32[$1 + 8 >> 2] < HEAP32[$1 + 4 >> 2]) {
-                 HEAP32[$1 + 12 >> 2] = jsvGetArrayItem(HEAP32[24864], HEAP32[$1 + 8 >> 2]);
+                 HEAP32[$1 + 12 >> 2] = jsvGetArrayItem(HEAP32[24604], HEAP32[$1 + 8 >> 2]);
                  HEAP32[$1 >> 2] = HEAP32[$1 + 8 >> 2];
-                 jsiConsolePrintf(7141, $1);
+                 jsiConsolePrintf(7137, $1);
                  jsiDebuggerPrintScope(HEAP32[$1 + 12 >> 2]);
-                 jsiConsolePrintString(5892);
+                 jsiConsolePrintString(5888);
                  jsvUnLock(HEAP32[$1 + 12 >> 2]);
                  HEAP32[$1 + 8 >> 2] = HEAP32[$1 + 8 >> 2] + 1;
                  continue;
@@ -17932,7 +17932,7 @@ function jsiDebuggerLine($0) {
                }
                break label$34;
               }
-              jsiConsolePrintString(7185);
+              jsiConsolePrintString(7181);
              }
             }
             break label$26;
@@ -17949,7 +17949,7 @@ function jsiDebuggerLine($0) {
   }
  }
  if (!(HEAP8[$1 + 51 | 0] & 1)) {
-  jsiConsolePrintString(7202);
+  jsiConsolePrintString(7198);
  }
  jslKill();
  jslSetLex(HEAP32[$1 + 52 >> 2]);
@@ -18423,48 +18423,48 @@ function tflite__ops__micro__AllOpsResolver__AllOpsResolver_28_29($0) {
  HEAP32[$1 + 12 >> 2] = $0;
  $0 = HEAP32[$1 + 12 >> 2];
  tflite__MicroMutableOpResolver__MicroMutableOpResolver_28_29($0);
- HEAP32[$0 >> 2] = 51264;
- tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 4, 57692, 1);
- tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 9, 58460, 4);
- tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 17, 57884, 2);
- tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 25, 57916, 1);
- tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 14, 57788, 1);
- tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 27, 58428, 1);
- tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 3, 57820, 3);
- tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 1, 57852, 1);
- tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 101, 58556, 1);
- tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 66, 58588, 1);
- tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 108, 58620, 1);
- tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 73, 58652, 1);
- tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 75, 58684, 1);
- tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 76, 58716, 1);
- tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 92, 58748, 1);
- tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 54, 57948, 1);
- tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 8, 58204, 1);
- tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 55, 58492, 1);
- tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 57, 58524, 1);
- tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 56, 58012, 1);
- tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 79, 58044, 1);
- tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 84, 57596, 1);
- tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 86, 57628, 1);
- tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 87, 58780, 1);
- tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 22, 57660, 1);
- tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 71, 58236, 1);
- tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 72, 58268, 1);
- tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 61, 58300, 1);
- tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 62, 58332, 1);
- tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 58, 58364, 1);
- tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 63, 58396, 1);
- tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 104, 57980, 1);
- tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 116, 58844, 1);
- tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 45, 58812, 1);
- tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 83, 57564, 1);
- tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 49, 58140, 3);
- tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 88, 58076, 1);
- tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 59, 58172, 1);
- tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 0, 58108, 1);
- tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 114, 57724, 4);
- tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 6, 57756, 4);
+ HEAP32[$0 >> 2] = 50224;
+ tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 4, 56652, 1);
+ tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 9, 57420, 4);
+ tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 17, 56844, 2);
+ tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 25, 56876, 1);
+ tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 14, 56748, 1);
+ tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 27, 57388, 1);
+ tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 3, 56780, 3);
+ tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 1, 56812, 1);
+ tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 101, 57516, 1);
+ tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 66, 57548, 1);
+ tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 108, 57580, 1);
+ tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 73, 57612, 1);
+ tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 75, 57644, 1);
+ tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 76, 57676, 1);
+ tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 92, 57708, 1);
+ tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 54, 56908, 1);
+ tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 8, 57164, 1);
+ tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 55, 57452, 1);
+ tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 57, 57484, 1);
+ tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 56, 56972, 1);
+ tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 79, 57004, 1);
+ tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 84, 56556, 1);
+ tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 86, 56588, 1);
+ tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 87, 57740, 1);
+ tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 22, 56620, 1);
+ tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 71, 57196, 1);
+ tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 72, 57228, 1);
+ tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 61, 57260, 1);
+ tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 62, 57292, 1);
+ tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 58, 57324, 1);
+ tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 63, 57356, 1);
+ tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 104, 56940, 1);
+ tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 116, 57804, 1);
+ tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 45, 57772, 1);
+ tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 83, 56524, 1);
+ tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 49, 57100, 3);
+ tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 88, 57036, 1);
+ tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 59, 57132, 1);
+ tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 0, 57068, 1);
+ tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 114, 56684, 4);
+ tflite__MicroMutableOpResolver__AddBuiltin_28tflite__BuiltinOperator_2c_20TfLiteRegistration__2c_20int_2c_20int_29($0, 6, 56716, 4);
  global$0 = $1 + 16 | 0;
 }
 function tflite__reference_ops__ProcessBroadcastShapes_28tflite__RuntimeShape_20const__2c_20tflite__RuntimeShape_20const__2c_20tflite__ArithmeticParams__29($0, $1, $2) {
@@ -18956,20 +18956,20 @@ function __jspeBinaryExpression($0, $1) {
  global$0 = $2;
  HEAP32[$2 + 172 >> 2] = $0;
  HEAP32[$2 + 168 >> 2] = $1;
- HEAP32[$2 + 164 >> 2] = jspeGetBinaryExpressionPrecedence(HEAP16[HEAP32[14856] + 2 >> 1]);
+ HEAP32[$2 + 164 >> 2] = jspeGetBinaryExpressionPrecedence(HEAP16[HEAP32[14596] + 2 >> 1]);
  while (1) {
   if (HEAP32[$2 + 164 >> 2] ? HEAPU32[$2 + 164 >> 2] > HEAPU32[$2 + 168 >> 2] : 0) {
-   HEAP32[$2 + 160 >> 2] = HEAP16[HEAP32[14856] + 2 >> 1];
+   HEAP32[$2 + 160 >> 2] = HEAP16[HEAP32[14596] + 2 >> 1];
    jslGetNextToken();
    label$5 : {
     if (!(HEAP32[$2 + 160 >> 2] != 160 ? HEAP32[$2 + 160 >> 2] != 158 : 0)) {
      HEAP8[$2 + 159 | 0] = jsvGetBoolAndUnLock(jsvSkipName(HEAP32[$2 + 172 >> 2])) & 1;
      label$8 : {
       if (!(!(HEAP8[$2 + 159 | 0] & 1) | HEAP32[$2 + 160 >> 2] != 160 ? !(HEAP32[$2 + 160 >> 2] == 158 ? !(HEAP8[$2 + 159 | 0] & 1) : 0) : 0)) {
-       HEAP32[$2 + 152 >> 2] = HEAP32[24866];
+       HEAP32[$2 + 152 >> 2] = HEAP32[24606];
        jspSetNoExecute();
        jsvUnLock(__jspeBinaryExpression(jspeUnaryExpression(), HEAP32[$2 + 164 >> 2]));
-       HEAP32[24866] = HEAP32[24866] & -1664 | HEAP32[$2 + 152 >> 2] & 1663;
+       HEAP32[24606] = HEAP32[24606] & -1664 | HEAP32[$2 + 152 >> 2] & 1663;
        break label$8;
       }
       jsvUnLock(HEAP32[$2 + 172 >> 2]);
@@ -18978,7 +18978,7 @@ function __jspeBinaryExpression($0, $1) {
      break label$5;
     }
     HEAP32[$2 + 148 >> 2] = __jspeBinaryExpression(jspeUnaryExpression(), HEAP32[$2 + 164 >> 2]);
-    if ((HEAP32[24866] & 63) == 1) {
+    if ((HEAP32[24606] & 63) == 1) {
      label$13 : {
       if (HEAP32[$2 + 160 >> 2] == 185) {
        HEAP32[$2 + 144 >> 2] = jsvSkipName(HEAP32[$2 + 172 >> 2]);
@@ -19080,7 +19080,7 @@ function __jspeBinaryExpression($0, $1) {
     }
     jsvUnLock(HEAP32[$2 + 148 >> 2]);
    }
-   HEAP32[$2 + 164 >> 2] = jspeGetBinaryExpressionPrecedence(HEAP16[HEAP32[14856] + 2 >> 1]);
+   HEAP32[$2 + 164 >> 2] = jspeGetBinaryExpressionPrecedence(HEAP16[HEAP32[14596] + 2 >> 1]);
    continue;
   }
   break;
@@ -19230,11 +19230,11 @@ function tflite__ops__micro__depthwise_conv__Eval_28TfLiteContext__2c_20TfLiteNo
     $3 = HEAP32[HEAP32[$2 + 660 >> 2] + 48 >> 2];
     HEAP32[$2 + 20 >> 2] = 1;
     HEAP32[$2 + 16 >> 2] = $3;
-    HEAP32[$2 + 12 >> 2] = 46814;
-    HEAP32[$2 + 8 >> 2] = 46788;
+    HEAP32[$2 + 12 >> 2] = 45774;
+    HEAP32[$2 + 8 >> 2] = 45748;
     HEAP32[$2 + 4 >> 2] = 216;
-    HEAP32[$2 >> 2] = 46683;
-    FUNCTION_TABLE[$0]($1, 46657, $2);
+    HEAP32[$2 >> 2] = 45643;
+    FUNCTION_TABLE[$0]($1, 45617, $2);
     HEAP32[$2 + 684 >> 2] = 1;
     break label$3;
    }
@@ -19242,20 +19242,20 @@ function tflite__ops__micro__depthwise_conv__Eval_28TfLiteContext__2c_20TfLiteNo
    if (!HEAP32[$2 + 84 >> 2]) {
     $0 = HEAP32[HEAP32[$2 + 680 >> 2] + 20 >> 2];
     $1 = HEAP32[$2 + 680 >> 2];
-    HEAP32[$2 + 72 >> 2] = 46863;
+    HEAP32[$2 + 72 >> 2] = 45823;
     HEAP32[$2 + 68 >> 2] = 221;
-    HEAP32[$2 + 64 >> 2] = 46683;
-    FUNCTION_TABLE[$0]($1, 46840, $2 - -64 | 0);
+    HEAP32[$2 + 64 >> 2] = 45643;
+    FUNCTION_TABLE[$0]($1, 45800, $2 - -64 | 0);
     HEAP32[$2 + 684 >> 2] = 1;
     break label$3;
    }
    if (!HEAP32[HEAP32[$2 + 84 >> 2] >> 2]) {
     $0 = HEAP32[HEAP32[$2 + 680 >> 2] + 20 >> 2];
     $1 = HEAP32[$2 + 680 >> 2];
-    HEAP32[$2 + 56 >> 2] = 46883;
+    HEAP32[$2 + 56 >> 2] = 45843;
     HEAP32[$2 + 52 >> 2] = 222;
-    HEAP32[$2 + 48 >> 2] = 46683;
-    FUNCTION_TABLE[$0]($1, 46840, $2 + 48 | 0);
+    HEAP32[$2 + 48 >> 2] = 45643;
+    FUNCTION_TABLE[$0]($1, 45800, $2 + 48 | 0);
     HEAP32[$2 + 684 >> 2] = 1;
     break label$3;
    }
@@ -19297,7 +19297,7 @@ function tflite__ops__micro__depthwise_conv__Eval_28TfLiteContext__2c_20TfLiteNo
    $3 = TfLiteTypeGetName(HEAP32[HEAP32[$2 + 664 >> 2] >> 2]);
    HEAP32[$2 + 36 >> 2] = HEAP32[HEAP32[$2 + 664 >> 2] >> 2];
    HEAP32[$2 + 32 >> 2] = $3;
-   FUNCTION_TABLE[$0]($1, 46910, $2 + 32 | 0);
+   FUNCTION_TABLE[$0]($1, 45870, $2 + 32 | 0);
    HEAP32[$2 + 684 >> 2] = 1;
    break label$3;
   }
@@ -19318,7 +19318,7 @@ function jswrap_interface_setWatch($0, $1, $2) {
  HEAP32[$3 + 64 >> 2] = $2;
  label$1 : {
   if (!(jshIsPinValid(HEAPU8[$3 + 71 | 0]) & 1)) {
-   jsError(37518, 0);
+   jsError(36494, 0);
    HEAP32[$3 + 76 >> 2] = 0;
    break label$1;
   }
@@ -19329,7 +19329,7 @@ function jswrap_interface_setWatch($0, $1, $2) {
    if (jshIsDeviceInitialised(HEAPU8[$3 + 71 | 0]) & 1) {
     break label$3;
    }
-   jsWarn(37695, 0);
+   jsWarn(36671, 0);
    HEAP32[$3 + 76 >> 2] = 0;
    break label$1;
   }
@@ -19349,11 +19349,11 @@ function jswrap_interface_setWatch($0, $1, $2) {
   }
   label$6 : {
    if (jsvIsObject(HEAP32[$3 + 64 >> 2]) & 1) {
-    HEAP32[$3 + 36 >> 2] = jsvObjectGetChild(HEAP32[$3 + 64 >> 2], 37661, 0);
+    HEAP32[$3 + 36 >> 2] = jsvObjectGetChild(HEAP32[$3 + 64 >> 2], 36637, 0);
     if (HEAP32[$3 + 36 >> 2]) {
      HEAP8[$3 + 63 | 0] = jsvGetBoolAndUnLock(HEAP32[$3 + 36 >> 2]) & 1;
     }
-    HEAP32[$3 + 36 >> 2] = jsvObjectGetChild(HEAP32[$3 + 64 >> 2], 37830, 0);
+    HEAP32[$3 + 36 >> 2] = jsvObjectGetChild(HEAP32[$3 + 64 >> 2], 36806, 0);
     if (HEAP32[$3 + 36 >> 2]) {
      HEAPF64[$3 + 48 >> 3] = jsvGetFloatAndUnLock(HEAP32[$3 + 36 >> 2]);
     }
@@ -19362,7 +19362,7 @@ function jswrap_interface_setWatch($0, $1, $2) {
     if (!(HEAPF64[$3 + 48 >> 3] < 0 ? 0 : ($1 | 0) == 2146435072 & $0 >>> 0 <= 0 | $1 >>> 0 < 2146435072)) {
      HEAPF64[$3 + 48 >> 3] = 0;
     }
-    HEAP32[$3 + 36 >> 2] = jsvObjectGetChild(HEAP32[$3 + 64 >> 2], 37839, 0);
+    HEAP32[$3 + 36 >> 2] = jsvObjectGetChild(HEAP32[$3 + 64 >> 2], 36815, 0);
     if (!(jsvIsUndefined(HEAP32[$3 + 36 >> 2]) & 1)) {
      label$13 : {
       if (jsvIsNumeric(HEAP32[$3 + 36 >> 2]) & 1) {
@@ -19379,16 +19379,16 @@ function jswrap_interface_setWatch($0, $1, $2) {
       HEAP32[$3 + 44 >> 2] = -1e3;
       if (jsvIsString(HEAP32[$3 + 36 >> 2]) & 1) {
        label$17 : {
-        if (jsvIsStringEqual(HEAP32[$3 + 36 >> 2], 37844) & 1) {
+        if (jsvIsStringEqual(HEAP32[$3 + 36 >> 2], 36820) & 1) {
          HEAP32[$3 + 44 >> 2] = 1;
          break label$17;
         }
         label$19 : {
-         if (jsvIsStringEqual(HEAP32[$3 + 36 >> 2], 37851) & 1) {
+         if (jsvIsStringEqual(HEAP32[$3 + 36 >> 2], 36827) & 1) {
           HEAP32[$3 + 44 >> 2] = -1;
           break label$19;
          }
-         if (jsvIsStringEqual(HEAP32[$3 + 36 >> 2], 37859) & 1) {
+         if (jsvIsStringEqual(HEAP32[$3 + 36 >> 2], 36835) & 1) {
           HEAP32[$3 + 44 >> 2] = 0;
          }
         }
@@ -19398,12 +19398,12 @@ function jswrap_interface_setWatch($0, $1, $2) {
     }
     jsvUnLock(HEAP32[$3 + 36 >> 2]);
     if (!(HEAP32[$3 + 44 >> 2] <= 1 ? HEAP32[$3 + 44 >> 2] >= -1 : 0)) {
-     jsExceptionHere(3, 37864, 0);
+     jsExceptionHere(3, 36840, 0);
      HEAP32[$3 + 76 >> 2] = 0;
      break label$1;
     }
-    HEAP8[$3 + 43 | 0] = jsvGetBoolAndUnLock(jsvObjectGetChild(HEAP32[$3 + 64 >> 2], 37933, 0)) & 1;
-    HEAP8[$3 + 42 | 0] = jshGetPinFromVarAndUnLock(jsvObjectGetChild(HEAP32[$3 + 64 >> 2], 37937, 0));
+    HEAP8[$3 + 43 | 0] = jsvGetBoolAndUnLock(jsvObjectGetChild(HEAP32[$3 + 64 >> 2], 36909, 0)) & 1;
+    HEAP8[$3 + 42 | 0] = jshGetPinFromVarAndUnLock(jsvObjectGetChild(HEAP32[$3 + 64 >> 2], 36913, 0));
     break label$6;
    }
    HEAP8[$3 + 63 | 0] = jsvGetBool(HEAP32[$3 + 64 >> 2]) & 1;
@@ -19417,22 +19417,22 @@ function jswrap_interface_setWatch($0, $1, $2) {
     if (jsvIsString(HEAP32[$3 + 72 >> 2]) & 1) {
      break label$25;
     }
-    jsExceptionHere(1, 37942, 0);
+    jsExceptionHere(1, 36918, 0);
     break label$24;
    }
    HEAP32[$3 + 24 >> 2] = jsvNewWithFlags(5);
    if (HEAP32[$3 + 24 >> 2]) {
-    jsvObjectSetChildAndUnLock(HEAP32[$3 + 24 >> 2], 37975, jsvNewFromPin(HEAPU8[$3 + 71 | 0]));
+    jsvObjectSetChildAndUnLock(HEAP32[$3 + 24 >> 2], 36951, jsvNewFromPin(HEAPU8[$3 + 71 | 0]));
     if (HEAP8[$3 + 63 | 0] & 1) {
-     jsvObjectSetChildAndUnLock(HEAP32[$3 + 24 >> 2], 37979, jsvNewFromBool(HEAP8[$3 + 63 | 0] & 1));
+     jsvObjectSetChildAndUnLock(HEAP32[$3 + 24 >> 2], 36955, jsvNewFromBool(HEAP8[$3 + 63 | 0] & 1));
     }
     if (HEAPF64[$3 + 48 >> 3] > 0) {
-     jsvObjectSetChildAndUnLock(HEAP32[$3 + 24 >> 2], 37830, jsvNewFromInteger(jshGetTimeFromMilliseconds(HEAPF64[$3 + 48 >> 3])));
+     jsvObjectSetChildAndUnLock(HEAP32[$3 + 24 >> 2], 36806, jsvNewFromInteger(jshGetTimeFromMilliseconds(HEAPF64[$3 + 48 >> 3])));
     }
     if (HEAP32[$3 + 44 >> 2]) {
-     jsvObjectSetChildAndUnLock(HEAP32[$3 + 24 >> 2], 37839, jsvNewFromInteger(HEAP32[$3 + 44 >> 2]));
+     jsvObjectSetChildAndUnLock(HEAP32[$3 + 24 >> 2], 36815, jsvNewFromInteger(HEAP32[$3 + 44 >> 2]));
     }
-    jsvObjectSetChild(HEAP32[$3 + 24 >> 2], 37985, HEAP32[$3 + 72 >> 2]);
+    jsvObjectSetChild(HEAP32[$3 + 24 >> 2], 36961, HEAP32[$3 + 72 >> 2]);
    }
    HEAP8[$3 + 23 | 0] = 0;
    if (!(jsiIsWatchingPin(HEAPU8[$3 + 71 | 0]) & 1)) {
@@ -19452,20 +19452,20 @@ function jswrap_interface_setWatch($0, $1, $2) {
        }
        label$37 : {
         if (jshIsPinValid(HEAPU8[$3 + 42 | 0]) & 1) {
-         jsExceptionHere(1, 37994, 0);
+         jsExceptionHere(1, 36970, 0);
          break label$37;
         }
-        jsExceptionHere(1, 38029, 0);
+        jsExceptionHere(1, 37005, 0);
        }
       }
      }
      break label$31;
     }
     if (HEAP8[$3 + 43 | 0] & 1) {
-     jsExceptionHere(1, 38081, 0);
+     jsExceptionHere(1, 37057, 0);
     }
    }
-   HEAP32[$3 + 16 >> 2] = jsvLock(HEAPU16[49741]);
+   HEAP32[$3 + 16 >> 2] = jsvLock(HEAPU16[49221]);
    HEAP32[$3 + 28 >> 2] = jsvArrayAddToEnd(HEAP32[$3 + 16 >> 2], HEAP32[$3 + 24 >> 2]) - 1;
    jsvUnLock2(HEAP32[$3 + 16 >> 2], HEAP32[$3 + 24 >> 2]);
   }
@@ -19501,16 +19501,16 @@ function jswrap_graphics_createArrayBuffer($0, $1, $2, $3) {
      break label$2;
     }
    }
-   jsExceptionHere(1, 42516, 0);
+   jsExceptionHere(1, 41476, 0);
    HEAP32[$4 + 108 >> 2] = 0;
    break label$1;
   }
   if (!(isValidBPP(HEAP32[$4 + 96 >> 2]) & 1)) {
-   jsExceptionHere(1, 42529, 0);
+   jsExceptionHere(1, 41489, 0);
    HEAP32[$4 + 108 >> 2] = 0;
    break label$1;
   }
-  HEAP32[$4 + 88 >> 2] = jspNewObject(0, 42541);
+  HEAP32[$4 + 88 >> 2] = jspNewObject(0, 41501);
   if (!HEAP32[$4 + 88 >> 2]) {
    HEAP32[$4 + 108 >> 2] = 0;
    break label$1;
@@ -19530,28 +19530,28 @@ function jswrap_graphics_createArrayBuffer($0, $1, $2, $3) {
   HEAP8[$4 + 18 | 0] = $0 >>> 16;
   HEAP8[$4 + 19 | 0] = $0 >>> 24;
   if (jsvIsObject(HEAP32[$4 + 92 >> 2]) & 1) {
-   if (jsvGetBoolAndUnLock(jsvObjectGetChild(HEAP32[$4 + 92 >> 2], 42550, 0)) & 1) {
+   if (jsvGetBoolAndUnLock(jsvObjectGetChild(HEAP32[$4 + 92 >> 2], 41510, 0)) & 1) {
     $0 = HEAPU8[$4 + 24 | 0] | HEAPU8[$4 + 25 | 0] << 8 | (HEAPU8[$4 + 26 | 0] << 16 | HEAPU8[$4 + 27 | 0] << 24) | 1;
     HEAP8[$4 + 24 | 0] = $0;
     HEAP8[$4 + 25 | 0] = $0 >>> 8;
     HEAP8[$4 + 26 | 0] = $0 >>> 16;
     HEAP8[$4 + 27 | 0] = $0 >>> 24;
    }
-   if (jsvGetBoolAndUnLock(jsvObjectGetChild(HEAP32[$4 + 92 >> 2], 42557, 0)) & 1) {
+   if (jsvGetBoolAndUnLock(jsvObjectGetChild(HEAP32[$4 + 92 >> 2], 41517, 0)) & 1) {
     $0 = HEAPU8[$4 + 24 | 0] | HEAPU8[$4 + 25 | 0] << 8 | (HEAPU8[$4 + 26 | 0] << 16 | HEAPU8[$4 + 27 | 0] << 24) | 4;
     HEAP8[$4 + 24 | 0] = $0;
     HEAP8[$4 + 25 | 0] = $0 >>> 8;
     HEAP8[$4 + 26 | 0] = $0 >>> 16;
     HEAP8[$4 + 27 | 0] = $0 >>> 24;
    }
-   if (jsvGetBoolAndUnLock(jsvObjectGetChild(HEAP32[$4 + 92 >> 2], 42561, 0)) & 1) {
+   if (jsvGetBoolAndUnLock(jsvObjectGetChild(HEAP32[$4 + 92 >> 2], 41521, 0)) & 1) {
     $0 = HEAPU8[$4 + 24 | 0] | HEAPU8[$4 + 25 | 0] << 8 | (HEAPU8[$4 + 26 | 0] << 16 | HEAPU8[$4 + 27 | 0] << 24) | 8;
     HEAP8[$4 + 24 | 0] = $0;
     HEAP8[$4 + 25 | 0] = $0 >>> 8;
     HEAP8[$4 + 26 | 0] = $0 >>> 16;
     HEAP8[$4 + 27 | 0] = $0 >>> 24;
    }
-   if (jsvGetBoolAndUnLock(jsvObjectGetChild(HEAP32[$4 + 92 >> 2], 42573, 0)) & 1) {
+   if (jsvGetBoolAndUnLock(jsvObjectGetChild(HEAP32[$4 + 92 >> 2], 41533, 0)) & 1) {
     label$11 : {
      if (HEAPU8[$4 + 32 | 0] == 1) {
       $0 = HEAPU8[$4 + 24 | 0] | HEAPU8[$4 + 25 | 0] << 8 | (HEAPU8[$4 + 26 | 0] << 16 | HEAPU8[$4 + 27 | 0] << 24) | 2;
@@ -19561,21 +19561,21 @@ function jswrap_graphics_createArrayBuffer($0, $1, $2, $3) {
       HEAP8[$4 + 27 | 0] = $0 >>> 24;
       break label$11;
      }
-     jsExceptionHere(1, 42587, 0);
+     jsExceptionHere(1, 41547, 0);
      HEAP32[$4 + 108 >> 2] = 0;
      break label$1;
     }
     if ((HEAPU8[$4 + 30 | 0] | HEAPU8[$4 + 31 | 0] << 8) & 7) {
-     jsExceptionHere(1, 42635, 0);
+     jsExceptionHere(1, 41595, 0);
      HEAP32[$4 + 108 >> 2] = 0;
      break label$1;
     }
    }
-   HEAP32[$4 + 12 >> 2] = jsvObjectGetChild(HEAP32[$4 + 92 >> 2], 42692, 0);
+   HEAP32[$4 + 12 >> 2] = jsvObjectGetChild(HEAP32[$4 + 92 >> 2], 41652, 0);
    if (HEAP32[$4 + 12 >> 2]) {
-    if (!(jsvIsStringEqual(HEAP32[$4 + 12 >> 2], 42704) & 1)) {
+    if (!(jsvIsStringEqual(HEAP32[$4 + 12 >> 2], 41664) & 1)) {
      label$16 : {
-      if (!(jsvIsStringEqual(HEAP32[$4 + 12 >> 2], 42708) & 1)) {
+      if (!(jsvIsStringEqual(HEAP32[$4 + 12 >> 2], 41668) & 1)) {
        $0 = HEAPU8[$4 + 24 | 0] | HEAPU8[$4 + 25 | 0] << 8 | (HEAPU8[$4 + 26 | 0] << 16 | HEAPU8[$4 + 27 | 0] << 24) | 128;
        HEAP8[$4 + 24 | 0] = $0;
        HEAP8[$4 + 25 | 0] = $0 >>> 8;
@@ -19584,7 +19584,7 @@ function jswrap_graphics_createArrayBuffer($0, $1, $2, $3) {
        break label$16;
       }
       label$18 : {
-       if (!(jsvIsStringEqual(HEAP32[$4 + 12 >> 2], 42712) & 1)) {
+       if (!(jsvIsStringEqual(HEAP32[$4 + 12 >> 2], 41672) & 1)) {
         $0 = HEAPU8[$4 + 24 | 0] | HEAPU8[$4 + 25 | 0] << 8 | (HEAPU8[$4 + 26 | 0] << 16 | HEAPU8[$4 + 27 | 0] << 24) | 256;
         HEAP8[$4 + 24 | 0] = $0;
         HEAP8[$4 + 25 | 0] = $0 >>> 8;
@@ -19593,7 +19593,7 @@ function jswrap_graphics_createArrayBuffer($0, $1, $2, $3) {
         break label$18;
        }
        label$20 : {
-        if (!(jsvIsStringEqual(HEAP32[$4 + 12 >> 2], 42716) & 1)) {
+        if (!(jsvIsStringEqual(HEAP32[$4 + 12 >> 2], 41676) & 1)) {
          $0 = HEAPU8[$4 + 24 | 0] | HEAPU8[$4 + 25 | 0] << 8 | (HEAPU8[$4 + 26 | 0] << 16 | HEAPU8[$4 + 27 | 0] << 24) | 384;
          HEAP8[$4 + 24 | 0] = $0;
          HEAP8[$4 + 25 | 0] = $0 >>> 8;
@@ -19602,7 +19602,7 @@ function jswrap_graphics_createArrayBuffer($0, $1, $2, $3) {
          break label$20;
         }
         label$22 : {
-         if (!(jsvIsStringEqual(HEAP32[$4 + 12 >> 2], 42720) & 1)) {
+         if (!(jsvIsStringEqual(HEAP32[$4 + 12 >> 2], 41680) & 1)) {
           $0 = HEAPU8[$4 + 24 | 0] | HEAPU8[$4 + 25 | 0] << 8 | (HEAPU8[$4 + 26 | 0] << 16 | HEAPU8[$4 + 27 | 0] << 24) | 512;
           HEAP8[$4 + 24 | 0] = $0;
           HEAP8[$4 + 25 | 0] = $0 >>> 8;
@@ -19611,7 +19611,7 @@ function jswrap_graphics_createArrayBuffer($0, $1, $2, $3) {
           break label$22;
          }
          label$24 : {
-          if (!(jsvIsStringEqual(HEAP32[$4 + 12 >> 2], 42724) & 1)) {
+          if (!(jsvIsStringEqual(HEAP32[$4 + 12 >> 2], 41684) & 1)) {
            $0 = HEAPU8[$4 + 24 | 0] | HEAPU8[$4 + 25 | 0] << 8 | (HEAPU8[$4 + 26 | 0] << 16 | HEAPU8[$4 + 27 | 0] << 24) | 640;
            HEAP8[$4 + 24 | 0] = $0;
            HEAP8[$4 + 25 | 0] = $0 >>> 8;
@@ -19619,7 +19619,7 @@ function jswrap_graphics_createArrayBuffer($0, $1, $2, $3) {
            HEAP8[$4 + 27 | 0] = $0 >>> 24;
            break label$24;
           }
-          jsWarn(42728, 0);
+          jsWarn(41688, 0);
          }
         }
        }
@@ -19675,7 +19675,7 @@ function matchcharacter($0, $1, $2, $3) {
      HEAP32[$0 >> 2] = HEAP32[$0 >> 2] + 1;
      break label$9;
     }
-    jsExceptionHere(1, 40738, 0);
+    jsExceptionHere(1, 39710, 0);
     HEAP8[$4 + 47 | 0] = 0;
     break label$1;
    }
@@ -20100,11 +20100,11 @@ function tflite__ops__micro__conv__Eval_28TfLiteContext__2c_20TfLiteNode__29($0,
     $3 = HEAP32[HEAP32[$2 + 660 >> 2] + 48 >> 2];
     HEAP32[$2 + 20 >> 2] = 1;
     HEAP32[$2 + 16 >> 2] = $3;
-    HEAP32[$2 + 12 >> 2] = 48030;
-    HEAP32[$2 + 8 >> 2] = 48004;
+    HEAP32[$2 + 12 >> 2] = 46990;
+    HEAP32[$2 + 8 >> 2] = 46964;
     HEAP32[$2 + 4 >> 2] = 221;
-    HEAP32[$2 >> 2] = 47825;
-    FUNCTION_TABLE[$0]($1, 47956, $2);
+    HEAP32[$2 >> 2] = 46785;
+    FUNCTION_TABLE[$0]($1, 46916, $2);
     HEAP32[$2 + 684 >> 2] = 1;
     break label$1;
    }
@@ -20112,20 +20112,20 @@ function tflite__ops__micro__conv__Eval_28TfLiteContext__2c_20TfLiteNode__29($0,
    if (!HEAP32[$2 + 84 >> 2]) {
     $0 = HEAP32[HEAP32[$2 + 680 >> 2] + 20 >> 2];
     $1 = HEAP32[$2 + 680 >> 2];
-    HEAP32[$2 + 72 >> 2] = 48056;
+    HEAP32[$2 + 72 >> 2] = 47016;
     HEAP32[$2 + 68 >> 2] = 226;
-    HEAP32[$2 + 64 >> 2] = 47825;
-    FUNCTION_TABLE[$0]($1, 47802, $2 - -64 | 0);
+    HEAP32[$2 + 64 >> 2] = 46785;
+    FUNCTION_TABLE[$0]($1, 46762, $2 - -64 | 0);
     HEAP32[$2 + 684 >> 2] = 1;
     break label$1;
    }
    if (!HEAP32[HEAP32[$2 + 84 >> 2] >> 2]) {
     $0 = HEAP32[HEAP32[$2 + 680 >> 2] + 20 >> 2];
     $1 = HEAP32[$2 + 680 >> 2];
-    HEAP32[$2 + 56 >> 2] = 48076;
+    HEAP32[$2 + 56 >> 2] = 47036;
     HEAP32[$2 + 52 >> 2] = 227;
-    HEAP32[$2 + 48 >> 2] = 47825;
-    FUNCTION_TABLE[$0]($1, 47802, $2 + 48 | 0);
+    HEAP32[$2 + 48 >> 2] = 46785;
+    FUNCTION_TABLE[$0]($1, 46762, $2 + 48 | 0);
     HEAP32[$2 + 684 >> 2] = 1;
     break label$1;
    }
@@ -20167,7 +20167,7 @@ function tflite__ops__micro__conv__Eval_28TfLiteContext__2c_20TfLiteNode__29($0,
    $3 = TfLiteTypeGetName(HEAP32[HEAP32[$2 + 664 >> 2] >> 2]);
    HEAP32[$2 + 36 >> 2] = HEAP32[HEAP32[$2 + 664 >> 2] >> 2];
    HEAP32[$2 + 32 >> 2] = $3;
-   FUNCTION_TABLE[$0]($1, 48103, $2 + 32 | 0);
+   FUNCTION_TABLE[$0]($1, 47063, $2 + 32 | 0);
    HEAP32[$2 + 684 >> 2] = 1;
    break label$1;
   }
@@ -20304,7 +20304,7 @@ function graphicsDrawChar6x8($0, $1, $2, $3, $4, $5) {
    if (HEAP32[$6 + 16 >> 2] >= 8) {
     break label$1;
    }
-   HEAP32[$6 + 8 >> 2] = HEAP32[(HEAP32[$6 + 24 >> 2] + HEAP32[$6 + 16 >> 2] << 2) + 25136 >> 2] >>> Math_imul(HEAP32[$6 + 20 >> 2], 5);
+   HEAP32[$6 + 8 >> 2] = HEAP32[(HEAP32[$6 + 24 >> 2] + HEAP32[$6 + 16 >> 2] << 2) + 24112 >> 2] >>> Math_imul(HEAP32[$6 + 20 >> 2], 5);
    HEAP32[$6 + 4 >> 2] = HEAP32[$6 + 36 >> 2] + Math_imul(HEAP32[$6 + 16 >> 2], HEAPU16[$6 + 32 >> 1]);
    if (!(HEAP32[$6 + 8 >> 2] & 16 ? 0 : !(HEAP8[$6 + 31 | 0] & 1))) {
     $1 = HEAP32[$6 + 44 >> 2];
@@ -20405,10 +20405,10 @@ function jswrap_storagefile_write($0, $1) {
  global$0 = $2;
  HEAP32[$2 + 268 >> 2] = $0;
  HEAP32[$2 + 264 >> 2] = $1;
- HEAP8[$2 + 263 | 0] = jsvGetIntegerAndUnLock(jsvObjectGetChild(HEAP32[$2 + 268 >> 2], 41055, 0));
+ HEAP8[$2 + 263 | 0] = jsvGetIntegerAndUnLock(jsvObjectGetChild(HEAP32[$2 + 268 >> 2], 40027, 0));
  label$1 : {
   if (!(HEAP8[$2 + 263 | 0] == 119 | HEAP8[$2 + 263 | 0] == 97)) {
-   jsExceptionHere(1, 41084, 0);
+   jsExceptionHere(1, 40056, 0);
    break label$1;
   }
   HEAP32[$2 + 256 >> 2] = jsvAsString(HEAP32[$2 + 264 >> 2]);
@@ -20420,9 +20420,9 @@ function jswrap_storagefile_write($0, $1) {
    break label$1;
   }
   $0 = $2 + 216 | 0;
-  HEAP32[$2 + 248 >> 2] = jsvGetIntegerAndUnLock(jsvObjectGetChild(HEAP32[$2 + 268 >> 2], 41043, 0));
-  HEAP32[$2 + 244 >> 2] = jsvGetIntegerAndUnLock(jsvObjectGetChild(HEAP32[$2 + 268 >> 2], 41037, 0));
-  jsfNameFromVarAndUnLock($0, jsvObjectGetChild(HEAP32[$2 + 268 >> 2], 41032, 0));
+  HEAP32[$2 + 248 >> 2] = jsvGetIntegerAndUnLock(jsvObjectGetChild(HEAP32[$2 + 268 >> 2], 40015, 0));
+  HEAP32[$2 + 244 >> 2] = jsvGetIntegerAndUnLock(jsvObjectGetChild(HEAP32[$2 + 268 >> 2], 40009, 0));
+  jsfNameFromVarAndUnLock($0, jsvObjectGetChild(HEAP32[$2 + 268 >> 2], 40004, 0));
   HEAP32[$2 + 212 >> 2] = 27;
   while (1) {
    if (HEAP32[$2 + 212 >> 2] ? !HEAP8[(HEAP32[$2 + 212 >> 2] + $2 | 0) + 215 | 0] : 0) {
@@ -20432,7 +20432,7 @@ function jswrap_storagefile_write($0, $1) {
    break;
   }
   HEAP8[HEAP32[$2 + 212 >> 2] + ($2 + 216 | 0) | 0] = HEAP32[$2 + 244 >> 2];
-  HEAP32[$2 + 208 >> 2] = jsvGetIntegerAndUnLock(jsvObjectGetChild(HEAP32[$2 + 268 >> 2], 41050, 0));
+  HEAP32[$2 + 208 >> 2] = jsvGetIntegerAndUnLock(jsvObjectGetChild(HEAP32[$2 + 268 >> 2], 40022, 0));
   HEAP32[$2 + 204 >> 2] = 992 - HEAP32[$2 + 248 >> 2];
   if (!HEAP32[$2 + 208 >> 2]) {
    $0 = HEAP32[$2 + 256 >> 2];
@@ -20459,8 +20459,8 @@ function jswrap_storagefile_write($0, $1) {
     HEAP32[$2 + 68 >> 2] = $0;
     HEAP32[$2 + 208 >> 2] = jsfFindFile($2 - -64 | 0, $2 + 168 | 0);
     HEAP32[$2 + 248 >> 2] = HEAP32[$2 + 252 >> 2];
-    jsvObjectSetChildAndUnLock(HEAP32[$2 + 268 >> 2], 41043, jsvNewFromInteger(HEAP32[$2 + 248 >> 2]));
-    jsvObjectSetChildAndUnLock(HEAP32[$2 + 268 >> 2], 41050, jsvNewFromInteger(HEAP32[$2 + 208 >> 2]));
+    jsvObjectSetChildAndUnLock(HEAP32[$2 + 268 >> 2], 40015, jsvNewFromInteger(HEAP32[$2 + 248 >> 2]));
+    jsvObjectSetChildAndUnLock(HEAP32[$2 + 268 >> 2], 40022, jsvNewFromInteger(HEAP32[$2 + 208 >> 2]));
    }
    jsvUnLock(HEAP32[$2 + 256 >> 2]);
    break label$1;
@@ -20475,13 +20475,13 @@ function jswrap_storagefile_write($0, $1) {
    jswrap_flash_write(HEAP32[$2 + 164 >> 2], HEAP32[$2 + 208 >> 2] + HEAP32[$2 + 248 >> 2] | 0);
    jsvUnLock(HEAP32[$2 + 164 >> 2]);
    if (HEAP32[$2 + 244 >> 2] == 255) {
-    jsExceptionHere(1, 41109, 0);
+    jsExceptionHere(1, 40081, 0);
     jsvUnLock(HEAP32[$2 + 256 >> 2]);
     break label$1;
    }
    HEAP32[$2 + 244 >> 2] = HEAP32[$2 + 244 >> 2] + 1;
    HEAP8[HEAP32[$2 + 212 >> 2] + ($2 + 216 | 0) | 0] = HEAP32[$2 + 244 >> 2];
-   jsvObjectSetChildAndUnLock(HEAP32[$2 + 268 >> 2], 41037, jsvNewFromInteger(HEAP32[$2 + 244 >> 2]));
+   jsvObjectSetChildAndUnLock(HEAP32[$2 + 268 >> 2], 40009, jsvNewFromInteger(HEAP32[$2 + 244 >> 2]));
    HEAP32[$2 + 164 >> 2] = jsvNewFromStringVar(HEAP32[$2 + 256 >> 2], HEAP32[$2 + 204 >> 2], 2147483647);
    $0 = HEAP32[$2 + 164 >> 2];
    HEAP32[$2 + 56 >> 2] = HEAP32[$2 + 240 >> 2];
@@ -20508,8 +20508,8 @@ function jswrap_storagefile_write($0, $1) {
      HEAP32[$2 + 4 >> 2] = $0;
      HEAP32[$2 + 208 >> 2] = jsfFindFile($2, $2 + 128 | 0);
      HEAP32[$2 + 248 >> 2] = HEAP32[$2 + 252 >> 2];
-     jsvObjectSetChildAndUnLock(HEAP32[$2 + 268 >> 2], 41043, jsvNewFromInteger(HEAP32[$2 + 248 >> 2]));
-     jsvObjectSetChildAndUnLock(HEAP32[$2 + 268 >> 2], 41050, jsvNewFromInteger(HEAP32[$2 + 208 >> 2]));
+     jsvObjectSetChildAndUnLock(HEAP32[$2 + 268 >> 2], 40015, jsvNewFromInteger(HEAP32[$2 + 248 >> 2]));
+     jsvObjectSetChildAndUnLock(HEAP32[$2 + 268 >> 2], 40022, jsvNewFromInteger(HEAP32[$2 + 208 >> 2]));
      break label$12;
     }
     jsvUnLock(HEAP32[$2 + 256 >> 2]);
@@ -20518,7 +20518,7 @@ function jswrap_storagefile_write($0, $1) {
    HEAP32[$2 + 248 >> 2] = jsvGetStringLength(HEAP32[$2 + 164 >> 2]);
    jsvUnLock(HEAP32[$2 + 164 >> 2]);
   }
-  jsvObjectSetChildAndUnLock(HEAP32[$2 + 268 >> 2], 41043, jsvNewFromInteger(HEAP32[$2 + 248 >> 2]));
+  jsvObjectSetChildAndUnLock(HEAP32[$2 + 268 >> 2], 40015, jsvNewFromInteger(HEAP32[$2 + 248 >> 2]));
   jsvUnLock(HEAP32[$2 + 256 >> 2]);
  }
  global$0 = $2 + 272 | 0;
@@ -20527,8 +20527,8 @@ function nmea_decode() {
  var $0 = 0, $1 = 0, $2 = 0;
  $0 = global$0 - 112 | 0;
  global$0 = $0;
- HEAP32[$0 + 104 >> 2] = 255696;
- HEAP32[$0 + 100 >> 2] = 255760;
+ HEAP32[$0 + 104 >> 2] = 254656;
+ HEAP32[$0 + 100 >> 2] = 254720;
  $1 = $0 + 16 | 0;
  strcpy($1, HEAP32[$0 + 100 >> 2]);
  HEAP32[$0 + 12 >> 2] = $1;
@@ -20989,7 +20989,7 @@ function jswrap_json_parse_internal() {
      label$5 : {
       label$6 : {
        label$7 : {
-        $1 = HEAP16[HEAP32[14856] + 2 >> 1];
+        $1 = HEAP16[HEAP32[14596] + 2 >> 1];
         if (($1 | 0) != 45) {
          if (($1 | 0) == 91) {
           break label$4;
@@ -21030,7 +21030,7 @@ function jswrap_json_parse_internal() {
          break label$1;
         }
         jslGetNextToken();
-        if (!(HEAP16[HEAP32[14856] + 2 >> 1] == 129 | HEAP16[HEAP32[14856] + 2 >> 1] == 130)) {
+        if (!(HEAP16[HEAP32[14596] + 2 >> 1] == 129 | HEAP16[HEAP32[14596] + 2 >> 1] == 130)) {
          HEAP32[$0 + 108 >> 2] = 0;
          break label$1;
         }
@@ -21064,7 +21064,7 @@ function jswrap_json_parse_internal() {
     }
     jslGetNextToken();
     while (1) {
-     if (HEAP16[HEAP32[14856] + 2 >> 1] != 93) {
+     if (HEAP16[HEAP32[14596] + 2 >> 1] != 93) {
       $1 = jspHasError() ^ -1;
      } else {
       $1 = 0;
@@ -21073,7 +21073,7 @@ function jswrap_json_parse_internal() {
       HEAP32[$0 + 68 >> 2] = jswrap_json_parse_internal();
       label$18 : {
        if (HEAP32[$0 + 68 >> 2]) {
-        if (HEAP16[HEAP32[14856] + 2 >> 1] == 93) {
+        if (HEAP16[HEAP32[14596] + 2 >> 1] == 93) {
          break label$18;
         }
         if (jslMatch(44) & 1) {
@@ -21105,7 +21105,7 @@ function jswrap_json_parse_internal() {
    }
    jslGetNextToken();
    while (1) {
-    if (HEAP16[HEAP32[14856] + 2 >> 1] == 131) {
+    if (HEAP16[HEAP32[14596] + 2 >> 1] == 131) {
      $1 = jspHasError() ^ -1;
     } else {
      $1 = 0;
@@ -21124,7 +21124,7 @@ function jswrap_json_parse_internal() {
        if (!$1) {
         break label$27;
        }
-       if (HEAP16[HEAP32[14856] + 2 >> 1] == 125) {
+       if (HEAP16[HEAP32[14596] + 2 >> 1] == 125) {
         break label$26;
        }
        if (jslMatch(44) & 1) {
@@ -21150,9 +21150,9 @@ function jswrap_json_parse_internal() {
    break label$1;
   }
   $1 = $0 + 16 | 0;
-  jslTokenAsString(HEAP16[HEAP32[14856] + 2 >> 1], $1, 32);
+  jslTokenAsString(HEAP16[HEAP32[14596] + 2 >> 1], $1, 32);
   HEAP32[$0 >> 2] = $1;
-  jsExceptionHere(2, 38205, $0);
+  jsExceptionHere(2, 37181, $0);
   HEAP32[$0 + 108 >> 2] = 0;
  }
  global$0 = $0 + 112 | 0;
@@ -21307,28 +21307,28 @@ function jswrap_storage_open($0, $1) {
  HEAP8[$2 + 243 | 0] = 0;
  label$1 : {
   label$2 : {
-   if (jsvIsStringEqual(HEAP32[$2 + 244 >> 2], 40998) & 1) {
+   if (jsvIsStringEqual(HEAP32[$2 + 244 >> 2], 39970) & 1) {
     HEAP8[$2 + 243 | 0] = 114;
     break label$2;
    }
    label$4 : {
-    if (jsvIsStringEqual(HEAP32[$2 + 244 >> 2], 41e3) & 1) {
+    if (jsvIsStringEqual(HEAP32[$2 + 244 >> 2], 39972) & 1) {
      HEAP8[$2 + 243 | 0] = 119;
      break label$4;
     }
     label$6 : {
-     if (jsvIsStringEqual(HEAP32[$2 + 244 >> 2], 41002) & 1) {
+     if (jsvIsStringEqual(HEAP32[$2 + 244 >> 2], 39974) & 1) {
       HEAP8[$2 + 243 | 0] = 97;
       break label$6;
      }
      HEAP32[$2 + 64 >> 2] = HEAP32[$2 + 244 >> 2];
-     jsExceptionHere(1, 41004, $2 - -64 | 0);
+     jsExceptionHere(1, 39976, $2 - -64 | 0);
      HEAP32[$2 + 252 >> 2] = 0;
      break label$1;
     }
    }
   }
-  HEAP32[$2 + 236 >> 2] = jspNewObject(0, 41020);
+  HEAP32[$2 + 236 >> 2] = jspNewObject(0, 39992);
   if (!HEAP32[$2 + 236 >> 2]) {
    HEAP32[$2 + 252 >> 2] = 0;
    break label$1;
@@ -21346,7 +21346,7 @@ function jswrap_storage_open($0, $1) {
    break;
   }
   HEAP8[HEAP32[$2 + 196 >> 2] + ($2 + 200 | 0) | 0] = HEAP32[$2 + 232 >> 2];
-  jsvObjectSetChildAndUnLock(HEAP32[$2 + 236 >> 2], 41032, HEAP32[$2 + 228 >> 2]);
+  jsvObjectSetChildAndUnLock(HEAP32[$2 + 236 >> 2], 40004, HEAP32[$2 + 228 >> 2]);
   HEAP32[$2 + 192 >> 2] = 0;
   HEAP32[$2 + 56 >> 2] = HEAP32[$2 + 224 >> 2];
   $0 = HEAP32[$2 + 220 >> 2];
@@ -21444,10 +21444,10 @@ function jswrap_storage_open($0, $1) {
     break label$30;
    }
   }
-  jsvObjectSetChildAndUnLock(HEAP32[$2 + 236 >> 2], 41037, jsvNewFromInteger(HEAP32[$2 + 232 >> 2]));
-  jsvObjectSetChildAndUnLock(HEAP32[$2 + 236 >> 2], 41043, jsvNewFromInteger(HEAP32[$2 + 192 >> 2]));
-  jsvObjectSetChildAndUnLock(HEAP32[$2 + 236 >> 2], 41050, jsvNewFromInteger(HEAP32[$2 + 156 >> 2]));
-  jsvObjectSetChildAndUnLock(HEAP32[$2 + 236 >> 2], 41055, jsvNewFromInteger(HEAP8[$2 + 243 | 0]));
+  jsvObjectSetChildAndUnLock(HEAP32[$2 + 236 >> 2], 40009, jsvNewFromInteger(HEAP32[$2 + 232 >> 2]));
+  jsvObjectSetChildAndUnLock(HEAP32[$2 + 236 >> 2], 40015, jsvNewFromInteger(HEAP32[$2 + 192 >> 2]));
+  jsvObjectSetChildAndUnLock(HEAP32[$2 + 236 >> 2], 40022, jsvNewFromInteger(HEAP32[$2 + 156 >> 2]));
+  jsvObjectSetChildAndUnLock(HEAP32[$2 + 236 >> 2], 40027, jsvNewFromInteger(HEAP8[$2 + 243 | 0]));
   HEAP32[$2 + 252 >> 2] = HEAP32[$2 + 236 >> 2];
  }
  global$0 = $2 + 256 | 0;
@@ -21580,11 +21580,11 @@ function tflite__ops__micro__round__Prepare_28TfLiteContext__2c_20TfLiteNode__29
    $3 = tflite__NumInputs_28TfLiteNode_20const__29(HEAP32[$2 + 228 >> 2]);
    HEAP32[$2 + 20 >> 2] = 1;
    HEAP32[$2 + 16 >> 2] = $3;
-   HEAP32[$2 + 12 >> 2] = 52394;
-   HEAP32[$2 + 8 >> 2] = 52378;
+   HEAP32[$2 + 12 >> 2] = 51354;
+   HEAP32[$2 + 8 >> 2] = 51338;
    HEAP32[$2 + 4 >> 2] = 33;
-   HEAP32[$2 >> 2] = 52282;
-   FUNCTION_TABLE[$0]($1, 52256, $2);
+   HEAP32[$2 >> 2] = 51242;
+   FUNCTION_TABLE[$0]($1, 51216, $2);
    HEAP32[$2 + 236 >> 2] = 1;
    break label$1;
   }
@@ -21594,11 +21594,11 @@ function tflite__ops__micro__round__Prepare_28TfLiteContext__2c_20TfLiteNode__29
    $3 = tflite__NumOutputs_28TfLiteNode_20const__29(HEAP32[$2 + 228 >> 2]);
    HEAP32[$2 + 52 >> 2] = 1;
    HEAP32[$2 + 48 >> 2] = $3;
-   HEAP32[$2 + 44 >> 2] = 52394;
-   HEAP32[$2 + 40 >> 2] = 52396;
+   HEAP32[$2 + 44 >> 2] = 51354;
+   HEAP32[$2 + 40 >> 2] = 51356;
    HEAP32[$2 + 36 >> 2] = 34;
-   HEAP32[$2 + 32 >> 2] = 52282;
-   FUNCTION_TABLE[$0]($1, 52256, $2 + 32 | 0);
+   HEAP32[$2 + 32 >> 2] = 51242;
+   FUNCTION_TABLE[$0]($1, 51216, $2 + 32 | 0);
    HEAP32[$2 + 236 >> 2] = 1;
    break label$1;
   }
@@ -21608,11 +21608,11 @@ function tflite__ops__micro__round__Prepare_28TfLiteContext__2c_20TfLiteNode__29
    $3 = HEAP32[HEAP32[$2 + 224 >> 2] >> 2];
    HEAP32[$2 + 84 >> 2] = 1;
    HEAP32[$2 + 80 >> 2] = $3;
-   HEAP32[$2 + 76 >> 2] = 52425;
-   HEAP32[$2 + 72 >> 2] = 52413;
+   HEAP32[$2 + 76 >> 2] = 51385;
+   HEAP32[$2 + 72 >> 2] = 51373;
    HEAP32[$2 + 68 >> 2] = 35;
-   HEAP32[$2 + 64 >> 2] = 52282;
-   FUNCTION_TABLE[$0]($1, 52256, $2 - -64 | 0);
+   HEAP32[$2 + 64 >> 2] = 51242;
+   FUNCTION_TABLE[$0]($1, 51216, $2 - -64 | 0);
    HEAP32[$2 + 236 >> 2] = 1;
    break label$1;
   }
@@ -21622,11 +21622,11 @@ function tflite__ops__micro__round__Prepare_28TfLiteContext__2c_20TfLiteNode__29
    $3 = HEAP32[HEAP32[$2 + 220 >> 2] >> 2];
    HEAP32[$2 + 116 >> 2] = HEAP32[HEAP32[$2 + 224 >> 2] >> 2];
    HEAP32[$2 + 112 >> 2] = $3;
-   HEAP32[$2 + 108 >> 2] = 52413;
-   HEAP32[$2 + 104 >> 2] = 52440;
+   HEAP32[$2 + 108 >> 2] = 51373;
+   HEAP32[$2 + 104 >> 2] = 51400;
    HEAP32[$2 + 100 >> 2] = 36;
-   HEAP32[$2 + 96 >> 2] = 52282;
-   FUNCTION_TABLE[$0]($1, 52256, $2 + 96 | 0);
+   HEAP32[$2 + 96 >> 2] = 51242;
+   FUNCTION_TABLE[$0]($1, 51216, $2 + 96 | 0);
    HEAP32[$2 + 236 >> 2] = 1;
    break label$1;
   }
@@ -21636,11 +21636,11 @@ function tflite__ops__micro__round__Prepare_28TfLiteContext__2c_20TfLiteNode__29
    $3 = HEAP32[HEAP32[$2 + 220 >> 2] + 24 >> 2];
    HEAP32[$2 + 148 >> 2] = HEAP32[HEAP32[$2 + 224 >> 2] + 24 >> 2];
    HEAP32[$2 + 144 >> 2] = $3;
-   HEAP32[$2 + 140 >> 2] = 52467;
-   HEAP32[$2 + 136 >> 2] = 52453;
+   HEAP32[$2 + 140 >> 2] = 51427;
+   HEAP32[$2 + 136 >> 2] = 51413;
    HEAP32[$2 + 132 >> 2] = 37;
-   HEAP32[$2 + 128 >> 2] = 52282;
-   FUNCTION_TABLE[$0]($1, 52256, $2 + 128 | 0);
+   HEAP32[$2 + 128 >> 2] = 51242;
+   FUNCTION_TABLE[$0]($1, 51216, $2 + 128 | 0);
    HEAP32[$2 + 236 >> 2] = 1;
    break label$1;
   }
@@ -21650,11 +21650,11 @@ function tflite__ops__micro__round__Prepare_28TfLiteContext__2c_20TfLiteNode__29
    $3 = HEAP32[HEAP32[HEAP32[$2 + 220 >> 2] + 8 >> 2] >> 2];
    HEAP32[$2 + 180 >> 2] = HEAP32[HEAP32[HEAP32[$2 + 224 >> 2] + 8 >> 2] >> 2];
    HEAP32[$2 + 176 >> 2] = $3;
-   HEAP32[$2 + 172 >> 2] = 52499;
-   HEAP32[$2 + 168 >> 2] = 52480;
+   HEAP32[$2 + 172 >> 2] = 51459;
+   HEAP32[$2 + 168 >> 2] = 51440;
    HEAP32[$2 + 164 >> 2] = 38;
-   HEAP32[$2 + 160 >> 2] = 52282;
-   FUNCTION_TABLE[$0]($1, 52256, $2 + 160 | 0);
+   HEAP32[$2 + 160 >> 2] = 51242;
+   FUNCTION_TABLE[$0]($1, 51216, $2 + 160 | 0);
    HEAP32[$2 + 236 >> 2] = 1;
    break label$1;
   }
@@ -21667,11 +21667,11 @@ function tflite__ops__micro__round__Prepare_28TfLiteContext__2c_20TfLiteNode__29
      $3 = HEAP32[(HEAP32[HEAP32[$2 + 220 >> 2] + 8 >> 2] + 4 | 0) + (HEAP32[$2 + 216 >> 2] << 2) >> 2];
      HEAP32[$2 + 212 >> 2] = HEAP32[(HEAP32[HEAP32[$2 + 224 >> 2] + 8 >> 2] + 4 | 0) + (HEAP32[$2 + 216 >> 2] << 2) >> 2];
      HEAP32[$2 + 208 >> 2] = $3;
-     HEAP32[$2 + 204 >> 2] = 52539;
-     HEAP32[$2 + 200 >> 2] = 52517;
+     HEAP32[$2 + 204 >> 2] = 51499;
+     HEAP32[$2 + 200 >> 2] = 51477;
      HEAP32[$2 + 196 >> 2] = 40;
-     HEAP32[$2 + 192 >> 2] = 52282;
-     FUNCTION_TABLE[$0]($1, 52256, $2 + 192 | 0);
+     HEAP32[$2 + 192 >> 2] = 51242;
+     FUNCTION_TABLE[$0]($1, 51216, $2 + 192 | 0);
      HEAP32[$2 + 236 >> 2] = 1;
      break label$1;
     } else {
@@ -21703,11 +21703,11 @@ function tflite__ops__micro__ceil__Prepare_28TfLiteContext__2c_20TfLiteNode__29(
    $3 = tflite__NumInputs_28TfLiteNode_20const__29(HEAP32[$2 + 228 >> 2]);
    HEAP32[$2 + 20 >> 2] = 1;
    HEAP32[$2 + 16 >> 2] = $3;
-   HEAP32[$2 + 12 >> 2] = 48779;
-   HEAP32[$2 + 8 >> 2] = 48763;
+   HEAP32[$2 + 12 >> 2] = 47739;
+   HEAP32[$2 + 8 >> 2] = 47723;
    HEAP32[$2 + 4 >> 2] = 33;
-   HEAP32[$2 >> 2] = 48668;
-   FUNCTION_TABLE[$0]($1, 48642, $2);
+   HEAP32[$2 >> 2] = 47628;
+   FUNCTION_TABLE[$0]($1, 47602, $2);
    HEAP32[$2 + 236 >> 2] = 1;
    break label$1;
   }
@@ -21717,11 +21717,11 @@ function tflite__ops__micro__ceil__Prepare_28TfLiteContext__2c_20TfLiteNode__29(
    $3 = tflite__NumOutputs_28TfLiteNode_20const__29(HEAP32[$2 + 228 >> 2]);
    HEAP32[$2 + 52 >> 2] = 1;
    HEAP32[$2 + 48 >> 2] = $3;
-   HEAP32[$2 + 44 >> 2] = 48779;
-   HEAP32[$2 + 40 >> 2] = 48781;
+   HEAP32[$2 + 44 >> 2] = 47739;
+   HEAP32[$2 + 40 >> 2] = 47741;
    HEAP32[$2 + 36 >> 2] = 34;
-   HEAP32[$2 + 32 >> 2] = 48668;
-   FUNCTION_TABLE[$0]($1, 48642, $2 + 32 | 0);
+   HEAP32[$2 + 32 >> 2] = 47628;
+   FUNCTION_TABLE[$0]($1, 47602, $2 + 32 | 0);
    HEAP32[$2 + 236 >> 2] = 1;
    break label$1;
   }
@@ -21731,11 +21731,11 @@ function tflite__ops__micro__ceil__Prepare_28TfLiteContext__2c_20TfLiteNode__29(
    $3 = HEAP32[HEAP32[$2 + 224 >> 2] >> 2];
    HEAP32[$2 + 84 >> 2] = 1;
    HEAP32[$2 + 80 >> 2] = $3;
-   HEAP32[$2 + 76 >> 2] = 48810;
-   HEAP32[$2 + 72 >> 2] = 48798;
+   HEAP32[$2 + 76 >> 2] = 47770;
+   HEAP32[$2 + 72 >> 2] = 47758;
    HEAP32[$2 + 68 >> 2] = 35;
-   HEAP32[$2 + 64 >> 2] = 48668;
-   FUNCTION_TABLE[$0]($1, 48642, $2 - -64 | 0);
+   HEAP32[$2 + 64 >> 2] = 47628;
+   FUNCTION_TABLE[$0]($1, 47602, $2 - -64 | 0);
    HEAP32[$2 + 236 >> 2] = 1;
    break label$1;
   }
@@ -21745,11 +21745,11 @@ function tflite__ops__micro__ceil__Prepare_28TfLiteContext__2c_20TfLiteNode__29(
    $3 = HEAP32[HEAP32[$2 + 220 >> 2] >> 2];
    HEAP32[$2 + 116 >> 2] = HEAP32[HEAP32[$2 + 224 >> 2] >> 2];
    HEAP32[$2 + 112 >> 2] = $3;
-   HEAP32[$2 + 108 >> 2] = 48798;
-   HEAP32[$2 + 104 >> 2] = 48825;
+   HEAP32[$2 + 108 >> 2] = 47758;
+   HEAP32[$2 + 104 >> 2] = 47785;
    HEAP32[$2 + 100 >> 2] = 36;
-   HEAP32[$2 + 96 >> 2] = 48668;
-   FUNCTION_TABLE[$0]($1, 48642, $2 + 96 | 0);
+   HEAP32[$2 + 96 >> 2] = 47628;
+   FUNCTION_TABLE[$0]($1, 47602, $2 + 96 | 0);
    HEAP32[$2 + 236 >> 2] = 1;
    break label$1;
   }
@@ -21759,11 +21759,11 @@ function tflite__ops__micro__ceil__Prepare_28TfLiteContext__2c_20TfLiteNode__29(
    $3 = HEAP32[HEAP32[$2 + 220 >> 2] + 24 >> 2];
    HEAP32[$2 + 148 >> 2] = HEAP32[HEAP32[$2 + 224 >> 2] + 24 >> 2];
    HEAP32[$2 + 144 >> 2] = $3;
-   HEAP32[$2 + 140 >> 2] = 48852;
-   HEAP32[$2 + 136 >> 2] = 48838;
+   HEAP32[$2 + 140 >> 2] = 47812;
+   HEAP32[$2 + 136 >> 2] = 47798;
    HEAP32[$2 + 132 >> 2] = 37;
-   HEAP32[$2 + 128 >> 2] = 48668;
-   FUNCTION_TABLE[$0]($1, 48642, $2 + 128 | 0);
+   HEAP32[$2 + 128 >> 2] = 47628;
+   FUNCTION_TABLE[$0]($1, 47602, $2 + 128 | 0);
    HEAP32[$2 + 236 >> 2] = 1;
    break label$1;
   }
@@ -21773,11 +21773,11 @@ function tflite__ops__micro__ceil__Prepare_28TfLiteContext__2c_20TfLiteNode__29(
    $3 = HEAP32[HEAP32[HEAP32[$2 + 220 >> 2] + 8 >> 2] >> 2];
    HEAP32[$2 + 180 >> 2] = HEAP32[HEAP32[HEAP32[$2 + 224 >> 2] + 8 >> 2] >> 2];
    HEAP32[$2 + 176 >> 2] = $3;
-   HEAP32[$2 + 172 >> 2] = 48884;
-   HEAP32[$2 + 168 >> 2] = 48865;
+   HEAP32[$2 + 172 >> 2] = 47844;
+   HEAP32[$2 + 168 >> 2] = 47825;
    HEAP32[$2 + 164 >> 2] = 38;
-   HEAP32[$2 + 160 >> 2] = 48668;
-   FUNCTION_TABLE[$0]($1, 48642, $2 + 160 | 0);
+   HEAP32[$2 + 160 >> 2] = 47628;
+   FUNCTION_TABLE[$0]($1, 47602, $2 + 160 | 0);
    HEAP32[$2 + 236 >> 2] = 1;
    break label$1;
   }
@@ -21790,11 +21790,11 @@ function tflite__ops__micro__ceil__Prepare_28TfLiteContext__2c_20TfLiteNode__29(
      $3 = HEAP32[(HEAP32[HEAP32[$2 + 220 >> 2] + 8 >> 2] + 4 | 0) + (HEAP32[$2 + 216 >> 2] << 2) >> 2];
      HEAP32[$2 + 212 >> 2] = HEAP32[(HEAP32[HEAP32[$2 + 224 >> 2] + 8 >> 2] + 4 | 0) + (HEAP32[$2 + 216 >> 2] << 2) >> 2];
      HEAP32[$2 + 208 >> 2] = $3;
-     HEAP32[$2 + 204 >> 2] = 48924;
-     HEAP32[$2 + 200 >> 2] = 48902;
+     HEAP32[$2 + 204 >> 2] = 47884;
+     HEAP32[$2 + 200 >> 2] = 47862;
      HEAP32[$2 + 196 >> 2] = 40;
-     HEAP32[$2 + 192 >> 2] = 48668;
-     FUNCTION_TABLE[$0]($1, 48642, $2 + 192 | 0);
+     HEAP32[$2 + 192 >> 2] = 47628;
+     FUNCTION_TABLE[$0]($1, 47602, $2 + 192 | 0);
      HEAP32[$2 + 236 >> 2] = 1;
      break label$1;
     } else {
@@ -21880,7 +21880,7 @@ function jspeClassDefinition($0) {
  HEAP32[$1 + 52 >> 2] = 0;
  HEAP32[$1 + 48 >> 2] = 0;
  HEAP32[$1 + 44 >> 2] = 0;
- HEAP8[$1 + 43 | 0] = (HEAP32[24866] & 63) == 1;
+ HEAP8[$1 + 43 | 0] = (HEAP32[24606] & 63) == 1;
  if (HEAP8[$1 + 43 | 0] & 1) {
   HEAP32[$1 + 52 >> 2] = jsvNewWithFlags(7);
   HEAP32[$1 + 36 >> 2] = jspeiGetScopesAsVar();
@@ -21888,7 +21888,7 @@ function jspeClassDefinition($0) {
    jsvUnLock2(jsvAddNamedChild(HEAP32[$1 + 52 >> 2], HEAP32[$1 + 36 >> 2], 3848), HEAP32[$1 + 36 >> 2]);
   }
  }
- if (!(!(HEAP8[$1 + 59 | 0] & 1) | HEAP16[HEAP32[14856] + 2 >> 1] != 128)) {
+ if (!(!(HEAP8[$1 + 59 | 0] & 1) | HEAP16[HEAP32[14596] + 2 >> 1] != 128)) {
   if (HEAP32[$1 + 52 >> 2]) {
    HEAP32[$1 + 44 >> 2] = jslGetTokenValueAsVar();
   }
@@ -21901,7 +21901,7 @@ function jspeClassDefinition($0) {
   jsvUnLock(HEAP32[$1 + 32 >> 2]);
  }
  label$6 : {
-  if (HEAP16[HEAP32[14856] + 2 >> 1] == 195) {
+  if (HEAP16[HEAP32[14596] + 2 >> 1] == 195) {
    jslGetNextToken();
    $0 = $1;
    label$8 : {
@@ -21941,16 +21941,16 @@ function jspeClassDefinition($0) {
   }
   while (1) {
    label$17 : {
-    if (HEAP16[HEAP32[14856] + 2 >> 1] != 128) {
+    if (HEAP16[HEAP32[14596] + 2 >> 1] != 128) {
      $0 = 0;
-     if (HEAP16[HEAP32[14856] + 2 >> 1] != 197) {
+     if (HEAP16[HEAP32[14596] + 2 >> 1] != 197) {
       break label$17;
      }
     }
     $0 = jspIsInterrupted() ^ -1;
    }
    if ($0 & 1) {
-    HEAP8[$1 + 23 | 0] = HEAP16[HEAP32[14856] + 2 >> 1] == 197;
+    HEAP8[$1 + 23 | 0] = HEAP16[HEAP32[14596] + 2 >> 1] == 197;
     if (HEAP8[$1 + 23 | 0] & 1) {
      jslGetNextToken();
     }
@@ -21962,7 +21962,7 @@ function jspeClassDefinition($0) {
     }
     HEAP8[$1 + 15 | 0] = 0;
     HEAP8[$1 + 14 | 0] = 0;
-    if (HEAP16[HEAP32[14856] + 2 >> 1] == 128) {
+    if (HEAP16[HEAP32[14596] + 2 >> 1] == 128) {
      HEAP8[$1 + 15 | 0] = jsvIsStringEqual(HEAP32[$1 + 16 >> 2], 4312) & 1;
      HEAP8[$1 + 14 | 0] = jsvIsStringEqual(HEAP32[$1 + 16 >> 2], 4316) & 1;
      if (!(HEAP8[$1 + 14 | 0] & 1 ? 0 : !(HEAP8[$1 + 15 | 0] & 1))) {
@@ -22077,21 +22077,21 @@ function tflite__ops__micro__arg_min_max__Eval_28TfLiteContext__2c_20TfLiteNode_
      $0 = HEAP32[HEAP32[$3 + 216 >> 2] + 20 >> 2];
      $1 = HEAP32[$3 + 216 >> 2];
      HEAP32[$3 >> 2] = TfLiteTypeGetName(HEAP32[HEAP32[$3 + 204 >> 2] >> 2]);
-     FUNCTION_TABLE[$0]($1, 48945, $3);
+     FUNCTION_TABLE[$0]($1, 47905, $3);
      HEAP32[$3 + 220 >> 2] = 1;
      break label$1;
     }
     $0 = HEAP32[HEAP32[$3 + 216 >> 2] + 20 >> 2];
     $1 = HEAP32[$3 + 216 >> 2];
     HEAP32[$3 + 16 >> 2] = TfLiteTypeGetName(HEAP32[HEAP32[$3 + 196 >> 2] >> 2]);
-    FUNCTION_TABLE[$0]($1, 49007, $3 + 16 | 0);
+    FUNCTION_TABLE[$0]($1, 47967, $3 + 16 | 0);
     HEAP32[$3 + 220 >> 2] = 1;
     break label$1;
    }
    $0 = HEAP32[HEAP32[$3 + 216 >> 2] + 20 >> 2];
    $1 = HEAP32[$3 + 216 >> 2];
    HEAP32[$3 + 32 >> 2] = TfLiteTypeGetName(HEAP32[HEAP32[$3 + 200 >> 2] >> 2]);
-   FUNCTION_TABLE[$0]($1, 49007, $3 + 32 | 0);
+   FUNCTION_TABLE[$0]($1, 47967, $3 + 32 | 0);
    HEAP32[$3 + 220 >> 2] = 1;
    break label$1;
   }
@@ -22257,7 +22257,7 @@ function jswrap_graphics_asBMP($0) {
    break label$1;
   }
   if (!(HEAPU8[$1 + 80 | 0] == 1 | HEAPU8[$1 + 80 | 0] == 24)) {
-   jsExceptionHere(1, 43379, 0);
+   jsExceptionHere(1, 42339, 0);
    HEAP32[$1 + 140 >> 2] = 0;
    break label$1;
   }
@@ -22539,14 +22539,14 @@ function jsvGarbageCollect() {
  $0 = global$0 - 48 | 0;
  global$0 = $0;
  label$1 : {
-  if (HEAP32[14858]) {
+  if (HEAP32[14598]) {
    HEAP32[$0 + 44 >> 2] = 0;
    break label$1;
   }
-  HEAP32[14858] = 2;
+  HEAP32[14598] = 2;
   HEAP16[$0 + 42 >> 1] = 1;
   while (1) {
-   if (HEAPU16[$0 + 42 >> 1] <= HEAPU32[14353]) {
+   if (HEAPU16[$0 + 42 >> 1] <= HEAPU32[14093]) {
     HEAP32[$0 + 36 >> 2] = jsvGetAddressOf(HEAPU16[$0 + 42 >> 1]);
     if (HEAPU16[HEAP32[$0 + 36 >> 2] + 14 >> 1] & 63) {
      $1 = HEAP32[$0 + 36 >> 2];
@@ -22562,7 +22562,7 @@ function jsvGarbageCollect() {
   }
   HEAP16[$0 + 42 >> 1] = 1;
   while (1) {
-   if (HEAPU16[$0 + 42 >> 1] <= HEAPU32[14353]) {
+   if (HEAPU16[$0 + 42 >> 1] <= HEAPU32[14093]) {
     HEAP32[$0 + 32 >> 2] = jsvGetAddressOf(HEAPU16[$0 + 42 >> 1]);
     label$9 : {
      if (!(HEAPU16[HEAP32[$0 + 32 >> 2] + 14 >> 1] & 128)) {
@@ -22582,11 +22582,11 @@ function jsvGarbageCollect() {
    break;
   }
   HEAP32[$0 + 28 >> 2] = 0;
-  HEAP16[29718] = 0;
+  HEAP16[29198] = 0;
   HEAP32[$0 + 24 >> 2] = 0;
   HEAP16[$0 + 42 >> 1] = 1;
   while (1) {
-   if (HEAPU16[$0 + 42 >> 1] <= HEAPU32[14353]) {
+   if (HEAPU16[$0 + 42 >> 1] <= HEAPU32[14093]) {
     HEAP32[$0 + 20 >> 2] = jsvGetAddressOf(HEAPU16[$0 + 42 >> 1]);
     label$13 : {
      if (HEAPU16[HEAP32[$0 + 20 >> 2] + 14 >> 1] & 128) {
@@ -22599,7 +22599,7 @@ function jsvGarbageCollect() {
          jsvSetNextSibling(HEAP32[$0 + 24 >> 2], HEAPU16[$0 + 42 >> 1]);
          break label$16;
         }
-        HEAP16[29718] = HEAPU16[$0 + 42 >> 1];
+        HEAP16[29198] = HEAPU16[$0 + 42 >> 1];
        }
        HEAP32[$0 + 24 >> 2] = HEAP32[$0 + 20 >> 2];
        while (1) {
@@ -22617,7 +22617,7 @@ function jsvGarbageCollect() {
            jsvSetNextSibling(HEAP32[$0 + 24 >> 2], HEAPU16[$0 + 42 >> 1]);
            break label$20;
           }
-          HEAP16[29718] = HEAPU16[$0 + 42 >> 1];
+          HEAP16[29198] = HEAPU16[$0 + 42 >> 1];
          }
          HEAP32[$0 + 24 >> 2] = HEAP32[$0 + 20 >> 2];
          continue;
@@ -22641,7 +22641,7 @@ function jsvGarbageCollect() {
         jsvSetNextSibling(HEAP32[$0 + 24 >> 2], HEAPU16[$0 + 42 >> 1]);
         break label$25;
        }
-       HEAP16[29718] = HEAPU16[$0 + 42 >> 1];
+       HEAP16[29198] = HEAPU16[$0 + 42 >> 1];
       }
       HEAP32[$0 + 24 >> 2] = HEAP32[$0 + 20 >> 2];
       HEAP32[$0 + 28 >> 2] = HEAP32[$0 + 28 >> 2] + 1;
@@ -22658,7 +22658,7 @@ function jsvGarbageCollect() {
          jsvSetNextSibling(HEAP32[$0 + 24 >> 2], HEAPU16[$0 + 42 >> 1]);
          break label$30;
         }
-        HEAP16[29718] = HEAPU16[$0 + 42 >> 1];
+        HEAP16[29198] = HEAPU16[$0 + 42 >> 1];
        }
        HEAP32[$0 + 24 >> 2] = HEAP32[$0 + 20 >> 2];
       }
@@ -22672,7 +22672,7 @@ function jsvGarbageCollect() {
   if (HEAP32[$0 + 24 >> 2]) {
    jsvSetNextSibling(HEAP32[$0 + 24 >> 2], 0);
   }
-  HEAP32[14858] = 0;
+  HEAP32[14598] = 0;
   HEAP32[$0 + 44 >> 2] = HEAP32[$0 + 28 >> 2];
  }
  global$0 = $0 + 48 | 0;
@@ -22682,28 +22682,28 @@ function jslLexString() {
  var $0 = 0, $1 = 0, $2 = 0;
  $0 = global$0 - 48 | 0;
  global$0 = $0;
- HEAP8[$0 + 47 | 0] = HEAPU8[HEAP32[14856]];
+ HEAP8[$0 + 47 | 0] = HEAPU8[HEAP32[14596]];
  $1 = jsvNewFromEmptyString();
- HEAP32[HEAP32[14856] + 96 >> 2] = $1;
+ HEAP32[HEAP32[14596] + 96 >> 2] = $1;
  label$1 : {
-  if (!HEAP32[HEAP32[14856] + 96 >> 2]) {
-   HEAP16[HEAP32[14856] + 2 >> 1] = 0;
+  if (!HEAP32[HEAP32[14596] + 96 >> 2]) {
+   HEAP16[HEAP32[14596] + 2 >> 1] = 0;
    break label$1;
   }
-  jsvStringIteratorNew($0 + 24 | 0, HEAP32[HEAP32[14856] + 96 >> 2], 0);
+  jsvStringIteratorNew($0 + 24 | 0, HEAP32[HEAP32[14596] + 96 >> 2], 0);
   jslGetNextCh();
   while (1) {
    label$4 : {
-    if (!(HEAP8[HEAP32[14856]] ? HEAP8[HEAP32[14856]] != HEAP8[$0 + 47 | 0] : 0)) {
+    if (!(HEAP8[HEAP32[14596]] ? HEAP8[HEAP32[14596]] != HEAP8[$0 + 47 | 0] : 0)) {
      break label$4;
     }
     label$7 : {
-     if (HEAP8[HEAP32[14856]] == 92) {
+     if (HEAP8[HEAP32[14596]] == 92) {
       jslGetNextCh();
-      HEAP8[$0 + 23 | 0] = HEAPU8[HEAP32[14856]];
+      HEAP8[$0 + 23 | 0] = HEAPU8[HEAP32[14596]];
       label$9 : {
        label$10 : {
-        $1 = HEAP8[HEAP32[14856]] + -98 | 0;
+        $1 = HEAP8[HEAP32[14596]] + -98 | 0;
         if ($1 >>> 0 > 22) {
          break label$10;
         }
@@ -22761,21 +22761,21 @@ function jslLexString() {
         HEAP8[$1 + 1 | 0] = $2 >>> 8;
         HEAP8[$1 + 2 | 0] = $2 >>> 16;
         HEAP8[$1 + 3 | 0] = $2 >>> 24;
-        if (HEAP8[HEAP32[14856]] == 117) {
+        if (HEAP8[HEAP32[14596]] == 117) {
          jslGetNextCh();
          jslGetNextCh();
         }
         $1 = $0 + 18 | 0;
         jslGetNextCh();
-        HEAP8[$0 + 20 | 0] = HEAPU8[HEAP32[14856]];
+        HEAP8[$0 + 20 | 0] = HEAPU8[HEAP32[14596]];
         jslGetNextCh();
-        HEAP8[$0 + 21 | 0] = HEAPU8[HEAP32[14856]];
+        HEAP8[$0 + 21 | 0] = HEAPU8[HEAP32[14596]];
         jslGetNextCh();
         HEAP8[$0 + 23 | 0] = stringToInt($1);
         break label$9;
        }
        label$19 : {
-        if (!(HEAP8[HEAP32[14856]] < 48 | HEAP8[HEAP32[14856]] > 55)) {
+        if (!(HEAP8[HEAP32[14596]] < 48 | HEAP8[HEAP32[14596]] > 55)) {
          $1 = $0 + 13 | 0;
          HEAP8[$1 + 4 | 0] = HEAPU8[1880];
          $2 = HEAPU8[1876] | HEAPU8[1877] << 8 | (HEAPU8[1878] << 16 | HEAPU8[1879] << 24);
@@ -22783,17 +22783,17 @@ function jslLexString() {
          HEAP8[$1 + 1 | 0] = $2 >>> 8;
          HEAP8[$1 + 2 | 0] = $2 >>> 16;
          HEAP8[$1 + 3 | 0] = $2 >>> 24;
-         HEAP8[$0 + 14 | 0] = HEAPU8[HEAP32[14856]];
+         HEAP8[$0 + 14 | 0] = HEAPU8[HEAP32[14596]];
          HEAP32[$0 + 8 >> 2] = 2;
          jslGetNextCh();
-         if (!(HEAP8[HEAP32[14856]] < 48 | HEAP8[HEAP32[14856]] > 55)) {
-          $1 = HEAPU8[HEAP32[14856]];
+         if (!(HEAP8[HEAP32[14596]] < 48 | HEAP8[HEAP32[14596]] > 55)) {
+          $1 = HEAPU8[HEAP32[14596]];
           $2 = HEAP32[$0 + 8 >> 2];
           HEAP32[$0 + 8 >> 2] = $2 + 1;
           HEAP8[$2 + ($0 + 13 | 0) | 0] = $1;
           jslGetNextCh();
-          if (!(HEAP8[HEAP32[14856]] < 48 | HEAP8[HEAP32[14856]] > 55)) {
-           $1 = HEAPU8[HEAP32[14856]];
+          if (!(HEAP8[HEAP32[14596]] < 48 | HEAP8[HEAP32[14596]] > 55)) {
+           $1 = HEAPU8[HEAP32[14596]];
            $2 = HEAP32[$0 + 8 >> 2];
            HEAP32[$0 + 8 >> 2] = $2 + 1;
            HEAP8[$2 + ($0 + 13 | 0) | 0] = $1;
@@ -22813,12 +22813,12 @@ function jslLexString() {
       jsvStringIteratorAppend($1, HEAP8[$0 + 23 | 0]);
       break label$7;
      }
-     if (!(HEAP8[$0 + 47 | 0] == 96 | HEAP8[HEAP32[14856]] != 10)) {
+     if (!(HEAP8[$0 + 47 | 0] == 96 | HEAP8[HEAP32[14596]] != 10)) {
       break label$4;
      }
      $1 = $0 + 24 | 0;
-     jslTokenAppendChar(HEAP8[HEAP32[14856]]);
-     jsvStringIteratorAppend($1, HEAP8[HEAP32[14856]]);
+     jslTokenAppendChar(HEAP8[HEAP32[14596]]);
+     jsvStringIteratorAppend($1, HEAP8[HEAP32[14596]]);
      jslGetNextCh();
     }
     continue;
@@ -22828,13 +22828,13 @@ function jslLexString() {
   jsvStringIteratorFree($0 + 24 | 0);
   label$24 : {
    if (HEAP8[$0 + 47 | 0] == 96) {
-    HEAP16[HEAP32[14856] + 2 >> 1] = 133;
+    HEAP16[HEAP32[14596] + 2 >> 1] = 133;
     break label$24;
    }
-   HEAP16[HEAP32[14856] + 2 >> 1] = 131;
+   HEAP16[HEAP32[14596] + 2 >> 1] = 131;
   }
-  if (HEAP8[HEAP32[14856]] != HEAP8[$0 + 47 | 0]) {
-   $1 = HEAP32[14856];
+  if (HEAP8[HEAP32[14596]] != HEAP8[$0 + 47 | 0]) {
+   $1 = HEAP32[14596];
    HEAP16[$1 + 2 >> 1] = HEAPU16[$1 + 2 >> 1] + 1;
   }
   jslGetNextCh();
@@ -22886,7 +22886,7 @@ function tflite__ops__micro__activations__SoftmaxEval_28TfLiteContext__2c_20TfLi
      $0 = HEAP32[HEAP32[$2 + 72 >> 2] + 20 >> 2];
      $1 = HEAP32[$2 + 72 >> 2];
      HEAP32[$2 + 16 >> 2] = tflite__NumDimensions_28TfLiteTensor_20const__29(HEAP32[$2 + 60 >> 2]);
-     FUNCTION_TABLE[$0]($1, 48205, $2 + 16 | 0);
+     FUNCTION_TABLE[$0]($1, 47165, $2 + 16 | 0);
      HEAP32[$2 + 76 >> 2] = 1;
      break label$1;
     case 0:
@@ -22913,14 +22913,14 @@ function tflite__ops__micro__activations__SoftmaxEval_28TfLiteContext__2c_20TfLi
    $0 = HEAP32[HEAP32[$2 + 72 >> 2] + 20 >> 2];
    $1 = HEAP32[$2 + 72 >> 2];
    HEAP32[$2 + 32 >> 2] = tflite__NumDimensions_28TfLiteTensor_20const__29(HEAP32[$2 + 60 >> 2]);
-   FUNCTION_TABLE[$0]($1, 48262, $2 + 32 | 0);
+   FUNCTION_TABLE[$0]($1, 47222, $2 + 32 | 0);
    HEAP32[$2 + 76 >> 2] = 1;
    break label$1;
   }
   $0 = HEAP32[HEAP32[$2 + 72 >> 2] + 20 >> 2];
   $1 = HEAP32[$2 + 72 >> 2];
   HEAP32[$2 >> 2] = TfLiteTypeGetName(HEAP32[HEAP32[$2 + 60 >> 2] >> 2]);
-  FUNCTION_TABLE[$0]($1, 48315, $2);
+  FUNCTION_TABLE[$0]($1, 47275, $2);
   HEAP32[$2 + 76 >> 2] = 1;
  }
  global$0 = $2 + 80 | 0;
@@ -22932,19 +22932,19 @@ function terminalSendChar($0) {
  global$0 = $1;
  HEAP8[$1 + 159 | 0] = $0;
  label$1 : {
-  if (!HEAP8[256374]) {
+  if (!HEAP8[255334]) {
    if (HEAP8[$1 + 159 | 0] == 8) {
-    if (HEAPU8[256372] > 0) {
-     HEAP8[256372] = HEAPU8[256372] + -1;
+    if (HEAPU8[255332] > 0) {
+     HEAP8[255332] = HEAPU8[255332] + -1;
     }
     break label$1;
    }
    label$5 : {
     if (HEAP8[$1 + 159 | 0] == 10) {
-     HEAP8[256372] = 0;
-     HEAP8[57560] = HEAPU8[57560] + 1;
+     HEAP8[255332] = 0;
+     HEAP8[56520] = HEAPU8[56520] + 1;
      while (1) {
-      if (HEAPU8[57560] >= 30) {
+      if (HEAPU8[56520] >= 30) {
        terminalScroll();
        continue;
       }
@@ -22954,24 +22954,24 @@ function terminalSendChar($0) {
     }
     label$9 : {
      if (HEAP8[$1 + 159 | 0] == 13) {
-      HEAP8[256372] = 0;
+      HEAP8[255332] = 0;
       break label$9;
      }
      label$11 : {
       if (HEAP8[$1 + 159 | 0] == 27) {
-       HEAP8[256374] = 27;
+       HEAP8[255334] = 27;
        break label$11;
       }
       if (!(HEAP8[$1 + 159 | 0] == 19 | HEAP8[$1 + 159 | 0] == 17)) {
        if (terminalGetGFX($1 + 88 | 0) & 1) {
-        HEAP16[$1 + 86 >> 1] = Math_imul(HEAPU8[256372], 6);
-        HEAP16[$1 + 84 >> 1] = ((HEAPU8[$1 + 102 | 0] | HEAPU8[$1 + 103 | 0] << 8) + (HEAPU8[57560] << 3) | 0) - 240;
+        HEAP16[$1 + 86 >> 1] = Math_imul(HEAPU8[255332], 6);
+        HEAP16[$1 + 84 >> 1] = ((HEAPU8[$1 + 102 | 0] | HEAPU8[$1 + 103 | 0] << 8) + (HEAPU8[56520] << 3) | 0) - 240;
         $0 = $1 + 88 | 0;
         graphicsDrawChar6x8($0, HEAP16[$1 + 86 >> 1], HEAP16[$1 + 84 >> 1], HEAP8[$1 + 159 | 0], 1, 1);
         terminalSetGFX($0);
        }
-       if (HEAPU8[256372] < 255) {
-        HEAP8[256372] = HEAPU8[256372] + 1;
+       if (HEAPU8[255332] < 255) {
+        HEAP8[255332] = HEAPU8[255332] + 1;
        }
       }
      }
@@ -22980,16 +22980,16 @@ function terminalSendChar($0) {
    break label$1;
   }
   label$17 : {
-   if (HEAP8[256374] == 27) {
-    if (HEAP8[256375] == 91) {
-     if (HEAP8[256376] == 63) {
-      if (HEAP8[256377] == 55) {
+   if (HEAP8[255334] == 27) {
+    if (HEAP8[255335] == 91) {
+     if (HEAP8[255336] == 63) {
+      if (HEAP8[255337] == 55) {
        terminalControlCharsReset();
        break label$17;
       }
       label$22 : {
        if (HEAP8[$1 + 159 | 0] == 55) {
-        HEAP8[256377] = 55;
+        HEAP8[255337] = 55;
         break label$22;
        }
        terminalControlCharsReset();
@@ -22998,7 +22998,7 @@ function terminalSendChar($0) {
      }
      label$24 : {
       if (HEAP8[$1 + 159 | 0] == 63) {
-       HEAP8[256376] = 63;
+       HEAP8[255336] = 63;
        break label$24;
       }
       terminalControlCharsReset();
@@ -23010,14 +23010,14 @@ function terminalSendChar($0) {
        label$27 : {
         switch ($0 - 1 | 0) {
         default:
-         if (HEAPU8[57560] > 0) {
-          HEAP8[57560] = HEAPU8[57560] + -1;
+         if (HEAPU8[56520] > 0) {
+          HEAP8[56520] = HEAPU8[56520] + -1;
          }
          break label$26;
         case 0:
-         HEAP8[57560] = HEAPU8[57560] + 1;
+         HEAP8[56520] = HEAPU8[56520] + 1;
          while (1) {
-          if (HEAPU8[57560] >= 30) {
+          if (HEAPU8[56520] >= 30) {
            terminalScroll();
            continue;
           }
@@ -23025,13 +23025,13 @@ function terminalSendChar($0) {
          }
          break label$26;
         case 1:
-         if (HEAPU8[256372] < 255) {
-          HEAP8[256372] = HEAPU8[256372] + 1;
+         if (HEAPU8[255332] < 255) {
+          HEAP8[255332] = HEAPU8[255332] + 1;
          }
          break label$26;
         case 2:
-         if (HEAPU8[256372] > 0) {
-          HEAP8[256372] = HEAPU8[256372] + -1;
+         if (HEAPU8[255332] > 0) {
+          HEAP8[255332] = HEAPU8[255332] + -1;
          }
          break label$26;
         case 3:
@@ -23045,8 +23045,8 @@ function terminalSendChar($0) {
         }
        }
        if (terminalGetGFX($1 + 8 | 0) & 1) {
-        HEAP16[$1 + 6 >> 1] = Math_imul(HEAPU8[256372], 6);
-        HEAP16[$1 + 4 >> 1] = ((HEAPU8[$1 + 22 | 0] | HEAPU8[$1 + 23 | 0] << 8) + (HEAPU8[57560] << 3) | 0) - 240;
+        HEAP16[$1 + 6 >> 1] = Math_imul(HEAPU8[255332], 6);
+        HEAP16[$1 + 4 >> 1] = ((HEAPU8[$1 + 22 | 0] | HEAPU8[$1 + 23 | 0] << 8) + (HEAPU8[56520] << 3) | 0) - 240;
         $0 = $1;
         if ((HEAPU8[$1 + 16 | 0] | HEAPU8[$1 + 17 | 0] << 8 | (HEAPU8[$1 + 18 | 0] << 16 | HEAPU8[$1 + 19 | 0] << 24)) & 16) {
          $2 = HEAPU8[$1 + 22 | 0] | HEAPU8[$1 + 23 | 0] << 8;
@@ -23072,7 +23072,7 @@ function terminalSendChar($0) {
     }
     label$42 : {
      if (HEAP8[$1 + 159 | 0] == 91) {
-      HEAP8[256375] = 91;
+      HEAP8[255335] = 91;
       break label$42;
      }
      terminalControlCharsReset();
@@ -23091,22 +23091,22 @@ function jswrap_storagefile_read_internal($0, $1) {
  HEAP32[$2 + 168 >> 2] = $0;
  HEAP32[$2 + 164 >> 2] = $1;
  HEAP8[$2 + 163 | 0] = HEAP32[$2 + 164 >> 2] < 0;
- HEAP8[$2 + 162 | 0] = jsvGetIntegerAndUnLock(jsvObjectGetChild(HEAP32[$2 + 168 >> 2], 41055, 0));
+ HEAP8[$2 + 162 | 0] = jsvGetIntegerAndUnLock(jsvObjectGetChild(HEAP32[$2 + 168 >> 2], 40027, 0));
  label$1 : {
   if (HEAP8[$2 + 162 | 0] != 114) {
-   jsExceptionHere(1, 41060, 0);
+   jsExceptionHere(1, 40032, 0);
    HEAP32[$2 + 172 >> 2] = 0;
    break label$1;
   }
-  HEAP32[$2 + 156 >> 2] = jsvGetIntegerAndUnLock(jsvObjectGetChild(HEAP32[$2 + 168 >> 2], 41050, 0));
+  HEAP32[$2 + 156 >> 2] = jsvGetIntegerAndUnLock(jsvObjectGetChild(HEAP32[$2 + 168 >> 2], 40022, 0));
   if (!HEAP32[$2 + 156 >> 2]) {
    HEAP32[$2 + 172 >> 2] = 0;
    break label$1;
   }
   $0 = $2 + 120 | 0;
-  HEAP32[$2 + 152 >> 2] = jsvGetIntegerAndUnLock(jsvObjectGetChild(HEAP32[$2 + 168 >> 2], 41043, 0));
-  HEAP32[$2 + 148 >> 2] = jsvGetIntegerAndUnLock(jsvObjectGetChild(HEAP32[$2 + 168 >> 2], 41037, 0));
-  jsfNameFromVarAndUnLock($0, jsvObjectGetChild(HEAP32[$2 + 168 >> 2], 41032, 0));
+  HEAP32[$2 + 152 >> 2] = jsvGetIntegerAndUnLock(jsvObjectGetChild(HEAP32[$2 + 168 >> 2], 40015, 0));
+  HEAP32[$2 + 148 >> 2] = jsvGetIntegerAndUnLock(jsvObjectGetChild(HEAP32[$2 + 168 >> 2], 40009, 0));
+  jsfNameFromVarAndUnLock($0, jsvObjectGetChild(HEAP32[$2 + 168 >> 2], 40004, 0));
   HEAP32[$2 + 116 >> 2] = 27;
   while (1) {
    if (HEAP32[$2 + 116 >> 2] ? !HEAP8[(HEAP32[$2 + 116 >> 2] + $2 | 0) + 119 | 0] : 0) {
@@ -23147,9 +23147,9 @@ function jswrap_storagefile_read_internal($0, $1) {
       HEAP32[$2 + 4 >> 2] = $0;
       HEAP32[$2 + 156 >> 2] = jsfFindFile($2, $2 + 40 | 0);
      }
-     jsvObjectSetChildAndUnLock(HEAP32[$2 + 168 >> 2], 41050, jsvNewFromInteger(HEAP32[$2 + 156 >> 2]));
-     jsvObjectSetChildAndUnLock(HEAP32[$2 + 168 >> 2], 41043, jsvNewFromInteger(HEAP32[$2 + 152 >> 2]));
-     jsvObjectSetChildAndUnLock(HEAP32[$2 + 168 >> 2], 41037, jsvNewFromInteger(HEAP32[$2 + 148 >> 2]));
+     jsvObjectSetChildAndUnLock(HEAP32[$2 + 168 >> 2], 40022, jsvNewFromInteger(HEAP32[$2 + 156 >> 2]));
+     jsvObjectSetChildAndUnLock(HEAP32[$2 + 168 >> 2], 40015, jsvNewFromInteger(HEAP32[$2 + 152 >> 2]));
+     jsvObjectSetChildAndUnLock(HEAP32[$2 + 168 >> 2], 40009, jsvNewFromInteger(HEAP32[$2 + 148 >> 2]));
      HEAP32[$2 + 76 >> 2] = 992;
      if (!HEAP32[$2 + 156 >> 2]) {
       HEAP32[$2 + 172 >> 2] = HEAP32[$2 + 112 >> 2];
@@ -23204,7 +23204,7 @@ function jswrap_storagefile_read_internal($0, $1) {
    }
    break;
   }
-  jsvObjectSetChildAndUnLock(HEAP32[$2 + 168 >> 2], 41043, jsvNewFromInteger(HEAP32[$2 + 152 >> 2]));
+  jsvObjectSetChildAndUnLock(HEAP32[$2 + 168 >> 2], 40015, jsvNewFromInteger(HEAP32[$2 + 152 >> 2]));
   HEAP32[$2 + 172 >> 2] = HEAP32[$2 + 112 >> 2];
  }
  global$0 = $2 + 176 | 0;
@@ -23491,7 +23491,7 @@ function tflite__ops__micro__fully_connected__EvalQuantized_28TfLiteContext__2c_
     tflite__RuntimeShape___RuntimeShape_28_29($8);
     break label$2;
    }
-   FUNCTION_TABLE[HEAP32[HEAP32[$8 + 280 >> 2] + 20 >> 2]](HEAP32[$8 + 280 >> 2], 51337, 0);
+   FUNCTION_TABLE[HEAP32[HEAP32[$8 + 280 >> 2] + 20 >> 2]](HEAP32[$8 + 280 >> 2], 50297, 0);
    HEAP32[$8 + 284 >> 2] = 1;
    break label$1;
   }
@@ -24387,40 +24387,40 @@ function jspeStatement() {
  var $0 = 0, $1 = 0;
  $0 = global$0 - 16 | 0;
  global$0 = $0;
- if (!(!(HEAP32[24866] & 8192) | HEAP16[HEAP32[14856] + 2 >> 1] == 59 | (HEAP32[24866] & 63) != 1)) {
-  $1 = jsvStringIteratorGetIndex(HEAP32[14856] + 4 | 0);
-  HEAP32[HEAP32[14856] + 28 >> 2] = $1 - 1;
+ if (!(!(HEAP32[24606] & 8192) | HEAP16[HEAP32[14596] + 2 >> 1] == 59 | (HEAP32[24606] & 63) != 1)) {
+  $1 = jsvStringIteratorGetIndex(HEAP32[14596] + 4 | 0);
+  HEAP32[HEAP32[14596] + 28 >> 2] = $1 - 1;
   jsiDebuggerLoop();
  }
  label$2 : {
   label$3 : {
    label$4 : {
-    if (HEAP16[HEAP32[14856] + 2 >> 1] == 128 | HEAP16[HEAP32[14856] + 2 >> 1] == 129 | (HEAP16[HEAP32[14856] + 2 >> 1] == 130 | HEAP16[HEAP32[14856] + 2 >> 1] == 131)) {
+    if (HEAP16[HEAP32[14596] + 2 >> 1] == 128 | HEAP16[HEAP32[14596] + 2 >> 1] == 129 | (HEAP16[HEAP32[14596] + 2 >> 1] == 130 | HEAP16[HEAP32[14596] + 2 >> 1] == 131)) {
      break label$4;
     }
-    if (HEAP16[HEAP32[14856] + 2 >> 1] == 133 | HEAP16[HEAP32[14856] + 2 >> 1] == 135 | (HEAP16[HEAP32[14856] + 2 >> 1] == 184 | HEAP16[HEAP32[14856] + 2 >> 1] == 182)) {
+    if (HEAP16[HEAP32[14596] + 2 >> 1] == 133 | HEAP16[HEAP32[14596] + 2 >> 1] == 135 | (HEAP16[HEAP32[14596] + 2 >> 1] == 184 | HEAP16[HEAP32[14596] + 2 >> 1] == 182)) {
      break label$4;
     }
-    if (HEAP16[HEAP32[14856] + 2 >> 1] == 183 | HEAP16[HEAP32[14856] + 2 >> 1] == 180 | (HEAP16[HEAP32[14856] + 2 >> 1] == 181 | HEAP16[HEAP32[14856] + 2 >> 1] == 175)) {
+    if (HEAP16[HEAP32[14596] + 2 >> 1] == 183 | HEAP16[HEAP32[14596] + 2 >> 1] == 180 | (HEAP16[HEAP32[14596] + 2 >> 1] == 181 | HEAP16[HEAP32[14596] + 2 >> 1] == 175)) {
      break label$4;
     }
-    if (HEAP16[HEAP32[14856] + 2 >> 1] == 190 | HEAP16[HEAP32[14856] + 2 >> 1] == 191 | (HEAP16[HEAP32[14856] + 2 >> 1] == 192 | HEAP16[HEAP32[14856] + 2 >> 1] == 196)) {
+    if (HEAP16[HEAP32[14596] + 2 >> 1] == 190 | HEAP16[HEAP32[14596] + 2 >> 1] == 191 | (HEAP16[HEAP32[14596] + 2 >> 1] == 192 | HEAP16[HEAP32[14596] + 2 >> 1] == 196)) {
      break label$4;
     }
-    if (HEAP16[HEAP32[14856] + 2 >> 1] == 152 | HEAP16[HEAP32[14856] + 2 >> 1] == 153 | (HEAP16[HEAP32[14856] + 2 >> 1] == 33 | HEAP16[HEAP32[14856] + 2 >> 1] == 45)) {
+    if (HEAP16[HEAP32[14596] + 2 >> 1] == 152 | HEAP16[HEAP32[14596] + 2 >> 1] == 153 | (HEAP16[HEAP32[14596] + 2 >> 1] == 33 | HEAP16[HEAP32[14596] + 2 >> 1] == 45)) {
      break label$4;
     }
-    if (HEAP16[HEAP32[14856] + 2 >> 1] == 43 | HEAP16[HEAP32[14856] + 2 >> 1] == 126 | HEAP16[HEAP32[14856] + 2 >> 1] == 91) {
+    if (HEAP16[HEAP32[14596] + 2 >> 1] == 43 | HEAP16[HEAP32[14596] + 2 >> 1] == 126 | HEAP16[HEAP32[14596] + 2 >> 1] == 91) {
      break label$4;
     }
-    if (HEAP16[HEAP32[14856] + 2 >> 1] != 40) {
+    if (HEAP16[HEAP32[14596] + 2 >> 1] != 40) {
      break label$3;
     }
    }
    HEAP32[$0 + 12 >> 2] = jspeExpression();
    break label$2;
   }
-  if (HEAP16[HEAP32[14856] + 2 >> 1] == 123) {
+  if (HEAP16[HEAP32[14596] + 2 >> 1] == 123) {
    if (!(jspCheckStackPosition() & 1)) {
     HEAP32[$0 + 12 >> 2] = 0;
     break label$2;
@@ -24429,87 +24429,87 @@ function jspeStatement() {
    HEAP32[$0 + 12 >> 2] = 0;
    break label$2;
   }
-  if (HEAP16[HEAP32[14856] + 2 >> 1] == 59) {
+  if (HEAP16[HEAP32[14596] + 2 >> 1] == 59) {
    jslGetNextToken();
    HEAP32[$0 + 12 >> 2] = 0;
    break label$2;
   }
-  if (!(HEAP16[HEAP32[14856] + 2 >> 1] != 174 ? !(HEAP16[HEAP32[14856] + 2 >> 1] == 172 | HEAP16[HEAP32[14856] + 2 >> 1] == 173) : 0)) {
+  if (!(HEAP16[HEAP32[14596] + 2 >> 1] != 174 ? !(HEAP16[HEAP32[14596] + 2 >> 1] == 172 | HEAP16[HEAP32[14596] + 2 >> 1] == 173) : 0)) {
    HEAP32[$0 + 12 >> 2] = jspeStatementVar();
    break label$2;
   }
-  if (HEAP16[HEAP32[14856] + 2 >> 1] == 163) {
+  if (HEAP16[HEAP32[14596] + 2 >> 1] == 163) {
    HEAP32[$0 + 12 >> 2] = jspeStatementIf();
    break label$2;
   }
-  if (HEAP16[HEAP32[14856] + 2 >> 1] == 165) {
+  if (HEAP16[HEAP32[14596] + 2 >> 1] == 165) {
    HEAP32[$0 + 12 >> 2] = jspeStatementDoOrWhile(0);
    break label$2;
   }
-  if (HEAP16[HEAP32[14856] + 2 >> 1] == 166) {
+  if (HEAP16[HEAP32[14596] + 2 >> 1] == 166) {
    HEAP32[$0 + 12 >> 2] = jspeStatementDoOrWhile(1);
    break label$2;
   }
-  if (HEAP16[HEAP32[14856] + 2 >> 1] == 167) {
+  if (HEAP16[HEAP32[14596] + 2 >> 1] == 167) {
    HEAP32[$0 + 12 >> 2] = jspeStatementFor();
    break label$2;
   }
-  if (HEAP16[HEAP32[14856] + 2 >> 1] == 177) {
+  if (HEAP16[HEAP32[14596] + 2 >> 1] == 177) {
    HEAP32[$0 + 12 >> 2] = jspeStatementTry();
    break label$2;
   }
-  if (HEAP16[HEAP32[14856] + 2 >> 1] == 171) {
+  if (HEAP16[HEAP32[14596] + 2 >> 1] == 171) {
    HEAP32[$0 + 12 >> 2] = jspeStatementReturn();
    break label$2;
   }
-  if (HEAP16[HEAP32[14856] + 2 >> 1] == 176) {
+  if (HEAP16[HEAP32[14596] + 2 >> 1] == 176) {
    HEAP32[$0 + 12 >> 2] = jspeStatementThrow();
    break label$2;
   }
-  if (HEAP16[HEAP32[14856] + 2 >> 1] == 170) {
+  if (HEAP16[HEAP32[14596] + 2 >> 1] == 170) {
    HEAP32[$0 + 12 >> 2] = jspeStatementFunctionDecl(0);
    break label$2;
   }
-  if (HEAP16[HEAP32[14856] + 2 >> 1] == 194) {
+  if (HEAP16[HEAP32[14596] + 2 >> 1] == 194) {
    HEAP32[$0 + 12 >> 2] = jspeStatementFunctionDecl(1);
    break label$2;
   }
   label$19 : {
-   if (HEAP16[HEAP32[14856] + 2 >> 1] == 169) {
+   if (HEAP16[HEAP32[14596] + 2 >> 1] == 169) {
     jslGetNextToken();
-    if ((HEAP32[24866] & 63) == 1) {
+    if ((HEAP32[24606] & 63) == 1) {
      label$22 : {
-      if (!(HEAP32[24866] & 512)) {
+      if (!(HEAP32[24606] & 512)) {
        jsExceptionHere(2, 4938, 0);
        break label$22;
       }
-      HEAP32[24866] = HEAP32[24866] & -64 | 4;
+      HEAP32[24606] = HEAP32[24606] & -64 | 4;
      }
     }
     break label$19;
    }
    label$24 : {
-    if (HEAP16[HEAP32[14856] + 2 >> 1] == 168) {
+    if (HEAP16[HEAP32[14596] + 2 >> 1] == 168) {
      jslGetNextToken();
-     if ((HEAP32[24866] & 63) == 1) {
+     if ((HEAP32[24606] & 63) == 1) {
       label$27 : {
-       if (!(HEAP32[24866] & 1536)) {
+       if (!(HEAP32[24606] & 1536)) {
         jsExceptionHere(2, 4986, 0);
         break label$27;
        }
-       HEAP32[24866] = HEAP32[24866] & -64 | 2;
+       HEAP32[24606] = HEAP32[24606] & -64 | 2;
       }
      }
      break label$24;
     }
-    if (HEAP16[HEAP32[14856] + 2 >> 1] == 187) {
+    if (HEAP16[HEAP32[14596] + 2 >> 1] == 187) {
      HEAP32[$0 + 12 >> 2] = jspeStatementSwitch();
      break label$2;
     }
     label$30 : {
-     if (HEAP16[HEAP32[14856] + 2 >> 1] == 193) {
+     if (HEAP16[HEAP32[14596] + 2 >> 1] == 193) {
       jslGetNextToken();
-      if ((HEAP32[24866] & 63) == 1) {
+      if ((HEAP32[24606] & 63) == 1) {
        jsiDebuggerLoop();
       }
       break label$30;
@@ -24747,7 +24747,7 @@ function jswrap_espruino_mapInPlace($0, $1, $2, $3) {
      break label$2;
     }
    }
-   jsExceptionHere(1, 36212, 0);
+   jsExceptionHere(1, 35188, 0);
    break label$1;
   }
   label$4 : {
@@ -24763,7 +24763,7 @@ function jswrap_espruino_mapInPlace($0, $1, $2, $3) {
    if (jsvIsFunction(HEAP32[$4 + 132 >> 2]) & 1) {
     break label$4;
    }
-   jsExceptionHere(1, 36254, 0);
+   jsExceptionHere(1, 35230, 0);
    break label$1;
   }
   HEAP8[$4 + 127 | 0] = jsvIsFunction(HEAP32[$4 + 132 >> 2]) & 1;
@@ -25133,7 +25133,7 @@ function tflite__ops__micro__activations__PreluEval_28TfLiteContext__2c_20TfLite
   $0 = HEAP32[HEAP32[$2 + 216 >> 2] + 20 >> 2];
   $1 = HEAP32[$2 + 216 >> 2];
   HEAP32[$2 >> 2] = TfLiteTypeGetName(HEAP32[HEAP32[$2 + 208 >> 2] >> 2]);
-  FUNCTION_TABLE[$0]($1, 48586, $2);
+  FUNCTION_TABLE[$0]($1, 47546, $2);
   HEAP32[$2 + 220 >> 2] = 1;
  }
  global$0 = $2 + 224 | 0;
@@ -25341,7 +25341,7 @@ function jsvDefragment() {
  HEAP32[$0 + 44 >> 2] = 0;
  HEAP32[$0 + 40 >> 2] = 0;
  while (1) {
-  if (HEAPU32[$0 + 40 >> 2] < HEAPU32[14353]) {
+  if (HEAPU32[$0 + 40 >> 2] < HEAPU32[14093]) {
    HEAP16[$0 + 38 >> 1] = HEAP32[$0 + 40 >> 2] + 1;
    HEAP32[$0 + 32 >> 2] = _jsvGetAddressOf(HEAPU16[$0 + 38 >> 1]);
    if (HEAPU16[HEAP32[$0 + 32 >> 2] + 14 >> 1] & 63) {
@@ -25371,13 +25371,13 @@ function jsvDefragment() {
     break label$9;
    }
    HEAP16[$0 + 30 >> 1] = HEAPU16[($0 + 48 | 0) + (HEAP32[$0 + 44 >> 2] << 1) >> 1];
-   HEAP16[$0 + 28 >> 1] = HEAPU16[29718];
+   HEAP16[$0 + 28 >> 1] = HEAPU16[29198];
    if (!HEAPU16[$0 + 28 >> 1] | HEAPU16[$0 + 30 >> 1] < HEAPU16[$0 + 28 >> 1]) {
     break label$9;
    }
    HEAP32[$0 + 24 >> 2] = _jsvGetAddressOf(HEAPU16[$0 + 30 >> 1]);
    HEAP32[$0 + 20 >> 2] = _jsvGetAddressOf(HEAPU16[$0 + 28 >> 1]);
-   HEAP16[29718] = jsvGetNextSibling(HEAP32[$0 + 20 >> 2]);
+   HEAP16[29198] = jsvGetNextSibling(HEAP32[$0 + 20 >> 2]);
    $1 = HEAP32[$0 + 24 >> 2];
    $3 = HEAP32[$1 + 4 >> 2];
    $2 = HEAP32[$0 + 20 >> 2];
@@ -25389,7 +25389,7 @@ function jsvDefragment() {
    HEAP16[HEAP32[$0 + 24 >> 2] + 14 >> 1] = 0;
    HEAP32[$0 + 16 >> 2] = 0;
    while (1) {
-    if (HEAPU32[$0 + 16 >> 2] < HEAPU32[14353]) {
+    if (HEAPU32[$0 + 16 >> 2] < HEAPU32[14093]) {
      HEAP16[$0 + 14 >> 1] = HEAP32[$0 + 16 >> 2] + 1;
      HEAP32[$0 + 8 >> 2] = _jsvGetAddressOf(HEAPU16[$0 + 14 >> 1]);
      if (HEAPU16[HEAP32[$0 + 8 >> 2] + 14 >> 1] & 63) {
@@ -26591,13 +26591,13 @@ function _jswrap_array_iterate_with_callback($0, $1, $2, $3, $4, $5, $6) {
  label$1 : {
   if (!(jsvIsIterable(HEAP32[$7 + 148 >> 2]) & 1)) {
    HEAP32[$7 + 32 >> 2] = HEAP32[$7 + 152 >> 2];
-   jsExceptionHere(1, 34582, $7 + 32 | 0);
+   jsExceptionHere(1, 33558, $7 + 32 | 0);
    HEAP32[$7 + 156 >> 2] = 0;
    break label$1;
   }
   if (!(jsvIsFunction(HEAP32[$7 + 144 >> 2]) & 1)) {
    HEAP32[$7 + 16 >> 2] = HEAP32[$7 + 152 >> 2];
-   jsExceptionHere(1, 34632, $7 + 16 | 0);
+   jsExceptionHere(1, 33608, $7 + 16 | 0);
    HEAP32[$7 + 156 >> 2] = 0;
    break label$1;
   }
@@ -26609,7 +26609,7 @@ function _jswrap_array_iterate_with_callback($0, $1, $2, $3, $4, $5, $6) {
     break label$4;
    }
    HEAP32[$7 >> 2] = HEAP32[$7 + 152 >> 2];
-   jsExceptionHere(1, 34770, $7);
+   jsExceptionHere(1, 33746, $7);
    HEAP32[$7 + 156 >> 2] = 0;
    break label$1;
   }
@@ -27116,7 +27116,7 @@ function jswrap_object_keys_or_property_names_cb($0, $1, $2, $3, $4) {
       if (!(FUNCTION_TABLE[HEAP32[$5 + 108 >> 2]](HEAP32[$5 + 60 >> 2]) & 1)) {
        break label$5;
       }
-      if (!(jsvIsStringEqual(HEAP32[$5 + 60 >> 2], 38802) & 1)) {
+      if (!(jsvIsStringEqual(HEAP32[$5 + 60 >> 2], 37778) & 1)) {
        break label$4;
       }
      }
@@ -27163,7 +27163,7 @@ function jswrap_object_keys_or_property_names_cb($0, $1, $2, $3, $4) {
       break label$13;
      }
     }
-    HEAP32[$5 + 36 >> 2] = jsvObjectGetChild(HEAP32[$5 + 124 >> 2], 38814, 0);
+    HEAP32[$5 + 36 >> 2] = jsvObjectGetChild(HEAP32[$5 + 124 >> 2], 37790, 0);
    }
    label$15 : {
     if (jsvIsObject(HEAP32[$5 + 36 >> 2]) & 1) {
@@ -27184,7 +27184,7 @@ function jswrap_object_keys_or_property_names_cb($0, $1, $2, $3, $4) {
      break label$18;
     }
    }
-   HEAP32[$5 + 28 >> 2] = jsvNewFromString(38824);
+   HEAP32[$5 + 28 >> 2] = jsvNewFromString(37800);
    FUNCTION_TABLE[HEAP32[$5 + 116 >> 2]](HEAP32[$5 + 112 >> 2], HEAP32[$5 + 28 >> 2]);
    jsvUnLock(HEAP32[$5 + 28 >> 2]);
   }
@@ -27438,24 +27438,24 @@ function __jspeAssignmentExpression($0) {
  HEAP32[$1 + 28 >> 2] = $0;
  label$1 : {
   label$2 : {
-   if (HEAP16[HEAP32[14856] + 2 >> 1] == 61 | HEAP16[HEAP32[14856] + 2 >> 1] == 150 | (HEAP16[HEAP32[14856] + 2 >> 1] == 151 | HEAP16[HEAP32[14856] + 2 >> 1] == 154)) {
+   if (HEAP16[HEAP32[14596] + 2 >> 1] == 61 | HEAP16[HEAP32[14596] + 2 >> 1] == 150 | (HEAP16[HEAP32[14596] + 2 >> 1] == 151 | HEAP16[HEAP32[14596] + 2 >> 1] == 154)) {
     break label$2;
    }
-   if (HEAP16[HEAP32[14856] + 2 >> 1] == 155 | HEAP16[HEAP32[14856] + 2 >> 1] == 156 | (HEAP16[HEAP32[14856] + 2 >> 1] == 157 | HEAP16[HEAP32[14856] + 2 >> 1] == 159)) {
+   if (HEAP16[HEAP32[14596] + 2 >> 1] == 155 | HEAP16[HEAP32[14596] + 2 >> 1] == 156 | (HEAP16[HEAP32[14596] + 2 >> 1] == 157 | HEAP16[HEAP32[14596] + 2 >> 1] == 159)) {
     break label$2;
    }
-   if (HEAP16[HEAP32[14856] + 2 >> 1] == 161 | HEAP16[HEAP32[14856] + 2 >> 1] == 148 | HEAP16[HEAP32[14856] + 2 >> 1] == 144) {
+   if (HEAP16[HEAP32[14596] + 2 >> 1] == 161 | HEAP16[HEAP32[14596] + 2 >> 1] == 148 | HEAP16[HEAP32[14596] + 2 >> 1] == 144) {
     break label$2;
    }
-   if (HEAP16[HEAP32[14856] + 2 >> 1] != 149) {
+   if (HEAP16[HEAP32[14596] + 2 >> 1] != 149) {
     break label$1;
    }
   }
-  HEAP32[$1 + 20 >> 2] = HEAP16[HEAP32[14856] + 2 >> 1];
+  HEAP32[$1 + 20 >> 2] = HEAP16[HEAP32[14596] + 2 >> 1];
   jslGetNextToken();
   HEAP32[$1 + 24 >> 2] = __jspeAssignmentExpression(jspeConditionalExpression());
   HEAP32[$1 + 24 >> 2] = jsvSkipNameAndUnLock(HEAP32[$1 + 24 >> 2]);
-  if (!(!HEAP32[$1 + 28 >> 2] | (HEAP32[24866] & 63) != 1)) {
+  if (!(!HEAP32[$1 + 28 >> 2] | (HEAP32[24606] & 63) != 1)) {
    label$4 : {
     if (HEAP32[$1 + 20 >> 2] == 61) {
      jsvReplaceWithOrAddToRoot(HEAP32[$1 + 28 >> 2], HEAP32[$1 + 24 >> 2]);
@@ -27574,38 +27574,38 @@ function jsserialPopulateUSARTInfo($0, $1, $2) {
  HEAP32[$3 + 156 >> 2] = 0;
  HEAP32[$3 + 152 >> 2] = HEAPU8[HEAP32[$3 + 172 >> 2] + 8 | 0];
  HEAP32[$3 + 148 >> 2] = HEAPU8[HEAP32[$3 + 172 >> 2] + 10 | 0];
- HEAP32[$3 + 32 >> 2] = 7538;
+ HEAP32[$3 + 32 >> 2] = 7534;
  HEAP16[$3 + 36 >> 1] = 12;
  HEAP32[$3 + 40 >> 2] = HEAP32[$3 + 172 >> 2] + 4;
- HEAP32[$3 + 44 >> 2] = 7541;
+ HEAP32[$3 + 44 >> 2] = 7537;
  HEAP16[$3 + 48 >> 1] = 12;
  HEAP32[$3 + 52 >> 2] = HEAP32[$3 + 172 >> 2] + 5;
- HEAP32[$3 + 56 >> 2] = 7544;
+ HEAP32[$3 + 56 >> 2] = 7540;
  HEAP16[$3 + 60 >> 1] = 12;
  HEAP32[$3 + 64 >> 2] = HEAP32[$3 + 172 >> 2] + 6;
- HEAP32[$3 + 68 >> 2] = 7547;
+ HEAP32[$3 + 68 >> 2] = 7543;
  HEAP16[$3 + 72 >> 1] = 12;
  HEAP32[$3 + 76 >> 2] = HEAP32[$3 + 172 >> 2] + 7;
- HEAP32[$3 + 80 >> 2] = 7551;
+ HEAP32[$3 + 80 >> 2] = 7547;
  HEAP16[$3 + 84 >> 1] = 9;
  HEAP32[$3 + 88 >> 2] = $7;
- HEAP32[$3 + 92 >> 2] = 7560;
+ HEAP32[$3 + 92 >> 2] = 7556;
  HEAP16[$3 + 96 >> 1] = 9;
  HEAP32[$3 + 100 >> 2] = $6;
- HEAP32[$3 + 104 >> 2] = 7569;
+ HEAP32[$3 + 104 >> 2] = 7565;
  HEAP16[$3 + 108 >> 1] = 5;
  HEAP32[$3 + 112 >> 2] = $5;
- HEAP32[$3 + 116 >> 2] = 7576;
+ HEAP32[$3 + 116 >> 2] = 7572;
  HEAP16[$3 + 120 >> 1] = 5;
  HEAP32[$3 + 124 >> 2] = $4;
- HEAP32[$3 + 128 >> 2] = 7581;
+ HEAP32[$3 + 128 >> 2] = 7577;
  HEAP16[$3 + 132 >> 1] = 11;
  HEAP32[$3 + 136 >> 2] = HEAP32[$3 + 172 >> 2] + 12;
  if (!(jsvIsUndefined(HEAP32[$3 + 168 >> 2]) & 1)) {
   HEAP32[$3 + 28 >> 2] = jsvGetInteger(HEAP32[$3 + 168 >> 2]);
   label$2 : {
    if (!(HEAP32[$3 + 28 >> 2] <= 1e7 ? HEAP32[$3 + 28 >> 2] > 100 : 0)) {
-    jsExceptionHere(1, 7588, 0);
+    jsExceptionHere(1, 7584, 0);
     break label$2;
    }
    $0 = HEAP32[$3 + 172 >> 2];
@@ -27624,8 +27624,8 @@ function jsserialPopulateUSARTInfo($0, $1, $2) {
   label$6 : {
    if (jsvIsString(HEAP32[$3 + 160 >> 2]) & 1) {
     label$8 : {
-     if (!(jsvIsStringEqual(HEAP32[$3 + 160 >> 2], 7616) & 1)) {
-      if (!(jsvIsStringEqual(HEAP32[$3 + 160 >> 2], 7618) & 1)) {
+     if (!(jsvIsStringEqual(HEAP32[$3 + 160 >> 2], 7612) & 1)) {
+      if (!(jsvIsStringEqual(HEAP32[$3 + 160 >> 2], 7614) & 1)) {
        break label$8;
       }
      }
@@ -27633,8 +27633,8 @@ function jsserialPopulateUSARTInfo($0, $1, $2) {
      break label$6;
     }
     label$10 : {
-     if (!(jsvIsStringEqual(HEAP32[$3 + 160 >> 2], 7622) & 1)) {
-      if (!(jsvIsStringEqual(HEAP32[$3 + 160 >> 2], 7624) & 1)) {
+     if (!(jsvIsStringEqual(HEAP32[$3 + 160 >> 2], 7618) & 1)) {
+      if (!(jsvIsStringEqual(HEAP32[$3 + 160 >> 2], 7620) & 1)) {
        break label$10;
       }
      }
@@ -27649,7 +27649,7 @@ function jsserialPopulateUSARTInfo($0, $1, $2) {
   }
   if (HEAPU8[HEAP32[$3 + 172 >> 2] + 9 | 0] > 2) {
    HEAP32[$3 + 16 >> 2] = HEAPU8[HEAP32[$3 + 172 >> 2] + 9 | 0];
-   jsExceptionHere(1, 7629, $3 + 16 | 0);
+   jsExceptionHere(1, 7625, $3 + 16 | 0);
    HEAP8[$3 + 27 | 0] = 0;
   }
   if (HEAP8[$3 + 27 | 0] & 1) {
@@ -27662,7 +27662,7 @@ function jsserialPopulateUSARTInfo($0, $1, $2) {
       if (jsvIsNull(HEAP32[$3 + 156 >> 2]) & 1) {
        break label$17;
       }
-      if (!(jsvIsStringEqual(HEAP32[$3 + 156 >> 2], 7647) & 1)) {
+      if (!(jsvIsStringEqual(HEAP32[$3 + 156 >> 2], 7643) & 1)) {
        break label$16;
       }
      }
@@ -27670,12 +27670,12 @@ function jsserialPopulateUSARTInfo($0, $1, $2) {
      break label$15;
     }
     label$18 : {
-     if (jsvIsStringEqual(HEAP32[$3 + 156 >> 2], 7652) & 1) {
+     if (jsvIsStringEqual(HEAP32[$3 + 156 >> 2], 7648) & 1) {
       HEAP8[HEAP32[$3 + 172 >> 2] + 11 | 0] = 1;
       break label$18;
      }
      HEAP32[$3 >> 2] = HEAP32[$3 + 156 >> 2];
-     jsExceptionHere(1, 7656, $3);
+     jsExceptionHere(1, 7652, $3);
      HEAP8[$3 + 27 | 0] = 0;
     }
    }
@@ -27931,7 +27931,7 @@ function jswrap_graphics_quadraticBezier($0, $1, $2) {
   HEAP32[$3 + 60 >> 2] = jsvIteratorGetIntegerValue($0);
   jsvIteratorFree($0);
   if (jsvIsObject(HEAP32[$3 + 144 >> 2]) & 1) {
-   HEAP32[$3 + 56 >> 2] = jsvGetIntegerAndUnLock(jsvObjectGetChild(HEAP32[$3 + 144 >> 2], 43452, 0));
+   HEAP32[$3 + 56 >> 2] = jsvGetIntegerAndUnLock(jsvObjectGetChild(HEAP32[$3 + 144 >> 2], 42412, 0));
   }
   $0 = $3;
   if ((HEAP32[$3 + 80 >> 2] - HEAP32[$3 + 72 >> 2] | 0) < 0) {
@@ -28018,11 +28018,11 @@ function tflite__ops__micro__quantize__Prepare_28TfLiteContext__2c_20TfLiteNode_
    $3 = tflite__NumInputs_28TfLiteNode_20const__29(HEAP32[$2 + 196 >> 2]);
    HEAP32[$2 + 20 >> 2] = 1;
    HEAP32[$2 + 16 >> 2] = $3;
-   HEAP32[$2 + 12 >> 2] = 47137;
-   HEAP32[$2 + 8 >> 2] = 47121;
+   HEAP32[$2 + 12 >> 2] = 46097;
+   HEAP32[$2 + 8 >> 2] = 46081;
    HEAP32[$2 + 4 >> 2] = 34;
-   HEAP32[$2 >> 2] = 47022;
-   FUNCTION_TABLE[$0]($1, 46996, $2);
+   HEAP32[$2 >> 2] = 45982;
+   FUNCTION_TABLE[$0]($1, 45956, $2);
    HEAP32[$2 + 204 >> 2] = 1;
    break label$1;
   }
@@ -28032,11 +28032,11 @@ function tflite__ops__micro__quantize__Prepare_28TfLiteContext__2c_20TfLiteNode_
    $3 = tflite__NumOutputs_28TfLiteNode_20const__29(HEAP32[$2 + 196 >> 2]);
    HEAP32[$2 + 52 >> 2] = 1;
    HEAP32[$2 + 48 >> 2] = $3;
-   HEAP32[$2 + 44 >> 2] = 47137;
-   HEAP32[$2 + 40 >> 2] = 47139;
+   HEAP32[$2 + 44 >> 2] = 46097;
+   HEAP32[$2 + 40 >> 2] = 46099;
    HEAP32[$2 + 36 >> 2] = 35;
-   HEAP32[$2 + 32 >> 2] = 47022;
-   FUNCTION_TABLE[$0]($1, 46996, $2 + 32 | 0);
+   HEAP32[$2 + 32 >> 2] = 45982;
+   FUNCTION_TABLE[$0]($1, 45956, $2 + 32 | 0);
    HEAP32[$2 + 204 >> 2] = 1;
    break label$1;
   }
@@ -28048,11 +28048,11 @@ function tflite__ops__micro__quantize__Prepare_28TfLiteContext__2c_20TfLiteNode_
    $3 = HEAP32[HEAP32[$2 + 188 >> 2] + 48 >> 2];
    HEAP32[$2 + 84 >> 2] = 1;
    HEAP32[$2 + 80 >> 2] = $3;
-   HEAP32[$2 + 76 >> 2] = 47182;
-   HEAP32[$2 + 72 >> 2] = 47156;
+   HEAP32[$2 + 76 >> 2] = 46142;
+   HEAP32[$2 + 72 >> 2] = 46116;
    HEAP32[$2 + 68 >> 2] = 43;
-   HEAP32[$2 + 64 >> 2] = 47022;
-   FUNCTION_TABLE[$0]($1, 46996, $2 - -64 | 0);
+   HEAP32[$2 + 64 >> 2] = 45982;
+   FUNCTION_TABLE[$0]($1, 45956, $2 - -64 | 0);
    HEAP32[$2 + 204 >> 2] = 1;
    break label$1;
   }
@@ -28060,50 +28060,50 @@ function tflite__ops__micro__quantize__Prepare_28TfLiteContext__2c_20TfLiteNode_
   if (!HEAP32[$2 + 184 >> 2]) {
    $0 = HEAP32[HEAP32[$2 + 200 >> 2] + 20 >> 2];
    $1 = HEAP32[$2 + 200 >> 2];
-   HEAP32[$2 + 168 >> 2] = 47231;
+   HEAP32[$2 + 168 >> 2] = 46191;
    HEAP32[$2 + 164 >> 2] = 46;
-   HEAP32[$2 + 160 >> 2] = 47022;
-   FUNCTION_TABLE[$0]($1, 47208, $2 + 160 | 0);
+   HEAP32[$2 + 160 >> 2] = 45982;
+   FUNCTION_TABLE[$0]($1, 46168, $2 + 160 | 0);
    HEAP32[$2 + 204 >> 2] = 1;
    break label$1;
   }
   if (!HEAP32[HEAP32[$2 + 184 >> 2] >> 2]) {
    $0 = HEAP32[HEAP32[$2 + 200 >> 2] + 20 >> 2];
    $1 = HEAP32[$2 + 200 >> 2];
-   HEAP32[$2 + 152 >> 2] = 47251;
+   HEAP32[$2 + 152 >> 2] = 46211;
    HEAP32[$2 + 148 >> 2] = 47;
-   HEAP32[$2 + 144 >> 2] = 47022;
-   FUNCTION_TABLE[$0]($1, 47208, $2 + 144 | 0);
+   HEAP32[$2 + 144 >> 2] = 45982;
+   FUNCTION_TABLE[$0]($1, 46168, $2 + 144 | 0);
    HEAP32[$2 + 204 >> 2] = 1;
    break label$1;
   }
   if (HEAP32[HEAP32[HEAP32[$2 + 184 >> 2] >> 2] >> 2] != 1) {
    $0 = HEAP32[HEAP32[$2 + 200 >> 2] + 20 >> 2];
    $1 = HEAP32[$2 + 200 >> 2];
-   HEAP32[$2 + 136 >> 2] = 47278;
+   HEAP32[$2 + 136 >> 2] = 46238;
    HEAP32[$2 + 132 >> 2] = 48;
-   HEAP32[$2 + 128 >> 2] = 47022;
-   FUNCTION_TABLE[$0]($1, 47208, $2 + 128 | 0);
+   HEAP32[$2 + 128 >> 2] = 45982;
+   FUNCTION_TABLE[$0]($1, 46168, $2 + 128 | 0);
    HEAP32[$2 + 204 >> 2] = 1;
    break label$1;
   }
   if (HEAP32[HEAP32[$2 + 192 >> 2] >> 2] != 1) {
    $0 = HEAP32[HEAP32[$2 + 200 >> 2] + 20 >> 2];
    $1 = HEAP32[$2 + 200 >> 2];
-   HEAP32[$2 + 120 >> 2] = 47316;
+   HEAP32[$2 + 120 >> 2] = 46276;
    HEAP32[$2 + 116 >> 2] = 50;
-   HEAP32[$2 + 112 >> 2] = 47022;
-   FUNCTION_TABLE[$0]($1, 47208, $2 + 112 | 0);
+   HEAP32[$2 + 112 >> 2] = 45982;
+   FUNCTION_TABLE[$0]($1, 46168, $2 + 112 | 0);
    HEAP32[$2 + 204 >> 2] = 1;
    break label$1;
   }
   if (!(HEAP32[HEAP32[$2 + 188 >> 2] >> 2] == 3 | HEAP32[HEAP32[$2 + 188 >> 2] >> 2] == 9)) {
    $0 = HEAP32[HEAP32[$2 + 200 >> 2] + 20 >> 2];
    $1 = HEAP32[$2 + 200 >> 2];
-   HEAP32[$2 + 104 >> 2] = 47346;
+   HEAP32[$2 + 104 >> 2] = 46306;
    HEAP32[$2 + 100 >> 2] = 52;
-   HEAP32[$2 + 96 >> 2] = 47022;
-   FUNCTION_TABLE[$0]($1, 47208, $2 + 96 | 0);
+   HEAP32[$2 + 96 >> 2] = 45982;
+   FUNCTION_TABLE[$0]($1, 46168, $2 + 96 | 0);
    HEAP32[$2 + 204 >> 2] = 1;
    break label$1;
   }
@@ -28300,7 +28300,7 @@ function jswrap_string_split($0, $1) {
   }
   if (jsvIsInstanceOf(HEAP32[$2 + 52 >> 2]) & 1) {
    HEAP32[$2 + 44 >> 2] = 0;
-   jsvObjectSetChildAndUnLock(HEAP32[$2 + 52 >> 2], 41447, jsvNewFromInteger(0));
+   jsvObjectSetChildAndUnLock(HEAP32[$2 + 52 >> 2], 40419, jsvNewFromInteger(0));
    HEAP32[$2 + 40 >> 2] = jswrap_regexp_exec(HEAP32[$2 + 52 >> 2], HEAP32[$2 + 56 >> 2]);
    while (1) {
     if (HEAP32[$2 + 40 >> 2]) {
@@ -28310,20 +28310,20 @@ function jswrap_string_split($0, $1) {
     }
     if ($0 & 1) {
      HEAP32[$2 + 36 >> 2] = jsvGetArrayItem(HEAP32[$2 + 40 >> 2], 0);
-     HEAP32[$2 + 32 >> 2] = jsvGetIntegerAndUnLock(jsvObjectGetChild(HEAP32[$2 + 40 >> 2], 41457, 0));
+     HEAP32[$2 + 32 >> 2] = jsvGetIntegerAndUnLock(jsvObjectGetChild(HEAP32[$2 + 40 >> 2], 40429, 0));
      HEAP32[$2 + 28 >> 2] = jsvGetStringLength(HEAP32[$2 + 36 >> 2]);
      jsvUnLock(HEAP32[$2 + 36 >> 2]);
      jsvArrayPushAndUnLock(HEAP32[$2 + 48 >> 2], jsvNewFromStringVar(HEAP32[$2 + 56 >> 2], HEAP32[$2 + 44 >> 2], HEAP32[$2 + 32 >> 2] - HEAP32[$2 + 44 >> 2] | 0));
      HEAP32[$2 + 44 >> 2] = HEAP32[$2 + 32 >> 2] + HEAP32[$2 + 28 >> 2];
      jsvUnLock(HEAP32[$2 + 40 >> 2]);
-     jsvObjectSetChildAndUnLock(HEAP32[$2 + 52 >> 2], 41447, jsvNewFromInteger(HEAP32[$2 + 44 >> 2]));
+     jsvObjectSetChildAndUnLock(HEAP32[$2 + 52 >> 2], 40419, jsvNewFromInteger(HEAP32[$2 + 44 >> 2]));
      HEAP32[$2 + 40 >> 2] = jswrap_regexp_exec(HEAP32[$2 + 52 >> 2], HEAP32[$2 + 56 >> 2]);
      continue;
     }
     break;
    }
    jsvUnLock(HEAP32[$2 + 40 >> 2]);
-   jsvObjectSetChildAndUnLock(HEAP32[$2 + 52 >> 2], 41447, jsvNewFromInteger(0));
+   jsvObjectSetChildAndUnLock(HEAP32[$2 + 52 >> 2], 40419, jsvNewFromInteger(0));
    if (HEAPU32[$2 + 44 >> 2] <= jsvGetStringLength(HEAP32[$2 + 56 >> 2]) >>> 0) {
     jsvArrayPushAndUnLock(HEAP32[$2 + 48 >> 2], jsvNewFromStringVar(HEAP32[$2 + 56 >> 2], HEAP32[$2 + 44 >> 2], 2147483647));
    }
@@ -28526,10 +28526,10 @@ function tflite__ops__micro__conv__CalculateOpData_28TfLiteContext__2c_20TfLiteN
   if (!(HEAP8[$11 + 95 | 0] & 1 | HEAP32[HEAP32[HEAP32[$11 + 132 >> 2] >> 2] >> 2] == 2)) {
    $0 = HEAP32[HEAP32[$11 + 136 >> 2] + 20 >> 2];
    $1 = HEAP32[$11 + 136 >> 2];
-   HEAP32[$11 + 40 >> 2] = 47920;
+   HEAP32[$11 + 40 >> 2] = 46880;
    HEAP32[$11 + 36 >> 2] = 79;
-   HEAP32[$11 + 32 >> 2] = 47825;
-   FUNCTION_TABLE[$0]($1, 47802, $11 + 32 | 0);
+   HEAP32[$11 + 32 >> 2] = 46785;
+   FUNCTION_TABLE[$0]($1, 46762, $11 + 32 | 0);
    HEAP32[$11 + 140 >> 2] = 1;
    break label$1;
   }
@@ -28539,11 +28539,11 @@ function tflite__ops__micro__conv__CalculateOpData_28TfLiteContext__2c_20TfLiteN
    $2 = HEAP32[HEAP32[HEAP32[$11 + 132 >> 2] + 4 >> 2] >> 2];
    HEAP32[$11 + 20 >> 2] = 1;
    HEAP32[$11 + 16 >> 2] = $2;
-   HEAP32[$11 + 12 >> 2] = 48002;
-   HEAP32[$11 + 8 >> 2] = 47982;
+   HEAP32[$11 + 12 >> 2] = 46962;
+   HEAP32[$11 + 8 >> 2] = 46942;
    HEAP32[$11 + 4 >> 2] = 80;
-   HEAP32[$11 >> 2] = 47825;
-   FUNCTION_TABLE[$0]($1, 47956, $11);
+   HEAP32[$11 >> 2] = 46785;
+   FUNCTION_TABLE[$0]($1, 46916, $11);
    HEAP32[$11 + 140 >> 2] = 1;
    break label$1;
   }
@@ -28769,7 +28769,7 @@ function jswrap_function_bind($0, $1, $2) {
  label$1 : {
   if (!(jsvIsFunction(HEAP32[$3 + 72 >> 2]) & 1)) {
    HEAP32[$3 >> 2] = HEAP32[$3 + 72 >> 2];
-   jsExceptionHere(3, 39819, $3);
+   jsExceptionHere(3, 38795, $3);
    HEAP32[$3 + 76 >> 2] = 0;
    break label$1;
   }
@@ -28871,7 +28871,7 @@ function jswrap_function_bind($0, $1, $2) {
    break;
   }
   jsvObjectIteratorFree($3 + 56 | 0);
-  jsvObjectSetChild(HEAP32[$3 + 60 >> 2], 39874, HEAP32[$3 + 68 >> 2]);
+  jsvObjectSetChild(HEAP32[$3 + 60 >> 2], 38850, HEAP32[$3 + 68 >> 2]);
   HEAP32[$3 + 76 >> 2] = HEAP32[$3 + 60 >> 2];
  }
  global$0 = $3 + 80 | 0;
@@ -28894,7 +28894,7 @@ function tflite__ops__micro__strided_slice__CheckOutputSize_28TfLiteContext__2c_
    if (HEAP32[$2 + 100 >> 2] < HEAP32[HEAP32[$2 + 180 >> 2] + 24 >> 2]) {
     HEAP32[$2 + 96 >> 2] = HEAP32[float__20tflite__GetTensorData_float__28TfLiteTensor__29(HEAP32[HEAP32[$2 + 180 >> 2] + 16 >> 2]) + (HEAP32[$2 + 100 >> 2] << 2) >> 2];
     if (!HEAP32[$2 + 96 >> 2]) {
-     FUNCTION_TABLE[HEAP32[HEAP32[$2 + 184 >> 2] + 20 >> 2]](HEAP32[$2 + 184 >> 2], 51696, 0);
+     FUNCTION_TABLE[HEAP32[HEAP32[$2 + 184 >> 2] + 20 >> 2]](HEAP32[$2 + 184 >> 2], 50656, 0);
      HEAP32[$2 + 188 >> 2] = 1;
      break label$1;
     }
@@ -28928,11 +28928,11 @@ function tflite__ops__micro__strided_slice__CheckOutputSize_28TfLiteContext__2c_
       $3 = HEAP32[(HEAP32[$2 + 176 >> 2] + 4 | 0) + (HEAP32[$2 + 172 >> 2] << 2) >> 2];
       HEAP32[$2 + 20 >> 2] = HEAP32[$2 + 68 >> 2];
       HEAP32[$2 + 16 >> 2] = $3;
-      HEAP32[$2 + 12 >> 2] = 51993;
-      HEAP32[$2 + 8 >> 2] = 51962;
+      HEAP32[$2 + 12 >> 2] = 50953;
+      HEAP32[$2 + 8 >> 2] = 50922;
       HEAP32[$2 + 4 >> 2] = 115;
-      HEAP32[$2 >> 2] = 51858;
-      FUNCTION_TABLE[$0]($1, 51832, $2);
+      HEAP32[$2 >> 2] = 50818;
+      FUNCTION_TABLE[$0]($1, 50792, $2);
       HEAP32[$2 + 188 >> 2] = 1;
       break label$1;
      }
@@ -28949,11 +28949,11 @@ function tflite__ops__micro__strided_slice__CheckOutputSize_28TfLiteContext__2c_
    $3 = HEAP32[HEAP32[$2 + 176 >> 2] >> 2];
    HEAP32[$2 + 52 >> 2] = HEAP32[$2 + 172 >> 2];
    HEAP32[$2 + 48 >> 2] = $3;
-   HEAP32[$2 + 44 >> 2] = 52022;
-   HEAP32[$2 + 40 >> 2] = 52003;
+   HEAP32[$2 + 44 >> 2] = 50982;
+   HEAP32[$2 + 40 >> 2] = 50963;
    HEAP32[$2 + 36 >> 2] = 119;
-   HEAP32[$2 + 32 >> 2] = 51858;
-   FUNCTION_TABLE[$0]($1, 51832, $2 + 32 | 0);
+   HEAP32[$2 + 32 >> 2] = 50818;
+   FUNCTION_TABLE[$0]($1, 50792, $2 + 32 | 0);
    HEAP32[$2 + 188 >> 2] = 1;
    break label$1;
   }
@@ -29105,22 +29105,22 @@ function jsiDumpHardwareInitialisation($0, $1, $2) {
  HEAP32[$3 + 92 >> 2] = $0;
  HEAP32[$3 + 88 >> 2] = $1;
  HEAP8[$3 + 87 | 0] = $2;
- if (HEAP16[49742] & 1) {
+ if (HEAP16[49222] & 1) {
   FUNCTION_TABLE[HEAP32[$3 + 92 >> 2]](5389, HEAP32[$3 + 88 >> 2]);
  }
- if (HEAPU8[57425] != 255) {
+ if (HEAPU8[56385] != 255) {
   $0 = HEAP32[$3 + 92 >> 2];
   $1 = HEAP32[$3 + 88 >> 2];
-  HEAP32[$3 + 64 >> 2] = HEAPU8[57425];
+  HEAP32[$3 + 64 >> 2] = HEAPU8[56385];
   cbprintf($0, $1, 5398, $3 - -64 | 0);
  }
- if (HEAPU8[57426] != 255) {
+ if (HEAPU8[56386] != 255) {
   $0 = HEAP32[$3 + 92 >> 2];
   $1 = HEAP32[$3 + 88 >> 2];
-  HEAP32[$3 + 48 >> 2] = HEAPU8[57426];
+  HEAP32[$3 + 48 >> 2] = HEAPU8[56386];
   cbprintf($0, $1, 5421, $3 + 48 | 0);
  }
- if (!(!(HEAP8[$3 + 87 | 0] & 1) | !HEAPU8[59428])) {
+ if (!(!(HEAP8[$3 + 87 | 0] & 1) | !HEAPU8[58388])) {
   HEAP32[$3 + 80 >> 2] = jsfGetFlags();
   $0 = HEAP32[$3 + 92 >> 2];
   $1 = HEAP32[$3 + 88 >> 2];
@@ -29395,7 +29395,7 @@ function tflite__ops__micro__fully_connected__Eval_28TfLiteContext__2c_20TfLiteN
   $0 = HEAP32[HEAP32[$2 + 56 >> 2] + 20 >> 2];
   $1 = HEAP32[$2 + 56 >> 2];
   HEAP32[$2 >> 2] = HEAP32[HEAP32[$2 + 40 >> 2] >> 2];
-  FUNCTION_TABLE[$0]($1, 51304, $2);
+  FUNCTION_TABLE[$0]($1, 50264, $2);
   HEAP32[$2 + 60 >> 2] = 1;
  }
  global$0 = $2 - -64 | 0;
@@ -29428,7 +29428,7 @@ function graphicsDrawChar4x6($0, $1, $2, $3, $4, $5) {
    if (HEAP32[$6 + 16 >> 2] >= 6) {
     break label$1;
    }
-   HEAP32[$6 + 8 >> 2] = HEAPU16[(HEAP32[$6 + 24 >> 2] + HEAP32[$6 + 16 >> 2] << 1) + 24896 >> 1] >> Math_imul(HEAP32[$6 + 20 >> 2], 3);
+   HEAP32[$6 + 8 >> 2] = HEAPU16[(HEAP32[$6 + 24 >> 2] + HEAP32[$6 + 16 >> 2] << 1) + 23872 >> 1] >> Math_imul(HEAP32[$6 + 20 >> 2], 3);
    HEAP32[$6 + 4 >> 2] = HEAP32[$6 + 36 >> 2] + Math_imul(HEAP32[$6 + 16 >> 2], HEAPU16[$6 + 32 >> 1]);
    if (!(HEAP32[$6 + 8 >> 2] & 4 ? 0 : !(HEAP8[$6 + 31 | 0] & 1))) {
     $1 = HEAP32[$6 + 44 >> 2];
@@ -29501,7 +29501,7 @@ function tflite__ops__micro__split__Eval_28TfLiteContext__2c_20TfLiteNode__29($0
  HEAP32[$0 + 12 >> 2] = HEAP32[$2 + 64 >> 2];
  label$1 : {
   if (HEAP32[HEAP32[$0 + 12 >> 2] + 20 >> 2] != 1) {
-   FUNCTION_TABLE[HEAP32[HEAP32[$2 + 72 >> 2] + 20 >> 2]](HEAP32[$2 + 72 >> 2], 49140, 0);
+   FUNCTION_TABLE[HEAP32[HEAP32[$2 + 72 >> 2] + 20 >> 2]](HEAP32[$2 + 72 >> 2], 48100, 0);
    HEAP32[$2 + 76 >> 2] = 1;
    break label$1;
   }
@@ -29512,20 +29512,20 @@ function tflite__ops__micro__split__Eval_28TfLiteContext__2c_20TfLiteNode__29($0
   if (HEAP32[$2 + 56 >> 2] < 0) {
    $0 = HEAP32[HEAP32[$2 + 72 >> 2] + 20 >> 2];
    $1 = HEAP32[$2 + 72 >> 2];
-   HEAP32[$2 + 40 >> 2] = 49394;
+   HEAP32[$2 + 40 >> 2] = 48354;
    HEAP32[$2 + 36 >> 2] = 87;
-   HEAP32[$2 + 32 >> 2] = 49298;
-   FUNCTION_TABLE[$0]($1, 49275, $2 + 32 | 0);
+   HEAP32[$2 + 32 >> 2] = 48258;
+   FUNCTION_TABLE[$0]($1, 48235, $2 + 32 | 0);
    HEAP32[$2 + 76 >> 2] = 1;
    break label$1;
   }
   if (HEAP32[$2 + 56 >> 2] >= (tflite__NumDimensions_28TfLiteTensor_20const__29(HEAP32[$2 + 60 >> 2]) | 0)) {
    $0 = HEAP32[HEAP32[$2 + 72 >> 2] + 20 >> 2];
    $1 = HEAP32[$2 + 72 >> 2];
-   HEAP32[$2 + 24 >> 2] = 49410;
+   HEAP32[$2 + 24 >> 2] = 48370;
    HEAP32[$2 + 20 >> 2] = 88;
-   HEAP32[$2 + 16 >> 2] = 49298;
-   FUNCTION_TABLE[$0]($1, 49275, $2 + 16 | 0);
+   HEAP32[$2 + 16 >> 2] = 48258;
+   FUNCTION_TABLE[$0]($1, 48235, $2 + 16 | 0);
    HEAP32[$2 + 76 >> 2] = 1;
    break label$1;
   }
@@ -29563,7 +29563,7 @@ function tflite__ops__micro__split__Eval_28TfLiteContext__2c_20TfLiteNode__29($0
   $0 = HEAP32[HEAP32[$2 + 72 >> 2] + 20 >> 2];
   $1 = HEAP32[$2 + 72 >> 2];
   HEAP32[$2 >> 2] = TfLiteTypeGetName(HEAP32[HEAP32[$2 + 60 >> 2] >> 2]);
-  FUNCTION_TABLE[$0]($1, 49444, $2);
+  FUNCTION_TABLE[$0]($1, 48404, $2);
   HEAP32[$2 + 76 >> 2] = 1;
  }
  global$0 = $2 + 80 | 0;
@@ -29574,17 +29574,17 @@ function jsiTabComplete() {
  $0 = global$0 - 320 | 0;
  global$0 = $0;
  label$1 : {
-  if (!(jsvIsString(HEAP32[24872]) & 1)) {
+  if (!(jsvIsString(HEAP32[24612]) & 1)) {
    break label$1;
   }
   HEAP32[$0 + 316 >> 2] = 0;
   HEAP32[$0 + 300 >> 2] = 0;
   HEAP32[$0 + 292 >> 2] = 0;
   HEAP32[$0 + 156 >> 2] = jslSetLex($0 + 160 | 0);
-  jslInit(HEAP32[24872]);
+  jslInit(HEAP32[24612]);
   while (1) {
    if (HEAP16[$0 + 162 >> 1]) {
-    $1 = jsvStringIteratorGetIndex($0 + 164 | 0) >>> 0 <= HEAPU32[24874];
+    $1 = jsvStringIteratorGetIndex($0 + 164 | 0) >>> 0 <= HEAPU32[24614];
    } else {
     $1 = 0;
    }
@@ -29623,7 +29623,7 @@ function jsiTabComplete() {
   label$11 : {
    if (HEAP32[$0 + 300 >> 2]) {
     HEAP32[$0 + 296 >> 2] = jsvGetStringLength(HEAP32[$0 + 300 >> 2]);
-    HEAP32[$0 + 152 >> 2] = (HEAP32[24874] + 1 | 0) - HEAP32[$0 + 292 >> 2];
+    HEAP32[$0 + 152 >> 2] = (HEAP32[24614] + 1 | 0) - HEAP32[$0 + 292 >> 2];
     if (HEAPU32[$0 + 152 >> 2] > HEAPU32[$0 + 296 >> 2]) {
      jsvUnLock2(HEAP32[$0 + 316 >> 2], HEAP32[$0 + 300 >> 2]);
      break label$1;
@@ -29659,22 +29659,22 @@ function jsiTabComplete() {
    }
   }
   if (!HEAP32[$0 + 316 >> 2]) {
-   HEAP32[$0 + 316 >> 2] = jsvLockAgain(HEAP32[24862]);
+   HEAP32[$0 + 316 >> 2] = jsvLockAgain(HEAP32[24602]);
   }
   HEAP32[$0 + 304 >> 2] = 0;
   HEAP32[$0 + 308 >> 2] = 0;
   jswrap_object_keys_or_property_names_cb(HEAP32[$0 + 316 >> 2], 1, 1, 12, $0 + 296 | 0);
   if (HEAP32[$0 + 308 >> 2] > 1) {
    $1 = $0 + 296 | 0;
-   jsiMoveCursorChar(HEAP32[24872], HEAP32[24874], HEAP32[14357]);
-   HEAP8[99492] = 1;
-   jsiConsolePrintString(5892);
+   jsiMoveCursorChar(HEAP32[24612], HEAP32[24614], HEAP32[14097]);
+   HEAP8[98452] = 1;
+   jsiConsolePrintString(5888);
    HEAP32[$0 + 312 >> 2] = 0;
    jswrap_object_keys_or_property_names_cb(HEAP32[$0 + 316 >> 2], 1, 1, 13, $1);
    if (HEAP32[$0 + 312 >> 2]) {
-    jsiConsolePrintString(5716);
+    jsiConsolePrintString(5712);
    }
-   jsiConsolePrintString(5716);
+   jsiConsolePrintString(5712);
    jsiConsoleReturnInputLine();
   }
   jsvUnLock2(HEAP32[$0 + 316 >> 2], HEAP32[$0 + 300 >> 2]);
@@ -29699,8 +29699,8 @@ function jspeStatementSwitch() {
    break label$1;
   }
   HEAP32[$0 + 24 >> 2] = jspeExpression();
-  HEAP32[$0 + 20 >> 2] = HEAP32[24866];
-  HEAP8[$0 + 19 | 0] = (HEAP32[24866] & 63) == 1;
+  HEAP32[$0 + 20 >> 2] = HEAP32[24606];
+  HEAP8[$0 + 19 | 0] = (HEAP32[24606] & 63) == 1;
   if (!(jslMatch(41) & 1)) {
    jsvUnLock(HEAP32[$0 + 24 >> 2]);
    break label$1;
@@ -29716,20 +29716,20 @@ function jspeStatementSwitch() {
   }
   HEAP8[$0 + 18 | 0] = 1;
   if (HEAP8[$0 + 19 | 0] & 1) {
-   HEAP32[24866] = 1024;
+   HEAP32[24606] = 1024;
   }
   while (1) {
-   if (HEAP16[HEAP32[14856] + 2 >> 1] == 188) {
+   if (HEAP16[HEAP32[14596] + 2 >> 1] == 188) {
     if (!(jslMatch(188) & 1)) {
      jsvUnLock(HEAP32[$0 + 24 >> 2]);
      break label$1;
     }
-    HEAP32[$0 + 12 >> 2] = HEAP32[24866];
+    HEAP32[$0 + 12 >> 2] = HEAP32[24606];
     if (HEAP8[$0 + 19 | 0] & 1) {
-     HEAP32[24866] = 1025;
+     HEAP32[24606] = 1025;
     }
     HEAP32[$0 + 8 >> 2] = __jspeAssignmentExpression(jspeConditionalExpression());
-    HEAP32[24866] = HEAP32[$0 + 12 >> 2] | 1024;
+    HEAP32[24606] = HEAP32[$0 + 12 >> 2] | 1024;
     if (!(jslMatch(58) & 1)) {
      jsvUnLock2(HEAP32[$0 + 24 >> 2], HEAP32[$0 + 8 >> 2]);
      break label$1;
@@ -29742,28 +29742,28 @@ function jspeStatementSwitch() {
      HEAP8[$0 + 18 | 0] = 0;
     }
     jsvUnLock(HEAP32[$0 + 8 >> 2]);
-    if (!(!(HEAP8[$0 + 7 | 0] & 1) | HEAP32[24866] & 63)) {
-     HEAP32[24866] = 1025;
+    if (!(!(HEAP8[$0 + 7 | 0] & 1) | HEAP32[24606] & 63)) {
+     HEAP32[24606] = 1025;
     }
     while (1) {
      $1 = 0;
      label$15 : {
-      if (HEAP32[24866] & 80) {
+      if (HEAP32[24606] & 80) {
        break label$15;
       }
       $1 = 0;
-      if (!HEAP16[HEAP32[14856] + 2 >> 1]) {
+      if (!HEAP16[HEAP32[14596] + 2 >> 1]) {
        break label$15;
       }
       $1 = 0;
-      if (HEAP16[HEAP32[14856] + 2 >> 1] == 188) {
+      if (HEAP16[HEAP32[14596] + 2 >> 1] == 188) {
        break label$15;
       }
       $1 = 0;
-      if (HEAP16[HEAP32[14856] + 2 >> 1] == 189) {
+      if (HEAP16[HEAP32[14596] + 2 >> 1] == 189) {
        break label$15;
       }
-      $1 = HEAP16[HEAP32[14856] + 2 >> 1] != 125;
+      $1 = HEAP16[HEAP32[14596] + 2 >> 1] != 125;
      }
      if ($1) {
       jsvUnLock(jspeBlockOrStatement());
@@ -29771,48 +29771,48 @@ function jspeStatementSwitch() {
      }
      break;
     }
-    HEAP32[$0 + 20 >> 2] = HEAP32[$0 + 20 >> 2] | HEAP32[24866] & 120;
+    HEAP32[$0 + 20 >> 2] = HEAP32[$0 + 20 >> 2] | HEAP32[24606] & 120;
     continue;
    }
    break;
   }
   jsvUnLock(HEAP32[$0 + 24 >> 2]);
   label$17 : {
-   if (!(!(HEAP8[$0 + 19 | 0] & 1) | (HEAP32[24866] & 63) != 2)) {
-    HEAP32[24866] = 1025;
+   if (!(!(HEAP8[$0 + 19 | 0] & 1) | (HEAP32[24606] & 63) != 2)) {
+    HEAP32[24606] = 1025;
     break label$17;
    }
    HEAP8[$0 + 18 | 0] = 1;
   }
-  HEAP32[24866] = HEAP32[24866] & -1664 | HEAP32[$0 + 20 >> 2] & 1663;
-  if (HEAP16[HEAP32[14856] + 2 >> 1] == 189) {
+  HEAP32[24606] = HEAP32[24606] & -1664 | HEAP32[$0 + 20 >> 2] & 1663;
+  if (HEAP16[HEAP32[14596] + 2 >> 1] == 189) {
    jslGetNextToken();
    if (!(jslMatch(58) & 1)) {
     break label$1;
    }
-   HEAP32[$0 >> 2] = HEAP32[24866];
+   HEAP32[$0 >> 2] = HEAP32[24606];
    label$20 : {
     if (!(HEAP8[$0 + 18 | 0] & 1)) {
      jspSetNoExecute();
      break label$20;
     }
-    HEAP32[24866] = HEAP32[24866] | 1024;
+    HEAP32[24606] = HEAP32[24606] | 1024;
    }
    while (1) {
     $1 = 0;
     label$23 : {
-     if (HEAP32[24866] & 80) {
+     if (HEAP32[24606] & 80) {
       break label$23;
      }
      $1 = 0;
-     if (!HEAP16[HEAP32[14856] + 2 >> 1]) {
+     if (!HEAP16[HEAP32[14596] + 2 >> 1]) {
       break label$23;
      }
      $1 = 0;
-     if (HEAP16[HEAP32[14856] + 2 >> 1] == 125) {
+     if (HEAP16[HEAP32[14596] + 2 >> 1] == 125) {
       break label$23;
      }
-     $1 = HEAP16[HEAP32[14856] + 2 >> 1] != 188;
+     $1 = HEAP16[HEAP32[14596] + 2 >> 1] != 188;
     }
     if ($1) {
      jsvUnLock(jspeBlockOrStatement());
@@ -29820,11 +29820,11 @@ function jspeStatementSwitch() {
     }
     break;
    }
-   HEAP32[$0 >> 2] = HEAP32[$0 >> 2] | HEAP32[24866] & 120;
-   HEAP32[24866] = HEAP32[24866] & -3;
-   HEAP32[24866] = HEAP32[24866] & -1664 | HEAP32[$0 >> 2] & 1663;
+   HEAP32[$0 >> 2] = HEAP32[$0 >> 2] | HEAP32[24606] & 120;
+   HEAP32[24606] = HEAP32[24606] & -3;
+   HEAP32[24606] = HEAP32[24606] & -1664 | HEAP32[$0 >> 2] & 1663;
   }
-  if (HEAP16[HEAP32[14856] + 2 >> 1] == 188) {
+  if (HEAP16[HEAP32[14596] + 2 >> 1] == 188) {
    jsExceptionHere(2, 4724, 0);
    break label$1;
   }
@@ -30176,10 +30176,10 @@ function tflite__ops__micro__depthwise_conv___28anonymous_20namespace_29__Calcul
   if (!(HEAP8[$9 + 103 | 0] & 1 | HEAP32[HEAP32[HEAP32[$9 + 132 >> 2] >> 2] >> 2] == 2)) {
    $0 = HEAP32[HEAP32[$9 + 136 >> 2] + 20 >> 2];
    $1 = HEAP32[$9 + 136 >> 2];
-   HEAP32[$9 + 40 >> 2] = 46938;
+   HEAP32[$9 + 40 >> 2] = 45898;
    HEAP32[$9 + 36 >> 2] = 64;
-   HEAP32[$9 + 32 >> 2] = 46683;
-   FUNCTION_TABLE[$0]($1, 46840, $9 + 32 | 0);
+   HEAP32[$9 + 32 >> 2] = 45643;
+   FUNCTION_TABLE[$0]($1, 45800, $9 + 32 | 0);
    HEAP32[$9 + 140 >> 2] = 1;
    break label$1;
   }
@@ -30189,11 +30189,11 @@ function tflite__ops__micro__depthwise_conv___28anonymous_20namespace_29__Calcul
    $2 = HEAP32[HEAP32[HEAP32[$9 + 132 >> 2] + 4 >> 2] >> 2];
    HEAP32[$9 + 20 >> 2] = 1;
    HEAP32[$9 + 16 >> 2] = $2;
-   HEAP32[$9 + 12 >> 2] = 46994;
-   HEAP32[$9 + 8 >> 2] = 46974;
+   HEAP32[$9 + 12 >> 2] = 45954;
+   HEAP32[$9 + 8 >> 2] = 45934;
    HEAP32[$9 + 4 >> 2] = 65;
-   HEAP32[$9 >> 2] = 46683;
-   FUNCTION_TABLE[$0]($1, 46657, $9);
+   HEAP32[$9 >> 2] = 45643;
+   FUNCTION_TABLE[$0]($1, 45617, $9);
    HEAP32[$9 + 140 >> 2] = 1;
    break label$1;
   }
@@ -30746,12 +30746,12 @@ function jspeFactorMember($0, $1) {
  HEAP32[$2 + 64 >> 2] = 0;
  label$1 : {
   while (1) {
-   if (HEAP16[HEAP32[14856] + 2 >> 1] != 46 ? HEAP16[HEAP32[14856] + 2 >> 1] == 91 : 1) {
-    if (HEAP16[HEAP32[14856] + 2 >> 1] == 46) {
+   if (HEAP16[HEAP32[14596] + 2 >> 1] != 46 ? HEAP16[HEAP32[14596] + 2 >> 1] == 91 : 1) {
+    if (HEAP16[HEAP32[14596] + 2 >> 1] == 46) {
      jslGetNextToken();
      label$7 : {
       if (jslIsIDOrReservedWord() & 1) {
-       if ((HEAP32[24866] & 63) == 1) {
+       if ((HEAP32[24606] & 63) == 1) {
         HEAP32[$2 + 60 >> 2] = jslGetTokenValueAsString();
         HEAP32[$2 + 56 >> 2] = jsvSkipNameWithParent(HEAP32[$2 + 72 >> 2], 1, HEAP32[$2 + 64 >> 2]);
         HEAP32[$2 + 52 >> 2] = 0;
@@ -30785,7 +30785,7 @@ function jspeFactorMember($0, $1) {
      }
      continue;
     }
-    if (HEAP16[HEAP32[14856] + 2 >> 1] == 91) {
+    if (HEAP16[HEAP32[14596] + 2 >> 1] == 91) {
      jslGetNextToken();
      if (!(jspCheckStackPosition() & 1)) {
       HEAP32[$2 + 76 >> 2] = HEAP32[$2 + 64 >> 2];
@@ -30797,7 +30797,7 @@ function jspeFactorMember($0, $1) {
       HEAP32[$2 + 76 >> 2] = HEAP32[$2 + 72 >> 2];
       break label$1;
      }
-     if ((HEAP32[24866] & 63) == 1) {
+     if ((HEAP32[24606] & 63) == 1) {
       HEAP32[$2 + 44 >> 2] = jsvAsArrayIndexAndUnLock(HEAP32[$2 + 44 >> 2]);
       HEAP32[$2 + 40 >> 2] = jsvSkipNameWithParent(HEAP32[$2 + 72 >> 2], 1, HEAP32[$2 + 64 >> 2]);
       HEAP32[$2 + 36 >> 2] = 0;
@@ -31162,7 +31162,7 @@ function TfLiteStatus_20tflite__ops__micro__strided_slice__Eval__28tflite__ops__
    $0 = HEAP32[HEAP32[$2 + 232 >> 2] + 20 >> 2];
    $1 = HEAP32[$2 + 232 >> 2];
    HEAP32[$2 >> 2] = HEAP32[HEAP32[$2 + 204 >> 2] >> 2];
-   FUNCTION_TABLE[$0]($1, 52204, $2);
+   FUNCTION_TABLE[$0]($1, 51164, $2);
    HEAP32[$2 + 236 >> 2] = 1;
    break label$1;
   }
@@ -31476,7 +31476,7 @@ function tflite__ops__micro__svdf__Eval_28TfLiteContext__2c_20TfLiteNode__29($0,
   $0 = HEAP32[HEAP32[$2 + 56 >> 2] + 20 >> 2];
   $1 = HEAP32[$2 + 56 >> 2];
   HEAP32[$2 >> 2] = TfLiteTypeGetName(HEAP32[HEAP32[$2 + 40 >> 2] >> 2]);
-  FUNCTION_TABLE[$0]($1, 51221, $2);
+  FUNCTION_TABLE[$0]($1, 50181, $2);
   HEAP32[$2 + 60 >> 2] = 1;
  }
  global$0 = $2 - -64 | 0;
@@ -31915,35 +31915,35 @@ function jslNewTokenisedStringFromLexer($0, $1) {
  global$0 = $2;
  HEAP32[$2 + 204 >> 2] = $0;
  HEAP32[$2 + 200 >> 2] = $1;
- HEAP32[$2 + 196 >> 2] = HEAP32[14856];
- HEAP32[14856] = $2 - -64;
+ HEAP32[$2 + 196 >> 2] = HEAP32[14596];
+ HEAP32[14596] = $2 - -64;
  HEAP32[$2 + 60 >> 2] = 0;
  jslInit(HEAP32[HEAP32[$2 + 196 >> 2] + 104 >> 2]);
  jslSeekToP(HEAP32[$2 + 204 >> 2]);
  HEAP32[$2 + 56 >> 2] = 0;
  while (1) {
-  if (HEAP16[HEAP32[14856] + 2 >> 1]) {
-   $0 = jsvStringIteratorGetIndex(HEAP32[14856] + 108 | 0) >>> 0 <= HEAP32[$2 + 200 >> 2] + 1 >>> 0;
+  if (HEAP16[HEAP32[14596] + 2 >> 1]) {
+   $0 = jsvStringIteratorGetIndex(HEAP32[14596] + 108 | 0) >>> 0 <= HEAP32[$2 + 200 >> 2] + 1 >>> 0;
   } else {
    $0 = 0;
   }
   if ($0) {
-   if (!((HEAP16[HEAP32[14856] + 2 >> 1] != 129 ? !(HEAP16[HEAP32[14856] + 2 >> 1] == 128 | HEAP16[HEAP32[14856] + 2 >> 1] == 130) : 0) | (HEAP32[$2 + 56 >> 2] != 129 ? !(HEAP32[$2 + 56 >> 2] == 128 | HEAP32[$2 + 56 >> 2] == 130) : 0))) {
+   if (!((HEAP16[HEAP32[14596] + 2 >> 1] != 129 ? !(HEAP16[HEAP32[14596] + 2 >> 1] == 128 | HEAP16[HEAP32[14596] + 2 >> 1] == 130) : 0) | (HEAP32[$2 + 56 >> 2] != 129 ? !(HEAP32[$2 + 56 >> 2] == 128 | HEAP32[$2 + 56 >> 2] == 130) : 0))) {
     HEAP32[$2 + 60 >> 2] = HEAP32[$2 + 60 >> 2] + 1;
    }
    label$8 : {
     label$9 : {
-     if (!(HEAP16[HEAP32[14856] + 2 >> 1] == 128 | HEAP16[HEAP32[14856] + 2 >> 1] == 129 | (HEAP16[HEAP32[14856] + 2 >> 1] == 130 | HEAP16[HEAP32[14856] + 2 >> 1] == 131))) {
-      if (HEAP16[HEAP32[14856] + 2 >> 1] != 133) {
+     if (!(HEAP16[HEAP32[14596] + 2 >> 1] == 128 | HEAP16[HEAP32[14596] + 2 >> 1] == 129 | (HEAP16[HEAP32[14596] + 2 >> 1] == 130 | HEAP16[HEAP32[14596] + 2 >> 1] == 131))) {
+      if (HEAP16[HEAP32[14596] + 2 >> 1] != 133) {
        break label$9;
       }
      }
-     HEAP32[$2 + 60 >> 2] = (jsvStringIteratorGetIndex(HEAP32[14856] + 108 | 0) - jsvStringIteratorGetIndex(HEAP32[14856] + 4 | 0) | 0) + HEAP32[$2 + 60 >> 2];
+     HEAP32[$2 + 60 >> 2] = (jsvStringIteratorGetIndex(HEAP32[14596] + 108 | 0) - jsvStringIteratorGetIndex(HEAP32[14596] + 4 | 0) | 0) + HEAP32[$2 + 60 >> 2];
      break label$8;
     }
     HEAP32[$2 + 60 >> 2] = HEAP32[$2 + 60 >> 2] + 1;
    }
-   HEAP32[$2 + 56 >> 2] = HEAP16[HEAP32[14856] + 2 >> 1];
+   HEAP32[$2 + 56 >> 2] = HEAP16[HEAP32[14596] + 2 >> 1];
    jslGetNextToken();
    continue;
   }
@@ -31955,27 +31955,27 @@ function jslNewTokenisedStringFromLexer($0, $1) {
   jslSeekToP(HEAP32[$2 + 204 >> 2]);
   HEAP32[$2 + 56 >> 2] = 0;
   while (1) {
-   if (HEAP16[HEAP32[14856] + 2 >> 1]) {
-    $0 = jsvStringIteratorGetIndex(HEAP32[14856] + 108 | 0) >>> 0 <= HEAP32[$2 + 200 >> 2] + 1 >>> 0;
+   if (HEAP16[HEAP32[14596] + 2 >> 1]) {
+    $0 = jsvStringIteratorGetIndex(HEAP32[14596] + 108 | 0) >>> 0 <= HEAP32[$2 + 200 >> 2] + 1 >>> 0;
    } else {
     $0 = 0;
    }
    if ($0) {
-    if (!((HEAP16[HEAP32[14856] + 2 >> 1] != 129 ? !(HEAP16[HEAP32[14856] + 2 >> 1] == 128 | HEAP16[HEAP32[14856] + 2 >> 1] == 130) : 0) | (HEAP32[$2 + 56 >> 2] != 129 ? !(HEAP32[$2 + 56 >> 2] == 128 | HEAP32[$2 + 56 >> 2] == 130) : 0))) {
+    if (!((HEAP16[HEAP32[14596] + 2 >> 1] != 129 ? !(HEAP16[HEAP32[14596] + 2 >> 1] == 128 | HEAP16[HEAP32[14596] + 2 >> 1] == 130) : 0) | (HEAP32[$2 + 56 >> 2] != 129 ? !(HEAP32[$2 + 56 >> 2] == 128 | HEAP32[$2 + 56 >> 2] == 130) : 0))) {
      jsvStringIteratorSetCharAndNext($2 + 32 | 0, 32);
     }
     label$19 : {
      label$20 : {
-      if (!(HEAP16[HEAP32[14856] + 2 >> 1] == 128 | HEAP16[HEAP32[14856] + 2 >> 1] == 129 | (HEAP16[HEAP32[14856] + 2 >> 1] == 130 | HEAP16[HEAP32[14856] + 2 >> 1] == 131))) {
-       if (HEAP16[HEAP32[14856] + 2 >> 1] != 133) {
+      if (!(HEAP16[HEAP32[14596] + 2 >> 1] == 128 | HEAP16[HEAP32[14596] + 2 >> 1] == 129 | (HEAP16[HEAP32[14596] + 2 >> 1] == 130 | HEAP16[HEAP32[14596] + 2 >> 1] == 131))) {
+       if (HEAP16[HEAP32[14596] + 2 >> 1] != 133) {
         break label$20;
        }
       }
       $0 = $2 + 8 | 0;
-      jsvStringIteratorSetCharAndNext($2 + 32 | 0, HEAP8[HEAP32[14856] + 24 | 0]);
-      jsvStringIteratorClone($0, HEAP32[14856] + 4 | 0);
+      jsvStringIteratorSetCharAndNext($2 + 32 | 0, HEAP8[HEAP32[14596] + 24 | 0]);
+      jsvStringIteratorClone($0, HEAP32[14596] + 4 | 0);
       while (1) {
-       if (jsvStringIteratorGetIndex($2 + 8 | 0) + 1 >>> 0 < jsvStringIteratorGetIndex(HEAP32[14856] + 108 | 0) >>> 0) {
+       if (jsvStringIteratorGetIndex($2 + 8 | 0) + 1 >>> 0 < jsvStringIteratorGetIndex(HEAP32[14596] + 108 | 0) >>> 0) {
         $0 = $2 + 8 | 0;
         jsvStringIteratorSetCharAndNext($2 + 32 | 0, jsvStringIteratorGetChar($0) << 24 >> 24);
         jsvStringIteratorNext($0);
@@ -31986,9 +31986,9 @@ function jslNewTokenisedStringFromLexer($0, $1) {
       jsvStringIteratorFree($2 + 8 | 0);
       break label$19;
      }
-     jsvStringIteratorSetCharAndNext($2 + 32 | 0, HEAPU16[HEAP32[14856] + 2 >> 1] << 24 >> 24);
+     jsvStringIteratorSetCharAndNext($2 + 32 | 0, HEAPU16[HEAP32[14596] + 2 >> 1] << 24 >> 24);
     }
-    HEAP32[$2 + 56 >> 2] = HEAP16[HEAP32[14856] + 2 >> 1];
+    HEAP32[$2 + 56 >> 2] = HEAP16[HEAP32[14596] + 2 >> 1];
     jslGetNextToken();
     continue;
    }
@@ -31997,7 +31997,7 @@ function jslNewTokenisedStringFromLexer($0, $1) {
   jsvStringIteratorFree($2 + 32 | 0);
  }
  jslKill();
- HEAP32[14856] = HEAP32[$2 + 196 >> 2];
+ HEAP32[14596] = HEAP32[$2 + 196 >> 2];
  global$0 = $2 + 208 | 0;
  return HEAP32[$2 + 52 >> 2];
 }
@@ -32133,16 +32133,16 @@ function jspeStatementDoOrWhile($0) {
  HEAP8[$1 + 99 | 0] = 1;
  HEAP8[$1 + 98 | 0] = 0;
  jslGetNextToken();
- HEAP8[$1 + 71 | 0] = (HEAP32[24866] & 512) != 0;
+ HEAP8[$1 + 71 | 0] = (HEAP32[24606] & 512) != 0;
  label$1 : {
   if (HEAP8[$1 + 107 | 0] & 1) {
    if (!(jslMatch(40) & 1)) {
     break label$1;
    }
-   jslCharPosClone($1 + 72 | 0, HEAP32[14856] + 4 | 0);
+   jslCharPosClone($1 + 72 | 0, HEAP32[14596] + 4 | 0);
    HEAP32[$1 + 100 >> 2] = __jspeAssignmentExpression(jspeConditionalExpression());
    $0 = $1;
-   if ((HEAP32[24866] & 63) == 1) {
+   if ((HEAP32[24606] & 63) == 1) {
     $2 = jsvGetBoolAndUnLock(jsvSkipName(HEAP32[$1 + 100 >> 2]));
    } else {
     $2 = 0;
@@ -32154,28 +32154,28 @@ function jspeStatementDoOrWhile($0) {
     break label$1;
    }
   }
-  jslCharPosClone($1 + 40 | 0, HEAP32[14856] + 4 | 0);
-  HEAP32[$1 + 36 >> 2] = HEAP32[24866];
+  jslCharPosClone($1 + 40 | 0, HEAP32[14596] + 4 | 0);
+  HEAP32[$1 + 36 >> 2] = HEAP32[24606];
   if (!(HEAP8[$1 + 99 | 0] & 1)) {
    jspSetNoExecute();
   }
-  HEAP32[24866] = HEAP32[24866] | 512;
+  HEAP32[24606] = HEAP32[24606] | 512;
   jsvUnLock(jspeBlockOrStatement());
   if (!(HEAP8[$1 + 71 | 0] & 1)) {
-   HEAP32[24866] = HEAP32[24866] & -513;
+   HEAP32[24606] = HEAP32[24606] & -513;
   }
   label$8 : {
-   if (HEAP32[24866] & 4) {
-    HEAP32[24866] = HEAP32[24866] & -64 | 1;
+   if (HEAP32[24606] & 4) {
+    HEAP32[24606] = HEAP32[24606] & -64 | 1;
     break label$8;
    }
-   if (HEAP32[24866] & 2) {
-    HEAP32[24866] = HEAP32[24866] & -64 | 1;
+   if (HEAP32[24606] & 2) {
+    HEAP32[24606] = HEAP32[24606] & -64 | 1;
     HEAP8[$1 + 98 | 0] = 1;
    }
   }
   if (!(HEAP8[$1 + 99 | 0] & 1)) {
-   HEAP32[24866] = HEAP32[24866] & -1664 | HEAP32[$1 + 36 >> 2] & 1663;
+   HEAP32[24606] = HEAP32[24606] & -1664 | HEAP32[$1 + 36 >> 2] & 1663;
   }
   if (!(HEAP8[$1 + 107 | 0] & 1)) {
    if (!(jslMatch(166) & 1)) {
@@ -32189,10 +32189,10 @@ function jspeStatementDoOrWhile($0) {
     }
     break label$1;
    }
-   jslCharPosClone($1 + 72 | 0, HEAP32[14856] + 4 | 0);
+   jslCharPosClone($1 + 72 | 0, HEAP32[14596] + 4 | 0);
    HEAP32[$1 + 100 >> 2] = __jspeAssignmentExpression(jspeConditionalExpression());
    $0 = $1;
-   if ((HEAP32[24866] & 63) == 1) {
+   if ((HEAP32[24606] & 63) == 1) {
     $2 = jsvGetBoolAndUnLock(jsvSkipName(HEAP32[$1 + 100 >> 2]));
    } else {
     $2 = 0;
@@ -32206,13 +32206,13 @@ function jspeStatementDoOrWhile($0) {
     break label$1;
    }
   }
-  jslCharPosClone($1 + 8 | 0, HEAP32[14856] + 4 | 0);
+  jslCharPosClone($1 + 8 | 0, HEAP32[14596] + 4 | 0);
   while (1) {
    if ((HEAP8[$1 + 98 | 0] & 1 ? 0 : HEAPU8[$1 + 99 | 0]) & 1) {
     jslSeekToP($1 + 72 | 0);
     HEAP32[$1 + 100 >> 2] = __jspeAssignmentExpression(jspeConditionalExpression());
     $0 = $1;
-    if ((HEAP32[24866] & 63) == 1) {
+    if ((HEAP32[24606] & 63) == 1) {
      $2 = jsvGetBoolAndUnLock(jsvSkipName(HEAP32[$1 + 100 >> 2]));
     } else {
      $2 = 0;
@@ -32221,19 +32221,19 @@ function jspeStatementDoOrWhile($0) {
     jsvUnLock(HEAP32[$1 + 100 >> 2]);
     if (HEAP8[$1 + 99 | 0] & 1) {
      jslSeekToP($1 + 40 | 0);
-     HEAP32[24866] = HEAP32[24866] | 512;
+     HEAP32[24606] = HEAP32[24606] | 512;
      jspDebuggerLoopIfCtrlC();
      jsvUnLock(jspeBlockOrStatement());
      if (!(HEAP8[$1 + 71 | 0] & 1)) {
-      HEAP32[24866] = HEAP32[24866] & -513;
+      HEAP32[24606] = HEAP32[24606] & -513;
      }
      label$27 : {
-      if (HEAP32[24866] & 4) {
-       HEAP32[24866] = HEAP32[24866] & -64 | 1;
+      if (HEAP32[24606] & 4) {
+       HEAP32[24606] = HEAP32[24606] & -64 | 1;
        break label$27;
       }
-      if (HEAP32[24866] & 2) {
-       HEAP32[24866] = HEAP32[24866] & -64 | 1;
+      if (HEAP32[24606] & 2) {
+       HEAP32[24606] = HEAP32[24606] & -64 | 1;
        HEAP8[$1 + 98 | 0] = 1;
       }
      }
@@ -32259,7 +32259,7 @@ function jspeFactorObject() {
  $0 = global$0 - 32 | 0;
  global$0 = $0;
  label$1 : {
-  if ((HEAP32[24866] & 63) == 1) {
+  if ((HEAP32[24606] & 63) == 1) {
    HEAP32[$0 + 24 >> 2] = jsvNewWithFlags(5);
    if (!HEAP32[$0 + 24 >> 2]) {
     jspSetError();
@@ -32271,11 +32271,11 @@ function jspeFactorObject() {
     break label$1;
    }
    while (1) {
-    if (HEAP32[24866] & 80 ? 0 : HEAP16[HEAP32[14856] + 2 >> 1] != 125) {
+    if (HEAP32[24606] & 80 ? 0 : HEAP16[HEAP32[14596] + 2 >> 1] != 125) {
      HEAP32[$0 + 20 >> 2] = 0;
      label$9 : {
       if (jslIsIDOrReservedWord() & 1) {
-       if ((HEAP32[24866] & 63) == 1) {
+       if ((HEAP32[24606] & 63) == 1) {
         HEAP32[$0 + 20 >> 2] = jslGetTokenValueAsVar();
        }
        jslGetNextToken();
@@ -32284,13 +32284,13 @@ function jspeFactorObject() {
       label$12 : {
        label$13 : {
         label$14 : {
-         if (HEAP16[HEAP32[14856] + 2 >> 1] == 131 | HEAP16[HEAP32[14856] + 2 >> 1] == 133 | (HEAP16[HEAP32[14856] + 2 >> 1] == 130 | HEAP16[HEAP32[14856] + 2 >> 1] == 129)) {
+         if (HEAP16[HEAP32[14596] + 2 >> 1] == 131 | HEAP16[HEAP32[14596] + 2 >> 1] == 133 | (HEAP16[HEAP32[14596] + 2 >> 1] == 130 | HEAP16[HEAP32[14596] + 2 >> 1] == 129)) {
           break label$14;
          }
-         if (HEAP16[HEAP32[14856] + 2 >> 1] == 180 | HEAP16[HEAP32[14856] + 2 >> 1] == 181 | HEAP16[HEAP32[14856] + 2 >> 1] == 182) {
+         if (HEAP16[HEAP32[14596] + 2 >> 1] == 180 | HEAP16[HEAP32[14596] + 2 >> 1] == 181 | HEAP16[HEAP32[14596] + 2 >> 1] == 182) {
           break label$14;
          }
-         if (HEAP16[HEAP32[14856] + 2 >> 1] != 183) {
+         if (HEAP16[HEAP32[14596] + 2 >> 1] != 183) {
           break label$13;
          }
         }
@@ -32305,7 +32305,7 @@ function jspeFactorObject() {
      }
      label$16 : {
       label$17 : {
-       if (HEAP16[HEAP32[14856] + 2 >> 1] != 128) {
+       if (HEAP16[HEAP32[14596] + 2 >> 1] != 128) {
         break label$17;
        }
        if (!(jsvIsString(HEAP32[$0 + 20 >> 2]) & 1)) {
@@ -32328,7 +32328,7 @@ function jspeFactorObject() {
        HEAP32[$0 + 28 >> 2] = HEAP32[$0 + 24 >> 2];
        break label$1;
       }
-      if ((HEAP32[24866] & 63) == 1) {
+      if ((HEAP32[24606] & 63) == 1) {
        HEAP32[$0 + 20 >> 2] = jsvAsArrayIndexAndUnLock(HEAP32[$0 + 20 >> 2]);
        HEAP32[$0 + 8 >> 2] = jsvFindChildFromVar(HEAP32[$0 + 24 >> 2], HEAP32[$0 + 20 >> 2], 1);
        if (HEAP32[$0 + 8 >> 2]) {
@@ -32338,7 +32338,7 @@ function jspeFactorObject() {
       }
      }
      jsvUnLock(HEAP32[$0 + 20 >> 2]);
-     if (HEAP16[HEAP32[14856] + 2 >> 1] != 125) {
+     if (HEAP16[HEAP32[14596] + 2 >> 1] != 125) {
       if (!(jslMatch(44) & 1)) {
        HEAP32[$0 + 28 >> 2] = HEAP32[$0 + 24 >> 2];
        break label$1;
@@ -32660,7 +32660,7 @@ function jswrap_storagefile_getLength($0) {
  global$0 = $1;
  $2 = $1 + 200 | 0;
  HEAP32[$1 + 236 >> 2] = $0;
- HEAP32[$1 + 232 >> 2] = jsvObjectGetChild(HEAP32[$1 + 236 >> 2], 41032, 0);
+ HEAP32[$1 + 232 >> 2] = jsvObjectGetChild(HEAP32[$1 + 236 >> 2], 40004, 0);
  jsfNameFromVar($2, HEAP32[$1 + 232 >> 2]);
  jsvUnLock(HEAP32[$1 + 232 >> 2]);
  HEAP32[$1 + 196 >> 2] = 27;
@@ -32813,7 +32813,7 @@ function jsfGetJSONForObjectItWithCallback($0, $1, $2, $3, $4, $5, $6) {
    if (!(HEAP8[$7 + 39 | 0] & 1)) {
     HEAP32[$7 + 48 >> 2] = HEAP32[$7 + 48 >> 2] + 1;
     if (!(HEAP8[$7 + 55 | 0] & 1)) {
-     cbprintf(HEAP32[$7 + 60 >> 2], HEAP32[$7 + 56 >> 2], HEAP32[$7 + 72 >> 2] & 4 ? 38320 : 38239, 0);
+     cbprintf(HEAP32[$7 + 60 >> 2], HEAP32[$7 + 56 >> 2], HEAP32[$7 + 72 >> 2] & 4 ? 37296 : 37215, 0);
     }
     $0 = $7;
     if (HEAP32[$7 + 72 >> 2] & 1) {
@@ -32859,12 +32859,12 @@ function jsfGetJSONForObjectItWithCallback($0, $1, $2, $3, $4, $5, $6) {
     $1 = HEAP32[$7 + 60 >> 2];
     $2 = HEAP32[$7 + 56 >> 2];
     if (HEAP8[$7 + 37 | 0] & 1) {
-     $0 = HEAP32[$7 + 72 >> 2] & 1024 ? 38462 : 38467;
+     $0 = HEAP32[$7 + 72 >> 2] & 1024 ? 37438 : 37443;
     } else {
-     $0 = 38472;
+     $0 = 37448;
     }
     $3 = HEAP32[$7 + 44 >> 2];
-    HEAP32[$7 + 4 >> 2] = HEAP32[$7 + 72 >> 2] & 4 ? 38477 : 38480;
+    HEAP32[$7 + 4 >> 2] = HEAP32[$7 + 72 >> 2] & 4 ? 37453 : 37456;
     HEAP32[$7 >> 2] = $3;
     cbprintf($1, $2, $0, $7);
     if (HEAP8[$7 + 55 | 0] & 1) {
@@ -32973,20 +32973,20 @@ function utilTimerRemoveTask($0) {
  global$0 = $2;
  HEAP32[$2 + 8 >> 2] = 15;
  HEAP32[$2 + 4 >> 2] = $0;
- HEAP8[$2 + 3 | 0] = HEAPU8[101425];
+ HEAP8[$2 + 3 | 0] = HEAPU8[100385];
  label$1 : {
-  if (HEAPU8[$2 + 3 | 0] != HEAPU8[101426]) {
-   HEAP8[$2 + 2 | 0] = HEAPU8[101426] + 15 & 15;
+  if (HEAPU8[$2 + 3 | 0] != HEAPU8[100386]) {
+   HEAP8[$2 + 2 | 0] = HEAPU8[100386] + 15 & 15;
    HEAP8[$2 + 3 | 0] = HEAPU8[$2 + 3 | 0] + 15 & 15;
    while (1) {
     if (HEAPU8[$2 + 3 | 0] != HEAPU8[$2 + 2 | 0]) {
-     if (FUNCTION_TABLE[HEAP32[$2 + 8 >> 2]](Math_imul(HEAPU8[$2 + 3 | 0], 29) + 101440 | 0, HEAP32[$2 + 4 >> 2]) & 1) {
+     if (FUNCTION_TABLE[HEAP32[$2 + 8 >> 2]](Math_imul(HEAPU8[$2 + 3 | 0], 29) + 100400 | 0, HEAP32[$2 + 4 >> 2]) & 1) {
       HEAP8[$2 + 1 | 0] = HEAPU8[$2 + 3 | 0] + 15 & 15;
       while (1) {
        if (HEAPU8[$2 + 1 | 0] != HEAPU8[$2 + 2 | 0]) {
-        $1 = Math_imul(HEAPU8[$2 + 1 | 0], 29) + 101440 | 0;
+        $1 = Math_imul(HEAPU8[$2 + 1 | 0], 29) + 100400 | 0;
         $4 = HEAPU8[$1 + 4 | 0] | HEAPU8[$1 + 5 | 0] << 8 | (HEAPU8[$1 + 6 | 0] << 16 | HEAPU8[$1 + 7 | 0] << 24);
-        $0 = Math_imul(HEAPU8[$2 + 3 | 0], 29) + 101440 | 0;
+        $0 = Math_imul(HEAPU8[$2 + 3 | 0], 29) + 100400 | 0;
         $3 = HEAPU8[$1 | 0] | HEAPU8[$1 + 1 | 0] << 8 | (HEAPU8[$1 + 2 | 0] << 16 | HEAPU8[$1 + 3 | 0] << 24);
         HEAP8[$0 | 0] = $3;
         HEAP8[$0 + 1 | 0] = $3 >>> 8;
@@ -33032,7 +33032,7 @@ function utilTimerRemoveTask($0) {
        }
        break;
       }
-      HEAP8[101426] = HEAPU8[101426] + 1 & 15;
+      HEAP8[100386] = HEAPU8[100386] + 1 & 15;
       HEAP8[$2 + 15 | 0] = 1;
       break label$1;
      } else {
@@ -33072,15 +33072,15 @@ function $28anonymous_20namespace_29__FastFloatToBufferLeft_28float_2c_20char__2
  label$2 : {
   if (HEAP32[$2 + 32 >> 2] == 128) {
    if (!HEAP32[$2 + 28 >> 2]) {
-    HEAP32[$2 + 64 >> 2] = $28anonymous_20namespace_29__StrCatStr_28char__2c_20int_2c_20char_20const__29(HEAP32[$2 + 64 >> 2], HEAP32[$2 + 60 >> 2] - HEAP32[$2 + 64 >> 2] | 0, 43844);
+    HEAP32[$2 + 64 >> 2] = $28anonymous_20namespace_29__StrCatStr_28char__2c_20int_2c_20char_20const__29(HEAP32[$2 + 64 >> 2], HEAP32[$2 + 60 >> 2] - HEAP32[$2 + 64 >> 2] | 0, 42804);
     break label$2;
    }
-   HEAP32[$2 + 64 >> 2] = $28anonymous_20namespace_29__StrCatStr_28char__2c_20int_2c_20char_20const__29(HEAP32[$2 + 64 >> 2], HEAP32[$2 + 60 >> 2] - HEAP32[$2 + 64 >> 2] | 0, 43848);
+   HEAP32[$2 + 64 >> 2] = $28anonymous_20namespace_29__StrCatStr_28char__2c_20int_2c_20char_20const__29(HEAP32[$2 + 64 >> 2], HEAP32[$2 + 60 >> 2] - HEAP32[$2 + 64 >> 2] | 0, 42808);
    break label$2;
   }
   HEAP32[$2 + 24 >> 2] = 13;
-  $1 = HEAPU8[43861] | HEAPU8[43862] << 8 | (HEAPU8[43863] << 16 | HEAPU8[43864] << 24);
-  $3 = HEAPU8[43857] | HEAPU8[43858] << 8 | (HEAPU8[43859] << 16 | HEAPU8[43860] << 24);
+  $1 = HEAPU8[42821] | HEAPU8[42822] << 8 | (HEAPU8[42823] << 16 | HEAPU8[42824] << 24);
+  $3 = HEAPU8[42817] | HEAPU8[42818] << 8 | (HEAPU8[42819] << 16 | HEAPU8[42820] << 24);
   HEAP8[$2 + 16 | 0] = $3;
   HEAP8[$2 + 17 | 0] = $3 >>> 8;
   HEAP8[$2 + 18 | 0] = $3 >>> 16;
@@ -33089,8 +33089,8 @@ function $28anonymous_20namespace_29__FastFloatToBufferLeft_28float_2c_20char__2
   HEAP8[$2 + 21 | 0] = $1 >>> 8;
   HEAP8[$2 + 22 | 0] = $1 >>> 16;
   HEAP8[$2 + 23 | 0] = $1 >>> 24;
-  $1 = HEAPU8[43856] | HEAPU8[43857] << 8 | (HEAPU8[43858] << 16 | HEAPU8[43859] << 24);
-  $3 = HEAPU8[43852] | HEAPU8[43853] << 8 | (HEAPU8[43854] << 16 | HEAPU8[43855] << 24);
+  $1 = HEAPU8[42816] | HEAPU8[42817] << 8 | (HEAPU8[42818] << 16 | HEAPU8[42819] << 24);
+  $3 = HEAPU8[42812] | HEAPU8[42813] << 8 | (HEAPU8[42814] << 16 | HEAPU8[42815] << 24);
   HEAP8[$2 + 11 | 0] = $3;
   HEAP8[$2 + 12 | 0] = $3 >>> 8;
   HEAP8[$2 + 13 | 0] = $3 >>> 16;
@@ -33115,7 +33115,7 @@ function $28anonymous_20namespace_29__FastFloatToBufferLeft_28float_2c_20char__2
   HEAP32[$2 + 64 >> 2] = HEAP32[$2 + 64 >> 2] + 1;
   HEAP8[HEAP32[$2 + 64 >> 2]] = 0;
   HEAP32[$2 + 64 >> 2] = $28anonymous_20namespace_29__StrCatUInt32_28char__2c_20int_2c_20unsigned_20int_2c_20int_29(HEAP32[$2 + 64 >> 2], HEAP32[$2 + 60 >> 2] - HEAP32[$2 + 64 >> 2] | 0, HEAP32[$2 + 4 >> 2]);
-  HEAP32[$2 + 64 >> 2] = $28anonymous_20namespace_29__StrCatStr_28char__2c_20int_2c_20char_20const__29(HEAP32[$2 + 64 >> 2], HEAP32[$2 + 60 >> 2] - HEAP32[$2 + 64 >> 2] | 0, 43865);
+  HEAP32[$2 + 64 >> 2] = $28anonymous_20namespace_29__StrCatStr_28char__2c_20int_2c_20char_20const__29(HEAP32[$2 + 64 >> 2], HEAP32[$2 + 60 >> 2] - HEAP32[$2 + 64 >> 2] | 0, 42825);
   HEAP32[$2 + 64 >> 2] = $28anonymous_20namespace_29__StrCatInt32_28char__2c_20int_2c_20int_29(HEAP32[$2 + 64 >> 2], HEAP32[$2 + 60 >> 2] - HEAP32[$2 + 64 >> 2] | 0, HEAP32[$2 + 32 >> 2]);
  }
  HEAP32[$2 + 76 >> 2] = HEAP32[$2 + 64 >> 2];
@@ -33139,7 +33139,7 @@ function jspeFunctionDefinitionInternal($0, $1) {
     break label$1;
    }
    label$5 : {
-    if (HEAP16[HEAP32[14856] + 2 >> 1] != 131) {
+    if (HEAP16[HEAP32[14596] + 2 >> 1] != 131) {
      break label$5;
     }
     if (strcmp(jslGetTokenValueAsString(), 3778)) {
@@ -33147,29 +33147,29 @@ function jspeFunctionDefinitionInternal($0, $1) {
     }
     jsWarn(3787, 0);
    }
-   if (!(!HEAP32[$2 + 72 >> 2] | HEAP16[HEAP32[14856] + 2 >> 1] != 171)) {
+   if (!(!HEAP32[$2 + 72 >> 2] | HEAP16[HEAP32[14596] + 2 >> 1] != 171)) {
     HEAP16[HEAP32[$2 + 72 >> 2] + 14 >> 1] = HEAPU16[HEAP32[$2 + 72 >> 2] + 14 >> 1] & -64 | 8;
     jslGetNextToken();
    }
   }
   HEAP32[$2 + 64 >> 2] = 0;
-  if (!(!HEAP32[$2 + 72 >> 2] | !HEAPU16[HEAP32[14856] + 102 >> 1])) {
-   HEAP32[$2 + 64 >> 2] = (jslGetLineNumber() + HEAPU16[HEAP32[14856] + 102 >> 1] | 0) - 1;
+  if (!(!HEAP32[$2 + 72 >> 2] | !HEAPU16[HEAP32[14596] + 102 >> 1])) {
+   HEAP32[$2 + 64 >> 2] = (jslGetLineNumber() + HEAPU16[HEAP32[14596] + 102 >> 1] | 0) - 1;
   }
-  jslCharPosClone($2 + 40 | 0, HEAP32[14856] + 4 | 0);
+  jslCharPosClone($2 + 40 | 0, HEAP32[14596] + 4 | 0);
   HEAP32[$2 + 36 >> 2] = -1;
   label$8 : {
    if (!(HEAP8[$2 + 71 | 0] & 1)) {
     HEAP32[$2 + 32 >> 2] = 0;
     while (1) {
-     if ((HEAP16[HEAP32[14856] + 2 >> 1] ? HEAP32[$2 + 32 >> 2] ? 1 : HEAP16[HEAP32[14856] + 2 >> 1] != 125 : 0) & 1) {
-      if (HEAP16[HEAP32[14856] + 2 >> 1] == 123) {
+     if ((HEAP16[HEAP32[14596] + 2 >> 1] ? HEAP32[$2 + 32 >> 2] ? 1 : HEAP16[HEAP32[14596] + 2 >> 1] != 125 : 0) & 1) {
+      if (HEAP16[HEAP32[14596] + 2 >> 1] == 123) {
        HEAP32[$2 + 32 >> 2] = HEAP32[$2 + 32 >> 2] + 1;
       }
-      if (HEAP16[HEAP32[14856] + 2 >> 1] == 125) {
+      if (HEAP16[HEAP32[14596] + 2 >> 1] == 125) {
        HEAP32[$2 + 32 >> 2] = HEAP32[$2 + 32 >> 2] + -1;
       }
-      HEAP32[$2 + 36 >> 2] = jsvStringIteratorGetIndex(HEAP32[14856] + 108 | 0) - 1;
+      HEAP32[$2 + 36 >> 2] = jsvStringIteratorGetIndex(HEAP32[14596] + 108 | 0) - 1;
       jslGetNextToken();
       continue;
      }
@@ -33177,17 +33177,17 @@ function jspeFunctionDefinitionInternal($0, $1) {
     }
     break label$8;
    }
-   HEAP32[$2 + 28 >> 2] = HEAP32[24866];
-   HEAP32[24866] = 0;
+   HEAP32[$2 + 28 >> 2] = HEAP32[24606];
+   HEAP32[24606] = 0;
    jsvUnLock(__jspeAssignmentExpression(jspeConditionalExpression()));
-   HEAP32[24866] = HEAP32[$2 + 28 >> 2];
-   HEAP32[$2 + 36 >> 2] = jsvStringIteratorGetIndex(HEAP32[14856] + 4 | 0) - 1;
+   HEAP32[24606] = HEAP32[$2 + 28 >> 2];
+   HEAP32[$2 + 36 >> 2] = jsvStringIteratorGetIndex(HEAP32[14596] + 4 | 0) - 1;
   }
   if (!(!HEAP32[$2 + 72 >> 2] | HEAP32[$2 + 36 >> 2] <= 0)) {
    label$19 : {
-    if (jsvIsNativeString(HEAP32[HEAP32[14856] + 104 >> 2]) & 1) {
+    if (jsvIsNativeString(HEAP32[HEAP32[14596] + 104 >> 2]) & 1) {
      HEAP32[$2 + 20 >> 2] = jsvStringIteratorGetIndex($2 + 40 | 0) - 1;
-     HEAP32[$2 + 24 >> 2] = jsvNewNativeString(HEAP32[HEAP32[HEAP32[14856] + 104 >> 2] >> 2] + HEAP32[$2 + 20 >> 2] | 0, HEAP32[$2 + 36 >> 2] - HEAP32[$2 + 20 >> 2] | 0);
+     HEAP32[$2 + 24 >> 2] = jsvNewNativeString(HEAP32[HEAP32[HEAP32[14596] + 104 >> 2] >> 2] + HEAP32[$2 + 20 >> 2] | 0, HEAP32[$2 + 36 >> 2] - HEAP32[$2 + 20 >> 2] | 0);
      break label$19;
     }
     label$21 : {
@@ -33246,11 +33246,11 @@ function tflite__ops__micro__reshape__ReshapeOutput_28TfLiteContext__2c_20TfLite
        $3 = HEAP32[$2 + 108 >> 2];
        HEAP32[$2 + 20 >> 2] = -1;
        HEAP32[$2 + 16 >> 2] = $3;
-       HEAP32[$2 + 12 >> 2] = 46503;
-       HEAP32[$2 + 8 >> 2] = 46491;
+       HEAP32[$2 + 12 >> 2] = 45463;
+       HEAP32[$2 + 8 >> 2] = 45451;
        HEAP32[$2 + 4 >> 2] = 54;
-       HEAP32[$2 >> 2] = 46393;
-       FUNCTION_TABLE[$0]($1, 46367, $2);
+       HEAP32[$2 >> 2] = 45353;
+       FUNCTION_TABLE[$0]($1, 45327, $2);
        HEAP32[$2 + 140 >> 2] = 1;
        break label$2;
       }
@@ -33274,11 +33274,11 @@ function tflite__ops__micro__reshape__ReshapeOutput_28TfLiteContext__2c_20TfLite
    $3 = HEAP32[HEAP32[$2 + 128 >> 2] >> 2];
    HEAP32[$2 + 52 >> 2] = HEAP32[HEAP32[$2 + 124 >> 2] >> 2];
    HEAP32[$2 + 48 >> 2] = $3;
-   HEAP32[$2 + 44 >> 2] = 46518;
-   HEAP32[$2 + 40 >> 2] = 46506;
+   HEAP32[$2 + 44 >> 2] = 45478;
+   HEAP32[$2 + 40 >> 2] = 45466;
    HEAP32[$2 + 36 >> 2] = 65;
-   HEAP32[$2 + 32 >> 2] = 46393;
-   FUNCTION_TABLE[$0]($1, 46367, $2 + 32 | 0);
+   HEAP32[$2 + 32 >> 2] = 45353;
+   FUNCTION_TABLE[$0]($1, 45327, $2 + 32 | 0);
    HEAP32[$2 + 140 >> 2] = 1;
    break label$2;
   }
@@ -33288,11 +33288,11 @@ function tflite__ops__micro__reshape__ReshapeOutput_28TfLiteContext__2c_20TfLite
    $3 = HEAP32[$2 + 120 >> 2];
    HEAP32[$2 + 84 >> 2] = HEAP32[$2 + 112 >> 2];
    HEAP32[$2 + 80 >> 2] = $3;
-   HEAP32[$2 + 76 >> 2] = 46550;
-   HEAP32[$2 + 72 >> 2] = 46531;
+   HEAP32[$2 + 76 >> 2] = 45510;
+   HEAP32[$2 + 72 >> 2] = 45491;
    HEAP32[$2 + 68 >> 2] = 66;
-   HEAP32[$2 + 64 >> 2] = 46393;
-   FUNCTION_TABLE[$0]($1, 46367, $2 - -64 | 0);
+   HEAP32[$2 + 64 >> 2] = 45353;
+   FUNCTION_TABLE[$0]($1, 45327, $2 - -64 | 0);
    HEAP32[$2 + 140 >> 2] = 1;
    break label$2;
   }
@@ -33312,7 +33312,7 @@ function jsfGetJSONForFunctionWithCallback($0, $1, $2, $3) {
  HEAP32[$4 + 108 >> 2] = 0;
  jsvObjectIteratorNew($4 + 104 | 0, HEAP32[$4 + 124 >> 2]);
  HEAP8[$4 + 103 | 0] = 1;
- cbprintf(HEAP32[$4 + 116 >> 2], HEAP32[$4 + 112 >> 2], 38237, 0);
+ cbprintf(HEAP32[$4 + 116 >> 2], HEAP32[$4 + 112 >> 2], 37213, 0);
  while (1) {
   if (jsvObjectIteratorHasValue($4 + 104 | 0) & 1) {
    HEAP32[$4 + 96 >> 2] = jsvObjectIteratorGetKey($4 + 104 | 0);
@@ -33323,13 +33323,13 @@ function jsfGetJSONForFunctionWithCallback($0, $1, $2, $3) {
        HEAP8[$4 + 103 | 0] = 0;
        break label$5;
       }
-      cbprintf(HEAP32[$4 + 116 >> 2], HEAP32[$4 + 112 >> 2], 38239, 0);
+      cbprintf(HEAP32[$4 + 116 >> 2], HEAP32[$4 + 112 >> 2], 37215, 0);
      }
      HEAP32[$4 + 92 >> 2] = jsvNewFromStringVar(HEAP32[$4 + 96 >> 2], 1, 2147483647);
      $0 = HEAP32[$4 + 116 >> 2];
      $1 = HEAP32[$4 + 112 >> 2];
      HEAP32[$4 >> 2] = HEAP32[$4 + 92 >> 2];
-     cbprintf($0, $1, 38241, $4);
+     cbprintf($0, $1, 37217, $4);
      jsvUnLock(HEAP32[$4 + 92 >> 2]);
      break label$3;
     }
@@ -33337,7 +33337,7 @@ function jsfGetJSONForFunctionWithCallback($0, $1, $2, $3) {
      if (!(jsvIsString(HEAP32[$4 + 96 >> 2]) & 1)) {
       break label$7;
      }
-     if (!(jsvIsStringEqual(HEAP32[$4 + 96 >> 2], 38244) & 1)) {
+     if (!(jsvIsStringEqual(HEAP32[$4 + 96 >> 2], 37220) & 1)) {
       break label$7;
      }
      HEAP32[$4 + 108 >> 2] = jsvObjectIteratorGetValue($4 + 104 | 0);
@@ -33351,10 +33351,10 @@ function jsfGetJSONForFunctionWithCallback($0, $1, $2, $3) {
   break;
  }
  jsvObjectIteratorFree($4 + 104 | 0);
- cbprintf(HEAP32[$4 + 116 >> 2], HEAP32[$4 + 112 >> 2], 38249, 0);
+ cbprintf(HEAP32[$4 + 116 >> 2], HEAP32[$4 + 112 >> 2], 37225, 0);
  label$8 : {
   if (jsvIsNative(HEAP32[$4 + 124 >> 2]) & 1) {
-   cbprintf(HEAP32[$4 + 116 >> 2], HEAP32[$4 + 112 >> 2], 38252, 0);
+   cbprintf(HEAP32[$4 + 116 >> 2], HEAP32[$4 + 112 >> 2], 37228, 0);
    break label$8;
   }
   label$10 : {
@@ -33362,14 +33362,14 @@ function jsfGetJSONForFunctionWithCallback($0, $1, $2, $3) {
     if (HEAP32[$4 + 120 >> 2] & 8) {
      $0 = HEAP32[$4 + 116 >> 2];
      $1 = HEAP32[$4 + 112 >> 2];
-     HEAP32[$4 + 16 >> 2] = HEAP32[14371];
-     cbprintf($0, $1, 38270, $4 + 16 | 0);
+     HEAP32[$4 + 16 >> 2] = HEAP32[14111];
+     cbprintf($0, $1, 37246, $4 + 16 | 0);
      break label$10;
     }
     HEAP8[$4 + 91 | 0] = (jsvGetStringIndexOf(HEAP32[$4 + 108 >> 2]) | 0) >= 0;
-    FUNCTION_TABLE[HEAP32[$4 + 116 >> 2]](HEAP8[$4 + 91 | 0] & 1 ? 38275 : 38280, HEAP32[$4 + 112 >> 2]);
+    FUNCTION_TABLE[HEAP32[$4 + 116 >> 2]](HEAP8[$4 + 91 | 0] & 1 ? 37251 : 37256, HEAP32[$4 + 112 >> 2]);
     if (jsvIsFunctionReturn(HEAP32[$4 + 124 >> 2]) & 1) {
-     FUNCTION_TABLE[HEAP32[$4 + 116 >> 2]](38282, HEAP32[$4 + 112 >> 2]);
+     FUNCTION_TABLE[HEAP32[$4 + 116 >> 2]](37258, HEAP32[$4 + 112 >> 2]);
     }
     HEAP8[$4 + 47 | 0] = 0;
     jsvStringIteratorNew($4 + 24 | 0, HEAP32[$4 + 108 >> 2], 0);
@@ -33377,7 +33377,7 @@ function jsfGetJSONForFunctionWithCallback($0, $1, $2, $3) {
      if (jsvStringIteratorHasChar($4 + 24 | 0) & 1) {
       HEAP8[$4 + 23 | 0] = jsvStringIteratorGetChar($4 + 24 | 0);
       if (jslNeedSpaceBetween(HEAPU8[$4 + 47 | 0], HEAPU8[$4 + 23 | 0]) & 1) {
-       FUNCTION_TABLE[HEAP32[$4 + 116 >> 2]](38290, HEAP32[$4 + 112 >> 2]);
+       FUNCTION_TABLE[HEAP32[$4 + 116 >> 2]](37266, HEAP32[$4 + 112 >> 2]);
       }
       $0 = $4 + 24 | 0;
       $1 = $4 + 48 | 0;
@@ -33390,10 +33390,10 @@ function jsfGetJSONForFunctionWithCallback($0, $1, $2, $3) {
      break;
     }
     jsvStringIteratorFree($4 + 24 | 0);
-    FUNCTION_TABLE[HEAP32[$4 + 116 >> 2]](HEAP8[$4 + 91 | 0] & 1 ? 38292 : 38295, HEAP32[$4 + 112 >> 2]);
+    FUNCTION_TABLE[HEAP32[$4 + 116 >> 2]](HEAP8[$4 + 91 | 0] & 1 ? 37268 : 37271, HEAP32[$4 + 112 >> 2]);
     break label$10;
    }
-   cbprintf(HEAP32[$4 + 116 >> 2], HEAP32[$4 + 112 >> 2], 38297, 0);
+   cbprintf(HEAP32[$4 + 116 >> 2], HEAP32[$4 + 112 >> 2], 37273, 0);
   }
  }
  jsvUnLock(HEAP32[$4 + 108 >> 2]);
@@ -34654,7 +34654,7 @@ function lcdST7789_flip($0) {
  $1 = global$0 + -64 | 0;
  global$0 = $1;
  HEAP32[$1 + 60 >> 2] = $0;
- $0 = HEAP32[25480] + -1 | 0;
+ $0 = HEAP32[25220] + -1 | 0;
  label$1 : {
   if ($0 >>> 0 > 3) {
    break label$1;
@@ -34663,23 +34663,23 @@ function lcdST7789_flip($0) {
    switch ($0 - 1 | 0) {
    case 0:
     label$5 : {
-     if (!HEAP32[25478]) {
-      HEAP32[25478] = 160;
+     if (!HEAP32[25218]) {
+      HEAP32[25218] = 160;
       break label$5;
      }
-     HEAP32[25478] = 0;
+     HEAP32[25218] = 0;
     }
     lcdST7789_scrollCmd();
     break label$1;
    case 1:
     $2 = $1 + 48 | 0;
     $0 = HEAP32[$1 + 60 >> 2];
-    HEAP32[$1 + 52 >> 2] = jsvObjectGetChild(HEAPU8[$0 | 0] | HEAPU8[$0 + 1 | 0] << 8 | (HEAPU8[$0 + 2 | 0] << 16 | HEAPU8[$0 + 3 | 0] << 24), 31751, 0);
+    HEAP32[$1 + 52 >> 2] = jsvObjectGetChild(HEAPU8[$0 | 0] | HEAPU8[$0 + 1 | 0] << 8 | (HEAPU8[$0 + 2 | 0] << 16 | HEAPU8[$0 + 3 | 0] << 24), 30727, 0);
     HEAP32[$1 + 48 >> 2] = 0;
     HEAP32[$1 + 44 >> 2] = jsvGetDataPointer(HEAP32[$1 + 52 >> 2], $2);
     jsvUnLock(HEAP32[$1 + 52 >> 2]);
     if (!(!HEAP32[$1 + 44 >> 2] | HEAPU32[$1 + 48 >> 2] < 14400)) {
-     HEAP32[25478] = 0;
+     HEAP32[25218] = 0;
      lcdST7789_scrollCmd();
      lcdST7789_blitStart();
      HEAP32[$1 + 40 >> 2] = 0;
@@ -34690,7 +34690,7 @@ function lcdST7789_flip($0) {
         if (HEAP32[$1 + 36 >> 2] < 120) {
          $0 = HEAP32[$1 + 44 >> 2];
          HEAP32[$1 + 44 >> 2] = $0 + 1;
-         HEAP16[$1 + 34 >> 1] = HEAPU16[(HEAPU8[$0 | 0] << 1) + 41968 >> 1];
+         HEAP16[$1 + 34 >> 1] = HEAPU16[(HEAPU8[$0 | 0] << 1) + 40928 >> 1];
          lcdST7789_blitPixel(HEAPU16[$1 + 34 >> 1]);
          lcdST7789_blitPixel(HEAPU16[$1 + 34 >> 1]);
          HEAP32[$1 + 36 >> 2] = HEAP32[$1 + 36 >> 2] + 1;
@@ -34716,12 +34716,12 @@ function lcdST7789_flip($0) {
   }
   $2 = $1 + 24 | 0;
   $0 = HEAP32[$1 + 60 >> 2];
-  HEAP32[$1 + 28 >> 2] = jsvObjectGetChild(HEAPU8[$0 | 0] | HEAPU8[$0 + 1 | 0] << 8 | (HEAPU8[$0 + 2 | 0] << 16 | HEAPU8[$0 + 3 | 0] << 24), 31751, 0);
+  HEAP32[$1 + 28 >> 2] = jsvObjectGetChild(HEAPU8[$0 | 0] | HEAPU8[$0 + 1 | 0] << 8 | (HEAPU8[$0 + 2 | 0] << 16 | HEAPU8[$0 + 3 | 0] << 24), 30727, 0);
   HEAP32[$1 + 24 >> 2] = 0;
   HEAP32[$1 + 20 >> 2] = jsvGetDataPointer(HEAP32[$1 + 28 >> 2], $2);
   jsvUnLock(HEAP32[$1 + 28 >> 2]);
   if (!(!HEAP32[$1 + 20 >> 2] | HEAPU32[$1 + 24 >> 2] < 6400)) {
-   HEAP32[25478] = 0;
+   HEAP32[25218] = 0;
    lcdST7789_scrollCmd();
    lcdST7789_blitStart();
    HEAP32[$1 + 16 >> 2] = 0;
@@ -34735,7 +34735,7 @@ function lcdST7789_flip($0) {
         if (HEAP32[$1 + 8 >> 2] < 80) {
          $0 = HEAP32[$1 + 20 >> 2];
          HEAP32[$1 + 20 >> 2] = $0 + 1;
-         HEAP16[$1 + 6 >> 1] = HEAPU16[(HEAPU8[$0 | 0] << 1) + 41968 >> 1];
+         HEAP16[$1 + 6 >> 1] = HEAPU16[(HEAPU8[$0 | 0] << 1) + 40928 >> 1];
          lcdST7789_blitPixel(HEAPU16[$1 + 6 >> 1]);
          lcdST7789_blitPixel(HEAPU16[$1 + 6 >> 1]);
          lcdST7789_blitPixel(HEAPU16[$1 + 6 >> 1]);
@@ -34831,7 +34831,7 @@ function jswrap_banglejs_setLCDMode($0) {
  label$1 : {
   label$2 : {
    if (!(jsvIsUndefined(HEAP32[$1 + 108 >> 2]) & 1)) {
-    if (!(jsvIsStringEqual(HEAP32[$1 + 108 >> 2], 32087) & 1)) {
+    if (!(jsvIsStringEqual(HEAP32[$1 + 108 >> 2], 31063) & 1)) {
      break label$2;
     }
    }
@@ -34839,33 +34839,33 @@ function jswrap_banglejs_setLCDMode($0) {
    break label$1;
   }
   label$4 : {
-   if (jsvIsStringEqual(HEAP32[$1 + 108 >> 2], 32094) & 1) {
+   if (jsvIsStringEqual(HEAP32[$1 + 108 >> 2], 31070) & 1) {
     HEAP32[$1 + 104 >> 2] = 0;
     break label$4;
    }
    label$6 : {
-    if (jsvIsStringEqual(HEAP32[$1 + 108 >> 2], 32099) & 1) {
+    if (jsvIsStringEqual(HEAP32[$1 + 108 >> 2], 31075) & 1) {
      HEAP32[$1 + 104 >> 2] = 2;
      break label$6;
     }
     label$8 : {
-     if (jsvIsStringEqual(HEAP32[$1 + 108 >> 2], 32114) & 1) {
+     if (jsvIsStringEqual(HEAP32[$1 + 108 >> 2], 31090) & 1) {
       HEAP32[$1 + 104 >> 2] = 3;
       break label$8;
      }
      label$10 : {
-      if (jsvIsStringEqual(HEAP32[$1 + 108 >> 2], 32122) & 1) {
+      if (jsvIsStringEqual(HEAP32[$1 + 108 >> 2], 31098) & 1) {
        HEAP32[$1 + 104 >> 2] = 4;
        break label$10;
       }
       HEAP32[$1 >> 2] = HEAP32[$1 + 108 >> 2];
-      jsExceptionHere(1, 32128, $1);
+      jsExceptionHere(1, 31104, $1);
      }
     }
    }
   }
  }
- HEAP32[$1 + 100 >> 2] = jsvObjectGetChild(HEAP32[24863], 32064, 0);
+ HEAP32[$1 + 100 >> 2] = jsvObjectGetChild(HEAP32[24603], 31040, 0);
  label$12 : {
   if (!HEAP32[$1 + 100 >> 2]) {
    break label$12;
@@ -34923,10 +34923,10 @@ function jswrap_banglejs_setLCDMode($0) {
    HEAP32[$1 + 16 >> 2] = jsvNewFlatStringOfLength(HEAP32[$1 + 20 >> 2]);
    label$19 : {
     if (HEAP32[$1 + 16 >> 2]) {
-     jsvObjectSetChildAndUnLock(HEAPU8[$1 + 24 | 0] | HEAPU8[$1 + 25 | 0] << 8 | (HEAPU8[$1 + 26 | 0] << 16 | HEAPU8[$1 + 27 | 0] << 24), 32148, jsvNewArrayBufferFromString(HEAP32[$1 + 16 >> 2], HEAP32[$1 + 20 >> 2]));
+     jsvObjectSetChildAndUnLock(HEAPU8[$1 + 24 | 0] | HEAPU8[$1 + 25 | 0] << 8 | (HEAPU8[$1 + 26 | 0] << 16 | HEAPU8[$1 + 27 | 0] << 24), 31124, jsvNewArrayBufferFromString(HEAP32[$1 + 16 >> 2], HEAP32[$1 + 20 >> 2]));
      break label$19;
     }
-    jsExceptionHere(1, 32155, 0);
+    jsExceptionHere(1, 31131, 0);
     jswrap_banglejs_setLCDMode(0);
     break label$12;
    }
@@ -34945,7 +34945,7 @@ function jsfSaveToFlash() {
  $0 = global$0 - 384 | 0;
  global$0 = $0;
  $1 = $0 + 344 | 0;
- HEAP32[$0 + 380 >> 2] = HEAP32[14353] << 4;
+ HEAP32[$0 + 380 >> 2] = HEAP32[14093] << 4;
  HEAP32[$0 + 376 >> 2] = _jsvGetAddressOf(1);
  jsiConsolePrintString(2087);
  jsfNameFromString($1, 2108);
@@ -35088,7 +35088,7 @@ function TfLiteStatus_20tflite__ops__micro__maximum_minimum__Eval__28tflite__ops
    $3 = TfLiteTypeGetName(HEAP32[HEAP32[$2 + 16 >> 2] >> 2]);
    HEAP32[$2 + 4 >> 2] = HEAP32[HEAP32[$2 + 16 >> 2] >> 2];
    HEAP32[$2 >> 2] = $3;
-   FUNCTION_TABLE[$0]($1, 51402, $2);
+   FUNCTION_TABLE[$0]($1, 50362, $2);
    HEAP32[$2 + 28 >> 2] = 1;
    break label$1;
   }
@@ -35144,7 +35144,7 @@ function TfLiteStatus_20tflite__ops__micro__maximum_minimum__Eval__28tflite__ops
    $3 = TfLiteTypeGetName(HEAP32[HEAP32[$2 + 16 >> 2] >> 2]);
    HEAP32[$2 + 4 >> 2] = HEAP32[HEAP32[$2 + 16 >> 2] >> 2];
    HEAP32[$2 >> 2] = $3;
-   FUNCTION_TABLE[$0]($1, 51402, $2);
+   FUNCTION_TABLE[$0]($1, 50362, $2);
    HEAP32[$2 + 28 >> 2] = 1;
    break label$1;
   }
@@ -35272,13 +35272,13 @@ function jswrap_banglejs_init() {
  var $0 = 0, $1 = 0, $2 = 0;
  $0 = global$0 - 144 | 0;
  global$0 = $0;
- HEAP32[63903] = 46;
- HEAP16[127805] = 0;
- HEAP8[255608] = 1;
- HEAP8[255636] = 255;
- HEAP32[63901] = 3e4;
- HEAP8[255620] = 0;
- HEAP32[$0 + 140 >> 2] = jspNewObject(0, 32521);
+ HEAP32[63643] = 46;
+ HEAP16[127285] = 0;
+ HEAP8[254568] = 1;
+ HEAP8[254596] = 255;
+ HEAP32[63641] = 3e4;
+ HEAP8[254580] = 0;
+ HEAP32[$0 + 140 >> 2] = jspNewObject(0, 31497);
  label$1 : {
   if (!HEAP32[$0 + 140 >> 2]) {
    break label$1;
@@ -35302,13 +35302,13 @@ function jswrap_banglejs_init() {
   HEAP8[$0 + 67 | 0] = $2 >>> 24;
   lcdST7789_init($1);
   graphicsSetVar($1);
-  jsvObjectSetChild(HEAP32[24862], 32530, HEAP32[$0 + 140 >> 2]);
-  jsvObjectSetChild(HEAP32[24863], 32064, HEAP32[$0 + 140 >> 2]);
+  jsvObjectSetChild(HEAP32[24602], 31506, HEAP32[$0 + 140 >> 2]);
+  jsvObjectSetChild(HEAP32[24603], 31040, HEAP32[$0 + 140 >> 2]);
   graphicsGetFromVar($1, HEAP32[$0 + 140 >> 2]);
   HEAP32[$0 + 60 >> 2] = jsvNewNativeFunction(498, 32768);
-  jsvObjectSetChildAndUnLock(HEAP32[$0 + 140 >> 2], 32532, HEAP32[$0 + 60 >> 2]);
+  jsvObjectSetChildAndUnLock(HEAP32[$0 + 140 >> 2], 31508, HEAP32[$0 + 60 >> 2]);
   HEAP8[$0 + 59 | 0] = 1;
-  if (HEAPU16[49742] & 64) {
+  if (HEAPU16[49222] & 64) {
    HEAP8[$0 + 59 | 0] = 0;
   }
   graphicsClear($0 - -64 | 0);
@@ -35321,23 +35321,23 @@ function jswrap_banglejs_init() {
    jsvUnLock(jswrap_graphics_drawImage(HEAP32[$0 + 140 >> 2], HEAP32[$0 + 52 >> 2], 9, HEAP32[$0 + 48 >> 2], 0));
    jsvUnLock(HEAP32[$0 + 52 >> 2]);
    HEAP32[$0 + 48 >> 2] = HEAP32[$0 + 48 >> 2] + 76;
-   HEAP32[$0 + 12 >> 2] = jsvNewFromString(32537);
+   HEAP32[$0 + 12 >> 2] = jsvNewFromString(31513);
    jsvGetString(HEAP32[$0 + 12 >> 2], $2, 20);
    jsvUnLock(HEAP32[$0 + 12 >> 2]);
-   jswrap_graphics_drawCString($1, HEAP32[$0 + 48 >> 2], 32538);
+   jswrap_graphics_drawCString($1, HEAP32[$0 + 48 >> 2], 31514);
    jswrap_graphics_drawCString($1, HEAP32[$0 + 48 >> 2] + 10 | 0, $2);
-   jswrap_graphics_drawCString($1, HEAP32[$0 + 48 >> 2] + 20 | 0, 32547);
+   jswrap_graphics_drawCString($1, HEAP32[$0 + 48 >> 2] + 20 | 0, 31519);
   }
   graphicsSetVar($0 - -64 | 0);
   jsvUnLock(HEAP32[$0 + 140 >> 2]);
-  HEAP32[63919] = 0;
-  HEAP8[255680] = 0;
-  HEAP8[255640] = 0;
-  HEAP8[255681] = 0;
+  HEAP32[63659] = 0;
+  HEAP8[254640] = 0;
+  HEAP8[254600] = 0;
+  HEAP8[254641] = 0;
   jshPinSetState(12, 5);
-  HEAP32[63906] = 0;
-  HEAP32[63908] = 0;
-  HEAP32[63907] = 0;
+  HEAP32[63646] = 0;
+  HEAP32[63648] = 0;
+  HEAP32[63647] = 0;
   jshSetPinShouldStayWatched(24, 1);
   jshSetPinShouldStayWatched(22, 1);
   jshSetPinShouldStayWatched(23, 1);
@@ -35653,7 +35653,7 @@ function jsvFreePtr($0) {
    if (jsvIsFlatString(HEAP32[$1 + 44 >> 2]) & 1) {
     HEAP32[$1 + 28 >> 2] = jsvGetFlatStringBlocks(HEAP32[$1 + 44 >> 2]);
     HEAP16[$1 + 26 >> 1] = (jsvGetRef(HEAP32[$1 + 44 >> 2]) & 65535) + HEAP32[$1 + 28 >> 2];
-    HEAP16[$1 + 24 >> 1] = HEAPU16[29718];
+    HEAP16[$1 + 24 >> 1] = HEAPU16[29198];
     HEAP16[$1 + 22 >> 1] = 0;
     while (1) {
      if (HEAPU16[$1 + 24 >> 1] ? HEAPU16[$1 + 24 >> 1] < HEAPU16[$1 + 26 >> 1] : 0) {
@@ -35685,9 +35685,9 @@ function jsvFreePtr($0) {
       jsvSetNextSibling(jsvGetAddressOf(HEAPU16[$1 + 22 >> 1]), HEAPU16[$1 + 24 >> 1]);
       break label$15;
      }
-     HEAP16[29718] = HEAPU16[$1 + 24 >> 1];
+     HEAP16[29198] = HEAPU16[$1 + 24 >> 1];
     }
-    HEAP8[59429] = 1;
+    HEAP8[58389] = 1;
     break label$7;
    }
    label$17 : {
@@ -35815,20 +35815,20 @@ function jswrap_waveform_start($0, $1, $2, $3, $4) {
  HEAPF64[$5 + 96 >> 3] = $2;
  HEAP32[$5 + 92 >> 2] = $3;
  HEAP8[$5 + 91 | 0] = $4;
- HEAP8[$5 + 90 | 0] = jsvGetBoolAndUnLock(jsvObjectGetChild(HEAP32[$5 + 108 >> 2], 41494, 0)) & 1;
+ HEAP8[$5 + 90 | 0] = jsvGetBoolAndUnLock(jsvObjectGetChild(HEAP32[$5 + 108 >> 2], 40466, 0)) & 1;
  label$1 : {
   if (HEAP8[$5 + 90 | 0] & 1) {
-   jsExceptionHere(1, 41740, 0);
+   jsExceptionHere(1, 40712, 0);
    break label$1;
   }
   if (!(jshIsPinValid(HEAPU8[$5 + 107 | 0]) & 1)) {
-   jsExceptionHere(1, 41768, 0);
+   jsExceptionHere(1, 40740, 0);
    break label$1;
   }
   $0 = __DOUBLE_BITS(HEAPF64[$5 + 96 >> 3]);
   $1 = i64toi32_i32$HIGH_BITS & 2147483647;
   if (!(HEAPF64[$5 + 96 >> 3] < .001 ? 0 : !(($1 | 0) == 2146435072 & $0 >>> 0 >= 0 | $1 >>> 0 > 2146435072))) {
-   jsExceptionHere(1, 41780, 0);
+   jsExceptionHere(1, 40752, 0);
    break label$1;
   }
   HEAP32[$5 + 80 >> 2] = jshGetSystemTime();
@@ -35836,19 +35836,19 @@ function jswrap_waveform_start($0, $1, $2, $3, $4) {
   HEAP8[$5 + 79 | 0] = 0;
   label$7 : {
    if (jsvIsObject(HEAP32[$5 + 92 >> 2]) & 1) {
-    HEAPF64[$5 + 64 >> 3] = jsvGetFloatAndUnLock(jsvObjectGetChild(HEAP32[$5 + 92 >> 2], 41812, 0));
+    HEAPF64[$5 + 64 >> 3] = jsvGetFloatAndUnLock(jsvObjectGetChild(HEAP32[$5 + 92 >> 2], 40784, 0));
     $0 = __DOUBLE_BITS(HEAPF64[$5 + 64 >> 3]);
     $1 = i64toi32_i32$HIGH_BITS & 2147483647;
     if (!(!(HEAPF64[$5 + 64 >> 3] > 0) | (($1 | 0) == 2146435072 & $0 >>> 0 >= 0 | $1 >>> 0 > 2146435072))) {
      HEAP32[$5 + 80 >> 2] = jshGetTimeFromMilliseconds(HEAPF64[$5 + 64 >> 3] * 1e3);
      HEAP32[$5 + 84 >> 2] = i64toi32_i32$HIGH_BITS;
     }
-    HEAP8[$5 + 79 | 0] = jsvGetBoolAndUnLock(jsvObjectGetChild(HEAP32[$5 + 92 >> 2], 41817, 0)) & 1;
+    HEAP8[$5 + 79 | 0] = jsvGetBoolAndUnLock(jsvObjectGetChild(HEAP32[$5 + 92 >> 2], 40789, 0)) & 1;
     break label$7;
    }
    if (!(jsvIsUndefined(HEAP32[$5 + 92 >> 2]) & 1)) {
     HEAP32[$5 + 16 >> 2] = HEAP32[$5 + 92 >> 2];
-    jsExceptionHere(1, 41652, $5 + 16 | 0);
+    jsExceptionHere(1, 40624, $5 + 16 | 0);
    }
   }
   HEAP8[$5 + 63 | 0] = 0;
@@ -35877,12 +35877,12 @@ function jswrap_waveform_start($0, $1, $2, $3, $4) {
    $0 = 0;
   }
   if (!(jstStartSignal($1, $3, $4, $6, $7, $8, $0, HEAPU8[$5 + 51 | 0]) & 1)) {
-   jsWarn(41824, 0);
+   jsWarn(40796, 0);
   }
   jsvUnLock2(HEAP32[$5 + 56 >> 2], HEAP32[$5 + 52 >> 2]);
-  jsvObjectSetChildAndUnLock(HEAP32[$5 + 108 >> 2], 41494, jsvNewFromBool(1));
-  jsvObjectSetChildAndUnLock(HEAP32[$5 + 108 >> 2], 41851, jsvNewFromFloat(HEAPF64[$5 + 96 >> 3]));
-  HEAP32[$5 + 44 >> 2] = jsvObjectGetChild(HEAP32[24863], 41489, 3);
+  jsvObjectSetChildAndUnLock(HEAP32[$5 + 108 >> 2], 40466, jsvNewFromBool(1));
+  jsvObjectSetChildAndUnLock(HEAP32[$5 + 108 >> 2], 40823, jsvNewFromFloat(HEAPF64[$5 + 96 >> 3]));
+  HEAP32[$5 + 44 >> 2] = jsvObjectGetChild(HEAP32[24603], 40461, 3);
   if (!HEAP32[$5 + 44 >> 2]) {
    break label$1;
   }
@@ -35948,12 +35948,12 @@ function jswrap_pipe($0, $1, $2) {
  HEAP32[$3 + 40 >> 2] = $1;
  HEAP32[$3 + 36 >> 2] = $2;
  if (!(!HEAP32[$3 + 44 >> 2] | !HEAP32[$3 + 40 >> 2])) {
-  HEAP32[$3 + 32 >> 2] = jspNewObject(0, 39925);
+  HEAP32[$3 + 32 >> 2] = jspNewObject(0, 38901);
   HEAP32[$3 + 28 >> 2] = pipeGetArray(1);
   HEAP32[$3 + 24 >> 2] = jsvNewFromInteger(0);
   if (!(!HEAP32[$3 + 24 >> 2] | (!HEAP32[$3 + 32 >> 2] | !HEAP32[$3 + 28 >> 2]))) {
-   HEAP32[$3 + 20 >> 2] = jspGetNamedField(HEAP32[$3 + 44 >> 2], 39930, 0);
-   HEAP32[$3 + 16 >> 2] = jspGetNamedField(HEAP32[$3 + 40 >> 2], 39935, 0);
+   HEAP32[$3 + 20 >> 2] = jspGetNamedField(HEAP32[$3 + 44 >> 2], 38906, 0);
+   HEAP32[$3 + 16 >> 2] = jspGetNamedField(HEAP32[$3 + 40 >> 2], 38911, 0);
    label$4 : {
     if (jsvIsFunction(HEAP32[$3 + 20 >> 2]) & 1) {
      if (jsvIsFunction(HEAP32[$3 + 16 >> 2]) & 1) {
@@ -35961,16 +35961,16 @@ function jswrap_pipe($0, $1, $2) {
       HEAP8[$3 + 11 | 0] = 1;
       label$7 : {
        if (jsvIsObject(HEAP32[$3 + 36 >> 2]) & 1) {
-        HEAP32[$3 + 4 >> 2] = jsvObjectGetChild(HEAP32[$3 + 36 >> 2], 39941, 0);
+        HEAP32[$3 + 4 >> 2] = jsvObjectGetChild(HEAP32[$3 + 36 >> 2], 38917, 0);
         if (HEAP32[$3 + 4 >> 2]) {
-         jsvObjectSetChild(HEAP32[$3 + 32 >> 2], 39950, HEAP32[$3 + 4 >> 2]);
+         jsvObjectSetChild(HEAP32[$3 + 32 >> 2], 38926, HEAP32[$3 + 4 >> 2]);
          jsvUnLock(HEAP32[$3 + 4 >> 2]);
         }
-        HEAP32[$3 + 4 >> 2] = jsvObjectGetChild(HEAP32[$3 + 36 >> 2], 39962, 0);
+        HEAP32[$3 + 4 >> 2] = jsvObjectGetChild(HEAP32[$3 + 36 >> 2], 38938, 0);
         if (HEAP32[$3 + 4 >> 2]) {
          HEAP8[$3 + 11 | 0] = jsvGetBoolAndUnLock(HEAP32[$3 + 4 >> 2]) & 1;
         }
-        HEAP32[$3 + 4 >> 2] = jsvObjectGetChild(HEAP32[$3 + 36 >> 2], 39966, 0);
+        HEAP32[$3 + 4 >> 2] = jsvObjectGetChild(HEAP32[$3 + 36 >> 2], 38942, 0);
         if (HEAP32[$3 + 4 >> 2]) {
          label$12 : {
           label$13 : {
@@ -35983,29 +35983,29 @@ function jswrap_pipe($0, $1, $2) {
            HEAP32[$3 + 12 >> 2] = jsvGetInteger(HEAP32[$3 + 4 >> 2]);
            break label$12;
           }
-          jsExceptionHere(3, 39976, 0);
+          jsExceptionHere(3, 38952, 0);
          }
          jsvUnLock(HEAP32[$3 + 4 >> 2]);
         }
         break label$7;
        }
        if (!(jsvIsUndefined(HEAP32[$3 + 36 >> 2]) & 1)) {
-        jsExceptionHere(3, 40009, 0);
+        jsExceptionHere(3, 38985, 0);
        }
       }
-      jswrap_object_addEventListener(HEAP32[$3 + 44 >> 2], 40051, 513, 32768);
-      jswrap_object_addEventListener(HEAP32[$3 + 40 >> 2], 40057, 512, 8);
-      jswrap_object_addEventListener(HEAP32[$3 + 40 >> 2], 40051, 511, 32768);
-      jsvObjectSetChildAndUnLock(HEAP32[$3 + 32 >> 2], 39966, jsvNewFromInteger(HEAP32[$3 + 12 >> 2]));
-      jsvObjectSetChildAndUnLock(HEAP32[$3 + 32 >> 2], 39962, jsvNewFromBool(HEAP8[$3 + 11 | 0] & 1));
-      jsvUnLock3(jsvAddNamedChild(HEAP32[$3 + 32 >> 2], HEAP32[$3 + 24 >> 2], 40063), jsvAddNamedChild(HEAP32[$3 + 32 >> 2], HEAP32[$3 + 44 >> 2], 40072), jsvAddNamedChild(HEAP32[$3 + 32 >> 2], HEAP32[$3 + 40 >> 2], 40079));
+      jswrap_object_addEventListener(HEAP32[$3 + 44 >> 2], 39027, 513, 32768);
+      jswrap_object_addEventListener(HEAP32[$3 + 40 >> 2], 39033, 512, 8);
+      jswrap_object_addEventListener(HEAP32[$3 + 40 >> 2], 39027, 511, 32768);
+      jsvObjectSetChildAndUnLock(HEAP32[$3 + 32 >> 2], 38942, jsvNewFromInteger(HEAP32[$3 + 12 >> 2]));
+      jsvObjectSetChildAndUnLock(HEAP32[$3 + 32 >> 2], 38938, jsvNewFromBool(HEAP8[$3 + 11 | 0] & 1));
+      jsvUnLock3(jsvAddNamedChild(HEAP32[$3 + 32 >> 2], HEAP32[$3 + 24 >> 2], 39039), jsvAddNamedChild(HEAP32[$3 + 32 >> 2], HEAP32[$3 + 44 >> 2], 39048), jsvAddNamedChild(HEAP32[$3 + 32 >> 2], HEAP32[$3 + 40 >> 2], 39055));
       jsvArrayPush(HEAP32[$3 + 28 >> 2], HEAP32[$3 + 32 >> 2]);
       break label$4;
      }
-     jsExceptionHere(1, 40091, 0);
+     jsExceptionHere(1, 39067, 0);
      break label$4;
     }
-    jsExceptionHere(1, 40182, 0);
+    jsExceptionHere(1, 39158, 0);
    }
    jsvUnLock2(HEAP32[$3 + 20 >> 2], HEAP32[$3 + 16 >> 2]);
   }
@@ -36023,9 +36023,9 @@ function jslPrintTokenLineMarker($0, $1, $2, $3) {
  HEAP32[$4 + 112 >> 2] = $3;
  HEAP32[$4 + 108 >> 2] = 1;
  HEAP32[$4 + 104 >> 2] = 1;
- jsvGetLineAndCol(HEAP32[HEAP32[14856] + 104 >> 2], HEAP32[$4 + 116 >> 2], $4 + 108 | 0, $4 + 104 | 0);
- HEAP32[$4 + 100 >> 2] = jsvGetIndexFromLineAndCol(HEAP32[HEAP32[14856] + 104 >> 2], HEAP32[$4 + 108 >> 2], 1);
- HEAP32[$4 + 96 >> 2] = jsvGetCharsOnLine(HEAP32[HEAP32[14856] + 104 >> 2], HEAP32[$4 + 108 >> 2]);
+ jsvGetLineAndCol(HEAP32[HEAP32[14596] + 104 >> 2], HEAP32[$4 + 116 >> 2], $4 + 108 | 0, $4 + 104 | 0);
+ HEAP32[$4 + 100 >> 2] = jsvGetIndexFromLineAndCol(HEAP32[HEAP32[14596] + 104 >> 2], HEAP32[$4 + 108 >> 2], 1);
+ HEAP32[$4 + 96 >> 2] = jsvGetCharsOnLine(HEAP32[HEAP32[14596] + 104 >> 2], HEAP32[$4 + 108 >> 2]);
  HEAP32[$4 + 92 >> 2] = 0;
  if (HEAP32[$4 + 112 >> 2]) {
   FUNCTION_TABLE[HEAP32[$4 + 124 >> 2]](HEAP32[$4 + 112 >> 2], HEAP32[$4 + 120 >> 2]);
@@ -36045,7 +36045,7 @@ function jslPrintTokenLineMarker($0, $1, $2, $3) {
   HEAP32[$4 + 96 >> 2] = HEAP32[$4 + 96 >> 2] - HEAP32[$4 + 88 >> 2];
  }
  HEAP32[$4 + 84 >> 2] = 0;
- jsvStringIteratorNew($4 - -64 | 0, HEAP32[HEAP32[14856] + 104 >> 2], HEAP32[$4 + 100 >> 2]);
+ jsvStringIteratorNew($4 - -64 | 0, HEAP32[HEAP32[14596] + 104 >> 2], HEAP32[$4 + 100 >> 2]);
  HEAP8[$4 + 63 | 0] = 0;
  while (1) {
   label$6 : {
@@ -36153,7 +36153,7 @@ function tflite__ops__micro__quantize__Eval_28TfLiteContext__2c_20TfLiteNode__29
    $3 = TfLiteTypeGetName(HEAP32[HEAP32[$2 + 144 >> 2] >> 2]);
    HEAP32[$2 + 4 >> 2] = HEAP32[HEAP32[$2 + 140 >> 2] >> 2];
    HEAP32[$2 >> 2] = $3;
-   FUNCTION_TABLE[$0]($1, 47406, $2);
+   FUNCTION_TABLE[$0]($1, 46366, $2);
    HEAP32[$2 + 156 >> 2] = 1;
    break label$1;
   }
@@ -36353,7 +36353,7 @@ function tflite__ops__micro__pooling__AverageEval_28TfLiteContext__2c_20TfLiteNo
    $0 = HEAP32[HEAP32[$2 + 40 >> 2] + 20 >> 2];
    $1 = HEAP32[$2 + 40 >> 2];
    HEAP32[$2 >> 2] = TfLiteTypeGetName(HEAP32[HEAP32[$2 + 12 >> 2] >> 2]);
-   FUNCTION_TABLE[$0]($1, 48131, $2);
+   FUNCTION_TABLE[$0]($1, 47091, $2);
    HEAP32[$2 + 44 >> 2] = 1;
    break label$1;
   }
@@ -36447,7 +36447,7 @@ function jswrap_graphics_createImage($0) {
  HEAP32[$1 + 72 >> 2] = $0;
  label$1 : {
   if (!(jsvIsString(HEAP32[$1 + 72 >> 2]) & 1)) {
-   jsExceptionHere(3, 42831, 0);
+   jsExceptionHere(3, 41791, 0);
    HEAP32[$1 + 76 >> 2] = 0;
    break label$1;
   }
@@ -36488,8 +36488,8 @@ function jswrap_graphics_createImage($0) {
    HEAP32[$1 + 76 >> 2] = 0;
    break label$1;
   }
-  jsvObjectSetChildAndUnLock(HEAP32[$1 + 24 >> 2], 42850, jsvNewFromInteger(HEAP32[$1 + 60 >> 2]));
-  jsvObjectSetChildAndUnLock(HEAP32[$1 + 24 >> 2], 42856, jsvNewFromInteger(HEAP32[$1 + 56 >> 2]));
+  jsvObjectSetChildAndUnLock(HEAP32[$1 + 24 >> 2], 41810, jsvNewFromInteger(HEAP32[$1 + 60 >> 2]));
+  jsvObjectSetChildAndUnLock(HEAP32[$1 + 24 >> 2], 41816, jsvNewFromInteger(HEAP32[$1 + 56 >> 2]));
   HEAP32[$1 + 20 >> 2] = Math_imul(HEAP32[$1 + 60 >> 2], HEAP32[$1 + 56 >> 2]) + 7 >> 3;
   HEAP32[$1 + 16 >> 2] = jsvNewStringOfLength(HEAP32[$1 + 20 >> 2], 0);
   if (!HEAP32[$1 + 16 >> 2]) {
@@ -36521,7 +36521,7 @@ function jswrap_graphics_createImage($0) {
    break;
   }
   jsvStringIteratorFree($1 + 32 | 0);
-  jsvObjectSetChildAndUnLock(HEAP32[$1 + 24 >> 2], 42863, HEAP32[$1 + 16 >> 2]);
+  jsvObjectSetChildAndUnLock(HEAP32[$1 + 24 >> 2], 41823, HEAP32[$1 + 16 >> 2]);
   HEAP32[$1 + 76 >> 2] = HEAP32[$1 + 24 >> 2];
  }
  global$0 = $1 + 80 | 0;
@@ -36539,7 +36539,7 @@ function jswrap_pin_getInfo($0) {
    HEAP32[$1 + 60 >> 2] = 0;
    break label$1;
   }
-  HEAP32[$1 + 48 >> 2] = Math_imul(HEAPU8[$1 + 55 | 0], 3) + 31968;
+  HEAP32[$1 + 48 >> 2] = Math_imul(HEAPU8[$1 + 55 | 0], 3) + 30944;
   HEAP32[$1 + 44 >> 2] = jsvNewWithFlags(5);
   if (!HEAP32[$1 + 44 >> 2]) {
    HEAP32[$1 + 60 >> 2] = 0;
@@ -36547,8 +36547,8 @@ function jswrap_pin_getInfo($0) {
   }
   HEAP8[$1 + 42 | 0] = HEAPU8[HEAP32[$1 + 48 >> 2]] - -64;
   HEAP8[$1 + 43 | 0] = 0;
-  jsvObjectSetChildAndUnLock(HEAP32[$1 + 44 >> 2], 38734, jsvNewFromString($1 + 42 | 0));
-  jsvObjectSetChildAndUnLock(HEAP32[$1 + 44 >> 2], 38739, jsvNewFromInteger(HEAPU8[HEAP32[$1 + 48 >> 2] + 1 | 0]));
+  jsvObjectSetChildAndUnLock(HEAP32[$1 + 44 >> 2], 37710, jsvNewFromString($1 + 42 | 0));
+  jsvObjectSetChildAndUnLock(HEAP32[$1 + 44 >> 2], 37715, jsvNewFromInteger(HEAPU8[HEAP32[$1 + 48 >> 2] + 1 | 0]));
   if (HEAPU8[HEAP32[$1 + 48 >> 2] + 2 | 0]) {
    HEAP32[$1 + 36 >> 2] = jsvNewWithFlags(5);
    if (HEAP32[$1 + 36 >> 2]) {
@@ -36565,9 +36565,9 @@ function jswrap_pin_getInfo($0) {
       }
       break;
      }
-     jsvObjectSetChildAndUnLock(HEAP32[$1 + 36 >> 2], 38743, HEAP32[$1 + 32 >> 2]);
+     jsvObjectSetChildAndUnLock(HEAP32[$1 + 36 >> 2], 37719, HEAP32[$1 + 32 >> 2]);
     }
-    jsvObjectSetChildAndUnLock(HEAP32[$1 + 44 >> 2], 38748, jsvNewFromInteger(HEAPU8[HEAP32[$1 + 48 >> 2] + 2 | 0] & 31));
+    jsvObjectSetChildAndUnLock(HEAP32[$1 + 44 >> 2], 37724, jsvNewFromInteger(HEAPU8[HEAP32[$1 + 48 >> 2] + 2 | 0] & 31));
    }
   }
   HEAP32[$1 + 24 >> 2] = jsvNewWithFlags(5);
@@ -36581,9 +36581,9 @@ function jswrap_pin_getInfo($0) {
       if (HEAP32[$1 + 16 >> 2]) {
        $0 = (HEAP32[$1 + 48 >> 2] + 3 | 0) + (HEAP32[$1 + 20 >> 2] << 1) | 0;
        jshPinFunctionToString(HEAPU8[$0 | 0] | HEAPU8[$0 + 1 | 0] << 8, 8, $1);
-       jsvObjectSetChildAndUnLock(HEAP32[$1 + 16 >> 2], 38756, jsvNewFromString($1));
+       jsvObjectSetChildAndUnLock(HEAP32[$1 + 16 >> 2], 37732, jsvNewFromString($1));
        $0 = (HEAP32[$1 + 48 >> 2] + 3 | 0) + (HEAP32[$1 + 20 >> 2] << 1) | 0;
-       jsvObjectSetChildAndUnLock(HEAP32[$1 + 16 >> 2], 38761, jsvNewFromInteger((HEAPU8[$0 | 0] | HEAPU8[$0 + 1 | 0] << 8) & 15));
+       jsvObjectSetChildAndUnLock(HEAP32[$1 + 16 >> 2], 37737, jsvNewFromInteger((HEAPU8[$0 | 0] | HEAPU8[$0 + 1 | 0] << 8) & 15));
        $0 = (HEAP32[$1 + 48 >> 2] + 3 | 0) + (HEAP32[$1 + 20 >> 2] << 1) | 0;
        jshPinFunctionToString(HEAPU8[$0 | 0] | HEAPU8[$0 + 1 | 0] << 8, 3, $1);
        jsvObjectSetChildAndUnLock(HEAP32[$1 + 24 >> 2], $1, HEAP32[$1 + 16 >> 2]);
@@ -36594,7 +36594,7 @@ function jswrap_pin_getInfo($0) {
     }
     break;
    }
-   jsvObjectSetChildAndUnLock(HEAP32[$1 + 44 >> 2], 38764, HEAP32[$1 + 24 >> 2]);
+   jsvObjectSetChildAndUnLock(HEAP32[$1 + 44 >> 2], 37740, HEAP32[$1 + 24 >> 2]);
   }
   HEAP32[$1 + 60 >> 2] = HEAP32[$1 + 44 >> 2];
  }
@@ -36608,14 +36608,14 @@ function utilTimerGetLastTask($0, $1, $2) {
  HEAP32[$3 + 24 >> 2] = $0;
  HEAP32[$3 + 20 >> 2] = $1;
  HEAP32[$3 + 16 >> 2] = $2;
- HEAP8[$3 + 15 | 0] = HEAPU8[101425];
+ HEAP8[$3 + 15 | 0] = HEAPU8[100385];
  label$1 : {
-  if (HEAPU8[$3 + 15 | 0] != HEAPU8[101426]) {
+  if (HEAPU8[$3 + 15 | 0] != HEAPU8[100386]) {
    HEAP8[$3 + 15 | 0] = HEAPU8[$3 + 15 | 0] + 15 & 15;
    while (1) {
-    if (HEAPU8[$3 + 15 | 0] != (HEAPU8[101426] + 15 & 15)) {
-     if (FUNCTION_TABLE[HEAP32[$3 + 24 >> 2]](Math_imul(HEAPU8[$3 + 15 | 0], 29) + 101440 | 0, HEAP32[$3 + 20 >> 2]) & 1) {
-      $1 = Math_imul(HEAPU8[$3 + 15 | 0], 29) + 101440 | 0;
+    if (HEAPU8[$3 + 15 | 0] != (HEAPU8[100386] + 15 & 15)) {
+     if (FUNCTION_TABLE[HEAP32[$3 + 24 >> 2]](Math_imul(HEAPU8[$3 + 15 | 0], 29) + 100400 | 0, HEAP32[$3 + 20 >> 2]) & 1) {
+      $1 = Math_imul(HEAPU8[$3 + 15 | 0], 29) + 100400 | 0;
       $4 = HEAPU8[$1 + 4 | 0] | HEAPU8[$1 + 5 | 0] << 8 | (HEAPU8[$1 + 6 | 0] << 16 | HEAPU8[$1 + 7 | 0] << 24);
       $0 = HEAP32[$3 + 16 >> 2];
       $2 = HEAPU8[$1 | 0] | HEAPU8[$1 + 1 | 0] << 8 | (HEAPU8[$1 + 2 | 0] << 16 | HEAPU8[$1 + 3 | 0] << 24);
@@ -36805,7 +36805,7 @@ function jspeGetBinaryExpressionPrecedence($0) {
      HEAP32[$1 + 12 >> 2] = 7;
      break label$1;
     case 147:
-     HEAP32[$1 + 12 >> 2] = HEAP32[24866] & 256 ? 0 : 7;
+     HEAP32[$1 + 12 >> 2] = HEAP32[24606] & 256 ? 0 : 7;
      break label$1;
     case 105:
     case 108:
@@ -37007,7 +37007,7 @@ function tflite__ops__micro__dequantize__Eval_28TfLiteContext__2c_20TfLiteNode__
    $3 = TfLiteTypeGetName(HEAP32[HEAP32[$2 + 144 >> 2] >> 2]);
    HEAP32[$2 + 4 >> 2] = HEAP32[HEAP32[$2 + 144 >> 2] >> 2];
    HEAP32[$2 >> 2] = $3;
-   FUNCTION_TABLE[$0]($1, 47730, $2);
+   FUNCTION_TABLE[$0]($1, 46690, $2);
    HEAP32[$2 + 156 >> 2] = 1;
    break label$1;
   }
@@ -37196,7 +37196,7 @@ function tflite__ops__micro__pooling__MaxEval_28TfLiteContext__2c_20TfLiteNode__
    $0 = HEAP32[HEAP32[$2 + 40 >> 2] + 20 >> 2];
    $1 = HEAP32[$2 + 40 >> 2];
    HEAP32[$2 >> 2] = TfLiteTypeGetName(HEAP32[HEAP32[$2 + 12 >> 2] >> 2]);
-   FUNCTION_TABLE[$0]($1, 48172, $2);
+   FUNCTION_TABLE[$0]($1, 47132, $2);
    HEAP32[$2 + 44 >> 2] = 1;
    break label$1;
   }
@@ -37509,7 +37509,7 @@ function tflite__ops__micro__pack___28anonymous_20namespace_29__Eval_28TfLiteCon
   $0 = HEAP32[HEAP32[$2 + 24 >> 2] + 20 >> 2];
   $1 = HEAP32[$2 + 24 >> 2];
   HEAP32[$2 >> 2] = TfLiteTypeGetName(HEAP32[HEAP32[$2 + 12 >> 2] >> 2]);
-  FUNCTION_TABLE[$0]($1, 46331, $2);
+  FUNCTION_TABLE[$0]($1, 45291, $2);
   HEAP32[$2 + 28 >> 2] = 1;
  }
  global$0 = $2 + 32 | 0;
@@ -37533,8 +37533,8 @@ function jswrap_graphics_stringWidth($0, $1) {
   HEAP32[$2 + 44 >> 2] = (HEAPU8[$2 + 81 | 0] | HEAPU8[$2 + 82 | 0] << 8) & 57344;
   HEAP16[$2 + 42 >> 1] = (HEAPU8[$2 + 81 | 0] | HEAPU8[$2 + 82 | 0] << 8) & 8191;
   if (HEAP32[$2 + 44 >> 2] == 24576) {
-   HEAP32[$2 + 52 >> 2] = jsvObjectGetChild(HEAP32[$2 + 136 >> 2], 42930, 0);
-   HEAP32[$2 + 48 >> 2] = jsvGetIntegerAndUnLock(jsvObjectGetChild(HEAP32[$2 + 136 >> 2], 42940, 0));
+   HEAP32[$2 + 52 >> 2] = jsvObjectGetChild(HEAP32[$2 + 136 >> 2], 41890, 0);
+   HEAP32[$2 + 48 >> 2] = jsvGetIntegerAndUnLock(jsvObjectGetChild(HEAP32[$2 + 136 >> 2], 41900, 0));
   }
   $0 = $2 + 16 | 0;
   HEAP32[$2 + 36 >> 2] = jsvAsString(HEAP32[$2 + 132 >> 2]);
@@ -37635,7 +37635,7 @@ function jswrap_typedarray_constructor($0, $1, $2, $3) {
  label$7 : {
   if (!HEAP32[$4 + 72 >> 2]) {
    HEAP32[$4 >> 2] = HEAP32[$4 + 84 >> 2];
-   jsExceptionHere(1, 34885, $4);
+   jsExceptionHere(1, 33861, $4);
    HEAP32[$4 + 92 >> 2] = 0;
    break label$7;
   }
@@ -37773,7 +37773,7 @@ function jspeTemplateLiteral() {
  $0 = global$0 - 96 | 0;
  global$0 = $0;
  HEAP32[$0 + 92 >> 2] = 0;
- if ((HEAP32[24866] & 63) == 1) {
+ if ((HEAP32[24606] & 63) == 1) {
   HEAP32[$0 + 88 >> 2] = jslGetTokenValueAsVar();
   HEAP32[$0 + 92 >> 2] = jsvNewFromEmptyString();
   if (!(!HEAP32[$0 + 92 >> 2] | !HEAP32[$0 + 88 >> 2])) {
@@ -37862,7 +37862,7 @@ function jswrap_atob($0) {
  label$1 : {
   if (!(jsvIsString(HEAP32[$1 + 88 >> 2]) & 1)) {
    HEAP32[$1 >> 2] = HEAP32[$1 + 88 >> 2];
-   jsExceptionHere(1, 36975, $1);
+   jsExceptionHere(1, 35951, $1);
    HEAP32[$1 + 92 >> 2] = 0;
    break label$1;
   }
@@ -38037,7 +38037,7 @@ function jswGetSymbolListForObject($0) {
     break label$1;
    }
   }
-  if (HEAP32[$1 + 8 >> 2] == HEAP32[24862]) {
+  if (HEAP32[$1 + 8 >> 2] == HEAP32[24602]) {
    HEAP32[$1 + 12 >> 2] = 16496;
    break label$1;
   }
@@ -38141,11 +38141,11 @@ function TfLiteStatus_20tflite__ops__micro__elementwise___28anonymous_20namespac
    $3 = tflite__NumInputs_28TfLiteNode_20const__29(HEAP32[$2 + 116 >> 2]);
    HEAP32[$2 + 20 >> 2] = 1;
    HEAP32[$2 + 16 >> 2] = $3;
-   HEAP32[$2 + 12 >> 2] = 51622;
-   HEAP32[$2 + 8 >> 2] = 51606;
+   HEAP32[$2 + 12 >> 2] = 50582;
+   HEAP32[$2 + 8 >> 2] = 50566;
    HEAP32[$2 + 4 >> 2] = 39;
-   HEAP32[$2 >> 2] = 51478;
-   FUNCTION_TABLE[$0]($1, 51452, $2);
+   HEAP32[$2 >> 2] = 50438;
+   FUNCTION_TABLE[$0]($1, 50412, $2);
    HEAP32[$2 + 124 >> 2] = 1;
    break label$1;
   }
@@ -38155,11 +38155,11 @@ function TfLiteStatus_20tflite__ops__micro__elementwise___28anonymous_20namespac
    $3 = tflite__NumOutputs_28TfLiteNode_20const__29(HEAP32[$2 + 116 >> 2]);
    HEAP32[$2 + 52 >> 2] = 1;
    HEAP32[$2 + 48 >> 2] = $3;
-   HEAP32[$2 + 44 >> 2] = 51622;
-   HEAP32[$2 + 40 >> 2] = 51624;
+   HEAP32[$2 + 44 >> 2] = 50582;
+   HEAP32[$2 + 40 >> 2] = 50584;
    HEAP32[$2 + 36 >> 2] = 40;
-   HEAP32[$2 + 32 >> 2] = 51478;
-   FUNCTION_TABLE[$0]($1, 51452, $2 + 32 | 0);
+   HEAP32[$2 + 32 >> 2] = 50438;
+   FUNCTION_TABLE[$0]($1, 50412, $2 + 32 | 0);
    HEAP32[$2 + 124 >> 2] = 1;
    break label$1;
   }
@@ -38171,11 +38171,11 @@ function TfLiteStatus_20tflite__ops__micro__elementwise___28anonymous_20namespac
    $3 = HEAP32[HEAP32[$2 + 112 >> 2] >> 2];
    HEAP32[$2 + 84 >> 2] = HEAP32[HEAP32[$2 + 108 >> 2] >> 2];
    HEAP32[$2 + 80 >> 2] = $3;
-   HEAP32[$2 + 76 >> 2] = 51641;
-   HEAP32[$2 + 72 >> 2] = 51580;
+   HEAP32[$2 + 76 >> 2] = 50601;
+   HEAP32[$2 + 72 >> 2] = 50540;
    HEAP32[$2 + 68 >> 2] = 43;
-   HEAP32[$2 + 64 >> 2] = 51478;
-   FUNCTION_TABLE[$0]($1, 51452, $2 - -64 | 0);
+   HEAP32[$2 + 64 >> 2] = 50438;
+   FUNCTION_TABLE[$0]($1, 50412, $2 - -64 | 0);
    HEAP32[$2 + 124 >> 2] = 1;
    break label$1;
   }
@@ -38185,7 +38185,7 @@ function TfLiteStatus_20tflite__ops__micro__elementwise___28anonymous_20namespac
    $3 = TfLiteTypeGetName(HEAP32[HEAP32[$2 + 112 >> 2] >> 2]);
    HEAP32[$2 + 100 >> 2] = HEAP32[HEAP32[$2 + 112 >> 2] >> 2];
    HEAP32[$2 + 96 >> 2] = $3;
-   FUNCTION_TABLE[$0]($1, 51654, $2 + 96 | 0);
+   FUNCTION_TABLE[$0]($1, 50614, $2 + 96 | 0);
    HEAP32[$2 + 124 >> 2] = 1;
    break label$1;
   }
@@ -38268,13 +38268,13 @@ function jswrap_espruino_nativeCall($0, $1, $2) {
      }
      if (!(HEAP8[$3 + 31 | 0] & 1)) {
       HEAP32[$3 >> 2] = HEAP32[$3 + 24 >> 2];
-      jsExceptionHere(1, 35654, $3);
+      jsExceptionHere(1, 34630, $3);
       HEAP32[$3 + 188 >> 2] = 0;
       break label$1;
      }
      break label$3;
     }
-    jsExceptionHere(1, 35700, 0);
+    jsExceptionHere(1, 34676, 0);
     HEAP32[$3 + 188 >> 2] = 0;
     break label$1;
    }
@@ -38282,7 +38282,7 @@ function jswrap_espruino_nativeCall($0, $1, $2) {
   HEAP32[$3 + 20 >> 2] = jsvNewNativeFunction(HEAP32[$3 + 184 >> 2], HEAP32[$3 + 172 >> 2] & 65535);
   if (HEAP32[$3 + 176 >> 2]) {
    HEAP32[$3 + 16 >> 2] = jsvAsFlatString(HEAP32[$3 + 176 >> 2]);
-   jsvUnLock2(jsvAddNamedChild(HEAP32[$3 + 20 >> 2], HEAP32[$3 + 16 >> 2], 35718), HEAP32[$3 + 16 >> 2]);
+   jsvUnLock2(jsvAddNamedChild(HEAP32[$3 + 20 >> 2], HEAP32[$3 + 16 >> 2], 34694), HEAP32[$3 + 16 >> 2]);
   }
   HEAP32[$3 + 188 >> 2] = HEAP32[$3 + 20 >> 2];
  }
@@ -38470,8 +38470,8 @@ function jsvNewFlatStringOfLength($0) {
  HEAP32[$1 + 32 >> 2] = (HEAP32[$1 + 40 >> 2] + 15 >>> 4) + 1;
  HEAP32[$1 + 28 >> 2] = 0;
  label$1 : {
-  if (HEAP32[14858]) {
-   HEAP8[99447] = HEAPU8[99447] | 32;
+  if (HEAP32[14598]) {
+   HEAP8[98407] = HEAPU8[98407] | 32;
    HEAP32[$1 + 44 >> 2] = 0;
    break label$1;
   }
@@ -38480,14 +38480,14 @@ function jsvNewFlatStringOfLength($0) {
    while (1) {
     if (HEAP8[$1 + 27 | 0] & 1) {
      HEAP8[$1 + 27 | 0] = 0;
-     HEAP8[59429] = 0;
+     HEAP8[58389] = 0;
      HEAP16[$1 + 24 >> 1] = 0;
-     HEAP16[$1 + 22 >> 1] = HEAPU16[29718];
+     HEAP16[$1 + 22 >> 1] = HEAPU16[29198];
      HEAP16[$1 + 20 >> 1] = HEAPU16[$1 + 22 >> 1];
      HEAP32[$1 + 16 >> 2] = 1;
      while (1) {
       label$7 : {
-       if (!((HEAPU16[$1 + 22 >> 1] ? HEAPU8[59429] ^ -1 : 0) & 1)) {
+       if (!((HEAPU16[$1 + 22 >> 1] ? HEAPU8[58389] ^ -1 : 0) & 1)) {
         break label$7;
        }
        HEAP32[$1 + 12 >> 2] = jsvGetAddressOf(HEAPU16[$1 + 22 >> 1]);
@@ -38498,13 +38498,13 @@ function jsvNewFlatStringOfLength($0) {
          if (HEAPU32[$1 + 16 >> 2] >= HEAPU32[$1 + 32 >> 2]) {
           HEAP32[$1 + 4 >> 2] = jsvGetAddressOf(HEAPU16[$1 + 10 >> 1]);
           HEAP16[$1 + 2 >> 1] = jsvGetNextSibling(HEAP32[$1 + 4 >> 2]);
-          if (!(HEAP8[59429] & 1)) {
+          if (!(HEAP8[58389] & 1)) {
            label$14 : {
             if (HEAPU16[$1 + 24 >> 1]) {
              jsvSetNextSibling(jsvGetAddressOf(HEAPU16[$1 + 24 >> 1]), HEAPU16[$1 + 2 >> 1]);
              break label$14;
             }
-            HEAP16[29718] = HEAPU16[$1 + 2 >> 1];
+            HEAP16[29198] = HEAPU16[$1 + 2 >> 1];
            }
            HEAP32[$1 + 28 >> 2] = jsvGetAddressOf(HEAPU16[$1 + 20 >> 1]);
            jsvResetVariable(HEAP32[$1 + 28 >> 2], 38);
@@ -38525,7 +38525,7 @@ function jsvNewFlatStringOfLength($0) {
       }
       break;
      }
-     if (HEAP8[59429] & 1) {
+     if (HEAP8[58389] & 1) {
       HEAP8[$1 + 27 | 0] = 1;
      }
      continue;
@@ -38544,7 +38544,7 @@ function jsvNewFlatStringOfLength($0) {
    break label$1;
   }
   memset(HEAP32[$1 + 28 >> 2] + 16 | 0, 0, HEAP32[$1 + 32 >> 2] - 1 << 4);
-  HEAP8[59429] = 1;
+  HEAP8[58389] = 1;
   HEAP32[$1 + 44 >> 2] = HEAP32[$1 + 28 >> 2];
  }
  global$0 = $1 + 48 | 0;
@@ -38891,10 +38891,10 @@ function jswrap_e_dumpVariables() {
  $0 = global$0 - 96 | 0;
  global$0 = $0;
  HEAP32[$0 + 92 >> 2] = 0;
- jsiConsolePrintf(36156, 0);
+ jsiConsolePrintf(35132, 0);
  HEAP32[$0 + 88 >> 2] = 0;
  while (1) {
-  if (HEAPU32[$0 + 88 >> 2] < HEAPU32[14353]) {
+  if (HEAPU32[$0 + 88 >> 2] < HEAPU32[14093]) {
    HEAP16[$0 + 86 >> 1] = HEAP32[$0 + 88 >> 2] + 1;
    HEAP32[$0 + 80 >> 2] = _jsvGetAddressOf(HEAPU16[$0 + 86 >> 1]);
    label$3 : {
@@ -38929,15 +38929,15 @@ function jswrap_e_dumpVariables() {
     $1 = HEAPU16[$0 + 86 >> 1];
     HEAP32[$0 + 52 >> 2] = HEAP32[$0 + 76 >> 2];
     HEAP32[$0 + 48 >> 2] = $1;
-    jsiConsolePrintf(36180, $0 + 48 | 0);
+    jsiConsolePrintf(35156, $0 + 48 | 0);
     label$9 : {
      if (jsvIsName(HEAP32[$0 + 80 >> 2]) & 1) {
       HEAP32[$0 + 16 >> 2] = HEAP32[$0 + 80 >> 2];
-      jsiConsolePrintf(36187, $0 + 16 | 0);
+      jsiConsolePrintf(35163, $0 + 16 | 0);
       break label$9;
      }
      HEAP32[$0 + 32 >> 2] = HEAP32[$0 + 80 >> 2];
-     jsiConsolePrintf(36191, $0 + 32 | 0);
+     jsiConsolePrintf(35167, $0 + 32 | 0);
     }
     label$11 : {
      if (!(jsvHasSingleChild(HEAP32[$0 + 80 >> 2]) & 1)) {
@@ -38950,7 +38950,7 @@ function jswrap_e_dumpVariables() {
       if (HEAPU16[$0 + 62 >> 1]) {
        HEAP32[$0 + 56 >> 2] = jsvLock(HEAPU16[$0 + 62 >> 1]);
        HEAP32[$0 >> 2] = HEAPU16[$0 + 62 >> 1];
-       jsiConsolePrintf(36193, $0);
+       jsiConsolePrintf(35169, $0);
        label$15 : {
         if (jsvHasChildren(HEAP32[$0 + 80 >> 2]) & 1) {
          HEAP16[$0 + 62 >> 1] = jsvGetNextSibling(HEAP32[$0 + 56 >> 2]);
@@ -38964,7 +38964,7 @@ function jswrap_e_dumpVariables() {
       break;
      }
     }
-    jsiConsolePrintString(36148);
+    jsiConsolePrintString(35124);
    }
    HEAP32[$0 + 88 >> 2] = HEAP32[$0 + 88 >> 2] + 1;
    continue;
@@ -39199,7 +39199,7 @@ function jswrap_string_match($0, $1) {
    break label$1;
   }
   if (jsvIsInstanceOf(HEAP32[$2 + 36 >> 2]) & 1) {
-   jsvObjectSetChildAndUnLock(HEAP32[$2 + 36 >> 2], 41447, jsvNewFromInteger(0));
+   jsvObjectSetChildAndUnLock(HEAP32[$2 + 36 >> 2], 40419, jsvNewFromInteger(0));
    HEAP32[$2 + 32 >> 2] = jswrap_regexp_exec(HEAP32[$2 + 36 >> 2], HEAP32[$2 + 40 >> 2]);
    if (!(jswrap_regexp_hasFlag(HEAP32[$2 + 36 >> 2], 103) & 1)) {
     HEAP32[$2 + 44 >> 2] = HEAP32[$2 + 32 >> 2];
@@ -39218,19 +39218,19 @@ function jswrap_string_match($0, $1) {
     }
     if ($0 & 1) {
      HEAP32[$2 + 24 >> 2] = jsvGetArrayItem(HEAP32[$2 + 32 >> 2], 0);
-     HEAP32[$2 + 20 >> 2] = jsvGetIntegerAndUnLock(jsvObjectGetChild(HEAP32[$2 + 32 >> 2], 41457, 0));
+     HEAP32[$2 + 20 >> 2] = jsvGetIntegerAndUnLock(jsvObjectGetChild(HEAP32[$2 + 32 >> 2], 40429, 0));
      HEAP32[$2 + 16 >> 2] = jsvGetStringLength(HEAP32[$2 + 24 >> 2]);
      HEAP32[$2 + 12 >> 2] = HEAP32[$2 + 20 >> 2] + HEAP32[$2 + 16 >> 2];
      jsvArrayPushAndUnLock(HEAP32[$2 + 28 >> 2], HEAP32[$2 + 24 >> 2]);
      jsvUnLock(HEAP32[$2 + 32 >> 2]);
-     jsvObjectSetChildAndUnLock(HEAP32[$2 + 36 >> 2], 41447, jsvNewFromInteger(HEAP32[$2 + 12 >> 2]));
+     jsvObjectSetChildAndUnLock(HEAP32[$2 + 36 >> 2], 40419, jsvNewFromInteger(HEAP32[$2 + 12 >> 2]));
      HEAP32[$2 + 32 >> 2] = jswrap_regexp_exec(HEAP32[$2 + 36 >> 2], HEAP32[$2 + 40 >> 2]);
      continue;
     }
     break;
    }
    jsvUnLock(HEAP32[$2 + 32 >> 2]);
-   jsvObjectSetChildAndUnLock(HEAP32[$2 + 36 >> 2], 41447, jsvNewFromInteger(0));
+   jsvObjectSetChildAndUnLock(HEAP32[$2 + 36 >> 2], 40419, jsvNewFromInteger(0));
    HEAP32[$2 + 44 >> 2] = HEAP32[$2 + 28 >> 2];
    break label$1;
   }
@@ -39244,8 +39244,8 @@ function jswrap_string_match($0, $1) {
     break label$1;
    }
    jsvArrayPush(HEAP32[$2 + 4 >> 2], HEAP32[$2 + 36 >> 2]);
-   jsvObjectSetChildAndUnLock(HEAP32[$2 + 4 >> 2], 41457, jsvNewFromInteger(HEAP32[$2 + 8 >> 2]));
-   jsvObjectSetChildAndUnLock(HEAP32[$2 + 4 >> 2], 41463, HEAP32[$2 + 36 >> 2]);
+   jsvObjectSetChildAndUnLock(HEAP32[$2 + 4 >> 2], 40429, jsvNewFromInteger(HEAP32[$2 + 8 >> 2]));
+   jsvObjectSetChildAndUnLock(HEAP32[$2 + 4 >> 2], 40435, HEAP32[$2 + 36 >> 2]);
    HEAP32[$2 + 44 >> 2] = HEAP32[$2 + 4 >> 2];
    break label$1;
   }
@@ -39300,12 +39300,12 @@ function jswrap_require($0) {
  label$1 : {
   if (!(jsvIsString(HEAP32[$1 + 248 >> 2]) & 1)) {
    HEAP32[$1 + 48 >> 2] = HEAP32[$1 + 248 >> 2];
-   jsExceptionHere(3, 38482, $1 + 48 | 0);
+   jsExceptionHere(3, 37458, $1 + 48 | 0);
    HEAP32[$1 + 252 >> 2] = 0;
    break label$1;
   }
   if (jsvGetString(HEAP32[$1 + 248 >> 2], $1 + 112 | 0, 128) >>> 0 >= 128) {
-   jsExceptionHere(3, 38530, 0);
+   jsExceptionHere(3, 37506, 0);
    HEAP32[$1 + 252 >> 2] = 0;
    break label$1;
   }
@@ -39368,7 +39368,7 @@ function jswrap_require($0) {
     break label$12;
    }
    HEAP32[$1 >> 2] = $1 + 112;
-   jsExceptionHere(1, 38567, $1);
+   jsExceptionHere(1, 37543, $1);
   }
   HEAP32[$1 + 252 >> 2] = HEAP32[$1 + 104 >> 2];
  }
@@ -39659,20 +39659,20 @@ function handlePipe($0, $1, $2) {
  HEAP32[$3 + 56 >> 2] = $0;
  HEAP32[$3 + 52 >> 2] = $1;
  HEAP32[$3 + 48 >> 2] = $2;
- HEAP8[$3 + 47 | 0] = jsvGetBoolAndUnLock(jsvObjectGetChild(HEAP32[$3 + 48 >> 2], 40273, 0)) & 1;
+ HEAP8[$3 + 47 | 0] = jsvGetBoolAndUnLock(jsvObjectGetChild(HEAP32[$3 + 48 >> 2], 39249, 0)) & 1;
  label$1 : {
   if (HEAP8[$3 + 47 | 0] & 1) {
    HEAP8[$3 + 63 | 0] = 0;
    break label$1;
   }
-  HEAP32[$3 + 40 >> 2] = jsvObjectGetChild(HEAP32[$3 + 48 >> 2], 40063, 0);
-  HEAP32[$3 + 36 >> 2] = jsvObjectGetChild(HEAP32[$3 + 48 >> 2], 39966, 0);
-  HEAP32[$3 + 32 >> 2] = jsvObjectGetChild(HEAP32[$3 + 48 >> 2], 40072, 0);
-  HEAP32[$3 + 28 >> 2] = jsvObjectGetChild(HEAP32[$3 + 48 >> 2], 40079, 0);
+  HEAP32[$3 + 40 >> 2] = jsvObjectGetChild(HEAP32[$3 + 48 >> 2], 39039, 0);
+  HEAP32[$3 + 36 >> 2] = jsvObjectGetChild(HEAP32[$3 + 48 >> 2], 38942, 0);
+  HEAP32[$3 + 32 >> 2] = jsvObjectGetChild(HEAP32[$3 + 48 >> 2], 39048, 0);
+  HEAP32[$3 + 28 >> 2] = jsvObjectGetChild(HEAP32[$3 + 48 >> 2], 39055, 0);
   HEAP8[$3 + 27 | 0] = 0;
   if (!(!HEAP32[$3 + 32 >> 2] | !HEAP32[$3 + 28 >> 2] | (!HEAP32[$3 + 36 >> 2] | !HEAP32[$3 + 40 >> 2]))) {
-   HEAP32[$3 + 20 >> 2] = jspGetNamedField(HEAP32[$3 + 32 >> 2], 39930, 0);
-   HEAP32[$3 + 16 >> 2] = jspGetNamedField(HEAP32[$3 + 28 >> 2], 39935, 0);
+   HEAP32[$3 + 20 >> 2] = jspGetNamedField(HEAP32[$3 + 32 >> 2], 38906, 0);
+   HEAP32[$3 + 16 >> 2] = jspGetNamedField(HEAP32[$3 + 28 >> 2], 38911, 0);
    label$4 : {
     label$5 : {
      if (!(jsvIsFunction(HEAP32[$3 + 20 >> 2]) & 1)) {
@@ -39693,7 +39693,7 @@ function handlePipe($0, $1, $2) {
         if (jsvGetBool(HEAP32[$3 + 4 >> 2]) & 1) {
          break label$8;
         }
-        jsvObjectSetChildAndUnLock(HEAP32[$3 + 48 >> 2], 40273, jsvNewFromBool(1));
+        jsvObjectSetChildAndUnLock(HEAP32[$3 + 48 >> 2], 39249, jsvNewFromBool(1));
        }
        jsvUnLock(HEAP32[$3 + 4 >> 2]);
        jsvSetInteger(HEAP32[$3 + 40 >> 2], jsvGetInteger(HEAP32[$3 + 40 >> 2]) + HEAP32[$3 + 8 >> 2] | 0);
@@ -39704,10 +39704,10 @@ function handlePipe($0, $1, $2) {
      break label$4;
     }
     if (!(jsvIsFunction(HEAP32[$3 + 20 >> 2]) & 1)) {
-     jsExceptionHere(1, 40283, 0);
+     jsExceptionHere(1, 39259, 0);
     }
     if (!(jsvIsFunction(HEAP32[$3 + 16 >> 2]) & 1)) {
-     jsExceptionHere(1, 40350, 0);
+     jsExceptionHere(1, 39326, 0);
     }
    }
    jsvUnLock2(HEAP32[$3 + 20 >> 2], HEAP32[$3 + 16 >> 2]);
@@ -39768,10 +39768,10 @@ function jspeFactorFunctionCall() {
  global$0 = $0;
  HEAP8[$0 + 43 | 0] = 0;
  label$1 : {
-  if (HEAP16[HEAP32[14856] + 2 >> 1] == 184) {
+  if (HEAP16[HEAP32[14596] + 2 >> 1] == 184) {
    jslGetNextToken();
    HEAP8[$0 + 43 | 0] = 1;
-   if (HEAP16[HEAP32[14856] + 2 >> 1] == 184) {
+   if (HEAP16[HEAP32[14596] + 2 >> 1] == 184) {
     jsExceptionHere(1, 4273, 0);
     jspSetError();
     HEAP32[$0 + 44 >> 2] = 0;
@@ -39780,21 +39780,21 @@ function jspeFactorFunctionCall() {
   }
   $1 = $0 + 36 | 0;
   HEAP32[$0 + 36 >> 2] = 0;
-  HEAP8[$0 + 35 | 0] = HEAP16[HEAP32[14856] + 2 >> 1] == 196;
+  HEAP8[$0 + 35 | 0] = HEAP16[HEAP32[14596] + 2 >> 1] == 196;
   HEAP32[$0 + 28 >> 2] = jspeFactorMember(jspeFactor(), $1);
   if (HEAP8[$0 + 35 | 0] & 1) {
    jsvUnLock(HEAP32[$0 + 36 >> 2]);
-   HEAP32[$0 + 36 >> 2] = jsvLockAgainSafe(HEAP32[24865]);
+   HEAP32[$0 + 36 >> 2] = jsvLockAgainSafe(HEAP32[24605]);
   }
   while (1) {
    label$6 : {
-    if (HEAP16[HEAP32[14856] + 2 >> 1] != 40) {
+    if (HEAP16[HEAP32[14596] + 2 >> 1] != 40) {
      $1 = 0;
      if (!(HEAP8[$0 + 43 | 0] & 1)) {
       break label$6;
      }
      $1 = 0;
-     if ((HEAP32[24866] & 63) != 1) {
+     if ((HEAP32[24606] & 63) != 1) {
       break label$6;
      }
     }
@@ -39804,8 +39804,8 @@ function jspeFactorFunctionCall() {
     HEAP32[$0 + 24 >> 2] = HEAP32[$0 + 28 >> 2];
     HEAP32[$0 + 20 >> 2] = jsvSkipName(HEAP32[$0 + 24 >> 2]);
     label$9 : {
-     if (!(!(HEAP8[$0 + 43 | 0] & 1) | (HEAP32[24866] & 63) != 1)) {
-      HEAP8[$0 + 19 | 0] = HEAP16[HEAP32[14856] + 2 >> 1] == 40;
+     if (!(!(HEAP8[$0 + 43 | 0] & 1) | (HEAP32[24606] & 63) != 1)) {
+      HEAP8[$0 + 19 | 0] = HEAP16[HEAP32[14596] + 2 >> 1] == 40;
       HEAP32[$0 + 28 >> 2] = jspeConstruct(HEAP32[$0 + 20 >> 2], HEAP32[$0 + 24 >> 2], HEAP8[$0 + 19 | 0] & 1);
       HEAP8[$0 + 43 | 0] = 0;
       break label$9;
@@ -39860,7 +39860,7 @@ function jsserialEventCallbackIdle() {
   while (1) {
    if (jsvObjectIteratorHasValue($0 + 48 | 0) & 1) {
     HEAP32[$0 + 44 >> 2] = jsvObjectIteratorGetValue($0 + 48 | 0);
-    HEAP32[$0 + 40 >> 2] = jsvObjectGetChild(HEAP32[$0 + 44 >> 2], 7747, 0);
+    HEAP32[$0 + 40 >> 2] = jsvObjectGetChild(HEAP32[$0 + 44 >> 2], 7743, 0);
     HEAP32[$0 + 36 >> 2] = jsvGetFlatStringPointer(HEAP32[$0 + 40 >> 2]);
     if (HEAP32[$0 + 36 >> 2]) {
      if (HEAPU8[HEAP32[$0 + 36 >> 2] + 88 | 0]) {
@@ -39925,11 +39925,11 @@ function handlePipeClose($0, $1, $2) {
  HEAP32[$3 + 44 >> 2] = $0;
  HEAP32[$3 + 40 >> 2] = $1;
  HEAP32[$3 + 36 >> 2] = $2;
- jsiQueueObjectCallbacks(HEAP32[$3 + 36 >> 2], 39950, $3 + 36 | 0, 1);
- HEAP32[$3 + 32 >> 2] = jsvObjectGetChild(HEAP32[$3 + 36 >> 2], 40072, 0);
- HEAP32[$3 + 28 >> 2] = jsvObjectGetChild(HEAP32[$3 + 36 >> 2], 40079, 0);
+ jsiQueueObjectCallbacks(HEAP32[$3 + 36 >> 2], 38926, $3 + 36 | 0, 1);
+ HEAP32[$3 + 32 >> 2] = jsvObjectGetChild(HEAP32[$3 + 36 >> 2], 39048, 0);
+ HEAP32[$3 + 28 >> 2] = jsvObjectGetChild(HEAP32[$3 + 36 >> 2], 39055, 0);
  if (!(!HEAP32[$3 + 32 >> 2] | !HEAP32[$3 + 28 >> 2])) {
-  HEAP32[$3 + 24 >> 2] = jsvObjectGetChild(HEAP32[$3 + 32 >> 2], 40423, 0);
+  HEAP32[$3 + 24 >> 2] = jsvObjectGetChild(HEAP32[$3 + 32 >> 2], 39399, 0);
   label$2 : {
    if (!HEAP32[$3 + 24 >> 2]) {
     break label$2;
@@ -39937,36 +39937,36 @@ function handlePipeClose($0, $1, $2) {
    if (!jsvGetStringLength(HEAP32[$3 + 24 >> 2])) {
     break label$2;
    }
-   jsvObjectRemoveChild(HEAP32[$3 + 32 >> 2], 40423);
-   HEAP32[$3 + 20 >> 2] = jspGetNamedField(HEAP32[$3 + 28 >> 2], 39935, 0);
+   jsvObjectRemoveChild(HEAP32[$3 + 32 >> 2], 39399);
+   HEAP32[$3 + 20 >> 2] = jspGetNamedField(HEAP32[$3 + 28 >> 2], 38911, 0);
    if (jsvIsFunction(HEAP32[$3 + 20 >> 2]) & 1) {
     jsvUnLock(jspExecuteFunction(HEAP32[$3 + 20 >> 2], HEAP32[$3 + 28 >> 2], 1, $3 + 24 | 0));
    }
    jsvUnLock(HEAP32[$3 + 20 >> 2]);
-   HEAP32[$3 + 16 >> 2] = jsvObjectGetChild(HEAP32[$3 + 36 >> 2], 40063, 0);
+   HEAP32[$3 + 16 >> 2] = jsvObjectGetChild(HEAP32[$3 + 36 >> 2], 39039, 0);
    jsvSetInteger(HEAP32[$3 + 16 >> 2], jsvGetInteger(HEAP32[$3 + 16 >> 2]) + jsvGetStringLength(HEAP32[$3 + 24 >> 2]) | 0);
    jsvUnLock(HEAP32[$3 + 16 >> 2]);
   }
   jsvUnLock(HEAP32[$3 + 24 >> 2]);
  }
- if (jsvGetBoolAndUnLock(jsvObjectGetChild(HEAP32[$3 + 36 >> 2], 39962, 0)) & 1) {
+ if (jsvGetBoolAndUnLock(jsvObjectGetChild(HEAP32[$3 + 36 >> 2], 38938, 0)) & 1) {
   if (HEAP32[$3 + 28 >> 2]) {
-   jswrap_object_removeAllListeners_cstr(HEAP32[$3 + 28 >> 2], 40057);
-   jswrap_object_removeAllListeners_cstr(HEAP32[$3 + 28 >> 2], 40051);
-   HEAP32[$3 + 12 >> 2] = jspGetNamedField(HEAP32[$3 + 28 >> 2], 39962, 0);
+   jswrap_object_removeAllListeners_cstr(HEAP32[$3 + 28 >> 2], 39033);
+   jswrap_object_removeAllListeners_cstr(HEAP32[$3 + 28 >> 2], 39027);
+   HEAP32[$3 + 12 >> 2] = jspGetNamedField(HEAP32[$3 + 28 >> 2], 38938, 0);
    if (jsvIsFunction(HEAP32[$3 + 12 >> 2]) & 1) {
     jsvUnLock(jspExecuteFunction(HEAP32[$3 + 12 >> 2], HEAP32[$3 + 28 >> 2], 0, 0));
    }
    jsvUnLock(HEAP32[$3 + 12 >> 2]);
-   HEAP32[$3 + 8 >> 2] = jspGetNamedField(HEAP32[$3 + 28 >> 2], 40051, 0);
+   HEAP32[$3 + 8 >> 2] = jspGetNamedField(HEAP32[$3 + 28 >> 2], 39027, 0);
    if (jsvIsFunction(HEAP32[$3 + 8 >> 2]) & 1) {
     jsvUnLock(jspExecuteFunction(HEAP32[$3 + 8 >> 2], HEAP32[$3 + 28 >> 2], 0, 0));
    }
    jsvUnLock(HEAP32[$3 + 8 >> 2]);
   }
   if (HEAP32[$3 + 32 >> 2]) {
-   jswrap_object_removeAllListeners_cstr(HEAP32[$3 + 32 >> 2], 40051);
-   HEAP32[$3 + 4 >> 2] = jspGetNamedField(HEAP32[$3 + 32 >> 2], 40051, 0);
+   jswrap_object_removeAllListeners_cstr(HEAP32[$3 + 32 >> 2], 39027);
+   HEAP32[$3 + 4 >> 2] = jspGetNamedField(HEAP32[$3 + 32 >> 2], 39027, 0);
    if (jsvIsFunction(HEAP32[$3 + 4 >> 2]) & 1) {
     jsvUnLock(jspExecuteFunction(HEAP32[$3 + 4 >> 2], HEAP32[$3 + 32 >> 2], 0, 0));
    }
@@ -39988,7 +39988,7 @@ function jswrap_btoa($0) {
  label$1 : {
   if (!(jsvIsIterable(HEAP32[$1 + 104 >> 2]) & 1)) {
    HEAP32[$1 >> 2] = HEAP32[$1 + 104 >> 2];
-   jsExceptionHere(1, 36939, $1);
+   jsExceptionHere(1, 35915, $1);
    HEAP32[$1 + 108 >> 2] = 0;
    break label$1;
   }
@@ -40327,10 +40327,10 @@ function _jswrap_promise_resolve_or_reject($0, $1, $2) {
    HEAP32[$3 + 48 >> 2] = jspExecuteFunction(HEAP32[$3 + 52 >> 2], HEAP32[$3 + 60 >> 2], 1, $3 + 56 | 0);
   }
  }
- jsvObjectRemoveChild(HEAP32[$3 + 60 >> 2], 40574);
- jsvObjectRemoveChild(HEAP32[$3 + 60 >> 2], 40579);
- HEAP32[$3 + 24 >> 2] = jsvObjectGetChild(HEAP32[$3 + 60 >> 2], 40584, 0);
- jsvObjectRemoveChild(HEAP32[$3 + 60 >> 2], 40584);
+ jsvObjectRemoveChild(HEAP32[$3 + 60 >> 2], 39546);
+ jsvObjectRemoveChild(HEAP32[$3 + 60 >> 2], 39551);
+ HEAP32[$3 + 24 >> 2] = jsvObjectGetChild(HEAP32[$3 + 60 >> 2], 39556, 0);
+ jsvObjectRemoveChild(HEAP32[$3 + 60 >> 2], 39556);
  HEAP32[$3 + 20 >> 2] = jspGetException();
  label$8 : {
   if (HEAP32[$3 + 20 >> 2]) {
@@ -40344,8 +40344,8 @@ function _jswrap_promise_resolve_or_reject($0, $1, $2) {
      HEAP32[$3 + 16 >> 2] = jsvNewNativeFunction(532, 32776);
      HEAP32[$3 + 12 >> 2] = jsvNewNativeFunction(531, 32776);
      if (!(!HEAP32[$3 + 16 >> 2] | !HEAP32[$3 + 12 >> 2])) {
-      jsvObjectSetChild(HEAP32[$3 + 16 >> 2], 40590, HEAP32[$3 + 24 >> 2]);
-      jsvObjectSetChild(HEAP32[$3 + 12 >> 2], 40590, HEAP32[$3 + 24 >> 2]);
+      jsvObjectSetChild(HEAP32[$3 + 16 >> 2], 39562, HEAP32[$3 + 24 >> 2]);
+      jsvObjectSetChild(HEAP32[$3 + 12 >> 2], 39562, HEAP32[$3 + 24 >> 2]);
       _jswrap_promise_add(HEAP32[$3 + 48 >> 2], HEAP32[$3 + 16 >> 2], 1);
       _jswrap_promise_add(HEAP32[$3 + 48 >> 2], HEAP32[$3 + 12 >> 2], 0);
      }
@@ -40568,7 +40568,7 @@ function tflite__ops__micro__unpack___28anonymous_20namespace_29__Eval_28TfLiteC
   $0 = HEAP32[HEAP32[$2 + 24 >> 2] + 20 >> 2];
   $1 = HEAP32[$2 + 24 >> 2];
   HEAP32[$2 >> 2] = TfLiteTypeGetName(HEAP32[HEAP32[$2 + 12 >> 2] >> 2]);
-  FUNCTION_TABLE[$0]($1, 49051, $2);
+  FUNCTION_TABLE[$0]($1, 48011, $2);
   HEAP32[$2 + 28 >> 2] = 1;
  }
  global$0 = $2 + 32 | 0;
@@ -40740,12 +40740,12 @@ function jswrap_graphics_createCallback($0, $1, $2, $3) {
      break label$2;
     }
    }
-   jsExceptionHere(1, 42516, 0);
+   jsExceptionHere(1, 41476, 0);
    HEAP32[$4 + 124 >> 2] = 0;
    break label$1;
   }
   if (!(isValidBPP(HEAP32[$4 + 112 >> 2]) & 1)) {
-   jsExceptionHere(1, 42529, 0);
+   jsExceptionHere(1, 41489, 0);
    HEAP32[$4 + 124 >> 2] = 0;
    break label$1;
   }
@@ -40754,15 +40754,15 @@ function jswrap_graphics_createCallback($0, $1, $2, $3) {
   label$5 : {
    if (jsvIsObject(HEAP32[$4 + 108 >> 2]) & 1) {
     jsvUnLock(HEAP32[$4 + 104 >> 2]);
-    HEAP32[$4 + 104 >> 2] = jsvObjectGetChild(HEAP32[$4 + 108 >> 2], 42761, 0);
-    HEAP32[$4 + 100 >> 2] = jsvObjectGetChild(HEAP32[$4 + 108 >> 2], 42770, 0);
+    HEAP32[$4 + 104 >> 2] = jsvObjectGetChild(HEAP32[$4 + 108 >> 2], 41721, 0);
+    HEAP32[$4 + 100 >> 2] = jsvObjectGetChild(HEAP32[$4 + 108 >> 2], 41730, 0);
     break label$5;
    }
    HEAP32[$4 + 104 >> 2] = jsvLockAgain(HEAP32[$4 + 108 >> 2]);
   }
   if (!(jsvIsFunction(HEAP32[$4 + 104 >> 2]) & 1)) {
    HEAP32[$4 + 16 >> 2] = HEAP32[$4 + 104 >> 2];
-   jsExceptionHere(1, 42779, $4 + 16 | 0);
+   jsExceptionHere(1, 41739, $4 + 16 | 0);
    jsvUnLock2(HEAP32[$4 + 104 >> 2], HEAP32[$4 + 100 >> 2]);
    HEAP32[$4 + 124 >> 2] = 0;
    break label$1;
@@ -40775,12 +40775,12 @@ function jswrap_graphics_createCallback($0, $1, $2, $3) {
     break label$8;
    }
    HEAP32[$4 >> 2] = HEAP32[$4 + 100 >> 2];
-   jsExceptionHere(1, 42779, $4);
+   jsExceptionHere(1, 41739, $4);
    jsvUnLock2(HEAP32[$4 + 104 >> 2], HEAP32[$4 + 100 >> 2]);
    HEAP32[$4 + 124 >> 2] = 0;
    break label$1;
   }
-  HEAP32[$4 + 96 >> 2] = jspNewObject(0, 42541);
+  HEAP32[$4 + 96 >> 2] = jspNewObject(0, 41501);
   if (!HEAP32[$4 + 96 >> 2]) {
    HEAP32[$4 + 124 >> 2] = 0;
    break label$1;
@@ -40908,10 +40908,10 @@ function jswrap_graphics_asImage($0) {
   HEAP32[$1 + 56 >> 2] = jswrap_graphics_getWidthOrHeight(HEAP32[$1 + 136 >> 2], 0);
   HEAP32[$1 + 52 >> 2] = jswrap_graphics_getWidthOrHeight(HEAP32[$1 + 136 >> 2], 1);
   HEAP32[$1 + 48 >> 2] = HEAPU8[$1 + 80 | 0];
-  jsvObjectSetChildAndUnLock(HEAP32[$1 + 60 >> 2], 42850, jsvNewFromInteger(HEAP32[$1 + 56 >> 2]));
-  jsvObjectSetChildAndUnLock(HEAP32[$1 + 60 >> 2], 42856, jsvNewFromInteger(HEAP32[$1 + 52 >> 2]));
+  jsvObjectSetChildAndUnLock(HEAP32[$1 + 60 >> 2], 41810, jsvNewFromInteger(HEAP32[$1 + 56 >> 2]));
+  jsvObjectSetChildAndUnLock(HEAP32[$1 + 60 >> 2], 41816, jsvNewFromInteger(HEAP32[$1 + 52 >> 2]));
   if (HEAP32[$1 + 48 >> 2] != 1) {
-   jsvObjectSetChildAndUnLock(HEAP32[$1 + 60 >> 2], 43162, jsvNewFromInteger(HEAP32[$1 + 48 >> 2]));
+   jsvObjectSetChildAndUnLock(HEAP32[$1 + 60 >> 2], 42122, jsvNewFromInteger(HEAP32[$1 + 48 >> 2]));
   }
   HEAP32[$1 + 44 >> 2] = Math_imul(HEAP32[$1 + 48 >> 2], Math_imul(HEAP32[$1 + 56 >> 2], HEAP32[$1 + 52 >> 2])) + 7 >> 3;
   HEAP32[$1 + 40 >> 2] = jsvNewStringOfLength(HEAP32[$1 + 44 >> 2], 0);
@@ -40948,7 +40948,7 @@ function jswrap_graphics_asImage($0) {
    break;
   }
   jsvStringIteratorFree($1);
-  jsvObjectSetChildAndUnLock(HEAP32[$1 + 60 >> 2], 42863, HEAP32[$1 + 40 >> 2]);
+  jsvObjectSetChildAndUnLock(HEAP32[$1 + 60 >> 2], 41823, HEAP32[$1 + 40 >> 2]);
   HEAP32[$1 + 140 >> 2] = HEAP32[$1 + 60 >> 2];
  }
  global$0 = $1 + 144 | 0;
@@ -41338,7 +41338,7 @@ function jswrap_function_replaceWith($0, $1) {
      break label$2;
     }
    }
-   jsExceptionHere(3, 39643, 0);
+   jsExceptionHere(3, 38619, 0);
    break label$1;
   }
   if ((jsvIsNativeFunction(HEAP32[$2 + 28 >> 2]) & 1) != (jsvIsNativeFunction(HEAP32[$2 + 24 >> 2]) & 1)) {
@@ -41362,8 +41362,8 @@ function jswrap_function_replaceWith($0, $1) {
    }
   }
   $0 = $2 + 8 | 0;
-  HEAP32[$2 + 20 >> 2] = jsvFindChildFromString(HEAP32[$2 + 28 >> 2], 39673, 0);
-  HEAP32[$2 + 16 >> 2] = jsvFindChildFromString(HEAP32[$2 + 28 >> 2], 39678, 0);
+  HEAP32[$2 + 20 >> 2] = jsvFindChildFromString(HEAP32[$2 + 28 >> 2], 38649, 0);
+  HEAP32[$2 + 16 >> 2] = jsvFindChildFromString(HEAP32[$2 + 28 >> 2], 38654, 0);
   jsvRemoveAllChildren(HEAP32[$2 + 28 >> 2]);
   jsvObjectIteratorNew($0, HEAP32[$2 + 24 >> 2]);
   while (1) {
@@ -41372,10 +41372,10 @@ function jswrap_function_replaceWith($0, $1) {
     HEAP32[$2 + 4 >> 2] = jsvObjectIteratorGetKey($0);
     jsvObjectIteratorNext($0);
     label$12 : {
-     if (jsvIsStringEqual(HEAP32[$2 + 4 >> 2], 39673) & 1) {
+     if (jsvIsStringEqual(HEAP32[$2 + 4 >> 2], 38649) & 1) {
       break label$12;
      }
-     if (jsvIsStringEqual(HEAP32[$2 + 4 >> 2], 39678) & 1) {
+     if (jsvIsStringEqual(HEAP32[$2 + 4 >> 2], 38654) & 1) {
       break label$12;
      }
      HEAP32[$2 >> 2] = jsvCopy(HEAP32[$2 + 4 >> 2], 1);
@@ -41416,27 +41416,27 @@ function jsiHandleNewLine($0) {
      break label$3;
     }
     if (jsiShowInputLine() & 1) {
-     jsiConsolePrintString(5716);
+     jsiConsolePrintString(5712);
     }
-    if (!(HEAPU16[49742] & 2)) {
-     HEAP8[99492] = 1;
+    if (!(HEAPU16[49222] & 2)) {
+     HEAP8[98452] = 1;
     }
-    HEAP32[$1 + 24 >> 2] = jsvStringTrimRight(HEAP32[24872]);
+    HEAP32[$1 + 24 >> 2] = jsvStringTrimRight(HEAP32[24612]);
     jsiClearInputLine(0);
     label$6 : {
-     if (HEAPU16[49742] & 8) {
+     if (HEAPU16[49222] & 8) {
       jsiDebuggerLine(HEAP32[$1 + 24 >> 2]);
       jsiHistoryAddLine(HEAP32[$1 + 24 >> 2]);
       jsvUnLock(HEAP32[$1 + 24 >> 2]);
       break label$6;
      }
-     HEAP32[$1 + 20 >> 2] = jspEvaluateVar(HEAP32[$1 + 24 >> 2], 0, HEAPU16[49754]);
+     HEAP32[$1 + 20 >> 2] = jspEvaluateVar(HEAP32[$1 + 24 >> 2], 0, HEAPU16[49234]);
      HEAP8[$1 + 19 | 0] = jsvIsEmptyString(HEAP32[$1 + 24 >> 2]) & 1;
      if (!(HEAP8[$1 + 19 | 0] & 1)) {
       jsiHistoryAddLine(HEAP32[$1 + 24 >> 2]);
      }
      jsvUnLock(HEAP32[$1 + 24 >> 2]);
-     HEAP16[49754] = 0;
+     HEAP16[49234] = 0;
      label$9 : {
       if (!(jsiEcho() & 1)) {
        break label$9;
@@ -41446,20 +41446,20 @@ function jsiHandleNewLine($0) {
       }
       jsiConsolePrintChar(61);
       jsfPrintJSON(HEAP32[$1 + 20 >> 2], 813);
-      jsiConsolePrintString(5716);
+      jsiConsolePrintString(5712);
      }
      jsvUnLock(HEAP32[$1 + 20 >> 2]);
     }
     jsiCheckErrors();
-    HEAP16[49742] = HEAPU16[49742] & -3;
+    HEAP16[49222] = HEAPU16[49222] & -3;
     break label$1;
    }
    if (jsiShowInputLine() & 1) {
-    jsiConsolePrintString(5895);
+    jsiConsolePrintString(5891);
    }
    jsiIsAboutToEditInputLine();
-   jsiAppendToInputLine(5716);
-   HEAP32[24874] = HEAP32[24874] + 1;
+   jsiAppendToInputLine(5712);
+   HEAP32[24614] = HEAP32[24614] + 1;
    break label$1;
   }
   jsiIsAboutToEditInputLine();
@@ -41467,19 +41467,19 @@ function jsiHandleNewLine($0) {
    jsiConsolePrintString(5198);
   }
   HEAP32[$1 + 12 >> 2] = jsvNewFromEmptyString();
-  if (HEAPU32[24874] > 0) {
-   jsvAppendStringVar(HEAP32[$1 + 12 >> 2], HEAP32[24872], 0, HEAP32[24874]);
+  if (HEAPU32[24614] > 0) {
+   jsvAppendStringVar(HEAP32[$1 + 12 >> 2], HEAP32[24612], 0, HEAP32[24614]);
   }
   jsvAppendCharacter(HEAP32[$1 + 12 >> 2], 10);
-  jsvAppendStringVar(HEAP32[$1 + 12 >> 2], HEAP32[24872], HEAP32[24874], 2147483647);
+  jsvAppendStringVar(HEAP32[$1 + 12 >> 2], HEAP32[24612], HEAP32[24614], 2147483647);
   jsiInputLineCursorMoved();
-  jsvUnLock(HEAP32[24872]);
-  HEAP32[24872] = HEAP32[$1 + 12 >> 2];
+  jsvUnLock(HEAP32[24612]);
+  HEAP32[24612] = HEAP32[$1 + 12 >> 2];
   if (jsiShowInputLine() & 1) {
-   jsiConsolePrintStringVarWithNewLineChar(HEAP32[24872], HEAP32[24874], 58);
-   jsiMoveCursorChar(HEAP32[24872], jsvGetStringLength(HEAP32[24872]), HEAP32[24874] + 1 | 0);
+   jsiConsolePrintStringVarWithNewLineChar(HEAP32[24612], HEAP32[24614], 58);
+   jsiMoveCursorChar(HEAP32[24612], jsvGetStringLength(HEAP32[24612]), HEAP32[24614] + 1 | 0);
   }
-  HEAP32[24874] = HEAP32[24874] + 1;
+  HEAP32[24614] = HEAP32[24614] + 1;
  }
  global$0 = $1 + 32 | 0;
 }
@@ -41490,11 +41490,11 @@ function jshFromDeviceString($0) {
  HEAP32[$1 + 8 >> 2] = $0;
  label$1 : {
   if (HEAP8[HEAP32[$1 + 8 >> 2]] == 76) {
-   if (!strcmp(HEAP32[$1 + 8 >> 2] + 1 | 0, 7341)) {
+   if (!strcmp(HEAP32[$1 + 8 >> 2] + 1 | 0, 7337)) {
     HEAP8[$1 + 15 | 0] = 17;
     break label$1;
    }
-   if (!strcmp(HEAP32[$1 + 8 >> 2] + 1 | 0, 7350)) {
+   if (!strcmp(HEAP32[$1 + 8 >> 2] + 1 | 0, 7346)) {
     HEAP8[$1 + 15 | 0] = 18;
     break label$1;
    }
@@ -41505,7 +41505,7 @@ function jshFromDeviceString($0) {
   }
   label$6 : {
    if (HEAP8[HEAP32[$1 + 8 >> 2]] == 84) {
-    if (!strcmp(HEAP32[$1 + 8 >> 2] + 1 | 0, 7359)) {
+    if (!strcmp(HEAP32[$1 + 8 >> 2] + 1 | 0, 7355)) {
      HEAP8[$1 + 15 | 0] = 20;
      break label$1;
     }
@@ -41556,34 +41556,34 @@ function jswrap_waveform_idle() {
  var $0 = 0, $1 = 0;
  $0 = global$0 - 80 | 0;
  global$0 = $0;
- HEAP32[$0 + 76 >> 2] = jsvObjectGetChild(HEAP32[24863], 41489, 0);
+ HEAP32[$0 + 76 >> 2] = jsvObjectGetChild(HEAP32[24603], 40461, 0);
  if (HEAP32[$0 + 76 >> 2]) {
   jsvObjectIteratorNew($0 + 72 | 0, HEAP32[$0 + 76 >> 2]);
   while (1) {
    if (jsvObjectIteratorHasValue($0 + 72 | 0) & 1) {
     HEAP32[$0 + 68 >> 2] = jsvObjectIteratorGetValue($0 + 72 | 0);
-    HEAP8[$0 + 67 | 0] = jsvGetBoolAndUnLock(jsvObjectGetChild(HEAP32[$0 + 68 >> 2], 41494, 0)) & 1;
+    HEAP8[$0 + 67 | 0] = jsvGetBoolAndUnLock(jsvObjectGetChild(HEAP32[$0 + 68 >> 2], 40466, 0)) & 1;
     if (HEAP8[$0 + 67 | 0] & 1) {
      $1 = $0 + 24 | 0;
      HEAP32[$0 + 60 >> 2] = jswrap_waveform_getBuffer(HEAP32[$0 + 68 >> 2], 0, 0);
      label$5 : {
       if (!(jstGetLastBufferTimerTask(HEAP32[$0 + 60 >> 2], $1) & 1)) {
        $1 = $0 + 20 | 0;
-       HEAP32[$0 + 20 >> 2] = jsvObjectGetChild(HEAP32[$0 + 68 >> 2], 41502, 0);
-       jsiQueueObjectCallbacks(HEAP32[$0 + 68 >> 2], 41509, $1, 1);
+       HEAP32[$0 + 20 >> 2] = jsvObjectGetChild(HEAP32[$0 + 68 >> 2], 40474, 0);
+       jsiQueueObjectCallbacks(HEAP32[$0 + 68 >> 2], 40481, $1, 1);
        jsvUnLock(HEAP32[$0 + 20 >> 2]);
        HEAP8[$0 + 67 | 0] = 0;
-       jsvObjectSetChildAndUnLock(HEAP32[$0 + 68 >> 2], 41494, jsvNewFromBool(HEAP8[$0 + 67 | 0] & 1));
+       jsvObjectSetChildAndUnLock(HEAP32[$0 + 68 >> 2], 40466, jsvNewFromBool(HEAP8[$0 + 67 | 0] & 1));
        break label$5;
       }
       if (!(!(HEAPU8[$0 + 42 | 0] | HEAPU8[$0 + 43 | 0] << 8) | (HEAPU8[$0 + 42 | 0] | HEAPU8[$0 + 43 | 0] << 8) == (HEAPU8[$0 + 40 | 0] | HEAPU8[$0 + 41 | 0] << 8))) {
        HEAP32[$0 + 16 >> 2] = (jsvGetRef(HEAP32[$0 + 60 >> 2]) & 65535) == (HEAPU8[$0 + 40 | 0] | HEAPU8[$0 + 41 | 0] << 8) ? 0 : 1;
-       HEAP32[$0 + 12 >> 2] = jsvGetIntegerAndUnLock(jsvObjectGetChild(HEAP32[$0 + 68 >> 2], 41519, 9));
+       HEAP32[$0 + 12 >> 2] = jsvGetIntegerAndUnLock(jsvObjectGetChild(HEAP32[$0 + 68 >> 2], 40491, 9));
        if (HEAP32[$0 + 12 >> 2] != HEAP32[$0 + 16 >> 2]) {
         $1 = $0 + 8 | 0;
-        jsvObjectSetChildAndUnLock(HEAP32[$0 + 68 >> 2], 41519, jsvNewFromInteger(HEAP32[$0 + 16 >> 2]));
-        HEAP32[$0 + 8 >> 2] = jsvObjectGetChild(HEAP32[$0 + 68 >> 2], HEAP32[$0 + 16 >> 2] ? 41502 : 41533, 0);
-        jsiQueueObjectCallbacks(HEAP32[$0 + 68 >> 2], 41541, $1, 1);
+        jsvObjectSetChildAndUnLock(HEAP32[$0 + 68 >> 2], 40491, jsvNewFromInteger(HEAP32[$0 + 16 >> 2]));
+        HEAP32[$0 + 8 >> 2] = jsvObjectGetChild(HEAP32[$0 + 68 >> 2], HEAP32[$0 + 16 >> 2] ? 40474 : 40505, 0);
+        jsiQueueObjectCallbacks(HEAP32[$0 + 68 >> 2], 40513, $1, 1);
         jsvUnLock(HEAP32[$0 + 8 >> 2]);
        }
       }
@@ -41696,7 +41696,7 @@ function jsspiGetSendFunction($0, $1, $2) {
   }
   if (!HEAPU8[$3 + 31 | 0]) {
    $0 = $3 + 16 | 0;
-   HEAP32[$3 + 12 >> 2] = jsvObjectGetChild(HEAP32[$3 + 40 >> 2], 7907, 0);
+   HEAP32[$3 + 12 >> 2] = jsvObjectGetChild(HEAP32[$3 + 40 >> 2], 7903, 0);
    jsspiPopulateSPIInfo($0, HEAP32[$3 + 12 >> 2]);
    jsvUnLock(HEAP32[$3 + 12 >> 2]);
    label$5 : {
@@ -41852,11 +41852,11 @@ function tflite__ops__micro__dequantize__Prepare_28TfLiteContext__2c_20TfLiteNod
    $3 = tflite__NumInputs_28TfLiteNode_20const__29(HEAP32[$2 + 100 >> 2]);
    HEAP32[$2 + 20 >> 2] = 1;
    HEAP32[$2 + 16 >> 2] = $3;
-   HEAP32[$2 + 12 >> 2] = 47599;
-   HEAP32[$2 + 8 >> 2] = 47583;
+   HEAP32[$2 + 12 >> 2] = 46559;
+   HEAP32[$2 + 8 >> 2] = 46543;
    HEAP32[$2 + 4 >> 2] = 29;
-   HEAP32[$2 >> 2] = 47482;
-   FUNCTION_TABLE[$0]($1, 47456, $2);
+   HEAP32[$2 >> 2] = 46442;
+   FUNCTION_TABLE[$0]($1, 46416, $2);
    HEAP32[$2 + 108 >> 2] = 1;
    break label$1;
   }
@@ -41866,11 +41866,11 @@ function tflite__ops__micro__dequantize__Prepare_28TfLiteContext__2c_20TfLiteNod
    $3 = tflite__NumOutputs_28TfLiteNode_20const__29(HEAP32[$2 + 100 >> 2]);
    HEAP32[$2 + 52 >> 2] = 1;
    HEAP32[$2 + 48 >> 2] = $3;
-   HEAP32[$2 + 44 >> 2] = 47599;
-   HEAP32[$2 + 40 >> 2] = 47601;
+   HEAP32[$2 + 44 >> 2] = 46559;
+   HEAP32[$2 + 40 >> 2] = 46561;
    HEAP32[$2 + 36 >> 2] = 30;
-   HEAP32[$2 + 32 >> 2] = 47482;
-   FUNCTION_TABLE[$0]($1, 47456, $2 + 32 | 0);
+   HEAP32[$2 + 32 >> 2] = 46442;
+   FUNCTION_TABLE[$0]($1, 46416, $2 + 32 | 0);
    HEAP32[$2 + 108 >> 2] = 1;
    break label$1;
   }
@@ -41879,20 +41879,20 @@ function tflite__ops__micro__dequantize__Prepare_28TfLiteContext__2c_20TfLiteNod
   if (!(HEAP32[HEAP32[$2 + 96 >> 2] >> 2] == 3 | HEAP32[HEAP32[$2 + 96 >> 2] >> 2] == 9)) {
    $0 = HEAP32[HEAP32[$2 + 104 >> 2] + 20 >> 2];
    $1 = HEAP32[$2 + 104 >> 2];
-   HEAP32[$2 + 88 >> 2] = 47641;
+   HEAP32[$2 + 88 >> 2] = 46601;
    HEAP32[$2 + 84 >> 2] = 37;
-   HEAP32[$2 + 80 >> 2] = 47482;
-   FUNCTION_TABLE[$0]($1, 47618, $2 + 80 | 0);
+   HEAP32[$2 + 80 >> 2] = 46442;
+   FUNCTION_TABLE[$0]($1, 46578, $2 + 80 | 0);
    HEAP32[$2 + 108 >> 2] = 1;
    break label$1;
   }
   if (HEAP32[HEAP32[$2 + 92 >> 2] >> 2] != 1) {
    $0 = HEAP32[HEAP32[$2 + 104 >> 2] + 20 >> 2];
    $1 = HEAP32[$2 + 104 >> 2];
-   HEAP32[$2 + 72 >> 2] = 47699;
+   HEAP32[$2 + 72 >> 2] = 46659;
    HEAP32[$2 + 68 >> 2] = 38;
-   HEAP32[$2 + 64 >> 2] = 47482;
-   FUNCTION_TABLE[$0]($1, 47618, $2 - -64 | 0);
+   HEAP32[$2 + 64 >> 2] = 46442;
+   FUNCTION_TABLE[$0]($1, 46578, $2 - -64 | 0);
    HEAP32[$2 + 108 >> 2] = 1;
    break label$1;
   }
@@ -41992,64 +41992,64 @@ function jswrap_banglejs_setOptions($0) {
  $1 = global$0 - 192 | 0;
  global$0 = $1;
  HEAP32[$1 + 188 >> 2] = $0;
- HEAP8[$1 + 187 | 0] = (HEAP32[63903] & 2) != 0;
- HEAP8[$1 + 186 | 0] = (HEAP32[63903] & 4) != 0;
- HEAP8[$1 + 185 | 0] = (HEAP32[63903] & 8) != 0;
- HEAP8[$1 + 184 | 0] = (HEAP32[63903] & 1) != 0;
- HEAP8[$1 + 183 | 0] = (HEAP32[63903] & 16) != 0;
- HEAP8[$1 + 182 | 0] = (HEAP32[63903] & 32) != 0;
- HEAP32[$1 >> 2] = 32219;
+ HEAP8[$1 + 187 | 0] = (HEAP32[63643] & 2) != 0;
+ HEAP8[$1 + 186 | 0] = (HEAP32[63643] & 4) != 0;
+ HEAP8[$1 + 185 | 0] = (HEAP32[63643] & 8) != 0;
+ HEAP8[$1 + 184 | 0] = (HEAP32[63643] & 1) != 0;
+ HEAP8[$1 + 183 | 0] = (HEAP32[63643] & 16) != 0;
+ HEAP8[$1 + 182 | 0] = (HEAP32[63643] & 32) != 0;
+ HEAP32[$1 >> 2] = 31195;
  HEAP16[$1 + 4 >> 1] = 9;
- HEAP32[$1 + 8 >> 2] = 57440;
- HEAP32[$1 + 12 >> 2] = 32238;
+ HEAP32[$1 + 8 >> 2] = 56400;
+ HEAP32[$1 + 12 >> 2] = 31214;
  HEAP16[$1 + 16 >> 1] = 9;
- HEAP32[$1 + 20 >> 2] = 57444;
- HEAP32[$1 + 24 >> 2] = 32255;
+ HEAP32[$1 + 20 >> 2] = 56404;
+ HEAP32[$1 + 24 >> 2] = 31231;
  HEAP16[$1 + 28 >> 1] = 9;
- HEAP32[$1 + 32 >> 2] = 57448;
- HEAP32[$1 + 36 >> 2] = 32276;
+ HEAP32[$1 + 32 >> 2] = 56408;
+ HEAP32[$1 + 36 >> 2] = 31252;
  HEAP16[$1 + 40 >> 1] = 9;
- HEAP32[$1 + 44 >> 2] = 57452;
- HEAP32[$1 + 48 >> 2] = 32293;
+ HEAP32[$1 + 44 >> 2] = 56412;
+ HEAP32[$1 + 48 >> 2] = 31269;
  HEAP16[$1 + 52 >> 1] = 9;
- HEAP32[$1 + 56 >> 2] = 57456;
- HEAP32[$1 + 60 >> 2] = 32317;
+ HEAP32[$1 + 56 >> 2] = 56416;
+ HEAP32[$1 + 60 >> 2] = 31293;
  HEAP16[$1 + 64 >> 1] = 9;
- HEAP32[$1 + 68 >> 2] = 57460;
- HEAP32[$1 + 72 >> 2] = 32342;
+ HEAP32[$1 + 68 >> 2] = 56420;
+ HEAP32[$1 + 72 >> 2] = 31318;
  HEAP16[$1 + 76 >> 1] = 9;
- HEAP32[$1 + 80 >> 2] = 57464;
- HEAP32[$1 + 84 >> 2] = 32357;
+ HEAP32[$1 + 80 >> 2] = 56424;
+ HEAP32[$1 + 84 >> 2] = 31333;
  HEAP16[$1 + 88 >> 1] = 9;
- HEAP32[$1 + 92 >> 2] = 57472;
- HEAP32[$1 + 96 >> 2] = 32370;
+ HEAP32[$1 + 92 >> 2] = 56432;
+ HEAP32[$1 + 96 >> 2] = 31346;
  HEAP16[$1 + 100 >> 1] = 9;
- HEAP32[$1 + 104 >> 2] = 57468;
- HEAP32[$1 + 108 >> 2] = 32380;
+ HEAP32[$1 + 104 >> 2] = 56428;
+ HEAP32[$1 + 108 >> 2] = 31356;
  HEAP16[$1 + 112 >> 1] = 11;
  HEAP32[$1 + 116 >> 2] = $1 + 187;
- HEAP32[$1 + 120 >> 2] = 32391;
+ HEAP32[$1 + 120 >> 2] = 31367;
  HEAP16[$1 + 124 >> 1] = 11;
  HEAP32[$1 + 128 >> 2] = $1 + 186;
- HEAP32[$1 + 132 >> 2] = 32402;
+ HEAP32[$1 + 132 >> 2] = 31378;
  HEAP16[$1 + 136 >> 1] = 11;
  HEAP32[$1 + 140 >> 2] = $1 + 185;
- HEAP32[$1 + 144 >> 2] = 32413;
+ HEAP32[$1 + 144 >> 2] = 31389;
  HEAP16[$1 + 148 >> 1] = 11;
  HEAP32[$1 + 152 >> 2] = $1 + 184;
- HEAP32[$1 + 156 >> 2] = 32426;
+ HEAP32[$1 + 156 >> 2] = 31402;
  HEAP16[$1 + 160 >> 1] = 11;
  HEAP32[$1 + 164 >> 2] = $1 + 183;
- HEAP32[$1 + 168 >> 2] = 32438;
+ HEAP32[$1 + 168 >> 2] = 31414;
  HEAP16[$1 + 172 >> 1] = 11;
  HEAP32[$1 + 176 >> 2] = $1 + 182;
  if (jsvReadConfigObject(HEAP32[$1 + 188 >> 2], $1, 15) & 1) {
-  HEAP32[63903] = HEAP32[63903] & -3 | (HEAP8[$1 + 187 | 0] & 1 ? 2 : 0);
-  HEAP32[63903] = HEAP32[63903] & -5 | (HEAP8[$1 + 186 | 0] & 1 ? 4 : 0);
-  HEAP32[63903] = HEAP32[63903] & -9 | (HEAP8[$1 + 185 | 0] & 1 ? 8 : 0);
-  HEAP32[63903] = HEAP32[63903] & -2 | (HEAP8[$1 + 184 | 0] & 1 ? 1 : 0);
-  HEAP32[63903] = HEAP32[63903] & -17 | (HEAP8[$1 + 183 | 0] & 1 ? 16 : 0);
-  HEAP32[63903] = HEAP32[63903] & -33 | (HEAP8[$1 + 182 | 0] & 1 ? 32 : 0);
+  HEAP32[63643] = HEAP32[63643] & -3 | (HEAP8[$1 + 187 | 0] & 1 ? 2 : 0);
+  HEAP32[63643] = HEAP32[63643] & -5 | (HEAP8[$1 + 186 | 0] & 1 ? 4 : 0);
+  HEAP32[63643] = HEAP32[63643] & -9 | (HEAP8[$1 + 185 | 0] & 1 ? 8 : 0);
+  HEAP32[63643] = HEAP32[63643] & -2 | (HEAP8[$1 + 184 | 0] & 1 ? 1 : 0);
+  HEAP32[63643] = HEAP32[63643] & -17 | (HEAP8[$1 + 183 | 0] & 1 ? 16 : 0);
+  HEAP32[63643] = HEAP32[63643] & -33 | (HEAP8[$1 + 182 | 0] & 1 ? 32 : 0);
  }
  global$0 = $1 + 192 | 0;
 }
@@ -42093,27 +42093,27 @@ function escapeCharacter($0, $1) {
   }
   HEAP8[$2 + 9 | 0] = HEAPU8[$2 + 11 | 0];
   if (!(HEAP8[$2 + 10 | 0] & 1 | HEAPU8[$2 + 9 | 0] >= 8)) {
-   HEAP8[99440] = 92;
-   HEAP8[99441] = HEAPU8[$2 + 9 | 0] + 48;
-   HEAP8[99442] = 0;
-   HEAP32[$2 + 12 >> 2] = 99440;
+   HEAP8[98400] = 92;
+   HEAP8[98401] = HEAPU8[$2 + 9 | 0] + 48;
+   HEAP8[98402] = 0;
+   HEAP32[$2 + 12 >> 2] = 98400;
    break label$1;
   }
   if (!(HEAPU8[$2 + 9 | 0] < 127 ? HEAPU8[$2 + 9 | 0] >= 32 : 0)) {
-   HEAP8[99440] = 92;
+   HEAP8[98400] = 92;
    HEAP32[$2 + 4 >> 2] = 2;
    label$13 : {
     if (HEAP8[$2 + 10 | 0] & 1) {
-     HEAP8[99441] = 117;
+     HEAP8[98401] = 117;
      $0 = HEAP32[$2 + 4 >> 2];
      HEAP32[$2 + 4 >> 2] = $0 + 1;
-     HEAP8[$0 + 99440 | 0] = 48;
+     HEAP8[$0 + 98400 | 0] = 48;
      $0 = HEAP32[$2 + 4 >> 2];
      HEAP32[$2 + 4 >> 2] = $0 + 1;
-     HEAP8[$0 + 99440 | 0] = 48;
+     HEAP8[$0 + 98400 | 0] = 48;
      break label$13;
     }
-    HEAP8[99441] = 120;
+    HEAP8[98401] = 120;
    }
    HEAP32[$2 >> 2] = HEAPU8[$2 + 9 | 0] >> 4;
    if (HEAP32[$2 >> 2] < 10) {
@@ -42123,7 +42123,7 @@ function escapeCharacter($0, $1) {
    }
    $1 = HEAP32[$2 + 4 >> 2];
    HEAP32[$2 + 4 >> 2] = $1 + 1;
-   HEAP8[$1 + 99440 | 0] = $0;
+   HEAP8[$1 + 98400 | 0] = $0;
    HEAP32[$2 >> 2] = HEAPU8[$2 + 9 | 0] & 15;
    if (HEAP32[$2 >> 2] < 10) {
     $0 = HEAP32[$2 >> 2] + 48 | 0;
@@ -42132,16 +42132,16 @@ function escapeCharacter($0, $1) {
    }
    $1 = HEAP32[$2 + 4 >> 2];
    HEAP32[$2 + 4 >> 2] = $1 + 1;
-   HEAP8[$1 + 99440 | 0] = $0;
+   HEAP8[$1 + 98400 | 0] = $0;
    $0 = HEAP32[$2 + 4 >> 2];
    HEAP32[$2 + 4 >> 2] = $0 + 1;
-   HEAP8[$0 + 99440 | 0] = 0;
-   HEAP32[$2 + 12 >> 2] = 99440;
+   HEAP8[$0 + 98400 | 0] = 0;
+   HEAP32[$2 + 12 >> 2] = 98400;
    break label$1;
   }
-  HEAP8[99441] = 0;
-  HEAP8[99440] = HEAPU8[$2 + 11 | 0];
-  HEAP32[$2 + 12 >> 2] = 99440;
+  HEAP8[98401] = 0;
+  HEAP8[98400] = HEAPU8[$2 + 11 | 0];
+  HEAP32[$2 + 12 >> 2] = 98400;
  }
  return HEAP32[$2 + 12 >> 2];
 }
@@ -42157,7 +42157,7 @@ function graphicsGetFromVar($0, $1) {
  HEAP8[$0 + 1 | 0] = $1 >>> 8;
  HEAP8[$0 + 2 | 0] = $1 >>> 16;
  HEAP8[$0 + 3 | 0] = $1 >>> 24;
- HEAP32[$2 >> 2] = jsvObjectGetChild(HEAP32[$2 + 4 >> 2], 26352, 0);
+ HEAP32[$2 >> 2] = jsvObjectGetChild(HEAP32[$2 + 4 >> 2], 25328, 0);
  label$1 : {
   if (HEAP32[$2 >> 2]) {
    jsvGetString(HEAP32[$2 >> 2], HEAP32[$2 + 8 >> 2] + 4 | 0, 45);
@@ -42211,7 +42211,7 @@ function graphicsGetFromVar($0, $1) {
        lcdST7789_setCallbacks(HEAP32[$2 + 8 >> 2]);
        break label$7;
       }
-      jsExceptionHere(4, 26357, 0);
+      jsExceptionHere(4, 25333, 0);
      }
     }
    }
@@ -42233,17 +42233,17 @@ function jswrap_array_reduce($0, $1, $2) {
  HEAP32[$3 + 152 >> 2] = $0;
  HEAP32[$3 + 148 >> 2] = $1;
  HEAP32[$3 + 144 >> 2] = $2;
- HEAP32[$3 + 140 >> 2] = 34575;
+ HEAP32[$3 + 140 >> 2] = 33551;
  label$1 : {
   if (!(jsvIsIterable(HEAP32[$3 + 152 >> 2]) & 1)) {
    HEAP32[$3 + 32 >> 2] = HEAP32[$3 + 140 >> 2];
-   jsExceptionHere(1, 34582, $3 + 32 | 0);
+   jsExceptionHere(1, 33558, $3 + 32 | 0);
    HEAP32[$3 + 156 >> 2] = 0;
    break label$1;
   }
   if (!(jsvIsFunction(HEAP32[$3 + 148 >> 2]) & 1)) {
    HEAP32[$3 + 16 >> 2] = HEAP32[$3 + 140 >> 2];
-   jsExceptionHere(1, 34632, $3 + 16 | 0);
+   jsExceptionHere(1, 33608, $3 + 16 | 0);
    HEAP32[$3 + 156 >> 2] = 0;
    break label$1;
   }
@@ -42273,7 +42273,7 @@ function jswrap_array_reduce($0, $1, $2) {
    }
    if (!HEAP32[$3 + 136 >> 2]) {
     HEAP32[$3 >> 2] = HEAP32[$3 + 140 >> 2];
-    jsExceptionHere(1, 34679, $3);
+    jsExceptionHere(1, 33655, $3);
    }
   }
   while (1) {
@@ -42317,14 +42317,14 @@ function jswrap_io_shiftOut($0, $1, $2) {
  HEAP8[$3 + 72 | 0] = 255;
  HEAP8[$3 + 73 | 0] = 0;
  HEAP32[$3 + 80 >> 2] = 1;
- HEAP32[$3 + 16 >> 2] = 37650;
+ HEAP32[$3 + 16 >> 2] = 36626;
  HEAP16[$3 + 20 >> 1] = 12;
  $0 = $3 - -64 | 0;
  HEAP32[$3 + 24 >> 2] = $0 + 8;
- HEAP32[$3 + 28 >> 2] = 37654;
+ HEAP32[$3 + 28 >> 2] = 36630;
  HEAP16[$3 + 32 >> 1] = 11;
  HEAP32[$3 + 36 >> 2] = $0 + 9;
- HEAP32[$3 + 40 >> 2] = 37661;
+ HEAP32[$3 + 40 >> 2] = 36637;
  HEAP16[$3 + 44 >> 1] = 9;
  HEAP32[$3 + 48 >> 2] = $0 + 16;
  label$1 : {
@@ -42342,7 +42342,7 @@ function jswrap_io_shiftOut($0, $1, $2) {
      if (jsvObjectIteratorHasValue($3 + 8 | 0) & 1) {
       if (HEAP32[$3 + 76 >> 2] >= 8) {
        HEAP32[$3 >> 2] = 8;
-       jsExceptionHere(1, 37668, $3);
+       jsExceptionHere(1, 36644, $3);
        break label$1;
       }
       $0 = $3 - -64 | 0;
@@ -42405,7 +42405,7 @@ function jswrap_i2c_readFrom($0, $1, $2) {
    break label$1;
   }
   if (HEAP32[$3 + 80 >> 2] + 256 >>> 0 > 1e6) {
-   jsExceptionHere(1, 41309, 0);
+   jsExceptionHere(1, 40281, 0);
    HEAP32[$3 + 92 >> 2] = 0;
    break label$1;
   }
@@ -42420,13 +42420,13 @@ function jswrap_i2c_readFrom($0, $1, $2) {
    label$6 : {
     if (!HEAPU8[$3 + 79 | 0]) {
      $0 = $3 + 56 | 0;
-     HEAP32[$3 + 52 >> 2] = jsvObjectGetChild(HEAP32[$3 + 88 >> 2], 41123, 0);
+     HEAP32[$3 + 52 >> 2] = jsvObjectGetChild(HEAP32[$3 + 88 >> 2], 40095, 0);
      if (jsi2cPopulateI2CInfo($0, HEAP32[$3 + 52 >> 2]) & 1) {
       $0 = $3 + 56 | 0;
-      HEAP8[$3 + 62 | 0] = jsvGetBoolAndUnLock(jsvObjectGetChild(HEAP32[$3 + 88 >> 2], 41301, 0)) & 1;
+      HEAP8[$3 + 62 | 0] = jsvGetBoolAndUnLock(jsvObjectGetChild(HEAP32[$3 + 88 >> 2], 40273, 0)) & 1;
       jsi2cRead($0, HEAP32[$3 + 72 >> 2] & 255, HEAP32[$3 + 80 >> 2], HEAP32[$3 + 68 >> 2], HEAP8[$3 + 78 | 0] & 1);
      }
-     jsvUnLock2(jsvObjectSetChild(HEAP32[$3 + 88 >> 2], 41301, jsvNewFromBool(HEAP8[$3 + 62 | 0] & 1)), HEAP32[$3 + 52 >> 2]);
+     jsvUnLock2(jsvObjectSetChild(HEAP32[$3 + 88 >> 2], 40273, jsvNewFromBool(HEAP8[$3 + 62 | 0] & 1)), HEAP32[$3 + 52 >> 2]);
      break label$6;
     }
     HEAP32[$3 + 92 >> 2] = 0;
@@ -42484,7 +42484,7 @@ function tflite__ops__micro__add__Eval_28TfLiteContext__2c_20TfLiteNode__29($0, 
      }
      break label$5;
     }
-    FUNCTION_TABLE[HEAP32[HEAP32[$2 + 72 >> 2] + 20 >> 2]](HEAP32[$2 + 72 >> 2], 49089, 0);
+    FUNCTION_TABLE[HEAP32[HEAP32[$2 + 72 >> 2] + 20 >> 2]](HEAP32[$2 + 72 >> 2], 48049, 0);
     HEAP32[$2 + 76 >> 2] = 1;
     break label$1;
    }
@@ -42522,8 +42522,8 @@ function jsserialGetSendFunction($0, $1, $2) {
   }
   if (!HEAPU8[$3 + 31 | 0]) {
    $1 = $3 + 16 | 0;
-   HEAP32[$3 + 12 >> 2] = jsvObjectGetChild(HEAP32[$3 + 40 >> 2], 7681, 0);
-   HEAP32[$3 + 8 >> 2] = jsvObjectGetChild(HEAP32[$3 + 40 >> 2], 7691, 0);
+   HEAP32[$3 + 12 >> 2] = jsvObjectGetChild(HEAP32[$3 + 40 >> 2], 7677, 0);
+   HEAP32[$3 + 8 >> 2] = jsvObjectGetChild(HEAP32[$3 + 40 >> 2], 7687, 0);
    jsserialPopulateUSARTInfo($1, HEAP32[$3 + 12 >> 2], HEAP32[$3 + 8 >> 2]);
    jsvUnLock(HEAP32[$3 + 8 >> 2]);
    jsvUnLock(HEAP32[$3 + 12 >> 2]);
@@ -42570,12 +42570,12 @@ function jswrap_arraybufferview_map($0, $1, $2) {
  HEAP32[$3 + 128 >> 2] = $2;
  label$1 : {
   if (!(jsvIsArrayBuffer(HEAP32[$3 + 136 >> 2]) & 1)) {
-   jsExceptionHere(1, 34972, 0);
+   jsExceptionHere(1, 33948, 0);
    HEAP32[$3 + 140 >> 2] = 0;
    break label$1;
   }
   if (!(jsvIsFunction(HEAP32[$3 + 132 >> 2]) & 1)) {
-   jsExceptionHere(1, 35033, 0);
+   jsExceptionHere(1, 34009, 0);
    HEAP32[$3 + 140 >> 2] = 0;
    break label$1;
   }
@@ -42586,7 +42586,7 @@ function jswrap_arraybufferview_map($0, $1, $2) {
    if (jsvIsObject(HEAP32[$3 + 128 >> 2]) & 1) {
     break label$4;
    }
-   jsExceptionHere(1, 35091, 0);
+   jsExceptionHere(1, 34067, 0);
    HEAP32[$3 + 140 >> 2] = 0;
    break label$1;
   }
@@ -42822,7 +42822,7 @@ function jstStartSignal($0, $1, $2, $3, $4, $5, $6, $7) {
    }
    label$7 : {
     if (!(HEAPU8[$8 + 43 | 0] != 6 ? HEAPU8[$8 + 43 | 0] != 4 : 0)) {
-     if (!HEAPU8[(Math_imul(HEAPU8[$8 + 55 | 0], 3) + 31968 | 0) + 2 | 0]) {
+     if (!HEAPU8[(Math_imul(HEAPU8[$8 + 55 | 0], 3) + 30944 | 0) + 2 | 0]) {
       HEAP8[$8 + 79 | 0] = 0;
       break label$1;
      }
@@ -42903,7 +42903,7 @@ function tflite__GetRegistrationFromOpCode_28tflite__OperatorCode_20const__2c_20
   if (!(HEAP32[$4 + 40 >> 2] >= 0 ? HEAP32[$4 + 40 >> 2] <= 121 : 0)) {
    $0 = HEAP32[$4 + 52 >> 2];
    HEAP32[$4 >> 2] = HEAP32[$4 + 40 >> 2];
-   tflite__ErrorReporter__Report_28char_20const__2c_20____29($0, 53004, $4);
+   tflite__ErrorReporter__Report_28char_20const__2c_20____29($0, 51964, $4);
    HEAP32[$4 + 44 >> 2] = 1;
    break label$1;
   }
@@ -42917,14 +42917,14 @@ function tflite__GetRegistrationFromOpCode_28tflite__OperatorCode_20const__2c_20
      $1 = tflite__EnumNameBuiltinOperator_28tflite__BuiltinOperator_29(HEAP32[$4 + 40 >> 2]);
      HEAP32[$4 + 20 >> 2] = HEAP32[$4 + 36 >> 2];
      HEAP32[$4 + 16 >> 2] = $1;
-     tflite__ErrorReporter__Report_28char_20const__2c_20____29($0, 53088, $4 + 16 | 0);
+     tflite__ErrorReporter__Report_28char_20const__2c_20____29($0, 52048, $4 + 16 | 0);
      HEAP32[$4 + 44 >> 2] = 1;
     }
     break label$4;
    }
    label$7 : {
     if (!tflite__Model__operator_codes_28_29_20const(HEAP32[$4 + 60 >> 2])) {
-     tflite__ErrorReporter__Report_28char_20const__2c_20____29(HEAP32[$4 + 52 >> 2], 53141, 0);
+     tflite__ErrorReporter__Report_28char_20const__2c_20____29(HEAP32[$4 + 52 >> 2], 52101, 0);
      HEAP32[$4 + 44 >> 2] = 1;
      break label$7;
     }
@@ -42953,52 +42953,52 @@ function jswrap_io_pinMode($0, $1, $2) {
  HEAP8[$3 + 7 | 0] = $2;
  label$1 : {
   if (!(jshIsPinValid(HEAPU8[$3 + 15 | 0]) & 1)) {
-   jsExceptionHere(1, 37518, 0);
+   jsExceptionHere(1, 36494, 0);
    break label$1;
   }
   HEAP8[$3 + 6 | 0] = 0;
   if (jsvIsString(HEAP32[$3 + 8 >> 2]) & 1) {
    label$4 : {
-    if (jsvIsStringEqual(HEAP32[$3 + 8 >> 2], 37530) & 1) {
+    if (jsvIsStringEqual(HEAP32[$3 + 8 >> 2], 36506) & 1) {
      HEAP8[$3 + 6 | 0] = 7;
      break label$4;
     }
     label$6 : {
-     if (jsvIsStringEqual(HEAP32[$3 + 8 >> 2], 37537) & 1) {
+     if (jsvIsStringEqual(HEAP32[$3 + 8 >> 2], 36513) & 1) {
       HEAP8[$3 + 6 | 0] = 4;
       break label$6;
      }
      label$8 : {
-      if (jsvIsStringEqual(HEAP32[$3 + 8 >> 2], 37543) & 1) {
+      if (jsvIsStringEqual(HEAP32[$3 + 8 >> 2], 36519) & 1) {
        HEAP8[$3 + 6 | 0] = 5;
        break label$8;
       }
       label$10 : {
-       if (jsvIsStringEqual(HEAP32[$3 + 8 >> 2], 37556) & 1) {
+       if (jsvIsStringEqual(HEAP32[$3 + 8 >> 2], 36532) & 1) {
         HEAP8[$3 + 6 | 0] = 6;
         break label$10;
        }
        label$12 : {
-        if (jsvIsStringEqual(HEAP32[$3 + 8 >> 2], 37571) & 1) {
+        if (jsvIsStringEqual(HEAP32[$3 + 8 >> 2], 36547) & 1) {
          HEAP8[$3 + 6 | 0] = 1;
          break label$12;
         }
         label$14 : {
-         if (jsvIsStringEqual(HEAP32[$3 + 8 >> 2], 37578) & 1) {
+         if (jsvIsStringEqual(HEAP32[$3 + 8 >> 2], 36554) & 1) {
           HEAP8[$3 + 6 | 0] = 2;
           break label$14;
          }
          label$16 : {
-          if (jsvIsStringEqual(HEAP32[$3 + 8 >> 2], 37588) & 1) {
+          if (jsvIsStringEqual(HEAP32[$3 + 8 >> 2], 36564) & 1) {
            HEAP8[$3 + 6 | 0] = 3;
            break label$16;
           }
           label$18 : {
-           if (jsvIsStringEqual(HEAP32[$3 + 8 >> 2], 37605) & 1) {
+           if (jsvIsStringEqual(HEAP32[$3 + 8 >> 2], 36581) & 1) {
             HEAP8[$3 + 6 | 0] = 8;
             break label$18;
            }
-           if (jsvIsStringEqual(HEAP32[$3 + 8 >> 2], 37615) & 1) {
+           if (jsvIsStringEqual(HEAP32[$3 + 8 >> 2], 36591) & 1) {
             HEAP8[$3 + 6 | 0] = 9;
            }
           }
@@ -43020,10 +43020,10 @@ function jswrap_io_pinMode($0, $1, $2) {
    if (jsvIsUndefined(HEAP32[$3 + 8 >> 2]) & 1) {
     break label$22;
    }
-   if (jsvIsStringEqual(HEAP32[$3 + 8 >> 2], 37628) & 1) {
+   if (jsvIsStringEqual(HEAP32[$3 + 8 >> 2], 36604) & 1) {
     break label$22;
    }
-   jsExceptionHere(1, 37633, 0);
+   jsExceptionHere(1, 36609, 0);
   }
  }
  global$0 = $3 + 16 | 0;
@@ -43047,7 +43047,7 @@ function jswrap_function_apply_or_call($0, $1, $2) {
     HEAP32[$3 + 84 >> 2] = jsvGetLength(HEAP32[$3 + 96 >> 2]);
     if (HEAPU32[$3 + 84 >> 2] > 64) {
      HEAP32[$3 >> 2] = HEAP32[$3 + 84 >> 2];
-     jsExceptionHere(1, 39688, $3);
+     jsExceptionHere(1, 38664, $3);
      HEAP32[$3 + 108 >> 2] = 0;
      break label$1;
     }
@@ -43086,7 +43086,7 @@ function jswrap_function_apply_or_call($0, $1, $2) {
    }
    if (!(jsvIsUndefined(HEAP32[$3 + 96 >> 2]) & 1)) {
     HEAP32[$3 + 16 >> 2] = HEAP32[$3 + 96 >> 2];
-    jsExceptionHere(1, 39760, $3 + 16 | 0);
+    jsExceptionHere(1, 38736, $3 + 16 | 0);
     HEAP32[$3 + 108 >> 2] = 0;
     break label$1;
    }
@@ -43184,11 +43184,11 @@ function TfLiteStatus_20tflite__ops__micro__elementwise___28anonymous_20namespac
    $2 = HEAP32[HEAP32[$3 + 56 >> 2] >> 2];
    HEAP32[$3 + 20 >> 2] = HEAP32[$3 + 60 >> 2];
    HEAP32[$3 + 16 >> 2] = $2;
-   HEAP32[$3 + 12 >> 2] = 51592;
-   HEAP32[$3 + 8 >> 2] = 51580;
+   HEAP32[$3 + 12 >> 2] = 50552;
+   HEAP32[$3 + 8 >> 2] = 50540;
    HEAP32[$3 + 4 >> 2] = 57;
-   HEAP32[$3 >> 2] = 51478;
-   FUNCTION_TABLE[$0]($1, 51452, $3);
+   HEAP32[$3 >> 2] = 50438;
+   FUNCTION_TABLE[$0]($1, 50412, $3);
    HEAP32[$3 + 76 >> 2] = 1;
    break label$1;
   }
@@ -43225,12 +43225,12 @@ function jspeStatementTry() {
  $0 = global$0 - 32 | 0;
  global$0 = $0;
  jslGetNextToken();
- HEAP8[$0 + 27 | 0] = (HEAP32[24866] & 63) == 1;
+ HEAP8[$0 + 27 | 0] = (HEAP32[24606] & 63) == 1;
  jspeBlock();
- HEAP8[$0 + 26 | 0] = HEAP8[$0 + 27 | 0] & 1 ? (HEAP32[24866] & 32) != 0 : 0;
+ HEAP8[$0 + 26 | 0] = HEAP8[$0 + 27 | 0] & 1 ? (HEAP32[24606] & 32) != 0 : 0;
  HEAP8[$0 + 25 | 0] = 0;
  label$3 : {
-  if (HEAP16[HEAP32[14856] + 2 >> 1] == 178) {
+  if (HEAP16[HEAP32[14596] + 2 >> 1] == 178) {
    jslGetNextToken();
    HEAP8[$0 + 25 | 0] = 1;
    if (!(jslMatch(40) & 1)) {
@@ -43258,15 +43258,15 @@ function jspeStatementTry() {
      jsvSetValueOfName(HEAP32[$0 + 16 >> 2], HEAP32[$0 + 12 >> 2]);
      jsvUnLock(HEAP32[$0 + 12 >> 2]);
     }
-    HEAP32[24866] = HEAP32[24866] & -161;
+    HEAP32[24606] = HEAP32[24606] & -161;
     jsvUnLock(HEAP32[$0 + 16 >> 2]);
    }
    label$11 : {
     if (!(!(HEAP8[$0 + 27 | 0] & 1) | HEAP8[$0 + 26 | 0] & 1)) {
-     HEAP32[$0 + 8 >> 2] = HEAP32[24866];
+     HEAP32[$0 + 8 >> 2] = HEAP32[24606];
      jspSetNoExecute();
      jspeBlock();
-     HEAP32[24866] = HEAP32[24866] & -1664 | HEAP32[$0 + 8 >> 2] & 1663;
+     HEAP32[24606] = HEAP32[24606] & -1664 | HEAP32[$0 + 8 >> 2] & 1663;
      break label$11;
     }
     label$13 : {
@@ -43283,16 +43283,16 @@ function jspeStatementTry() {
    }
    jsvUnLock(HEAP32[$0 + 20 >> 2]);
   }
-  if (!(HEAP8[$0 + 25 | 0] & 1 | HEAP32[24866] & 80 ? HEAP16[HEAP32[14856] + 2 >> 1] != 179 : 0)) {
+  if (!(HEAP8[$0 + 25 | 0] & 1 | HEAP32[24606] & 80 ? HEAP16[HEAP32[14596] + 2 >> 1] != 179 : 0)) {
    if (!(jslMatch(179) & 1)) {
     break label$3;
    }
    if (HEAP8[$0 + 26 | 0] & 1) {
-    HEAP32[24866] = HEAP32[24866] & -33;
+    HEAP32[24606] = HEAP32[24606] & -33;
    }
    jspeBlock();
    if (!(!(HEAP8[$0 + 26 | 0] & 1) | HEAP8[$0 + 25 | 0] & 1)) {
-    HEAP32[24866] = HEAP32[24866] | 32;
+    HEAP32[24606] = HEAP32[24606] | 32;
    }
   }
  }
@@ -43384,15 +43384,15 @@ function _parse_time($0, $1) {
  HEAP32[HEAP32[$2 + 24 >> 2] + 16 >> 2] = $0;
  jslGetNextToken();
  label$1 : {
-  if (HEAP16[HEAP32[14856] + 2 >> 1] == 58) {
+  if (HEAP16[HEAP32[14596] + 2 >> 1] == 58) {
    jslGetNextToken();
-   if (HEAP16[HEAP32[14856] + 2 >> 1] == 129) {
+   if (HEAP16[HEAP32[14596] + 2 >> 1] == 129) {
     $0 = _parse_int();
     HEAP32[HEAP32[$2 + 24 >> 2] + 12 >> 2] = $0;
     jslGetNextToken();
-    if (HEAP16[HEAP32[14856] + 2 >> 1] == 58) {
+    if (HEAP16[HEAP32[14596] + 2 >> 1] == 58) {
      jslGetNextToken();
-     if (!(HEAP16[HEAP32[14856] + 2 >> 1] != 130 ? HEAP16[HEAP32[14856] + 2 >> 1] != 129 : 0)) {
+     if (!(HEAP16[HEAP32[14596] + 2 >> 1] != 130 ? HEAP16[HEAP32[14596] + 2 >> 1] != 129 : 0)) {
       HEAPF64[$2 + 8 >> 3] = stringToFloat(jslGetTokenValueAsString());
       $0 = HEAP32[$2 + 24 >> 2];
       $3 = HEAPF64[$2 + 8 >> 3];
@@ -43416,19 +43416,19 @@ function _parse_time($0, $1) {
       HEAP32[$0 + 4 >> 2] = ($1 | 0) % 1e3;
       jslGetNextToken();
       label$11 : {
-       if (HEAP16[HEAP32[14856] + 2 >> 1] != 128) {
+       if (HEAP16[HEAP32[14596] + 2 >> 1] != 128) {
         break label$11;
        }
-       if (strcmp(jslGetTokenValueAsString(), 35547)) {
+       if (strcmp(jslGetTokenValueAsString(), 34523)) {
         break label$11;
        }
        HEAP32[HEAP32[$2 + 24 >> 2] + 20 >> 2] = 0;
        jslGetNextToken();
       }
-      if (!(HEAP16[HEAP32[14856] + 2 >> 1] != 45 ? HEAP16[HEAP32[14856] + 2 >> 1] != 43 : 0)) {
-       HEAP32[$2 + 4 >> 2] = HEAP16[HEAP32[14856] + 2 >> 1] == 43 ? 1 : -1;
+      if (!(HEAP16[HEAP32[14596] + 2 >> 1] != 45 ? HEAP16[HEAP32[14596] + 2 >> 1] != 43 : 0)) {
+       HEAP32[$2 + 4 >> 2] = HEAP16[HEAP32[14596] + 2 >> 1] == 43 ? 1 : -1;
        jslGetNextToken();
-       if (HEAP16[HEAP32[14856] + 2 >> 1] == 129) {
+       if (HEAP16[HEAP32[14596] + 2 >> 1] == 129) {
         HEAP32[$2 >> 2] = _parse_int();
         HEAP32[$2 >> 2] = Math_imul(HEAP32[$2 >> 2] / 100 | 0, 60) + (HEAP32[$2 >> 2] % 100 | 0);
         HEAP32[HEAP32[$2 + 24 >> 2] + 20 >> 2] = Math_imul(HEAP32[$2 >> 2], HEAP32[$2 + 4 >> 2]);
@@ -43454,11 +43454,11 @@ function jswrap_promise_all($0) {
  label$1 : {
   if (!(jsvIsIterable(HEAP32[$1 + 40 >> 2]) & 1)) {
    HEAP32[$1 >> 2] = HEAP32[$1 + 40 >> 2];
-   jsExceptionHere(3, 40660, $1);
+   jsExceptionHere(3, 39632, $1);
    HEAP32[$1 + 44 >> 2] = 0;
    break label$1;
   }
-  HEAP32[$1 + 36 >> 2] = jspNewObject(0, 40652);
+  HEAP32[$1 + 36 >> 2] = jspNewObject(0, 39624);
   if (!HEAP32[$1 + 36 >> 2]) {
    HEAP32[$1 + 44 >> 2] = 0;
    break label$1;
@@ -43466,7 +43466,7 @@ function jswrap_promise_all($0) {
   HEAP32[$1 + 32 >> 2] = jsvNewNativeFunction(535, 32776);
   if (HEAP32[$1 + 32 >> 2]) {
    $0 = $1 + 16 | 0;
-   jsvObjectSetChild(HEAP32[$1 + 32 >> 2], 40590, HEAP32[$1 + 36 >> 2]);
+   jsvObjectSetChild(HEAP32[$1 + 32 >> 2], 39562, HEAP32[$1 + 36 >> 2]);
    HEAP32[$1 + 28 >> 2] = jsvNewWithFlags(3);
    HEAP32[$1 + 24 >> 2] = 0;
    HEAP32[$1 + 20 >> 2] = 0;
@@ -43480,7 +43480,7 @@ function jswrap_promise_all($0) {
        HEAP32[$1 + 4 >> 2] = jsvNewFromInteger(HEAP32[$1 + 24 >> 2]);
        jsvAddFunctionParameter(HEAP32[$1 + 8 >> 2], 0, HEAP32[$1 + 4 >> 2]);
        jsvUnLock(HEAP32[$1 + 4 >> 2]);
-       jsvObjectSetChild(HEAP32[$1 + 8 >> 2], 40590, HEAP32[$1 + 36 >> 2]);
+       jsvObjectSetChild(HEAP32[$1 + 8 >> 2], 39562, HEAP32[$1 + 36 >> 2]);
        jsvUnLock2(jswrap_promise_then(HEAP32[$1 + 12 >> 2], HEAP32[$1 + 8 >> 2], HEAP32[$1 + 32 >> 2]), HEAP32[$1 + 8 >> 2]);
        break label$7;
       }
@@ -43496,8 +43496,8 @@ function jswrap_promise_all($0) {
     break;
    }
    jsvObjectIteratorFree($1 + 16 | 0);
-   jsvObjectSetChildAndUnLock(HEAP32[$1 + 36 >> 2], 40641, jsvNewFromInteger(HEAP32[$1 + 24 >> 2] - HEAP32[$1 + 20 >> 2] | 0));
-   jsvObjectSetChildAndUnLock(HEAP32[$1 + 36 >> 2], 40647, HEAP32[$1 + 28 >> 2]);
+   jsvObjectSetChildAndUnLock(HEAP32[$1 + 36 >> 2], 39613, jsvNewFromInteger(HEAP32[$1 + 24 >> 2] - HEAP32[$1 + 20 >> 2] | 0));
+   jsvObjectSetChildAndUnLock(HEAP32[$1 + 36 >> 2], 39619, HEAP32[$1 + 28 >> 2]);
   }
   jsvUnLock(HEAP32[$1 + 32 >> 2]);
   HEAP32[$1 + 44 >> 2] = HEAP32[$1 + 36 >> 2];
@@ -43517,25 +43517,25 @@ function jsspiPopulateSPIInfo($0, $1) {
  jshSPIInitInfo(HEAP32[$2 + 124 >> 2]);
  HEAP32[$2 + 116 >> 2] = 0;
  HEAP32[$2 + 112 >> 2] = HEAPU8[HEAP32[$2 + 124 >> 2] + 8 | 0];
- HEAP32[$2 + 16 >> 2] = 7807;
+ HEAP32[$2 + 16 >> 2] = 7803;
  HEAP16[$2 + 20 >> 1] = 12;
  HEAP32[$2 + 24 >> 2] = HEAP32[$2 + 124 >> 2] + 5;
- HEAP32[$2 + 28 >> 2] = 7811;
+ HEAP32[$2 + 28 >> 2] = 7807;
  HEAP16[$2 + 32 >> 1] = 12;
  HEAP32[$2 + 36 >> 2] = HEAP32[$2 + 124 >> 2] + 6;
- HEAP32[$2 + 40 >> 2] = 7816;
+ HEAP32[$2 + 40 >> 2] = 7812;
  HEAP16[$2 + 44 >> 1] = 12;
  HEAP32[$2 + 48 >> 2] = HEAP32[$2 + 124 >> 2] + 7;
- HEAP32[$2 + 52 >> 2] = 7821;
+ HEAP32[$2 + 52 >> 2] = 7817;
  HEAP16[$2 + 56 >> 1] = 9;
  HEAP32[$2 + 60 >> 2] = HEAP32[$2 + 124 >> 2];
- HEAP32[$2 + 64 >> 2] = 7826;
+ HEAP32[$2 + 64 >> 2] = 7822;
  HEAP16[$2 + 68 >> 1] = 9;
  HEAP32[$2 + 72 >> 2] = $5;
- HEAP32[$2 + 76 >> 2] = 7831;
+ HEAP32[$2 + 76 >> 2] = 7827;
  HEAP16[$2 + 80 >> 1] = 5;
  HEAP32[$2 + 84 >> 2] = $4;
- HEAP32[$2 + 88 >> 2] = 7837;
+ HEAP32[$2 + 88 >> 2] = 7833;
  HEAP16[$2 + 92 >> 1] = 9;
  HEAP32[$2 + 96 >> 2] = HEAP32[$2 + 124 >> 2] + 10;
  HEAP8[$2 + 15 | 0] = 1;
@@ -43546,7 +43546,7 @@ function jsspiPopulateSPIInfo($0, $1) {
     if (!(jsvIsString(HEAP32[$2 + 116 >> 2]) & 1)) {
      break label$3;
     }
-    if (!(jsvIsStringEqual(HEAP32[$2 + 116 >> 2], 7842) & 1)) {
+    if (!(jsvIsStringEqual(HEAP32[$2 + 116 >> 2], 7838) & 1)) {
      break label$3;
     }
     HEAP8[HEAP32[$2 + 124 >> 2] + 9 | 0] = 1;
@@ -43557,21 +43557,21 @@ function jsspiPopulateSPIInfo($0, $1) {
      if (!(jsvIsString(HEAP32[$2 + 116 >> 2]) & 1)) {
       break label$5;
      }
-     if (!(jsvIsStringEqual(HEAP32[$2 + 116 >> 2], 7846) & 1)) {
+     if (!(jsvIsStringEqual(HEAP32[$2 + 116 >> 2], 7842) & 1)) {
       break label$5;
      }
      HEAP8[HEAP32[$2 + 124 >> 2] + 9 | 0] = 0;
      break label$4;
     }
     if (!(jsvIsUndefined(HEAP32[$2 + 116 >> 2]) & 1)) {
-     jsExceptionHere(1, 7850, 0);
+     jsExceptionHere(1, 7846, 0);
      HEAP8[$2 + 15 | 0] = 0;
     }
    }
   }
   $0 = HEAP32[$2 + 124 >> 2];
   if ((HEAPU8[$0 | 0] | HEAPU8[$0 + 1 | 0] << 8 | (HEAPU8[$0 + 2 | 0] << 16 | HEAPU8[$0 + 3 | 0] << 24)) < 100) {
-   jsExceptionHere(1, 7885, 0);
+   jsExceptionHere(1, 7881, 0);
    HEAP8[$2 + 15 | 0] = 0;
   }
  }
@@ -43596,11 +43596,11 @@ function TfLiteStatus_20tflite__ops__micro__elementwise___28anonymous_20namespac
    $2 = HEAP32[HEAP32[$3 + 56 >> 2] >> 2];
    HEAP32[$3 + 20 >> 2] = HEAP32[$3 + 60 >> 2];
    HEAP32[$3 + 16 >> 2] = $2;
-   HEAP32[$3 + 12 >> 2] = 51592;
-   HEAP32[$3 + 8 >> 2] = 51580;
+   HEAP32[$3 + 12 >> 2] = 50552;
+   HEAP32[$3 + 8 >> 2] = 50540;
    HEAP32[$3 + 4 >> 2] = 57;
-   HEAP32[$3 >> 2] = 51478;
-   FUNCTION_TABLE[$0]($1, 51452, $3);
+   HEAP32[$3 >> 2] = 50438;
+   FUNCTION_TABLE[$0]($1, 50412, $3);
    HEAP32[$3 + 76 >> 2] = 1;
    break label$1;
   }
@@ -43783,12 +43783,12 @@ function jswrap_interface_clearWatch($0) {
     }
    }
    $0 = $1 + 48 | 0;
-   HEAP32[$1 + 56 >> 2] = jsvLock(HEAPU16[49741]);
+   HEAP32[$1 + 56 >> 2] = jsvLock(HEAPU16[49221]);
    jsvObjectIteratorNew($0, HEAP32[$1 + 56 >> 2]);
    while (1) {
     if (jsvObjectIteratorHasValue($1 + 48 | 0) & 1) {
      HEAP32[$1 + 44 >> 2] = jsvObjectIteratorGetValue($1 + 48 | 0);
-     HEAP32[$1 + 40 >> 2] = jsvObjectGetChild(HEAP32[$1 + 44 >> 2], 37975, 0);
+     HEAP32[$1 + 40 >> 2] = jsvObjectGetChild(HEAP32[$1 + 44 >> 2], 36951, 0);
      HEAP8[$1 + 39 | 0] = jshGetPinFromVar(HEAP32[$1 + 40 >> 2]);
      if (!(jshGetPinShouldStayWatched(HEAPU8[$1 + 39 | 0]) & 1)) {
       jshPinWatch(HEAPU8[$1 + 39 | 0], 0);
@@ -43807,18 +43807,18 @@ function jswrap_interface_clearWatch($0) {
   }
   HEAP32[$1 + 32 >> 2] = jsvGetArrayItem(HEAP32[$1 + 60 >> 2], 0);
   if (jsvIsUndefined(HEAP32[$1 + 32 >> 2]) & 1) {
-   jsExceptionHere(1, 38121, 0);
+   jsExceptionHere(1, 37097, 0);
    break label$1;
   }
-  HEAP32[$1 + 28 >> 2] = jsvLock(HEAPU16[49741]);
+  HEAP32[$1 + 28 >> 2] = jsvLock(HEAPU16[49221]);
   HEAP32[$1 + 24 >> 2] = jsvFindChildFromVar(HEAP32[$1 + 28 >> 2], HEAP32[$1 + 32 >> 2], 0);
   jsvUnLock(HEAP32[$1 + 28 >> 2]);
   label$8 : {
    if (HEAP32[$1 + 24 >> 2]) {
     HEAP32[$1 + 20 >> 2] = jsvSkipName(HEAP32[$1 + 24 >> 2]);
-    HEAP8[$1 + 19 | 0] = jshGetPinFromVarAndUnLock(jsvObjectGetChild(HEAP32[$1 + 20 >> 2], 37975, 0));
+    HEAP8[$1 + 19 | 0] = jshGetPinFromVarAndUnLock(jsvObjectGetChild(HEAP32[$1 + 20 >> 2], 36951, 0));
     jsvUnLock(HEAP32[$1 + 20 >> 2]);
-    HEAP32[$1 + 12 >> 2] = jsvLock(HEAPU16[49741]);
+    HEAP32[$1 + 12 >> 2] = jsvLock(HEAPU16[49221]);
     jsvRemoveChild(HEAP32[$1 + 12 >> 2], HEAP32[$1 + 24 >> 2]);
     jsvUnLock2(HEAP32[$1 + 24 >> 2], HEAP32[$1 + 12 >> 2]);
     if (!(jsiIsWatchingPin(HEAPU8[$1 + 19 | 0]) & 1)) {
@@ -43827,7 +43827,7 @@ function jswrap_interface_clearWatch($0) {
     break label$8;
    }
    HEAP32[$1 >> 2] = HEAP32[$1 + 32 >> 2];
-   jsExceptionHere(1, 38182, $1);
+   jsExceptionHere(1, 37158, $1);
   }
   jsvUnLock(HEAP32[$1 + 32 >> 2]);
  }
@@ -43838,15 +43838,15 @@ function jsiHandleDelete($0) {
  $1 = global$0 - 32 | 0;
  global$0 = $1;
  HEAP8[$1 + 31 | 0] = $0;
- HEAP32[$1 + 24 >> 2] = jsvGetStringLength(HEAP32[24872]);
+ HEAP32[$1 + 24 >> 2] = jsvGetStringLength(HEAP32[24612]);
  label$1 : {
-  if (!(HEAP32[24874] | !(HEAP8[$1 + 31 | 0] & 1)) | !(HEAP8[$1 + 31 | 0] & 1 | HEAPU32[24874] < HEAPU32[$1 + 24 >> 2])) {
+  if (!(HEAP32[24614] | !(HEAP8[$1 + 31 | 0] & 1)) | !(HEAP8[$1 + 31 | 0] & 1 | HEAPU32[24614] < HEAPU32[$1 + 24 >> 2])) {
    break label$1;
   }
   $3 = $1;
   label$4 : {
    if (HEAP8[$1 + 31 | 0] & 1) {
-    $0 = (jsvGetCharInString(HEAP32[24872], HEAP32[24874] - 1 | 0) & 255) == 10;
+    $0 = (jsvGetCharInString(HEAP32[24612], HEAP32[24614] - 1 | 0) & 255) == 10;
     $2 = 1;
     if ($0) {
      break label$4;
@@ -43855,7 +43855,7 @@ function jsiHandleDelete($0) {
    if (HEAP8[$1 + 31 | 0] & 1) {
     $2 = 0;
    } else {
-    $2 = (jsvGetCharInString(HEAP32[24872], HEAP32[24874]) & 255) == 10;
+    $2 = (jsvGetCharInString(HEAP32[24612], HEAP32[24614]) & 255) == 10;
    }
   }
   HEAP8[$3 + 23 | 0] = $2 & 1;
@@ -43868,41 +43868,41 @@ function jsiHandleDelete($0) {
    }
    jsiConsolePrintString(5198);
    if (HEAP8[$1 + 31 | 0] & 1) {
-    jsiConsolePrintString(5734);
-    jsiMoveCursorChar(HEAP32[24872], HEAP32[24874], HEAP32[24874] - 1 | 0);
+    jsiConsolePrintString(5730);
+    jsiMoveCursorChar(HEAP32[24612], HEAP32[24614], HEAP32[24614] - 1 | 0);
     jsiInputLineCursorMoved();
    }
   }
   HEAP32[$1 + 16 >> 2] = jsvNewFromEmptyString();
-  HEAP32[$1 + 12 >> 2] = HEAP32[24874];
+  HEAP32[$1 + 12 >> 2] = HEAP32[24614];
   if (HEAP8[$1 + 31 | 0] & 1) {
    HEAP32[$1 + 12 >> 2] = HEAP32[$1 + 12 >> 2] + -1;
   }
   if (HEAPU32[$1 + 12 >> 2] > 0) {
-   jsvAppendStringVar(HEAP32[$1 + 16 >> 2], HEAP32[24872], 0, HEAP32[$1 + 12 >> 2]);
+   jsvAppendStringVar(HEAP32[$1 + 16 >> 2], HEAP32[24612], 0, HEAP32[$1 + 12 >> 2]);
   }
   if (HEAP32[$1 + 12 >> 2] + 1 >>> 0 < HEAPU32[$1 + 24 >> 2]) {
-   jsvAppendStringVar(HEAP32[$1 + 16 >> 2], HEAP32[24872], HEAP32[$1 + 12 >> 2] + 1 | 0, 2147483647);
+   jsvAppendStringVar(HEAP32[$1 + 16 >> 2], HEAP32[24612], HEAP32[$1 + 12 >> 2] + 1 | 0, 2147483647);
   }
   jsiInputLineCursorMoved();
-  jsvUnLock(HEAP32[24872]);
-  HEAP32[24872] = HEAP32[$1 + 16 >> 2];
+  jsvUnLock(HEAP32[24612]);
+  HEAP32[24612] = HEAP32[$1 + 16 >> 2];
   if (HEAP8[$1 + 31 | 0] & 1) {
-   HEAP32[24874] = HEAP32[24874] + -1;
+   HEAP32[24614] = HEAP32[24614] + -1;
   }
   if (!(jsiShowInputLine() & 1)) {
    break label$1;
   }
   label$14 : {
    if (HEAP8[$1 + 23 | 0] & 1) {
-    jsiConsolePrintStringVarWithNewLineChar(HEAP32[24872], HEAP32[24874], 58);
-    jsiMoveCursorChar(HEAP32[24872], jsvGetStringLength(HEAP32[24872]), HEAP32[24874]);
+    jsiConsolePrintStringVarWithNewLineChar(HEAP32[24612], HEAP32[24614], 58);
+    jsiMoveCursorChar(HEAP32[24612], jsvGetStringLength(HEAP32[24612]), HEAP32[24614]);
     break label$14;
    }
    if (HEAP8[$1 + 31 | 0] & 1) {
     jsiConsolePrintChar(8);
    }
-   jsiConsolePrintStringVarUntilEOL(HEAP32[24872], HEAP32[24874]);
+   jsiConsolePrintStringVarUntilEOL(HEAP32[24612], HEAP32[24614]);
   }
  }
  global$0 = $1 + 32 | 0;
@@ -43930,14 +43930,14 @@ function graphicsFillVectorChar($0, $1, $2, $3, $4) {
   HEAP32[$5 + 64 >> 2] = 0;
   while (1) {
    if (HEAP32[$5 + 64 >> 2] < HEAP32[$5 + 60 >> 2]) {
-    HEAP32[$5 + 68 >> 2] = HEAPU8[((HEAP32[$5 + 64 >> 2] << 1) + 26384 | 0) + 1 | 0] + HEAP32[$5 + 68 >> 2];
+    HEAP32[$5 + 68 >> 2] = HEAPU8[((HEAP32[$5 + 64 >> 2] << 1) + 25360 | 0) + 1 | 0] + HEAP32[$5 + 68 >> 2];
     HEAP32[$5 + 64 >> 2] = HEAP32[$5 + 64 >> 2] + 1;
     continue;
    }
    break;
   }
-  HEAP8[$5 + 57 | 0] = HEAPU8[((HEAP32[$5 + 60 >> 2] << 1) + 26384 | 0) + 1 | 0];
-  HEAP8[$5 + 56 | 0] = HEAPU8[(HEAP32[$5 + 60 >> 2] << 1) + 26384 | 0];
+  HEAP8[$5 + 57 | 0] = HEAPU8[((HEAP32[$5 + 60 >> 2] << 1) + 25360 | 0) + 1 | 0];
+  HEAP8[$5 + 56 | 0] = HEAPU8[(HEAP32[$5 + 60 >> 2] << 1) + 25360 | 0];
   HEAP32[$5 + 12 >> 2] = 0;
   HEAP32[$5 + 64 >> 2] = 0;
   while (1) {
@@ -43946,10 +43946,10 @@ function graphicsFillVectorChar($0, $1, $2, $3, $4) {
      break label$8;
     }
     $0 = $5 + 16 | 0;
-    HEAP16[$0 + (HEAP32[$5 + 12 >> 2] << 1) >> 1] = HEAP32[$5 + 84 >> 2] + ((Math_imul(HEAP32[$5 + 76 >> 2], HEAPU8[(HEAP32[$5 + 68 >> 2] + HEAP32[$5 + 64 >> 2] | 0) + 26576 | 0] & 127) + 48 | 0) / 96 | 0);
-    HEAP16[$0 + (HEAP32[$5 + 12 >> 2] + 1 << 1) >> 1] = HEAP32[$5 + 80 >> 2] + ((Math_imul(HEAP32[$5 + 76 >> 2], HEAPU8[((HEAP32[$5 + 68 >> 2] + HEAP32[$5 + 64 >> 2] | 0) + 1 | 0) + 26576 | 0] & 127) + 48 | 0) / 96 | 0);
+    HEAP16[$0 + (HEAP32[$5 + 12 >> 2] << 1) >> 1] = HEAP32[$5 + 84 >> 2] + ((Math_imul(HEAP32[$5 + 76 >> 2], HEAPU8[(HEAP32[$5 + 68 >> 2] + HEAP32[$5 + 64 >> 2] | 0) + 25552 | 0] & 127) + 48 | 0) / 96 | 0);
+    HEAP16[$0 + (HEAP32[$5 + 12 >> 2] + 1 << 1) >> 1] = HEAP32[$5 + 80 >> 2] + ((Math_imul(HEAP32[$5 + 76 >> 2], HEAPU8[((HEAP32[$5 + 68 >> 2] + HEAP32[$5 + 64 >> 2] | 0) + 1 | 0) + 25552 | 0] & 127) + 48 | 0) / 96 | 0);
     HEAP32[$5 + 12 >> 2] = HEAP32[$5 + 12 >> 2] + 2;
-    if (HEAPU8[((HEAP32[$5 + 68 >> 2] + HEAP32[$5 + 64 >> 2] | 0) + 1 | 0) + 26576 | 0] & 128) {
+    if (HEAPU8[((HEAP32[$5 + 68 >> 2] + HEAP32[$5 + 64 >> 2] | 0) + 1 | 0) + 25552 | 0] & 128) {
      graphicsFillPoly(HEAP32[$5 + 88 >> 2], HEAP32[$5 + 12 >> 2] / 2 | 0, $5 + 16 | 0);
      if (jspIsInterrupted() & 1) {
       break label$8;
@@ -43986,7 +43986,7 @@ function tflite__MicroAllocator__MicroAllocator_28TfLiteContext__2c_20tflite__Mo
  HEAP32[$6 + 16 >> 2] = tflite__Model__subgraphs_28_29_20const(HEAP32[$6 + 32 >> 2]);
  label$1 : {
   if ((flatbuffers__Vector_int___size_28_29_20const(HEAP32[$6 + 16 >> 2]) | 0) != 1) {
-   tflite__ErrorReporter__Report_28char_20const__2c_20____29(HEAP32[$6 + 20 >> 2], 46104, 0);
+   tflite__ErrorReporter__Report_28char_20const__2c_20____29(HEAP32[$6 + 20 >> 2], 45064, 0);
    break label$1;
   }
   HEAP32[$0 + 32 >> 2] = flatbuffers__Vector_flatbuffers__Offset_tflite__SubGraph__20___operator_5b_5d_28unsigned_20int_29_20const(HEAP32[$6 + 16 >> 2], 0);
@@ -44012,16 +44012,16 @@ function jsiDebuggerLoop() {
  var $0 = 0, $1 = 0, $2 = 0;
  $0 = global$0 - 32 | 0;
  global$0 = $0;
- if (!(HEAPU16[49742] & 10)) {
-  HEAP32[24866] = HEAP32[24866] & -63489;
+ if (!(HEAPU16[49222] & 10)) {
+  HEAP32[24606] = HEAP32[24606] & -63489;
   jsiClearInputLine(1);
   jsiConsoleRemoveInputLine();
-  HEAP16[49742] = HEAPU16[49742] & -4 | 8;
-  if (HEAP32[14856]) {
+  HEAP16[49222] = HEAPU16[49222] & -4 | 8;
+  if (HEAP32[14596]) {
    label$3 : {
-    if (HEAPU16[HEAP32[14856] + 102 >> 1]) {
+    if (HEAPU16[HEAP32[14596] + 102 >> 1]) {
      $1 = $0 + 23 | 0;
-     itostr((jslGetLineNumber() + HEAPU16[HEAP32[14856] + 102 >> 1] | 0) - 1 | 0, $1, 10);
+     itostr((jslGetLineNumber() + HEAPU16[HEAP32[14596] + 102 >> 1] | 0) - 1 | 0, $1, 10);
      break label$3;
     }
     HEAP8[$0 + 23 | 0] = 0;
@@ -44038,10 +44038,10 @@ function jsiDebuggerLoop() {
    }
    $1 = $0 + 23 | 0;
    HEAP8[$1 + HEAP32[$0 + 16 >> 2] | 0] = 0;
-   jslPrintTokenLineMarker(9, 0, HEAP32[HEAP32[14856] + 28 >> 2], $1);
+   jslPrintTokenLineMarker(9, 0, HEAP32[HEAP32[14596] + 28 >> 2], $1);
   }
   while (1) {
-   if ((HEAPU16[49742] & 16 ? 0 : (HEAP32[24866] & 6144) != 0 ^ -1) & 1) {
+   if ((HEAPU16[49222] & 16 ? 0 : (HEAP32[24606] & 6144) != 0 ^ -1) & 1) {
     jsiConsoleReturnInputLine();
     jshIdle();
     while (1) {
@@ -44052,13 +44052,13 @@ function jsiDebuggerLoop() {
        break label$12;
       }
       $2 = 0;
-      if (HEAPU16[49742] & 16) {
+      if (HEAPU16[49222] & 16) {
        break label$12;
       }
-      $2 = (HEAP32[24866] & 6144) != 0 ^ -1;
+      $2 = (HEAP32[24606] & 6144) != 0 ^ -1;
      }
      if ($2 & 1) {
-      if (!(jshPopIOEvent($0 + 8 | 0) & 1) | HEAPU8[57424] != (HEAPU8[$0 + 8 | 0] & 31)) {
+      if (!(jshPopIOEvent($0 + 8 | 0) & 1) | HEAPU8[56384] != (HEAPU8[$0 + 8 | 0] & 31)) {
        continue;
       }
       jsiHandleIOEventForConsole($0 + 8 | 0);
@@ -44067,17 +44067,17 @@ function jsiDebuggerLoop() {
      break;
     }
     while (1) {
-     $1 = !(jshPopIOEventOfType(HEAPU8[57424], $0 + 8 | 0) & 1);
+     $1 = !(jshPopIOEventOfType(HEAPU8[56384], $0 + 8 | 0) & 1);
      $2 = 0;
      label$15 : {
       if ($1) {
        break label$15;
       }
       $2 = 0;
-      if (HEAPU16[49742] & 16) {
+      if (HEAPU16[49222] & 16) {
        break label$15;
       }
-      $2 = (HEAP32[24866] & 6144) != 0 ^ -1;
+      $2 = (HEAP32[24606] & 6144) != 0 ^ -1;
      }
      if ($2 & 1) {
       jsiHandleIOEventForConsole($0 + 8 | 0);
@@ -44090,10 +44090,10 @@ function jsiDebuggerLoop() {
    break;
   }
   jsiConsoleRemoveInputLine();
-  if (HEAP32[24866] & 6144) {
-   HEAP32[24866] = HEAP32[24866] | 16;
+  if (HEAP32[24606] & 6144) {
+   HEAP32[24606] = HEAP32[24606] | 16;
   }
-  HEAP16[49742] = HEAPU16[49742] & -25;
+  HEAP16[49222] = HEAPU16[49222] & -25;
  }
  global$0 = $0 + 32 | 0;
 }
@@ -44149,7 +44149,7 @@ function atan2($0, $1) {
       if (($2 | 0) != 2146435072) {
        break label$9;
       }
-      return HEAPF64[($3 << 3) + 57312 >> 3];
+      return HEAPF64[($3 << 3) + 56272 >> 3];
      }
      if (!($4 + 67108864 >>> 0 >= $2 >>> 0 ? ($2 | 0) != 2146435072 : 0)) {
       break label$4;
@@ -44179,7 +44179,7 @@ function atan2($0, $1) {
      }
      return $0 + -1.2246467991473532e-16 + -3.141592653589793;
     }
-    return HEAPF64[($3 << 3) + 57344 >> 3];
+    return HEAPF64[($3 << 3) + 56304 >> 3];
    }
    $0 = 3.141592653589793;
   }
@@ -44270,40 +44270,40 @@ function jsiSoftInit($0) {
  $1 = global$0 - 48 | 0;
  global$0 = $1;
  HEAP8[$1 + 47 | 0] = $0;
- HEAP8[99447] = 0;
- HEAP8[99503] = 0;
- HEAP32[24869] = jsvNewWithFlags(3);
- HEAP32[24872] = jsvNewFromEmptyString();
- HEAP32[24874] = 0;
- HEAP16[49754] = 0;
+ HEAP8[98407] = 0;
+ HEAP8[98463] = 0;
+ HEAP32[24609] = jsvNewWithFlags(3);
+ HEAP32[24612] = jsvNewFromEmptyString();
+ HEAP32[24614] = 0;
+ HEAP16[49234] = 0;
  jsiInputLineCursorMoved();
- HEAP32[24881] = 0;
+ HEAP32[24621] = 0;
  jsfSetFlag(1, 0);
- HEAP8[57425] = 255;
- HEAP8[57426] = 255;
- HEAP16[49740] = _jsiInitNamedArray(5233);
- HEAP16[49741] = _jsiInitNamedArray(5240);
- HEAP32[24884] = jshGetSystemTime();
- HEAP32[24885] = i64toi32_i32$HIGH_BITS;
- HEAP32[24886] = -1;
- HEAP32[$1 + 40 >> 2] = jsvObjectGetChild(HEAP32[24863], 5248, 0);
+ HEAP8[56385] = 255;
+ HEAP8[56386] = 255;
+ HEAP16[49220] = _jsiInitNamedArray(5233);
+ HEAP16[49221] = _jsiInitNamedArray(5240);
+ HEAP32[24624] = jshGetSystemTime();
+ HEAP32[24625] = i64toi32_i32$HIGH_BITS;
+ HEAP32[24626] = -1;
+ HEAP32[$1 + 40 >> 2] = jsvObjectGetChild(HEAP32[24603], 5248, 0);
  if (HEAP32[$1 + 40 >> 2]) {
-  HEAP8[59428] = jsvGetIntegerAndUnLock(HEAP32[$1 + 40 >> 2]);
-  jsvObjectRemoveChild(HEAP32[24863], 5248);
+  HEAP8[58388] = jsvGetIntegerAndUnLock(HEAP32[$1 + 40 >> 2]);
+  jsvObjectRemoveChild(HEAP32[24603], 5248);
  }
  jswrap_banglejs_init();
  terminalControlCharsReset();
- HEAP8[256372] = 0;
- HEAP8[57560] = 29;
+ HEAP8[255332] = 0;
+ HEAP8[56520] = 29;
  jsfLoadBootCodeFromFlash(HEAP8[$1 + 47 | 0] & 1);
- HEAP32[$1 + 36 >> 2] = jsvObjectGetChild(HEAP32[24863], 5254, 0);
+ HEAP32[$1 + 36 >> 2] = jsvObjectGetChild(HEAP32[24603], 5254, 0);
  if (HEAP32[$1 + 36 >> 2]) {
   jsvUnLock2(jspEvaluateVar(HEAP32[$1 + 36 >> 2], 0, 0), HEAP32[$1 + 36 >> 2]);
-  jsvObjectRemoveChild(HEAP32[24863], 5254);
+  jsvObjectRemoveChild(HEAP32[24603], 5254);
  }
- if (HEAPU16[49741]) {
+ if (HEAPU16[49221]) {
   $0 = $1 + 24 | 0;
-  HEAP32[$1 + 32 >> 2] = jsvLock(HEAPU16[49741]);
+  HEAP32[$1 + 32 >> 2] = jsvLock(HEAPU16[49221]);
   jsvObjectIteratorNew($0, HEAP32[$1 + 32 >> 2]);
   while (1) {
    if (jsvObjectIteratorHasValue($1 + 24 | 0) & 1) {
@@ -44321,7 +44321,7 @@ function jsiSoftInit($0) {
   jsvUnLock(HEAP32[$1 + 32 >> 2]);
  }
  jsiExecuteEventCallbackOn(5265, 0, 0);
- HEAP32[$1 + 12 >> 2] = jsvObjectGetChild(HEAP32[24862], 5273, 0);
+ HEAP32[$1 + 12 >> 2] = jsvObjectGetChild(HEAP32[24602], 5273, 0);
  if (HEAP32[$1 + 12 >> 2]) {
   if (jsiEcho() & 1) {
    jsiConsolePrintString(5280);
@@ -44365,7 +44365,7 @@ function tflite__MicroInterpreter__MicroInterpreter_28tflite__Model_20const__2c_
  HEAP32[$6 >> 2] = tflite__Model__subgraphs_28_29_20const(HEAP32[$6 + 20 >> 2]);
  label$1 : {
   if ((flatbuffers__Vector_int___size_28_29_20const(HEAP32[$6 >> 2]) | 0) != 1) {
-   tflite__ErrorReporter__Report_28char_20const__2c_20____29(HEAP32[$6 + 4 >> 2], 43869, 0);
+   tflite__ErrorReporter__Report_28char_20const__2c_20____29(HEAP32[$6 + 4 >> 2], 42829, 0);
    HEAP32[$0 + 116 >> 2] = 1;
    break label$1;
   }
@@ -44396,7 +44396,7 @@ function jswrap_spi_send8bit($0, $1, $2, $3, $4) {
  HEAP8[$5 + 78 | 0] = jsiGetDeviceFromClass(HEAP32[$5 + 92 >> 2]);
  label$1 : {
   if (!(HEAPU8[$5 + 78 | 0] <= 24 ? HEAPU8[$5 + 78 | 0] >= 24 : 0)) {
-   jsExceptionHere(1, 41222, 0);
+   jsExceptionHere(1, 40194, 0);
    break label$1;
   }
   jshPinSetState(HEAPU8[$5 + 78 | 0], 1);
@@ -44437,7 +44437,7 @@ function jswrap_spi_send8bit($0, $1, $2, $3, $4) {
      break label$9;
     }
     HEAP32[$5 >> 2] = HEAP32[$5 + 88 >> 2];
-    jsExceptionHere(1, 41172, $5);
+    jsExceptionHere(1, 40144, $5);
    }
   }
   jshUSARTKick(HEAPU8[$5 + 78 | 0]);
@@ -44465,7 +44465,7 @@ function jswrap_spi_send4bit($0, $1, $2, $3, $4) {
  HEAP8[$5 + 78 | 0] = jsiGetDeviceFromClass(HEAP32[$5 + 92 >> 2]);
  label$1 : {
   if (!(HEAPU8[$5 + 78 | 0] <= 24 ? HEAPU8[$5 + 78 | 0] >= 24 : 0)) {
-   jsExceptionHere(1, 41132, 0);
+   jsExceptionHere(1, 40104, 0);
    break label$1;
   }
   jshPinSetState(HEAPU8[$5 + 78 | 0], 1);
@@ -44506,7 +44506,7 @@ function jswrap_spi_send4bit($0, $1, $2, $3, $4) {
      break label$9;
     }
     HEAP32[$5 >> 2] = HEAP32[$5 + 88 >> 2];
-    jsExceptionHere(1, 41172, $5);
+    jsExceptionHere(1, 40144, $5);
    }
   }
   jshUSARTKick(HEAPU8[$5 + 78 | 0]);
@@ -44606,7 +44606,7 @@ function jspeiFindChildFromStringInParents($0, $1) {
    HEAP32[$2 + 24 >> 2] = jswGetBasicObjectName(HEAP32[$2 + 40 >> 2]);
    while (1) {
     if (HEAP32[$2 + 24 >> 2]) {
-     HEAP32[$2 + 20 >> 2] = jsvFindChildFromString(HEAP32[24862], HEAP32[$2 + 24 >> 2], 0);
+     HEAP32[$2 + 20 >> 2] = jsvFindChildFromString(HEAP32[24602], HEAP32[$2 + 24 >> 2], 0);
      if (HEAP32[$2 + 20 >> 2]) {
       HEAP32[$2 + 16 >> 2] = 0;
       HEAP32[$2 + 12 >> 2] = jsvSkipNameAndUnLock(HEAP32[$2 + 20 >> 2]);
@@ -44708,11 +44708,11 @@ function jswrap_object_on($0, $1, $2) {
  HEAP32[$3 + 36 >> 2] = $2;
  label$1 : {
   if (!(jsvHasChildren(HEAP32[$3 + 44 >> 2]) & 1)) {
-   jsExceptionHere(3, 39183, 0);
+   jsExceptionHere(3, 38159, 0);
    break label$1;
   }
   if (!(jsvIsString(HEAP32[$3 + 40 >> 2]) & 1)) {
-   jsExceptionHere(3, 39238, 0);
+   jsExceptionHere(3, 38214, 0);
    break label$1;
   }
   label$4 : {
@@ -44722,11 +44722,11 @@ function jswrap_object_on($0, $1, $2) {
    if (jsvIsString(HEAP32[$3 + 36 >> 2]) & 1) {
     break label$4;
    }
-   jsExceptionHere(3, 39293, 0);
+   jsExceptionHere(3, 38269, 0);
    break label$1;
   }
   HEAP32[$3 >> 2] = HEAP32[$3 + 40 >> 2];
-  HEAP32[$3 + 32 >> 2] = jsvVarPrintf(39381, $3);
+  HEAP32[$3 + 32 >> 2] = jsvVarPrintf(38357, $3);
   if (!HEAP32[$3 + 32 >> 2]) {
    break label$1;
   }
@@ -44751,13 +44751,13 @@ function jswrap_object_on($0, $1, $2) {
    }
   }
   jsvUnLock2(HEAP32[$3 + 24 >> 2], HEAP32[$3 + 28 >> 2]);
-  if (!(jsvIsStringEqual(HEAP32[$3 + 40 >> 2], 39387) & 1)) {
+  if (!(jsvIsStringEqual(HEAP32[$3 + 40 >> 2], 38363) & 1)) {
    break label$1;
   }
-  HEAP32[$3 + 16 >> 2] = jsvObjectGetChild(HEAP32[$3 + 44 >> 2], 39392, 0);
+  HEAP32[$3 + 16 >> 2] = jsvObjectGetChild(HEAP32[$3 + 44 >> 2], 38368, 0);
   if (jsvIsString(HEAP32[$3 + 16 >> 2]) & 1) {
-   jsiQueueObjectCallbacks(HEAP32[$3 + 44 >> 2], 39397, $3 + 16 | 0, 1);
-   jsvObjectRemoveChild(HEAP32[$3 + 44 >> 2], 39392);
+   jsiQueueObjectCallbacks(HEAP32[$3 + 44 >> 2], 38373, $3 + 16 | 0, 1);
+   jsvObjectRemoveChild(HEAP32[$3 + 44 >> 2], 38368);
   }
   jsvUnLock(HEAP32[$3 + 16 >> 2]);
  }
@@ -44906,7 +44906,7 @@ function jswrap_espruino_FFT($0, $1, $2) {
    $0 = HEAP32[$3 + 44 >> 2];
    HEAP32[$3 + 4 >> 2] = HEAP32[$3 + 40 >> 2];
    HEAP32[$3 >> 2] = $0;
-   jsExceptionHere(1, 35877, $3);
+   jsExceptionHere(1, 34853, $3);
    break label$1;
   }
   HEAP32[$3 + 32 >> 2] = jsvGetLength(HEAP32[$3 + 44 >> 2]);
@@ -44921,7 +44921,7 @@ function jswrap_espruino_FFT($0, $1, $2) {
    break;
   }
   if (1e6 < (HEAP32[$3 + 28 >> 2] << 3) + 256 >>> 0) {
-   jsExceptionHere(1, 35948, 0);
+   jsExceptionHere(1, 34924, 0);
    break label$1;
   }
   $0 = $4 - ((HEAP32[$3 + 28 >> 2] << 3) + 15 & -16) | 0;
@@ -45013,7 +45013,7 @@ function tflite___28anonymous_20namespace_29__DebugLogPrintf_28char_20const__2c_
   DebugLog($0);
   HEAP32[$2 + 12 >> 2] = 0;
  }
- DebugLog(43816);
+ DebugLog(42776);
  global$0 = $2 + 96 | 0;
 }
 function jsvIsStringNumericInt($0, $1) {
@@ -45133,7 +45133,7 @@ function jsiExecuteEventCallback($0, $1, $2, $3) {
       jsvUnLock(jspEvaluateVar(HEAP32[$4 + 24 >> 2], 0, 0));
       break label$10;
      }
-     jsError(5963, 0);
+     jsError(5959, 0);
     }
    }
   }
@@ -45148,13 +45148,13 @@ function jsiExecuteEventCallback($0, $1, $2, $3) {
     if (jspIsInterrupted() & 1) {
      break label$14;
     }
-    $1 = HEAPU32[24886] < jshGetTimeFromMilliseconds(100) >>> 0 ? 0 : 1;
+    $1 = HEAPU32[24626] < jshGetTimeFromMilliseconds(100) >>> 0 ? 0 : 1;
     $0 = i64toi32_i32$HIGH_BITS;
     if (0 > ($0 | 0) ? 1 : 0 >= ($0 | 0) ? $1 : 0) {
      break label$13;
     }
    }
-   HEAP8[99548] = 1;
+   HEAP8[98508] = 1;
    HEAP8[$4 + 47 | 0] = 0;
    break label$12;
   }
@@ -45263,7 +45263,7 @@ function expf($0) {
          break label$6;
         }
        }
-       $0 = Math_fround(Math_fround($0 * Math_fround(1.4426950216293335)) + HEAPF32[($5 << 2) + 57392 >> 2]);
+       $0 = Math_fround(Math_fround($0 * Math_fround(1.4426950216293335)) + HEAPF32[($5 << 2) + 56352 >> 2]);
        if (Math_fround(Math_abs($0)) < Math_fround(2147483648)) {
         $1 = ~~$0;
         break label$5;
@@ -45315,7 +45315,7 @@ function _jswrap_interface_setTimeoutOrInterval($0, $1, $2, $3) {
    if (jsvIsString(HEAP32[$4 + 56 >> 2]) & 1) {
     break label$2;
    }
-   jsExceptionHere(1, 37182, 0);
+   jsExceptionHere(1, 36158, 0);
    HEAP32[$4 + 60 >> 2] = 0;
    break label$1;
   }
@@ -45325,7 +45325,7 @@ function _jswrap_interface_setTimeoutOrInterval($0, $1, $2, $3) {
    HEAPF64[$4 + 48 >> 3] = .1;
   }
   if (HEAPF64[$4 + 48 >> 3] > 31536000001e3) {
-   jsExceptionHere(1, 37215, 0);
+   jsExceptionHere(1, 36191, 0);
    HEAP32[$4 + 60 >> 2] = 0;
    break label$1;
   }
@@ -45334,17 +45334,17 @@ function _jswrap_interface_setTimeoutOrInterval($0, $1, $2, $3) {
   HEAP32[$4 + 28 >> 2] = i64toi32_i32$HIGH_BITS;
   $6 = HEAP32[$4 + 36 >> 2];
   $0 = jshGetSystemTime();
-  $3 = HEAP32[24884];
+  $3 = HEAP32[24624];
   $5 = HEAP32[$4 + 24 >> 2];
   $2 = ($0 - $3 | 0) + $5 | 0;
-  $0 = HEAP32[$4 + 28 >> 2] + (i64toi32_i32$HIGH_BITS - (HEAP32[24885] + ($0 >>> 0 < $3 >>> 0) | 0) | 0) | 0;
-  jsvObjectSetChildAndUnLock($6, 37249, jsvNewFromLongInteger($2, $2 >>> 0 < $5 >>> 0 ? $0 + 1 | 0 : $0));
+  $0 = HEAP32[$4 + 28 >> 2] + (i64toi32_i32$HIGH_BITS - (HEAP32[24625] + ($0 >>> 0 < $3 >>> 0) | 0) | 0) | 0;
+  jsvObjectSetChildAndUnLock($6, 36225, jsvNewFromLongInteger($2, $2 >>> 0 < $5 >>> 0 ? $0 + 1 | 0 : $0));
   if (!(HEAP8[$4 + 43 | 0] & 1)) {
-   jsvObjectSetChildAndUnLock(HEAP32[$4 + 36 >> 2], 37254, jsvNewFromLongInteger(HEAP32[$4 + 24 >> 2], HEAP32[$4 + 28 >> 2]));
+   jsvObjectSetChildAndUnLock(HEAP32[$4 + 36 >> 2], 36230, jsvNewFromLongInteger(HEAP32[$4 + 24 >> 2], HEAP32[$4 + 28 >> 2]));
   }
-  jsvObjectSetChild(HEAP32[$4 + 36 >> 2], 37263, HEAP32[$4 + 56 >> 2]);
+  jsvObjectSetChild(HEAP32[$4 + 36 >> 2], 36239, HEAP32[$4 + 56 >> 2]);
   if (jsvGetArrayLength(HEAP32[$4 + 44 >> 2])) {
-   jsvObjectSetChild(HEAP32[$4 + 36 >> 2], 37272, HEAP32[$4 + 44 >> 2]);
+   jsvObjectSetChild(HEAP32[$4 + 36 >> 2], 36248, HEAP32[$4 + 44 >> 2]);
   }
   HEAP32[$4 + 20 >> 2] = jsvNewFromInteger(jsiTimerAdd(HEAP32[$4 + 36 >> 2]));
   jsvUnLock(HEAP32[$4 + 36 >> 2]);
@@ -45382,23 +45382,23 @@ function jswrap_object_getOwnPropertyDescriptor($0, $1) {
   }
   HEAP8[$2 + 23 | 0] = jsvIsNewChild(HEAP32[$2 + 28 >> 2]) & 1;
   HEAP32[$2 + 16 >> 2] = jsvGetInternalFunctionCheckerFor(HEAP32[$2 + 40 >> 2]);
-  jsvObjectSetChildAndUnLock(HEAP32[$2 + 24 >> 2], 38920, jsvNewFromBool(1));
+  jsvObjectSetChildAndUnLock(HEAP32[$2 + 24 >> 2], 37896, jsvNewFromBool(1));
   $0 = HEAP32[$2 + 24 >> 2];
   if (HEAP32[$2 + 16 >> 2]) {
    $1 = FUNCTION_TABLE[HEAP32[$2 + 16 >> 2]](HEAP32[$2 + 28 >> 2]) ^ -1;
   } else {
    $1 = 1;
   }
-  jsvObjectSetChildAndUnLock($0, 38929, jsvNewFromBool($1 & 1));
-  jsvObjectSetChildAndUnLock(HEAP32[$2 + 24 >> 2], 38940, jsvNewFromBool((HEAPU8[$2 + 23 | 0] ^ -1) & 1));
+  jsvObjectSetChildAndUnLock($0, 37905, jsvNewFromBool($1 & 1));
+  jsvObjectSetChildAndUnLock(HEAP32[$2 + 24 >> 2], 37916, jsvNewFromBool((HEAPU8[$2 + 23 | 0] ^ -1) & 1));
   HEAP32[$2 + 12 >> 2] = jsvGetValueOfName(HEAP32[$2 + 28 >> 2]);
   label$7 : {
    if (jsvIsGetterOrSetter(HEAP32[$2 + 12 >> 2]) & 1) {
-    jsvObjectSetChildAndUnLock(HEAP32[$2 + 24 >> 2], 38953, jsvObjectGetChild(HEAP32[$2 + 12 >> 2], 38953, 0));
-    jsvObjectSetChildAndUnLock(HEAP32[$2 + 24 >> 2], 38957, jsvObjectGetChild(HEAP32[$2 + 12 >> 2], 38957, 0));
+    jsvObjectSetChildAndUnLock(HEAP32[$2 + 24 >> 2], 37929, jsvObjectGetChild(HEAP32[$2 + 12 >> 2], 37929, 0));
+    jsvObjectSetChildAndUnLock(HEAP32[$2 + 24 >> 2], 37933, jsvObjectGetChild(HEAP32[$2 + 12 >> 2], 37933, 0));
     break label$7;
    }
-   jsvObjectSetChildAndUnLock(HEAP32[$2 + 24 >> 2], 38961, jsvSkipName(HEAP32[$2 + 28 >> 2]));
+   jsvObjectSetChildAndUnLock(HEAP32[$2 + 24 >> 2], 37937, jsvSkipName(HEAP32[$2 + 28 >> 2]));
   }
   jsvUnLock(HEAP32[$2 + 12 >> 2]);
   jsvUnLock(HEAP32[$2 + 28 >> 2]);
@@ -45559,17 +45559,17 @@ function jswrap_interface_edit($0) {
  label$1 : {
   if (jsvIsString(HEAP32[$1 + 28 >> 2]) & 1) {
    HEAP32[$1 + 28 >> 2] = jsvLockAgain(HEAP32[$1 + 28 >> 2]);
-   HEAP32[$1 + 24 >> 2] = jsvSkipNameAndUnLock(jsvFindChildFromVar(HEAP32[24862], HEAP32[$1 + 28 >> 2], 0));
+   HEAP32[$1 + 24 >> 2] = jsvSkipNameAndUnLock(jsvFindChildFromVar(HEAP32[24602], HEAP32[$1 + 28 >> 2], 0));
    break label$1;
   }
   HEAP32[$1 + 24 >> 2] = HEAP32[$1 + 28 >> 2];
-  HEAP32[$1 + 28 >> 2] = jsvGetPathTo(HEAP32[24862], HEAP32[$1 + 24 >> 2], 0);
+  HEAP32[$1 + 28 >> 2] = jsvGetPathTo(HEAP32[24602], HEAP32[$1 + 24 >> 2], 0);
  }
  label$3 : {
   if (jsvIsString(HEAP32[$1 + 28 >> 2]) & 1) {
    if (jsvIsFunction(HEAP32[$1 + 24 >> 2]) & 1) {
-    HEAP32[$1 + 20 >> 2] = jsvFindChildFromString(HEAP32[$1 + 24 >> 2], 37036, 0);
-    HEAP32[$1 + 16 >> 2] = jsvGetIndexOf(HEAP32[24862], HEAP32[$1 + 24 >> 2], 1);
+    HEAP32[$1 + 20 >> 2] = jsvFindChildFromString(HEAP32[$1 + 24 >> 2], 36012, 0);
+    HEAP32[$1 + 16 >> 2] = jsvGetIndexOf(HEAP32[24602], HEAP32[$1 + 24 >> 2], 1);
     HEAP8[$1 + 15 | 0] = HEAP32[$1 + 20 >> 2] ? 0 : HEAP32[$1 + 16 >> 2] != 0;
     jsvUnLock2(HEAP32[$1 + 16 >> 2], HEAP32[$1 + 20 >> 2]);
     HEAP32[$1 + 8 >> 2] = jsvNewFromEmptyString();
@@ -45577,15 +45577,15 @@ function jswrap_interface_edit($0) {
      HEAP32[$1 + 4 >> 2] = jsvAsString(HEAP32[$1 + 24 >> 2]);
      label$9 : {
       if (HEAP8[$1 + 15 | 0] & 1) {
-       jsvAppendString(HEAP32[$1 + 8 >> 2], 37041);
+       jsvAppendString(HEAP32[$1 + 8 >> 2], 36017);
        jsvAppendStringVarComplete(HEAP32[$1 + 8 >> 2], HEAP32[$1 + 28 >> 2]);
        jsvAppendStringVar(HEAP32[$1 + 8 >> 2], HEAP32[$1 + 4 >> 2], 9, 2147483647);
        break label$9;
       }
       jsvAppendStringVarComplete(HEAP32[$1 + 8 >> 2], HEAP32[$1 + 28 >> 2]);
-      jsvAppendString(HEAP32[$1 + 8 >> 2], 37051);
+      jsvAppendString(HEAP32[$1 + 8 >> 2], 36027);
       jsvAppendStringVarComplete(HEAP32[$1 + 8 >> 2], HEAP32[$1 + 4 >> 2]);
-      jsvAppendString(HEAP32[$1 + 8 >> 2], 37065);
+      jsvAppendString(HEAP32[$1 + 8 >> 2], 36041);
      }
      jsvUnLock(HEAP32[$1 + 4 >> 2]);
      jsiReplaceInputLine(HEAP32[$1 + 8 >> 2]);
@@ -45593,10 +45593,10 @@ function jswrap_interface_edit($0) {
     }
     break label$3;
    }
-   jsExceptionHere(1, 37068, 0);
+   jsExceptionHere(1, 36044, 0);
    break label$3;
   }
-  jsExceptionHere(1, 37118, 0);
+  jsExceptionHere(1, 36094, 0);
  }
  jsvUnLock2(HEAP32[$1 + 24 >> 2], HEAP32[$1 + 28 >> 2]);
  global$0 = $1 + 32 | 0;
@@ -45647,7 +45647,7 @@ function jswrap_graphics_setFont($0, $1, $2) {
   }
   HEAP16[$3 + 30 >> 1] = 65535;
   HEAP8[$3 + 29 | 0] = 0;
-  if (jsvIsStringEqualOrStartsWith(HEAP32[$3 + 36 >> 2], 43045, 1) & 1) {
+  if (jsvIsStringEqualOrStartsWith(HEAP32[$3 + 36 >> 2], 42005, 1) & 1) {
    HEAP16[$3 + 30 >> 1] = jsvGetIntegerAndUnLock(jsvNewFromStringVar(HEAP32[$3 + 36 >> 2], 6, 2147483647));
    if (HEAP32[$3 + 32 >> 2] > 0) {
     HEAP16[$3 + 30 >> 1] = HEAP32[$3 + 32 >> 2];
@@ -45662,18 +45662,18 @@ function jswrap_graphics_setFont($0, $1, $2) {
   }
   label$7 : {
    if (!(jsvIsUndefined(HEAP32[$3 + 36 >> 2]) & 1)) {
-    if (!(jsvIsStringEqual(HEAP32[$3 + 36 >> 2], 43052) & 1)) {
+    if (!(jsvIsStringEqual(HEAP32[$3 + 36 >> 2], 42012) & 1)) {
      break label$7;
     }
    }
    HEAP16[$3 + 30 >> 1] = HEAP32[$3 + 32 >> 2] - -8192;
   }
-  if (jsvIsStringEqual(HEAP32[$3 + 36 >> 2], 43056) & 1) {
+  if (jsvIsStringEqual(HEAP32[$3 + 36 >> 2], 42016) & 1) {
    HEAP16[$3 + 30 >> 1] = HEAP32[$3 + 32 >> 2] + 16384;
   }
   if (HEAPU16[$3 + 30 >> 1] == 65535) {
    HEAP32[$3 + 16 >> 2] = HEAP32[$3 + 36 >> 2];
-   HEAP32[$3 + 24 >> 2] = jsvVarPrintf(43060, $3 + 16 | 0);
+   HEAP32[$3 + 24 >> 2] = jsvVarPrintf(42020, $3 + 16 | 0);
    HEAP32[$3 + 20 >> 2] = jspGetVarNamedField(HEAP32[$3 + 40 >> 2], HEAP32[$3 + 24 >> 2], 0);
    if (HEAP32[$3 + 20 >> 2]) {
     jsvUnLock(jspExecuteFunction(HEAP32[$3 + 20 >> 2], HEAP32[$3 + 40 >> 2], 0, 0));
@@ -45683,7 +45683,7 @@ function jswrap_graphics_setFont($0, $1, $2) {
   }
   if (HEAPU16[$3 + 30 >> 1] == 65535) {
    HEAP32[$3 >> 2] = HEAP32[$3 + 36 >> 2];
-   jsExceptionHere(1, 43070, $3);
+   jsExceptionHere(1, 42030, $3);
   }
   HEAP32[$3 + 44 >> 2] = jswrap_graphics_setFontSizeX(HEAP32[$3 + 40 >> 2], HEAPU16[$3 + 30 >> 1], HEAP8[$3 + 29 | 0] & 1);
  }
@@ -45736,21 +45736,21 @@ function tflite__ops__micro__activations___28anonymous_20namespace_29__Calculate
     $2 = HEAP32[HEAP32[$5 + 64 >> 2] + 16 >> 2];
     HEAP32[$5 + 20 >> 2] = 0;
     HEAP32[$5 + 16 >> 2] = $2;
-    HEAP32[$5 + 12 >> 2] = 48527;
-    HEAP32[$5 + 8 >> 2] = 48501;
+    HEAP32[$5 + 12 >> 2] = 47487;
+    HEAP32[$5 + 8 >> 2] = 47461;
     HEAP32[$5 + 4 >> 2] = 44;
-    HEAP32[$5 >> 2] = 48403;
-    FUNCTION_TABLE[$0]($1, 48377, $5);
+    HEAP32[$5 >> 2] = 47363;
+    FUNCTION_TABLE[$0]($1, 47337, $5);
     HEAP32[$5 + 76 >> 2] = 1;
     break label$1;
    }
    if (HEAPF32[HEAP32[$5 + 64 >> 2] + 12 >> 2] != Math_fround(.00390625)) {
     $0 = HEAP32[HEAP32[$5 + 72 >> 2] + 20 >> 2];
     $1 = HEAP32[$5 + 72 >> 2];
-    HEAP32[$5 + 40 >> 2] = 48552;
+    HEAP32[$5 + 40 >> 2] = 47512;
     HEAP32[$5 + 36 >> 2] = 45;
-    HEAP32[$5 + 32 >> 2] = 48403;
-    FUNCTION_TABLE[$0]($1, 48529, $5 + 32 | 0);
+    HEAP32[$5 + 32 >> 2] = 47363;
+    FUNCTION_TABLE[$0]($1, 47489, $5 + 32 | 0);
     HEAP32[$5 + 76 >> 2] = 1;
     break label$1;
    }
@@ -45780,8 +45780,8 @@ function jswrap_regexp_exec($0, $1) {
  HEAP32[$2 + 40 >> 2] = $0;
  HEAP32[$2 + 36 >> 2] = $1;
  HEAP32[$2 + 32 >> 2] = jsvAsString(HEAP32[$2 + 36 >> 2]);
- HEAP32[$2 + 28 >> 2] = jsvGetIntegerAndUnLock(jsvObjectGetChild(HEAP32[$2 + 40 >> 2], 40835, 0));
- HEAP32[$2 + 24 >> 2] = jsvObjectGetChild(HEAP32[$2 + 40 >> 2], 40822, 0);
+ HEAP32[$2 + 28 >> 2] = jsvGetIntegerAndUnLock(jsvObjectGetChild(HEAP32[$2 + 40 >> 2], 39807, 0));
+ HEAP32[$2 + 24 >> 2] = jsvObjectGetChild(HEAP32[$2 + 40 >> 2], 39794, 0);
  label$1 : {
   if (!(jsvIsString(HEAP32[$2 + 24 >> 2]) & 1)) {
    jsvUnLock2(HEAP32[$2 + 32 >> 2], HEAP32[$2 + 24 >> 2]);
@@ -45810,14 +45810,14 @@ function jswrap_regexp_exec($0, $1) {
    label$6 : {
     if (jswrap_regexp_hasFlag(HEAP32[$2 + 40 >> 2], 103) & 1) {
      HEAP32[$2 + 8 >> 2] = jsvGetArrayItem(HEAP32[$2 + 12 >> 2], 0);
-     HEAP32[$2 + 28 >> 2] = jsvGetIntegerAndUnLock(jsvObjectGetChild(HEAP32[$2 + 12 >> 2], 40845, 0)) + jsvGetStringLength(HEAP32[$2 + 8 >> 2]);
+     HEAP32[$2 + 28 >> 2] = jsvGetIntegerAndUnLock(jsvObjectGetChild(HEAP32[$2 + 12 >> 2], 39817, 0)) + jsvGetStringLength(HEAP32[$2 + 8 >> 2]);
      jsvUnLock(HEAP32[$2 + 8 >> 2]);
      break label$6;
     }
     HEAP32[$2 + 28 >> 2] = 0;
    }
   }
-  jsvObjectSetChildAndUnLock(HEAP32[$2 + 40 >> 2], 40835, jsvNewFromInteger(HEAP32[$2 + 28 >> 2]));
+  jsvObjectSetChildAndUnLock(HEAP32[$2 + 40 >> 2], 39807, jsvNewFromInteger(HEAP32[$2 + 28 >> 2]));
   HEAP32[$2 + 44 >> 2] = HEAP32[$2 + 12 >> 2];
  }
  global$0 = $2 + 48 | 0;
@@ -45880,7 +45880,7 @@ function jswrap_waveform_constructor($0, $1) {
  HEAP32[$2 + 36 >> 2] = $1;
  label$1 : {
   if (HEAP32[$2 + 40 >> 2] <= 0) {
-   jsExceptionHere(1, 41580, 0);
+   jsExceptionHere(1, 40552, 0);
    HEAP32[$2 + 44 >> 2] = 0;
    break label$1;
   }
@@ -45888,10 +45888,10 @@ function jswrap_waveform_constructor($0, $1) {
   HEAP8[$2 + 34 | 0] = 0;
   label$3 : {
    if (jsvIsObject(HEAP32[$2 + 36 >> 2]) & 1) {
-    HEAP8[$2 + 35 | 0] = jsvGetBoolAndUnLock(jsvObjectGetChild(HEAP32[$2 + 36 >> 2], 41611, 0)) & 1;
-    HEAP32[$2 + 28 >> 2] = jsvGetIntegerAndUnLock(jsvObjectGetChild(HEAP32[$2 + 36 >> 2], 41624, 0));
+    HEAP8[$2 + 35 | 0] = jsvGetBoolAndUnLock(jsvObjectGetChild(HEAP32[$2 + 36 >> 2], 40583, 0)) & 1;
+    HEAP32[$2 + 28 >> 2] = jsvGetIntegerAndUnLock(jsvObjectGetChild(HEAP32[$2 + 36 >> 2], 40596, 0));
     if (!(!HEAP32[$2 + 28 >> 2] | HEAP32[$2 + 28 >> 2] == 8 | HEAP32[$2 + 28 >> 2] == 16)) {
-     jsExceptionHere(1, 41629, 0);
+     jsExceptionHere(1, 40601, 0);
      HEAP32[$2 + 44 >> 2] = 0;
      break label$1;
     }
@@ -45902,7 +45902,7 @@ function jswrap_waveform_constructor($0, $1) {
    }
    if (!(jsvIsUndefined(HEAP32[$2 + 36 >> 2]) & 1)) {
     HEAP32[$2 >> 2] = HEAP32[$2 + 36 >> 2];
-    jsExceptionHere(1, 41652, $2);
+    jsExceptionHere(1, 40624, $2);
    }
   }
   HEAP16[$2 + 26 >> 1] = HEAP8[$2 + 34 | 0] & 1 ? 2 : 1;
@@ -45911,15 +45911,15 @@ function jswrap_waveform_constructor($0, $1) {
   if (HEAP8[$2 + 35 | 0] & 1) {
    HEAP32[$2 + 16 >> 2] = jsvNewTypedArray(HEAPU16[$2 + 26 >> 1], HEAP32[$2 + 40 >> 2]);
   }
-  HEAP32[$2 + 12 >> 2] = jspNewObject(0, 41707);
+  HEAP32[$2 + 12 >> 2] = jspNewObject(0, 40679);
   if (!(HEAP32[$2 + 16 >> 2] | !(HEAP8[$2 + 35 | 0] & 1) ? !(!HEAP32[$2 + 12 >> 2] | !HEAP32[$2 + 20 >> 2]) : 0)) {
    jsvUnLock3(HEAP32[$2 + 12 >> 2], HEAP32[$2 + 20 >> 2], HEAP32[$2 + 16 >> 2]);
    HEAP32[$2 + 44 >> 2] = 0;
    break label$1;
   }
-  jsvObjectSetChildAndUnLock(HEAP32[$2 + 12 >> 2], 41502, HEAP32[$2 + 20 >> 2]);
+  jsvObjectSetChildAndUnLock(HEAP32[$2 + 12 >> 2], 40474, HEAP32[$2 + 20 >> 2]);
   if (HEAP32[$2 + 16 >> 2]) {
-   jsvObjectSetChildAndUnLock(HEAP32[$2 + 12 >> 2], 41533, HEAP32[$2 + 16 >> 2]);
+   jsvObjectSetChildAndUnLock(HEAP32[$2 + 12 >> 2], 40505, HEAP32[$2 + 16 >> 2]);
   }
   HEAP32[$2 + 44 >> 2] = HEAP32[$2 + 12 >> 2];
  }
@@ -46417,7 +46417,7 @@ function jsserialEventCallback($0, $1) {
   if (!HEAP32[$2 + 36 >> 2]) {
    break label$1;
   }
-  HEAP32[$2 + 32 >> 2] = jsvObjectGetChild(HEAP32[$2 + 36 >> 2], 7747, 0);
+  HEAP32[$2 + 32 >> 2] = jsvObjectGetChild(HEAP32[$2 + 36 >> 2], 7743, 0);
   HEAP32[$2 + 28 >> 2] = jsvGetFlatStringPointer(HEAP32[$2 + 32 >> 2]);
   if (!HEAP32[$2 + 28 >> 2]) {
    break label$1;
@@ -46501,7 +46501,7 @@ function nmea_to_jsVar() {
  var $0 = 0, $1 = 0;
  $0 = global$0 + -64 | 0;
  global$0 = $0;
- HEAP32[$0 + 60 >> 2] = 255696;
+ HEAP32[$0 + 60 >> 2] = 254656;
  HEAP32[$0 + 56 >> 2] = jsvNewWithFlags(5);
  if (HEAP32[$0 + 56 >> 2]) {
   jsvObjectSetChildAndUnLock(HEAP32[$0 + 56 >> 2], 1024, jsvNewFromFloat(HEAPF64[HEAP32[$0 + 60 >> 2] >> 3]));
@@ -46666,11 +46666,11 @@ function tflite__ops__micro__strided_slice__Prepare_28TfLiteContext__2c_20TfLite
    $3 = tflite__NumInputs_28TfLiteNode_20const__29(HEAP32[$2 + 84 >> 2]);
    HEAP32[$2 + 20 >> 2] = 4;
    HEAP32[$2 + 16 >> 2] = $3;
-   HEAP32[$2 + 12 >> 2] = 52049;
-   HEAP32[$2 + 8 >> 2] = 52033;
+   HEAP32[$2 + 12 >> 2] = 51009;
+   HEAP32[$2 + 8 >> 2] = 50993;
    HEAP32[$2 + 4 >> 2] = 124;
-   HEAP32[$2 >> 2] = 51858;
-   FUNCTION_TABLE[$0]($1, 51832, $2);
+   HEAP32[$2 >> 2] = 50818;
+   FUNCTION_TABLE[$0]($1, 50792, $2);
    HEAP32[$2 + 92 >> 2] = 1;
    break label$1;
   }
@@ -46680,17 +46680,17 @@ function tflite__ops__micro__strided_slice__Prepare_28TfLiteContext__2c_20TfLite
    $3 = tflite__NumOutputs_28TfLiteNode_20const__29(HEAP32[$2 + 84 >> 2]);
    HEAP32[$2 + 52 >> 2] = 1;
    HEAP32[$2 + 48 >> 2] = $3;
-   HEAP32[$2 + 44 >> 2] = 52068;
-   HEAP32[$2 + 40 >> 2] = 52051;
+   HEAP32[$2 + 44 >> 2] = 51028;
+   HEAP32[$2 + 40 >> 2] = 51011;
    HEAP32[$2 + 36 >> 2] = 125;
-   HEAP32[$2 + 32 >> 2] = 51858;
-   FUNCTION_TABLE[$0]($1, 51832, $2 + 32 | 0);
+   HEAP32[$2 + 32 >> 2] = 50818;
+   FUNCTION_TABLE[$0]($1, 50792, $2 + 32 | 0);
    HEAP32[$2 + 92 >> 2] = 1;
    break label$1;
   }
   tflite__ops__micro__strided_slice__StridedSliceContext__StridedSliceContext_28TfLiteContext__2c_20TfLiteNode__29($2 + 56 | 0, HEAP32[$2 + 88 >> 2], HEAP32[$2 + 84 >> 2]);
   if (HEAP32[$2 + 80 >> 2] > 4) {
-   FUNCTION_TABLE[HEAP32[HEAP32[$2 + 88 >> 2] + 20 >> 2]](HEAP32[$2 + 88 >> 2], 52070, 0);
+   FUNCTION_TABLE[HEAP32[HEAP32[$2 + 88 >> 2] + 20 >> 2]](HEAP32[$2 + 88 >> 2], 51030, 0);
    HEAP32[$2 + 92 >> 2] = 1;
    break label$1;
   }
@@ -46732,16 +46732,16 @@ function jsiCheckErrors() {
  var $0 = 0, $1 = 0;
  $0 = global$0 - 48 | 0;
  global$0 = $0;
- if (HEAP8[99548] & 1) {
+ if (HEAP8[98508] & 1) {
   jspSetInterrupted(0);
-  HEAP8[99548] = 0;
+  HEAP8[98508] = 0;
   jsiConsoleRemoveInputLine();
-  jsiConsolePrintString(5737);
+  jsiConsolePrintString(5733);
  }
  HEAP8[$0 + 47 | 0] = 0;
  HEAP32[$0 + 40 >> 2] = jspGetException();
  if (HEAP32[$0 + 40 >> 2]) {
-  if (jsiExecuteEventCallbackOn(5785, 1, $0 + 40 | 0) & 1) {
+  if (jsiExecuteEventCallbackOn(5781, 1, $0 + 40 | 0) & 1) {
    jsvUnLock(HEAP32[$0 + 40 >> 2]);
    HEAP32[$0 + 40 >> 2] = 0;
   }
@@ -46749,10 +46749,10 @@ function jsiCheckErrors() {
  if (HEAP32[$0 + 40 >> 2]) {
   jsiConsoleRemoveInputLine();
   HEAP32[$0 + 16 >> 2] = HEAP32[$0 + 40 >> 2];
-  jsiConsolePrintf(5806, $0 + 16 | 0);
+  jsiConsolePrintf(5802, $0 + 16 | 0);
   HEAP8[$0 + 47 | 0] = 1;
   if (jsvIsObject(HEAP32[$0 + 40 >> 2]) & 1) {
-   HEAP32[$0 + 36 >> 2] = jsvObjectGetChild(HEAP32[$0 + 40 >> 2], 5819, 0);
+   HEAP32[$0 + 36 >> 2] = jsvObjectGetChild(HEAP32[$0 + 40 >> 2], 5815, 0);
    if (HEAP32[$0 + 36 >> 2]) {
     jsiConsolePrintStringVar(HEAP32[$0 + 36 >> 2]);
     jsvUnLock(HEAP32[$0 + 36 >> 2]);
@@ -46760,9 +46760,9 @@ function jsiCheckErrors() {
   }
   jsvUnLock(HEAP32[$0 + 40 >> 2]);
  }
- if (!(!(jspIsInterrupted() & 1) | HEAPU16[49742] & 16)) {
+ if (!(!(jspIsInterrupted() & 1) | HEAPU16[49222] & 16)) {
   jsiConsoleRemoveInputLine();
-  jsiConsolePrintString(5825);
+  jsiConsolePrintString(5821);
   jspSetInterrupted(0);
   HEAP8[$0 + 47 | 0] = 1;
  }
@@ -46774,22 +46774,22 @@ function jsiCheckErrors() {
   jsvUnLock(HEAP32[$0 + 32 >> 2]);
  }
  if (jspHasError() & 1) {
-  HEAP32[24866] = HEAP32[24866] & -113;
+  HEAP32[24606] = HEAP32[24606] & -113;
  }
- if (HEAPU8[99503] != HEAPU8[99447]) {
-  HEAP8[$0 + 31 | 0] = HEAPU8[99447] & (HEAPU8[99503] ^ -1);
+ if (HEAPU8[98463] != HEAPU8[98407]) {
+  HEAP8[$0 + 31 | 0] = HEAPU8[98407] & (HEAPU8[98463] ^ -1);
   if (HEAPU8[$0 + 31 | 0] & -9) {
    $1 = $0 + 24 | 0;
    HEAP32[$0 + 24 >> 2] = jswrap_espruino_getErrorFlagArray(HEAPU8[$0 + 31 | 0]);
-   jsiExecuteEventCallbackOn(5848, 1, $1);
+   jsiExecuteEventCallbackOn(5844, 1, $1);
    if (HEAP32[$0 + 24 >> 2]) {
     jsiConsoleRemoveInputLine();
     HEAP32[$0 >> 2] = HEAP32[$0 + 24 >> 2];
-    jsiConsolePrintf(5861, $0);
+    jsiConsolePrintf(5857, $0);
     jsvUnLock(HEAP32[$0 + 24 >> 2]);
    }
   }
-  HEAP8[99503] = HEAPU8[99447];
+  HEAP8[98463] = HEAPU8[98407];
  }
  global$0 = $0 + 48 | 0;
 }
@@ -46855,7 +46855,7 @@ function jswrap_onewire_select($0, $1) {
     }
    }
    HEAP32[$2 >> 2] = HEAP32[$2 + 56 >> 2];
-   jsExceptionHere(3, 39891, $2);
+   jsExceptionHere(3, 38867, $2);
    break label$1;
   }
   $0 = $2 + 16 | 0;
@@ -46909,7 +46909,7 @@ function _jswrap_interface_clearTimeoutOrInterval($0, $1) {
  global$0 = $2;
  HEAP32[$2 + 44 >> 2] = $0;
  HEAP8[$2 + 43 | 0] = $1;
- HEAP32[$2 + 36 >> 2] = jsvLock(HEAPU16[49740]);
+ HEAP32[$2 + 36 >> 2] = jsvLock(HEAPU16[49220]);
  label$1 : {
   label$2 : {
    if (!(jsvIsUndefined(HEAP32[$2 + 44 >> 2]) & 1)) {
@@ -46921,7 +46921,7 @@ function _jswrap_interface_clearTimeoutOrInterval($0, $1) {
    while (1) {
     if (jsvObjectIteratorHasValue($2 + 32 | 0) & 1) {
      HEAP32[$2 + 28 >> 2] = jsvObjectIteratorGetValue($2 + 32 | 0);
-     HEAP32[$2 + 24 >> 2] = jsvObjectGetChild(HEAP32[$2 + 28 >> 2], 37277, 0);
+     HEAP32[$2 + 24 >> 2] = jsvObjectGetChild(HEAP32[$2 + 28 >> 2], 36253, 0);
      label$6 : {
       if (!HEAP32[$2 + 24 >> 2]) {
        jsvObjectIteratorRemoveAndGotoNext($2 + 32 | 0, HEAP32[$2 + 36 >> 2]);
@@ -46940,11 +46940,11 @@ function _jswrap_interface_clearTimeoutOrInterval($0, $1) {
   HEAP32[$2 + 20 >> 2] = jsvGetArrayItem(HEAP32[$2 + 44 >> 2], 0);
   label$8 : {
    if (jsvIsUndefined(HEAP32[$2 + 20 >> 2]) & 1) {
-    HEAP32[$2 + 16 >> 2] = HEAP8[$2 + 43 | 0] & 1 ? 37283 : 37291;
+    HEAP32[$2 + 16 >> 2] = HEAP8[$2 + 43 | 0] & 1 ? 36259 : 36267;
     $0 = HEAP32[$2 + 16 >> 2];
     HEAP32[$2 + 4 >> 2] = HEAP32[$2 + 16 >> 2];
     HEAP32[$2 >> 2] = $0;
-    jsExceptionHere(1, 37300, $2);
+    jsExceptionHere(1, 36276, $2);
     break label$8;
    }
    $0 = $2;
@@ -46987,7 +46987,7 @@ function jswrap_espruino_convolve($0, $1, $2) {
    $0 = HEAP32[$3 + 132 >> 2];
    HEAP32[$3 + 4 >> 2] = HEAP32[$3 + 128 >> 2];
    HEAP32[$3 >> 2] = $0;
-   jsExceptionHere(1, 35819, $3);
+   jsExceptionHere(1, 34795, $3);
    HEAPF64[$3 + 136 >> 3] = nan;
    break label$1;
   }
@@ -47059,7 +47059,7 @@ function jswrap_i2c_writeTo($0, $1, $2) {
   HEAP32[$3 + 24 >> 2] = jsvIterateCallbackCount(HEAP32[$3 + 36 >> 2]);
   label$2 : {
    if (HEAP32[$3 + 24 >> 2] + 256 >>> 0 > 1e6) {
-    jsExceptionHere(1, 41262, 0);
+    jsExceptionHere(1, 40234, 0);
     break label$2;
    }
    $0 = $4 - (HEAP32[$3 + 24 >> 2] + 15 & -16) | 0;
@@ -47076,13 +47076,13 @@ function jswrap_i2c_writeTo($0, $1, $2) {
    }
    if (!HEAPU8[$3 + 35 | 0]) {
     $0 = $3 + 8 | 0;
-    HEAP32[$3 + 4 >> 2] = jsvObjectGetChild(HEAP32[$3 + 44 >> 2], 41123, 0);
+    HEAP32[$3 + 4 >> 2] = jsvObjectGetChild(HEAP32[$3 + 44 >> 2], 40095, 0);
     if (jsi2cPopulateI2CInfo($0, HEAP32[$3 + 4 >> 2]) & 1) {
      $0 = $3 + 8 | 0;
-     HEAP8[$3 + 14 | 0] = jsvGetBoolAndUnLock(jsvObjectGetChild(HEAP32[$3 + 44 >> 2], 41301, 0)) & 1;
+     HEAP8[$3 + 14 | 0] = jsvGetBoolAndUnLock(jsvObjectGetChild(HEAP32[$3 + 44 >> 2], 40273, 0)) & 1;
      jsi2cWrite($0, HEAP32[$3 + 28 >> 2] & 255, HEAP32[$3 + 24 >> 2], HEAP32[$3 + 20 >> 2], HEAP8[$3 + 34 | 0] & 1);
     }
-    jsvUnLock2(jsvObjectSetChild(HEAP32[$3 + 44 >> 2], 41301, jsvNewFromBool(HEAP8[$3 + 14 | 0] & 1)), HEAP32[$3 + 4 >> 2]);
+    jsvUnLock2(jsvObjectSetChild(HEAP32[$3 + 44 >> 2], 40273, jsvNewFromBool(HEAP8[$3 + 14 | 0] & 1)), HEAP32[$3 + 4 >> 2]);
    }
   }
  }
@@ -47114,7 +47114,7 @@ function jswrap_date_constructor($0) {
        break label$7;
       }
       HEAP32[$1 >> 2] = HEAP32[$1 + 60 >> 2];
-      jsExceptionHere(3, 35382, $1);
+      jsExceptionHere(3, 34358, $1);
      }
     }
     jsvUnLock(HEAP32[$1 + 60 >> 2]);
@@ -47137,61 +47137,6 @@ function jswrap_date_constructor($0) {
  $0 = jswrap_date_from_milliseconds(HEAPF64[$1 + 64 >> 3]);
  global$0 = $1 + 80 | 0;
  return $0 | 0;
-}
-function jshPopIOEventOfType($0, $1) {
- var $2 = 0, $3 = 0;
- $2 = global$0 - 16 | 0;
- global$0 = $2;
- HEAP8[$2 + 14 | 0] = $0;
- HEAP32[$2 + 8 >> 2] = $1;
- label$1 : {
-  if (HEAPU8[$2 + 14 | 0] == (HEAPU8[Math_imul(HEAPU8[99555], 5) + 100144 | 0] & 31)) {
-   HEAP8[$2 + 15 | 0] = jshPopIOEvent(HEAP32[$2 + 8 >> 2]) & 1;
-   break label$1;
-  }
-  HEAP8[$2 + 7 | 0] = HEAPU8[99555];
-  while (1) {
-   if (HEAPU8[99554] != HEAPU8[$2 + 7 | 0]) {
-    if (HEAPU8[$2 + 14 | 0] == (HEAPU8[Math_imul(HEAPU8[$2 + 7 | 0], 5) + 100144 | 0] & 31)) {
-     $0 = HEAP32[$2 + 8 >> 2];
-     $1 = Math_imul(HEAPU8[$2 + 7 | 0], 5) + 100144 | 0;
-     $3 = HEAPU8[$1 | 0] | HEAPU8[$1 + 1 | 0] << 8 | (HEAPU8[$1 + 2 | 0] << 16 | HEAPU8[$1 + 3 | 0] << 24);
-     HEAP8[$0 | 0] = $3;
-     HEAP8[$0 + 1 | 0] = $3 >>> 8;
-     HEAP8[$0 + 2 | 0] = $3 >>> 16;
-     HEAP8[$0 + 3 | 0] = $3 >>> 24;
-     HEAP8[$0 + 4 | 0] = HEAPU8[$1 + 4 | 0];
-     HEAP8[$2 + 6 | 0] = HEAPU8[$2 + 7 | 0] + 255;
-     while (1) {
-      if (HEAPU8[$2 + 6 | 0] != HEAPU8[99555]) {
-       $0 = Math_imul(HEAPU8[$2 + 7 | 0], 5) + 100144 | 0;
-       $1 = Math_imul(HEAPU8[$2 + 6 | 0], 5) + 100144 | 0;
-       $3 = HEAPU8[$1 | 0] | HEAPU8[$1 + 1 | 0] << 8 | (HEAPU8[$1 + 2 | 0] << 16 | HEAPU8[$1 + 3 | 0] << 24);
-       HEAP8[$0 | 0] = $3;
-       HEAP8[$0 + 1 | 0] = $3 >>> 8;
-       HEAP8[$0 + 2 | 0] = $3 >>> 16;
-       HEAP8[$0 + 3 | 0] = $3 >>> 24;
-       HEAP8[$0 + 4 | 0] = HEAPU8[$1 + 4 | 0];
-       HEAP8[$2 + 7 | 0] = HEAPU8[$2 + 6 | 0];
-       HEAP8[$2 + 6 | 0] = HEAPU8[$2 + 6 | 0] + 255;
-       continue;
-      }
-      break;
-     }
-     HEAP8[99555] = HEAPU8[99555] + 1;
-     HEAP8[$2 + 15 | 0] = 1;
-     break label$1;
-    } else {
-     HEAP8[$2 + 7 | 0] = HEAPU8[$2 + 7 | 0] + 1;
-     continue;
-    }
-   }
-   break;
-  }
-  HEAP8[$2 + 15 | 0] = 0;
- }
- global$0 = $2 + 16 | 0;
- return HEAP8[$2 + 15 | 0] & 1;
 }
 function jswrap_io_digitalPulse($0, $1, $2) {
  $0 = $0 | 0;
@@ -47219,7 +47164,7 @@ function jswrap_io_digitalPulse($0, $1, $2) {
       }
       break label$4;
      }
-     jsExceptionHere(1, 37392, 0);
+     jsExceptionHere(1, 36368, 0);
      break label$3;
     }
     jshPinPulse(HEAPU8[$3 + 111 | 0], HEAP8[$3 + 110 | 0] & 1, HEAPF64[$3 + 96 >> 3]);
@@ -47253,10 +47198,65 @@ function jswrap_io_digitalPulse($0, $1, $2) {
     break label$6;
    }
    HEAP32[$3 + 32 >> 2] = HEAP32[$3 + 104 >> 2];
-   jsExceptionHere(1, 37458, $3 + 32 | 0);
+   jsExceptionHere(1, 36434, $3 + 32 | 0);
   }
  }
  global$0 = $3 + 112 | 0;
+}
+function jshPopIOEventOfType($0, $1) {
+ var $2 = 0, $3 = 0;
+ $2 = global$0 - 16 | 0;
+ global$0 = $2;
+ HEAP8[$2 + 14 | 0] = $0;
+ HEAP32[$2 + 8 >> 2] = $1;
+ label$1 : {
+  if (HEAPU8[$2 + 14 | 0] == (HEAPU8[Math_imul(HEAPU8[98515], 5) + 99104 | 0] & 31)) {
+   HEAP8[$2 + 15 | 0] = jshPopIOEvent(HEAP32[$2 + 8 >> 2]) & 1;
+   break label$1;
+  }
+  HEAP8[$2 + 7 | 0] = HEAPU8[98515];
+  while (1) {
+   if (HEAPU8[98514] != HEAPU8[$2 + 7 | 0]) {
+    if (HEAPU8[$2 + 14 | 0] == (HEAPU8[Math_imul(HEAPU8[$2 + 7 | 0], 5) + 99104 | 0] & 31)) {
+     $0 = HEAP32[$2 + 8 >> 2];
+     $1 = Math_imul(HEAPU8[$2 + 7 | 0], 5) + 99104 | 0;
+     $3 = HEAPU8[$1 | 0] | HEAPU8[$1 + 1 | 0] << 8 | (HEAPU8[$1 + 2 | 0] << 16 | HEAPU8[$1 + 3 | 0] << 24);
+     HEAP8[$0 | 0] = $3;
+     HEAP8[$0 + 1 | 0] = $3 >>> 8;
+     HEAP8[$0 + 2 | 0] = $3 >>> 16;
+     HEAP8[$0 + 3 | 0] = $3 >>> 24;
+     HEAP8[$0 + 4 | 0] = HEAPU8[$1 + 4 | 0];
+     HEAP8[$2 + 6 | 0] = HEAPU8[$2 + 7 | 0] + 255;
+     while (1) {
+      if (HEAPU8[$2 + 6 | 0] != HEAPU8[98515]) {
+       $0 = Math_imul(HEAPU8[$2 + 7 | 0], 5) + 99104 | 0;
+       $1 = Math_imul(HEAPU8[$2 + 6 | 0], 5) + 99104 | 0;
+       $3 = HEAPU8[$1 | 0] | HEAPU8[$1 + 1 | 0] << 8 | (HEAPU8[$1 + 2 | 0] << 16 | HEAPU8[$1 + 3 | 0] << 24);
+       HEAP8[$0 | 0] = $3;
+       HEAP8[$0 + 1 | 0] = $3 >>> 8;
+       HEAP8[$0 + 2 | 0] = $3 >>> 16;
+       HEAP8[$0 + 3 | 0] = $3 >>> 24;
+       HEAP8[$0 + 4 | 0] = HEAPU8[$1 + 4 | 0];
+       HEAP8[$2 + 7 | 0] = HEAPU8[$2 + 6 | 0];
+       HEAP8[$2 + 6 | 0] = HEAPU8[$2 + 6 | 0] + 255;
+       continue;
+      }
+      break;
+     }
+     HEAP8[98515] = HEAPU8[98515] + 1;
+     HEAP8[$2 + 15 | 0] = 1;
+     break label$1;
+    } else {
+     HEAP8[$2 + 7 | 0] = HEAPU8[$2 + 7 | 0] + 1;
+     continue;
+    }
+   }
+   break;
+  }
+  HEAP8[$2 + 15 | 0] = 0;
+ }
+ global$0 = $2 + 16 | 0;
+ return HEAP8[$2 + 15 | 0] & 1;
 }
 function jswrap_espruino_getSizeOf($0, $1) {
  $0 = $0 | 0;
@@ -47286,8 +47286,8 @@ function jswrap_espruino_getSizeOf($0, $1) {
      HEAP32[$2 + 16 >> 2] = jsvSkipName(HEAP32[$2 + 20 >> 2]);
      HEAP32[$2 + 12 >> 2] = jsvNewWithFlags(5);
      if (HEAP32[$2 + 12 >> 2]) {
-      jsvObjectSetChildAndUnLock(HEAP32[$2 + 12 >> 2], 36197, jsvAsString(HEAP32[$2 + 20 >> 2]));
-      jsvObjectSetChildAndUnLock(HEAP32[$2 + 12 >> 2], 36202, jswrap_espruino_getSizeOf(HEAP32[$2 + 20 >> 2], 0));
+      jsvObjectSetChildAndUnLock(HEAP32[$2 + 12 >> 2], 35173, jsvAsString(HEAP32[$2 + 20 >> 2]));
+      jsvObjectSetChildAndUnLock(HEAP32[$2 + 12 >> 2], 35178, jswrap_espruino_getSizeOf(HEAP32[$2 + 20 >> 2], 0));
       label$7 : {
        if (HEAP32[$2 + 36 >> 2] <= 1) {
         break label$7;
@@ -47295,7 +47295,7 @@ function jswrap_espruino_getSizeOf($0, $1) {
        if (!(jsvHasChildren(HEAP32[$2 + 16 >> 2]) & 1)) {
         break label$7;
        }
-       jsvObjectSetChildAndUnLock(HEAP32[$2 + 12 >> 2], 36207, jswrap_espruino_getSizeOf(HEAP32[$2 + 16 >> 2], HEAP32[$2 + 36 >> 2] - 1 | 0));
+       jsvObjectSetChildAndUnLock(HEAP32[$2 + 12 >> 2], 35183, jswrap_espruino_getSizeOf(HEAP32[$2 + 16 >> 2], HEAP32[$2 + 36 >> 2] - 1 | 0));
       }
       jsvArrayPushAndUnLock(HEAP32[$2 + 32 >> 2], HEAP32[$2 + 12 >> 2]);
      }
@@ -47324,11 +47324,11 @@ function jsserialEventCallbackInit($0, $1) {
  HEAP32[$2 + 16 >> 2] = jsvNewFlatStringOfLength(96);
  label$1 : {
   if (!HEAP32[$2 + 16 >> 2]) {
-   jsExceptionHere(1, 7709, 0);
+   jsExceptionHere(1, 7705, 0);
    HEAP8[$2 + 31 | 0] = 0;
    break label$1;
   }
-  jsvObjectSetChildAndUnLock(HEAP32[$2 + 24 >> 2], 7747, HEAP32[$2 + 16 >> 2]);
+  jsvObjectSetChildAndUnLock(HEAP32[$2 + 24 >> 2], 7743, HEAP32[$2 + 16 >> 2]);
   HEAP32[$2 + 12 >> 2] = jsvGetFlatStringPointer(HEAP32[$2 + 16 >> 2]);
   HEAP8[HEAP32[$2 + 12 >> 2] + 64 | 0] = 0;
   $0 = jshGetSystemTime();
@@ -47343,7 +47343,7 @@ function jsserialEventCallbackInit($0, $1) {
   HEAP8[$2 + 11 | 0] = jshPinWatch(HEAPU8[HEAP32[$2 + 20 >> 2] + 4 | 0], 1);
   label$3 : {
    if (HEAPU8[$2 + 11 | 0]) {
-    jsvObjectSetChildAndUnLock(HEAP32[$2 + 24 >> 2], 7755, jsvNewFromInteger(HEAPU8[$2 + 11 | 0]));
+    jsvObjectSetChildAndUnLock(HEAP32[$2 + 24 >> 2], 7751, jsvNewFromInteger(HEAPU8[$2 + 11 | 0]));
     HEAP32[$2 + 4 >> 2] = jsserialGetSerialList(1);
     if (!HEAP32[$2 + 4 >> 2]) {
      HEAP8[$2 + 31 | 0] = 0;
@@ -47355,7 +47355,7 @@ function jsserialEventCallbackInit($0, $1) {
     break label$3;
    }
    HEAP32[$2 >> 2] = HEAPU8[HEAP32[$2 + 20 >> 2] + 4 | 0];
-   jsExceptionHere(1, 7760, $2);
+   jsExceptionHere(1, 7756, $2);
    HEAP8[$2 + 31 | 0] = 0;
    break label$1;
   }
@@ -47658,41 +47658,41 @@ function jslLexRegex() {
  $1 = global$0 - 32 | 0;
  global$0 = $1;
  $0 = jsvNewFromEmptyString();
- HEAP32[HEAP32[14856] + 96 >> 2] = $0;
+ HEAP32[HEAP32[14596] + 96 >> 2] = $0;
  label$1 : {
-  if (!HEAP32[HEAP32[14856] + 96 >> 2]) {
-   HEAP16[HEAP32[14856] + 2 >> 1] = 0;
+  if (!HEAP32[HEAP32[14596] + 96 >> 2]) {
+   HEAP16[HEAP32[14596] + 2 >> 1] = 0;
    break label$1;
   }
   $0 = $1 + 8 | 0;
-  jsvStringIteratorNew($0, HEAP32[HEAP32[14856] + 96 >> 2], 0);
+  jsvStringIteratorNew($0, HEAP32[HEAP32[14596] + 96 >> 2], 0);
   jsvStringIteratorAppend($0, 47);
   jslGetNextCh();
   while (1) {
    label$4 : {
-    if (!(HEAP8[HEAP32[14856]] ? HEAP8[HEAP32[14856]] != 47 : 0)) {
+    if (!(HEAP8[HEAP32[14596]] ? HEAP8[HEAP32[14596]] != 47 : 0)) {
      break label$4;
     }
     label$7 : {
-     if (HEAP8[HEAP32[14856]] == 92) {
-      jsvStringIteratorAppend($1 + 8 | 0, HEAP8[HEAP32[14856]]);
+     if (HEAP8[HEAP32[14596]] == 92) {
+      jsvStringIteratorAppend($1 + 8 | 0, HEAP8[HEAP32[14596]]);
       jslGetNextCh();
       break label$7;
      }
-     if (HEAP8[HEAP32[14856]] == 10) {
+     if (HEAP8[HEAP32[14596]] == 10) {
       break label$4;
      }
     }
-    jsvStringIteratorAppend($1 + 8 | 0, HEAP8[HEAP32[14856]]);
+    jsvStringIteratorAppend($1 + 8 | 0, HEAP8[HEAP32[14596]]);
     jslGetNextCh();
     continue;
    }
    break;
   }
-  HEAP16[HEAP32[14856] + 2 >> 1] = 135;
+  HEAP16[HEAP32[14596] + 2 >> 1] = 135;
   label$9 : {
-   if (HEAP8[HEAP32[14856]] != 47) {
-    $0 = HEAP32[14856];
+   if (HEAP8[HEAP32[14596]] != 47) {
+    $0 = HEAP32[14596];
     HEAP16[$0 + 2 >> 1] = HEAPU16[$0 + 2 >> 1] + 1;
     break label$9;
    }
@@ -47701,27 +47701,27 @@ function jslLexRegex() {
    while (1) {
     $0 = 1;
     label$12 : {
-     if (HEAP8[HEAP32[14856]] == 103) {
+     if (HEAP8[HEAP32[14596]] == 103) {
       break label$12;
      }
      $0 = 1;
-     if (HEAP8[HEAP32[14856]] == 105) {
+     if (HEAP8[HEAP32[14596]] == 105) {
       break label$12;
      }
      $0 = 1;
-     if (HEAP8[HEAP32[14856]] == 109) {
+     if (HEAP8[HEAP32[14596]] == 109) {
       break label$12;
      }
      $0 = 1;
-     if (HEAP8[HEAP32[14856]] == 121) {
+     if (HEAP8[HEAP32[14596]] == 121) {
       break label$12;
      }
-     $0 = HEAP8[HEAP32[14856]] == 117;
+     $0 = HEAP8[HEAP32[14596]] == 117;
     }
     if ($0) {
      $0 = $1 + 8 | 0;
-     jslTokenAppendChar(HEAP8[HEAP32[14856]]);
-     jsvStringIteratorAppend($0, HEAP8[HEAP32[14856]]);
+     jslTokenAppendChar(HEAP8[HEAP32[14596]]);
+     jsvStringIteratorAppend($0, HEAP8[HEAP32[14596]]);
      jslGetNextCh();
      continue;
     }
@@ -47880,7 +47880,7 @@ function exp($0) {
          break label$6;
         }
        }
-       $0 = $0 * 1.4426950408889634 + HEAPF64[($5 << 3) + 57376 >> 3];
+       $0 = $0 * 1.4426950408889634 + HEAPF64[($5 << 3) + 56336 >> 3];
        if (Math_abs($0) < 2147483648) {
         $2 = ~~$0;
         break label$5;
@@ -47985,12 +47985,12 @@ function jswrap_graphics_setFontCustom($0, $1, $2, $3, $4) {
    break label$1;
   }
   if (!(jsvIsString(HEAP32[$5 + 100 >> 2]) & 1)) {
-   jsExceptionHere(1, 42945, 0);
+   jsExceptionHere(1, 41905, 0);
    HEAP32[$5 + 108 >> 2] = 0;
    break label$1;
   }
   if (!(HEAP32[$5 + 96 >> 2] <= 255 ? HEAP32[$5 + 96 >> 2] >= 0 : 0)) {
-   jsExceptionHere(1, 42974, 0);
+   jsExceptionHere(1, 41934, 0);
    HEAP32[$5 + 108 >> 2] = 0;
    break label$1;
   }
@@ -48001,7 +48001,7 @@ function jswrap_graphics_setFontCustom($0, $1, $2, $3, $4) {
    if (jsvIsInt(HEAP32[$5 + 92 >> 2]) & 1) {
     break label$6;
    }
-   jsExceptionHere(1, 43003, 0);
+   jsExceptionHere(1, 41963, 0);
    HEAP32[$5 + 108 >> 2] = 0;
    break label$1;
   }
@@ -48011,10 +48011,10 @@ function jswrap_graphics_setFontCustom($0, $1, $2, $3, $4) {
   }
   $0 = $5 + 16 | 0;
   HEAP32[$5 + 88 >> 2] = HEAP32[$5 + 88 >> 2] & 255;
-  jsvObjectSetChild(HEAP32[$5 + 104 >> 2], 42925, HEAP32[$5 + 100 >> 2]);
-  jsvObjectSetChild(HEAP32[$5 + 104 >> 2], 42930, HEAP32[$5 + 92 >> 2]);
-  jsvObjectSetChildAndUnLock(HEAP32[$5 + 104 >> 2], 42935, jsvNewFromInteger(HEAP32[$5 + 88 >> 2]));
-  jsvObjectSetChildAndUnLock(HEAP32[$5 + 104 >> 2], 42940, jsvNewFromInteger(HEAP32[$5 + 96 >> 2]));
+  jsvObjectSetChild(HEAP32[$5 + 104 >> 2], 41885, HEAP32[$5 + 100 >> 2]);
+  jsvObjectSetChild(HEAP32[$5 + 104 >> 2], 41890, HEAP32[$5 + 92 >> 2]);
+  jsvObjectSetChildAndUnLock(HEAP32[$5 + 104 >> 2], 41895, jsvNewFromInteger(HEAP32[$5 + 88 >> 2]));
+  jsvObjectSetChildAndUnLock(HEAP32[$5 + 104 >> 2], 41900, jsvNewFromInteger(HEAP32[$5 + 96 >> 2]));
   $1 = HEAP32[$5 + 12 >> 2] + 24576 | 0;
   HEAP8[$5 + 41 | 0] = $1;
   HEAP8[$5 + 42 | 0] = $1 >>> 8;
@@ -48171,7 +48171,7 @@ function jspeFactorArray() {
  HEAP32[$0 + 24 >> 2] = 0;
  HEAP32[$0 + 20 >> 2] = 0;
  label$1 : {
-  if ((HEAP32[24866] & 63) == 1) {
+  if ((HEAP32[24606] & 63) == 1) {
    HEAP32[$0 + 20 >> 2] = jsvNewWithFlags(3);
    if (!HEAP32[$0 + 20 >> 2]) {
     jspSetError();
@@ -48184,12 +48184,12 @@ function jspeFactorArray() {
    break label$1;
   }
   while (1) {
-   if (HEAP32[24866] & 80 ? 0 : HEAP16[HEAP32[14856] + 2 >> 1] != 93) {
+   if (HEAP32[24606] & 80 ? 0 : HEAP16[HEAP32[14596] + 2 >> 1] != 93) {
     label$9 : {
-     if ((HEAP32[24866] & 63) == 1) {
+     if ((HEAP32[24606] & 63) == 1) {
       HEAP32[$0 + 16 >> 2] = 0;
       HEAP32[$0 + 12 >> 2] = 0;
-      if (HEAP16[HEAP32[14856] + 2 >> 1] != 44) {
+      if (HEAP16[HEAP32[14596] + 2 >> 1] != 44) {
        HEAP32[$0 + 16 >> 2] = jsvSkipNameAndUnLock(__jspeAssignmentExpression(jspeConditionalExpression()));
        HEAP32[$0 + 12 >> 2] = jsvMakeIntoVariableName(jsvNewFromInteger(HEAP32[$0 + 24 >> 2]), HEAP32[$0 + 16 >> 2]);
       }
@@ -48202,7 +48202,7 @@ function jspeFactorArray() {
      }
      jsvUnLock(__jspeAssignmentExpression(jspeConditionalExpression()));
     }
-    if (HEAP16[HEAP32[14856] + 2 >> 1] != 93) {
+    if (HEAP16[HEAP32[14596] + 2 >> 1] != 93) {
      if (!(jslMatch(44) & 1)) {
       HEAP32[$0 + 28 >> 2] = HEAP32[$0 + 20 >> 2];
       break label$1;
@@ -48232,10 +48232,10 @@ function jswrap_tfmicrointerpreter_tensorToArrayBuffer($0, $1) {
  HEAP32[$2 + 40 >> 2] = $0;
  HEAP32[$2 + 36 >> 2] = $1;
  HEAP32[$2 + 32 >> 2] = jswrap_tfmicrointerpreter_getTFMI(HEAP32[$2 + 40 >> 2]);
- HEAP32[$2 + 28 >> 2] = jsvObjectGetChild(HEAP32[$2 + 40 >> 2], 43624, 0);
+ HEAP32[$2 + 28 >> 2] = jsvObjectGetChild(HEAP32[$2 + 40 >> 2], 42584, 0);
  label$1 : {
   if (!(HEAP32[$2 + 36 >> 2] | HEAP32[$2 + 28 >> 2])) {
-   jsExceptionHere(1, 43666, 0);
+   jsExceptionHere(1, 42626, 0);
    HEAP32[$2 + 44 >> 2] = 0;
    break label$1;
   }
@@ -48273,7 +48273,7 @@ function jswrap_tfmicrointerpreter_tensorToArrayBuffer($0, $1) {
     break label$3;
    }
    HEAP32[$2 >> 2] = HEAP32[HEAP32[$2 + 36 >> 2] >> 2];
-   jsExceptionHere(3, 43687, $2);
+   jsExceptionHere(3, 42647, $2);
    HEAP32[$2 + 44 >> 2] = 0;
    break label$1;
   }
@@ -48616,7 +48616,7 @@ function jswrap_serial_setup($0, $1, $2) {
  HEAP8[$3 + 35 | 0] = jsiGetDeviceFromClass(HEAP32[$3 + 44 >> 2]);
  label$1 : {
   if (jsvIsUndefined(HEAP32[$3 + 36 >> 2]) & 1) {
-   HEAP32[$3 + 36 >> 2] = jsvObjectGetChild(HEAP32[$3 + 44 >> 2], 40900, 0);
+   HEAP32[$3 + 36 >> 2] = jsvObjectGetChild(HEAP32[$3 + 44 >> 2], 39872, 0);
    break label$1;
   }
   jsvLockAgain(HEAP32[$3 + 36 >> 2]);
@@ -48627,13 +48627,13 @@ function jswrap_serial_setup($0, $1, $2) {
    jsvUnLock(HEAP32[$3 + 36 >> 2]);
    break label$3;
   }
-  jsvObjectSetChildAndUnLock(HEAP32[$3 + 44 >> 2], 40909, jsvNewFromInteger(HEAPU8[$3 + 16 | 0] | HEAPU8[$3 + 17 | 0] << 8 | (HEAPU8[$3 + 18 | 0] << 16 | HEAPU8[$3 + 19 | 0] << 24)));
+  jsvObjectSetChildAndUnLock(HEAP32[$3 + 44 >> 2], 39881, jsvNewFromInteger(HEAPU8[$3 + 16 | 0] | HEAPU8[$3 + 17 | 0] << 8 | (HEAPU8[$3 + 18 | 0] << 16 | HEAPU8[$3 + 19 | 0] << 24)));
   label$5 : {
    if (HEAP32[$3 + 36 >> 2]) {
-    jsvObjectSetChildAndUnLock(HEAP32[$3 + 44 >> 2], 40900, HEAP32[$3 + 36 >> 2]);
+    jsvObjectSetChildAndUnLock(HEAP32[$3 + 44 >> 2], 39872, HEAP32[$3 + 36 >> 2]);
     break label$5;
    }
-   jsvObjectRemoveChild(HEAP32[$3 + 44 >> 2], 40900);
+   jsvObjectRemoveChild(HEAP32[$3 + 44 >> 2], 39872);
   }
   if (!(HEAPU8[$3 + 35 | 0] < 17 | HEAPU8[$3 + 35 | 0] > 22)) {
    if (!(HEAPU8[$3 + 35 | 0] < 22 | HEAPU8[$3 + 35 | 0] > 22)) {
@@ -48652,7 +48652,7 @@ function jswrap_serial_setup($0, $1, $2) {
     jsserialEventCallbackInit(HEAP32[$3 + 44 >> 2], $0);
    }
    if (HEAPU8[$3 + 22 | 0] != 255) {
-    jsExceptionHere(1, 40919, 0);
+    jsExceptionHere(1, 39891, 0);
    }
   }
  }
@@ -48704,17 +48704,17 @@ function _jswrap_promise_resolve_or_reject_chain($0, $1, $2) {
  HEAP32[$3 + 44 >> 2] = $0;
  HEAP32[$3 + 40 >> 2] = $1;
  HEAP8[$3 + 39 | 0] = $2;
- HEAP32[$3 + 32 >> 2] = HEAP8[$3 + 39 | 0] & 1 ? 40574 : 40579;
- HEAP32[$3 + 28 >> 2] = jsvObjectGetChild(HEAP32[$3 + 44 >> 2], 40595, 0);
+ HEAP32[$3 + 32 >> 2] = HEAP8[$3 + 39 | 0] & 1 ? 39546 : 39551;
+ HEAP32[$3 + 28 >> 2] = jsvObjectGetChild(HEAP32[$3 + 44 >> 2], 39567, 0);
  label$1 : {
   if (HEAP32[$3 + 28 >> 2]) {
    jsvUnLock(HEAP32[$3 + 28 >> 2]);
    break label$1;
   }
-  jsvObjectSetChildAndUnLock(HEAP32[$3 + 44 >> 2], 40595, jsvNewFromBool(1));
+  jsvObjectSetChildAndUnLock(HEAP32[$3 + 44 >> 2], 39567, jsvNewFromBool(1));
   HEAP32[$3 + 24 >> 2] = jsvObjectGetChild(HEAP32[$3 + 44 >> 2], HEAP32[$3 + 32 >> 2], 0);
   if (!HEAP32[$3 + 24 >> 2]) {
-   HEAP32[$3 + 20 >> 2] = jsvObjectGetChild(HEAP32[$3 + 44 >> 2], 40584, 0);
+   HEAP32[$3 + 20 >> 2] = jsvObjectGetChild(HEAP32[$3 + 44 >> 2], 39556, 0);
    while (1) {
     if (HEAP32[$3 + 20 >> 2]) {
      HEAP32[$3 + 24 >> 2] = jsvObjectGetChild(HEAP32[$3 + 20 >> 2], HEAP32[$3 + 32 >> 2], 0);
@@ -48723,7 +48723,7 @@ function _jswrap_promise_resolve_or_reject_chain($0, $1, $2) {
       jsvUnLock2(HEAP32[$3 + 24 >> 2], HEAP32[$3 + 20 >> 2]);
       break label$1;
      }
-     HEAP32[$3 + 16 >> 2] = jsvObjectGetChild(HEAP32[$3 + 20 >> 2], 40584, 0);
+     HEAP32[$3 + 16 >> 2] = jsvObjectGetChild(HEAP32[$3 + 20 >> 2], 39556, 0);
      jsvUnLock(HEAP32[$3 + 20 >> 2]);
      HEAP32[$3 + 20 >> 2] = HEAP32[$3 + 16 >> 2];
      continue;
@@ -48732,7 +48732,7 @@ function _jswrap_promise_resolve_or_reject_chain($0, $1, $2) {
    }
   }
   if (HEAP8[$3 + 39 | 0] & 1) {
-   jsvObjectSetChild(HEAP32[$3 + 44 >> 2], 40600, HEAP32[$3 + 40 >> 2]);
+   jsvObjectSetChild(HEAP32[$3 + 44 >> 2], 39572, HEAP32[$3 + 40 >> 2]);
   }
   if (HEAP32[$3 + 24 >> 2]) {
    _jswrap_promise_resolve_or_reject(HEAP32[$3 + 44 >> 2], HEAP32[$3 + 40 >> 2], HEAP32[$3 + 24 >> 2]);
@@ -48741,7 +48741,7 @@ function _jswrap_promise_resolve_or_reject_chain($0, $1, $2) {
   }
   if (!(HEAP8[$3 + 39 | 0] & 1)) {
    HEAP32[$3 >> 2] = HEAP32[$3 + 40 >> 2];
-   jsExceptionHere(1, 40609, $3);
+   jsExceptionHere(1, 39581, $3);
   }
  }
  global$0 = $3 + 48 | 0;
@@ -49177,17 +49177,17 @@ function jswrap_banglejs_getCompass() {
  global$0 = $0;
  HEAP32[$0 + 44 >> 2] = jsvNewWithFlags(5);
  if (HEAP32[$0 + 44 >> 2]) {
-  jsvObjectSetChildAndUnLock(HEAP32[$0 + 44 >> 2], 32489, jsvNewFromInteger(HEAP16[127821]));
-  jsvObjectSetChildAndUnLock(HEAP32[$0 + 44 >> 2], 32491, jsvNewFromInteger(HEAP16[127822]));
-  jsvObjectSetChildAndUnLock(HEAP32[$0 + 44 >> 2], 32493, jsvNewFromInteger(HEAP16[127823]));
-  HEAP32[$0 + 40 >> 2] = HEAP16[127821] - ((HEAP16[127824] + HEAP16[127827] | 0) / 2 | 0);
-  HEAP32[$0 + 36 >> 2] = HEAP16[127822] - ((HEAP16[127825] + HEAP16[127828] | 0) / 2 | 0);
-  HEAP32[$0 + 32 >> 2] = HEAP16[127823] - ((HEAP16[127826] + HEAP16[127829] | 0) / 2 | 0);
-  jsvObjectSetChildAndUnLock(HEAP32[$0 + 44 >> 2], 32495, jsvNewFromInteger(HEAP32[$0 + 40 >> 2]));
-  jsvObjectSetChildAndUnLock(HEAP32[$0 + 44 >> 2], 32498, jsvNewFromInteger(HEAP32[$0 + 36 >> 2]));
-  jsvObjectSetChildAndUnLock(HEAP32[$0 + 44 >> 2], 32501, jsvNewFromInteger(HEAP32[$0 + 32 >> 2]));
-  HEAP32[$0 + 28 >> 2] = HEAP16[127827] - HEAP16[127824];
-  HEAP32[$0 + 24 >> 2] = HEAP16[127828] - HEAP16[127825];
+  jsvObjectSetChildAndUnLock(HEAP32[$0 + 44 >> 2], 31465, jsvNewFromInteger(HEAP16[127301]));
+  jsvObjectSetChildAndUnLock(HEAP32[$0 + 44 >> 2], 31467, jsvNewFromInteger(HEAP16[127302]));
+  jsvObjectSetChildAndUnLock(HEAP32[$0 + 44 >> 2], 31469, jsvNewFromInteger(HEAP16[127303]));
+  HEAP32[$0 + 40 >> 2] = HEAP16[127301] - ((HEAP16[127304] + HEAP16[127307] | 0) / 2 | 0);
+  HEAP32[$0 + 36 >> 2] = HEAP16[127302] - ((HEAP16[127305] + HEAP16[127308] | 0) / 2 | 0);
+  HEAP32[$0 + 32 >> 2] = HEAP16[127303] - ((HEAP16[127306] + HEAP16[127309] | 0) / 2 | 0);
+  jsvObjectSetChildAndUnLock(HEAP32[$0 + 44 >> 2], 31471, jsvNewFromInteger(HEAP32[$0 + 40 >> 2]));
+  jsvObjectSetChildAndUnLock(HEAP32[$0 + 44 >> 2], 31474, jsvNewFromInteger(HEAP32[$0 + 36 >> 2]));
+  jsvObjectSetChildAndUnLock(HEAP32[$0 + 44 >> 2], 31477, jsvNewFromInteger(HEAP32[$0 + 32 >> 2]));
+  HEAP32[$0 + 28 >> 2] = HEAP16[127307] - HEAP16[127304];
+  HEAP32[$0 + 24 >> 2] = HEAP16[127308] - HEAP16[127305];
   HEAP32[$0 + 20 >> 2] = Math_imul(HEAP32[$0 + 28 >> 2], HEAP32[$0 + 28 >> 2]) + Math_imul(HEAP32[$0 + 24 >> 2], HEAP32[$0 + 24 >> 2]);
   HEAPF64[$0 + 8 >> 3] = nan;
   if (HEAP32[$0 + 20 >> 2] > 3e3) {
@@ -49196,7 +49196,7 @@ function jswrap_banglejs_getCompass() {
     HEAPF64[$0 + 8 >> 3] = HEAPF64[$0 + 8 >> 3] + 360;
    }
   }
-  jsvObjectSetChildAndUnLock(HEAP32[$0 + 44 >> 2], 32504, jsvNewFromFloat(HEAPF64[$0 + 8 >> 3]));
+  jsvObjectSetChildAndUnLock(HEAP32[$0 + 44 >> 2], 31480, jsvNewFromFloat(HEAPF64[$0 + 8 >> 3]));
  }
  global$0 = $0 + 48 | 0;
  return HEAP32[$0 + 44 >> 2];
@@ -49246,13 +49246,13 @@ function lcdST7789_setCallbacks($0) {
  $1 = global$0 - 32 | 0;
  global$0 = $1;
  HEAP32[$1 + 28 >> 2] = $0;
- if (HEAP32[25480]) {
+ if (HEAP32[25220]) {
   label$2 : {
-   if (!(HEAP32[25480] != 4 ? HEAP32[25480] != 3 : 0)) {
+   if (!(HEAP32[25220] != 4 ? HEAP32[25220] != 3 : 0)) {
     $2 = $1 + 16 | 0;
-    HEAP32[$1 + 24 >> 2] = HEAP32[25480] == 3 ? 14400 : 6400;
+    HEAP32[$1 + 24 >> 2] = HEAP32[25220] == 3 ? 14400 : 6400;
     $0 = HEAP32[$1 + 28 >> 2];
-    HEAP32[$1 + 20 >> 2] = jsvObjectGetChild(HEAPU8[$0 | 0] | HEAPU8[$0 + 1 | 0] << 8 | (HEAPU8[$0 + 2 | 0] << 16 | HEAPU8[$0 + 3 | 0] << 24), 31751, 0);
+    HEAP32[$1 + 20 >> 2] = jsvObjectGetChild(HEAPU8[$0 | 0] | HEAPU8[$0 + 1 | 0] << 8 | (HEAPU8[$0 + 2 | 0] << 16 | HEAPU8[$0 + 3 | 0] << 24), 30727, 0);
     HEAP32[$1 + 16 >> 2] = 0;
     HEAP32[$1 + 12 >> 2] = jsvGetDataPointer(HEAP32[$1 + 20 >> 2], $2);
     jsvUnLock(HEAP32[$1 + 20 >> 2]);
@@ -49455,7 +49455,7 @@ function jswrap_parseInt($0, $1) {
    break label$2;
   }
   if (HEAP32[$2 + 36 >> 2] == ($2 + 117 | 0)) {
-   jsExceptionHere(1, 36846, 0);
+   jsExceptionHere(1, 35822, 0);
    HEAP32[$2 + 140 >> 2] = jsvNewFromFloat(nan);
    break label$2;
   }
@@ -49488,7 +49488,7 @@ function jswrap_decodeURIComponent($0) {
      }
      HEAP8[$1 + 15 | 0] = jsvStringIteratorGetChar($1 + 40 | 0);
      if (HEAP8[$1 + 15 | 0] >> 7) {
-      jsExceptionHere(1, 37002, 0);
+      jsExceptionHere(1, 35978, 0);
       break label$5;
      }
      if (HEAP8[$1 + 15 | 0] == 37) {
@@ -49499,7 +49499,7 @@ function jswrap_decodeURIComponent($0) {
       HEAP32[$1 + 4 >> 2] = jsvStringIteratorGetChar($0) << 24 >> 24;
       HEAP32[$1 >> 2] = hexToByte(HEAP32[$1 + 8 >> 2] << 24 >> 24, HEAP32[$1 + 4 >> 2] << 24 >> 24) << 24 >> 24;
       if (HEAP32[$1 >> 2] < 0) {
-       jsExceptionHere(1, 37014, 0);
+       jsExceptionHere(1, 35990, 0);
        break label$5;
       }
       HEAP8[$1 + 15 | 0] = HEAP32[$1 >> 2];
@@ -49637,11 +49637,11 @@ function tflite__ops__micro__floor__Eval_28TfLiteContext__2c_20TfLiteNode__29($0
    $3 = HEAP32[HEAP32[$2 + 80 >> 2] >> 2];
    HEAP32[$2 + 20 >> 2] = 1;
    HEAP32[$2 + 16 >> 2] = $3;
-   HEAP32[$2 + 12 >> 2] = 49656;
-   HEAP32[$2 + 8 >> 2] = 49644;
+   HEAP32[$2 + 12 >> 2] = 48616;
+   HEAP32[$2 + 8 >> 2] = 48604;
    HEAP32[$2 + 4 >> 2] = 31;
-   HEAP32[$2 >> 2] = 49548;
-   FUNCTION_TABLE[$0]($1, 49522, $2);
+   HEAP32[$2 >> 2] = 48508;
+   FUNCTION_TABLE[$0]($1, 48482, $2);
    HEAP32[$2 + 92 >> 2] = 1;
    break label$1;
   }
@@ -49669,18 +49669,18 @@ function jswrap_tensorflow_create($0, $1) {
  HEAP32[$2 + 36 >> 2] = $1;
  label$1 : {
   if (HEAP32[$2 + 40 >> 2] < 512) {
-   jsExceptionHere(1, 43463, 0);
+   jsExceptionHere(1, 42423, 0);
    HEAP32[$2 + 44 >> 2] = 0;
    break label$1;
   }
   HEAP32[$2 + 32 >> 2] = 0;
   HEAP32[$2 + 28 >> 2] = jsvGetDataPointer(HEAP32[$2 + 36 >> 2], $2 + 32 | 0);
   if (!HEAP32[$2 + 28 >> 2]) {
-   jsExceptionHere(3, 43482, 0);
+   jsExceptionHere(3, 42442, 0);
    HEAP32[$2 + 44 >> 2] = 0;
    break label$1;
   }
-  HEAP32[$2 + 24 >> 2] = jspNewObject(0, 43521);
+  HEAP32[$2 + 24 >> 2] = jspNewObject(0, 42481);
   if (!HEAP32[$2 + 24 >> 2]) {
    HEAP32[$2 + 44 >> 2] = 0;
    break label$1;
@@ -49692,7 +49692,7 @@ function jswrap_tensorflow_create($0, $1) {
   HEAP32[$2 + 20 >> 2] = HEAP32[$0 + 12 >> 2] + 4240;
   HEAP32[$2 + 16 >> 2] = jsvNewFlatStringOfLength(HEAP32[$2 + 20 >> 2]);
   if (!HEAP32[$2 + 16 >> 2]) {
-   jsExceptionHere(1, 43540, 0);
+   jsExceptionHere(1, 42500, 0);
    jsvUnLock(HEAP32[$2 + 24 >> 2]);
    HEAP32[$2 + 44 >> 2] = 0;
    break label$1;
@@ -49703,11 +49703,11 @@ function jswrap_tensorflow_create($0, $1) {
    break label$1;
   }
   if (!(tf_create(HEAP32[$2 + 12 >> 2], HEAP32[$2 + 40 >> 2], HEAP32[$2 + 28 >> 2]) & 1)) {
-   jsExceptionHere(1, 43585, 0);
+   jsExceptionHere(1, 42545, 0);
    jsvUnLock2(HEAP32[$2 + 24 >> 2], HEAP32[$2 + 16 >> 2]);
   }
-  jsvObjectSetChild(HEAP32[$2 + 24 >> 2], 43618, HEAP32[$2 + 36 >> 2]);
-  jsvObjectSetChildAndUnLock(HEAP32[$2 + 24 >> 2], 43624, HEAP32[$2 + 16 >> 2]);
+  jsvObjectSetChild(HEAP32[$2 + 24 >> 2], 42578, HEAP32[$2 + 36 >> 2]);
+  jsvObjectSetChildAndUnLock(HEAP32[$2 + 24 >> 2], 42584, HEAP32[$2 + 16 >> 2]);
   HEAP32[$2 + 44 >> 2] = HEAP32[$2 + 24 >> 2];
  }
  global$0 = $2 + 48 | 0;
@@ -49746,30 +49746,30 @@ function jswrap_e_dumpFragmentation() {
  HEAP32[$0 + 12 >> 2] = 0;
  HEAP32[$0 + 8 >> 2] = 0;
  while (1) {
-  if (HEAPU32[$0 + 8 >> 2] < HEAPU32[14353]) {
+  if (HEAPU32[$0 + 8 >> 2] < HEAPU32[14093]) {
    HEAP32[$0 + 4 >> 2] = _jsvGetAddressOf(HEAP32[$0 + 8 >> 2] + 1 & 65535);
    label$3 : {
     if (!(HEAPU16[HEAP32[$0 + 4 >> 2] + 14 >> 1] & 63)) {
-     jsiConsolePrintString(36146);
+     jsiConsolePrintString(35122);
      $1 = HEAP32[$0 + 12 >> 2];
      HEAP32[$0 + 12 >> 2] = $1 + 1;
      if (($1 | 0) > 80) {
-      jsiConsolePrintString(36148);
+      jsiConsolePrintString(35124);
       HEAP32[$0 + 12 >> 2] = 0;
      }
      break label$3;
     }
     label$6 : {
      if (jsvGetLocks(HEAP32[$0 + 4 >> 2]) & 255) {
-      jsiConsolePrintString(36150);
+      jsiConsolePrintString(35126);
       break label$6;
      }
-     jsiConsolePrintString(36152);
+     jsiConsolePrintString(35128);
     }
     $1 = HEAP32[$0 + 12 >> 2];
     HEAP32[$0 + 12 >> 2] = $1 + 1;
     if (($1 | 0) > 80) {
-     jsiConsolePrintString(36148);
+     jsiConsolePrintString(35124);
      HEAP32[$0 + 12 >> 2] = 0;
     }
     if (jsvIsFlatString(HEAP32[$0 + 4 >> 2]) & 1) {
@@ -49782,11 +49782,11 @@ function jswrap_e_dumpFragmentation() {
        if (!$1) {
         break label$11;
        }
-       jsiConsolePrintString(36154);
+       jsiConsolePrintString(35130);
        $1 = HEAP32[$0 + 12 >> 2];
        HEAP32[$0 + 12 >> 2] = $1 + 1;
        if (($1 | 0) > 80) {
-        jsiConsolePrintString(36148);
+        jsiConsolePrintString(35124);
         HEAP32[$0 + 12 >> 2] = 0;
        }
        continue;
@@ -49800,7 +49800,7 @@ function jswrap_e_dumpFragmentation() {
   }
   break;
  }
- jsiConsolePrintString(36148);
+ jsiConsolePrintString(35124);
  global$0 = $0 + 16 | 0;
 }
 function jsiSoftKill() {
@@ -49808,26 +49808,26 @@ function jsiSoftKill() {
  $0 = global$0 - 48 | 0;
  global$0 = $0;
  jsiExecuteEventCallbackOn(5517, 0, 0);
- HEAP32[24874] = 0;
+ HEAP32[24614] = 0;
  jsiInputLineCursorMoved();
- jsvUnLock(HEAP32[24872]);
- HEAP32[24872] = 0;
+ jsvUnLock(HEAP32[24612]);
+ HEAP32[24612] = 0;
  jswrap_banglejs_kill();
  jswrap_pipe_kill();
  jswrap_waveform_kill();
- HEAP8[101425] = 0;
- HEAP8[101426] = 0;
- if (HEAP32[24869]) {
-  jsvUnLock(HEAP32[24869]);
-  HEAP32[24869] = 0;
+ HEAP8[100385] = 0;
+ HEAP8[100386] = 0;
+ if (HEAP32[24609]) {
+  jsvUnLock(HEAP32[24609]);
+  HEAP32[24609] = 0;
  }
- if (HEAPU16[49740]) {
-  jsvUnRefRef(HEAPU16[49740]);
-  HEAP16[49740] = 0;
+ if (HEAPU16[49220]) {
+  jsvUnRefRef(HEAPU16[49220]);
+  HEAP16[49220] = 0;
  }
- if (HEAPU16[49741]) {
+ if (HEAPU16[49221]) {
   $1 = $0 + 40 | 0;
-  HEAP32[$0 + 44 >> 2] = jsvLock(HEAPU16[49741]);
+  HEAP32[$0 + 44 >> 2] = jsvLock(HEAPU16[49221]);
   jsvObjectIteratorNew($1, HEAP32[$0 + 44 >> 2]);
   while (1) {
    if (jsvObjectIteratorHasValue($0 + 40 | 0) & 1) {
@@ -49844,10 +49844,10 @@ function jsiSoftKill() {
   jsvObjectIteratorFree($0 + 40 | 0);
   jsvUnRef(HEAP32[$0 + 44 >> 2]);
   jsvUnLock(HEAP32[$0 + 44 >> 2]);
-  HEAP16[49741] = 0;
+  HEAP16[49221] = 0;
  }
- if (HEAPU8[59428]) {
-  jsvObjectSetChildAndUnLock(HEAP32[24863], 5248, jsvNewFromInteger(HEAPU8[59428]));
+ if (HEAPU8[58388]) {
+  jsvObjectSetChildAndUnLock(HEAP32[24603], 5248, jsvNewFromInteger(HEAPU8[58388]));
  }
  HEAP32[$0 + 28 >> 2] = jsvNewFromEmptyString();
  if (HEAP32[$0 + 28 >> 2]) {
@@ -49855,10 +49855,10 @@ function jsiSoftKill() {
   jsvStringIteratorNew($1, HEAP32[$0 + 28 >> 2], 0);
   jsiDumpHardwareInitialisation(4, $1, 0);
   jsvStringIteratorFree($1);
-  jsvObjectSetChild(HEAP32[24863], 5254, HEAP32[$0 + 28 >> 2]);
+  jsvObjectSetChild(HEAP32[24603], 5254, HEAP32[$0 + 28 >> 2]);
   jsvUnLock(HEAP32[$0 + 28 >> 2]);
  }
- HEAP16[49742] = HEAPU16[49742] & -2049;
+ HEAP16[49222] = HEAPU16[49222] & -2049;
  global$0 = $0 + 48 | 0;
 }
 function jswrap_object_defineProperty($0, $1, $2) {
@@ -49874,34 +49874,34 @@ function jswrap_object_defineProperty($0, $1, $2) {
  label$1 : {
   if (!(jsvIsObject(HEAP32[$3 + 56 >> 2]) & 1)) {
    HEAP32[$3 + 16 >> 2] = HEAP32[$3 + 56 >> 2];
-   jsExceptionHere(1, 38967, $3 + 16 | 0);
+   jsExceptionHere(1, 37943, $3 + 16 | 0);
    HEAP32[$3 + 60 >> 2] = 0;
    break label$1;
   }
   if (!(jsvIsObject(HEAP32[$3 + 48 >> 2]) & 1)) {
    HEAP32[$3 >> 2] = HEAP32[$3 + 48 >> 2];
-   jsExceptionHere(1, 39008, $3);
+   jsExceptionHere(1, 37984, $3);
    HEAP32[$3 + 60 >> 2] = 0;
    break label$1;
   }
   HEAP32[$3 + 44 >> 2] = jsvAsArrayIndex(HEAP32[$3 + 52 >> 2]);
   HEAP32[$3 + 40 >> 2] = 0;
-  HEAP32[$3 + 36 >> 2] = jsvObjectGetChild(HEAP32[$3 + 48 >> 2], 38953, 0);
-  HEAP32[$3 + 32 >> 2] = jsvObjectGetChild(HEAP32[$3 + 48 >> 2], 38957, 0);
+  HEAP32[$3 + 36 >> 2] = jsvObjectGetChild(HEAP32[$3 + 48 >> 2], 37929, 0);
+  HEAP32[$3 + 32 >> 2] = jsvObjectGetChild(HEAP32[$3 + 48 >> 2], 37933, 0);
   if (!(HEAP32[$3 + 32 >> 2] ? 0 : !HEAP32[$3 + 36 >> 2])) {
    HEAP32[$3 + 40 >> 2] = jsvNewWithFlags(6);
    if (HEAP32[$3 + 40 >> 2]) {
     if (HEAP32[$3 + 36 >> 2]) {
-     jsvObjectSetChild(HEAP32[$3 + 40 >> 2], 38953, HEAP32[$3 + 36 >> 2]);
+     jsvObjectSetChild(HEAP32[$3 + 40 >> 2], 37929, HEAP32[$3 + 36 >> 2]);
     }
     if (HEAP32[$3 + 32 >> 2]) {
-     jsvObjectSetChild(HEAP32[$3 + 40 >> 2], 38957, HEAP32[$3 + 32 >> 2]);
+     jsvObjectSetChild(HEAP32[$3 + 40 >> 2], 37933, HEAP32[$3 + 32 >> 2]);
     }
    }
    jsvUnLock2(HEAP32[$3 + 36 >> 2], HEAP32[$3 + 32 >> 2]);
   }
   if (!HEAP32[$3 + 40 >> 2]) {
-   HEAP32[$3 + 40 >> 2] = jsvObjectGetChild(HEAP32[$3 + 48 >> 2], 38961, 0);
+   HEAP32[$3 + 40 >> 2] = jsvObjectGetChild(HEAP32[$3 + 48 >> 2], 37937, 0);
   }
   jsvObjectSetChildVar(HEAP32[$3 + 56 >> 2], HEAP32[$3 + 44 >> 2], HEAP32[$3 + 40 >> 2]);
   jsvUnLock2(HEAP32[$3 + 44 >> 2], HEAP32[$3 + 40 >> 2]);
@@ -49922,22 +49922,22 @@ function jswrap_process_memory() {
  HEAP32[$0 + 20 >> 2] = jsvNewWithFlags(5);
  if (HEAP32[$0 + 20 >> 2]) {
   HEAP32[$0 + 16 >> 2] = 0;
-  HEAP32[$0 + 12 >> 2] = jsvObjectGetChild(HEAP32[24863], 40529, 0);
+  HEAP32[$0 + 12 >> 2] = jsvObjectGetChild(HEAP32[24603], 39501, 0);
   if (HEAP32[$0 + 12 >> 2]) {
    HEAP32[$0 + 16 >> 2] = jsvCountJsVarsUsed(HEAP32[$0 + 12 >> 2]);
    jsvUnLock(HEAP32[$0 + 12 >> 2]);
   }
   HEAP32[$0 + 8 >> 2] = jsvGetMemoryUsage() - HEAP32[$0 + 16 >> 2];
-  HEAP32[$0 + 4 >> 2] = HEAP32[14353];
-  jsvObjectSetChildAndUnLock(HEAP32[$0 + 20 >> 2], 40537, jsvNewFromInteger(HEAP32[$0 + 4 >> 2] - HEAP32[$0 + 8 >> 2] | 0));
-  jsvObjectSetChildAndUnLock(HEAP32[$0 + 20 >> 2], 40542, jsvNewFromInteger(HEAP32[$0 + 8 >> 2]));
-  jsvObjectSetChildAndUnLock(HEAP32[$0 + 20 >> 2], 40548, jsvNewFromInteger(HEAP32[$0 + 4 >> 2]));
-  jsvObjectSetChildAndUnLock(HEAP32[$0 + 20 >> 2], 40529, jsvNewFromInteger(HEAP32[$0 + 16 >> 2]));
-  jsvObjectSetChildAndUnLock(HEAP32[$0 + 20 >> 2], 40554, jsvNewFromInteger(HEAP32[$0 + 36 >> 2]));
+  HEAP32[$0 + 4 >> 2] = HEAP32[14093];
+  jsvObjectSetChildAndUnLock(HEAP32[$0 + 20 >> 2], 39509, jsvNewFromInteger(HEAP32[$0 + 4 >> 2] - HEAP32[$0 + 8 >> 2] | 0));
+  jsvObjectSetChildAndUnLock(HEAP32[$0 + 20 >> 2], 39514, jsvNewFromInteger(HEAP32[$0 + 8 >> 2]));
+  jsvObjectSetChildAndUnLock(HEAP32[$0 + 20 >> 2], 39520, jsvNewFromInteger(HEAP32[$0 + 4 >> 2]));
+  jsvObjectSetChildAndUnLock(HEAP32[$0 + 20 >> 2], 39501, jsvNewFromInteger(HEAP32[$0 + 16 >> 2]));
+  jsvObjectSetChildAndUnLock(HEAP32[$0 + 20 >> 2], 39526, jsvNewFromInteger(HEAP32[$0 + 36 >> 2]));
   $1 = HEAP32[$0 + 24 >> 2];
   $2 = HEAP32[$0 + 40 >> 2];
-  jsvObjectSetChildAndUnLock(HEAP32[$0 + 20 >> 2], 40557, jsvNewFromFloat(jshGetMillisecondsFromTime($1 - $2 | 0, HEAP32[$0 + 28 >> 2] - (HEAP32[$0 + 44 >> 2] + ($1 >>> 0 < $2 >>> 0) | 0) | 0)));
-  jsvObjectSetChildAndUnLock(HEAP32[$0 + 20 >> 2], 40564, jsvNewFromInteger(16));
+  jsvObjectSetChildAndUnLock(HEAP32[$0 + 20 >> 2], 39529, jsvNewFromFloat(jshGetMillisecondsFromTime($1 - $2 | 0, HEAP32[$0 + 28 >> 2] - (HEAP32[$0 + 44 >> 2] + ($1 >>> 0 < $2 >>> 0) | 0) | 0)));
+  jsvObjectSetChildAndUnLock(HEAP32[$0 + 20 >> 2], 39536, jsvNewFromInteger(16));
  }
  global$0 = $0 + 48 | 0;
  return HEAP32[$0 + 20 >> 2];
@@ -49954,15 +49954,15 @@ function jswrap_object_emit($0, $1, $2) {
  HEAP32[$3 + 68 >> 2] = $2;
  label$1 : {
   if (!(jsvHasChildren(HEAP32[$3 + 76 >> 2]) & 1)) {
-   jsExceptionHere(3, 39183, 0);
+   jsExceptionHere(3, 38159, 0);
    break label$1;
   }
   if (!(jsvIsString(HEAP32[$3 + 72 >> 2]) & 1)) {
-   jsExceptionHere(3, 39405, 0);
+   jsExceptionHere(3, 38381, 0);
    break label$1;
   }
   HEAP32[$3 + 16 >> 2] = HEAP32[$3 + 72 >> 2];
-  HEAP32[$3 + 64 >> 2] = jsvVarPrintf(39381, $3 + 16 | 0);
+  HEAP32[$3 + 64 >> 2] = jsvVarPrintf(38357, $3 + 16 | 0);
   if (!HEAP32[$3 + 64 >> 2]) {
    break label$1;
   }
@@ -49976,7 +49976,7 @@ function jswrap_object_emit($0, $1, $2) {
     }
     if (HEAPU32[$3 + 28 >> 2] >= 4) {
      HEAP32[$3 >> 2] = 4;
-     jsExceptionHere(3, 39462, $3);
+     jsExceptionHere(3, 38438, $3);
      break label$5;
     }
     $0 = $3 + 32 | 0;
@@ -50072,7 +50072,7 @@ function jswrap_arraybufferview_set($0, $1, $2) {
     break label$2;
    }
    HEAP32[$3 >> 2] = HEAP32[$3 + 104 >> 2];
-   jsExceptionHere(1, 34924, $3);
+   jsExceptionHere(1, 33900, $3);
    break label$1;
   }
   $0 = $3 + 16 | 0;
@@ -50166,7 +50166,7 @@ function atan($0) {
    return $0 - $0 * ($7 + $2);
   }
   $1 = $1 << 3;
-  $0 = HEAPF64[$1 + 57248 >> 3] - ($0 * ($7 + $2) - HEAPF64[$1 + 57280 >> 3] - $0);
+  $0 = HEAPF64[$1 + 56208 >> 3] - ($0 * ($7 + $2) - HEAPF64[$1 + 56240 >> 3] - $0);
   $0 = (($4 | 0) < 0 ? 1 : ($4 | 0) <= 0 ? $5 >>> 0 >= 0 ? 0 : 1 : 0) ? -$0 : $0;
  }
  return $0;
@@ -50355,7 +50355,7 @@ function jstPinOutputAtTime($0, $1, $2, $3) {
     break label$7;
    }
   }
-  jsExceptionHere(4, 7367, 0);
+  jsExceptionHere(4, 7363, 0);
  }
  utilTimerInsertTask($4 + 16 | 0);
  global$0 = $4 - -64 | 0;
@@ -50455,13 +50455,13 @@ function jswrap_io_digitalRead($0) {
   }
   if (jsvIsObject(HEAP32[$1 + 40 >> 2]) & 1) {
    HEAP32[$1 + 16 >> 2] = 0;
-   HEAP32[$1 + 12 >> 2] = jspGetNamedField(HEAP32[$1 + 40 >> 2], 37513, 0);
+   HEAP32[$1 + 12 >> 2] = jspGetNamedField(HEAP32[$1 + 40 >> 2], 36489, 0);
    label$7 : {
     if (jsvIsFunction(HEAP32[$1 + 12 >> 2]) & 1) {
      HEAP32[$1 + 16 >> 2] = jsvGetIntegerAndUnLock(jspeFunctionCall(HEAP32[$1 + 12 >> 2], 0, HEAP32[$1 + 40 >> 2], 0, 0, 0));
      break label$7;
     }
-    jsExceptionHere(1, 37500, 0);
+    jsExceptionHere(1, 36476, 0);
    }
    jsvUnLock(HEAP32[$1 + 12 >> 2]);
    HEAP32[$1 + 44 >> 2] = HEAP32[$1 + 16 >> 2];
@@ -50479,10 +50479,10 @@ function __jspeConditionalExpression($0) {
  global$0 = $1;
  HEAP32[$1 + 24 >> 2] = $0;
  label$1 : {
-  if (HEAP16[HEAP32[14856] + 2 >> 1] == 63) {
+  if (HEAP16[HEAP32[14596] + 2 >> 1] == 63) {
    jslGetNextToken();
    label$3 : {
-    if ((HEAP32[24866] & 63) != 1) {
+    if ((HEAP32[24606] & 63) != 1) {
      jsvUnLock(__jspeAssignmentExpression(jspeConditionalExpression()));
      if (!(jslMatch(58) & 1)) {
       HEAP32[$1 + 28 >> 2] = 0;
@@ -50500,16 +50500,16 @@ function __jspeConditionalExpression($0) {
        HEAP32[$1 + 28 >> 2] = 0;
        break label$1;
       }
-      HEAP32[$1 + 16 >> 2] = HEAP32[24866];
+      HEAP32[$1 + 16 >> 2] = HEAP32[24606];
       jspSetNoExecute();
       jsvUnLock(__jspeAssignmentExpression(jspeConditionalExpression()));
-      HEAP32[24866] = HEAP32[24866] & -1664 | HEAP32[$1 + 16 >> 2] & 1663;
+      HEAP32[24606] = HEAP32[24606] & -1664 | HEAP32[$1 + 16 >> 2] & 1663;
       break label$6;
      }
-     HEAP32[$1 + 12 >> 2] = HEAP32[24866];
+     HEAP32[$1 + 12 >> 2] = HEAP32[24606];
      jspSetNoExecute();
      jsvUnLock(__jspeAssignmentExpression(jspeConditionalExpression()));
-     HEAP32[24866] = HEAP32[24866] & -1664 | HEAP32[$1 + 12 >> 2] & 1663;
+     HEAP32[24606] = HEAP32[24606] & -1664 | HEAP32[$1 + 12 >> 2] & 1663;
      if (!(jslMatch(58) & 1)) {
       HEAP32[$1 + 28 >> 2] = 0;
       break label$1;
@@ -50612,7 +50612,7 @@ function void_20tflite__reference_ops__AffineQuantize_unsigned_20char__28tflite_
     $1 = -2147483648;
    }
    HEAP32[$0 + 16 >> 2] = $1 + HEAP32[$5 + 40 >> 2];
-   HEAP32[$5 + 12 >> 2] = HEAP32[int_20const__20std____2__min_int__28int_20const__2c_20int_20const__29(int_20const__20std____2__max_int__28int_20const__2c_20int_20const__29($2, 47448), 47452) >> 2];
+   HEAP32[$5 + 12 >> 2] = HEAP32[int_20const__20std____2__min_int__28int_20const__2c_20int_20const__29(int_20const__20std____2__max_int__28int_20const__2c_20int_20const__29($2, 46408), 46412) >> 2];
    HEAP8[HEAP32[$5 + 44 >> 2] + HEAP32[$5 + 24 >> 2] | 0] = HEAP32[$5 + 12 >> 2];
    HEAP32[$5 + 24 >> 2] = HEAP32[$5 + 24 >> 2] + 1;
    continue;
@@ -50794,7 +50794,7 @@ function void_20tflite__reference_ops__AffineQuantize_signed_20char__28tflite__Q
     $1 = -2147483648;
    }
    HEAP32[$0 + 16 >> 2] = $1 + HEAP32[$5 + 40 >> 2];
-   HEAP32[$5 + 12 >> 2] = HEAP32[int_20const__20std____2__min_int__28int_20const__2c_20int_20const__29(int_20const__20std____2__max_int__28int_20const__2c_20int_20const__29($2, 47440), 47444) >> 2];
+   HEAP32[$5 + 12 >> 2] = HEAP32[int_20const__20std____2__min_int__28int_20const__2c_20int_20const__29(int_20const__20std____2__max_int__28int_20const__2c_20int_20const__29($2, 46400), 46404) >> 2];
    HEAP8[HEAP32[$5 + 44 >> 2] + HEAP32[$5 + 24 >> 2] | 0] = HEAP32[$5 + 12 >> 2];
    HEAP32[$5 + 24 >> 2] = HEAP32[$5 + 24 >> 2] + 1;
    continue;
@@ -50807,7 +50807,7 @@ function getCalendarDate($0, $1) {
  var $2 = 0;
  $2 = global$0 - 16 | 0;
  HEAP32[$2 + 12 >> 2] = $1;
- HEAP32[$2 >> 2] = 35232;
+ HEAP32[$2 >> 2] = 34208;
  HEAP32[$0 >> 2] = HEAP32[$2 + 12 >> 2];
  HEAP32[$2 + 8 >> 2] = HEAP32[$2 + 12 >> 2] / 1461;
  HEAP32[$2 + 12 >> 2] = HEAP32[$2 + 12 >> 2] - Math_imul(HEAP32[$2 + 8 >> 2], 1461);
@@ -50828,7 +50828,7 @@ function getCalendarDate($0, $1) {
      HEAP32[$2 + 12 >> 2] = HEAP32[$2 + 12 >> 2] - 366;
      break label$4;
     }
-    HEAP32[$2 >> 2] = 35264;
+    HEAP32[$2 >> 2] = 34240;
    }
   }
  }
@@ -51008,7 +51008,7 @@ function jspeStatementIf() {
    break label$1;
   }
   HEAP32[$0 + 20 >> 2] = jspeExpression();
-  if (HEAP32[24866] & 80) {
+  if (HEAP32[24606] & 80) {
    HEAP32[$0 + 28 >> 2] = HEAP32[$0 + 20 >> 2];
    break label$1;
   }
@@ -51017,14 +51017,14 @@ function jspeStatementIf() {
    break label$1;
   }
   $2 = $0;
-  if ((HEAP32[24866] & 63) == 1) {
+  if ((HEAP32[24606] & 63) == 1) {
    $1 = jsvGetBoolAndUnLock(jsvSkipName(HEAP32[$0 + 20 >> 2]));
   } else {
    $1 = 0;
   }
   HEAP8[$2 + 27 | 0] = $1 & 1;
   jsvUnLock(HEAP32[$0 + 20 >> 2]);
-  HEAP32[$0 + 12 >> 2] = HEAP32[24866];
+  HEAP32[$0 + 12 >> 2] = HEAP32[24606];
   if (!(HEAP8[$0 + 27 | 0] & 1)) {
    jspSetNoExecute();
   }
@@ -51032,14 +51032,14 @@ function jspeStatementIf() {
   label$8 : {
    if (!(HEAP8[$0 + 27 | 0] & 1)) {
     jsvUnLock(HEAP32[$0 + 8 >> 2]);
-    HEAP32[24866] = HEAP32[24866] & -1664 | HEAP32[$0 + 12 >> 2] & 1663;
+    HEAP32[24606] = HEAP32[24606] & -1664 | HEAP32[$0 + 12 >> 2] & 1663;
     break label$8;
    }
    HEAP32[$0 + 16 >> 2] = HEAP32[$0 + 8 >> 2];
   }
-  if (HEAP16[HEAP32[14856] + 2 >> 1] == 164) {
+  if (HEAP16[HEAP32[14596] + 2 >> 1] == 164) {
    jslGetNextToken();
-   HEAP32[$0 + 4 >> 2] = HEAP32[24866];
+   HEAP32[$0 + 4 >> 2] = HEAP32[24606];
    if (HEAP8[$0 + 27 | 0] & 1) {
     jspSetNoExecute();
    }
@@ -51047,7 +51047,7 @@ function jspeStatementIf() {
    label$12 : {
     if (HEAP8[$0 + 27 | 0] & 1) {
      jsvUnLock(HEAP32[$0 >> 2]);
-     HEAP32[24866] = HEAP32[24866] & -1664 | HEAP32[$0 + 4 >> 2] & 1663;
+     HEAP32[24606] = HEAP32[24606] & -1664 | HEAP32[$0 + 4 >> 2] & 1663;
      break label$12;
     }
     HEAP32[$0 + 16 >> 2] = HEAP32[$0 >> 2];
@@ -51449,7 +51449,7 @@ function jshGetCharToTransmit($0) {
  HEAP8[$1 + 11 | 0] = $0;
  label$1 : {
   if (!(HEAPU8[$1 + 11 | 0] < 21 | HEAPU8[$1 + 11 | 0] > 22)) {
-   HEAP32[$1 + 4 >> 2] = HEAPU8[$1 + 11 | 0] + 99535;
+   HEAP32[$1 + 4 >> 2] = HEAPU8[$1 + 11 | 0] + 98495;
    if (HEAP8[HEAP32[$1 + 4 >> 2]] & 1) {
     HEAP8[HEAP32[$1 + 4 >> 2]] = HEAPU8[HEAP32[$1 + 4 >> 2]] & -2 | 4;
     HEAP32[$1 + 12 >> 2] = 19;
@@ -51461,17 +51461,17 @@ function jshGetCharToTransmit($0) {
     break label$1;
    }
   }
-  HEAP8[$1 + 3 | 0] = HEAPU8[99553];
+  HEAP8[$1 + 3 | 0] = HEAPU8[98513];
   while (1) {
-   if (HEAPU8[99552] != HEAPU8[$1 + 3 | 0]) {
-    if (HEAPU8[$1 + 11 | 0] == (HEAPU8[(HEAPU8[$1 + 3 | 0] << 1) + 99632 | 0] & 31)) {
-     HEAP8[$1 + 2 | 0] = HEAPU8[((HEAPU8[$1 + 3 | 0] << 1) + 99632 | 0) + 1 | 0];
-     if (HEAPU8[$1 + 3 | 0] != HEAPU8[99553]) {
+   if (HEAPU8[98512] != HEAPU8[$1 + 3 | 0]) {
+    if (HEAPU8[$1 + 11 | 0] == (HEAPU8[(HEAPU8[$1 + 3 | 0] << 1) + 98592 | 0] & 31)) {
+     HEAP8[$1 + 2 | 0] = HEAPU8[((HEAPU8[$1 + 3 | 0] << 1) + 98592 | 0) + 1 | 0];
+     if (HEAPU8[$1 + 3 | 0] != HEAPU8[98513]) {
       HEAP8[$1 + 1 | 0] = HEAPU8[$1 + 3 | 0];
       HEAP8[$1 | 0] = HEAPU8[$1 + 1 | 0] + 255;
       while (1) {
-       if (HEAPU8[$1 + 1 | 0] != HEAPU8[99553]) {
-        HEAP16[(HEAPU8[$1 + 1 | 0] << 1) + 99632 >> 1] = HEAPU16[(HEAPU8[$1 | 0] << 1) + 99632 >> 1];
+       if (HEAPU8[$1 + 1 | 0] != HEAPU8[98513]) {
+        HEAP16[(HEAPU8[$1 + 1 | 0] << 1) + 98592 >> 1] = HEAPU16[(HEAPU8[$1 | 0] << 1) + 98592 >> 1];
         HEAP8[$1 + 1 | 0] = HEAPU8[$1 | 0];
         HEAP8[$1 | 0] = HEAPU8[$1 + 1 | 0] + 255;
         continue;
@@ -51479,7 +51479,7 @@ function jshGetCharToTransmit($0) {
        break;
       }
      }
-     HEAP8[99553] = HEAPU8[99553] + 1;
+     HEAP8[98513] = HEAPU8[98513] + 1;
      HEAP32[$1 + 12 >> 2] = HEAPU8[$1 + 2 | 0];
      break label$1;
     } else {
@@ -51939,7 +51939,7 @@ function tflite__ops__micro__neg__Eval_28TfLiteContext__2c_20TfLiteNode__29($0, 
    $0 = HEAP32[HEAP32[$2 + 72 >> 2] + 20 >> 2];
    $1 = HEAP32[$2 + 72 >> 2];
    HEAP32[$2 >> 2] = HEAP32[HEAP32[$2 + 64 >> 2] >> 2];
-   FUNCTION_TABLE[$0]($1, 49477, $2);
+   FUNCTION_TABLE[$0]($1, 48437, $2);
    HEAP32[$2 + 76 >> 2] = 1;
    break label$1;
   }
@@ -51980,10 +51980,10 @@ function tflite__CalculateActivationRangeQuantized_28TfLiteContext__2c_20TfLiteF
      }
      $0 = HEAP32[HEAP32[$5 + 40 >> 2] + 20 >> 2];
      $1 = HEAP32[$5 + 40 >> 2];
-     HEAP32[$5 + 8 >> 2] = 53703;
+     HEAP32[$5 + 8 >> 2] = 52663;
      HEAP32[$5 + 4 >> 2] = 169;
-     HEAP32[$5 >> 2] = 53222;
-     FUNCTION_TABLE[$0]($1, 53382, $5);
+     HEAP32[$5 >> 2] = 52182;
+     FUNCTION_TABLE[$0]($1, 52342, $5);
      HEAP32[$5 + 44 >> 2] = 1;
      break label$1;
     }
@@ -52113,10 +52113,10 @@ function tflite__GetQuantizedConvolutionMultipler_28TfLiteContext__2c_20TfLiteTe
    if (!(Math_abs(HEAPF64[$0 + 8 >> 3]) <= 1e-6 * HEAPF64[double_20const__20std____2__min_double__28double_20const__2c_20double_20const__29($6 + 24 | 0, $6 + 16 | 0) >> 3])) {
     $0 = HEAP32[HEAP32[$6 + 56 >> 2] + 20 >> 2];
     $1 = HEAP32[$6 + 56 >> 2];
-    HEAP32[$6 + 8 >> 2] = 53583;
+    HEAP32[$6 + 8 >> 2] = 52543;
     HEAP32[$6 + 4 >> 2] = 106;
-    HEAP32[$6 >> 2] = 53222;
-    FUNCTION_TABLE[$0]($1, 53382, $6);
+    HEAP32[$6 >> 2] = 52182;
+    FUNCTION_TABLE[$0]($1, 52342, $6);
     HEAP32[$6 + 60 >> 2] = 1;
     break label$1;
    }
@@ -52194,7 +52194,7 @@ function jswrap_io_digitalWrite($0, $1) {
   }
   label$5 : {
    if (jsvIsObject(HEAP32[$2 + 28 >> 2]) & 1) {
-    HEAP32[$2 + 8 >> 2] = jspGetNamedField(HEAP32[$2 + 28 >> 2], 37494, 0);
+    HEAP32[$2 + 8 >> 2] = jspGetNamedField(HEAP32[$2 + 28 >> 2], 36470, 0);
     label$7 : {
      if (jsvIsFunction(HEAP32[$2 + 8 >> 2]) & 1) {
       $0 = $2 + 4 | 0;
@@ -52203,7 +52203,7 @@ function jswrap_io_digitalWrite($0, $1) {
       jsvUnLock(HEAP32[$2 + 4 >> 2]);
       break label$7;
      }
-     jsExceptionHere(1, 37500, 0);
+     jsExceptionHere(1, 36476, 0);
     }
     jsvUnLock(HEAP32[$2 + 8 >> 2]);
     break label$5;
@@ -52231,10 +52231,10 @@ function jswrap_graphics_getModified($0, $1) {
   if ((HEAPU8[$2 + 56 | 0] | HEAPU8[$2 + 57 | 0] << 8) << 16 >> 16 <= (HEAPU8[$2 + 60 | 0] | HEAPU8[$2 + 61 | 0] << 8) << 16 >> 16) {
    HEAP32[$2 + 12 >> 2] = jsvNewWithFlags(5);
    if (HEAP32[$2 + 12 >> 2]) {
-    jsvObjectSetChildAndUnLock(HEAP32[$2 + 12 >> 2], 43367, jsvNewFromInteger((HEAPU8[$2 + 56 | 0] | HEAPU8[$2 + 57 | 0] << 8) << 16 >> 16));
-    jsvObjectSetChildAndUnLock(HEAP32[$2 + 12 >> 2], 43370, jsvNewFromInteger((HEAPU8[$2 + 58 | 0] | HEAPU8[$2 + 59 | 0] << 8) << 16 >> 16));
-    jsvObjectSetChildAndUnLock(HEAP32[$2 + 12 >> 2], 43373, jsvNewFromInteger((HEAPU8[$2 + 60 | 0] | HEAPU8[$2 + 61 | 0] << 8) << 16 >> 16));
-    jsvObjectSetChildAndUnLock(HEAP32[$2 + 12 >> 2], 43376, jsvNewFromInteger((HEAPU8[$2 + 62 | 0] | HEAPU8[$2 + 63 | 0] << 8) << 16 >> 16));
+    jsvObjectSetChildAndUnLock(HEAP32[$2 + 12 >> 2], 42327, jsvNewFromInteger((HEAPU8[$2 + 56 | 0] | HEAPU8[$2 + 57 | 0] << 8) << 16 >> 16));
+    jsvObjectSetChildAndUnLock(HEAP32[$2 + 12 >> 2], 42330, jsvNewFromInteger((HEAPU8[$2 + 58 | 0] | HEAPU8[$2 + 59 | 0] << 8) << 16 >> 16));
+    jsvObjectSetChildAndUnLock(HEAP32[$2 + 12 >> 2], 42333, jsvNewFromInteger((HEAPU8[$2 + 60 | 0] | HEAPU8[$2 + 61 | 0] << 8) << 16 >> 16));
+    jsvObjectSetChildAndUnLock(HEAP32[$2 + 12 >> 2], 42336, jsvNewFromInteger((HEAPU8[$2 + 62 | 0] | HEAPU8[$2 + 63 | 0] << 8) << 16 >> 16));
    }
   }
   if (HEAP8[$2 + 87 | 0] & 1) {
@@ -52299,7 +52299,7 @@ function jspeExpressionOrArrowFunction() {
  HEAP8[$0 + 3 | 0] = 1;
  label$1 : {
   while (1) {
-   if ((HEAP16[HEAP32[14856] + 2 >> 1] != 41 ? (HEAP32[24866] & 80) != 0 ^ -1 : 0) & 1) {
+   if ((HEAP16[HEAP32[14596] + 2 >> 1] != 41 ? (HEAP32[24606] & 80) != 0 ^ -1 : 0) & 1) {
     if (!(!(HEAP8[$0 + 3 | 0] & 1) | !HEAP32[$0 + 8 >> 2])) {
      HEAP32[$0 + 4 >> 2] = jspeAddNamedFunctionParameter(HEAP32[$0 + 4 >> 2], HEAP32[$0 + 8 >> 2]);
     }
@@ -52313,7 +52313,7 @@ function jspeExpressionOrArrowFunction() {
      }
      HEAP8[$0 + 3 | 0] = 0;
     }
-    if (HEAP16[HEAP32[14856] + 2 >> 1] != 41) {
+    if (HEAP16[HEAP32[14596] + 2 >> 1] != 41) {
      if (!(jslMatch(44) & 1)) {
       jsvUnLock2(HEAP32[$0 + 8 >> 2], HEAP32[$0 + 4 >> 2]);
       HEAP32[$0 + 12 >> 2] = 0;
@@ -52329,7 +52329,7 @@ function jspeExpressionOrArrowFunction() {
    HEAP32[$0 + 12 >> 2] = 0;
    break label$1;
   }
-  if (!(!(HEAP8[$0 + 3 | 0] & 1) | HEAP16[HEAP32[14856] + 2 >> 1] != 162)) {
+  if (!(!(HEAP8[$0 + 3 | 0] & 1) | HEAP16[HEAP32[14596] + 2 >> 1] != 162)) {
    HEAP32[$0 + 4 >> 2] = jspeArrowFunction(HEAP32[$0 + 4 >> 2], HEAP32[$0 + 8 >> 2]);
    jsvUnLock(HEAP32[$0 + 8 >> 2]);
    HEAP32[$0 + 12 >> 2] = HEAP32[$0 + 4 >> 2];
@@ -52465,7 +52465,7 @@ function jspeStatementVar() {
     break label$2;
    }
    $1 = 0;
-   if (HEAP16[HEAP32[14856] + 2 >> 1] != 128) {
+   if (HEAP16[HEAP32[14596] + 2 >> 1] != 128) {
     break label$2;
    }
    $1 = jspIsInterrupted() ^ -1;
@@ -52473,7 +52473,7 @@ function jspeStatementVar() {
   if ($1 & 1) {
    label$4 : {
     HEAP32[$0 + 16 >> 2] = 0;
-    if ((HEAP32[24866] & 63) == 1) {
+    if ((HEAP32[24606] & 63) == 1) {
      HEAP32[$0 + 16 >> 2] = jspeiFindOnTop(jslGetTokenValueAsString());
      if (!HEAP32[$0 + 16 >> 2]) {
       jspSetError();
@@ -52484,20 +52484,20 @@ function jspeStatementVar() {
      jsvUnLock(HEAP32[$0 + 16 >> 2]);
      break label$4;
     }
-    if (HEAP16[HEAP32[14856] + 2 >> 1] == 61) {
+    if (HEAP16[HEAP32[14596] + 2 >> 1] == 61) {
      if (!(jslMatch(61) & 1)) {
       jsvUnLock(HEAP32[$0 + 16 >> 2]);
       break label$4;
      }
      HEAP32[$0 + 12 >> 2] = jsvSkipNameAndUnLock(__jspeAssignmentExpression(jspeConditionalExpression()));
-     if ((HEAP32[24866] & 63) == 1) {
+     if ((HEAP32[24606] & 63) == 1) {
       jsvReplaceWith(HEAP32[$0 + 16 >> 2], HEAP32[$0 + 12 >> 2]);
      }
      jsvUnLock(HEAP32[$0 + 12 >> 2]);
     }
     jsvUnLock(HEAP32[$0 + 24 >> 2]);
     HEAP32[$0 + 24 >> 2] = HEAP32[$0 + 16 >> 2];
-    HEAP8[$0 + 23 | 0] = HEAP16[HEAP32[14856] + 2 >> 1] == 44;
+    HEAP8[$0 + 23 | 0] = HEAP16[HEAP32[14596] + 2 >> 1] == 44;
     if (HEAP8[$0 + 23 | 0] & 1) {
      if (!(jslMatch(44) & 1)) {
       break label$4;
@@ -52537,7 +52537,7 @@ function tflite__ops__micro__activations__Eval_28TfLiteContext__2c_20TfLiteNode_
   $0 = HEAP32[HEAP32[$2 + 72 >> 2] + 20 >> 2];
   $1 = HEAP32[$2 + 72 >> 2];
   HEAP32[$2 >> 2] = TfLiteTypeGetName(HEAP32[HEAP32[$2 + 64 >> 2] >> 2]);
-  FUNCTION_TABLE[$0]($1, 47758, $2);
+  FUNCTION_TABLE[$0]($1, 46718, $2);
   HEAP32[$2 + 76 >> 2] = 1;
  }
  global$0 = $2 + 80 | 0;
@@ -52551,7 +52551,7 @@ function jsiDumpSerialInitialisation($0, $1, $2, $3) {
  HEAP32[$4 + 40 >> 2] = $1;
  HEAP32[$4 + 36 >> 2] = $2;
  HEAP8[$4 + 35 | 0] = $3;
- HEAP32[$4 + 28 >> 2] = jsvFindChildFromString(HEAP32[24862], HEAP32[$4 + 36 >> 2], 0);
+ HEAP32[$4 + 28 >> 2] = jsvFindChildFromString(HEAP32[24602], HEAP32[$4 + 36 >> 2], 0);
  HEAP32[$4 + 24 >> 2] = jsvSkipName(HEAP32[$4 + 28 >> 2]);
  if (HEAP32[$4 + 24 >> 2]) {
   if (HEAP8[$4 + 35 | 0] & 1) {
@@ -52600,7 +52600,7 @@ function internal_memalign($0, $1) {
   }
  }
  if (-64 - $0 >>> 0 <= $1 >>> 0) {
-  HEAP32[64357] = 48;
+  HEAP32[64097] = 48;
   return 0;
  }
  $3 = $1 >>> 0 < 11 ? 16 : $1 + 11 & -8;
@@ -52806,7 +52806,7 @@ function tflite__ConvertTensorType_28tflite__TensorType_2c_20TfLiteType__2c_20tf
   if (!HEAP32[HEAP32[$3 + 20 >> 2] >> 2]) {
    $0 = HEAP32[$3 + 16 >> 2];
    HEAP32[$3 >> 2] = HEAP32[$3 + 24 >> 2];
-   tflite__ErrorReporter__Report_28char_20const__2c_20____29($0, 52694, $3);
+   tflite__ErrorReporter__Report_28char_20const__2c_20____29($0, 51654, $3);
    HEAP32[$3 + 28 >> 2] = 1;
    break label$12;
   }
@@ -52977,7 +52977,7 @@ function tflite__TfLiteTypeSizeOf_28TfLiteType_2c_20unsigned_20long__2c_20tflite
    $1 = TfLiteTypeGetName(HEAP32[$3 + 24 >> 2]);
    HEAP32[$3 + 4 >> 2] = HEAP32[$3 + 24 >> 2];
    HEAP32[$3 >> 2] = $1;
-   tflite__ErrorReporter__Report_28char_20const__2c_20____29($0, 43760, $3);
+   tflite__ErrorReporter__Report_28char_20const__2c_20____29($0, 42720, $3);
    HEAP32[$3 + 28 >> 2] = 1;
    break label$1;
   }
@@ -53021,11 +53021,11 @@ function _jswrap_promise_add($0, $1, $2) {
  label$1 : {
   if (!(jsvIsFunction(HEAP32[$3 + 40 >> 2]) & 1)) {
    HEAP32[$3 >> 2] = HEAP32[$3 + 40 >> 2];
-   jsExceptionHere(3, 40702, $3);
+   jsExceptionHere(3, 39674, $3);
    break label$1;
   }
   if (HEAP8[$3 + 39 | 0] & 1) {
-   HEAP32[$3 + 32 >> 2] = jsvFindChildFromString(HEAP32[$3 + 44 >> 2], 40600, 0);
+   HEAP32[$3 + 32 >> 2] = jsvFindChildFromString(HEAP32[$3 + 44 >> 2], 39572, 0);
    if (HEAP32[$3 + 32 >> 2]) {
     $0 = $3 + 32 | 0;
     HEAP32[$3 + 32 >> 2] = jsvSkipNameAndUnLock(HEAP32[$3 + 32 >> 2]);
@@ -53034,7 +53034,7 @@ function _jswrap_promise_add($0, $1, $2) {
     break label$1;
    }
   }
-  HEAP32[$3 + 28 >> 2] = HEAP8[$3 + 39 | 0] & 1 ? 40574 : 40579;
+  HEAP32[$3 + 28 >> 2] = HEAP8[$3 + 39 | 0] & 1 ? 39546 : 39551;
   HEAP32[$3 + 24 >> 2] = jsvObjectGetChild(HEAP32[$3 + 44 >> 2], HEAP32[$3 + 28 >> 2], 0);
   if (!HEAP32[$3 + 24 >> 2]) {
    jsvObjectSetChild(HEAP32[$3 + 44 >> 2], HEAP32[$3 + 28 >> 2], HEAP32[$3 + 40 >> 2]);
@@ -53152,7 +53152,7 @@ function jspeStatementFunctionDecl($0) {
  HEAP8[$1 + 27 | 0] = $0;
  HEAP32[$1 + 20 >> 2] = 0;
  jslGetNextToken();
- HEAP8[$1 + 15 | 0] = (HEAP32[24866] & 63) == 1;
+ HEAP8[$1 + 15 | 0] = (HEAP32[24606] & 63) == 1;
  label$1 : {
   if (HEAP8[$1 + 15 | 0] & 1) {
    HEAP32[$1 + 20 >> 2] = jsvMakeIntoVariableName(jslGetTokenValueAsVar(), 0);
@@ -53209,7 +53209,7 @@ function tflite___28anonymous_20namespace_29__FlatBufferIntVectorToArray_28int_2
   if (!HEAP32[$4 + 52 >> 2]) {
    $0 = HEAP32[$4 + 44 >> 2];
    HEAP32[$4 + 16 >> 2] = HEAP32[$4 + 40 >> 2];
-   tflite__ErrorReporter__Report_28char_20const__2c_20____29($0, 52893, $4 + 16 | 0);
+   tflite__ErrorReporter__Report_28char_20const__2c_20____29($0, 51853, $4 + 16 | 0);
    HEAP32[$4 + 60 >> 2] = 1;
    break label$1;
   }
@@ -53217,7 +53217,7 @@ function tflite___28anonymous_20namespace_29__FlatBufferIntVectorToArray_28int_2
   if (HEAPU32[$4 + 36 >> 2] > HEAP32[$4 + 56 >> 2] >>> 2 >>> 0) {
    $0 = HEAP32[$4 + 44 >> 2];
    HEAP32[$4 >> 2] = HEAP32[$4 + 40 >> 2];
-   tflite__ErrorReporter__Report_28char_20const__2c_20____29($0, 52939, $4);
+   tflite__ErrorReporter__Report_28char_20const__2c_20____29($0, 51899, $4);
    HEAP32[$4 + 60 >> 2] = 1;
    break label$1;
   }
@@ -53279,12 +53279,12 @@ function jswrap_object_removeAllListeners($0, $1) {
  HEAP32[$2 + 24 >> 2] = $1;
  label$1 : {
   if (!(jsvHasChildren(HEAP32[$2 + 28 >> 2]) & 1)) {
-   jsExceptionHere(3, 39183, 0);
+   jsExceptionHere(3, 38159, 0);
    break label$1;
   }
   if (jsvIsString(HEAP32[$2 + 24 >> 2]) & 1) {
    HEAP32[$2 >> 2] = HEAP32[$2 + 24 >> 2];
-   HEAP32[$2 + 20 >> 2] = jsvVarPrintf(39381, $2);
+   HEAP32[$2 + 20 >> 2] = jsvVarPrintf(38357, $2);
    if (!HEAP32[$2 + 20 >> 2]) {
     break label$1;
    }
@@ -53304,7 +53304,7 @@ function jswrap_object_removeAllListeners($0, $1) {
       $0 = $2 + 8 | 0;
       HEAP32[$2 + 4 >> 2] = jsvObjectIteratorGetKey($0);
       jsvObjectIteratorNext($0);
-      if (jsvIsStringEqualOrStartsWith(HEAP32[$2 + 4 >> 2], 39554, 1) & 1) {
+      if (jsvIsStringEqualOrStartsWith(HEAP32[$2 + 4 >> 2], 38530, 1) & 1) {
        jsvRemoveChild(HEAP32[$2 + 28 >> 2], HEAP32[$2 + 4 >> 2]);
       }
       jsvUnLock(HEAP32[$2 + 4 >> 2]);
@@ -53315,7 +53315,7 @@ function jswrap_object_removeAllListeners($0, $1) {
     jsvObjectIteratorFree($2 + 8 | 0);
     break label$5;
    }
-   jsExceptionHere(3, 39558, 0);
+   jsExceptionHere(3, 38534, 0);
   }
  }
  global$0 = $2 + 32 | 0;
@@ -53422,7 +53422,7 @@ function jswrap_storagefile_erase($0) {
  $1 = global$0 - 80 | 0;
  global$0 = $1;
  HEAP32[$1 + 76 >> 2] = $0;
- jsfNameFromVarAndUnLock($1 + 48 | 0, jsvObjectGetChild(HEAP32[$1 + 76 >> 2], 41032, 0));
+ jsfNameFromVarAndUnLock($1 + 48 | 0, jsvObjectGetChild(HEAP32[$1 + 76 >> 2], 40004, 0));
  HEAP32[$1 + 44 >> 2] = 27;
  while (1) {
   if (HEAP32[$1 + 44 >> 2] ? !HEAP8[(HEAP32[$1 + 44 >> 2] + $1 | 0) + 47 | 0] : 0) {
@@ -53452,10 +53452,10 @@ function jswrap_storagefile_erase($0) {
   }
   break;
  }
- jsvObjectSetChildAndUnLock(HEAP32[$1 + 76 >> 2], 41037, jsvNewFromInteger(1));
- jsvObjectSetChildAndUnLock(HEAP32[$1 + 76 >> 2], 41043, jsvNewFromInteger(0));
- jsvObjectSetChildAndUnLock(HEAP32[$1 + 76 >> 2], 41050, jsvNewFromInteger(0));
- jsvObjectSetChildAndUnLock(HEAP32[$1 + 76 >> 2], 41055, jsvNewFromInteger(0));
+ jsvObjectSetChildAndUnLock(HEAP32[$1 + 76 >> 2], 40009, jsvNewFromInteger(1));
+ jsvObjectSetChildAndUnLock(HEAP32[$1 + 76 >> 2], 40015, jsvNewFromInteger(0));
+ jsvObjectSetChildAndUnLock(HEAP32[$1 + 76 >> 2], 40022, jsvNewFromInteger(0));
+ jsvObjectSetChildAndUnLock(HEAP32[$1 + 76 >> 2], 40027, jsvNewFromInteger(0));
  global$0 = $1 + 80 | 0;
 }
 function heatshrink_encoder_sink($0, $1, $2, $3) {
@@ -53527,7 +53527,7 @@ function jswrap_interface_changeInterval($0, $1) {
  global$0 = $2;
  HEAP32[$2 + 44 >> 2] = $0;
  HEAPF64[$2 + 32 >> 3] = $1;
- HEAP32[$2 + 28 >> 2] = jsvLock(HEAPU16[49740]);
+ HEAP32[$2 + 28 >> 2] = jsvLock(HEAPU16[49220]);
  if (HEAPF64[$2 + 32 >> 3] < .1) {
   HEAPF64[$2 + 32 >> 3] = .1;
  }
@@ -53545,19 +53545,19 @@ function jswrap_interface_changeInterval($0, $1) {
    HEAP32[$2 + 20 >> 2] = jsvSkipNameAndUnLock(HEAP32[$2 + 24 >> 2]);
    HEAP32[$2 + 8 >> 2] = jshGetTimeFromMilliseconds(HEAPF64[$2 + 32 >> 3]);
    HEAP32[$2 + 12 >> 2] = i64toi32_i32$HIGH_BITS;
-   jsvObjectSetChildAndUnLock(HEAP32[$2 + 20 >> 2], 37254, jsvNewFromLongInteger(HEAP32[$2 + 8 >> 2], HEAP32[$2 + 12 >> 2]));
+   jsvObjectSetChildAndUnLock(HEAP32[$2 + 20 >> 2], 36230, jsvNewFromLongInteger(HEAP32[$2 + 8 >> 2], HEAP32[$2 + 12 >> 2]));
    $6 = HEAP32[$2 + 20 >> 2];
    $0 = jshGetSystemTime();
-   $4 = HEAP32[24884];
+   $4 = HEAP32[24624];
    $5 = HEAP32[$2 + 8 >> 2];
    $3 = ($0 - $4 | 0) + $5 | 0;
-   $0 = HEAP32[$2 + 12 >> 2] + (i64toi32_i32$HIGH_BITS - (HEAP32[24885] + ($0 >>> 0 < $4 >>> 0) | 0) | 0) | 0;
-   jsvObjectSetChildAndUnLock($6, 37249, jsvNewFromLongInteger($3, $3 >>> 0 < $5 >>> 0 ? $0 + 1 | 0 : $0));
+   $0 = HEAP32[$2 + 12 >> 2] + (i64toi32_i32$HIGH_BITS - (HEAP32[24625] + ($0 >>> 0 < $4 >>> 0) | 0) | 0) | 0;
+   jsvObjectSetChildAndUnLock($6, 36225, jsvNewFromLongInteger($3, $3 >>> 0 < $5 >>> 0 ? $0 + 1 | 0 : $0));
    jsvUnLock(HEAP32[$2 + 20 >> 2]);
    jsiTimersChanged();
    break label$4;
   }
-  jsExceptionHere(1, 37355, 0);
+  jsExceptionHere(1, 36331, 0);
  }
  jsvUnLock(HEAP32[$2 + 28 >> 2]);
  global$0 = $2 + 48 | 0;
@@ -53606,7 +53606,7 @@ function tf_create($0, $1, $2) {
    $1 = tflite__Operator__opcode_index_28_29_20const(HEAP32[$3 + 20 >> 2]);
    HEAP32[$3 + 4 >> 2] = 3;
    HEAP32[$3 >> 2] = $1;
-   tflite__ErrorReporter__Report_28char_20const__2c_20____29($0, 53709, $3);
+   tflite__ErrorReporter__Report_28char_20const__2c_20____29($0, 52669, $3);
    HEAP8[$3 + 47 | 0] = 0;
    break label$1;
   }
@@ -53624,14 +53624,14 @@ function jspeUnaryExpression() {
  global$0 = $0;
  label$1 : {
   label$2 : {
-   if (!(HEAP16[HEAP32[14856] + 2 >> 1] == 33 | HEAP16[HEAP32[14856] + 2 >> 1] == 126 | HEAP16[HEAP32[14856] + 2 >> 1] == 45)) {
-    if (HEAP16[HEAP32[14856] + 2 >> 1] != 43) {
+   if (!(HEAP16[HEAP32[14596] + 2 >> 1] == 33 | HEAP16[HEAP32[14596] + 2 >> 1] == 126 | HEAP16[HEAP32[14596] + 2 >> 1] == 45)) {
+    if (HEAP16[HEAP32[14596] + 2 >> 1] != 43) {
      break label$2;
     }
    }
-   HEAP16[$0 + 10 >> 1] = HEAPU16[HEAP32[14856] + 2 >> 1];
+   HEAP16[$0 + 10 >> 1] = HEAPU16[HEAP32[14596] + 2 >> 1];
    jslGetNextToken();
-   if ((HEAP32[24866] & 63) != 1) {
+   if ((HEAP32[24606] & 63) != 1) {
     HEAP32[$0 + 12 >> 2] = jspeUnaryExpression();
     break label$1;
    }
@@ -53676,11 +53676,11 @@ function jsiDebuggerPrintScope($0) {
    HEAP32[$1 + 12 >> 2] = jsvAsString(HEAP32[$1 + 16 >> 2]);
    HEAP32[$1 + 8 >> 2] = jsvObjectIteratorGetValue($0);
    HEAP32[$1 + 4 >> 2] = jsvGetStringLength(HEAP32[$1 + 12 >> 2]);
-   if (!(jsvIsStringEqual(HEAP32[$1 + 12 >> 2], 6422) & 1)) {
+   if (!(jsvIsStringEqual(HEAP32[$1 + 12 >> 2], 6418) & 1)) {
     HEAP8[$1 + 23 | 0] = 1;
     jsiConsolePrintChar(32);
     if (jsvIsFunctionParameter(HEAP32[$1 + 16 >> 2]) & 1) {
-     jsiConsolePrintString(6429);
+     jsiConsolePrintString(6425);
      HEAP32[$1 + 4 >> 2] = HEAP32[$1 + 4 >> 2] + 6;
     }
     jsiConsolePrintStringVar(HEAP32[$1 + 12 >> 2]);
@@ -53692,9 +53692,9 @@ function jsiDebuggerPrintScope($0) {
      }
      break;
     }
-    jsiConsolePrintString(6436);
+    jsiConsolePrintString(6432);
     jsfPrintJSON(HEAP32[$1 + 8 >> 2], 301);
-    jsiConsolePrintString(5716);
+    jsiConsolePrintString(5712);
    }
    $0 = $1 + 24 | 0;
    jsvUnLock3(HEAP32[$1 + 16 >> 2], HEAP32[$1 + 12 >> 2], HEAP32[$1 + 8 >> 2]);
@@ -53705,7 +53705,7 @@ function jsiDebuggerPrintScope($0) {
  }
  jsvObjectIteratorFree($1 + 24 | 0);
  if (!(HEAP8[$1 + 23 | 0] & 1)) {
-  jsiConsolePrintString(6440);
+  jsiConsolePrintString(6436);
  }
  global$0 = $1 + 32 | 0;
 }
@@ -53717,28 +53717,28 @@ function jswrap_stream_pushData($0, $1) {
  HEAP32[$2 + 24 >> 2] = $1;
  HEAP8[$2 + 23 | 0] = 1;
  HEAP8[$2 + 22 | 0] = 1;
- HEAP32[$2 + 16 >> 2] = jsvFindChildFromString(HEAP32[$2 + 28 >> 2], 41380, 0);
+ HEAP32[$2 + 16 >> 2] = jsvFindChildFromString(HEAP32[$2 + 28 >> 2], 40352, 0);
  label$1 : {
   if (HEAP32[$2 + 16 >> 2]) {
    if (!(jsiExecuteEventCallback(HEAP32[$2 + 28 >> 2], HEAP32[$2 + 16 >> 2], 1, $2 + 24 | 0) & 1)) {
-    jsError(41388, 0);
-    HEAP8[99447] = HEAPU8[99447] | 4;
-    jsvObjectRemoveChild(HEAP32[$2 + 28 >> 2], 41380);
+    jsError(40360, 0);
+    HEAP8[98407] = HEAPU8[98407] | 4;
+    jsvObjectRemoveChild(HEAP32[$2 + 28 >> 2], 40352);
    }
    jsvUnLock(HEAP32[$2 + 16 >> 2]);
    break label$1;
   }
-  HEAP32[$2 + 12 >> 2] = jsvObjectGetChild(HEAP32[$2 + 28 >> 2], 41375, 0);
+  HEAP32[$2 + 12 >> 2] = jsvObjectGetChild(HEAP32[$2 + 28 >> 2], 40347, 0);
   label$4 : {
    if (!(jsvIsString(HEAP32[$2 + 12 >> 2]) & 1)) {
-    jsvObjectSetChild(HEAP32[$2 + 28 >> 2], 41375, HEAP32[$2 + 24 >> 2]);
+    jsvObjectSetChild(HEAP32[$2 + 28 >> 2], 40347, HEAP32[$2 + 24 >> 2]);
     break label$4;
    }
    HEAP32[$2 + 8 >> 2] = jsvGetStringLength(HEAP32[$2 + 12 >> 2]);
    HEAP32[$2 + 4 >> 2] = jsvGetStringLength(HEAP32[$2 + 24 >> 2]);
    if (HEAP32[$2 + 8 >> 2] + HEAP32[$2 + 4 >> 2] >>> 0 > 512) {
     if (HEAP8[$2 + 23 | 0] & 1) {
-     HEAP8[99447] = HEAPU8[99447] | 2;
+     HEAP8[98407] = HEAPU8[98407] | 2;
     }
     HEAP8[$2 + 22 | 0] = 0;
    }
@@ -53826,12 +53826,12 @@ function jspEvaluateModule($0) {
   }
   HEAP32[$1 + 12 >> 2] = jsvAddNamedChild(HEAP32[$1 + 20 >> 2], HEAP32[$1 + 16 >> 2], 5041);
   jsvUnLock2(HEAP32[$1 + 16 >> 2], jsvAddNamedChild(HEAP32[$1 + 20 >> 2], HEAP32[$1 + 20 >> 2], 5049));
-  HEAP32[$1 + 8 >> 2] = HEAP32[24866];
-  HEAP32[$1 + 4 >> 2] = HEAP32[24865];
-  HEAP32[24865] = HEAP32[$1 + 16 >> 2];
+  HEAP32[$1 + 8 >> 2] = HEAP32[24606];
+  HEAP32[$1 + 4 >> 2] = HEAP32[24605];
+  HEAP32[24605] = HEAP32[$1 + 16 >> 2];
   jsvUnLock(jspEvaluateVar(HEAP32[$1 + 24 >> 2], HEAP32[$1 + 20 >> 2], 0));
-  HEAP32[24865] = HEAP32[$1 + 4 >> 2];
-  HEAP32[24866] = HEAP32[$1 + 8 >> 2];
+  HEAP32[24605] = HEAP32[$1 + 4 >> 2];
+  HEAP32[24606] = HEAP32[$1 + 8 >> 2];
   jsvUnLock2(HEAP32[$1 + 24 >> 2], HEAP32[$1 + 20 >> 2]);
   HEAP32[$1 + 28 >> 2] = jsvSkipNameAndUnLock(HEAP32[$1 + 12 >> 2]);
  }
@@ -53966,7 +53966,7 @@ function jspNewObject($0, $1) {
   jsvUnLock3(jsvAddNamedChild(HEAP32[$2 + 12 >> 2], HEAP32[$2 + 4 >> 2], 3684), HEAP32[$2 + 4 >> 2], HEAP32[$2 + 16 >> 2]);
   HEAP32[$2 + 16 >> 2] = 0;
   if (HEAP32[$2 + 24 >> 2]) {
-   HEAP32[$2 >> 2] = jsvFindChildFromString(HEAP32[24862], HEAP32[$2 + 24 >> 2], 1);
+   HEAP32[$2 >> 2] = jsvFindChildFromString(HEAP32[24602], HEAP32[$2 + 24 >> 2], 1);
    if (HEAP32[$2 >> 2]) {
     jsvSetValueOfName(HEAP32[$2 >> 2], HEAP32[$2 + 12 >> 2]);
    }
@@ -53995,7 +53995,7 @@ function jsiGetHistoryLine($0) {
    break label$1;
   }
   HEAP32[$1 + 16 >> 2] = 0;
-  HEAP32[$1 + 12 >> 2] = jsvGetIndexOf(HEAP32[$1 + 20 >> 2], HEAP32[24872], 1);
+  HEAP32[$1 + 12 >> 2] = jsvGetIndexOf(HEAP32[$1 + 20 >> 2], HEAP32[24612], 1);
   label$3 : {
    if (HEAP32[$1 + 12 >> 2]) {
     label$5 : {
@@ -54136,12 +54136,12 @@ function jswrap_object_removeListener($0, $1, $2) {
  HEAP32[$3 + 20 >> 2] = $2;
  label$1 : {
   if (!(jsvHasChildren(HEAP32[$3 + 28 >> 2]) & 1)) {
-   jsExceptionHere(3, 39183, 0);
+   jsExceptionHere(3, 38159, 0);
    break label$1;
   }
   if (jsvIsString(HEAP32[$3 + 24 >> 2]) & 1) {
    HEAP32[$3 >> 2] = HEAP32[$3 + 24 >> 2];
-   HEAP32[$3 + 16 >> 2] = jsvVarPrintf(39381, $3);
+   HEAP32[$3 + 16 >> 2] = jsvVarPrintf(38357, $3);
    if (!HEAP32[$3 + 16 >> 2]) {
     break label$1;
    }
@@ -54167,7 +54167,7 @@ function jswrap_object_removeListener($0, $1, $2) {
    jsvUnLock(HEAP32[$3 + 12 >> 2]);
    break label$1;
   }
-  jsExceptionHere(3, 39487, 0);
+  jsExceptionHere(3, 38463, 0);
  }
  global$0 = $3 + 32 | 0;
 }
@@ -54176,47 +54176,47 @@ function btnTouchHandler() {
  $0 = global$0 - 16 | 0;
  global$0 = $0;
  label$1 : {
-  if (HEAP32[63903] & 16) {
-   HEAP16[127805] = 0;
-   if (!(HEAP8[255608] & 1)) {
-    HEAP32[63904] = HEAP32[63904] | 1;
+  if (HEAP32[63643] & 16) {
+   HEAP16[127285] = 0;
+   if (!(HEAP8[254568] & 1)) {
+    HEAP32[63644] = HEAP32[63644] | 1;
     HEAP8[$0 + 15 | 0] = 1;
     break label$1;
    }
   }
   HEAP32[$0 + 8 >> 2] = (jshPinGetValue(11) & 1 ? 1 : 0) | (jshPinGetValue(16) & 1 ? 2 : 0);
-  HEAP32[63906] = HEAP32[$0 + 8 >> 2] | HEAP32[63906];
+  HEAP32[63646] = HEAP32[$0 + 8 >> 2] | HEAP32[63646];
   label$4 : {
-   if (!(HEAP32[$0 + 8 >> 2] == 1 ? !(HEAP32[63907] != 2 | HEAP32[63908] != 3) : 0)) {
-    if (HEAP32[63908] != 2 | HEAP32[$0 + 8 >> 2] != 1) {
+   if (!(HEAP32[$0 + 8 >> 2] == 1 ? !(HEAP32[63647] != 2 | HEAP32[63648] != 3) : 0)) {
+    if (HEAP32[63648] != 2 | HEAP32[$0 + 8 >> 2] != 1) {
      break label$4;
     }
    }
-   HEAP32[63906] = HEAP32[63906] | 4;
-   HEAP32[63904] = HEAP32[63904] | 2048;
+   HEAP32[63646] = HEAP32[63646] | 4;
+   HEAP32[63644] = HEAP32[63644] | 2048;
   }
   label$7 : {
-   if (!(HEAP32[$0 + 8 >> 2] == 2 ? !(HEAP32[63907] != 1 | HEAP32[63908] != 3) : 0)) {
-    if (HEAP32[63908] != 1 | HEAP32[$0 + 8 >> 2] != 2) {
+   if (!(HEAP32[$0 + 8 >> 2] == 2 ? !(HEAP32[63647] != 1 | HEAP32[63648] != 3) : 0)) {
+    if (HEAP32[63648] != 1 | HEAP32[$0 + 8 >> 2] != 2) {
      break label$7;
     }
    }
-   HEAP32[63906] = HEAP32[63906] | 4;
-   HEAP32[63904] = HEAP32[63904] | 4096;
+   HEAP32[63646] = HEAP32[63646] | 4;
+   HEAP32[63644] = HEAP32[63644] | 4096;
   }
   if (!HEAP32[$0 + 8 >> 2]) {
-   if (!(!HEAP32[63908] | HEAP32[63906] & 4)) {
-    if (HEAP32[63906] & 1) {
-     HEAP32[63904] = HEAP32[63904] | 8192;
+   if (!(!HEAP32[63648] | HEAP32[63646] & 4)) {
+    if (HEAP32[63646] & 1) {
+     HEAP32[63644] = HEAP32[63644] | 8192;
     }
-    if (HEAP32[63906] & 2) {
-     HEAP32[63904] = HEAP32[63904] | 16384;
+    if (HEAP32[63646] & 2) {
+     HEAP32[63644] = HEAP32[63644] | 16384;
     }
    }
-   HEAP32[63906] = 0;
+   HEAP32[63646] = 0;
   }
-  HEAP32[63907] = HEAP32[63908];
-  HEAP32[63908] = HEAP32[$0 + 8 >> 2];
+  HEAP32[63647] = HEAP32[63648];
+  HEAP32[63648] = HEAP32[$0 + 8 >> 2];
   HEAP8[$0 + 15 | 0] = 0;
  }
  global$0 = $0 + 16 | 0;
@@ -54263,15 +54263,15 @@ function jswrap_graphics_getFonts($0) {
    break label$1;
   }
   $0 = $1 + 16 | 0;
-  jsvArrayPushAndUnLock(HEAP32[$1 + 28 >> 2], jsvNewFromString(43052));
-  jsvArrayPushAndUnLock(HEAP32[$1 + 28 >> 2], jsvNewFromString(43056));
-  jsvArrayPushAndUnLock(HEAP32[$1 + 28 >> 2], jsvNewFromString(43045));
+  jsvArrayPushAndUnLock(HEAP32[$1 + 28 >> 2], jsvNewFromString(42012));
+  jsvArrayPushAndUnLock(HEAP32[$1 + 28 >> 2], jsvNewFromString(42016));
+  jsvArrayPushAndUnLock(HEAP32[$1 + 28 >> 2], jsvNewFromString(42005));
   HEAP32[$1 + 24 >> 2] = jspGetPrototype(HEAP32[$1 + 104 >> 2]);
   jsvObjectIteratorNew($0, HEAP32[$1 + 24 >> 2]);
   while (1) {
    if (jsvObjectIteratorHasValue($1 + 16 | 0) & 1) {
     HEAP32[$1 + 12 >> 2] = jsvObjectIteratorGetKey($1 + 16 | 0);
-    if (jsvIsStringEqualOrStartsWith(HEAP32[$1 + 12 >> 2], 43102, 1) & 1) {
+    if (jsvIsStringEqualOrStartsWith(HEAP32[$1 + 12 >> 2], 42062, 1) & 1) {
      jsvArrayPushAndUnLock(HEAP32[$1 + 28 >> 2], jsvNewFromStringVar(HEAP32[$1 + 12 >> 2], 7, 2147483647));
     }
     $0 = $1 + 16 | 0;
@@ -54349,7 +54349,7 @@ function lcdFillRect_JS($0, $1, $2, $3, $4, $5) {
  HEAP32[$6 + 28 >> 2] = $4;
  HEAP32[$6 + 24 >> 2] = $5;
  $0 = HEAP32[$6 + 44 >> 2];
- HEAP32[$6 + 20 >> 2] = jsvObjectGetChild(HEAPU8[$0 | 0] | HEAPU8[$0 + 1 | 0] << 8 | (HEAPU8[$0 + 2 | 0] << 16 | HEAPU8[$0 + 3 | 0] << 24), 31741, 0);
+ HEAP32[$6 + 20 >> 2] = jsvObjectGetChild(HEAPU8[$0 | 0] | HEAPU8[$0 + 1 | 0] << 8 | (HEAPU8[$0 + 2 | 0] << 16 | HEAPU8[$0 + 3 | 0] << 24), 30717, 0);
  label$1 : {
   if (HEAP32[$6 + 20 >> 2]) {
    HEAP32[$6 >> 2] = jsvNewFromInteger(HEAP32[$6 + 40 >> 2]);
@@ -54745,10 +54745,10 @@ function tflite__ops__micro__reshape__Prepare_28TfLiteContext__2c_20TfLiteNode__
    }
    $0 = HEAP32[HEAP32[$2 + 56 >> 2] + 20 >> 2];
    $1 = HEAP32[$2 + 56 >> 2];
-   HEAP32[$2 + 40 >> 2] = 46593;
+   HEAP32[$2 + 40 >> 2] = 45553;
    HEAP32[$2 + 36 >> 2] = 71;
-   HEAP32[$2 + 32 >> 2] = 46393;
-   FUNCTION_TABLE[$0]($1, 46570, $2 + 32 | 0);
+   HEAP32[$2 + 32 >> 2] = 45353;
+   FUNCTION_TABLE[$0]($1, 45530, $2 + 32 | 0);
    HEAP32[$2 + 60 >> 2] = 1;
    break label$1;
   }
@@ -54758,11 +54758,11 @@ function tflite__ops__micro__reshape__Prepare_28TfLiteContext__2c_20TfLiteNode__
    $3 = tflite__NumOutputs_28TfLiteNode_20const__29(HEAP32[$2 + 52 >> 2]);
    HEAP32[$2 + 20 >> 2] = 1;
    HEAP32[$2 + 16 >> 2] = $3;
-   HEAP32[$2 + 12 >> 2] = 46655;
-   HEAP32[$2 + 8 >> 2] = 46638;
+   HEAP32[$2 + 12 >> 2] = 45615;
+   HEAP32[$2 + 8 >> 2] = 45598;
    HEAP32[$2 + 4 >> 2] = 72;
-   HEAP32[$2 >> 2] = 46393;
-   FUNCTION_TABLE[$0]($1, 46367, $2);
+   HEAP32[$2 >> 2] = 45353;
+   FUNCTION_TABLE[$0]($1, 45327, $2);
    HEAP32[$2 + 60 >> 2] = 1;
    break label$1;
   }
@@ -55077,7 +55077,7 @@ function jspeFactorDelete() {
  HEAP32[$0 + 28 >> 2] = 0;
  HEAP32[$0 + 24 >> 2] = jspeFactorMember(jspeFactor(), $1);
  HEAP32[$0 + 20 >> 2] = 0;
- if ((HEAP32[24866] & 63) == 1) {
+ if ((HEAP32[24606] & 63) == 1) {
   HEAP8[$0 + 19 | 0] = 0;
   label$2 : {
    if (!(jsvIsName(HEAP32[$0 + 24 >> 2]) & 1)) {
@@ -55090,10 +55090,10 @@ function jspeFactorDelete() {
     if (HEAP32[$0 + 28 >> 2]) {
      break label$3;
     }
-    if (!(jsvIsChild(HEAP32[24862], HEAP32[$0 + 24 >> 2]) & 1)) {
+    if (!(jsvIsChild(HEAP32[24602], HEAP32[$0 + 24 >> 2]) & 1)) {
      break label$3;
     }
-    HEAP32[$0 + 28 >> 2] = jsvLockAgain(HEAP32[24862]);
+    HEAP32[$0 + 28 >> 2] = jsvLockAgain(HEAP32[24602]);
    }
    if (jsvHasChildren(HEAP32[$0 + 28 >> 2]) & 1) {
     label$5 : {
@@ -55131,7 +55131,7 @@ function jswrap_array_sort($0, $1) {
     break label$2;
    }
    HEAP32[$2 >> 2] = HEAP32[$2 + 52 >> 2];
-   jsExceptionHere(1, 34735, $2);
+   jsExceptionHere(1, 33711, $2);
    HEAP32[$2 + 60 >> 2] = 0;
    break label$1;
   }
@@ -55205,7 +55205,7 @@ function jswrap_io_getPinMode($0) {
  HEAP8[$1 + 11 | 0] = $0;
  label$1 : {
   if (!(jshIsPinValid(HEAPU8[$1 + 11 | 0]) & 1)) {
-   jsExceptionHere(1, 37518, 0);
+   jsExceptionHere(1, 36494, 0);
    HEAP32[$1 + 12 >> 2] = 0;
    break label$1;
   }
@@ -55219,34 +55219,34 @@ function jswrap_io_getPinMode($0) {
    label$4 : {
     switch ($0 - 1 | 0) {
     case 5:
-     HEAP32[$1 + 4 >> 2] = 37530;
+     HEAP32[$1 + 4 >> 2] = 36506;
      break label$3;
     case 2:
-     HEAP32[$1 + 4 >> 2] = 37537;
+     HEAP32[$1 + 4 >> 2] = 36513;
      break label$3;
     case 3:
-     HEAP32[$1 + 4 >> 2] = 37543;
+     HEAP32[$1 + 4 >> 2] = 36519;
      break label$3;
     case 4:
-     HEAP32[$1 + 4 >> 2] = 37556;
+     HEAP32[$1 + 4 >> 2] = 36532;
      break label$3;
     default:
-     HEAP32[$1 + 4 >> 2] = 37571;
+     HEAP32[$1 + 4 >> 2] = 36547;
      break label$3;
     case 0:
-     HEAP32[$1 + 4 >> 2] = 37578;
+     HEAP32[$1 + 4 >> 2] = 36554;
      break label$3;
     case 1:
-     HEAP32[$1 + 4 >> 2] = 37588;
+     HEAP32[$1 + 4 >> 2] = 36564;
      break label$3;
     case 6:
-     HEAP32[$1 + 4 >> 2] = 37605;
+     HEAP32[$1 + 4 >> 2] = 36581;
      break label$3;
     case 7:
      break label$4;
     }
    }
-   HEAP32[$1 + 4 >> 2] = 37615;
+   HEAP32[$1 + 4 >> 2] = 36591;
   }
   if (HEAP32[$1 + 4 >> 2]) {
    HEAP32[$1 + 12 >> 2] = jsvNewFromString(HEAP32[$1 + 4 >> 2]);
@@ -55289,7 +55289,7 @@ function jswrap_stream_read($0, $1) {
    HEAP32[$2 + 28 >> 2] = 0;
    break label$1;
   }
-  HEAP32[$2 + 16 >> 2] = jsvObjectGetChild(HEAP32[$2 + 24 >> 2], 41375, 0);
+  HEAP32[$2 + 16 >> 2] = jsvObjectGetChild(HEAP32[$2 + 24 >> 2], 40347, 0);
   HEAP32[$2 + 12 >> 2] = 0;
   label$3 : {
    if (jsvIsString(HEAP32[$2 + 16 >> 2]) & 1) {
@@ -55298,12 +55298,12 @@ function jswrap_stream_read($0, $1) {
      if (!(HEAPU32[$2 + 20 >> 2] < HEAPU32[$2 + 8 >> 2] ? HEAP32[$2 + 20 >> 2] > 0 : 0)) {
       HEAP32[$2 + 12 >> 2] = HEAP32[$2 + 16 >> 2];
       HEAP32[$2 + 16 >> 2] = 0;
-      jsvObjectRemoveChild(HEAP32[$2 + 24 >> 2], 41375);
+      jsvObjectRemoveChild(HEAP32[$2 + 24 >> 2], 40347);
       break label$5;
      }
      HEAP32[$2 + 12 >> 2] = jsvNewFromStringVar(HEAP32[$2 + 16 >> 2], 0, HEAP32[$2 + 20 >> 2]);
      HEAP32[$2 + 4 >> 2] = jsvNewFromStringVar(HEAP32[$2 + 16 >> 2], HEAP32[$2 + 20 >> 2], 2147483647);
-     jsvObjectSetChildAndUnLock(HEAP32[$2 + 24 >> 2], 41375, HEAP32[$2 + 4 >> 2]);
+     jsvObjectSetChildAndUnLock(HEAP32[$2 + 24 >> 2], 40347, HEAP32[$2 + 4 >> 2]);
     }
     break label$3;
    }
@@ -55429,7 +55429,7 @@ function jswrap_graphics_fillPoly($0, $1) {
   jsvIteratorFree($2 + 16 | 0);
   if (HEAP32[$2 + 60 >> 2] == 128) {
    HEAP32[$2 >> 2] = 64;
-   jsWarn(43110, $2);
+   jsWarn(42070, $2);
   }
   $0 = $2 + 328 | 0;
   graphicsFillPoly($0, HEAP32[$2 + 60 >> 2] / 2 | 0, $2 - -64 | 0);
@@ -55533,7 +55533,7 @@ function jswrap_function_constructor($0) {
    if (jsvObjectIteratorHasValue($1 + 16 | 0) & 1) {
     HEAP32[$1 + 8 >> 2] = jsvAsString(HEAP32[$1 + 12 >> 2]);
     if (HEAP32[$1 + 8 >> 2]) {
-     HEAP32[$1 + 4 >> 2] = jsvNewFromString(36839);
+     HEAP32[$1 + 4 >> 2] = jsvNewFromString(35815);
      if (HEAP32[$1 + 4 >> 2]) {
       jsvAppendStringVarComplete(HEAP32[$1 + 4 >> 2], HEAP32[$1 + 8 >> 2]);
       jsvAddFunctionParameter(HEAP32[$1 + 20 >> 2], HEAP32[$1 + 4 >> 2], 0);
@@ -55549,7 +55549,7 @@ function jswrap_function_constructor($0) {
    break;
   }
   jsvObjectIteratorFree($1 + 16 | 0);
-  jsvObjectSetChildAndUnLock(HEAP32[$1 + 20 >> 2], 36841, HEAP32[$1 + 12 >> 2]);
+  jsvObjectSetChildAndUnLock(HEAP32[$1 + 20 >> 2], 35817, HEAP32[$1 + 12 >> 2]);
   HEAP32[$1 + 28 >> 2] = HEAP32[$1 + 20 >> 2];
  }
  global$0 = $1 + 32 | 0;
@@ -55583,14 +55583,14 @@ function jswrap_dataview_get($0, $1, $2, $3) {
  HEAP16[$4 + 70 >> 1] = $1;
  HEAP32[$4 + 64 >> 2] = $2;
  HEAP8[$4 + 63 | 0] = $3;
- HEAP32[$4 + 56 >> 2] = jsvObjectGetChild(HEAP32[$4 + 72 >> 2], 35202, 0);
+ HEAP32[$4 + 56 >> 2] = jsvObjectGetChild(HEAP32[$4 + 72 >> 2], 34178, 0);
  label$1 : {
   if (!(jsvIsArrayBuffer(HEAP32[$4 + 56 >> 2]) & 1)) {
    jsvUnLock(HEAP32[$4 + 56 >> 2]);
    HEAP32[$4 + 76 >> 2] = 0;
    break label$1;
   }
-  HEAP32[$4 + 64 >> 2] = jsvGetIntegerAndUnLock(jsvObjectGetChild(HEAP32[$4 + 72 >> 2], 35209, 0)) + HEAP32[$4 + 64 >> 2];
+  HEAP32[$4 + 64 >> 2] = jsvGetIntegerAndUnLock(jsvObjectGetChild(HEAP32[$4 + 72 >> 2], 34185, 0)) + HEAP32[$4 + 64 >> 2];
   HEAP32[$4 + 52 >> 2] = HEAPU16[$4 + 70 >> 1] & 15;
   if (!(HEAP8[$4 + 63 | 0] & 1)) {
    HEAP16[$4 + 70 >> 1] = HEAPU16[$4 + 70 >> 1] | 256;
@@ -55618,17 +55618,17 @@ function jswrap_serial_unsetup($0) {
  global$0 = $1;
  HEAP32[$1 + 28 >> 2] = $0;
  HEAP8[$1 + 27 | 0] = jsiGetDeviceFromClass(HEAP32[$1 + 28 >> 2]);
- HEAP32[$1 + 20 >> 2] = jsvObjectGetChild(HEAP32[$1 + 28 >> 2], 40900, 0);
+ HEAP32[$1 + 20 >> 2] = jsvObjectGetChild(HEAP32[$1 + 28 >> 2], 39872, 0);
  label$1 : {
   if (!HEAP32[$1 + 20 >> 2]) {
-   jsExceptionHere(1, 40959, 0);
+   jsExceptionHere(1, 39931, 0);
    break label$1;
   }
-  HEAP32[$1 + 16 >> 2] = jsvObjectGetChild(HEAP32[$1 + 28 >> 2], 40909, 0);
+  HEAP32[$1 + 16 >> 2] = jsvObjectGetChild(HEAP32[$1 + 28 >> 2], 39881, 0);
   jsserialPopulateUSARTInfo($1, HEAP32[$1 + 16 >> 2], HEAP32[$1 + 20 >> 2]);
   jsvUnLock2(HEAP32[$1 + 20 >> 2], HEAP32[$1 + 16 >> 2]);
-  jsvObjectRemoveChild(HEAP32[$1 + 28 >> 2], 40909);
-  jsvObjectRemoveChild(HEAP32[$1 + 28 >> 2], 40900);
+  jsvObjectRemoveChild(HEAP32[$1 + 28 >> 2], 39881);
+  jsvObjectRemoveChild(HEAP32[$1 + 28 >> 2], 39872);
   label$3 : {
    if (!(HEAPU8[$1 + 27 | 0] <= 22 ? HEAPU8[$1 + 27 | 0] >= 17 : 0)) {
     jsserialEventCallbackKill(HEAP32[$1 + 28 >> 2], $1);
@@ -55832,7 +55832,7 @@ function jsiCountBracketsInInput() {
  global$0 = $0;
  HEAP32[$0 + 140 >> 2] = 0;
  HEAP32[$0 + 4 >> 2] = jslSetLex($0 + 8 | 0);
- jslInit(HEAP32[24872]);
+ jslInit(HEAP32[24612]);
  while (1) {
   label$2 : {
    $1 = 0;
@@ -55924,7 +55924,7 @@ function jswrap_espruino_setConsole($0, $1) {
  HEAP32[$2 + 108 >> 2] = $0;
  HEAP32[$2 + 104 >> 2] = $1;
  HEAP8[$2 + 103 | 0] = 0;
- HEAP32[$2 + 88 >> 2] = 36060;
+ HEAP32[$2 + 88 >> 2] = 35036;
  HEAP16[$2 + 92 >> 1] = 11;
  HEAP32[$2 + 96 >> 2] = $2 + 103;
  label$1 : {
@@ -55951,11 +55951,11 @@ function jswrap_espruino_setConsole($0, $1) {
     break label$5;
    }
    HEAP32[$2 >> 2] = HEAPU8[$2 + 87 | 0];
-   jsExceptionHere(1, 36066, $2);
+   jsExceptionHere(1, 35042, $2);
    break label$1;
   }
   if (!(!HEAPU8[$2 + 87 | 0] | (HEAPU8[$2 + 87 | 0] <= 22 ? HEAPU8[$2 + 87 | 0] >= 17 : 0))) {
-   jsExceptionHere(1, 36089, 0);
+   jsExceptionHere(1, 35065, 0);
    break label$1;
   }
   jsiSetConsoleDevice(HEAPU8[$2 + 87 | 0], HEAP8[$2 + 103 | 0] & 1);
@@ -55965,35 +55965,35 @@ function jswrap_espruino_setConsole($0, $1) {
 function jslGetNextCh() {
  var $0 = 0;
  $0 = jslNextCh();
- HEAP8[HEAP32[14856]] = $0;
- $0 = HEAP32[14856];
+ HEAP8[HEAP32[14596]] = $0;
+ $0 = HEAP32[14596];
  HEAP32[$0 + 108 >> 2] = HEAP32[$0 + 108 >> 2] + 1;
- if (HEAPU32[HEAP32[14856] + 108 >> 2] >= HEAPU32[HEAP32[14856] + 112 >> 2]) {
-  $0 = HEAP32[14856];
-  HEAP32[$0 + 108 >> 2] = HEAP32[$0 + 108 >> 2] - HEAP32[HEAP32[14856] + 112 >> 2];
-  $0 = HEAP32[14856];
-  HEAP32[$0 + 116 >> 2] = HEAP32[HEAP32[14856] + 112 >> 2] + HEAP32[$0 + 116 >> 2];
+ if (HEAPU32[HEAP32[14596] + 108 >> 2] >= HEAPU32[HEAP32[14596] + 112 >> 2]) {
+  $0 = HEAP32[14596];
+  HEAP32[$0 + 108 >> 2] = HEAP32[$0 + 108 >> 2] - HEAP32[HEAP32[14596] + 112 >> 2];
+  $0 = HEAP32[14596];
+  HEAP32[$0 + 116 >> 2] = HEAP32[HEAP32[14596] + 112 >> 2] + HEAP32[$0 + 116 >> 2];
   label$2 : {
    label$3 : {
-    if (!HEAP32[HEAP32[14856] + 120 >> 2]) {
+    if (!HEAP32[HEAP32[14596] + 120 >> 2]) {
      break label$3;
     }
-    if (!(jsvGetLastChild(HEAP32[HEAP32[14856] + 120 >> 2]) & 65535)) {
+    if (!(jsvGetLastChild(HEAP32[HEAP32[14596] + 120 >> 2]) & 65535)) {
      break label$3;
     }
-    $0 = _jsvGetAddressOf(jsvGetLastChild(HEAP32[HEAP32[14856] + 120 >> 2]) & 65535);
-    HEAP32[HEAP32[14856] + 120 >> 2] = $0;
-    HEAP32[HEAP32[14856] + 124 >> 2] = HEAP32[HEAP32[14856] + 120 >> 2];
-    $0 = jsvGetCharactersInVar(HEAP32[HEAP32[14856] + 120 >> 2]);
-    HEAP32[HEAP32[14856] + 112 >> 2] = $0;
+    $0 = _jsvGetAddressOf(jsvGetLastChild(HEAP32[HEAP32[14596] + 120 >> 2]) & 65535);
+    HEAP32[HEAP32[14596] + 120 >> 2] = $0;
+    HEAP32[HEAP32[14596] + 124 >> 2] = HEAP32[HEAP32[14596] + 120 >> 2];
+    $0 = jsvGetCharactersInVar(HEAP32[HEAP32[14596] + 120 >> 2]);
+    HEAP32[HEAP32[14596] + 112 >> 2] = $0;
     break label$2;
    }
-   HEAP32[HEAP32[14856] + 120 >> 2] = 0;
-   HEAP32[HEAP32[14856] + 124 >> 2] = 0;
-   HEAP32[HEAP32[14856] + 112 >> 2] = 0;
-   $0 = HEAP32[14856];
-   HEAP32[$0 + 116 >> 2] = HEAP32[HEAP32[14856] + 108 >> 2] + HEAP32[$0 + 116 >> 2];
-   HEAP32[HEAP32[14856] + 108 >> 2] = 0;
+   HEAP32[HEAP32[14596] + 120 >> 2] = 0;
+   HEAP32[HEAP32[14596] + 124 >> 2] = 0;
+   HEAP32[HEAP32[14596] + 112 >> 2] = 0;
+   $0 = HEAP32[14596];
+   HEAP32[$0 + 116 >> 2] = HEAP32[HEAP32[14596] + 108 >> 2] + HEAP32[$0 + 116 >> 2];
+   HEAP32[HEAP32[14596] + 108 >> 2] = 0;
   }
  }
 }
@@ -56049,13 +56049,13 @@ function jsiSetConsoleDevice($0, $1) {
  HEAP8[$2 + 46 | 0] = $1;
  label$1 : {
   if (HEAP8[$2 + 46 | 0] & 1) {
-   HEAP16[49742] = HEAPU16[49742] | 256;
+   HEAP16[49222] = HEAPU16[49222] | 256;
    break label$1;
   }
-  HEAP16[49742] = HEAPU16[49742] & -257;
+  HEAP16[49222] = HEAPU16[49222] & -257;
  }
  label$3 : {
-  if (HEAPU8[$2 + 47 | 0] == HEAPU8[57424]) {
+  if (HEAPU8[$2 + 47 | 0] == HEAPU8[56384]) {
    break label$3;
   }
   label$4 : {
@@ -56070,7 +56070,7 @@ function jsiSetConsoleDevice($0, $1) {
    jshUSARTSetup(HEAPU8[$2 + 47 | 0], $0);
   }
   HEAP8[$2 + 31 | 0] = jsiEcho() & 1;
-  if (HEAPU8[57424] == 19) {
+  if (HEAPU8[56384] == 19) {
    HEAP8[$2 + 31 | 0] = 0;
    jshTransmitMove(HEAPU8[$2 + 47 | 0]);
    jshUSARTKick(HEAPU8[$2 + 47 | 0]);
@@ -56080,8 +56080,8 @@ function jsiSetConsoleDevice($0, $1) {
    HEAP32[$2 + 16 >> 2] = jshGetDeviceString(HEAPU8[$2 + 47 | 0]);
    jsiConsolePrintf(5184, $2 + 16 | 0);
   }
-  HEAP8[$2 + 30 | 0] = HEAPU8[57424];
-  HEAP8[57424] = HEAPU8[$2 + 47 | 0];
+  HEAP8[$2 + 30 | 0] = HEAPU8[56384];
+  HEAP8[56384] = HEAPU8[$2 + 47 | 0];
   if (!(HEAP8[$2 + 31 | 0] & 1)) {
    break label$3;
   }
@@ -56161,7 +56161,7 @@ function jswrap_object_assign($0) {
     label$7 : {
      if (!(jsvIsObject(HEAP32[$1 + 8 >> 2]) & 1)) {
       HEAP32[$1 >> 2] = HEAP32[$1 + 8 >> 2];
-      jsExceptionHere(3, 39157, $1);
+      jsExceptionHere(3, 38133, $1);
       HEAP8[$1 + 15 | 0] = 1;
       break label$7;
      }
@@ -56260,7 +56260,7 @@ function jsiTabComplete_printCommon($0, $1) {
     break;
    }
    HEAP32[$2 + 16 >> 2] = HEAP32[$2 + 24 >> 2];
-   jsiConsolePrintf(5888, $2 + 16 | 0);
+   jsiConsolePrintf(5884, $2 + 16 | 0);
    HEAP32[HEAP32[$2 + 20 >> 2] + 16 >> 2] = 0;
   }
  }
@@ -56331,25 +56331,25 @@ function jshTransmit($0, $1) {
   if (!HEAPU8[$2 + 15 | 0]) {
    break label$1;
   }
-  HEAP8[$2 + 13 | 0] = HEAPU8[99552] + 1;
-  if (HEAPU8[$2 + 13 | 0] == HEAPU8[99553]) {
+  HEAP8[$2 + 13 | 0] = HEAPU8[98512] + 1;
+  if (HEAPU8[$2 + 13 | 0] == HEAPU8[98513]) {
    jsiSetBusy(2, 1);
-   HEAP8[$2 + 12 | 0] = HEAPU8[$2 + 15 | 0] == 19 ? HEAPU8[57424] == 19 : 0;
+   HEAP8[$2 + 12 | 0] = HEAPU8[$2 + 15 | 0] == 19 ? HEAPU8[56384] == 19 : 0;
    while (1) {
-    if (HEAPU8[$2 + 13 | 0] == HEAPU8[99553]) {
+    if (HEAPU8[$2 + 13 | 0] == HEAPU8[98513]) {
      jshBusyIdle();
      continue;
     }
     break;
    }
-   if (!(!(HEAP8[$2 + 12 | 0] & 1) | HEAPU8[57424] == 19)) {
-    HEAP8[$2 + 15 | 0] = HEAPU8[57424];
+   if (!(!(HEAP8[$2 + 12 | 0] & 1) | HEAPU8[56384] == 19)) {
+    HEAP8[$2 + 15 | 0] = HEAPU8[56384];
    }
    jsiSetBusy(2, 0);
   }
-  HEAP8[(HEAPU8[99552] << 1) + 99632 | 0] = HEAPU8[$2 + 15 | 0];
-  HEAP8[((HEAPU8[99552] << 1) + 99632 | 0) + 1 | 0] = HEAPU8[$2 + 14 | 0];
-  HEAP8[99552] = HEAPU8[$2 + 13 | 0];
+  HEAP8[(HEAPU8[98512] << 1) + 98592 | 0] = HEAPU8[$2 + 15 | 0];
+  HEAP8[((HEAPU8[98512] << 1) + 98592 | 0) + 1 | 0] = HEAPU8[$2 + 14 | 0];
+  HEAP8[98512] = HEAPU8[$2 + 13 | 0];
   jshUSARTKick(HEAPU8[$2 + 15 | 0]);
  }
  global$0 = $2 + 16 | 0;
@@ -56556,8 +56556,8 @@ function matchfound($0, $1) {
   }
   break;
  }
- jsvObjectSetChildAndUnLock(HEAP32[$2 + 24 >> 2], 40845, jsvNewFromInteger(HEAP32[$1 + 4 >> 2]));
- jsvObjectSetChild(HEAP32[$2 + 24 >> 2], 40851, HEAP32[$1 >> 2]);
+ jsvObjectSetChildAndUnLock(HEAP32[$2 + 24 >> 2], 39817, jsvNewFromInteger(HEAP32[$1 + 4 >> 2]));
+ jsvObjectSetChild(HEAP32[$2 + 24 >> 2], 39823, HEAP32[$1 >> 2]);
  global$0 = $2 + 32 | 0;
  return HEAP32[$2 + 24 >> 2];
 }
@@ -56686,21 +56686,21 @@ function jswrap_dataview_constructor($0, $1, $2) {
  label$1 : {
   if (!(wasm2js_i32$0 = jsvIsArrayBuffer(HEAP32[$3 + 24 >> 2]) & 1, wasm2js_i32$1 = 0, wasm2js_i32$2 = HEAPU16[HEAP32[$3 + 24 >> 2] + 4 >> 1] == 129, wasm2js_i32$2 ? wasm2js_i32$0 : wasm2js_i32$1)) {
    HEAP32[$3 >> 2] = HEAP32[$3 + 24 >> 2];
-   jsExceptionHere(3, 35163, $3);
+   jsExceptionHere(3, 34139, $3);
    HEAP32[$3 + 28 >> 2] = 0;
    break label$1;
   }
-  HEAP32[$3 + 12 >> 2] = jspNewObject(0, 35193);
+  HEAP32[$3 + 12 >> 2] = jspNewObject(0, 34169);
   if (HEAP32[$3 + 12 >> 2]) {
-   jsvObjectSetChild(HEAP32[$3 + 12 >> 2], 35202, HEAP32[$3 + 24 >> 2]);
-   jsvObjectSetChildAndUnLock(HEAP32[$3 + 12 >> 2], 35209, jsvNewFromInteger(HEAP32[$3 + 20 >> 2]));
+   jsvObjectSetChild(HEAP32[$3 + 12 >> 2], 34178, HEAP32[$3 + 24 >> 2]);
+   jsvObjectSetChildAndUnLock(HEAP32[$3 + 12 >> 2], 34185, jsvNewFromInteger(HEAP32[$3 + 20 >> 2]));
    $0 = HEAP32[$3 + 12 >> 2];
    if (HEAP32[$3 + 16 >> 2]) {
     $1 = HEAP32[$3 + 16 >> 2];
    } else {
     $1 = jsvGetArrayBufferLength(HEAP32[$3 + 24 >> 2]);
    }
-   jsvObjectSetChildAndUnLock($0, 35220, jsvNewFromInteger($1));
+   jsvObjectSetChildAndUnLock($0, 34196, jsvNewFromInteger($1));
   }
   HEAP32[$3 + 28 >> 2] = HEAP32[$3 + 12 >> 2];
  }
@@ -56801,8 +56801,8 @@ function jswrap_date_toString($0) {
   HEAP32[$1 + 48 >> 2] = HEAP32[$1 + 100 >> 2];
   HEAP8[$1 + 55 | 0] = 43;
  }
- $0 = HEAP32[14370] + (HEAP32[$1 + 72 >> 2] << 2) | 0;
- $2 = HEAP32[14369] + (HEAP32[$1 + 64 >> 2] << 2) | 0;
+ $0 = HEAP32[14110] + (HEAP32[$1 + 72 >> 2] << 2) | 0;
+ $2 = HEAP32[14109] + (HEAP32[$1 + 64 >> 2] << 2) | 0;
  $3 = HEAP32[$1 + 60 >> 2];
  $4 = HEAP32[$1 + 68 >> 2];
  $5 = HEAP32[$1 + 96 >> 2];
@@ -56818,7 +56818,7 @@ function jswrap_date_toString($0) {
  HEAP32[$1 + 8 >> 2] = $3;
  HEAP32[$1 + 4 >> 2] = $2;
  HEAP32[$1 >> 2] = $0;
- $0 = jsvVarPrintf(35444, $1);
+ $0 = jsvVarPrintf(34420, $1);
  global$0 = $1 + 112 | 0;
  return $0 | 0;
 }
@@ -56972,13 +56972,13 @@ function jswrap_object_defineProperties($0, $1) {
  label$1 : {
   if (!(jsvIsObject(HEAP32[$2 + 40 >> 2]) & 1)) {
    HEAP32[$2 + 16 >> 2] = HEAP32[$2 + 40 >> 2];
-   jsExceptionHere(1, 39055, $2 + 16 | 0);
+   jsExceptionHere(1, 38031, $2 + 16 | 0);
    HEAP32[$2 + 44 >> 2] = 0;
    break label$1;
   }
   if (!(jsvIsObject(HEAP32[$2 + 36 >> 2]) & 1)) {
    HEAP32[$2 >> 2] = HEAP32[$2 + 36 >> 2];
-   jsExceptionHere(1, 39097, $2);
+   jsExceptionHere(1, 38073, $2);
    HEAP32[$2 + 44 >> 2] = 0;
    break label$1;
   }
@@ -57055,28 +57055,28 @@ function jsiAppendStringToInputLine($0) {
   }
   break;
  }
- if (HEAP32[14357] < 0) {
-  HEAP32[14357] = jsvGetStringLength(HEAP32[24872]);
+ if (HEAP32[14097] < 0) {
+  HEAP32[14097] = jsvGetStringLength(HEAP32[24612]);
  }
  label$4 : {
-  if (HEAP32[24874] >= HEAP32[14357]) {
+  if (HEAP32[24614] >= HEAP32[14097]) {
    jsiAppendToInputLine(HEAP32[$1 + 12 >> 2]);
    break label$4;
   }
   HEAP32[$1 + 4 >> 2] = jsvNewFromEmptyString();
-  if (HEAPU32[24874] > 0) {
-   jsvAppendStringVar(HEAP32[$1 + 4 >> 2], HEAP32[24872], 0, HEAP32[24874]);
+  if (HEAPU32[24614] > 0) {
+   jsvAppendStringVar(HEAP32[$1 + 4 >> 2], HEAP32[24612], 0, HEAP32[24614]);
   }
   jsvAppendString(HEAP32[$1 + 4 >> 2], HEAP32[$1 + 12 >> 2]);
-  jsvAppendStringVar(HEAP32[$1 + 4 >> 2], HEAP32[24872], HEAP32[24874], 2147483647);
+  jsvAppendStringVar(HEAP32[$1 + 4 >> 2], HEAP32[24612], HEAP32[24614], 2147483647);
   jsiInputLineCursorMoved();
-  jsvUnLock(HEAP32[24872]);
-  HEAP32[24872] = HEAP32[$1 + 4 >> 2];
+  jsvUnLock(HEAP32[24612]);
+  HEAP32[24612] = HEAP32[$1 + 4 >> 2];
   if (jsiShowInputLine() & 1) {
-   jsiConsolePrintStringVarUntilEOL(HEAP32[24872], HEAP32[24874]);
+   jsiConsolePrintStringVarUntilEOL(HEAP32[24612], HEAP32[24614]);
   }
  }
- HEAP32[24874] = HEAP32[$1 + 8 >> 2] + HEAP32[24874];
+ HEAP32[24614] = HEAP32[$1 + 8 >> 2] + HEAP32[24614];
  if (jsiShowInputLine() & 1) {
   jsiConsolePrintString(HEAP32[$1 + 12 >> 2]);
  }
@@ -57270,16 +57270,16 @@ function jsiExecuteEvents() {
  var $0 = 0, $1 = 0, $2 = 0;
  $0 = global$0 - 32 | 0;
  global$0 = $0;
- HEAP8[$0 + 31 | 0] = (jsvArrayIsEmpty(HEAP32[24869]) ^ -1) & 1;
+ HEAP8[$0 + 31 | 0] = (jsvArrayIsEmpty(HEAP32[24609]) ^ -1) & 1;
  if (HEAP8[$0 + 31 | 0] & 1) {
   jsiSetBusy(1, 1);
  }
  while (1) {
-  if ((jsvArrayIsEmpty(HEAP32[24869]) ^ -1) & 1) {
-   HEAP32[$0 + 24 >> 2] = jsvSkipNameAndUnLock(jsvArrayPopFirst(HEAP32[24869]));
-   HEAP32[$0 + 20 >> 2] = jsvObjectGetChild(HEAP32[$0 + 24 >> 2], 5948, 0);
-   HEAP32[$0 + 16 >> 2] = jsvObjectGetChild(HEAP32[$0 + 24 >> 2], 5958, 0);
-   HEAP32[$0 + 12 >> 2] = jsvObjectGetChild(HEAP32[$0 + 24 >> 2], 5953, 0);
+  if ((jsvArrayIsEmpty(HEAP32[24609]) ^ -1) & 1) {
+   HEAP32[$0 + 24 >> 2] = jsvSkipNameAndUnLock(jsvArrayPopFirst(HEAP32[24609]));
+   HEAP32[$0 + 20 >> 2] = jsvObjectGetChild(HEAP32[$0 + 24 >> 2], 5944, 0);
+   HEAP32[$0 + 16 >> 2] = jsvObjectGetChild(HEAP32[$0 + 24 >> 2], 5954, 0);
+   HEAP32[$0 + 12 >> 2] = jsvObjectGetChild(HEAP32[$0 + 24 >> 2], 5949, 0);
    jsvUnLock(HEAP32[$0 + 24 >> 2]);
    jsiExecuteEventCallbackArgsArray(HEAP32[$0 + 16 >> 2], HEAP32[$0 + 20 >> 2], HEAP32[$0 + 12 >> 2]);
    jsvUnLock(HEAP32[$0 + 12 >> 2]);
@@ -57292,13 +57292,13 @@ function jsiExecuteEvents() {
   jsiSetBusy(1, 0);
   label$5 : {
    if (!(jspIsInterrupted() & 1)) {
-    $2 = HEAPU32[24886] < jshGetTimeFromMilliseconds(100) >>> 0 ? 0 : 1;
+    $2 = HEAPU32[24626] < jshGetTimeFromMilliseconds(100) >>> 0 ? 0 : 1;
     $1 = i64toi32_i32$HIGH_BITS;
     if (0 > ($1 | 0) ? 1 : 0 >= ($1 | 0) ? $2 : 0) {
      break label$5;
     }
    }
-   HEAP8[99548] = 1;
+   HEAP8[98508] = 1;
   }
  }
  global$0 = $0 + 32 | 0;
@@ -57539,13 +57539,13 @@ function jswrap_dataview_set($0, $1, $2, $3, $4) {
  HEAP32[$5 + 68 >> 2] = $2;
  HEAP32[$5 + 64 >> 2] = $3;
  HEAP8[$5 + 63 | 0] = $4;
- HEAP32[$5 + 56 >> 2] = jsvObjectGetChild(HEAP32[$5 + 76 >> 2], 35202, 0);
+ HEAP32[$5 + 56 >> 2] = jsvObjectGetChild(HEAP32[$5 + 76 >> 2], 34178, 0);
  label$1 : {
   if (!(jsvIsArrayBuffer(HEAP32[$5 + 56 >> 2]) & 1)) {
    jsvUnLock(HEAP32[$5 + 56 >> 2]);
    break label$1;
   }
-  HEAP32[$5 + 68 >> 2] = jsvGetIntegerAndUnLock(jsvObjectGetChild(HEAP32[$5 + 76 >> 2], 35209, 0)) + HEAP32[$5 + 68 >> 2];
+  HEAP32[$5 + 68 >> 2] = jsvGetIntegerAndUnLock(jsvObjectGetChild(HEAP32[$5 + 76 >> 2], 34185, 0)) + HEAP32[$5 + 68 >> 2];
   HEAP32[$5 + 52 >> 2] = HEAPU16[$5 + 74 >> 1] & 15;
   if (!(HEAP8[$5 + 63 | 0] & 1)) {
    HEAP16[$5 + 74 >> 1] = HEAPU16[$5 + 74 >> 1] | 256;
@@ -57736,28 +57736,28 @@ function jshGetDeviceString($0) {
    label$3 : {
     switch ($0 - 1 | 0) {
     default:
-     HEAP32[$1 + 12 >> 2] = 7278;
+     HEAP32[$1 + 12 >> 2] = 7274;
      break label$1;
     case 16:
-     HEAP32[$1 + 12 >> 2] = 7283;
+     HEAP32[$1 + 12 >> 2] = 7279;
      break label$1;
     case 17:
-     HEAP32[$1 + 12 >> 2] = 7293;
+     HEAP32[$1 + 12 >> 2] = 7289;
      break label$1;
     case 18:
-     HEAP32[$1 + 12 >> 2] = 7303;
+     HEAP32[$1 + 12 >> 2] = 7299;
      break label$1;
     case 20:
-     HEAP32[$1 + 12 >> 2] = 7309;
+     HEAP32[$1 + 12 >> 2] = 7305;
      break label$1;
     case 19:
-     HEAP32[$1 + 12 >> 2] = 7313;
+     HEAP32[$1 + 12 >> 2] = 7309;
      break label$1;
     case 21:
-     HEAP32[$1 + 12 >> 2] = 7322;
+     HEAP32[$1 + 12 >> 2] = 7318;
      break label$1;
     case 23:
-     HEAP32[$1 + 12 >> 2] = 7330;
+     HEAP32[$1 + 12 >> 2] = 7326;
      break label$1;
     case 0:
     case 1:
@@ -57781,10 +57781,10 @@ function jshGetDeviceString($0) {
      break label$3;
     }
    }
-   HEAP32[$1 + 12 >> 2] = 7335;
+   HEAP32[$1 + 12 >> 2] = 7331;
    break label$1;
   }
-  HEAP32[$1 + 12 >> 2] = 7340;
+  HEAP32[$1 + 12 >> 2] = 7336;
  }
  return HEAP32[$1 + 12 >> 2];
 }
@@ -57820,16 +57820,16 @@ function jspEvaluateVar($0, $1, $2) {
  HEAP32[$3 + 28 >> 2] = jslSetLex($3 + 32 | 0);
  jslInit(HEAP32[$3 + 172 >> 2]);
  HEAP16[$3 + 134 >> 1] = HEAPU16[$3 + 166 >> 1];
- HEAP32[$0 + 16 >> 2] = HEAP32[24866];
- $1 = HEAP32[24865];
- HEAP32[$0 + 8 >> 2] = HEAP32[24864];
+ HEAP32[$0 + 16 >> 2] = HEAP32[24606];
+ $1 = HEAP32[24605];
+ HEAP32[$0 + 8 >> 2] = HEAP32[24604];
  HEAP32[$0 + 12 >> 2] = $1;
- $1 = HEAP32[24863];
- HEAP32[$0 >> 2] = HEAP32[24862];
+ $1 = HEAP32[24603];
+ HEAP32[$0 >> 2] = HEAP32[24602];
  HEAP32[$0 + 4 >> 2] = $1;
- HEAP32[24866] = 1;
+ HEAP32[24606] = 1;
  if (HEAP32[$3 + 168 >> 2]) {
-  HEAP32[24864] = 0;
+  HEAP32[24604] = 0;
   jspeiAddScope(HEAP32[$3 + 168 >> 2]);
  }
  HEAP32[$3 + 4 >> 2] = jspParse();
@@ -57839,14 +57839,14 @@ function jspEvaluateVar($0, $1, $2) {
  $0 = $3 + 8 | 0;
  jslKill();
  jslSetLex(HEAP32[$3 + 28 >> 2]);
- HEAP32[$3 + 24 >> 2] = HEAP32[$3 + 24 >> 2] | HEAP32[24866] & 6256;
+ HEAP32[$3 + 24 >> 2] = HEAP32[$3 + 24 >> 2] | HEAP32[24606] & 6256;
  $1 = HEAP32[$0 + 4 >> 2];
- HEAP32[24862] = HEAP32[$0 >> 2];
- HEAP32[24863] = $1;
- HEAP32[24866] = HEAP32[$0 + 16 >> 2];
+ HEAP32[24602] = HEAP32[$0 >> 2];
+ HEAP32[24603] = $1;
+ HEAP32[24606] = HEAP32[$0 + 16 >> 2];
  $1 = HEAP32[$0 + 12 >> 2];
- HEAP32[24864] = HEAP32[$0 + 8 >> 2];
- HEAP32[24865] = $1;
+ HEAP32[24604] = HEAP32[$0 + 8 >> 2];
+ HEAP32[24605] = $1;
  $0 = jsvSkipNameAndUnLock(HEAP32[$3 + 4 >> 2]);
  global$0 = $3 + 176 | 0;
  return $0;
@@ -57946,11 +57946,11 @@ function jsvClearEmptyVarList() {
  var $0 = 0, $1 = 0;
  $1 = global$0 - 16 | 0;
  global$0 = $1;
- HEAP32[14858] = 1;
- HEAP16[29718] = 0;
+ HEAP32[14598] = 1;
+ HEAP16[29198] = 0;
  HEAP16[$1 + 14 >> 1] = 1;
  while (1) {
-  if (HEAPU16[$1 + 14 >> 1] <= HEAPU32[14353]) {
+  if (HEAPU16[$1 + 14 >> 1] <= HEAPU32[14093]) {
    HEAP32[$1 + 8 >> 2] = jsvGetAddressOf(HEAPU16[$1 + 14 >> 1]);
    label$3 : {
     if (!(HEAPU16[HEAP32[$1 + 8 >> 2] + 14 >> 1] & 63)) {
@@ -57982,7 +57982,7 @@ function jsvClearEmptyVarList() {
   }
   break;
  }
- HEAP32[14858] = 0;
+ HEAP32[14598] = 0;
  global$0 = $1 + 16 | 0;
 }
 function tflite__GreedyMemoryPlanner__GetMaximumMemorySize_28_29($0) {
@@ -58062,8 +58062,8 @@ function tflite__GreedyMemoryPlanner__GreedyMemoryPlanner_28unsigned_20char__2c_
  $1 = global$0 - 16 | 0;
  $0 = HEAP32[$3 + 28 >> 2];
  HEAP32[$1 + 12 >> 2] = $0;
- HEAP32[HEAP32[$1 + 12 >> 2] >> 2] = 52568;
- HEAP32[$0 >> 2] = 52600;
+ HEAP32[HEAP32[$1 + 12 >> 2] >> 2] = 51528;
+ HEAP32[$0 >> 2] = 51560;
  HEAP32[$0 + 8 >> 2] = 0;
  HEAP8[$0 + 36 | 0] = 1;
  HEAP32[$3 + 16 >> 2] = 36;
@@ -58141,25 +58141,25 @@ function jswrap_espruino_getErrorFlagArray($0) {
    break label$1;
   }
   if (HEAP8[$1 + 11 | 0] & 1) {
-   jsvArrayPushAndUnLock(HEAP32[$1 + 4 >> 2], jsvNewFromString(35985));
+   jsvArrayPushAndUnLock(HEAP32[$1 + 4 >> 2], jsvNewFromString(34961));
   }
   if (HEAPU8[$1 + 11 | 0] & 2) {
-   jsvArrayPushAndUnLock(HEAP32[$1 + 4 >> 2], jsvNewFromString(35995));
+   jsvArrayPushAndUnLock(HEAP32[$1 + 4 >> 2], jsvNewFromString(34971));
   }
   if (HEAPU8[$1 + 11 | 0] & 4) {
-   jsvArrayPushAndUnLock(HEAP32[$1 + 4 >> 2], jsvNewFromString(36007));
+   jsvArrayPushAndUnLock(HEAP32[$1 + 4 >> 2], jsvNewFromString(34983));
   }
   if (HEAPU8[$1 + 11 | 0] & 8) {
-   jsvArrayPushAndUnLock(HEAP32[$1 + 4 >> 2], jsvNewFromString(36016));
+   jsvArrayPushAndUnLock(HEAP32[$1 + 4 >> 2], jsvNewFromString(34992));
   }
   if (HEAPU8[$1 + 11 | 0] & 16) {
-   jsvArrayPushAndUnLock(HEAP32[$1 + 4 >> 2], jsvNewFromString(36027));
+   jsvArrayPushAndUnLock(HEAP32[$1 + 4 >> 2], jsvNewFromString(35003));
   }
   if (HEAPU8[$1 + 11 | 0] & 32) {
-   jsvArrayPushAndUnLock(HEAP32[$1 + 4 >> 2], jsvNewFromString(36034));
+   jsvArrayPushAndUnLock(HEAP32[$1 + 4 >> 2], jsvNewFromString(35010));
   }
   if (HEAPU8[$1 + 11 | 0] & 64) {
-   jsvArrayPushAndUnLock(HEAP32[$1 + 4 >> 2], jsvNewFromString(36046));
+   jsvArrayPushAndUnLock(HEAP32[$1 + 4 >> 2], jsvNewFromString(35022));
   }
   HEAP32[$1 + 12 >> 2] = HEAP32[$1 + 4 >> 2];
  }
@@ -58393,7 +58393,7 @@ function jspeFunctionArguments($0) {
    break label$1;
   }
   while (1) {
-   if (HEAP16[HEAP32[14856] + 2 >> 1] != 41) {
+   if (HEAP16[HEAP32[14596] + 2 >> 1] != 41) {
     if (HEAP32[$1 + 88 >> 2]) {
      HEAP8[$1 + 16 | 0] = 255;
      $0 = $1 + 16 | 0;
@@ -58411,7 +58411,7 @@ function jspeFunctionArguments($0) {
      HEAP8[$1 + 95 | 0] = 0;
      break label$1;
     }
-    if (HEAP16[HEAP32[14856] + 2 >> 1] != 41) {
+    if (HEAP16[HEAP32[14596] + 2 >> 1] != 41) {
      if (!(jslMatch(44) & 1)) {
       HEAP8[$1 + 95 | 0] = 0;
       break label$1;
@@ -58526,8 +58526,8 @@ function jswrap_banglejs_project($0) {
  HEAPF64[$1 + 48 >> 3] = .017453292519943295;
  HEAPF64[$1 + 40 >> 3] = 85.0511287798;
  HEAPF64[$1 + 32 >> 3] = 6378137;
- HEAPF64[$1 + 24 >> 3] = jsvGetFloatAndUnLock(jsvObjectGetChild(HEAP32[$1 + 60 >> 2], 33006, 0));
- HEAPF64[$1 + 16 >> 3] = jsvGetFloatAndUnLock(jsvObjectGetChild(HEAP32[$1 + 60 >> 2], 33010, 0));
+ HEAPF64[$1 + 24 >> 3] = jsvGetFloatAndUnLock(jsvObjectGetChild(HEAP32[$1 + 60 >> 2], 31978, 0));
+ HEAPF64[$1 + 16 >> 3] = jsvGetFloatAndUnLock(jsvObjectGetChild(HEAP32[$1 + 60 >> 2], 31982, 0));
  if (HEAPF64[$1 + 24 >> 3] > 85.0511287798) {
   HEAPF64[$1 + 24 >> 3] = 85.0511287798;
  }
@@ -58537,8 +58537,8 @@ function jswrap_banglejs_project($0) {
  HEAPF64[$1 + 8 >> 3] = sin(HEAPF64[$1 + 24 >> 3] * .017453292519943295);
  HEAP32[$1 + 4 >> 2] = jsvNewWithFlags(5);
  if (HEAP32[$1 + 4 >> 2]) {
-  jsvObjectSetChildAndUnLock(HEAP32[$1 + 4 >> 2], 32489, jsvNewFromFloat(6378137 * HEAPF64[$1 + 16 >> 3] * .017453292519943295));
-  jsvObjectSetChildAndUnLock(HEAP32[$1 + 4 >> 2], 32491, jsvNewFromFloat(6378137 * log((1 + HEAPF64[$1 + 8 >> 3]) / (1 - HEAPF64[$1 + 8 >> 3])) / 2));
+  jsvObjectSetChildAndUnLock(HEAP32[$1 + 4 >> 2], 31465, jsvNewFromFloat(6378137 * HEAPF64[$1 + 16 >> 3] * .017453292519943295));
+  jsvObjectSetChildAndUnLock(HEAP32[$1 + 4 >> 2], 31467, jsvNewFromFloat(6378137 * log((1 + HEAPF64[$1 + 8 >> 3]) / (1 - HEAPF64[$1 + 8 >> 3])) / 2));
  }
  global$0 = $1 - -64 | 0;
  return HEAP32[$1 + 4 >> 2];
@@ -58663,7 +58663,7 @@ function jswrap_heatshrink_compress($0) {
  label$1 : {
   if (!(jsvIsIterable(HEAP32[$1 + 88 >> 2]) & 1)) {
    HEAP32[$1 >> 2] = HEAP32[$1 + 88 >> 2];
-   jsExceptionHere(3, 41856, $1);
+   jsExceptionHere(3, 40828, $1);
    HEAP32[$1 + 92 >> 2] = 0;
    break label$1;
   }
@@ -58673,7 +58673,7 @@ function jswrap_heatshrink_compress($0) {
   jsvIteratorFree($0);
   HEAP32[$1 + 8 >> 2] = jsvNewStringOfLength(HEAP32[$1 + 12 >> 2], 0);
   if (!HEAP32[$1 + 8 >> 2]) {
-   jsError(41893, 0);
+   jsError(40865, 0);
    HEAP32[$1 + 92 >> 2] = 0;
    break label$1;
   }
@@ -58763,7 +58763,7 @@ function tflite__GreedyMemoryPlanner__AddBuffer_28tflite__ErrorReporter__2c_20in
   if (HEAP32[$0 + 8 >> 2] >= HEAP32[$0 + 4 >> 2]) {
    $1 = HEAP32[$5 + 20 >> 2];
    HEAP32[$5 >> 2] = HEAP32[$0 + 4 >> 2];
-   tflite__ErrorReporter__Report_28char_20const__2c_20____29($1, 52624, $5);
+   tflite__ErrorReporter__Report_28char_20const__2c_20____29($1, 51584, $5);
    HEAP32[$5 + 28 >> 2] = 1;
    break label$1;
   }
@@ -58787,7 +58787,7 @@ function jswrap_heatshrink_decompress($0) {
  label$1 : {
   if (!(jsvIsIterable(HEAP32[$1 + 88 >> 2]) & 1)) {
    HEAP32[$1 >> 2] = HEAP32[$1 + 88 >> 2];
-   jsExceptionHere(3, 41856, $1);
+   jsExceptionHere(3, 40828, $1);
    HEAP32[$1 + 92 >> 2] = 0;
    break label$1;
   }
@@ -58797,7 +58797,7 @@ function jswrap_heatshrink_decompress($0) {
   jsvIteratorFree($0);
   HEAP32[$1 + 8 >> 2] = jsvNewStringOfLength(HEAP32[$1 + 12 >> 2], 0);
   if (!HEAP32[$1 + 8 >> 2]) {
-   jsError(41893, 0);
+   jsError(40865, 0);
    HEAP32[$1 + 92 >> 2] = 0;
    break label$1;
   }
@@ -58871,7 +58871,7 @@ function jswrap_array_constructor($0) {
     HEAP32[$1 + 4 >> 2] = jsvGetInteger(HEAP32[$1 + 20 >> 2]);
     jsvUnLock(HEAP32[$1 + 20 >> 2]);
     if (!(HEAP32[$1 + 4 >> 2] >= 0 ? HEAPF64[$1 + 8 >> 3] == +HEAP32[$1 + 4 >> 2] : 0)) {
-     jsExceptionHere(1, 34507, 0);
+     jsExceptionHere(1, 33483, 0);
      HEAP32[$1 + 28 >> 2] = 0;
      break label$1;
     }
@@ -59366,10 +59366,10 @@ function jswrap_graphics_setFontSizeX($0, $1, $2) {
    }
   }
   if (!((HEAP32[$3 + 84 >> 2] & 57344) == 24576 | ((HEAPU8[$3 + 33 | 0] | HEAPU8[$3 + 34 | 0] << 8) & 57344) != 24576)) {
-   jsvObjectRemoveChild(HEAP32[$3 + 88 >> 2], 42925);
-   jsvObjectRemoveChild(HEAP32[$3 + 88 >> 2], 42930);
-   jsvObjectRemoveChild(HEAP32[$3 + 88 >> 2], 42935);
-   jsvObjectRemoveChild(HEAP32[$3 + 88 >> 2], 42940);
+   jsvObjectRemoveChild(HEAP32[$3 + 88 >> 2], 41885);
+   jsvObjectRemoveChild(HEAP32[$3 + 88 >> 2], 41890);
+   jsvObjectRemoveChild(HEAP32[$3 + 88 >> 2], 41895);
+   jsvObjectRemoveChild(HEAP32[$3 + 88 >> 2], 41900);
   }
   $0 = HEAP32[$3 + 84 >> 2];
   HEAP8[$3 + 33 | 0] = $0;
@@ -59442,7 +59442,7 @@ function jswrap_graphics_getFontHeightInternal($0) {
   }
   if (HEAP32[$1 + 4 >> 2] == 24576) {
    $0 = HEAP32[$1 + 8 >> 2];
-   HEAP32[$1 + 12 >> 2] = Math_imul(HEAPU16[$1 + 2 >> 1], jsvGetIntegerAndUnLock(jsvObjectGetChild(HEAPU8[$0 | 0] | HEAPU8[$0 + 1 | 0] << 8 | (HEAPU8[$0 + 2 | 0] << 16 | HEAPU8[$0 + 3 | 0] << 24), 42935, 0)));
+   HEAP32[$1 + 12 >> 2] = Math_imul(HEAPU16[$1 + 2 >> 1], jsvGetIntegerAndUnLock(jsvObjectGetChild(HEAPU8[$0 | 0] | HEAPU8[$0 + 1 | 0] << 8 | (HEAPU8[$0 + 2 | 0] << 16 | HEAPU8[$0 + 3 | 0] << 24), 41895, 0)));
    break label$1;
   }
   HEAP32[$1 + 12 >> 2] = 0;
@@ -59470,7 +59470,7 @@ function tflite__MicroInterpreter__output_28unsigned_20long_29($0) {
    $2 = HEAP32[$1 + 20 >> 2];
    HEAP32[$1 + 4 >> 2] = HEAP32[$1 + 12 >> 2];
    HEAP32[$1 >> 2] = $2;
-   tflite__ErrorReporter__Report_28char_20const__2c_20____29($0, 44248, $1);
+   tflite__ErrorReporter__Report_28char_20const__2c_20____29($0, 43208, $1);
    HEAP32[$1 + 28 >> 2] = 0;
    break label$1;
   }
@@ -59487,14 +59487,14 @@ function jspGetNamedVariable($0) {
  HEAP32[$1 + 12 >> 2] = $0;
  $0 = $1;
  label$1 : {
-  if ((HEAP32[24866] & 63) == 1) {
+  if ((HEAP32[24606] & 63) == 1) {
    $2 = jspeiFindInScopes(HEAP32[$1 + 12 >> 2]);
    break label$1;
   }
   $2 = 0;
  }
  HEAP32[$0 + 8 >> 2] = $2;
- if (!(HEAP32[$1 + 8 >> 2] | (HEAP32[24866] & 63) != 1)) {
+ if (!(HEAP32[$1 + 8 >> 2] | (HEAP32[24606] & 63) != 1)) {
   label$4 : {
    if (jswIsBuiltInObject(HEAP32[$1 + 12 >> 2]) & 1) {
     HEAP32[$1 + 4 >> 2] = jswFindBuiltInFunction(0, HEAP32[$1 + 12 >> 2]);
@@ -59502,7 +59502,7 @@ function jspGetNamedVariable($0) {
      HEAP32[$1 + 4 >> 2] = jspNewBuiltin(HEAP32[$1 + 12 >> 2]);
     }
     if (HEAP32[$1 + 4 >> 2]) {
-     HEAP32[$1 + 8 >> 2] = jsvAddNamedChild(HEAP32[24862], HEAP32[$1 + 4 >> 2], HEAP32[$1 + 12 >> 2]);
+     HEAP32[$1 + 8 >> 2] = jsvAddNamedChild(HEAP32[24602], HEAP32[$1 + 4 >> 2], HEAP32[$1 + 12 >> 2]);
      jsvUnLock(HEAP32[$1 + 4 >> 2]);
     }
     break label$4;
@@ -59780,19 +59780,19 @@ function jswrap_banglejs_buzz($0, $1) {
   HEAP32[$2 + 24 >> 2] = 5e3;
  }
  label$7 : {
-  if (HEAP32[63922]) {
-   jsExceptionHere(1, 33031, 0);
+  if (HEAP32[63662]) {
+   jsExceptionHere(1, 32003, 0);
    HEAP32[$2 + 28 >> 2] = 0;
    break label$7;
   }
-  HEAP32[63922] = jspromise_create();
-  if (!HEAP32[63922]) {
+  HEAP32[63662] = jspromise_create();
+  if (!HEAP32[63662]) {
    HEAP32[$2 + 28 >> 2] = 0;
    break label$7;
   }
   jshPinAnalogOutput(13, .4 + HEAPF64[$2 + 16 >> 3] * .6, 1e3, 0);
   jsiSetTimeout(505, +HEAP32[$2 + 24 >> 2]);
-  HEAP32[$2 + 28 >> 2] = jsvLockAgain(HEAP32[63922]);
+  HEAP32[$2 + 28 >> 2] = jsvLockAgain(HEAP32[63662]);
  }
  global$0 = $2 + 32 | 0;
  return HEAP32[$2 + 28 >> 2];
@@ -60180,7 +60180,7 @@ function jswrap_spi_setup($0, $1) {
    jsvUnLock(jsvSetNamedChild(HEAP32[$2 + 28 >> 2], HEAP32[$2 + 24 >> 2]));
    break label$1;
   }
-  jsvObjectRemoveChild(HEAP32[$2 + 28 >> 2], 41123);
+  jsvObjectRemoveChild(HEAP32[$2 + 28 >> 2], 40095);
  }
  global$0 = $2 + 32 | 0;
 }
@@ -60206,16 +60206,16 @@ function jshPushIOWatchEvent($0) {
  HEAP8[$1 + 30 | 0] = jshGetWatchedPinState(HEAPU8[$1 + 31 | 0]) & 1;
  HEAP32[$1 + 24 >> 2] = HEAPU8[$1 + 31 | 0] - 1;
  label$1 : {
-  if (HEAP32[(HEAP32[$1 + 24 >> 2] << 2) + 99568 >> 2]) {
+  if (HEAP32[(HEAP32[$1 + 24 >> 2] << 2) + 98528 >> 2]) {
    label$3 : {
-    if ((HEAP32[(HEAP32[$1 + 24 >> 2] << 2) + 99568 >> 2] & -256) == -256) {
-     HEAP8[$1 + 23 | 0] = HEAP32[(HEAP32[$1 + 24 >> 2] << 2) + 99568 >> 2];
+    if ((HEAP32[(HEAP32[$1 + 24 >> 2] << 2) + 98528 >> 2] & -256) == -256) {
+     HEAP8[$1 + 23 | 0] = HEAP32[(HEAP32[$1 + 24 >> 2] << 2) + 98528 >> 2];
      if (jshPinGetValue(HEAPU8[$1 + 23 | 0]) & 1) {
       HEAP8[$1 + 31 | 0] = HEAPU8[$1 + 31 | 0] | 64;
      }
      break label$3;
     }
-    FUNCTION_TABLE[HEAP32[(HEAP32[$1 + 24 >> 2] << 2) + 99568 >> 2]](HEAP8[$1 + 30 | 0] & 1, HEAPU8[$1 + 31 | 0]);
+    FUNCTION_TABLE[HEAP32[(HEAP32[$1 + 24 >> 2] << 2) + 98528 >> 2]](HEAP8[$1 + 30 | 0] & 1, HEAPU8[$1 + 31 | 0]);
     break label$1;
    }
   }
@@ -60357,43 +60357,43 @@ function TfLiteTypeGetName($0) {
    label$3 : {
     switch ($0 - 1 | 0) {
     default:
-     HEAP32[$1 + 12 >> 2] = 31758;
+     HEAP32[$1 + 12 >> 2] = 30734;
      break label$1;
     case 0:
-     HEAP32[$1 + 12 >> 2] = 31765;
+     HEAP32[$1 + 12 >> 2] = 30741;
      break label$1;
     case 6:
-     HEAP32[$1 + 12 >> 2] = 31773;
+     HEAP32[$1 + 12 >> 2] = 30749;
      break label$1;
     case 1:
-     HEAP32[$1 + 12 >> 2] = 31779;
+     HEAP32[$1 + 12 >> 2] = 30755;
      break label$1;
     case 2:
-     HEAP32[$1 + 12 >> 2] = 31785;
+     HEAP32[$1 + 12 >> 2] = 30761;
      break label$1;
     case 8:
-     HEAP32[$1 + 12 >> 2] = 31791;
+     HEAP32[$1 + 12 >> 2] = 30767;
      break label$1;
     case 3:
-     HEAP32[$1 + 12 >> 2] = 31796;
+     HEAP32[$1 + 12 >> 2] = 30772;
      break label$1;
     case 5:
-     HEAP32[$1 + 12 >> 2] = 31802;
+     HEAP32[$1 + 12 >> 2] = 30778;
      break label$1;
     case 7:
-     HEAP32[$1 + 12 >> 2] = 31807;
+     HEAP32[$1 + 12 >> 2] = 30783;
      break label$1;
     case 4:
-     HEAP32[$1 + 12 >> 2] = 31817;
+     HEAP32[$1 + 12 >> 2] = 30793;
      break label$1;
     case 9:
      break label$3;
     }
    }
-   HEAP32[$1 + 12 >> 2] = 31824;
+   HEAP32[$1 + 12 >> 2] = 30800;
    break label$1;
   }
-  HEAP32[$1 + 12 >> 2] = 31832;
+  HEAP32[$1 + 12 >> 2] = 30808;
  }
  return HEAP32[$1 + 12 >> 2];
 }
@@ -60419,10 +60419,10 @@ function jshSetFlowControlXON($0, $1) {
  HEAP8[$2 + 14 | 0] = $1;
  if (!(HEAPU8[$2 + 15 | 0] < 21 | HEAPU8[$2 + 15 | 0] > 22)) {
   if (!(HEAP8[$2 + 14 | 0] & 1)) {
-   HEAP8[101424] = 1;
+   HEAP8[100384] = 1;
   }
   HEAP32[$2 + 8 >> 2] = HEAPU8[$2 + 15 | 0] - 21;
-  HEAP32[$2 + 4 >> 2] = HEAP32[$2 + 8 >> 2] + 99556;
+  HEAP32[$2 + 4 >> 2] = HEAP32[$2 + 8 >> 2] + 98516;
   if (HEAPU8[HEAP32[$2 + 4 >> 2]] & 8) {
    label$4 : {
     if (HEAP8[$2 + 14 | 0] & 1) {
@@ -60440,7 +60440,7 @@ function jshSetFlowControlXON($0, $1) {
     }
    }
   }
-  HEAP8[$2 + 3 | 0] = HEAPU8[HEAP32[$2 + 8 >> 2] + 99558 | 0];
+  HEAP8[$2 + 3 | 0] = HEAPU8[HEAP32[$2 + 8 >> 2] + 98518 | 0];
   if (HEAPU8[$2 + 3 | 0] != 255) {
    jshPinSetValue(HEAPU8[$2 + 3 | 0], (HEAPU8[$2 + 14 | 0] ^ -1) & 1);
   }
@@ -60481,11 +60481,11 @@ function jshTransmitMove($0) {
    }
    break label$1;
   }
-  HEAP8[$1 + 7 | 0] = HEAPU8[99553];
+  HEAP8[$1 + 7 | 0] = HEAPU8[98513];
   while (1) {
-   if (HEAPU8[$1 + 7 | 0] != HEAPU8[99552]) {
-    if (HEAPU8[$1 + 15 | 0] == (HEAPU8[(HEAPU8[$1 + 7 | 0] << 1) + 99632 | 0] & 31)) {
-     HEAP8[(HEAPU8[$1 + 7 | 0] << 1) + 99632 | 0] = HEAPU8[$1 + 14 | 0] | HEAPU8[(HEAPU8[$1 + 7 | 0] << 1) + 99632 | 0] & -32;
+   if (HEAPU8[$1 + 7 | 0] != HEAPU8[98512]) {
+    if (HEAPU8[$1 + 15 | 0] == (HEAPU8[(HEAPU8[$1 + 7 | 0] << 1) + 98592 | 0] & 31)) {
+     HEAP8[(HEAPU8[$1 + 7 | 0] << 1) + 98592 | 0] = HEAPU8[$1 + 14 | 0] | HEAPU8[(HEAPU8[$1 + 7 | 0] << 1) + 98592 | 0] & -32;
     }
     HEAP8[$1 + 7 | 0] = HEAPU8[$1 + 7 | 0] + 1;
     continue;
@@ -60506,16 +60506,16 @@ function jswrap_promise_constructor($0) {
   HEAP32[$1 + 16 >> 2] = jsvNewNativeFunction(532, 32776);
   HEAP32[$1 + 20 >> 2] = jsvNewNativeFunction(531, 32776);
   if (HEAP32[$1 + 16 >> 2]) {
-   jsvObjectSetChild(HEAP32[$1 + 16 >> 2], 40590, HEAP32[$1 + 24 >> 2]);
+   jsvObjectSetChild(HEAP32[$1 + 16 >> 2], 39562, HEAP32[$1 + 24 >> 2]);
   }
   if (HEAP32[$1 + 20 >> 2]) {
-   jsvObjectSetChild(HEAP32[$1 + 20 >> 2], 40590, HEAP32[$1 + 24 >> 2]);
+   jsvObjectSetChild(HEAP32[$1 + 20 >> 2], 39562, HEAP32[$1 + 24 >> 2]);
   }
-  HEAP32[$1 + 12 >> 2] = HEAP32[24866];
+  HEAP32[$1 + 12 >> 2] = HEAP32[24606];
   if (HEAP32[$1 + 28 >> 2]) {
    jsvUnLock(jspeFunctionCall(HEAP32[$1 + 28 >> 2], 0, HEAP32[$1 + 24 >> 2], 0, 2, $1 + 16 | 0));
   }
-  HEAP32[24866] = HEAP32[$1 + 12 >> 2];
+  HEAP32[24606] = HEAP32[$1 + 12 >> 2];
   jsvUnLockMany(2, $1 + 16 | 0);
   HEAP32[$1 + 8 >> 2] = jspGetException();
   if (HEAP32[$1 + 8 >> 2]) {
@@ -60657,7 +60657,7 @@ function jsiIsWatchingPin($0) {
   }
   $0 = $1 + 16 | 0;
   HEAP8[$1 + 29 | 0] = 0;
-  HEAP32[$1 + 24 >> 2] = jsvLock(HEAPU16[49741]);
+  HEAP32[$1 + 24 >> 2] = jsvLock(HEAPU16[49221]);
   jsvObjectIteratorNew($0, HEAP32[$1 + 24 >> 2]);
   while (1) {
    if (jsvObjectIteratorHasValue($1 + 16 | 0) & 1) {
@@ -60715,23 +60715,23 @@ function jsvNewWithFlags($0) {
  global$0 = $1;
  HEAP16[$1 + 10 >> 1] = $0;
  label$1 : {
-  if (HEAP32[14858]) {
-   HEAP8[99447] = HEAPU8[99447] | 32;
+  if (HEAP32[14598]) {
+   HEAP8[98407] = HEAPU8[98407] | 32;
    HEAP32[$1 + 12 >> 2] = 0;
    break label$1;
   }
   HEAP32[$1 + 4 >> 2] = 0;
-  if (HEAPU16[29718]) {
-   HEAP32[$1 + 4 >> 2] = jsvGetAddressOf(HEAPU16[29718]);
-   HEAP16[29718] = jsvGetNextSibling(HEAP32[$1 + 4 >> 2]);
-   HEAP8[59429] = 1;
+  if (HEAPU16[29198]) {
+   HEAP32[$1 + 4 >> 2] = jsvGetAddressOf(HEAPU16[29198]);
+   HEAP16[29198] = jsvGetNextSibling(HEAP32[$1 + 4 >> 2]);
+   HEAP8[58389] = 1;
   }
   if (HEAP32[$1 + 4 >> 2]) {
    jsvResetVariable(HEAP32[$1 + 4 >> 2], HEAPU16[$1 + 10 >> 1]);
    HEAP32[$1 + 12 >> 2] = HEAP32[$1 + 4 >> 2];
    break label$1;
   }
-  HEAP8[99447] = HEAPU8[99447] | 8;
+  HEAP8[98407] = HEAPU8[98407] | 8;
   if (jsvGarbageCollect()) {
    HEAP32[$1 + 12 >> 2] = jsvNewWithFlags(HEAPU16[$1 + 10 >> 1]);
    break label$1;
@@ -60740,7 +60740,7 @@ function jsvNewWithFlags($0) {
    HEAP32[$1 + 12 >> 2] = jsvNewWithFlags(HEAPU16[$1 + 10 >> 1]);
    break label$1;
   }
-  HEAP8[99447] = HEAPU8[99447] | 16;
+  HEAP8[98407] = HEAPU8[98407] | 16;
   jspSetInterrupted(1);
   HEAP32[$1 + 12 >> 2] = 0;
  }
@@ -60752,16 +60752,16 @@ function jspeBlockNoBrackets() {
  $0 = global$0 - 16 | 0;
  global$0 = $0;
  label$1 : {
-  if ((HEAP32[24866] & 63) == 1) {
+  if ((HEAP32[24606] & 63) == 1) {
    while (1) {
-    if (HEAP16[HEAP32[14856] + 2 >> 1] ? HEAP16[HEAP32[14856] + 2 >> 1] != 125 : 0) {
+    if (HEAP16[HEAP32[14596] + 2 >> 1] ? HEAP16[HEAP32[14596] + 2 >> 1] != 125 : 0) {
      HEAP32[$0 + 12 >> 2] = jspeStatement();
      jsvCheckReferenceError(HEAP32[$0 + 12 >> 2]);
      jsvUnLock(HEAP32[$0 + 12 >> 2]);
-     if (HEAP32[24866] & 112) {
-      if (!(!HEAP32[14856] | HEAP32[24866] & 128)) {
-       HEAP32[24866] = HEAP32[24866] | 128;
-       HEAP32[$0 + 8 >> 2] = jsvObjectGetChild(HEAP32[24863], 3760, 27);
+     if (HEAP32[24606] & 112) {
+      if (!(!HEAP32[14596] | HEAP32[24606] & 128)) {
+       HEAP32[24606] = HEAP32[24606] | 128;
+       HEAP32[$0 + 8 >> 2] = jsvObjectGetChild(HEAP32[24603], 3760, 27);
        if (HEAP32[$0 + 8 >> 2]) {
         jsvAppendPrintf(HEAP32[$0 + 8 >> 2], 4720, 0);
         jspAppendStackTrace(HEAP32[$0 + 8 >> 2]);
@@ -60769,10 +60769,10 @@ function jspeBlockNoBrackets() {
        }
       }
      }
-     if (HEAP32[24866] & 80) {
+     if (HEAP32[24606] & 80) {
       break label$1;
      }
-     if ((HEAP32[24866] & 63) != 1) {
+     if ((HEAP32[24606] & 63) != 1) {
       jspeSkipBlock();
       break label$1;
      }
@@ -60822,16 +60822,16 @@ function jswrap_process_env() {
  $0 = global$0 - 16 | 0;
  global$0 = $0;
  HEAP32[$0 + 12 >> 2] = jsvNewWithFlags(5);
- jsvObjectSetChildAndUnLock(HEAP32[$0 + 12 >> 2], 40428, jsvNewFromString(40436));
- jsvObjectSetChildAndUnLock(HEAP32[$0 + 12 >> 2], 40445, jsvNewFromString(40456));
- jsvObjectSetChildAndUnLock(HEAP32[$0 + 12 >> 2], 40465, jsvNewFromString(40471));
- jsvObjectSetChildAndUnLock(HEAP32[$0 + 12 >> 2], 40482, jsvNewFromInteger(262144));
- jsvObjectSetChildAndUnLock(HEAP32[$0 + 12 >> 2], 40488, jsvNewFromInteger(41984));
- jsvObjectSetChildAndUnLock(HEAP32[$0 + 12 >> 2], 40496, jsvNewFromInteger(0));
- jsvObjectSetChildAndUnLock(HEAP32[$0 + 12 >> 2], 40500, jswrap_interface_getSerial());
- jsvObjectSetChildAndUnLock(HEAP32[$0 + 12 >> 2], 40507, jswrap_espruino_getConsole());
- jsvObjectSetChildAndUnLock(HEAP32[$0 + 12 >> 2], 40515, jsvNewFromString(19257));
- jsvObjectSetChildAndUnLock(HEAP32[$0 + 12 >> 2], 40523, jsvNewFromInteger(57488));
+ jsvObjectSetChildAndUnLock(HEAP32[$0 + 12 >> 2], 39404, jsvNewFromString(39412));
+ jsvObjectSetChildAndUnLock(HEAP32[$0 + 12 >> 2], 39417, jsvNewFromString(39428));
+ jsvObjectSetChildAndUnLock(HEAP32[$0 + 12 >> 2], 39437, jsvNewFromString(39443));
+ jsvObjectSetChildAndUnLock(HEAP32[$0 + 12 >> 2], 39454, jsvNewFromInteger(262144));
+ jsvObjectSetChildAndUnLock(HEAP32[$0 + 12 >> 2], 39460, jsvNewFromInteger(41984));
+ jsvObjectSetChildAndUnLock(HEAP32[$0 + 12 >> 2], 39468, jsvNewFromInteger(0));
+ jsvObjectSetChildAndUnLock(HEAP32[$0 + 12 >> 2], 39472, jswrap_interface_getSerial());
+ jsvObjectSetChildAndUnLock(HEAP32[$0 + 12 >> 2], 39479, jswrap_espruino_getConsole());
+ jsvObjectSetChildAndUnLock(HEAP32[$0 + 12 >> 2], 39487, jsvNewFromString(18259));
+ jsvObjectSetChildAndUnLock(HEAP32[$0 + 12 >> 2], 39495, jsvNewFromInteger(56448));
  global$0 = $0 + 16 | 0;
  return HEAP32[$0 + 12 >> 2];
 }
@@ -61058,19 +61058,19 @@ function jswrap_graphics_getFont($0) {
   HEAP32[$1 + 12 >> 2] = (HEAPU8[$1 + 41 | 0] | HEAPU8[$1 + 42 | 0] << 8) & 57344;
   if (!HEAP32[$1 + 12 >> 2]) {
    HEAP32[$1 >> 2] = (HEAPU8[$1 + 41 | 0] | HEAPU8[$1 + 42 | 0] << 8) & 8191;
-   HEAP32[$1 + 92 >> 2] = jsvVarPrintf(43086, $1);
+   HEAP32[$1 + 92 >> 2] = jsvVarPrintf(42046, $1);
    break label$1;
   }
   if (HEAP32[$1 + 12 >> 2] == 8192) {
-   HEAP32[$1 + 92 >> 2] = jsvNewFromString(43052);
+   HEAP32[$1 + 92 >> 2] = jsvNewFromString(42012);
    break label$1;
   }
   if (HEAP32[$1 + 12 >> 2] == 16384) {
-   HEAP32[$1 + 92 >> 2] = jsvNewFromString(43056);
+   HEAP32[$1 + 92 >> 2] = jsvNewFromString(42016);
    break label$1;
   }
   if (HEAP32[$1 + 12 >> 2] == 24576) {
-   HEAP32[$1 + 92 >> 2] = jsvNewFromString(43095);
+   HEAP32[$1 + 92 >> 2] = jsvNewFromString(42055);
    break label$1;
   }
   HEAP32[$1 + 92 >> 2] = jsvNewFromInteger(HEAPU8[$1 + 41 | 0] | HEAPU8[$1 + 42 | 0] << 8);
@@ -61123,17 +61123,17 @@ function jswrap_waveform_kill() {
  var $0 = 0, $1 = 0;
  $0 = global$0 - 32 | 0;
  global$0 = $0;
- HEAP32[$0 + 28 >> 2] = jsvObjectGetChild(HEAP32[24863], 41489, 0);
+ HEAP32[$0 + 28 >> 2] = jsvObjectGetChild(HEAP32[24603], 40461, 0);
  if (HEAP32[$0 + 28 >> 2]) {
   jsvObjectIteratorNew($0 + 24 | 0, HEAP32[$0 + 28 >> 2]);
   while (1) {
    if (jsvObjectIteratorHasValue($0 + 24 | 0) & 1) {
     HEAP32[$0 + 20 >> 2] = jsvObjectIteratorGetValue($0 + 24 | 0);
-    HEAP8[$0 + 19 | 0] = jsvGetBoolAndUnLock(jsvObjectGetChild(HEAP32[$0 + 20 >> 2], 41494, 0)) & 1;
+    HEAP8[$0 + 19 | 0] = jsvGetBoolAndUnLock(jsvObjectGetChild(HEAP32[$0 + 20 >> 2], 40466, 0)) & 1;
     if (HEAP8[$0 + 19 | 0] & 1) {
      HEAP32[$0 + 12 >> 2] = jswrap_waveform_getBuffer(HEAP32[$0 + 20 >> 2], 0, 0);
      if (!(jstStopBufferTimerTask(HEAP32[$0 + 12 >> 2]) & 1)) {
-      jsExceptionHere(1, 41551, 0);
+      jsExceptionHere(1, 40523, 0);
      }
      jsvUnLock(HEAP32[$0 + 12 >> 2]);
     }
@@ -61160,7 +61160,7 @@ function jswrap_flash_write($0, $1) {
  HEAP32[$2 + 8 >> 2] = $1;
  label$1 : {
   if (jsvIsUndefined(HEAP32[$2 + 12 >> 2]) & 1) {
-   jsExceptionHere(1, 36728, 0);
+   jsExceptionHere(1, 35704, 0);
    break label$1;
   }
   HEAP32[$2 + 4 >> 2] = 0;
@@ -61169,7 +61169,7 @@ function jswrap_flash_write($0, $1) {
    HEAP32[$2 + 4 >> 2] = jsvIterateCallbackCount(HEAP32[$2 + 12 >> 2]);
    label$4 : {
     if (HEAP32[$2 + 4 >> 2] + 256 >>> 0 > 1e6) {
-     jsExceptionHere(1, 36748, 0);
+     jsExceptionHere(1, 35724, 0);
      break label$4;
     }
     $0 = $3 - (HEAP32[$2 + 4 >> 2] + 15 & -16) | 0;
@@ -61191,7 +61191,7 @@ function lcdSetCallbacks_ArrayBuffer($0) {
  global$0 = $1;
  HEAP32[$1 + 12 >> 2] = $0;
  $0 = HEAP32[$1 + 12 >> 2];
- HEAP32[$1 + 8 >> 2] = jsvObjectGetChild(HEAPU8[$0 | 0] | HEAPU8[$0 + 1 | 0] << 8 | (HEAPU8[$0 + 2 | 0] << 16 | HEAPU8[$0 + 3 | 0] << 24), 31724, 0);
+ HEAP32[$1 + 8 >> 2] = jsvObjectGetChild(HEAPU8[$0 | 0] | HEAPU8[$0 + 1 | 0] << 8 | (HEAPU8[$0 + 2 | 0] << 16 | HEAPU8[$0 + 3 | 0] << 24), 30700, 0);
  jsvUnLock(HEAP32[$1 + 8 >> 2]);
  if (jsvIsArrayBuffer(HEAP32[$1 + 8 >> 2]) & 1) {
   $0 = HEAP32[$1 + 12 >> 2];
@@ -61261,27 +61261,27 @@ function jspExecuteFunction($0, $1, $2, $3) {
  HEAP32[$4 + 36 >> 2] = $2;
  HEAP32[$4 + 32 >> 2] = $3;
  $0 = $4 + 8 | 0;
- HEAP32[$0 + 16 >> 2] = HEAP32[24866];
- $1 = HEAP32[24865];
- HEAP32[$0 + 8 >> 2] = HEAP32[24864];
+ HEAP32[$0 + 16 >> 2] = HEAP32[24606];
+ $1 = HEAP32[24605];
+ HEAP32[$0 + 8 >> 2] = HEAP32[24604];
  HEAP32[$0 + 12 >> 2] = $1;
- $1 = HEAP32[24863];
- HEAP32[$0 >> 2] = HEAP32[24862];
+ $1 = HEAP32[24603];
+ HEAP32[$0 >> 2] = HEAP32[24602];
  HEAP32[$0 + 4 >> 2] = $1;
- HEAP32[24864] = 0;
- HEAP32[24866] = 1;
- HEAP32[24865] = 0;
+ HEAP32[24604] = 0;
+ HEAP32[24606] = 1;
+ HEAP32[24605] = 0;
  HEAP32[$4 + 4 >> 2] = jspeFunctionCall(HEAP32[$4 + 44 >> 2], 0, HEAP32[$4 + 40 >> 2], 0, HEAP32[$4 + 36 >> 2], HEAP32[$4 + 32 >> 2]);
  jspeiClearScopes();
- HEAP32[$4 + 24 >> 2] = HEAP32[$4 + 24 >> 2] | HEAP32[24866] & 6256;
+ HEAP32[$4 + 24 >> 2] = HEAP32[$4 + 24 >> 2] | HEAP32[24606] & 6256;
  jspeiClearScopes();
  $1 = HEAP32[$0 + 4 >> 2];
- HEAP32[24862] = HEAP32[$0 >> 2];
- HEAP32[24863] = $1;
- HEAP32[24866] = HEAP32[$0 + 16 >> 2];
+ HEAP32[24602] = HEAP32[$0 >> 2];
+ HEAP32[24603] = $1;
+ HEAP32[24606] = HEAP32[$0 + 16 >> 2];
  $1 = HEAP32[$0 + 12 >> 2];
- HEAP32[24864] = HEAP32[$0 + 8 >> 2];
- HEAP32[24865] = $1;
+ HEAP32[24604] = HEAP32[$0 + 8 >> 2];
+ HEAP32[24605] = $1;
  global$0 = $4 + 48 | 0;
  return HEAP32[$4 + 4 >> 2];
 }
@@ -61293,13 +61293,13 @@ function jsi2cPopulateI2CInfo($0, $1) {
  HEAP32[$2 + 56 >> 2] = $0;
  HEAP32[$2 + 52 >> 2] = $1;
  jshI2CInitInfo(HEAP32[$2 + 56 >> 2]);
- HEAP32[$2 + 16 >> 2] = 7392;
+ HEAP32[$2 + 16 >> 2] = 7388;
  HEAP16[$2 + 20 >> 1] = 12;
  HEAP32[$2 + 24 >> 2] = HEAP32[$2 + 56 >> 2] + 4;
- HEAP32[$2 + 28 >> 2] = 7396;
+ HEAP32[$2 + 28 >> 2] = 7392;
  HEAP16[$2 + 32 >> 1] = 12;
  HEAP32[$2 + 36 >> 2] = HEAP32[$2 + 56 >> 2] + 5;
- HEAP32[$2 + 40 >> 2] = 7400;
+ HEAP32[$2 + 40 >> 2] = 7396;
  HEAP16[$2 + 44 >> 1] = 9;
  HEAP32[$2 + 48 >> 2] = HEAP32[$2 + 56 >> 2];
  label$1 : {
@@ -61307,7 +61307,7 @@ function jsi2cPopulateI2CInfo($0, $1) {
    HEAP8[$2 + 15 | 0] = 1;
    $0 = HEAP32[$2 + 56 >> 2];
    if ((HEAPU8[$0 | 0] | HEAPU8[$0 + 1 | 0] << 8 | (HEAPU8[$0 + 2 | 0] << 16 | HEAPU8[$0 + 3 | 0] << 24)) < 100) {
-    jsExceptionHere(1, 7408, 0);
+    jsExceptionHere(1, 7404, 0);
     HEAP8[$2 + 15 | 0] = 0;
    }
    HEAP8[$2 + 63 | 0] = HEAP8[$2 + 15 | 0] & 1;
@@ -61365,23 +61365,23 @@ function jswrap_regexp_constructor($0, $1) {
  label$1 : {
   if (!(jsvIsString(HEAP32[$2 + 40 >> 2]) & 1)) {
    HEAP32[$2 + 16 >> 2] = HEAP32[$2 + 40 >> 2];
-   jsExceptionHere(3, 40772, $2 + 16 | 0);
+   jsExceptionHere(3, 39744, $2 + 16 | 0);
    HEAP32[$2 + 44 >> 2] = 0;
    break label$1;
   }
-  HEAP32[$2 + 32 >> 2] = jspNewObject(0, 40815);
-  jsvObjectSetChild(HEAP32[$2 + 32 >> 2], 40822, HEAP32[$2 + 40 >> 2]);
+  HEAP32[$2 + 32 >> 2] = jspNewObject(0, 39787);
+  jsvObjectSetChild(HEAP32[$2 + 32 >> 2], 39794, HEAP32[$2 + 40 >> 2]);
   if (!(jsvIsUndefined(HEAP32[$2 + 36 >> 2]) & 1)) {
    label$4 : {
     if (!(jsvIsString(HEAP32[$2 + 36 >> 2]) & 1)) {
      HEAP32[$2 >> 2] = HEAP32[$2 + 40 >> 2];
-     jsExceptionHere(3, 40772, $2);
+     jsExceptionHere(3, 39744, $2);
      break label$4;
     }
-    jsvObjectSetChild(HEAP32[$2 + 32 >> 2], 40829, HEAP32[$2 + 36 >> 2]);
+    jsvObjectSetChild(HEAP32[$2 + 32 >> 2], 39801, HEAP32[$2 + 36 >> 2]);
    }
   }
-  jsvObjectSetChildAndUnLock(HEAP32[$2 + 32 >> 2], 40835, jsvNewFromInteger(0));
+  jsvObjectSetChildAndUnLock(HEAP32[$2 + 32 >> 2], 39807, jsvNewFromInteger(0));
   HEAP32[$2 + 44 >> 2] = HEAP32[$2 + 32 >> 2];
  }
  global$0 = $2 + 48 | 0;
@@ -61526,10 +61526,10 @@ function tflite__GetQuantizedConvolutionMultipler_28TfLiteContext__2c_20TfLiteTe
   if (!(HEAPF64[$5 + 16 >> 3] >= 0)) {
    $0 = HEAP32[HEAP32[$5 + 40 >> 2] + 20 >> 2];
    $1 = HEAP32[$5 + 40 >> 2];
-   HEAP32[$5 + 8 >> 2] = 53678;
+   HEAP32[$5 + 8 >> 2] = 52638;
    HEAP32[$5 + 4 >> 2] = 118;
-   HEAP32[$5 >> 2] = 53222;
-   FUNCTION_TABLE[$0]($1, 53382, $5);
+   HEAP32[$5 >> 2] = 52182;
+   FUNCTION_TABLE[$0]($1, 52342, $5);
    HEAP32[$5 + 44 >> 2] = 1;
    break label$1;
   }
@@ -61582,25 +61582,25 @@ function btnHandlerCommon($0, $1, $2) {
  HEAP8[$3 + 11 | 0] = $1;
  HEAP8[$3 + 10 | 0] = $2;
  label$1 : {
-  if (HEAP32[63901]) {
+  if (HEAP32[63641]) {
    label$3 : {
-    if (!(!(HEAP32[63903] & 8) | HEAP32[$3 + 12 >> 2] != 3 ? !((HEAP32[$3 + 12 >> 2] == 1 ? HEAP32[63903] & 2 : 0) | (HEAP32[$3 + 12 >> 2] == 2 ? HEAP32[63903] & 4 : 0)) : 0)) {
-     HEAP16[127805] = 0;
-     if (!(!(HEAP8[$3 + 11 | 0] & 1) | HEAP8[255608] & 1)) {
-      HEAP32[63904] = HEAP32[63904] | 1;
-      HEAP8[255620] = HEAP32[$3 + 12 >> 2];
+    if (!(!(HEAP32[63643] & 8) | HEAP32[$3 + 12 >> 2] != 3 ? !((HEAP32[$3 + 12 >> 2] == 1 ? HEAP32[63643] & 2 : 0) | (HEAP32[$3 + 12 >> 2] == 2 ? HEAP32[63643] & 4 : 0)) : 0)) {
+     HEAP16[127285] = 0;
+     if (!(!(HEAP8[$3 + 11 | 0] & 1) | HEAP8[254568] & 1)) {
+      HEAP32[63644] = HEAP32[63644] | 1;
+      HEAP8[254580] = HEAP32[$3 + 12 >> 2];
       break label$1;
      }
      break label$3;
     }
-    if (!(HEAP8[255608] & 1)) {
+    if (!(HEAP8[254568] & 1)) {
      break label$1;
     }
-    HEAP16[127805] = 0;
+    HEAP16[127285] = 0;
    }
   }
-  if (!(HEAP8[$3 + 11 | 0] & 1 | HEAP32[$3 + 12 >> 2] != HEAP8[255620])) {
-   HEAP8[255620] = 0;
+  if (!(HEAP8[$3 + 11 | 0] & 1 | HEAP32[$3 + 12 >> 2] != HEAP8[254580])) {
+   HEAP8[254580] = 0;
    break label$1;
   }
   jshPushIOEvent((HEAPU8[$3 + 10 | 0] | (HEAP8[$3 + 11 | 0] & 1 ? 32 : 0)) & 255, jshGetSystemTime(), i64toi32_i32$HIGH_BITS);
@@ -61656,7 +61656,7 @@ function jswrap_modules_addCached($0, $1) {
      break label$2;
     }
    }
-   jsExceptionHere(1, 38653, 0);
+   jsExceptionHere(1, 37629, 0);
    break label$1;
   }
   HEAP32[$2 + 20 >> 2] = jswrap_modules_getModuleList();
@@ -61667,7 +61667,7 @@ function jswrap_modules_addCached($0, $1) {
   label$4 : {
    if (!HEAP32[$2 + 16 >> 2]) {
     HEAP32[$2 >> 2] = HEAP32[$2 + 28 >> 2];
-    jsExceptionHere(1, 38701, $2);
+    jsExceptionHere(1, 37677, $2);
     break label$4;
    }
    jsvObjectSetChildVar(HEAP32[$2 + 20 >> 2], HEAP32[$2 + 28 >> 2], HEAP32[$2 + 16 >> 2]);
@@ -61697,7 +61697,7 @@ function tflite__GreedyMemoryPlanner__GetOffsetForBuffer_28tflite__ErrorReporter
    $2 = HEAP32[$4 + 16 >> 2];
    HEAP32[$4 + 4 >> 2] = HEAP32[$0 + 8 >> 2];
    HEAP32[$4 >> 2] = $2;
-   tflite__ErrorReporter__Report_28char_20const__2c_20____29($1, 52653, $4);
+   tflite__ErrorReporter__Report_28char_20const__2c_20____29($1, 51613, $4);
    HEAP32[$4 + 28 >> 2] = 1;
    break label$1;
   }
@@ -61766,9 +61766,9 @@ function jsiSemiInit($0) {
  global$0 = $1;
  HEAP8[$1 + 15 | 0] = $0;
  jspSoftInit();
- HEAP8[99548] = 0;
- HEAP16[49742] = HEAPU16[49742] & 1760;
- HEAP8[57425] = 255;
+ HEAP8[98508] = 0;
+ HEAP16[49222] = HEAPU16[49222] & 1760;
+ HEAP8[56385] = 255;
  $0 = $1;
  if (HEAP8[$1 + 15 | 0] & 1) {
   $2 = jsfFlashContainsCode();
@@ -61777,29 +61777,29 @@ function jsiSemiInit($0) {
  }
  HEAP8[$0 + 14 | 0] = $2 & 1;
  if (HEAP8[$1 + 14 | 0] & 1) {
-  HEAP16[49742] = HEAPU16[49742] & -2049;
+  HEAP16[49222] = HEAPU16[49222] & -2049;
   jspSoftKill();
   jsvClearEmptyVarList();
   jsfLoadStateFromFlash();
   jsvCreateEmptyVarList();
   jspSoftInit();
  }
- HEAP32[$1 + 8 >> 2] = jsvObjectGetChild(HEAP32[24863], 5525, 0);
+ HEAP32[$1 + 8 >> 2] = jsvObjectGetChild(HEAP32[24603], 5525, 0);
  if (HEAP32[$1 + 8 >> 2]) {
-  HEAP16[49742] = HEAPU16[49742] | 1024;
+  HEAP16[49222] = HEAPU16[49222] | 1024;
  }
  jsvUnLock(HEAP32[$1 + 8 >> 2]);
  jsiSoftInit((HEAPU8[$1 + 15 | 0] ^ -1) & 1);
  if (jsiEcho() & 1) {
   if (!(HEAP8[$1 + 14 | 0] & 1)) {
-   if (HEAPU8[57424] != 20) {
+   if (HEAPU8[56384] != 20) {
     jsiConsolePrintString(5529);
    }
   }
-  if (HEAPU8[57424] != 20) {
-   jsiConsolePrintString(5716);
+  if (HEAPU8[56384] != 20) {
+   jsiConsolePrintString(5712);
   }
-  HEAP8[99492] = 1;
+  HEAP8[98452] = 1;
  }
  global$0 = $1 + 16 | 0;
 }
@@ -61818,7 +61818,7 @@ function tflite__MicroInterpreter__input_28unsigned_20long_29($0) {
    $2 = HEAP32[$1 + 20 >> 2];
    HEAP32[$1 + 4 >> 2] = HEAP32[$1 + 12 >> 2];
    HEAP32[$1 >> 2] = $2;
-   tflite__ErrorReporter__Report_28char_20const__2c_20____29($0, 44205, $1);
+   tflite__ErrorReporter__Report_28char_20const__2c_20____29($0, 43165, $1);
    HEAP32[$1 + 28 >> 2] = 0;
    break label$1;
   }
@@ -61840,7 +61840,7 @@ function jswrap_promise_resolve($0) {
    break label$1;
   }
   if (jsvIsObject(HEAP32[$1 + 8 >> 2]) & 1) {
-   HEAP32[$1 >> 2] = jsvObjectGetChild(HEAP32[$1 + 8 >> 2], 40697, 0);
+   HEAP32[$1 >> 2] = jsvObjectGetChild(HEAP32[$1 + 8 >> 2], 39669, 0);
    if (jsvIsFunction(HEAP32[$1 >> 2]) & 1) {
     HEAP32[$1 + 4 >> 2] = jswrap_promise_constructor(HEAP32[$1 >> 2]);
    }
@@ -61869,12 +61869,12 @@ function jswrap_arraybuffer_constructor($0) {
  HEAP32[$1 + 8 >> 2] = $0;
  label$1 : {
   if (!(HEAP32[$1 + 8 >> 2] <= 65535 ? HEAP32[$1 + 8 >> 2] >= 0 : 0)) {
-   jsExceptionHere(1, 34831, 0);
+   jsExceptionHere(1, 33807, 0);
    HEAP32[$1 + 12 >> 2] = 0;
    break label$1;
   }
   if (HEAP32[$1 + 8 >> 2] > 65535) {
-   jsExceptionHere(1, 34863, 0);
+   jsExceptionHere(1, 33839, 0);
    HEAP32[$1 + 12 >> 2] = 0;
    break label$1;
   }
@@ -61914,7 +61914,7 @@ function jswrap_espruino_sum($0) {
     break label$2;
    }
    HEAP32[$1 >> 2] = HEAP32[$1 + 68 >> 2];
-   jsExceptionHere(1, 35723, $1);
+   jsExceptionHere(1, 34699, $1);
    HEAPF64[$1 + 72 >> 3] = nan;
    break label$1;
   }
@@ -61954,9 +61954,9 @@ function jswrap_pipe_drain_listener($0) {
   while (1) {
    if (jsvObjectIteratorHasValue($1 + 16 | 0) & 1) {
     HEAP32[$1 + 12 >> 2] = jsvObjectIteratorGetValue($1 + 16 | 0);
-    HEAP32[$1 + 8 >> 2] = jsvObjectGetChild(HEAP32[$1 + 12 >> 2], 40079, 0);
+    HEAP32[$1 + 8 >> 2] = jsvObjectGetChild(HEAP32[$1 + 12 >> 2], 39055, 0);
     if (HEAP32[$1 + 8 >> 2] == HEAP32[$1 + 28 >> 2]) {
-     jsvObjectSetChildAndUnLock(HEAP32[$1 + 12 >> 2], 40273, jsvNewFromBool(0));
+     jsvObjectSetChildAndUnLock(HEAP32[$1 + 12 >> 2], 39249, jsvNewFromBool(0));
     }
     $0 = $1 + 16 | 0;
     jsvUnLock2(HEAP32[$1 + 8 >> 2], HEAP32[$1 + 12 >> 2]);
@@ -61975,10 +61975,10 @@ function jstSystemTimeChanged($0, $1) {
  $2 = global$0 - 16 | 0;
  HEAP32[$2 + 8 >> 2] = $0;
  HEAP32[$2 + 12 >> 2] = $1;
- HEAP8[$2 + 7 | 0] = HEAPU8[101426];
+ HEAP8[$2 + 7 | 0] = HEAPU8[100386];
  while (1) {
-  if (HEAPU8[$2 + 7 | 0] != HEAPU8[101425]) {
-   $0 = Math_imul(HEAPU8[$2 + 7 | 0], 29) + 101440 | 0;
+  if (HEAPU8[$2 + 7 | 0] != HEAPU8[100385]) {
+   $0 = Math_imul(HEAPU8[$2 + 7 | 0], 29) + 100400 | 0;
    $1 = $0;
    $4 = HEAPU8[$0 | 0] | HEAPU8[$0 + 1 | 0] << 8 | (HEAPU8[$0 + 2 | 0] << 16 | HEAPU8[$0 + 3 | 0] << 24);
    $3 = $4 + HEAP32[$2 + 8 >> 2] | 0;
@@ -62004,12 +62004,12 @@ function jspeFunctionDefinition($0) {
  global$0 = $1;
  HEAP8[$1 + 27 | 0] = $0;
  HEAP32[$1 + 20 >> 2] = 0;
- HEAP8[$1 + 19 | 0] = (HEAP32[24866] & 63) == 1;
+ HEAP8[$1 + 19 | 0] = (HEAP32[24606] & 63) == 1;
  if (HEAP8[$1 + 19 | 0] & 1) {
   HEAP32[$1 + 20 >> 2] = jsvNewWithFlags(7);
  }
  HEAP32[$1 + 12 >> 2] = 0;
- if (!(!(HEAP8[$1 + 27 | 0] & 1) | HEAP16[HEAP32[14856] + 2 >> 1] != 128)) {
+ if (!(!(HEAP8[$1 + 27 | 0] & 1) | HEAP16[HEAP32[14596] + 2 >> 1] != 128)) {
   if (HEAP32[$1 + 20 >> 2]) {
    HEAP32[$1 + 12 >> 2] = jslGetTokenValueAsVar();
   }
@@ -62034,14 +62034,14 @@ function jsvCreateEmptyVarList() {
  var $0 = 0, $1 = 0;
  $0 = global$0 - 32 | 0;
  global$0 = $0;
- HEAP32[14858] = 1;
- HEAP16[29718] = 0;
+ HEAP32[14598] = 1;
+ HEAP16[29198] = 0;
  $1 = $0 + 16 | 0;
  jsvSetNextSibling($1, 0);
  HEAP32[$0 + 12 >> 2] = $1;
  HEAP16[$0 + 10 >> 1] = 1;
  while (1) {
-  if (HEAPU16[$0 + 10 >> 1] <= HEAPU32[14353]) {
+  if (HEAPU16[$0 + 10 >> 1] <= HEAPU32[14093]) {
    HEAP32[$0 + 4 >> 2] = jsvGetAddressOf(HEAPU16[$0 + 10 >> 1]);
    label$3 : {
     if (!(HEAPU16[HEAP32[$0 + 4 >> 2] + 14 >> 1] & 63)) {
@@ -62060,8 +62060,8 @@ function jsvCreateEmptyVarList() {
  }
  $1 = $0 + 16 | 0;
  jsvSetNextSibling(HEAP32[$0 + 12 >> 2], 0);
- HEAP16[29718] = jsvGetNextSibling($1);
- HEAP32[14858] = 0;
+ HEAP16[29198] = jsvGetNextSibling($1);
+ HEAP32[14598] = 0;
  global$0 = $0 + 32 | 0;
 }
 function jswrap_i2c_setup($0, $1) {
@@ -62095,7 +62095,7 @@ function jswrap_i2c_setup($0, $1) {
     jsvUnLock(jsvSetNamedChild(HEAP32[$2 + 12 >> 2], HEAP32[$2 + 8 >> 2]));
     break label$7;
    }
-   jsvObjectRemoveChild(HEAP32[$2 + 12 >> 2], 41123);
+   jsvObjectRemoveChild(HEAP32[$2 + 12 >> 2], 40095);
   }
  }
  global$0 = $2 + 16 | 0;
@@ -62111,7 +62111,7 @@ function jswrap_espruino_variance($0, $1) {
  label$1 : {
   if (!(jsvIsIterable(HEAP32[$2 + 84 >> 2]) & 1)) {
    HEAP32[$2 >> 2] = HEAP32[$2 + 84 >> 2];
-   jsExceptionHere(1, 35771, $2);
+   jsExceptionHere(1, 34747, $2);
    HEAPF64[$2 + 88 >> 3] = nan;
    break label$1;
   }
@@ -62172,8 +62172,8 @@ function jsiHandleMoveUpDown($0) {
  $2 = $1 + 20 | 0;
  $3 = $1 + 24 | 0;
  HEAP32[$1 + 28 >> 2] = $0;
- HEAP32[$1 + 16 >> 2] = jsvGetLinesInString(HEAP32[24872]);
- jsvGetLineAndCol(HEAP32[24872], HEAP32[24874], $2, $3);
+ HEAP32[$1 + 16 >> 2] = jsvGetLinesInString(HEAP32[24612]);
+ jsvGetLineAndCol(HEAP32[24612], HEAP32[24614], $2, $3);
  HEAP32[$1 + 12 >> 2] = HEAP32[$1 + 24 >> 2];
  HEAP32[$1 + 8 >> 2] = HEAP32[$1 + 20 >> 2];
  HEAP32[$1 + 8 >> 2] = HEAP32[$1 + 8 >> 2] + HEAP32[$1 + 28 >> 2];
@@ -62185,8 +62185,8 @@ function jsiHandleMoveUpDown($0) {
  }
  $0 = $1 + 8 | 0;
  $2 = $1 + 12 | 0;
- HEAP32[24874] = jsvGetIndexFromLineAndCol(HEAP32[24872], HEAP32[$1 + 8 >> 2], HEAP32[$1 + 12 >> 2]);
- jsvGetLineAndCol(HEAP32[24872], HEAP32[24874], $0, $2);
+ HEAP32[24614] = jsvGetIndexFromLineAndCol(HEAP32[24612], HEAP32[$1 + 8 >> 2], HEAP32[$1 + 12 >> 2]);
+ jsvGetLineAndCol(HEAP32[24612], HEAP32[24614], $0, $2);
  if (jsiShowInputLine() & 1) {
   jsiMoveCursor(HEAP32[$1 + 24 >> 2], HEAP32[$1 + 20 >> 2], HEAP32[$1 + 12 >> 2], HEAP32[$1 + 8 >> 2]);
  }
@@ -62260,16 +62260,16 @@ function jshPinWatch($0, $1) {
    HEAP32[$2 + 8 >> 2] = 0;
    while (1) {
     if (HEAP32[$2 + 8 >> 2] < 16) {
-     if (HEAPU8[HEAP32[$2 + 8 >> 2] + 255584 | 0] == 255) {
-      HEAP8[HEAP32[$2 + 8 >> 2] + 255584 | 0] = HEAPU8[$2 + 14 | 0];
+     if (HEAPU8[HEAP32[$2 + 8 >> 2] + 254544 | 0] == 255) {
+      HEAP8[HEAP32[$2 + 8 >> 2] + 254544 | 0] = HEAPU8[$2 + 14 | 0];
       HEAP8[$2 + 15 | 0] = HEAP32[$2 + 8 >> 2] + 1;
       break label$1;
      } else {
       HEAP32[$2 + 4 >> 2] = 0;
       while (1) {
        if (HEAP32[$2 + 4 >> 2] < 16) {
-        if (HEAPU8[HEAP32[$2 + 4 >> 2] + 255584 | 0] == HEAPU8[$2 + 14 | 0]) {
-         HEAP8[HEAP32[$2 + 4 >> 2] + 255584 | 0] = 255;
+        if (HEAPU8[HEAP32[$2 + 4 >> 2] + 254544 | 0] == HEAPU8[$2 + 14 | 0]) {
+         HEAP8[HEAP32[$2 + 4 >> 2] + 254544 | 0] = 255;
         }
         HEAP32[$2 + 4 >> 2] = HEAP32[$2 + 4 >> 2] + 1;
         continue;
@@ -62324,7 +62324,7 @@ function jspNewPrototype($0) {
  $1 = global$0 - 32 | 0;
  global$0 = $1;
  HEAP32[$1 + 24 >> 2] = $0;
- HEAP32[$1 + 20 >> 2] = jsvFindChildFromString(HEAP32[24862], HEAP32[$1 + 24 >> 2], 1);
+ HEAP32[$1 + 20 >> 2] = jsvFindChildFromString(HEAP32[24602], HEAP32[$1 + 24 >> 2], 1);
  label$1 : {
   if (!HEAP32[$1 + 20 >> 2]) {
    HEAP32[$1 + 28 >> 2] = 0;
@@ -62592,25 +62592,25 @@ function lcdST7789_blitStart() {
  HEAP32[$0 + 24 >> 2] = 0;
  HEAP32[$0 + 20 >> 2] = 239;
  HEAP32[$0 + 16 >> 2] = 239;
- HEAP32[25481] = -1;
- HEAP32[25482] = -1;
+ HEAP32[25221] = -1;
+ HEAP32[25222] = -1;
  HEAP32[$0 + 12 >> 2] = HEAP32[$0 + 28 >> 2];
- HEAP32[$0 + 8 >> 2] = HEAP32[$0 + 24 >> 2] + HEAP32[25478];
+ HEAP32[$0 + 8 >> 2] = HEAP32[$0 + 24 >> 2] + HEAP32[25218];
  if (HEAP32[$0 + 8 >> 2] >= 320) {
   HEAP32[$0 + 8 >> 2] = HEAP32[$0 + 8 >> 2] - 320;
  }
  HEAP32[$0 + 4 >> 2] = HEAP32[$0 + 28 >> 2] + HEAP32[$0 + 20 >> 2];
- HEAP32[$0 >> 2] = HEAP32[25478] + (HEAP32[$0 + 24 >> 2] + HEAP32[$0 + 16 >> 2] | 0);
+ HEAP32[$0 >> 2] = HEAP32[25218] + (HEAP32[$0 + 24 >> 2] + HEAP32[$0 + 16 >> 2] | 0);
  if (HEAP32[$0 >> 2] >= 320) {
   HEAP32[$0 >> 2] = HEAP32[$0 >> 2] - 320;
  }
- HEAP32[$0 + 24 >> 2] = HEAP32[25478] + HEAP32[$0 + 24 >> 2];
- HEAP32[25483] = HEAP32[$0 + 12 >> 2];
- HEAP32[25484] = HEAP32[$0 + 8 >> 2];
- HEAP32[25485] = HEAP32[$0 + 12 >> 2];
- HEAP32[25486] = HEAP32[$0 + 8 >> 2];
- HEAP32[25487] = HEAP32[$0 + 4 >> 2];
- HEAP32[25488] = HEAP32[$0 >> 2];
+ HEAP32[$0 + 24 >> 2] = HEAP32[25218] + HEAP32[$0 + 24 >> 2];
+ HEAP32[25223] = HEAP32[$0 + 12 >> 2];
+ HEAP32[25224] = HEAP32[$0 + 8 >> 2];
+ HEAP32[25225] = HEAP32[$0 + 12 >> 2];
+ HEAP32[25226] = HEAP32[$0 + 8 >> 2];
+ HEAP32[25227] = HEAP32[$0 + 4 >> 2];
+ HEAP32[25228] = HEAP32[$0 >> 2];
 }
 function lcdSetPixel_JS($0, $1, $2, $3) {
  $0 = $0 | 0;
@@ -62625,7 +62625,7 @@ function lcdSetPixel_JS($0, $1, $2, $3) {
  HEAP32[$4 + 20 >> 2] = $2;
  HEAP32[$4 + 16 >> 2] = $3;
  $0 = HEAP32[$4 + 28 >> 2];
- HEAP32[$4 + 12 >> 2] = jsvObjectGetChild(HEAPU8[$0 | 0] | HEAPU8[$0 + 1 | 0] << 8 | (HEAPU8[$0 + 2 | 0] << 16 | HEAPU8[$0 + 3 | 0] << 24), 31731, 0);
+ HEAP32[$4 + 12 >> 2] = jsvObjectGetChild(HEAPU8[$0 | 0] | HEAPU8[$0 + 1 | 0] << 8 | (HEAPU8[$0 + 2 | 0] << 16 | HEAPU8[$0 + 3 | 0] << 24), 30707, 0);
  if (HEAP32[$4 + 12 >> 2]) {
   HEAP32[$4 >> 2] = jsvNewFromInteger(HEAP32[$4 + 24 >> 2]);
   HEAP32[$4 + 4 >> 2] = jsvNewFromInteger(HEAP32[$4 + 20 >> 2]);
@@ -62678,10 +62678,10 @@ function fromCalenderDate($0) {
  HEAP32[$1 + 8 >> 2] = Math_imul(HEAP32[$1 + 16 >> 2], 365);
  label$1 : {
   if (HEAP32[$1 + 16 >> 2] == 2) {
-   HEAP32[$1 + 12 >> 2] = 35264;
+   HEAP32[$1 + 12 >> 2] = 34240;
    break label$1;
   }
-  HEAP32[$1 + 12 >> 2] = 35232;
+  HEAP32[$1 + 12 >> 2] = 34208;
  }
  if (HEAP32[$1 + 16 >> 2] >= 2) {
   HEAP32[$1 + 8 >> 2] = HEAP32[$1 + 8 >> 2] + 1;
@@ -62690,7 +62690,7 @@ function fromCalenderDate($0) {
  if (HEAP32[$1 + 4 >> 2] < 0) {
   HEAP32[$1 + 4 >> 2] = HEAP32[$1 + 4 >> 2] + 12;
  }
- return (HEAP32[HEAP32[$1 + 28 >> 2] + 4 >> 2] + (HEAP16[HEAP32[$1 + 12 >> 2] + (HEAP32[$1 + 4 >> 2] << 1) >> 1] + (HEAP16[(HEAP32[$1 + 16 >> 2] << 1) + 35290 >> 1] + Math_imul(HEAP32[$1 + 20 >> 2], 1461) | 0) | 0) | 0) - 1 | 0;
+ return (HEAP32[HEAP32[$1 + 28 >> 2] + 4 >> 2] + (HEAP16[HEAP32[$1 + 12 >> 2] + (HEAP32[$1 + 4 >> 2] << 1) >> 1] + (HEAP16[(HEAP32[$1 + 16 >> 2] << 1) + 34266 >> 1] + Math_imul(HEAP32[$1 + 20 >> 2], 1461) | 0) | 0) | 0) - 1 | 0;
 }
 function i2c_start($0) {
  var $1 = 0;
@@ -62715,12 +62715,12 @@ function i2c_start($0) {
    break;
   }
   if (!HEAP32[$1 + 8 >> 2]) {
-   err(7428);
+   err(7424);
   }
   dly(HEAP32[$1 + 12 >> 2]);
  }
  if (!(jshPinGetValue(HEAPU8[HEAP32[$1 + 12 >> 2] + 1 | 0]) & 1)) {
-  err(7444);
+  err(7440);
  }
  jshPinSetValue(HEAPU8[HEAP32[$1 + 12 >> 2] + 1 | 0], 0);
  dly(HEAP32[$1 + 12 >> 2]);
@@ -62904,8 +62904,8 @@ function jspeiFindInScopes($0) {
  global$0 = $1;
  HEAP32[$1 + 24 >> 2] = $0;
  label$1 : {
-  if (HEAP32[24864]) {
-   HEAP32[$1 + 20 >> 2] = jsvLockSafe(jsvGetLastChild(HEAP32[24864]) & 65535);
+  if (HEAP32[24604]) {
+   HEAP32[$1 + 20 >> 2] = jsvLockSafe(jsvGetLastChild(HEAP32[24604]) & 65535);
    while (1) {
     if (HEAP32[$1 + 20 >> 2]) {
      HEAP32[$1 + 16 >> 2] = jsvSkipName(HEAP32[$1 + 20 >> 2]);
@@ -62922,7 +62922,7 @@ function jspeiFindInScopes($0) {
     break;
    }
   }
-  HEAP32[$1 + 28 >> 2] = jsvFindChildFromString(HEAP32[24862], HEAP32[$1 + 24 >> 2], 0);
+  HEAP32[$1 + 28 >> 2] = jsvFindChildFromString(HEAP32[24602], HEAP32[$1 + 24 >> 2], 0);
  }
  global$0 = $1 + 32 | 0;
  return HEAP32[$1 + 28 >> 2];
@@ -63071,7 +63071,7 @@ function wcrtomb($0, $1) {
     break label$1;
    }
    label$3 : {
-    if (!HEAP32[HEAP32[14804] >> 2]) {
+    if (!HEAP32[HEAP32[14544] >> 2]) {
      if (($1 & -128) == 57216) {
       break label$1;
      }
@@ -63096,7 +63096,7 @@ function wcrtomb($0, $1) {
      return 4;
     }
    }
-   HEAP32[64357] = 25;
+   HEAP32[64097] = 25;
    $0 = -1;
   } else {
    $0 = 1;
@@ -63177,27 +63177,27 @@ function nativeCallGetCType() {
  $0 = global$0 - 16 | 0;
  global$0 = $0;
  label$1 : {
-  if (HEAP16[HEAP32[14856] + 2 >> 1] == 192) {
+  if (HEAP16[HEAP32[14596] + 2 >> 1] == 192) {
    jslMatch(192);
    HEAP32[$0 + 12 >> 2] = 0;
    break label$1;
   }
-  if (HEAP16[HEAP32[14856] + 2 >> 1] == 128) {
+  if (HEAP16[HEAP32[14596] + 2 >> 1] == 128) {
    HEAP32[$0 + 8 >> 2] = -1;
    HEAP32[$0 + 4 >> 2] = jslGetTokenValueAsString();
-   if (!strcmp(HEAP32[$0 + 4 >> 2], 35628)) {
+   if (!strcmp(HEAP32[$0 + 4 >> 2], 34604)) {
     HEAP32[$0 + 8 >> 2] = 4;
    }
-   if (!strcmp(HEAP32[$0 + 4 >> 2], 35632)) {
+   if (!strcmp(HEAP32[$0 + 4 >> 2], 34608)) {
     HEAP32[$0 + 8 >> 2] = 6;
    }
-   if (!strcmp(HEAP32[$0 + 4 >> 2], 35639)) {
+   if (!strcmp(HEAP32[$0 + 4 >> 2], 34615)) {
     HEAP32[$0 + 8 >> 2] = 3;
    }
-   if (!strcmp(HEAP32[$0 + 4 >> 2], 35644)) {
+   if (!strcmp(HEAP32[$0 + 4 >> 2], 34620)) {
     HEAP32[$0 + 8 >> 2] = 5;
    }
-   if (!strcmp(HEAP32[$0 + 4 >> 2], 35648)) {
+   if (!strcmp(HEAP32[$0 + 4 >> 2], 34624)) {
     HEAP32[$0 + 8 >> 2] = 1;
    }
    jslMatch(128);
@@ -63215,10 +63215,10 @@ function __jspePostfixExpression($0) {
  global$0 = $1;
  HEAP32[$1 + 28 >> 2] = $0;
  while (1) {
-  if (HEAP16[HEAP32[14856] + 2 >> 1] != 152 ? HEAP16[HEAP32[14856] + 2 >> 1] == 153 : 1) {
-   HEAP32[$1 + 24 >> 2] = HEAP16[HEAP32[14856] + 2 >> 1];
+  if (HEAP16[HEAP32[14596] + 2 >> 1] != 152 ? HEAP16[HEAP32[14596] + 2 >> 1] == 153 : 1) {
+   HEAP32[$1 + 24 >> 2] = HEAP16[HEAP32[14596] + 2 >> 1];
    jslGetNextToken();
-   if ((HEAP32[24866] & 63) == 1) {
+   if ((HEAP32[24606] & 63) == 1) {
     HEAP32[$1 + 20 >> 2] = jsvNewFromInteger(1);
     HEAP32[$1 + 16 >> 2] = jsvAsNumberAndUnLock(jsvSkipName(HEAP32[$1 + 28 >> 2]));
     HEAP32[$1 + 12 >> 2] = jsvMathsOpSkipNames(HEAP32[$1 + 16 >> 2], HEAP32[$1 + 20 >> 2], HEAP32[$1 + 24 >> 2] == 152 ? 43 : 45);
@@ -63252,7 +63252,7 @@ function jswrap_espruino_lookupNoCase($0, $1, $2) {
   }
   if ((jsvGetString(HEAP32[$3 + 84 >> 2], $3 + 16 | 0, 64) | 0) == 64) {
    HEAP32[$3 >> 2] = 64;
-   jsExceptionHere(1, 36299, $3);
+   jsExceptionHere(1, 35275, $3);
   }
   if (HEAP8[$3 + 83 | 0] & 1) {
    HEAP32[$3 + 12 >> 2] = jsvFindChildFromStringI(HEAP32[$3 + 88 >> 2], $3 + 16 | 0);
@@ -63272,23 +63272,23 @@ function jshResetDevices() {
  var $0 = 0;
  $0 = global$0 - 16 | 0;
  global$0 = $0;
- HEAP32[24867] = 0;
- HEAP32[24868] = 0;
+ HEAP32[24607] = 0;
+ HEAP32[24608] = 0;
  HEAP32[$0 + 12 >> 2] = 0;
  while (1) {
   if (HEAPU32[$0 + 12 >> 2] < 2) {
-   HEAP8[HEAP32[$0 + 12 >> 2] + 99556 | 0] = 0;
-   HEAP8[HEAP32[$0 + 12 >> 2] + 99558 | 0] = 255;
+   HEAP8[HEAP32[$0 + 12 >> 2] + 98516 | 0] = 0;
+   HEAP8[HEAP32[$0 + 12 >> 2] + 98518 | 0] = 255;
    HEAP32[$0 + 12 >> 2] = HEAP32[$0 + 12 >> 2] + 1;
    continue;
   }
   break;
  }
- HEAP8[99556] = 8;
+ HEAP8[98516] = 8;
  HEAP32[$0 + 12 >> 2] = 1;
  while (1) {
   if (HEAPU32[$0 + 12 >> 2] <= 16) {
-   HEAP32[(HEAP32[$0 + 12 >> 2] << 2) + 99564 >> 2] = 0;
+   HEAP32[(HEAP32[$0 + 12 >> 2] << 2) + 98524 >> 2] = 0;
    HEAP32[$0 + 12 >> 2] = HEAP32[$0 + 12 >> 2] + 1;
    continue;
   }
@@ -63323,12 +63323,12 @@ function jswrap_object_create($0, $1) {
     break label$2;
    }
    HEAP32[$2 >> 2] = HEAP32[$2 + 24 >> 2];
-   jsExceptionHere(3, 38831, $2);
+   jsExceptionHere(3, 37807, $2);
    HEAP32[$2 + 28 >> 2] = 0;
    break label$1;
   }
   if (jsvIsObject(HEAP32[$2 + 20 >> 2]) & 1) {
-   jsExceptionHere(1, 38882, 0);
+   jsExceptionHere(1, 37858, 0);
   }
   HEAP32[$2 + 16 >> 2] = jsvNewWithFlags(5);
   if (!HEAP32[$2 + 16 >> 2]) {
@@ -63336,7 +63336,7 @@ function jswrap_object_create($0, $1) {
    break label$1;
   }
   if (jsvIsObject(HEAP32[$2 + 24 >> 2]) & 1) {
-   jsvObjectSetChild(HEAP32[$2 + 16 >> 2], 38814, HEAP32[$2 + 24 >> 2]);
+   jsvObjectSetChild(HEAP32[$2 + 16 >> 2], 37790, HEAP32[$2 + 24 >> 2]);
   }
   HEAP32[$2 + 28 >> 2] = HEAP32[$2 + 16 >> 2];
  }
@@ -63766,7 +63766,7 @@ function jshGetDeviceFor($0, $1, $2) {
   HEAP32[$3 + 4 >> 2] = 0;
   while (1) {
    if (HEAP32[$3 + 4 >> 2] < 0) {
-    $0 = (Math_imul(HEAPU8[$3 + 9 | 0], 3) + 31971 | 0) + (HEAP32[$3 + 4 >> 2] << 1) | 0;
+    $0 = (Math_imul(HEAPU8[$3 + 9 | 0], 3) + 30947 | 0) + (HEAP32[$3 + 4 >> 2] << 1) | 0;
     HEAP16[$3 + 2 >> 1] = HEAPU8[$0 | 0] | HEAPU8[$0 + 1 | 0] << 8;
     if (!((HEAPU16[$3 + 2 >> 1] & 4080) < HEAPU16[$3 + 12 >> 1] | (HEAPU16[$3 + 2 >> 1] & 4080) > HEAPU16[$3 + 10 >> 1])) {
      HEAP16[$3 + 14 >> 1] = HEAPU16[$3 + 2 >> 1];
@@ -63846,28 +63846,6 @@ function jsvGetCharsOnLine($0, $1) {
  global$0 = $2 + 48 | 0;
  return HEAP32[$2 + 32 >> 2];
 }
-function jshPushIOCharEventAppend($0, $1) {
- var $2 = 0;
- $2 = global$0 - 16 | 0;
- HEAP8[$2 + 14 | 0] = $0;
- HEAP8[$2 + 13 | 0] = $1;
- HEAP8[$2 + 12 | 0] = HEAPU8[99554] + 255;
- label$1 : {
-  if (!(HEAPU8[99554] == HEAPU8[99555] | HEAPU8[$2 + 12 | 0] == HEAPU8[99555])) {
-   if (HEAPU8[$2 + 14 | 0] == (HEAPU8[Math_imul(HEAPU8[$2 + 12 | 0], 5) + 100144 | 0] & 31)) {
-    HEAP8[$2 + 11 | 0] = ((HEAPU8[Math_imul(HEAPU8[$2 + 12 | 0], 5) + 100144 | 0] & 96) >> 5) + 1;
-    if (HEAPU8[$2 + 11 | 0] < 4) {
-     HEAP8[HEAPU8[$2 + 11 | 0] + (Math_imul(HEAPU8[$2 + 12 | 0], 5) + 100145 | 0) | 0] = HEAPU8[$2 + 13 | 0];
-     HEAP8[Math_imul(HEAPU8[$2 + 12 | 0], 5) + 100144 | 0] = HEAPU8[Math_imul(HEAPU8[$2 + 12 | 0], 5) + 100144 | 0] & 159 | HEAPU8[$2 + 11 | 0] << 5;
-     HEAP8[$2 + 15 | 0] = 1;
-     break label$1;
-    }
-   }
-  }
-  HEAP8[$2 + 15 | 0] = 0;
- }
- return HEAP8[$2 + 15 | 0] & 1;
-}
 function TfLiteIntArrayEqualsArray($0, $1, $2) {
  var $3 = 0;
  $3 = global$0 - 32 | 0;
@@ -63944,13 +63922,13 @@ function jswrap_io_analogWrite($0, $1, $2) {
  HEAPF64[$3 + 16 >> 3] = 0;
  HEAP32[$3 + 12 >> 2] = 0;
  if (jsvIsObject(HEAP32[$3 + 28 >> 2]) & 1) {
-  HEAPF64[$3 + 16 >> 3] = jsvGetFloatAndUnLock(jsvObjectGetChild(HEAP32[$3 + 28 >> 2], 37372, 0));
+  HEAPF64[$3 + 16 >> 3] = jsvGetFloatAndUnLock(jsvObjectGetChild(HEAP32[$3 + 28 >> 2], 36348, 0));
   label$2 : {
-   if (jsvGetBoolAndUnLock(jsvObjectGetChild(HEAP32[$3 + 28 >> 2], 37377, 0)) & 1) {
+   if (jsvGetBoolAndUnLock(jsvObjectGetChild(HEAP32[$3 + 28 >> 2], 36353, 0)) & 1) {
     HEAP32[$3 + 12 >> 2] = HEAP32[$3 + 12 >> 2] | 2;
     break label$2;
    }
-   if (jsvGetBoolAndUnLock(jsvObjectGetChild(HEAP32[$3 + 28 >> 2], 37387, 0)) & 1) {
+   if (jsvGetBoolAndUnLock(jsvObjectGetChild(HEAP32[$3 + 28 >> 2], 36363, 0)) & 1) {
     HEAP32[$3 + 12 >> 2] = HEAP32[$3 + 12 >> 2] | 1;
    }
   }
@@ -63987,13 +63965,35 @@ function jswrap_espruino_enableWatchdog($0, $1) {
      break label$4;
     }
    }
-   HEAP16[49742] = HEAPU16[49742] | 512;
+   HEAP16[49222] = HEAPU16[49222] | 512;
    break label$3;
   }
-  HEAP16[49742] = HEAPU16[49742] & -513;
+  HEAP16[49222] = HEAPU16[49222] & -513;
  }
  HEAPF64[(global$0 - 16 | 0) + 8 >> 3] = HEAPF64[$2 + 24 >> 3];
  global$0 = $2 + 32 | 0;
+}
+function jshPushIOCharEventAppend($0, $1) {
+ var $2 = 0;
+ $2 = global$0 - 16 | 0;
+ HEAP8[$2 + 14 | 0] = $0;
+ HEAP8[$2 + 13 | 0] = $1;
+ HEAP8[$2 + 12 | 0] = HEAPU8[98514] + 255;
+ label$1 : {
+  if (!(HEAPU8[98514] == HEAPU8[98515] | HEAPU8[$2 + 12 | 0] == HEAPU8[98515])) {
+   if (HEAPU8[$2 + 14 | 0] == (HEAPU8[Math_imul(HEAPU8[$2 + 12 | 0], 5) + 99104 | 0] & 31)) {
+    HEAP8[$2 + 11 | 0] = ((HEAPU8[Math_imul(HEAPU8[$2 + 12 | 0], 5) + 99104 | 0] & 96) >> 5) + 1;
+    if (HEAPU8[$2 + 11 | 0] < 4) {
+     HEAP8[HEAPU8[$2 + 11 | 0] + (Math_imul(HEAPU8[$2 + 12 | 0], 5) + 99105 | 0) | 0] = HEAPU8[$2 + 13 | 0];
+     HEAP8[Math_imul(HEAPU8[$2 + 12 | 0], 5) + 99104 | 0] = HEAPU8[Math_imul(HEAPU8[$2 + 12 | 0], 5) + 99104 | 0] & 159 | HEAPU8[$2 + 11 | 0] << 5;
+     HEAP8[$2 + 15 | 0] = 1;
+     break label$1;
+    }
+   }
+  }
+  HEAP8[$2 + 15 | 0] = 0;
+ }
+ return HEAP8[$2 + 15 | 0] & 1;
 }
 function jsvArrayBufferIteratorGetValue($0) {
  var $1 = 0;
@@ -64227,21 +64227,21 @@ function jswrap_error_toString($0) {
  $1 = global$0 - 32 | 0;
  global$0 = $1;
  HEAP32[$1 + 24 >> 2] = $0;
- HEAP32[$1 + 20 >> 2] = jsvObjectGetChild(HEAP32[$1 + 24 >> 2], 35559, 0);
+ HEAP32[$1 + 20 >> 2] = jsvObjectGetChild(HEAP32[$1 + 24 >> 2], 34535, 0);
  if (!HEAP32[$1 + 20 >> 2]) {
-  HEAP32[$1 + 20 >> 2] = jsvNewFromString(35564);
+  HEAP32[$1 + 20 >> 2] = jsvNewFromString(34540);
  }
  label$2 : {
   if (!HEAP32[$1 + 20 >> 2]) {
    HEAP32[$1 + 28 >> 2] = 0;
    break label$2;
   }
-  HEAP32[$1 + 16 >> 2] = jsvObjectGetChild(HEAP32[$1 + 24 >> 2], 35551, 0);
+  HEAP32[$1 + 16 >> 2] = jsvObjectGetChild(HEAP32[$1 + 24 >> 2], 34527, 0);
   if (HEAP32[$1 + 16 >> 2]) {
    $0 = HEAP32[$1 + 20 >> 2];
    HEAP32[$1 + 4 >> 2] = HEAP32[$1 + 16 >> 2];
    HEAP32[$1 >> 2] = $0;
-   HEAP32[$1 + 12 >> 2] = jsvVarPrintf(35621, $1);
+   HEAP32[$1 + 12 >> 2] = jsvVarPrintf(34597, $1);
    jsvUnLock2(HEAP32[$1 + 16 >> 2], HEAP32[$1 + 20 >> 2]);
    HEAP32[$1 + 20 >> 2] = HEAP32[$1 + 12 >> 2];
   }
@@ -64439,18 +64439,18 @@ function jswrap_banglejs_setLCDPower($0) {
   lcdST7789_cmd(16, 0, 0);
  }
  jshUSARTKick(HEAP8[$1 + 15 | 0] & 1);
- if ((HEAP8[255608] & 1) != (HEAP8[$1 + 15 | 0] & 1)) {
-  HEAP32[$1 + 8 >> 2] = jsvObjectGetChild(HEAP32[24862], 32068, 0);
+ if ((HEAP8[254568] & 1) != (HEAP8[$1 + 15 | 0] & 1)) {
+  HEAP32[$1 + 8 >> 2] = jsvObjectGetChild(HEAP32[24602], 31044, 0);
   if (HEAP32[$1 + 8 >> 2]) {
    $0 = $1 + 4 | 0;
    HEAP32[$1 + 4 >> 2] = jsvNewFromBool(HEAP8[$1 + 15 | 0] & 1);
-   jsiQueueObjectCallbacks(HEAP32[$1 + 8 >> 2], 32075, $0, 1);
+   jsiQueueObjectCallbacks(HEAP32[$1 + 8 >> 2], 31051, $0, 1);
    jsvUnLock(HEAP32[$1 + 4 >> 2]);
   }
   jsvUnLock(HEAP32[$1 + 8 >> 2]);
  }
- HEAP16[127805] = 0;
- HEAP8[255608] = HEAP8[$1 + 15 | 0] & 1;
+ HEAP16[127285] = 0;
+ HEAP8[254568] = HEAP8[$1 + 15 | 0] & 1;
  global$0 = $1 + 16 | 0;
 }
 function jsvGetLongInteger($0) {
@@ -64499,7 +64499,7 @@ function jswrap_interface_getSerial() {
   while (1) {
    if (HEAP32[$0 + 12 >> 2] < HEAP32[$0 + 8 >> 2]) {
     if (!(!HEAP32[$0 + 12 >> 2] | HEAP32[$0 + 12 >> 2] & 3)) {
-     jsvAppendString(HEAP32[$0 + 4 >> 2], 37180);
+     jsvAppendString(HEAP32[$0 + 4 >> 2], 36156);
     }
     $1 = $0 + 52 | 0;
     itostr(HEAPU8[HEAP32[$0 + 12 >> 2] + ($0 + 16 | 0) | 0] | 256, $1, 16);
@@ -64552,7 +64552,7 @@ function jsiDumpDeviceInitialisation($0, $1, $2) {
  HEAP32[$3 + 28 >> 2] = $0;
  HEAP32[$3 + 24 >> 2] = $1;
  HEAP32[$3 + 20 >> 2] = $2;
- HEAP32[$3 + 16 >> 2] = jsvObjectGetChild(HEAP32[24862], HEAP32[$3 + 20 >> 2], 0);
+ HEAP32[$3 + 16 >> 2] = jsvObjectGetChild(HEAP32[24602], HEAP32[$3 + 20 >> 2], 0);
  if (HEAP32[$3 + 16 >> 2]) {
   HEAP32[$3 + 12 >> 2] = jsvObjectGetChild(HEAP32[$3 + 16 >> 2], 5351, 0);
   if (HEAP32[$3 + 12 >> 2]) {
@@ -64640,12 +64640,12 @@ function jswrap_promise_all_resolve($0, $1, $2) {
  HEAP32[$3 + 28 >> 2] = $0;
  HEAP32[$3 + 24 >> 2] = $1;
  HEAP32[$3 + 20 >> 2] = $2;
- HEAP32[$3 + 16 >> 2] = jsvGetIntegerAndUnLock(jsvObjectGetChild(HEAP32[$3 + 28 >> 2], 40641, 0));
- HEAP32[$3 + 12 >> 2] = jsvObjectGetChild(HEAP32[$3 + 28 >> 2], 40647, 0);
+ HEAP32[$3 + 16 >> 2] = jsvGetIntegerAndUnLock(jsvObjectGetChild(HEAP32[$3 + 28 >> 2], 39613, 0));
+ HEAP32[$3 + 12 >> 2] = jsvObjectGetChild(HEAP32[$3 + 28 >> 2], 39619, 0);
  if (HEAP32[$3 + 12 >> 2]) {
   jsvSetArrayItem(HEAP32[$3 + 12 >> 2], HEAP32[$3 + 24 >> 2], HEAP32[$3 + 20 >> 2]);
   HEAP32[$3 + 16 >> 2] = HEAP32[$3 + 16 >> 2] + -1;
-  jsvObjectSetChildAndUnLock(HEAP32[$3 + 28 >> 2], 40641, jsvNewFromInteger(HEAP32[$3 + 16 >> 2]));
+  jsvObjectSetChildAndUnLock(HEAP32[$3 + 28 >> 2], 39613, jsvNewFromInteger(HEAP32[$3 + 16 >> 2]));
   if (!HEAP32[$3 + 16 >> 2]) {
    _jswrap_promise_queueresolve(HEAP32[$3 + 28 >> 2], HEAP32[$3 + 12 >> 2]);
   }
@@ -64713,11 +64713,11 @@ function jspePostfixExpression() {
  $0 = global$0 - 16 | 0;
  global$0 = $0;
  label$1 : {
-  if (!(HEAP16[HEAP32[14856] + 2 >> 1] != 153 ? HEAP16[HEAP32[14856] + 2 >> 1] != 152 : 0)) {
-   HEAP32[$0 + 8 >> 2] = HEAP16[HEAP32[14856] + 2 >> 1];
+  if (!(HEAP16[HEAP32[14596] + 2 >> 1] != 153 ? HEAP16[HEAP32[14596] + 2 >> 1] != 152 : 0)) {
+   HEAP32[$0 + 8 >> 2] = HEAP16[HEAP32[14596] + 2 >> 1];
    jslGetNextToken();
    HEAP32[$0 + 12 >> 2] = jspePostfixExpression();
-   if ((HEAP32[24866] & 63) == 1) {
+   if ((HEAP32[24606] & 63) == 1) {
     HEAP32[$0 + 4 >> 2] = jsvNewFromInteger(1);
     HEAP32[$0 >> 2] = jsvMathsOpSkipNames(HEAP32[$0 + 12 >> 2], HEAP32[$0 + 4 >> 2], HEAP32[$0 + 8 >> 2] == 152 ? 43 : 45);
     jsvUnLock(HEAP32[$0 + 4 >> 2]);
@@ -64808,14 +64808,14 @@ function jswrap_interface_print($0) {
    jsvUnLock(HEAP32[$1 + 4 >> 2]);
    jsvObjectIteratorNext($0);
    if (jsvObjectIteratorHasValue($0) & 1) {
-    jsiConsolePrintString(37032);
+    jsiConsolePrintString(36008);
    }
    continue;
   }
   break;
  }
  jsvObjectIteratorFree($1 + 8 | 0);
- jsiConsolePrintString(37034);
+ jsiConsolePrintString(36010);
  global$0 = $1 + 16 | 0;
 }
 function jswrap_espruino_CRC32($0) {
@@ -64919,7 +64919,7 @@ function jshSetFlowControlEnabled($0) {
  HEAP8[$1 + 13 | 0] = 255;
  if (!(HEAPU8[$1 + 15 | 0] < 21 | HEAPU8[$1 + 15 | 0] > 22)) {
   HEAP32[$1 + 8 >> 2] = HEAPU8[$1 + 15 | 0] - 21;
-  HEAP32[$1 + 4 >> 2] = HEAP32[$1 + 8 >> 2] + 99556;
+  HEAP32[$1 + 4 >> 2] = HEAP32[$1 + 8 >> 2] + 98516;
   label$2 : {
    if (HEAP8[$1 + 14 | 0] & 1) {
     $0 = HEAP32[$1 + 4 >> 2];
@@ -64929,11 +64929,11 @@ function jshSetFlowControlEnabled($0) {
    $0 = HEAP32[$1 + 4 >> 2];
    HEAP8[$0 | 0] = HEAPU8[$0 | 0] & -9;
   }
-  HEAP8[HEAP32[$1 + 8 >> 2] + 99558 | 0] = 255;
+  HEAP8[HEAP32[$1 + 8 >> 2] + 98518 | 0] = 255;
   if (jshIsPinValid(HEAPU8[$1 + 13 | 0]) & 1) {
    jshPinSetState(HEAPU8[$1 + 13 | 0], 1);
    jshPinSetValue(HEAPU8[$1 + 13 | 0], 0);
-   HEAP8[HEAP32[$1 + 8 >> 2] + 99558 | 0] = HEAPU8[$1 + 13 | 0];
+   HEAP8[HEAP32[$1 + 8 >> 2] + 98518 | 0] = HEAPU8[$1 + 13 | 0];
   }
  }
  global$0 = $1 + 16 | 0;
@@ -64945,7 +64945,7 @@ function jswrap_waveform_getBuffer($0, $1, $2) {
  HEAP32[$3 + 24 >> 2] = $0;
  HEAP32[$3 + 20 >> 2] = $1;
  HEAP32[$3 + 16 >> 2] = $2;
- HEAP32[$3 + 12 >> 2] = jsvObjectGetChild(HEAP32[$3 + 24 >> 2], HEAP32[$3 + 20 >> 2] ? 41533 : 41502, 0);
+ HEAP32[$3 + 12 >> 2] = jsvObjectGetChild(HEAP32[$3 + 24 >> 2], HEAP32[$3 + 20 >> 2] ? 40505 : 40474, 0);
  label$1 : {
   if (!HEAP32[$3 + 12 >> 2]) {
    HEAP32[$3 + 28 >> 2] = 0;
@@ -65019,17 +65019,17 @@ function jsiQueueEvents($0, $1, $2, $3) {
  HEAP32[$4 + 16 >> 2] = $3;
  HEAP32[$4 + 12 >> 2] = jsvNewWithFlags(5);
  if (HEAP32[$4 + 12 >> 2]) {
-  jsvUnLock(jsvAddNamedChild(HEAP32[$4 + 12 >> 2], HEAP32[$4 + 24 >> 2], 5948));
+  jsvUnLock(jsvAddNamedChild(HEAP32[$4 + 12 >> 2], HEAP32[$4 + 24 >> 2], 5944));
   if (HEAP32[$4 + 16 >> 2]) {
    HEAP32[$4 + 8 >> 2] = jsvNewArray(HEAP32[$4 + 20 >> 2], HEAP32[$4 + 16 >> 2]);
    if (HEAP32[$4 + 8 >> 2]) {
-    jsvUnLock2(jsvAddNamedChild(HEAP32[$4 + 12 >> 2], HEAP32[$4 + 8 >> 2], 5953), HEAP32[$4 + 8 >> 2]);
+    jsvUnLock2(jsvAddNamedChild(HEAP32[$4 + 12 >> 2], HEAP32[$4 + 8 >> 2], 5949), HEAP32[$4 + 8 >> 2]);
    }
   }
   if (HEAP32[$4 + 28 >> 2]) {
-   jsvUnLock(jsvAddNamedChild(HEAP32[$4 + 12 >> 2], HEAP32[$4 + 28 >> 2], 5958));
+   jsvUnLock(jsvAddNamedChild(HEAP32[$4 + 12 >> 2], HEAP32[$4 + 28 >> 2], 5954));
   }
-  jsvArrayPushAndUnLock(HEAP32[24869], HEAP32[$4 + 12 >> 2]);
+  jsvArrayPushAndUnLock(HEAP32[24609], HEAP32[$4 + 12 >> 2]);
  }
  global$0 = $4 + 32 | 0;
 }
@@ -65049,7 +65049,7 @@ function jswrap_object_setPrototypeOf($0, $1) {
      break label$2;
     }
    }
-   $1 = jspGetNamedField(HEAP32[$2 + 12 >> 2], 38814, 1);
+   $1 = jspGetNamedField(HEAP32[$2 + 12 >> 2], 37790, 1);
    break label$1;
   }
   $1 = 0;
@@ -65058,7 +65058,7 @@ function jswrap_object_setPrototypeOf($0, $1) {
  label$4 : {
   if (!(jsvIsName(HEAP32[$2 + 4 >> 2]) & 1)) {
    HEAP32[$2 >> 2] = HEAP32[$2 + 4 >> 2];
-   jsExceptionHere(3, 39140, $2);
+   jsExceptionHere(3, 38116, $2);
    break label$4;
   }
   jsvSetValueOfName(HEAP32[$2 + 4 >> 2], HEAP32[$2 + 8 >> 2]);
@@ -65074,7 +65074,7 @@ function jsserialEventCallbackKill($0, $1) {
  global$0 = $2;
  HEAP32[$2 + 28 >> 2] = $0;
  HEAP32[$2 + 24 >> 2] = $1;
- HEAP32[$2 + 20 >> 2] = jsvObjectGetChild(HEAP32[$2 + 28 >> 2], 7755, 0);
+ HEAP32[$2 + 20 >> 2] = jsvObjectGetChild(HEAP32[$2 + 28 >> 2], 7751, 0);
  if (HEAP32[$2 + 20 >> 2]) {
   HEAP8[$2 + 19 | 0] = jsvGetIntegerAndUnLock(HEAP32[$2 + 20 >> 2]);
   jshPinWatch(HEAPU8[$2 + 19 | 0], 0);
@@ -65085,7 +65085,7 @@ function jsserialEventCallbackKill($0, $1) {
     jsvRemoveChild(HEAP32[$2 + 12 >> 2], HEAP32[$2 + 8 >> 2]);
    }
    if (!jsvGetChildren(HEAP32[$2 + 12 >> 2])) {
-    jsvObjectRemoveChild(HEAP32[24863], 7700);
+    jsvObjectRemoveChild(HEAP32[24603], 7696);
    }
    jsvUnLock2(HEAP32[$2 + 8 >> 2], HEAP32[$2 + 12 >> 2]);
   }
@@ -65135,19 +65135,19 @@ function jswrap_banglejs_beep($0, $1) {
   HEAP32[$2 + 8 >> 2] = 5e3;
  }
  label$4 : {
-  if (HEAP32[63921]) {
-   jsExceptionHere(1, 33014, 0);
+  if (HEAP32[63661]) {
+   jsExceptionHere(1, 31986, 0);
    HEAP32[$2 + 12 >> 2] = 0;
    break label$4;
   }
-  HEAP32[63921] = jspromise_create();
-  if (!HEAP32[63921]) {
+  HEAP32[63661] = jspromise_create();
+  if (!HEAP32[63661]) {
    HEAP32[$2 + 12 >> 2] = 0;
    break label$4;
   }
   jshPinAnalogOutput(18, .5, +HEAP32[$2 + 4 >> 2], 0);
   jsiSetTimeout(504, +HEAP32[$2 + 8 >> 2]);
-  HEAP32[$2 + 12 >> 2] = jsvLockAgain(HEAP32[63921]);
+  HEAP32[$2 + 12 >> 2] = jsvLockAgain(HEAP32[63661]);
  }
  global$0 = $2 + 16 | 0;
  return HEAP32[$2 + 12 >> 2];
@@ -65204,13 +65204,13 @@ function i2c_stop($0) {
   break;
  }
  if (!HEAP32[$1 + 8 >> 2]) {
-  err(7504);
+  err(7500);
  }
  dly(HEAP32[$1 + 12 >> 2]);
  jshPinSetValue(HEAPU8[HEAP32[$1 + 12 >> 2] + 1 | 0], 1);
  dly(HEAP32[$1 + 12 >> 2]);
  if (!(jshPinGetValue(HEAPU8[HEAP32[$1 + 12 >> 2] + 1 | 0]) & 1)) {
-  err(7519);
+  err(7515);
  }
  dly(HEAP32[$1 + 12 >> 2]);
  HEAP8[HEAP32[$1 + 12 >> 2] + 2 | 0] = 0;
@@ -65248,9 +65248,9 @@ function jswrap_date_toUTCString($0) {
  HEAP32[$1 + 92 >> 2] = $0;
  getTimeFromDateVar($1 - -64 | 0, HEAP32[$1 + 92 >> 2], 1);
  getCalendarDate($2, HEAP32[$1 + 64 >> 2]);
- $0 = HEAP32[14370] + (HEAP32[$1 + 56 >> 2] << 2) | 0;
+ $0 = HEAP32[14110] + (HEAP32[$1 + 56 >> 2] << 2) | 0;
  $2 = HEAP32[$1 + 44 >> 2];
- $3 = HEAP32[14369];
+ $3 = HEAP32[14109];
  $4 = HEAP32[$1 + 48 >> 2] << 2;
  $5 = HEAP32[$1 + 52 >> 2];
  $6 = HEAP32[$1 + 80 >> 2];
@@ -65262,7 +65262,7 @@ function jswrap_date_toUTCString($0) {
  HEAP32[$1 + 8 >> 2] = $3 + $4;
  HEAP32[$1 + 4 >> 2] = $2;
  HEAP32[$1 >> 2] = $0;
- $0 = jsvVarPrintf(35481, $1);
+ $0 = jsvVarPrintf(34457, $1);
  global$0 = $1 + 96 | 0;
  return $0 | 0;
 }
@@ -65389,7 +65389,7 @@ function jswrap_banglejs_lcdWr($0, $1) {
   HEAP32[$2 + 4 >> 2] = jsvIterateCallbackCount(HEAP32[$2 + 8 >> 2]);
   label$2 : {
    if (HEAP32[$2 + 4 >> 2] + 256 >>> 0 > 1e6) {
-    jsExceptionHere(1, 32450, 0);
+    jsExceptionHere(1, 31426, 0);
     break label$2;
    }
    $0 = $3 - (HEAP32[$2 + 4 >> 2] + 15 & -16) | 0;
@@ -65431,11 +65431,11 @@ function jspGetException() {
  var $0 = 0;
  $0 = global$0 - 16 | 0;
  global$0 = $0;
- HEAP32[$0 + 8 >> 2] = jsvFindChildFromString(HEAP32[24863], 3753, 0);
+ HEAP32[$0 + 8 >> 2] = jsvFindChildFromString(HEAP32[24603], 3753, 0);
  label$1 : {
   if (HEAP32[$0 + 8 >> 2]) {
    HEAP32[$0 + 4 >> 2] = jsvSkipName(HEAP32[$0 + 8 >> 2]);
-   jsvRemoveChild(HEAP32[24863], HEAP32[$0 + 8 >> 2]);
+   jsvRemoveChild(HEAP32[24603], HEAP32[$0 + 8 >> 2]);
    jsvUnLock(HEAP32[$0 + 8 >> 2]);
    HEAP32[$0 >> 2] = jspGetStackTrace();
    label$3 : {
@@ -65479,7 +65479,7 @@ function i2c_rd_bit($0) {
   break;
  }
  if (!HEAP32[$1 + 8 >> 2]) {
-  err(7491);
+  err(7487);
  }
  dly(HEAP32[$1 + 12 >> 2]);
  HEAP8[$1 + 7 | 0] = jshPinGetValue(HEAPU8[HEAP32[$1 + 12 >> 2] + 1 | 0]) & 1;
@@ -65550,7 +65550,7 @@ function jswrap_banglejs_getLCDMode() {
  $0 = global$0 - 16 | 0;
  global$0 = $0;
  HEAP32[$0 + 8 >> 2] = 0;
- $1 = HEAP32[25480];
+ $1 = HEAP32[25220];
  label$1 : {
   if ($1 >>> 0 > 4) {
    break label$1;
@@ -65558,22 +65558,22 @@ function jswrap_banglejs_getLCDMode() {
   label$2 : {
    switch ($1 - 1 | 0) {
    default:
-    HEAP32[$0 + 8 >> 2] = 32094;
+    HEAP32[$0 + 8 >> 2] = 31070;
     break label$1;
    case 0:
-    HEAP32[$0 + 8 >> 2] = 32087;
+    HEAP32[$0 + 8 >> 2] = 31063;
     break label$1;
    case 1:
-    HEAP32[$0 + 8 >> 2] = 32099;
+    HEAP32[$0 + 8 >> 2] = 31075;
     break label$1;
    case 2:
-    HEAP32[$0 + 8 >> 2] = 32114;
+    HEAP32[$0 + 8 >> 2] = 31090;
     break label$1;
    case 3:
     break label$2;
    }
   }
-  HEAP32[$0 + 8 >> 2] = 32122;
+  HEAP32[$0 + 8 >> 2] = 31098;
  }
  label$7 : {
   if (!HEAP32[$0 + 8 >> 2]) {
@@ -65590,7 +65590,7 @@ function jsvIsInstanceOf($0) {
  $1 = global$0 - 32 | 0;
  global$0 = $1;
  HEAP32[$1 + 24 >> 2] = $0;
- HEAP32[$1 + 20 >> 2] = 41440;
+ HEAP32[$1 + 20 >> 2] = 40412;
  HEAP8[$1 + 19 | 0] = 0;
  label$1 : {
   if (!(jsvHasChildren(HEAP32[$1 + 24 >> 2]) & 1)) {
@@ -65656,7 +65656,7 @@ function jswrap_array_join($0, $1) {
   }
   label$3 : {
    if (jsvIsUndefined(HEAP32[$2 + 4 >> 2]) & 1) {
-    HEAP32[$2 + 4 >> 2] = jsvNewFromString(34528);
+    HEAP32[$2 + 4 >> 2] = jsvNewFromString(33504);
     break label$3;
    }
    HEAP32[$2 + 4 >> 2] = jsvAsString(HEAP32[$2 + 4 >> 2]);
@@ -65737,7 +65737,7 @@ function jsvGetMemoryUsage() {
  HEAP32[$0 + 12 >> 2] = 0;
  HEAP32[$0 + 8 >> 2] = 1;
  while (1) {
-  if (HEAPU32[$0 + 8 >> 2] <= HEAPU32[14353]) {
+  if (HEAPU32[$0 + 8 >> 2] <= HEAPU32[14093]) {
    HEAP32[$0 + 4 >> 2] = jsvGetAddressOf(HEAP32[$0 + 8 >> 2] & 65535);
    if (HEAPU16[HEAP32[$0 + 4 >> 2] + 14 >> 1] & 63) {
     HEAP32[$0 + 12 >> 2] = HEAP32[$0 + 12 >> 2] + 1;
@@ -65763,7 +65763,7 @@ function jsiDumpJSON($0, $1, $2, $3) {
  HEAP32[$4 + 24 >> 2] = $1;
  HEAP32[$4 + 20 >> 2] = $2;
  HEAP32[$4 + 16 >> 2] = $3;
- HEAP32[$4 + 12 >> 2] = jsvGetIndexOf(HEAP32[24862], HEAP32[$4 + 20 >> 2], 1);
+ HEAP32[$4 + 12 >> 2] = jsvGetIndexOf(HEAP32[24602], HEAP32[$4 + 20 >> 2], 1);
  label$1 : {
   label$2 : {
    if (!HEAP32[$4 + 12 >> 2]) {
@@ -65851,25 +65851,25 @@ function jswrap_banglejs_gps_character($0) {
   if (HEAP8[$1 + 14 | 0] == 13) {
    break label$1;
   }
-  if (HEAPU8[255600] >= 82) {
-   HEAP8[255600] = 0;
+  if (HEAPU8[254560] >= 82) {
+   HEAP8[254560] = 0;
   }
   $0 = HEAPU8[$1 + 14 | 0];
-  $2 = HEAPU8[255600];
-  HEAP8[255600] = $2 + 1;
-  HEAP8[$2 + 256288 | 0] = $0;
+  $2 = HEAPU8[254560];
+  HEAP8[254560] = $2 + 1;
+  HEAP8[$2 + 255248 | 0] = $0;
   if (HEAP8[$1 + 14 | 0] != 10) {
    break label$1;
   }
-  if (HEAPU8[255600] > 1) {
-   memcpy(255760, 256288, HEAPU8[255600]);
-   HEAP8[(HEAPU8[255600] - 1 | 0) + 255760 | 0] = 0;
-   HEAP32[63904] = HEAP32[63904] | 32;
+  if (HEAPU8[254560] > 1) {
+   memcpy(254720, 255248, HEAPU8[254560]);
+   HEAP8[(HEAPU8[254560] - 1 | 0) + 254720 | 0] = 0;
+   HEAP32[63644] = HEAP32[63644] | 32;
    if (nmea_decode() & 1) {
-    HEAP32[63904] = HEAP32[63904] | 16;
+    HEAP32[63644] = HEAP32[63644] | 16;
    }
   }
-  HEAP8[255600] = 0;
+  HEAP8[254560] = 0;
  }
  HEAP8[$1 + 15 | 0] = 1;
  global$0 = $1 + 16 | 0;
@@ -65925,7 +65925,7 @@ function jswrap_modules_removeCached($0) {
  HEAP32[$1 + 12 >> 2] = $0;
  label$1 : {
   if (!(jsvIsString(HEAP32[$1 + 12 >> 2]) & 1)) {
-   jsExceptionHere(1, 38587, 0);
+   jsExceptionHere(1, 37563, 0);
    break label$1;
   }
   HEAP32[$1 + 8 >> 2] = jswrap_modules_getModuleList();
@@ -65936,7 +65936,7 @@ function jswrap_modules_removeCached($0) {
   label$3 : {
    if (!HEAP32[$1 + 4 >> 2]) {
     HEAP32[$1 >> 2] = HEAP32[$1 + 12 >> 2];
-    jsExceptionHere(1, 38633, $1);
+    jsExceptionHere(1, 37609, $1);
     break label$3;
    }
    jsvRemoveChild(HEAP32[$1 + 8 >> 2], HEAP32[$1 + 4 >> 2]);
@@ -65953,7 +65953,7 @@ function jslGetTokenString($0) {
  HEAP32[$1 + 28 >> 2] = $0;
  HEAP32[$1 + 24 >> 2] = 30;
  label$1 : {
-  if (HEAP16[HEAP32[14856] + 2 >> 1] == 128) {
+  if (HEAP16[HEAP32[14596] + 2 >> 1] == 128) {
    $0 = HEAP32[$1 + 28 >> 2];
    $2 = HEAP32[$1 + 24 >> 2];
    HEAP32[$1 >> 2] = jslGetTokenValueAsString();
@@ -65961,14 +65961,14 @@ function jslGetTokenString($0) {
    break label$1;
   }
   label$3 : {
-   if (HEAP16[HEAP32[14856] + 2 >> 1] == 131) {
+   if (HEAP16[HEAP32[14596] + 2 >> 1] == 131) {
     $0 = HEAP32[$1 + 28 >> 2];
     $2 = HEAP32[$1 + 24 >> 2];
     HEAP32[$1 + 16 >> 2] = jslGetTokenValueAsString();
     espruino_snprintf($0, $2, 1832, $1 + 16 | 0);
     break label$3;
    }
-   jslTokenAsString(HEAP16[HEAP32[14856] + 2 >> 1], HEAP32[$1 + 28 >> 2], HEAP32[$1 + 24 >> 2]);
+   jslTokenAsString(HEAP16[HEAP32[14596] + 2 >> 1], HEAP32[$1 + 28 >> 2], HEAP32[$1 + 24 >> 2]);
   }
  }
  global$0 = $1 + 32 | 0;
@@ -66139,7 +66139,7 @@ function jswrap_regexp_hasFlag($0, $1) {
  global$0 = $2;
  HEAP32[$2 + 44 >> 2] = $0;
  HEAP8[$2 + 43 | 0] = $1;
- HEAP32[$2 + 36 >> 2] = jsvObjectGetChild(HEAP32[$2 + 44 >> 2], 40829, 0);
+ HEAP32[$2 + 36 >> 2] = jsvObjectGetChild(HEAP32[$2 + 44 >> 2], 39801, 0);
  HEAP8[$2 + 35 | 0] = 0;
  if (jsvIsString(HEAP32[$2 + 36 >> 2]) & 1) {
   jsvStringIteratorNew($2 + 8 | 0, HEAP32[$2 + 36 >> 2], 0);
@@ -66207,7 +66207,7 @@ function jswrap_date_toISOString($0) {
  HEAP32[$1 + 8 >> 2] = $3;
  HEAP32[$1 + 4 >> 2] = $2;
  HEAP32[$1 >> 2] = $0;
- $0 = jsvVarPrintf(35513, $1);
+ $0 = jsvVarPrintf(34489, $1);
  global$0 = $1 + 96 | 0;
  return $0 | 0;
 }
@@ -66272,7 +66272,7 @@ function jsiExecuteEventCallbackOn($0, $1, $2) {
  HEAP32[$3 + 20 >> 2] = $1;
  HEAP32[$3 + 16 >> 2] = $2;
  HEAP8[$3 + 15 | 0] = 0;
- HEAP32[$3 + 8 >> 2] = jsvObjectGetChild(HEAP32[24862], HEAP32[$3 + 28 >> 2], 0);
+ HEAP32[$3 + 8 >> 2] = jsvObjectGetChild(HEAP32[24602], HEAP32[$3 + 28 >> 2], 0);
  if (jsvHasChildren(HEAP32[$3 + 8 >> 2]) & 1) {
   HEAP32[$3 + 4 >> 2] = jsvObjectGetChild(HEAP32[$3 + 8 >> 2], HEAP32[$3 + 24 >> 2], 0);
   if (HEAP32[$3 + 4 >> 2]) {
@@ -66299,7 +66299,7 @@ function jshGetDeviceObjectFor($0, $1, $2) {
   }
   $0 = $3 + 16 | 0;
   jshPinFunctionToString(HEAPU16[$3 + 36 >> 1], 19, $0);
-  HEAP32[$3 + 12 >> 2] = jsvObjectGetChild(HEAP32[24862], $0, 0);
+  HEAP32[$3 + 12 >> 2] = jsvObjectGetChild(HEAP32[24602], $0, 0);
   if (HEAP32[$3 + 12 >> 2]) {
    HEAP32[$3 + 44 >> 2] = HEAP32[$3 + 12 >> 2];
    break label$1;
@@ -66374,7 +66374,7 @@ function jspEvaluate($0) {
    break label$3;
   }
   HEAP32[$1 + 12 >> 2] = 0;
-  if (!((HEAPU16[29718] != 0 ^ -1) & 1)) {
+  if (!((HEAPU16[29198] != 0 ^ -1) & 1)) {
    HEAP32[$1 + 12 >> 2] = jspEvaluateVar(HEAP32[$1 + 16 >> 2], 0, 0);
   }
   jsvUnLock(HEAP32[$1 + 16 >> 2]);
@@ -66468,11 +66468,11 @@ function jswrap_banglejs_getAccel() {
  global$0 = $0;
  HEAP32[$0 + 12 >> 2] = jsvNewWithFlags(5);
  if (HEAP32[$0 + 12 >> 2]) {
-  jsvObjectSetChildAndUnLock(HEAP32[$0 + 12 >> 2], 32489, jsvNewFromFloat(+HEAP16[127830] / 8192));
-  jsvObjectSetChildAndUnLock(HEAP32[$0 + 12 >> 2], 32491, jsvNewFromFloat(+HEAP16[127831] / 8192));
-  jsvObjectSetChildAndUnLock(HEAP32[$0 + 12 >> 2], 32493, jsvNewFromFloat(+HEAP16[127832] / 8192));
-  jsvObjectSetChildAndUnLock(HEAP32[$0 + 12 >> 2], 32512, jsvNewFromFloat(Math_sqrt(+HEAP32[63917]) / 8192));
-  jsvObjectSetChildAndUnLock(HEAP32[$0 + 12 >> 2], 32516, jsvNewFromFloat(Math_sqrt(+HEAP32[63918]) / 8192));
+  jsvObjectSetChildAndUnLock(HEAP32[$0 + 12 >> 2], 31465, jsvNewFromFloat(+HEAP16[127310] / 8192));
+  jsvObjectSetChildAndUnLock(HEAP32[$0 + 12 >> 2], 31467, jsvNewFromFloat(+HEAP16[127311] / 8192));
+  jsvObjectSetChildAndUnLock(HEAP32[$0 + 12 >> 2], 31469, jsvNewFromFloat(+HEAP16[127312] / 8192));
+  jsvObjectSetChildAndUnLock(HEAP32[$0 + 12 >> 2], 31488, jsvNewFromFloat(Math_sqrt(+HEAP32[63657]) / 8192));
+  jsvObjectSetChildAndUnLock(HEAP32[$0 + 12 >> 2], 31492, jsvNewFromFloat(Math_sqrt(+HEAP32[63658]) / 8192));
  }
  global$0 = $0 + 16 | 0;
  return HEAP32[$0 + 12 >> 2];
@@ -66511,7 +66511,7 @@ function jsfGetFlags() {
    HEAP32[$0 + 12 >> 2] = 0;
    break label$1;
   }
-  HEAP32[$0 + 4 >> 2] = HEAP32[14352];
+  HEAP32[$0 + 4 >> 2] = HEAP32[14092];
   HEAP8[$0 + 3 | 0] = 1;
   while (1) {
    if (HEAPU8[HEAP32[$0 + 4 >> 2]]) {
@@ -66649,7 +66649,7 @@ function i2c_wr_bit($0, $1) {
   break;
  }
  if (!HEAP32[$2 + 4 >> 2]) {
-  err(7478);
+  err(7474);
  }
  jshPinSetValue(HEAPU8[HEAP32[$2 + 12 >> 2]], 0);
  dly(HEAP32[$2 + 12 >> 2]);
@@ -66701,7 +66701,7 @@ function jswrap_string_repeat($0, $1) {
  HEAP32[$2 + 4 >> 2] = $1;
  label$1 : {
   if (HEAP32[$2 + 4 >> 2] < 0) {
-   jsExceptionHere(1, 41469, 0);
+   jsExceptionHere(1, 40441, 0);
    HEAP32[$2 + 12 >> 2] = 0;
    break label$1;
   }
@@ -66786,7 +66786,7 @@ function jsfSetFlags($0) {
   if (!(jsvIsObject(HEAP32[$1 + 12 >> 2]) & 1)) {
    break label$1;
   }
-  HEAP32[$1 + 8 >> 2] = HEAP32[14352];
+  HEAP32[$1 + 8 >> 2] = HEAP32[14092];
   HEAP8[$1 + 7 | 0] = 1;
   while (1) {
    if (!HEAPU8[HEAP32[$1 + 8 >> 2]]) {
@@ -66812,18 +66812,18 @@ function jswrap_parseFloat($0) {
  $0 = $1 + 16 | 0;
  jsvGetString(HEAP32[$1 + 100 >> 2], $0, 70);
  label$1 : {
-  if (!strcmp($0, 36884)) {
+  if (!strcmp($0, 35860)) {
    HEAPF64[$1 + 104 >> 3] = infinity;
    break label$1;
   }
-  if (!strcmp($1 + 16 | 0, 36893)) {
+  if (!strcmp($1 + 16 | 0, 35869)) {
    HEAPF64[$1 + 104 >> 3] = -infinity;
    break label$1;
   }
   $0 = $1 + 16 | 0;
   HEAPF64[$1 >> 3] = stringToFloatWithRadix($0, 0, $1 + 12 | 0);
   if (HEAP32[$1 + 12 >> 2] == ($0 + 69 | 0)) {
-   jsExceptionHere(1, 36903, 0);
+   jsExceptionHere(1, 35879, 0);
    HEAPF64[$1 + 104 >> 3] = nan;
    break label$1;
   }
@@ -66897,14 +66897,14 @@ function jswrap_terminal_idle() {
  var $0 = 0;
  $0 = global$0 - 80 | 0;
  global$0 = $0;
- if (HEAP8[256373] & 1) {
+ if (HEAP8[255333] & 1) {
   if (terminalGetGFX($0 + 8 | 0) & 1) {
-   HEAP32[$0 + 4 >> 2] = jsvObjectGetChild(HEAPU8[$0 + 8 | 0] | HEAPU8[$0 + 9 | 0] << 8 | (HEAPU8[$0 + 10 | 0] << 16 | HEAPU8[$0 + 11 | 0] << 24), 43458, 0);
+   HEAP32[$0 + 4 >> 2] = jsvObjectGetChild(HEAPU8[$0 + 8 | 0] | HEAPU8[$0 + 9 | 0] << 8 | (HEAPU8[$0 + 10 | 0] << 16 | HEAPU8[$0 + 11 | 0] << 24), 42418, 0);
    if (HEAP32[$0 + 4 >> 2]) {
     jsvUnLock2(jspExecuteFunction(HEAP32[$0 + 4 >> 2], HEAPU8[$0 + 8 | 0] | HEAPU8[$0 + 9 | 0] << 8 | (HEAPU8[$0 + 10 | 0] << 16 | HEAPU8[$0 + 11 | 0] << 24), 0, 0), HEAP32[$0 + 4 >> 2]);
    }
    jsvUnLock(HEAPU8[$0 + 8 | 0] | HEAPU8[$0 + 9 | 0] << 8 | (HEAPU8[$0 + 10 | 0] << 16 | HEAPU8[$0 + 11 | 0] << 24));
-   HEAP8[256373] = 0;
+   HEAP8[255333] = 0;
   }
  }
  global$0 = $0 + 80 | 0;
@@ -66919,8 +66919,8 @@ function jswrap_interactive_setTime($0) {
  HEAP32[$1 + 16 >> 2] = jshGetTimeFromMilliseconds(HEAPF64[$1 + 24 >> 3] * 1e3);
  HEAP32[$1 + 20 >> 2] = i64toi32_i32$HIGH_BITS;
  $2 = HEAP32[$1 + 20 >> 2];
- HEAP32[24884] = HEAP32[$1 + 16 >> 2];
- HEAP32[24885] = $2;
+ HEAP32[24624] = HEAP32[$1 + 16 >> 2];
+ HEAP32[24625] = $2;
  HEAP32[$1 + 8 >> 2] = jshGetSystemTime();
  HEAP32[$1 + 12 >> 2] = i64toi32_i32$HIGH_BITS;
  jshSetSystemTime(HEAP32[$1 + 16 >> 2], HEAP32[$1 + 20 >> 2]);
@@ -67061,28 +67061,28 @@ function lcdST7789_setMode($0) {
  $1 = global$0 - 16 | 0;
  global$0 = $1;
  HEAP32[$1 + 12 >> 2] = $0;
- if (HEAP32[25480] != HEAP32[$1 + 12 >> 2]) {
-  HEAP32[25480] = HEAP32[$1 + 12 >> 2];
-  $0 = HEAP32[25480] + -1 | 0;
+ if (HEAP32[25220] != HEAP32[$1 + 12 >> 2]) {
+  HEAP32[25220] = HEAP32[$1 + 12 >> 2];
+  $0 = HEAP32[25220] + -1 | 0;
   label$2 : {
    if ($0 >>> 0 > 3) {
     break label$2;
    }
    if ($0 - 1) {
-    HEAP8[101908] = 0;
+    HEAP8[100868] = 0;
     lcdST7789_cmd(19, 0, 0);
-    HEAP32[25478] = 0;
+    HEAP32[25218] = 0;
     lcdST7789_scrollCmd();
     break label$2;
    }
-   HEAP8[101908] = 1;
+   HEAP8[100868] = 1;
    HEAP8[$1 + 8 | 0] = 0;
    HEAP8[$1 + 9 | 0] = 40;
    HEAP8[$1 + 10 | 0] = 0;
    HEAP8[$1 + 11 | 0] = 199;
    lcdST7789_cmd(48, 4, $1 + 8 | 0);
    lcdST7789_cmd(18, 0, 0);
-   HEAP32[25478] = 0;
+   HEAP32[25218] = 0;
    lcdST7789_scrollCmd();
   }
  }
@@ -67142,14 +67142,14 @@ function jsGfxGetPtr($0) {
  $1 = global$0 - 16 | 0;
  HEAP32[$1 + 8 >> 2] = $0;
  label$1 : {
-  if (HEAP8[101908] & 1) {
+  if (HEAP8[100868] & 1) {
    if (!(HEAP32[$1 + 8 >> 2] < 200 ? HEAP32[$1 + 8 >> 2] >= 40 : 0)) {
     HEAP32[$1 + 12 >> 2] = 0;
     break label$1;
    }
   }
-  HEAP32[$1 + 8 >> 2] = HEAP32[25476] + HEAP32[$1 + 8 >> 2];
-  if (HEAP8[101908] & 1) {
+  HEAP32[$1 + 8 >> 2] = HEAP32[25216] + HEAP32[$1 + 8 >> 2];
+  if (HEAP8[100868] & 1) {
    HEAP32[$1 + 8 >> 2] = HEAP32[$1 + 8 >> 2] - 40;
   }
   if (HEAP32[$1 + 8 >> 2] < 0) {
@@ -67158,7 +67158,7 @@ function jsGfxGetPtr($0) {
   if (HEAP32[$1 + 8 >> 2] >= 320) {
    HEAP32[$1 + 8 >> 2] = HEAP32[$1 + 8 >> 2] - 320;
   }
-  HEAP32[$1 + 12 >> 2] = (Math_imul(HEAP32[$1 + 8 >> 2], 240) << 1) + 101968;
+  HEAP32[$1 + 12 >> 2] = (Math_imul(HEAP32[$1 + 8 >> 2], 240) << 1) + 100928;
  }
  return HEAP32[$1 + 12 >> 2];
 }
@@ -67259,8 +67259,8 @@ function jswrap_flash_getPage($0) {
    HEAP32[$1 + 28 >> 2] = 0;
    break label$1;
   }
-  jsvObjectSetChildAndUnLock(HEAP32[$1 + 12 >> 2], 36679, jsvNewFromInteger(HEAP32[$1 + 20 >> 2]));
-  jsvObjectSetChildAndUnLock(HEAP32[$1 + 12 >> 2], 36684, jsvNewFromInteger(HEAP32[$1 + 16 >> 2]));
+  jsvObjectSetChildAndUnLock(HEAP32[$1 + 12 >> 2], 35655, jsvNewFromInteger(HEAP32[$1 + 20 >> 2]));
+  jsvObjectSetChildAndUnLock(HEAP32[$1 + 12 >> 2], 35660, jsvNewFromInteger(HEAP32[$1 + 16 >> 2]));
   HEAP32[$1 + 28 >> 2] = HEAP32[$1 + 12 >> 2];
  }
  global$0 = $1 + 32 | 0;
@@ -67300,7 +67300,7 @@ function jsiDumpEvent($0, $1, $2, $3, $4) {
  $2 = HEAP32[$5 + 20 >> 2];
  HEAP32[$5 + 4 >> 2] = HEAP32[$5 + 8 >> 2];
  HEAP32[$5 >> 2] = $2;
- cbprintf($0, $1, 7267, $5);
+ cbprintf($0, $1, 7263, $5);
  jsvUnLock(HEAP32[$5 + 8 >> 2]);
  jsiDumpJSON(HEAP32[$5 + 28 >> 2], HEAP32[$5 + 24 >> 2], HEAP32[$5 + 12 >> 2], 0);
  FUNCTION_TABLE[HEAP32[$5 + 28 >> 2]](5375, HEAP32[$5 + 24 >> 2]);
@@ -67356,7 +67356,7 @@ function jswrap_graphics_asURL($0) {
    break label$1;
   }
   HEAP32[$1 >> 2] = HEAP32[$1 + 16 >> 2];
-  HEAP32[$1 + 12 >> 2] = jsvVarPrintf(43425, $1);
+  HEAP32[$1 + 12 >> 2] = jsvVarPrintf(42385, $1);
   jsvUnLock(HEAP32[$1 + 16 >> 2]);
   HEAP32[$1 + 28 >> 2] = HEAP32[$1 + 12 >> 2];
  }
@@ -67423,7 +67423,7 @@ function getMonth($0) {
  label$1 : {
   while (1) {
    if (HEAP32[$1 + 4 >> 2] < 12) {
-    if (!(HEAP8[HEAP32[$1 + 8 >> 2]] != HEAP8[HEAP32[14369] + (HEAP32[$1 + 4 >> 2] << 2) | 0] | HEAP8[HEAP32[$1 + 8 >> 2] + 1 | 0] != HEAP8[HEAP32[14369] + ((HEAP32[$1 + 4 >> 2] << 2) + 1 | 0) | 0] | HEAP8[HEAP32[$1 + 8 >> 2] + 2 | 0] != HEAP8[HEAP32[14369] + ((HEAP32[$1 + 4 >> 2] << 2) + 2 | 0) | 0])) {
+    if (!(HEAP8[HEAP32[$1 + 8 >> 2]] != HEAP8[HEAP32[14109] + (HEAP32[$1 + 4 >> 2] << 2) | 0] | HEAP8[HEAP32[$1 + 8 >> 2] + 1 | 0] != HEAP8[HEAP32[14109] + ((HEAP32[$1 + 4 >> 2] << 2) + 1 | 0) | 0] | HEAP8[HEAP32[$1 + 8 >> 2] + 2 | 0] != HEAP8[HEAP32[14109] + ((HEAP32[$1 + 4 >> 2] << 2) + 2 | 0) | 0])) {
      HEAP32[$1 + 12 >> 2] = HEAP32[$1 + 4 >> 2];
      break label$1;
     }
@@ -67526,29 +67526,6 @@ function jswrap_graphics_drawLine($0, $1, $2, $3, $4) {
  global$0 = $5 + 96 | 0;
  return HEAP32[$5 + 92 >> 2];
 }
-function jshPushEvent($0) {
- var $1 = 0, $2 = 0, $3 = 0;
- $1 = global$0 - 16 | 0;
- global$0 = $1;
- HEAP32[$1 + 12 >> 2] = $0;
- HEAP8[$1 + 11 | 0] = HEAPU8[99554] + 1;
- label$1 : {
-  if (HEAPU8[99555] == HEAPU8[$1 + 11 | 0]) {
-   HEAP8[99447] = HEAPU8[99447] | 1;
-   break label$1;
-  }
-  $0 = Math_imul(HEAPU8[99554], 5) + 100144 | 0;
-  $2 = HEAP32[$1 + 12 >> 2];
-  $3 = HEAPU8[$2 | 0] | HEAPU8[$2 + 1 | 0] << 8 | (HEAPU8[$2 + 2 | 0] << 16 | HEAPU8[$2 + 3 | 0] << 24);
-  HEAP8[$0 | 0] = $3;
-  HEAP8[$0 + 1 | 0] = $3 >>> 8;
-  HEAP8[$0 + 2 | 0] = $3 >>> 16;
-  HEAP8[$0 + 3 | 0] = $3 >>> 24;
-  HEAP8[$0 + 4 | 0] = HEAPU8[$2 + 4 | 0];
-  HEAP8[99554] = HEAPU8[$1 + 11 | 0];
- }
- global$0 = $1 + 16 | 0;
-}
 function jsvNewFromLongInteger($0, $1) {
  var $2 = 0;
  $2 = global$0 - 16 | 0;
@@ -67572,6 +67549,29 @@ function jsvNewFromLongInteger($0, $1) {
  }
  global$0 = $2 + 16 | 0;
  return HEAP32[$2 + 12 >> 2];
+}
+function jshPushEvent($0) {
+ var $1 = 0, $2 = 0, $3 = 0;
+ $1 = global$0 - 16 | 0;
+ global$0 = $1;
+ HEAP32[$1 + 12 >> 2] = $0;
+ HEAP8[$1 + 11 | 0] = HEAPU8[98514] + 1;
+ label$1 : {
+  if (HEAPU8[98515] == HEAPU8[$1 + 11 | 0]) {
+   HEAP8[98407] = HEAPU8[98407] | 1;
+   break label$1;
+  }
+  $0 = Math_imul(HEAPU8[98514], 5) + 99104 | 0;
+  $2 = HEAP32[$1 + 12 >> 2];
+  $3 = HEAPU8[$2 | 0] | HEAPU8[$2 + 1 | 0] << 8 | (HEAPU8[$2 + 2 | 0] << 16 | HEAPU8[$2 + 3 | 0] << 24);
+  HEAP8[$0 | 0] = $3;
+  HEAP8[$0 + 1 | 0] = $3 >>> 8;
+  HEAP8[$0 + 2 | 0] = $3 >>> 16;
+  HEAP8[$0 + 3 | 0] = $3 >>> 24;
+  HEAP8[$0 + 4 | 0] = HEAPU8[$2 + 4 | 0];
+  HEAP8[98514] = HEAPU8[$1 + 11 | 0];
+ }
+ global$0 = $1 + 16 | 0;
 }
 function unsigned_20char_20const__20std____2__min_unsigned_20char_2c_20std____2____less_unsigned_20char_2c_20unsigned_20char__20__28unsigned_20char_20const__2c_20unsigned_20char_20const__2c_20std____2____less_unsigned_20char_2c_20unsigned_20char__29($0, $1) {
  var $2 = 0;
@@ -67667,16 +67667,16 @@ function jspeStatementReturn() {
  global$0 = $0;
  HEAP32[$0 + 12 >> 2] = 0;
  jslGetNextToken();
- if (!(HEAP16[HEAP32[14856] + 2 >> 1] == 59 | HEAP16[HEAP32[14856] + 2 >> 1] == 125)) {
+ if (!(HEAP16[HEAP32[14596] + 2 >> 1] == 59 | HEAP16[HEAP32[14596] + 2 >> 1] == 125)) {
   HEAP32[$0 + 12 >> 2] = jsvSkipNameAndUnLock(jspeExpression());
  }
- if ((HEAP32[24866] & 63) == 1) {
+ if ((HEAP32[24606] & 63) == 1) {
   HEAP32[$0 + 8 >> 2] = jspeiFindInScopes(4033);
   label$3 : {
    if (HEAP32[$0 + 8 >> 2]) {
     jsvReplaceWith(HEAP32[$0 + 8 >> 2], HEAP32[$0 + 12 >> 2]);
     jsvUnLock(HEAP32[$0 + 8 >> 2]);
-    HEAP32[24866] = HEAP32[24866] | 8;
+    HEAP32[24606] = HEAP32[24606] | 8;
     break label$3;
    }
    jsExceptionHere(2, 4896, 0);
@@ -68044,19 +68044,19 @@ function jspSetException($0) {
  $1 = global$0 - 16 | 0;
  global$0 = $1;
  HEAP32[$1 + 12 >> 2] = $0;
- HEAP32[$1 + 8 >> 2] = jsvFindChildFromString(HEAP32[24863], 3753, 1);
+ HEAP32[$1 + 8 >> 2] = jsvFindChildFromString(HEAP32[24603], 3753, 1);
  if (HEAP32[$1 + 8 >> 2]) {
   jsvSetValueOfName(HEAP32[$1 + 8 >> 2], HEAP32[$1 + 12 >> 2]);
   jsvUnLock(HEAP32[$1 + 8 >> 2]);
  }
- HEAP32[24866] = HEAP32[24866] | 32;
- if (HEAP32[14856]) {
-  HEAP32[$1 + 4 >> 2] = jsvObjectGetChild(HEAP32[24863], 3760, 27);
+ HEAP32[24606] = HEAP32[24606] | 32;
+ if (HEAP32[14596]) {
+  HEAP32[$1 + 4 >> 2] = jsvObjectGetChild(HEAP32[24603], 3760, 27);
   if (HEAP32[$1 + 4 >> 2]) {
    jsvAppendPrintf(HEAP32[$1 + 4 >> 2], 3767, 0);
    jspAppendStackTrace(HEAP32[$1 + 4 >> 2]);
    jsvUnLock(HEAP32[$1 + 4 >> 2]);
-   HEAP32[24866] = HEAP32[24866] | 128;
+   HEAP32[24606] = HEAP32[24606] | 128;
   }
  }
  global$0 = $1 + 16 | 0;
@@ -68172,12 +68172,12 @@ function jspeParseFunctionCallBrackets() {
    break label$1;
   }
   while (1) {
-   if (HEAP32[24866] & 80 ? 0 : HEAP16[HEAP32[14856] + 2 >> 1] != 41) {
+   if (HEAP32[24606] & 80 ? 0 : HEAP16[HEAP32[14596] + 2 >> 1] != 41) {
     jsvUnLock(__jspeAssignmentExpression(jspeConditionalExpression()));
-    if (HEAP16[HEAP32[14856] + 2 >> 1] == 162) {
+    if (HEAP16[HEAP32[14596] + 2 >> 1] == 162) {
      jsvUnLock(jspeArrowFunction(0, 0));
     }
-    if (HEAP16[HEAP32[14856] + 2 >> 1] != 41) {
+    if (HEAP16[HEAP32[14596] + 2 >> 1] != 41) {
      if (!(jslMatch(44) & 1)) {
       break label$1;
      }
@@ -68186,7 +68186,7 @@ function jspeParseFunctionCallBrackets() {
    }
    break;
   }
-  if (!(HEAP32[24866] & 80)) {
+  if (!(HEAP32[24606] & 80)) {
    jslMatch(41);
   }
  }
@@ -68202,12 +68202,12 @@ function i2c_get_address($0, $1) {
  HEAP8[HEAP32[$2 + 4 >> 2]] = 1;
  label$1 : {
   if (jsvIsObject(HEAP32[$2 + 8 >> 2]) & 1) {
-   HEAP32[$2 >> 2] = jsvObjectGetChild(HEAP32[$2 + 8 >> 2], 41362, 0);
+   HEAP32[$2 >> 2] = jsvObjectGetChild(HEAP32[$2 + 8 >> 2], 40334, 0);
    if (HEAP32[$2 >> 2]) {
     $0 = jsvGetBoolAndUnLock(HEAP32[$2 >> 2]);
     HEAP8[HEAP32[$2 + 4 >> 2]] = $0 & 1;
    }
-   HEAP32[$2 + 12 >> 2] = jsvGetIntegerAndUnLock(jsvObjectGetChild(HEAP32[$2 + 8 >> 2], 41367, 0));
+   HEAP32[$2 + 12 >> 2] = jsvGetIntegerAndUnLock(jsvObjectGetChild(HEAP32[$2 + 8 >> 2], 40339, 0));
    break label$1;
   }
   HEAP32[$2 + 12 >> 2] = jsvGetInteger(HEAP32[$2 + 8 >> 2]);
@@ -68247,18 +68247,18 @@ function jsiChangeToHistory($0) {
   if (HEAP32[$1 + 8 >> 2]) {
    jsiReplaceInputLine(HEAP32[$1 + 8 >> 2]);
    jsvUnLock(HEAP32[$1 + 8 >> 2]);
-   HEAP8[99501] = 1;
+   HEAP8[98461] = 1;
    break label$1;
   }
   if (!(HEAP8[$1 + 15 | 0] & 1)) {
    if (jsiShowInputLine() & 1) {
-    jsiMoveCursorChar(HEAP32[24872], HEAP32[24874], 0);
+    jsiMoveCursorChar(HEAP32[24612], HEAP32[24614], 0);
     jsiConsolePrintString(5198);
    }
    jsiInputLineCursorMoved();
-   jsvUnLock(HEAP32[24872]);
-   HEAP32[24872] = jsvNewFromEmptyString();
-   HEAP32[24874] = 0;
+   jsvUnLock(HEAP32[24612]);
+   HEAP32[24612] = jsvNewFromEmptyString();
+   HEAP32[24614] = 0;
   }
  }
  global$0 = $1 + 16 | 0;
@@ -68285,7 +68285,7 @@ function graphicsSetVar($0) {
  global$0 = $1;
  HEAP32[$1 + 12 >> 2] = $0;
  $0 = HEAP32[$1 + 12 >> 2];
- HEAP32[$1 + 8 >> 2] = jsvFindChildFromString(HEAPU8[$0 | 0] | HEAPU8[$0 + 1 | 0] << 8 | (HEAPU8[$0 + 2 | 0] << 16 | HEAPU8[$0 + 3 | 0] << 24), 26352, 1);
+ HEAP32[$1 + 8 >> 2] = jsvFindChildFromString(HEAPU8[$0 | 0] | HEAPU8[$0 + 1 | 0] << 8 | (HEAPU8[$0 + 2 | 0] << 16 | HEAPU8[$0 + 3 | 0] << 24), 25328, 1);
  HEAP32[$1 + 4 >> 2] = jsvSkipName(HEAP32[$1 + 8 >> 2]);
  if (!HEAP32[$1 + 4 >> 2]) {
   HEAP32[$1 + 4 >> 2] = jsvNewStringOfLength(44, 0);
@@ -68310,9 +68310,9 @@ function _jswrap_error_constructor($0, $1) {
   }
   if (HEAP32[$2 + 8 >> 2]) {
    HEAP32[$2 + 8 >> 2] = jsvAsString(HEAP32[$2 + 8 >> 2]);
-   jsvObjectSetChildAndUnLock(HEAP32[$2 >> 2], 35551, HEAP32[$2 + 8 >> 2]);
+   jsvObjectSetChildAndUnLock(HEAP32[$2 >> 2], 34527, HEAP32[$2 + 8 >> 2]);
   }
-  jsvObjectSetChildAndUnLock(HEAP32[$2 >> 2], 35559, jsvNewFromString(HEAP32[$2 + 4 >> 2]));
+  jsvObjectSetChildAndUnLock(HEAP32[$2 >> 2], 34535, jsvNewFromString(HEAP32[$2 + 4 >> 2]));
   HEAP32[$2 + 12 >> 2] = HEAP32[$2 >> 2];
  }
  global$0 = $2 + 16 | 0;
@@ -68397,19 +68397,19 @@ function jshPopIOEvent($0) {
  $1 = global$0 - 16 | 0;
  HEAP32[$1 + 8 >> 2] = $0;
  label$1 : {
-  if (HEAPU8[99554] == HEAPU8[99555]) {
+  if (HEAPU8[98514] == HEAPU8[98515]) {
    HEAP8[$1 + 15 | 0] = 0;
    break label$1;
   }
   $0 = HEAP32[$1 + 8 >> 2];
-  $2 = Math_imul(HEAPU8[99555], 5) + 100144 | 0;
+  $2 = Math_imul(HEAPU8[98515], 5) + 99104 | 0;
   $3 = HEAPU8[$2 | 0] | HEAPU8[$2 + 1 | 0] << 8 | (HEAPU8[$2 + 2 | 0] << 16 | HEAPU8[$2 + 3 | 0] << 24);
   HEAP8[$0 | 0] = $3;
   HEAP8[$0 + 1 | 0] = $3 >>> 8;
   HEAP8[$0 + 2 | 0] = $3 >>> 16;
   HEAP8[$0 + 3 | 0] = $3 >>> 24;
   HEAP8[$0 + 4 | 0] = HEAPU8[$2 + 4 | 0];
-  HEAP8[99555] = HEAPU8[99555] + 1;
+  HEAP8[98515] = HEAPU8[98515] + 1;
   HEAP8[$1 + 15 | 0] = 1;
  }
  return HEAP8[$1 + 15 | 0] & 1;
@@ -68546,7 +68546,7 @@ function jswrap_banglejs_setPollInterval($0) {
  $3 = i64toi32_i32$HIGH_BITS & 2147483647;
  label$1 : {
   if (!(HEAPF64[$1 + 24 >> 3] > 5e3 ? 0 : !(($3 | 0) == 2146435072 & $2 >>> 0 >= 0 | $3 >>> 0 > 2146435072 | HEAPF64[$1 + 24 >> 3] < 10))) {
-   jsExceptionHere(1, 32202, 0);
+   jsExceptionHere(1, 31178, 0);
    break label$1;
   }
   $0 = HEAPF64[$1 + 24 >> 3];
@@ -68557,7 +68557,7 @@ function jswrap_banglejs_setPollInterval($0) {
    }
    $2 = 0;
   }
-  HEAP16[127819] = $2;
+  HEAP16[127299] = $2;
  }
  global$0 = $1 + 32 | 0;
 }
@@ -68571,7 +68571,7 @@ function jsvMoreFreeVariablesThan() {
    HEAP8[$0 + 15 | 0] = 0;
    break label$1;
   }
-  HEAP16[$0 + 6 >> 1] = HEAPU16[29718];
+  HEAP16[$0 + 6 >> 1] = HEAPU16[29198];
   while (1) {
    if (HEAPU16[$0 + 6 >> 1]) {
     $1 = HEAP32[$0 + 8 >> 2];
@@ -68616,16 +68616,16 @@ function jslInit($0) {
  global$0 = $1;
  HEAP32[$1 + 12 >> 2] = $0;
  $0 = jsvLockAgain(HEAP32[$1 + 12 >> 2]);
- HEAP32[HEAP32[14856] + 104 >> 2] = $0;
- HEAP16[HEAP32[14856] + 2 >> 1] = 0;
- HEAP32[HEAP32[14856] + 16 >> 2] = 0;
- HEAP8[HEAP32[14856] + 24 | 0] = 0;
- HEAP32[HEAP32[14856] + 28 >> 2] = 0;
- HEAP8[HEAP32[14856] + 100 | 0] = 0;
- HEAP32[HEAP32[14856] + 96 >> 2] = 0;
- HEAP16[HEAP32[14856] + 102 >> 1] = 0;
- jsvStringIteratorNew(HEAP32[14856] + 108 | 0, HEAP32[HEAP32[14856] + 104 >> 2], 0);
- jsvUnLock(HEAP32[HEAP32[14856] + 120 >> 2]);
+ HEAP32[HEAP32[14596] + 104 >> 2] = $0;
+ HEAP16[HEAP32[14596] + 2 >> 1] = 0;
+ HEAP32[HEAP32[14596] + 16 >> 2] = 0;
+ HEAP8[HEAP32[14596] + 24 | 0] = 0;
+ HEAP32[HEAP32[14596] + 28 >> 2] = 0;
+ HEAP8[HEAP32[14596] + 100 | 0] = 0;
+ HEAP32[HEAP32[14596] + 96 >> 2] = 0;
+ HEAP16[HEAP32[14596] + 102 >> 1] = 0;
+ jsvStringIteratorNew(HEAP32[14596] + 108 | 0, HEAP32[HEAP32[14596] + 104 >> 2], 0);
+ jsvUnLock(HEAP32[HEAP32[14596] + 120 >> 2]);
  jslGetNextCh();
  jslGetNextToken();
  global$0 = $1 + 16 | 0;
@@ -68792,17 +68792,17 @@ function jsiHandlePageUpDown($0) {
  $1 = global$0 - 32 | 0;
  global$0 = $1;
  HEAP8[$1 + 31 | 0] = $0;
- jsvGetLineAndCol(HEAP32[24872], HEAP32[24874], $1 + 20 | 0, $1 + 24 | 0);
+ jsvGetLineAndCol(HEAP32[24612], HEAP32[24614], $1 + 20 | 0, $1 + 24 | 0);
  label$1 : {
   if (!(HEAP8[$1 + 31 | 0] & 1)) {
-   HEAP32[24874] = 0;
+   HEAP32[24614] = 0;
    break label$1;
   }
-  HEAP32[24874] = jsvGetStringLength(HEAP32[24872]);
+  HEAP32[24614] = jsvGetStringLength(HEAP32[24612]);
  }
  HEAP32[$1 + 16 >> 2] = HEAP32[$1 + 24 >> 2];
  HEAP32[$1 + 12 >> 2] = HEAP32[$1 + 20 >> 2];
- jsvGetLineAndCol(HEAP32[24872], HEAP32[24874], $1 + 12 | 0, $1 + 16 | 0);
+ jsvGetLineAndCol(HEAP32[24612], HEAP32[24614], $1 + 12 | 0, $1 + 16 | 0);
  jsiMoveCursor(HEAP32[$1 + 24 >> 2], HEAP32[$1 + 20 >> 2], HEAP32[$1 + 16 >> 2], HEAP32[$1 + 12 >> 2]);
  global$0 = $1 + 32 | 0;
 }
@@ -68813,15 +68813,15 @@ function jspeSkipBlock() {
  HEAP32[$0 + 12 >> 2] = 1;
  while (1) {
   label$2 : {
-   if (!(HEAP16[HEAP32[14856] + 2 >> 1] ? HEAP32[$0 + 12 >> 2] != 0 : 0)) {
+   if (!(HEAP16[HEAP32[14596] + 2 >> 1] ? HEAP32[$0 + 12 >> 2] != 0 : 0)) {
     break label$2;
    }
    label$5 : {
-    if (HEAP16[HEAP32[14856] + 2 >> 1] == 123) {
+    if (HEAP16[HEAP32[14596] + 2 >> 1] == 123) {
      HEAP32[$0 + 12 >> 2] = HEAP32[$0 + 12 >> 2] + 1;
      break label$5;
     }
-    if (HEAP16[HEAP32[14856] + 2 >> 1] == 125) {
+    if (HEAP16[HEAP32[14596] + 2 >> 1] == 125) {
      HEAP32[$0 + 12 >> 2] = HEAP32[$0 + 12 >> 2] + -1;
      if (!HEAP32[$0 + 12 >> 2]) {
       break label$2;
@@ -68843,8 +68843,8 @@ function jslIsToken($0) {
  HEAP32[$1 >> 2] = HEAP32[$1 + 4 >> 2];
  label$1 : {
   while (1) {
-   if (HEAP32[$1 >> 2] < HEAPU8[HEAP32[14856] + 100 | 0]) {
-    if (HEAP8[HEAP32[$1 >> 2] + (HEAP32[14856] + 32 | 0) | 0] != HEAP8[HEAP32[$1 + 8 >> 2] + HEAP32[$1 >> 2] | 0]) {
+   if (HEAP32[$1 >> 2] < HEAPU8[HEAP32[14596] + 100 | 0]) {
+    if (HEAP8[HEAP32[$1 >> 2] + (HEAP32[14596] + 32 | 0) | 0] != HEAP8[HEAP32[$1 + 8 >> 2] + HEAP32[$1 >> 2] | 0]) {
      HEAP8[$1 + 15 | 0] = 0;
      break label$1;
     } else {
@@ -68854,7 +68854,7 @@ function jslIsToken($0) {
    }
    break;
   }
-  HEAP8[$1 + 15 | 0] = !HEAP8[HEAP32[$1 + 8 >> 2] + HEAPU8[HEAP32[14856] + 100 | 0] | 0];
+  HEAP8[$1 + 15 | 0] = !HEAP8[HEAP32[$1 + 8 >> 2] + HEAPU8[HEAP32[14596] + 100 | 0] | 0];
  }
  return HEAP8[$1 + 15 | 0] & 1;
 }
@@ -69045,9 +69045,9 @@ function jslPrintPosition($0, $1) {
  HEAP32[$2 + 28 >> 2] = 4;
  HEAP32[$2 + 24 >> 2] = $0;
  HEAP32[$2 + 20 >> 2] = $1;
- jsvGetLineAndCol(HEAP32[HEAP32[14856] + 104 >> 2], HEAP32[$2 + 20 >> 2], $2 + 16 | 0, $2 + 12 | 0);
- if (HEAPU16[HEAP32[14856] + 102 >> 1]) {
-  HEAP32[$2 + 16 >> 2] = HEAP32[$2 + 16 >> 2] + (HEAPU16[HEAP32[14856] + 102 >> 1] - 1 | 0);
+ jsvGetLineAndCol(HEAP32[HEAP32[14596] + 104 >> 2], HEAP32[$2 + 20 >> 2], $2 + 16 | 0, $2 + 12 | 0);
+ if (HEAPU16[HEAP32[14596] + 102 >> 1]) {
+  HEAP32[$2 + 16 >> 2] = HEAP32[$2 + 16 >> 2] + (HEAPU16[HEAP32[14596] + 102 >> 1] - 1 | 0);
  }
  $0 = HEAP32[$2 + 28 >> 2];
  $1 = HEAP32[$2 + 24 >> 2];
@@ -69172,7 +69172,7 @@ function jsvReplaceWithOrAddToRoot($0, $1) {
    if (jsvIsNewChild(HEAP32[$2 + 12 >> 2]) & 1) {
     break label$2;
    }
-   jsvAddName(HEAP32[24862], HEAP32[$2 + 12 >> 2]);
+   jsvAddName(HEAP32[24602], HEAP32[$2 + 12 >> 2]);
   }
  }
  jsvReplaceWith(HEAP32[$2 + 12 >> 2], HEAP32[$2 + 8 >> 2]);
@@ -69215,7 +69215,7 @@ function jswrap_banglejs_setLCDTimeout($0) {
  $3 = i64toi32_i32$HIGH_BITS & 2147483647;
  label$1 : {
   if (($3 | 0) == 2146435072 & $2 >>> 0 >= 0 | $3 >>> 0 > 2146435072) {
-   HEAP32[63901] = 0;
+   HEAP32[63641] = 0;
    break label$1;
   }
   $0 = HEAPF64[$1 + 24 >> 3] * 1e3;
@@ -69226,10 +69226,10 @@ function jswrap_banglejs_setLCDTimeout($0) {
    }
    $2 = -2147483648;
   }
-  HEAP32[63901] = $2;
+  HEAP32[63641] = $2;
  }
- if (HEAP32[63901] < 0) {
-  HEAP32[63901] = 0;
+ if (HEAP32[63641] < 0) {
+  HEAP32[63641] = 0;
  }
  global$0 = $1 + 32 | 0;
 }
@@ -69391,9 +69391,9 @@ function jswrap_banglejs_dbg() {
    HEAP32[$0 + 12 >> 2] = 0;
    break label$1;
   }
-  jsvObjectSetChildAndUnLock(HEAP32[$0 + 8 >> 2], 32963, jsvNewFromInteger(HEAPU8[256113]));
-  jsvObjectSetChildAndUnLock(HEAP32[$0 + 8 >> 2], 32977, jsvNewFromInteger(HEAPU8[256370]));
-  jsvObjectSetChildAndUnLock(HEAP32[$0 + 8 >> 2], 32993, jsvNewFromInteger(HEAPU8[256371]));
+  jsvObjectSetChildAndUnLock(HEAP32[$0 + 8 >> 2], 31935, jsvNewFromInteger(HEAPU8[255073]));
+  jsvObjectSetChildAndUnLock(HEAP32[$0 + 8 >> 2], 31949, jsvNewFromInteger(HEAPU8[255330]));
+  jsvObjectSetChildAndUnLock(HEAP32[$0 + 8 >> 2], 31965, jsvNewFromInteger(HEAPU8[255331]));
   HEAP32[$0 + 12 >> 2] = HEAP32[$0 + 8 >> 2];
  }
  global$0 = $0 + 16 | 0;
@@ -69550,7 +69550,7 @@ function jspeFactorTypeOf() {
  jslGetNextToken();
  HEAP32[$0 + 12 >> 2] = jspeUnaryExpression();
  HEAP32[$0 + 8 >> 2] = 0;
- if ((HEAP32[24866] & 63) == 1) {
+ if ((HEAP32[24606] & 63) == 1) {
   label$2 : {
    if (!(jsvIsVariableDefined(HEAP32[$0 + 12 >> 2]) & 1)) {
     HEAP32[$0 + 8 >> 2] = jsvNewFromString(4370);
@@ -69607,12 +69607,12 @@ function jsiAtEndOfInputLine() {
  var $0 = 0;
  $0 = global$0 - 16 | 0;
  global$0 = $0;
- HEAP32[$0 + 8 >> 2] = HEAP32[24874];
- HEAP32[$0 + 4 >> 2] = jsvGetStringLength(HEAP32[24872]);
+ HEAP32[$0 + 8 >> 2] = HEAP32[24614];
+ HEAP32[$0 + 4 >> 2] = jsvGetStringLength(HEAP32[24612]);
  label$1 : {
   while (1) {
    if (HEAPU32[$0 + 8 >> 2] < HEAPU32[$0 + 4 >> 2]) {
-    if (isWhitespace(jsvGetCharInString(HEAP32[24872], HEAP32[$0 + 8 >> 2]) << 24 >> 24) & 1) {
+    if (isWhitespace(jsvGetCharInString(HEAP32[24612], HEAP32[$0 + 8 >> 2]) << 24 >> 24) & 1) {
      HEAP32[$0 + 8 >> 2] = HEAP32[$0 + 8 >> 2] + 1;
      continue;
     } else {
@@ -69680,15 +69680,15 @@ function jswrap_waveform_stop($0) {
  $1 = global$0 - 16 | 0;
  global$0 = $1;
  HEAP32[$1 + 12 >> 2] = $0;
- HEAP8[$1 + 11 | 0] = jsvGetBoolAndUnLock(jsvObjectGetChild(HEAP32[$1 + 12 >> 2], 41494, 0)) & 1;
+ HEAP8[$1 + 11 | 0] = jsvGetBoolAndUnLock(jsvObjectGetChild(HEAP32[$1 + 12 >> 2], 40466, 0)) & 1;
  label$1 : {
   if (!(HEAP8[$1 + 11 | 0] & 1)) {
-   jsExceptionHere(1, 41716, 0);
+   jsExceptionHere(1, 40688, 0);
    break label$1;
   }
   HEAP32[$1 + 4 >> 2] = jswrap_waveform_getBuffer(HEAP32[$1 + 12 >> 2], 0, 0);
   if (!(jstStopBufferTimerTask(HEAP32[$1 + 4 >> 2]) & 1)) {
-   jsExceptionHere(1, 41551, 0);
+   jsExceptionHere(1, 40523, 0);
   }
   jsvUnLock(HEAP32[$1 + 4 >> 2]);
   jswrap_waveform_idle();
@@ -69794,7 +69794,7 @@ function jswrap_stream_available($0) {
    HEAP32[$1 + 12 >> 2] = 0;
    break label$1;
   }
-  HEAP32[$1 + 4 >> 2] = jsvObjectGetChild(HEAP32[$1 + 8 >> 2], 41375, 0);
+  HEAP32[$1 + 4 >> 2] = jsvObjectGetChild(HEAP32[$1 + 8 >> 2], 40347, 0);
   HEAP32[$1 >> 2] = 0;
   if (jsvIsString(HEAP32[$1 + 4 >> 2]) & 1) {
    HEAP32[$1 >> 2] = jsvGetStringLength(HEAP32[$1 + 4 >> 2]);
@@ -69811,9 +69811,9 @@ function jspeExpression() {
  global$0 = $0;
  label$1 : {
   while (1) {
-   if (((HEAP32[24866] & 80) != 0 ^ -1) & 1) {
+   if (((HEAP32[24606] & 80) != 0 ^ -1) & 1) {
     HEAP32[$0 + 8 >> 2] = __jspeAssignmentExpression(jspeConditionalExpression());
-    if (HEAP16[HEAP32[14856] + 2 >> 1] != 44) {
+    if (HEAP16[HEAP32[14596] + 2 >> 1] != 44) {
      HEAP32[$0 + 12 >> 2] = HEAP32[$0 + 8 >> 2];
      break label$1;
     }
@@ -69837,7 +69837,7 @@ function jsonNewLine($0, $1, $2, $3) {
  HEAP32[$4 + 24 >> 2] = $1;
  HEAP32[$4 + 20 >> 2] = $2;
  HEAP32[$4 + 16 >> 2] = $3;
- cbprintf(HEAP32[$4 + 20 >> 2], HEAP32[$4 + 16 >> 2], 38300, 0);
+ cbprintf(HEAP32[$4 + 20 >> 2], HEAP32[$4 + 16 >> 2], 37276, 0);
  HEAP32[$4 + 12 >> 2] = HEAP32[$4 + 28 >> 2] >>> 12;
  while (1) {
   label$2 : {
@@ -69894,18 +69894,18 @@ function lcdST7789_scroll($0, $1, $2) {
  HEAP32[$3 + 12 >> 2] = $0;
  HEAP32[$3 + 8 >> 2] = $1;
  HEAP32[$3 + 4 >> 2] = $2;
- if (HEAP32[25480] == 1) {
-  HEAP32[25478] = HEAP32[25478] - HEAP32[$3 + 4 >> 2];
+ if (HEAP32[25220] == 1) {
+  HEAP32[25218] = HEAP32[25218] - HEAP32[$3 + 4 >> 2];
   while (1) {
-   if (HEAP32[25478] < 0) {
-    HEAP32[25478] = HEAP32[25478] + 320;
+   if (HEAP32[25218] < 0) {
+    HEAP32[25218] = HEAP32[25218] + 320;
     continue;
    }
    break;
   }
   while (1) {
-   if (HEAP32[25478] >= 320) {
-    HEAP32[25478] = HEAP32[25478] - 320;
+   if (HEAP32[25218] >= 320) {
+    HEAP32[25218] = HEAP32[25218] - 320;
     continue;
    }
    break;
@@ -70130,8 +70130,8 @@ function jswrap_banglejs_setLCDBrightness($0) {
  if (HEAP32[$1 + 4 >> 2] > 255) {
   HEAP32[$1 + 4 >> 2] = 255;
  }
- HEAP8[255636] = HEAP32[$1 + 4 >> 2];
- if (HEAP8[255608] & 1) {
+ HEAP8[254596] = HEAP32[$1 + 4 >> 2];
+ if (HEAP8[254568] & 1) {
   jshUSARTKick(1);
  }
  global$0 = $1 + 16 | 0;
@@ -70166,13 +70166,13 @@ function jslMatchError($0) {
  $0 = $1 + 48 | 0;
  jslGetTokenString($0);
  jslTokenAsString(HEAP32[$1 + 92 >> 2], $2, 30);
- HEAP32[$1 + 12 >> 2] = HEAP32[HEAP32[14856] + 28 >> 2];
- $3 = jsvStringIteratorGetIndex(HEAP32[14856] + 4 | 0);
- HEAP32[HEAP32[14856] + 28 >> 2] = $3 - 1;
+ HEAP32[$1 + 12 >> 2] = HEAP32[HEAP32[14596] + 28 >> 2];
+ $3 = jsvStringIteratorGetIndex(HEAP32[14596] + 4 | 0);
+ HEAP32[HEAP32[14596] + 28 >> 2] = $3 - 1;
  HEAP32[$1 + 4 >> 2] = $2;
  HEAP32[$1 >> 2] = $0;
  jsExceptionHere(2, 1881, $1);
- HEAP32[HEAP32[14856] + 28 >> 2] = HEAP32[$1 + 12 >> 2];
+ HEAP32[HEAP32[14596] + 28 >> 2] = HEAP32[$1 + 12 >> 2];
  jslGetNextToken();
  global$0 = $1 + 96 | 0;
 }
@@ -70397,7 +70397,7 @@ function tf_invoke($0) {
  HEAP32[$1 + 12 >> 2] = tflite__MicroInterpreter__Invoke_28_29(HEAP32[$1 + 20 >> 2] + 4108 | 0);
  label$1 : {
   if (HEAP32[$1 + 12 >> 2]) {
-   tflite__ErrorReporter__Report_28char_20const__2c_20____29(HEAP32[$1 + 16 >> 2], 53780, 0);
+   tflite__ErrorReporter__Report_28char_20const__2c_20____29(HEAP32[$1 + 16 >> 2], 52740, 0);
    HEAP8[$1 + 31 | 0] = 0;
    break label$1;
   }
@@ -70576,8 +70576,8 @@ function lcdST7789_scrollCmd() {
  var $0 = 0;
  $0 = global$0 - 16 | 0;
  global$0 = $0;
- HEAP32[$0 + 12 >> 2] = HEAP32[25478] + HEAP32[25479];
- if (HEAP32[25480] == 2) {
+ HEAP32[$0 + 12 >> 2] = HEAP32[25218] + HEAP32[25219];
+ if (HEAP32[25220] == 2) {
   HEAP32[$0 + 12 >> 2] = HEAP32[$0 + 12 >> 2] + 120;
  }
  if (HEAP32[$0 + 12 >> 2] >= 320) {
@@ -70618,8 +70618,8 @@ function jsiFreeMoreMemory() {
  var $0 = 0;
  $0 = global$0 - 16 | 0;
  global$0 = $0;
- jsvObjectRemoveChild(HEAP32[24863], 5718);
- HEAP32[$0 + 8 >> 2] = jsvObjectGetChild(HEAP32[24863], 5726, 0);
+ jsvObjectRemoveChild(HEAP32[24603], 5714);
+ HEAP32[$0 + 8 >> 2] = jsvObjectGetChild(HEAP32[24603], 5722, 0);
  label$1 : {
   if (!HEAP32[$0 + 8 >> 2]) {
    HEAP8[$0 + 15 | 0] = 0;
@@ -70709,12 +70709,12 @@ function jswrap_arguments() {
  $0 = global$0 - 16 | 0;
  global$0 = $0;
  HEAP32[$0 + 8 >> 2] = 0;
- if (HEAP32[24864]) {
-  HEAP32[$0 + 8 >> 2] = jsvGetLastArrayItem(HEAP32[24864]);
+ if (HEAP32[24604]) {
+  HEAP32[$0 + 8 >> 2] = jsvGetLastArrayItem(HEAP32[24604]);
  }
  label$2 : {
   if (!(jsvIsFunction(HEAP32[$0 + 8 >> 2]) & 1)) {
-   jsExceptionHere(1, 36787, 0);
+   jsExceptionHere(1, 35763, 0);
    HEAP32[$0 + 12 >> 2] = 0;
    break label$2;
   }
@@ -70732,7 +70732,7 @@ function jsvFindOrCreateRoot() {
  HEAP16[$0 + 10 >> 1] = 1;
  label$1 : {
   while (1) {
-   if (HEAPU16[$0 + 10 >> 1] <= HEAPU32[14353]) {
+   if (HEAPU16[$0 + 10 >> 1] <= HEAPU32[14093]) {
     if (jsvIsRoot(jsvGetAddressOf(HEAPU16[$0 + 10 >> 1])) & 1) {
      HEAP32[$0 + 12 >> 2] = jsvLock(HEAPU16[$0 + 10 >> 1]);
      break label$1;
@@ -70837,15 +70837,15 @@ function jslSeekToP($0) {
  $1 = global$0 - 16 | 0;
  global$0 = $1;
  HEAP32[$1 + 12 >> 2] = $0;
- if (HEAP32[HEAP32[14856] + 120 >> 2]) {
-  jsvLockAgain(HEAP32[HEAP32[14856] + 120 >> 2]);
+ if (HEAP32[HEAP32[14596] + 120 >> 2]) {
+  jsvLockAgain(HEAP32[HEAP32[14596] + 120 >> 2]);
  }
- jsvStringIteratorFree(HEAP32[14856] + 108 | 0);
- jsvStringIteratorClone(HEAP32[14856] + 108 | 0, HEAP32[$1 + 12 >> 2]);
- jsvUnLock(HEAP32[HEAP32[14856] + 120 >> 2]);
- HEAP8[HEAP32[14856]] = HEAPU8[HEAP32[$1 + 12 >> 2] + 20 | 0];
- HEAP32[HEAP32[14856] + 16 >> 2] = 0;
- HEAP8[HEAP32[14856] + 24 | 0] = 0;
+ jsvStringIteratorFree(HEAP32[14596] + 108 | 0);
+ jsvStringIteratorClone(HEAP32[14596] + 108 | 0, HEAP32[$1 + 12 >> 2]);
+ jsvUnLock(HEAP32[HEAP32[14596] + 120 >> 2]);
+ HEAP8[HEAP32[14596]] = HEAPU8[HEAP32[$1 + 12 >> 2] + 20 | 0];
+ HEAP32[HEAP32[14596] + 16 >> 2] = 0;
+ HEAP8[HEAP32[14596] + 24 | 0] = 0;
  jslGetNextToken();
  global$0 = $1 + 16 | 0;
 }
@@ -70907,11 +70907,11 @@ function lcd_flip($0) {
  $1 = global$0 - 80 | 0;
  global$0 = $1;
  HEAP32[$1 + 76 >> 2] = $0;
- if (!(!HEAP32[63901] | HEAP8[255608] & 1)) {
+ if (!(!HEAP32[63641] | HEAP8[254568] & 1)) {
   jswrap_banglejs_setLCDPower(1);
  }
- HEAP16[127805] = 0;
- HEAP32[$1 + 72 >> 2] = jsvObjectGetChild(HEAP32[24863], 32064, 0);
+ HEAP16[127285] = 0;
+ HEAP32[$1 + 72 >> 2] = jsvObjectGetChild(HEAP32[24603], 31040, 0);
  label$2 : {
   if (!HEAP32[$1 + 72 >> 2]) {
    break label$2;
@@ -71026,10 +71026,10 @@ function jspeArrowFunction($0, $1) {
  HEAP32[$2 + 8 >> 2] = $1;
  jslGetNextToken();
  HEAP32[$2 + 12 >> 2] = jspeAddNamedFunctionParameter(HEAP32[$2 + 12 >> 2], HEAP32[$2 + 8 >> 2]);
- HEAP8[$2 + 7 | 0] = HEAP16[HEAP32[14856] + 2 >> 1] != 123;
+ HEAP8[$2 + 7 | 0] = HEAP16[HEAP32[14596] + 2 >> 1] != 123;
  jspeFunctionDefinitionInternal(HEAP32[$2 + 12 >> 2], HEAP8[$2 + 7 | 0] & 1);
- if (HEAP32[24865]) {
-  jsvObjectSetChild(HEAP32[$2 + 12 >> 2], 3986, HEAP32[24865]);
+ if (HEAP32[24605]) {
+  jsvObjectSetChild(HEAP32[$2 + 12 >> 2], 3986, HEAP32[24605]);
  }
  global$0 = $2 + 16 | 0;
  return HEAP32[$2 + 12 >> 2];
@@ -71060,9 +71060,9 @@ function lcdInit_JS($0, $1, $2) {
  HEAP32[$3 + 8 >> 2] = $1;
  HEAP32[$3 + 4 >> 2] = $2;
  $0 = HEAP32[$3 + 12 >> 2];
- jsvObjectSetChild(HEAPU8[$0 | 0] | HEAPU8[$0 + 1 | 0] << 8 | (HEAPU8[$0 + 2 | 0] << 16 | HEAPU8[$0 + 3 | 0] << 24), 31731, HEAP32[$3 + 8 >> 2]);
+ jsvObjectSetChild(HEAPU8[$0 | 0] | HEAPU8[$0 + 1 | 0] << 8 | (HEAPU8[$0 + 2 | 0] << 16 | HEAPU8[$0 + 3 | 0] << 24), 30707, HEAP32[$3 + 8 >> 2]);
  $0 = HEAP32[$3 + 12 >> 2];
- jsvObjectSetChild(HEAPU8[$0 | 0] | HEAPU8[$0 + 1 | 0] << 8 | (HEAPU8[$0 + 2 | 0] << 16 | HEAPU8[$0 + 3 | 0] << 24), 31741, HEAP32[$3 + 4 >> 2]);
+ jsvObjectSetChild(HEAPU8[$0 | 0] | HEAPU8[$0 + 1 | 0] << 8 | (HEAPU8[$0 + 2 | 0] << 16 | HEAPU8[$0 + 3 | 0] << 24), 30717, HEAP32[$3 + 4 >> 2]);
  global$0 = $3 + 16 | 0;
 }
 function jswrap_object_addEventListener($0, $1, $2, $3) {
@@ -71107,7 +71107,7 @@ function getDay($0) {
  label$1 : {
   while (1) {
    if (HEAP32[$1 + 4 >> 2] < 7) {
-    if (strcmp(HEAP32[$1 + 8 >> 2], HEAP32[14370] + (HEAP32[$1 + 4 >> 2] << 2) | 0)) {
+    if (strcmp(HEAP32[$1 + 8 >> 2], HEAP32[14110] + (HEAP32[$1 + 4 >> 2] << 2) | 0)) {
      HEAP32[$1 + 4 >> 2] = HEAP32[$1 + 4 >> 2] + 1;
      continue;
     } else {
@@ -71126,18 +71126,18 @@ function jsiHandleEnd() {
  var $0 = 0, $1 = 0;
  $0 = global$0 - 16 | 0;
  global$0 = $0;
- HEAP32[$0 + 12 >> 2] = jsvGetStringLength(HEAP32[24872]);
+ HEAP32[$0 + 12 >> 2] = jsvGetStringLength(HEAP32[24612]);
  while (1) {
-  if (HEAPU32[24874] < HEAPU32[$0 + 12 >> 2]) {
-   $1 = (jsvGetCharInString(HEAP32[24872], HEAP32[24874]) & 255) != 10;
+  if (HEAPU32[24614] < HEAPU32[$0 + 12 >> 2]) {
+   $1 = (jsvGetCharInString(HEAP32[24612], HEAP32[24614]) & 255) != 10;
   } else {
    $1 = 0;
   }
   if ($1) {
    if (jsiShowInputLine() & 1) {
-    jsiConsolePrintChar(jsvGetCharInString(HEAP32[24872], HEAP32[24874]) << 24 >> 24);
+    jsiConsolePrintChar(jsvGetCharInString(HEAP32[24612], HEAP32[24614]) << 24 >> 24);
    }
-   HEAP32[24874] = HEAP32[24874] + 1;
+   HEAP32[24614] = HEAP32[24614] + 1;
    continue;
   }
   break;
@@ -71170,7 +71170,7 @@ function jspIsConstructor($0, $1) {
  global$0 = $2;
  HEAP32[$2 + 24 >> 2] = $0;
  HEAP32[$2 + 20 >> 2] = $1;
- HEAP32[$2 + 16 >> 2] = jsvObjectGetChild(HEAP32[24862], HEAP32[$2 + 20 >> 2], 0);
+ HEAP32[$2 + 16 >> 2] = jsvObjectGetChild(HEAP32[24602], HEAP32[$2 + 20 >> 2], 0);
  label$1 : {
   if (!HEAP32[$2 + 16 >> 2]) {
    HEAP8[$2 + 31 | 0] = 0;
@@ -71223,7 +71223,7 @@ function jsiShouldExecuteWatch($0, $1) {
  global$0 = $2;
  HEAP32[$2 + 12 >> 2] = $0;
  HEAP8[$2 + 11 | 0] = $1;
- HEAP32[$2 + 4 >> 2] = jsvGetIntegerAndUnLock(jsvObjectGetChild(HEAP32[$2 + 12 >> 2], 6003, 0));
+ HEAP32[$2 + 4 >> 2] = jsvGetIntegerAndUnLock(jsvObjectGetChild(HEAP32[$2 + 12 >> 2], 5999, 0));
  global$0 = $2 + 16 | 0;
  $0 = 1;
  label$1 : {
@@ -71307,7 +71307,7 @@ function jshPinSetValue($0, $1) {
  global$0 = $2;
  HEAP8[$2 + 15 | 0] = $0;
  HEAP8[$2 + 14 | 0] = $1;
- if (HEAPU8[Math_imul(HEAPU8[$2 + 15 | 0], 3) + 31968 | 0] & 16) {
+ if (HEAPU8[Math_imul(HEAPU8[$2 + 15 | 0], 3) + 30944 | 0] & 16) {
   HEAP8[$2 + 14 | 0] = (HEAPU8[$2 + 14 | 0] ^ -1) & 1;
  }
  HEAP8[$2 + 11 | 0] = 105;
@@ -71316,7 +71316,7 @@ function jshPinSetValue($0, $1) {
  $0 = HEAPU8[$2 + 15 | 0];
  HEAP32[$2 + 4 >> 2] = HEAP8[$2 + 14 | 0] & 1;
  HEAP32[$2 >> 2] = $0;
- emscripten_asm_const_iii(31863, $2 + 11 | 0, $2 | 0) | 0;
+ emscripten_asm_const_iii(30839, $2 + 11 | 0, $2 | 0) | 0;
  global$0 = $2 + 16 | 0;
 }
 function jswrap_date_setDate($0, $1) {
@@ -71388,12 +71388,12 @@ function lcdST7789_setPixel($0, $1, $2, $3) {
  HEAP32[$4 + 8 >> 2] = $1;
  HEAP32[$4 + 4 >> 2] = $2;
  HEAP32[$4 >> 2] = $3;
- HEAP32[$4 + 4 >> 2] = HEAP32[25478] + HEAP32[$4 + 4 >> 2];
+ HEAP32[$4 + 4 >> 2] = HEAP32[25218] + HEAP32[$4 + 4 >> 2];
  if (HEAP32[$4 + 4 >> 2] >= 320) {
   HEAP32[$4 + 4 >> 2] = HEAP32[$4 + 4 >> 2] - 320;
  }
- HEAP16[(HEAP32[$4 + 8 >> 2] + Math_imul(HEAP32[$4 + 4 >> 2], 240) << 1) + 101968 >> 1] = HEAP32[$4 >> 2];
- HEAP8[101909] = 1;
+ HEAP16[(HEAP32[$4 + 8 >> 2] + Math_imul(HEAP32[$4 + 4 >> 2], 240) << 1) + 100928 >> 1] = HEAP32[$4 >> 2];
+ HEAP8[100869] = 1;
 }
 function jsvStringIteratorAppendString($0, $1, $2) {
  var $3 = 0;
@@ -71459,9 +71459,9 @@ function jshPushIOCharEventHandler($0, $1) {
  HEAP8[$2 + 14 | 0] = $0;
  HEAP8[$2 + 13 | 0] = $1;
  label$1 : {
-  if (!(HEAP8[$2 + 13 | 0] != 3 | HEAPU8[$2 + 14 | 0] != HEAPU8[57424])) {
+  if (!(HEAP8[$2 + 13 | 0] != 3 | HEAPU8[$2 + 14 | 0] != HEAPU8[56384])) {
    if (!(jsiPasswordProtected() & 1)) {
-    HEAP32[24866] = HEAP32[24866] | 2048;
+    HEAP32[24606] = HEAP32[24606] | 2048;
    }
    HEAP8[$2 + 15 | 0] = 1;
    break label$1;
@@ -71641,7 +71641,7 @@ function jsvSetNamedChild($0, $1) {
  global$0 = $2;
  HEAP32[$2 + 24 >> 2] = $0;
  HEAP32[$2 + 20 >> 2] = $1;
- HEAP32[$2 + 16 >> 2] = 41123;
+ HEAP32[$2 + 16 >> 2] = 40095;
  HEAP32[$2 + 12 >> 2] = jsvFindChildFromString(HEAP32[$2 + 24 >> 2], HEAP32[$2 + 16 >> 2], 1);
  label$1 : {
   if (HEAP32[$2 + 12 >> 2]) {
@@ -71799,11 +71799,11 @@ function fflush($0) {
   }
   return __fflush_unlocked($0) | 0;
  }
- if (HEAP32[14756]) {
-  $1 = fflush(HEAP32[14756]);
+ if (HEAP32[14496]) {
+  $1 = fflush(HEAP32[14496]);
  }
- __lock(257416);
- $0 = HEAP32[64356];
+ __lock(256376);
+ $0 = HEAP32[64096];
  if ($0) {
   while (1) {
    if (HEAPU32[$0 + 20 >> 2] > HEAPU32[$0 + 28 >> 2]) {
@@ -71816,7 +71816,7 @@ function fflush($0) {
    break;
   }
  }
- __unlock(257416);
+ __unlock(256376);
  return $1 | 0;
 }
 function jsiQueueObjectCallbacks($0, $1, $2, $3) {
@@ -71859,7 +71859,7 @@ function jswrap_array_findIndex($0, $1) {
  global$0 = $2;
  HEAP32[$2 + 8 >> 2] = $0;
  HEAP32[$2 + 4 >> 2] = $1;
- HEAP32[$2 >> 2] = _jswrap_array_iterate_with_callback(34554, HEAP32[$2 + 8 >> 2], HEAP32[$2 + 4 >> 2], 0, 3, 1, 1);
+ HEAP32[$2 >> 2] = _jswrap_array_iterate_with_callback(33530, HEAP32[$2 + 8 >> 2], HEAP32[$2 + 4 >> 2], 0, 3, 1, 1);
  label$1 : {
   if (HEAP32[$2 >> 2]) {
    HEAP32[$2 + 12 >> 2] = HEAP32[$2 >> 2];
@@ -72009,11 +72009,11 @@ function jspGetStackTrace() {
  var $0 = 0;
  $0 = global$0 - 16 | 0;
  global$0 = $0;
- HEAP32[$0 + 8 >> 2] = jsvFindChildFromString(HEAP32[24863], 3760, 0);
+ HEAP32[$0 + 8 >> 2] = jsvFindChildFromString(HEAP32[24603], 3760, 0);
  label$1 : {
   if (HEAP32[$0 + 8 >> 2]) {
    HEAP32[$0 + 4 >> 2] = jsvSkipName(HEAP32[$0 + 8 >> 2]);
-   jsvRemoveChild(HEAP32[24863], HEAP32[$0 + 8 >> 2]);
+   jsvRemoveChild(HEAP32[24603], HEAP32[$0 + 8 >> 2]);
    jsvUnLock(HEAP32[$0 + 8 >> 2]);
    HEAP32[$0 + 12 >> 2] = HEAP32[$0 + 4 >> 2];
    break label$1;
@@ -72082,7 +72082,7 @@ function jshGetEventFlagsForPin($0) {
  label$1 : {
   while (1) {
    if (HEAP32[$1 + 8 >> 2] < 16) {
-    if (HEAPU8[HEAP32[$1 + 8 >> 2] + 255584 | 0] == HEAPU8[$1 + 14 | 0]) {
+    if (HEAPU8[HEAP32[$1 + 8 >> 2] + 254544 | 0] == HEAPU8[$1 + 14 | 0]) {
      HEAP8[$1 + 15 | 0] = HEAP32[$1 + 8 >> 2] + 1;
      break label$1;
     } else {
@@ -72107,7 +72107,7 @@ function graphicsVectorCharWidth($0, $1, $2) {
    HEAP32[$3 + 12 >> 2] = 0;
    break label$1;
   }
-  HEAP8[$3 + 2 | 0] = HEAPU8[(HEAP8[$3 + 3 | 0] << 1) + 26320 | 0];
+  HEAP8[$3 + 2 | 0] = HEAPU8[(HEAP8[$3 + 3 | 0] << 1) + 25296 | 0];
   HEAP32[$3 + 12 >> 2] = (Math_imul(HEAPU8[$3 + 2 | 0], HEAP32[$3 + 4 >> 2]) >>> 0) / 192;
  }
  return HEAP32[$3 + 12 >> 2];
@@ -72154,7 +72154,7 @@ function jspFindPrototypeFor($0) {
  $1 = global$0 - 16 | 0;
  global$0 = $1;
  HEAP32[$1 + 8 >> 2] = $0;
- HEAP32[$1 + 4 >> 2] = jsvObjectGetChild(HEAP32[24862], HEAP32[$1 + 8 >> 2], 0);
+ HEAP32[$1 + 4 >> 2] = jsvObjectGetChild(HEAP32[24602], HEAP32[$1 + 8 >> 2], 0);
  label$1 : {
   if (!HEAP32[$1 + 4 >> 2]) {
    HEAP32[$1 + 12 >> 2] = 0;
@@ -72173,14 +72173,14 @@ function jsiReplaceInputLine($0) {
  global$0 = $1;
  HEAP32[$1 + 12 >> 2] = $0;
  if (jsiShowInputLine() & 1) {
-  jsiMoveCursorChar(HEAP32[24872], HEAP32[24874], 0);
+  jsiMoveCursorChar(HEAP32[24612], HEAP32[24614], 0);
   jsiConsolePrintString(5198);
   jsiConsolePrintStringVarWithNewLineChar(HEAP32[$1 + 12 >> 2], 0, 58);
  }
  jsiInputLineCursorMoved();
- jsvUnLock(HEAP32[24872]);
- HEAP32[24872] = jsvLockAgain(HEAP32[$1 + 12 >> 2]);
- HEAP32[24874] = jsvGetStringLength(HEAP32[24872]);
+ jsvUnLock(HEAP32[24612]);
+ HEAP32[24612] = jsvLockAgain(HEAP32[$1 + 12 >> 2]);
+ HEAP32[24614] = jsvGetStringLength(HEAP32[24612]);
  global$0 = $1 + 16 | 0;
 }
 function jsvNewNativeFunction($0, $1) {
@@ -72265,7 +72265,7 @@ function _jswrap_promise_queueresolve($0, $1) {
  HEAP32[$2 + 4 >> 2] = jsvNewNativeFunction(534, 32776);
  if (HEAP32[$2 + 4 >> 2]) {
   $0 = $2 + 8 | 0;
-  jsvObjectSetChild(HEAP32[$2 + 4 >> 2], 40590, HEAP32[$2 + 12 >> 2]);
+  jsvObjectSetChild(HEAP32[$2 + 4 >> 2], 39562, HEAP32[$2 + 12 >> 2]);
   jsiQueueEvents(HEAP32[$2 + 12 >> 2], HEAP32[$2 + 4 >> 2], $0, 1);
   jsvUnLock(HEAP32[$2 + 4 >> 2]);
  }
@@ -72304,7 +72304,7 @@ function _jswrap_promise_queuereject($0, $1) {
  HEAP32[$2 + 4 >> 2] = jsvNewNativeFunction(533, 32776);
  if (HEAP32[$2 + 4 >> 2]) {
   $0 = $2 + 8 | 0;
-  jsvObjectSetChild(HEAP32[$2 + 4 >> 2], 40590, HEAP32[$2 + 12 >> 2]);
+  jsvObjectSetChild(HEAP32[$2 + 4 >> 2], 39562, HEAP32[$2 + 12 >> 2]);
   jsiQueueEvents(HEAP32[$2 + 12 >> 2], HEAP32[$2 + 4 >> 2], $0, 1);
   jsvUnLock(HEAP32[$2 + 4 >> 2]);
  }
@@ -72361,7 +72361,7 @@ function jshSleep($0, $1) {
   }
   $0 = -2147483648;
  }
- HEAP32[14358] = $0;
+ HEAP32[14098] = $0;
  global$0 = $2 + 16 | 0;
 }
 function hexToByte($0, $1) {
@@ -72411,16 +72411,16 @@ function jsiAppendToInputLine($0) {
  $1 = global$0 - 16 | 0;
  global$0 = $1;
  HEAP32[$1 + 12 >> 2] = $0;
- if (!HEAP32[24881]) {
-  jsvStringIteratorNew(99512, HEAP32[24872], 0);
-  jsvStringIteratorGotoEnd(99512);
+ if (!HEAP32[24621]) {
+  jsvStringIteratorNew(98472, HEAP32[24612], 0);
+  jsvStringIteratorGotoEnd(98472);
  }
  while (1) {
   if (HEAPU8[HEAP32[$1 + 12 >> 2]]) {
    $0 = HEAP32[$1 + 12 >> 2];
    HEAP32[$1 + 12 >> 2] = $0 + 1;
-   jsvStringIteratorAppend(99512, HEAP8[$0 | 0]);
-   HEAP32[14357] = HEAP32[14357] + 1;
+   jsvStringIteratorAppend(98472, HEAP8[$0 | 0]);
+   HEAP32[14097] = HEAP32[14097] + 1;
    continue;
   }
   break;
@@ -72506,7 +72506,7 @@ function jswrap_eval($0) {
    break label$1;
   }
   HEAP32[$1 + 4 >> 2] = jsvAsString(HEAP32[$1 + 8 >> 2]);
-  HEAP32[$1 >> 2] = jspEvaluateVar(HEAP32[$1 + 4 >> 2], HEAP32[24865], 0);
+  HEAP32[$1 >> 2] = jspEvaluateVar(HEAP32[$1 + 4 >> 2], HEAP32[24605], 0);
   jsvUnLock(HEAP32[$1 + 4 >> 2]);
   HEAP32[$1 + 12 >> 2] = HEAP32[$1 >> 2];
  }
@@ -72791,7 +72791,7 @@ function jswrap_serial_setConsole($0, $1) {
    jsiSetConsoleDevice(HEAPU8[$2 + 10 | 0], HEAP8[$2 + 11 | 0] & 1);
    break label$1;
   }
-  jsExceptionHere(1, 40857, 0);
+  jsExceptionHere(1, 39829, 0);
  }
  global$0 = $2 + 16 | 0;
 }
@@ -72801,13 +72801,13 @@ function jswrap_onewire_constructor($0) {
  $1 = global$0 - 16 | 0;
  global$0 = $1;
  HEAP8[$1 + 11 | 0] = $0;
- HEAP32[$1 + 4 >> 2] = jspNewObject(0, 39879);
+ HEAP32[$1 + 4 >> 2] = jspNewObject(0, 38855);
  label$1 : {
   if (!HEAP32[$1 + 4 >> 2]) {
    HEAP32[$1 + 12 >> 2] = 0;
    break label$1;
   }
-  jsvObjectSetChildAndUnLock(HEAP32[$1 + 4 >> 2], 39887, jsvNewFromPin(HEAPU8[$1 + 11 | 0]));
+  jsvObjectSetChildAndUnLock(HEAP32[$1 + 4 >> 2], 38863, jsvNewFromPin(HEAPU8[$1 + 11 | 0]));
   HEAP32[$1 + 12 >> 2] = HEAP32[$1 + 4 >> 2];
  }
  global$0 = $1 + 16 | 0;
@@ -72841,10 +72841,10 @@ function jswrap_promise_all_reject($0, $1) {
  global$0 = $2;
  HEAP32[$2 + 12 >> 2] = $0;
  HEAP32[$2 + 8 >> 2] = $1;
- HEAP32[$2 + 4 >> 2] = jsvObjectGetChild(HEAP32[$2 + 12 >> 2], 40647, 0);
+ HEAP32[$2 + 4 >> 2] = jsvObjectGetChild(HEAP32[$2 + 12 >> 2], 39619, 0);
  if (HEAP32[$2 + 4 >> 2]) {
   jsvUnLock(HEAP32[$2 + 4 >> 2]);
-  jsvObjectRemoveChild(HEAP32[$2 + 12 >> 2], 40647);
+  jsvObjectRemoveChild(HEAP32[$2 + 12 >> 2], 39619);
   _jswrap_promise_queuereject(HEAP32[$2 + 12 >> 2], HEAP32[$2 + 8 >> 2]);
  }
  global$0 = $2 + 16 | 0;
@@ -72856,11 +72856,11 @@ function tflite__EnumNameBuiltinOperator_28tflite__BuiltinOperator_29($0) {
  HEAP32[$1 + 8 >> 2] = $0;
  label$1 : {
   if (!(HEAP32[$1 + 8 >> 2] <= 121 ? HEAP32[$1 + 8 >> 2] >= 0 : 0)) {
-   HEAP32[$1 + 12 >> 2] = 44292;
+   HEAP32[$1 + 12 >> 2] = 43252;
    break label$1;
   }
   HEAP32[$1 + 4 >> 2] = HEAP32[$1 + 8 >> 2];
-  HEAP32[$1 + 12 >> 2] = HEAP32[(HEAP32[$1 + 4 >> 2] << 2) + 44304 >> 2];
+  HEAP32[$1 + 12 >> 2] = HEAP32[(HEAP32[$1 + 4 >> 2] << 2) + 43264 >> 2];
  }
  global$0 = $1 + 16 | 0;
  return HEAP32[$1 + 12 >> 2];
@@ -72893,8 +72893,8 @@ function jshPinGetValue($0) {
  HEAP8[$1 + 12 | 0] = 105;
  HEAP8[$1 + 13 | 0] = 0;
  HEAP32[$1 >> 2] = HEAPU8[$1 + 15 | 0];
- HEAP8[$1 + 14 | 0] = (emscripten_asm_const_iii(31888, $1 + 12 | 0, $1 | 0) | 0) != 0;
- if (HEAPU8[Math_imul(HEAPU8[$1 + 15 | 0], 3) + 31968 | 0] & 16) {
+ HEAP8[$1 + 14 | 0] = (emscripten_asm_const_iii(30864, $1 + 12 | 0, $1 | 0) | 0) != 0;
+ if (HEAPU8[Math_imul(HEAPU8[$1 + 15 | 0], 3) + 30944 | 0] & 16) {
   HEAP8[$1 + 14 | 0] = (HEAPU8[$1 + 14 | 0] ^ -1) & 1;
  }
  global$0 = $1 + 16 | 0;
@@ -73026,14 +73026,14 @@ function jswrap_interface_setSleepIndicator($0) {
  $1 = global$0 - 16 | 0;
  global$0 = $1;
  HEAP32[$1 + 12 >> 2] = $0;
- HEAP8[$1 + 11 | 0] = HEAPU8[57426];
- HEAP8[57426] = jshGetPinFromVar(HEAP32[$1 + 12 >> 2]);
- if (HEAPU8[57426] != HEAPU8[$1 + 11 | 0]) {
+ HEAP8[$1 + 11 | 0] = HEAPU8[56386];
+ HEAP8[56386] = jshGetPinFromVar(HEAP32[$1 + 12 >> 2]);
+ if (HEAPU8[56386] != HEAPU8[$1 + 11 | 0]) {
   if (HEAPU8[$1 + 11 | 0] != 255) {
    jshPinOutput(HEAPU8[$1 + 11 | 0], 0);
   }
-  if (HEAPU8[57426] != 255) {
-   jshPinOutput(HEAPU8[57426], 1);
+  if (HEAPU8[56386] != 255) {
+   jshPinOutput(HEAPU8[56386], 1);
   }
  }
  global$0 = $1 + 16 | 0;
@@ -73044,14 +73044,14 @@ function jswrap_interface_setBusyIndicator($0) {
  $1 = global$0 - 16 | 0;
  global$0 = $1;
  HEAP32[$1 + 12 >> 2] = $0;
- HEAP8[$1 + 11 | 0] = HEAPU8[57425];
- HEAP8[57425] = jshGetPinFromVar(HEAP32[$1 + 12 >> 2]);
- if (HEAPU8[57425] != HEAPU8[$1 + 11 | 0]) {
+ HEAP8[$1 + 11 | 0] = HEAPU8[56385];
+ HEAP8[56385] = jshGetPinFromVar(HEAP32[$1 + 12 >> 2]);
+ if (HEAPU8[56385] != HEAPU8[$1 + 11 | 0]) {
   if (HEAPU8[$1 + 11 | 0] != 255) {
    jshPinOutput(HEAPU8[$1 + 11 | 0], 0);
   }
-  if (HEAPU8[57425] != 255) {
-   jshPinOutput(HEAPU8[57425], 1);
+  if (HEAPU8[56385] != 255) {
+   jshPinOutput(HEAPU8[56385], 1);
   }
  }
  global$0 = $1 + 16 | 0;
@@ -73062,17 +73062,17 @@ function jswrap_banglejs_setCompassPower($0) {
  $1 = global$0 - 16 | 0;
  global$0 = $1;
  HEAP8[$1 + 15 | 0] = $0;
- HEAP8[255640] = HEAP8[$1 + 15 | 0] & 1;
+ HEAP8[254600] = HEAP8[$1 + 15 | 0] & 1;
  jswrap_banglejs_compassWr(49, HEAP8[$1 + 15 | 0] & 1 ? 8 : 0);
- HEAP16[127821] = 0;
- HEAP16[127822] = 0;
- HEAP16[127823] = 0;
- HEAP16[127824] = 0;
- HEAP16[127825] = 0;
- HEAP16[127826] = 0;
- HEAP16[127827] = 0;
- HEAP16[127828] = 0;
- HEAP16[127829] = 0;
+ HEAP16[127301] = 0;
+ HEAP16[127302] = 0;
+ HEAP16[127303] = 0;
+ HEAP16[127304] = 0;
+ HEAP16[127305] = 0;
+ HEAP16[127306] = 0;
+ HEAP16[127307] = 0;
+ HEAP16[127308] = 0;
+ HEAP16[127309] = 0;
  global$0 = $1 + 16 | 0;
 }
 function heatshrink_decode($0, $1, $2) {
@@ -73193,7 +73193,7 @@ function lcdInit_ArrayBuffer($0) {
  HEAP32[$1 + 12 >> 2] = $0;
  HEAP32[$1 + 8 >> 2] = jswrap_arraybuffer_constructor(graphicsGetMemoryRequired(HEAP32[$1 + 12 >> 2]));
  $0 = HEAP32[$1 + 12 >> 2];
- jsvUnLock2(jsvAddNamedChild(HEAPU8[$0 | 0] | HEAPU8[$0 + 1 | 0] << 8 | (HEAPU8[$0 + 2 | 0] << 16 | HEAPU8[$0 + 3 | 0] << 24), HEAP32[$1 + 8 >> 2], 31724), HEAP32[$1 + 8 >> 2]);
+ jsvUnLock2(jsvAddNamedChild(HEAPU8[$0 | 0] | HEAPU8[$0 + 1 | 0] << 8 | (HEAPU8[$0 + 2 | 0] << 16 | HEAPU8[$0 + 3 | 0] << 24), HEAP32[$1 + 8 >> 2], 30700), HEAP32[$1 + 8 >> 2]);
  global$0 = $1 + 16 | 0;
 }
 function heatshrink_encoder_finish($0) {
@@ -73220,14 +73220,14 @@ function lcdST7789_cmd($0, $1, $2) {
  HEAP32[$3 + 8 >> 2] = $1;
  HEAP32[$3 + 4 >> 2] = $2;
  if (HEAP32[$3 + 12 >> 2] == 55) {
-  HEAP32[25476] = HEAPU8[HEAP32[$3 + 4 >> 2] + 1 | 0] | HEAPU8[HEAP32[$3 + 4 >> 2]] << 8;
-  if (HEAP8[101908] & 1) {
-   HEAP32[25476] = HEAP32[25476] + 40;
+  HEAP32[25216] = HEAPU8[HEAP32[$3 + 4 >> 2] + 1 | 0] | HEAPU8[HEAP32[$3 + 4 >> 2]] << 8;
+  if (HEAP8[100868] & 1) {
+   HEAP32[25216] = HEAP32[25216] + 40;
   }
-  if (HEAP32[25476] >= 320) {
-   HEAP32[25476] = HEAP32[25476] - 320;
+  if (HEAP32[25216] >= 320) {
+   HEAP32[25216] = HEAP32[25216] - 320;
   }
-  HEAP8[101909] = 1;
+  HEAP8[100869] = 1;
  }
 }
 function gemmlowp__FixedPoint_int_2c_202__20gemmlowp__Rescale_2_2c_20int_2c_204__28gemmlowp__FixedPoint_int_2c_204__29($0) {
@@ -73273,18 +73273,18 @@ function std____2____compressed_pair_elem_TfLiteResizeNearestNeighborParams__2c_
  global$0 = $2 + 16 | 0;
 }
 function jslKill() {
- HEAP16[HEAP32[14856] + 2 >> 1] = 0;
- if (HEAP32[HEAP32[14856] + 120 >> 2]) {
-  jsvLockAgain(HEAP32[HEAP32[14856] + 120 >> 2]);
+ HEAP16[HEAP32[14596] + 2 >> 1] = 0;
+ if (HEAP32[HEAP32[14596] + 120 >> 2]) {
+  jsvLockAgain(HEAP32[HEAP32[14596] + 120 >> 2]);
  }
- jsvStringIteratorFree(HEAP32[14856] + 108 | 0);
- if (HEAP32[HEAP32[14856] + 96 >> 2]) {
-  jsvUnLock(HEAP32[HEAP32[14856] + 96 >> 2]);
-  HEAP32[HEAP32[14856] + 96 >> 2] = 0;
+ jsvStringIteratorFree(HEAP32[14596] + 108 | 0);
+ if (HEAP32[HEAP32[14596] + 96 >> 2]) {
+  jsvUnLock(HEAP32[HEAP32[14596] + 96 >> 2]);
+  HEAP32[HEAP32[14596] + 96 >> 2] = 0;
  }
- jsvUnLock(HEAP32[HEAP32[14856] + 104 >> 2]);
- HEAP32[HEAP32[14856] + 16 >> 2] = 0;
- HEAP8[HEAP32[14856] + 24 | 0] = 0;
+ jsvUnLock(HEAP32[HEAP32[14596] + 104 >> 2]);
+ HEAP32[HEAP32[14596] + 16 >> 2] = 0;
+ HEAP8[HEAP32[14596] + 24 | 0] = 0;
 }
 function jsspiHardwareFunc($0, $1, $2, $3) {
  $0 = $0 | 0;
@@ -73374,14 +73374,14 @@ function lcdST7789_blitPixel($0) {
  var $1 = 0;
  $1 = global$0 - 16 | 0;
  HEAP32[$1 + 12 >> 2] = $0;
- HEAP16[(HEAP32[25483] + Math_imul(HEAP32[25484], 240) << 1) + 101968 >> 1] = HEAP32[$1 + 12 >> 2];
- HEAP8[101909] = 1;
- HEAP32[25483] = HEAP32[25483] + 1;
- if (HEAP32[25483] > HEAP32[25487]) {
-  HEAP32[25483] = HEAP32[25485];
-  HEAP32[25484] = HEAP32[25484] + 1;
-  if (HEAP32[25484] > HEAP32[25488]) {
-   HEAP32[25484] = HEAP32[25486];
+ HEAP16[(HEAP32[25223] + Math_imul(HEAP32[25224], 240) << 1) + 100928 >> 1] = HEAP32[$1 + 12 >> 2];
+ HEAP8[100869] = 1;
+ HEAP32[25223] = HEAP32[25223] + 1;
+ if (HEAP32[25223] > HEAP32[25227]) {
+  HEAP32[25223] = HEAP32[25225];
+  HEAP32[25224] = HEAP32[25224] + 1;
+  if (HEAP32[25224] > HEAP32[25228]) {
+   HEAP32[25224] = HEAP32[25226];
   }
  }
 }
@@ -73459,12 +73459,12 @@ function jslGetTokenValueAsVar() {
  $0 = global$0 - 16 | 0;
  global$0 = $0;
  label$1 : {
-  if (HEAP32[HEAP32[14856] + 96 >> 2]) {
-   HEAP32[$0 + 12 >> 2] = jsvLockAgain(HEAP32[HEAP32[14856] + 96 >> 2]);
+  if (HEAP32[HEAP32[14596] + 96 >> 2]) {
+   HEAP32[$0 + 12 >> 2] = jsvLockAgain(HEAP32[HEAP32[14596] + 96 >> 2]);
    break label$1;
   }
-  HEAP8[HEAPU8[HEAP32[14856] + 100 | 0] + (HEAP32[14856] + 32 | 0) | 0] = 0;
-  HEAP32[$0 + 12 >> 2] = jsvNewFromString(HEAP32[14856] + 32 | 0);
+  HEAP8[HEAPU8[HEAP32[14596] + 100 | 0] + (HEAP32[14596] + 32 | 0) | 0] = 0;
+  HEAP32[$0 + 12 >> 2] = jsvNewFromString(HEAP32[14596] + 32 | 0);
  }
  global$0 = $0 + 16 | 0;
  return HEAP32[$0 + 12 >> 2];
@@ -73493,28 +73493,28 @@ function jswrap_tfmicrointerpreter_getTFMI($0) {
  global$0 = $1;
  $2 = $1 + 4 | 0;
  HEAP32[$1 + 12 >> 2] = $0;
- HEAP32[$1 + 8 >> 2] = jsvObjectGetChild(HEAP32[$1 + 12 >> 2], 43624, 0);
+ HEAP32[$1 + 8 >> 2] = jsvObjectGetChild(HEAP32[$1 + 12 >> 2], 42584, 0);
  HEAP32[$1 >> 2] = jsvGetDataPointer(HEAP32[$1 + 8 >> 2], $2);
  jsvUnLock(HEAP32[$1 + 8 >> 2]);
  if (!HEAP32[$1 >> 2]) {
-  jsExceptionHere(1, 43627, 0);
+  jsExceptionHere(1, 42587, 0);
  }
  global$0 = $1 + 16 | 0;
  return HEAP32[$1 >> 2];
 }
 function jsiConsoleReturnInputLine() {
- if (HEAP8[99492] & 1) {
-  HEAP8[99492] = 0;
+ if (HEAP8[98452] & 1) {
+  HEAP8[98452] = 0;
   if (jsiEcho() & 1) {
-   if (HEAPU16[49742] & 8) {
+   if (HEAPU16[49222] & 8) {
     jsiConsolePrintString(5218);
    }
    if (jsiPasswordProtected() & 1) {
     jsiConsolePrintString(5224);
    }
    jsiConsolePrintChar(62);
-   jsiConsolePrintStringVarWithNewLineChar(HEAP32[24872], 0, 58);
-   jsiMoveCursorChar(HEAP32[24872], jsvGetStringLength(HEAP32[24872]), HEAP32[24874]);
+   jsiConsolePrintStringVarWithNewLineChar(HEAP32[24612], 0, 58);
+   jsiMoveCursorChar(HEAP32[24612], jsvGetStringLength(HEAP32[24612]), HEAP32[24614]);
   }
  }
 }
@@ -73541,13 +73541,13 @@ function jsiSetBusy($0, $1) {
  HEAP8[$2 + 11 | 0] = $1;
  label$1 : {
   if (HEAP8[$2 + 11 | 0] & 1) {
-   HEAP32[24876] = HEAP32[$2 + 12 >> 2] | HEAP32[24876];
+   HEAP32[24616] = HEAP32[$2 + 12 >> 2] | HEAP32[24616];
    break label$1;
   }
-  HEAP32[24876] = HEAP32[24876] & (HEAP32[$2 + 12 >> 2] ^ -1);
+  HEAP32[24616] = HEAP32[24616] & (HEAP32[$2 + 12 >> 2] ^ -1);
  }
- if (HEAPU8[57425] != 255) {
-  jshPinOutput(HEAPU8[57425], HEAP32[24876] != 0);
+ if (HEAPU8[56385] != 255) {
+  jshPinOutput(HEAPU8[56385], HEAP32[24616] != 0);
  }
  global$0 = $2 + 16 | 0;
 }
@@ -73663,7 +73663,7 @@ function jsiGetClassNameFromDevice($0) {
    HEAP32[$1 + 12 >> 2] = 0;
    break label$1;
   }
-  HEAP32[$1 + 12 >> 2] = jsvFindChildFromString(HEAP32[24862], HEAP32[$1 + 4 >> 2], 0);
+  HEAP32[$1 + 12 >> 2] = jsvFindChildFromString(HEAP32[24602], HEAP32[$1 + 4 >> 2], 0);
  }
  global$0 = $1 + 16 | 0;
  return HEAP32[$1 + 12 >> 2];
@@ -73683,13 +73683,13 @@ function jspeBlockOrStatement() {
  $0 = global$0 - 16 | 0;
  global$0 = $0;
  label$1 : {
-  if (HEAP16[HEAP32[14856] + 2 >> 1] == 123) {
+  if (HEAP16[HEAP32[14596] + 2 >> 1] == 123) {
    jspeBlock();
    HEAP32[$0 + 12 >> 2] = 0;
    break label$1;
   }
   HEAP32[$0 + 8 >> 2] = jspeStatement();
-  if (HEAP16[HEAP32[14856] + 2 >> 1] == 59) {
+  if (HEAP16[HEAP32[14596] + 2 >> 1] == 59) {
    jslGetNextToken();
   }
   HEAP32[$0 + 12 >> 2] = HEAP32[$0 + 8 >> 2];
@@ -73794,13 +73794,13 @@ function unsigned_20char_20tflite__ops__micro__maximum_minimum___28anonymous_20n
  return $0 | 0;
 }
 function jsiConsoleRemoveInputLine() {
- if (!(HEAP8[99492] & 1)) {
-  HEAP8[99492] = 1;
-  if (!(!(jsiEcho() & 1) | !HEAP32[24872])) {
-   jsiMoveCursorChar(HEAP32[24872], HEAP32[24874], 0);
+ if (!(HEAP8[98452] & 1)) {
+  HEAP8[98452] = 1;
+  if (!(!(jsiEcho() & 1) | !HEAP32[24612])) {
+   jsiMoveCursorChar(HEAP32[24612], HEAP32[24614], 0);
    jsiConsolePrintChar(13);
    jsiConsolePrintString(5198);
-   if (HEAPU16[49742] & 8) {
+   if (HEAPU16[49222] & 8) {
     jsiConsolePrintChar(8);
     jsiConsolePrintChar(8);
     jsiConsolePrintChar(8);
@@ -74003,7 +74003,7 @@ function jsvObjectSetOrRemoveChild($0) {
  $1 = global$0 - 16 | 0;
  global$0 = $1;
  HEAP32[$1 + 12 >> 2] = $0;
- HEAP32[$1 + 8 >> 2] = 32148;
+ HEAP32[$1 + 8 >> 2] = 31124;
  HEAP32[$1 + 4 >> 2] = 0;
  label$1 : {
   if (HEAP32[$1 + 4 >> 2]) {
@@ -74174,7 +74174,7 @@ function jswrap_object_valueOf($0) {
  label$1 : {
   if (!HEAP32[$1 + 8 >> 2]) {
    HEAP32[$1 >> 2] = HEAP32[$1 + 8 >> 2];
-   jsExceptionHere(3, 38774, $1);
+   jsExceptionHere(3, 37750, $1);
    HEAP32[$1 + 12 >> 2] = 0;
    break label$1;
   }
@@ -74434,7 +74434,7 @@ function jswrap_tfmicrointerpreter_invoke($0) {
   if (tf_invoke(HEAP32[$1 + 8 >> 2]) & 1) {
    break label$1;
   }
-  jsExceptionHere(3, 43727, 0);
+  jsExceptionHere(3, 42687, 0);
  }
  global$0 = $1 + 16 | 0;
 }
@@ -74486,10 +74486,10 @@ function jswrap_waveform_startOutput($0, $1, $2, $3) {
  global$0 = $4 + 32 | 0;
 }
 function jswrap_banglejs_kill() {
- jsvUnLock(HEAP32[63921]);
- HEAP32[63921] = 0;
- jsvUnLock(HEAP32[63922]);
- HEAP32[63922] = 0;
+ jsvUnLock(HEAP32[63661]);
+ HEAP32[63661] = 0;
+ jsvUnLock(HEAP32[63662]);
+ HEAP32[63662] = 0;
  jshSetPinShouldStayWatched(24, 0);
  jshSetPinShouldStayWatched(22, 0);
  jshSetPinShouldStayWatched(23, 0);
@@ -74600,10 +74600,10 @@ function jswrap_promise_get_chained_promise($0) {
  $1 = global$0 - 16 | 0;
  global$0 = $1;
  HEAP32[$1 + 12 >> 2] = $0;
- HEAP32[$1 + 8 >> 2] = jsvObjectGetChild(HEAP32[$1 + 12 >> 2], 40584, 0);
+ HEAP32[$1 + 8 >> 2] = jsvObjectGetChild(HEAP32[$1 + 12 >> 2], 39556, 0);
  if (!HEAP32[$1 + 8 >> 2]) {
-  HEAP32[$1 + 8 >> 2] = jspNewObject(0, 40652);
-  jsvObjectSetChild(HEAP32[$1 + 12 >> 2], 40584, HEAP32[$1 + 8 >> 2]);
+  HEAP32[$1 + 8 >> 2] = jspNewObject(0, 39624);
+  jsvObjectSetChild(HEAP32[$1 + 12 >> 2], 39556, HEAP32[$1 + 8 >> 2]);
  }
  global$0 = $1 + 16 | 0;
  return HEAP32[$1 + 8 >> 2];
@@ -74908,7 +74908,7 @@ function _jsiInitNamedArray($0) {
  $1 = global$0 - 16 | 0;
  global$0 = $1;
  HEAP32[$1 + 12 >> 2] = $0;
- HEAP32[$1 + 8 >> 2] = jsvObjectGetChild(HEAP32[24863], HEAP32[$1 + 12 >> 2], 3);
+ HEAP32[$1 + 8 >> 2] = jsvObjectGetChild(HEAP32[24603], HEAP32[$1 + 12 >> 2], 3);
  HEAP16[$1 + 6 >> 1] = 0;
  if (HEAP32[$1 + 8 >> 2]) {
   HEAP16[$1 + 6 >> 1] = jsvGetRef(jsvRef(HEAP32[$1 + 8 >> 2]));
@@ -75018,14 +75018,14 @@ function jsiIsAboutToEditInputLine() {
  var $0 = 0;
  $0 = global$0 - 16 | 0;
  global$0 = $0;
- if (HEAP8[99501] & 1) {
-  HEAP8[99501] = 0;
-  if (jsiIsInHistory(HEAP32[24872]) & 1) {
-   HEAP32[$0 + 12 >> 2] = jsvCopy(HEAP32[24872], 0);
+ if (HEAP8[98461] & 1) {
+  HEAP8[98461] = 0;
+  if (jsiIsInHistory(HEAP32[24612]) & 1) {
+   HEAP32[$0 + 12 >> 2] = jsvCopy(HEAP32[24612], 0);
    if (HEAP32[$0 + 12 >> 2]) {
     jsiInputLineCursorMoved();
-    jsvUnLock(HEAP32[24872]);
-    HEAP32[24872] = HEAP32[$0 + 12 >> 2];
+    jsvUnLock(HEAP32[24612]);
+    HEAP32[24612] = HEAP32[$0 + 12 >> 2];
    }
   }
  }
@@ -75403,7 +75403,7 @@ function jswrap_espruino_setTimeZone($0) {
  $1 = global$0 - 16 | 0;
  global$0 = $1;
  HEAPF64[$1 + 8 >> 3] = $0;
- $3 = HEAP32[24863];
+ $3 = HEAP32[24603];
  $0 = HEAPF64[$1 + 8 >> 3] * 60;
  label$1 : {
   if (Math_abs($0) < 2147483648) {
@@ -75412,7 +75412,7 @@ function jswrap_espruino_setTimeZone($0) {
   }
   $2 = -2147483648;
  }
- jsvObjectSetChildAndUnLock($3, 36342, jsvNewFromInteger($2));
+ jsvObjectSetChildAndUnLock($3, 35318, jsvNewFromInteger($2));
  global$0 = $1 + 16 | 0;
 }
 function jsvObjectIteratorNext($0) {
@@ -75534,7 +75534,7 @@ function jspParse() {
  global$0 = $0;
  HEAP32[$0 + 12 >> 2] = 0;
  while (1) {
-  if (HEAP32[24866] & 80 ? 0 : HEAP16[HEAP32[14856] + 2 >> 1]) {
+  if (HEAP32[24606] & 80 ? 0 : HEAP16[HEAP32[14596] + 2 >> 1]) {
    jsvUnLock(HEAP32[$0 + 12 >> 2]);
    HEAP32[$0 + 12 >> 2] = jspeBlockOrStatement();
    jsvCheckReferenceError(HEAP32[$0 + 12 >> 2]);
@@ -75550,13 +75550,13 @@ function jshSetPinShouldStayWatched($0, $1) {
  $2 = global$0 - 16 | 0;
  HEAP8[$2 + 15 | 0] = $0;
  HEAP8[$2 + 14 | 0] = $1;
- $0 = (HEAPU8[$2 + 15 | 0] >> 5 << 2) + 99472 | 0;
+ $0 = (HEAPU8[$2 + 15 | 0] >> 5 << 2) + 98432 | 0;
  if (HEAP8[$2 + 14 | 0] & 1) {
   $1 = 1 << (HEAPU8[$2 + 15 | 0] & 31);
  } else {
   $1 = 0;
  }
- HEAP32[$0 >> 2] = $1 | HEAP32[(HEAPU8[$2 + 15 | 0] >> 5 << 2) + 99472 >> 2] & (1 << (HEAPU8[$2 + 15 | 0] & 31) ^ -1);
+ HEAP32[$0 >> 2] = $1 | HEAP32[(HEAPU8[$2 + 15 | 0] >> 5 << 2) + 98432 >> 2] & (1 << (HEAPU8[$2 + 15 | 0] & 31) ^ -1);
 }
 function tflite__Operator__builtin_options_as_RNNOptions_28_29_20const($0) {
  var $1 = 0;
@@ -75595,14 +75595,14 @@ function jspeiGetTopScope() {
  $0 = global$0 - 16 | 0;
  global$0 = $0;
  label$1 : {
-  if (HEAP32[24864]) {
-   HEAP32[$0 + 8 >> 2] = jsvGetLastArrayItem(HEAP32[24864]);
+  if (HEAP32[24604]) {
+   HEAP32[$0 + 8 >> 2] = jsvGetLastArrayItem(HEAP32[24604]);
    if (HEAP32[$0 + 8 >> 2]) {
     HEAP32[$0 + 12 >> 2] = HEAP32[$0 + 8 >> 2];
     break label$1;
    }
   }
-  HEAP32[$0 + 12 >> 2] = jsvLockAgain(HEAP32[24862]);
+  HEAP32[$0 + 12 >> 2] = jsvLockAgain(HEAP32[24602]);
  }
  global$0 = $0 + 16 | 0;
  return HEAP32[$0 + 12 >> 2];
@@ -75636,15 +75636,15 @@ function jspeiAddScope($0) {
  $1 = global$0 - 16 | 0;
  global$0 = $1;
  HEAP32[$1 + 8 >> 2] = $0;
- if (!HEAP32[24864]) {
-  HEAP32[24864] = jsvNewWithFlags(3);
+ if (!HEAP32[24604]) {
+  HEAP32[24604] = jsvNewWithFlags(3);
  }
  label$2 : {
-  if (!HEAP32[24864]) {
+  if (!HEAP32[24604]) {
    HEAP8[$1 + 15 | 0] = 0;
    break label$2;
   }
-  jsvArrayPush(HEAP32[24864], HEAP32[$1 + 8 >> 2]);
+  jsvArrayPush(HEAP32[24604], HEAP32[$1 + 8 >> 2]);
   HEAP8[$1 + 15 | 0] = 1;
  }
  global$0 = $1 + 16 | 0;
@@ -75671,8 +75671,8 @@ function jspAppendStackTrace($0) {
  $0 = $1 + 8 | 0;
  jsvStringIteratorNew($0, HEAP32[$1 + 28 >> 2], 0);
  jsvStringIteratorGotoEnd($0);
- jslPrintPosition($0, HEAP32[HEAP32[14856] + 28 >> 2]);
- jslPrintTokenLineMarker(4, $0, HEAP32[HEAP32[14856] + 28 >> 2], 0);
+ jslPrintPosition($0, HEAP32[HEAP32[14596] + 28 >> 2]);
+ jslPrintTokenLineMarker(4, $0, HEAP32[HEAP32[14596] + 28 >> 2], 0);
  jsvStringIteratorFree($0);
  global$0 = $1 + 32 | 0;
 }
@@ -75693,13 +75693,13 @@ function jshSetPinStateIsManual($0, $1) {
  $2 = global$0 - 16 | 0;
  HEAP8[$2 + 15 | 0] = $0;
  HEAP8[$2 + 14 | 0] = $1;
- $0 = (HEAPU8[$2 + 15 | 0] >> 5 << 2) + 99468 | 0;
+ $0 = (HEAPU8[$2 + 15 | 0] >> 5 << 2) + 98428 | 0;
  if (HEAP8[$2 + 14 | 0] & 1) {
   $1 = 1 << (HEAPU8[$2 + 15 | 0] & 31);
  } else {
   $1 = 0;
  }
- HEAP32[$0 >> 2] = $1 | HEAP32[(HEAPU8[$2 + 15 | 0] >> 5 << 2) + 99468 >> 2] & (1 << (HEAPU8[$2 + 15 | 0] & 31) ^ -1);
+ HEAP32[$0 >> 2] = $1 | HEAP32[(HEAPU8[$2 + 15 | 0] >> 5 << 2) + 98428 >> 2] & (1 << (HEAPU8[$2 + 15 | 0] & 31) ^ -1);
 }
 function tflite__IsHybridOp_28TfLiteTensor_20const__2c_20TfLiteTensor_20const__29($0, $1) {
  var $2 = 0;
@@ -75762,7 +75762,7 @@ function jshSetFlowControlAllReady() {
  var $0 = 0;
  $0 = global$0 - 16 | 0;
  global$0 = $0;
- if (HEAP8[101424] & 1) {
+ if (HEAP8[100384] & 1) {
   HEAP32[$0 + 12 >> 2] = 0;
   while (1) {
    if (HEAP32[$0 + 12 >> 2] < 2) {
@@ -75772,7 +75772,7 @@ function jshSetFlowControlAllReady() {
    }
    break;
   }
-  HEAP8[101424] = 0;
+  HEAP8[100384] = 0;
  }
  global$0 = $0 + 16 | 0;
 }
@@ -75835,8 +75835,8 @@ function jsvArrayBufferGet($0, $1) {
 function jspeiRemoveScope() {
  label$1 : {
   label$2 : {
-   if (HEAP32[24864]) {
-    if (jsvGetArrayLength(HEAP32[24864])) {
+   if (HEAP32[24604]) {
+    if (jsvGetArrayLength(HEAP32[24604])) {
      break label$2;
     }
    }
@@ -75844,12 +75844,12 @@ function jspeiRemoveScope() {
    jspSetError();
    break label$1;
   }
-  jsvUnLock(jsvArrayPop(HEAP32[24864]));
-  if (jsvGetFirstChild(HEAP32[24864]) & 65535) {
+  jsvUnLock(jsvArrayPop(HEAP32[24604]));
+  if (jsvGetFirstChild(HEAP32[24604]) & 65535) {
    break label$1;
   }
-  jsvUnLock(HEAP32[24864]);
-  HEAP32[24864] = 0;
+  jsvUnLock(HEAP32[24604]);
+  HEAP32[24604] = 0;
  }
 }
 function jsvGetPathTo($0, $1, $2) {
@@ -75942,8 +75942,8 @@ function jshGetEventDataPin($0) {
  HEAP8[$1 + 14 | 0] = $0;
  HEAP32[$1 + 8 >> 2] = HEAPU8[$1 + 14 | 0] - 1;
  label$1 : {
-  if ((HEAP32[(HEAP32[$1 + 8 >> 2] << 2) + 99568 >> 2] & -256) == -256) {
-   HEAP8[$1 + 15 | 0] = HEAP32[(HEAP32[$1 + 8 >> 2] << 2) + 99568 >> 2];
+  if ((HEAP32[(HEAP32[$1 + 8 >> 2] << 2) + 98528 >> 2] & -256) == -256) {
+   HEAP8[$1 + 15 | 0] = HEAP32[(HEAP32[$1 + 8 >> 2] << 2) + 98528 >> 2];
    break label$1;
   }
   HEAP8[$1 + 15 | 0] = 255;
@@ -76060,7 +76060,7 @@ function jswrap_array_filter($0, $1, $2) {
  HEAP32[$3 + 12 >> 2] = $0;
  HEAP32[$3 + 8 >> 2] = $1;
  HEAP32[$3 + 4 >> 2] = $2;
- $0 = _jswrap_array_iterate_with_callback(34542, HEAP32[$3 + 12 >> 2], HEAP32[$3 + 8 >> 2], HEAP32[$3 + 4 >> 2], 1, 1, 1);
+ $0 = _jswrap_array_iterate_with_callback(33518, HEAP32[$3 + 12 >> 2], HEAP32[$3 + 8 >> 2], HEAP32[$3 + 4 >> 2], 1, 1, 1);
  global$0 = $3 + 16 | 0;
  return $0 | 0;
 }
@@ -76081,7 +76081,7 @@ function jswrap_espruino_getConsole() {
  var $0 = 0;
  $0 = global$0 - 16 | 0;
  global$0 = $0;
- HEAP8[$0 + 11 | 0] = HEAPU8[57424];
+ HEAP8[$0 + 11 | 0] = HEAPU8[56384];
  label$1 : {
   if (!HEAPU8[$0 + 11 | 0]) {
    HEAP32[$0 + 12 >> 2] = jsvNewWithFlags(2);
@@ -76102,7 +76102,7 @@ function jswrap_array_every($0, $1, $2) {
  HEAP32[$3 + 12 >> 2] = $0;
  HEAP32[$3 + 8 >> 2] = $1;
  HEAP32[$3 + 4 >> 2] = $2;
- $0 = _jswrap_array_iterate_with_callback(34569, HEAP32[$3 + 12 >> 2], HEAP32[$3 + 8 >> 2], HEAP32[$3 + 4 >> 2], 0, 1, 1);
+ $0 = _jswrap_array_iterate_with_callback(33545, HEAP32[$3 + 12 >> 2], HEAP32[$3 + 8 >> 2], HEAP32[$3 + 4 >> 2], 0, 1, 1);
  global$0 = $3 + 16 | 0;
  return $0 | 0;
 }
@@ -76153,7 +76153,7 @@ function jswrap_array_some($0, $1, $2) {
  HEAP32[$3 + 12 >> 2] = $0;
  HEAP32[$3 + 8 >> 2] = $1;
  HEAP32[$3 + 4 >> 2] = $2;
- $0 = _jswrap_array_iterate_with_callback(34564, HEAP32[$3 + 12 >> 2], HEAP32[$3 + 8 >> 2], HEAP32[$3 + 4 >> 2], 0, 1, 0);
+ $0 = _jswrap_array_iterate_with_callback(33540, HEAP32[$3 + 12 >> 2], HEAP32[$3 + 8 >> 2], HEAP32[$3 + 4 >> 2], 0, 1, 0);
  global$0 = $3 + 16 | 0;
  return $0 | 0;
 }
@@ -76179,7 +76179,7 @@ function jswrap_array_map($0, $1, $2) {
  HEAP32[$3 + 12 >> 2] = $0;
  HEAP32[$3 + 8 >> 2] = $1;
  HEAP32[$3 + 4 >> 2] = $2;
- $0 = _jswrap_array_iterate_with_callback(34530, HEAP32[$3 + 12 >> 2], HEAP32[$3 + 8 >> 2], HEAP32[$3 + 4 >> 2], 1, 0, 0);
+ $0 = _jswrap_array_iterate_with_callback(33506, HEAP32[$3 + 12 >> 2], HEAP32[$3 + 8 >> 2], HEAP32[$3 + 4 >> 2], 1, 0, 0);
  global$0 = $3 + 16 | 0;
  return $0 | 0;
 }
@@ -76367,14 +76367,14 @@ function jsiClearInputLine($0) {
  $1 = global$0 - 16 | 0;
  global$0 = $1;
  HEAP8[$1 + 15 | 0] = $0;
- if (!(jsvIsEmptyString(HEAP32[24872]) & 1)) {
+ if (!(jsvIsEmptyString(HEAP32[24612]) & 1)) {
   if (HEAP8[$1 + 15 | 0] & 1) {
    jsiConsoleRemoveInputLine();
   }
   jsiInputLineCursorMoved();
-  jsvUnLock(HEAP32[24872]);
-  HEAP32[24872] = jsvNewFromEmptyString();
-  HEAP32[24874] = 0;
+  jsvUnLock(HEAP32[24612]);
+  HEAP32[24612] = jsvNewFromEmptyString();
+  HEAP32[24614] = 0;
  }
  global$0 = $1 + 16 | 0;
 }
@@ -76402,7 +76402,7 @@ function jslMatch($0) {
  global$0 = $1;
  HEAP32[$1 + 8 >> 2] = $0;
  label$1 : {
-  if (HEAP16[HEAP32[14856] + 2 >> 1] != HEAP32[$1 + 8 >> 2]) {
+  if (HEAP16[HEAP32[14596] + 2 >> 1] != HEAP32[$1 + 8 >> 2]) {
    jslMatchError(HEAP32[$1 + 8 >> 2]);
    HEAP8[$1 + 15 | 0] = 0;
    break label$1;
@@ -76478,7 +76478,7 @@ function jswrap_flash_erasePage($0) {
  label$1 : {
   if (!(jsvIsInt(HEAP32[$1 + 12 >> 2]) & 1)) {
    HEAP32[$1 >> 2] = HEAP32[$1 + 12 >> 2];
-   jsExceptionHere(1, 36691, $1);
+   jsExceptionHere(1, 35667, $1);
    break label$1;
   }
   do_indexing(jsvGetInteger(HEAP32[$1 + 12 >> 2]));
@@ -76542,8 +76542,8 @@ function tflite__MicroMutableOpResolver__MicroMutableOpResolver_28_29($0) {
  $2 = global$0 - 16 | 0;
  $0 = HEAP32[$1 + 12 >> 2];
  HEAP32[$2 + 12 >> 2] = $0;
- HEAP32[HEAP32[$2 + 12 >> 2] >> 2] = 51288;
- HEAP32[$0 >> 2] = 43828;
+ HEAP32[HEAP32[$2 + 12 >> 2] >> 2] = 50248;
+ HEAP32[$0 >> 2] = 42788;
  HEAP32[$0 + 4100 >> 2] = 0;
  global$0 = $1 + 16 | 0;
 }
@@ -76609,7 +76609,7 @@ function jswrap_graphics_dump($0) {
   jsiConsolePrintStringVar(HEAP32[$1 + 8 >> 2]);
  }
  jsvUnLock(HEAP32[$1 + 8 >> 2]);
- jsiConsolePrintString(43450);
+ jsiConsolePrintString(42410);
  global$0 = $1 + 16 | 0;
 }
 function tflite__strided_slice__LoopCondition_28int_2c_20int_2c_20int_29($0, $1, $2) {
@@ -76770,7 +76770,7 @@ function jswrap_banglejs_getLogo() {
  $0 = global$0 - 1440 | 0;
  global$0 = $0;
  $1 = $0 + 16 | 0;
- memcpy($1, 33088, 1419);
+ memcpy($1, 32064, 1419);
  HEAP32[$0 + 12 >> 2] = jsvNewNativeString($1, 1419);
  HEAP32[$0 + 8 >> 2] = jswrap_heatshrink_decompress(HEAP32[$0 + 12 >> 2]);
  jsvUnLock(HEAP32[$0 + 12 >> 2]);
@@ -76787,7 +76787,7 @@ function jswrap_array_forEach($0, $1, $2) {
  HEAP32[$3 + 12 >> 2] = $0;
  HEAP32[$3 + 8 >> 2] = $1;
  HEAP32[$3 + 4 >> 2] = $2;
- _jswrap_array_iterate_with_callback(34534, HEAP32[$3 + 12 >> 2], HEAP32[$3 + 8 >> 2], HEAP32[$3 + 4 >> 2], 0, 0, 0);
+ _jswrap_array_iterate_with_callback(33510, HEAP32[$3 + 12 >> 2], HEAP32[$3 + 8 >> 2], HEAP32[$3 + 4 >> 2], 0, 0, 0);
  global$0 = $3 + 16 | 0;
 }
 function isAlpha($0) {
@@ -76889,8 +76889,8 @@ function tflite___28anonymous_20namespace_29__StackDataAllocator__StackDataAlloc
  $0 = global$0 - 16 | 0;
  $2 = HEAP32[$1 + 12 >> 2];
  HEAP32[$0 + 12 >> 2] = $2;
- HEAP32[HEAP32[$0 + 12 >> 2] >> 2] = 46088;
- HEAP32[$2 >> 2] = 46064;
+ HEAP32[HEAP32[$0 + 12 >> 2] >> 2] = 45048;
+ HEAP32[$2 >> 2] = 45024;
  global$0 = $1 + 16 | 0;
 }
 function tflite__DepthwiseConv2DOptions__fused_activation_function_28_29_20const($0) {
@@ -76940,10 +76940,10 @@ function jsvTrace($0) {
  global$0 = $1;
  HEAP32[$1 + 12 >> 2] = $0;
  HEAP32[$1 + 8 >> 2] = 0;
- HEAP32[$1 + 4 >> 2] = HEAP32[14858];
- HEAP32[14858] = 0;
+ HEAP32[$1 + 4 >> 2] = HEAP32[14598];
+ HEAP32[14598] = 0;
  _jsvTrace(HEAP32[$1 + 12 >> 2], HEAP32[$1 + 8 >> 2], HEAP32[$1 + 12 >> 2], 0);
- HEAP32[14858] = HEAP32[$1 + 4 >> 2];
+ HEAP32[14598] = HEAP32[$1 + 4 >> 2];
  jsiConsolePrintf(3311, 0);
  global$0 = $1 + 16 | 0;
 }
@@ -77062,10 +77062,10 @@ function tflite__HaveSameShapes_28TfLiteTensor_20const__2c_20TfLiteTensor_20cons
 }
 function sbrk($0) {
  var $1 = 0;
- $1 = HEAP32[64504];
+ $1 = HEAP32[64244];
  $0 = $1 + $0 | 0;
  if (($0 | 0) <= -1) {
-  HEAP32[64357] = 48;
+  HEAP32[64097] = 48;
   return -1;
  }
  label$2 : {
@@ -77075,10 +77075,10 @@ function sbrk($0) {
   if (emscripten_resize_heap($0 | 0)) {
    break label$2;
   }
-  HEAP32[64357] = 48;
+  HEAP32[64097] = 48;
   return -1;
  }
- HEAP32[64504] = $0;
+ HEAP32[64244] = $0;
  return $1;
 }
 function graphicsGetMemoryRequired($0) {
@@ -77207,7 +77207,7 @@ function jswrap_espruino_memoryMap($0, $1) {
  HEAP32[$2 + 8 >> 2] = $1;
  HEAP32[$2 >> 2] = HEAP32[$2 + 12 >> 2];
  HEAP32[$2 + 4 >> 2] = HEAP32[$2 + 8 >> 2];
- $0 = jspExecuteJSFunction(36345, 2, $2);
+ $0 = jspExecuteJSFunction(35321, 2, $2);
  global$0 = $2 + 16 | 0;
  return $0 | 0;
 }
@@ -77305,7 +77305,7 @@ function jswrap_date_setTime($0, $1) {
  HEAP32[$2 + 12 >> 2] = $0;
  HEAPF64[$2 >> 3] = $1;
  if (HEAP32[$2 + 12 >> 2]) {
-  jsvObjectSetChildAndUnLock(HEAP32[$2 + 12 >> 2], 35441, jsvNewFromFloat(HEAPF64[$2 >> 3]));
+  jsvObjectSetChildAndUnLock(HEAP32[$2 + 12 >> 2], 34417, jsvNewFromFloat(HEAPF64[$2 >> 3]));
  }
  global$0 = $2 + 16 | 0;
  return +HEAPF64[$2 >> 3];
@@ -77320,7 +77320,7 @@ function gen_jswrap_E_showPrompt($0, $1) {
  HEAP32[$2 + 8 >> 2] = $1;
  HEAP32[$2 >> 2] = HEAP32[$2 + 12 >> 2];
  HEAP32[$2 + 4 >> 2] = HEAP32[$2 + 8 >> 2];
- $0 = jspExecuteJSFunction(23578, 2, $2);
+ $0 = jspExecuteJSFunction(22572, 2, $2);
  global$0 = $2 + 16 | 0;
  return $0 | 0;
 }
@@ -77334,7 +77334,7 @@ function gen_jswrap_E_showAlert($0, $1) {
  HEAP32[$2 + 8 >> 2] = $1;
  HEAP32[$2 >> 2] = HEAP32[$2 + 12 >> 2];
  HEAP32[$2 + 4 >> 2] = HEAP32[$2 + 8 >> 2];
- $0 = jspExecuteJSFunction(20758, 2, $2);
+ $0 = jspExecuteJSFunction(19752, 2, $2);
  global$0 = $2 + 16 | 0;
  return $0 | 0;
 }
@@ -77378,14 +77378,14 @@ function jshInit() {
  HEAP32[$0 + 12 >> 2] = 0;
  while (1) {
   if (HEAP32[$0 + 12 >> 2] < 16) {
-   HEAP8[HEAP32[$0 + 12 >> 2] + 255584 | 0] = 255;
+   HEAP8[HEAP32[$0 + 12 >> 2] + 254544 | 0] = 255;
    HEAP32[$0 + 12 >> 2] = HEAP32[$0 + 12 >> 2] + 1;
    continue;
   }
   break;
  }
  jshResetDevices();
- HEAP8[57436] = 1;
+ HEAP8[56396] = 1;
  global$0 = $0 + 16 | 0;
 }
 function bool_20tflite__ops__micro__Greater__operator_28_29_unsigned_20char__28unsigned_20char_20const__2c_20unsigned_20char_20const__29_20const($0, $1, $2) {
@@ -77403,7 +77403,7 @@ function jspeStatementThrow() {
  HEAP32[$0 + 12 >> 2] = 0;
  jslGetNextToken();
  HEAP32[$0 + 12 >> 2] = jsvSkipNameAndUnLock(jspeExpression());
- if ((HEAP32[24866] & 63) == 1) {
+ if ((HEAP32[24606] & 63) == 1) {
   jspSetException(HEAP32[$0 + 12 >> 2]);
  }
  jsvUnLock(HEAP32[$0 + 12 >> 2]);
@@ -77539,7 +77539,7 @@ function lcdST7789_setYOffset($0) {
  if (HEAP32[$1 + 12 >> 2] > 80) {
   HEAP32[$1 + 12 >> 2] = 80;
  }
- HEAP32[25479] = HEAP32[$1 + 12 >> 2];
+ HEAP32[25219] = HEAP32[$1 + 12 >> 2];
  lcdST7789_scrollCmd();
  global$0 = $1 + 16 | 0;
 }
@@ -77625,7 +77625,7 @@ function gen_jswrap_E_showMessage($0, $1) {
  HEAP32[$2 + 8 >> 2] = $1;
  HEAP32[$2 >> 2] = HEAP32[$2 + 12 >> 2];
  HEAP32[$2 + 4 >> 2] = HEAP32[$2 + 8 >> 2];
- jsvUnLock(jspExecuteJSFunction(23194, 2, $2));
+ jsvUnLock(jspExecuteJSFunction(22188, 2, $2));
  global$0 = $2 + 16 | 0;
 }
 function _jswrap_espruino_toString_char($0, $1) {
@@ -77835,8 +77835,8 @@ function tflite__MicroErrorReporter__MicroErrorReporter_28_29($0) {
  $0 = global$0 - 16 | 0;
  $2 = HEAP32[$1 + 12 >> 2];
  HEAP32[$0 + 12 >> 2] = $2;
- HEAP32[HEAP32[$0 + 12 >> 2] >> 2] = 53804;
- HEAP32[$2 >> 2] = 43804;
+ HEAP32[HEAP32[$0 + 12 >> 2] >> 2] = 52764;
+ HEAP32[$2 >> 2] = 42764;
  global$0 = $1 + 16 | 0;
 }
 function tflite__LocalResponseNormalizationOptions__bias_28_29_20const($0) {
@@ -77854,7 +77854,7 @@ function terminalSetGFX($0) {
  global$0 = $1;
  HEAP32[$1 + 12 >> 2] = $0;
  graphicsSetVar(HEAP32[$1 + 12 >> 2]);
- HEAP8[256373] = 1;
+ HEAP8[255333] = 1;
  $0 = HEAP32[$1 + 12 >> 2];
  jsvUnLock(HEAPU8[$0 | 0] | HEAPU8[$0 + 1 | 0] << 8 | (HEAPU8[$0 + 2 | 0] << 16 | HEAPU8[$0 + 3 | 0] << 24));
  global$0 = $1 + 16 | 0;
@@ -77896,8 +77896,8 @@ function tflite__Pool2DOptions__filter_height_28_29_20const($0) {
 function jsiHandleHome() {
  var $0 = 0;
  while (1) {
-  if (HEAPU32[24874] > 0) {
-   $0 = (jsvGetCharInString(HEAP32[24872], HEAP32[24874] - 1 | 0) & 255) != 10;
+  if (HEAPU32[24614] > 0) {
+   $0 = (jsvGetCharInString(HEAP32[24612], HEAP32[24614] - 1 | 0) & 255) != 10;
   } else {
    $0 = 0;
   }
@@ -77905,24 +77905,11 @@ function jsiHandleHome() {
    if (jsiShowInputLine() & 1) {
     jsiConsolePrintChar(8);
    }
-   HEAP32[24874] = HEAP32[24874] + -1;
+   HEAP32[24614] = HEAP32[24614] + -1;
    continue;
   }
   break;
  }
-}
-function jshIsTopEvent($0) {
- var $1 = 0;
- $1 = global$0 - 16 | 0;
- HEAP8[$1 + 14 | 0] = $0;
- label$1 : {
-  if (HEAPU8[99554] == HEAPU8[99555]) {
-   HEAP8[$1 + 15 | 0] = 0;
-   break label$1;
-  }
-  HEAP8[$1 + 15 | 0] = HEAPU8[$1 + 14 | 0] == (HEAPU8[Math_imul(HEAPU8[99555], 5) + 100144 | 0] & 31);
- }
- return HEAP8[$1 + 15 | 0] & 1;
 }
 function jsWarn($0, $1) {
  var $2 = 0, $3 = 0;
@@ -77964,11 +77951,24 @@ function jsiTimerAdd($0) {
  $1 = global$0 - 16 | 0;
  global$0 = $1;
  HEAP32[$1 + 12 >> 2] = $0;
- HEAP32[$1 + 8 >> 2] = jsvLock(HEAPU16[49740]);
+ HEAP32[$1 + 8 >> 2] = jsvLock(HEAPU16[49220]);
  HEAP32[$1 + 4 >> 2] = jsvArrayAddToEnd(HEAP32[$1 + 8 >> 2], HEAP32[$1 + 12 >> 2]) - 1;
  jsvUnLock(HEAP32[$1 + 8 >> 2]);
  global$0 = $1 + 16 | 0;
  return HEAP32[$1 + 4 >> 2];
+}
+function jshIsTopEvent($0) {
+ var $1 = 0;
+ $1 = global$0 - 16 | 0;
+ HEAP8[$1 + 14 | 0] = $0;
+ label$1 : {
+  if (HEAPU8[98514] == HEAPU8[98515]) {
+   HEAP8[$1 + 15 | 0] = 0;
+   break label$1;
+  }
+  HEAP8[$1 + 15 | 0] = HEAPU8[$1 + 14 | 0] == (HEAPU8[Math_imul(HEAPU8[98515], 5) + 99104 | 0] & 31);
+ }
+ return HEAP8[$1 + 15 | 0] & 1;
 }
 function heatshrink_ptr_output_cb($0, $1) {
  $0 = $0 | 0;
@@ -78003,7 +78003,7 @@ function jswrap_espruino_setPassword($0) {
  if (HEAP32[$1 + 12 >> 2]) {
   HEAP32[$1 + 12 >> 2] = jsvAsString(HEAP32[$1 + 12 >> 2]);
  }
- jsvUnLock(jsvObjectSetChild(HEAP32[24863], 36338, HEAP32[$1 + 12 >> 2]));
+ jsvUnLock(jsvObjectSetChild(HEAP32[24603], 35314, HEAP32[$1 + 12 >> 2]));
  global$0 = $1 + 16 | 0;
 }
 function _jswrap_serial_inject_cb($0, $1) {
@@ -78164,7 +78164,7 @@ function jswrap_array_find($0, $1) {
  global$0 = $2;
  HEAP32[$2 + 12 >> 2] = $0;
  HEAP32[$2 + 8 >> 2] = $1;
- $0 = _jswrap_array_iterate_with_callback(34549, HEAP32[$2 + 12 >> 2], HEAP32[$2 + 8 >> 2], 0, 2, 1, 1);
+ $0 = _jswrap_array_iterate_with_callback(33525, HEAP32[$2 + 12 >> 2], HEAP32[$2 + 8 >> 2], 0, 2, 1, 1);
  global$0 = $2 + 16 | 0;
  return $0 | 0;
 }
@@ -78232,7 +78232,7 @@ function jswGetBuiltInJSLibrary($0) {
  HEAP32[$1 + 8 >> 2] = $0;
  label$1 : {
   if (!strcmp(HEAP32[$1 + 8 >> 2], 17389)) {
-   HEAP32[$1 + 12 >> 2] = 17404;
+   HEAP32[$1 + 12 >> 2] = 17396;
    break label$1;
   }
   HEAP32[$1 + 12 >> 2] = 0;
@@ -78278,7 +78278,7 @@ function jshGetDeviceToTransmit() {
    HEAP8[$0 + 15 | 0] = 0;
    break label$1;
   }
-  HEAP8[$0 + 15 | 0] = HEAPU8[(HEAPU8[99553] << 1) + 99632 | 0] & 31;
+  HEAP8[$0 + 15 | 0] = HEAPU8[(HEAPU8[98513] << 1) + 98592 | 0] & 31;
  }
  global$0 = $0 + 16 | 0;
  return HEAPU8[$0 + 15 | 0];
@@ -78373,9 +78373,9 @@ function jsvFreePtrInternal($0) {
  global$0 = $1;
  HEAP32[$1 + 12 >> 2] = $0;
  HEAP16[HEAP32[$1 + 12 >> 2] + 14 >> 1] = 0;
- jsvSetNextSibling(HEAP32[$1 + 12 >> 2], HEAPU16[29718]);
- HEAP16[29718] = jsvGetRef(HEAP32[$1 + 12 >> 2]);
- HEAP8[59429] = 1;
+ jsvSetNextSibling(HEAP32[$1 + 12 >> 2], HEAPU16[29198]);
+ HEAP16[29198] = jsvGetRef(HEAP32[$1 + 12 >> 2]);
+ HEAP8[58389] = 1;
  global$0 = $1 + 16 | 0;
 }
 function gen_jswrap_Graphics_setFontVector($0, $1) {
@@ -78473,7 +78473,7 @@ function jslGetLineNumber() {
  global$0 = $0;
  $1 = $0 + 12 | 0;
  $2 = $0 + 8 | 0;
- jsvGetLineAndCol(HEAP32[HEAP32[14856] + 104 >> 2], jsvStringIteratorGetIndex(HEAP32[14856] + 4 | 0) - 1 | 0, $1, $2);
+ jsvGetLineAndCol(HEAP32[HEAP32[14596] + 104 >> 2], jsvStringIteratorGetIndex(HEAP32[14596] + 4 | 0) - 1 | 0, $1, $2);
  global$0 = $0 + 16 | 0;
  return HEAP32[$0 + 12 >> 2];
 }
@@ -78496,7 +78496,7 @@ function jswrap_interface_trace($0) {
  HEAP32[$1 + 12 >> 2] = $0;
  label$1 : {
   if (jsvIsUndefined(HEAP32[$1 + 12 >> 2]) & 1) {
-   jsvTrace(HEAP32[24862]);
+   jsvTrace(HEAP32[24602]);
    break label$1;
   }
   jsvTrace(HEAP32[$1 + 12 >> 2]);
@@ -78610,10 +78610,10 @@ function jsfSetFlag($0, $1) {
  HEAP8[$2 + 14 | 0] = $1;
  label$1 : {
   if (HEAP8[$2 + 14 | 0] & 1) {
-   HEAP8[59428] = HEAPU8[$2 + 15 | 0] | HEAPU8[59428];
+   HEAP8[58388] = HEAPU8[$2 + 15 | 0] | HEAPU8[58388];
    break label$1;
   }
-  HEAP8[59428] = HEAPU8[59428] & (HEAPU8[$2 + 15 | 0] ^ -1);
+  HEAP8[58388] = HEAPU8[58388] & (HEAPU8[$2 + 15 | 0] ^ -1);
  }
 }
 function jsvGetIndexOf($0, $1, $2) {
@@ -78696,9 +78696,9 @@ function jslTokenAppendChar($0) {
  var $1 = 0, $2 = 0;
  $1 = global$0 - 16 | 0;
  HEAP8[$1 + 15 | 0] = $0;
- if (HEAPU8[HEAP32[14856] + 100 | 0] < 63) {
+ if (HEAPU8[HEAP32[14596] + 100 | 0] < 63) {
   $2 = HEAPU8[$1 + 15 | 0];
-  $0 = HEAP32[14856];
+  $0 = HEAP32[14596];
   $1 = HEAPU8[$0 + 100 | 0];
   HEAP8[$0 + 100 | 0] = $1 + 1;
   HEAP8[$1 + ($0 + 32 | 0) | 0] = $2;
@@ -78740,10 +78740,10 @@ function jshGetEventsUsed() {
  var $0 = 0, $1 = 0, $2 = 0;
  $0 = global$0 - 16 | 0;
  $2 = $0;
- if (HEAPU8[99554] >= HEAPU8[99555]) {
-  $1 = HEAPU8[99554] - HEAPU8[99555] | 0;
+ if (HEAPU8[98514] >= HEAPU8[98515]) {
+  $1 = HEAPU8[98514] - HEAPU8[98515] | 0;
  } else {
-  $1 = (HEAPU8[99554] + 256 | 0) - HEAPU8[99555] | 0;
+  $1 = (HEAPU8[98514] + 256 | 0) - HEAPU8[98515] | 0;
  }
  HEAP32[$2 + 12 >> 2] = $1;
  return HEAP32[$0 + 12 >> 2];
@@ -78781,9 +78781,9 @@ function jswrap_espruino_lockConsole() {
  var $0 = 0;
  $0 = global$0 - 16 | 0;
  global$0 = $0;
- HEAP32[$0 + 12 >> 2] = jsvObjectGetChild(HEAP32[24863], 36338, 0);
+ HEAP32[$0 + 12 >> 2] = jsvObjectGetChild(HEAP32[24603], 35314, 0);
  if (HEAP32[$0 + 12 >> 2]) {
-  HEAP16[49742] = HEAPU16[49742] | 1024;
+  HEAP16[49222] = HEAPU16[49222] | 1024;
  }
  jsvUnLock(HEAP32[$0 + 12 >> 2]);
  global$0 = $0 + 16 | 0;
@@ -78876,7 +78876,7 @@ function jswrap_date_from_milliseconds($0) {
  $1 = global$0 - 16 | 0;
  global$0 = $1;
  HEAPF64[$1 + 8 >> 3] = $0;
- HEAP32[$1 + 4 >> 2] = jspNewObject(0, 35377);
+ HEAP32[$1 + 4 >> 2] = jspNewObject(0, 34353);
  jswrap_date_setTime(HEAP32[$1 + 4 >> 2], HEAPF64[$1 + 8 >> 3]);
  global$0 = $1 + 16 | 0;
  return HEAP32[$1 + 4 >> 2];
@@ -79019,11 +79019,11 @@ function jspeiGetScopesAsVar() {
  $0 = global$0 - 16 | 0;
  global$0 = $0;
  label$1 : {
-  if (!HEAP32[24864]) {
+  if (!HEAP32[24604]) {
    HEAP32[$0 + 12 >> 2] = 0;
    break label$1;
   }
-  HEAP32[$0 + 12 >> 2] = jsvCopy(HEAP32[24864], 1);
+  HEAP32[$0 + 12 >> 2] = jsvCopy(HEAP32[24604], 1);
  }
  global$0 = $0 + 16 | 0;
  return HEAP32[$0 + 12 >> 2];
@@ -79083,7 +79083,7 @@ function jsvGetRef($0) {
    HEAP16[$1 + 14 >> 1] = 0;
    break label$1;
   }
-  HEAP16[$1 + 14 >> 1] = (HEAP32[$1 + 8 >> 2] - 59440 >> 4) + 1;
+  HEAP16[$1 + 14 >> 1] = (HEAP32[$1 + 8 >> 2] - 58400 >> 4) + 1;
  }
  return HEAPU16[$1 + 14 >> 1];
 }
@@ -79246,10 +79246,10 @@ function jspeiLoadScopesFromVar($0) {
  $1 = global$0 - 16 | 0;
  global$0 = $1;
  HEAP32[$1 + 12 >> 2] = $0;
- jsvUnLock(HEAP32[24864]);
- HEAP32[24864] = 0;
+ jsvUnLock(HEAP32[24604]);
+ HEAP32[24604] = 0;
  if (HEAP32[$1 + 12 >> 2]) {
-  HEAP32[24864] = jsvCopy(HEAP32[$1 + 12 >> 2], 1);
+  HEAP32[24604] = jsvCopy(HEAP32[$1 + 12 >> 2], 1);
  }
  global$0 = $1 + 16 | 0;
 }
@@ -79423,8 +79423,8 @@ function jswrap_interface_load($0) {
  $1 = global$0 - 16 | 0;
  global$0 = $1;
  HEAP32[$1 + 12 >> 2] = $0;
- HEAP16[49742] = HEAPU16[49742] | 64;
- jsvObjectSetChildAndUnLock(HEAP32[24863], 37027, HEAP32[$1 + 12 >> 2]);
+ HEAP16[49222] = HEAPU16[49222] | 64;
+ jsvObjectSetChildAndUnLock(HEAP32[24603], 36003, HEAP32[$1 + 12 >> 2]);
  global$0 = $1 + 16 | 0;
 }
 function gen_jswrap_E_showMenu($0) {
@@ -79434,7 +79434,7 @@ function gen_jswrap_E_showMenu($0) {
  global$0 = $1;
  HEAP32[$1 + 12 >> 2] = $0;
  HEAP32[$1 + 8 >> 2] = HEAP32[$1 + 12 >> 2];
- $0 = jspExecuteJSFunction(20823, 1, $1 + 8 | 0);
+ $0 = jspExecuteJSFunction(19817, 1, $1 + 8 | 0);
  global$0 = $1 + 16 | 0;
  return $0 | 0;
 }
@@ -79522,8 +79522,8 @@ function jswrap_espruino_getErrorFlags() {
  var $0 = 0, $1 = 0;
  $0 = global$0 - 16 | 0;
  global$0 = $0;
- HEAP8[$0 + 15 | 0] = HEAPU8[99447];
- HEAP8[99447] = 0;
+ HEAP8[$0 + 15 | 0] = HEAPU8[98407];
+ HEAP8[98407] = 0;
  $1 = jswrap_espruino_getErrorFlagArray(HEAPU8[$0 + 15 | 0]);
  global$0 = $0 + 16 | 0;
  return $1 | 0;
@@ -79571,7 +79571,7 @@ function terminalScroll() {
  var $0 = 0, $1 = 0;
  $0 = global$0 - 80 | 0;
  global$0 = $0;
- HEAP8[57560] = HEAPU8[57560] + -1;
+ HEAP8[56520] = HEAPU8[56520] + -1;
  if (terminalGetGFX($0 + 8 | 0) & 1) {
   $1 = $0 + 8 | 0;
   graphicsScroll($1, 0, -8);
@@ -79597,20 +79597,20 @@ function jswrap_interface_echo($0) {
  HEAP8[$1 + 15 | 0] = $0;
  label$1 : {
   if (HEAP8[$1 + 15 | 0] & 1) {
-   HEAP16[49742] = HEAPU16[49742] & -2;
+   HEAP16[49222] = HEAPU16[49222] & -2;
    break label$1;
   }
-  HEAP16[49742] = HEAPU16[49742] | 1;
+  HEAP16[49222] = HEAPU16[49222] | 1;
  }
 }
 function jsiLoop() {
  jshIdle();
  jsiIdle();
  jsiCheckErrors();
- if (HEAP32[24866] & 6144) {
-  HEAP32[24866] = HEAP32[24866] & -6145;
-  if (jsvIsEmptyString(HEAP32[24872]) & 1) {
-   HEAP32[24886] = 0;
+ if (HEAP32[24606] & 6144) {
+  HEAP32[24606] = HEAP32[24606] & -6145;
+  if (jsvIsEmptyString(HEAP32[24612]) & 1) {
+   HEAP32[24626] = 0;
   }
   jsiClearInputLine(1);
  }
@@ -79700,7 +79700,7 @@ function fmt_x($0, $1, $2, $3) {
  if ($0 | $1) {
   while (1) {
    $2 = $2 + -1 | 0;
-   HEAP8[$2 | 0] = HEAPU8[($0 & 15) + 54304 | 0] | $3;
+   HEAP8[$2 | 0] = HEAPU8[($0 & 15) + 53264 | 0] | $3;
    $0 = ($1 & 15) << 28 | $0 >>> 4;
    $1 = $1 >>> 4;
    if ($0 | $1) {
@@ -79727,7 +79727,7 @@ function jswrap_interface_reset($0) {
  $1 = global$0 - 16 | 0;
  global$0 = $1;
  HEAP8[$1 + 15 | 0] = $0;
- HEAP16[49742] = HEAPU16[49742] | 128;
+ HEAP16[49222] = HEAPU16[49222] | 128;
  if (HEAP8[$1 + 15 | 0] & 1) {
   jsfRemoveCodeFromFlash();
  }
@@ -79803,7 +79803,7 @@ function jswrap_date_getTime($0) {
  $1 = global$0 - 16 | 0;
  global$0 = $1;
  HEAP32[$1 + 12 >> 2] = $0;
- $2 = jsvGetFloatAndUnLock(jsvObjectGetChild(HEAP32[$1 + 12 >> 2], 35441, 0));
+ $2 = jsvGetFloatAndUnLock(jsvObjectGetChild(HEAP32[$1 + 12 >> 2], 34417, 0));
  global$0 = $1 + 16 | 0;
  return +$2;
 }
@@ -79831,8 +79831,8 @@ function srand($0) {
  var $1 = 0;
  $1 = global$0 - 16 | 0;
  HEAP32[$1 + 12 >> 2] = $0;
- HEAP32[14354] = HEAP32[$1 + 12 >> 2] & 65535 | HEAP32[$1 + 12 >> 2] << 16;
- HEAP32[14355] = HEAP32[$1 + 12 >> 2] & -65536 | HEAP32[$1 + 12 >> 2] >>> 16;
+ HEAP32[14094] = HEAP32[$1 + 12 >> 2] & 65535 | HEAP32[$1 + 12 >> 2] << 16;
+ HEAP32[14095] = HEAP32[$1 + 12 >> 2] & -65536 | HEAP32[$1 + 12 >> 2] >>> 16;
 }
 function flatbuffers__Vector_int___Length_28_29_20const($0) {
  var $1 = 0;
@@ -79962,10 +79962,10 @@ function jsvRef($0) {
 }
 function jsiOneSecondAfterStartup() {
  label$1 : {
-  if (HEAPU8[57424] == 19) {
-   HEAP8[57424] = jsiGetPreferredConsoleDevice();
-   jshTransmitMove(HEAPU8[57424]);
-   jshUSARTKick(HEAPU8[57424]);
+  if (HEAPU8[56384] == 19) {
+   HEAP8[56384] = jsiGetPreferredConsoleDevice();
+   jshTransmitMove(HEAPU8[56384]);
+   jshUSARTKick(HEAPU8[56384]);
    break label$1;
   }
   jshTransmitClearDevice();
@@ -79997,7 +79997,7 @@ function jswrap_referenceerror_constructor($0) {
  $1 = global$0 - 16 | 0;
  global$0 = $1;
  HEAP32[$1 + 12 >> 2] = $0;
- $0 = _jswrap_error_constructor(HEAP32[$1 + 12 >> 2], 35606);
+ $0 = _jswrap_error_constructor(HEAP32[$1 + 12 >> 2], 34582);
  global$0 = $1 + 16 | 0;
  return $0 | 0;
 }
@@ -80034,7 +80034,7 @@ function jswrap_internalerror_constructor($0) {
  $1 = global$0 - 16 | 0;
  global$0 = $1;
  HEAP32[$1 + 12 >> 2] = $0;
- $0 = _jswrap_error_constructor(HEAP32[$1 + 12 >> 2], 35592);
+ $0 = _jswrap_error_constructor(HEAP32[$1 + 12 >> 2], 34568);
  global$0 = $1 + 16 | 0;
  return $0 | 0;
 }
@@ -80108,7 +80108,7 @@ function jswrap_syntaxerror_constructor($0) {
  $1 = global$0 - 16 | 0;
  global$0 = $1;
  HEAP32[$1 + 12 >> 2] = $0;
- $0 = _jswrap_error_constructor(HEAP32[$1 + 12 >> 2], 35570);
+ $0 = _jswrap_error_constructor(HEAP32[$1 + 12 >> 2], 34546);
  global$0 = $1 + 16 | 0;
  return $0 | 0;
 }
@@ -80143,10 +80143,10 @@ function jspSetInterrupted($0) {
  HEAP8[$1 + 15 | 0] = $0;
  label$1 : {
   if (HEAP8[$1 + 15 | 0] & 1) {
-   HEAP32[24866] = HEAP32[24866] | 16;
+   HEAP32[24606] = HEAP32[24606] | 16;
    break label$1;
   }
-  HEAP32[24866] = HEAP32[24866] & -17;
+  HEAP32[24606] = HEAP32[24606] & -17;
  }
 }
 function jshTransmitClearDevice() {
@@ -80191,7 +80191,7 @@ function jsiShowInputLine() {
    break label$1;
   }
   $0 = 0;
-  if (HEAP8[99492] & 1) {
+  if (HEAP8[98452] & 1) {
    break label$1;
   }
   $0 = jsiPasswordProtected() ^ -1;
@@ -80209,9 +80209,9 @@ function gen_jswrap_Object_keys($0) {
  return $0 | 0;
 }
 function rand() {
- HEAP32[14355] = Math_imul(HEAP32[14355] & 65535, 36969) + (HEAP32[14355] >>> 16);
- HEAP32[14354] = Math_imul(HEAP32[14354] & 65535, 18e3) + (HEAP32[14354] >>> 16);
- return HEAP32[14354] + (HEAP32[14355] << 16) & 2147483647;
+ HEAP32[14095] = Math_imul(HEAP32[14095] & 65535, 36969) + (HEAP32[14095] >>> 16);
+ HEAP32[14094] = Math_imul(HEAP32[14094] & 65535, 18e3) + (HEAP32[14094] >>> 16);
+ return HEAP32[14094] + (HEAP32[14095] << 16) & 2147483647;
 }
 function jswrap_typeerror_constructor($0) {
  $0 = $0 | 0;
@@ -80219,7 +80219,7 @@ function jswrap_typeerror_constructor($0) {
  $1 = global$0 - 16 | 0;
  global$0 = $1;
  HEAP32[$1 + 12 >> 2] = $0;
- $0 = _jswrap_error_constructor(HEAP32[$1 + 12 >> 2], 35582);
+ $0 = _jswrap_error_constructor(HEAP32[$1 + 12 >> 2], 34558);
  global$0 = $1 + 16 | 0;
  return $0 | 0;
 }
@@ -80254,7 +80254,7 @@ function jsserialGetSerialList($0) {
  $1 = global$0 - 16 | 0;
  global$0 = $1;
  HEAP8[$1 + 15 | 0] = $0;
- $0 = jsvObjectGetChild(HEAP32[24863], 7700, (HEAP8[$1 + 15 | 0] & 1 ? 3 : 0) & 65535);
+ $0 = jsvObjectGetChild(HEAP32[24603], 7696, (HEAP8[$1 + 15 | 0] & 1 ? 3 : 0) & 65535);
  global$0 = $1 + 16 | 0;
  return $0;
 }
@@ -80287,7 +80287,7 @@ function onewire_getpin($0) {
  $1 = global$0 - 16 | 0;
  global$0 = $1;
  HEAP32[$1 + 12 >> 2] = $0;
- $0 = jshGetPinFromVarAndUnLock(jsvObjectGetChild(HEAP32[$1 + 12 >> 2], 39887, 0));
+ $0 = jshGetPinFromVarAndUnLock(jsvObjectGetChild(HEAP32[$1 + 12 >> 2], 38863, 0));
  global$0 = $1 + 16 | 0;
  return $0 & 255;
 }
@@ -80297,7 +80297,7 @@ function jswrap_error_constructor($0) {
  $1 = global$0 - 16 | 0;
  global$0 = $1;
  HEAP32[$1 + 12 >> 2] = $0;
- $0 = _jswrap_error_constructor(HEAP32[$1 + 12 >> 2], 35564);
+ $0 = _jswrap_error_constructor(HEAP32[$1 + 12 >> 2], 34540);
  global$0 = $1 + 16 | 0;
  return $0 | 0;
 }
@@ -80343,7 +80343,7 @@ function jshGetSystemTime() {
  $0 = global$0 - 16 | 0;
  global$0 = $0;
  HEAP8[$0 + 15 | 0] = 0;
- $1 = jshGetTimeFromMilliseconds(+emscripten_asm_const_dii(31917, $0 + 15 | 0, 0));
+ $1 = jshGetTimeFromMilliseconds(+emscripten_asm_const_dii(30893, $0 + 15 | 0, 0));
  global$0 = $0 + 16 | 0;
  return $1;
 }
@@ -80360,7 +80360,7 @@ function jswrap_object_getPrototypeOf($0) {
  $1 = global$0 - 16 | 0;
  global$0 = $1;
  HEAP32[$1 + 12 >> 2] = $0;
- $0 = jspGetNamedField(HEAP32[$1 + 12 >> 2], 38814, 0);
+ $0 = jspGetNamedField(HEAP32[$1 + 12 >> 2], 37790, 0);
  global$0 = $1 + 16 | 0;
  return $0 | 0;
 }
@@ -80430,7 +80430,7 @@ function pipeGetArray($0) {
  $1 = global$0 - 16 | 0;
  global$0 = $1;
  HEAP8[$1 + 15 | 0] = $0;
- $0 = jsvObjectGetChild(HEAP32[24863], 40267, (HEAP8[$1 + 15 | 0] & 1 ? 3 : 0) & 65535);
+ $0 = jsvObjectGetChild(HEAP32[24603], 39243, (HEAP8[$1 + 15 | 0] & 1 ? 3 : 0) & 65535);
  global$0 = $1 + 16 | 0;
  return $0;
 }
@@ -80475,7 +80475,7 @@ function jswrap_espruino_asm($0, $1) {
  global$0 = $2;
  HEAP32[$2 + 12 >> 2] = $0;
  HEAP32[$2 + 8 >> 2] = $1;
- jsExceptionHere(1, 36523, 0);
+ jsExceptionHere(1, 35499, 0);
  global$0 = $2 + 16 | 0;
 }
 function jshGetWatchedPinState($0) {
@@ -80483,7 +80483,7 @@ function jshGetWatchedPinState($0) {
  $1 = global$0 - 16 | 0;
  global$0 = $1;
  HEAP8[$1 + 15 | 0] = $0;
- $0 = jshPinGetValue(HEAPU8[(HEAPU8[$1 + 15 | 0] - 1 | 0) + 255584 | 0]);
+ $0 = jshPinGetValue(HEAPU8[(HEAPU8[$1 + 15 | 0] - 1 | 0) + 254544 | 0]);
  global$0 = $1 + 16 | 0;
  return $0 & 1;
 }
@@ -80699,7 +80699,7 @@ function jswrap_pipe_src_close_listener($0) {
  $1 = global$0 - 16 | 0;
  global$0 = $1;
  HEAP32[$1 + 12 >> 2] = $0;
- jswrap_pipe_close_listener(HEAP32[$1 + 12 >> 2], 40072);
+ jswrap_pipe_close_listener(HEAP32[$1 + 12 >> 2], 39048);
  global$0 = $1 + 16 | 0;
 }
 function jswrap_pipe_dst_close_listener($0) {
@@ -80708,7 +80708,7 @@ function jswrap_pipe_dst_close_listener($0) {
  $1 = global$0 - 16 | 0;
  global$0 = $1;
  HEAP32[$1 + 12 >> 2] = $0;
- jswrap_pipe_close_listener(HEAP32[$1 + 12 >> 2], 40079);
+ jswrap_pipe_close_listener(HEAP32[$1 + 12 >> 2], 39055);
  global$0 = $1 + 16 | 0;
 }
 function jsiInit() {
@@ -80716,8 +80716,8 @@ function jsiInit() {
  $0 = global$0 - 16 | 0;
  global$0 = $0;
  HEAP8[$0 + 15 | 0] = 1;
- HEAP16[49742] = 2048;
- HEAP8[57424] = 19;
+ HEAP16[49222] = 2048;
+ HEAP8[56384] = 19;
  jsiSemiInit(HEAP8[$0 + 15 | 0] & 1);
  jsiSetBusy(1, 0);
  global$0 = $0 + 16 | 0;
@@ -80908,8 +80908,8 @@ function jsvSetArrayLength($0, $1) {
 }
 function jslNextCh() {
  var $0 = 0;
- if (HEAP32[HEAP32[14856] + 124 >> 2]) {
-  $0 = HEAPU8[HEAP32[HEAP32[14856] + 124 >> 2] + HEAP32[HEAP32[14856] + 108 >> 2] | 0];
+ if (HEAP32[HEAP32[14596] + 124 >> 2]) {
+  $0 = HEAPU8[HEAP32[HEAP32[14596] + 124 >> 2] + HEAP32[HEAP32[14596] + 108 >> 2] | 0];
  } else {
   $0 = 0;
  }
@@ -80953,7 +80953,7 @@ function jshGetPinShouldStayWatched($0) {
  var $1 = 0;
  $1 = global$0 - 16 | 0;
  HEAP8[$1 + 15 | 0] = $0;
- return (HEAP32[(HEAPU8[$1 + 15 | 0] >> 5 << 2) + 99472 >> 2] >>> (HEAPU8[$1 + 15 | 0] & 31) & 1) != 0;
+ return (HEAP32[(HEAPU8[$1 + 15 | 0] >> 5 << 2) + 98432 >> 2] >>> (HEAPU8[$1 + 15 | 0] & 31) & 1) != 0;
 }
 function int_20gemmlowp__BitAnd_int__28int_2c_20int_29($0, $1) {
  var $2 = 0;
@@ -81006,7 +81006,7 @@ function jshSetEventDataPin($0, $1) {
  $2 = global$0 - 16 | 0;
  HEAP8[$2 + 15 | 0] = $0;
  HEAP8[$2 + 14 | 0] = $1;
- HEAP32[(HEAPU8[$2 + 15 | 0] << 2) + 99564 >> 2] = HEAPU8[$2 + 14 | 0] | -256;
+ HEAP32[(HEAPU8[$2 + 15 | 0] << 2) + 98524 >> 2] = HEAPU8[$2 + 14 | 0] | -256;
 }
 function jsvSkipOneName($0) {
  var $1 = 0;
@@ -81021,7 +81021,7 @@ function jshGetPinStateIsManual($0) {
  var $1 = 0;
  $1 = global$0 - 16 | 0;
  HEAP8[$1 + 15 | 0] = $0;
- return (HEAP32[(HEAPU8[$1 + 15 | 0] >> 5 << 2) + 99468 >> 2] >>> (HEAPU8[$1 + 15 | 0] & 31) & 1) != 0;
+ return (HEAP32[(HEAPU8[$1 + 15 | 0] >> 5 << 2) + 98428 >> 2] >>> (HEAPU8[$1 + 15 | 0] & 31) & 1) != 0;
 }
 function dynCall_iidiiii($0, $1, $2, $3, $4, $5, $6) {
  $0 = $0 | 0;
@@ -81060,9 +81060,9 @@ function jspSetError() {
  var $0 = 0;
  $0 = global$0 - 16 | 0;
  HEAP8[$0 + 15 | 0] = 0;
- HEAP32[24866] = HEAP32[24866] & -2 | 64;
+ HEAP32[24606] = HEAP32[24606] & -2 | 64;
  if (HEAP8[$0 + 15 | 0] & 1) {
-  HEAP32[24866] = HEAP32[24866] | 128;
+  HEAP32[24606] = HEAP32[24606] | 128;
  }
 }
 function jshSetEventCallback($0, $1) {
@@ -81070,14 +81070,14 @@ function jshSetEventCallback($0, $1) {
  $2 = global$0 - 16 | 0;
  HEAP8[$2 + 15 | 0] = $0;
  HEAP32[$2 + 8 >> 2] = $1;
- HEAP32[(HEAPU8[$2 + 15 | 0] << 2) + 99564 >> 2] = HEAP32[$2 + 8 >> 2];
+ HEAP32[(HEAPU8[$2 + 15 | 0] << 2) + 98524 >> 2] = HEAP32[$2 + 8 >> 2];
 }
 function jsvInit() {
  var $0 = 0;
  $0 = global$0 - 16 | 0;
  global$0 = $0;
  HEAP32[$0 + 12 >> 2] = 0;
- HEAP16[29718] = jsvInitJsVars(HEAP32[14353]);
+ HEAP16[29198] = jsvInitJsVars(HEAP32[14093]);
  jsvCreateEmptyVarList();
  global$0 = $0 + 16 | 0;
 }
@@ -81094,7 +81094,7 @@ function jshIsPinValid($0) {
  var $1 = 0;
  $1 = global$0 - 16 | 0;
  HEAP8[$1 + 15 | 0] = $0;
- return HEAPU8[$1 + 15 | 0] < 32 ? (HEAPU8[Math_imul(HEAPU8[$1 + 15 | 0], 3) + 31968 | 0] & 15) != 0 : 0;
+ return HEAPU8[$1 + 15 | 0] < 32 ? (HEAPU8[Math_imul(HEAPU8[$1 + 15 | 0], 3) + 30944 | 0] & 15) != 0 : 0;
 }
 function err($0) {
  var $1 = 0;
@@ -81102,7 +81102,7 @@ function err($0) {
  global$0 = $1;
  HEAP32[$1 + 12 >> 2] = $0;
  HEAP32[$1 >> 2] = HEAP32[$1 + 12 >> 2];
- jsExceptionHere(1, 7464, $1);
+ jsExceptionHere(1, 7460, $1);
  global$0 = $1 + 16 | 0;
 }
 function dynCall_viiiiii($0, $1, $2, $3, $4, $5, $6) {
@@ -81129,8 +81129,8 @@ function jslSetLex($0) {
  var $1 = 0;
  $1 = global$0 - 16 | 0;
  HEAP32[$1 + 12 >> 2] = $0;
- HEAP32[$1 + 8 >> 2] = HEAP32[14856];
- HEAP32[14856] = HEAP32[$1 + 12 >> 2];
+ HEAP32[$1 + 8 >> 2] = HEAP32[14596];
+ HEAP32[14596] = HEAP32[$1 + 12 >> 2];
  return HEAP32[$1 + 8 >> 2];
 }
 function can_take_byte($0) {
@@ -81231,7 +81231,7 @@ function jswrap_espruino_compiledC($0) {
  $1 = global$0 - 16 | 0;
  global$0 = $1;
  HEAP32[$1 + 12 >> 2] = $0;
- jsExceptionHere(1, 36599, 0);
+ jsExceptionHere(1, 35575, 0);
  global$0 = $1 + 16 | 0;
 }
 function jsvStringIteratorHasChar($0) {
@@ -81271,7 +81271,7 @@ function jsiConsolePrintChar($0) {
  $1 = global$0 - 16 | 0;
  global$0 = $1;
  HEAP8[$1 + 15 | 0] = $0;
- jshTransmit(HEAPU8[57424], HEAPU8[$1 + 15 | 0]);
+ jshTransmit(HEAPU8[56384], HEAPU8[$1 + 15 | 0]);
  global$0 = $1 + 16 | 0;
 }
 function tflite__MicroInterpreter__error_reporter_28_29($0) {
@@ -81337,7 +81337,7 @@ function jsvIsNameIntBool($0) {
 function jspeBlock() {
  if (jslMatch(123) & 1) {
   jspeBlockNoBrackets();
-  if (!(HEAP32[24866] & 80)) {
+  if (!(HEAP32[24606] & 80)) {
    label$3 : {
     if (jslMatch(125) & 1) {
      break label$3;
@@ -81351,7 +81351,7 @@ function abort_message() {
  $0 = global$0 - 16 | 0;
  global$0 = $0;
  HEAP32[$0 + 12 >> 2] = 0;
- $0 = HEAP32[13590];
+ $0 = HEAP32[13330];
  __vfprintf_internal($0);
  fputc($0);
  abort();
@@ -81428,7 +81428,7 @@ function jshBusyIdle() {
  $0 = global$0 - 16 | 0;
  global$0 = $0;
  HEAP8[$0 + 15 | 0] = 0;
- emscripten_asm_const_iii(31845, $0 + 15 | 0, 0) | 0;
+ emscripten_asm_const_iii(30821, $0 + 15 | 0, 0) | 0;
  global$0 = $0 + 16 | 0;
 }
 function dynCall_diiiii($0, $1, $2, $3, $4, $5) {
@@ -81498,11 +81498,11 @@ function jsvIsNull($0) {
 }
 function lcdST7789_init($0) {
  HEAP32[(global$0 - 16 | 0) + 12 >> 2] = $0;
- HEAP32[25482] = -1;
- HEAP32[25481] = -1;
- HEAP32[25478] = 0;
- HEAP32[25479] = 0;
- HEAP32[25480] = 1;
+ HEAP32[25222] = -1;
+ HEAP32[25221] = -1;
+ HEAP32[25218] = 0;
+ HEAP32[25219] = 0;
+ HEAP32[25220] = 1;
 }
 function gen_jswrap_ArrayBufferView_byteOffset($0) {
  $0 = $0 | 0;
@@ -81520,7 +81520,7 @@ function DebugLog($0) {
  global$0 = $1 + 16 | 0;
 }
 function jslIsIDOrReservedWord() {
- return (HEAP16[HEAP32[14856] + 2 >> 1] != 128 ? HEAP16[HEAP32[14856] + 2 >> 1] >= 163 ? HEAP16[HEAP32[14856] + 2 >> 1] <= 198 : 0 : 1) & 1;
+ return (HEAP16[HEAP32[14596] + 2 >> 1] != 128 ? HEAP16[HEAP32[14596] + 2 >> 1] >= 163 ? HEAP16[HEAP32[14596] + 2 >> 1] <= 198 : 0 : 1) & 1;
 }
 function dynCall_viiiii($0, $1, $2, $3, $4, $5) {
  $0 = $0 | 0;
@@ -81555,12 +81555,12 @@ function jswrap_banglejs_compassWr($0, $1) {
  HEAP32[$2 + 8 >> 2] = $1;
 }
 function jspSoftKill() {
- jsvUnLock(HEAP32[24864]);
- HEAP32[24864] = 0;
- jsvUnLock(HEAP32[24863]);
- HEAP32[24863] = 0;
- jsvUnLock(HEAP32[24862]);
- HEAP32[24862] = 0;
+ jsvUnLock(HEAP32[24604]);
+ HEAP32[24604] = 0;
+ jsvUnLock(HEAP32[24603]);
+ HEAP32[24603] = 0;
+ jsvUnLock(HEAP32[24602]);
+ HEAP32[24602] = 0;
 }
 function float_20flatbuffers__EndianScalar_float__28float_29($0) {
  var $1 = 0;
@@ -81585,14 +81585,14 @@ function dynCall_iiiii($0, $1, $2, $3, $4) {
 function utilTimerIsFull() {
  var $0 = 0;
  $0 = global$0 - 16 | 0;
- HEAP8[$0 + 15 | 0] = HEAPU8[101425] + 1 & 15;
- return HEAPU8[$0 + 15 | 0] == HEAPU8[101426];
+ HEAP8[$0 + 15 | 0] = HEAPU8[100385] + 1 & 15;
+ return HEAPU8[$0 + 15 | 0] == HEAPU8[100386];
 }
 function jsInit() {
  var $0 = 0;
  $0 = global$0 - 16 | 0;
  global$0 = $0;
- HEAP32[63892] = $0 + 12;
+ HEAP32[63632] = $0 + 12;
  jshInit();
  jsvInit();
  jsiInit();
@@ -81623,8 +81623,8 @@ function jsvGetFlatStringBlocks($0) {
 function jsGfxChanged() {
  var $0 = 0;
  $0 = global$0 - 16 | 0;
- HEAP8[$0 + 15 | 0] = HEAP8[101909] & 1;
- HEAP8[101909] = 0;
+ HEAP8[$0 + 15 | 0] = HEAP8[100869] & 1;
+ HEAP8[100869] = 0;
  return HEAP8[$0 + 15 | 0] & 1;
 }
 function dynCall_fff($0, $1, $2) {
@@ -81696,9 +81696,9 @@ function ceil_28float_29($0) {
 }
 function jswrap_banglejs_beep_callback() {
  jshPinSetState(18, 4);
- jspromise_resolve(HEAP32[63921], 0);
- jsvUnLock(HEAP32[63921]);
- HEAP32[63921] = 0;
+ jspromise_resolve(HEAP32[63661], 0);
+ jsvUnLock(HEAP32[63661]);
+ HEAP32[63661] = 0;
 }
 function jsvGetLocks($0) {
  var $1 = 0;
@@ -81729,9 +81729,9 @@ function jshSPISend($0, $1) {
 }
 function jswrap_banglejs_buzz_callback() {
  jshPinOutput(13, 0);
- jspromise_resolve(HEAP32[63922], 0);
- jsvUnLock(HEAP32[63922]);
- HEAP32[63922] = 0;
+ jspromise_resolve(HEAP32[63662], 0);
+ jsvUnLock(HEAP32[63662]);
+ HEAP32[63662] = 0;
 }
 function jshFlashGetMemMapAddress($0) {
  $0 = $0 | 0;
@@ -81793,7 +81793,7 @@ function jsvGetAddressOf($0) {
  var $1 = 0;
  $1 = global$0 - 16 | 0;
  HEAP16[$1 + 14 >> 1] = $0;
- return (HEAPU16[$1 + 14 >> 1] << 4) + 59424 | 0;
+ return (HEAPU16[$1 + 14 >> 1] << 4) + 58384 | 0;
 }
 function jsfGetFileFlags($0) {
  var $1 = 0;
@@ -81814,13 +81814,13 @@ function jsvGetFirstChild($0) {
  return HEAPU16[HEAP32[$1 + 12 >> 2] + 8 >> 1];
 }
 function jslGetTokenValueAsString() {
- HEAP8[HEAPU8[HEAP32[14856] + 100 | 0] + (HEAP32[14856] + 32 | 0) | 0] = 0;
- return HEAP32[14856] + 32 | 0;
+ HEAP8[HEAPU8[HEAP32[14596] + 100 | 0] + (HEAP32[14596] + 32 | 0) | 0] = 0;
+ return HEAP32[14596] + 32 | 0;
 }
 function jspSoftInit() {
- HEAP32[24862] = jsvFindOrCreateRoot();
- HEAP32[24863] = jsvObjectGetChild(HEAP32[24862], 5039, 5);
- HEAP32[24866] = 1;
+ HEAP32[24602] = jsvFindOrCreateRoot();
+ HEAP32[24603] = jsvObjectGetChild(HEAP32[24602], 5039, 5);
+ HEAP32[24606] = 1;
 }
 function tflite__BuiltinDataAllocator___BuiltinDataAllocator_28_29_1($0) {
  $0 = $0 | 0;
@@ -81837,7 +81837,7 @@ function jsfGetFlag($0) {
  var $1 = 0;
  $1 = global$0 - 16 | 0;
  HEAP8[$1 + 15 | 0] = $0;
- return (HEAPU8[59428] & HEAPU8[$1 + 15 | 0]) != 0;
+ return (HEAPU8[58388] & HEAPU8[$1 + 15 | 0]) != 0;
 }
 function __wasm_i64_udiv($0, $1, $2, $3) {
  $0 = _ZN17compiler_builtins3int4udiv10divmod_u6417h6026910b5ed08e40E($0, $1, $2, $3);
@@ -81871,11 +81871,11 @@ function dynCall_diii($0, $1, $2, $3) {
  return +FUNCTION_TABLE[$0]($1, $2, $3);
 }
 function jsiInputLineCursorMoved() {
- if (HEAP32[24881]) {
-  jsvStringIteratorFree(99512);
-  HEAP32[24881] = 0;
+ if (HEAP32[24621]) {
+  jsvStringIteratorFree(98472);
+  HEAP32[24621] = 0;
  }
- HEAP32[14357] = -1;
+ HEAP32[14097] = -1;
 }
 function jsfAlignAddress($0) {
  var $1 = 0;
@@ -81922,9 +81922,9 @@ function jsvIsUndefined($0) {
 function setThrew($0, $1) {
  $0 = $0 | 0;
  $1 = $1 | 0;
- if (!HEAP32[64500]) {
-  HEAP32[64501] = $1;
-  HEAP32[64500] = $0;
+ if (!HEAP32[64240]) {
+  HEAP32[64241] = $1;
+  HEAP32[64240] = $0;
  }
 }
 function jspeConditionalExpression() {
@@ -81962,7 +81962,7 @@ function jshPinSetState($0, $1) {
  HEAP8[$2 + 14 | 0] = $1;
 }
 function jspDebuggerLoopIfCtrlC() {
- if (!(!(HEAP32[24866] & 4096) | (HEAP32[24866] & 63) != 1)) {
+ if (!(!(HEAP32[24606] & 4096) | (HEAP32[24606] & 63) != 1)) {
   jsiDebuggerLoop();
  }
 }
@@ -81970,10 +81970,10 @@ function __wasm_i64_sdiv($0, $1, $2) {
  return _ZN17compiler_builtins3int4sdiv3Div3div17he78fc483e41d7ec7E($0, $1, $2);
 }
 function terminalControlCharsReset() {
- HEAP8[256374] = 0;
- HEAP8[256375] = 0;
- HEAP8[256376] = 0;
- HEAP8[256377] = 0;
+ HEAP8[255334] = 0;
+ HEAP8[255335] = 0;
+ HEAP8[255336] = 0;
+ HEAP8[255337] = 0;
 }
 function dynCall_iii($0, $1, $2) {
  $0 = $0 | 0;
@@ -82009,7 +82009,7 @@ function dynCall_ddd($0, $1, $2) {
  return +FUNCTION_TABLE[$0]($1, $2);
 }
 function jsiGetHistory() {
- return jsvObjectGetChild(HEAP32[24863], HEAPU16[49742] & 8 ? 5718 : 5726, 3);
+ return jsvObjectGetChild(HEAP32[24603], HEAPU16[49222] & 8 ? 5714 : 5722, 3);
 }
 function dynCall_vii($0, $1, $2) {
  $0 = $0 | 0;
@@ -82018,7 +82018,7 @@ function dynCall_vii($0, $1, $2) {
  FUNCTION_TABLE[$0]($1, $2);
 }
 function jsdGetTimeZone() {
- return jsvGetIntegerAndUnLock(jsvObjectGetChild(HEAP32[24863], 35374, 0));
+ return jsvGetIntegerAndUnLock(jsvObjectGetChild(HEAP32[24603], 34350, 0));
 }
 function dynCall_vid($0, $1, $2) {
  $0 = $0 | 0;
@@ -82038,7 +82038,7 @@ function jsvIsFlashString($0) {
  return 0;
 }
 function jslSingleChar() {
- HEAP16[HEAP32[14856] + 2 >> 1] = HEAPU8[HEAP32[14856]];
+ HEAP16[HEAP32[14596] + 2 >> 1] = HEAPU8[HEAP32[14596]];
  jslGetNextCh();
 }
 function __wasm_ctz_i32($0) {
@@ -82054,23 +82054,23 @@ function stackAlloc($0) {
  return $0 | 0;
 }
 function jshIdle() {
- if (HEAP8[57436] & 1) {
+ if (HEAP8[56396] & 1) {
   jsiOneSecondAfterStartup();
  }
- HEAP8[57436] = 0;
+ HEAP8[56396] = 0;
 }
 function __bswap_32($0) {
  return $0 << 8 & 16711680 | $0 << 24 | ($0 >>> 8 & 65280 | $0 >>> 24);
 }
 function jswrap_graphics_getInstance() {
- return jsvObjectGetChild(HEAP32[24863], 42512, 0) | 0;
+ return jsvObjectGetChild(HEAP32[24603], 41472, 0) | 0;
 }
 function get_input_buffer_size($0) {
  HEAP32[(global$0 - 16 | 0) + 12 >> 2] = $0;
  return 256;
 }
 function jswrap_modules_getModuleList() {
- return jsvObjectGetChild(HEAP32[24863], 38726, 5);
+ return jsvObjectGetChild(HEAP32[24603], 37702, 5);
 }
 function dynCall_ii($0, $1) {
  $0 = $0 | 0;
@@ -82081,7 +82081,7 @@ function __wasi_syscall_ret($0) {
  if (!$0) {
   return 0;
  }
- HEAP32[64357] = $0;
+ HEAP32[64097] = $0;
  return -1;
 }
 function __stdio_close($0) {
@@ -82096,7 +82096,7 @@ function _parse_int() {
  return stringToIntWithRadix(jslGetTokenValueAsString(), 10, 0, 0);
 }
 function gen_jswrap_Bangle_showLauncher() {
- jsvUnLock(jspExecuteJSFunction(20516, 0, 0));
+ jsvUnLock(jspExecuteJSFunction(19510, 0, 0));
 }
 function dynCall_id($0, $1) {
  $0 = $0 | 0;
@@ -82109,10 +82109,10 @@ function dynCall_di($0, $1) {
  return +FUNCTION_TABLE[$0]($1);
 }
 function gen_jswrap_Bangle_loadWidgets() {
- jsvUnLock(jspExecuteJSFunction(20384, 0, 0));
+ jsvUnLock(jspExecuteJSFunction(19378, 0, 0));
 }
 function gen_jswrap_Bangle_drawWidgets() {
- jsvUnLock(jspExecuteJSFunction(19862, 0, 0));
+ jsvUnLock(jspExecuteJSFunction(18856, 0, 0));
 }
 function dynCall_dd($0, $1) {
  $0 = $0 | 0;
@@ -82144,7 +82144,7 @@ function dynCall_vd($0, $1) {
 }
 function jswrap_espruino_reboot() {
  jsiKill();
- jsExceptionHere(1, 31940, 0);
+ jsExceptionHere(1, 30916, 0);
 }
 function jswrap_banglejs_isCharging() {
  return (jshPinGetValue(12) ^ -1) & 1;
@@ -82156,22 +82156,22 @@ function wctomb($0, $1) {
  return wcrtomb($0, $1);
 }
 function jspeiClearScopes() {
- jsvUnLock(HEAP32[24864]);
- HEAP32[24864] = 0;
+ jsvUnLock(HEAP32[24604]);
+ HEAP32[24604] = 0;
 }
 function gen_jswrap_process_version() {
- return jsvNewFromString(24872) | 0;
+ return jsvNewFromString(23866) | 0;
 }
 function jsIdle() {
- HEAP32[14358] = -1;
+ HEAP32[14098] = -1;
  jsiLoop();
- return HEAP32[14358];
+ return HEAP32[14098];
 }
 function gen_jswrap_LED2() {
- return jspExecuteJSFunction(19574, 0, 0) | 0;
+ return jspExecuteJSFunction(18568, 0, 0) | 0;
 }
 function gen_jswrap_LED1() {
- return jspExecuteJSFunction(19332, 0, 0) | 0;
+ return jspExecuteJSFunction(18326, 0, 0) | 0;
 }
 function gen_jswrap_Math_random() {
  return +(+(rand() | 0) / 2147483647);
@@ -82183,33 +82183,33 @@ function gen_jswrap_Number_MAX_VALUE() {
  return 1.7976931348623157e+308;
 }
 function gen_jswrap_LoopbackB() {
- return jspNewObject(19826, 17277) | 0;
+ return jspNewObject(18820, 17277) | 0;
 }
 function gen_jswrap_LoopbackA() {
- return jspNewObject(19816, 17277) | 0;
+ return jspNewObject(18810, 17277) | 0;
 }
 function gen_jswrap_Terminal() {
- return jspNewObject(19849, 17277) | 0;
+ return jspNewObject(18843, 17277) | 0;
 }
 function dynCall_i($0) {
  $0 = $0 | 0;
  return FUNCTION_TABLE[$0]() | 0;
 }
 function jsiPasswordProtected() {
- return (HEAPU16[49742] & 1024) != 0;
+ return (HEAPU16[49222] & 1024) != 0;
 }
 function jshHasTransmitData() {
- return HEAPU8[99552] != HEAPU8[99553];
+ return HEAPU8[98512] != HEAPU8[98513];
 }
 function htons($0) {
  $0 = $0 | 0;
  return ($0 << 24 | $0 << 8) >>> 16;
 }
 function gen_jswrap_global() {
- return jsvLockAgain(HEAP32[24862]) | 0;
+ return jsvLockAgain(HEAP32[24602]) | 0;
 }
 function gen_jswrap_Serial1() {
- return jspNewObject(19841, 17277) | 0;
+ return jspNewObject(18835, 17277) | 0;
 }
 function do_indexing($0) {
  HEAP32[(global$0 - 16 | 0) + 12 >> 2] = $0;
@@ -82219,13 +82219,13 @@ function dynCall_d($0) {
  return +FUNCTION_TABLE[$0]();
 }
 function gen_jswrap_SPI1() {
- return jspNewObject(19836, 17296) | 0;
+ return jspNewObject(18830, 17296) | 0;
 }
 function gen_jswrap_I2C1() {
- return jspNewObject(19327, 17300) | 0;
+ return jspNewObject(18321, 17300) | 0;
 }
 function gen_jswrap_USB() {
- return jspNewObject(19858, 17277) | 0;
+ return jspNewObject(18852, 17277) | 0;
 }
 function gen_jswrap_Number_NEGATIVE_INFINITY() {
  return -infinity;
@@ -82234,33 +82234,33 @@ function jswrap_storage_getFree() {
  return jsfGetFreeSpace() | 0;
 }
 function jspSetNoExecute() {
- HEAP32[24866] = HEAP32[24866] & -64;
+ HEAP32[24606] = HEAP32[24606] & -64;
 }
 function jsiTimersChanged() {
- HEAP16[49742] = HEAPU16[49742] | 4;
+ HEAP16[49222] = HEAPU16[49222] | 4;
 }
 function gen_jswrap_save() {
- HEAP16[49742] = HEAPU16[49742] | 32;
+ HEAP16[49222] = HEAPU16[49222] | 32;
 }
 function __growWasmMemory($0) {
  $0 = $0 | 0;
  return abort() | 0;
 }
 function jshHasEvents() {
- return HEAPU8[99554] != HEAPU8[99555];
+ return HEAPU8[98514] != HEAPU8[98515];
 }
 function __emscripten_stdout_close($0) {
  $0 = $0 | 0;
  return 0;
 }
 function jspIsInterrupted() {
- return (HEAP32[24866] & 16) != 0;
+ return (HEAP32[24606] & 16) != 0;
 }
 function jswrap_banglejs_off() {
- jsExceptionHere(1, 33048, 0);
+ jsExceptionHere(1, 32020, 0);
 }
 function jswrap_banglejs_isLCDOn() {
- return HEAP8[255608] & 1;
+ return HEAP8[254568] & 1;
 }
 function gen_jswrap_Math_SQRT1_2() {
  return .7071067811865476;
@@ -82282,14 +82282,14 @@ function gen_jswrap_Math_LOG10E() {
  return .4342944819032518;
 }
 function jspromise_create() {
- return jspNewObject(0, 40652);
+ return jspNewObject(0, 39624);
 }
 function dynCall_v($0) {
  $0 = $0 | 0;
  FUNCTION_TABLE[$0]();
 }
 function jspHasError() {
- return (HEAP32[24866] & 112) != 0;
+ return (HEAP32[24606] & 112) != 0;
 }
 function gen_jswrap_Math_LN10() {
  return 2.302585092994046;
@@ -82326,7 +82326,7 @@ function ceil($0) {
  return +Math_ceil($0);
 }
 function jsiEcho() {
- return !(HEAPU16[49742] & 3);
+ return !(HEAPU16[49222] & 3);
 }
 function jshGetRandomNumber() {
  return rand() | 0;
@@ -82348,7 +82348,7 @@ function jsiKill() {
  jspKill();
 }
 function __errno_location() {
- return 257428;
+ return 256388;
 }
 function strcpy($0, $1) {
  __stpcpy($0, $1);
@@ -83153,7 +83153,8 @@ var writeSegment = (
 writeSegment(1024, "bGF0AGxvbgBhbHQAc3BlZWQAY291cnNlAHRpbWUAc2F0ZWxsaXRlcwBmaXgAAAAABAIDAAkHAgMDCgUDBgEMAQEBAQEBAQEBAQMDDQ4PAwM=");
 writeSegment(1130, "AwMDCwAC");
 writeSegment(1162, "AwhicmVhawBjYXNlAGNhdGNoAGNsYXNzAGNvbnN0AGNvbnRpbnVlAGRlZmF1bHQAZGVsZXRlAGRvAGRlYnVnZ2VyAGVsc2UAZXh0ZW5kcwBmYWxzZQBmaW5hbGx5AGZvcgBmdW5jdGlvbgBpZgBpbgBpbnN0YW5jZW9mAGxldABuZXcAbnVsbABvZgByZXR1cm4Ac3RhdGljAHN1cGVyAHN3aXRjaAB0aGlzAHRocm93AHRydWUAdHJ5AHR5cGVvZgB1bmRlZmluZWQAd2hpbGUAdmFyAHZvaWQARU9GAElEAElOVABGTE9BVABTVFJJTkcAVU5GSU5JU0hFRCBTVFJJTkcAVEVNUExBVEUgTElURVJBTABVTkZJTklTSEVEIFRFTVBMQVRFIExJVEVSQUwAUkVHRVgAVU5GSU5JU0hFRCBSRUdFWABVTkZJTklTSEVEIENPTU1FTlQ=");
-writeSegment(1520, "PT0APT09ACE9ACE9PQA8PQA8PAA8PD0APj0APj4APj4+AD4+PQA+Pj49ACs9AC09ACsrAC0tACo9AC89ACU9ACY9ACYmAHw9AHx8AF49AD0+AGlmAGVsc2UAZG8Ad2hpbGUAZm9yAGJyZWFrAGNvbnRpbnVlAGZ1bmN0aW9uAHJldHVybgB2YXIAbGV0AGNvbnN0AHRoaXMAdGhyb3cAdHJ5AGNhdGNoAGZpbmFsbHkAdHJ1ZQBmYWxzZQBudWxsAHVuZGVmaW5lZABuZXcAaW4AaW5zdGFuY2VvZgBzd2l0Y2gAY2FzZQBkZWZhdWx0AGRlbGV0ZQB0eXBlb2YAdm9pZABkZWJ1Z2dlcgBjbGFzcwBleHRlbmRzAHN1cGVyAHN0YXRpYwBvZgAAP1slZF0ASUQ6JXMAU3RyaW5nOiclcycAbGluZSAlZCBjb2wgJWQKAC4uLgAgAAoAXgoAMHg/PwAwAAAAAEdvdCAlcyBleHBlY3RlZCAlcwBkZWVwU2xlZXAAcHJldG9rZW5pc2UAdW5zYWZlRmxhc2gAdW5zeW5jRmlsZXMAAE5vdCBlbm91Z2ggc3RhY2sgbWVtb3J5IHRvIGRlY29kZSBkYXRhAFVuYWJsZSB0byBmaW5kIG9yIGNyZWF0ZSBmaWxlAFRvbyBtdWNoIGRhdGEgZm9yIGZpbGUgc2l6ZQBGaWxlIGFscmVhZHkgd3JpdHRlbiB3aXRoIGRpZmZlcmVudCBkYXRhAC4AQ29tcGFjdGluZyBGbGFzaC4uLgoALnZhcmltZwBDYWxjdWxhdGluZyBTaXplLi4uCgBFUlJPUjogVG9vIGJpZyB0byBzYXZlIHRvIGZsYXNoICglZCB2cyAlZCBieXRlcykKAERlbGV0aW5nIGNvbW1hbmQgaGlzdG9yeSBhbmQgdHJ5aW5nIGFnYWluLi4uCgBOb3QgZW5vdWdoIGZyZWUgc3BhY2UgdG8gc2F2ZS4gVHJ5IHJlcXVpcmUoJ1N0b3JhZ2UnKS5lcmFzZUFsbCgpCgBDb2RlIGlzIHRvbyBiaWcgdG8gc2F2ZSB0byBGbGFzaC4KAFdyaXRpbmcuLgAKQ29tcHJlc3NlZCAlZCBieXRlcyB0byAlZAoATm90IGxvYWRpbmcgc2F2ZWQgY29kZSBmcm9tIGRpZmZlcmVudCBFc3BydWlubyBmaXJtd2FyZS4KAExvYWRpbmcgJWQgYnl0ZXMgZnJvbSBmbGFzaC4uLgoALmJvb3RjZGUALmJvb3Ryc3QALmJvb3RYAEVyYXNpbmcgc2F2ZWQgY29kZS4ACkRvbmUhCgAyOTJmN2QwZAD/Y29kAHVuZGVmaW5lZABudWxsAHRydWUAZmFsc2UAb2JqZWN0AGZ1bmN0aW9uAHN0cmluZwBib29sZWFuAG51bWJlcgA/AHZhbHVlT2YAVmFyaWFibGUgdHlwZSBjYW5ub3QgYmUgY29udmVydGVkIHRvIHN0cmluZwB0b1N0cmluZwBbb2JqZWN0IE9iamVjdF0ALABTdHJpbmcgdG9vIGJpZyB0byBjb252ZXJ0IHRvIGludGVnZXIKAFN0cmluZyB0b28gYmlnIHRvIGNvbnZlcnQgdG8gZmxvYXQKAEluZmluaXR5AC1JbmZpbml0eQBnZXQAc2V0AFVuYWJsZSB0byBhc3NpZ24gdmFsdWUgdG8gbm9uLXJlZmVyZW5jZSAldABGaWVsZCBvciBtZXRob2QgIiVzIiBkb2VzIG5vdCBhbHJlYWR5IGV4aXN0LCBhbmQgY2FuJ3QgY3JlYXRlIGl0IG9uICV0ACVxIGlzIG5vdCBkZWZpbmVkAE9wZXJhdGlvbiAlcyBub3Qgc3VwcG9ydGVkIG9uIHRoZSAlcyBkYXRhdHlwZQBJbnRlZ2VyAERvdWJsZQBBcnJheQBPYmplY3QAU3RyaW5nACMlZFtyJWQsbCVkXSAAIAAuLi4KAE5ld0NoaWxkIFBBUkVOVDoAQ0hJTEQ6IABOYW1lIABPYmplY3QgeyAAR2V0dGVyL1NldHRlciB7IABBcnJheSglZCkgWyAATmF0aXZlRnVuY3Rpb24gMHgleCAoJWQpIHsgAEZ1bmN0aW9uIHsgAHJldHVybiAAUGluICVkAEludGVnZXIgJWQAQm9vbCAlcwBEb3VibGUgJWYAUGFyYW0gJXEgAEFycmF5QnVmZmVyTmFtZVslZF0gACVzIChvZmZzICVkLCBsZW4gJWQpAHVua25vd24gQXJyYXlCdWZmZXIAAEZsYXQATmF0aXZlAEZsYXNoACVzU3RyaW5nIFslZCBibG9ja3NdICVxAFVua25vd24gJWQAPSBpbnQgJWQKAD0gYm9vbCAlcwoACgAlYwBfX3Byb3RvX18AY29uc3RydWN0b3IARXhwZWN0aW5nIGFuIE9iamVjdCwgb3IgdW5kZWZpbmVkAFVua25vd24gb3B0aW9uICVxACV2LiV2ACV2WyVxXQBjYWxsYmFjawBjb3VudABkYXRhAElmIHNwZWNpZnlpbmcgYW4gb2JqZWN0LCBpdCBtdXN0IGJlIG9mIHRoZSBmb3JtIHtkYXRhIDogLi4uLCBjb3VudCA6IE59IG9yIHtjYWxsYmFjayA6IGZufSAtIGdvdCAlagBFeHBlY3RpbmcgYSBudW1iZXIgb3Igc29tZXRoaW5nIGl0ZXJhYmxlLCBnb3QgJXQAXGIAXHQAXG4AXHYAXGYAXHIAXFwAXCIARVJST1I6IAAKAFdBUk5JTkc6IABOYU4ALUluZmluaXR5AEluZmluaXR5ACAAMAAiAG51bGwAVG9vIG1hbnkgc2NvcGVzIHJlbW92ZWQAcHJvdG90eXBlAF9fcHJvdG9fXwBPYmplY3QAVG9vIG11Y2ggcmVjdXJzaW9uIC0gdGhlIHN0YWNrIGlzIGFib3V0IHRvIG92ZXJmbG93AGV4Y2VwdABzVHJhY2UAIGF0IABzdGFjawBjb21waWxlZABGdW5jdGlvbiBtYXJrZWQgd2l0aCAiY29tcGlsZWQiIHVwbG9hZGVkIGluIHNvdXJjZSBmb3JtAP9jb2QA/3NjbwD/bGluAP9uYW0ARnVuY3Rpb24gJXEgbm90IGZvdW5kIQBGdW5jdGlvbiBub3QgZm91bmQhAEV4cGVjdGluZyBhIGZ1bmN0aW9uIHRvIGNhbGwsIGdvdCAldABJbnN1ZmZpY2llbnQgc3RhY2sgZm9yIHRoaXMgbWFueSBhcmd1bWVudHMA/3RocwBTdGVwcGluZyBpbnRvICV2CgBTdGVwcGluZyBpbnRvIGZ1bmN0aW9uCgByZXR1cm4AVmFsdWUgcmV0dXJuZWQgaXMgPQBpbiBmdW5jdGlvbiAlcSBjYWxsZWQgZnJvbSAAaW4gZnVuY3Rpb24gY2FsbGVkIGZyb20gAHN5c3RlbQoAQ2Fubm90IHJlYWQgcHJvcGVydHkgJyVzJyBvZiB1bmRlZmluZWQARmllbGQgb3IgbWV0aG9kICVxIGRvZXMgbm90IGFscmVhZHkgZXhpc3QsIGFuZCBjYW4ndCBjcmVhdGUgaXQgb24gJXQAQ29uc3RydWN0b3Igc2hvdWxkIGJlIGEgZnVuY3Rpb24sIGJ1dCBpcyAldABOZXN0aW5nICduZXcnIG9wZXJhdG9ycyBpcyB1bnN1cHBvcnRlZABnZXQAc2V0AFByb3RvdHlwZSBzaG91bGQgYmUgYW4gb2JqZWN0LCBnb3QgJXQAY29uc3RydWN0b3IAdW5kZWZpbmVkAGlmKHRoaXMuX19wcm90b19fLl9fcHJvdG9fXy5jb25zdHJ1Y3Rvcil0aGlzLl9fcHJvdG9fXy5fX3Byb3RvX18uY29uc3RydWN0b3IuYXBwbHkodGhpcyxhcmd1bWVudHMpACdleHRlbmRzJyBhcmd1bWVudCBzaG91bGQgYmUgYSBmdW5jdGlvbiwgZ290ICV0AFRhZ2dlZCB0ZW1wbGF0ZSBsaXRlcmFscyBub3Qgc3VwcG9ydGVkAENhbGxpbmcgJ3N1cGVyJyBvdXRzaWRlIG9mIGNsYXNzAFVuZXhwZWN0ZWQgZW5kIG9mIElucHV0CgBDYW5ub3QgdXNlICdpbicgb3BlcmF0b3IgdG8gc2VhcmNoIGEgJXQARXhwZWN0aW5nIGEgZnVuY3Rpb24gb24gUkhTIGluIGluc3RhbmNlb2YgY2hlY2ssIGdvdCAldABhdCAARXNwcnVpbm8gZG9lc24ndCBzdXBwb3J0IENBU0UgYWZ0ZXIgREVGQVVMVABBcnJheQBmb3IoYSAlcyBiKSAtICdhJyBtdXN0IGJlIGEgdmFyaWFibGUgbmFtZSwgbm90ICV0AG9mAGluAEZPUiBsb29wIGNhbiBvbmx5IGl0ZXJhdGUgb3ZlciBBcnJheXMsIFN0cmluZ3Mgb3IgT2JqZWN0cywgbm90ICV0AFJFVFVSTiBzdGF0ZW1lbnQsIGJ1dCBub3QgaW4gYSBmdW5jdGlvbi4KAENPTlRJTlVFIHN0YXRlbWVudCBvdXRzaWRlIG9mIEZPUiBvciBXSElMRSBsb29wAEJSRUFLIHN0YXRlbWVudCBvdXRzaWRlIG9mIFNXSVRDSCwgRk9SIG9yIFdISUxFIGxvb3AA/wBleHBvcnRzAG1vZHVsZQB1bmRlZmluZWQASW52YWxpZCBwaW4hAABTZXJpYWwAVVNBUlQAUlgAVFgAQ0sAU1BJAE1JU08ATU9TSQBTQ0sASTJDAFNDTABTREEAREFDAENIMQBDSDIAVElNAENvdWxkbid0IGNvbnZlcnQgcGluIGZ1bmN0aW9uICVkCgAgAC0+ICVzCgA8LSAlcwoAG1tKABtbQwAbW0QAG1tCABtbQQBkZWJ1ZwBwYXNzd29yZAB0aW1lcnMAd2F0Y2hlcwBmbGFncwBpbml0AHBpbgBFACNvbmluaXQAb25Jbml0AFJ1bm5pbmcgb25Jbml0KCkuLi4KACV2AHByb3RvdHlwZQAucHJvdG90eXBlACNvbgAldi4ldiA9IAA7CgBfYmF1ZHJhdGUAX29wdGlvbnMAJXMuc2V0dXAoJWQALCAAKTsKACVzLnNldHVwKABlY2hvKDApOwBzZXRCdXN5SW5kaWNhdG9yKCVwKTsKAHNldFNsZWVwSW5kaWNhdG9yKCVwKTsKAEUuc2V0RmxhZ3MoJWopOwoAVVNCAGRpZ2l0YWxXcml0ZSglcCwgJWQpOwoAcGluTW9kZSglcCwgJXElcyk7CgAALCB0cnVlACNvbmtpbGwAcHdkABtbPzdsCiBfX19fICAgICAgICAgICAgICAgICBfIAp8ICBfX3xfX18gX19fIF9fXyBfIF98X3xfX18gX19fIAp8ICBfX3xfIC18IC4gfCAgX3wgfCB8IHwgICB8IC4gfAp8X19fX3xfX198ICBffF98IHxfX198X3xffF98X19ffAogICAgICAgICB8X3wgZXNwcnVpbm8uY29tCiAydjA0LjM5OCAoYykgMjAxOSBHLldpbGxpYW1zCgAKAGRiZ2hpc3QAaGlzdG9yeQAIIABFeGVjdXRpb24gSW50ZXJydXB0ZWQgZHVyaW5nIGV2ZW50IHByb2Nlc3NpbmcuCgAjb251bmNhdWdodEV4Y2VwdGlvbgBVbmNhdWdodCAldgoAc3RhY2sARXhlY3V0aW9uIEludGVycnVwdGVkCgAjb25lcnJvckZsYWcATmV3IGludGVycHJldGVyIGVycm9yOiAldgoAJXYKAAoKAAo6AAogIEludmFsaWQgcGFzc3dvcmQKcGFzc3dvcmQ+AAogIExvZ2dlZCBpbi4KACAgICAAZnVuYwBhcmdzAHRoaXMAVW5rbm93biB0eXBlIG9mIGNhbGxiYWNrIGluIEV2ZW50IFF1ZXVlAGVkZ2UAI29uZnJhbWluZwAjb25wYXJpdHkAZGVib3VuY2UAc3RhdGUAdGltZW91dAB0aW1lAHdhdGNoAGNhbGxiYWNrAGxhc3RUaW1lAHJlY3VyAGRhdGEAQ3RybC1DIHdoaWxlIHByb2Nlc3Npbmcgd2F0Y2ggLSByZW1vdmluZyBpdC4AaW50ZXJ2YWwAQ3RybC1DIHdoaWxlIHByb2Nlc3NpbmcgaW50ZXJ2YWwgLSByZW1vdmluZyBpdC4AbG9hZABnAABmdW5jdGlvbiAldgB2YXIgJXYgPSAAX19wcm90b19fAE9iamVjdC5jcmVhdGUoJXYpOwoAc2V0SW50ZXJ2YWwoAHNldFRpbWVvdXQoACwgJWYpOyAvLyAldgoAc2V0V2F0Y2goACwgJWosIHsgcmVwZWF0OiVzLCBlZGdlOiclcycAdHJ1ZQBmYWxzZQBmYWxsaW5nAHJpc2luZwBib3RoACwgZGVib3VuY2UgOiAlZgAgfSk7CgAvLyBDb2RlIHNhdmVkIHdpdGggRS5zZXRCb290Q29kZQoldgoAcmV0dXJuAHBhcmFtIAAgOiAAIFtObyB2YXJpYWJsZXNdCgBoZWxwAGgAQ29tbWFuZHM6CmhlbHAgLyBoICAgICAgICAgICAtIHRoaXMgaW5mb3JtYXRpb24KcXVpdCAvIHEgLyBDdHJsLUMgIC0gUXVpdCBkZWJ1ZyBtb2RlLCBicmVhayBleGVjdXRpb24KcmVzZXQgICAgICAgICAgICAgIC0gU29mdC1yZXNldCBFc3BydWlubwpjb250aW51ZSAvIGMgICAgICAgLSBDb250aW51ZSBleGVjdXRpb24KbmV4dCAvIG4gICAgICAgICAgIC0gZXhlY3V0ZSB0byBuZXh0IGxpbmUKc3RlcCAvIHMgICAgICAgICAgIC0gZXhlY3V0ZSB0byBuZXh0IGxpbmUsIG9yIHN0ZXAgaW50byBmdW5jdGlvbiBjYWxsCmZpbmlzaCAvIGYgICAgICAgICAtIGZpbmlzaCBleGVjdXRpb24gb2YgdGhlIGZ1bmN0aW9uIGNhbGwKcHJpbnQgLi4uIC8gcCAuLi4gIC0gZXZhbHVhdGUgYW5kIHByaW50IHRoZSBuZXh0IGFyZ3VtZW50CmluZm8gbG9jYWxzIC8gaSBsKSAgICAtIG91dHB1dCBsb2NhbCB2YXJpYWJsZXMKaW5mbyBzY29wZWNoYWluIC8gaSBzIC0gb3V0cHV0IGFsbCB2YXJpYWJsZXMgaW4gYWxsIHNjb3BlcwoAcXVpdABxAHJlc2V0AGNvbnRpbnVlAGMAbmV4dABuAHN0ZXAAcwBmaW5pc2gAZgBwcmludABwAGluZm8AaQBsb2NhbHMAbABObyBsb2NhbHMgZm91bmQKAExvY2FsczoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KAHNjb3BlY2hhaW4ATm8gc2NvcGVzIGZvdW5kCgBTY29wZSAlZDoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KAFVua25vd24gY29tbWFuZAoASW4gZGVidWcgbW9kZTogRXhwZWN0ZWQgYSBzaW1wbGUgSUQsIHR5cGUgJ2hlbHAnIGZvciBtb3JlIGluZm8uCgAldi5vbiglcSwgAG51bGwATG9vcGJhY2tBAExvb3BiYWNrQgBMaW1ibwBVU0IAVGVybWluYWwAU2VyaWFsMQBTUEkxAEkyQzEAAG9vcGJhY2tBAG9vcGJhY2tCAGVybWluYWwAVGltZW91dCBvbiBVdGlsaXR5IFRpbWVyAHNjbABzZGEAYml0cmF0ZQBJbnZhbGlkIEkyQyBiaXRyYXRlAFRpbWVvdXQgKHN0YXJ0KQBBcmJpdHJhdGlvbiAoc3RhcnQpAEkyQyBFcnJvcjogJXMAVGltZW91dCAod3IpAFRpbWVvdXQgKHJkKQBUaW1lb3V0IChzdG9wKQBBcmJpdHJhdGlvbiAoc3RvcCkAcngAdHgAY2sAY3RzAGJ5dGVzaXplAHN0b3BiaXRzAHBhcml0eQBmbG93AGVycm9ycwBJbnZhbGlkIGJhdWQgcmF0ZSBzcGVjaWZpZWQAbwBvZGQAZQBldmVuAEludmFsaWQgcGFyaXR5ICVkAG5vbmUAeG9uAEludmFsaWQgZmxvdyBjb250cm9sOiAlcQBfYmF1ZHJhdGUAX29wdGlvbnMAc3dzZXJpYWwAVW5hYmxlIHRvIGFsbG9jYXRlIGRhdGEgZm9yIFNlcmlhbCBSWABpcnFEYXRhAGV4dGkAVW5hYmxlIHRvIHdhdGNoIHBpbiAlcCwgbm8gU29mdHdhcmUgU2VyaWFsIFJYCgBzY2sAbWlzbwBtb3NpAGJhdWQAbW9kZQBvcmRlcgBiaXRzAG1zYgBsc2IAU1BJIG9yZGVyIHNob3VsZCBiZSAnbXNiJyBvciAnbHNiJwBJbnZhbGlkIFNQSSBiYXVkIHJhdGUAX29wdGlvbnMAAAAAAAAAEQApAAAABgAhADcAAAASAAEAOAAAACIABXA7AAAAJgAFcDwAAAArAAVwPQAAADAABXA+AAAANQAFcD8AAAA6AAVwQAAAAD8AAQAnAAAARgALAEEAAABOAAkJFgAAAFcAEQAXAAAAXAABACgAAABeAAkAGAAAAGQACQlCAAAAcQAJCUMAAAB+ABEAOgAAAIcAAQAlAAAAkAAEcEQAAACVAAAAIwAAAJkAAXBFAAAAngAGcEYAAACnAAkJRwAAALIACQlIAAAAvQAJCUkAAADHAAkAGwAAANUAAQAsAAAA2gABcEoAAADeAAFwSgAAAOMAAXBLAAAA6AAEcEwAAADsAAFwTQAAAPYAAXBOAAAAAAEBADUAAAAFAQEALQAAAA0BBnBPAAAAEQERAC4AAAAYAQkALwAAAB8BKQAdAAAAJwEJADkAAAArAQkAHgAAADMBCQAcAAAAQgFJAB8AAABJAQAAIgAAAE0BAXBQAAAAUgEAACAAAABZAQFwUQAAAGEBAQAhAAAAbQERADMAAAB0AQkAGQAAAIABAQAmAAAAkwEBcFIAAACcAQkAGgAAAKYBAXBTAAAAqgEJCVQAAAC2AQkJVQAAAMIBCQlWAAAAzgEJCVcAAADZAQkJWAAAAOsBBXBZAAAA8wFhACQAAAD8AS4AWgAAAAcCqANbAAAAEwIBcFwAAAAdAgkAXQAAACICCQBeAAAAJwKIAV8AAAA2AhAAYAAAAEQCEABhAAAAUQIQAGIAAABcAgEAKwAAAGQCCQBjAAAAdwLoAmQAAACEAgwAZQAAAJACCAFmAAAAnQIAAGcAAACiAhgAaAAAAKcCCABpAAAArAIJAGoAAAC/AgkACwAAAMQCAQAwAAAAxwIpAGsAAADSAgEAbAAAANwCBgBtAAAA5AIBcG4AAADrAgsAbwAAAPQCCwBwAAAA+gIIAHEAAAD/Ag4AcgAAAAoDSQBzAAAAEwMhAXQAAAAaAyEBdQAAACEDIQF2AAAAJwNoBncAAAAvA2AAeAAAADYDYAB5AAAAPQNgAHoAAABDAxAAewAAAEkDAQAxAAAAUQMJAHwAAABZAxgAfQAAAF8DAAB+AAAAZAMIAH8AAAB1A4kFgAAAAIEDCACBAAAAkwMwAIIAAACbA4kFgwAAAKYDSQOEAAAArwNIAoUAAAC4AwgAhg==");
+writeSegment(1520, "PT0APT09ACE9ACE9PQA8PQA8PAA8PD0APj0APj4APj4+AD4+PQA+Pj49ACs9AC09ACsrAC0tACo9AC89ACU9ACY9ACYmAHw9AHx8AF49AD0+AGlmAGVsc2UAZG8Ad2hpbGUAZm9yAGJyZWFrAGNvbnRpbnVlAGZ1bmN0aW9uAHJldHVybgB2YXIAbGV0AGNvbnN0AHRoaXMAdGhyb3cAdHJ5AGNhdGNoAGZpbmFsbHkAdHJ1ZQBmYWxzZQBudWxsAHVuZGVmaW5lZABuZXcAaW4AaW5zdGFuY2VvZgBzd2l0Y2gAY2FzZQBkZWZhdWx0AGRlbGV0ZQB0eXBlb2YAdm9pZABkZWJ1Z2dlcgBjbGFzcwBleHRlbmRzAHN1cGVyAHN0YXRpYwBvZgAAP1slZF0ASUQ6JXMAU3RyaW5nOiclcycAbGluZSAlZCBjb2wgJWQKAC4uLgAgAAoAXgoAMHg/PwAwAAAAAEdvdCAlcyBleHBlY3RlZCAlcwBkZWVwU2xlZXAAcHJldG9rZW5pc2UAdW5zYWZlRmxhc2gAdW5zeW5jRmlsZXMAAE5vdCBlbm91Z2ggc3RhY2sgbWVtb3J5IHRvIGRlY29kZSBkYXRhAFVuYWJsZSB0byBmaW5kIG9yIGNyZWF0ZSBmaWxlAFRvbyBtdWNoIGRhdGEgZm9yIGZpbGUgc2l6ZQBGaWxlIGFscmVhZHkgd3JpdHRlbiB3aXRoIGRpZmZlcmVudCBkYXRhAC4AQ29tcGFjdGluZyBGbGFzaC4uLgoALnZhcmltZwBDYWxjdWxhdGluZyBTaXplLi4uCgBFUlJPUjogVG9vIGJpZyB0byBzYXZlIHRvIGZsYXNoICglZCB2cyAlZCBieXRlcykKAERlbGV0aW5nIGNvbW1hbmQgaGlzdG9yeSBhbmQgdHJ5aW5nIGFnYWluLi4uCgBOb3QgZW5vdWdoIGZyZWUgc3BhY2UgdG8gc2F2ZS4gVHJ5IHJlcXVpcmUoJ1N0b3JhZ2UnKS5lcmFzZUFsbCgpCgBDb2RlIGlzIHRvbyBiaWcgdG8gc2F2ZSB0byBGbGFzaC4KAFdyaXRpbmcuLgAKQ29tcHJlc3NlZCAlZCBieXRlcyB0byAlZAoATm90IGxvYWRpbmcgc2F2ZWQgY29kZSBmcm9tIGRpZmZlcmVudCBFc3BydWlubyBmaXJtd2FyZS4KAExvYWRpbmcgJWQgYnl0ZXMgZnJvbSBmbGFzaC4uLgoALmJvb3RjZGUALmJvb3Ryc3QALmJvb3RYAEVyYXNpbmcgc2F2ZWQgY29kZS4ACkRvbmUhCgAwOWFhMGQ4NAD/Y29kAHVuZGVmaW5lZABudWxsAHRydWUAZmFsc2UAb2JqZWN0AGZ1bmN0aW9uAHN0cmluZwBib29sZWFuAG51bWJlcgA/AHZhbHVlT2YAVmFyaWFibGUgdHlwZSBjYW5ub3QgYmUgY29udmVydGVkIHRvIHN0cmluZwB0b1N0cmluZwBbb2JqZWN0IE9iamVjdF0ALABTdHJpbmcgdG9vIGJpZyB0byBjb252ZXJ0IHRvIGludGVnZXIKAFN0cmluZyB0b28gYmlnIHRvIGNvbnZlcnQgdG8gZmxvYXQKAEluZmluaXR5AC1JbmZpbml0eQBnZXQAc2V0AFVuYWJsZSB0byBhc3NpZ24gdmFsdWUgdG8gbm9uLXJlZmVyZW5jZSAldABGaWVsZCBvciBtZXRob2QgIiVzIiBkb2VzIG5vdCBhbHJlYWR5IGV4aXN0LCBhbmQgY2FuJ3QgY3JlYXRlIGl0IG9uICV0ACVxIGlzIG5vdCBkZWZpbmVkAE9wZXJhdGlvbiAlcyBub3Qgc3VwcG9ydGVkIG9uIHRoZSAlcyBkYXRhdHlwZQBJbnRlZ2VyAERvdWJsZQBBcnJheQBPYmplY3QAU3RyaW5nACMlZFtyJWQsbCVkXSAAIAAuLi4KAE5ld0NoaWxkIFBBUkVOVDoAQ0hJTEQ6IABOYW1lIABPYmplY3QgeyAAR2V0dGVyL1NldHRlciB7IABBcnJheSglZCkgWyAATmF0aXZlRnVuY3Rpb24gMHgleCAoJWQpIHsgAEZ1bmN0aW9uIHsgAHJldHVybiAAUGluICVkAEludGVnZXIgJWQAQm9vbCAlcwBEb3VibGUgJWYAUGFyYW0gJXEgAEFycmF5QnVmZmVyTmFtZVslZF0gACVzIChvZmZzICVkLCBsZW4gJWQpAHVua25vd24gQXJyYXlCdWZmZXIAAEZsYXQATmF0aXZlAEZsYXNoACVzU3RyaW5nIFslZCBibG9ja3NdICVxAFVua25vd24gJWQAPSBpbnQgJWQKAD0gYm9vbCAlcwoACgAlYwBfX3Byb3RvX18AY29uc3RydWN0b3IARXhwZWN0aW5nIGFuIE9iamVjdCwgb3IgdW5kZWZpbmVkAFVua25vd24gb3B0aW9uICVxACV2LiV2ACV2WyVxXQBjYWxsYmFjawBjb3VudABkYXRhAElmIHNwZWNpZnlpbmcgYW4gb2JqZWN0LCBpdCBtdXN0IGJlIG9mIHRoZSBmb3JtIHtkYXRhIDogLi4uLCBjb3VudCA6IE59IG9yIHtjYWxsYmFjayA6IGZufSAtIGdvdCAlagBFeHBlY3RpbmcgYSBudW1iZXIgb3Igc29tZXRoaW5nIGl0ZXJhYmxlLCBnb3QgJXQAXGIAXHQAXG4AXHYAXGYAXHIAXFwAXCIARVJST1I6IAAKAFdBUk5JTkc6IABOYU4ALUluZmluaXR5AEluZmluaXR5ACAAMAAiAG51bGwAVG9vIG1hbnkgc2NvcGVzIHJlbW92ZWQAcHJvdG90eXBlAF9fcHJvdG9fXwBPYmplY3QAVG9vIG11Y2ggcmVjdXJzaW9uIC0gdGhlIHN0YWNrIGlzIGFib3V0IHRvIG92ZXJmbG93AGV4Y2VwdABzVHJhY2UAIGF0IABzdGFjawBjb21waWxlZABGdW5jdGlvbiBtYXJrZWQgd2l0aCAiY29tcGlsZWQiIHVwbG9hZGVkIGluIHNvdXJjZSBmb3JtAP9jb2QA/3NjbwD/bGluAP9uYW0ARnVuY3Rpb24gJXEgbm90IGZvdW5kIQBGdW5jdGlvbiBub3QgZm91bmQhAEV4cGVjdGluZyBhIGZ1bmN0aW9uIHRvIGNhbGwsIGdvdCAldABJbnN1ZmZpY2llbnQgc3RhY2sgZm9yIHRoaXMgbWFueSBhcmd1bWVudHMA/3RocwBTdGVwcGluZyBpbnRvICV2CgBTdGVwcGluZyBpbnRvIGZ1bmN0aW9uCgByZXR1cm4AVmFsdWUgcmV0dXJuZWQgaXMgPQBpbiBmdW5jdGlvbiAlcSBjYWxsZWQgZnJvbSAAaW4gZnVuY3Rpb24gY2FsbGVkIGZyb20gAHN5c3RlbQoAQ2Fubm90IHJlYWQgcHJvcGVydHkgJyVzJyBvZiB1bmRlZmluZWQARmllbGQgb3IgbWV0aG9kICVxIGRvZXMgbm90IGFscmVhZHkgZXhpc3QsIGFuZCBjYW4ndCBjcmVhdGUgaXQgb24gJXQAQ29uc3RydWN0b3Igc2hvdWxkIGJlIGEgZnVuY3Rpb24sIGJ1dCBpcyAldABOZXN0aW5nICduZXcnIG9wZXJhdG9ycyBpcyB1bnN1cHBvcnRlZABnZXQAc2V0AFByb3RvdHlwZSBzaG91bGQgYmUgYW4gb2JqZWN0LCBnb3QgJXQAY29uc3RydWN0b3IAdW5kZWZpbmVkAGlmKHRoaXMuX19wcm90b19fLl9fcHJvdG9fXy5jb25zdHJ1Y3Rvcil0aGlzLl9fcHJvdG9fXy5fX3Byb3RvX18uY29uc3RydWN0b3IuYXBwbHkodGhpcyxhcmd1bWVudHMpACdleHRlbmRzJyBhcmd1bWVudCBzaG91bGQgYmUgYSBmdW5jdGlvbiwgZ290ICV0AFRhZ2dlZCB0ZW1wbGF0ZSBsaXRlcmFscyBub3Qgc3VwcG9ydGVkAENhbGxpbmcgJ3N1cGVyJyBvdXRzaWRlIG9mIGNsYXNzAFVuZXhwZWN0ZWQgZW5kIG9mIElucHV0CgBDYW5ub3QgdXNlICdpbicgb3BlcmF0b3IgdG8gc2VhcmNoIGEgJXQARXhwZWN0aW5nIGEgZnVuY3Rpb24gb24gUkhTIGluIGluc3RhbmNlb2YgY2hlY2ssIGdvdCAldABhdCAARXNwcnVpbm8gZG9lc24ndCBzdXBwb3J0IENBU0UgYWZ0ZXIgREVGQVVMVABBcnJheQBmb3IoYSAlcyBiKSAtICdhJyBtdXN0IGJlIGEgdmFyaWFibGUgbmFtZSwgbm90ICV0AG9mAGluAEZPUiBsb29wIGNhbiBvbmx5IGl0ZXJhdGUgb3ZlciBBcnJheXMsIFN0cmluZ3Mgb3IgT2JqZWN0cywgbm90ICV0AFJFVFVSTiBzdGF0ZW1lbnQsIGJ1dCBub3QgaW4gYSBmdW5jdGlvbi4KAENPTlRJTlVFIHN0YXRlbWVudCBvdXRzaWRlIG9mIEZPUiBvciBXSElMRSBsb29wAEJSRUFLIHN0YXRlbWVudCBvdXRzaWRlIG9mIFNXSVRDSCwgRk9SIG9yIFdISUxFIGxvb3AA/wBleHBvcnRzAG1vZHVsZQB1bmRlZmluZWQASW52YWxpZCBwaW4hAABTZXJpYWwAVVNBUlQAUlgAVFgAQ0sAU1BJAE1JU08ATU9TSQBTQ0sASTJDAFNDTABTREEAREFDAENIMQBDSDIAVElNAENvdWxkbid0IGNvbnZlcnQgcGluIGZ1bmN0aW9uICVkCgAgAC0+ICVzCgA8LSAlcwoAG1tKABtbQwAbW0QAG1tCABtbQQBkZWJ1ZwBwYXNzd29yZAB0aW1lcnMAd2F0Y2hlcwBmbGFncwBpbml0AHBpbgBFACNvbmluaXQAb25Jbml0AFJ1bm5pbmcgb25Jbml0KCkuLi4KACV2AHByb3RvdHlwZQAucHJvdG90eXBlACNvbgAldi4ldiA9IAA7CgBfYmF1ZHJhdGUAX29wdGlvbnMAJXMuc2V0dXAoJWQALCAAKTsKACVzLnNldHVwKABlY2hvKDApOwBzZXRCdXN5SW5kaWNhdG9yKCVwKTsKAHNldFNsZWVwSW5kaWNhdG9yKCVwKTsKAEUuc2V0RmxhZ3MoJWopOwoAVVNCAGRpZ2l0YWxXcml0ZSglcCwgJWQpOwoAcGluTW9kZSglcCwgJXElcyk7CgAALCB0cnVlACNvbmtpbGwAcHdkABtbPzdsCiBfX19fICAgICAgICAgICAgICAgICBfIAp8ICBfX3xfX18gX19fIF9fXyBfIF98X3xfX18gX19fIAp8ICBfX3xfIC18IC4gfCAgX3wgfCB8IHwgICB8IC4gfAp8X19fX3xfX198ICBffF98IHxfX198X3xffF98X19ffAogICAgICAgICB8X3wgZXNwcnVpbm8uY29tCiAydjA1IChjKSAyMDE5IEcuV2lsbGlhbXMKAAoAZGJnaGlzdABoaXN0b3J5AAggAEV4ZWN1dGlvbiBJbnRlcnJ1cHRlZCBkdXJpbmcgZXZlbnQgcHJvY2Vzc2luZy4KACNvbnVuY2F1Z2h0RXhjZXB0aW9uAFVuY2F1Z2h0ICV2CgBzdGFjawBFeGVjdXRpb24gSW50ZXJydXB0ZWQKACNvbmVycm9yRmxhZwBOZXcgaW50ZXJwcmV0ZXIgZXJyb3I6ICV2CgAldgoACgoACjoACiAgSW52YWxpZCBwYXNzd29yZApwYXNzd29yZD4ACiAgTG9nZ2VkIGluLgoAICAgIABmdW5jAGFyZ3MAdGhpcwBVbmtub3duIHR5cGUgb2YgY2FsbGJhY2sgaW4gRXZlbnQgUXVldWUAZWRnZQAjb25mcmFtaW5nACNvbnBhcml0eQBkZWJvdW5jZQBzdGF0ZQB0aW1lb3V0AHRpbWUAd2F0Y2gAY2FsbGJhY2sAbGFzdFRpbWUAcmVjdXIAZGF0YQBDdHJsLUMgd2hpbGUgcHJvY2Vzc2luZyB3YXRjaCAtIHJlbW92aW5nIGl0LgBpbnRlcnZhbABDdHJsLUMgd2hpbGUgcHJvY2Vzc2luZyBpbnRlcnZhbCAtIHJlbW92aW5nIGl0LgBsb2FkAGcAAGZ1bmN0aW9uICV2AHZhciAldiA9IABfX3Byb3RvX18AT2JqZWN0LmNyZWF0ZSgldik7CgBzZXRJbnRlcnZhbCgAc2V0VGltZW91dCgALCAlZik7IC8vICV2CgBzZXRXYXRjaCgALCAlaiwgeyByZXBlYXQ6JXMsIGVkZ2U6JyVzJwB0cnVlAGZhbHNlAGZhbGxpbmcAcmlzaW5nAGJvdGgALCBkZWJvdW5jZSA6ICVmACB9KTsKAC8vIENvZGUgc2F2ZWQgd2l0aCBFLnNldEJvb3RDb2RlCiV2CgByZXR1cm4AcGFyYW0gACA6IAAgW05vIHZhcmlhYmxlc10KAGhlbHAAaABDb21tYW5kczoKaGVscCAvIGggICAgICAgICAgIC0gdGhpcyBpbmZvcm1hdGlvbgpxdWl0IC8gcSAvIEN0cmwtQyAgLSBRdWl0IGRlYnVnIG1vZGUsIGJyZWFrIGV4ZWN1dGlvbgpyZXNldCAgICAgICAgICAgICAgLSBTb2Z0LXJlc2V0IEVzcHJ1aW5vCmNvbnRpbnVlIC8gYyAgICAgICAtIENvbnRpbnVlIGV4ZWN1dGlvbgpuZXh0IC8gbiAgICAgICAgICAgLSBleGVjdXRlIHRvIG5leHQgbGluZQpzdGVwIC8gcyAgICAgICAgICAgLSBleGVjdXRlIHRvIG5leHQgbGluZSwgb3Igc3RlcCBpbnRvIGZ1bmN0aW9uIGNhbGwKZmluaXNoIC8gZiAgICAgICAgIC0gZmluaXNoIGV4ZWN1dGlvbiBvZiB0aGUgZnVuY3Rpb24gY2FsbApwcmludCAuLi4gLyBwIC4uLiAgLSBldmFsdWF0ZSBhbmQgcHJpbnQgdGhlIG5leHQgYXJndW1lbnQKaW5mbyBsb2NhbHMgLyBpIGwpICAgIC0gb3V0cHV0IGxvY2FsIHZhcmlhYmxlcwppbmZvIHNjb3BlY2hhaW4gLyBpIHMgLSBvdXRwdXQgYWxsIHZhcmlhYmxlcyBpbiBhbGwgc2NvcGVzCgBxdWl0AHEAcmVzZXQAY29udGludWUAYwBuZXh0AG4Ac3RlcABzAGZpbmlzaABmAHByaW50AHAAaW5mbwBpAGxvY2FscwBsAE5vIGxvY2FscyBmb3VuZAoATG9jYWxzOgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQoAc2NvcGVjaGFpbgBObyBzY29wZXMgZm91bmQKAFNjb3BlICVkOgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQoAVW5rbm93biBjb21tYW5kCgBJbiBkZWJ1ZyBtb2RlOiBFeHBlY3RlZCBhIHNpbXBsZSBJRCwgdHlwZSAnaGVscCcgZm9yIG1vcmUgaW5mby4KACV2Lm9uKCVxLCAAbnVsbABMb29wYmFja0EATG9vcGJhY2tCAExpbWJvAFVTQgBUZXJtaW5hbABTZXJpYWwxAFNQSTEASTJDMQAAb29wYmFja0EAb29wYmFja0IAZXJtaW5hbABUaW1lb3V0IG9uIFV0aWxpdHkgVGltZXIAc2NsAHNkYQBiaXRyYXRlAEludmFsaWQgSTJDIGJpdHJhdGUAVGltZW91dCAoc3RhcnQpAEFyYml0cmF0aW9uIChzdGFydCkASTJDIEVycm9yOiAlcwBUaW1lb3V0ICh3cikAVGltZW91dCAocmQpAFRpbWVvdXQgKHN0b3ApAEFyYml0cmF0aW9uIChzdG9wKQByeAB0eABjawBjdHMAYnl0ZXNpemUAc3RvcGJpdHMAcGFyaXR5AGZsb3cAZXJyb3JzAEludmFsaWQgYmF1ZCByYXRlIHNwZWNpZmllZABvAG9kZABlAGV2ZW4ASW52YWxpZCBwYXJpdHkgJWQAbm9uZQB4b24ASW52YWxpZCBmbG93IGNvbnRyb2w6ICVxAF9iYXVkcmF0ZQBfb3B0aW9ucwBzd3NlcmlhbABVbmFibGUgdG8gYWxsb2NhdGUgZGF0YSBmb3IgU2VyaWFsIFJYAGlycURhdGEAZXh0aQBVbmFibGUgdG8gd2F0Y2ggcGluICVwLCBubyBTb2Z0d2FyZSBTZXJpYWwgUlgKAHNjawBtaXNvAG1vc2kAYmF1ZABtb2RlAG9yZGVyAGJpdHMAbXNiAGxzYgBTUEkgb3JkZXIgc2hvdWxkIGJlICdtc2InIG9yICdsc2InAEludmFsaWQgU1BJIGJhdWQgcmF0ZQBfb3B0aW9ucw==");
+writeSegment(7922, "EQApAAAABgAhADcAAAASAAEAOAAAACIABXA7AAAAJgAFcDwAAAArAAVwPQAAADAABXA+AAAANQAFcD8AAAA6AAVwQAAAAD8AAQAnAAAARgALAEEAAABOAAkJFgAAAFcAEQAXAAAAXAABACgAAABeAAkAGAAAAGQACQlCAAAAcQAJCUMAAAB+ABEAOgAAAIcAAQAlAAAAkAAEcEQAAACVAAAAIwAAAJkAAXBFAAAAngAGcEYAAACnAAkJRwAAALIACQlIAAAAvQAJCUkAAADHAAkAGwAAANUAAQAsAAAA2gABcEoAAADeAAFwSgAAAOMAAXBLAAAA6AAEcEwAAADsAAFwTQAAAPYAAXBOAAAAAAEBADUAAAAFAQEALQAAAA0BBnBPAAAAEQERAC4AAAAYAQkALwAAAB8BKQAdAAAAJwEJADkAAAArAQkAHgAAADMBCQAcAAAAQgFJAB8AAABJAQAAIgAAAE0BAXBQAAAAUgEAACAAAABZAQFwUQAAAGEBAQAhAAAAbQERADMAAAB0AQkAGQAAAIABAQAmAAAAkwEBcFIAAACcAQkAGgAAAKYBAXBTAAAAqgEJCVQAAAC2AQkJVQAAAMIBCQlWAAAAzgEJCVcAAADZAQkJWAAAAOsBBXBZAAAA8wFhACQAAAD8AS4AWgAAAAcCqANbAAAAEwIBcFwAAAAdAgkAXQAAACICCQBeAAAAJwKIAV8AAAA2AhAAYAAAAEQCEABhAAAAUQIQAGIAAABcAgEAKwAAAGQCCQBjAAAAdwLoAmQAAACEAgwAZQAAAJACCAFmAAAAnQIAAGcAAACiAhgAaAAAAKcCCABpAAAArAIJAGoAAAC/AgkACwAAAMQCAQAwAAAAxwIpAGsAAADSAgEAbAAAANwCBgBtAAAA5AIBcG4AAADrAgsAbwAAAPQCCwBwAAAA+gIIAHEAAAD/Ag4AcgAAAAoDSQBzAAAAEwMhAXQAAAAaAyEBdQAAACEDIQF2AAAAJwNoBncAAAAvA2AAeAAAADYDYAB5AAAAPQNgAHoAAABDAxAAewAAAEkDAQAxAAAAUQMJAHwAAABZAxgAfQAAAF8DAAB+AAAAZAMIAH8AAAB1A4kFgAAAAIEDCACBAAAAkwMwAIIAAACbA4kFgwAAAKYDSQOEAAAArwNIAoUAAAC4AwgAhg==");
 writeSegment(8816, "QXJyYXkAQXJyYXlCdWZmZXIAQXJyYXlCdWZmZXJWaWV3AEJUTgBCVE4xAEJUTjIAQlROMwBCVE40AEJUTjUAQmFuZ2xlAEJvb2xlYW4ARGF0YVZpZXcARGF0ZQBFAEVycm9yAEZsb2F0MzJBcnJheQBGbG9hdDY0QXJyYXkARnVuY3Rpb24AR3JhcGhpY3MASElHSABJMkMASTJDMQBJbmZpbml0eQBJbnQxNkFycmF5AEludDMyQXJyYXkASW50OEFycmF5AEludGVybmFsRXJyb3IASlNPTgBMRUQATEVEMQBMRUQyAExPVwBMb29wYmFja0EATG9vcGJhY2tCAE1hdGgATW9kdWxlcwBOYU4ATnVtYmVyAE9iamVjdABPbmVXaXJlAFBpbgBQcm9taXNlAFJlZmVyZW5jZUVycm9yAFJlZ0V4cABTUEkAU1BJMQBTZXJpYWwAU2VyaWFsMQBTdG9yYWdlRmlsZQBTdHJpbmcAU3ludGF4RXJyb3IAVEZNaWNyb0ludGVycHJldGVyAFRlcm1pbmFsAFR5cGVFcnJvcgBVU0IAVWludDE2QXJyYXkAVWludDI0QXJyYXkAVWludDMyQXJyYXkAVWludDhBcnJheQBVaW50OENsYW1wZWRBcnJheQBWSUJSQVRFAFdhdmVmb3JtAGFuYWxvZ1JlYWQAYW5hbG9nV3JpdGUAYXJndW1lbnRzAGF0b2IAYnRvYQBjaGFuZ2VJbnRlcnZhbABjbGVhckludGVydmFsAGNsZWFyVGltZW91dABjbGVhcldhdGNoAGNvbnNvbGUAZGVjb2RlVVJJQ29tcG9uZW50AGRpZ2l0YWxQdWxzZQBkaWdpdGFsUmVhZABkaWdpdGFsV3JpdGUAZHVtcABlY2hvAGVkaXQAZW5jb2RlVVJJQ29tcG9uZW50AGV2YWwAZnMAZ2V0UGluTW9kZQBnZXRTZXJpYWwAZ2V0VGltZQBnbG9iYWwAaXNGaW5pdGUAaXNOYU4AbG9hZABwYXJzZUZsb2F0AHBhcnNlSW50AHBlZWsxNgBwZWVrMzIAcGVlazgAcGluTW9kZQBwb2tlMTYAcG9rZTMyAHBva2U4AHByaW50AHByb2Nlc3MAcmVxdWlyZQByZXNldABzYXZlAHNldEJ1c3lJbmRpY2F0b3IAc2V0SW50ZXJ2YWwAc2V0U2xlZXBJbmRpY2F0b3IAc2V0VGltZQBzZXRUaW1lb3V0AHNldFdhdGNoAHNoaWZ0T3V0AHRyYWNlAAAAAAAkAIcAAAAIACABiAAAABAAIQGJAAAAFQChAYoAAAAaACABiwAAACQAAQCMAAAAKAAAAI0AAAA0AAEAjgAAAD0AAQCPAAAASAABAJAAAABTAAEAkQAAAFsAIAGSAAAAYAADAJMAAABrAAMAlAAAAHMAYACVAAAAeQAAAJYAAACFAAAAlwAAAIkACQCYAAAAkQAYAJkAAAChABgAmgAAAK0AGACbAAAAuQAwAJwAAADKAAgAnQAAANUAIACeAAAA4gAYAJ8AAADuADAAoAAAAPwACAChAAAABwEwAKIAAAAXAQAAow==");
 writeSegment(10016, "YWNjZWxSZABhY2NlbFdyAGJlZXAAYnV6egBjb21wYXNzV3IAZGJnAGRyYXdXaWRnZXRzAGdldEFjY2VsAGdldENvbXBhc3MAZ2V0TENETW9kZQBnZXRMb2dvAGlvV3IAaXNDaGFyZ2luZwBpc0xDRE9uAGxjZFdyAGxvYWRXaWRnZXRzAG9mZgBwcm9qZWN0AHNldENvbXBhc3NQb3dlcgBzZXRHUFNQb3dlcgBzZXRIUk1Qb3dlcgBzZXRMQ0RCcmlnaHRuZXNzAHNldExDRE1vZGUAc2V0TENET2Zmc2V0AHNldExDRFBvd2VyAHNldExDRFRpbWVvdXQAc2V0T3B0aW9ucwBzZXRQb2xsSW50ZXJ2YWwAc2hvd0xhdW5jaGVy");
 writeSegment(10322, "CQCkAAAABgBIBqUAAAAKALE9pgAAABMAiACnAAAAFwC2DagAAAAcAAgAqQAAACYATgiqAAAALwAAAKsAAAA2AAAArAAAAEgAAQCtAAAAUAAAAK4AAABeAHAArwAAAG0AzACwAAAAegAGALEAAACIAAQAsgAAAJMAAQCzAAAAngABALQAAACsAAEAtQAAALUACQG2AAAAvwAGALcAAADOAAQAuAAAANUAjgG5AAAA4QAObboAAADvAAAAuwAAAPwAAAC8AAAACAFJBr0AAAAVAUhCvgAAACABIQG/AAAAKwFJAMAAAAA1AWECwQAAAEABSALCAAAARQEAAMMAAABMASQAxAAAAFgByADFAAAAZAEMAMYAAABtAUgAxwAAAHgBCADIAAAAgQEIAMkAAACNATAAygAAAJkBSQDLAAAAowEJAMwAAACsAUgAzQAAALgBSQDOAAAAwwEgAM8AAADJAQ4A0AAAAM0BCQDRAAAA2wEJANIAAADgAREA0wAAAOkBEQDUAAAA9gGOAdUAAABDUkMzMgBGRlQASFNCdG9SR0IAYXNtAGNsaXAAY29tcGlsZWRDAGNvbnZvbHZlAGRlZnJhZwBkdW1wRnJhZ21lbnRhdGlvbgBkdW1wU3RyAGR1bXBWYXJpYWJsZXMAZW5hYmxlV2F0Y2hkb2cAZ2V0QWRkcmVzc09mAGdldEFuYWxvZ1ZSZWYAZ2V0QmF0dGVyeQBnZXRDb25zb2xlAGdldEVycm9yRmxhZ3MAZ2V0RmxhZ3MAZ2V0U2l6ZU9mAGdldFRlbXBlcmF0dXJlAGh3UmFuZABpbnRlcnBvbGF0ZQBpbnRlcnBvbGF0ZTJkAGtpY2tXYXRjaGRvZwBsb2NrQ29uc29sZQBsb29rdXBOb0Nhc2UAbWFwSW5QbGFjZQBtZW1vcnlBcmVhAG1lbW9yeU1hcABuYXRpdmVDYWxsAHBpcGUAcmVib290AHJldmVyc2VCeXRlAHNldEJvb3RDb2RlAHNldENsb2NrAHNldENvbnNvbGUAc2V0RmxhZ3MAc2V0UGFzc3dvcmQAc2V0VGltZVpvbmUAc2hvd0FsZXJ0AHNob3dNZW51AHNob3dNZXNzYWdlAHNob3dQcm9tcHQAc3JhbmQAc3VtAHRvQXJyYXlCdWZmZXIAdG9KUwB0b1N0cmluZwB0b1VpbnQ4QXJyYXkAdmFyaWFuY2UAAAAAEYDWAAAABwBJgNcAAAANAAmD2AAAABIASYDZAAAAGQAJgNoAAAAeAAmA2wAAACgASIDcAAAAMAALgd0AAAA5AAmB3gAAAEEACYDfAAAARgAB8OAAAABNAEmA4QAAAFEAAYDiAAAAVQAUgOMAAABaAEmA5AAAAGEAAYDlAAAAaQABgOYAAABvAGGA5wAAAHUASYDoAAAAegAJgOkAAAB/AGGE6gAAAIYACYADAAAAjwAUgOs=");
@@ -83198,98 +83199,96 @@ writeSegment(15538, "IRmvAQAAEgAhGbABAAAhAAkAsQEAAC0AAQCyAQAAY3JlYXRlQXJyYXlCdWZ
 writeSegment(15634, "AYCzAQAABgABgLQBAAAOAAGAtQEAABQAGYC2AQAAGgAhybcBAAAkACGJuAEAAC8AIcm5AQAAOwAJmboBAABFACHJuwEAAE4AyYC8AQAAVwAhyb0BAABgAAm5vgEAAGsAAIC/AQAAcAAhicABAAB7ACHJwQEAAIcACYDCAQAAkAAhycMBAACZAASAxAEAAKQABIDFAQAArQABgMYBAAC1AASAxwEAAMMAAYDIAQAAzAAEgMkBAADWABmAygEAAOIAJIHLAQAA6wAEgMwBAAD0ACGBzQEAAPsAIYHOAQAAAgFJgM8BAAASAQGA0AEAABgBIYHRAQAAHwFJgtIBAAAqASHJ0wEAADYBSYLUAQAAPwEJgdUBAABHASGJ1gEAAFQBAYDXAQAAYgEJw9gBAABwASGA2QEAAH4BIYPaAQAAhwHhgNsBAACTAQyA3AEAAJ8BTILdAQ==");
 writeSegment(15984, "YXNCTVAAYXNJbWFnZQBhc1VSTABjbGVhcgBjbGVhclJlY3QAZHJhd0NpcmNsZQBkcmF3RWxsaXBzZQBkcmF3SW1hZ2UAZHJhd0xpbmUAZHJhd1BvbHkAZHJhd1JlY3QAZHJhd1N0cmluZwBkdW1wAGZpbGxDaXJjbGUAZmlsbEVsbGlwc2UAZmlsbFBvbHkAZmlsbFJlY3QAZ2V0QmdDb2xvcgBnZXRDb2xvcgBnZXRGb250AGdldEZvbnRIZWlnaHQAZ2V0Rm9udHMAZ2V0SGVpZ2h0AGdldE1vZGlmaWVkAGdldFBpeGVsAGdldFdpZHRoAGxpbmVUbwBtb3ZlVG8AcXVhZHJhdGljQmV6aWVyAHJlc2V0AHNjcm9sbABzZXRCZ0NvbG9yAHNldENsaXBSZWN0AHNldENvbG9yAHNldEZvbnQAc2V0Rm9udEFsaWduAHNldEZvbnRCaXRtYXAAc2V0Rm9udEN1c3RvbQBzZXRGb250VmVjdG9yAHNldFBpeGVsAHNldFJvdGF0aW9uAHN0cmluZ1dpZHRoAHRvQ29sb3IAAAAAYQDeAQAAY3JlYXRl");
 writeSegment(16434, "AYDfAQAACQABgOABAAATAACA4QE=");
-writeSegment(16464, "Z2V0SW5wdXQAZ2V0T3V0cHV0AGludm9rZQAAAAAAAADwHgAAcCIAAG8wJgAAICcAAB1QKAAA4CkAADLgKwAAoCwAABc4LQAAQC0AAAFMLQAAVC0AAAFgLQAA8C0AABFwLgAA8C4AABCQLwAAoC8AAAKwLwAAcDAAABdkMQAAbDEAAAF4MQAAgDEAAAGMMQAAlDEAAAGgMQAAqDEAAAG0MQAAvDEAAAHQMQAAADIAAAUoMgAAMDIAAAFAMgAAUDIAAAJwMgAAkDIAAATQMgAAIDMAAAlgMwAAkDMAAAXQMwAA2DMAAAHwMwAAQDQAAAmgNAAA8DQAAAlwNQAAkDUAAASwNQAA8DUAAAccNgAAJDYAAAEwNgAAUDYAAANwNgAAkDYAAAOwNgAAwDYAAALQNgAA4DYAAALsNgAA9DYAAAEANwAAUDcAAAqgNwAAADgAAAtgOAAAkDgAAAW4OAAAwDgAAAHQOAAAADkAAAUkOQAALDkAAAFAOQAAYDkAAAOAOQAAEDoAABKsOgAAtDoAAAHQOgAA8DoAAAMQOwAAIDsAAAJAOwAAIDwAABywPAAA0DwAAAQQPQAAcD4AACsYQAAAIEAAAAEwQAAAUEAAAANfX3Byb3RvX18AY29uc3RydWN0b3IAQmFuZ2xlAEUAQXJyYXkAQXJyYXlCdWZmZXIAQXJyYXlCdWZmZXJWaWV3AFVpbnQ4QXJyYXkAVWludDhDbGFtcGVkQXJyYXkASW50OEFycmF5AFVpbnQxNkFycmF5AEludDE2QXJyYXkAVWludDI0QXJyYXkAVWludDMyQXJyYXkASW50MzJBcnJheQBGbG9hdDMyQXJyYXkARmxvYXQ2NEFycmF5AERhdGFWaWV3AERhdGUARXJyb3IAU3ludGF4RXJyb3IAVHlwZUVycm9yAEludGVybmFsRXJyb3IAUmVmZXJlbmNlRXJyb3IARnVuY3Rpb24AY29uc29sZQBKU09OAE1vZHVsZXMAUGluAE51bWJlcgBPYmplY3QAQm9vbGVhbgBPbmVXaXJlAGZzAHByb2Nlc3MAUHJvbWlzZQBSZWdFeHAAU2VyaWFsAFN0b3JhZ2VGaWxlAFNQSQBJMkMAU3RyaW5nAFdhdmVmb3JtAE1hdGgAR3JhcGhpY3MAVEZNaWNyb0ludGVycHJldGVyAEZsYXNoAFN0b3JhZ2UAaGVhdHNocmluawB0ZW5zb3JmbG93AGdyYXBoaWNhbF9tZW51AGV4cG9ydHMubGlzdD1mdW5jdGlvbihhLHApe3ZhciBiPXBbIiJdLGU9T2JqZWN0LmtleXMocCk7YiYmZS5zcGxpY2UoZS5pbmRleE9mKCIiKSwxKTtiIGluc3RhbmNlb2YgT2JqZWN0fHwoYj17fSk7dm9pZCAwPT09Yi5zZWxlY3RlZCYmKGIuc2VsZWN0ZWQ9MCk7Yi5mb250SGVpZ2h0fHwoYi5mb250SGVpZ2h0PTYpO3ZhciBxPTB8Yi54LG09Yi54Mnx8YS5nZXRXaWR0aCgpLTEsbD0wfGIueSx2PWIueTJ8fGEuZ2V0SGVpZ2h0KCktMTtiLnRpdGxlJiYobCs9Yi5mb250SGVpZ2h0KzIpO3ZhciB3PWIuY0J8fDAsbj1iLmNGO3ZvaWQgMD09PW4mJihuPS0xKTt2YXIgcj1iLmNIQjt2b2lkIDA9PT1yJiYocj0tMSk7dmFyIHU9Yi5jSEZ8fDAsZD17ZHJhdzpmdW5jdGlvbigpe2Euc2V0Q29sb3Iobik7Yi5wcmVkcmF3JiZiLnByZWRyYXcoYSk7YS5zZXRGb250QWxpZ24oMCwtMSk7Yi50aXRsZSYmKGEuZHJhd1N0cmluZyhiLnRpdGxlLChxK20pLzIsbC1iLmZvbnRIZWlnaHQtCjIpLGEuZHJhd0xpbmUocSxsLTIsbSxsLTIpKTtmb3IodmFyIHQ9MHxNYXRoLm1pbigodi1sKS9iLmZvbnRIZWlnaHQsZS5sZW5ndGgpLGM9RS5jbGlwKGIuc2VsZWN0ZWQtKHQ+PjEpLDAsZS5sZW5ndGgtdCksZj1sLHg9MDxjO3QtLTspe3ZhciBoPWVbY10sZz1wW2hdLGs9Yz09Yi5zZWxlY3RlZCYmIWQuc2VsZWN0RWRpdDthLnNldENvbG9yKGs/cjp3KTthLmZpbGxSZWN0KHEsZixtLGYrYi5mb250SGVpZ2h0LTEpO2Euc2V0Q29sb3Ioaz91Om4pO2Euc2V0Rm9udEFsaWduKC0xLC0xKTthLmRyYXdTdHJpbmcoaCxxLGYpOyJvYmplY3QiPT10eXBlb2YgZyYmKGg9bSxrPWcudmFsdWUsZy5mb3JtYXQmJihrPWcuZm9ybWF0KGspKSxkLnNlbGVjdEVkaXQmJmM9PWIuc2VsZWN0ZWQmJihnPTEwPGIuZm9udEhlaWdodD8yOjEsaC09MTIqZysxLGEuc2V0Q29sb3IociksYS5maWxsUmVjdChoLShhLnN0cmluZ1dpZHRoKGspKzQpLGYsbSxmK2IuZm9udEhlaWdodC0xKSxhLnNldENvbG9yKHUpLAphLmRyYXdJbWFnZSh7d2lkdGg6MTIsaGVpZ2h0OjUsYnVmZmVyOiIgXHUwMDA3XHgwMFx1MDBmOVx1MDBmMFx1MDAwZVx4MDBAIix0cmFuc3BhcmVudDowfSxoLGYrKGIuZm9udEhlaWdodC01KmcpLzIse3NjYWxlOmd9KSksYS5zZXRGb250QWxpZ24oMSwtMSksYS5kcmF3U3RyaW5nKGssaC0yLGYpKTthLnNldENvbG9yKG4pO2YrPWIuZm9udEhlaWdodDtjKyt9YS5zZXRGb250QWxpZ24oLTEsLTEpO2IucHJlZmxpcCYmYi5wcmVmbGlwKGEseCxjPGUubGVuZ3RoKTthLmZsaXAmJmEuZmxpcCgpfSxzZWxlY3Q6ZnVuY3Rpb24oYSl7YT1wW2VbYi5zZWxlY3RlZF1dO2lmKCJmdW5jdGlvbiI9PXR5cGVvZiBhKWEoZCk7ZWxzZSBpZigib2JqZWN0Ij09dHlwZW9mIGEpe2lmKCJudW1iZXIiPT10eXBlb2YgYS52YWx1ZSlkLnNlbGVjdEVkaXQ9ZC5zZWxlY3RFZGl0P3ZvaWQgMDphO2Vsc2UgaWYoImJvb2xlYW4iPT10eXBlb2YgYS52YWx1ZSYmKGEudmFsdWU9IWEudmFsdWUpLGEub25jaGFuZ2UpYS5vbmNoYW5nZShhLnZhbHVlKTsKZC5kcmF3KCl9fSxtb3ZlOmZ1bmN0aW9uKGEpe2lmKGQuc2VsZWN0RWRpdCl7dmFyIGM9ZC5zZWxlY3RFZGl0O2MudmFsdWUtPShhfHwxKSooYy5zdGVwfHwxKTt2b2lkIDAhPT1jLm1pbiYmYy52YWx1ZTxjLm1pbiYmKGMudmFsdWU9Yy5taW4pO3ZvaWQgMCE9PWMubWF4JiZjLnZhbHVlPmMubWF4JiYoYy52YWx1ZT1jLm1heCk7aWYoYy5vbmNoYW5nZSljLm9uY2hhbmdlKGMudmFsdWUpfWVsc2UgYi5zZWxlY3RlZD0oYStiLnNlbGVjdGVkKSVlLmxlbmd0aCwwPmIuc2VsZWN0ZWQmJihiLnNlbGVjdGVkKz1lLmxlbmd0aCk7ZC5kcmF3KCl9fTtkLmRyYXcoKTtyZXR1cm4gZH0ARmxhc2gsU3RvcmFnZSxoZWF0c2hyaW5rLHRlbnNvcmZsb3csZ3JhcGhpY2FsX21lbnUAVW5rbm93biBhcmdzcGVjICVkAEkyQzEAKGZ1bmN0aW9uKCl7cmV0dXJue192OiExLHJlYWQ6ZnVuY3Rpb24oKXtyZXR1cm4gdGhpcy5fdn0sc2V0OmZ1bmN0aW9uKCl7dGhpcy53cml0ZSgxKX0scmVzZXQ6ZnVuY3Rpb24oKXt0aGlzLndyaXRlKDApfSx3cml0ZTpmdW5jdGlvbihhKXtnLnNldENvbG9yKCh0aGlzLl92PSEhYSk/MTowLDAsMCkuZmlsbENpcmNsZSgxMTAsNSw1KS5mbGlwKCl9LHRvZ2dsZTpmdW5jdGlvbigpe3RoaXMud3JpdGUoIXRoaXMuX3YpfX19KQAoZnVuY3Rpb24oKXtyZXR1cm57X3Y6ITEscmVhZDpmdW5jdGlvbigpe3JldHVybiB0aGlzLl92fSxzZXQ6ZnVuY3Rpb24oKXt0aGlzLndyaXRlKDEpfSxyZXNldDpmdW5jdGlvbigpe3RoaXMud3JpdGUoMCl9LHdyaXRlOmZ1bmN0aW9uKGEpe2cuc2V0Q29sb3IoMCwodGhpcy5fdj0hIWEpPzE6MCwwKS5maWxsQ2lyY2xlKDEzMCw1LDUpLmZsaXAoKX0sdG9nZ2xlOmZ1bmN0aW9uKCl7dGhpcy53cml0ZSghdGhpcy5fdil9fX0pAExvb3BiYWNrQQBMb29wYmFja0IAU1BJMQBTZXJpYWwxAFRlcm1pbmFsAFVTQgAoZnVuY3Rpb24oKXt2YXIgdz1nLmdldFdpZHRoKCksaD1nLmdldEhlaWdodCgpO3ZhciBwb3M9e3RsOnt4OjI4LHk6MCxyOjAsYzowfSx0cjp7eDp3LTI4LHk6MCxyOjEsYzowfSxibDp7eDoyNCx5OmgtMjQscjowLGM6MH0sYnI6e3g6dy0yNCx5OmgtMjQscjoxLGM6MH19O2lmKGdsb2JhbC5XSURHRVRTKXtmb3IodmFyIHdkIG9mIFdJREdFVFMpe3ZhciBwPXBvc1t3ZC5hcmVhXTtpZighcClyZXR1cm47d2QueD1wLngtcC5yKndkLndpZHRoO3dkLnk9cC55O3AueCs9d2Qud2lkdGgqKDEtMipwLnIpO3AuYysrO3dkLmRyYXcod2QpfQpnLnJlc2V0KCk7aWYocG9zLnRsLmMpZy5jbGVhclJlY3QoMCwwLHBvcy50bC54LDIzKTtpZihwb3MuYmwuYylnLmNsZWFyUmVjdCgwLGgtMjQscG9zLmJsLngsaC0xKTtpZihwb3MudHIuYylnLmNsZWFyUmVjdChwb3MudHIueCwwLHctMSwyMyk7aWYocG9zLmJyLmMpZy5jbGVhclJlY3QocG9zLmJyLngsaC0yNCx3LTEsaC0xKTtmb3Iod2Qgb2YgV0lER0VUUyl3ZC5kcmF3KHdkKX19KQAoZnVuY3Rpb24oKXtnbG9iYWwuV0lER0VUUz17fTtyZXF1aXJlKCJTdG9yYWdlIikubGlzdCgvXC53aWRcLmpzJC8pLmZvckVhY2goZnVuY3Rpb24oYSl7cmV0dXJuIGV2YWwocmVxdWlyZSgiU3RvcmFnZSIpLnJlYWQoYSkpfSl9KQAoZnVuY3Rpb24oKSB7CiAgdmFyIGwgPSByZXF1aXJlKCJTdG9yYWdlIikubGlzdCgvXC5pbmZvJC8pLm1hcChhcHA9PnsKICAgIHRyeSB7IHJldHVybiByZXF1aXJlKCJTdG9yYWdlIikucmVhZEpTT04oYXBwKTsgfSBjYXRjaCAoZSkge30KICB9KS5maW5kKGFwcD0+YXBwLnR5cGU9PSJsYXVuY2giKTsKICBpZiAobCkgbG9hZChsLnNyYyk7CiAgZWxzZSBFLnNob3dNZXNzYWdlKCJMYXVuY2hlclxubm90IGZvdW5kIik7Cn0pAChmdW5jdGlvbihhLGIpe3JldHVybiBFLnNob3dQcm9tcHQoYSx7dGl0bGU6YixidXR0b25zOntPazoxfX0pfSkAKGZ1bmN0aW9uKG0pe0JhbmdsZS5idG5XYXRjaGVzJiYoQmFuZ2xlLmJ0bldhdGNoZXMuZm9yRWFjaChjbGVhcldhdGNoKSxCYW5nbGUuYnRuV2F0Y2hlcz12b2lkIDApO2cuY2xlYXIoMSk7Zy5mbGlwKCk7QmFuZ2xlLmRyYXdXaWRnZXRzKCk7aWYobSl7dmFyIHA9Zy5nZXRXaWR0aCgpLTk7Zy5nZXRIZWlnaHQoKTt2YXIgZT1PYmplY3Qua2V5cyhtKSxhPW1bIiJdO2EmJmUuc3BsaWNlKGUuaW5kZXhPZigiIiksMSk7YSBpbnN0YW5jZW9mIE9iamVjdHx8KGE9e30pO2EuZm9udEhlaWdodD0xNjthLng9MDthLngyPXAtMjthLnk9MjQ7YS55Mj0yMjA7dm9pZCAwPT09YS5zZWxlY3RlZCYmKGEuc2VsZWN0ZWQ9MCk7YS5mb250SGVpZ2h0fHwoYS5mb250SGVpZ2h0PTYpO3ZhciBxPTB8YS54LG49YS54Mnx8Zy5nZXRXaWR0aCgpLTEsaz0wfGEueSx1PWEueTJ8fGcuZ2V0SGVpZ2h0KCktMTthLnRpdGxlJiYoays9YS5mb250SGVpZ2h0KzIpO3ZhciB0PXJlcXVpcmUoImxvY2FsZSIpLApkPXtkcmF3OmZ1bmN0aW9uKCl7Zy5yZXNldCgpO2cuc2V0Q29sb3IoLTEpO2cuc2V0Rm9udCgiNng4IiwyKS5zZXRGb250QWxpZ24oMCwtMSwwKTthLnRpdGxlJiYoZy5kcmF3U3RyaW5nKGEudGl0bGUsKHErbikvMixrLWEuZm9udEhlaWdodC0yKSxnLmRyYXdMaW5lKHEsay0yLG4say0yKSk7Zm9yKHZhciBjPTB8TWF0aC5taW4oKHUtaykvYS5mb250SGVpZ2h0LGUubGVuZ3RoKSxiPUUuY2xpcChhLnNlbGVjdGVkLShjPj4xKSwwLGUubGVuZ3RoLWMpLGY9aztjLS07KXt2YXIgaD1lW2JdLHI9bVtoXTtnLnNldENvbG9yKGIhPWEuc2VsZWN0ZWR8fGQuc2VsZWN0RWRpdD83Ojc1OSk7Zy5maWxsUmVjdChxLGYsbixmK2EuZm9udEhlaWdodC0xKTtnLnNldENvbG9yKC0xKTtnLnNldEZvbnRBbGlnbigtMSwtMSk7Zy5kcmF3U3RyaW5nKHQudHJhbnNsYXRlKGgpLHEsZik7aWYoIm9iamVjdCI9PXR5cGVvZiByKXtoPW47dmFyIGw9ci52YWx1ZTtyLmZvcm1hdCYmKGw9ci5mb3JtYXQobCkpOwpsPXQudHJhbnNsYXRlKCIiK2wpO2Quc2VsZWN0RWRpdCYmYj09YS5zZWxlY3RlZCYmKGgtPTI1LGcuc2V0Q29sb3IoNzU5KSxnLmZpbGxSZWN0KGgtKGcuc3RyaW5nV2lkdGgobCkrNCksZixuLGYrYS5mb250SGVpZ2h0LTEpLGcuc2V0Q29sb3IoLTEpLGcuZHJhd0ltYWdlKCJcZlx1MDAwNVx1MDA4MVx4MDAgXHUwMDA3XHgwMFx1MDBmOVx1MDBmMFx1MDAwZVx4MDBAIixoLGYrKGEuZm9udEhlaWdodC0xMCkvMix7c2NhbGU6Mn0pKTtnLnNldEZvbnRBbGlnbigxLC0xKTtnLmRyYXdTdHJpbmcobCxoLTIsZil9Zy5zZXRDb2xvcigtMSk7Zis9YS5mb250SGVpZ2h0O2IrK31nLnNldEZvbnRBbGlnbigtMSwtMSk7Yz1iPGUubGVuZ3RoO2cuZHJhd0ltYWdlKCJcYlxiXHUwMDAxXHUwMDEwOHxcdTAwZmVcdTAwMTBcdTAwMTBcdTAwMTBcdTAwMTAiLHAsNDApO2cuZHJhd0ltYWdlKCJcYlxiXHUwMDAxXHUwMDEwXHUwMDEwXHUwMDEwXHUwMDEwXHUwMGZlfDhcdTAwMTAiLHAsMTk0KTtnLmRyYXdJbWFnZSgiXGJcYlx1MDAwMVx4MDBcYlxmXHUwMDBlXHUwMGZmXHUwMDBlXGZcYiIsCnAsMTE2KTtnLnNldENvbG9yKGM/LTE6MCk7Zy5maWxsUG9seShbMTA0LDIyMCwxMzYsMjIwLDEyMCwyMjhdKTtnLmZsaXAoKX0sc2VsZWN0OmZ1bmN0aW9uKGMpe2M9bVtlW2Euc2VsZWN0ZWRdXTtpZigiZnVuY3Rpb24iPT10eXBlb2YgYyljKGQpO2Vsc2UgaWYoIm9iamVjdCI9PXR5cGVvZiBjKXtpZigibnVtYmVyIj09dHlwZW9mIGMudmFsdWUpZC5zZWxlY3RFZGl0PWQuc2VsZWN0RWRpdD92b2lkIDA6YztlbHNlIGlmKCJib29sZWFuIj09dHlwZW9mIGMudmFsdWUmJihjLnZhbHVlPSFjLnZhbHVlKSxjLm9uY2hhbmdlKWMub25jaGFuZ2UoYy52YWx1ZSk7ZC5kcmF3KCl9fSxtb3ZlOmZ1bmN0aW9uKGMpe2lmKGQuc2VsZWN0RWRpdCl7dmFyIGI9ZC5zZWxlY3RFZGl0O2IudmFsdWUtPShjfHwxKSooYi5zdGVwfHwxKTt2b2lkIDAhPT1iLm1pbiYmYi52YWx1ZTxiLm1pbiYmKGIudmFsdWU9Yi5taW4pO3ZvaWQgMCE9PWIubWF4JiZiLnZhbHVlPmIubWF4JiYoYi52YWx1ZT1iLm1heCk7CmlmKGIub25jaGFuZ2UpYi5vbmNoYW5nZShiLnZhbHVlKX1lbHNlIGEuc2VsZWN0ZWQ9KGMrYS5zZWxlY3RlZCklZS5sZW5ndGgsMD5hLnNlbGVjdGVkJiYoYS5zZWxlY3RlZCs9ZS5sZW5ndGgpO2QuZHJhdygpfX07ZC5kcmF3KCk7QmFuZ2xlLmJ0bldhdGNoZXM9W3NldFdhdGNoKGZ1bmN0aW9uKCl7ZC5tb3ZlKC0xKX0sQlROMSx7cmVwZWF0OjF9KSxzZXRXYXRjaChmdW5jdGlvbigpe2QubW92ZSgxKX0sQlROMyx7cmVwZWF0OjF9KSxzZXRXYXRjaChmdW5jdGlvbigpe2Quc2VsZWN0KCl9LEJUTjIse3JlcGVhdDoxfSldO3JldHVybiBkfX0pAChmdW5jdGlvbihlLGEpe2cuY2xlYXIoMSkuZmxpcCgpO0JhbmdsZS5kcmF3V2lkZ2V0cygpO2cucmVzZXQoKS5zZXRGb250KCI2eDgiLDIpLnNldEZvbnRBbGlnbigwLDApO3ZhciBkPXJlcXVpcmUoImxvY2FsZSIpLGM9Zy5nZXRXaWR0aCgpLGY9Zy5nZXRIZWlnaHQoKTtpZihhKXthPWQudHJhbnNsYXRlKGEpO2cuZHJhd1N0cmluZyhhLGMvMiwzNCk7dmFyIGI9KGcuc3RyaW5nV2lkdGgoYSkrMTYpLzI7Zy5maWxsUmVjdChjLzItYiw0NCxjLzIrYiw0NSl9Yj1lLnNwbGl0KCJcbiIpO3ZhciBoPShmLTE2KmIubGVuZ3RoKS8yO2IuZm9yRWFjaChmdW5jdGlvbihhLGIpe3JldHVybiBnLmRyYXdTdHJpbmcoZC50cmFuc2xhdGUoYSksYy8yLGgrMTYqYil9KTtnLmZsaXAoKX0pAChmdW5jdGlvbihtLGEpe2Z1bmN0aW9uIGUoKXtnLnJlc2V0KCkuc2V0Rm9udCgiNng4IiwyKS5zZXRGb250QWxpZ24oMCwwKTt2YXIgaD1nLmdldFdpZHRoKCksZT1nLmdldEhlaWdodCgpLGI9YS50aXRsZTtiJiYoYj1rLnRyYW5zbGF0ZShiKSxnLmRyYXdTdHJpbmcoYixoLzIsMzQpLGI9KGcuc3RyaW5nV2lkdGgoYikrMTYpLzIsZy5maWxsUmVjdChoLzItYiw0NCxoLzIrYiw0NCkpO2I9bS5zcGxpdCgiXG4iKTt2YXIgcD0oZS0xNipiLmxlbmd0aCkvMjtiLmZvckVhY2goZnVuY3Rpb24oYSxjKXtyZXR1cm4gZy5kcmF3U3RyaW5nKGsudHJhbnNsYXRlKGEpLGgvMixwKzE2KmMpfSk7dmFyIG49MDtsLmZvckVhY2goZnVuY3Rpb24oYSl7cmV0dXJuIG4rPTE2K2cuc3RyaW5nV2lkdGgoay50cmFuc2xhdGUoYSkpfSk7dmFyIGM9KGgtbikvMixmPWUtNDA7bC5mb3JFYWNoKGZ1bmN0aW9uKGIsaCl7Yj1rLnRyYW5zbGF0ZShiKTt2YXIgZT1nLnN0cmluZ1dpZHRoKGIpOwpjKz0oMTYrZSkvMjt2YXIgZD0yK2UvMjtkPVtjLWQsZi0xMixjK2QsZi0xMixjK2QrNCxmLTgsYytkKzQsZis4LGMrZCxmKzEyLGMtZCxmKzEyLGMtZC00LGYrOCxjLWQtNCxmLTgsYy1kLGYtMTJdO2cuc2V0Q29sb3IoaD09YS5zZWxlY3RlZD83NTk6MCkuZmlsbFBvbHkoZCkuc2V0Q29sb3IoLTEpLmRyYXdQb2x5KGQpLmRyYXdTdHJpbmcoYixjLGYrMSk7Yys9KDE2K2UpLzJ9KTtnLnNldENvbG9yKC0xKS5mbGlwKCl9YXx8KGE9e30pO2EuYnV0dG9uc3x8KGEuYnV0dG9ucz17WWVzOiEwLE5vOiExfSk7dmFyIGs9cmVxdWlyZSgibG9jYWxlIiksbD1PYmplY3Qua2V5cyhhLmJ1dHRvbnMpO2Euc2VsZWN0ZWR8fChhLnNlbGVjdGVkPTApO0JhbmdsZS5idG5XYXRjaGVzJiYoQmFuZ2xlLmJ0bldhdGNoZXMuZm9yRWFjaChjbGVhcldhdGNoKSxCYW5nbGUuYnRuV2F0Y2hlcz12b2lkIDApO2cuY2xlYXIoMSk7QmFuZ2xlLmRyYXdXaWRnZXRzKCk7aWYoIW0pcmV0dXJuIFByb21pc2UucmVzb2x2ZSgpOwplKCk7cmV0dXJuIG5ldyBQcm9taXNlKGZ1bmN0aW9uKGgpe0JhbmdsZS5idG5XYXRjaGVzPVtzZXRXYXRjaChmdW5jdGlvbigpezA8YS5zZWxlY3RlZCYmKGEuc2VsZWN0ZWQtLSxlKCkpfSxCVE4xLHtyZXBlYXQ6MX0pLHNldFdhdGNoKGZ1bmN0aW9uKCl7YS5zZWxlY3RlZDxsLmxlbmd0aC0xJiYoYS5zZWxlY3RlZCsrLGUoKSl9LEJUTjMse3JlcGVhdDoxfSksc2V0V2F0Y2goZnVuY3Rpb24oKXtFLnNob3dQcm9tcHQoKTtoKGEuYnV0dG9uc1tsW2Euc2VsZWN0ZWRdXSl9LEJUTjIse3JlcGVhdDoxfSldfSl9KQAydjA0LjM5OA==");
-writeSegment(24896, "alXqH0ItwEdCXwAEliQWcwNTBgOHBAAAABAAEAIgx0ESRCAAkj11UpVUFXP6HQAA3yVkWnY0qRqWJAAAAAAAAJIuABGSLiAAlixpW3pN4FtaLQAA/lclWbV7JVs+VwAAT1mKeYp5anlXfwAAlWVvW29br28VVwAAe1tUW1J7UX/WVQAA7U9tSLooFRnVHwAAFwgpZAEQAXDHcQAARBDeJGV/ZSneJgAAoEQzUK1tq1TpVQYIBgCyZXpbelt/ZQBAAATrXrVVZVSjMwEAAABte70qf0d6cwAMk3eSfNZwknCTcQBwAwAEAAYABgAEAAMAQAGSCUQppxVEfSoIBChHGgSogiQA/LokBCg3GwAAAgBEIAAAhBAAAAQJRQAACUIAAIn/AQAJQgiAEEUIQCAAEAAEAAAACEccAIjJIgCQSgMfkEocgKBMIIAg9z8AQAAAAAAAAE588x3RQBQiRnkvHEGGSCLxx4giTjiHHA==");
-writeSegment(25268, "DgABIJEQAhCREPQJDwAIBIEQ9AmOEAIQACABIMABAAAuEu84cZIYJaIqDyOkuggjYMYYJQRG7zjgAQAAAAAAAP+76A4QwkgCnMNPAhDeSCIQxkgiH7roHA==");
-writeSegment(25364, "EcboPBLuHCMU1hojHMYZPRLGGCHxx+gg");
-writeSegment(25396, "zrsfIzFCEiPROxIjMQYSFTJGEhUtOuIIAQAAAAAA4CAxxo8QUUWBEJUogghVEYQILhKIBCqSjwQAAOACjgAEIIIAAiBCAeA8QgEQIiIC8CICABAjAgDwPA58AAAggAMgIAAEIO45/zwwRhQjMH4UIzBC9CLvPRQiAADgAERABgAAQAIAzEWiPURIUiNEcFIjREhSI05EUyOAAwAAAAAAEAAAABDOP+s8McYMETFG6BDRPxgQDgboDwAG");
-writeSegment(25592, "McYYPzFGFQVRVRIJUVX1EI+oGD4AAOAAg2AADIQQABKEEAA4mIwEEJiMCjiEEAkShBAADINgAAAADAAAABAACAAQAAgAOAA+ABAACICRDQiAkFQJAGEJCARkAgCEaAceXxEoKAQgRywEwIAoH+xIKARsJx4EAAAAgABAGOADgAhPAMAQlAAAABYBAAAUAgAA7wMAAAAAAABpAwAAMgEAGlsSACwAOAAAAHz3AQA4AAAAEAAAAAAAAIAAAAgfAAAAy0EFPguiCgTAEQsIICAKEMDDBT4AAAAAAAACABEAYgAREIciCgDKHQQQihQEkIccBBByIwAQAgCROOUYkUAQBYowUB0fSJAlBCSQHZ8YUAGEBBABgHjgAAAA9xkAgAgkBYAOJAqADRjUgw4ASoANAEWACAAAAAcAgDEBAEQIkh6EEJA6HwmQGsQx0AoEAKAKHwCACgAAAAsAEAYkADAJJAAQSSkMEKkIDDhWEgABoBaAAEAvAAMAIhICZhxSAQAAVBJCCIQBpRSLEuccKaEYI3LFGCMzOgAAVhEAGISA4z6EEBYhSikLOc45DiExRhohMcbrPgAAQABGAWYc/3/nHBBCQgicc0IIEEJCCBBCQgj/f+ccAAAAAApYZhSOReccROUYI6TXGCMkzRgjRMUYI45F5xwAAAAAVoHADM4BFyMxghkjMaoaIzGSGiMxqhwjzgHnHAAACABKEQAYMUbIADFGLx0xqkgDMZI4HzESHyPOEWgfAAAAAMRZpQAAAEAAzjnnPCGEEArvvfc+McYYKe+99xYAAAAAgBmlGAAAAADOOecYMMYYCdB77wkQQggJ7733HAQAAABGKWUZAAAGAIwx4R2EEBcjhJAYI4SQGCPOORcdAAAAAEZZBQAAAAACzjlHHDHGCCYxxvgrMcYIMs45RxwAAAAgzChFIAAAACAxxhgtMcYYMzHGGDMxxvgs770XIAAA4CAKAAAAAAAAABEAAAARAAAAEQAAAA8AAAABAAAADgAAAP9nZngAVW5rbm93biBncmFwaGljcyB0eXBlCgAAAAAARQA/ElcQiXyJlNx+pIYuCFMoUypgNpEiRQ5TCEUIRQiJWokQiTyJXok0iVSJeIkiiYiJcEUQRRaREpEQkRKJOvvupCqkaLJcskqkLJYkwWKyKEUIeySkLIkQyzKyIMFgpELBfrJQpF6WGLJIpBbxMqQooh6WHEUYRQhFGHASiQhTCIlYiWJ7SIlYiVJFLolwiS42EDYYeyw2CM1KiTSJTIleiVhTJHtWRTKJMH0WsC57KHYieyJTNj0IUzKRIAAAGAgLCA9LFEoXtAxUDGAYYBjUBggJJxAnEogaCB0nJCcniBIqFCACIAKpEGEVShQgEioOvwxKDj8CPwLIEGEOPwxKB+IxSihJI2Es4ShJMUpEyEQ/Mz4qPxVKKElEyDkgOClEKUSgMz44KTmgNgYwIC4qMz45ID+GFCAdHyMGGYYbKS4qMCAdHxSgFUoqPxe+GykUIBVKF74uKio/M74RMBMjEwkJEwimFFEPRgXIDVseYh9ZFFEFyB9ZHmIf7iZiHzYfbibuP0EvVSZiM14/zT9BNjQmrTQKJQAmDjIaPJseDh8qJi0mDiWAP0EmLR+qETAmOD9BHyoToxMJFhIeDiWAEyMWEhOJETAfNia4JlkmOB+2JlkfNibiL1UmWSbiNEkvVT/BLz00ST/BJjgvPT/BEicSFhAKCBoNrhsuDS4cNSivIxMjKCgvLRokiSgvIygbrg0uGy4SpxAKEhYajhoOIxMkiRAKGg4kiVQGTAZHDxtjJONMVktJRjxCRkXcV1tMVkVcUmNb4mA5XVNbYmVWZ8lPPltBYDlVNUa8RjxLSU++XVNXW1viW0FdU2C5JSgdFhQQFCMarRJKFj0aLQo8B9AvXydYFVEHUBFdGuFCTTxXSGFQ2ko5QDc7QTROL188V0LNNQwwHSsvNiY7mSUQNQwnBhSQMB0lKCuvLhMwHTWMJRAuEzWMHRYlEBSQKy8lKBqtITU7QSsvGq0WPSE1Gq0VURJKB9A0TidYL98hNTROO8EGCAknDycSiAxaFEUVLhMWCi8IvhhdDFodeSX6DFoYXRTFExYVLhihHAkTFhghJYYVXwl5EvccZxpHFV8S9yJVJUMYLhpHHOciKRoWDwcQFhguJcMQFg8HCIYSHBUVCBAFmBIcCiYRqxggFRUSHBGrKCceHBUVGCAhrBsVFRUeHCyYLBgoEBuVFAYVFRsVHYYgOiAwCDAIuio6IDAgUirSQjAqMCAwKjpCuiAXIDAqMCqXGFQRYA5xF+gRYBhUDNQFOwVGJkYmuwxUDGAYYBjUGggBYQliI4cHRxE5Ex4TDQgfBqwdVxRMB0cTXR/hPz0ySx9hLGA61DALLxg0Mz89PiI4kxkVJxEwCx4IE40fYSRZHdcHRxRMEbkTDRMeGZUySyRZH+E0MzJLP70nES8YMIsuBw4eEickmy4HJBskYC7gECIXFRMMChUHoBMMFxUkkRNWNzIsLwlTBOATVgRgP2A/1j4nPRczGywvN7IkETMbPZc1DSAIEwwkET2XHRERDQceEJ8rCRgJEQ0dESaRLTgtJx0tHLYwMDAdLSctuBBcF1QQSAbJH2IiWRdUENwvXzBSIlkf4jpWQEk0SDBSL985NjAwLTg0SEDJMB0wMDqlORYrCSYRMB06pTNMKUwpYDPgAkwpTDPMP0EzQSlBAkwzTD/MKBkpQTNBMwgqiA5AKBkqCAs1AswCTClBDsAUKhAKCTUTtgxYG1cRSgbJGmEnWBtXDNgmYjRcMVEnWBrhPk41RDFRNNxAQDM6NUQ+zj00MSknMDM6QMAnJhQqEzYnMDGpEAoUKhmUPAkQChkUPJQUHRkKDBYFtBNLEj8FNAhME9wqVx9YE1wlYjLeNy40STJePk4/vxAyNy4sKCCoNAwsEzUePZ0lCCERLBM0jBkKFB0hESWIEDIUHQW0GjQ3LhAyBbQTXB9YE8sFNBI/GrQ0SSpXMt4zPDRJN64tNDM8N64aNC00N64TYCNFMiQxFCMqFssTYB5gI8UxFDIkP5FACQcJBxQxFD+RFTAVIQ0SCR0MqBFHFzoVMAo4Bs0dWBRRBk0RXRvhQEgoWBthMV862CoqJTYzQEBIPj4wsDEiMDA8IjmTIhEuFjkTLAkaiRUwGyoVoQ0SFSEWmBoJDRIWGCKRFzolNioqGyoVsDkTLhYxojAwMSIqqhRREUcGzShYHVgb4TJQKFhAyDNAMlBAyBEqChUHLhK+KDgSPipANbcPXBdVEUsIzBlhI1kXVQ/cK2AsVSNZGeE1WTNILFUr4DxOPz4/JDU3M0g12TIbMys1Nz8kOJMjETIbOBMuChiJNTczKyi4Ej4oOBa0Ej4WNBGqChURKhaXGAkKFRYXI5EMIAwtGC0YoAxUDGAYYBjUDCAMLRgtGKAYVBFgDnEX6BFgGFQM1EFIFTQHMAc6QdJBGAcwFTRCoggiCC1CLUKiCD0IR0JHQr1COjQ0B0gH0kEvBxcHIjQ0QroXFA4OBiARoSsHHgcODhcUJ5AqPj0oMyQgOh3LHUsoSyq+PBQwFTMkPagrBycQMBU8lBxUHGApYCnUGCYkGS4JGBgLrhRoEUsLLghIC9pOejtxKGwUaCFyNfl6X2VpTnpgdW3uel9vYGXpTnplaVPwTnpTcDvxFGgobBrgFGgaYBHLCy4RSxK3Cy4SNximLgkkGTSRRwYuCTQRS5BQKlNUXSFSoUw4U1RQKkmiMi5FKkkiOh8rqChcKz0rKCE4H80oXDdgR9dqVV1UU1RHV0peXN50J203akVqVXNGd7VHBmEZdCdrFluLRwZLEGGZdCdhGWupdCdrKW23alVqRV3URFA0VyhcR1dT1EkiRSpMuFNUTDhE0Cs9Mi4rqCxRKz0o3DRXLFEo3CgTIggBXw1fFsYvCCgTODw8RkVgU+AaOxZGPEY4vBZGGjsokygTLwgiiDJVFVcKYD1eRdk9MUVZTEdGtzsaOSk9MUggRJMVEjITRBM1CQqIPj9FWT0xOakyEzsaRJMKYBUtFRIKiC4sFS0VtzM4OSkuLBW3OSkzOD6/RVk+Pz7PRVk+TzLVCmAVVxW3FS0KYBW3BzcVJB4LEBYIpidhIFMWRQc3CkcR1TxVLFcnYTphTdQ8VU1UVUVKwidhLFcg0wc3FkUTtAc3EzQVpB4LFSQlkh4LJRI0kUEWSSNTnksRNBFBFlOeMwceCzQRS5E5VBVXCmA3X0XZTRlHN0VZUUNTrAoIMBNNGUENJ4hFWUBNOdQKCApgFVcVk0c3QE1F2UYoRzdNmT0XRihNmTATPRdNmRUTMBMKiBZWC2BMYEzWC2AWVha3Fi4WN0c3R64LYBY3Fq4LCAtgFi4WkwsIFhNLE0uIC2AWYBa4Fi4WOEA4QK4LYBY4Fq4LCAtgFi4WkwsIFhNHE0eIBzkLSRQ0FyEZDhAWCacjUxVCC0kWWCzhTU84VyxhRl9Z1E4+WTMzMzO+TU9ZVFkzTr4sYThXI9MLSRVCFLQZDhchJ5IZDicSO5FREkUWTyNYoTsRRRZRkj8ILgcZDjsRUZILYBZgFrZQCEQIRCxENkRgUOAWLBY2RDZErAtgFjYWrAsIC2AWLBaIDAgMYBhgGIgJWRNUDkcExxZhJmAhVhNUCdkyVzVCKEkhVibgKQgoSTVCNYgKYBVgFcEtLSQ0Q2BS3yQ0LS1RiEEIFTQVQSQ0UYgKYBVBFbQKCApgFTQViBVWCmBBYEHWCggKYBVWFYgKCApgFWAWlzVUFhcuYDrgXghTF1NgXuBTF14IT4g1VDpgUxdPiBYXNVQbiBYXGwgKiApgFWAVm0RNFggVG0NgT+BETU9gTwhFiAoICmAVGxaIBz4MSxM0GB4aDQ0bCKs4YShWHFAMSx1dKeFaPkpKOVY4YUZcUdNFC0ofTzFaPlkkUJQiFDgRRQsyBhqNOGE5VijWDEscUBXEDEsVRBO0Gg0YHiKUTzFKSlq+OBFKH0WLCggKYBVgFbxLLTUxFTw0O0G4Pwo/GkEmSy1NG0eQFRM4Ez8KKggKiAoIFTwVMhWTNTEVMhW8QSY1MUutOBM/Gj+KCCQWICMTJAgYDQ6XGlwVRQgkBz0Nz05XMFgaXCxiRt1OV0ZdWGdb31QaTitMRU5XWEZasiQIORJUGksPOocxUDtVTldFUDPITlc7VTDYGlwwWB3RGlwdURXFCCQVRROqCCQTKhagJAgjEzmSTEVFUE7XRRlOK1SaORJFGVSaCwgLYBZgFrk6SUlgWOBISDo4MDw6SVjgFjkwPDq4Oy0WLxY5OjhHs0QbQilHM1ElTZIWETsTTRJBCQuICwgWORYvFpFCKTstR7M7E0QbTZIWMhclFxcXCgsWDaoPWRZPEEMGxCJWFk8P2RxgMGE0ViJWD9lEWj9QNFYw4UtPTEI7Pj9QRNo9MhclFjI7PkzCFwoXFyKSFwoiEjWTSBg1Ez4gSqE/DS8HFwo1E0iYLRMhEyFgLeADEyETLZNKCAMIAxMtE0qTOGEeUwxMGV0o4VAxQks4YUhZTc9EMlAxUAhEiFAxRDJCyzhhQks71DhhO1Qt1zhhLVce0wxMHlMYzAxMGEwXvgsIDEwXPhaIKlQwYFIIRogjYDBgKtQBCCNgKlQOiFZROxVQYFzgVlFcYHQIaYk7FVZRQog7FUIINIgfUyZgOxU0iBlgJmAf0wIJGWAfUw6IKTsjMwJgEN8GCCMzKbtRYDEyKScGCCk7Q+ApJzEyTwlDiAYIKScTiC47IzsjYC7gKjEjOy47UYhRCEQIKrEBCCM7KjEPiBBWSBI5EwNWA+AQVgNgSWBJ1kgICAgIEzkTSJITcAl5IXkh8AkICXkTcBORCQgTESERIYgJBgEHGV8j4Rt5D3ADcAP5GwgPEQ9wG/kDCAMRDxEbiCIGGAgENg82HZIiBh0SLDY3tgBxAHlHeUfxBgcSFhwYFIcRMxgqGiAPJAeyGiAYKiepMyEaICcpL6wZRjFAMTgOQAbJElQGSQhZFOEsVRpZFGElYDLaMyExODFAMlo/YDupMyEvLDG4ElQZRgbJGlkSVBThMUAsVTLaCWASYBLZJlkSWR1hM90+MjkoNTwyUDNdO1U/xRMnJig5KC0gHaAJYBJZE0YTJxMICYgSWRdSE8YmWRdSEtkyUCZZM90wLjU8OagmKDAuOagcKiYoE6cUNRwqE6cTRhQ1E6cUXhJMCi0GOAfMN1gnWBReIGIt4CdYN1g8SzLKFF4nWBjVFF4YVRLMCi0STBK1Ci0SNRauLyEaIAotFi4kqDcoLyEkKDI1PLMlKDEnJSAUohE3Fi0UIgosBcMdWBFJBUMOWSLiPAgyWTJgPOAxJzJZPAgxiB1YImIyWSrWBUMRSRG3FCIWLSWoMSclKC+wMScvMDHLMUsqVjLZMScxSzLZDVgQQxE6ECYIMQbLLFcdVw1YH2E03ixXNF4+TTXMDVgdVxbSDVgWUhDDLy00OkBDPC0soBUuIigsIBsgEKYQJhE6Fa5AQzQ6EToQwyIoLy0soAwpDCACIAKpDGAWYBYpFiAPCwwgDKkWIBYpIykjoA8LFiAakScHGAcPCxoRJpEKUxA8FSEHMwXFIlcVUQpTFV4n3xF3IHohcgdmCe8ydi5rIXIg+jxnM1guazL2MygyODJHM1g8Zz2gPSAzIDOoIygrKzMoKSAVoTMoKysyuCpVJ18zWDLHJ18qVSLXClMVURC8FSEQPBesFSEXLCOoFCcTCAkICWATYBS6PDMyMzJgPeA4JSwqMjM8szAgHiAeKiwqOKUUJxQ6HioeoAkICRUTFROICSAJYBNgE6AJCAkVExUTiBJwCGwAeg73CSAIbBJwE6AJYBNgE8cjOBxBMGA94C4gEzsTRxxBI7gjODwgLqAJYBNHE7sJCAlgEzsTiAkICWATYBOICWASKRIgCaAWMRIpCWAT4BIpFjEeqjsyLS4uYDrgOCoeKi0uO7JeK1QvVWBg4FgjRiBJKFQvXqs4KjsySShGoDIjJB8SKR4qOKoJYBIpEiAJoBQ2EikJYBPgGS0dIRIpFLYdIRktJag8MDI0MmA94CUoMjQ8sDIhHSElKDywBUcRNxoqGSANKAezFlMFRwxYH+FBRjNNJVkfYS1gOdgrIC0rNTxBRj4wNKQrIBkgGiotqxFJETcFxxZTEUkFxyVZFlMf4TU8M01Bxgl5EigSIAmgE1oSKAl5E/knWBtWE1ogYTDfNEwwXz5PQL0jHywqQD06KS+hE1obVhPJEigTWhPJEigTSRS4Ix8SKBQ4Hqk0TCdYMN81OzRMQL0sKjU7QL0eKSwqI58RSRQvCiwFRg/aH1gPWh5iMdo8IDIoMVoxeTz5PCAyIDKoICgwMjIoKSEaoDFaK1Yf2A9aH1gX1Q9aF1URyRogCiwULyCoMUwrVjHaMUwxWjKoMDIxTDKoCWATYBMpEiAJoBMpE2AVsxMpFTMfqh8qJysrohsgEykfKiuiEkERMAonBi8JuwlYFVYPTAXOFmEmYSlXFVYJ2DdWLk4pVybhOUwoSC5ON9YvPxY2EkEoSDnMEkEWNhGwCicRMBmoNSkrIRYgCicZKCWpNSklKS4yNrELKQsgAyADqQsgCykL2hNgFlQVKQsQCyAL2hZUE2AhYCHXFSAVKSApIKAVCgsQFSkVoCpVGlcQXihgMtg8IDJYMmA84DBNMlg8IDGgMlgwTSrVFE4JSxBeGtcJIAlLFE4ToB9TGl4lYD2gPSAyIB/TAiAaXh9TDaAbUQEiFGAg4EBQLTA5YEXgQFBFYFkhTqAoIC0wQFAzoBtRIGAtMCigASIbUQygH0cYPwJgD+A9YCY/HzYEIRg/H8cfRzBgPeAfNiY/PCAvoAQhHzYRoBp2E28Hbwn5ImcbYRNvGvYgVA4gAyEbYSLnIFQiZz0hM6ASVTkmKykMTgPgFFcDYDxgPNcDYBRXEtU6IAUgBSkrKTmmD0AYNh0TGwcTEA+xD0APMQQ9BMQbaRhLDksScBb2G2kWdid6J/IPQAREDksYyycGGwcdEyePDAYMehV6FYYbMxgQDhMSNhzAEngZbB1KHEAURw3vEngNbwRxA/omPBszHEAdSibFDwgDBgMPDhMYkAYyBj4Ttzw9Qzc5Mi0yBjITNy++QzdDLDmyBjItMhqsYnVmZmVyAGlTZXRQaXhlbABpRmlsbFJlY3QAYnVmZmVyAE5PVFlQRQBGTE9BVDMyAElOVDE2AElOVDMyAFVJTlQ4AElOVDgASU5UNjQAQk9PTABDT01QTEVYNjQAU1RSSU5HAEZMT0FUMTYAVW5rbm93biB0eXBlAHsganNIYW5kbGVJTygpOyB9AHsgaHdTZXRQaW5WYWx1ZSgkMCwkMSkgfQB7IHJldHVybiBod0dldFBpblZhbHVlKCQwKSB9AHsgcmV0dXJuIERhdGUubm93KCk7IH0ATm90IGltcGxlbWVudGVk");
-writeSegment(31968, "BAAABAEABAIgBAMhBAQiBAUjBAYABAcABAgABAkABAoAFAsABAwABA0ABA4ABA8AFBAABBEABBIABBMABBQABBUAFBYAFBcAFBgABBkABBoABBsABBwkBB0lBB4mBB8nZ2Z4AEJhbmdsZQAjb25sY2RQb3dlcgBkaXJlY3QAbnVsbABkb3VibGVidWZmZXJlZAAxMjB4MTIwADgweDgwAFVua25vd24gTENEIE1vZGUgJWoAYnVmZmVyAE5vdCBlbm91Z2ggbWVtb3J5IHRvIGFsbG9jYXRlIG9mZnNjcmVlbiBidWZmZXIASW52YWxpZCBpbnRlcnZhbABnZXN0dXJlU3RhcnRUaHJlc2gAZ2VzdHVyZUVuZFRocmVzaABnZXN0dXJlSW5hY3RpdmVDb3VudABnZXN0dXJlTWluTGVuZ3RoAHN0ZXBDb3VudGVyVGhyZXNob2xkTG93AHN0ZXBDb3VudGVyVGhyZXNob2xkSGlnaAB0d2lzdFRocmVzaG9sZAB0d2lzdFRpbWVvdXQAdHdpc3RNYXhZAHdha2VPbkJUTjEAd2FrZU9uQlROMgB3YWtlT25CVE4zAHdha2VPbkZhY2VVcAB3YWtlT25Ub3VjaAB3YWtlT25Ud2lzdABOb3QgZW5vdWdoIHN0YWNrIG1lbW9yeSB0byBkZWNvZGUgZGF0YQB4AHkAegBkeABkeQBkegBoZWFkaW5nAG1hZwBkaWZmAEdyYXBoaWNzAGcAZmxpcAAAMnYwNC4zOTgAQ29weXJpZ2h0IDIwMTkgRy5XaWxsaWFtcwAjb25hY2NlbAAjb25mYWNlVXAAZnJvbnQAYmFjawBib3R0b20AdG9wAHJpZ2h0AGxlZnQAZGlyAGRvdWJsZQAjb250YXAAI29uR1BTACNvbkdQUy1yYXcAI29ubWFnAGJwbQBjb25maWRlbmNlAHJhdwAjb25IUk0AI29uZ2VzdHVyZQAjb25haUdlc3R1cmUALnRmbW9kZWwAVEYgZXJyb3IgLSBubyBtb2RlbAoAKGZ1bmN0aW9uKGEpIHt2YXIgbT0wLGc7Zm9yICh2YXIgaSBpbiBhKSBpZiAoYVtpXT5tKSB7IG09YVtpXTtnPWk7IH1pZiAoZyE9PXVuZGVmaW5lZCkge3ZhciBuPXJlcXVpcmUoJ1N0b3JhZ2UnKS5yZWFkKCcudGZuYW1lcycpO2lmIChuKSBnPW4uc3BsaXQoJywnKVtnXTt9cmV0dXJuIGc7fSkAI29uY2hhcmdpbmcAI29uc3RlcAAjb250d2lzdAAjb25zd2lwZQAjb250b3VjaABhY2NIaXN0b3J5SWR4AGFjY0dlc3R1cmVDb3VudABhY2NJZGxlQ291bnQAbGF0AGxvbgBCZWVwIGluIHByb2dyZXNzAEJ1enogaW4gcHJvZ3Jlc3MALm9mZiBub3QgaW1wbGVtZW50ZWQgb24gZW11bGF0b3I=");
-writeSegment(33088, "71ogQtqgX/AAf9MuE/G4nwG18LGwn/N2A2F+g2vh43FwBu1/Bu/N1v8N23AG10BN20fN2sCN20vG4vQG10DGwv9N18/G4vgN2v+N23wN2v/N19/N2sLN2w2G/A2uj43G4A2tgQ2G/oofg2ABxkvG43QG7+8BpkHGIP+ytqAgQ2fhbHMUoXgAwVvU0JuNGwK1Ejf//OQAoMPVwVAN0l/GwoVBGAjmDG65uMj42GBASnCh/q1W/cy5uMg//6AJGl//+gEB/A/CAYRuggP/+AIFiCvCJ4MPPYUvJA5ubv/8A4sPIIQKCNQe/N0UPZY0B8EAgbnCNwcDQAxubgSaCAAk8awX9NwsvoBuhv5bGh4rCBYRuDgI7DNz0PMQSlGPQQ0BGQY7DNzwqBSQylCIYZunn6lGhY+DBgTdmhalKPYZuDgZKGNzbQCUpCjB/huEv42VNxcv+ilKgG/4BuDh/QNzVayAKDgf/UpQNB/xuDg5yDNy0B///Dok/LQylEPgPwNwULHgIADi1QAwkVQ4kBtJuG343BUAcLZ4KlKJgLtBAARKEEAP0hYIB/AGBRAcHCgOAnxuDv/5gwQE/6xDUo7XB+kPG4YMDv5XC3oQBLwRFCGwX/wfgNwQgBKASRBA4LJGUopFBwH+1WqFQIpCl/+o3/7YHB//+q3/RIKGB8tb/xuDgYuCgLFDS4KlKbAWfJYUCFIULEAIsBNwTFBgbICv5ABhaEBNwW/WQfwAYMfAYQADsAGFTYJ+Dgf9HQICBHwRuCSIQFBj63Cj5lBNwMPagcvLQIaBF4oAGgb8COoZMBv5/ChY7BGYQKBTggGBNwUBagh/Cl5uFh43Gn5uEAwNAh5gCDgI0BEQUDIgQMCagRuBn4sEOYJuHVgxuGgItBF4QABNwSWCFYJ0DAgJuCD4QACYIRuGAA5uGFoMfVoguBBwUCEQJEEvxuDG4iKBbpNQNxUA3orCAAV9IAIOCl8AIgkDNwf61QAC1LdK37ODNw4iBYwkDNw0B+gNDnzdHAATdIl0fNxc+gZOEnpuGl9ANw7UHNw8DfoRuYgRuQgJuHngGEg5uGvxuNj5uHIApnDNw0BMwjjB9IHEhfQTAgGBNwoFDNwsfSocUAYReFNwMHDQkP/BfDAAP8Iwv9Nw0PFocHNwQRCO4RqCh/8NwsAgyAE/9AF4kvwApEj5uH3wUD/xuCg6dD34DDD4ZuCCIJnDj/wNwgdCDYcDNw8DKYcvNwcvJIIDBGQQaCNwsAngGCgX/ZAkBLIMDA4f/Nw4tDhZuDJwJHBj5EDn53DNwV0gZ3Dn/gNwgcDC4U/Nw69CKQRuDAoP6/5pDA4IRBNwcD8pEDhbrBL4YhBAgN/AYMv/ZuHgYlBgP/vxuDg///52BGAaODNwUfVwn/4EPC4IABIQQmBAAP83puHhYNC6fgg4MCgw2FSIK4CbocEAwcvGAI2DJQZzBRwMLNw60BBoPgnwvEAAyABNwoMHLAX+yALDG4KABvpPBYgUfBoUbGwMDXYQAJMIRuEAAn/PYgAWNxgqGNwsvdQoAVhZuMg6mENwoLFACVUAge8CRkv/gKIgKlXhYXDh/AUxp9Jn6lXn4DCgQcNTQJGIj4KJABoyE34TNFgJBJWJIANh/0ZwTCOv/9Kg///9AG61//NA146CABcB/62GBAP/KJwjKAAJdHThI3G3//KJw3MGx66BG4sBGwOZGy4ABtWkCSEv//+AoUGUjLyXGIPpq2vAgPgG1sCeQQADX6AAeUwIAFUt0BGw38N10PG42AG92/GwvwG10HNww2ugE/N2sDN3vgN2v+N23QG10CGwv9N18vG4vAG10BGwv8N18fN2sAN20PN3n4N22AN35utoA3v342E+A2vgZuFG18Aj42E6ALEASW52YWxpZCBhcnJheSBsZW5ndGgALABtYXAAZm9yRWFjaABmaWx0ZXIAZmluZABmaW5kSW5kZXgAc29tZQBldmVyeQByZWR1Y2UAQXJyYXkuJXMgY2FuIG9ubHkgYmUgY2FsbGVkIG9uIHNvbWV0aGluZyBpdGVyYWJsZQBBcnJheS4lcydzIGZpcnN0IGFyZ3VtZW50IHNob3VsZCBiZSBhIGZ1bmN0aW9uAEFycmF5LiVzIHdpdGhvdXQgaW5pdGlhbCB2YWx1ZSByZXF1aXJlZCBub24tZW1wdHkgYXJyYXkARXhwZWN0aW5nIGNvbXBhcmUgZnVuY3Rpb24sIGdvdCAldABBcnJheS4lcydzIHNlY29uZCBhcmd1bWVudCBzaG91bGQgYmUgdW5kZWZpbmVkLCBvciBhbiBvYmplY3QASW52YWxpZCBsZW5ndGggZm9yIEFycmF5QnVmZmVyCgBBcnJheUJ1ZmZlciB0b28gbG9uZwoAVW5zdXBwb3J0ZWQgZmlyc3QgYXJndW1lbnQgb2YgdHlwZSAldAoARXhwZWN0aW5nIGZpcnN0IGFyZ3VtZW50IHRvIGJlIGFuIGFycmF5LCBub3QgJXQAQXJyYXlCdWZmZXJWaWV3Lm1hcCBjYW4gb25seSBiZSBjYWxsZWQgb24gYW4gQXJyYXlCdWZmZXJWaWV3AEFycmF5QnVmZmVyVmlldy5tYXAncyBmaXJzdCBhcmd1bWVudCBzaG91bGQgYmUgYSBmdW5jdGlvbgBBcnJheUJ1ZmZlclZpZXcubWFwJ3Mgc2Vjb25kIGFyZ3VtZW50IHNob3VsZCBiZSB1bmRlZmluZWQsIG9yIGFuIG9iamVjdABFeHBlY3RpbmcgQXJyYXlCdWZmZXIsIGdvdCAldABEYXRhVmlldwBidWZmZXIAYnl0ZU9mZnNldABieXRlTGVuZ3RoAAAAAB8AOwBaAHgAlwC1ANQA8wARATABTgFtAQ==");
-writeSegment(35266, "HwA8AFsAeQCYALYA1QD0ABIBMQFPAW4BAABtAdoCSARKYW4ARmViAE1hcgBBcHIATWF5AEp1bgBKdWwAQXVnAFNlcABPY3QATm92AERlYwBTdW4ATW9uAFR1ZQBXZWQAVGh1AEZyaQBTYXQAdHoARGF0ZQBWYXJpYWJsZXMgb2YgdHlwZSAldCBhcmUgbm90IHN1cHBvcnRlZCBpbiBkYXRlIGNvbnN0cnVjdG9yAG1zACVzICVzICVkICVkICUwMmQ6JTAyZDolMDJkIEdNVCVjJTA0ZAAlcywgJWQgJXMgJWQgJTAyZDolMDJkOiUwMmQgR01UACVkLSUwMmQtJTAyZFQlMDJkOiUwMmQ6JTAyZC4lMDNkWgBHTVQAbWVzc2FnZQB0eXBlAEVycm9yAFN5bnRheEVycm9yAFR5cGVFcnJvcgBJbnRlcm5hbEVycm9yAFJlZmVyZW5jZUVycm9yACV2OiAldgBpbnQAZG91YmxlAGJvb2wAUGluAEpzVmFyAEVycm9yIFBhcnNpbmcgc2lnbmF0dXJlIGF0IGFyZ3VtZW50IG51bWJlciAlZABJbnZhbGlkIFNpZ25hdHVyZQD/Y29kAEV4cGVjdGluZyBmaXJzdCBhcmd1bWVudCB0byBiZSBhbiBhcnJheSwgbm90ICV0AEV4cGVjdGluZyBmaXJzdCBhcmd1bWVudCB0byBiZSBpdGVyYWJsZSwgbm90ICV0AEV4cGVjdGluZyBmaXJzdCAyIGFyZ3VtZW50cyB0byBiZSBpdGVyYWJsZSwgbm90ICV0IGFuZCAldABFeHBlY3RpbmcgZmlyc3QgMiBhcmd1bWVudHMgdG8gYmUgaXRlcmFibGUgb3IgdW5kZWZpbmVkLCBub3QgJXQgYW5kICV0AEluc3VmZmljaWVudCBzdGFjayBmb3IgY29tcHV0aW5nIEZGVABGSUZPX0ZVTEwAQlVGRkVSX0ZVTEwAQ0FMTEJBQ0sATE9XX01FTU9SWQBNRU1PUlkATUVNT1JZX0JVU1kAVUFSVF9PVkVSRkxPVwBmb3JjZQBVbmtub3duIGRldmljZSB0eXBlICVxAHNldENvbnNvbGUgY2FuJ3QgYmUgdXNlZCBvbiAnc29mdCcgb3Igbm9uLVNlcmlhbCBkZXZpY2VzACAACgBMACMAPQByZWYsc2l6ZSxuYW1lLGxpbmtzLi4uCgAlZCwlZCwAJXEsACwAJWQsAG5hbWUAc2l6ZQBtb3JlAEZpcnN0IDIgYXJndW1lbnRzIHNob3VsZCBiZSBhcnJheSBidWZmZXJzAFRoaXJkIGFyZ3VtZW50IHNob3VsZCBiZSBhIGZ1bmN0aW9uIG9yIGFycmF5AFNlYXJjaCBzdHJpbmcgaXMgdG9vIGxvbmcgKD49JWQgY2hhcnMpAHB3ZAB0egAoZnVuY3Rpb24oYmFzZSxqKSB7dmFyIG89e30sYWRkcjtmb3IgKHZhciByZWcgaW4gaikge2FkZHI9YmFzZStqW3JlZ107T2JqZWN0LmRlZmluZVByb3BlcnR5KG8scmVnLHtnZXQ6cGVlazMyLmJpbmQodW5kZWZpbmVkLGFkZHIpLHNldDpwb2tlMzIuYmluZCh1bmRlZmluZWQsYWRkcil9KTt9cmV0dXJuIG87fSkAJ0UuYXNtJyBjYWxscyBzaG91bGQgaGF2ZSBiZWVuIHJlcGxhY2VkIGJ5IHRoZSBFc3BydWlubyB0b29scyBiZWZvcmUgdXBsb2FkACdFLklubGluZUMnIGNhbGxzIHNob3VsZCBoYXZlIGJlZW4gcmVwbGFjZWQgYnkgdGhlIEVzcHJ1aW5vIHRvb2xzIGJlZm9yZSB1cGxvYWQAYWRkcgBsZW5ndGgAQWRkcmVzcyBzaG91bGQgYmUgYW4gaW50ZWdlciwgZ290ICV0AERhdGEgaXMgbm90IGRlZmluZWQATm90IGVub3VnaCBzdGFjayBtZW1vcnkgdG8gZGVjb2RlIGRhdGEAQ2FuIG9ubHkgdXNlICdhcmd1bWVudHMnIHZhcmlhYmxlIGluc2lkZSBhIGZ1bmN0aW9uAP8A/2NvZABTdHJpbmcgdG9vIGJpZyB0byBjb252ZXJ0IHRvIGludGVnZXIKAEluZmluaXR5AC1JbmZpbml0eQBTdHJpbmcgdG9vIGJpZyB0byBjb252ZXJ0IHRvIGZsb2F0CgBFeHBlY3RpbmcgYSBzdHJpbmcgb3IgYXJyYXksIGdvdCAldABFeHBlY3RpbmcgYSBzdHJpbmcsIGdvdCAldABBU0NJSSBvbmx5CgBJbnZhbGlkIFVSSQoAbG9hZAAgAAoA/3NjbwBmdW5jdGlvbiAALnJlcGxhY2VXaXRoKAApOwBFZGl0IHNob3VsZCBiZSBjYWxsZWQgd2l0aCB0aGUgbmFtZSBvZiBhIGZ1bmN0aW9uAEVkaXQgc2hvdWxkIGJlIGNhbGxlZCB3aXRoIGVkaXQoZnVuY05hbWUpIG9yIGVkaXQoJ2Z1bmNOYW1lJykALQBGdW5jdGlvbiBvciBTdHJpbmcgbm90IHN1cHBsaWVkIQBJbnRlcnZhbCBpcyB0b28gbG9uZyAoPjEwMCB5ZWFycykAdGltZQBpbnRlcnZhbABjYWxsYmFjawBhcmdzAHdhdGNoAFRpbWVvdXQASW50ZXJ2YWwAY2xlYXIlcyh1bmRlZmluZWQpIG5vdCBhbGxvd2VkLiBVc2UgY2xlYXIlcygpIGluc3RlYWQuAFVua25vd24gSW50ZXJ2YWwAZnJlcQBmb3JjZVNvZnQAc29mdABQdWxzZSBUaW1lIGdpdmVuIGZvciBkaWdpdGFsUHVsc2UgaXMgbGVzcyB0aGFuIDAsIG9yIG5vdCBhIG51bWJlcgBFeHBlY3RpbmcgYSBudW1iZXIgb3IgYXJyYXksIGdvdCAldAB3cml0ZQBJbnZhbGlkIHBpbiEAcmVhZABJbnZhbGlkIHBpbgBhbmFsb2cAaW5wdXQAaW5wdXRfcHVsbHVwAGlucHV0X3B1bGxkb3duAG91dHB1dABvcGVuZHJhaW4Ab3BlbmRyYWluX3B1bGx1cABhZl9vdXRwdXQAYWZfb3BlbmRyYWluAGF1dG8AVW5rbm93biBwaW4gbW9kZQBjbGsAY2xrUG9sAHJlcGVhdABUb28gbWFueSBwaW5zISAlZCBNYXhpbXVtLgBVbmFibGUgdG8gc2V0IHdhdGNoLiBZb3UgbWF5IGFscmVhZHkgaGF2ZSBhIHdhdGNoIG9uIGEgcGluIHdpdGggdGhlIHNhbWUgbnVtYmVyIChlZy4gQTAgYW5kIEIwKSwKb3IgdGhpcyBwaW4gY2Fubm90IGJlIHVzZWQgd2l0aCB3YXRjaABkZWJvdW5jZQBlZGdlAHJpc2luZwBmYWxsaW5nAGJvdGgAJ2VkZ2UnIGluIHNldFdhdGNoIHNob3VsZCBiZSAxLCAtMSwgMCwgJ3Jpc2luZycsICdmYWxsaW5nJyBvciAnYm90aCcAaXJxAGRhdGEARnVuY3Rpb24gb3IgU3RyaW5nIG5vdCBzdXBwbGllZCEAcGluAHJlY3VyAGNhbGxiYWNrAENhbid0IGhhdmUgYSBkYXRhIHBpbiBhbmQgaXJxOnRydWUAaXJxPXRydWUgc2V0LCBidXQgZnVuY3Rpb24gaXMgbm90IGEgbmF0aXZlIGZ1bmN0aW9uAGlycT10cnVlIHNldCwgYnV0IHdhdGNoIGlzIGFscmVhZHkgdXNlZABjbGVhcldhdGNoKHVuZGVmaW5lZCkgbm90IGFsbG93ZWQuIFVzZSBjbGVhcldhdGNoKCkgaW5zdGVhZC4AVW5rbm93biBXYXRjaCAldgAgLi4uIABFeHBlY3RpbmcgYSB2YWxpZCB2YWx1ZSwgZ290ICVzACgALAAldgD/Y29kACkgAHsgW25hdGl2ZSBjb2RlXSB9AHslc30AewogIAB7AHJldHVybiAAIAAKfQB9AHt9AAoAICAAdW5kZWZpbmVkAFsgAFsALCAAbnVsbAAgXQBdAG5ldyAlcyglZCkAQXJyYXlCdWZmZXIAVWludDhBcnJheQBuZXcgJXMoWwBdKQAuYnVmZmVyACVzAF9fcHJvdG9fXwBjb25zdHJ1Y3RvcgAldjogAHRvU3RyaW5nAHRvSlNPTgB7IAAgfQBmdW5jdGlvbiAAJXElcyVxACVRACVxACVRJXMAJXElcwAldiVzADogADoARXhwZWN0aW5nIGEgbW9kdWxlIG5hbWUgYXMgYSBzdHJpbmcsIGJ1dCBnb3QgJXQATW9kdWxlIG5hbWUgdG9vIGxvbmcgKG1heCAxMjggY2hhcnMpAE1vZHVsZSAlcyBub3QgZm91bmQAVGhlIGFyZ3VtZW50IHRvIHJlbW92ZUNhY2hlZCBtdXN0IGJlIGEgc3RyaW5nAE1vZHVsZSAlcSBub3QgZm91bmQAYXJncyBtdXN0IGJlIGFkZENhY2hlZChzdHJpbmcsIHN0cmluZ3xmdW5jdGlvbikAVW5hYmxlIHRvIGxvYWQgbW9kdWxlICVxAG1vZHVsZXMAcG9ydABudW0AQURDcwBjaGFubmVsAHR5cGUAYWYAZnVuY3Rpb25zAEludmFsaWQgdHlwZSAldCBmb3IgdmFsdWVPZgBjb25zdHJ1Y3RvcgBfX3Byb3RvX18AbGVuZ3RoAE9iamVjdCBwcm90b3R5cGUgbWF5IG9ubHkgYmUgYW4gT2JqZWN0IG9yIG51bGw6ICV0AHByb3BlcnRpZXNPYmplY3QgaXMgbm90IHN1cHBvcnRlZCB5ZXQAd3JpdGFibGUAZW51bWVyYWJsZQBjb25maWd1cmFibGUAZ2V0AHNldAB2YWx1ZQBGaXJzdCBhcmd1bWVudCBtdXN0IGJlIGFuIG9iamVjdCwgZ290ICV0AFByb3BlcnR5IGRlc2NyaXB0aW9uIG11c3QgYmUgYW4gb2JqZWN0LCBnb3QgJXQARmlyc3QgYXJndW1lbnQgbXVzdCBiZSBhbiBvYmplY3QsIGdvdCAldAoAU2Vjb25kIGFyZ3VtZW50IG11c3QgYmUgYW4gb2JqZWN0LCBnb3QgJXQKAENhbid0IGV4dGVuZCAldAoARXhwZWN0aW5nIE9iamVjdCwgZ290ICV0CgBQYXJlbnQgbXVzdCBiZSBhbiBvYmplY3QgLSBub3QgYSBTdHJpbmcsIEludGVnZXIsIGV0Yy4ARmlyc3QgYXJndW1lbnQgdG8gRXZlbnRFbWl0dGVyLm9uKC4uKSBtdXN0IGJlIGEgc3RyaW5nAFNlY29uZCBhcmd1bWVudCB0byBFdmVudEVtaXR0ZXIub24oLi4pIG11c3QgYmUgYSBmdW5jdGlvbiBvciBhIFN0cmluZyAoY29udGFpbmluZyBjb2RlKQAjb24ldgBkYXRhAP9idWYAI29uZGF0YQBGaXJzdCBhcmd1bWVudCB0byBFdmVudEVtaXR0ZXIuZW1pdCguLikgbXVzdCBiZSBhIHN0cmluZwBUb28gbWFueSBhcmd1bWVudHMgKD4lZCkARmlyc3QgYXJndW1lbnQgdG8gRXZlbnRFbWl0dGVyLnJlbW92ZUxpc3RlbmVyKC4uKSBtdXN0IGJlIGEgc3RyaW5nACNvbgBGaXJzdCBhcmd1bWVudCB0byBFdmVudEVtaXR0ZXIucmVtb3ZlQWxsTGlzdGVuZXJzKC4uKSBtdXN0IGJlIGEgc3RyaW5nLCBvciB1bmRlZmluZWQAQXJndW1lbnQgc2hvdWxkIGJlIGEgZnVuY3Rpb24A/3NjbwBwcm90b3R5cGUAQXJyYXkgcGFzc2VkIHRvIEZ1bmN0aW9uLmFwcGx5IGlzIHRvbyBiaWchIE1heGltdW0gNjQgYXJndW1lbnRzLCBnb3QgJWQAU2Vjb25kIGFyZ3VtZW50IHRvIEZ1bmN0aW9uLmFwcGx5IG11c3QgYmUgaXRlcmFibGUsIGdvdCAldABGdW5jdGlvbi5iaW5kIGV4cGVjdHMgdG8gYmUgY2FsbGVkIG9uIGZ1bmN0aW9uLCBnb3QgJXQA/3RocwBPbmVXaXJlAHBpbgBJbnZhbGlkIE9uZVdpcmUgZGV2aWNlIGFkZHJlc3MgJXEAUGlwZQByZWFkAHdyaXRlAGNvbXBsZXRlACNvbmNvbXBsZXRlAGVuZABjaHVua1NpemUAY2h1bmtTaXplIG11c3QgYmUgYW4gaW50ZWdlciA+IDAAJ29wdGlvbnMnIG11c3QgYmUgYW4gb2JqZWN0LCBvciB1bmRlZmluZWQAY2xvc2UAZHJhaW4AcG9zaXRpb24Ac291cmNlAGRlc3RpbmF0aW9uAERlc3RpbmF0aW9uIG9iamVjdCBkb2VzIG5vdCBpbXBsZW1lbnQgdGhlIHJlcXVpcmVkIHdyaXRlKGJ1ZmZlciwgbGVuZ3RoLCBwb3NpdGlvbikgbWV0aG9kLgBTb3VyY2Ugb2JqZWN0IGRvZXMgbm90IGltcGxlbWVudCB0aGUgcmVxdWlyZWQgcmVhZChidWZmZXIsIGxlbmd0aCwgcG9zaXRpb24pIG1ldGhvZC4AcGlwZXMAZHJhaW5XYWl0AFNvdXJjZSBTdHJlYW0gZG9lcyBub3QgaW1wbGVtZW50IHRoZSByZXF1aXJlZCByZWFkKGxlbmd0aCkgbWV0aG9kLgBEZXN0aW5hdGlvbiBTdHJlYW0gZG9lcyBub3QgaW1wbGVtZW50IHRoZSByZXF1aXJlZCB3cml0ZShidWZmZXIpIG1ldGhvZC4A/2J1ZgBWRVJTSU9OADJ2MDQuMzk4AEdJVF9DT01NSVQAMjkyZjdkMGQAQk9BUkQARU1TQ1JJUFRFTgBGTEFTSABTVE9SQUdFAFJBTQBTRVJJQUwAQ09OU09MRQBNT0RVTEVTAEVYUFRSAGhpc3RvcnkAZnJlZQB1c2FnZQB0b3RhbABnYwBnY3RpbWUAYmxvY2tzaXplAP90aG4A/2NhdABjaGFpbgD/dGhzAGRvbmUAcmVzb2x2ZWQAVW5oYW5kbGVkIHByb21pc2UgcmVqZWN0aW9uOiAldgD/bGVmdAD/cmVzAFByb21pc2UARXhwZWN0aW5nIHNvbWV0aGluZyBpdGVyYWJsZSwgZ290ICV0AHRoZW4AQ2FsbGJhY2sgbXVzdCBiZSBhIGZ1bmN0aW9uLCBnb3QgJXQAVW5maW5pc2hlZCBjaGFyYWN0ZXIgc2V0IGluIFJlZ0V4AEV4cGVjdGluZyBTdHJpbmcgYXMgZmlyc3QgYXJndW1lbnQsIGdvdCAldABSZWdFeHAAc291cmNlAGZsYWdzAGxhc3RJbmRleABpbmRleABpbnB1dABzZXRDb25zb2xlIGNhbid0IGJlIHVzZWQgb24gJ3NvZnQnIGRldmljZXMAX29wdGlvbnMAX2JhdWRyYXRlAFNvZnR3YXJlIFNlcmlhbCBDSyBub3QgaW1wbGVtZW50ZWQgeWV0CgBDYW4ndCB1bnNldHVwIC0gU2VyaWFsIG5vdCBpbml0aWFsaXNlZAByAHcAYQBJbnZhbGlkIG1vZGUgJWoAU3RvcmFnZUZpbGUAbmFtZQBjaHVuawBvZmZzZXQAYWRkcgBtb2RlAENhbid0IHJlYWQgaW4gdGhpcyBtb2RlAENhbid0IHdyaXRlIGluIHRoaXMgbW9kZQBGaWxlIHRvbyBiaWchAF9vcHRpb25zAFNQSS5zZW5kNGJpdCBvbmx5IHdvcmtzIG9uIGhhcmR3YXJlIFNQSQBWYXJpYWJsZSB0eXBlICV0IG5vdCBzdWl0ZWQgdG8gdHJhbnNtaXQgb3BlcmF0aW9uAFNQSS5zZW5kOGJpdCBvbmx5IHdvcmtzIG9uIGhhcmR3YXJlIFNQSQBOb3QgZW5vdWdoIHN0YWNrIG1lbW9yeSB0byBkZWNvZGUgZGF0YQBzdGFydGVkAE5vdCBlbm91Z2ggZnJlZSBzdGFjayB0byByZWNlaXZlIHRoaXMgYW1vdW50IG9mIGRhdGEAc3RvcABhZGRyZXNzAP9idWYAI29uZGF0YQBFcnJvciBwcm9jZXNzaW5nIFNlcmlhbCBkYXRhIGhhbmRsZXIgLSByZW1vdmluZyBpdC4AUmVnRXhwAGxhc3RJbmRleABpbmRleABpbnB1dABJbnZhbGlkIGNvdW50IHZhbHVlAHdhdmUAcnVubmluZwBidWZmZXIAI29uZmluaXNoAGN1cnJlbnRCdWZmZXIAYnVmZmVyMgAjb25idWZmZXIAV2F2ZWZvcm0gY291bGRuJ3QgYmUgc3RvcHBlZABTYW1wbGVzIG11c3QgYmUgZ3JlYXRlciB0aGFuIDAAZG91YmxlQnVmZmVyAGJpdHMASW52YWxpZCBudW1iZXIgb2YgYml0cwBFeHBlY3Rpbmcgb3B0aW9ucyB0byBiZSB1bmRlZmluZWQgb3IgYW4gT2JqZWN0LCBub3QgJXQAV2F2ZWZvcm0AV2F2ZWZvcm0gaXMgbm90IHJ1bm5pbmcAV2F2ZWZvcm0gaXMgYWxyZWFkeSBydW5uaW5nAEludmFsaWQgcGluAEZyZXF1ZW5jeSBtdXN0IGJlIGFib3ZlIDAuMDAxSHoAdGltZQByZXBlYXQAVW5hYmxlIHRvIHNjaGVkdWxlIGEgdGltZXIAZnJlcQBFeHBlY3Rpbmcgc29tZXRoaW5nIGl0ZXJhYmxlLCBnb3QgJXQATm90IGVub3VnaCBtZW1vcnkgZm9yIHJlc3VsdA==");
-writeSegment(41938, "KEJRjNe9JpuAYSADQAXfBBkAEzAT+ADYIPvg////AAAGAAwAEwAZAB8AgAGGAYwBkwGZAZ8BIAMmAywDMwM5Az8DwATGBMwE0wTZBN8EYAZmBmwGcwZ5Bn8G4AfmB+wH8wf5B/8HADAGMAwwEzAZMB8wgDGGMYwxkzGZMZ8xIDMmMywzMzM5Mz8zwDTGNMw00zTZNN80YDZmNmw2czZ5Nn824DfmN+w38zf5N/83AGAGYAxgE2AZYB9ggGGGYYxhk2GZYZ9hIGMmYyxjM2M5Yz9jwGTGZMxk02TZZN9kYGZmZmxmc2Z5Zn9m4GfmZ+xn82f5Z/9nAJgGmAyYE5gZmB+YgJmGmYyZk5mZmZ+ZIJsmmyybM5s5mz+bwJzGnMyc05zZnN+cYJ5mnmyec555nn+e4J/mn+yf85/5n/+fAMgGyAzIE8gZyB/IgMmGyYzJk8mZyZ/JIMsmyyzLM8s5yz/LwMzGzMzM08zZzN/MYM5mzmzOc855zn/O4M/mz+zP88/5z//PAPgG+Az4E/gZ+B/4gPmG+Yz5k/mZ+Z/5IPsm+yz7M/s5+z/7wPzG/Mz80/zZ/N/8YP5m/mz+c/55/n/+4P/m/+z/8//5////");
-writeSegment(42478, "//8AACsAgQCsAHkATgAMABIAFwAEACcAtwCQAMAA0gDXAGdmeABJbnZhbGlkIFNpemUASW52YWxpZCBCUFAAR3JhcGhpY3MAemlnemFnAG1zYgBpbnRlcmxlYXZleAB2ZXJ0aWNhbF9ieXRlAHZlcnRpY2FsX2J5dGUgb25seSB3b3JrcyBmb3IgMWJwcCBBcnJheUJ1ZmZlcnMKAGhlaWdodCBtdXN0IGJlIGEgbXVsdGlwbGUgb2YgOCB3aGVuIHVzaW5nIHZlcnRpY2FsX2J5dGUKAGNvbG9yX29yZGVyAHJnYgBicmcAYmdyAGdicgBncmIAcmJnAGNvbG9yX29yZGVyIG11c3QgYmUgMyBjaGFyYWN0ZXJzAHNldFBpeGVsAGZpbGxSZWN0AEV4cGVjdGluZyBDYWxsYmFjayBGdW5jdGlvbiBvciBhbiBPYmplY3QgYnV0IGdvdCAldABFeHBlY3RpbmcgYSBTdHJpbmcAd2lkdGgAaGVpZ2h0AGJ1ZmZlcgBJZiBDb2xvciBpcyBhIFN0cmluZywgaXQgbXVzdCBiZSBvZiB0aGUgZm9ybSAnI3JyZ2diYicA/2ZuQgD/Zm5XAP9mbkgA/2ZuMQBGb250IGJpdG1hcCBtdXN0IGJlIGEgU3RyaW5nAEZpcnN0IGNoYXJhY3RlciBvdXQgb2YgcmFuZ2UARm9udCB3aWR0aCBtdXN0IGJlIGEgU3RyaW5nIG9yIGFuIGludGVnZXIAVmVjdG9yADR4NgA2eDgAc2V0Rm9udCV2AFVua25vd24gZm9udCAlagBWZWN0b3IlZABDdXN0b20Ac2V0Rm9udABNYXhpbXVtIG51bWJlciBvZiBwb2ludHMgKCVkKSBleGNlZWRlZCBmb3IgZmlsbFBvbHkAYnBwAHRyYW5zcGFyZW50AHBhbGV0dGUAcGFsZXR0ZSBzcGVjaWZpZWQsIGJ1dCBtdXN0IGJlIGEgZmxhdCBVaW50MTZBcnJheSBvZiAyLDQsIG9yIDE2IGVsZW1lbnRzAEV4cGVjdGluZyBmaXJzdCBhcmd1bWVudCB0byBiZSBhbiBvYmplY3Qgb3IgYSBTdHJpbmcARXhwZWN0aW5nIGZpcnN0IGFyZ3VtZW50IHRvIGEgdmFsaWQgSW1hZ2UAc2NhbGUAcm90YXRlAHgxAHkxAHgyAHkyAGFzQk1QL2FzVVJMIG9ubHkgd29ya3Mgb24gMWJwcC8yNGJwcCBHcmFwaGljcwBkYXRhOmltYWdlL2JtcDtiYXNlNjQsJXYACgBjb3VudABmbGlwAEludmFsaWQgQXJlbmEgU2l6ZQBNb2RlbCBpcyBub3QgYSBGbGF0IFN0cmluZy9BcnJheUJ1ZmZlcgBURk1pY3JvSW50ZXJwcmV0ZXIAVW5hYmxlIHRvIGFsbG9jYXRlIGVub3VnaCBSQU0gZm9yIFRlbnNvckZsb3cATWljcm9JbnRlcnByZXRlciBjcmVhdGlvbiBmYWlsZWQAbW9kZWwAbWkAVEZNaWNyb0ludGVycHJldGVyIHN0cnVjdHVyZSBjb3JydXB0ZWQAVW5hYmxlIHRvIGdldCB0ZW5zb3IAVW5zdXBwb3J0ZWQgVGVuc29yIGZvcm1hdCBUZkxpdGVUeXBlOiVkAFRGTWljcm9JbnRlcnByZXRlciBpbnZva2UgZmFpbGVkAFR5cGUgJXMgKCVkKSBub3QgaXMgbm90IHN1cHBvcnRlZA==");
-writeSegment(43804, "HgIAAB8CAAAgAgAADQo=");
-writeSegment(43828, "IQIAACICAAAjAgAAJAIAAEluZgBOYU4AAwQICw0OERITFBUWFyoyXgBPbmx5IDEgc3ViZ3JhcGggaXMgY3VycmVudGx5IHN1cHBvcnRlZC4KAEludm9rZSgpIGNhbGxlZCBhZnRlciBpbml0aWFsaXphdGlvbiBmYWlsZWQKAE1pc3NpbmcgcmVnaXN0cmF0aW9uIGZvciBvcGNvZGVfaW5kZXggJWQKAFNraXBwaW5nIG9wIGZvciBvcGNvZGVfaW5kZXggJWQKAFVuc3VwcG9ydGVkIGJlaGF2aW9yOiBmb3VuZCBidWlsdGluIG9wZXJhdG9yICVzIHdpdGggY3VzdG9tIG9wdGlvbnMuCgBOb2RlICVzIChudW1iZXIgJWQpIGZhaWxlZCB0byBwcmVwYXJlIHdpdGggc3RhdHVzICVkAE5vZGUgJXMgKG51bWJlciAlZCkgZmFpbGVkIHRvIGludm9rZSB3aXRoIHN0YXR1cyAlZABJbnB1dCBpbmRleCAlZCBvdXQgb2YgcmFuZ2UgKGxlbmd0aCBpcyAlZCkAT3V0cHV0IGluZGV4ICVkIG91dCBvZiByYW5nZSAobGVuZ3RoIGlzICVkKQ==");
-writeSegment(44304, "/K4AAACvAAAQrwAAHq8AACavAAA4rwAAR68AAFKvAABjrwAAaa8AAHmvAACKrwAAm68AAKavAADDrwAAzK8AANuvAADgrwAA7K8AAPCvAAD1rwAAArAAAAiwAAAQsAAAILAAACSwAAAssAAAO7AAAECwAABFsAAAV7AAAGGwAABmsAAAbbAAAIWwAACJsAAApbAAAKywAAC+sAAA0LAAANqwAADfsAAA47AAAOewAADvsAAADLEAABqxAAA1sQAAObEAAEGxAABHsQAAU7EAAFyxAAB4sQAAfbEAAIOxAACLsQAAk7EAAJuxAACgsQAApLEAAKqxAACysQAAwLEAAMuxAADSsQAA2LEAANyxAADrsQAA+7EAAACyAAAMsgAAErIAAByyAAAgsgAAJLIAACmyAAAvsgAANbIAADmyAABBsgAATLIAAFiyAABjsgAAaLIAAHOyAAB7sgAAh7IAAJOyAACasgAApbIAAK+yAAC6sgAAwbIAAMyyAADRsgAA27IAAOGyAAD5sgAABLMAABezAAAiswAAJrMAAC6zAAA1swAAOrMAAEWzAABLswAAVbMAAFmzAABfswAAZLMAAGizAAB5swAAhbMAAI6zAACeswAApLMAAK+zAACyswAAuLMAAM+zAAAAAAAAQUREAEFWRVJBR0VfUE9PTF8yRABDT05DQVRFTkFUSU9OAENPTlZfMkQAREVQVEhXSVNFX0NPTlZfMkQAREVQVEhfVE9fU1BBQ0UAREVRVUFOVElaRQBFTUJFRERJTkdfTE9PS1VQAEZMT09SAEZVTExZX0NPTk5FQ1RFRABIQVNIVEFCTEVfTE9PS1VQAEwyX05PUk1BTElaQVRJT04ATDJfUE9PTF8yRABMT0NBTF9SRVNQT05TRV9OT1JNQUxJWkFUSU9OAExPR0lTVElDAExTSF9QUk9KRUNUSU9OAExTVE0ATUFYX1BPT0xfMkQATVVMAFJFTFUAUkVMVV9OMV9UT18xAFJFTFU2AFJFU0hBUEUAUkVTSVpFX0JJTElORUFSAFJOTgBTT0ZUTUFYAFNQQUNFX1RPX0RFUFRIAFNWREYAVEFOSABDT05DQVRfRU1CRURESU5HUwBTS0lQX0dSQU0AQ0FMTABDVVNUT00ARU1CRURESU5HX0xPT0tVUF9TUEFSU0UAUEFEAFVOSURJUkVDVElPTkFMX1NFUVVFTkNFX1JOTgBHQVRIRVIAQkFUQ0hfVE9fU1BBQ0VfTkQAU1BBQ0VfVE9fQkFUQ0hfTkQAVFJBTlNQT1NFAE1FQU4AU1VCAERJVgBTUVVFRVpFAFVOSURJUkVDVElPTkFMX1NFUVVFTkNFX0xTVE0AU1RSSURFRF9TTElDRQBCSURJUkVDVElPTkFMX1NFUVVFTkNFX1JOTgBFWFAAVE9QS19WMgBTUExJVABMT0dfU09GVE1BWABERUxFR0FURQBCSURJUkVDVElPTkFMX1NFUVVFTkNFX0xTVE0AQ0FTVABQUkVMVQBNQVhJTVVNAEFSR19NQVgATUlOSU1VTQBMRVNTAE5FRwBQQURWMgBHUkVBVEVSAEdSRUFURVJfRVFVQUwATEVTU19FUVVBTABTRUxFQ1QAU0xJQ0UAU0lOAFRSQU5TUE9TRV9DT05WAFNQQVJTRV9UT19ERU5TRQBUSUxFAEVYUEFORF9ESU1TAEVRVUFMAE5PVF9FUVVBTABMT0cAU1VNAFNRUlQAUlNRUlQAU0hBUEUAUE9XAEFSR19NSU4ARkFLRV9RVUFOVABSRURVQ0VfUFJPRABSRURVQ0VfTUFYAFBBQ0sATE9HSUNBTF9PUgBPTkVfSE9UAExPR0lDQUxfQU5EAExPR0lDQUxfTk9UAFVOUEFDSwBSRURVQ0VfTUlOAEZMT09SX0RJVgBSRURVQ0VfQU5ZAFNRVUFSRQBaRVJPU19MSUtFAEZJTEwARkxPT1JfTU9EAFJBTkdFAFJFU0laRV9ORUFSRVNUX05FSUdIQk9SAExFQUtZX1JFTFUAU1FVQVJFRF9ESUZGRVJFTkNFAE1JUlJPUl9QQUQAQUJTAFNQTElUX1YAVU5JUVVFAENFSUwAUkVWRVJTRV9WMgBBRERfTgBHQVRIRVJfTkQAQ09TAFdIRVJFAFJBTksARUxVAFJFVkVSU0VfU0VRVUVOQ0UATUFUUklYX0RJQUcAUVVBTlRJWkUATUFUUklYX1NFVF9ESUFHAFJPVU5EAEhBUkRfU1dJU0gASUYAV0hJTEUATk9OX01BWF9TVVBQUkVTU0lPTl9WNABOT05fTUFYX1NVUFBSRVNTSU9OX1Y1");
-writeSegment(46064, "JgIAACcCAAAoAgAAKQI=");
-writeSegment(46088, "KgIAACoCAAArAgAALAIAAE9ubHkgMSBzdWJncmFwaCBpcyBjdXJyZW50bHkgc3VwcG9ydGVkLgoATG9naWMgZXJyb3IgaW4gbWVtb3J5IHBsYW5uZXIsIHRlbnNvciAlZCBoYXMgYW4gaW52YWxpZCBsaWZldGltZQBBcmVuYSBzaXplIGlzIHRvbyBzbWFsbCBmb3IgYWN0aXZhdGlvbiBidWZmZXJzLiBOZWVkZWQgJWQgYnV0IG9ubHkgJWQgd2FzIGF2YWlsYWJsZS4AVmFyaWFibGUgaXMgbm90IGFsbG9jYXRlZAA8Tm8gbmFtZT4AVHlwZSAnJXMnIGlzIG5vdCBzdXBwb3J0ZWQgYnkgcGFjay4AJXM6JWQgJXMgIT0gJXMgKCVkICE9ICVkKQAvaG9tZS9ndy93b3Jrc3BhY2UvRXNwcnVpbm8vbGlicy90ZW5zb3JmbG93L3RlbnNvcmZsb3cvbGl0ZS9leHBlcmltZW50YWwvbWljcm8va2VybmVscy9yZXNoYXBlLmNjAHN0cmV0Y2hfZGltAC0xAGlucHV0LT50eXBlAG91dHB1dC0+dHlwZQBudW1faW5wdXRfZWxlbWVudHMAbnVtX291dHB1dF9lbGVtZW50cwAlczolZCAlcyB3YXMgbm90IHRydWUuAE51bUlucHV0cyhub2RlKSA9PSAxIHx8IE51bUlucHV0cyhub2RlKSA9PSAyAE51bU91dHB1dHMobm9kZSkAMQAlczolZCAlcyAhPSAlcyAoJWQgIT0gJWQpAC9ob21lL2d3L3dvcmtzcGFjZS9Fc3BydWluby9saWJzL3RlbnNvcmZsb3cvdGVuc29yZmxvdy9saXRlL2V4cGVyaW1lbnRhbC9taWNyby9rZXJuZWxzL2RlcHRod2lzZV9jb252LmNjAGZpbHRlci0+cXVhbnRpemF0aW9uLnR5cGUAa1RmTGl0ZUFmZmluZVF1YW50aXphdGlvbgAlczolZCAlcyB3YXMgbm90IHRydWUuAGFmZmluZV9xdWFudGl6YXRpb24AYWZmaW5lX3F1YW50aXphdGlvbi0+c2NhbGUAVHlwZSAlcyAoJWQpIG5vdCBzdXBwb3J0ZWQuAGhhc19iaWFzIHx8IG5vZGUtPmlucHV0cy0+c2l6ZSA9PSAyAG5vZGUtPm91dHB1dHMtPnNpemUAMQAlczolZCAlcyAhPSAlcyAoJWQgIT0gJWQpAC9ob21lL2d3L3dvcmtzcGFjZS9Fc3BydWluby9saWJzL3RlbnNvcmZsb3cvdGVuc29yZmxvdy9saXRlL2V4cGVyaW1lbnRhbC9taWNyby9rZXJuZWxzL3F1YW50aXplLmNjAE51bUlucHV0cyhub2RlKQAxAE51bU91dHB1dHMobm9kZSkAb3V0cHV0LT5xdWFudGl6YXRpb24udHlwZQBrVGZMaXRlQWZmaW5lUXVhbnRpemF0aW9uACVzOiVkICVzIHdhcyBub3QgdHJ1ZS4AYWZmaW5lX3F1YW50aXphdGlvbgBhZmZpbmVfcXVhbnRpemF0aW9uLT5zY2FsZQBhZmZpbmVfcXVhbnRpemF0aW9uLT5zY2FsZS0+c2l6ZSA9PSAxAGlucHV0LT50eXBlID09IGtUZkxpdGVGbG9hdDMyAG91dHB1dC0+dHlwZSA9PSBrVGZMaXRlVUludDggfHwgb3V0cHV0LT50eXBlID09IGtUZkxpdGVJbnQ4AE91dHB1dCB0eXBlICVzICglZCkgbm90IHN1cHBvcnRlZACA////fwAAAAAAAAD/AAAAJXM6JWQgJXMgIT0gJXMgKCVkICE9ICVkKQAvaG9tZS9ndy93b3Jrc3BhY2UvRXNwcnVpbm8vbGlicy90ZW5zb3JmbG93L3RlbnNvcmZsb3cvbGl0ZS9leHBlcmltZW50YWwvbWljcm8va2VybmVscy9kZXF1YW50aXplLmNjAE51bUlucHV0cyhub2RlKQAxAE51bU91dHB1dHMobm9kZSkAJXM6JWQgJXMgd2FzIG5vdCB0cnVlLgBpbnB1dC0+dHlwZSA9PSBrVGZMaXRlVUludDggfHwgaW5wdXQtPnR5cGUgPT0ga1RmTGl0ZUludDgAb3V0cHV0LT50eXBlID09IGtUZkxpdGVGbG9hdDMyAFR5cGUgJXMgKCVkKSBub3Qgc3VwcG9ydGVkLgBPbmx5IGZsb2F0MzIgaXMgc3VwcG9ydGVkIGN1cnJlbnRseSwgZ290ICVzACVzOiVkICVzIHdhcyBub3QgdHJ1ZS4AL2hvbWUvZ3cvd29ya3NwYWNlL0VzcHJ1aW5vL2xpYnMvdGVuc29yZmxvdy90ZW5zb3JmbG93L2xpdGUvZXhwZXJpbWVudGFsL21pY3JvL2tlcm5lbHMvY29udi5jYwBoYXNfYmlhcyB8fCBub2RlLT5pbnB1dHMtPnNpemUgPT0gMgAlczolZCAlcyAhPSAlcyAoJWQgIT0gJWQpAG5vZGUtPm91dHB1dHMtPnNpemUAMQBmaWx0ZXItPnF1YW50aXphdGlvbi50eXBlAGtUZkxpdGVBZmZpbmVRdWFudGl6YXRpb24AYWZmaW5lX3F1YW50aXphdGlvbgBhZmZpbmVfcXVhbnRpemF0aW9uLT5zY2FsZQBUeXBlICVzICglZCkgbm90IHN1cHBvcnRlZC4ASW5wdXQgdHlwZSAlcyBpcyBub3QgY3VycmVudGx5IHN1cHBvcnRlZABUeXBlICVzIG5vdCBjdXJyZW50bHkgc3VwcG9ydGVkLgBPbmx5IDFELCAyRCBhbmQgNEQgdGVuc29ycyBzdXBwb3J0ZWQgY3VycmVudGx5LCBnb3QgJWRELgBPbmx5IDJEIGFuZCA0RCB0ZW5zb3JzIHN1cHBvcnRlZCBjdXJyZW50bHksIGdvdCAlZEQuAE9ubHkgZmxvYXQzMiwgaW50OF90IGFuZCB1aW50OF90IHN1cHBvcnRlZCBjdXJyZW50bHksIGdvdCAlcy4AJXM6JWQgJXMgIT0gJXMgKCVkICE9ICVkKQAvaG9tZS9ndy93b3Jrc3BhY2UvRXNwcnVpbm8vbGlicy90ZW5zb3JmbG93L3RlbnNvcmZsb3cvbGl0ZS9leHBlcmltZW50YWwvbWljcm8va2VybmVscy9zb2Z0bWF4LmNjAG91dHB1dC0+cGFyYW1zLnplcm9fcG9pbnQAMAAlczolZCAlcyB3YXMgbm90IHRydWUuAG91dHB1dC0+cGFyYW1zLnNjYWxlID09IDEuZiAvIDI1NgBPbmx5IGZsb2F0MzIgYW5kIHVpbnQ4IGFyZSBzdXBwb3J0ZWQgY3VycmVudGx5LCBnb3QgJWQuACVzOiVkICVzICE9ICVzICglZCAhPSAlZCkAL2hvbWUvZ3cvd29ya3NwYWNlL0VzcHJ1aW5vL2xpYnMvdGVuc29yZmxvdy90ZW5zb3JmbG93L2xpdGUvZXhwZXJpbWVudGFsL21pY3JvL2tlcm5lbHMvY2VpbC5jYwBOdW1JbnB1dHMobm9kZSkAMQBOdW1PdXRwdXRzKG5vZGUpAGlucHV0LT50eXBlAGtUZkxpdGVGbG9hdDMyAG91dHB1dC0+dHlwZQBvdXRwdXQtPmJ5dGVzAGlucHV0LT5ieXRlcwBvdXRwdXQtPmRpbXMtPnNpemUAaW5wdXQtPmRpbXMtPnNpemUAb3V0cHV0LT5kaW1zLT5kYXRhW2ldAGlucHV0LT5kaW1zLT5kYXRhW2ldAE9ubHkgZmxvYXQzMiwgdWludDggYW5kIGludDggYXJlIHN1cHBvcnRlZCBjdXJyZW50bHksIGdvdCAlcy4AT25seSBpbnQzMiBhcmUgc3VwcG9ydGVkIGN1cnJlbnRseSwgZ290ICVzLgBUeXBlICclcycgaXMgbm90IHN1cHBvcnRlZCBieSB1bnBhY2suAElucHV0cyBhbmQgb3V0cHV0cyBub3QgYWxsIGZsb2F0fHVpbnQ4fGludDggdHlwZXMuAC9ob21lL2d3L3dvcmtzcGFjZS9Fc3BydWluby9saWJzL3RlbnNvcmZsb3cvdGVuc29yZmxvdy9saXRlL2V4cGVyaW1lbnRhbC9taWNyby9rZXJuZWxzL3NwbGl0LmNjIE5vbiBjb25zdGFudCBheGlzIHRlbnNvciBub3Qgc3VwcG9ydGVkACVzOiVkICVzIHdhcyBub3QgdHJ1ZS4AL2hvbWUvZ3cvd29ya3NwYWNlL0VzcHJ1aW5vL2xpYnMvdGVuc29yZmxvdy90ZW5zb3JmbG93L2xpdGUvZXhwZXJpbWVudGFsL21pY3JvL2tlcm5lbHMvc3BsaXQuY2MAYXhpc192YWx1ZSA+PSAwAGF4aXNfdmFsdWUgPCBOdW1EaW1lbnNpb25zKGlucHV0KQBUeXBlICVzIGN1cnJlbnRseSBub3Qgc3VwcG9ydGVkLgBOZWcgb25seSBjdXJyZW50bHkgc3VwcG9ydHMgZmxvYXQzMiwgZ290ICVkLgAlczolZCAlcyAhPSAlcyAoJWQgIT0gJWQpAC9ob21lL2d3L3dvcmtzcGFjZS9Fc3BydWluby9saWJzL3RlbnNvcmZsb3cvdGVuc29yZmxvdy9saXRlL2V4cGVyaW1lbnRhbC9taWNyby9rZXJuZWxzL2Zsb29yLmNjAGlucHV0LT50eXBlAGtUZkxpdGVGbG9hdDMyAERvZXMgbm90IHN1cHBvcnQgdHlwZSAlZCwgcmVxdWlyZXMgYm9vbHxmbG9hdHxpbnR8dWludDgARG9lcyBub3Qgc3VwcG9ydCB0eXBlICVkLCByZXF1aXJlcyBmbG9hdHxpbnR8dWludDgAJXM6JWQgJXMgIT0gJXMgKCVkICE9ICVkKQAvaG9tZS9ndy93b3Jrc3BhY2UvRXNwcnVpbm8vbGlicy90ZW5zb3JmbG93L3RlbnNvcmZsb3cvbGl0ZS9leHBlcmltZW50YWwvbWljcm8va2VybmVscy9zdmRmLmNjAG5vZGUtPmlucHV0cy0+c2l6ZQA2AG51bV9maWx0ZXJzICUgcmFuawAwAGlucHV0LT50eXBlAGtUZkxpdGVGbG9hdDMyAE51bURpbWVuc2lvbnMoaW5wdXQpADIATnVtRGltZW5zaW9ucyh3ZWlnaHRzX2ZlYXR1cmUpAHdlaWdodHNfZmVhdHVyZS0+ZGltcy0+ZGF0YVsxXQBpbnB1dF9zaXplAE51bURpbWVuc2lvbnMod2VpZ2h0c190aW1lKQB3ZWlnaHRzX3RpbWUtPmRpbXMtPmRhdGFbMF0AbnVtX2ZpbHRlcnMAd2VpZ2h0c190aW1lLT5kaW1zLT5kYXRhWzFdAG1lbW9yeV9zaXplAGJpYXMtPmRpbXMtPmRhdGFbMF0AbnVtX3VuaXRzAGJpYXMtPnR5cGUAYWN0aXZhdGlvbl9zdGF0ZS0+dHlwZQBOdW1EaW1lbnNpb25zKGFjdGl2YXRpb25fc3RhdGUpAGFjdGl2YXRpb25fc3RhdGUtPmRpbXMtPmRhdGFbMF0AYmF0Y2hfc2l6ZQBhY3RpdmF0aW9uX3N0YXRlLT5kaW1zLT5kYXRhWzFdAG1lbW9yeV9zaXplICogbnVtX2ZpbHRlcnMAc2NyYXRjaF90ZW5zb3ItPnR5cGUATnVtRGltZW5zaW9ucyhzY3JhdGNoX3RlbnNvcikAc2NyYXRjaF90ZW5zb3ItPmRpbXMtPmRhdGFbMF0Ac2NyYXRjaF90ZW5zb3ItPmRpbXMtPmRhdGFbMV0AJXM6JWQgJXMgd2FzIG5vdCB0cnVlLgB3ZWlnaHRzX2ZlYXR1cmUtPnR5cGUgPT0ga1RmTGl0ZVVJbnQ4IHx8IHdlaWdodHNfZmVhdHVyZS0+dHlwZSA9PSBrVGZMaXRlSW50OAB3ZWlnaHRzX3RpbWUtPnR5cGUgPT0ga1RmTGl0ZVVJbnQ4IHx8IHdlaWdodHNfdGltZS0+dHlwZSA9PSBrVGZMaXRlSW50OABub2RlLT50ZW1wb3Jhcmllcy0+c2l6ZQA0AHNjcmF0Y2hfaW5wdXRfcXVhbnRpemVkLT50eXBlID09IGtUZkxpdGVVSW50OCB8fCBzY3JhdGNoX2lucHV0X3F1YW50aXplZC0+dHlwZSA9PSBrVGZMaXRlSW50OABzY3JhdGNoX2lucHV0X3F1YW50aXplZC0+ZGltcy0+ZGF0YVswXQBzY3JhdGNoX3NjYWxpbmdfZmFjdG9ycy0+dHlwZQBOdW1EaW1lbnNpb25zKHNjcmF0Y2hfc2NhbGluZ19mYWN0b3JzKQAxAHNjcmF0Y2hfc2NhbGluZ19mYWN0b3JzLT5kaW1zLT5kYXRhWzBdAHNjcmF0Y2hfZmxvYXRfd2VpZ2h0c190aW1lLT50eXBlAE51bURpbWVuc2lvbnMoc2NyYXRjaF9mbG9hdF93ZWlnaHRzX3RpbWUpAHNjcmF0Y2hfZmxvYXRfd2VpZ2h0c190aW1lLT5kaW1zLT5kYXRhWzBdAHNjcmF0Y2hfZmxvYXRfd2VpZ2h0c190aW1lLT5kaW1zLT5kYXRhWzFdAHdlaWdodHNfZmVhdHVyZS0+dHlwZQB3ZWlnaHRzX3RpbWUtPnR5cGUAbm9kZS0+b3V0cHV0cy0+c2l6ZQBvdXRwdXQtPnR5cGUATnVtRGltZW5zaW9ucyhvdXRwdXQpAG91dHB1dC0+ZGltcy0+ZGF0YVswXQBvdXRwdXQtPmRpbXMtPmRhdGFbMV0AVHlwZSAlcyBub3QgY3VycmVudGx5IHN1cHBvcnRlZC4=");
-writeSegment(51264, "IQIAACICAABpAgAAagI=");
-writeSegment(51288, "KgIAACoCAABrAgAAbAIAAFR5cGUgJWQgbm90IGN1cnJlbnRseSBzdXBwb3J0ZWQuAFF1YW50aXplZCBGdWxseUNvbm5lY3RlZCBleHBlY3RzIG91dHB1dCBkYXRhIHR5cGUgdWludDggb3IgaW50MTYAVHlwZSAlcyAoJWQpIGlzIG5vdCBzdXBwb3J0ZWQgYnkgTWF4aW11bS9NaW5pbXVtLgAlczolZCAlcyAhPSAlcyAoJWQgIT0gJWQpAC9ob21lL2d3L3dvcmtzcGFjZS9Fc3BydWluby9saWJzL3RlbnNvcmZsb3cvdGVuc29yZmxvdy9saXRlL2V4cGVyaW1lbnRhbC9taWNyby9rZXJuZWxzL2VsZW1lbnR3aXNlLmNjAGlucHV0LT50eXBlAGV4cGVjdGVkX3R5cGUATnVtSW5wdXRzKG5vZGUpADEATnVtT3V0cHV0cyhub2RlKQBvdXRwdXQtPnR5cGUASW5wdXQgZGF0YSB0eXBlICVzICglZCkgaXMgbm90IHN1cHBvcnRlZC4AL2hvbWUvZ3cvd29ya3NwYWNlL0VzcHJ1aW5vL2xpYnMvdGVuc29yZmxvdy90ZW5zb3JmbG93L2xpdGUvZXhwZXJpbWVudGFsL21pY3JvL2tlcm5lbHMvc3RyaWRlZF9zbGljZS5jYyBzdHJpZGUgdmFsdWUgaGFzIHRvIGJlIG5vbi16ZXJvACVzOiVkICVzICE9ICVzICglZCAhPSAlZCkAL2hvbWUvZ3cvd29ya3NwYWNlL0VzcHJ1aW5vL2xpYnMvdGVuc29yZmxvdy90ZW5zb3JmbG93L2xpdGUvZXhwZXJpbWVudGFsL21pY3JvL2tlcm5lbHMvc3RyaWRlZF9zbGljZS5jYwBvdXRwdXRfc2hhcGUtPmRhdGFbc2hhcGVfc2l6ZV0AZGltX3NoYXBlAG91dHB1dF9zaGFwZS0+c2l6ZQBzaGFwZV9zaXplAE51bUlucHV0cyhub2RlKQA0AE51bU91dHB1dHMobm9kZSkAMQAvaG9tZS9ndy93b3Jrc3BhY2UvRXNwcnVpbm8vbGlicy90ZW5zb3JmbG93L3RlbnNvcmZsb3cvbGl0ZS9leHBlcmltZW50YWwvbWljcm8va2VybmVscy9zdHJpZGVkX3NsaWNlLmNjIGlucHV0IGRpbSBzaG91bGQgbm90IGV4Y2VlZCA0AFR5cGUgJWQgaXMgY3VycmVudGx5IG5vdCBzdXBwb3J0ZWQgYnkgU3RyaWRlZFNsaWNlLgAlczolZCAlcyAhPSAlcyAoJWQgIT0gJWQpAC9ob21lL2d3L3dvcmtzcGFjZS9Fc3BydWluby9saWJzL3RlbnNvcmZsb3cvdGVuc29yZmxvdy9saXRlL2V4cGVyaW1lbnRhbC9taWNyby9rZXJuZWxzL3JvdW5kLmNjAE51bUlucHV0cyhub2RlKQAxAE51bU91dHB1dHMobm9kZSkAaW5wdXQtPnR5cGUAa1RmTGl0ZUZsb2F0MzIAb3V0cHV0LT50eXBlAG91dHB1dC0+Ynl0ZXMAaW5wdXQtPmJ5dGVzAG91dHB1dC0+ZGltcy0+c2l6ZQBpbnB1dC0+ZGltcy0+c2l6ZQBvdXRwdXQtPmRpbXMtPmRhdGFbaV0AaW5wdXQtPmRpbXMtPmRhdGFbaV0=");
-writeSegment(52568, "kwIAAJQCAAAqAgAAKgIAACoCAAAqAg==");
-writeSegment(52600, "lQIAAJYCAACXAgAAmAIAAJkCAACaAgAAVG9vIG1hbnkgYnVmZmVycyAobWF4IGlzICVkKQBidWZmZXIgaW5kZXggJWQgaXMgb3V0c2lkZSByYW5nZSAwIHRvICVkAFVuc3VwcG9ydGVkIGRhdGEgdHlwZSAlZCBpbiB0ZW5zb3IKAFVuaGFuZGxlZCBmdWxseS1jb25uZWN0ZWQgd2VpZ2h0cyBmb3JtYXQuAFVuaGFuZGxlZCBMU1RNIGtlcm5lbCB0eXBlOiAlZABObyB2YWxpZCBMU1RNIGJ1aWx0aW4gb3B0aW9ucyBleGlzdAByZXNoYXBlAHNxdWVlemUAREVMRUdBVEUgb3Agc2hvdWxkbid0IGV4aXN0IGluIG1vZGVsLgBJbnB1dCBhcnJheSBub3QgcHJvdmlkZWQgZm9yIG9wZXJhdGlvbiAnJXMnLgoARm91bmQgdG9vIG1hbnkgZGltZW5zaW9ucyBpbiB0aGUgaW5wdXQgYXJyYXkgb2Ygb3BlcmF0aW9uICclcycuCgBPcCBidWlsdGluX2NvZGUgb3V0IG9mIHJhbmdlOiAlZC4gQXJlIHlvdSB1c2luZyBvbGQgVEZMaXRlIGJpbmFyeSB3aXRoIG5ld2VyIG1vZGVsPwBEaWRuJ3QgZmluZCBvcCBmb3IgYnVpbHRpbiBvcGNvZGUgJyVzJyB2ZXJzaW9uICclZCcKAE9wZXJhdG9yIHdpdGggQ1VTVE9NIGJ1aWx0aW5fY29kZSBoYXMgbm8gY3VzdG9tX2NvZGUuCgAlczolZCAlcyAhPSAlcyAoJWQgIT0gJWQpAC9ob21lL2d3L3dvcmtzcGFjZS9Fc3BydWluby9saWJzL3RlbnNvcmZsb3cvdGVuc29yZmxvdy9saXRlL2tlcm5lbHMva2VybmVsX3V0aWwuY2MAaW5wdXQtPnF1YW50aXphdGlvbi50eXBlAGtUZkxpdGVBZmZpbmVRdWFudGl6YXRpb24AZmlsdGVyLT5xdWFudGl6YXRpb24udHlwZQAlczolZCAlcyB3YXMgbm90IHRydWUuAGFmZmluZV9xdWFudGl6YXRpb24AYWZmaW5lX3F1YW50aXphdGlvbi0+c2NhbGUAaW5wdXQtPnR5cGUAa1RmTGl0ZUludDgAZmlsdGVyLT50eXBlAGFmZmluZV9xdWFudGl6YXRpb24tPnNjYWxlLT5zaXplAGZpbHRlci0+ZGltcy0+ZGF0YVthZmZpbmVfcXVhbnRpemF0aW9uLT5xdWFudGl6ZWRfZGltZW5zaW9uXQBzdGQ6OmFicyhpbnB1dF9wcm9kdWN0X3NjYWxlIC0gYmlhc19zY2FsZSkgPD0gMWUtNiAqIHN0ZDo6bWluKGlucHV0X3Byb2R1Y3Rfc2NhbGUsIGJpYXNfc2NhbGUpAGlucHV0X3Byb2R1Y3Rfc2NhbGUgPj0gMABmYWxzZQBNb2RlbCBwcm92aWRlZCBpcyBzY2hlbWEgdmVyc2lvbiAlZCBub3QgZXF1YWwgdG8gc3VwcG9ydGVkIHZlcnNpb24gJWQuAEludm9rZSBmYWlsZWQ=");
-writeSegment(53804, "mwIAAJwCAAAqAgAALSsgICAwWDB4AChudWxsKQ==");
-writeSegment(53840, "EQAKABEREQAAAAAFAAAAAAAACQAAAAAL");
-writeSegment(53872, "EQAPChEREQMKBwABEwkLCwAACQYLAAALAAYRAAAAERER");
-writeSegment(53921, "Cw==");
-writeSegment(53930, "EQAKChEREQAKAAACAAkLAAAACQALAAAL");
-writeSegment(53979, "DA==");
-writeSegment(53991, "DAAAAAAMAAAAAAkMAAAAAAAMAAAM");
-writeSegment(54037, "Dg==");
-writeSegment(54049, "DQAAAAQNAAAAAAkOAAAAAAAOAAAO");
-writeSegment(54095, "EA==");
-writeSegment(54107, "DwAAAAAPAAAAAAkQAAAAAAAQAAAQAAASAAAAEhIS");
-writeSegment(54162, "EgAAABISEgAAAAAAAAk=");
-writeSegment(54211, "Cw==");
-writeSegment(54223, "CgAAAAAKAAAAAAkLAAAAAAALAAAL");
-writeSegment(54269, "DA==");
-writeSegment(54281, "DAAAAAAMAAAAAAkMAAAAAAAMAAAMAAAwMTIzNDU2Nzg5QUJDREVGLTBYKzBYIDBYLTB4KzB4IDB4AGluZgBJTkYAbmFuAE5BTgAuAAAAAIjnAABQdXJlIHZpcnR1YWwgZnVuY3Rpb24gY2FsbGVkIQAAAAAAAAADAAAABAAAAAQAAAAGAAAAg/miAERObgD8KRUA0VcnAN009QBi28AAPJmVAEGQQwBjUf4Au96rALdhxQA6biQA0k1CAEkG4AAJ6i4AHJLRAOsd/gApsRwA6D6nAPU1ggBEuy4AnOmEALQmcABBfl8A1pE5AFODOQCc9DkAi1+EACj5vQD4HzsA3v+XAA+YBQARL+8AClqLAG0fbQDPfjYACcsnAEZPtwCeZj8ALepfALondQDl68cAPXvxAPc5BwCSUooA+2vqAB+xXwAIXY0AMANWAHv8RgDwq2sAILzPADb0mgDjqR0AXmGRAAgb5gCFmWUAoBRfAI1AaACA2P8AJ3NNAAYGMQDKVhUAyahzAHviYABrjMAAGcRHAM1nwwAJ6NwAWYMqAIt2xACmHJYARK/dABlX0QClPgUABQf/ADN+PwDCMugAmE/eALt9MgAmPcMAHmvvAJ/4XgA1HzoAf/LKAPGHHQB8kCEAaiR8ANVu+gAwLXcAFTtDALUUxgDDGZ0ArcTCACxNQQAMAF0Ahn1GAONxLQCbxpoAM2IAALTSfAC0p5cAN1XVANc+9gCjEBgATXb8AGSdKgBw16sAY3z4AHqwVwAXFecAwElWADvW2QCnhDgAJCPLANaKdwBaVCMAAB+5APEKGwAZzt8AnzH/AGYeagCZV2EArPtHAH5/2AAiZbcAMuiJAOa/YADvxM0AbDYJAF0/1AAW3tcAWDveAN6bkgDSIigAKIboAOJYTQDGyjIACOMWAOB9ywAXwFAA8x2nABjgWwAuEzQAgxJiAINIAQD1jlsArbB/AB7p8gBISkMAEGfTAKrd2ACuX0IAamHOAAoopADTmbQABqbyAFx3fwCjwoMAYTyIAIpzeACvjFoAb9e9AC2mYwD0v8sAjYHvACbBZwBVykUAytk2ACio0gDCYY0AEsl3AAQmFAASRpsAxFnEAMjFRABNspEAABfzANRDrQApSeUA/dUQAAC+/AAelMwAcM7uABM+9QDs8YAAs+fDAMf4KACTBZQAwXE+AC4JswALRfMAiBKcAKsgewAutZ8AR5LCAHsyLwAMVW0AcqeQAGvnHwAxy5YAeRZKAEF54gD034kA6JSXAOLmhACZMZcAiO1rAF9fNgC7/Q4ASJq0AGekbABxckIAjV0yAJ8VuAC85QkAjTElAPd0OQAwBRwADQwBAEsIaAAs7lgAR6qQAHTnAgC91iQA932mAG5IcgCfFu8AjpSmALSR9gDRU1EAzwryACCYMwD1S34AsmNoAN0+XwBAXQMAhYl/AFVSKQA3ZMAAbdgQADJIMgBbTHUATnHUAEVUbgALCcEAKvVpABRm1QAnB50AXQRQALQ72wDqdsUAh/kXAElrfQAdJ7oAlmkpAMbMrACtFFQAkOJqAIjZiQAsclAABKS+AHcHlADzMHAAAPwnAOpxqABmwkkAZOA9AJfdgwCjP5cAQ5T9AA2GjAAxQd4AkjmdAN1wjAAXt+cACN87ABU3KwBcgKAAWoCTABARkgAP6NgAbICvANv/SwA4kA8AWRh2AGKlFQBhy7sAx4m5ABBAvQDS8gQASXUnAOu29gDbIrsAChSqAIkmLwBkg3YACTszAA6UGgBROqoAHaPCAK/trgBcJhIAbcJNAC16nADAVpcAAz+DAAnw9gArQIwAbTGZADm0BwAMIBUA2MNbAPWSxADGrUsATsqlAKc3zQDmqTYAq5KUAN1CaAAZY94AdozvAGiLUgD82zcArqGrAN8VMQAArqEADPvaAGRNZgDtBbcAKWUwAFdWvwBH/zoAavm5AHW+8wAok98Aq4AwAGaM9gAEyxUA+iIGANnkHQA9s6QAVxuPADbNCQBOQukAE76kADMjtQDwqhoAT2WoANLBpQALPw8AW3jNACP5dgB7iwQAiRdyAMamUwBvbuIA7+sAAJtKWADE2rcAqma6AHbPzwDRAh0AsfEtAIyZwQDDrXcAhkjaAPddoADGgPQArPAvAN3smgA/XLwA0N5tAJDHHwAq27YAoyU6AACvmgCtU5MAtlcEACkttABLgH4A2genAHaqDgB7WaEAFhIqANy3LQD65f0Aidv+AIm+/QDkdmwABqn8AD6AcACFbhUA/Yf/ACg+BwBhZzMAKhiGAE296gCz568Aj21uAJVnOQAxv1sAhNdIADDfFgDHLUMAJWE1AMlwzgAwy7gAv2z9AKQAogAFbOQAWt2gACFvRwBiEtIAuVyEAHBhSQBrVuAAmVIBAFBVNwAe1bcAM/HEABNuXwBdMOQAhS6pAB2ywwChMjYACLekAOqx1AAW9yEAj2nkACf/dwAMA4AAjUAtAE/NoAAgpZkAs6LTAC9dCgC0+UIAEdrLAH2+0ACb28EAqxe9AMqigQAIalwALlUXACcAVQB/FPAA4QeGABQLZACWQY0Ah77eANr9KgBrJbYAe4k0AAXz/gC5v54AaGpPAEoqqABPxFoALfi8ANdamAD0x5UADU2NACA6pgCkV18AFD+xAIA4lQDMIAEAcd2GAMnetgC/YPUATWURAAEHawCMsKwAssDQAFFVSAAe+w4AlXLDAKMGOwDAQDUABtx7AOBFzABOKfoA1srIAOjzQQB8ZN4Am2TYANm+MQCkl8MAd1jUAGnjxQDw2hMAujo8AEYYRgBVdV8A0r31AG6SxgCsLl0ADkTtABw+QgBhxIcAKf3pAOfW8wAifMoAb5E1AAjgxQD/140AbmriALD9xgCTCMEAfF10AGutsgDNbp0APnJ7AMYRagD3z6kAKXPfALXJugC3AFEA4rINAHS6JADlfWAAdNiKAA0VLACBGAwAfmaUAAEpFgCfenYA/f2+AFZF7wDZfjYA7NkTAIu6uQDEl/wAMagnAPFuwwCUxTYA2KhWALSotQDPzA4AEoktAG9XNAAsVokAmc7jANYguQBrXqoAPiqcABFfzAD9C0oA4fT7AI47bQDihiwA6dSEAPy0qQDv7tEALjXJAC85YQA4IUQAG9nIAIH8CgD7SmoALxzYAFO0hABOmYwAVCLMACpV3ADAxtYACxmWABpwuABplWQAJlpgAD9S7gB/EQ8A9LURAPzL9QA0vC0ANLzuAOhdzADdXmAAZ46bAJIz7wDJF7gAYVibAOFXvABRg8YA2D4QAN1xSAAtHN0ArxihACEsRgBZ89cA2XqYAJ5UwABPhvoAVgb8AOV5rgCJIjYAOK0iAGeT3ABV6KoAgiY4AMrnmwBRDaQAmTOxAKnXDgBpBUgAZbLwAH+IpwCITJcA+dE2ACGSswB7gkoAmM8hAECf3ADcR1UA4XQ6AGfrQgD+nd8AXtRfAHtnpAC6rHoAVfaiACuIIwBBulUAWW4IACEqhgA5R4MAiePmAOWe1ABJ+0AA/1bpABwPygDFWYoAlPorANPBxQAPxc8A21quAEfFhgCFQ2IAIYY7ACx5lAAQYYcAKkx7AIAsGgBDvxIAiCaQAHg8iQCoxOQA5dt7AMQ6wgAm9OoA92eKAA2SvwBloysAPZOxAL18CwCkUdwAJ91jAGnh3QCalBkAqCmVAGjOKAAJ7bQARJ8gAE6YygBwgmMAfnwjAA+5MgCn9Y4AFFbnACHxCAC1nSoAb35NAKUZUQC1+asAgt/WAJbdYQAWNgIAxDqfAIOioQBy7W0AOY16AIK4qQBrMlwARidbAAA07QDSAHcA/PRVAAFZTQDgcYA=");
-writeSegment(57187, "QPsh+T8AAAAALUR0PgAAAICYRvg8AAAAYFHMeDsAAACAgxvwOQAAAEAgJXo4AAAAgCKC4zYAAAAAHfNpNU+7YQVnrN0/GC1EVPsh6T+b9oHSC3PvPxgtRFT7Ifk/4mUvIn8rejwHXBQzJqaBPL3L8HqIB3A8B1wUMyamkTwYLURU+yHpPxgtRFT7Iem/0iEzf3zZAkDSITN/fNkCwA==");
-writeSegment(57359, "gBgtRFT7IQlAGC1EVPshCcAAAAAAAADgPwAAAAAAAOC/AAAAPwAAAL8=");
-writeSegment(57408, "bAcAAMQJAADvvq3evrr+yhX//wD//////////wEAAAAAxAkAAAk9AAQAAAAKAAAAABnsAwAZFAQgAwAA4Pz//+gDAADiiQAAEooAADeVAAACAgAAAwIAAAQCAAAFAgAABgIAAAcCAAAIAgAACQIAAAoCAAALAgAADAIAAA0CAAAOAgAADwIAABACAAARAgAAEgIAAAAAAAAd");
-writeSegment(57572, "LQIAAC4C");
-writeSegment(57608, "MQI=");
-writeSegment(57640, "MgI=");
-writeSegment(57668, "MwIAADQC");
-writeSegment(57692, "NQIAADYCAAA3AgAAOAI=");
-writeSegment(57724, "OQIAADoCAAA7AgAAPAI=");
-writeSegment(57764, "PQIAAD4C");
-writeSegment(57796, "PwIAAEAC");
-writeSegment(57820, "QQIAAEICAABDAgAARAI=");
-writeSegment(57852, "RQIAAEYCAABHAgAASAI=");
-writeSegment(57884, "RQIAAEYCAABHAgAASQI=");
-writeSegment(57916, "SgIAAEsCAABMAgAATQI=");
-writeSegment(57956, "TgIAAE8C");
-writeSegment(57988, "UAIAAFEC");
-writeSegment(58020, "UgIAAFMC");
-writeSegment(58052, "UgIAAFQC");
-writeSegment(58084, "VQIAAFYC");
-writeSegment(58108, "VwIAAFgCAABZAgAAWgI=");
-writeSegment(58148, "WwIAAFwC");
-writeSegment(58184, "XQI=");
-writeSegment(58216, "XgI=");
-writeSegment(58248, "XwI=");
-writeSegment(58280, "YAI=");
-writeSegment(58312, "YQI=");
-writeSegment(58344, "YgI=");
-writeSegment(58376, "YwI=");
-writeSegment(58408, "ZAI=");
-writeSegment(58428, "ZQIAAGYCAABnAgAAaAI=");
-writeSegment(58460, "bQIAAG4CAABvAgAAcAI=");
-writeSegment(58504, "ewI=");
-writeSegment(58536, "fAI=");
-writeSegment(58564, "hQIAAIYC");
-writeSegment(58596, "hQIAAIcC");
-writeSegment(58628, "hQIAAIgC");
-writeSegment(58660, "hQIAAIkC");
-writeSegment(58692, "hQIAAIoC");
-writeSegment(58724, "hQIAAIsC");
-writeSegment(58756, "hQIAAIwC");
-writeSegment(58788, "jQIAAI4C");
-writeSegment(58820, "jwIAAJAC");
-writeSegment(58852, "kQIAAJIC");
-writeSegment(58880, "BQ==");
-writeSegment(58892, "nQI=");
-writeSegment(58916, "ngIAAJ8CAACI6QMAAAQ=");
-writeSegment(58940, "AQ==");
-writeSegment(58955, "Cv////8=");
-writeSegment(59025, "5g==");
-writeSegment(59216, "wO0D");
-writeSegment(59272, "BQ==");
-writeSegment(59284, "ogI=");
-writeSegment(59308, "ngIAAKMCAADg7QM=");
-writeSegment(59332, "Ag==");
-writeSegment(59347, "//////8=");
+writeSegment(16464, "Z2V0SW5wdXQAZ2V0T3V0cHV0AGludm9rZQAAAAAAAADwHgAAcCIAAG8wJgAAICcAAB1QKAAA4CkAADLgKwAAoCwAABc4LQAAQC0AAAFMLQAAVC0AAAFgLQAA8C0AABFwLgAA8C4AABCQLwAAoC8AAAKwLwAAcDAAABdkMQAAbDEAAAF4MQAAgDEAAAGMMQAAlDEAAAGgMQAAqDEAAAG0MQAAvDEAAAHQMQAAADIAAAUoMgAAMDIAAAFAMgAAUDIAAAJwMgAAkDIAAATQMgAAIDMAAAlgMwAAkDMAAAXQMwAA2DMAAAHwMwAAQDQAAAmgNAAA8DQAAAlwNQAAkDUAAASwNQAA8DUAAAccNgAAJDYAAAEwNgAAUDYAAANwNgAAkDYAAAOwNgAAwDYAAALQNgAA4DYAAALsNgAA9DYAAAEANwAAUDcAAAqgNwAAADgAAAtgOAAAkDgAAAW4OAAAwDgAAAHQOAAAADkAAAUkOQAALDkAAAFAOQAAYDkAAAOAOQAAEDoAABKsOgAAtDoAAAHQOgAA8DoAAAMQOwAAIDsAAAJAOwAAIDwAABywPAAA0DwAAAQQPQAAcD4AACsYQAAAIEAAAAEwQAAAUEAAAANfX3Byb3RvX18AY29uc3RydWN0b3IAQmFuZ2xlAEUAQXJyYXkAQXJyYXlCdWZmZXIAQXJyYXlCdWZmZXJWaWV3AFVpbnQ4QXJyYXkAVWludDhDbGFtcGVkQXJyYXkASW50OEFycmF5AFVpbnQxNkFycmF5AEludDE2QXJyYXkAVWludDI0QXJyYXkAVWludDMyQXJyYXkASW50MzJBcnJheQBGbG9hdDMyQXJyYXkARmxvYXQ2NEFycmF5AERhdGFWaWV3AERhdGUARXJyb3IAU3ludGF4RXJyb3IAVHlwZUVycm9yAEludGVybmFsRXJyb3IAUmVmZXJlbmNlRXJyb3IARnVuY3Rpb24AY29uc29sZQBKU09OAE1vZHVsZXMAUGluAE51bWJlcgBPYmplY3QAQm9vbGVhbgBPbmVXaXJlAGZzAHByb2Nlc3MAUHJvbWlzZQBSZWdFeHAAU2VyaWFsAFN0b3JhZ2VGaWxlAFNQSQBJMkMAU3RyaW5nAFdhdmVmb3JtAE1hdGgAR3JhcGhpY3MAVEZNaWNyb0ludGVycHJldGVyAEZsYXNoAFN0b3JhZ2UAaGVhdHNocmluawB0ZW5zb3JmbG93AGxvY2FsZQBleHBvcnRzPXtuYW1lOidlbl9HQicsY3VycmVuY3lTeW06J8KjJyx0cmFuc2xhdGU6YT0+YSxkYXRlOihhLGIpPT5iPygnMCcrYS5nZXREYXRlKCkpLnN1YnN0cigtMikrJy8nKygnMCcrKGEuZ2V0TW9udGgoKSsxKSkuc3Vic3RyKC0yKSsnLycrYS5nZXRGdWxsWWVhcigpOmEudG9TdHJpbmcoKS5zdWJzdHIoNCwxMSksdGltZTooYixlKT0+e2lmKGUpcmV0dXJuIGIudG9TdHJpbmcoKS5zdWJzdHIoMTYsNSk7ZWxzZXt2YXIgYT1iLmdldEhvdXJzKCksZD1iLmdldE1pbnV0ZXMoKSxjPSdhbSc7cmV0dXJuIGE9PTA/YT0xMjphPj0xMiYmKGE+MTImJihhLT0xMiksYz0ncG0nKSwoJyAnK2EpLnN1YnN0cigtMikrJzonKygnMCcrZCkuc3Vic3RyKC0yKSsnLicrKCcwJytiLmdldFNlY29uZHMoKSkuc3Vic3RyKC0yKSsnICcrY319LGRvdzooYSxiKT0+Yj9hLnRvU3RyaW5nKCkuc3Vic3RyKDAsMyk6J1N1bmRheSxNb25kYXksVHVlc2RheSxXZWRuZXNkYXksVGh1cnNkYXksRnJpZGF5LFNhdHVyZGF5Jy5zcGxpdCgnLCcpW2EuZ2V0RGF5KCldLG1vbnRoOihhLGIpPT5iP2EudG9TdHJpbmcoKS5zdWJzdHIoNCwzKTonSmFudWFyeSxGZWJydWFyeSxNYXJjaCxBcHJpbCxNYXksSnVuZSxKdWx5LEF1Z3VzdCxTZXB0ZW1iZXIsT2N0b2JlcixOb3ZlbWJlcixEZWNlbWJlcicuc3BsaXQoJywnKVthLmdldE1vbnRoKCldLG51bWJlcjphPT5hLnRvU3RyaW5nKCksY3VycmVuY3k6YT0+J8KjJythLnRvRml4ZWQoMiksZGlzdGFuY2U6YT0+YTwxZTM/TWF0aC5yb3VuZChhKSsnbSc6TWF0aC5yb3VuZChhLzE2MC45MzQpLzEwKydtaScsc3BlZWQ6YT0+TWF0aC5yb3VuZChhKSsnbXBoJyx0ZW1wOmE9Pk1hdGgucm91bmQoYSkrIidDIn0KAEZsYXNoLFN0b3JhZ2UsaGVhdHNocmluayx0ZW5zb3JmbG93LGxvY2FsZQBVbmtub3duIGFyZ3NwZWMgJWQASTJDMQAoZnVuY3Rpb24oKXtyZXR1cm57X3Y6ITEscmVhZDpmdW5jdGlvbigpe3JldHVybiB0aGlzLl92fSxzZXQ6ZnVuY3Rpb24oKXt0aGlzLndyaXRlKDEpfSxyZXNldDpmdW5jdGlvbigpe3RoaXMud3JpdGUoMCl9LHdyaXRlOmZ1bmN0aW9uKGEpe2cuc2V0Q29sb3IoKHRoaXMuX3Y9ISFhKT8xOjAsMCwwKS5maWxsQ2lyY2xlKDExMCw1LDUpLmZsaXAoKX0sdG9nZ2xlOmZ1bmN0aW9uKCl7dGhpcy53cml0ZSghdGhpcy5fdil9fX0pAChmdW5jdGlvbigpe3JldHVybntfdjohMSxyZWFkOmZ1bmN0aW9uKCl7cmV0dXJuIHRoaXMuX3Z9LHNldDpmdW5jdGlvbigpe3RoaXMud3JpdGUoMSl9LHJlc2V0OmZ1bmN0aW9uKCl7dGhpcy53cml0ZSgwKX0sd3JpdGU6ZnVuY3Rpb24oYSl7Zy5zZXRDb2xvcigwLCh0aGlzLl92PSEhYSk/MTowLDApLmZpbGxDaXJjbGUoMTMwLDUsNSkuZmxpcCgpfSx0b2dnbGU6ZnVuY3Rpb24oKXt0aGlzLndyaXRlKCF0aGlzLl92KX19fSkATG9vcGJhY2tBAExvb3BiYWNrQgBTUEkxAFNlcmlhbDEAVGVybWluYWwAVVNCAChmdW5jdGlvbigpe3ZhciB3PWcuZ2V0V2lkdGgoKSxoPWcuZ2V0SGVpZ2h0KCk7dmFyIHBvcz17dGw6e3g6MjgseTowLHI6MCxjOjB9LHRyOnt4OnctMjgseTowLHI6MSxjOjB9LGJsOnt4OjI0LHk6aC0yNCxyOjAsYzowfSxicjp7eDp3LTI0LHk6aC0yNCxyOjEsYzowfX07aWYoZ2xvYmFsLldJREdFVFMpe2Zvcih2YXIgd2Qgb2YgV0lER0VUUyl7dmFyIHA9cG9zW3dkLmFyZWFdO2lmKCFwKXJldHVybjt3ZC54PXAueC1wLnIqd2Qud2lkdGg7d2QueT1wLnk7cC54Kz13ZC53aWR0aCooMS0yKnAucik7cC5jKys7d2QuZHJhdyh3ZCl9CmcucmVzZXQoKTtpZihwb3MudGwuYylnLmNsZWFyUmVjdCgwLDAscG9zLnRsLngsMjMpO2lmKHBvcy5ibC5jKWcuY2xlYXJSZWN0KDAsaC0yNCxwb3MuYmwueCxoLTEpO2lmKHBvcy50ci5jKWcuY2xlYXJSZWN0KHBvcy50ci54LDAsdy0xLDIzKTtpZihwb3MuYnIuYylnLmNsZWFyUmVjdChwb3MuYnIueCxoLTI0LHctMSxoLTEpO2Zvcih3ZCBvZiBXSURHRVRTKXdkLmRyYXcod2QpfX0pAChmdW5jdGlvbigpe2dsb2JhbC5XSURHRVRTPXt9O3JlcXVpcmUoIlN0b3JhZ2UiKS5saXN0KC9cLndpZFwuanMkLykuZm9yRWFjaChmdW5jdGlvbihhKXtyZXR1cm4gZXZhbChyZXF1aXJlKCJTdG9yYWdlIikucmVhZChhKSl9KX0pAChmdW5jdGlvbigpIHsKICB2YXIgbCA9IHJlcXVpcmUoIlN0b3JhZ2UiKS5saXN0KC9cLmluZm8kLykubWFwKGFwcD0+ewogICAgdHJ5IHsgcmV0dXJuIHJlcXVpcmUoIlN0b3JhZ2UiKS5yZWFkSlNPTihhcHApOyB9IGNhdGNoIChlKSB7fQogIH0pLmZpbmQoYXBwPT5hcHAudHlwZT09ImxhdW5jaCIpOwogIGlmIChsKSBsb2FkKGwuc3JjKTsKICBlbHNlIEUuc2hvd01lc3NhZ2UoIkxhdW5jaGVyXG5ub3QgZm91bmQiKTsKfSkAKGZ1bmN0aW9uKGEsYil7cmV0dXJuIEUuc2hvd1Byb21wdChhLHt0aXRsZTpiLGJ1dHRvbnM6e09rOjF9fSl9KQAoZnVuY3Rpb24obSl7QmFuZ2xlLmJ0bldhdGNoZXMmJihCYW5nbGUuYnRuV2F0Y2hlcy5mb3JFYWNoKGNsZWFyV2F0Y2gpLEJhbmdsZS5idG5XYXRjaGVzPXZvaWQgMCk7Zy5jbGVhcigxKTtnLmZsaXAoKTtCYW5nbGUuZHJhd1dpZGdldHMoKTtpZihtKXt2YXIgcD1nLmdldFdpZHRoKCktOTtnLmdldEhlaWdodCgpO3ZhciBlPU9iamVjdC5rZXlzKG0pLGE9bVsiIl07YSYmZS5zcGxpY2UoZS5pbmRleE9mKCIiKSwxKTthIGluc3RhbmNlb2YgT2JqZWN0fHwoYT17fSk7YS5mb250SGVpZ2h0PTE2O2EueD0wO2EueDI9cC0yO2EueT0yNDthLnkyPTIyMDt2b2lkIDA9PT1hLnNlbGVjdGVkJiYoYS5zZWxlY3RlZD0wKTthLmZvbnRIZWlnaHR8fChhLmZvbnRIZWlnaHQ9Nik7dmFyIHE9MHxhLngsbj1hLngyfHxnLmdldFdpZHRoKCktMSxrPTB8YS55LHU9YS55Mnx8Zy5nZXRIZWlnaHQoKS0xO2EudGl0bGUmJihrKz1hLmZvbnRIZWlnaHQrMik7dmFyIHQ9cmVxdWlyZSgibG9jYWxlIiksCmQ9e2RyYXc6ZnVuY3Rpb24oKXtnLnJlc2V0KCk7Zy5zZXRDb2xvcigtMSk7Zy5zZXRGb250KCI2eDgiLDIpLnNldEZvbnRBbGlnbigwLC0xLDApO2EudGl0bGUmJihnLmRyYXdTdHJpbmcoYS50aXRsZSwocStuKS8yLGstYS5mb250SGVpZ2h0LTIpLGcuZHJhd0xpbmUocSxrLTIsbixrLTIpKTtmb3IodmFyIGM9MHxNYXRoLm1pbigodS1rKS9hLmZvbnRIZWlnaHQsZS5sZW5ndGgpLGI9RS5jbGlwKGEuc2VsZWN0ZWQtKGM+PjEpLDAsZS5sZW5ndGgtYyksZj1rO2MtLTspe3ZhciBoPWVbYl0scj1tW2hdO2cuc2V0Q29sb3IoYiE9YS5zZWxlY3RlZHx8ZC5zZWxlY3RFZGl0Pzc6NzU5KTtnLmZpbGxSZWN0KHEsZixuLGYrYS5mb250SGVpZ2h0LTEpO2cuc2V0Q29sb3IoLTEpO2cuc2V0Rm9udEFsaWduKC0xLC0xKTtnLmRyYXdTdHJpbmcodC50cmFuc2xhdGUoaCkscSxmKTtpZigib2JqZWN0Ij09dHlwZW9mIHIpe2g9bjt2YXIgbD1yLnZhbHVlO3IuZm9ybWF0JiYobD1yLmZvcm1hdChsKSk7Cmw9dC50cmFuc2xhdGUoIiIrbCk7ZC5zZWxlY3RFZGl0JiZiPT1hLnNlbGVjdGVkJiYoaC09MjUsZy5zZXRDb2xvcig3NTkpLGcuZmlsbFJlY3QoaC0oZy5zdHJpbmdXaWR0aChsKSs0KSxmLG4sZithLmZvbnRIZWlnaHQtMSksZy5zZXRDb2xvcigtMSksZy5kcmF3SW1hZ2UoIlxmXHUwMDA1XHUwMDgxXHgwMCBcdTAwMDdceDAwXHUwMGY5XHUwMGYwXHUwMDBlXHgwMEAiLGgsZisoYS5mb250SGVpZ2h0LTEwKS8yLHtzY2FsZToyfSkpO2cuc2V0Rm9udEFsaWduKDEsLTEpO2cuZHJhd1N0cmluZyhsLGgtMixmKX1nLnNldENvbG9yKC0xKTtmKz1hLmZvbnRIZWlnaHQ7YisrfWcuc2V0Rm9udEFsaWduKC0xLC0xKTtjPWI8ZS5sZW5ndGg7Zy5kcmF3SW1hZ2UoIlxiXGJcdTAwMDFcdTAwMTA4fFx1MDBmZVx1MDAxMFx1MDAxMFx1MDAxMFx1MDAxMCIscCw0MCk7Zy5kcmF3SW1hZ2UoIlxiXGJcdTAwMDFcdTAwMTBcdTAwMTBcdTAwMTBcdTAwMTBcdTAwZmV8OFx1MDAxMCIscCwxOTQpO2cuZHJhd0ltYWdlKCJcYlxiXHUwMDAxXHgwMFxiXGZcdTAwMGVcdTAwZmZcdTAwMGVcZlxiIiwKcCwxMTYpO2cuc2V0Q29sb3IoYz8tMTowKTtnLmZpbGxQb2x5KFsxMDQsMjIwLDEzNiwyMjAsMTIwLDIyOF0pO2cuZmxpcCgpfSxzZWxlY3Q6ZnVuY3Rpb24oYyl7Yz1tW2VbYS5zZWxlY3RlZF1dO2lmKCJmdW5jdGlvbiI9PXR5cGVvZiBjKWMoZCk7ZWxzZSBpZigib2JqZWN0Ij09dHlwZW9mIGMpe2lmKCJudW1iZXIiPT10eXBlb2YgYy52YWx1ZSlkLnNlbGVjdEVkaXQ9ZC5zZWxlY3RFZGl0P3ZvaWQgMDpjO2Vsc2UgaWYoImJvb2xlYW4iPT10eXBlb2YgYy52YWx1ZSYmKGMudmFsdWU9IWMudmFsdWUpLGMub25jaGFuZ2UpYy5vbmNoYW5nZShjLnZhbHVlKTtkLmRyYXcoKX19LG1vdmU6ZnVuY3Rpb24oYyl7aWYoZC5zZWxlY3RFZGl0KXt2YXIgYj1kLnNlbGVjdEVkaXQ7Yi52YWx1ZS09KGN8fDEpKihiLnN0ZXB8fDEpO3ZvaWQgMCE9PWIubWluJiZiLnZhbHVlPGIubWluJiYoYi52YWx1ZT1iLm1pbik7dm9pZCAwIT09Yi5tYXgmJmIudmFsdWU+Yi5tYXgmJihiLnZhbHVlPWIubWF4KTsKaWYoYi5vbmNoYW5nZSliLm9uY2hhbmdlKGIudmFsdWUpfWVsc2UgYS5zZWxlY3RlZD0oYythLnNlbGVjdGVkKSVlLmxlbmd0aCwwPmEuc2VsZWN0ZWQmJihhLnNlbGVjdGVkKz1lLmxlbmd0aCk7ZC5kcmF3KCl9fTtkLmRyYXcoKTtCYW5nbGUuYnRuV2F0Y2hlcz1bc2V0V2F0Y2goZnVuY3Rpb24oKXtkLm1vdmUoLTEpfSxCVE4xLHtyZXBlYXQ6MX0pLHNldFdhdGNoKGZ1bmN0aW9uKCl7ZC5tb3ZlKDEpfSxCVE4zLHtyZXBlYXQ6MX0pLHNldFdhdGNoKGZ1bmN0aW9uKCl7ZC5zZWxlY3QoKX0sQlROMix7cmVwZWF0OjF9KV07cmV0dXJuIGR9fSkAKGZ1bmN0aW9uKGUsYSl7Zy5jbGVhcigxKS5mbGlwKCk7QmFuZ2xlLmRyYXdXaWRnZXRzKCk7Zy5yZXNldCgpLnNldEZvbnQoIjZ4OCIsMikuc2V0Rm9udEFsaWduKDAsMCk7dmFyIGQ9cmVxdWlyZSgibG9jYWxlIiksYz1nLmdldFdpZHRoKCksZj1nLmdldEhlaWdodCgpO2lmKGEpe2E9ZC50cmFuc2xhdGUoYSk7Zy5kcmF3U3RyaW5nKGEsYy8yLDM0KTt2YXIgYj0oZy5zdHJpbmdXaWR0aChhKSsxNikvMjtnLmZpbGxSZWN0KGMvMi1iLDQ0LGMvMitiLDQ1KX1iPWUuc3BsaXQoIlxuIik7dmFyIGg9KGYtMTYqYi5sZW5ndGgpLzI7Yi5mb3JFYWNoKGZ1bmN0aW9uKGEsYil7cmV0dXJuIGcuZHJhd1N0cmluZyhkLnRyYW5zbGF0ZShhKSxjLzIsaCsxNipiKX0pO2cuZmxpcCgpfSkAKGZ1bmN0aW9uKG0sYSl7ZnVuY3Rpb24gZSgpe2cucmVzZXQoKS5zZXRGb250KCI2eDgiLDIpLnNldEZvbnRBbGlnbigwLDApO3ZhciBoPWcuZ2V0V2lkdGgoKSxlPWcuZ2V0SGVpZ2h0KCksYj1hLnRpdGxlO2ImJihiPWsudHJhbnNsYXRlKGIpLGcuZHJhd1N0cmluZyhiLGgvMiwzNCksYj0oZy5zdHJpbmdXaWR0aChiKSsxNikvMixnLmZpbGxSZWN0KGgvMi1iLDQ0LGgvMitiLDQ0KSk7Yj1tLnNwbGl0KCJcbiIpO3ZhciBwPShlLTE2KmIubGVuZ3RoKS8yO2IuZm9yRWFjaChmdW5jdGlvbihhLGMpe3JldHVybiBnLmRyYXdTdHJpbmcoay50cmFuc2xhdGUoYSksaC8yLHArMTYqYyl9KTt2YXIgbj0wO2wuZm9yRWFjaChmdW5jdGlvbihhKXtyZXR1cm4gbis9MTYrZy5zdHJpbmdXaWR0aChrLnRyYW5zbGF0ZShhKSl9KTt2YXIgYz0oaC1uKS8yLGY9ZS00MDtsLmZvckVhY2goZnVuY3Rpb24oYixoKXtiPWsudHJhbnNsYXRlKGIpO3ZhciBlPWcuc3RyaW5nV2lkdGgoYik7CmMrPSgxNitlKS8yO3ZhciBkPTIrZS8yO2Q9W2MtZCxmLTEyLGMrZCxmLTEyLGMrZCs0LGYtOCxjK2QrNCxmKzgsYytkLGYrMTIsYy1kLGYrMTIsYy1kLTQsZis4LGMtZC00LGYtOCxjLWQsZi0xMl07Zy5zZXRDb2xvcihoPT1hLnNlbGVjdGVkPzc1OTowKS5maWxsUG9seShkKS5zZXRDb2xvcigtMSkuZHJhd1BvbHkoZCkuZHJhd1N0cmluZyhiLGMsZisxKTtjKz0oMTYrZSkvMn0pO2cuc2V0Q29sb3IoLTEpLmZsaXAoKX1hfHwoYT17fSk7YS5idXR0b25zfHwoYS5idXR0b25zPXtZZXM6ITAsTm86ITF9KTt2YXIgaz1yZXF1aXJlKCJsb2NhbGUiKSxsPU9iamVjdC5rZXlzKGEuYnV0dG9ucyk7YS5zZWxlY3RlZHx8KGEuc2VsZWN0ZWQ9MCk7QmFuZ2xlLmJ0bldhdGNoZXMmJihCYW5nbGUuYnRuV2F0Y2hlcy5mb3JFYWNoKGNsZWFyV2F0Y2gpLEJhbmdsZS5idG5XYXRjaGVzPXZvaWQgMCk7Zy5jbGVhcigxKTtCYW5nbGUuZHJhd1dpZGdldHMoKTtpZighbSlyZXR1cm4gUHJvbWlzZS5yZXNvbHZlKCk7CmUoKTtyZXR1cm4gbmV3IFByb21pc2UoZnVuY3Rpb24oaCl7QmFuZ2xlLmJ0bldhdGNoZXM9W3NldFdhdGNoKGZ1bmN0aW9uKCl7MDxhLnNlbGVjdGVkJiYoYS5zZWxlY3RlZC0tLGUoKSl9LEJUTjEse3JlcGVhdDoxfSksc2V0V2F0Y2goZnVuY3Rpb24oKXthLnNlbGVjdGVkPGwubGVuZ3RoLTEmJihhLnNlbGVjdGVkKyssZSgpKX0sQlROMyx7cmVwZWF0OjF9KSxzZXRXYXRjaChmdW5jdGlvbigpe0Uuc2hvd1Byb21wdCgpO2goYS5idXR0b25zW2xbYS5zZWxlY3RlZF1dKX0sQlROMix7cmVwZWF0OjF9KV19KX0pADJ2MDUAAGpV6h9CLcBHQl8ABJYkFnMDUwYDhwQAAAAQABACIMdBEkQgAJI9dVKVVBVz+h0AAN8lZFp2NKkaliQAAAAAAACSLgARki4gAJYsaVt6TeBbWi0AAP5XJVm1eyVbPlcAAE9ZinmKeWp5V38AAJVlb1tvW69vFVcAAHtbVFtSe1F/1lUAAO1PbUi6KBUZ1R8AABcIKWQBEAFwx3EAAEQQ3iRlf2Up3iYAAKBEM1CtbatU6VUGCAYAsmV6W3pbf2UAQAAE6161VWVUozMBAAAAbXu9Kn9HenMADJN3knzWcJJwk3EAcAMABAAGAAYABAADAEABkglEKacVRH0qCAQoRxoEqIIkAPy6JAQoNxsAAAIARCAAAIQQAAAECUUAAAlCAACJ/wEACUIIgBBFCEAgABAABAAAAAhHHACIySIAkEoDH5BKHICgTCCAIPc/AEAAAAAAAABOfPMd0UAUIkZ5LxxBhkgi8ceIIk44hxw=");
+writeSegment(24244, "DgABIJEQAhCREPQJDwAIBIEQ9AmOEAIQACABIMABAAAuEu84cZIYJaIqDyOkuggjYMYYJQRG7zjgAQAAAAAAAP+76A4QwkgCnMNPAhDeSCIQxkgiH7roHA==");
+writeSegment(24340, "EcboPBLuHCMU1hojHMYZPRLGGCHxx+gg");
+writeSegment(24372, "zrsfIzFCEiPROxIjMQYSFTJGEhUtOuIIAQAAAAAA4CAxxo8QUUWBEJUogghVEYQILhKIBCqSjwQAAOACjgAEIIIAAiBCAeA8QgEQIiIC8CICABAjAgDwPA58AAAggAMgIAAEIO45/zwwRhQjMH4UIzBC9CLvPRQiAADgAERABgAAQAIAzEWiPURIUiNEcFIjREhSI05EUyOAAwAAAAAAEAAAABDOP+s8McYMETFG6BDRPxgQDgboDwAG");
+writeSegment(24568, "McYYPzFGFQVRVRIJUVX1EI+oGD4AAOAAg2AADIQQABKEEAA4mIwEEJiMCjiEEAkShBAADINgAAAADAAAABAACAAQAAgAOAA+ABAACICRDQiAkFQJAGEJCARkAgCEaAceXxEoKAQgRywEwIAoH+xIKARsJx4EAAAAgABAGOADgAhPAMAQlAAAABYBAAAUAgAA7wMAAAAAAABpAwAAMgEAGlsSACwAOAAAAHz3AQA4AAAAEAAAAAAAAIAAAAgfAAAAy0EFPguiCgTAEQsIICAKEMDDBT4AAAAAAAACABEAYgAREIciCgDKHQQQihQEkIccBBByIwAQAgCROOUYkUAQBYowUB0fSJAlBCSQHZ8YUAGEBBABgHjgAAAA9xkAgAgkBYAOJAqADRjUgw4ASoANAEWACAAAAAcAgDEBAEQIkh6EEJA6HwmQGsQx0AoEAKAKHwCACgAAAAsAEAYkADAJJAAQSSkMEKkIDDhWEgABoBaAAEAvAAMAIhICZhxSAQAAVBJCCIQBpRSLEuccKaEYI3LFGCMzOgAAVhEAGISA4z6EEBYhSikLOc45DiExRhohMcbrPgAAQABGAWYc/3/nHBBCQgicc0IIEEJCCBBCQgj/f+ccAAAAAApYZhSOReccROUYI6TXGCMkzRgjRMUYI45F5xwAAAAAVoHADM4BFyMxghkjMaoaIzGSGiMxqhwjzgHnHAAACABKEQAYMUbIADFGLx0xqkgDMZI4HzESHyPOEWgfAAAAAMRZpQAAAEAAzjnnPCGEEArvvfc+McYYKe+99xYAAAAAgBmlGAAAAADOOecYMMYYCdB77wkQQggJ7733HAQAAABGKWUZAAAGAIwx4R2EEBcjhJAYI4SQGCPOORcdAAAAAEZZBQAAAAACzjlHHDHGCCYxxvgrMcYIMs45RxwAAAAgzChFIAAAACAxxhgtMcYYMzHGGDMxxvgs770XIAAA4CAKAAAAAAAAABEAAAARAAAAEQAAAA8AAAABAAAADgAAAP9nZngAVW5rbm93biBncmFwaGljcyB0eXBlCgAAAAAARQA/ElcQiXyJlNx+pIYuCFMoUypgNpEiRQ5TCEUIRQiJWokQiTyJXok0iVSJeIkiiYiJcEUQRRaREpEQkRKJOvvupCqkaLJcskqkLJYkwWKyKEUIeySkLIkQyzKyIMFgpELBfrJQpF6WGLJIpBbxMqQooh6WHEUYRQhFGHASiQhTCIlYiWJ7SIlYiVJFLolwiS42EDYYeyw2CM1KiTSJTIleiVhTJHtWRTKJMH0WsC57KHYieyJTNj0IUzKRIAAAGAgLCA9LFEoXtAxUDGAYYBjUBggJJxAnEogaCB0nJCcniBIqFCACIAKpEGEVShQgEioOvwxKDj8CPwLIEGEOPwxKB+IxSihJI2Es4ShJMUpEyEQ/Mz4qPxVKKElEyDkgOClEKUSgMz44KTmgNgYwIC4qMz45ID+GFCAdHyMGGYYbKS4qMCAdHxSgFUoqPxe+GykUIBVKF74uKio/M74RMBMjEwkJEwimFFEPRgXIDVseYh9ZFFEFyB9ZHmIf7iZiHzYfbibuP0EvVSZiM14/zT9BNjQmrTQKJQAmDjIaPJseDh8qJi0mDiWAP0EmLR+qETAmOD9BHyoToxMJFhIeDiWAEyMWEhOJETAfNia4JlkmOB+2JlkfNibiL1UmWSbiNEkvVT/BLz00ST/BJjgvPT/BEicSFhAKCBoNrhsuDS4cNSivIxMjKCgvLRokiSgvIygbrg0uGy4SpxAKEhYajhoOIxMkiRAKGg4kiVQGTAZHDxtjJONMVktJRjxCRkXcV1tMVkVcUmNb4mA5XVNbYmVWZ8lPPltBYDlVNUa8RjxLSU++XVNXW1viW0FdU2C5JSgdFhQQFCMarRJKFj0aLQo8B9AvXydYFVEHUBFdGuFCTTxXSGFQ2ko5QDc7QTROL188V0LNNQwwHSsvNiY7mSUQNQwnBhSQMB0lKCuvLhMwHTWMJRAuEzWMHRYlEBSQKy8lKBqtITU7QSsvGq0WPSE1Gq0VURJKB9A0TidYL98hNTROO8EGCAknDycSiAxaFEUVLhMWCi8IvhhdDFodeSX6DFoYXRTFExYVLhihHAkTFhghJYYVXwl5EvccZxpHFV8S9yJVJUMYLhpHHOciKRoWDwcQFhguJcMQFg8HCIYSHBUVCBAFmBIcCiYRqxggFRUSHBGrKCceHBUVGCAhrBsVFRUeHCyYLBgoEBuVFAYVFRsVHYYgOiAwCDAIuio6IDAgUirSQjAqMCAwKjpCuiAXIDAqMCqXGFQRYA5xF+gRYBhUDNQFOwVGJkYmuwxUDGAYYBjUGggBYQliI4cHRxE5Ex4TDQgfBqwdVxRMB0cTXR/hPz0ySx9hLGA61DALLxg0Mz89PiI4kxkVJxEwCx4IE40fYSRZHdcHRxRMEbkTDRMeGZUySyRZH+E0MzJLP70nES8YMIsuBw4eEickmy4HJBskYC7gECIXFRMMChUHoBMMFxUkkRNWNzIsLwlTBOATVgRgP2A/1j4nPRczGywvN7IkETMbPZc1DSAIEwwkET2XHRERDQceEJ8rCRgJEQ0dESaRLTgtJx0tHLYwMDAdLSctuBBcF1QQSAbJH2IiWRdUENwvXzBSIlkf4jpWQEk0SDBSL985NjAwLTg0SEDJMB0wMDqlORYrCSYRMB06pTNMKUwpYDPgAkwpTDPMP0EzQSlBAkwzTD/MKBkpQTNBMwgqiA5AKBkqCAs1AswCTClBDsAUKhAKCTUTtgxYG1cRSgbJGmEnWBtXDNgmYjRcMVEnWBrhPk41RDFRNNxAQDM6NUQ+zj00MSknMDM6QMAnJhQqEzYnMDGpEAoUKhmUPAkQChkUPJQUHRkKDBYFtBNLEj8FNAhME9wqVx9YE1wlYjLeNy40STJePk4/vxAyNy4sKCCoNAwsEzUePZ0lCCERLBM0jBkKFB0hESWIEDIUHQW0GjQ3LhAyBbQTXB9YE8sFNBI/GrQ0SSpXMt4zPDRJN64tNDM8N64aNC00N64TYCNFMiQxFCMqFssTYB5gI8UxFDIkP5FACQcJBxQxFD+RFTAVIQ0SCR0MqBFHFzoVMAo4Bs0dWBRRBk0RXRvhQEgoWBthMV862CoqJTYzQEBIPj4wsDEiMDA8IjmTIhEuFjkTLAkaiRUwGyoVoQ0SFSEWmBoJDRIWGCKRFzolNioqGyoVsDkTLhYxojAwMSIqqhRREUcGzShYHVgb4TJQKFhAyDNAMlBAyBEqChUHLhK+KDgSPipANbcPXBdVEUsIzBlhI1kXVQ/cK2AsVSNZGeE1WTNILFUr4DxOPz4/JDU3M0g12TIbMys1Nz8kOJMjETIbOBMuChiJNTczKyi4Ej4oOBa0Ej4WNBGqChURKhaXGAkKFRYXI5EMIAwtGC0YoAxUDGAYYBjUDCAMLRgtGKAYVBFgDnEX6BFgGFQM1EFIFTQHMAc6QdJBGAcwFTRCoggiCC1CLUKiCD0IR0JHQr1COjQ0B0gH0kEvBxcHIjQ0QroXFA4OBiARoSsHHgcODhcUJ5AqPj0oMyQgOh3LHUsoSyq+PBQwFTMkPagrBycQMBU8lBxUHGApYCnUGCYkGS4JGBgLrhRoEUsLLghIC9pOejtxKGwUaCFyNfl6X2VpTnpgdW3uel9vYGXpTnplaVPwTnpTcDvxFGgobBrgFGgaYBHLCy4RSxK3Cy4SNximLgkkGTSRRwYuCTQRS5BQKlNUXSFSoUw4U1RQKkmiMi5FKkkiOh8rqChcKz0rKCE4H80oXDdgR9dqVV1UU1RHV0peXN50J203akVqVXNGd7VHBmEZdCdrFluLRwZLEGGZdCdhGWupdCdrKW23alVqRV3URFA0VyhcR1dT1EkiRSpMuFNUTDhE0Cs9Mi4rqCxRKz0o3DRXLFEo3CgTIggBXw1fFsYvCCgTODw8RkVgU+AaOxZGPEY4vBZGGjsokygTLwgiiDJVFVcKYD1eRdk9MUVZTEdGtzsaOSk9MUggRJMVEjITRBM1CQqIPj9FWT0xOakyEzsaRJMKYBUtFRIKiC4sFS0VtzM4OSkuLBW3OSkzOD6/RVk+Pz7PRVk+TzLVCmAVVxW3FS0KYBW3BzcVJB4LEBYIpidhIFMWRQc3CkcR1TxVLFcnYTphTdQ8VU1UVUVKwidhLFcg0wc3FkUTtAc3EzQVpB4LFSQlkh4LJRI0kUEWSSNTnksRNBFBFlOeMwceCzQRS5E5VBVXCmA3X0XZTRlHN0VZUUNTrAoIMBNNGUENJ4hFWUBNOdQKCApgFVcVk0c3QE1F2UYoRzdNmT0XRihNmTATPRdNmRUTMBMKiBZWC2BMYEzWC2AWVha3Fi4WN0c3R64LYBY3Fq4LCAtgFi4WkwsIFhNLE0uIC2AWYBa4Fi4WOEA4QK4LYBY4Fq4LCAtgFi4WkwsIFhNHE0eIBzkLSRQ0FyEZDhAWCacjUxVCC0kWWCzhTU84VyxhRl9Z1E4+WTMzMzO+TU9ZVFkzTr4sYThXI9MLSRVCFLQZDhchJ5IZDicSO5FREkUWTyNYoTsRRRZRkj8ILgcZDjsRUZILYBZgFrZQCEQIRCxENkRgUOAWLBY2RDZErAtgFjYWrAsIC2AWLBaIDAgMYBhgGIgJWRNUDkcExxZhJmAhVhNUCdkyVzVCKEkhVibgKQgoSTVCNYgKYBVgFcEtLSQ0Q2BS3yQ0LS1RiEEIFTQVQSQ0UYgKYBVBFbQKCApgFTQViBVWCmBBYEHWCggKYBVWFYgKCApgFWAWlzVUFhcuYDrgXghTF1NgXuBTF14IT4g1VDpgUxdPiBYXNVQbiBYXGwgKiApgFWAVm0RNFggVG0NgT+BETU9gTwhFiAoICmAVGxaIBz4MSxM0GB4aDQ0bCKs4YShWHFAMSx1dKeFaPkpKOVY4YUZcUdNFC0ofTzFaPlkkUJQiFDgRRQsyBhqNOGE5VijWDEscUBXEDEsVRBO0Gg0YHiKUTzFKSlq+OBFKH0WLCggKYBVgFbxLLTUxFTw0O0G4Pwo/GkEmSy1NG0eQFRM4Ez8KKggKiAoIFTwVMhWTNTEVMhW8QSY1MUutOBM/Gj+KCCQWICMTJAgYDQ6XGlwVRQgkBz0Nz05XMFgaXCxiRt1OV0ZdWGdb31QaTitMRU5XWEZasiQIORJUGksPOocxUDtVTldFUDPITlc7VTDYGlwwWB3RGlwdURXFCCQVRROqCCQTKhagJAgjEzmSTEVFUE7XRRlOK1SaORJFGVSaCwgLYBZgFrk6SUlgWOBISDo4MDw6SVjgFjkwPDq4Oy0WLxY5OjhHs0QbQilHM1ElTZIWETsTTRJBCQuICwgWORYvFpFCKTstR7M7E0QbTZIWMhclFxcXCgsWDaoPWRZPEEMGxCJWFk8P2RxgMGE0ViJWD9lEWj9QNFYw4UtPTEI7Pj9QRNo9MhclFjI7PkzCFwoXFyKSFwoiEjWTSBg1Ez4gSqE/DS8HFwo1E0iYLRMhEyFgLeADEyETLZNKCAMIAxMtE0qTOGEeUwxMGV0o4VAxQks4YUhZTc9EMlAxUAhEiFAxRDJCyzhhQks71DhhO1Qt1zhhLVce0wxMHlMYzAxMGEwXvgsIDEwXPhaIKlQwYFIIRogjYDBgKtQBCCNgKlQOiFZROxVQYFzgVlFcYHQIaYk7FVZRQog7FUIINIgfUyZgOxU0iBlgJmAf0wIJGWAfUw6IKTsjMwJgEN8GCCMzKbtRYDEyKScGCCk7Q+ApJzEyTwlDiAYIKScTiC47IzsjYC7gKjEjOy47UYhRCEQIKrEBCCM7KjEPiBBWSBI5EwNWA+AQVgNgSWBJ1kgICAgIEzkTSJITcAl5IXkh8AkICXkTcBORCQgTESERIYgJBgEHGV8j4Rt5D3ADcAP5GwgPEQ9wG/kDCAMRDxEbiCIGGAgENg82HZIiBh0SLDY3tgBxAHlHeUfxBgcSFhwYFIcRMxgqGiAPJAeyGiAYKiepMyEaICcpL6wZRjFAMTgOQAbJElQGSQhZFOEsVRpZFGElYDLaMyExODFAMlo/YDupMyEvLDG4ElQZRgbJGlkSVBThMUAsVTLaCWASYBLZJlkSWR1hM90+MjkoNTwyUDNdO1U/xRMnJig5KC0gHaAJYBJZE0YTJxMICYgSWRdSE8YmWRdSEtkyUCZZM90wLjU8OagmKDAuOagcKiYoE6cUNRwqE6cTRhQ1E6cUXhJMCi0GOAfMN1gnWBReIGIt4CdYN1g8SzLKFF4nWBjVFF4YVRLMCi0STBK1Ci0SNRauLyEaIAotFi4kqDcoLyEkKDI1PLMlKDEnJSAUohE3Fi0UIgosBcMdWBFJBUMOWSLiPAgyWTJgPOAxJzJZPAgxiB1YImIyWSrWBUMRSRG3FCIWLSWoMSclKC+wMScvMDHLMUsqVjLZMScxSzLZDVgQQxE6ECYIMQbLLFcdVw1YH2E03ixXNF4+TTXMDVgdVxbSDVgWUhDDLy00OkBDPC0soBUuIigsIBsgEKYQJhE6Fa5AQzQ6EToQwyIoLy0soAwpDCACIAKpDGAWYBYpFiAPCwwgDKkWIBYpIykjoA8LFiAakScHGAcPCxoRJpEKUxA8FSEHMwXFIlcVUQpTFV4n3xF3IHohcgdmCe8ydi5rIXIg+jxnM1guazL2MygyODJHM1g8Zz2gPSAzIDOoIygrKzMoKSAVoTMoKysyuCpVJ18zWDLHJ18qVSLXClMVURC8FSEQPBesFSEXLCOoFCcTCAkICWATYBS6PDMyMzJgPeA4JSwqMjM8szAgHiAeKiwqOKUUJxQ6HioeoAkICRUTFROICSAJYBNgE6AJCAkVExUTiBJwCGwAeg73CSAIbBJwE6AJYBNgE8cjOBxBMGA94C4gEzsTRxxBI7gjODwgLqAJYBNHE7sJCAlgEzsTiAkICWATYBOICWASKRIgCaAWMRIpCWAT4BIpFjEeqjsyLS4uYDrgOCoeKi0uO7JeK1QvVWBg4FgjRiBJKFQvXqs4KjsySShGoDIjJB8SKR4qOKoJYBIpEiAJoBQ2EikJYBPgGS0dIRIpFLYdIRktJag8MDI0MmA94CUoMjQ8sDIhHSElKDywBUcRNxoqGSANKAezFlMFRwxYH+FBRjNNJVkfYS1gOdgrIC0rNTxBRj4wNKQrIBkgGiotqxFJETcFxxZTEUkFxyVZFlMf4TU8M01Bxgl5EigSIAmgE1oSKAl5E/knWBtWE1ogYTDfNEwwXz5PQL0jHywqQD06KS+hE1obVhPJEigTWhPJEigTSRS4Ix8SKBQ4Hqk0TCdYMN81OzRMQL0sKjU7QL0eKSwqI58RSRQvCiwFRg/aH1gPWh5iMdo8IDIoMVoxeTz5PCAyIDKoICgwMjIoKSEaoDFaK1Yf2A9aH1gX1Q9aF1URyRogCiwULyCoMUwrVjHaMUwxWjKoMDIxTDKoCWATYBMpEiAJoBMpE2AVsxMpFTMfqh8qJysrohsgEykfKiuiEkERMAonBi8JuwlYFVYPTAXOFmEmYSlXFVYJ2DdWLk4pVybhOUwoSC5ON9YvPxY2EkEoSDnMEkEWNhGwCicRMBmoNSkrIRYgCicZKCWpNSklKS4yNrELKQsgAyADqQsgCykL2hNgFlQVKQsQCyAL2hZUE2AhYCHXFSAVKSApIKAVCgsQFSkVoCpVGlcQXihgMtg8IDJYMmA84DBNMlg8IDGgMlgwTSrVFE4JSxBeGtcJIAlLFE4ToB9TGl4lYD2gPSAyIB/TAiAaXh9TDaAbUQEiFGAg4EBQLTA5YEXgQFBFYFkhTqAoIC0wQFAzoBtRIGAtMCigASIbUQygH0cYPwJgD+A9YCY/HzYEIRg/H8cfRzBgPeAfNiY/PCAvoAQhHzYRoBp2E28Hbwn5ImcbYRNvGvYgVA4gAyEbYSLnIFQiZz0hM6ASVTkmKykMTgPgFFcDYDxgPNcDYBRXEtU6IAUgBSkrKTmmD0AYNh0TGwcTEA+xD0APMQQ9BMQbaRhLDksScBb2G2kWdid6J/IPQAREDksYyycGGwcdEyePDAYMehV6FYYbMxgQDhMSNhzAEngZbB1KHEAURw3vEngNbwRxA/omPBszHEAdSibFDwgDBgMPDhMYkAYyBj4Ttzw9Qzc5Mi0yBjITNy++QzdDLDmyBjItMhqsYnVmZmVyAGlTZXRQaXhlbABpRmlsbFJlY3QAYnVmZmVyAE5PVFlQRQBGTE9BVDMyAElOVDE2AElOVDMyAFVJTlQ4AElOVDgASU5UNjQAQk9PTABDT01QTEVYNjQAU1RSSU5HAEZMT0FUMTYAVW5rbm93biB0eXBlAHsganNIYW5kbGVJTygpOyB9AHsgaHdTZXRQaW5WYWx1ZSgkMCwkMSkgfQB7IHJldHVybiBod0dldFBpblZhbHVlKCQwKSB9AHsgcmV0dXJuIERhdGUubm93KCk7IH0ATm90IGltcGxlbWVudGVk");
+writeSegment(30944, "BAAABAEABAIgBAMhBAQiBAUjBAYABAcABAgABAkABAoAFAsABAwABA0ABA4ABA8AFBAABBEABBIABBMABBQABBUAFBYAFBcAFBgABBkABBoABBsABBwkBB0lBB4mBB8nZ2Z4AEJhbmdsZQAjb25sY2RQb3dlcgBkaXJlY3QAbnVsbABkb3VibGVidWZmZXJlZAAxMjB4MTIwADgweDgwAFVua25vd24gTENEIE1vZGUgJWoAYnVmZmVyAE5vdCBlbm91Z2ggbWVtb3J5IHRvIGFsbG9jYXRlIG9mZnNjcmVlbiBidWZmZXIASW52YWxpZCBpbnRlcnZhbABnZXN0dXJlU3RhcnRUaHJlc2gAZ2VzdHVyZUVuZFRocmVzaABnZXN0dXJlSW5hY3RpdmVDb3VudABnZXN0dXJlTWluTGVuZ3RoAHN0ZXBDb3VudGVyVGhyZXNob2xkTG93AHN0ZXBDb3VudGVyVGhyZXNob2xkSGlnaAB0d2lzdFRocmVzaG9sZAB0d2lzdFRpbWVvdXQAdHdpc3RNYXhZAHdha2VPbkJUTjEAd2FrZU9uQlROMgB3YWtlT25CVE4zAHdha2VPbkZhY2VVcAB3YWtlT25Ub3VjaAB3YWtlT25Ud2lzdABOb3QgZW5vdWdoIHN0YWNrIG1lbW9yeSB0byBkZWNvZGUgZGF0YQB4AHkAegBkeABkeQBkegBoZWFkaW5nAG1hZwBkaWZmAEdyYXBoaWNzAGcAZmxpcAAAMnYwNQBDb3B5cmlnaHQgMjAxOSBHLldpbGxpYW1zACNvbmFjY2VsACNvbmZhY2VVcABmcm9udABiYWNrAGJvdHRvbQB0b3AAcmlnaHQAbGVmdABkaXIAZG91YmxlACNvbnRhcAAjb25HUFMAI29uR1BTLXJhdwAjb25tYWcAYnBtAGNvbmZpZGVuY2UAcmF3ACNvbkhSTQAjb25nZXN0dXJlACNvbmFpR2VzdHVyZQAudGZtb2RlbABURiBlcnJvciAtIG5vIG1vZGVsCgAoZnVuY3Rpb24oYSkge3ZhciBtPTAsZztmb3IgKHZhciBpIGluIGEpIGlmIChhW2ldPm0pIHsgbT1hW2ldO2c9aTsgfWlmIChnIT09dW5kZWZpbmVkKSB7dmFyIG49cmVxdWlyZSgnU3RvcmFnZScpLnJlYWQoJy50Zm5hbWVzJyk7aWYgKG4pIGc9bi5zcGxpdCgnLCcpW2ddO31yZXR1cm4gZzt9KQAjb25jaGFyZ2luZwAjb25zdGVwACNvbnR3aXN0ACNvbnN3aXBlACNvbnRvdWNoAGFjY0hpc3RvcnlJZHgAYWNjR2VzdHVyZUNvdW50AGFjY0lkbGVDb3VudABsYXQAbG9uAEJlZXAgaW4gcHJvZ3Jlc3MAQnV6eiBpbiBwcm9ncmVzcwAub2ZmIG5vdCBpbXBsZW1lbnRlZCBvbiBlbXVsYXRvcg==");
+writeSegment(32064, "71ogQtqgX/AAf9MuE/G4nwG18LGwn/N2A2F+g2vh43FwBu1/Bu/N1v8N23AG10BN20fN2sCN20vG4vQG10DGwv9N18/G4vgN2v+N23wN2v/N19/N2sLN2w2G/A2uj43G4A2tgQ2G/oofg2ABxkvG43QG7+8BpkHGIP+ytqAgQ2fhbHMUoXgAwVvU0JuNGwK1Ejf//OQAoMPVwVAN0l/GwoVBGAjmDG65uMj42GBASnCh/q1W/cy5uMg//6AJGl//+gEB/A/CAYRuggP/+AIFiCvCJ4MPPYUvJA5ubv/8A4sPIIQKCNQe/N0UPZY0B8EAgbnCNwcDQAxubgSaCAAk8awX9NwsvoBuhv5bGh4rCBYRuDgI7DNz0PMQSlGPQQ0BGQY7DNzwqBSQylCIYZunn6lGhY+DBgTdmhalKPYZuDgZKGNzbQCUpCjB/huEv42VNxcv+ilKgG/4BuDh/QNzVayAKDgf/UpQNB/xuDg5yDNy0B///Dok/LQylEPgPwNwULHgIADi1QAwkVQ4kBtJuG343BUAcLZ4KlKJgLtBAARKEEAP0hYIB/AGBRAcHCgOAnxuDv/5gwQE/6xDUo7XB+kPG4YMDv5XC3oQBLwRFCGwX/wfgNwQgBKASRBA4LJGUopFBwH+1WqFQIpCl/+o3/7YHB//+q3/RIKGB8tb/xuDgYuCgLFDS4KlKbAWfJYUCFIULEAIsBNwTFBgbICv5ABhaEBNwW/WQfwAYMfAYQADsAGFTYJ+Dgf9HQICBHwRuCSIQFBj63Cj5lBNwMPagcvLQIaBF4oAGgb8COoZMBv5/ChY7BGYQKBTggGBNwUBagh/Cl5uFh43Gn5uEAwNAh5gCDgI0BEQUDIgQMCagRuBn4sEOYJuHVgxuGgItBF4QABNwSWCFYJ0DAgJuCD4QACYIRuGAA5uGFoMfVoguBBwUCEQJEEvxuDG4iKBbpNQNxUA3orCAAV9IAIOCl8AIgkDNwf61QAC1LdK37ODNw4iBYwkDNw0B+gNDnzdHAATdIl0fNxc+gZOEnpuGl9ANw7UHNw8DfoRuYgRuQgJuHngGEg5uGvxuNj5uHIApnDNw0BMwjjB9IHEhfQTAgGBNwoFDNwsfSocUAYReFNwMHDQkP/BfDAAP8Iwv9Nw0PFocHNwQRCO4RqCh/8NwsAgyAE/9AF4kvwApEj5uH3wUD/xuCg6dD34DDD4ZuCCIJnDj/wNwgdCDYcDNw8DKYcvNwcvJIIDBGQQaCNwsAngGCgX/ZAkBLIMDA4f/Nw4tDhZuDJwJHBj5EDn53DNwV0gZ3Dn/gNwgcDC4U/Nw69CKQRuDAoP6/5pDA4IRBNwcD8pEDhbrBL4YhBAgN/AYMv/ZuHgYlBgP/vxuDg///52BGAaODNwUfVwn/4EPC4IABIQQmBAAP83puHhYNC6fgg4MCgw2FSIK4CbocEAwcvGAI2DJQZzBRwMLNw60BBoPgnwvEAAyABNwoMHLAX+yALDG4KABvpPBYgUfBoUbGwMDXYQAJMIRuEAAn/PYgAWNxgqGNwsvdQoAVhZuMg6mENwoLFACVUAge8CRkv/gKIgKlXhYXDh/AUxp9Jn6lXn4DCgQcNTQJGIj4KJABoyE34TNFgJBJWJIANh/0ZwTCOv/9Kg///9AG61//NA146CABcB/62GBAP/KJwjKAAJdHThI3G3//KJw3MGx66BG4sBGwOZGy4ABtWkCSEv//+AoUGUjLyXGIPpq2vAgPgG1sCeQQADX6AAeUwIAFUt0BGw38N10PG42AG92/GwvwG10HNww2ugE/N2sDN3vgN2v+N23QG10CGwv9N18vG4vAG10BGwv8N18fN2sAN20PN3n4N22AN35utoA3v342E+A2vgZuFG18Aj42E6ALEASW52YWxpZCBhcnJheSBsZW5ndGgALABtYXAAZm9yRWFjaABmaWx0ZXIAZmluZABmaW5kSW5kZXgAc29tZQBldmVyeQByZWR1Y2UAQXJyYXkuJXMgY2FuIG9ubHkgYmUgY2FsbGVkIG9uIHNvbWV0aGluZyBpdGVyYWJsZQBBcnJheS4lcydzIGZpcnN0IGFyZ3VtZW50IHNob3VsZCBiZSBhIGZ1bmN0aW9uAEFycmF5LiVzIHdpdGhvdXQgaW5pdGlhbCB2YWx1ZSByZXF1aXJlZCBub24tZW1wdHkgYXJyYXkARXhwZWN0aW5nIGNvbXBhcmUgZnVuY3Rpb24sIGdvdCAldABBcnJheS4lcydzIHNlY29uZCBhcmd1bWVudCBzaG91bGQgYmUgdW5kZWZpbmVkLCBvciBhbiBvYmplY3QASW52YWxpZCBsZW5ndGggZm9yIEFycmF5QnVmZmVyCgBBcnJheUJ1ZmZlciB0b28gbG9uZwoAVW5zdXBwb3J0ZWQgZmlyc3QgYXJndW1lbnQgb2YgdHlwZSAldAoARXhwZWN0aW5nIGZpcnN0IGFyZ3VtZW50IHRvIGJlIGFuIGFycmF5LCBub3QgJXQAQXJyYXlCdWZmZXJWaWV3Lm1hcCBjYW4gb25seSBiZSBjYWxsZWQgb24gYW4gQXJyYXlCdWZmZXJWaWV3AEFycmF5QnVmZmVyVmlldy5tYXAncyBmaXJzdCBhcmd1bWVudCBzaG91bGQgYmUgYSBmdW5jdGlvbgBBcnJheUJ1ZmZlclZpZXcubWFwJ3Mgc2Vjb25kIGFyZ3VtZW50IHNob3VsZCBiZSB1bmRlZmluZWQsIG9yIGFuIG9iamVjdABFeHBlY3RpbmcgQXJyYXlCdWZmZXIsIGdvdCAldABEYXRhVmlldwBidWZmZXIAYnl0ZU9mZnNldABieXRlTGVuZ3RoAAAAAB8AOwBaAHgAlwC1ANQA8wARATABTgFtAQ==");
+writeSegment(34242, "HwA8AFsAeQCYALYA1QD0ABIBMQFPAW4BAABtAdoCSARKYW4ARmViAE1hcgBBcHIATWF5AEp1bgBKdWwAQXVnAFNlcABPY3QATm92AERlYwBTdW4ATW9uAFR1ZQBXZWQAVGh1AEZyaQBTYXQAdHoARGF0ZQBWYXJpYWJsZXMgb2YgdHlwZSAldCBhcmUgbm90IHN1cHBvcnRlZCBpbiBkYXRlIGNvbnN0cnVjdG9yAG1zACVzICVzICVkICVkICUwMmQ6JTAyZDolMDJkIEdNVCVjJTA0ZAAlcywgJWQgJXMgJWQgJTAyZDolMDJkOiUwMmQgR01UACVkLSUwMmQtJTAyZFQlMDJkOiUwMmQ6JTAyZC4lMDNkWgBHTVQAbWVzc2FnZQB0eXBlAEVycm9yAFN5bnRheEVycm9yAFR5cGVFcnJvcgBJbnRlcm5hbEVycm9yAFJlZmVyZW5jZUVycm9yACV2OiAldgBpbnQAZG91YmxlAGJvb2wAUGluAEpzVmFyAEVycm9yIFBhcnNpbmcgc2lnbmF0dXJlIGF0IGFyZ3VtZW50IG51bWJlciAlZABJbnZhbGlkIFNpZ25hdHVyZQD/Y29kAEV4cGVjdGluZyBmaXJzdCBhcmd1bWVudCB0byBiZSBhbiBhcnJheSwgbm90ICV0AEV4cGVjdGluZyBmaXJzdCBhcmd1bWVudCB0byBiZSBpdGVyYWJsZSwgbm90ICV0AEV4cGVjdGluZyBmaXJzdCAyIGFyZ3VtZW50cyB0byBiZSBpdGVyYWJsZSwgbm90ICV0IGFuZCAldABFeHBlY3RpbmcgZmlyc3QgMiBhcmd1bWVudHMgdG8gYmUgaXRlcmFibGUgb3IgdW5kZWZpbmVkLCBub3QgJXQgYW5kICV0AEluc3VmZmljaWVudCBzdGFjayBmb3IgY29tcHV0aW5nIEZGVABGSUZPX0ZVTEwAQlVGRkVSX0ZVTEwAQ0FMTEJBQ0sATE9XX01FTU9SWQBNRU1PUlkATUVNT1JZX0JVU1kAVUFSVF9PVkVSRkxPVwBmb3JjZQBVbmtub3duIGRldmljZSB0eXBlICVxAHNldENvbnNvbGUgY2FuJ3QgYmUgdXNlZCBvbiAnc29mdCcgb3Igbm9uLVNlcmlhbCBkZXZpY2VzACAACgBMACMAPQByZWYsc2l6ZSxuYW1lLGxpbmtzLi4uCgAlZCwlZCwAJXEsACwAJWQsAG5hbWUAc2l6ZQBtb3JlAEZpcnN0IDIgYXJndW1lbnRzIHNob3VsZCBiZSBhcnJheSBidWZmZXJzAFRoaXJkIGFyZ3VtZW50IHNob3VsZCBiZSBhIGZ1bmN0aW9uIG9yIGFycmF5AFNlYXJjaCBzdHJpbmcgaXMgdG9vIGxvbmcgKD49JWQgY2hhcnMpAHB3ZAB0egAoZnVuY3Rpb24oYmFzZSxqKSB7dmFyIG89e30sYWRkcjtmb3IgKHZhciByZWcgaW4gaikge2FkZHI9YmFzZStqW3JlZ107T2JqZWN0LmRlZmluZVByb3BlcnR5KG8scmVnLHtnZXQ6cGVlazMyLmJpbmQodW5kZWZpbmVkLGFkZHIpLHNldDpwb2tlMzIuYmluZCh1bmRlZmluZWQsYWRkcil9KTt9cmV0dXJuIG87fSkAJ0UuYXNtJyBjYWxscyBzaG91bGQgaGF2ZSBiZWVuIHJlcGxhY2VkIGJ5IHRoZSBFc3BydWlubyB0b29scyBiZWZvcmUgdXBsb2FkACdFLklubGluZUMnIGNhbGxzIHNob3VsZCBoYXZlIGJlZW4gcmVwbGFjZWQgYnkgdGhlIEVzcHJ1aW5vIHRvb2xzIGJlZm9yZSB1cGxvYWQAYWRkcgBsZW5ndGgAQWRkcmVzcyBzaG91bGQgYmUgYW4gaW50ZWdlciwgZ290ICV0AERhdGEgaXMgbm90IGRlZmluZWQATm90IGVub3VnaCBzdGFjayBtZW1vcnkgdG8gZGVjb2RlIGRhdGEAQ2FuIG9ubHkgdXNlICdhcmd1bWVudHMnIHZhcmlhYmxlIGluc2lkZSBhIGZ1bmN0aW9uAP8A/2NvZABTdHJpbmcgdG9vIGJpZyB0byBjb252ZXJ0IHRvIGludGVnZXIKAEluZmluaXR5AC1JbmZpbml0eQBTdHJpbmcgdG9vIGJpZyB0byBjb252ZXJ0IHRvIGZsb2F0CgBFeHBlY3RpbmcgYSBzdHJpbmcgb3IgYXJyYXksIGdvdCAldABFeHBlY3RpbmcgYSBzdHJpbmcsIGdvdCAldABBU0NJSSBvbmx5CgBJbnZhbGlkIFVSSQoAbG9hZAAgAAoA/3NjbwBmdW5jdGlvbiAALnJlcGxhY2VXaXRoKAApOwBFZGl0IHNob3VsZCBiZSBjYWxsZWQgd2l0aCB0aGUgbmFtZSBvZiBhIGZ1bmN0aW9uAEVkaXQgc2hvdWxkIGJlIGNhbGxlZCB3aXRoIGVkaXQoZnVuY05hbWUpIG9yIGVkaXQoJ2Z1bmNOYW1lJykALQBGdW5jdGlvbiBvciBTdHJpbmcgbm90IHN1cHBsaWVkIQBJbnRlcnZhbCBpcyB0b28gbG9uZyAoPjEwMCB5ZWFycykAdGltZQBpbnRlcnZhbABjYWxsYmFjawBhcmdzAHdhdGNoAFRpbWVvdXQASW50ZXJ2YWwAY2xlYXIlcyh1bmRlZmluZWQpIG5vdCBhbGxvd2VkLiBVc2UgY2xlYXIlcygpIGluc3RlYWQuAFVua25vd24gSW50ZXJ2YWwAZnJlcQBmb3JjZVNvZnQAc29mdABQdWxzZSBUaW1lIGdpdmVuIGZvciBkaWdpdGFsUHVsc2UgaXMgbGVzcyB0aGFuIDAsIG9yIG5vdCBhIG51bWJlcgBFeHBlY3RpbmcgYSBudW1iZXIgb3IgYXJyYXksIGdvdCAldAB3cml0ZQBJbnZhbGlkIHBpbiEAcmVhZABJbnZhbGlkIHBpbgBhbmFsb2cAaW5wdXQAaW5wdXRfcHVsbHVwAGlucHV0X3B1bGxkb3duAG91dHB1dABvcGVuZHJhaW4Ab3BlbmRyYWluX3B1bGx1cABhZl9vdXRwdXQAYWZfb3BlbmRyYWluAGF1dG8AVW5rbm93biBwaW4gbW9kZQBjbGsAY2xrUG9sAHJlcGVhdABUb28gbWFueSBwaW5zISAlZCBNYXhpbXVtLgBVbmFibGUgdG8gc2V0IHdhdGNoLiBZb3UgbWF5IGFscmVhZHkgaGF2ZSBhIHdhdGNoIG9uIGEgcGluIHdpdGggdGhlIHNhbWUgbnVtYmVyIChlZy4gQTAgYW5kIEIwKSwKb3IgdGhpcyBwaW4gY2Fubm90IGJlIHVzZWQgd2l0aCB3YXRjaABkZWJvdW5jZQBlZGdlAHJpc2luZwBmYWxsaW5nAGJvdGgAJ2VkZ2UnIGluIHNldFdhdGNoIHNob3VsZCBiZSAxLCAtMSwgMCwgJ3Jpc2luZycsICdmYWxsaW5nJyBvciAnYm90aCcAaXJxAGRhdGEARnVuY3Rpb24gb3IgU3RyaW5nIG5vdCBzdXBwbGllZCEAcGluAHJlY3VyAGNhbGxiYWNrAENhbid0IGhhdmUgYSBkYXRhIHBpbiBhbmQgaXJxOnRydWUAaXJxPXRydWUgc2V0LCBidXQgZnVuY3Rpb24gaXMgbm90IGEgbmF0aXZlIGZ1bmN0aW9uAGlycT10cnVlIHNldCwgYnV0IHdhdGNoIGlzIGFscmVhZHkgdXNlZABjbGVhcldhdGNoKHVuZGVmaW5lZCkgbm90IGFsbG93ZWQuIFVzZSBjbGVhcldhdGNoKCkgaW5zdGVhZC4AVW5rbm93biBXYXRjaCAldgAgLi4uIABFeHBlY3RpbmcgYSB2YWxpZCB2YWx1ZSwgZ290ICVzACgALAAldgD/Y29kACkgAHsgW25hdGl2ZSBjb2RlXSB9AHslc30AewogIAB7AHJldHVybiAAIAAKfQB9AHt9AAoAICAAdW5kZWZpbmVkAFsgAFsALCAAbnVsbAAgXQBdAG5ldyAlcyglZCkAQXJyYXlCdWZmZXIAVWludDhBcnJheQBuZXcgJXMoWwBdKQAuYnVmZmVyACVzAF9fcHJvdG9fXwBjb25zdHJ1Y3RvcgAldjogAHRvU3RyaW5nAHRvSlNPTgB7IAAgfQBmdW5jdGlvbiAAJXElcyVxACVRACVxACVRJXMAJXElcwAldiVzADogADoARXhwZWN0aW5nIGEgbW9kdWxlIG5hbWUgYXMgYSBzdHJpbmcsIGJ1dCBnb3QgJXQATW9kdWxlIG5hbWUgdG9vIGxvbmcgKG1heCAxMjggY2hhcnMpAE1vZHVsZSAlcyBub3QgZm91bmQAVGhlIGFyZ3VtZW50IHRvIHJlbW92ZUNhY2hlZCBtdXN0IGJlIGEgc3RyaW5nAE1vZHVsZSAlcSBub3QgZm91bmQAYXJncyBtdXN0IGJlIGFkZENhY2hlZChzdHJpbmcsIHN0cmluZ3xmdW5jdGlvbikAVW5hYmxlIHRvIGxvYWQgbW9kdWxlICVxAG1vZHVsZXMAcG9ydABudW0AQURDcwBjaGFubmVsAHR5cGUAYWYAZnVuY3Rpb25zAEludmFsaWQgdHlwZSAldCBmb3IgdmFsdWVPZgBjb25zdHJ1Y3RvcgBfX3Byb3RvX18AbGVuZ3RoAE9iamVjdCBwcm90b3R5cGUgbWF5IG9ubHkgYmUgYW4gT2JqZWN0IG9yIG51bGw6ICV0AHByb3BlcnRpZXNPYmplY3QgaXMgbm90IHN1cHBvcnRlZCB5ZXQAd3JpdGFibGUAZW51bWVyYWJsZQBjb25maWd1cmFibGUAZ2V0AHNldAB2YWx1ZQBGaXJzdCBhcmd1bWVudCBtdXN0IGJlIGFuIG9iamVjdCwgZ290ICV0AFByb3BlcnR5IGRlc2NyaXB0aW9uIG11c3QgYmUgYW4gb2JqZWN0LCBnb3QgJXQARmlyc3QgYXJndW1lbnQgbXVzdCBiZSBhbiBvYmplY3QsIGdvdCAldAoAU2Vjb25kIGFyZ3VtZW50IG11c3QgYmUgYW4gb2JqZWN0LCBnb3QgJXQKAENhbid0IGV4dGVuZCAldAoARXhwZWN0aW5nIE9iamVjdCwgZ290ICV0CgBQYXJlbnQgbXVzdCBiZSBhbiBvYmplY3QgLSBub3QgYSBTdHJpbmcsIEludGVnZXIsIGV0Yy4ARmlyc3QgYXJndW1lbnQgdG8gRXZlbnRFbWl0dGVyLm9uKC4uKSBtdXN0IGJlIGEgc3RyaW5nAFNlY29uZCBhcmd1bWVudCB0byBFdmVudEVtaXR0ZXIub24oLi4pIG11c3QgYmUgYSBmdW5jdGlvbiBvciBhIFN0cmluZyAoY29udGFpbmluZyBjb2RlKQAjb24ldgBkYXRhAP9idWYAI29uZGF0YQBGaXJzdCBhcmd1bWVudCB0byBFdmVudEVtaXR0ZXIuZW1pdCguLikgbXVzdCBiZSBhIHN0cmluZwBUb28gbWFueSBhcmd1bWVudHMgKD4lZCkARmlyc3QgYXJndW1lbnQgdG8gRXZlbnRFbWl0dGVyLnJlbW92ZUxpc3RlbmVyKC4uKSBtdXN0IGJlIGEgc3RyaW5nACNvbgBGaXJzdCBhcmd1bWVudCB0byBFdmVudEVtaXR0ZXIucmVtb3ZlQWxsTGlzdGVuZXJzKC4uKSBtdXN0IGJlIGEgc3RyaW5nLCBvciB1bmRlZmluZWQAQXJndW1lbnQgc2hvdWxkIGJlIGEgZnVuY3Rpb24A/3NjbwBwcm90b3R5cGUAQXJyYXkgcGFzc2VkIHRvIEZ1bmN0aW9uLmFwcGx5IGlzIHRvbyBiaWchIE1heGltdW0gNjQgYXJndW1lbnRzLCBnb3QgJWQAU2Vjb25kIGFyZ3VtZW50IHRvIEZ1bmN0aW9uLmFwcGx5IG11c3QgYmUgaXRlcmFibGUsIGdvdCAldABGdW5jdGlvbi5iaW5kIGV4cGVjdHMgdG8gYmUgY2FsbGVkIG9uIGZ1bmN0aW9uLCBnb3QgJXQA/3RocwBPbmVXaXJlAHBpbgBJbnZhbGlkIE9uZVdpcmUgZGV2aWNlIGFkZHJlc3MgJXEAUGlwZQByZWFkAHdyaXRlAGNvbXBsZXRlACNvbmNvbXBsZXRlAGVuZABjaHVua1NpemUAY2h1bmtTaXplIG11c3QgYmUgYW4gaW50ZWdlciA+IDAAJ29wdGlvbnMnIG11c3QgYmUgYW4gb2JqZWN0LCBvciB1bmRlZmluZWQAY2xvc2UAZHJhaW4AcG9zaXRpb24Ac291cmNlAGRlc3RpbmF0aW9uAERlc3RpbmF0aW9uIG9iamVjdCBkb2VzIG5vdCBpbXBsZW1lbnQgdGhlIHJlcXVpcmVkIHdyaXRlKGJ1ZmZlciwgbGVuZ3RoLCBwb3NpdGlvbikgbWV0aG9kLgBTb3VyY2Ugb2JqZWN0IGRvZXMgbm90IGltcGxlbWVudCB0aGUgcmVxdWlyZWQgcmVhZChidWZmZXIsIGxlbmd0aCwgcG9zaXRpb24pIG1ldGhvZC4AcGlwZXMAZHJhaW5XYWl0AFNvdXJjZSBTdHJlYW0gZG9lcyBub3QgaW1wbGVtZW50IHRoZSByZXF1aXJlZCByZWFkKGxlbmd0aCkgbWV0aG9kLgBEZXN0aW5hdGlvbiBTdHJlYW0gZG9lcyBub3QgaW1wbGVtZW50IHRoZSByZXF1aXJlZCB3cml0ZShidWZmZXIpIG1ldGhvZC4A/2J1ZgBWRVJTSU9OADJ2MDUAR0lUX0NPTU1JVAAwOWFhMGQ4NABCT0FSRABFTVNDUklQVEVOAEZMQVNIAFNUT1JBR0UAUkFNAFNFUklBTABDT05TT0xFAE1PRFVMRVMARVhQVFIAaGlzdG9yeQBmcmVlAHVzYWdlAHRvdGFsAGdjAGdjdGltZQBibG9ja3NpemUA/3RobgD/Y2F0AGNoYWluAP90aHMAZG9uZQByZXNvbHZlZABVbmhhbmRsZWQgcHJvbWlzZSByZWplY3Rpb246ICV2AP9sZWZ0AP9yZXMAUHJvbWlzZQBFeHBlY3Rpbmcgc29tZXRoaW5nIGl0ZXJhYmxlLCBnb3QgJXQAdGhlbgBDYWxsYmFjayBtdXN0IGJlIGEgZnVuY3Rpb24sIGdvdCAldABVbmZpbmlzaGVkIGNoYXJhY3RlciBzZXQgaW4gUmVnRXgARXhwZWN0aW5nIFN0cmluZyBhcyBmaXJzdCBhcmd1bWVudCwgZ290ICV0AFJlZ0V4cABzb3VyY2UAZmxhZ3MAbGFzdEluZGV4AGluZGV4AGlucHV0AHNldENvbnNvbGUgY2FuJ3QgYmUgdXNlZCBvbiAnc29mdCcgZGV2aWNlcwBfb3B0aW9ucwBfYmF1ZHJhdGUAU29mdHdhcmUgU2VyaWFsIENLIG5vdCBpbXBsZW1lbnRlZCB5ZXQKAENhbid0IHVuc2V0dXAgLSBTZXJpYWwgbm90IGluaXRpYWxpc2VkAHIAdwBhAEludmFsaWQgbW9kZSAlagBTdG9yYWdlRmlsZQBuYW1lAGNodW5rAG9mZnNldABhZGRyAG1vZGUAQ2FuJ3QgcmVhZCBpbiB0aGlzIG1vZGUAQ2FuJ3Qgd3JpdGUgaW4gdGhpcyBtb2RlAEZpbGUgdG9vIGJpZyEAX29wdGlvbnMAU1BJLnNlbmQ0Yml0IG9ubHkgd29ya3Mgb24gaGFyZHdhcmUgU1BJAFZhcmlhYmxlIHR5cGUgJXQgbm90IHN1aXRlZCB0byB0cmFuc21pdCBvcGVyYXRpb24AU1BJLnNlbmQ4Yml0IG9ubHkgd29ya3Mgb24gaGFyZHdhcmUgU1BJAE5vdCBlbm91Z2ggc3RhY2sgbWVtb3J5IHRvIGRlY29kZSBkYXRhAHN0YXJ0ZWQATm90IGVub3VnaCBmcmVlIHN0YWNrIHRvIHJlY2VpdmUgdGhpcyBhbW91bnQgb2YgZGF0YQBzdG9wAGFkZHJlc3MA/2J1ZgAjb25kYXRhAEVycm9yIHByb2Nlc3NpbmcgU2VyaWFsIGRhdGEgaGFuZGxlciAtIHJlbW92aW5nIGl0LgBSZWdFeHAAbGFzdEluZGV4AGluZGV4AGlucHV0AEludmFsaWQgY291bnQgdmFsdWUAd2F2ZQBydW5uaW5nAGJ1ZmZlcgAjb25maW5pc2gAY3VycmVudEJ1ZmZlcgBidWZmZXIyACNvbmJ1ZmZlcgBXYXZlZm9ybSBjb3VsZG4ndCBiZSBzdG9wcGVkAFNhbXBsZXMgbXVzdCBiZSBncmVhdGVyIHRoYW4gMABkb3VibGVCdWZmZXIAYml0cwBJbnZhbGlkIG51bWJlciBvZiBiaXRzAEV4cGVjdGluZyBvcHRpb25zIHRvIGJlIHVuZGVmaW5lZCBvciBhbiBPYmplY3QsIG5vdCAldABXYXZlZm9ybQBXYXZlZm9ybSBpcyBub3QgcnVubmluZwBXYXZlZm9ybSBpcyBhbHJlYWR5IHJ1bm5pbmcASW52YWxpZCBwaW4ARnJlcXVlbmN5IG11c3QgYmUgYWJvdmUgMC4wMDFIegB0aW1lAHJlcGVhdABVbmFibGUgdG8gc2NoZWR1bGUgYSB0aW1lcgBmcmVxAEV4cGVjdGluZyBzb21ldGhpbmcgaXRlcmFibGUsIGdvdCAldABOb3QgZW5vdWdoIG1lbW9yeSBmb3IgcmVzdWx0AAAAAAAoQlGM170mm4BhIANABd8EGQATMBP4ANgg++D///8AAAYADAATABkAHwCAAYYBjAGTAZkBnwEgAyYDLAMzAzkDPwPABMYEzATTBNkE3wRgBmYGbAZzBnkGfwbgB+YH7AfzB/kH/wcAMAYwDDATMBkwHzCAMYYxjDGTMZkxnzEgMyYzLDMzMzkzPzPANMY0zDTTNNk03zRgNmY2bDZzNnk2fzbgN+Y37DfzN/k3/zcAYAZgDGATYBlgH2CAYYZhjGGTYZlhn2EgYyZjLGMzYzljP2PAZMZkzGTTZNlk32RgZmZmbGZzZnlmf2bgZ+Zn7GfzZ/ln/2cAmAaYDJgTmBmYH5iAmYaZjJmTmZmZn5kgmyabLJszmzmbP5vAnMaczJzTnNmc35xgnmaebJ5znnmef57gn+af7J/zn/mf/58AyAbIDMgTyBnIH8iAyYbJjMmTyZnJn8kgyybLLMszyznLP8vAzMbMzMzTzNnM38xgzmbObM5zznnOf87gz+bP7M/zz/nP/88A+Ab4DPgT+Bn4H/iA+Yb5jPmT+Zn5n/kg+yb7LPsz+zn7P/vA/Mb8zPzT/Nn83/xg/mb+bP5z/nn+f/7g/+b/7P/z//n///8=");
+writeSegment(41438, "//8AACsAgQCsAHkATgAMABIAFwAEACcAtwCQAMAA0gDXAGdmeABJbnZhbGlkIFNpemUASW52YWxpZCBCUFAAR3JhcGhpY3MAemlnemFnAG1zYgBpbnRlcmxlYXZleAB2ZXJ0aWNhbF9ieXRlAHZlcnRpY2FsX2J5dGUgb25seSB3b3JrcyBmb3IgMWJwcCBBcnJheUJ1ZmZlcnMKAGhlaWdodCBtdXN0IGJlIGEgbXVsdGlwbGUgb2YgOCB3aGVuIHVzaW5nIHZlcnRpY2FsX2J5dGUKAGNvbG9yX29yZGVyAHJnYgBicmcAYmdyAGdicgBncmIAcmJnAGNvbG9yX29yZGVyIG11c3QgYmUgMyBjaGFyYWN0ZXJzAHNldFBpeGVsAGZpbGxSZWN0AEV4cGVjdGluZyBDYWxsYmFjayBGdW5jdGlvbiBvciBhbiBPYmplY3QgYnV0IGdvdCAldABFeHBlY3RpbmcgYSBTdHJpbmcAd2lkdGgAaGVpZ2h0AGJ1ZmZlcgBJZiBDb2xvciBpcyBhIFN0cmluZywgaXQgbXVzdCBiZSBvZiB0aGUgZm9ybSAnI3JyZ2diYicA/2ZuQgD/Zm5XAP9mbkgA/2ZuMQBGb250IGJpdG1hcCBtdXN0IGJlIGEgU3RyaW5nAEZpcnN0IGNoYXJhY3RlciBvdXQgb2YgcmFuZ2UARm9udCB3aWR0aCBtdXN0IGJlIGEgU3RyaW5nIG9yIGFuIGludGVnZXIAVmVjdG9yADR4NgA2eDgAc2V0Rm9udCV2AFVua25vd24gZm9udCAlagBWZWN0b3IlZABDdXN0b20Ac2V0Rm9udABNYXhpbXVtIG51bWJlciBvZiBwb2ludHMgKCVkKSBleGNlZWRlZCBmb3IgZmlsbFBvbHkAYnBwAHRyYW5zcGFyZW50AHBhbGV0dGUAcGFsZXR0ZSBzcGVjaWZpZWQsIGJ1dCBtdXN0IGJlIGEgZmxhdCBVaW50MTZBcnJheSBvZiAyLDQsIG9yIDE2IGVsZW1lbnRzAEV4cGVjdGluZyBmaXJzdCBhcmd1bWVudCB0byBiZSBhbiBvYmplY3Qgb3IgYSBTdHJpbmcARXhwZWN0aW5nIGZpcnN0IGFyZ3VtZW50IHRvIGEgdmFsaWQgSW1hZ2UAc2NhbGUAcm90YXRlAHgxAHkxAHgyAHkyAGFzQk1QL2FzVVJMIG9ubHkgd29ya3Mgb24gMWJwcC8yNGJwcCBHcmFwaGljcwBkYXRhOmltYWdlL2JtcDtiYXNlNjQsJXYACgBjb3VudABmbGlwAEludmFsaWQgQXJlbmEgU2l6ZQBNb2RlbCBpcyBub3QgYSBGbGF0IFN0cmluZy9BcnJheUJ1ZmZlcgBURk1pY3JvSW50ZXJwcmV0ZXIAVW5hYmxlIHRvIGFsbG9jYXRlIGVub3VnaCBSQU0gZm9yIFRlbnNvckZsb3cATWljcm9JbnRlcnByZXRlciBjcmVhdGlvbiBmYWlsZWQAbW9kZWwAbWkAVEZNaWNyb0ludGVycHJldGVyIHN0cnVjdHVyZSBjb3JydXB0ZWQAVW5hYmxlIHRvIGdldCB0ZW5zb3IAVW5zdXBwb3J0ZWQgVGVuc29yIGZvcm1hdCBUZkxpdGVUeXBlOiVkAFRGTWljcm9JbnRlcnByZXRlciBpbnZva2UgZmFpbGVkAFR5cGUgJXMgKCVkKSBub3QgaXMgbm90IHN1cHBvcnRlZA==");
+writeSegment(42764, "HgIAAB8CAAAgAgAADQo=");
+writeSegment(42788, "IQIAACICAAAjAgAAJAIAAEluZgBOYU4AAwQICw0OERITFBUWFyoyXgBPbmx5IDEgc3ViZ3JhcGggaXMgY3VycmVudGx5IHN1cHBvcnRlZC4KAEludm9rZSgpIGNhbGxlZCBhZnRlciBpbml0aWFsaXphdGlvbiBmYWlsZWQKAE1pc3NpbmcgcmVnaXN0cmF0aW9uIGZvciBvcGNvZGVfaW5kZXggJWQKAFNraXBwaW5nIG9wIGZvciBvcGNvZGVfaW5kZXggJWQKAFVuc3VwcG9ydGVkIGJlaGF2aW9yOiBmb3VuZCBidWlsdGluIG9wZXJhdG9yICVzIHdpdGggY3VzdG9tIG9wdGlvbnMuCgBOb2RlICVzIChudW1iZXIgJWQpIGZhaWxlZCB0byBwcmVwYXJlIHdpdGggc3RhdHVzICVkAE5vZGUgJXMgKG51bWJlciAlZCkgZmFpbGVkIHRvIGludm9rZSB3aXRoIHN0YXR1cyAlZABJbnB1dCBpbmRleCAlZCBvdXQgb2YgcmFuZ2UgKGxlbmd0aCBpcyAlZCkAT3V0cHV0IGluZGV4ICVkIG91dCBvZiByYW5nZSAobGVuZ3RoIGlzICVkKQ==");
+writeSegment(43264, "7KoAAPCqAAAAqwAADqsAABarAAAoqwAAN6sAAEKrAABTqwAAWasAAGmrAAB6qwAAi6sAAJarAACzqwAAvKsAAMurAADQqwAA3KsAAOCrAADlqwAA8qsAAPirAAAArAAAEKwAABSsAAAcrAAAK6wAADCsAAA1rAAAR6wAAFGsAABWrAAAXawAAHWsAAB5rAAAlawAAJysAACurAAAwKwAAMqsAADPrAAA06wAANesAADfrAAA/KwAAAqtAAAlrQAAKa0AADGtAAA3rQAAQ60AAEytAABorQAAba0AAHOtAAB7rQAAg60AAIutAACQrQAAlK0AAJqtAACirQAAsK0AALutAADCrQAAyK0AAMytAADbrQAA660AAPCtAAD8rQAAAq4AAAyuAAAQrgAAFK4AABmuAAAfrgAAJa4AACmuAAAxrgAAPK4AAEiuAABTrgAAWK4AAGOuAABrrgAAd64AAIOuAACKrgAAla4AAJ+uAACqrgAAsa4AALyuAADBrgAAy64AANGuAADprgAA9K4AAAevAAASrwAAFq8AAB6vAAAlrwAAKq8AADWvAAA7rwAARa8AAEmvAABPrwAAVK8AAFivAABprwAAda8AAH6vAACOrwAAlK8AAJ+vAACirwAAqK8AAL+vAAAAAAAAQUREAEFWRVJBR0VfUE9PTF8yRABDT05DQVRFTkFUSU9OAENPTlZfMkQAREVQVEhXSVNFX0NPTlZfMkQAREVQVEhfVE9fU1BBQ0UAREVRVUFOVElaRQBFTUJFRERJTkdfTE9PS1VQAEZMT09SAEZVTExZX0NPTk5FQ1RFRABIQVNIVEFCTEVfTE9PS1VQAEwyX05PUk1BTElaQVRJT04ATDJfUE9PTF8yRABMT0NBTF9SRVNQT05TRV9OT1JNQUxJWkFUSU9OAExPR0lTVElDAExTSF9QUk9KRUNUSU9OAExTVE0ATUFYX1BPT0xfMkQATVVMAFJFTFUAUkVMVV9OMV9UT18xAFJFTFU2AFJFU0hBUEUAUkVTSVpFX0JJTElORUFSAFJOTgBTT0ZUTUFYAFNQQUNFX1RPX0RFUFRIAFNWREYAVEFOSABDT05DQVRfRU1CRURESU5HUwBTS0lQX0dSQU0AQ0FMTABDVVNUT00ARU1CRURESU5HX0xPT0tVUF9TUEFSU0UAUEFEAFVOSURJUkVDVElPTkFMX1NFUVVFTkNFX1JOTgBHQVRIRVIAQkFUQ0hfVE9fU1BBQ0VfTkQAU1BBQ0VfVE9fQkFUQ0hfTkQAVFJBTlNQT1NFAE1FQU4AU1VCAERJVgBTUVVFRVpFAFVOSURJUkVDVElPTkFMX1NFUVVFTkNFX0xTVE0AU1RSSURFRF9TTElDRQBCSURJUkVDVElPTkFMX1NFUVVFTkNFX1JOTgBFWFAAVE9QS19WMgBTUExJVABMT0dfU09GVE1BWABERUxFR0FURQBCSURJUkVDVElPTkFMX1NFUVVFTkNFX0xTVE0AQ0FTVABQUkVMVQBNQVhJTVVNAEFSR19NQVgATUlOSU1VTQBMRVNTAE5FRwBQQURWMgBHUkVBVEVSAEdSRUFURVJfRVFVQUwATEVTU19FUVVBTABTRUxFQ1QAU0xJQ0UAU0lOAFRSQU5TUE9TRV9DT05WAFNQQVJTRV9UT19ERU5TRQBUSUxFAEVYUEFORF9ESU1TAEVRVUFMAE5PVF9FUVVBTABMT0cAU1VNAFNRUlQAUlNRUlQAU0hBUEUAUE9XAEFSR19NSU4ARkFLRV9RVUFOVABSRURVQ0VfUFJPRABSRURVQ0VfTUFYAFBBQ0sATE9HSUNBTF9PUgBPTkVfSE9UAExPR0lDQUxfQU5EAExPR0lDQUxfTk9UAFVOUEFDSwBSRURVQ0VfTUlOAEZMT09SX0RJVgBSRURVQ0VfQU5ZAFNRVUFSRQBaRVJPU19MSUtFAEZJTEwARkxPT1JfTU9EAFJBTkdFAFJFU0laRV9ORUFSRVNUX05FSUdIQk9SAExFQUtZX1JFTFUAU1FVQVJFRF9ESUZGRVJFTkNFAE1JUlJPUl9QQUQAQUJTAFNQTElUX1YAVU5JUVVFAENFSUwAUkVWRVJTRV9WMgBBRERfTgBHQVRIRVJfTkQAQ09TAFdIRVJFAFJBTksARUxVAFJFVkVSU0VfU0VRVUVOQ0UATUFUUklYX0RJQUcAUVVBTlRJWkUATUFUUklYX1NFVF9ESUFHAFJPVU5EAEhBUkRfU1dJU0gASUYAV0hJTEUATk9OX01BWF9TVVBQUkVTU0lPTl9WNABOT05fTUFYX1NVUFBSRVNTSU9OX1Y1");
+writeSegment(45024, "JgIAACcCAAAoAgAAKQI=");
+writeSegment(45048, "KgIAACoCAAArAgAALAIAAE9ubHkgMSBzdWJncmFwaCBpcyBjdXJyZW50bHkgc3VwcG9ydGVkLgoATG9naWMgZXJyb3IgaW4gbWVtb3J5IHBsYW5uZXIsIHRlbnNvciAlZCBoYXMgYW4gaW52YWxpZCBsaWZldGltZQBBcmVuYSBzaXplIGlzIHRvbyBzbWFsbCBmb3IgYWN0aXZhdGlvbiBidWZmZXJzLiBOZWVkZWQgJWQgYnV0IG9ubHkgJWQgd2FzIGF2YWlsYWJsZS4AVmFyaWFibGUgaXMgbm90IGFsbG9jYXRlZAA8Tm8gbmFtZT4AVHlwZSAnJXMnIGlzIG5vdCBzdXBwb3J0ZWQgYnkgcGFjay4AJXM6JWQgJXMgIT0gJXMgKCVkICE9ICVkKQAvaG9tZS9ndy93b3Jrc3BhY2UvRXNwcnVpbm8vbGlicy90ZW5zb3JmbG93L3RlbnNvcmZsb3cvbGl0ZS9leHBlcmltZW50YWwvbWljcm8va2VybmVscy9yZXNoYXBlLmNjAHN0cmV0Y2hfZGltAC0xAGlucHV0LT50eXBlAG91dHB1dC0+dHlwZQBudW1faW5wdXRfZWxlbWVudHMAbnVtX291dHB1dF9lbGVtZW50cwAlczolZCAlcyB3YXMgbm90IHRydWUuAE51bUlucHV0cyhub2RlKSA9PSAxIHx8IE51bUlucHV0cyhub2RlKSA9PSAyAE51bU91dHB1dHMobm9kZSkAMQAlczolZCAlcyAhPSAlcyAoJWQgIT0gJWQpAC9ob21lL2d3L3dvcmtzcGFjZS9Fc3BydWluby9saWJzL3RlbnNvcmZsb3cvdGVuc29yZmxvdy9saXRlL2V4cGVyaW1lbnRhbC9taWNyby9rZXJuZWxzL2RlcHRod2lzZV9jb252LmNjAGZpbHRlci0+cXVhbnRpemF0aW9uLnR5cGUAa1RmTGl0ZUFmZmluZVF1YW50aXphdGlvbgAlczolZCAlcyB3YXMgbm90IHRydWUuAGFmZmluZV9xdWFudGl6YXRpb24AYWZmaW5lX3F1YW50aXphdGlvbi0+c2NhbGUAVHlwZSAlcyAoJWQpIG5vdCBzdXBwb3J0ZWQuAGhhc19iaWFzIHx8IG5vZGUtPmlucHV0cy0+c2l6ZSA9PSAyAG5vZGUtPm91dHB1dHMtPnNpemUAMQAlczolZCAlcyAhPSAlcyAoJWQgIT0gJWQpAC9ob21lL2d3L3dvcmtzcGFjZS9Fc3BydWluby9saWJzL3RlbnNvcmZsb3cvdGVuc29yZmxvdy9saXRlL2V4cGVyaW1lbnRhbC9taWNyby9rZXJuZWxzL3F1YW50aXplLmNjAE51bUlucHV0cyhub2RlKQAxAE51bU91dHB1dHMobm9kZSkAb3V0cHV0LT5xdWFudGl6YXRpb24udHlwZQBrVGZMaXRlQWZmaW5lUXVhbnRpemF0aW9uACVzOiVkICVzIHdhcyBub3QgdHJ1ZS4AYWZmaW5lX3F1YW50aXphdGlvbgBhZmZpbmVfcXVhbnRpemF0aW9uLT5zY2FsZQBhZmZpbmVfcXVhbnRpemF0aW9uLT5zY2FsZS0+c2l6ZSA9PSAxAGlucHV0LT50eXBlID09IGtUZkxpdGVGbG9hdDMyAG91dHB1dC0+dHlwZSA9PSBrVGZMaXRlVUludDggfHwgb3V0cHV0LT50eXBlID09IGtUZkxpdGVJbnQ4AE91dHB1dCB0eXBlICVzICglZCkgbm90IHN1cHBvcnRlZACA////fwAAAAAAAAD/AAAAJXM6JWQgJXMgIT0gJXMgKCVkICE9ICVkKQAvaG9tZS9ndy93b3Jrc3BhY2UvRXNwcnVpbm8vbGlicy90ZW5zb3JmbG93L3RlbnNvcmZsb3cvbGl0ZS9leHBlcmltZW50YWwvbWljcm8va2VybmVscy9kZXF1YW50aXplLmNjAE51bUlucHV0cyhub2RlKQAxAE51bU91dHB1dHMobm9kZSkAJXM6JWQgJXMgd2FzIG5vdCB0cnVlLgBpbnB1dC0+dHlwZSA9PSBrVGZMaXRlVUludDggfHwgaW5wdXQtPnR5cGUgPT0ga1RmTGl0ZUludDgAb3V0cHV0LT50eXBlID09IGtUZkxpdGVGbG9hdDMyAFR5cGUgJXMgKCVkKSBub3Qgc3VwcG9ydGVkLgBPbmx5IGZsb2F0MzIgaXMgc3VwcG9ydGVkIGN1cnJlbnRseSwgZ290ICVzACVzOiVkICVzIHdhcyBub3QgdHJ1ZS4AL2hvbWUvZ3cvd29ya3NwYWNlL0VzcHJ1aW5vL2xpYnMvdGVuc29yZmxvdy90ZW5zb3JmbG93L2xpdGUvZXhwZXJpbWVudGFsL21pY3JvL2tlcm5lbHMvY29udi5jYwBoYXNfYmlhcyB8fCBub2RlLT5pbnB1dHMtPnNpemUgPT0gMgAlczolZCAlcyAhPSAlcyAoJWQgIT0gJWQpAG5vZGUtPm91dHB1dHMtPnNpemUAMQBmaWx0ZXItPnF1YW50aXphdGlvbi50eXBlAGtUZkxpdGVBZmZpbmVRdWFudGl6YXRpb24AYWZmaW5lX3F1YW50aXphdGlvbgBhZmZpbmVfcXVhbnRpemF0aW9uLT5zY2FsZQBUeXBlICVzICglZCkgbm90IHN1cHBvcnRlZC4ASW5wdXQgdHlwZSAlcyBpcyBub3QgY3VycmVudGx5IHN1cHBvcnRlZABUeXBlICVzIG5vdCBjdXJyZW50bHkgc3VwcG9ydGVkLgBPbmx5IDFELCAyRCBhbmQgNEQgdGVuc29ycyBzdXBwb3J0ZWQgY3VycmVudGx5LCBnb3QgJWRELgBPbmx5IDJEIGFuZCA0RCB0ZW5zb3JzIHN1cHBvcnRlZCBjdXJyZW50bHksIGdvdCAlZEQuAE9ubHkgZmxvYXQzMiwgaW50OF90IGFuZCB1aW50OF90IHN1cHBvcnRlZCBjdXJyZW50bHksIGdvdCAlcy4AJXM6JWQgJXMgIT0gJXMgKCVkICE9ICVkKQAvaG9tZS9ndy93b3Jrc3BhY2UvRXNwcnVpbm8vbGlicy90ZW5zb3JmbG93L3RlbnNvcmZsb3cvbGl0ZS9leHBlcmltZW50YWwvbWljcm8va2VybmVscy9zb2Z0bWF4LmNjAG91dHB1dC0+cGFyYW1zLnplcm9fcG9pbnQAMAAlczolZCAlcyB3YXMgbm90IHRydWUuAG91dHB1dC0+cGFyYW1zLnNjYWxlID09IDEuZiAvIDI1NgBPbmx5IGZsb2F0MzIgYW5kIHVpbnQ4IGFyZSBzdXBwb3J0ZWQgY3VycmVudGx5LCBnb3QgJWQuACVzOiVkICVzICE9ICVzICglZCAhPSAlZCkAL2hvbWUvZ3cvd29ya3NwYWNlL0VzcHJ1aW5vL2xpYnMvdGVuc29yZmxvdy90ZW5zb3JmbG93L2xpdGUvZXhwZXJpbWVudGFsL21pY3JvL2tlcm5lbHMvY2VpbC5jYwBOdW1JbnB1dHMobm9kZSkAMQBOdW1PdXRwdXRzKG5vZGUpAGlucHV0LT50eXBlAGtUZkxpdGVGbG9hdDMyAG91dHB1dC0+dHlwZQBvdXRwdXQtPmJ5dGVzAGlucHV0LT5ieXRlcwBvdXRwdXQtPmRpbXMtPnNpemUAaW5wdXQtPmRpbXMtPnNpemUAb3V0cHV0LT5kaW1zLT5kYXRhW2ldAGlucHV0LT5kaW1zLT5kYXRhW2ldAE9ubHkgZmxvYXQzMiwgdWludDggYW5kIGludDggYXJlIHN1cHBvcnRlZCBjdXJyZW50bHksIGdvdCAlcy4AT25seSBpbnQzMiBhcmUgc3VwcG9ydGVkIGN1cnJlbnRseSwgZ290ICVzLgBUeXBlICclcycgaXMgbm90IHN1cHBvcnRlZCBieSB1bnBhY2suAElucHV0cyBhbmQgb3V0cHV0cyBub3QgYWxsIGZsb2F0fHVpbnQ4fGludDggdHlwZXMuAC9ob21lL2d3L3dvcmtzcGFjZS9Fc3BydWluby9saWJzL3RlbnNvcmZsb3cvdGVuc29yZmxvdy9saXRlL2V4cGVyaW1lbnRhbC9taWNyby9rZXJuZWxzL3NwbGl0LmNjIE5vbiBjb25zdGFudCBheGlzIHRlbnNvciBub3Qgc3VwcG9ydGVkACVzOiVkICVzIHdhcyBub3QgdHJ1ZS4AL2hvbWUvZ3cvd29ya3NwYWNlL0VzcHJ1aW5vL2xpYnMvdGVuc29yZmxvdy90ZW5zb3JmbG93L2xpdGUvZXhwZXJpbWVudGFsL21pY3JvL2tlcm5lbHMvc3BsaXQuY2MAYXhpc192YWx1ZSA+PSAwAGF4aXNfdmFsdWUgPCBOdW1EaW1lbnNpb25zKGlucHV0KQBUeXBlICVzIGN1cnJlbnRseSBub3Qgc3VwcG9ydGVkLgBOZWcgb25seSBjdXJyZW50bHkgc3VwcG9ydHMgZmxvYXQzMiwgZ290ICVkLgAlczolZCAlcyAhPSAlcyAoJWQgIT0gJWQpAC9ob21lL2d3L3dvcmtzcGFjZS9Fc3BydWluby9saWJzL3RlbnNvcmZsb3cvdGVuc29yZmxvdy9saXRlL2V4cGVyaW1lbnRhbC9taWNyby9rZXJuZWxzL2Zsb29yLmNjAGlucHV0LT50eXBlAGtUZkxpdGVGbG9hdDMyAERvZXMgbm90IHN1cHBvcnQgdHlwZSAlZCwgcmVxdWlyZXMgYm9vbHxmbG9hdHxpbnR8dWludDgARG9lcyBub3Qgc3VwcG9ydCB0eXBlICVkLCByZXF1aXJlcyBmbG9hdHxpbnR8dWludDgAJXM6JWQgJXMgIT0gJXMgKCVkICE9ICVkKQAvaG9tZS9ndy93b3Jrc3BhY2UvRXNwcnVpbm8vbGlicy90ZW5zb3JmbG93L3RlbnNvcmZsb3cvbGl0ZS9leHBlcmltZW50YWwvbWljcm8va2VybmVscy9zdmRmLmNjAG5vZGUtPmlucHV0cy0+c2l6ZQA2AG51bV9maWx0ZXJzICUgcmFuawAwAGlucHV0LT50eXBlAGtUZkxpdGVGbG9hdDMyAE51bURpbWVuc2lvbnMoaW5wdXQpADIATnVtRGltZW5zaW9ucyh3ZWlnaHRzX2ZlYXR1cmUpAHdlaWdodHNfZmVhdHVyZS0+ZGltcy0+ZGF0YVsxXQBpbnB1dF9zaXplAE51bURpbWVuc2lvbnMod2VpZ2h0c190aW1lKQB3ZWlnaHRzX3RpbWUtPmRpbXMtPmRhdGFbMF0AbnVtX2ZpbHRlcnMAd2VpZ2h0c190aW1lLT5kaW1zLT5kYXRhWzFdAG1lbW9yeV9zaXplAGJpYXMtPmRpbXMtPmRhdGFbMF0AbnVtX3VuaXRzAGJpYXMtPnR5cGUAYWN0aXZhdGlvbl9zdGF0ZS0+dHlwZQBOdW1EaW1lbnNpb25zKGFjdGl2YXRpb25fc3RhdGUpAGFjdGl2YXRpb25fc3RhdGUtPmRpbXMtPmRhdGFbMF0AYmF0Y2hfc2l6ZQBhY3RpdmF0aW9uX3N0YXRlLT5kaW1zLT5kYXRhWzFdAG1lbW9yeV9zaXplICogbnVtX2ZpbHRlcnMAc2NyYXRjaF90ZW5zb3ItPnR5cGUATnVtRGltZW5zaW9ucyhzY3JhdGNoX3RlbnNvcikAc2NyYXRjaF90ZW5zb3ItPmRpbXMtPmRhdGFbMF0Ac2NyYXRjaF90ZW5zb3ItPmRpbXMtPmRhdGFbMV0AJXM6JWQgJXMgd2FzIG5vdCB0cnVlLgB3ZWlnaHRzX2ZlYXR1cmUtPnR5cGUgPT0ga1RmTGl0ZVVJbnQ4IHx8IHdlaWdodHNfZmVhdHVyZS0+dHlwZSA9PSBrVGZMaXRlSW50OAB3ZWlnaHRzX3RpbWUtPnR5cGUgPT0ga1RmTGl0ZVVJbnQ4IHx8IHdlaWdodHNfdGltZS0+dHlwZSA9PSBrVGZMaXRlSW50OABub2RlLT50ZW1wb3Jhcmllcy0+c2l6ZQA0AHNjcmF0Y2hfaW5wdXRfcXVhbnRpemVkLT50eXBlID09IGtUZkxpdGVVSW50OCB8fCBzY3JhdGNoX2lucHV0X3F1YW50aXplZC0+dHlwZSA9PSBrVGZMaXRlSW50OABzY3JhdGNoX2lucHV0X3F1YW50aXplZC0+ZGltcy0+ZGF0YVswXQBzY3JhdGNoX3NjYWxpbmdfZmFjdG9ycy0+dHlwZQBOdW1EaW1lbnNpb25zKHNjcmF0Y2hfc2NhbGluZ19mYWN0b3JzKQAxAHNjcmF0Y2hfc2NhbGluZ19mYWN0b3JzLT5kaW1zLT5kYXRhWzBdAHNjcmF0Y2hfZmxvYXRfd2VpZ2h0c190aW1lLT50eXBlAE51bURpbWVuc2lvbnMoc2NyYXRjaF9mbG9hdF93ZWlnaHRzX3RpbWUpAHNjcmF0Y2hfZmxvYXRfd2VpZ2h0c190aW1lLT5kaW1zLT5kYXRhWzBdAHNjcmF0Y2hfZmxvYXRfd2VpZ2h0c190aW1lLT5kaW1zLT5kYXRhWzFdAHdlaWdodHNfZmVhdHVyZS0+dHlwZQB3ZWlnaHRzX3RpbWUtPnR5cGUAbm9kZS0+b3V0cHV0cy0+c2l6ZQBvdXRwdXQtPnR5cGUATnVtRGltZW5zaW9ucyhvdXRwdXQpAG91dHB1dC0+ZGltcy0+ZGF0YVswXQBvdXRwdXQtPmRpbXMtPmRhdGFbMV0AVHlwZSAlcyBub3QgY3VycmVudGx5IHN1cHBvcnRlZC4=");
+writeSegment(50224, "IQIAACICAABpAgAAagI=");
+writeSegment(50248, "KgIAACoCAABrAgAAbAIAAFR5cGUgJWQgbm90IGN1cnJlbnRseSBzdXBwb3J0ZWQuAFF1YW50aXplZCBGdWxseUNvbm5lY3RlZCBleHBlY3RzIG91dHB1dCBkYXRhIHR5cGUgdWludDggb3IgaW50MTYAVHlwZSAlcyAoJWQpIGlzIG5vdCBzdXBwb3J0ZWQgYnkgTWF4aW11bS9NaW5pbXVtLgAlczolZCAlcyAhPSAlcyAoJWQgIT0gJWQpAC9ob21lL2d3L3dvcmtzcGFjZS9Fc3BydWluby9saWJzL3RlbnNvcmZsb3cvdGVuc29yZmxvdy9saXRlL2V4cGVyaW1lbnRhbC9taWNyby9rZXJuZWxzL2VsZW1lbnR3aXNlLmNjAGlucHV0LT50eXBlAGV4cGVjdGVkX3R5cGUATnVtSW5wdXRzKG5vZGUpADEATnVtT3V0cHV0cyhub2RlKQBvdXRwdXQtPnR5cGUASW5wdXQgZGF0YSB0eXBlICVzICglZCkgaXMgbm90IHN1cHBvcnRlZC4AL2hvbWUvZ3cvd29ya3NwYWNlL0VzcHJ1aW5vL2xpYnMvdGVuc29yZmxvdy90ZW5zb3JmbG93L2xpdGUvZXhwZXJpbWVudGFsL21pY3JvL2tlcm5lbHMvc3RyaWRlZF9zbGljZS5jYyBzdHJpZGUgdmFsdWUgaGFzIHRvIGJlIG5vbi16ZXJvACVzOiVkICVzICE9ICVzICglZCAhPSAlZCkAL2hvbWUvZ3cvd29ya3NwYWNlL0VzcHJ1aW5vL2xpYnMvdGVuc29yZmxvdy90ZW5zb3JmbG93L2xpdGUvZXhwZXJpbWVudGFsL21pY3JvL2tlcm5lbHMvc3RyaWRlZF9zbGljZS5jYwBvdXRwdXRfc2hhcGUtPmRhdGFbc2hhcGVfc2l6ZV0AZGltX3NoYXBlAG91dHB1dF9zaGFwZS0+c2l6ZQBzaGFwZV9zaXplAE51bUlucHV0cyhub2RlKQA0AE51bU91dHB1dHMobm9kZSkAMQAvaG9tZS9ndy93b3Jrc3BhY2UvRXNwcnVpbm8vbGlicy90ZW5zb3JmbG93L3RlbnNvcmZsb3cvbGl0ZS9leHBlcmltZW50YWwvbWljcm8va2VybmVscy9zdHJpZGVkX3NsaWNlLmNjIGlucHV0IGRpbSBzaG91bGQgbm90IGV4Y2VlZCA0AFR5cGUgJWQgaXMgY3VycmVudGx5IG5vdCBzdXBwb3J0ZWQgYnkgU3RyaWRlZFNsaWNlLgAlczolZCAlcyAhPSAlcyAoJWQgIT0gJWQpAC9ob21lL2d3L3dvcmtzcGFjZS9Fc3BydWluby9saWJzL3RlbnNvcmZsb3cvdGVuc29yZmxvdy9saXRlL2V4cGVyaW1lbnRhbC9taWNyby9rZXJuZWxzL3JvdW5kLmNjAE51bUlucHV0cyhub2RlKQAxAE51bU91dHB1dHMobm9kZSkAaW5wdXQtPnR5cGUAa1RmTGl0ZUZsb2F0MzIAb3V0cHV0LT50eXBlAG91dHB1dC0+Ynl0ZXMAaW5wdXQtPmJ5dGVzAG91dHB1dC0+ZGltcy0+c2l6ZQBpbnB1dC0+ZGltcy0+c2l6ZQBvdXRwdXQtPmRpbXMtPmRhdGFbaV0AaW5wdXQtPmRpbXMtPmRhdGFbaV0=");
+writeSegment(51528, "kwIAAJQCAAAqAgAAKgIAACoCAAAqAg==");
+writeSegment(51560, "lQIAAJYCAACXAgAAmAIAAJkCAACaAgAAVG9vIG1hbnkgYnVmZmVycyAobWF4IGlzICVkKQBidWZmZXIgaW5kZXggJWQgaXMgb3V0c2lkZSByYW5nZSAwIHRvICVkAFVuc3VwcG9ydGVkIGRhdGEgdHlwZSAlZCBpbiB0ZW5zb3IKAFVuaGFuZGxlZCBmdWxseS1jb25uZWN0ZWQgd2VpZ2h0cyBmb3JtYXQuAFVuaGFuZGxlZCBMU1RNIGtlcm5lbCB0eXBlOiAlZABObyB2YWxpZCBMU1RNIGJ1aWx0aW4gb3B0aW9ucyBleGlzdAByZXNoYXBlAHNxdWVlemUAREVMRUdBVEUgb3Agc2hvdWxkbid0IGV4aXN0IGluIG1vZGVsLgBJbnB1dCBhcnJheSBub3QgcHJvdmlkZWQgZm9yIG9wZXJhdGlvbiAnJXMnLgoARm91bmQgdG9vIG1hbnkgZGltZW5zaW9ucyBpbiB0aGUgaW5wdXQgYXJyYXkgb2Ygb3BlcmF0aW9uICclcycuCgBPcCBidWlsdGluX2NvZGUgb3V0IG9mIHJhbmdlOiAlZC4gQXJlIHlvdSB1c2luZyBvbGQgVEZMaXRlIGJpbmFyeSB3aXRoIG5ld2VyIG1vZGVsPwBEaWRuJ3QgZmluZCBvcCBmb3IgYnVpbHRpbiBvcGNvZGUgJyVzJyB2ZXJzaW9uICclZCcKAE9wZXJhdG9yIHdpdGggQ1VTVE9NIGJ1aWx0aW5fY29kZSBoYXMgbm8gY3VzdG9tX2NvZGUuCgAlczolZCAlcyAhPSAlcyAoJWQgIT0gJWQpAC9ob21lL2d3L3dvcmtzcGFjZS9Fc3BydWluby9saWJzL3RlbnNvcmZsb3cvdGVuc29yZmxvdy9saXRlL2tlcm5lbHMva2VybmVsX3V0aWwuY2MAaW5wdXQtPnF1YW50aXphdGlvbi50eXBlAGtUZkxpdGVBZmZpbmVRdWFudGl6YXRpb24AZmlsdGVyLT5xdWFudGl6YXRpb24udHlwZQAlczolZCAlcyB3YXMgbm90IHRydWUuAGFmZmluZV9xdWFudGl6YXRpb24AYWZmaW5lX3F1YW50aXphdGlvbi0+c2NhbGUAaW5wdXQtPnR5cGUAa1RmTGl0ZUludDgAZmlsdGVyLT50eXBlAGFmZmluZV9xdWFudGl6YXRpb24tPnNjYWxlLT5zaXplAGZpbHRlci0+ZGltcy0+ZGF0YVthZmZpbmVfcXVhbnRpemF0aW9uLT5xdWFudGl6ZWRfZGltZW5zaW9uXQBzdGQ6OmFicyhpbnB1dF9wcm9kdWN0X3NjYWxlIC0gYmlhc19zY2FsZSkgPD0gMWUtNiAqIHN0ZDo6bWluKGlucHV0X3Byb2R1Y3Rfc2NhbGUsIGJpYXNfc2NhbGUpAGlucHV0X3Byb2R1Y3Rfc2NhbGUgPj0gMABmYWxzZQBNb2RlbCBwcm92aWRlZCBpcyBzY2hlbWEgdmVyc2lvbiAlZCBub3QgZXF1YWwgdG8gc3VwcG9ydGVkIHZlcnNpb24gJWQuAEludm9rZSBmYWlsZWQ=");
+writeSegment(52764, "mwIAAJwCAAAqAgAALSsgICAwWDB4AChudWxsKQ==");
+writeSegment(52800, "EQAKABEREQAAAAAFAAAAAAAACQAAAAAL");
+writeSegment(52832, "EQAPChEREQMKBwABEwkLCwAACQYLAAALAAYRAAAAERER");
+writeSegment(52881, "Cw==");
+writeSegment(52890, "EQAKChEREQAKAAACAAkLAAAACQALAAAL");
+writeSegment(52939, "DA==");
+writeSegment(52951, "DAAAAAAMAAAAAAkMAAAAAAAMAAAM");
+writeSegment(52997, "Dg==");
+writeSegment(53009, "DQAAAAQNAAAAAAkOAAAAAAAOAAAO");
+writeSegment(53055, "EA==");
+writeSegment(53067, "DwAAAAAPAAAAAAkQAAAAAAAQAAAQAAASAAAAEhIS");
+writeSegment(53122, "EgAAABISEgAAAAAAAAk=");
+writeSegment(53171, "Cw==");
+writeSegment(53183, "CgAAAAAKAAAAAAkLAAAAAAALAAAL");
+writeSegment(53229, "DA==");
+writeSegment(53241, "DAAAAAAMAAAAAAkMAAAAAAAMAAAMAAAwMTIzNDU2Nzg5QUJDREVGLTBYKzBYIDBYLTB4KzB4IDB4AGluZgBJTkYAbmFuAE5BTgAuAAAAAHjjAABQdXJlIHZpcnR1YWwgZnVuY3Rpb24gY2FsbGVkIQAAAAAAAAADAAAABAAAAAQAAAAGAAAAg/miAERObgD8KRUA0VcnAN009QBi28AAPJmVAEGQQwBjUf4Au96rALdhxQA6biQA0k1CAEkG4AAJ6i4AHJLRAOsd/gApsRwA6D6nAPU1ggBEuy4AnOmEALQmcABBfl8A1pE5AFODOQCc9DkAi1+EACj5vQD4HzsA3v+XAA+YBQARL+8AClqLAG0fbQDPfjYACcsnAEZPtwCeZj8ALepfALondQDl68cAPXvxAPc5BwCSUooA+2vqAB+xXwAIXY0AMANWAHv8RgDwq2sAILzPADb0mgDjqR0AXmGRAAgb5gCFmWUAoBRfAI1AaACA2P8AJ3NNAAYGMQDKVhUAyahzAHviYABrjMAAGcRHAM1nwwAJ6NwAWYMqAIt2xACmHJYARK/dABlX0QClPgUABQf/ADN+PwDCMugAmE/eALt9MgAmPcMAHmvvAJ/4XgA1HzoAf/LKAPGHHQB8kCEAaiR8ANVu+gAwLXcAFTtDALUUxgDDGZ0ArcTCACxNQQAMAF0Ahn1GAONxLQCbxpoAM2IAALTSfAC0p5cAN1XVANc+9gCjEBgATXb8AGSdKgBw16sAY3z4AHqwVwAXFecAwElWADvW2QCnhDgAJCPLANaKdwBaVCMAAB+5APEKGwAZzt8AnzH/AGYeagCZV2EArPtHAH5/2AAiZbcAMuiJAOa/YADvxM0AbDYJAF0/1AAW3tcAWDveAN6bkgDSIigAKIboAOJYTQDGyjIACOMWAOB9ywAXwFAA8x2nABjgWwAuEzQAgxJiAINIAQD1jlsArbB/AB7p8gBISkMAEGfTAKrd2ACuX0IAamHOAAoopADTmbQABqbyAFx3fwCjwoMAYTyIAIpzeACvjFoAb9e9AC2mYwD0v8sAjYHvACbBZwBVykUAytk2ACio0gDCYY0AEsl3AAQmFAASRpsAxFnEAMjFRABNspEAABfzANRDrQApSeUA/dUQAAC+/AAelMwAcM7uABM+9QDs8YAAs+fDAMf4KACTBZQAwXE+AC4JswALRfMAiBKcAKsgewAutZ8AR5LCAHsyLwAMVW0AcqeQAGvnHwAxy5YAeRZKAEF54gD034kA6JSXAOLmhACZMZcAiO1rAF9fNgC7/Q4ASJq0AGekbABxckIAjV0yAJ8VuAC85QkAjTElAPd0OQAwBRwADQwBAEsIaAAs7lgAR6qQAHTnAgC91iQA932mAG5IcgCfFu8AjpSmALSR9gDRU1EAzwryACCYMwD1S34AsmNoAN0+XwBAXQMAhYl/AFVSKQA3ZMAAbdgQADJIMgBbTHUATnHUAEVUbgALCcEAKvVpABRm1QAnB50AXQRQALQ72wDqdsUAh/kXAElrfQAdJ7oAlmkpAMbMrACtFFQAkOJqAIjZiQAsclAABKS+AHcHlADzMHAAAPwnAOpxqABmwkkAZOA9AJfdgwCjP5cAQ5T9AA2GjAAxQd4AkjmdAN1wjAAXt+cACN87ABU3KwBcgKAAWoCTABARkgAP6NgAbICvANv/SwA4kA8AWRh2AGKlFQBhy7sAx4m5ABBAvQDS8gQASXUnAOu29gDbIrsAChSqAIkmLwBkg3YACTszAA6UGgBROqoAHaPCAK/trgBcJhIAbcJNAC16nADAVpcAAz+DAAnw9gArQIwAbTGZADm0BwAMIBUA2MNbAPWSxADGrUsATsqlAKc3zQDmqTYAq5KUAN1CaAAZY94AdozvAGiLUgD82zcArqGrAN8VMQAArqEADPvaAGRNZgDtBbcAKWUwAFdWvwBH/zoAavm5AHW+8wAok98Aq4AwAGaM9gAEyxUA+iIGANnkHQA9s6QAVxuPADbNCQBOQukAE76kADMjtQDwqhoAT2WoANLBpQALPw8AW3jNACP5dgB7iwQAiRdyAMamUwBvbuIA7+sAAJtKWADE2rcAqma6AHbPzwDRAh0AsfEtAIyZwQDDrXcAhkjaAPddoADGgPQArPAvAN3smgA/XLwA0N5tAJDHHwAq27YAoyU6AACvmgCtU5MAtlcEACkttABLgH4A2genAHaqDgB7WaEAFhIqANy3LQD65f0Aidv+AIm+/QDkdmwABqn8AD6AcACFbhUA/Yf/ACg+BwBhZzMAKhiGAE296gCz568Aj21uAJVnOQAxv1sAhNdIADDfFgDHLUMAJWE1AMlwzgAwy7gAv2z9AKQAogAFbOQAWt2gACFvRwBiEtIAuVyEAHBhSQBrVuAAmVIBAFBVNwAe1bcAM/HEABNuXwBdMOQAhS6pAB2ywwChMjYACLekAOqx1AAW9yEAj2nkACf/dwAMA4AAjUAtAE/NoAAgpZkAs6LTAC9dCgC0+UIAEdrLAH2+0ACb28EAqxe9AMqigQAIalwALlUXACcAVQB/FPAA4QeGABQLZACWQY0Ah77eANr9KgBrJbYAe4k0AAXz/gC5v54AaGpPAEoqqABPxFoALfi8ANdamAD0x5UADU2NACA6pgCkV18AFD+xAIA4lQDMIAEAcd2GAMnetgC/YPUATWURAAEHawCMsKwAssDQAFFVSAAe+w4AlXLDAKMGOwDAQDUABtx7AOBFzABOKfoA1srIAOjzQQB8ZN4Am2TYANm+MQCkl8MAd1jUAGnjxQDw2hMAujo8AEYYRgBVdV8A0r31AG6SxgCsLl0ADkTtABw+QgBhxIcAKf3pAOfW8wAifMoAb5E1AAjgxQD/140AbmriALD9xgCTCMEAfF10AGutsgDNbp0APnJ7AMYRagD3z6kAKXPfALXJugC3AFEA4rINAHS6JADlfWAAdNiKAA0VLACBGAwAfmaUAAEpFgCfenYA/f2+AFZF7wDZfjYA7NkTAIu6uQDEl/wAMagnAPFuwwCUxTYA2KhWALSotQDPzA4AEoktAG9XNAAsVokAmc7jANYguQBrXqoAPiqcABFfzAD9C0oA4fT7AI47bQDihiwA6dSEAPy0qQDv7tEALjXJAC85YQA4IUQAG9nIAIH8CgD7SmoALxzYAFO0hABOmYwAVCLMACpV3ADAxtYACxmWABpwuABplWQAJlpgAD9S7gB/EQ8A9LURAPzL9QA0vC0ANLzuAOhdzADdXmAAZ46bAJIz7wDJF7gAYVibAOFXvABRg8YA2D4QAN1xSAAtHN0ArxihACEsRgBZ89cA2XqYAJ5UwABPhvoAVgb8AOV5rgCJIjYAOK0iAGeT3ABV6KoAgiY4AMrnmwBRDaQAmTOxAKnXDgBpBUgAZbLwAH+IpwCITJcA+dE2ACGSswB7gkoAmM8hAECf3ADcR1UA4XQ6AGfrQgD+nd8AXtRfAHtnpAC6rHoAVfaiACuIIwBBulUAWW4IACEqhgA5R4MAiePmAOWe1ABJ+0AA/1bpABwPygDFWYoAlPorANPBxQAPxc8A21quAEfFhgCFQ2IAIYY7ACx5lAAQYYcAKkx7AIAsGgBDvxIAiCaQAHg8iQCoxOQA5dt7AMQ6wgAm9OoA92eKAA2SvwBloysAPZOxAL18CwCkUdwAJ91jAGnh3QCalBkAqCmVAGjOKAAJ7bQARJ8gAE6YygBwgmMAfnwjAA+5MgCn9Y4AFFbnACHxCAC1nSoAb35NAKUZUQC1+asAgt/WAJbdYQAWNgIAxDqfAIOioQBy7W0AOY16AIK4qQBrMlwARidbAAA07QDSAHcA/PRVAAFZTQDgcYA=");
+writeSegment(56147, "QPsh+T8AAAAALUR0PgAAAICYRvg8AAAAYFHMeDsAAACAgxvwOQAAAEAgJXo4AAAAgCKC4zYAAAAAHfNpNU+7YQVnrN0/GC1EVPsh6T+b9oHSC3PvPxgtRFT7Ifk/4mUvIn8rejwHXBQzJqaBPL3L8HqIB3A8B1wUMyamkTwYLURU+yHpPxgtRFT7Iem/0iEzf3zZAkDSITN/fNkCwA==");
+writeSegment(56319, "gBgtRFT7IQlAGC1EVPshCcAAAAAAAADgPwAAAAAAAOC/AAAAPwAAAL8=");
+writeSegment(56368, "bAcAAMQJAADvvq3evrr+yhX//wD//////////wEAAAAAxAkAAAk9AAQAAAAKAAAAABnsAwAZFAQgAwAA4Pz//+gDAADihQAAEoYAADeRAAACAgAAAwIAAAQCAAAFAgAABgIAAAcCAAAIAgAACQIAAAoCAAALAgAADAIAAA0CAAAOAgAADwIAABACAAARAgAAEgIAAAAAAAAd");
+writeSegment(56532, "LQIAAC4C");
+writeSegment(56568, "MQI=");
+writeSegment(56600, "MgI=");
+writeSegment(56628, "MwIAADQC");
+writeSegment(56652, "NQIAADYCAAA3AgAAOAI=");
+writeSegment(56684, "OQIAADoCAAA7AgAAPAI=");
+writeSegment(56724, "PQIAAD4C");
+writeSegment(56756, "PwIAAEAC");
+writeSegment(56780, "QQIAAEICAABDAgAARAI=");
+writeSegment(56812, "RQIAAEYCAABHAgAASAI=");
+writeSegment(56844, "RQIAAEYCAABHAgAASQI=");
+writeSegment(56876, "SgIAAEsCAABMAgAATQI=");
+writeSegment(56916, "TgIAAE8C");
+writeSegment(56948, "UAIAAFEC");
+writeSegment(56980, "UgIAAFMC");
+writeSegment(57012, "UgIAAFQC");
+writeSegment(57044, "VQIAAFYC");
+writeSegment(57068, "VwIAAFgCAABZAgAAWgI=");
+writeSegment(57108, "WwIAAFwC");
+writeSegment(57144, "XQI=");
+writeSegment(57176, "XgI=");
+writeSegment(57208, "XwI=");
+writeSegment(57240, "YAI=");
+writeSegment(57272, "YQI=");
+writeSegment(57304, "YgI=");
+writeSegment(57336, "YwI=");
+writeSegment(57368, "ZAI=");
+writeSegment(57388, "ZQIAAGYCAABnAgAAaAI=");
+writeSegment(57420, "bQIAAG4CAABvAgAAcAI=");
+writeSegment(57464, "ewI=");
+writeSegment(57496, "fAI=");
+writeSegment(57524, "hQIAAIYC");
+writeSegment(57556, "hQIAAIcC");
+writeSegment(57588, "hQIAAIgC");
+writeSegment(57620, "hQIAAIkC");
+writeSegment(57652, "hQIAAIoC");
+writeSegment(57684, "hQIAAIsC");
+writeSegment(57716, "hQIAAIwC");
+writeSegment(57748, "jQIAAI4C");
+writeSegment(57780, "jwIAAJAC");
+writeSegment(57812, "kQIAAJIC");
+writeSegment(57840, "BQ==");
+writeSegment(57852, "nQI=");
+writeSegment(57876, "ngIAAJ8CAAB45QMAAAQ=");
+writeSegment(57900, "AQ==");
+writeSegment(57915, "Cv////8=");
+writeSegment(57984, "8OE=");
+writeSegment(58176, "sOkD");
+writeSegment(58232, "BQ==");
+writeSegment(58244, "ogI=");
+writeSegment(58268, "ngIAAKMCAADQ6QM=");
+writeSegment(58292, "Ag==");
+writeSegment(58307, "//////8=");
 return asmFunc({
     'Int8Array': Int8Array,
     'Int16Array': Int16Array,
@@ -83995,11 +83994,11 @@ function updateGlobalBufferAndViews(buf) {
 }
 
 var STATIC_BASE = 1024,
-    STACK_BASE = 5501056,
+    STACK_BASE = 5500016,
     STACKTOP = STACK_BASE,
-    STACK_MAX = 258176,
-    DYNAMIC_BASE = 5501056,
-    DYNAMICTOP_PTR = 258016;
+    STACK_MAX = 257136,
+    DYNAMIC_BASE = 5500016,
+    DYNAMICTOP_PTR = 256976;
 
 assert(STACK_BASE % 16 === 0, 'stack must start aligned');
 assert(DYNAMIC_BASE % 16 === 0, 'heap must start aligned');
@@ -84532,10 +84531,10 @@ var tempI64;
 // === Body ===
 
 var ASM_CONSTS = {
-  31845: function() {jsHandleIO();},  
- 31863: function($0, $1) {hwSetPinValue($0,$1)},  
- 31888: function($0) {return hwGetPinValue($0)},  
- 31917: function() {return Date.now();}
+  30821: function() {jsHandleIO();},  
+ 30839: function($0, $1) {hwSetPinValue($0,$1)},  
+ 30864: function($0) {return hwGetPinValue($0)},  
+ 30893: function() {return Date.now();}
 };
 
 // Avoid creating a new array
@@ -84572,7 +84571,7 @@ function _emscripten_asm_const_iii(code, sigPtr, argbuf) {
 
 
 
-// STATICTOP = STATIC_BASE + 257152;
+// STATICTOP = STATIC_BASE + 256112;
 /* global initializers */  __ATINIT__.push({ func: function() { ___wasm_call_ctors() } });
 
 
@@ -84634,7 +84633,7 @@ function _emscripten_asm_const_iii(code, sigPtr, argbuf) {
     }
 
   function _emscripten_get_sbrk_ptr() {
-      return 258016;
+      return 256976;
     }
 
   function _emscripten_memcpy_big(dest, src, num) {
