@@ -74,6 +74,7 @@ This will clone both the EspruinoWebIDE repository and the submodule dependencie
 ### Running in [Node.js](https://nodejs.org/en/)
 
 * Go to the `EspruinoWebIDE` directory
+* Run `sudo npm install nw -g`
 * Run `npm install`
 * Run `npm start`
 
