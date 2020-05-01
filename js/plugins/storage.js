@@ -104,11 +104,12 @@
 
   function getFileList(callback) {
     //callback(['"a"','"b"','"c"']);
-    Espruino.Core.Utils.executeExpression("require('Storage').list().map(x=>JSON.stringify(x))",function(files) {
+
+    Espruino.Core.Utils.executeStatement(`require('Storage').list().forEach(x=>print(JSON.stringify(x)));`, function(files) {
       var fileList = [];
       try {
-        fileList = JSON.parse(files);
-        fileList = fileList.map(fileName => Espruino.Core.Utils.parseJSONish(fileName))
+        fileList = Espruino.Core.Utils.parseJSONish("["+files.trim().replace(/\n/g,",")+"]");
+        fileList.sort();
         // fileList.sort(); // ideally should ignore first char for sorting
       } catch (e) {
         console.log("getFileList",e);
