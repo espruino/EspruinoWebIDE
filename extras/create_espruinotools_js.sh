@@ -1,5 +1,5 @@
 #!/bin/bash
-# Makes a mashed up JS file containing what's needed to 
+# Makes a mashed up JS file containing what's needed to
 # run the Espruino code building pipeline
 #
 # You can then just do:
@@ -10,7 +10,7 @@
 # }).then(function(code) {
 #   console.log(code);
 # });
-# 
+#
 
 cd `dirname $0`
 cd ..
@@ -18,33 +18,17 @@ cd ..
 echo Creating espruinotools.js
 cat > espruinotools.js << EOF
 // EspruinoTools bundle (https://github.com/espruino/EspruinoTools)
-// Cteated with https://github.com/espruino/EspruinoWebIDE/blob/gh-pages/extras/create_espruinotools_js.sh
-
-if (typeof $ === "undefined") {
-  var jqReady = [];
-  var jqShim = {
-    ready : function(cb) { jqReady.push(cb); },
-    css : function() {},
-    html : function() {},
-    width : function() {},
-    height : function() {},
-    addClass : function() {},
-    removeClass : function() {},
-    appendTo : function() { return jqShim; },
-    show : function() {},
-    hide : function() {},
-  };
-  var $ = function() { return jqShim; };
-}
+// Created with https://github.com/espruino/EspruinoWebIDE/blob/gh-pages/extras/create_espruinotools_js.sh
 EOF
+echo "// Based on EspruinoWebIDE " `sed -ne "s/.*version.*\"\(.*\)\".*/\1/p" package.json` >> espruinotools.js
 cat EspruinoTools/espruino.js >> espruinotools.js
 cat >> espruinotools.js << EOF
 Espruino.Core.Notifications = {
   success : function(e) { console.log(e); },
   error : function(e) { console.error(e); },
   warning : function(e) { console.warn(e); },
-  info : function(e) { console.log(e); }, 
-};  
+  info : function(e) { console.log(e); },
+};
 Espruino.Core.Status = {
   setStatus : function(e,len) { console.log(e); },
   hasProgress : function() { return false; },
@@ -60,14 +44,14 @@ cat EspruinoTools/core/codeWriter.js >> espruinotools.js
 cat EspruinoTools/core/modules.js >> espruinotools.js
 cat EspruinoTools/core/env.js >> espruinotools.js
 #cat EspruinoTools/plugins/compiler.js >> espruinotools.js
-#cat EspruinoTools/plugins/assembler.js >> espruinotools.js
+cat EspruinoTools/plugins/assembler.js >> espruinotools.js
 cat EspruinoTools/plugins/getGitHub.js >> espruinotools.js
-cat EspruinoTools/libs/utf8.js >> espruinotools.js
-cat EspruinoTools/plugins/unicode.js >> espruinotools.js
-cat EspruinoTools/libs/esprima/esprima.js >> espruinotools.js
-cat EspruinoTools/libs/esprima/esmangle.js >> espruinotools.js
-cat EspruinoTools/libs/esprima/escodegen.js >> espruinotools.js
-cat EspruinoTools/plugins/minify.js >> espruinotools.js
+#cat EspruinoTools/libs/utf8.js >> espruinotools.js
+#cat EspruinoTools/plugins/unicode.js >> espruinotools.js
+#cat EspruinoTools/libs/esprima/esprima.js >> espruinotools.js
+#cat EspruinoTools/libs/esprima/esmangle.js >> espruinotools.js
+#cat EspruinoTools/libs/esprima/escodegen.js >> espruinotools.js
+#cat EspruinoTools/plugins/minify.js >> espruinotools.js
 cat EspruinoTools/plugins/pretokenise.js >> espruinotools.js
 cat EspruinoTools/plugins/saveOnSend.js >> espruinotools.js
 cat EspruinoTools/plugins/setTime.js >> espruinotools.js
@@ -87,6 +71,4 @@ Espruino.transform = function(code, options) {
   });
 };
 
-// Finally init everything
-jqReady.forEach(function(cb){cb();});
 EOF
