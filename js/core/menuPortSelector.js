@@ -137,19 +137,23 @@
 
   }
 
-  function connectToPort(serialPort, callback)
-  {
+  function connectToPort(serialPort, callback) {
     if (!serialPort) {
       Espruino.Core.Notifications.error("Invalid Serial Port ");
       return;
     }
+    function nameFromConInfo(cInfo) {
+      var name = serialPort;
+      if (cInfo.portName && name!=cInfo.portName) name+=", "+cInfo.portName;
+      return name;
+    }
+
     Espruino.Core.Status.setStatus("Connecting...");
     Espruino.Core.Serial.setSlowWrite(true);
     Espruino.Core.Serial.open(serialPort, function(cInfo) {
       if (cInfo!=undefined) {
         console.log("Device found "+JSON.stringify(cInfo));
-        var name = serialPort;
-        if (cInfo.portName) name+=", "+cInfo.portName;
+        var name = nameFromConInfo(cInfo);
         var boardData = Espruino.Core.Env.getBoardData();
         if (!boardData.BOARD || !boardData.VERSION)
           name += " (No response from board)";
@@ -160,9 +164,9 @@
         Espruino.Core.Notifications.error("Connection Failed.", true);
         callback(false);
       }
-    }, function () {
-      console.log("Disconnect callback...");
-      Espruino.Core.Notifications.warning("Disconnected", true);
+    }, function (cInfo) {
+      console.log("Disconnect callback... "+JSON.stringify(cInfo));
+      Espruino.Core.Notifications.warning("Disconnected from "+nameFromConInfo(cInfo), true);
     });
 
   };
