@@ -18,7 +18,7 @@
     Espruino.Core.Config.add("AUTO_SAVE_CODE", {
       section : "Communications",
       name : "Auto Save",
-      description : "Save code to Chrome's cloud storage when clicking 'Send to Espruino'?",
+      description : "Save code to local storage",
       type : "boolean",
       defaultValue : true,
     });
@@ -46,21 +46,27 @@
     // get code from our config area at bootup
     Espruino.addProcessor("initialised", function(data,callback) {
       var code;
-      if (Espruino.Config.CODE) {
-        code = Espruino.Config.CODE;
-        console.log("Loaded code from storage.");
-      } else {
+      if (Espruino.Config.AUTO_SAVE_CODE && typeof window !== 'undefined' && window.localStorage) {
+        code = window.localStorage.getItem("JSCODE");
+        console.log("Loaded code from local storage.");
+      }
+      if (!code) {
         code = Espruino.Core.Code.DEFAULT_CODE;
         console.log("No code in storage.");
       }
       Espruino.Core.EditorJavaScript.setCode(code);
       callback(data);
     });
-
-
     Espruino.addProcessor("sending", function(data, callback) {
+      // save the code to local storage - not rate limited
       if(Espruino.Config.AUTO_SAVE_CODE)
-        Espruino.Config.set("CODE", Espruino.Core.EditorJavaScript.getCode()); // save the code
+        window.localStorage.setItem("JSCODE", Espruino.Core.EditorJavaScript.getCode());
+      callback(data);
+    });
+    Espruino.addProcessor("jsCodeChanged", function(data, callback) {
+      // save the code to local storage - not rate limited
+      if(Espruino.Config.AUTO_SAVE_CODE)
+        window.localStorage.setItem("JSCODE", data.code);
       callback(data);
     });
     // try and save code when window closes

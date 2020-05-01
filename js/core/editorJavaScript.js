@@ -80,9 +80,8 @@
           cm.setCursor(c);
         }
       }
-      // write the modified code into local storage
-      if ((typeof chrome!="undefined") && chrome.storage && chrome.storage.local)
-        chrome.storage.local.set({"CODE_JS": cm.getValue()});
+      // Send an event for code changed
+      Espruino.callProcessor("jsCodeChanged", { code : cm.getValue() } );
     });
     // Handle hovering
     CodeMirror.on(codeMirror.getWrapperElement(), "mouseover", function(e) {
