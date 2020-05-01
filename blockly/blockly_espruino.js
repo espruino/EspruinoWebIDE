@@ -63,8 +63,8 @@ window.onload = function() {
     }
   }
 
-  // Store current blockly state (Blockly.mainWorkspace?)
-  Blockly.addChangeListener(function() {
+  // Store current blockly state
+  Blockly.mainWorkspace.addChangeListener(function() {
     var xml = Blockly.Xml.workspaceToDom( Blockly.mainWorkspace );
     if (window.localStorage) {
       var txt = "";
