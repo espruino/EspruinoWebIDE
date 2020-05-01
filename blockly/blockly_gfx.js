@@ -244,16 +244,16 @@ Blockly.Blocks.gfx_image = {
         fileLoader.addEventListener('click', function(e) {
           e.target.value = ''; // handle repeated upload of the same file
         });
-        fileLoader.onchange = function(e) {
-          var reader = new FileReader();
-          reader.onload = function(e) {
-            fi.setValue(reader.result);
-            loadImage(reader.result);
-          };
-          reader.readAsDataURL(e.target.files[0]);
-        };
         document.body.appendChild(fileLoader);
       }
+      fileLoader.onchange = function(e) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+          field.setValue(reader.result);
+          loadImage(reader.result);
+        };
+        reader.readAsDataURL(e.target.files[0]);
+      };
       fileLoader.click();
     }
 
