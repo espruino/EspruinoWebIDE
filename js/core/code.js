@@ -59,24 +59,16 @@
     });
     Espruino.addProcessor("sending", function(data, callback) {
       // save the code to local storage - not rate limited
-      if(Espruino.Config.AUTO_SAVE_CODE)
+      if(Espruino.Config.AUTO_SAVE_CODE && typeof window !== 'undefined' && window.localStorage)
         window.localStorage.setItem("JSCODE", Espruino.Core.EditorJavaScript.getCode());
       callback(data);
     });
     Espruino.addProcessor("jsCodeChanged", function(data, callback) {
       // save the code to local storage - not rate limited
-      if(Espruino.Config.AUTO_SAVE_CODE)
+      if(Espruino.Config.AUTO_SAVE_CODE && typeof window !== 'undefined' && window.localStorage)
         window.localStorage.setItem("JSCODE", data.code);
       callback(data);
     });
-    // try and save code when window closes
-    function saveCode(e) {
-      if(Espruino.Config.AUTO_SAVE_CODE)
-        Espruino.Config.set("CODE", Espruino.Core.EditorJavaScript.getCode());
-    }
-    window.addEventListener("close", saveCode);
-    if (!Espruino.Core.Utils.isChromeWebApp()) // chrome complains if we use this
-      window.addEventListener("beforeunload", saveCode);
   }
 
   function isInBlockly() { // TODO: we should really enumerate views - we might want another view?
