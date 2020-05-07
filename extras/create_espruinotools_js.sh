@@ -71,4 +71,8 @@ Espruino.transform = function(code, options) {
   });
 };
 
+if (!document) Espruino.init();
+if ("undefined"!=typeof module)
+  module.exports = Espruino;
+
 EOF
