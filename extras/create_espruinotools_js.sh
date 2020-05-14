@@ -35,7 +35,11 @@ Espruino.Core.Status = {
   incrementProgress : function(amt) {}
 };
 EOF
+
+# hacks to get acorn to work despite node
+echo "var acorn = (function(){ var exports={};" >> espruinotools.js
 cat js/libs/acorn/acorn.js >> espruinotools.js
+echo "return exports;})();" >> espruinotools.js
 cat EspruinoTools/core/utils.js >> espruinotools.js
 cat EspruinoTools/core/config.js >> espruinotools.js
 # do we need this?
@@ -71,7 +75,7 @@ Espruino.transform = function(code, options) {
   });
 };
 
-if (!document) Espruino.init();
+if ("undefined"==typeof document) Espruino.init();
 if ("undefined"!=typeof module)
   module.exports = Espruino;
 
