@@ -37,7 +37,7 @@ Espruino.Core.Status = {
 EOF
 
 # hacks to get acorn to work despite node
-echo "var acorn = (function(){ var exports={};" >> espruinotools.js
+echo "var acorn = (function(){ var exports={};var module={};" >> espruinotools.js
 cat js/libs/acorn/acorn.js >> espruinotools.js
 echo "return exports;})();" >> espruinotools.js
 cat EspruinoTools/core/utils.js >> espruinotools.js
