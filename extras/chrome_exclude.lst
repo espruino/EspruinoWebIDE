@@ -44,3 +44,12 @@ serviceworker.js
 *.sh
 EspruinoWebIDE.zip
 README.md
+espruinotools.js
+testtool.html
+emulator.html
+*.jsx
+embed.js
+js/plugins/emulator_espruino.js
+js/plugins/emulator.js
+EspruinoTools/index.html
+EspruinoTools/configDefaults.json
