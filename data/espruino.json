@@ -1063,16 +1063,6 @@
       "!doc": "<p>Performs a Fast Fourier Transform (FFT) in 32 bit floats on the supplied data and writes it back into the\noriginal arrays. Note that if only one array is supplied, the data written back is the modulus of the complex\nresult <code>sqrt(r*r+i*i)</code>.</p>\n<p>In order to perform the FFT, there has to be enough room on the stack to allocate two arrays of 32 bit\nfloating point numbers - this will limit the maximum size of FFT possible to around 1024 items on\nmost platforms.</p>\n<p><strong>Note:</strong> on the Original Espruino board, FFTs are performed in 64bit arithmetic as there isn&#39;t\nspace to include the 32 bit maths routines (2x more RAM is required).</p>\n",
       "!url": "http://www.espruino.com/Reference#l_E_FFT"
     },
-    "interpolate": {
-      "!type": "fn(array: ?, index: number) -> number",
-      "!doc": "<p>Interpolate between two adjacent values in the Typed Array</p>\n",
-      "!url": "http://www.espruino.com/Reference#l_E_interpolate"
-    },
-    "interpolate2d": {
-      "!type": "fn(array: ?, width: number, x: number, y: number) -> number",
-      "!doc": "<p>Interpolate between four adjacent values in the Typed Array, in 2D.</p>\n",
-      "!url": "http://www.espruino.com/Reference#l_E_interpolate2d"
-    },
     "kickWatchdog": {
       "!type": "fn()",
       "!doc": "<p>Kicks a Watchdog timer set up with <code>E.enableWatchdog(..., false)</code>. See\n<code>E.enableWatchdog</code> for more information.</p>\n<p><strong>NOTE:</strong> This is only implemented on STM32 and nRF5x devices (all official Espruino boards).</p>\n",
@@ -2912,6 +2902,11 @@
       "!doc": "<p>Get the most recent accelerometer reading. Data is in the same format as the <code>Bangle.on(&#39;accel&#39;,</code> event.</p>\n<ul>\n<li><code>x</code> is X axis (left-right) in <code>g</code></li>\n<li><code>y</code> is Y axis (up-down) in <code>g</code></li>\n<li><code>z</code> is Z axis (in-out) in <code>g</code></li>\n<li><code>diff</code> is difference between this and the last reading in <code>g</code></li>\n<li><code>mag</code> is the magnitude of the acceleration in <code>g</code></li>\n</ul>\n",
       "!url": "http://www.espruino.com/Reference#l_Bangle_getAccel"
     },
+    "F_BEEPSET": {
+      "!type": "bool",
+      "!doc": "<p>Feature flag - If true, this Bangle.js firmware reads <code>setting.json</code> and\nmodifies beep &amp; buzz behaviour accordingly (the bootloader\ndoesn&#39;t need to do it).</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_Bangle_F_BEEPSET"
+    },
     "compassWr": {
       "!type": "fn(reg: number, data: number)",
       "!doc": "<p>Writes a register on the Magnetometer/Compass</p>\n",
@@ -3235,11 +3230,6 @@
         "!doc": "<p>Draw a polyline (lines between each of the points in <code>poly</code>) in the current foreground color</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Graphics_drawPoly"
       },
-      "fillPoly": {
-        "!type": "fn(poly: ?) -> +Graphics",
-        "!doc": "<p>Draw a filled polygon in the current foreground color</p>\n",
-        "!url": "http://www.espruino.com/Reference#l_Graphics_fillPoly"
-      },
       "setRotation": {
         "!type": "fn(rotation: number, reflect: bool) -> +Graphics",
         "!doc": "<p>Set the current rotation of the graphics device.</p>\n",
@@ -3338,7 +3328,7 @@
     },
     "accelOn": {
       "!type": "fn(samplerate: number)",
-      "!doc": "",
+      "!doc": "<p>Accepted values are:</p>\n<ul>\n<li>1.6 Hz (No Gyro) - 40uA</li>\n<li>12.5 Hz - 350uA</li>\n<li>26 Hz - 450 uA</li>\n<li>52 Hz - 600 uA</li>\n<li>104 Hz - 900 uA</li>\n<li>208 Hz - 1500 uA</li>\n<li>416 Hz (not recommended)</li>\n<li>833 Hz (not recommended)</li>\n<li>1660 Hz (not recommended)</li>\n</ul>\n",
       "!url": "http://www.espruino.com/Reference#l_Puck_accelOn"
     },
     "accelOff": {
