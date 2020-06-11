@@ -17,8 +17,12 @@ var jsRXCallback;
 var jsIdleTimeout;
 // used to interface to Espruino emscripten...
 var hwPinValue = new Uint8Array(32);
+var flashMemory = new Uint8Array(4096*1024);
+flashMemory.fill(255);
 function hwSetPinValue(pin,v) { hwPinValue[pin] = v; }
 function hwGetPinValue(pin) { return hwPinValue[pin]; }
+function hwFlashWrite(addr,v) { flashMemory[addr] = v; }
+function hwFlashRead(addr) { return flashMemory[addr]; }
 
 function jsHandleIO() {
   var device;
