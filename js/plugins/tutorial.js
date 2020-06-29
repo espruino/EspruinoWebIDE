@@ -79,6 +79,28 @@
     }
     if (step.text!="")
       tutorialData.push(step);
+    // first get a list of declarations
+    var DECLS = [];
+    var boardData = Espruino.Core.Env.getBoardData();
+    if (boardData && boardData.BOARD)
+      DECLS.push(boardData.BOARD);
+    // detect comments like <PIXLJS>foo</PIXLJS> and <!PIXLJS>foo</!PIXLJS>
+    // and crop them out if they don't match our board
+    tutorialData.forEach(step => {
+      var ifBoardRegex = /<(!?[A-Z]+)>(.*)<\/\1>/;
+      var ifBoard = step.text.match(ifBoardRegex);
+      while (ifBoard) {
+        var decl = ifBoard[1];
+        var txt = ifBoard[2];
+        var negated = decl[0]=="!";
+        if (negated) decl = decl.substring(1);
+        if (DECLS.includes(decl) == negated) txt="";
+        // replace text and try again
+        step.text = step.text.substring(0,ifBoard.index) + txt + step.text.substring(ifBoard.index+ifBoard[0].length);
+        ifBoard = step.text.match(ifBoardRegex);
+      }
+    });
+
     // test
     displayTutorialStep();
   }
