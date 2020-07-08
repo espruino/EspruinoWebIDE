@@ -43,7 +43,7 @@
     "websocket": "^1.0.23"
   },
   "optionalDependencies": {
-    "@abandonware/noble": "^1.9.2-3",
+    "@abandonware/noble": "^1.9.2-9",
     "serialport": "^7.1.4",
     "winnus": ""
   },
