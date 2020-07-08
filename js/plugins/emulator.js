@@ -93,7 +93,6 @@ function jsInit() {
   var div = document.createElement("div");
   div.id = "gfxdiv";
   div.style = "position:absolute;top:0px;right:0px;z-index:100;border: 2px solid white;width:264px;height:244px;";
-  div.style = "position:absolute;top:0px;right:0px;z-index:100;border: 2px solid white;width:264px;height:244px;";
   div.innerHTML = `<canvas id="gfxcanvas" width="240" height="240"></canvas>
 <button id="BTN1" style="width:20px;height:73px;position:absolute;right:0px;top:0px;">1</button>
 <button id="BTN2" style="width:20px;height:73px;position:absolute;right:0px;top:73px;">2</button>
