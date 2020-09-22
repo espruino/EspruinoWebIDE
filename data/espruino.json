@@ -606,20 +606,10 @@
         "!doc": "<p>Return true if the object (not its prototype) has the given property.</p>\n<p>NOTE: This currently returns false-positives for built-in functions in prototypes</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Object_hasOwnProperty"
       },
-      "on": {
-        "!type": "fn(event: ?, listener: ?)",
-        "!doc": "<p>Register an event listener for this object, for instance <code>http.on(&#39;data&#39;, function(d) {...})</code>. See Node.js&#39;s EventEmitter.</p>\n",
-        "!url": "http://www.espruino.com/Reference#l_Object_on"
-      },
       "emit": {
         "!type": "fn(event: ?, args: ?)",
-        "!doc": "<p>Call the event listeners for this object, for instance <code>http.emit(&#39;data&#39;, &#39;Foo&#39;)</code>. See Node.js&#39;s EventEmitter.</p>\n",
+        "!doc": "<p>Call any event listeners that were added to this object with <code>Object.on</code>, for instance <code>obj.emit(&#39;data&#39;, &#39;Foo&#39;)</code>.</p>\n<p>For more information see <code>Object.on</code></p>\n",
         "!url": "http://www.espruino.com/Reference#l_Object_emit"
-      },
-      "removeAllListeners": {
-        "!type": "fn(event: ?)",
-        "!doc": "<p>Removes all listeners, or those of the specified event.</p>\n",
-        "!url": "http://www.espruino.com/Reference#l_Object_removeAllListeners"
       }
     },
     "keys": {
@@ -697,7 +687,7 @@
     }
   },
   "Serial": {
-    "!type": "fn()",
+    "!type": "fn() -> ?",
     "!doc": "<p>Create a software Serial port. This has limited functionality (only low baud rates), but it can work on any pins.</p>\n<p>Use <code>Serial.setup</code> to configure this port.</p>\n",
     "!url": "http://www.espruino.com/Reference#l_Serial_Serial",
     "find": {
@@ -794,7 +784,7 @@
     "!url": "http://www.espruino.com/Reference#l__global_LoopbackB"
   },
   "Telnet": {
-    "!doc": "<p>A telnet serial device that maps to the built-in telnet console server (devices that have\nbuilt-in wifi only).</p>\n",
+    "!doc": "<p>A telnet serial device that maps to the built-in telnet console server (devices that have built-in wifi only).</p>\n",
     "!url": "http://www.espruino.com/Reference#l__global_Telnet"
   },
   "Date": {
@@ -961,7 +951,7 @@
   },
   "Storage": {
     "!type": "fn()",
-    "!doc": "<p>This module allows you to read and write part of the nonvolatile flash\nmemory of your device using a filesystem-like API.</p>\n<p>Also see the <code>Flash</code> library, which provides a low level, more dangerous way\nto access all parts of your flash memory.</p>\n<p><strong>Note:</strong> In firmware 2v05 and later, the maximum length for filenames\nis 28 characters. However in 2v04 and earlier the max length is 8.</p>\n",
+    "!doc": "<p>This module allows you to read and write part of the nonvolatile flash\nmemory of your device using a filesystem-like API.</p>\n<p>Also see the <code>Flash</code> library, which provides a low level, more dangerous way\nto access all parts of your flash memory.</p>\n<p>The <code>Storage</code> library provides two distinct types of file:</p>\n<ul>\n<li><code>require(&quot;Storage&quot;).write(...)</code>/<code>require(&quot;Storage&quot;).read(...)</code>/etc create simple\ncontiguous files of fixed length. This is the recommended file type.</li>\n<li><code>require(&quot;Storage&quot;).open(...)</code> creates a <code>StorageFile</code>, which stores the file in\nnumbered chunks (<code>&quot;filename\\1&quot;</code>/<code>&quot;filename\\2&quot;</code>/etc). It allows data to be appended\nand for the file to be read line by line.</li>\n</ul>\n<p>You must read a file using the same method you used to write it - eg. you can&#39;t create a\nfile with <code>require(&quot;Storage&quot;).open(...)</code> and then read it with <code>require(&quot;Storage&quot;).read(...)</code>.</p>\n<p><strong>Note:</strong> In firmware 2v05 and later, the maximum length for filenames\nis 28 characters. However in 2v04 and earlier the max length is 8.</p>\n",
     "!url": "http://www.espruino.com/Reference#l_Storage_undefined",
     "eraseAll": {
       "!type": "fn()",
@@ -970,32 +960,32 @@
     },
     "erase": {
       "!type": "fn(name: ?)",
-      "!doc": "<p>Erase a single file from the flash storage area.</p>\n",
+      "!doc": "<p>Erase a single file from the flash storage area.</p>\n<p><strong>Note:</strong> This function should be used with normal files, and not\n<code>StorageFile</code>s created with <code>require(&quot;Storage&quot;).open(filename, ...)</code></p>\n",
       "!url": "http://www.espruino.com/Reference#l_Storage_erase"
     },
     "read": {
       "!type": "fn(name: ?, offset: number, length: number) -> ?",
-      "!doc": "<p>Read a file from the flash storage area that has\nbeen written with <code>require(&quot;Storage&quot;).write(...)</code>.</p>\n<p>This function returns a String that points to the actual\nmemory area in read-only memory, so it won&#39;t use up RAM.</p>\n<p>If you evaluate this string with <code>eval</code>, any functions\ncontained in the String will keep their code stored\nin flash memory.</p>\n",
+      "!doc": "<p>Read a file from the flash storage area that has\nbeen written with <code>require(&quot;Storage&quot;).write(...)</code>.</p>\n<p>This function returns a memory-mapped String that points to the actual\nmemory area in read-only memory, so it won&#39;t use up RAM.</p>\n<p>As such you can check if a file exists efficiently using <code>require(&quot;Storage&quot;).read(filename)!==undefined</code>.</p>\n<p>If you evaluate this string with <code>eval</code>, any functions\ncontained in the String will keep their code stored\nin flash memory.</p>\n<p><strong>Note:</strong> This function should be used with normal files, and not\n<code>StorageFile</code>s created with <code>require(&quot;Storage&quot;).open(filename, ...)</code></p>\n",
       "!url": "http://www.espruino.com/Reference#l_Storage_read"
     },
     "readJSON": {
       "!type": "fn(name: ?, noExceptions: bool) -> ?",
-      "!doc": "<p>Read a file from the flash storage area that has\nbeen written with <code>require(&quot;Storage&quot;).write(...)</code>,\nand parse JSON in it into a JavaScript object.</p>\n<p>This is identical to <code>JSON.parse(require(&quot;Storage&quot;).read(...))</code>.\nIt will throw an exception if the data in the file is not\nvalid JSON.</p>\n",
+      "!doc": "<p>Read a file from the flash storage area that has\nbeen written with <code>require(&quot;Storage&quot;).write(...)</code>,\nand parse JSON in it into a JavaScript object.</p>\n<p>This is identical to <code>JSON.parse(require(&quot;Storage&quot;).read(...))</code>.\nIt will throw an exception if the data in the file is not\nvalid JSON.</p>\n<p><strong>Note:</strong> This function should be used with normal files, and not\n<code>StorageFile</code>s created with <code>require(&quot;Storage&quot;).open(filename, ...)</code></p>\n",
       "!url": "http://www.espruino.com/Reference#l_Storage_readJSON"
     },
     "readArrayBuffer": {
       "!type": "fn(name: ?) -> ?",
-      "!doc": "<p>Read a file from the flash storage area that has\nbeen written with <code>require(&quot;Storage&quot;).write(...)</code>,\nand return the raw binary data as an ArrayBuffer.</p>\n<p>This can be used:</p>\n<ul>\n<li>In a <code>DataView</code> with <code>new DataView(require(&quot;Storage&quot;).readArrayBuffer(&quot;x&quot;))</code></li>\n<li>In a <code>Uint8Array/Float32Array/etc</code> with <code>new Uint8Array(require(&quot;Storage&quot;).readArrayBuffer(&quot;x&quot;))</code></li>\n</ul>\n",
+      "!doc": "<p>Read a file from the flash storage area that has\nbeen written with <code>require(&quot;Storage&quot;).write(...)</code>,\nand return the raw binary data as an ArrayBuffer.</p>\n<p>This can be used:</p>\n<ul>\n<li>In a <code>DataView</code> with <code>new DataView(require(&quot;Storage&quot;).readArrayBuffer(&quot;x&quot;))</code></li>\n<li>In a <code>Uint8Array/Float32Array/etc</code> with <code>new Uint8Array(require(&quot;Storage&quot;).readArrayBuffer(&quot;x&quot;))</code></li>\n</ul>\n<p><strong>Note:</strong> This function should be used with normal files, and not\n<code>StorageFile</code>s created with <code>require(&quot;Storage&quot;).open(filename, ...)</code></p>\n",
       "!url": "http://www.espruino.com/Reference#l_Storage_readArrayBuffer"
     },
     "writeJSON": {
       "!type": "fn(name: ?, data: ?) -> bool",
-      "!doc": "<p>Write/create a file in the flash storage area. This is\nnonvolatile and will not disappear when the device resets\nor power is lost.</p>\n<p>Simply write <code>require(&quot;Storage&quot;).writeJSON(&quot;MyFile&quot;, [1,2,3])</code> to write\na new file, and <code>require(&quot;Storage&quot;).readJSON(&quot;MyFile&quot;)</code> to read it.</p>\n<p>This is equivalent to: <code>require(&quot;Storage&quot;).write(name, JSON.stringify(data))</code></p>\n",
+      "!doc": "<p>Write/create a file in the flash storage area. This is\nnonvolatile and will not disappear when the device resets\nor power is lost.</p>\n<p>Simply write <code>require(&quot;Storage&quot;).writeJSON(&quot;MyFile&quot;, [1,2,3])</code> to write\na new file, and <code>require(&quot;Storage&quot;).readJSON(&quot;MyFile&quot;)</code> to read it.</p>\n<p>This is equivalent to: <code>require(&quot;Storage&quot;).write(name, JSON.stringify(data))</code></p>\n<p><strong>Note:</strong> This function should be used with normal files, and not\n<code>StorageFile</code>s created with <code>require(&quot;Storage&quot;).open(filename, ...)</code></p>\n",
       "!url": "http://www.espruino.com/Reference#l_Storage_writeJSON"
     },
     "list": {
       "!type": "fn(regex: ?) -> ?",
-      "!doc": "<p>List all files in the flash storage area. An array of Strings is returned.</p>\n<p><strong>Note:</strong> This will output system files (eg. saved code) as well as\nfiles that you may have written.</p>\n",
+      "!doc": "<p>List all files in the flash storage area. An array of Strings is returned.</p>\n<p>This currently also lists files created by <code>StorageFile</code> (<code>require(&quot;Storage&quot;).open</code>)\nwhich have a file number (<code>&quot;\\1&quot;</code>/<code>&quot;\\2&quot;</code>/etc) appended to them.</p>\n<p><strong>Note:</strong> This will output system files (eg. saved code) as well as\nfiles that you may have written.</p>\n",
       "!url": "http://www.espruino.com/Reference#l_Storage_list"
     },
     "compact": {
@@ -1145,7 +1135,7 @@
     },
     "dumpFragmentation": {
       "!type": "fn()",
-      "!doc": "<p>Show fragmentation.</p>\n<ul>\n<li><code> </code> is free space</li>\n<li><code>#</code> is a normal variable</li>\n<li><code>L</code> is a locked variable (address used, cannopt be moved)</li>\n<li><code>=</code> represents data in a Flat String (must be contiguous)</li>\n</ul>\n",
+      "!doc": "<p>Show fragmentation.</p>\n<ul>\n<li><code></code> is free space</li>\n<li><code>#</code> is a normal variable</li>\n<li><code>L</code> is a locked variable (address used, cannopt be moved)</li>\n<li><code>=</code> represents data in a Flat String (must be contiguous)</li>\n</ul>\n",
       "!url": "http://www.espruino.com/Reference#l_E_dumpFragmentation"
     },
     "dumpVariables": {
@@ -1847,7 +1837,7 @@
     }
   },
   "SPI": {
-    "!type": "fn()",
+    "!type": "fn() -> ?",
     "!doc": "<p>Create a software SPI port. This has limited functionality (no baud rate), but it can work on any pins.</p>\n<p>Use <code>SPI.setup</code> to configure this port.</p>\n",
     "!url": "http://www.espruino.com/Reference#l_SPI_SPI",
     "find": {
@@ -1894,7 +1884,7 @@
     "!url": "http://www.espruino.com/Reference#l__global_SPI3"
   },
   "I2C": {
-    "!type": "fn()",
+    "!type": "fn() -> ?",
     "!doc": "<p>Create a software I2C port. This has limited functionality (no baud rate), but it can work on any pins.</p>\n<p>Use <code>I2C.setup</code> to configure this port.</p>\n",
     "!url": "http://www.espruino.com/Reference#l_I2C_I2C",
     "find": {
@@ -2589,9 +2579,24 @@
         "!url": "http://www.espruino.com/Reference#l_Ethernet_getIP"
       },
       "setIP": {
-        "!type": "fn(options: ?, options: ?) -> bool",
-        "!doc": "<p>Set the current IP address or get an IP from DHCP (if no options object is specified)</p>\n<p>If &#39;mac&#39; is specified as an option, it must be a string of the form <code>&quot;00:01:02:03:04:05&quot;</code></p>\n",
+        "!type": "fn(options: ?, callback: ?) -> bool",
+        "!doc": "<p>Set the current IP address or get an IP from DHCP (if no options object is specified)</p>\n<p>If &#39;mac&#39; is specified as an option, it must be a string of the form <code>&quot;00:01:02:03:04:05&quot;</code>\nThe default mac is 00:08:DC:01:02:03.</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Ethernet_setIP"
+      },
+      "setHostname": {
+        "!type": "fn(hostname: ?, callback: ?) -> bool",
+        "!doc": "<p>Set hostname allow to set the hosname used during the dhcp request.\nmin 8 and max 12 char, best set before calling <code>eth.setIP()</code>\nDefault is WIZnet010203, 010203 is the default nic as part of the mac.\nBest to set the hosname before calling setIP().</p>\n",
+        "!url": "http://www.espruino.com/Reference#l_Ethernet_setHostname"
+      },
+      "getHostname": {
+        "!type": "fn(callback: ?) -> ?",
+        "!doc": "<p>Returns the hostname</p>\n",
+        "!url": "http://www.espruino.com/Reference#l_Ethernet_getHostname"
+      },
+      "getStatus": {
+        "!type": "fn(options: ?) -> ?",
+        "!doc": "<p>Get the current status of the ethernet device</p>\n",
+        "!url": "http://www.espruino.com/Reference#l_Ethernet_getStatus"
       }
     }
   },
@@ -2809,7 +2814,7 @@
     },
     "setPollInterval": {
       "!type": "fn(interval: number)",
-      "!doc": "<p>Set how often the watch should poll for new acceleration/gyro data</p>\n",
+      "!doc": "<p>Set how often the watch should poll for new acceleration/gyro data and kick the Watchdog timer. It isn&#39;t\nrecommended that you make this interval much larger than 1000ms, but values up to 4000ms are allowed.</p>\n<p>Calling this will set <code>Bangle.setOptions({powerSave: false})</code> - disabling the dynamic adjustment of\npoll interval to save battery power when Bangle.js is stationary.</p>\n",
       "!url": "http://www.espruino.com/Reference#l_Bangle_setPollInterval"
     },
     "setLCDPalette": {
@@ -2848,8 +2853,8 @@
       "!url": "http://www.espruino.com/Reference#l_Bangle_accelWr"
     },
     "accelRd": {
-      "!type": "fn(reg: number) -> number",
-      "!doc": "<p>Reads a register from the KX023 Accelerometer</p>\n",
+      "!type": "fn(reg: number, cnt: number) -> ?",
+      "!doc": "<p>Reads a register from the KX023 Accelerometer</p>\n<p><strong>Note:</strong> On Espruino 2v06 and before this function only returns a number (<code>cnt</code> is ignored).</p>\n",
       "!url": "http://www.espruino.com/Reference#l_Bangle_accelRd"
     },
     "project": {
@@ -2874,7 +2879,7 @@
     },
     "setLCDMode": {
       "!type": "fn(mode: ?)",
-      "!doc": "<p>This function can be used to change the way graphics is handled on Bangle.js.</p>\n<p>Available options for <code>Bangle.setLCDMode</code> are:</p>\n<ul>\n<li><code>Bangle.setLCDMode()</code> or <code>Bangle.setLCDMode(&quot;direct&quot;)</code> (the default) - The drawable area is 240x240 16 bit. Unbuffered, so draw calls take effect immediately. Terminal and vertical scrolling work (horizontal scrolling doesn&#39;t).</li>\n<li><code>Bangle.setLCDMode(&quot;doublebuffered&quot;)</code> - The drawable area is 240x160 16 bit, terminal and scrolling will not work.</li>\n<li><code>Bangle.setLCDMode(&quot;120x120&quot;)</code> - The drawable area is 120x120 8 bit, <code>g.getPixel</code>, terminal, and full scrolling work.</li>\n<li><code>Bangle.setLCDMode(&quot;80x80&quot;)</code> - The drawable area is 80x80 8 bit, <code>g.getPixel</code>, terminal, and full scrolling work.</li>\n</ul>\n<p>You can also call <code>Bangle.setLCDMode()</code> to return to normal, unbuffered <code>&quot;direct&quot;</code> mode.</p>\n",
+      "!doc": "<p>This function can be used to change the way graphics is handled on Bangle.js.</p>\n<p>Available options for <code>Bangle.setLCDMode</code> are:</p>\n<ul>\n<li><code>Bangle.setLCDMode()</code> or <code>Bangle.setLCDMode(&quot;direct&quot;)</code> (the default) - The drawable area is 240x240 16 bit. Unbuffered, so draw calls take effect immediately. Terminal and vertical scrolling work (horizontal scrolling doesn&#39;t).</li>\n<li><code>Bangle.setLCDMode(&quot;doublebuffered&quot;)</code> - The drawable area is 240x160 16 bit, terminal and scrolling will not work. <code>g.flip()</code> must be called for draw operations to take effect.</li>\n<li><code>Bangle.setLCDMode(&quot;120x120&quot;)</code> - The drawable area is 120x120 8 bit, <code>g.getPixel</code>, terminal, and full scrolling work. Uses an offscreen buffer stored on Bangle.js, <code>g.flip()</code> must be called for draw operations to take effect.</li>\n<li><code>Bangle.setLCDMode(&quot;80x80&quot;)</code> - The drawable area is 80x80 8 bit, <code>g.getPixel</code>, terminal, and full scrolling work. Uses an offscreen buffer stored on Bangle.js, <code>g.flip()</code> must be called for draw operations to take effect.</li>\n</ul>\n<p>You can also call <code>Bangle.setLCDMode()</code> to return to normal, unbuffered <code>&quot;direct&quot;</code> mode.</p>\n",
       "!url": "http://www.espruino.com/Reference#l_Bangle_setLCDMode"
     },
     "getLCDMode": {
@@ -2889,7 +2894,7 @@
     },
     "setOptions": {
       "!type": "fn(options: ?)",
-      "!doc": "<p>Set internal options used for gestures, step counting, etc...</p>\n<ul>\n<li><code>wakeOnBTN1</code> should the LCD turn on when BTN1 is pressed? default = <code>true</code></li>\n<li><code>wakeOnBTN2</code> should the LCD turn on when BTN2 is pressed? default = <code>true</code></li>\n<li><code>wakeOnBTN3</code> should the LCD turn on when BTN3 is pressed? default = <code>true</code></li>\n<li><code>wakeOnFaceUp</code> should the LCD turn on when the watch is turned face up? default = <code>false</code></li>\n<li><code>wakeOnTouch</code> should the LCD turn on when the touchscreen is pressed? default = <code>false</code></li>\n<li><code>wakeOnTwist</code> should the LCD turn on when the watch is twisted? default = <code>true</code></li>\n<li><code>twistThreshold</code>  How much acceleration to register a twist of the watch strap? Can be negative for oppsite direction. default = <code>800</code></li>\n<li><code>twistMaxY</code> Maximum acceleration in Y to trigger a twist (low Y means watch is facing the right way up). default = <code>-800</code></li>\n<li><p><code>twistTimeout</code>  How little time (in ms) must a twist take from low-&gt;high acceleration? default = <code>1000</code></p>\n</li>\n<li><p><code>gestureStartThresh</code> how big a difference before we consider a gesture started? default = <code>sqr(800)</code></p>\n</li>\n<li><code>gestureEndThresh</code> how small a difference before we consider a gesture ended? default = <code>sqr(2000)</code></li>\n<li><code>gestureInactiveCount</code> how many samples do we keep after a gesture has ended? default = <code>4</code></li>\n<li><code>gestureMinLength</code> how many samples must a gesture have before we notify about it? default = <code>10</code>\n*</li>\n<li><code>stepCounterThresholdLow</code> How low must acceleration magnitude squared get before we consider the next rise a step? default = <code>sqr(8192-80)</code></li>\n<li><code>stepCounterThresholdHigh</code> How high must acceleration magnitude squared get before we consider it a step? default = <code>sqr(8192+80)</code></li>\n</ul>\n<p>Where accelerations are used they are in internal units, where <code>8192 = 1g</code></p>\n",
+      "!doc": "<p>Set internal options used for gestures, step counting, etc...</p>\n<ul>\n<li><code>wakeOnBTN1</code> should the LCD turn on when BTN1 is pressed? default = <code>true</code></li>\n<li><code>wakeOnBTN2</code> should the LCD turn on when BTN2 is pressed? default = <code>true</code></li>\n<li><code>wakeOnBTN3</code> should the LCD turn on when BTN3 is pressed? default = <code>true</code></li>\n<li><code>wakeOnFaceUp</code> should the LCD turn on when the watch is turned face up? default = <code>false</code></li>\n<li><code>wakeOnTouch</code> should the LCD turn on when the touchscreen is pressed? default = <code>false</code></li>\n<li><code>wakeOnTwist</code> should the LCD turn on when the watch is twisted? default = <code>true</code></li>\n<li><code>twistThreshold</code>  How much acceleration to register a twist of the watch strap? Can be negative for oppsite direction. default = <code>800</code></li>\n<li><code>twistMaxY</code> Maximum acceleration in Y to trigger a twist (low Y means watch is facing the right way up). default = <code>-800</code></li>\n<li><p><code>twistTimeout</code>  How little time (in ms) must a twist take from low-&gt;high acceleration? default = <code>1000</code></p>\n</li>\n<li><p><code>gestureStartThresh</code> how big a difference before we consider a gesture started? default = <code>sqr(800)</code></p>\n</li>\n<li><code>gestureEndThresh</code> how small a difference before we consider a gesture ended? default = <code>sqr(2000)</code></li>\n<li><code>gestureInactiveCount</code> how many samples do we keep after a gesture has ended? default = <code>4</code></li>\n<li><code>gestureMinLength</code> how many samples must a gesture have before we notify about it? default = <code>10</code>\n*</li>\n<li><code>stepCounterThresholdLow</code> How low must acceleration magnitude squared get before we consider the next rise a step? default = <code>sqr(8192-80)</code></li>\n<li><p><code>stepCounterThresholdHigh</code> How high must acceleration magnitude squared get before we consider it a step? default = <code>sqr(8192+80)</code></p>\n</li>\n<li><p><code>powerSave</code> after a minute of not being moved, Bangle.js will change the accelerometer poll interval down to 800ms (10x accelerometer samples).\n On movement it&#39;ll be raised to the default 80ms. If <code>Bangle.setPollInterval</code> is used this is disabled, and for it to work the poll interval\n must be either 80ms or 800ms. default = <code>true</code></p>\n</li>\n</ul>\n<p>Where accelerations are used they are in internal units, where <code>8192 = 1g</code></p>\n",
       "!url": "http://www.espruino.com/Reference#l_Bangle_setOptions"
     },
     "getCompass": {
@@ -3313,12 +3318,12 @@
     },
     "magWr": {
       "!type": "fn(reg: number, data: number)",
-      "!doc": "<p>Writes a register on the LIS3MDL / MAX3110 Magnetometer</p>\n",
+      "!doc": "<p>Writes a register on the LIS3MDL / MAX3110 Magnetometer. Can be used for configuring advanced functions.</p>\n<p>Check out <a href=\"http://www.espruino.com/Puck.js#on-board-peripherals\">the Puck.js page on the magnetometer</a>\nfor more information and links to modules that use this function.</p>\n",
       "!url": "http://www.espruino.com/Reference#l_Puck_magWr"
     },
     "magRd": {
       "!type": "fn(reg: number) -> number",
-      "!doc": "<p>Reads a register from the LIS3MDL / MAX3110 Magnetometer</p>\n",
+      "!doc": "<p>Reads a register from the LIS3MDL / MAX3110 Magnetometer. Can be used for configuring advanced functions.</p>\n<p>Check out <a href=\"http://www.espruino.com/Puck.js#on-board-peripherals\">the Puck.js page on the magnetometer</a>\nfor more information and links to modules that use this function.</p>\n",
       "!url": "http://www.espruino.com/Reference#l_Puck_magRd"
     },
     "getTemperature": {
@@ -3328,27 +3333,27 @@
     },
     "accelOn": {
       "!type": "fn(samplerate: number)",
-      "!doc": "<p>Accepted values are:</p>\n<ul>\n<li>1.6 Hz (No Gyro) - 40uA</li>\n<li>12.5 Hz - 350uA</li>\n<li>26 Hz - 450 uA</li>\n<li>52 Hz - 600 uA</li>\n<li>104 Hz - 900 uA</li>\n<li>208 Hz - 1500 uA</li>\n<li>416 Hz (not recommended)</li>\n<li>833 Hz (not recommended)</li>\n<li>1660 Hz (not recommended)</li>\n</ul>\n",
+      "!doc": "<p>Accepted values are:</p>\n<ul>\n<li>1.6 Hz (no Gyro) - 40uA (2v05 and later firmware)</li>\n<li>12.5 Hz (with Gyro)- 350uA</li>\n<li>26 Hz (with Gyro) - 450 uA</li>\n<li>52 Hz (with Gyro) - 600 uA</li>\n<li>104 Hz (with Gyro) - 900 uA</li>\n<li>208 Hz (with Gyro) - 1500 uA</li>\n<li>416 Hz (with Gyro) (not recommended)</li>\n<li>833 Hz (with Gyro) (not recommended)</li>\n<li>1660 Hz (with Gyro) (not recommended)</li>\n</ul>\n<p>Check out <a href=\"http://www.espruino.com/Puck.js#on-board-peripherals\">the Puck.js page on the accelerometer</a>\nfor more information.</p>\n",
       "!url": "http://www.espruino.com/Reference#l_Puck_accelOn"
     },
     "accelOff": {
       "!type": "fn()",
-      "!doc": "<p>Turn the magnetometer off</p>\n",
+      "!doc": "<p>Turn the accelerometer off</p>\n",
       "!url": "http://www.espruino.com/Reference#l_Puck_accelOff"
     },
     "accel": {
       "!type": "fn() -> ?",
-      "!doc": "<p>Turn on the accelerometer, take a single reading, and then turn it off again.</p>\n",
+      "!doc": "<p>Turn on the accelerometer, take a single reading, and then turn it off again.</p>\n<p>The values reported are the raw values from the chip. In normal configuration:</p>\n<ul>\n<li>accelerometer: full-scale (32768) is 4g, so you need to divide by 8192 to get correctly scaled values</li>\n<li>gyro: full-scale (32768) is 245 dps, so you need to divide by 134 to get correctly scaled values</li>\n</ul>\n",
       "!url": "http://www.espruino.com/Reference#l_Puck_accel"
     },
     "accelWr": {
       "!type": "fn(reg: number, data: number)",
-      "!doc": "<p>Writes a register on the LSM6DS3 Accelerometer</p>\n",
+      "!doc": "<p>Writes a register on the LSM6DS3TR-C Accelerometer. Can be used for configuring advanced functions.</p>\n<p>Check out <a href=\"http://www.espruino.com/Puck.js#on-board-peripherals\">the Puck.js page on the accelerometer</a>\nfor more information and links to modules that use this function.</p>\n",
       "!url": "http://www.espruino.com/Reference#l_Puck_accelWr"
     },
     "accelRd": {
       "!type": "fn(reg: number) -> number",
-      "!doc": "<p>Reads a register from the LSM6DS3 Accelerometer</p>\n",
+      "!doc": "<p>Reads a register from the LSM6DS3TR-C Accelerometer. Can be used for configuring advanced functions.</p>\n<p>Check out <a href=\"http://www.espruino.com/Puck.js#on-board-peripherals\">the Puck.js page on the accelerometer</a>\nfor more information and links to modules that use this function.</p>\n",
       "!url": "http://www.espruino.com/Reference#l_Puck_accelRd"
     },
     "IR": {
@@ -3519,7 +3524,7 @@
   },
   "dump": {
     "!type": "fn()",
-    "!doc": "<p>Output current interpreter state in a text form such that it can be copied to a new device</p>\n<p>Note: &#39;Internal&#39; functions are currently not handled correctly. You will need to recreate these in the <code>onInit</code> function.</p>\n",
+    "!doc": "<p>Output current interpreter state in a text form such that it can be copied to a new device</p>\n<p>Espruino keeps its current state in RAM (even if the function code is stored in Flash). When you type <code>dump()</code> it dumps the current state of code in RAM plus the hardware state, then if there&#39;s code saved in flash it writes &quot;// Code saved with E.setBootCode&quot; and dumps that too.</p>\n<p><strong>Note:</strong> &#39;Internal&#39; functions are currently not handled correctly. You will need to recreate these in the <code>onInit</code> function.</p>\n",
     "!url": "http://www.espruino.com/Reference#l__global_dump"
   },
   "load": {
@@ -3704,7 +3709,7 @@
   },
   "FET": {
     "!type": "+Pin",
-    "!doc": "<p>On Puck.js V2 (not v1.0) this is the pin that controls the FET.</p>\n",
+    "!doc": "<p>On Puck.js V2 (not v1.0) this is the pin that controls the FET, for high-powered outputs.</p>\n",
     "!url": "http://www.espruino.com/Reference#l__global_FET"
   },
   "BTNA": {
