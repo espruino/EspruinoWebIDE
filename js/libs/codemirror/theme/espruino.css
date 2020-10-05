@@ -1,0 +1,32 @@
+/**
+ * Replication of the colour scheme used in the terminal pane based of zenburn
+ */
+
+.cm-s-espruino .CodeMirror-gutters { background: #222 !important; border-right: 1px solid #4f4f4f }
+.cm-s-espruino .CodeMirror-foldgutter-open, .CodeMirror-foldgutter-folded { color: #999; }
+.cm-s-espruino .CodeMirror-cursor { border-left: 1px solid white; }
+.cm-s-espruino.CodeMirror { background-color: #222; color: #dcdccc; }
+.cm-s-espruino.CodeMirror-focused{ background-color: #333; color: #dcdccc; }
+.cm-s-espruino span.cm-builtin { color: #dcdccc; font-weight: bold; }
+.cm-s-espruino span.cm-comment { color: #7f9f7f; }
+.cm-s-espruino span.cm-keyword { color: #f1c40f; font-weight: bold; }
+.cm-s-espruino span.cm-atom { color: #3598db; }
+.cm-s-espruino span.cm-def { color: #dcdccc; }
+.cm-s-espruino span.cm-variable { color: #88F;  font-weight: bold;}
+.cm-s-espruino span.cm-variable-2 { color: #dcdccc; }
+.cm-s-espruino span.cm-string { color: #cc9393; }
+.cm-s-espruino span.cm-string-2 { color: #cc9393; }
+.cm-s-espruino span.cm-number { color: #dcdccc; }
+.cm-s-espruino span.cm-tag { color: #93e0e3; }
+.cm-s-espruino span.cm-property { color: #dfaf8f; }
+.cm-s-espruino span.cm-attribute { color: #dfaf8f; }
+.cm-s-espruino span.cm-qualifier { color: #7cb8bb; }
+.cm-s-espruino span.cm-meta { color: #f0dfaf; }
+.cm-s-espruino span.cm-header { color: #f0efd0; }
+.cm-s-espruino span.cm-operator { color: #f0efd0; }
+.cm-s-espruino span.CodeMirror-matchingbracket { box-sizing: border-box; background: transparent; border-bottom: 1px solid; }
+.cm-s-espruino span.CodeMirror-nonmatchingbracket { border-bottom: 1px solid; background: none; }
+.cm-s-espruino .CodeMirror-activeline { background: #000000; }
+.cm-s-espruino .CodeMirror-activeline-background { background: #000000; }
+.cm-s-espruino div.CodeMirror-selected { background: #545454; }
+.cm-s-espruino .CodeMirror-focused div.CodeMirror-selected { background: #4f4f4f; }

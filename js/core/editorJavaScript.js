@@ -28,7 +28,7 @@
       section : "General",
       name : "JavaScript Editor Theme",
       description : "Changes the colour scheme for the JavaScript editor.",
-      type : { "default": "default", "3024-day": "3024-day", "3024-night": "3024-night", "abcdef": "abcdef", "ambiance": "ambiance", "ayu-dark": "ayu-dark", "ayu-mirage": "ayu-mirage", "base16-dark": "base16-dark", "base16-light": "base16-light", "bespin": "bespin", "blackboard": "blackboard", "cobalt": "cobalt", "colorforth": "colorforth", "darcula": "darcula", "dracula": "dracula", "duotone-dark": "duotone-dark", "duotone-light": "duotone-light", "eclipse": "eclipse", "elegant": "elegant", "erlang-dark": "erlang-dark", "gruvbox-dark": "gruvbox-dark", "hopscotch": "hopscotch", "icecoder": "icecoder", "idea": "idea", "isotope": "isotope", "lesser-dark": "lesser-dark", "liquibyte": "liquibyte", "lucario": "lucario", "material": "material", "material-darker": "material-darker", "material-palenight": "material-palenight", "material-ocean": "material-ocean", "mbo": "mbo", "mdn-like": "mdn-like", "midnight": "midnight", "monokai": "monokai", "moxer": "moxer", "neat": "neat", "neo": "neo", "night": "night", "nord": "nord", "oceanic-next": "oceanic-next", "panda-syntax": "panda-syntax", "paraiso-dark": "paraiso-dark", "paraiso-light": "paraiso-light", "pastel-on-dark": "pastel-on-dark", "railscasts": "railscasts", "rubyblue": "rubyblue", "seti": "seti", "shadowfox": "shadowfox", "solarized dark": "solarized dark", "solarized light": "solarized light", "the-matrix": "the-matrix", "tomorrow-night-bright": "tomorrow-night-bright", "tomorrow-night-eighties": "tomorrow-night-eighties", "ttcn": "ttcn", "twilight": "twilight", "vibrant-ink": "vibrant-ink", "xq-dark": "xq-dark", "xq-light": "xq-light", "yeti": "yeti", "yonce": "yonce", "zenburn": "zenburn" },
+      type : { "default": "default", "3024-day": "3024-day", "3024-night": "3024-night", "abcdef": "abcdef", "ambiance": "ambiance", "ayu-dark": "ayu-dark", "ayu-mirage": "ayu-mirage", "base16-dark": "base16-dark", "base16-light": "base16-light", "bespin": "bespin", "blackboard": "blackboard", "cobalt": "cobalt", "colorforth": "colorforth", "darcula": "darcula", "dracula": "dracula", "duotone-dark": "duotone-dark", "duotone-light": "duotone-light", "eclipse": "eclipse", "elegant": "elegant", "espruino": "espruino", "erlang-dark": "erlang-dark", "gruvbox-dark": "gruvbox-dark", "hopscotch": "hopscotch", "icecoder": "icecoder", "idea": "idea", "isotope": "isotope", "lesser-dark": "lesser-dark", "liquibyte": "liquibyte", "lucario": "lucario", "material": "material", "material-darker": "material-darker", "material-palenight": "material-palenight", "material-ocean": "material-ocean", "mbo": "mbo", "mdn-like": "mdn-like", "midnight": "midnight", "monokai": "monokai", "moxer": "moxer", "neat": "neat", "neo": "neo", "night": "night", "nord": "nord", "oceanic-next": "oceanic-next", "panda-syntax": "panda-syntax", "paraiso-dark": "paraiso-dark", "paraiso-light": "paraiso-light", "pastel-on-dark": "pastel-on-dark", "railscasts": "railscasts", "rubyblue": "rubyblue", "seti": "seti", "shadowfox": "shadowfox", "solarized dark": "solarized dark", "solarized light": "solarized light", "the-matrix": "the-matrix", "tomorrow-night-bright": "tomorrow-night-bright", "tomorrow-night-eighties": "tomorrow-night-eighties", "ttcn": "ttcn", "twilight": "twilight", "vibrant-ink": "vibrant-ink", "xq-dark": "xq-dark", "xq-light": "xq-light", "yeti": "yeti", "yonce": "yonce", "zenburn": "zenburn" },
       defaultValue : "default",
       onChange : function(newValue) { codeMirror.theme = Espruino.Config.THEME }
     });
@@ -41,6 +41,18 @@
       type : "boolean",
       defaultValue : false,
     });
+    // Load in custom theme if selected
+    if(Espruino.Config.THEME !== 'default'){
+      var themeCSSFile = Espruino.Config.THEME;
+      themeCSSFile = themeCSSFile.replace(/solarized\s(dark|light)/, 'solarized'); // edge case for solarized theme: 1 sheet for both themes
+
+      var themeCSSElement = document.createElement('link');
+      themeCSSElement.href = 'js/libs/codemirror/theme/' + themeCSSFile + '.css';
+      themeCSSElement.setAttribute('rel', 'stylesheet');
+
+      var codeMirrorMainCSS = document.querySelector('link[href$="codemirror.css"]');
+      if(codeMirrorMainCSS) codeMirrorMainCSS.parentNode.insertBefore(themeCSSElement, codeMirrorMainCSS.nextSibling);
+    }
     $('<div id="divcode" style="width:100%;height:100%;"><textarea id="code" name="code"></textarea></div>').appendTo(".editor--code .editor__canvas");
     // The code editor
     var lintFlags = {
