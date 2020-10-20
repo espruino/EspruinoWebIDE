@@ -152,7 +152,7 @@
     Espruino.Core.Status.setStatus("Connecting...");
     Espruino.Core.Serial.setSlowWrite(true);
     Espruino.Core.Serial.open(serialPort, function(cInfo) {
-      if (cInfo!=undefined) {
+      if (cInfo!==undefined && cInfo.error===undefined) {
         console.log("Device found "+JSON.stringify(cInfo));
         var name = nameFromConInfo(cInfo);
         var boardData = Espruino.Core.Env.getBoardData();
@@ -162,7 +162,10 @@
         callback(true);
       } else {
         // fail
-        Espruino.Core.Notifications.error("Connection Failed.", true);
+        var msg = ".";
+        if (cInfo!==undefined && cInfo.error!==undefined)
+          msg = ": "+cInfo.error;
+        Espruino.Core.Notifications.error("Connection Failed"+msg, true);
         callback(false);
       }
     }, function (cInfo) {
