@@ -3,9 +3,13 @@
 .project
 .settings
 CONTRIBUTING.md
-EspruinoWebIDE.zip 
-embed.js 
+EspruinoWebIDE.zip
+embed.js
 extras
 unused
 relay
 EspruinoTools/node_modules
+blockly/emojitest.js
+extras/field_textarea2.js
+extras/nwjs_build.sh
+auth_config.json
