@@ -2306,6 +2306,21 @@
       "!url": "http://www.espruino.com/Reference#l_Math_max"
     }
   },
+  "ID": {
+    "!type": "fn()",
+    "!doc": "<p>Class containing utility functions for <a href=\"http://www.espruino.com/ID205\">ID205</a></p>\n",
+    "!url": "http://www.espruino.com/Reference#ID",
+    "setLCDPower": {
+      "!type": "fn(isOn: bool)",
+      "!doc": "<p>This function can be used to turn ID205&#39;s LCD off or on.</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_ID_setLCDPower"
+    },
+    "lcdw": {
+      "!type": "fn(cmd: number, data: ?)",
+      "!doc": "<p>Writes a command directly to the ST7567 LCD controller</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_ID_lcdw"
+    }
+  },
   "heatshrink": {
     "!type": "fn()",
     "!doc": "<p>Simple library for compression/decompression using <a href=\"https://github.com/atomicobject/heatshrink\">heatshrink</a>, an <a href=\"https://en.wikipedia.org/wiki/Lempel%E2%80%93Ziv%E2%80%93Storer%E2%80%93Szymanski\">LZSS</a> compression tool.</p>\n<p>Espruino uses heatshrink internally to compress RAM down to fit in Flash memory when <code>save()</code> is used. This just exposes that functionality.</p>\n<p>Functions here take and return buffers of data. There is no support for streaming, so both the compressed and decompressed data must be able to fit in memory at the same time.</p>\n",
@@ -2948,6 +2963,61 @@
       "!url": "http://www.espruino.com/Reference#l_Bangle_showLauncher"
     }
   },
+  "Microbit": {
+    "!type": "fn()",
+    "!doc": "<p>Class containing <a href=\"https://www.espruino.com/MicroBit\">micro:bit&#39;s</a> utility functions.</p>\n",
+    "!url": "http://www.espruino.com/Reference#Microbit",
+    "SPEAKER": {
+      "!type": "+Pin",
+      "!doc": "<p>The micro:bit&#39;s speaker pin</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_Microbit_SPEAKER"
+    },
+    "MIC": {
+      "!type": "+Pin",
+      "!doc": "<p>The micro:bit&#39;s microphone pin</p>\n<p><code>MIC_ENABLE</code> should be set to 1 before using this</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_Microbit_MIC"
+    },
+    "MIC_ENABLE": {
+      "!type": "+Pin",
+      "!doc": "<p>The micro:bit&#39;s microphone enable pin</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_Microbit_MIC_ENABLE"
+    },
+    "mag": {
+      "!type": "fn() -> ?",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Microbit_mag"
+    },
+    "accel": {
+      "!type": "fn() -> ?",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Microbit_accel"
+    },
+    "accelWr": {
+      "!type": "fn(addr: number, data: number)",
+      "!doc": "<p><strong>Note:</strong> This function is only available on the <a href=\"/MicroBit\">BBC micro:bit</a> board</p>\n<p>Write the given value to the accelerometer</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_Microbit_accelWr"
+    },
+    "accelOn": {
+      "!type": "fn()",
+      "!doc": "<p>Turn on the accelerometer, and create <code>Microbit.accel</code> and <code>Microbit.gesture</code> events.</p>\n<p><strong>Note:</strong> The accelerometer is currently always enabled - this code\njust responds to interrupts and reads</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_Microbit_accelOn"
+    },
+    "accelOff": {
+      "!type": "fn()",
+      "!doc": "<p>Turn off events from  the accelerometer (started with <code>Microbit.accelOn</code>)</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_Microbit_accelOff"
+    },
+    "play": {
+      "!type": "fn(waveform: ?, samplesPerSecond: ?, callback: ?)",
+      "!doc": "<p>Play a waveform on the Micro:bit&#39;s speaker</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_Microbit_play"
+    },
+    "record": {
+      "!type": "fn(samplesPerSecond: ?, callback: ?, samples: ?)",
+      "!doc": "<p>Records sound from the micro:bit&#39;s onboard microphone and returns the result</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_Microbit_record"
+    }
+  },
   "fs": {
     "!type": "fn()",
     "!doc": "<p>This library handles interfacing with a FAT32 filesystem on an SD card. The API is designed to be similar to node.js&#39;s - However Espruino does not currently support asynchronous file IO, so the functions behave like node.js&#39;s xxxxSync functions. Versions of the functions with &#39;Sync&#39; after them are also provided for compatibility.</p>\n<p>To use this, you must type <code>var fs = require(&#39;fs&#39;)</code> to get access to the library</p>\n<p>See <a href=\"http://www.espruino.com/File+IO\">the page on File IO</a> for more information, and for examples on wiring up an SD card if your device doesn&#39;t come with one.</p>\n<p><strong>Note:</strong> If you want to remove an SD card after you have started using it, you <em>must</em> call <code>E.unmountSD()</code> or you may cause damage to the card.</p>\n",
@@ -3220,6 +3290,11 @@
         "!doc": "<p>Draw a line between x1,y1 and x2,y2 in the current foreground color</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Graphics_drawLine"
       },
+      "drawLineAA": {
+        "!type": "fn(x1: number, y1: number, x2: number, y2: number) -> +Graphics",
+        "!doc": "<p>Draw a line between x1,y1 and x2,y2 in the current foreground color</p>\n",
+        "!url": "http://www.espruino.com/Reference#l_Graphics_drawLineAA"
+      },
       "lineTo": {
         "!type": "fn(x: number, y: number) -> +Graphics",
         "!doc": "<p>Draw a line from the last position of lineTo or moveTo to this position</p>\n",
@@ -3234,6 +3309,11 @@
         "!type": "fn(poly: ?, closed: bool) -> +Graphics",
         "!doc": "<p>Draw a polyline (lines between each of the points in <code>poly</code>) in the current foreground color</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Graphics_drawPoly"
+      },
+      "drawPolyAA": {
+        "!type": "fn(poly: ?, closed: bool) -> +Graphics",
+        "!doc": "<p>Draw an <strong>antialiased</strong> polyline (lines between each of the points in <code>poly</code>) in the current foreground color</p>\n",
+        "!url": "http://www.espruino.com/Reference#l_Graphics_drawPolyAA"
       },
       "setRotation": {
         "!type": "fn(rotation: number, reflect: bool) -> +Graphics",
@@ -3331,19 +3411,14 @@
       "!doc": "<p>On Puck.js v2.0 this will use the on-board PCT2075TP temperature sensor, but on Puck.js the less accurate on-chip Temperature sensor is used.</p>\n",
       "!url": "http://www.espruino.com/Reference#l_Puck_getTemperature"
     },
-    "accelOn": {
-      "!type": "fn(samplerate: number)",
-      "!doc": "<p>Accepted values are:</p>\n<ul>\n<li>1.6 Hz (no Gyro) - 40uA (2v05 and later firmware)</li>\n<li>12.5 Hz (with Gyro)- 350uA</li>\n<li>26 Hz (with Gyro) - 450 uA</li>\n<li>52 Hz (with Gyro) - 600 uA</li>\n<li>104 Hz (with Gyro) - 900 uA</li>\n<li>208 Hz (with Gyro) - 1500 uA</li>\n<li>416 Hz (with Gyro) (not recommended)</li>\n<li>833 Hz (with Gyro) (not recommended)</li>\n<li>1660 Hz (with Gyro) (not recommended)</li>\n</ul>\n<p>Check out <a href=\"http://www.espruino.com/Puck.js#on-board-peripherals\">the Puck.js page on the accelerometer</a>\nfor more information.</p>\n",
-      "!url": "http://www.espruino.com/Reference#l_Puck_accelOn"
-    },
     "accelOff": {
       "!type": "fn()",
-      "!doc": "<p>Turn the accelerometer off</p>\n",
+      "!doc": "<p>Turn the accelerometer off after it has been turned on by <code>Puck.accelOn()</code>. </p>\n<p>Check out <a href=\"http://www.espruino.com/Puck.js#on-board-peripherals\">the Puck.js page on the accelerometer</a>\nfor more information.</p>\n",
       "!url": "http://www.espruino.com/Reference#l_Puck_accelOff"
     },
     "accel": {
       "!type": "fn() -> ?",
-      "!doc": "<p>Turn on the accelerometer, take a single reading, and then turn it off again.</p>\n<p>The values reported are the raw values from the chip. In normal configuration:</p>\n<ul>\n<li>accelerometer: full-scale (32768) is 4g, so you need to divide by 8192 to get correctly scaled values</li>\n<li>gyro: full-scale (32768) is 245 dps, so you need to divide by 134 to get correctly scaled values</li>\n</ul>\n",
+      "!doc": "<p>Turn on the accelerometer, take a single reading, and then turn it off again.</p>\n<p>The values reported are the raw values from the chip. In normal configuration:</p>\n<ul>\n<li>accelerometer: full-scale (32768) is 4g, so you need to divide by 8192 to get correctly scaled values</li>\n<li>gyro: full-scale (32768) is 245 dps, so you need to divide by 134 to get correctly scaled values</li>\n</ul>\n<p>If taking more than one reading, we&#39;d suggest you use <code>Puck.accelOn()</code> and the <code>Puck.accel</code> event.</p>\n",
       "!url": "http://www.espruino.com/Reference#l_Puck_accel"
     },
     "accelWr": {
@@ -3627,6 +3702,11 @@
     "!doc": "<p>Convert any groups of characters of the form &#39;%ZZ&#39;, into characters with hex code &#39;0xZZ&#39;</p>\n",
     "!url": "http://www.espruino.com/Reference#l__global_decodeURIComponent"
   },
+  "VIBRATE": {
+    "!type": "+Pin",
+    "!doc": "<p>The Bangle.js&#39;s vibration motor.</p>\n",
+    "!url": "http://www.espruino.com/Reference#l__global_VIBRATE"
+  },
   "SDA": {
     "!type": "+Pin",
     "!doc": "<p>The pin marked SDA on the Arduino pin footprint. This is connected directly to pin A4.</p>\n",
@@ -3677,11 +3757,6 @@
     "!doc": "",
     "!url": "http://www.espruino.com/Reference#l__global_IOEXT3"
   },
-  "VIBRATE": {
-    "!type": "+Pin",
-    "!doc": "<p>The Bangle.js&#39;s vibration motor.</p>\n",
-    "!url": "http://www.espruino.com/Reference#l__global_VIBRATE"
-  },
   "LED": {
     "!type": "?",
     "!doc": "<p>On most Espruino board there are LEDs, in which case <code>LED</code> will be an actual Pin.</p>\n<p>On Bangle.js there are no LEDs, so to remain compatible with example code that might\nexpect an LED, this is an object that behaves like a pin, but which just displays\na circle on the display</p>\n",
@@ -3699,12 +3774,12 @@
   },
   "acceleration": {
     "!type": "fn() -> ?",
-    "!doc": "<p><strong>Note:</strong> This function is only available on the <a href=\"/MicroBit\">BBC micro:bit</a> board</p>\n<p>Get the current acceleration of the micro:bit from the on-board accelerometer</p>\n",
+    "!doc": "<p><strong>Note:</strong> This function is only available on the <a href=\"/MicroBit\">BBC micro:bit</a> board</p>\n<p>Get the current acceleration of the micro:bit from the on-board accelerometer</p>\n<p><strong>This is deprecated.</strong> Please use <code>Microbit.accel</code> instead.</p>\n",
     "!url": "http://www.espruino.com/Reference#l__global_acceleration"
   },
   "compass": {
     "!type": "fn() -> ?",
-    "!doc": "<p><strong>Note:</strong> This function is only available on the <a href=\"/MicroBit\">BBC micro:bit</a> board</p>\n<p>Get the current compass position for the micro:bit from the on-board magnetometer</p>\n",
+    "!doc": "<p><strong>Note:</strong> This function is only available on the <a href=\"/MicroBit\">BBC micro:bit</a> board</p>\n<p>Get the current compass position for the micro:bit from the on-board magnetometer</p>\n<p><strong>This is deprecated.</strong> Please use <code>Microbit.mag</code> instead.</p>\n",
     "!url": "http://www.espruino.com/Reference#l__global_compass"
   },
   "FET": {
