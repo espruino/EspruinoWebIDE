@@ -42,52 +42,21 @@
 
   function downloadFile(fileName, callback) {
     Espruino.Core.Status.showStatusWindow("Device Storage","Downloading "+JSON.stringify(fileName));
+    // if it was a storagefile, remove the last char - downloadFile will work it out automatically
     if (fileName.endsWith(STORAGEFILE_POSTFIX)) {
       fileName = fileName.substr(0, fileName.length-STORAGEFILE_POSTFIX.length);
-      Espruino.Core.Utils.executeStatement(`(function(filename) {
-  var f = require("Storage").open(filename,"r");
-  var d = f.read(${CHUNKSIZE});
-  while (d!==undefined) {
-    console.log(btoa(d));
-    d = f.read(${CHUNKSIZE});
-  }
-})(${JSON.stringify(fileName)});`, function(contents) {
-        Espruino.Core.Status.hideStatusWindow();
-        if (contents===undefined)
-          return Espruino.Core.Notifications.error("Timed out receiving file")
-        // atob doesn't care about the newlines
-        callback(atob(contents));
-      });
-    } else { // a normal file
-      //Espruino.Core.Utils.executeExpression("btoa(require('Storage').read("+JSON.stringify(fileName)+"))", function(contents) {
-      Espruino.Core.Utils.executeStatement(`(function(filename) {
-  var s = require("Storage").read(filename);
-  for (var i=0;i<s.length;i+=${CHUNKSIZE}) console.log(btoa(s.substr(i,${CHUNKSIZE})));
-})(${JSON.stringify(fileName)});`, function(contents) {
-        Espruino.Core.Status.hideStatusWindow();
-        if (contents===undefined)
-          return Espruino.Core.Notifications.error("Timed out receiving file")
-        // atob doesn't care about the newlines
-        callback(atob(contents));
-      });
     }
-
+    Espruino.Core.Utils.downloadFile(fileName, function(contents) {
+      Espruino.Core.Status.hideStatusWindow();
+      if (contents===undefined)
+        return Espruino.Core.Notifications.error("Timed out receiving file")
+      callback(contents);
+    });
   }
 
   function uploadFile(fileName, contents, callback) {
     Espruino.Core.Status.showStatusWindow("Device Storage","Uploading "+JSON.stringify(fileName));
-    var js = "";
-    if ("string" != typeof contents)
-      throw new Error("Expecting a string for contents");
-    if (fileName.length==0 || fileName.length>MAX_FILENAME_LEN)
-      throw new Error("Invalid filename length");
-
-    var fn = JSON.stringify(fileName);
-    for (var i=0;i<contents.length;i+=CHUNKSIZE) {
-      var part = contents.substr(i,CHUNKSIZE);
-      js += `\n\x10require("Storage").write(${fn},atob(${JSON.stringify(Espruino.Core.Utils.btoa(part))}),${i}${(i==0)?","+contents.length:""})`;
-    }
-    Espruino.Core.Utils.executeStatement(js, function() {
+    Espruino.Core.Utils.uploadFile(fileName, contents, function() {
       Espruino.Core.Status.hideStatusWindow();
       callback();
     });
@@ -210,6 +179,7 @@
           popup.close();
         }}, { name:"Cancel", callback : function() { popup.close(); }}]
       });
+      popup.window.querySelector(".filenameinput").focus();
       if (isImage) {
         var controls = {
           convert : popup.window.querySelector("#convert"),
@@ -332,6 +302,7 @@
       buttons : [{ name:"Yes", callback : function() {
         deleteFile(fileName, function() {
           Espruino.Core.Status.setStatus("File deleted.");
+          showStorage();
         });
         popup.close();
       }},{ name:"No", callback : function() { popup.close(); }}]
@@ -462,6 +433,7 @@
                 callback(filename);
               }}, { name:"Cancel", callback : function() { popup.close(); }}]
             });
+            popup.window.querySelector(".filenameinput").focus();
           }
         });
       }
