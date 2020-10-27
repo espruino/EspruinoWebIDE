@@ -243,9 +243,11 @@
     // Append the modal overlay
     var winOverlay = Espruino.Core.HTML.domElement('<div class="window__overlay"><div class="window__overlay-inner"></div></div>');
     document.querySelector(".window > .window__viewport").append(winOverlay);
-    winOverlay.addEventListener("click", function(w) {
+    winOverlay.addEventListener("mousedown", function(e) {
+      e.stopPropagation();
       api.close()
     });
+
     // Append the popup window
     var winModal = Espruino.Core.HTML.domElement('<div class="window window--modal window--'+ options.position +'" id="' + options.id + '">'+
           '<div class="window__title-bar title-bar">'+
@@ -258,13 +260,10 @@
             (options.padding ? '</div>':'')+
           '</div>'+
         '</div>');
-    winModal.addEventListener("click", function(e) {
+    winModal.addEventListener("mousedown", function(e) {
       e.stopPropagation();
     });
     winOverlay.querySelector(".window__overlay-inner").append(winModal);
-    winOverlay.addEventListener("click", function(e) {
-      e.stopPropagation();
-    });
 
     // Append close button
     var winClose = Espruino.Core.HTML.domElement('<a class="icon-cross sml title-bar__button title-bar__button--close" title="Close"></a>');
