@@ -74,10 +74,6 @@
       title: "Flash",
       description : "Executed even after power-down",
       callback : function() { choose(1) }
-    },{
-      title: "Flash (always)",
-      description : "Executed even after `reset()` is called. USE WITH CARE",
-      callback : function() { choose(2) }
     }];
     if (Espruino.Plugins.Storage)
       items.push({

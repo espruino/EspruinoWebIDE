@@ -166,7 +166,7 @@
       contents: '<p>Your board has multiple options for firmware. Please select from the list below and click next...</p>'+
                 '<p><b>Note:</b> If you don\'t need any of the features listed, you can choose any firmware.</p>'+
                 html,
-      position: "center",
+      position: "auto",
       buttons : [{ name:"Next", callback : function() {
         var binary_filename = $('.fw_list option:selected').attr("filename");
         popup.close();

@@ -47,11 +47,11 @@
     if (Espruino.Core.Serial.isConnected()) {
       disconnect();
     } else {
-      createPortSelector();
+      showPortSelector();
     }
   }
 
-  function createPortSelector(callback) {
+  function showPortSelector(callback) {
     var checkInt, popup;
 
     function selectPortInternal(port) {
@@ -69,7 +69,8 @@
       connect();
     }
 
-    var searchHtml = '<h2 class="list__no-results">Searching...</h2>';
+    var searchHtml = `<h2 class="list__no-results">Searching...</h2>
+    <div class="list__no-results-help"><a href="#" onclick="Espruino.Core.MenuPortSelector.showPortStatus()">Show status</a>`;
 
     function getPorts() {
       Espruino.Core.Serial.getPorts(function(items) {
@@ -99,13 +100,13 @@
               }
             }
           });
-          popup.setContents(Espruino.Core.HTML.domList(listItems));
+          var domList = Espruino.Core.HTML.domList(listItems);
+          domList.append(Espruino.Core.HTML.domElement('<li style="text-align: right;"><a href="#" onclick="Espruino.Core.MenuPortSelector.showPortStatus()">status</a></li>'));
+          popup.setContents(domList);
         } else {
           var html = '<h2 class="list__no-results">Searching... No ports found</h2>';
-          if (Espruino.Core.Utils.isAppleDevice())
-            html += '<div class="list__no-results-help">As you\'re using an iDevice<br/>you need <a href="https://itunes.apple.com/us/app/webble/id1193531073" target="_blank">to use the WebBLE app</a></div>';
-          else
-            html += '<div class="list__no-results-help">Have you tried <a href="http://www.espruino.com/Troubleshooting" target="_blank">Troubleshooting</a>?</div>';
+          html += `<div class="list__no-results-help"><a href="#" onclick="Espruino.Core.MenuPortSelector.showPortStatus()">Show status</a><br/>
+                   Have you tried <a href="http://www.espruino.com/Troubleshooting" target="_blank">Troubleshooting</a>?</div>`;
           popup.setContents(html);
         }
       });
@@ -151,7 +152,7 @@
     Espruino.Core.Status.setStatus("Connecting...");
     Espruino.Core.Serial.setSlowWrite(true);
     Espruino.Core.Serial.open(serialPort, function(cInfo) {
-      if (cInfo!=undefined) {
+      if (cInfo!==undefined && cInfo.error===undefined) {
         console.log("Device found "+JSON.stringify(cInfo));
         var name = nameFromConInfo(cInfo);
         var boardData = Espruino.Core.Env.getBoardData();
@@ -161,7 +162,10 @@
         callback(true);
       } else {
         // fail
-        Espruino.Core.Notifications.error("Connection Failed.", true);
+        var msg = ".";
+        if (cInfo!==undefined && cInfo.error!==undefined)
+          msg = ": "+cInfo.error;
+        Espruino.Core.Notifications.error("Connection Failed"+msg, true);
         callback(false);
       }
     }, function (cInfo) {
@@ -177,7 +181,7 @@
     if (Espruino.Core.Serial.isConnected()) {
       callback(); // great - we're done!
     } else {
-      createPortSelector(callback);
+      showPortSelector(callback);
     }
   }
 
@@ -186,13 +190,41 @@
       Espruino.Core.Serial.close();
   }
 
+  function showPortStatus() {
+    var html = `<table style="padding-top: 8px;padding-bottom: 8px;">`;
+    Espruino.Core.Serial.devices.forEach(device => {
+      var deviceText = "";
+      var deviceIcon = "&nbsp;";
+      var color = "black";
+      if (device.getStatus) {
+        var s = device.getStatus();
+        if (s===true) { deviceIcon=`&#10003;`; deviceText = "Ok"; color="green"; }
+        else if (s.warning) { deviceIcon=`&#9888;`; deviceText = s.warning; color="orange"; }
+        else if (s.error) { deviceIcon=`&#10006;`; deviceText = s.error; color="red"; }
+        else deviceText = "Unknown Status";
+      } else {
+        deviceText = "Unknown Status";
+      }
+      html += `<tr><td><span style="color:${color};font-size:200%;">${deviceIcon}</span></td><td style="font-weight:bold">${device.name}</td><td>${deviceText}</td></tr>\n`;
+    });
+    html += `</table>`;
+
+    Espruino.Core.App.openPopup({
+      id: "portstatus",
+      title: "Port Status",
+      contents: html,
+      position: "auto", padding: true
+    });
+  }
+
   Espruino.Core.MenuPortSelector = {
       init : init,
 
       ensureConnected : ensureConnected,
       connectToPort : connectToPort,
       disconnect : disconnect,
-      showPortSelector: createPortSelector
+      showPortSelector: showPortSelector,
+      showPortStatus : showPortStatus
   };
 
 }());

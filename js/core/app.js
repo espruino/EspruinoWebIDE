@@ -204,7 +204,7 @@
   *   id    : a unique ID for this window
   *   position  : "center" // middle of screen, small
                   "stretch" // across the screen
-                  "auto"    // full height, auto width
+                  "auto"    // auto width, enough height to show all contents
   *   padding  : bool - add padding or not?
   *   width / height : set size in pixels
   *   title : title text
@@ -243,9 +243,11 @@
     // Append the modal overlay
     var winOverlay = Espruino.Core.HTML.domElement('<div class="window__overlay"><div class="window__overlay-inner"></div></div>');
     document.querySelector(".window > .window__viewport").append(winOverlay);
-    winOverlay.addEventListener("click", function(w) {
+    winOverlay.addEventListener("mousedown", function(e) {
+      e.stopPropagation();
       api.close()
     });
+
     // Append the popup window
     var winModal = Espruino.Core.HTML.domElement('<div class="window window--modal window--'+ options.position +'" id="' + options.id + '">'+
           '<div class="window__title-bar title-bar">'+
@@ -258,13 +260,10 @@
             (options.padding ? '</div>':'')+
           '</div>'+
         '</div>');
-    winModal.addEventListener("click", function(e) {
+    winModal.addEventListener("mousedown", function(e) {
       e.stopPropagation();
     });
     winOverlay.querySelector(".window__overlay-inner").append(winModal);
-    winOverlay.addEventListener("click", function(e) {
-      e.stopPropagation();
-    });
 
     // Append close button
     var winClose = Espruino.Core.HTML.domElement('<a class="icon-cross sml title-bar__button title-bar__button--close" title="Close"></a>');
@@ -413,8 +412,7 @@
         // Is there a leak if we don't remove event handlers?
         element.remove();
       },
-      addMenuItem: function(options)
-      {
+      addMenuItem: function(options) {
         var menuEl = element.querySelector(".menu");
         if(!menuEl) {
           menuEl = Espruino.Core.HTML.domElement('<div class="menu"></div>');
@@ -425,7 +423,11 @@
         if (options.order !== undefined)
           order = options.order;
 
-        var menuItemEl = Espruino.Core.HTML.domElement('<a id="icon-'+ options.id +'" title="'+ options.title +'" data-icon-order="'+ order +'"><i class="icon-'+ options.icon +' sml"></i> '+ options.title +'</a>');
+        var menuItemHTML =
+          `<a id="menu-${options.id}" title="${options.title}" data-icon-order="${order}">`;
+        if (options.icon) menuItemHTML += `<i class="icon-${options.icon} sml"></i>`;
+        menuItemHTML += `${options.title}</a>`;
+        var menuItemEl = Espruino.Core.HTML.domElement(menuItemHTML);
         menuEl.append(menuItemEl);
         if(options.click)
           menuItemEl.addEventListener("click", function(e){
@@ -434,6 +436,10 @@
           });
 
         sortIcons(menuEl);
+      },
+      removeMenuItem: function(id) {
+        var menuItemEl = element.querySelector("#menu-"+id);
+        if (menuItemEl) menuItemEl.remove();
       }
     };
 
