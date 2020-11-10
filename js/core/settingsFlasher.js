@@ -50,12 +50,80 @@
               Espruino.Core.MenuFlasher.showFlasher( undefined, buffer );
             });
           });
+          // Espruino WiFi flash
+          $('.espruino_wifi_fw_check').click( checkWiFiFirmware );
+          $('.espruino_wifi_fw_start').click( flashWiFiFirmware );
         });
       }
     });
   }
 
-  function startFlashing() {
+  function checkWiFiFirmware() {
+    Espruino.Core.MenuPortSelector.ensureConnected(function() {
+      Espruino.Core.Status.showStatusWindow("Espruino WiFi","Checking firmware version...");
+      Espruino.Core.FlasherESP8266.getFirmwareVersion(version => {
+        Espruino.Core.Status.hideStatusWindow();
+        var popup = Espruino.Core.App.openPopup({
+          title: "Espruino WiFi",
+          padding: true,
+          contents: version ? `<p><b>The WiFi firmware reported:</b></p><p><pre>${Espruino.Core.Utils.escapeHTML(version)}</pre></p>`:
+                            `<p><b>The ESP8266 did not respond to the version request</b></p>`,
+          position: "center",
+          buttons : [{ name:"Ok", callback : function() {
+            popup.close();
+          }}]
+        });
+      });
+    });
+  }
+
+  function flashWiFiFirmware() {
+    var BIN = "ESP8266_AT_1_5_4_8M";
+    var URL = "https://www.espruino.com/binaries/"+BIN+".bin";
+    Espruino.Core.App.closePopup();
+    var popup = Espruino.Core.App.openPopup({
+      title: "Espruino WiFi ESP8266 Firmware Update",
+      padding: true,
+      contents: `<p>This option will update your Espruino WiFi's ESP8266 WiFi
+    module to the latest version (${BIN}). This will take several minutes, and should not be stopped
+    halfway. <b>Espruino WiFi should not be in bootloader mode when you connect.</b></p>`,
+      position: "auto",
+      buttons : [{ name:"Next", callback : function() {
+        popup.close();
+        Espruino.Core.Status.showStatusWindow("Firmware Update","ESP8266 firmware is now being updated...");
+        Espruino.Core.Status.setStatus("Downloading binary...");
+        Espruino.Core.Utils.getBinaryURL(URL, function (err, binary) {
+          if (err) {
+            Espruino.Core.Status.hideStatusWindow();
+            Espruino.Core.Notifications.error("Unable to download binary: "+ err, true);
+            return;
+          }
+          console.log("Downloaded "+binary.byteLength+" bytes");
+          Espruino.Core.MenuPortSelector.ensureConnected(function() {
+            Espruino.Core.FlasherESP8266.flashDevice({
+              binary : binary,
+              cbStatus : function(txt,progress) {
+                Espruino.Core.Status.setStatus(txt);
+              },
+              cbDone : function() {
+                Espruino.Core.Status.hideStatusWindow();
+                var popup = Espruino.Core.App.openPopup({
+                  title: "Firmware Update",
+                  padding: true,
+                  contents: '<p><b>The Firmware was updated successfully!</b><p>',
+                  position: "center",
+                  buttons : [{ name:"Next", callback : function() {
+                    popup.close();
+                  }}]
+                });
+              }
+            });
+          });
+        });
+      }},{ name:"Close", callback : function() {
+        popup.close();
+      }}]
+    });
 
   }
 
