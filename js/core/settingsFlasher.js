@@ -51,17 +51,30 @@
             });
           });
           // Espruino WiFi flash
-          $('.espruino_wifi_fw_check').click( checkWiFiFirmware );
-          $('.espruino_wifi_fw_start').click( flashWiFiFirmware );
+          $('.esp8266_fw_check').click( checkESP8266Firmware );
+          $('.esp8266_fw_start').click( flashESP8266Firmware );
         });
       }
     });
   }
 
-  function checkWiFiFirmware() {
+  const ESP8266_CONFIGS = {
+    espruinowifi : {serialDevice:"Serial2",serialRx:"A3",serialTx:"A2",chPD:"A13",chBoot:"A14"},
+    espruinopicoshim : {serialDevice:"Serial2",serialRx:"A3",serialTx:"A2",chPD:"B9",chBoot:"A1"},
+    pixljs : {serialDevice:"Serial1",serialRx:"D0",serialTx:"D1",note:"You will need to manually connect GPIO0/BOOT pin to GND to flash firmware (by setting SW3 to ON)"},
+    pixljsmulti : {serialDevice:"Serial1",serialRx:"D0",serialTx:"D1",chPD:"D9",note:"You will need to manually connect GPIO0/BOOT pin to GND to flash firmware" }
+  };
+  function getESP8266Config() {
+    var options = ESP8266_CONFIGS[document.querySelector('input[name=esp8266_type]:checked').value];
+    if (!options) throw new Error("Unknown config type!");
+    return options;
+  }
+
+  function checkESP8266Firmware() {
+    var options = getESP8266Config();
     Espruino.Core.MenuPortSelector.ensureConnected(function() {
       Espruino.Core.Status.showStatusWindow("Espruino WiFi","Checking firmware version...");
-      Espruino.Core.FlasherESP8266.getFirmwareVersion(version => {
+      Espruino.Core.FlasherESP8266.getFirmwareVersion(options, version => {
         Espruino.Core.Status.hideStatusWindow();
         var popup = Espruino.Core.App.openPopup({
           title: "Espruino WiFi",
@@ -77,7 +90,8 @@
     });
   }
 
-  function flashWiFiFirmware() {
+  function flashESP8266Firmware() {
+    var options = getESP8266Config();
     var BIN = "ESP8266_AT_1_5_4_8M";
     var URL = "https://www.espruino.com/binaries/"+BIN+".bin";
     Espruino.Core.App.closePopup();
@@ -86,7 +100,7 @@
       padding: true,
       contents: `<p>This option will update your Espruino WiFi's ESP8266 WiFi
     module to the latest version (${BIN}). This will take several minutes, and should not be stopped
-    halfway. <b>Espruino WiFi should not be in bootloader mode when you connect.</b></p>`,
+    halfway. <b>Espruino WiFi should not be in bootloader mode when you connect.</b></p>${options.note?``:`<p>${options.note}</p>`}`,
       position: "auto",
       buttons : [{ name:"Next", callback : function() {
         popup.close();
@@ -100,24 +114,24 @@
           }
           console.log("Downloaded "+binary.byteLength+" bytes");
           Espruino.Core.MenuPortSelector.ensureConnected(function() {
-            Espruino.Core.FlasherESP8266.flashDevice({
-              binary : binary,
-              cbStatus : function(txt,progress) {
-                Espruino.Core.Status.setStatus(txt);
-              },
-              cbDone : function() {
-                Espruino.Core.Status.hideStatusWindow();
-                var popup = Espruino.Core.App.openPopup({
-                  title: "Firmware Update",
-                  padding: true,
-                  contents: '<p><b>The Firmware was updated successfully!</b><p>',
-                  position: "center",
-                  buttons : [{ name:"Next", callback : function() {
-                    popup.close();
-                  }}]
-                });
-              }
-            });
+            options.binary = binary;
+            options.cbStatus = function(txt,progress) {
+              Espruino.Core.Status.setStatus(txt);
+            };
+            options.cbDone = function(err) {
+              Espruino.Core.Status.hideStatusWindow();
+              var popup = Espruino.Core.App.openPopup({
+                title: "Firmware Update",
+                padding: true,
+                contents: err ? '<p><b>The Firmware update failed: '+Espruino.Core.Utils.escapeHTML(err)+'</b><p>'
+                              : '<p><b>The Firmware was updated successfully!</b><p>',
+                position: "center",
+                buttons : [{ name:"Next", callback : function() {
+                  popup.close();
+                }}]
+              });
+            };
+            Espruino.Core.FlasherESP8266.flashDevice(options);
           });
         });
       }},{ name:"Close", callback : function() {
