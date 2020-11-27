@@ -152,6 +152,11 @@ return c;
     if (!rgba) throw new Error("No dataIn specified");
     if (!options.width) throw new Error("No Width specified");
     if (!options.height) throw new Error("No Height specified");
+
+    if (options.autoCrop) {
+      rgba = autoCrop(rgba, options);
+    }
+
     if ("string"!=typeof options.diffusion)
       options.diffusion = "none";
     options.compression = options.compression || false;
@@ -342,6 +347,39 @@ return c;
     }
   }
 
+  /* Given an image attempt to automatically crop (use top left
+  pixel color) */
+  function autoCrop(rgba, options) {
+    var buf = new Uint32Array(rgba.buffer);
+    var stride = options.width;
+    var cropCol = buf[0];
+    var x1=options.width, x2=0, y1=options.height,y2=2;
+    for (var y=0;y<options.height;y++) {
+      for (var x=0;x<options.width;x++) {
+        if (buf[x+y*stride]!=cropCol) {
+          if (x<x1) x1=x;
+          if (y<y1) y1=y;
+          if (x>x2) x2=x;
+          if (y>y2) y2=y;
+        }
+      }
+    }
+    // no data! might as well just send it all
+    if (x1>x2 || y1>y2) return rgba;
+    // ok, crop!
+    var w = 1+x2-x1;
+    var h = 1+y2-y1;
+    var dst = new Uint32Array(w*h);
+    for (var y=0;y<h;y++)
+      for (var x=0;x<w;x++)
+        dst[x+y*w] = buf[(x+x1)+(y+y1)*stride];
+    options.width = w;
+    options.height = h;
+    var cropped = new Uint8ClampedArray(dst.buffer);
+    if (options.rgbaOut) options.rgbaOut = cropped;
+    return cropped;
+  }
+
   /* RGBAtoString options, PLUS:
 
   updateCanvas: update canvas with the quantized image
@@ -386,6 +424,7 @@ return c;
       mode : Object.keys(COL_BPP),
       output : ["object","string","raw"],
       inverted : "bool",
+      autoCrop : "bool", // whether to crop the image's borders or not
     }
   }
 
