@@ -137,6 +137,9 @@
         <option value="4bitmac">4 bit Mac palette</option>
         <option value="web">8 bit Web palette</option>
         <option value="rgb565">16 bit RGB565</option>
+        <option value="opt1bit">Optimal 1 bit</option>
+        <option value="opt2bit">Optimal 2 bit</option>
+        <option value="opt4bit">Optimal 4 bit</option>
         </select><br/>
         Diffusion: <select id="diffusion">
         <option value="none" selected="selected">Flat</option>

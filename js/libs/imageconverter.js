@@ -23,27 +23,26 @@
   0x000000, 0x444444, 0x888888, 0xBBBBBB,
   0x996633, 0x663300, 0x006600, 0x00aa00,
   0x0099ff, 0x0000cc, 0x330099, 0xff0099,
-  0xdd0000, 0xff6600, 0xffff00, 0xffffff
-],
-lookup : function(palette,r,g,b,a, no_transparent) {
-if (!no_transparent && a<128) return TRANSPARENT_8BIT;
-var maxd = 0xFFFFFF;
-var c = 0;
-palette.forEach(function(p,n) {
-  var pr=p>>16;
-  var pg=(p>>8)&255;
-  var pb=p&255;
-  var dr = r-pr;
-  var dg = g-pg;
-  var db = b-pb;
-  var d = dr*dr + dg*dg + db*db;
-  if (d<maxd) {
-    c = n;
-    maxd=d;
+  0xdd0000, 0xff6600, 0xffff00, 0xffffff],
+  lookup : function(palette,r,g,b,a, no_transparent) {
+    if (!no_transparent && a<128) return TRANSPARENT_8BIT;
+    var maxd = 0xFFFFFF;
+    var c = 0;
+    palette.forEach(function(p,n) {
+      var pr=(p>>16)&255;
+      var pg=(p>>8)&255;
+      var pb=p&255;
+      var dr = r-pr;
+      var dg = g-pg;
+      var db = b-pb;
+      var d = dr*dr + dg*dg + db*db;
+      if (d<maxd) {
+        c = n;
+        maxd=d;
+      }
+    });
+    return c;
   }
-});
-return c;
-}
 };
   var TRANSPARENT_8BIT = 254;
 
@@ -55,7 +54,10 @@ return c;
     "4bitmac":4,
     "vga":8,
     "web":8,
-    "rgb565":16
+    "rgb565":16,
+    "opt1bit":1,
+    "opt2bit":2,
+    "opt4bit":4,
   };
 
 
@@ -94,6 +96,15 @@ return c;
         ((g&0xFC)<<3) |
         ((b&0xF8)>>3));
     },
+    "opt1bit":function(r,g,b,a,palette) {
+      return PALETTE.lookup(palette.rgb888,r,g,b,a);
+    },
+    "opt2bit":function(r,g,b,a,palette) {
+      return PALETTE.lookup(palette.rgb888,r,g,b,a);
+    },
+    "opt4bit":function(r,g,b,a,palette) {
+      return PALETTE.lookup(palette.rgb888,r,g,b,a);
+    }
   };
   var COL_TO_RGB = {
     "1bit":function(c) {
@@ -127,6 +138,15 @@ return c;
       var b = (c<<3)&0xF8;
       return 0xFF000000|(r<<16)|(g<<8)|b;
     },
+    "opt1bit":function(c,palette) {
+      return palette.rgb888[c];
+    },
+    "opt2bit":function(c,palette) {
+      return palette.rgb888[c];
+    },
+    "opt4bit":function(c,palette) {
+      return palette.rgb888[c];
+    }
   };
   // What Espruino uses by default
   var BPP_TO_COLOR_FORMAT = {
@@ -165,6 +185,7 @@ return c;
     options.output = options.output || "object";
     options.inverted = options.inverted || false;
     options.transparent = !!options.transparent;
+
     var transparentCol = undefined;
     if (options.transparent) {
       if (options.mode=="4bit")
@@ -173,7 +194,16 @@ return c;
         transparentCol=TRANSPARENT_8BIT;
     }
     var bpp = COL_BPP[options.mode];
+    if (bpp===undefined) throw new Error("Unknown image mode");
     var bitData = new Uint8Array(((options.width*options.height)*bpp+7)/8);
+    var palette, paletteBpp;
+    if (options.mode.startsWith("opt")) {
+      var oldBPP = bpp, oldMode = options.mode;
+      bpp = 16; options.mode="rgb565";
+      var pixels = readImage();
+      bpp = oldBPP; options.mode = oldMode;
+      palette = generatePalette(pixels, options);
+    }
 
     function readImage() {
       var pixels = new Int32Array(options.width*options.height);
@@ -206,14 +236,14 @@ return c;
           b = clip(b + options.brightness + eb);
           var isTransparent = a<128;
 
-          var c = COL_FROM_RGB[options.mode](r,g,b,a);
+          var c = COL_FROM_RGB[options.mode](r,g,b,a,palette);
           if (isTransparent && options.transparent && transparentCol===undefined) {
             c = -1;
             a = 0;
           }
           pixels[n] = c;
           // error diffusion
-          var cr = COL_TO_RGB[options.mode](c);
+          var cr = COL_TO_RGB[options.mode](c,palette);
           var oa = cr>>>24;
           var or = (cr>>16)&255;
           var og = (cr>>8)&255;
@@ -246,7 +276,7 @@ return c;
           else if (bpp==16) { bitData[n<<1] = c>>8; bitData[1+(n<<1)] = c&0xFF; }
           else throw new Error("Unhandled BPP");
           // Write preview
-          var cr = COL_TO_RGB[options.mode](c);
+          var cr = COL_TO_RGB[options.mode](c, palette);
           if (c===transparentCol)
             cr = ((((x>>2)^(y>>2))&1)?0xFFFFFF:0); // pixel pattern
           var oa = cr>>>24;
@@ -294,13 +324,21 @@ return c;
     var strCmd;
     if ((options.output=="string") || (options.output=="raw")) {
       var transparent = transparentCol!==undefined;
-      var headerSize = transparent?4:3;
-      var imgData = new Uint8Array(bitData.length + headerSize);
-      imgData[0] = options.width;
-      imgData[1] = options.height;
-      imgData[2] = bpp + (transparent?128:0);
-      if (transparent) imgData[3] = transparentCol;
-      imgData.set(bitData, headerSize);
+      var header = [];
+      header.push(options.width);
+      header.push(options.height);
+      header.push(bpp + (transparent?128:0) + (palette?64:0));
+      if (transparent) header.push(transparentCol);
+      if (palette) {
+        var p = palette.rgb565;
+        for (var i=0;i<p.length;i++) {
+          header.push(p[i]&255);
+          header.push(p[i]>>8);
+        }
+      }
+      var imgData = new Uint8Array(header.length + bitData.length);
+      imgData.set(header, 0);
+      imgData.set(bitData, header.length);
       bitData = imgData;
     }
     if (options.compression) {
@@ -319,6 +357,7 @@ return c;
       imgstr = "{\n";
       imgstr += "  width : "+options.width+", height : "+options.height+", bpp : "+bpp+",\n";
       if (transparentCol!==undefined) imgstr += "  transparent : "+transparentCol+",\n";
+      if (palette!==undefined) imgstr += "  palette : new Uint16Array(["+palette.rgb565.toString()+"]),\n";
       imgstr += '  buffer : '+strCmd+'(atob("'+btoa(str)+'"))\n';
       imgstr += "}";
     } else if (options.output=="string") {
@@ -345,6 +384,30 @@ return c;
         n++;
       }
     }
+  }
+
+  /* Given an image, try and work out a palette.
+    Runs off a 32 bit array of pixels (actually just 1 bits) */
+  function generatePalette(pixels, options) {
+    var bpp = COL_BPP[options.mode];
+    var bppRange = 1<<bpp;
+    var colors = {};
+    var n=0;
+    // count pixel colors - max 65535 so it's not going to kill us
+    for (var n=0;n<pixels.length;n++) {
+      var px = pixels[n];
+      if (!colors[px]) colors[px]=1;
+      else colors[px]++;
+    }
+    // now get as array, sort and crop
+    var pixelCols = Object.keys(colors).sort((a,b)=>colors[b]-colors[a]).slice(0,bppRange);
+    // debugging...
+    //console.log("Palette",pixelCols.map(c=>({col:0|c, cnt:colors[c],rgb:(COL_TO_RGB["rgb565"](c)&0xFFFFFF).toString(16).padStart(6,"0")})));
+    // Return palettes
+    return {
+      "rgb565" : new Uint16Array(pixelCols),
+      "rgb888" : new Uint32Array(pixelCols.map(c=>c>=0 ? COL_TO_RGB["rgb565"](c) : 0))
+    };
   }
 
   /* Given an image attempt to automatically crop (use top left
