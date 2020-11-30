@@ -46,13 +46,30 @@ Use embed.js on the client side to link this in.
   var device = {
     "name" : "Emulator",
     "init" : function() {
+      Espruino.Core.Config.add("EMULATOR_BANGLEJS", {
+        section : "Communications",
+        name : "Enable Bangle.js Emulator",
+        description : "The size of font used in the Terminal and Code Editor windows",
+        type : "boolean",
+        defaultValue : true
+      });
+    },
+    "getStatus": function(ignoreSettings) {
+      if (!Espruino.Config.EMULATOR_BANGLEJS && !ignoreSettings)
+        return {warning:"Disabled in Communications Settings"};
+      return true;
     },
     "getPorts": function(callback) {
+      var emulatorRequested = window.location.search.substr(1).split("&").includes("emulator");
+      if (emulatorRequested)
+        Espruino.Config.set("EMULATOR_BANGLEJS", true);
+      if (!Espruino.Config.EMULATOR_BANGLEJS)
+        return callback([]);
       var port = {
         path:'Emulator',
         description:'Bangle.js Emulator',
         type:"emulator"};
-      if (window.location.search.substr(1).split("&").includes("emulator"))
+      if (emulatorRequested)
         port.autoconnect = true;
       callback([port], true/*instantPorts*/);
     },
