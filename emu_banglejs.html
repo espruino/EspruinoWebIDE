@@ -12,18 +12,39 @@
   #emu {
     width:500px; height:500px; border:1px solid black;
   }
+  #gfxdiv {
+    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:264px;height:244px;
+  }
+  #BTN1 {
+    width:20px;height:73px;position:absolute;right:0px;top:0px;
+  }
+  #BTN2 {
+    width:20px;height:73px;position:absolute;right:0px;top:73px;
+  }
+  #BTN3 {
+    width:20px;height:73px;position:absolute;right:0px;top:146px;
+  }
+  #BTN4 {
+    width:125px;height:240px;position:absolute;left:0px;top:0px;
+  }
+  #BTN5 {
+    width:125px;height:240px;position:absolute;left:120px;top:0px;
+  }
+  #screenshot {
+    width:20px;height:21px;position:absolute;right:0px;top:219px;color:white;text-decoration:none;background-color:black;
+  }
   </style>
 </head>
 <body>
 
-<div id="gfxdiv" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:264px;height:244px;">
+<div id="gfxdiv">
   <canvas id="gfxcanvas" width="240" height="240"></canvas>
-  <button id="BTN1" style="width:20px;height:73px;position:absolute;right:0px;top:0px;">1</button>
-  <button id="BTN2" style="width:20px;height:73px;position:absolute;right:0px;top:73px;">2</button>
-  <button id="BTN3" style="width:20px;height:73px;position:absolute;right:0px;top:146px;">3</button>
-  <a id="screenshot" style="width:20px;height:21px;position:absolute;right:0px;top:219px;color:white;text-decoration:none;background-color:black;">&#x1F4F7;</a>
-  <div id="BTN4" style="width:125px;height:240px;position:absolute;left:0px;top:0px;"></div>
-  <div id="BTN5" style="width:125px;height:240px;position:absolute;left:120px;top:0px;"></div>
+  <button id="BTN1">1</button>
+  <button id="BTN2">2</button>
+  <button id="BTN3">3</button>
+  <a id="screenshot">&#x1F4F7;</a>
+  <div id="BTN4"></div>
+  <div id="BTN5"></div>
 </div>
 
 <script src="js/plugins/emulator_espruino.js"></script>
@@ -177,6 +198,13 @@ function jsKill() {
   Module.ccall('jsKill', 'number', [], []);
 }
 
+function onResize(e) {
+  var scale = Math.floor(Math.min(window.innerWidth/264, window.innerHeight/244)*2)/2;
+  document.getElementById("gfxdiv").style.transform = "translate(-50%,-50%) scale("+scale+","+scale+")";
+}
+window.addEventListener('resize', onResize);
+onResize();
+
 /* ===========================================================================
      Frame to frame comms
    ===========================================================================
@@ -186,8 +214,7 @@ HOST sends: {type:"rx",for:"emu",data:string}
 
 WE send: {type:"tx",from:"emu",data:string}
 
-   */
-
+*/
 var hostWindow = window.parent;
 window.addEventListener('message', function(e) {
   var event = e.data;
