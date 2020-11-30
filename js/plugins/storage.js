@@ -129,6 +129,7 @@
         <input type="checkbox" id="convert" checked>Convert for Espruino</input><br/>
         <div id="imageoptions">
         <input type="checkbox" id="transparent" checked>Transparency?</input><br/>
+        <input type="checkbox" id="autoCrop">Crop?</input><br/>
         Colours: <select id="colorStyle">
         <option value="1bit" selected="selected">1 bit black/white</option>
         <option value="1bitinverted">1 bit white/black</option>
@@ -136,6 +137,9 @@
         <option value="4bitmac">4 bit Mac palette</option>
         <option value="web">8 bit Web palette</option>
         <option value="rgb565">16 bit RGB565</option>
+        <option value="opt1bit">Optimal 1 bit</option>
+        <option value="opt2bit">Optimal 2 bit</option>
+        <option value="opt4bit">Optimal 4 bit</option>
         </select><br/>
         Diffusion: <select id="diffusion">
         <option value="none" selected="selected">Flat</option>
@@ -185,6 +189,7 @@
           convert : popup.window.querySelector("#convert"),
           imageoptionsdiv : popup.window.querySelector("#imageoptions"),
           transparent : popup.window.querySelector("#transparent"),
+          autoCrop : popup.window.querySelector("#autoCrop"),
           diffusion : popup.window.querySelector("#diffusion"),
           brightness : popup.window.querySelector("#brightness"),
           colorStyle : popup.window.querySelector("#colorStyle"),
@@ -194,6 +199,7 @@
         };
         controls.convert.addEventListener("change", recalculate);
         controls.transparent.addEventListener("change", recalculate);
+        controls.autoCrop.addEventListener("change", recalculate);
         controls.diffusion.addEventListener("change", recalculate);
         controls.brightness.addEventListener("change", recalculate);
         controls.colorStyle.addEventListener("change", recalculate);
@@ -212,6 +218,7 @@
             options.diffusion = controls.diffusion.options[controls.diffusion.selectedIndex].value;
             options.compression = false;
             options.transparent = controls.transparent.checked;
+            options.autoCrop = controls.autoCrop.checked;
             options.brightness = 0|controls.brightness.value;
             options.mode = controls.colorStyle.options[controls.colorStyle.selectedIndex].value;
             if (options.mode=="1bitinverted") {
@@ -234,16 +241,18 @@
             options.height = img.height;
             contentsToUpload = imageconverter.RGBAtoString(rgba, options);
 
-            controls.canvas2.width = img.width;
-            controls.canvas2.height = img.height;
+            controls.canvas2.width = options.width;
+            controls.canvas2.height = options.height;
             controls.canvas2.style = "display:block;border:1px solid black;margin:8px;"
             var ctx2 = canvas2.getContext("2d");
-            imageconverter.RGBAtoCheckerboard(imageData.data, options)
-            ctx2.putImageData(imageData,0,0);
+            ctx2.fillStyle = 'white';
+            ctx2.fillRect(options.width, 0, options.width, options.height);
+            var outputImageData = new ImageData(options.rgbaOut, options.width, options.height);
+            ctx2.putImageData(outputImageData,0,0);
 
             // checkerboard for transparency on original image
             var imageData = ctx1.getImageData(0, 0, img.width, img.height);
-            imageconverter.RGBAtoCheckerboard(imageData.data, options)
+            imageconverter.RGBAtoCheckerboard(imageData.data, {width:img.width,height:img.height});
             ctx1.putImageData(imageData,0,0);
           }
 

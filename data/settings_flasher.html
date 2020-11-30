@@ -18,7 +18,15 @@
  <p>If you have the file on your computer, click <button class="flash_start_file">Flash from File</button> and you'll be able to choose the file to upload.</p>
  <p><b>NOTE:</b> STM32-based boards need to be flashed with <code>.bin</code> files, and nRF52 boards need <code>.zip</code> files (not <code>.hex</code>)</p>
 
- <h3>Espruino WiFi Firmware</h3>
- <p>If you're using an <a href="http://www.espruino.com/WiFi" target="_blank">Espruino WiFi</a> board
-   you can use the button below to update the WiFi module's firmware.</p>
-  <p><button class="espruino_wifi_fw_check">Check firmware version</button><button class="espruino_wifi_fw_start">Update WiFi module Firmware (Beta)</button></p>
+ <h3>ESP8266 WiFi Firmware</h3>
+ <p>If you're using an Espruino board with ESP8266 attached (eg. <a href="http://www.espruino.com/WiFi" target="_blank">Espruino WiFi</a>)
+   then you can use the buttons below to update the WiFi module's firmware to the AT command firmware 1.1.0.0 / 1.5.4.</p>
+ <p>
+   Please select the type of device:</p>
+ <input type="radio" name="esp8266_type" value="espruinowifi" checked><label for="espruinowifi">Espruino WiFi (Serial2,rx:A3,tx:A2,pd:A13,boot:A14)</label><br>
+ <input type="radio" name="esp8266_type" value="espruinopicoshim"><label for="espruinopicoshim">Espruino Pico WiFi shim (Serial2,rx:A3,tx:A2,pd:B9,boot:A1)</label><br>
+ <input type="radio" name="esp8266_type" value="pixljs"> <label for="pixljs">Pixl.js with ESP8266 Shield (Serial1,rx:D0,tx:D1)</label><br>
+ <input type="radio" name="esp8266_type" value="pixljsmulti"> <label for="pixljs">Pixl.js Multicolour (Serial1,rx:D0,tx:D1,pd:D9)</label><br>
+
+<p><button class="esp8266_fw_check">Check firmware version</button><button class="esp8266_fw_start">Update WiFi module Firmware (Beta)</button></p>
+
