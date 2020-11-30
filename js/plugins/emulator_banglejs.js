@@ -48,7 +48,13 @@ Use embed.js on the client side to link this in.
     "init" : function() {
     },
     "getPorts": function(callback) {
-      callback([{path:'Emulator',description:'Bangle.js Emulator', type:"emulator"/*, autoconnect : true*/}], true/*instantPorts*/);
+      var port = {
+        path:'Emulator',
+        description:'Bangle.js Emulator',
+        type:"emulator"};
+      if (window.location.search.substr(1).split("&").includes("emulator"))
+        port.autoconnect = true;
+      callback([port], true/*instantPorts*/);
     },
     "open": function(path, openCallback, receiveCallback, disconnectCallback) {
       callbacks.open = openCallback;
