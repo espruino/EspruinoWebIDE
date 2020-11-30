@@ -101,6 +101,8 @@ const CACHED_RESOURCES = [
   'index.js',  // auto-generated file of squished JS
   'index.css', // auto-generated file of squished CSS
   'index.html',
+  'emu_banglejs.html',
+  'js/plugins/emulator_espruino.js',
   './'
 ];
 
