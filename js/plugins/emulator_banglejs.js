@@ -81,7 +81,10 @@ Use embed.js on the client side to link this in.
         callbacks = {};
         disconnectCallback();
       }
-      var url = "https://localhost/EspruinoWebIDE/emu_banglejs.html";
+      var url = window.location.pathname;
+      if (url.includes("/"))
+        url = url.substr(0,url.lastIndexOf("/"));
+      url = window.location.origin + url + "/emu_banglejs.html";
       emu = window.open(url, "banglewindow", "innerWidth=270,innerHeight=248,location=0");
       setTimeout(function() {
         post({type:"init"});
