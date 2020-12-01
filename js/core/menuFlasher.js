@@ -14,6 +14,8 @@
 
   var isFlashing = false; // are we currently trying to update flash?
 
+  var BLE_DEVICES = ["PUCKJS","PIXLJS","MDBT42Q","SMARTIBOT","BANGLEJS"];
+
   function init() {
   }
 
@@ -45,13 +47,11 @@
 
   function getBoardFlashingFunction(boardId) {
     var msg;
-    if (["PUCKJS","PIXLJS","MDBT42Q","RUUVITAG","SMARTIBOT","BANGLEJS","RAK8211","RAK8212"].indexOf(boardId)>=0) {
+    if (BLE_DEVICES.indexOf(boardId)>=0) {
       if (navigator && navigator.bluetooth &&
           !(window && window.location && window.location.protocol=="http:")) {
 
         return stepFlashNordicDFU;
-      } else if (Espruino.Core.Utils.isWindows()) {
-        msg = '<p>Unfortunately Bluetooth firmware updates are not possible from Windows at the moment. Please see you device\'s reference page for more information on firmware updates.</p>';
       } else {
         msg = '<p>The firmware for this device can only be written via Web Bluetooth (or a phone app). Please see you device\'s reference page for more information on firmware updates.</p>';
       }
@@ -449,11 +449,22 @@
           '<p><b>Please put your board into bootloader mode.</b> Hold down BTN1, press and release RST, then release BTN1.</p>'+
           '<p>When the blue LED starts pulsing on and off, click <b>Next</b>...</p>'+
           '<p>If the blue LED is not pulsing, please see the <a href="http://www.espruino.com/Troubleshooting" target="_blank">Troubleshooting page</a></p>';
+      } else if (data.board_id=="BANGLEJS") {
+        html =
+          '<p><b>Please put your Bangle.js into bootloader mode.</b> Hold down BTN1(top) and BTN2(middle) for ~10 sec until the watch reboots to a screen of black and white text.</p>'+
+          '<p>While ===== is moving across the screen release both buttons. Now click <b>Next</b> and connect to the Bluetooth device named <b>DfuTarg</b>...</p>'+
+          '<p>If you cannot find a device named DfuTarg, see the <a href="http://www.espruino.com/Troubleshooting+Bangle.js" target="_blank">Troubleshooting page</a></p>';
+      } else if (BLE_DEVICES.indexOf(data.board_id)>=0) {
+        html =
+          '<p><b>Please put your board into bootloader mode.</b> Hold down BTN1 while powering it on, and then release BTN1 immediately.</p>'+
+          '<p>A LED should light to indicate bootloader mode - Now click <b>Next</b> and connect to the Bluetooth device named <b>DfuTarg</b>...</p>'+
+          '<p>If you cannot find a device named DfuTarg, see the <a href="https://www.espruino.com/Troubleshooting+BLE" target="_blank">Troubleshooting page</a>.</p>';
+
       } else {  // General instructions
         html =
-          '<p><b>Please put your board into bootloader mode.</b> Hold down BTN1, power cycle it, and release BTN1 immediately.</p>'+
-          '<p>An LED should light to indicate bootloader mode - click <b>Next</b>...</p>'+
-          '<p>If no LED is lit, please see the <a href="http://www.espruino.com/Troubleshooting" target="_blank">Troubleshooting page</a> and the instructions for your board.</p>';
+          '<p><b>Please put your board into bootloader mode.</b> Hold down BTN1 while powering it on, and then release BTN1 immediately.</p>'+
+          '<p>A LED should light to indicate bootloader mode - click <b>Next</b>...</p>'+
+          '<p>If a LED is not lighting, please see the <a href="https://www.espruino.com/Troubleshooting" target="_blank">Troubleshooting page</a>.</p>';
       }
     } else if (doc=="success") {
       if (data.board_id.substr(0,4)=="PICO"  ||
