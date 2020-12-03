@@ -128,7 +128,8 @@
 
   function enableWebCamDeviceId(id) {
     var videoConstraints = getVideoConstraints();
-    videoConstraints.deviceId = { exact: id };
+    if (id!==undefined && id!="")
+      videoConstraints.deviceId = { exact: id };
     enableWebCam({
         audio: false,
         video: videoConstraints
