@@ -1233,6 +1233,16 @@
       "!doc": "<p>Gets the RTC&#39;s current prescaler value if <code>calibrate</code> is undefined or false.</p>\n<p>If <code>calibrate</code> is true, the low speed oscillator&#39;s speed is calibrated against the high speed\noscillator (usually +/- 20 ppm) and a suggested value to be fed into <code>E.setRTCPrescaler(...)</code> is returned.</p>\n<p>See <code>E.setRTCPrescaler</code> for more information.</p>\n",
       "!url": "http://www.espruino.com/Reference#l_E_getRTCPrescaler"
     },
+    "showMenu": {
+      "!type": "fn()",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_E_showMenu"
+    },
+    "showPrompt": {
+      "!type": "fn()",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_E_showPrompt"
+    },
     "unmountSD": {
       "!type": "fn()",
       "!doc": "<p>Unmount the SD card, so it can be removed. If you remove the SD card without calling this you may cause corruption, and you will be unable to access another SD card until you reset Espruino or call <code>E.unmountSD()</code>.</p>\n",
@@ -1937,7 +1947,7 @@
   },
   "tv": {
     "!type": "fn()",
-    "!doc": "<p>This library provides TV out capability on the Espruino and Espruino Pico.</p>\n<p>See the [[Television]] page for more information.</p>\n",
+    "!doc": "<p>This library provides TV out capability on the Espruino and Espruino Pico.</p>\n<p>See the <a href=\"/Television\">Television</a> page for more information.</p>\n",
     "!url": "http://www.espruino.com/Reference#l_tv_undefined"
   },
   "crypto": {
@@ -2015,7 +2025,7 @@
       "!url": "http://www.espruino.com/Reference#l_NRF_wake"
     },
     "restart": {
-      "!type": "fn()",
+      "!type": "fn(callback: ?)",
       "!doc": "<p>Restart the Bluetooth softdevice (if there is currently a BLE connection,\nit will queue a restart to be done when the connection closes).</p>\n<p>You shouldn&#39;t need to call this function in normal usage. However, Nordic&#39;s\nBLE softdevice has some settings that cannot be reset. For example there\nare only a certain number of unique UUIDs. Once these are all used the\nonly option is to restart the softdevice to clear them all out.</p>\n",
       "!url": "http://www.espruino.com/Reference#l_NRF_restart"
     },
@@ -2304,21 +2314,6 @@
       "!type": "fn(args: ?) -> number",
       "!doc": "<p>Find the maximum of a series of numbers</p>\n",
       "!url": "http://www.espruino.com/Reference#l_Math_max"
-    }
-  },
-  "ID": {
-    "!type": "fn()",
-    "!doc": "<p>Class containing utility functions for <a href=\"http://www.espruino.com/ID205\">ID205</a></p>\n",
-    "!url": "http://www.espruino.com/Reference#ID",
-    "setLCDPower": {
-      "!type": "fn(isOn: bool)",
-      "!doc": "<p>This function can be used to turn ID205&#39;s LCD off or on.</p>\n",
-      "!url": "http://www.espruino.com/Reference#l_ID_setLCDPower"
-    },
-    "lcdw": {
-      "!type": "fn(cmd: number, data: ?)",
-      "!doc": "<p>Writes a command directly to the ST7567 LCD controller</p>\n",
-      "!url": "http://www.espruino.com/Reference#l_ID_lcdw"
     }
   },
   "heatshrink": {
@@ -2822,71 +2817,6 @@
       "!doc": "<p>This function can be used to turn Bangle.js&#39;s LCD off or on.</p>\n<p><strong>When on full, the LCD draws roughly 40mA.</strong> You can adjust\nWhen brightness using <code>Bange.setLCDBrightness</code>.</p>\n",
       "!url": "http://www.espruino.com/Reference#l_Bangle_setLCDPower"
     },
-    "setLCDTimeout": {
-      "!type": "fn(isOn: number)",
-      "!doc": "<p>This function can be used to turn Bangle.js&#39;s LCD power saving on or off.</p>\n<p>With power saving off, the display will remain in the state you set it with <code>Bangle.setLCDPower</code>.</p>\n<p>With power saving on, the display will turn on if a button is pressed, the watch is turned face up, or the screen is updated. It&#39;ll turn off automatically after the given timeout.</p>\n",
-      "!url": "http://www.espruino.com/Reference#l_Bangle_setLCDTimeout"
-    },
-    "setPollInterval": {
-      "!type": "fn(interval: number)",
-      "!doc": "<p>Set how often the watch should poll for new acceleration/gyro data and kick the Watchdog timer. It isn&#39;t\nrecommended that you make this interval much larger than 1000ms, but values up to 4000ms are allowed.</p>\n<p>Calling this will set <code>Bangle.setOptions({powerSave: false})</code> - disabling the dynamic adjustment of\npoll interval to save battery power when Bangle.js is stationary.</p>\n",
-      "!url": "http://www.espruino.com/Reference#l_Bangle_setPollInterval"
-    },
-    "setLCDPalette": {
-      "!type": "fn(palette: ?)",
-      "!doc": "<p>Bangle.js&#39;s LCD can display colours in 12 bit, but to keep the offscreen\nbuffer to a reasonable size it uses a 4 bit paletted buffer.</p>\n<p>With this, you can change the colour palette that is used.</p>\n",
-      "!url": "http://www.espruino.com/Reference#l_Bangle_setLCDPalette"
-    },
-    "setGestureOptions": {
-      "!type": "fn(options: ?)",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_Bangle_setGestureOptions"
-    },
-    "isLCDOn": {
-      "!type": "fn() -> bool",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_Bangle_isLCDOn"
-    },
-    "isCharging": {
-      "!type": "fn() -> bool",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_Bangle_isCharging"
-    },
-    "lcdWr": {
-      "!type": "fn(cmd: number, data: ?)",
-      "!doc": "<p>Writes a command directly to the ST7735 LCD controller</p>\n",
-      "!url": "http://www.espruino.com/Reference#l_Bangle_lcdWr"
-    },
-    "dbg": {
-      "!type": "fn() -> ?",
-      "!doc": "<p>Reads debug info</p>\n",
-      "!url": "http://www.espruino.com/Reference#l_Bangle_dbg"
-    },
-    "accelWr": {
-      "!type": "fn(reg: number, data: number)",
-      "!doc": "<p>Writes a register on the KX023 Accelerometer</p>\n",
-      "!url": "http://www.espruino.com/Reference#l_Bangle_accelWr"
-    },
-    "accelRd": {
-      "!type": "fn(reg: number, cnt: number) -> ?",
-      "!doc": "<p>Reads a register from the KX023 Accelerometer</p>\n<p><strong>Note:</strong> On Espruino 2v06 and before this function only returns a number (<code>cnt</code> is ignored).</p>\n",
-      "!url": "http://www.espruino.com/Reference#l_Bangle_accelRd"
-    },
-    "project": {
-      "!type": "fn(latlong: ?) -> ?",
-      "!doc": "<p>Perform a Spherical <a href=\"https://en.wikipedia.org/wiki/Web_Mercator_projection\">Web Mercator projection</a>\nof latitude and longitude into <code>x</code> and <code>y</code> coordinates, which are roughly\nequivalent to meters from <code>{lat:0,lon:0}</code>.</p>\n<p>This is the formula used for most online mapping and is a good way\nto compare GPS coordinates to work out the distance between them.</p>\n",
-      "!url": "http://www.espruino.com/Reference#l_Bangle_project"
-    },
-    "buzz": {
-      "!type": "fn(time: number, strength: number) -> +Promise",
-      "!doc": "<p>Use the vibration motor to buzz for a certain time period</p>\n",
-      "!url": "http://www.espruino.com/Reference#l_Bangle_buzz"
-    },
-    "off": {
-      "!type": "fn()",
-      "!doc": "<p>Turn Bangle.js off. It can only be woken by pressing BTN1.</p>\n",
-      "!url": "http://www.espruino.com/Reference#l_Bangle_off"
-    },
     "setLCDBrightness": {
       "!type": "fn(brightness: number)",
       "!doc": "<p>This function can be used to adjust the brightness of Bangle.js&#39;s display, and\nhence prolong its battery life.</p>\n<p>Due to hardware design constraints, software PWM has to be used which\nmeans that the display may flicker slightly when Bluetooth is active\nand the display is not at full power.</p>\n<p><strong>Power consumption</strong></p>\n<ul>\n<li>0 = 7mA</li>\n<li>0.1 = 12mA</li>\n<li>0.2 = 18mA</li>\n<li>0.5 = 28mA</li>\n<li>0.9 = 40mA (switching overhead)</li>\n<li>1 = 40mA</li>\n</ul>\n",
@@ -2907,10 +2837,35 @@
       "!doc": "<p>This can be used to move the displayed memory area up or down temporarily. It&#39;s\nused for displaying notifications while keeping the main display contents\nintact.</p>\n",
       "!url": "http://www.espruino.com/Reference#l_Bangle_setLCDOffset"
     },
+    "setLCDTimeout": {
+      "!type": "fn(isOn: number)",
+      "!doc": "<p>This function can be used to turn Bangle.js&#39;s LCD power saving on or off.</p>\n<p>With power saving off, the display will remain in the state you set it with <code>Bangle.setLCDPower</code>.</p>\n<p>With power saving on, the display will turn on if a button is pressed, the watch is turned face up, or the screen is updated. It&#39;ll turn off automatically after the given timeout.</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_Bangle_setLCDTimeout"
+    },
+    "setPollInterval": {
+      "!type": "fn(interval: number)",
+      "!doc": "<p>Set how often the watch should poll for new acceleration/gyro data and kick the Watchdog timer. It isn&#39;t\nrecommended that you make this interval much larger than 1000ms, but values up to 4000ms are allowed.</p>\n<p>Calling this will set <code>Bangle.setOptions({powerSave: false})</code> - disabling the dynamic adjustment of\npoll interval to save battery power when Bangle.js is stationary.</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_Bangle_setPollInterval"
+    },
     "setOptions": {
       "!type": "fn(options: ?)",
       "!doc": "<p>Set internal options used for gestures, step counting, etc...</p>\n<ul>\n<li><code>wakeOnBTN1</code> should the LCD turn on when BTN1 is pressed? default = <code>true</code></li>\n<li><code>wakeOnBTN2</code> should the LCD turn on when BTN2 is pressed? default = <code>true</code></li>\n<li><code>wakeOnBTN3</code> should the LCD turn on when BTN3 is pressed? default = <code>true</code></li>\n<li><code>wakeOnFaceUp</code> should the LCD turn on when the watch is turned face up? default = <code>false</code></li>\n<li><code>wakeOnTouch</code> should the LCD turn on when the touchscreen is pressed? default = <code>false</code></li>\n<li><code>wakeOnTwist</code> should the LCD turn on when the watch is twisted? default = <code>true</code></li>\n<li><code>twistThreshold</code>  How much acceleration to register a twist of the watch strap? Can be negative for oppsite direction. default = <code>800</code></li>\n<li><code>twistMaxY</code> Maximum acceleration in Y to trigger a twist (low Y means watch is facing the right way up). default = <code>-800</code></li>\n<li><p><code>twistTimeout</code>  How little time (in ms) must a twist take from low-&gt;high acceleration? default = <code>1000</code></p>\n</li>\n<li><p><code>gestureStartThresh</code> how big a difference before we consider a gesture started? default = <code>sqr(800)</code></p>\n</li>\n<li><code>gestureEndThresh</code> how small a difference before we consider a gesture ended? default = <code>sqr(2000)</code></li>\n<li><code>gestureInactiveCount</code> how many samples do we keep after a gesture has ended? default = <code>4</code></li>\n<li><code>gestureMinLength</code> how many samples must a gesture have before we notify about it? default = <code>10</code>\n*</li>\n<li><code>stepCounterThresholdLow</code> How low must acceleration magnitude squared get before we consider the next rise a step? default = <code>sqr(8192-80)</code></li>\n<li><p><code>stepCounterThresholdHigh</code> How high must acceleration magnitude squared get before we consider it a step? default = <code>sqr(8192+80)</code></p>\n</li>\n<li><p><code>powerSave</code> after a minute of not being moved, Bangle.js will change the accelerometer poll interval down to 800ms (10x accelerometer samples).\n On movement it&#39;ll be raised to the default 80ms. If <code>Bangle.setPollInterval</code> is used this is disabled, and for it to work the poll interval\n must be either 80ms or 800ms. default = <code>true</code></p>\n</li>\n</ul>\n<p>Where accelerations are used they are in internal units, where <code>8192 = 1g</code></p>\n",
       "!url": "http://www.espruino.com/Reference#l_Bangle_setOptions"
+    },
+    "isLCDOn": {
+      "!type": "fn() -> bool",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Bangle_isLCDOn"
+    },
+    "isCharging": {
+      "!type": "fn() -> bool",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Bangle_isCharging"
+    },
+    "lcdWr": {
+      "!type": "fn(cmd: number, data: ?)",
+      "!doc": "<p>Writes a command directly to the ST7735 LCD controller</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_Bangle_lcdWr"
     },
     "getCompass": {
       "!type": "fn() -> ?",
@@ -2927,6 +2882,21 @@
       "!doc": "<p>Feature flag - If true, this Bangle.js firmware reads <code>setting.json</code> and\nmodifies beep &amp; buzz behaviour accordingly (the bootloader\ndoesn&#39;t need to do it).</p>\n",
       "!url": "http://www.espruino.com/Reference#l_Bangle_F_BEEPSET"
     },
+    "dbg": {
+      "!type": "fn() -> ?",
+      "!doc": "<p>Reads debug info</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_Bangle_dbg"
+    },
+    "accelWr": {
+      "!type": "fn(reg: number, data: number)",
+      "!doc": "<p>Writes a register on the KX023 Accelerometer</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_Bangle_accelWr"
+    },
+    "accelRd": {
+      "!type": "fn(reg: number, cnt: number) -> ?",
+      "!doc": "<p>Reads a register from the KX023 Accelerometer</p>\n<p><strong>Note:</strong> On Espruino 2v06 and before this function only returns a number (<code>cnt</code> is ignored).</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_Bangle_accelRd"
+    },
     "compassWr": {
       "!type": "fn(reg: number, data: number)",
       "!doc": "<p>Writes a register on the Magnetometer/Compass</p>\n",
@@ -2937,10 +2907,25 @@
       "!doc": "<p>Changes a pin state on the IO expander</p>\n",
       "!url": "http://www.espruino.com/Reference#l_Bangle_ioWr"
     },
+    "project": {
+      "!type": "fn(latlong: ?) -> ?",
+      "!doc": "<p>Perform a Spherical <a href=\"https://en.wikipedia.org/wiki/Web_Mercator_projection\">Web Mercator projection</a>\nof latitude and longitude into <code>x</code> and <code>y</code> coordinates, which are roughly\nequivalent to meters from <code>{lat:0,lon:0}</code>.</p>\n<p>This is the formula used for most online mapping and is a good way\nto compare GPS coordinates to work out the distance between them.</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_Bangle_project"
+    },
     "beep": {
       "!type": "fn(time: number, freq: number) -> +Promise",
       "!doc": "<p>Use the piezo speaker to Beep for a certain time period and frequency</p>\n",
       "!url": "http://www.espruino.com/Reference#l_Bangle_beep"
+    },
+    "buzz": {
+      "!type": "fn(time: number, strength: number) -> +Promise",
+      "!doc": "<p>Use the vibration motor to buzz for a certain time period</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_Bangle_buzz"
+    },
+    "off": {
+      "!type": "fn()",
+      "!doc": "<p>Turn Bangle.js off. It can only be woken by pressing BTN1.</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_Bangle_off"
     },
     "getLogo": {
       "!type": "fn() -> ?",
@@ -2954,7 +2939,7 @@
     },
     "drawWidgets": {
       "!type": "fn()",
-      "!doc": "<p>Draw any onscreen widgets that were loaded with <code>Bangle.loadWidgets()</code>.</p>\n<p>Widgets should redraw themselves when something changes - you&#39;ll only\nneed to call drawWidgets if you decide to clear the entire screen\nwith <code>g.clear()</code>.</p>\n",
+      "!doc": "",
       "!url": "http://www.espruino.com/Reference#l_Bangle_drawWidgets"
     },
     "showLauncher": {
@@ -3232,7 +3217,7 @@
       },
       "setClipRect": {
         "!type": "fn(x1: number, y1: number, x2: number, y2: number) -> +Graphics",
-        "!doc": "<p>This sets the &#39;clip rect&#39; that subsequent drawing operations are clipped to\nsit between.</p>\n<p>These values are inclusive - eg <code>g.setClipRect(1,0,5,0)</code> will ensure that only\npixel rows 1,2,3,4,5 are touched on column 0.</p>\n<p><strong>Note:</strong> For maximum flexibility, the values here are not range checked. For normal\nuse, unsure X and Y are between 0 and <code>getWidth</code>/<code>getHeight</code>.</p>\n",
+        "!doc": "<p>This sets the &#39;clip rect&#39; that subsequent drawing operations are clipped to\nsit between.</p>\n<p>These values are inclusive - eg <code>g.setClipRect(1,0,5,0)</code> will ensure that only\npixel rows 1,2,3,4,5 are touched on column 0.</p>\n<p><strong>Note:</strong> For maximum flexibility, the values here are not range checked. For normal\nuse, X and Y should be between 0 and <code>getWidth</code>/<code>getHeight</code>.</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Graphics_setClipRect"
       },
       "setFontBitmap": {
@@ -3702,11 +3687,6 @@
     "!doc": "<p>Convert any groups of characters of the form &#39;%ZZ&#39;, into characters with hex code &#39;0xZZ&#39;</p>\n",
     "!url": "http://www.espruino.com/Reference#l__global_decodeURIComponent"
   },
-  "VIBRATE": {
-    "!type": "+Pin",
-    "!doc": "<p>The Bangle.js&#39;s vibration motor.</p>\n",
-    "!url": "http://www.espruino.com/Reference#l__global_VIBRATE"
-  },
   "SDA": {
     "!type": "+Pin",
     "!doc": "<p>The pin marked SDA on the Arduino pin footprint. This is connected directly to pin A4.</p>\n",
@@ -3757,6 +3737,11 @@
     "!doc": "",
     "!url": "http://www.espruino.com/Reference#l__global_IOEXT3"
   },
+  "VIBRATE": {
+    "!type": "+Pin",
+    "!doc": "<p>The Bangle.js&#39;s vibration motor.</p>\n",
+    "!url": "http://www.espruino.com/Reference#l__global_VIBRATE"
+  },
   "LED": {
     "!type": "?",
     "!doc": "<p>On most Espruino board there are LEDs, in which case <code>LED</code> will be an actual Pin.</p>\n<p>On Bangle.js there are no LEDs, so to remain compatible with example code that might\nexpect an LED, this is an object that behaves like a pin, but which just displays\na circle on the display</p>\n",
@@ -3771,6 +3756,26 @@
     "!type": "?",
     "!doc": "<p>On most Espruino board there are LEDs, in which case <code>LED2</code> will be an actual Pin.</p>\n<p>On Bangle.js there are no LEDs, so to remain compatible with example code that might\nexpect an LED, this is an object that behaves like a pin, but which just displays\na circle on the display</p>\n",
     "!url": "http://www.espruino.com/Reference#l__global_LED2"
+  },
+  "BTN1": {
+    "!type": "+Pin",
+    "!doc": "<p>This is a fake pin, used only for injecting &#39;fake&#39; button press events from the touchscreen</p>\n",
+    "!url": "http://www.espruino.com/Reference#l__global_BTN1"
+  },
+  "BTN2": {
+    "!type": "+Pin",
+    "!doc": "",
+    "!url": "http://www.espruino.com/Reference#l__global_BTN2"
+  },
+  "BTN3": {
+    "!type": "+Pin",
+    "!doc": "<p>This is a fake pin, used only for injecting &#39;fake&#39; button press events from the touchscreen</p>\n",
+    "!url": "http://www.espruino.com/Reference#l__global_BTN3"
+  },
+  "BTN": {
+    "!type": "+Pin",
+    "!doc": "",
+    "!url": "http://www.espruino.com/Reference#l__global_BTN"
   },
   "acceleration": {
     "!type": "fn() -> ?",

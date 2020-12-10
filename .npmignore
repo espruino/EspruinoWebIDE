@@ -12,4 +12,8 @@ EspruinoTools/node_modules
 blockly/emojitest.js
 extras/field_textarea2.js
 extras/nwjs_build.sh
+espruinotools.js 
 auth_config.json
+*~
+tmp
+emulator.html
