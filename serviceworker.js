@@ -1,5 +1,5 @@
 // Service worker for Offline Web IDE
-const VERSION = 'v71';
+const VERSION = 'v72';
 
 const CACHED_RESOURCES = [
   'blockly/blockly_espruino.js',
