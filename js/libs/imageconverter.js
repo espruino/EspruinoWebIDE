@@ -24,14 +24,24 @@
   0x996633, 0x663300, 0x006600, 0x00aa00,
   0x0099ff, 0x0000cc, 0x330099, 0xff0099,
   0xdd0000, 0xff6600, 0xffff00, 0xffffff],
-  lookup : function(palette,r,g,b,a, no_transparent) {
-    if (!no_transparent && a<128) return TRANSPARENT_8BIT;
+  lookup : function(palette,r,g,b,a, transparentCol) {
+    if (isFinite(transparentCol) && a<128) return transparentCol;
     var maxd = 0xFFFFFF;
     var c = 0;
     palette.forEach(function(p,n) {
       var pr=(p>>16)&255;
       var pg=(p>>8)&255;
       var pb=p&255;
+      var pa=(p>>24)&255;
+      if (transparentCol=="palette" && pa<128) {
+        // if this is a transparent palette entry,
+        // either use it or ignore it depending on pixel transparency
+        if (a<128) {
+          maxd = 0;
+          c = n;
+        }
+        return;
+      }
       var dr = r-pr;
       var dg = g-pg;
       var db = b-pb;
@@ -50,6 +60,7 @@
   var COL_BPP = {
     "1bit":1,
     "2bitbw":2,
+    "8bitbw":8,
     "4bit":4,
     "4bitmac":4,
     "vga":8,
@@ -73,6 +84,11 @@
       if (c>255)c=255;
       return c>>6;
     },
+    "8bitbw":function(r,g,b) {
+      var c = (r+g+b)/3;
+      if (c>255) c=255;
+      return c;
+    },
     "4bit":function(r,g,b,a) {
       var thresh = 128;
       return (
@@ -82,13 +98,13 @@
         ((a>thresh)?8:0));
     },
     "4bitmac":function(r,g,b,a) {
-      return PALETTE.lookup(PALETTE.MAC16,r,g,b,a, true /* no transparency */);
+      return PALETTE.lookup(PALETTE.MAC16,r,g,b,a, undefined /* no transparency */);
     },
     "vga":function(r,g,b,a) {
-      return PALETTE.lookup(PALETTE.VGA,r,g,b,a);
+      return PALETTE.lookup(PALETTE.VGA,r,g,b,a, TRANSPARENT_8BIT);
     },
     "web":function(r,g,b,a) {
-      return PALETTE.lookup(PALETTE.WEB,r,g,b,a);
+      return PALETTE.lookup(PALETTE.WEB,r,g,b,a, TRANSPARENT_8BIT);
     },
     "rgb565":function(r,g,b,a) {
       return (
@@ -97,13 +113,13 @@
         ((b&0xF8)>>3));
     },
     "opt1bit":function(r,g,b,a,palette) {
-      return PALETTE.lookup(palette.rgb888,r,g,b,a);
+      return PALETTE.lookup(palette.rgb888,r,g,b,a, "palette");
     },
     "opt2bit":function(r,g,b,a,palette) {
-      return PALETTE.lookup(palette.rgb888,r,g,b,a);
+      return PALETTE.lookup(palette.rgb888,r,g,b,a, "palette");
     },
     "opt4bit":function(r,g,b,a,palette) {
-      return PALETTE.lookup(palette.rgb888,r,g,b,a);
+      return PALETTE.lookup(palette.rgb888,r,g,b,a, "palette");
     }
   };
   var COL_TO_RGB = {
@@ -113,6 +129,10 @@
     "2bitbw":function(c) {
       c = c&3;
       c = c | (c<<2) | (c<<4) | (c<<6);
+      return 0xFF000000|(c<<16)|(c<<8)|c;
+    },
+    "8bitbw":function(c) {
+      c = c&255;
       return 0xFF000000|(c<<16)|(c<<8)|c;
     },
     "4bit":function(c) {
@@ -163,6 +183,24 @@
     return x;
   }
 
+  // compare two RGB888 colors and give a squared distance value
+  function compareRGBA8888(ca,cb) {
+    var ar=(ca>>16)&255;
+    var ag=(ca>>8)&255;
+    var ab=ca&255;
+    var aa=(ca>>24)&255;
+    var br=(cb>>16)&255;
+    var bg=(cb>>8)&255;
+    var bb=cb&255;
+    var ba=(cb>>24)&255;
+
+    var dr = ar-br;
+    var dg = ag-bg;
+    var db = ab-bb;
+    var da = aa-ba;
+    return dr*dr + dg*dg + db*db + da*da;
+  }
+
 
   /*
   See 'getOptions' for possible options
@@ -203,6 +241,8 @@
       var pixels = readImage();
       bpp = oldBPP; options.mode = oldMode;
       palette = generatePalette(pixels, options);
+      if (palette.transparentCol !== undefined)
+        transparentCol = palette.transparentCol;
     }
 
     function readImage() {
@@ -391,22 +431,50 @@
   function generatePalette(pixels, options) {
     var bpp = COL_BPP[options.mode];
     var bppRange = 1<<bpp;
-    var colors = {};
+    var colorUses = {};
     var n=0;
     // count pixel colors - max 65535 so it's not going to kill us
     for (var n=0;n<pixels.length;n++) {
       var px = pixels[n];
-      if (!colors[px]) colors[px]=1;
-      else colors[px]++;
+      if (!colorUses[px]) colorUses[px]=1;
+      else colorUses[px]++;
     }
-    // now get as array, sort and crop
-    var pixelCols = Object.keys(colors).sort((a,b)=>colors[b]-colors[a]).slice(0,bppRange);
+    // now get as array
+    var pixelCols = Object.keys(colorUses);
+    var maxUses = 0;
+    pixelCols.forEach(col => maxUses=Math.max(maxUses, colorUses[col]));
+    // work out scores
+    var scores = {};
+    pixelCols.forEach(col => {
+      // for each color...
+      var uses = colorUses[col];
+      // work out how close it is to other
+      // colors that have more pixels used
+      var nearestDiff = 0xFFFFFF;
+      pixelCols.forEach(c => {
+        if (c==col || colorUses[c]<=uses) return;
+        var diff = compareRGBA8888(col,c);
+        if (diff<nearestDiff)
+          nearestDiff = diff;
+      });
+      // now our heuristic!
+      // the number of pixels we have *plus* how far we are
+      // away from an existing color times some number
+      scores[col] = uses + (nearestDiff/128);
+    });
+    // sort based on score...
+    pixelCols.sort((a,b)=>scores[b]-scores[a]);
+    pixelCols = pixelCols.slice(0,31); // for sanity
+    //console.log("All Colors",pixelCols.map(c=>({col:0|c, cnt:colorUses[c], score:scores[c], rgb:(COL_TO_RGB["rgb565"](c)&0xFFFFFF).toString(16).padStart(6,"0")})));
+    // crop to how many palette items we're allowed
+    pixelCols = pixelCols.slice(0,bppRange);
     // debugging...
-    //console.log("Palette",pixelCols.map(c=>({col:0|c, cnt:colors[c],rgb:(COL_TO_RGB["rgb565"](c)&0xFFFFFF).toString(16).padStart(6,"0")})));
+    //console.log("Palette",pixelCols.map(c=>({col:0|c, cnt:colorUses[c], score:scores[c], rgb:(COL_TO_RGB["rgb565"](c)&0xFFFFFF).toString(16).padStart(6,"0")})));
     // Return palettes
     return {
       "rgb565" : new Uint16Array(pixelCols),
-      "rgb888" : new Uint32Array(pixelCols.map(c=>c>=0 ? COL_TO_RGB["rgb565"](c) : 0))
+      "rgb888" : new Uint32Array(pixelCols.map(c=>c>=0 ? COL_TO_RGB["rgb565"](c) : 0)),
+      transparentCol : pixelCols.findIndex(c=>c==-1)
     };
   }
 
