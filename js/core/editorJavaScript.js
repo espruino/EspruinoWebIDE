@@ -47,6 +47,30 @@
         }
       }
     });
+    Espruino.Core.Config.add("INDENTATION_TYPE", {
+      section : "General",
+      name : "Indentation Type",
+      description : "Whether to indent using spaces or tab characters",
+      type : { "spaces": "Spaces", "tabs": "Tabs" },
+      defaultValue : "spaces",
+      onChange : function(newValue) {
+        if (codeMirror) {
+          codeMirror.setOption('indentWithTabs', !!(Espruino.Config.INDENTATION_TYPE == "tabs"));
+        }
+      }
+    });
+    Espruino.Core.Config.add("TAB_SIZE", {
+      section : "General",
+      name : "Indentation Size",
+      description : "The number of space characters an indentation should take up",
+      type : {1:1,2:2,4:4,8:8},
+      defaultValue : 2,
+      onChange : function(newValue) {
+        if (codeMirror) {
+          codeMirror.setOption('indentUnit', Espruino.Config.TAB_SIZE);
+        }
+      }
+    });
     Espruino.Core.Config.add("DISABLE_CODE_HINTS", {
       section : "General",
       name : "Disable Code Hints",
@@ -78,13 +102,26 @@
       gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter", "CodeMirror-lint-markers"],
       keyMap: Espruino.Config.KEYMAP,
       theme: Espruino.Config.THEME,
+      indentWithTabs: !!(Espruino.Config.INDENTATION_TYPE == "tabs"),
+      tabSize: Espruino.Config.TAB_SIZE,
+      indentUnit: Espruino.Config.TAB_SIZE,
       extraKeys: {
         "Tab" : function(cm) {
           if (cm.somethingSelected()) {
-            cm.indentSelection("add");
+            // `cm.indentSelection("add");` has been replaced due to issues when
+            // indenting using 4 spaces rather than 2. Instead, this for loop
+            // will iterate each line and indent that line. For lines where
+            // there's spaces that don't match an indentation level, the line
+            // will be snapped to the next tab stop.
+            // Also works with indentations that use the tab character!
+            for (var line = cm.getCursor(true).line; line <= cm.getCursor(false).line; line++) {
+              var spacesAlreadyIndented = cm.getLine(line).search(/\S|\t|$/) % cm.getOption("indentUnit");
+
+              cm.indentLine(line, cm.getOption("indentUnit") - spacesAlreadyIndented);
+            }
           } else { // make sure the tab key indents with spaces
             cm.replaceSelection(cm.getOption("indentWithTabs")? "\t":
-              Array(cm.getOption("indentUnit") + 1).join(" "), "end", "+input");
+              " ".repeat(cm.getOption("indentUnit")), "end", "+input");
           }
         }
       }
