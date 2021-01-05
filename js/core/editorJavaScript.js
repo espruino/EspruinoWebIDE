@@ -67,6 +67,7 @@
       defaultValue : 2,
       onChange : function(newValue) {
         if (codeMirror) {
+          codeMirror.setOption('tabSize', Espruino.Config.TAB_SIZE);
           codeMirror.setOption('indentUnit', Espruino.Config.TAB_SIZE);
         }
       }
