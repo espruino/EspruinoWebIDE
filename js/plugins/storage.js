@@ -129,11 +129,12 @@
         <input type="checkbox" id="convert" checked>Convert for Espruino</input><br/>
         <div id="imageoptions">
         <input type="checkbox" id="transparent" checked>Transparency?</input><br/>
+        <input type="checkbox" id="inverted">Inverted?</input><br/>
         <input type="checkbox" id="autoCrop">Crop?</input><br/>
         Colours: <select id="colorStyle">
         <option value="1bit" selected="selected">1 bit black/white</option>
-        <option value="1bitinverted">1 bit white/black</option>
         <option value="2bitbw">2 bit greyscale</option>
+        <option value="4bitbw">4 bit greyscale</option>
         <option value="4bit">4 bit RGBA</option>
         <option value="4bitmac">4 bit Mac palette</option>
         <option value="web">8 bit Web palette</option>
@@ -192,6 +193,7 @@
           convert : popup.window.querySelector("#convert"),
           imageoptionsdiv : popup.window.querySelector("#imageoptions"),
           transparent : popup.window.querySelector("#transparent"),
+          inverted : popup.window.querySelector("#inverted"),
           autoCrop : popup.window.querySelector("#autoCrop"),
           diffusion : popup.window.querySelector("#diffusion"),
           brightness : popup.window.querySelector("#brightness"),
@@ -202,6 +204,7 @@
         };
         controls.convert.addEventListener("change", recalculate);
         controls.transparent.addEventListener("change", recalculate);
+        controls.inverted.addEventListener("change", recalculate);
         controls.autoCrop.addEventListener("change", recalculate);
         controls.diffusion.addEventListener("change", recalculate);
         controls.brightness.addEventListener("change", recalculate);
@@ -221,15 +224,10 @@
             options.diffusion = controls.diffusion.options[controls.diffusion.selectedIndex].value;
             options.compression = false;
             options.transparent = controls.transparent.checked;
+            options.inverted = document.getElementById("inverted").checked;
             options.autoCrop = controls.autoCrop.checked;
             options.brightness = 0|controls.brightness.value;
             options.mode = controls.colorStyle.options[controls.colorStyle.selectedIndex].value;
-            if (options.mode=="1bitinverted") {
-              options.mode="1bit";
-              options.inverted=true;
-            }
-
-
 
             controls.canvas1.width = img.width;
             controls.canvas1.height = img.height;

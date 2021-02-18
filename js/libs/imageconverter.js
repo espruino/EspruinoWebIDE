@@ -62,6 +62,7 @@
     "2bitbw":2,
     "8bitbw":8,
     "4bit":4,
+    "4bitbw":4,
     "4bitmac":4,
     "vga":8,
     "web":8,
@@ -83,6 +84,12 @@
       c += 31; // rounding
       if (c>255)c=255;
       return c>>6;
+    },
+    "4bitbw":function(r,g,b) {
+      var c = (r+g+b) / 3;
+      c += 7; // rounding
+      if (c>255)c=255;
+      return c>>4;
     },
     "8bitbw":function(r,g,b) {
       var c = (r+g+b)/3;
@@ -129,6 +136,11 @@
     "2bitbw":function(c) {
       c = c&3;
       c = c | (c<<2) | (c<<4) | (c<<6);
+      return 0xFF000000|(c<<16)|(c<<8)|c;
+    },
+    "4bitbw":function(c) {
+      c = c&15;
+      c = c | (c<<4);
       return 0xFF000000|(c<<16)|(c<<8)|c;
     },
     "8bitbw":function(c) {
@@ -255,6 +267,9 @@
           var g = rgba[n*4+1];
           var b = rgba[n*4+2];
           var a = rgba[n*4+3];
+          if (options.alphaToColor) {
+            r = g = b = a;
+          }
 
           if (options.diffusion == "random1" ||
               options.diffusion == "errorrandom") {
@@ -555,6 +570,7 @@
       mode : Object.keys(COL_BPP),
       output : ["object","string","raw"],
       inverted : "bool",
+      alphaToColor : "bool",
       autoCrop : "bool", // whether to crop the image's borders or not
     }
   }
