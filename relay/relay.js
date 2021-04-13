@@ -111,6 +111,10 @@ Packets Sent:
     // Create WebSocket connection.
     var socket = new WebSocket(WS_HOST, 'espruino');
 
+    if (Espruino.Config.RELAY_KEY.trim().length != 8) {
+      Espruino.Config.set("RELAY_KEY", getUID());
+    }
+
     socket.addEventListener('open', function (event) {
       Espruino.Core.Notifications.success("Websocket connection open", true);
       term("Websocket connection open");
