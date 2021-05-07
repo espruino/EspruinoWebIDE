@@ -379,9 +379,19 @@
       <block type="bangle_result_number"></block>
     </category>
     <category name="Robot" enable_if="robot">
-      <block type="robot_motor"></block>
-      <block type="robot_led"></block>
-      <block type="robot_ldr"></block>
+      <label text="'motor(l,r)' must be defined in .boot0 for this"></label>
+      <block type="robot_fwd">
+        <value name="VAL"><block type="math_number"><title name="NUM">1</title></block></value>
+      </block>
+      <block type="robot_back">
+        <value name="VAL"><block type="math_number"><title name="NUM">1</title></block></value>
+      </block>
+      <block type="robot_left">
+        <value name="VAL"><block type="math_number"><title name="NUM">1</title></block></value>
+      </block>
+      <block type="robot_right">
+        <value name="VAL"><block type="math_number"><title name="NUM">1</title></block></value>
+      </block>
     </category>
     <!-- Amperka's MotorShield -->
     <category name="Amperka Motor Shield" enable_if="motorshield">
