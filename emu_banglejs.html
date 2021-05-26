@@ -16,22 +16,22 @@
     position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:264px;height:244px;
   }
   #BTN1 {
-    width:20px;height:73px;position:absolute;right:0px;top:0px;
+    width:20px;height:73px;position:absolute;right:0px;top:0px;padding:0;font-weight:bold;
   }
   #BTN2 {
-    width:20px;height:73px;position:absolute;right:0px;top:73px;
+    width:20px;height:73px;position:absolute;right:0px;top:73px;padding:0;font-weight:bold;
   }
   #BTN3 {
-    width:20px;height:73px;position:absolute;right:0px;top:146px;
+    width:20px;height:73px;position:absolute;right:0px;top:146px;padding:0;font-weight:bold;
   }
   #BTN4 {
-    width:125px;height:240px;position:absolute;left:0px;top:0px;
+    width:125px;height:240px;position:absolute;left:0px;top:0px;padding:0;font-weight:bold;
   }
   #BTN5 {
-    width:125px;height:240px;position:absolute;left:120px;top:0px;
+    width:125px;height:240px;position:absolute;left:120px;top:0px;padding:0;font-weight:bold;
   }
   #screenshot {
-    width:20px;height:21px;position:absolute;right:0px;top:219px;color:white;text-decoration:none;background-color:black;
+    width:20px;height:21px;position:absolute;right:0px;top:219px;color:white;text-decoration:none;background-color:black;cursor:pointer;
   }
   #gfxcanvas {
     image-rendering: pixelated;
@@ -201,10 +201,48 @@ function jsKill() {
   Module.ccall('jsKill', 'number', [], []);
 }
 
-function onResize(e) {
-  var scale = Math.floor(Math.min(window.innerWidth/264, window.innerHeight/244)*2)/2;
+var dontTrigger = false;
+var timerResize;
+function resizeEnd() {
+  //100ms since last resize
+  dontTrigger = true;
+  window.resizeBy(Math.round(byX*correctingRatio*270-window.innerWidth), Math.round(byY*correctingRatio*244-window.innerHeight));
+  var scale = correctingRatio*byX;
+  if (scale < correctingRatio ) scale = correctingRatio;
   document.getElementById("gfxdiv").style.transform = "translate(-50%,-50%) scale("+scale+","+scale+")";
+  
 }
+function onResize(e) {
+  if ( !dontTrigger ) {
+    clearTimeout(timerResize);
+    timerResize = setTimeout(resizeEnd, 100);
+  } else {
+    dontTrigger = false;
+  }
+  
+  // data collection
+  if ( window.innerWidth < Math.floor(270*correctingRatio*3) || window.innerHeight < Math.floor(244*correctingRatio*3) ) {
+    if ( window.innerWidth < Math.floor(270*correctingRatio*2.5) || window.innerHeight < Math.floor(244*correctingRatio*2.5) ) {
+      byX=2;byY=2;
+    } else {
+      byX=3;byY=3;
+    }
+  } else {
+    byX=3;byY=3;
+  }
+  if ( window.innerWidth < Math.floor(270*correctingRatio*2) || window.innerHeight < Math.floor(244*correctingRatio*2) ) {
+    if ( window.innerWidth < Math.floor(270*correctingRatio*1.5) || window.innerHeight < Math.floor(244*correctingRatio*1.5) ) {
+      byX=1;byY=1;
+    } else {
+      byX=2;byY=2;
+    }
+  }
+  if ( window.innerWidth < Math.floor(270*correctingRatio) || window.innerHeight < Math.floor(244*correctingRatio) ) {
+    byX=1;byY=1;
+  }
+}
+var correctingRatio = 1/window.devicePixelRatio;
+var byX=1,byY=1;
 window.addEventListener('resize', onResize);
 onResize();
 
