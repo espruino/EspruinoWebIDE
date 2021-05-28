@@ -56,137 +56,175 @@
 };
   var TRANSPARENT_8BIT = 254;
 
-
-  var COL_BPP = {
-    "1bit":1,
-    "2bitbw":2,
-    "8bitbw":8,
-    "4bit":4,
-    "4bitbw":4,
-    "4bitmac":4,
-    "vga":8,
-    "web":8,
-    "rgb565":16,
-    "opt1bit":1,
-    "opt2bit":2,
-    "opt4bit":4,
-  };
-
-
-  var COL_FROM_RGB = {
-    "1bit":function(r,g,b) {
-      var c = (r+g+b) / 3;
-      var thresh = 128;
-      return c>thresh;
+  var FORMATS = {
+    "1bit":{
+      bpp:1,name:"1 bit black/white",
+      fromRGBA:function(r,g,b) {
+        var c = (r+g+b) / 3;
+        var thresh = 128;
+        return c>thresh;
+      },toRGBA:function(c) {
+        return c ? 0xFFFFFFFF : 0xFF000000;
+      }
     },
-    "2bitbw":function(r,g,b) {
-      var c = (r+g+b) / 3;
-      c += 31; // rounding
-      if (c>255)c=255;
-      return c>>6;
+    "2bitbw":{
+      bpp:2,name:"2 bit greyscale",
+      fromRGBA:function(r,g,b) {
+        var c = (r+g+b) / 3;
+        c += 31; // rounding
+        if (c>255)c=255;
+        return c>>6;
+      },toRGBA:function(c) {
+        c = c&3;
+        c = c | (c<<2) | (c<<4) | (c<<6);
+        return 0xFF000000|(c<<16)|(c<<8)|c;
+      }
     },
-    "4bitbw":function(r,g,b) {
-      var c = (r+g+b) / 3;
-      c += 7; // rounding
-      if (c>255)c=255;
-      return c>>4;
+    "4bitbw":{
+      bpp:4,name:"4 bit greyscale",
+      fromRGBA:function(r,g,b) {
+        var c = (r+g+b) / 3;
+        c += 7; // rounding
+        if (c>255)c=255;
+        return c>>4;
+      },toRGBA:function(c) {
+        c = c&15;
+        c = c | (c<<4);
+        return 0xFF000000|(c<<16)|(c<<8)|c;
+      }
     },
-    "8bitbw":function(r,g,b) {
-      var c = (r+g+b)/3;
-      if (c>255) c=255;
-      return c;
+    "8bitbw":{
+      bpp:8,name:"8 bit greyscale",
+      fromRGBA:function(r,g,b) {
+        var c = (r+g+b)/3;
+        if (c>255) c=255;
+        return c;
+      },toRGBA:function(c) {
+        c = c&255;
+        return 0xFF000000|(c<<16)|(c<<8)|c;
+      }
     },
-    "4bit":function(r,g,b,a) {
-      var thresh = 128;
-      return (
-        ((r>thresh)?1:0) |
-        ((g>thresh)?2:0) |
-        ((b>thresh)?4:0) |
-        ((a>thresh)?8:0));
+    "3bit":{
+      bpp:3,name:"3 bit RGB",
+      fromRGBA:function(r,g,b) {
+        var thresh = 128;
+        return (
+          ((r>thresh)?1:0) |
+          ((g>thresh)?2:0) |
+          ((b>thresh)?4:0));
+      },toRGBA:function(c) {
+        return ((c&1 ? 0xFF0000 : 0x000000) |
+                (c&2 ? 0x00FF00 : 0x000000) |
+                (c&4 ? 0x0000FF : 0x000000) |
+                0xFF000000);
+      }
     },
-    "4bitmac":function(r,g,b,a) {
-      return PALETTE.lookup(PALETTE.MAC16,r,g,b,a, undefined /* no transparency */);
+    "4bit":{
+      bpp:4,name:"4 bit RGBA",
+      fromRGBA:function(r,g,b,a) {
+        var thresh = 128;
+        return (
+          ((r>thresh)?1:0) |
+          ((g>thresh)?2:0) |
+          ((b>thresh)?4:0) |
+          ((a>thresh)?8:0));
+      },toRGBA:function(c) {
+        if (!(c&8)) return 0;
+        return ((c&1 ? 0xFF0000 : 0x000000) |
+                (c&2 ? 0x00FF00 : 0x000000) |
+                (c&4 ? 0x0000FF : 0x000000) |
+                0xFF000000);
+      }
     },
-    "vga":function(r,g,b,a) {
-      return PALETTE.lookup(PALETTE.VGA,r,g,b,a, TRANSPARENT_8BIT);
+    "4bitmac":{
+      bpp:4,name:"4 bit Mac palette",
+      fromRGBA:function(r,g,b,a) {
+        return PALETTE.lookup(PALETTE.MAC16,r,g,b,a, undefined /* no transparency */);
+      },toRGBA:function(c) {
+        return 0xFF000000|PALETTE.MAC16[c];
+      }
     },
-    "web":function(r,g,b,a) {
-      return PALETTE.lookup(PALETTE.WEB,r,g,b,a, TRANSPARENT_8BIT);
+    "vga":{
+      bpp:8,name:"8 bit VGA palette",
+      fromRGBA:function(r,g,b,a) {
+        return PALETTE.lookup(PALETTE.VGA,r,g,b,a, TRANSPARENT_8BIT);
+      },toRGBA:function(c) {
+        if (c==TRANSPARENT_8BIT) return 0;
+        return 0xFF000000|PALETTE.VGA[c];
+      }
     },
-    "rgb565":function(r,g,b,a) {
-      return (
-        ((r&0xF8)<<8) |
-        ((g&0xFC)<<3) |
-        ((b&0xF8)>>3));
+    "web":{
+      bpp:8,name:"8 bit Web palette",
+      fromRGBA:function(r,g,b,a) {
+        return PALETTE.lookup(PALETTE.WEB,r,g,b,a, TRANSPARENT_8BIT);
+      },toRGBA:function(c) {
+        if (c==TRANSPARENT_8BIT) return 0;
+        return 0xFF000000|PALETTE.WEB[c];
+      }
     },
-    "opt1bit":function(r,g,b,a,palette) {
-      return PALETTE.lookup(palette.rgb888,r,g,b,a, "palette");
+    "rgb565":{
+      bpp:16,name:"16 bit RGB565",
+      fromRGBA:function(r,g,b,a) {
+        return (
+          ((r&0xF8)<<8) |
+          ((g&0xFC)<<3) |
+          ((b&0xF8)>>3));
+      },toRGBA:function(c) {
+        var r = (c>>8)&0xF8;
+        var g = (c>>3)&0xFC;
+        var b = (c<<3)&0xF8;
+        return 0xFF000000|(r<<16)|(g<<8)|b;
+      }
     },
-    "opt2bit":function(r,g,b,a,palette) {
-      return PALETTE.lookup(palette.rgb888,r,g,b,a, "palette");
+    "opt1bit":{
+      bpp:1, optimalPalette:true,name:"Optimal 1 bit",
+      fromRGBA:function(r,g,b,a,palette) {
+        return PALETTE.lookup(palette.rgb888,r,g,b,a, "palette");
+      },toRGBA:function(c,palette) {
+        return palette.rgb888[c];
+      }
     },
-    "opt4bit":function(r,g,b,a,palette) {
-      return PALETTE.lookup(palette.rgb888,r,g,b,a, "palette");
-    }
-  };
-  var COL_TO_RGB = {
-    "1bit":function(c) {
-      return c ? 0xFFFFFFFF : 0xFF000000;
+    "opt2bit":{
+      bpp:2, optimalPalette:true,name:"Optimal 2 bit",
+      fromRGBA:function(r,g,b,a,palette) {
+        return PALETTE.lookup(palette.rgb888,r,g,b,a, "palette");
+      },toRGBA:function(c,palette) {
+        return palette.rgb888[c];
+      }
     },
-    "2bitbw":function(c) {
-      c = c&3;
-      c = c | (c<<2) | (c<<4) | (c<<6);
-      return 0xFF000000|(c<<16)|(c<<8)|c;
+    "opt3bit":{
+      bpp:3, optimalPalette:true,name:"Optimal 3 bit",
+      fromRGBA:function(r,g,b,a,palette) {
+        return PALETTE.lookup(palette.rgb888,r,g,b,a, "palette");
+      },toRGBA:function(c,palette) {
+        return palette.rgb888[c];
+      }
     },
-    "4bitbw":function(c) {
-      c = c&15;
-      c = c | (c<<4);
-      return 0xFF000000|(c<<16)|(c<<8)|c;
-    },
-    "8bitbw":function(c) {
-      c = c&255;
-      return 0xFF000000|(c<<16)|(c<<8)|c;
-    },
-    "4bit":function(c) {
-      if (!(c&8)) return 0;
-      return ((c&1 ? 0xFF0000 : 0xFF000000) |
-              (c&2 ? 0x00FF00 : 0xFF000000) |
-              (c&4 ? 0x0000FF : 0xFF000000));
-    },
-    "4bitmac":function(c) {
-      return 0xFF000000|PALETTE.MAC16[c];
-    },
-    "vga":function(c) {
-      if (c==TRANSPARENT_8BIT) return 0;
-      return 0xFF000000|PALETTE.VGA[c];
-    },
-    "web":function(c) {
-      if (c==TRANSPARENT_8BIT) return 0;
-      return 0xFF000000|PALETTE.WEB[c];
-    },
-    "rgb565":function(c) {
-      var r = (c>>8)&0xF8;
-      var g = (c>>3)&0xFC;
-      var b = (c<<3)&0xF8;
-      return 0xFF000000|(r<<16)|(g<<8)|b;
-    },
-    "opt1bit":function(c,palette) {
-      return palette.rgb888[c];
-    },
-    "opt2bit":function(c,palette) {
-      return palette.rgb888[c];
-    },
-    "opt4bit":function(c,palette) {
-      return palette.rgb888[c];
+    "opt4bit":{
+      bpp:4, optimalPalette:true,name:"Optimal 4 bit",
+      fromRGBA:function(r,g,b,a,palette) {
+        return PALETTE.lookup(palette.rgb888,r,g,b,a, "palette");
+      },toRGBA:function(c,palette) {
+        return palette.rgb888[c];
+      }
     }
   };
   // What Espruino uses by default
   var BPP_TO_COLOR_FORMAT = {
     1 : "1bit",
     2 : "2bitbw",
+    3 : "3bit",
     4 : "4bitmac",
     8 : "web",
     16 : "rgb565"
+  };
+
+  var DIFFUSION_TYPES = {
+    "none" : "Nearest color (flat)",
+    "random1":"Random small",
+    "random2":"Random large",
+    "error":"Error Diffusion",
+    "errorrandom":"Randomised Error Diffusion"
   };
 
   function clip(x) {
@@ -231,10 +269,12 @@
       options.diffusion = "none";
     options.compression = options.compression || false;
     options.brightness = options.brightness | 0;
+    options.contrast = options.contrast | 0;
     options.mode = options.mode || "1bit";
     options.output = options.output || "object";
     options.inverted = options.inverted || false;
     options.transparent = !!options.transparent;
+    var contrast =  (259 * (options.contrast + 255)) / (255 * (259 - options.contrast));
 
     var transparentCol = undefined;
     if (options.transparent) {
@@ -243,21 +283,21 @@
       if (options.mode=="vga" || options.mode=="web")
         transparentCol=TRANSPARENT_8BIT;
     }
-    var bpp = COL_BPP[options.mode];
-    if (bpp===undefined) throw new Error("Unknown image mode");
+    var fmt = FORMATS[options.mode];
+    if (fmt===undefined) throw new Error("Unknown image mode");
+    var bpp = fmt.bpp;
     var bitData = new Uint8Array(((options.width*options.height)*bpp+7)/8);
     var palette, paletteBpp;
-    if (options.mode.startsWith("opt")) {
+    if (fmt.optimalPalette) {
       var oldBPP = bpp, oldMode = options.mode;
-      bpp = 16; options.mode="rgb565";
-      var pixels = readImage();
-      bpp = oldBPP; options.mode = oldMode;
+      var pixels = readImage(FORMATS["rgb565"]);
       palette = generatePalette(pixels, options);
       if (palette.transparentCol !== undefined)
         transparentCol = palette.transparentCol;
     }
 
-    function readImage() {
+    function readImage(fmt) {
+      var bpp = fmt.bpp;
       var pixels = new Int32Array(options.width*options.height);
       var n = 0;
       var er=0,eg=0,eb=0;
@@ -286,19 +326,19 @@
             g=255-g;
             b=255-b;
           }
-          r = clip(r + options.brightness + er);
-          g = clip(g + options.brightness + eg);
-          b = clip(b + options.brightness + eb);
+          r = clip(((r + options.brightness - 128)*contrast) + 128 + er);
+          g = clip(((g + options.brightness - 128)*contrast) + 128 + eg);
+          b = clip(((b + options.brightness - 128)*contrast) + 128 + eb);
           var isTransparent = a<128;
 
-          var c = COL_FROM_RGB[options.mode](r,g,b,a,palette);
+          var c = fmt.fromRGBA(r,g,b,a,palette);
           if (isTransparent && options.transparent && transparentCol===undefined) {
             c = -1;
             a = 0;
           }
           pixels[n] = c;
           // error diffusion
-          var cr = COL_TO_RGB[options.mode](c,palette);
+          var cr = fmt.toRGBA(c,palette);
           var oa = cr>>>24;
           var or = (cr>>16)&255;
           var og = (cr>>8)&255;
@@ -326,12 +366,19 @@
           // Write image data
           if (bpp==1) bitData[n>>3] |= c ? 128>>(n&7) : 0;
           else if (bpp==2) bitData[n>>2] |= c<<((3-(n&3))*2);
-          else if (bpp==4) bitData[n>>1] |= c<<((n&1)?0:4);
+          else if (bpp==3) {
+            c = c&7;
+            var bitaddr = n*3;
+            var a = bitaddr>>3;
+            var shift = bitaddr&7;
+            bitData[a] |= (c<<(8-shift)) >> 3;
+            bitData[a+1] |= (c<<(16-shift)) >> 3;
+          } else if (bpp==4) bitData[n>>1] |= c<<((n&1)?0:4);
           else if (bpp==8) bitData[n] = c;
           else if (bpp==16) { bitData[n<<1] = c>>8; bitData[1+(n<<1)] = c&0xFF; }
           else throw new Error("Unhandled BPP");
           // Write preview
-          var cr = COL_TO_RGB[options.mode](c, palette);
+          var cr = fmt.toRGBA(c, palette);
           if (c===transparentCol)
             cr = ((((x>>2)^(y>>2))&1)?0xFFFFFF:0); // pixel pattern
           var oa = cr>>>24;
@@ -349,7 +396,7 @@
       }
     }
 
-    var pixels = readImage();
+    var pixels = readImage(fmt);
     if (options.transparent && transparentCol===undefined && bpp<=16) {
       // we have no fixed transparent colour - pick one that's unused
       var colors = new Uint32Array(1<<bpp);
@@ -444,7 +491,8 @@
   /* Given an image, try and work out a palette.
     Runs off a 32 bit array of pixels (actually just 1 bits) */
   function generatePalette(pixels, options) {
-    var bpp = COL_BPP[options.mode];
+    var fmt = FORMATS[options.mode];
+    var bpp = fmt.bpp;
     var bppRange = 1<<bpp;
     var colorUses = {};
     var n=0;
@@ -480,15 +528,15 @@
     // sort based on score...
     pixelCols.sort((a,b)=>scores[b]-scores[a]);
     pixelCols = pixelCols.slice(0,31); // for sanity
-    //console.log("All Colors",pixelCols.map(c=>({col:0|c, cnt:colorUses[c], score:scores[c], rgb:(COL_TO_RGB["rgb565"](c)&0xFFFFFF).toString(16).padStart(6,"0")})));
+    //console.log("All Colors",pixelCols.map(c=>({col:0|c, cnt:colorUses[c], score:scores[c], rgb:(FORMATS["rgb565"].toRGBA(c)&0xFFFFFF).toString(16).padStart(6,"0")})));
     // crop to how many palette items we're allowed
     pixelCols = pixelCols.slice(0,bppRange);
     // debugging...
-    //console.log("Palette",pixelCols.map(c=>({col:0|c, cnt:colorUses[c], score:scores[c], rgb:(COL_TO_RGB["rgb565"](c)&0xFFFFFF).toString(16).padStart(6,"0")})));
+    //console.log("Palette",pixelCols.map(c=>({col:0|c, cnt:colorUses[c], score:scores[c], rgb:(FORMATS["rgb565"].toRGBA(c)&0xFFFFFF).toString(16).padStart(6,"0")})));
     // Return palettes
     return {
       "rgb565" : new Uint16Array(pixelCols),
-      "rgb888" : new Uint32Array(pixelCols.map(c=>c>=0 ? COL_TO_RGB["rgb565"](c) : 0)),
+      "rgb888" : new Uint32Array(pixelCols.map(c=>c>=0 ? FORMATS["rgb565"].toRGBA(c) : 0)),
       transparentCol : pixelCols.findIndex(c=>c==-1)
     };
   }
@@ -563,11 +611,12 @@
       width : "int",
       height : "int",
       rgbaOut : "Uint8Array", //  to store quantised data
-      diffusion : ["none"],
+      diffusion : DIFFUSION_TYPES,
       compression : "bool",
       transparent : "bool",
-      brightness : "int",
-      mode : Object.keys(COL_BPP),
+      brightness : "int", // 0 default +/- 127
+      contrast : "int", // 0 default, +/- 255
+      mode : Object.keys(FORMATS),
       output : ["object","string","raw"],
       inverted : "bool",
       alphaToColor : "bool",
@@ -590,8 +639,13 @@
       bpp &= 127;
       transparentCol = 0|data.charCodeAt(p++);
     }
+    // TODO: Palettes!
     var mode = BPP_TO_COLOR_FORMAT[bpp];
-    if (!mode) return undefined; // unknown format
+    if (!mode) {
+      console.log("Couldn't guess format");
+      return undefined; // unknown format
+    }
+    var fmt = FORMATS[mode];
     var bitmapSize = ((width*height*bpp)+7) >> 3;
     // If it's the wrong length, it's not a bitmap or it's corrupt!
     if (data.length != p+bitmapSize)
@@ -613,7 +667,7 @@
       }
       var c = (nidata>>(nibits-bpp)) & ((1<<bpp)-1);
       nibits -= bpp;
-      var cr = COL_TO_RGB[mode](c);
+      var cr = fmt.toRGBA(c);
       if (c == transparentCol)
         cr = cr & 0xFFFFFF;
       rgba[no++] = (cr>>16)&255; // r
@@ -634,6 +688,14 @@
     return '<img src="'+url+'"\>';
   }
 
+  function setFormatOptions(div) {
+    div.innerHTML = Object.keys(FORMATS).map(id => `<option value="${id}">${FORMATS[id].name}</option>`).join("\n");
+  }
+
+  function setDiffusionOptions(div) {
+    div.innerHTML = Object.keys(DIFFUSION_TYPES).map(id => `<option value="${id}">${DIFFUSION_TYPES[id]}</option>`).join("\n");
+  }
+
   // =======================================================
   return {
     RGBAtoString : RGBAtoString,
@@ -641,6 +703,9 @@
     canvastoString : canvastoString,
     imagetoString : imagetoString,
     getOptions : getOptions,
+    getFormats : function() { return FORMATS; },
+    setFormatOptions : setFormatOptions,
+    setDiffusionOptions : setDiffusionOptions,
 
     stringToImageHTML : stringToImageHTML,
     stringToImageURL : stringToImageURL

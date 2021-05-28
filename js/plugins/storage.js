@@ -131,28 +131,10 @@
         <input type="checkbox" id="transparent" checked>Transparency?</input><br/>
         <input type="checkbox" id="inverted">Inverted?</input><br/>
         <input type="checkbox" id="autoCrop">Crop?</input><br/>
-        Colours: <select id="colorStyle">
-        <option value="1bit" selected="selected">1 bit black/white</option>
-        <option value="2bitbw">2 bit greyscale</option>
-        <option value="4bitbw">4 bit greyscale</option>
-        <option value="4bit">4 bit RGBA</option>
-        <option value="4bitmac">4 bit Mac palette</option>
-        <option value="web">8 bit Web palette</option>
-        <option value="vga">8 bit VGA palette</option>
-        <option value="8bitbw">8 bit greyscale</option>
-        <option value="rgb565">16 bit RGB565</option>
-        <option value="opt1bit">Optimal 1 bit</option>
-        <option value="opt2bit">Optimal 2 bit</option>
-        <option value="opt4bit">Optimal 4 bit</option>
-        </select><br/>
-        Diffusion: <select id="diffusion">
-        <option value="none" selected="selected">Flat</option>
-        <option value="error">Error Diffusion</option>
-        <option value="errorrandom">Randomised Error Diffusion</option>
-        <option value="random1">Random small</option>
-        <option value="random2">Random large</option>
-        </select><br/>
-        Brightness:<input type="range" id="brightness" min="-255" max="255" value="0"></input><br/>
+        Colours: <select id="colorStyle"></select><br/>
+        Diffusion: <select id="diffusion"></select><br/>
+        Brightness:<input type="range" id="brightness" min="-127" max="127" value="0"></input><br/>
+        Contrast:<input type="range" id="contrast" min="-255" max="255" value="0"></input><br/>
 
         <table width="100%">
         <tr><th>Original</th>
@@ -197,17 +179,21 @@
           autoCrop : popup.window.querySelector("#autoCrop"),
           diffusion : popup.window.querySelector("#diffusion"),
           brightness : popup.window.querySelector("#brightness"),
+          contrast : popup.window.querySelector("#contrast"),
           colorStyle : popup.window.querySelector("#colorStyle"),
           canvas1 : popup.window.querySelector("#canvas1"),
           canvas2 : popup.window.querySelector("#canvas2"),
           ressize : popup.window.querySelector("#ressize")
         };
+        imageconverter.setFormatOptions(controls.colorStyle);
+        imageconverter.setDiffusionOptions(controls.diffusion);
         controls.convert.addEventListener("change", recalculate);
         controls.transparent.addEventListener("change", recalculate);
         controls.inverted.addEventListener("change", recalculate);
         controls.autoCrop.addEventListener("change", recalculate);
         controls.diffusion.addEventListener("change", recalculate);
         controls.brightness.addEventListener("change", recalculate);
+        controls.contrast.addEventListener("change", recalculate);
         controls.colorStyle.addEventListener("change", recalculate);
 
         var img;
@@ -227,6 +213,7 @@
             options.inverted = document.getElementById("inverted").checked;
             options.autoCrop = controls.autoCrop.checked;
             options.brightness = 0|controls.brightness.value;
+            options.contrast = 0|controls.contrast.value;
             options.mode = controls.colorStyle.options[controls.colorStyle.selectedIndex].value;
 
             controls.canvas1.width = img.width;
