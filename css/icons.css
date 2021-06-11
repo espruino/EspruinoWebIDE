@@ -288,3 +288,8 @@ a .icon__more:hover {
 .icon-storage.lrg:before { background-position: 0 -2640px }
 .compact .icon-storage.lrg:before,
 .icon-storage.sml:before { background-position: -60px -2640px }
+
+.icon-log.lrg:before { background-position: 0 -2700px }
+.compact .icon-log.lrg:before,
+.icon-log.sml:before { background-position: -60px -2700px }
+

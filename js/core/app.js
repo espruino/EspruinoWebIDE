@@ -406,6 +406,7 @@
         element.classList.add(elementClass);
       },
       setInfo : function(text) {
+        options.info = text;
         if (info) info.innerHTML = text;
       },
       remove : function() {

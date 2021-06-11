@@ -83,7 +83,10 @@
       $('<video autoplay id="videotag" style="'+filters+'"></video>').prependTo(".editor--terminal .editor__canvas");
     } else {
       hadWebCam = false;
-      if (icon!==undefined) icon.remove();
+      if (icon!==undefined) {
+        icon.remove();
+        icon = undefined;
+      }
     }
     if (hadWebCam) toggleWebCam();
   }
