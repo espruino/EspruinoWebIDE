@@ -58,6 +58,52 @@ a.icon-alert:hover { background-color: #f39c12; }
     height: 30px;
 }
 
+[class*="icon-"].lrg.icon--hasinfo
+{
+    width: 60px;
+    height: 68px;
+}
+.compact [class*="icon-"].lrg.icon--hasinfo
+{
+    width: 30px;
+    height: 48px;
+}
+
+a span.icon__info {
+  color : #888;
+  padding : 1px;
+  font-size : 12px;
+  font-weight:bold;
+  position : absolute;
+  left : 0px;
+  bottom : 0px;
+}
+a span.icon__more {
+  color : white;
+  position : absolute;
+  right : 0px;
+  bottom : 0px;
+  padding-left:10px;
+  padding-top: 10px;/* make it easier to click*/
+}
+.compact a .icon__info {
+  left : 50%;
+  bottom : 12px;
+  transform: translate(-50%,0%);
+  font-weight:inherit;
+  font-size : 7px;
+}
+.compact a span.icon__more {
+  left : 50%;
+  transform: translate(-50%,0%);
+  font-size : 12px;
+  padding-left:0px;padding-right:0px;
+}
+
+a .icon__more:hover {
+  color : #2ecc71;
+}
+
 .icon--divide-right { border-right: solid 1px rgba(255,255,255,0.3); }
 .icon--divide-left { border-left: solid 1px rgba(255,255,255,0.3); }
 .icon--divide-bottom { border-bottom: solid 1px rgba(255,255,255,0.3); }
