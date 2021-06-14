@@ -25,10 +25,38 @@
       defaultValue : false,
       onChange : function(newValue) { showIcon(newValue); }
     });
+    Espruino.Core.Config.add("TERMINAL_LOGGER_SAVE_TO_LOCALSTORAGE", {
+      section : "General",
+      name : "Terminal Log - save to localstorage",
+      description : "Save the terminal log to localstorage?",
+      type : "boolean",
+      defaultValue : false,
+      onChange : function(newValue) { if(newValue && !window.localStorage) { Espruino.Core.Notifications.error("Can't access localStorage!"); Espruino.Config.set("TERMINAL_LOGGER_SAVE_TO_LOCALSTORAGE", false); } }
+    });
+    
+    if (Espruino.Config.TERMINAL_LOGGER_SAVE_TO_LOCALSTORAGE && window.localStorage) {
+      let logString = localStorage.getItem("TERMINAL_LOGGER_STORAGE");
+      if (logString) {
+        try {
+          let parsed = JSON.parse(logString);
+          if(Array.isArray(parsed)){
+            log = parsed;
+            logStarted = true;
+          } else {
+            // shouldn't happen, but...
+            Espruino.Core.Notifications.error("Log from localStorage is not an array?!");
+          }
+        } catch (error) {
+          Espruino.Core.Notifications.error("Couldn't parse log from localStorage! \n" + error);
+          console.error("Couldn't parse log from localStorage!", error, logString);
+        }
+      }
+    }
     showIcon(Espruino.Config.SHOW_TERMINAL_LOGGER_ICON);
     Espruino.addProcessor("terminalNewLine", function(line, callback) {
       if (logStarted) {
         log.push(line);
+        if(Espruino.Config.TERMINAL_LOGGER_SAVE_TO_LOCALSTORAGE) { window.localStorage.setItem("TERMINAL_LOGGER_STORAGE", JSON.stringify(log)); }
         icon.setInfo(getLogStateMessage());
       }
       callback(line);
@@ -89,6 +117,7 @@
       }});
       buttons.push({ name:"Clear", callback : function() {
         log = [];
+        if(Espruino.Config.TERMINAL_LOGGER_SAVE_TO_LOCALSTORAGE && window.localStorage){ localStorage.removeItem("TERMINAL_LOGGER_STORAGE"); }
         icon.setInfo(getLogStateMessage());
         popup.close();
       }});
