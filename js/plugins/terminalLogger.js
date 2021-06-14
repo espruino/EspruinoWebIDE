@@ -35,7 +35,7 @@
     });
     
     if (Espruino.Config.TERMINAL_LOGGER_SAVE_TO_LOCALSTORAGE && window.localStorage) {
-      let logString = localStorage.getItem("TERMINAL_LOGGER_STORAGE");
+      let logString = window.localStorage.getItem("TERMINAL_LOGGER_STORAGE");
       if (logString) {
         try {
           let parsed = JSON.parse(logString);
@@ -56,7 +56,8 @@
     Espruino.addProcessor("terminalNewLine", function(line, callback) {
       if (logStarted) {
         log.push(line);
-        if(Espruino.Config.TERMINAL_LOGGER_SAVE_TO_LOCALSTORAGE) { window.localStorage.setItem("TERMINAL_LOGGER_STORAGE", JSON.stringify(log)); }
+        if(Espruino.Config.TERMINAL_LOGGER_SAVE_TO_LOCALSTORAGE && window.localStorage) 
+          window.localStorage.setItem("TERMINAL_LOGGER_STORAGE", JSON.stringify(log)); 
         icon.setInfo(getLogStateMessage());
       }
       callback(line);
@@ -117,7 +118,8 @@
       }});
       buttons.push({ name:"Clear", callback : function() {
         log = [];
-        if(Espruino.Config.TERMINAL_LOGGER_SAVE_TO_LOCALSTORAGE && window.localStorage){ localStorage.removeItem("TERMINAL_LOGGER_STORAGE"); }
+        if(Espruino.Config.TERMINAL_LOGGER_SAVE_TO_LOCALSTORAGE && window.localStorage)
+          window.localStorage.removeItem("TERMINAL_LOGGER_STORAGE");
         icon.setInfo(getLogStateMessage());
         popup.close();
       }});
