@@ -109,18 +109,18 @@
       fromRGBA:function(r,g,b) {
         var thresh = 128;
         return (
-          ((r>thresh)?1:0) |
+          ((r>thresh)?4:0) |
           ((g>thresh)?2:0) |
-          ((b>thresh)?4:0));
+          ((b>thresh)?1:0));
       },toRGBA:function(c) {
-        return ((c&1 ? 0xFF0000 : 0x000000) |
+        return ((c&1 ? 0x0000FF : 0x000000) |
                 (c&2 ? 0x00FF00 : 0x000000) |
-                (c&4 ? 0x0000FF : 0x000000) |
+                (c&4 ? 0xFF0000 : 0x000000) |
                 0xFF000000);
       }
     },
     "4bit":{
-      bpp:4,name:"4 bit RGBA",
+      bpp:4,name:"4 bit ABGR",
       fromRGBA:function(r,g,b,a) {
         var thresh = 128;
         return (
