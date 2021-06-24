@@ -97,7 +97,7 @@ const CACHED_RESOURCES = [
   'img/icon_youtube.png',
   'img/ide_logo.png',
   'favicon.ico',
-  'manifest.json',
+  'ide/webapp_manifest.json',
   'index.js',  // auto-generated file of squished JS
   'index.css', // auto-generated file of squished CSS
   'index.html',
