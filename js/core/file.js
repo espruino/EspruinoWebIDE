@@ -11,14 +11,17 @@
 **/
 "use strict";
 (function(){
-
+  var watchIntervalHandle;
+  var fileLastModified = -Infinity;
+  var currentFileHandle;
   var currentJSFileName = "code.js";
   var currentXMLFileName = "code_blocks.xml";
   var loadFileCallback;
 
-  const MIMETYPE_JS = ".js,.txt,application/javascript,text/plain";
-  const MIMETYPE_XML = ".xml,text/xml";
-
+  const WATCH_INTERVAL = 1000;
+  const MIMETYPE_JS = {"application/javascript": [".js", ".js"], "text/plain": [".txt"]};
+  const MIMETYPE_XML = {"text/xml": [".xml"]};
+  
   function init() {
     // Configuration
 
@@ -34,10 +37,51 @@
         position: "top"
       },
       click: function() {
-        if (Espruino.Core.Code.isInBlockly())
-          loadFile(Espruino.Core.EditorBlockly.setXML, currentXMLFileName, MIMETYPE_XML);
-        else
-          loadFile(Espruino.Core.EditorJavaScript.setCode, currentJSFileName, MIMETYPE_JS);
+        var loadFileArguments = Espruino.Core.Code.isInBlockly()
+          ? [Espruino.Core.EditorBlockly.setXML, currentXMLFileName, MIMETYPE_XML]
+          : [Espruino.Core.EditorJavaScript.setCode, currentJSFileName, MIMETYPE_JS];
+
+        if (chrome.fileSystem || typeof window.showOpenFilePicker !== 'function') {
+          loadFile(...loadFileArguments);
+          return;
+        }
+
+        var callback = async function() {
+          if (watchIntervalHandle) {
+            clearInterval(watchIntervalHandle);
+            watchIntervalHandle = undefined;
+          }
+
+          fileLastModified = -Infinity;
+          var closePopup = await loadFile(...loadFileArguments);
+          if (closePopup) {
+            popup.close();
+          }
+        };
+
+        var listItems = [{
+          icon : "icon-folder-open",
+          title : "Open File",
+          description : "Load file from disk",
+          callback : callback
+        },{
+          icon : "icon-refresh",
+          title : "Open and Watch File",
+          description : "Load and watch for changes",
+          callback : async function() {
+            await callback();
+            watchIntervalHandle = setInterval(readFileContents, WATCH_INTERVAL, loadFileArguments[0]);
+          }
+        }];
+
+        var domList = Espruino.Core.HTML.domList(listItems);
+        var popup = Espruino.Core.App.openPopup({
+          id: "fileopenmodeselector",
+          title: "Select a mode...",
+          contents: "",
+          position: "center",
+        });
+        popup.setContents(domList);
       }
     });
 
@@ -79,7 +123,7 @@
    return chars.replace(/\r\n/g,"\n").replace(/\n/g,"\r\n");
   };
 
-  function loadFile(callback, filename, mimeType) {
+  async function loadFile(callback, filename, mimeType) {
     if (chrome.fileSystem) {
       // Chrome Web App / NW.js
       chrome.fileSystem.chooseEntry({type: 'openFile', suggestedName:filename}, function(fileEntry) {
@@ -96,14 +140,41 @@
           reader.readAsText(file);
         });
       });
+    } else if (typeof window.showOpenFilePicker === 'function') {
+      try {
+        var [fileHandle] = await window.showOpenFilePicker({types: [{accept: mimeType}]});
+        if (fileHandle.name) {
+          setCurrentFileName(fileHandle.name);
+        }
+        
+        currentFileHandle = fileHandle;
+        readFileContents(callback);
+      } catch (_ /* abort */) {
+        return false;
+      }
     } else {
-      Espruino.Core.Utils.fileOpenDialog({id:"code",type:"text",mimeType:mimeType}, function(data, mimeType, fileName) {
+      const mt = Object.values(mimeType).reduce((a, b) => `${a},${b}`) + "," + Object.keys(mimeType);
+      Espruino.Core.Utils.fileOpenDialog({id:"code",type:"text",mimeType:mt}, function(data, mimeType, fileName) {
         if (fileName) setCurrentFileName(fileName);
         callback(convertFromOS(data));
       });
     }
+
+    return true;
   }
 
+  async function readFileContents(callback) {
+    if (!currentFileHandle) {
+      return;
+    }
+
+    var file = await currentFileHandle.getFile();
+    if (file.lastModified > fileLastModified) {
+      var contents = await file.text();
+      fileLastModified = file.lastModified;
+      callback(convertFromOS(contents));
+    }
+  }
 
   Espruino.Core.File = {
     init : init
