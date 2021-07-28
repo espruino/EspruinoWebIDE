@@ -249,17 +249,20 @@
     });
 
     // Append the popup window
+    var domContents = typeof options.contents != "string";
     var winModal = Espruino.Core.HTML.domElement('<div class="window window--modal window--'+ options.position +'" id="' + options.id + '">'+
           '<div class="window__title-bar title-bar">'+
             '<h5 class="title-bar__title">'+ options.title +'</h5>'+
             '<div class="title-bar__buttons"></div>'+
           '</div>'+
-          '<div class="window__viewport">'+
+          '<div class="window__viewport">'+ (domContents ? "" : (
             (options.padding ? '<div style="padding: 0px 10px 0px 10px;">':'')+
             options.contents +
-            (options.padding ? '</div>':'')+
+            (options.padding ? '</div>':''))) +
           '</div>'+
         '</div>');
+    if (domContents)
+      winModal.querySelector(".window__viewport").append(options.contents);
     winModal.addEventListener("mousedown", function(e) {
       e.stopPropagation();
     });

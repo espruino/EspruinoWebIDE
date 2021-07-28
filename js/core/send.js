@@ -94,10 +94,9 @@
       id: "sendmethod",
       title: "Upload Destination",
       padding: true,
-      contents: "",
+      contents: Espruino.Core.HTML.domList(items),
       position: "auto",
     });
-    popup.window.append(Espruino.Core.HTML.domList(items));
     function choose(x) {
       popup.close();
       Espruino.Config.set("SAVE_ON_SEND",x);
