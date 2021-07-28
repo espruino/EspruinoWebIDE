@@ -12,19 +12,40 @@
 "use strict";
 (function(){
 
-  var currentJSFileName = "code.js";
-  var currentXMLFileName = "code_blocks.xml";
-  var loadFileCallback;
+  // how many millisecs between checking a file for modification?
+  const WATCH_INTERVAL = 1000;
+  // types of file we accept
+  const MIMETYPE_JS = {"application/javascript": [".js", ".js"], "text/plain": [".txt"]};
+  const MIMETYPE_XML = {"text/xml": [".xml"]};
 
-  const MIMETYPE_JS = ".js,.txt,application/javascript,text/plain";
-  const MIMETYPE_XML = ".xml,text/xml";
+  var currentJSFile = {
+    name:"code.js",
+    mimeTypes : MIMETYPE_JS,
+    // also setValue, getValue, handle, lastModified
+  };
+  var currentXMLFile = {
+    name:"code_blocks.xml",
+    mimeTypes : MIMETYPE_XML,
+  };
+  var currentFiles = [currentJSFile, currentXMLFile];
+
+  var iconOpenFile;
+  var iconSaveFile;
+  // interval used when checking files for modification
+  var watchInterval;
+  // What we should do when clicking the 'openFile' button
+  var openFileMode = "open"; // open, reload, watch, upload
+
+
 
   function init() {
-    // Configuration
+    currentJSFile.setValue = Espruino.Core.EditorJavaScript.setCode;
+    currentJSFile.getValue = Espruino.Core.EditorJavaScript.getCode;
+    currentXMLFile.setValue = Espruino.Core.EditorBlockly.setXML;
+    currentXMLFile.getValue = Espruino.Core.EditorBlockly.getXML;
 
-
-    // Add stuff we need
-    Espruino.Core.App.addIcon({
+    // Open file icon
+    var icon = {
       id: "openFile",
       icon: "folder-open",
       title : "Open File",
@@ -35,13 +56,39 @@
       },
       click: function() {
         if (Espruino.Core.Code.isInBlockly())
-          loadFile(Espruino.Core.EditorBlockly.setXML, currentXMLFileName, MIMETYPE_XML);
+          loadFile(currentXMLFile);
         else
-          loadFile(Espruino.Core.EditorJavaScript.setCode, currentJSFileName, MIMETYPE_JS);
+          loadFile(currentJSFile);
       }
-    });
-
-    Espruino.Core.App.addIcon({
+    };
+    // Only add extra options if showOpenFilePicker is available
+    if (typeof window.showOpenFilePicker === 'function') {
+      icon.more = function() {
+        var popup = Espruino.Core.App.openPopup({
+          id: "fileopenmodeselector",
+          title: "Open File should...",
+          contents: Espruino.Core.HTML.domList([{
+              icon : "icon-folder-open", title : "Open File",
+              description : "Load file from disk", callback : function() { setOpenFileMode("open");popup.close(); }
+            },{
+              icon : "icon-folder-open", title : "Reload File",
+              description : "Reload the current file", callback : function() { setOpenFileMode("reload");popup.close(); }
+            },{
+              icon : "icon-refresh", title : "Watch File",
+              description : "Watch for changes", callback : function() { setOpenFileMode("watch");popup.close(); }
+            },{
+              icon : "icon-refresh", title : "Watch and Upload",
+              description : "Watch for changes and upload", callback : function() { setOpenFileMode("upload");popup.close(); }
+            }
+          ]),
+          position: "center",
+        });
+      };
+      icon.info = "open";
+    }
+    iconOpenFile = Espruino.Core.App.addIcon(icon);
+    // Save file icon
+    iconSaveFile = Espruino.Core.App.addIcon({
       id: "saveFile",
       icon: "save",
       title : "Save File",
@@ -52,18 +99,31 @@
       },
       click: function() {
         if (Espruino.Core.Code.isInBlockly())
-          Espruino.Core.Utils.fileSaveDialog(convertToOS(Espruino.Core.EditorBlockly.getXML()), currentXMLFileName, setCurrentFileName);
+          saveFile(currentXMLFile);
         else
-          Espruino.Core.Utils.fileSaveDialog(convertToOS(Espruino.Core.EditorJavaScript.getCode()), currentJSFileName, setCurrentFileName);
+          saveFile(currentJSFile);
       }
     });
   }
 
+  function setOpenFileMode(mode) {
+    iconOpenFile.setInfo(mode);
+    openFileMode = mode;
+    if (watchInterval) clearInterval(watchInterval);
+    watchInterval = undefined;
+    // if we're in
+    if (openFileMode == "watch" || openFileMode == "upload") {
+      watchInterval = setInterval(function() {
+        currentFiles.forEach(readFileContents);
+      }, WATCH_INTERVAL);
+    }
+  }
+
   function setCurrentFileName(filename) {
     if (Espruino.Core.Code.isInBlockly()) {
-      currentXMLFileName = filename;
+      currentXMLFile.name = filename;
     } else {
-      currentJSFileName = filename;
+      currentJSFile.name = filename;
     }
   }
 
@@ -79,16 +139,35 @@
    return chars.replace(/\r\n/g,"\n").replace(/\n/g,"\r\n");
   };
 
-  function loadFile(callback, filename, mimeType) {
-    if (chrome.fileSystem) {
+  function loadFile(currentFile) {
+    currentFile.lastModified = undefined;
+    /* if clicking the button should just reload the existing file,
+    do that */
+    if (openFileMode == "reload" && currentFile.handle) {
+      readFileContents(currentFile);
+      return;
+    }
+    currentFile.handle = undefined;
+
+    if (typeof window.showOpenFilePicker === 'function') {
+      window.showOpenFilePicker({types: [{accept: currentFile.mimeTypes}]}).
+      then(function(fileHandles) {
+        var fileHandle = fileHandles[0];
+        if (fileHandle.name) {
+          setCurrentFileName(fileHandle.name);
+        }
+        currentFile.handle = fileHandle;
+        readFileContents(currentFile);
+      });
+    } else if (chrome.fileSystem) {
       // Chrome Web App / NW.js
-      chrome.fileSystem.chooseEntry({type: 'openFile', suggestedName:filename}, function(fileEntry) {
+      chrome.fileSystem.chooseEntry({type: 'openFile', suggestedName:currentFile.name}, function(fileEntry) {
         if (!fileEntry) return;
         if (fileEntry.name) setCurrentFileName(fileEntry.name);
         fileEntry.file(function(file) {
           var reader = new FileReader();
           reader.onload = function(e) {
-            callback(convertFromOS(e.target.result));
+            currentFile.setValue(convertFromOS(e.target.result));
           };
           reader.onerror = function() {
             Espruino.Core.Notifications.error("Error Loading", true);
@@ -97,13 +176,50 @@
         });
       });
     } else {
-      Espruino.Core.Utils.fileOpenDialog({id:"code",type:"text",mimeType:mimeType}, function(data, mimeType, fileName) {
+      var mimeTypeList = Object.values(currentFile.mimeTypes) + "," + Object.keys(currentFile.mimeTypes);
+      Espruino.Core.Utils.fileOpenDialog({id:"code",type:"text",mimeType:mimeTypeList}, function(data, mimeType, fileName) {
         if (fileName) setCurrentFileName(fileName);
-        callback(convertFromOS(data));
+        currentFile.setValue(convertFromOS(data));
       });
     }
   }
 
+
+  // read a file from window.showOpenFilePicker
+  function readFileContents(currentFile) {
+    if (!currentFile.handle) {
+      return;
+    }
+
+    var file;
+    currentFile.handle.getFile().then(function(f) {
+      file = f;
+      // if file is newer, proceed to load it
+      if (!currentFile.lastModified ||
+          file.lastModified > currentFile.lastModified)
+        return file.text();
+      else
+        return undefined;
+    }).then(function(contents) {
+      if (!contents) return;
+      // if loaded, update editor
+      currentFile.lastModified = file.lastModified;
+      currentFile.setValue(convertFromOS(contents));
+      if (openFileMode == "upload") {
+        Espruino.Core.Notifications.info(new Date().toLocaleTimeString() + ": " + currentFile.name+" changed, uploading...");
+        Espruino.Plugins.KeyShortcuts.action("icon-deploy");
+      }
+    });
+  }
+
+  function saveFile(currentFile) {
+    /* TODO: if currentFile.handle, we could write direct to this
+    file without the dialog. But then what do we do for 'save as'? The down-arrow
+    next to the icon? */
+    Espruino.Core.Utils.fileSaveDialog(convertToOS(currentFile.getValue()), currentFile.name, function(name) {
+      currentFile.name = name;
+    });
+  }
 
   Espruino.Core.File = {
     init : init
