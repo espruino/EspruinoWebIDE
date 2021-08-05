@@ -634,7 +634,7 @@
     },
     "defineProperty": {
       "!type": "fn(obj: ?, name: ?, desc: ?) -> ?",
-      "!doc": "<p>Add a new property to the Object. &#39;Desc&#39; is an object with the following fields:</p>\n<ul>\n<li><code>configurable</code> (bool = false) - can this property be changed/deleted</li>\n<li><code>enumerable</code> (bool = false) - can this property be enumerated</li>\n<li><code>value</code> (anything) - the value of this property</li>\n<li><code>writable</code> (bool = false) - can the value be changed with the assignment operator?</li>\n<li><code>get</code> (function) - the getter function, or undefined if no getter (only supported on some platforms)</li>\n<li><code>set</code> (function) - the setter function, or undefined if no setter (only supported on some platforms)</li>\n</ul>\n<p><strong>Note:</strong> <code>configurable</code>, <code>enumerable</code>, <code>writable</code>, <code>get</code>, and <code>set</code> are not implemented and will be ignored.</p>\n",
+      "!doc": "<p>Add a new property to the Object. &#39;Desc&#39; is an object with the following fields:</p>\n<ul>\n<li><code>configurable</code> (bool = false) - can this property be changed/deleted (not implemented)</li>\n<li><code>enumerable</code> (bool = false) - can this property be enumerated (not implemented)</li>\n<li><code>value</code> (anything) - the value of this property</li>\n<li><code>writable</code> (bool = false) - can the value be changed with the assignment operator? (not implemented)</li>\n<li><code>get</code> (function) - the getter function, or undefined if no getter (only supported on some platforms)</li>\n<li><code>set</code> (function) - the setter function, or undefined if no setter (only supported on some platforms)</li>\n</ul>\n<p><strong>Note:</strong> <code>configurable</code>, <code>enumerable</code> and <code>writable</code> are not implemented and will be ignored.</p>\n",
       "!url": "http://www.espruino.com/Reference#l_Object_defineProperty"
     },
     "defineProperties": {
@@ -983,11 +983,6 @@
       "!doc": "<p>Write/create a file in the flash storage area. This is\nnonvolatile and will not disappear when the device resets\nor power is lost.</p>\n<p>Simply write <code>require(&quot;Storage&quot;).writeJSON(&quot;MyFile&quot;, [1,2,3])</code> to write\na new file, and <code>require(&quot;Storage&quot;).readJSON(&quot;MyFile&quot;)</code> to read it.</p>\n<p>This is equivalent to: <code>require(&quot;Storage&quot;).write(name, JSON.stringify(data))</code></p>\n<p><strong>Note:</strong> This function should be used with normal files, and not\n<code>StorageFile</code>s created with <code>require(&quot;Storage&quot;).open(filename, ...)</code></p>\n",
       "!url": "http://www.espruino.com/Reference#l_Storage_writeJSON"
     },
-    "list": {
-      "!type": "fn(regex: ?) -> ?",
-      "!doc": "<p>List all files in the flash storage area. An array of Strings is returned.</p>\n<p>This currently also lists files created by <code>StorageFile</code> (<code>require(&quot;Storage&quot;).open</code>)\nwhich have a file number (<code>&quot;\\1&quot;</code>/<code>&quot;\\2&quot;</code>/etc) appended to them.</p>\n<p><strong>Note:</strong> This will output system files (eg. saved code) as well as\nfiles that you may have written.</p>\n",
-      "!url": "http://www.espruino.com/Reference#l_Storage_list"
-    },
     "compact": {
       "!type": "fn()",
       "!doc": "<p>The Flash Storage system is journaling. To make the most of the limited\nwrite cycles of Flash memory, Espruino marks deleted/replaced files as\ngarbage and moves on to a fresh part of flash memory. Espruino only\nfully erases those files when it is running low on flash, or when\n<code>compact</code> is called.</p>\n<p><code>compact</code> may fail if there isn&#39;t enough RAM free on the stack to\nuse as swap space, however in this case it will not lose data.</p>\n<p><strong>Note:</strong> <code>compact</code> rearranges the contents of memory. If code is\nreferencing that memory (eg. functions that have their code stored in flash)\nthen they may become garbled when compaction happens. To avoid this,\ncall <code>eraseFiles</code> before uploading data that you intend to reference to\nensure that uploaded files are right at the start of flash and cannot be\ncompacted further.</p>\n",
@@ -1232,6 +1227,11 @@
       "!type": "fn(calibrate: bool) -> number",
       "!doc": "<p>Gets the RTC&#39;s current prescaler value if <code>calibrate</code> is undefined or false.</p>\n<p>If <code>calibrate</code> is true, the low speed oscillator&#39;s speed is calibrated against the high speed\noscillator (usually +/- 20 ppm) and a suggested value to be fed into <code>E.setRTCPrescaler(...)</code> is returned.</p>\n<p>See <code>E.setRTCPrescaler</code> for more information.</p>\n",
       "!url": "http://www.espruino.com/Reference#l_E_getRTCPrescaler"
+    },
+    "decodeUTF8": {
+      "!type": "fn(str: ?, lookup: ?, replaceFn: ?) -> ?",
+      "!doc": "<p>Decode a UTF8 string.</p>\n<ul>\n<li>Any decoded character less than 256 gets passed straight through</li>\n<li>Otherwise if <code>lookup</code> is an array and an item with that char code exists in <code>lookup</code> then that is used</li>\n<li>Otherwise if <code>lookup</code> is an object and an item with that char code (as lowercase hex) exists in <code>lookup</code> then that is used</li>\n<li>Otherwise <code>replaceFn(charCode)</code> is called and the result used if <code>replaceFn</code> is a function</li>\n<li>If <code>replaceFn</code> is a string, that is used</li>\n<li>Or finally if nothing else matches, the character is ignored</li>\n</ul>\n",
+      "!url": "http://www.espruino.com/Reference#l_E_decodeUTF8"
     },
     "showMenu": {
       "!type": "fn()",
@@ -2059,6 +2059,11 @@
       "!doc": "<p>Send a USB HID report. HID must first be enabled with <code>NRF.setServices({}, {hid: hid_report})</code></p>\n",
       "!url": "http://www.espruino.com/Reference#l_NRF_sendHIDReport"
     },
+    "sendANCSAction": {
+      "!type": "fn(uid: number, positive: bool)",
+      "!doc": "<p>Send an ANCS action for a specific Notification UID. Corresponds to posaction/negaction in the &#39;ANCS&#39; event that was received</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_NRF_sendANCSAction"
+    },
     "setWhitelist": {
       "!type": "fn(whitelisting: bool)",
       "!doc": "<p>If set to true, whenever a device bonds it will be added to the\nwhitelist.</p>\n<p>When set to false, the whitelist is cleared and newly bonded\ndevices will not be added to the whitelist.</p>\n<p><strong>Note:</strong> This is remembered between <code>reset()</code>s but isn&#39;t\nremembered after power-on (you&#39;ll have to add it to <code>onInit()</code>.</p>\n",
@@ -2839,7 +2844,7 @@
     },
     "setLCDTimeout": {
       "!type": "fn(isOn: number)",
-      "!doc": "<p>This function can be used to turn Bangle.js&#39;s LCD power saving on or off.</p>\n<p>With power saving off, the display will remain in the state you set it with <code>Bangle.setLCDPower</code>.</p>\n<p>With power saving on, the display will turn on if a button is pressed, the watch is turned face up, or the screen is updated. It&#39;ll turn off automatically after the given timeout.</p>\n",
+      "!doc": "<p>This function can be used to turn Bangle.js&#39;s LCD power saving on or off.</p>\n<p>With power saving off, the display will remain in the state you set it with <code>Bangle.setLCDPower</code>.</p>\n<p>With power saving on, the display will turn on if a button is pressed, the watch is turned face up, or the screen is updated (see <code>Bangle.setOptions</code> for configuration). It&#39;ll turn off automatically after the given timeout.</p>\n<p><strong>Note:</strong> This function also sets the Backlight and Lock timeout (the time at which the touchscreen/buttons start being ignored). To set both separately, use <code>Bangle.setOptions</code></p>\n",
       "!url": "http://www.espruino.com/Reference#l_Bangle_setLCDTimeout"
     },
     "setPollInterval": {
@@ -2849,13 +2854,28 @@
     },
     "setOptions": {
       "!type": "fn(options: ?)",
-      "!doc": "<p>Set internal options used for gestures, step counting, etc...</p>\n<ul>\n<li><code>wakeOnBTN1</code> should the LCD turn on when BTN1 is pressed? default = <code>true</code></li>\n<li><code>wakeOnBTN2</code> should the LCD turn on when BTN2 is pressed? default = <code>true</code></li>\n<li><code>wakeOnBTN3</code> should the LCD turn on when BTN3 is pressed? default = <code>true</code></li>\n<li><code>wakeOnFaceUp</code> should the LCD turn on when the watch is turned face up? default = <code>false</code></li>\n<li><code>wakeOnTouch</code> should the LCD turn on when the touchscreen is pressed? default = <code>false</code></li>\n<li><code>wakeOnTwist</code> should the LCD turn on when the watch is twisted? default = <code>true</code></li>\n<li><code>twistThreshold</code>  How much acceleration to register a twist of the watch strap? Can be negative for oppsite direction. default = <code>800</code></li>\n<li><code>twistMaxY</code> Maximum acceleration in Y to trigger a twist (low Y means watch is facing the right way up). default = <code>-800</code></li>\n<li><p><code>twistTimeout</code>  How little time (in ms) must a twist take from low-&gt;high acceleration? default = <code>1000</code></p>\n</li>\n<li><p><code>gestureStartThresh</code> how big a difference before we consider a gesture started? default = <code>sqr(800)</code></p>\n</li>\n<li><code>gestureEndThresh</code> how small a difference before we consider a gesture ended? default = <code>sqr(2000)</code></li>\n<li><code>gestureInactiveCount</code> how many samples do we keep after a gesture has ended? default = <code>4</code></li>\n<li><code>gestureMinLength</code> how many samples must a gesture have before we notify about it? default = <code>10</code>\n*</li>\n<li><code>stepCounterThresholdLow</code> How low must acceleration magnitude squared get before we consider the next rise a step? default = <code>sqr(8192-80)</code></li>\n<li><p><code>stepCounterThresholdHigh</code> How high must acceleration magnitude squared get before we consider it a step? default = <code>sqr(8192+80)</code></p>\n</li>\n<li><p><code>powerSave</code> after a minute of not being moved, Bangle.js will change the accelerometer poll interval down to 800ms (10x accelerometer samples).\n On movement it&#39;ll be raised to the default 80ms. If <code>Bangle.setPollInterval</code> is used this is disabled, and for it to work the poll interval\n must be either 80ms or 800ms. default = <code>true</code></p>\n</li>\n</ul>\n<p>Where accelerations are used they are in internal units, where <code>8192 = 1g</code></p>\n",
+      "!doc": "<p>Set internal options used for gestures, etc...</p>\n<ul>\n<li><code>wakeOnBTN1</code> should the LCD turn on when BTN1 is pressed? default = <code>true</code></li>\n<li><code>wakeOnBTN2</code> should the LCD turn on when BTN2 is pressed? default = <code>true</code></li>\n<li><code>wakeOnBTN3</code> should the LCD turn on when BTN3 is pressed? default = <code>true</code></li>\n<li><code>wakeOnFaceUp</code> should the LCD turn on when the watch is turned face up? default = <code>false</code></li>\n<li><code>wakeOnTouch</code> should the LCD turn on when the touchscreen is pressed? default = <code>false</code></li>\n<li><code>wakeOnTwist</code> should the LCD turn on when the watch is twisted? default = <code>true</code></li>\n<li><code>twistThreshold</code>  How much acceleration to register a twist of the watch strap? Can be negative for oppsite direction. default = <code>800</code></li>\n<li><code>twistMaxY</code> Maximum acceleration in Y to trigger a twist (low Y means watch is facing the right way up). default = <code>-800</code></li>\n<li><code>twistTimeout</code>  How little time (in ms) must a twist take from low-&gt;high acceleration? default = <code>1000</code></li>\n<li><code>gestureStartThresh</code> how big a difference before we consider a gesture started? default = <code>sqr(800)</code></li>\n<li><code>gestureEndThresh</code> how small a difference before we consider a gesture ended? default = <code>sqr(2000)</code></li>\n<li><code>gestureInactiveCount</code> how many samples do we keep after a gesture has ended? default = <code>4</code></li>\n<li><code>gestureMinLength</code> how many samples must a gesture have before we notify about it? default = <code>10</code></li>\n<li><code>powerSave</code> after a minute of not being moved, Bangle.js will change the accelerometer poll interval down to 800ms (10x accelerometer samples).\n On movement it&#39;ll be raised to the default 80ms. If <code>Bangle.setPollInterval</code> is used this is disabled, and for it to work the poll interval\n must be either 80ms or 800ms. default = <code>true</code></li>\n<li><code>lockTimeout</code> how many milliseconds before the screen locks</li>\n<li><code>lcdPowerTimeout</code> how many milliseconds before the screen turns off</li>\n<li><code>backlightTimeout</code> how many milliseconds before the screen&#39;s backlight turns off</li>\n</ul>\n<p>Where accelerations are used they are in internal units, where <code>8192 = 1g</code></p>\n",
       "!url": "http://www.espruino.com/Reference#l_Bangle_setOptions"
+    },
+    "getOptions": {
+      "!type": "fn() -> ?",
+      "!doc": "<p>Return the current state of options as set by <code>Bangle.getOptions</code></p>\n",
+      "!url": "http://www.espruino.com/Reference#l_Bangle_getOptions"
     },
     "isLCDOn": {
       "!type": "fn() -> bool",
-      "!doc": "",
+      "!doc": "<p>Also see the <code>Bangle.lcdPower</code> event</p>\n",
       "!url": "http://www.espruino.com/Reference#l_Bangle_isLCDOn"
+    },
+    "setLocked": {
+      "!type": "fn(isLocked: bool)",
+      "!doc": "<p>This function can be used to lock or unlock Bangle.js\n(eg whether buttons and touchscreen work or not)</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_Bangle_setLocked"
+    },
+    "isLocked": {
+      "!type": "fn() -> bool",
+      "!doc": "<p>Also see the <code>Bangle.lock</code> event</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_Bangle_isLocked"
     },
     "isCharging": {
       "!type": "fn() -> bool",
@@ -2866,6 +2886,41 @@
       "!type": "fn(cmd: number, data: ?)",
       "!doc": "<p>Writes a command directly to the ST7735 LCD controller</p>\n",
       "!url": "http://www.espruino.com/Reference#l_Bangle_lcdWr"
+    },
+    "isHRMOn": {
+      "!type": "fn() -> bool",
+      "!doc": "<p>Is the Heart rate monitor powered?</p>\n<p>Set power with <code>Bangle.setHRMPower(...);</code></p>\n",
+      "!url": "http://www.espruino.com/Reference#l_Bangle_isHRMOn"
+    },
+    "isGPSOn": {
+      "!type": "fn() -> bool",
+      "!doc": "<p>Is the GPS powered?</p>\n<p>Set power with <code>Bangle.setGPSPower(...);</code></p>\n",
+      "!url": "http://www.espruino.com/Reference#l_Bangle_isGPSOn"
+    },
+    "isCompassOn": {
+      "!type": "fn() -> bool",
+      "!doc": "<p>Is the compass powered?</p>\n<p>Set power with <code>Bangle.setCompassPower(...);</code></p>\n",
+      "!url": "http://www.espruino.com/Reference#l_Bangle_isCompassOn"
+    },
+    "resetCompass": {
+      "!type": "fn()",
+      "!doc": "<p>Resets the compass minimum/maximum values. Can be used if the compass isn&#39;t\nproviding a reliable heading any more.</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_Bangle_resetCompass"
+    },
+    "setBarometerPower": {
+      "!type": "fn(isOn: bool, appID: ?) -> bool",
+      "!doc": "<p>Set the power to the barometer IC</p>\n<p>When on, the barometer draws roughly 50uA</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_Bangle_setBarometerPower"
+    },
+    "isBarometerOn": {
+      "!type": "fn() -> bool",
+      "!doc": "<p>Is the Barometer powered?</p>\n<p>Set power with <code>Bangle.setBarometerPower(...);</code></p>\n",
+      "!url": "http://www.espruino.com/Reference#l_Bangle_isBarometerOn"
+    },
+    "getStepCount": {
+      "!type": "fn() -> number",
+      "!doc": "<p>Returns the current amount of steps recorded by the step counter</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_Bangle_getStepCount"
     },
     "getCompass": {
       "!type": "fn() -> ?",
@@ -2889,13 +2944,23 @@
     },
     "accelWr": {
       "!type": "fn(reg: number, data: number)",
-      "!doc": "<p>Writes a register on the KX023 Accelerometer</p>\n",
+      "!doc": "<p>Writes a register on the accelerometer</p>\n",
       "!url": "http://www.espruino.com/Reference#l_Bangle_accelWr"
     },
     "accelRd": {
       "!type": "fn(reg: number, cnt: number) -> ?",
-      "!doc": "<p>Reads a register from the KX023 Accelerometer</p>\n<p><strong>Note:</strong> On Espruino 2v06 and before this function only returns a number (<code>cnt</code> is ignored).</p>\n",
+      "!doc": "<p>Reads a register from the accelerometer</p>\n<p><strong>Note:</strong> On Espruino 2v06 and before this function only returns a number (<code>cnt</code> is ignored).</p>\n",
       "!url": "http://www.espruino.com/Reference#l_Bangle_accelRd"
+    },
+    "barometerWr": {
+      "!type": "fn(reg: number, data: number)",
+      "!doc": "<p>Writes a register on the barometer IC</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_Bangle_barometerWr"
+    },
+    "barometerRd": {
+      "!type": "fn(reg: number, cnt: number) -> ?",
+      "!doc": "<p>Reads a register from the barometer IC</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_Bangle_barometerRd"
     },
     "compassWr": {
       "!type": "fn(reg: number, data: number)",
@@ -2927,9 +2992,14 @@
       "!doc": "<p>Turn Bangle.js off. It can only be woken by pressing BTN1.</p>\n",
       "!url": "http://www.espruino.com/Reference#l_Bangle_off"
     },
+    "softOff": {
+      "!type": "fn()",
+      "!doc": "<p>Turn Bangle.js (mostly) off, but keep the CPU in sleep\nmode until BTN1 is pressed to preserve the RTC (current time).</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_Bangle_softOff"
+    },
     "getLogo": {
       "!type": "fn() -> ?",
-      "!doc": "",
+      "!doc": "<ul>\n<li>On platforms with an LCD of &gt;=8bpp this is 222 x 104 x 2 bits</li>\n<li>Otherwise it&#39;s 119 x 56 x 1 bits</li>\n</ul>\n",
       "!url": "http://www.espruino.com/Reference#l_Bangle_getLogo"
     },
     "loadWidgets": {
@@ -2946,6 +3016,16 @@
       "!type": "fn()",
       "!doc": "<p>Load the Bangle.js app launcher, which will allow the user\nto select an application to launch.</p>\n",
       "!url": "http://www.espruino.com/Reference#l_Bangle_showLauncher"
+    },
+    "setUI": {
+      "!type": "fn()",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Bangle_setUI"
+    },
+    "factoryReset": {
+      "!type": "fn()",
+      "!doc": "<p>Erase all storage and reload it with the default\ncontents.</p>\n<p>This is only available on Bangle.js 2.0. On Bangle.js 1.0\nyou need to use <code>Install Default Apps</code> under the About page\nof <a href=\"http://banglejs.com/apps\">http://banglejs.com/apps</a></p>\n",
+      "!url": "http://www.espruino.com/Reference#l_Bangle_factoryReset"
     }
   },
   "Microbit": {
@@ -3132,13 +3212,18 @@
       },
       "getWidth": {
         "!type": "fn() -> number",
-        "!doc": "<p>The width of the LCD</p>\n",
+        "!doc": "<p>The width of this Graphics instance</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Graphics_getWidth"
       },
       "getHeight": {
         "!type": "fn() -> number",
-        "!doc": "<p>The height of the LCD</p>\n",
+        "!doc": "<p>The height of this Graphics instance</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Graphics_getHeight"
+      },
+      "getBPP": {
+        "!type": "fn() -> number",
+        "!doc": "<p>The number of bits per pixel of this Graphics instance</p>\n",
+        "!url": "http://www.espruino.com/Reference#l_Graphics_getBPP"
       },
       "reset": {
         "!type": "fn() -> +Graphics",
@@ -3174,6 +3259,11 @@
         "!type": "fn(x: number, y: number, rad: number) -> +Graphics",
         "!doc": "<p>Draw an unfilled circle 1px wide in the Foreground Color</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Graphics_drawCircle"
+      },
+      "drawCircleAA": {
+        "!type": "fn(x: number, y: number, r: number) -> +Graphics",
+        "!doc": "<p>Draw a circle, centred at (x,y) with radius r in the current foreground color</p>\n",
+        "!url": "http://www.espruino.com/Reference#l_Graphics_drawCircleAA"
       },
       "fillEllipse": {
         "!type": "fn(x1: number, y1: number, x2: number, y2: number) -> +Graphics",
@@ -3339,6 +3429,11 @@
         "!type": "fn(arr: ?, options: ?) -> ?",
         "!doc": "<p>Calculate the square area under a Bezier curve.</p>\n<p> x0,y0: start point\n x1,y1: control point\n y2,y2: end point</p>\n<p> Max 10 points without start point.</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Graphics_quadraticBezier"
+      },
+      "setFont6x15": {
+        "!type": "fn(scale: number) -> +Graphics",
+        "!doc": "<p>Set the current font</p>\n",
+        "!url": "http://www.espruino.com/Reference#l_Graphics_setFont6x15"
       }
     },
     "getInstance": {
@@ -3756,26 +3851,6 @@
     "!type": "?",
     "!doc": "<p>On most Espruino board there are LEDs, in which case <code>LED2</code> will be an actual Pin.</p>\n<p>On Bangle.js there are no LEDs, so to remain compatible with example code that might\nexpect an LED, this is an object that behaves like a pin, but which just displays\na circle on the display</p>\n",
     "!url": "http://www.espruino.com/Reference#l__global_LED2"
-  },
-  "BTN1": {
-    "!type": "+Pin",
-    "!doc": "<p>This is a fake pin, used only for injecting &#39;fake&#39; button press events from the touchscreen</p>\n",
-    "!url": "http://www.espruino.com/Reference#l__global_BTN1"
-  },
-  "BTN2": {
-    "!type": "+Pin",
-    "!doc": "",
-    "!url": "http://www.espruino.com/Reference#l__global_BTN2"
-  },
-  "BTN3": {
-    "!type": "+Pin",
-    "!doc": "<p>This is a fake pin, used only for injecting &#39;fake&#39; button press events from the touchscreen</p>\n",
-    "!url": "http://www.espruino.com/Reference#l__global_BTN3"
-  },
-  "BTN": {
-    "!type": "+Pin",
-    "!doc": "",
-    "!url": "http://www.espruino.com/Reference#l__global_BTN"
   },
   "acceleration": {
     "!type": "fn() -> ?",
