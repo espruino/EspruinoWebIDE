@@ -210,7 +210,7 @@
     }
   };
   // What Espruino uses by default
-  var BPP_TO_COLOR_FORMAT = {
+  const BPP_TO_COLOR_FORMAT = {
     1 : "1bit",
     2 : "2bitbw",
     3 : "3bit",
@@ -219,13 +219,26 @@
     16 : "rgb565"
   };
 
-  var DIFFUSION_TYPES = {
+  const DIFFUSION_TYPES = {
     "none" : "Nearest color (flat)",
     "random1":"Random small",
     "random2":"Random large",
     "error":"Error Diffusion",
-    "errorrandom":"Randomised Error Diffusion"
+    "errorrandom":"Randomised Error Diffusion",
+    "bayer2":"2x2 Bayer",
+    "bayer4":"4x4 Bayer",
   };
+
+  const BAYER2 = [
+    [ 0, 2 ],
+    [ 3, 1 ]
+  ];
+  const BAYER4 = [
+    [ 0, 8, 2,10],
+    [12, 4,14, 6],
+    [ 3,11, 1, 9],
+    [15, 7,13, 5]
+  ];
 
   function clip(x) {
     if (x<0) return 0;
@@ -320,6 +333,16 @@
             er += Math.random()*128 - 64;
             eg += Math.random()*128 - 64;
             eb += Math.random()*128 - 64;
+          } else if (options.diffusion == "bayer2") {
+            var th = BAYER2[x&1][y&1]*64 - 96;
+            er += th;
+            eg += th;
+            eb += th;
+          } else if (options.diffusion == "bayer4") {
+            var th = BAYER4[x&3][y&3]*16 - 96;
+            er += th;
+            eg += th;
+            eb += th;
           }
           if (options.inverted) {
             r=255-r;
