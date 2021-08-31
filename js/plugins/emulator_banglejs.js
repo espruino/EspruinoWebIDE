@@ -86,10 +86,15 @@ Use embed.js on the client side to link this in.
         url = url.substr(0,url.lastIndexOf("/"));
       url = window.location.origin + url + "/emu_banglejs.html";
       emu = window.open(url, "banglewindow", "innerWidth=280,innerHeight=258,location=0");
-      setTimeout(function() {
-        post({type:"init"});
-      }, 500);
-
+      var inited = false;
+      emu.addEventListener("load", function() { 
+        if (!inited) post({type:"init"});
+        inited = true;
+      }, false);
+      emu.attachEvent("onload", function() { 
+        if (!inited) post({type:"init"});
+        inited = true;
+      }, false);
     },
     "write": function(d, callback) {
       post({type:"rx",data:d});
