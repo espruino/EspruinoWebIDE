@@ -1,5 +1,5 @@
 // Service worker for Offline Web IDE
-const VERSION = 'v82';
+const VERSION = 'v84';
 
 const CACHED_RESOURCES = [
   'blockly/blockly_espruino.js',
@@ -97,7 +97,7 @@ const CACHED_RESOURCES = [
   'img/icon_youtube.png',
   'img/ide_logo.png',
   'favicon.ico',
-  'ide/webapp_manifest.json',
+  'webapp_manifest.json',
   'index.js',  // auto-generated file of squished JS
   'index.css', // auto-generated file of squished CSS
   'index.html',
@@ -108,6 +108,7 @@ const CACHED_RESOURCES = [
 
 const CACHE_PREFIX = 'espruino-web-ide-';
 const CACHE_NAME = CACHE_PREFIX + VERSION;
+let warnMessages = [];
 
 self.addEventListener('install', function(event) {
   console.log('serviceworker> '+VERSION+' installing.');
@@ -116,13 +117,27 @@ self.addEventListener('install', function(event) {
   // Load cache
   event.waitUntil(
     caches.open(CACHE_NAME).then(function(cache) {
-      return cache.addAll(CACHED_RESOURCES);
+      //return cache.addAll(CACHED_RESOURCES);
+      // this fails nicely if one file is not found
+      return Promise.all(
+        CACHED_RESOURCES.map(function(url) {
+          return cache.add(url).catch(function (reason) {
+            warnMessages.push("serviceworker> " + url + " failed! " + reason.toString())
+          });
+        })
+    );
     })
   );
 });
 
 // Use the cache, fallback to network
 self.addEventListener('fetch', function(event) {
+
+  if (warnMessages) {
+    warnMessages.forEach(line => console.warn("serviceworker> " + line));
+    warnMessages = undefined;
+  }
+
   event.respondWith(
     caches.match(event.request, {ignoreSearch: true}).then(function(response) {
       return response || fetch(event.request);
