@@ -14,7 +14,7 @@
 
   var isFlashing = false; // are we currently trying to update flash?
 
-  var BLE_DEVICES = ["PUCKJS","PIXLJS","MDBT42Q","SMARTIBOT","BANGLEJS"];
+  var BLE_DEVICES = ["PUCKJS","PIXLJS","MDBT42Q","SMARTIBOT","BANGLEJS","BANGLEJS2"];
 
   function init() {
   }
@@ -454,6 +454,11 @@
           '<p><b>Please put your Bangle.js into bootloader mode.</b> Hold down BTN1(top) and BTN2(middle) for ~10 sec until the watch reboots to a screen of black and white text.</p>'+
           '<p>While ===== is moving across the screen release both buttons. Now click <b>Next</b> and connect to the Bluetooth device named <b>DfuTarg</b>...</p>'+
           '<p>If you cannot find a device named DfuTarg, see the <a href="http://www.espruino.com/Troubleshooting+Bangle.js" target="_blank">Troubleshooting page</a></p>';
+        } else if (data.board_id=="BANGLEJS2") {
+          html =
+            '<p><b>Please put your Bangle.js into bootloader mode.</b> Hold down the button for ~10 sec until the watch reboots to a screen of black and white text.</p>'+
+            '<p>While ===== is moving across the screen release the button. Now click <b>Next</b> and connect to the Bluetooth device named <b>DfuTarg</b>...</p>'+
+            '<p>If you cannot find a device named DfuTarg, see the <a href="http://www.espruino.com/Troubleshooting+Bangle.js" target="_blank">Troubleshooting page</a></p>';          
       } else if (BLE_DEVICES.indexOf(data.board_id)>=0) {
         html =
           '<p><b>Please put your board into bootloader mode.</b> Hold down BTN1 while powering it on, and then release BTN1 immediately.</p>'+
