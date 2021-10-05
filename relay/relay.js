@@ -18,6 +18,22 @@ Packets Sent:
 
   var WS_HOST = 'wss://'+window.location.host+':8443';
 
+  Espruino.Core.Terminal.OVERRIDE_CONTENTS = `
+  <div style="max-width:400px;margin:auto;">
+  <h1>Web IDE Relay</h1>
+  <p>This allows you to forward the Bluetooth connection from your
+  phone (or other Web Bluetooth device) to a Web IDE on a desktop computer</p>
+  <h2>How to use</h2>
+  <ul>
+  <li>Click the 'Connect' icon in the top left</li>
+  <li>Choose a Web Bluetooth device and click 'Pair'</li>
+  <li>An 8 digit relay key will be shown in this window, copy it</li>
+  <li>Go to <a href="https://espruino.com/ide" target="_blank">espruino.com/ide</a> on your desktop, go to settings, and paste the relay key into the 'relay key' box</li>
+  <li>Click 'connect' on the desktop, then 'Web IDE Relay'</li>
+  </ul>
+  </div>
+  `;
+
   var connectButton;
   var connectedSocket;
 
@@ -32,7 +48,7 @@ Packets Sent:
   }
 
   function init() {
-    Espruino.Config.FONT_SIZE = 24;
+    Espruino.Config.FONT_SIZE = 18;
     $("#terminal").css("font-size", Espruino.Config.FONT_SIZE+"px");
 
     Espruino.Core.Config.add("RELAY_KEY", {
