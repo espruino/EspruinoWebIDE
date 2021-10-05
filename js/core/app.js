@@ -210,6 +210,7 @@
   *   title : title text
   *   contents : html contents
   *   buttons : [ {name, callback}, ... ] - add  button and call callback when clicked
+  *   onClose : function - called when the window is closed
   *
   * returns : {
   *  setContents, // set window contents
@@ -236,6 +237,7 @@
       },
       close : function() {
         winOverlay.remove();
+        if (options.onClose) options.onClose();
       }
     }
 

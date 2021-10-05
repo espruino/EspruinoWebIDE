@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html><!-- index for ws.js or totally online Web IDE -->
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Bangle.js emulator</title>
+  <style>
+  body {
+    overflow:hidden;
+  }
+  #emu {
+    width:500px; height:500px; border:1px solid black;
+  }
+  #gfxdiv {
+    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:200px;height:180px;
+  }
+  #BTN1 {
+    width:20px;height:73px;position:absolute;right:0px;top:43px;padding:0;font-weight:bold;
+  }
+  #screenshot {
+    width:20px;height:21px;position:absolute;right:0px;top:156px;color:white;text-decoration:none;background-color:black;cursor:pointer;
+  }
+  #gfxcanvas {
+    image-rendering: pixelated;
+  }
+  </style>
+</head>
+<body>
+
+<div id="gfxdiv">
+  <canvas id="gfxcanvas" width="176" height="176"></canvas>
+  <button id="BTN1">1</button>
+  <a id="screenshot">&#x1F4F7;</a>
+  <div id="BTN4"></div>
+  <div id="BTN5"></div>
+</div>
+
+<script src="emulator_banglejs2.js"></script>
+<script>
+var PIN_COUNT = 48;
+var DEVICE = 21; // USB
+var BTN1 = 17;
+var GFX_WIDTH = 176;
+var GFX_HEIGHT = 176;
+var FLASH_SIZE = 8192*1024;
+</script>
+<script src="common.js"></script>
+<script>
+var touchX=0, touchY=0, touchPts=0;
+var touchDX=0, touchDY=0; // drag direction
+var touchAX=0, touchAY=0; // drag amount
+
+function jsUpdateGfx() {
+  var changed = Module.ccall('jsGfxChanged', 'number', [], []);
+  if (changed) {
+    var canvas = document.getElementById('gfxcanvas');
+    var ctx = canvas.getContext('2d');
+    var imgData = ctx.createImageData(176, 176);
+    var rgba = imgData.data;
+    var i = 0;
+    for (var y=0;y<176;y++) {
+      var p = Module.ccall('jsGfxGetPtr', 'number', ['number'], [y]);
+      for (var x=0;x<176;x++) {
+        var bit = x*3, byte = bit>>3;
+        var c = p ? (Module.HEAPU8[p+byte+1]|(Module.HEAPU8[p+byte]<<8)) : 0;
+        c = c >> (13-(bit&7));
+        rgba[i++]=(c&1)?0xFF:0;
+        rgba[i++]=(c&2)?0xFF:0;
+        rgba[i++]=(c&4)?0xFF:0;
+        rgba[i++]=255;
+      }
+    }
+    ctx.putImageData(imgData, 0, 0);
+
+  }
+  jsHandleIO();
+}
+
+
+function jsInitButtons() {
+  var div = document.getElementById("gfxdiv");
+  function handleButton(n, pin) {
+    hwPinValue[pin]=1; // inverted
+    var btn = document.getElementById("BTN"+n);
+    btn.addEventListener('mousedown', e => {
+      e.preventDefault();
+      hwPinValue[pin]=0; // inverted
+      jsTransmitPinEvent(pin);
+    });
+    btn.addEventListener('mouseup', e => {
+      hwPinValue[pin]=1; // inverted
+      jsTransmitPinEvent(pin);
+    });
+    btn.addEventListener('mouseenter', e => {
+      if (e.buttons) {
+        hwPinValue[pin]=0; // inverted
+        jsTransmitPinEvent(pin);
+      }
+    });
+    btn.addEventListener('mouseleave', e => {
+      // mouseleave comes *before* mouseenter usually - so delay it
+      // in order to get overlap when swiping to make Bangle.js screen swipes work
+      setTimeout(function() {
+        if (!hwPinValue[pin]) {
+          hwPinValue[pin]=1; // inverted
+          jsTransmitPinEvent(pin);
+        }
+      },10);
+    });
+  }
+  handleButton(1,BTN1);
+
+
+  div = document.getElementById("gfxcanvas");
+  div.addEventListener('mousemove', e => {
+    e.preventDefault();
+
+    var x = e.offsetX;
+    var y = e.offsetY;
+    var dx = x-touchX;
+    var dy = y-touchY;
+    var pts =e.buttons?1:0;
+    if (pts) {
+      touchDX += dx;
+      touchDY += dy;
+      touchAX += Math.abs(dx);
+      touchAY += Math.abs(dy);
+    }
+    touchX = x;
+    touchY = y;
+    if (pts || (touchPts != pts))
+      jsSendTouchEvent(touchX, touchY, pts, 0);
+    touchPts = pts;
+  });
+  div.addEventListener('mousedown', e => {
+    e.preventDefault();
+    touchX = e.offsetX;
+    touchY = e.offsetY;
+    touchPts = 1;
+    jsSendTouchEvent(touchX, touchY, touchPts, 0);
+  });
+  div.addEventListener('mouseup', e => {
+    e.preventDefault();
+    touchX = e.offsetX;
+    touchY = e.offsetY;
+    if (touchPts) {
+      console.log("Touch up", {
+        x : touchX,
+        y : touchY,
+        dx : touchDX,
+        dy : touchDY,
+        ax : touchAX,
+        ay : touchAY
+      });
+      jsSendTouchEvent(touchX, touchY, 0, 0);
+      if (touchAX<5 && touchAY<5) // single click
+        jsSendTouchEvent(touchX, touchY, 0, 5);
+      if (touchAX>80 && touchAY<20)
+        jsSendTouchEvent(touchX, touchY, 0, (touchDX<0) ? 3 : 4); // slide left/right
+      if (touchAX<20 && touchAY>80)
+        jsSendTouchEvent(touchX, touchY, 0, (touchDY<0) ? 2 : 1); // slide up/down
+    }
+    touchDX = 0;
+    touchDY = 0;
+    touchAX = 0;
+    touchAY = 0;
+    touchPts = 0;
+  });
+  div.addEventListener('mouseleave', e => {
+    if (touchPts)
+      jsSendTouchEvent(touchX, touchY, 0, 0);
+    touchPts = 0;
+  });
+}
+</script>
+</body>
+</html>

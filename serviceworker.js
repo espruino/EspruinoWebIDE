@@ -1,5 +1,5 @@
 // Service worker for Offline Web IDE
-const VERSION = 'v85';
+const VERSION = 'v86';
 
 const CACHED_RESOURCES = [
   'blockly/blockly_espruino.js',
@@ -101,8 +101,12 @@ const CACHED_RESOURCES = [
   'index.js',  // auto-generated file of squished JS
   'index.css', // auto-generated file of squished CSS
   'index.html',
-  'emu_banglejs.html',
-  'js/plugins/emulator_espruino.js',
+  'emu/common.js',
+  'emu/emulator_banglejs1.js',
+  'emu/emulator_banglejs2.js',
+  'emu/emu_banglejs1.html',
+  'emu/emu_banglejs2.html',
+  'js/plugins/emulator.js',
   './'
 ];
 

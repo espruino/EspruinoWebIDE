@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html><!-- index for ws.js or totally online Web IDE -->
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Bangle.js emulator</title>
+  <style>
+  body {
+    overflow:hidden;
+  }
+  #emu {
+    width:500px; height:500px; border:1px solid black;
+  }
+  #gfxdiv {
+    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:264px;height:244px;
+  }
+  #BTN1 {
+    width:20px;height:73px;position:absolute;right:0px;top:0px;padding:0;font-weight:bold;
+  }
+  #BTN2 {
+    width:20px;height:73px;position:absolute;right:0px;top:73px;padding:0;font-weight:bold;
+  }
+  #BTN3 {
+    width:20px;height:73px;position:absolute;right:0px;top:146px;padding:0;font-weight:bold;
+  }
+  #BTN4 {
+    width:125px;height:240px;position:absolute;left:0px;top:0px;padding:0;font-weight:bold;
+  }
+  #BTN5 {
+    width:125px;height:240px;position:absolute;left:120px;top:0px;padding:0;font-weight:bold;
+  }
+  #screenshot {
+    width:20px;height:21px;position:absolute;right:0px;top:219px;color:white;text-decoration:none;background-color:black;cursor:pointer;
+  }
+  #gfxcanvas {
+    image-rendering: pixelated;
+  }
+  </style>
+</head>
+<body>
+
+<div id="gfxdiv">
+  <canvas id="gfxcanvas" width="240" height="240"></canvas>
+  <button id="BTN1">1</button>
+  <button id="BTN2">2</button>
+  <button id="BTN3">3</button>
+  <a id="screenshot">&#x1F4F7;</a>
+  <div id="BTN4"></div>
+  <div id="BTN5"></div>
+</div>
+
+<script src="emulator_banglejs1.js"></script>
+<script>
+var PIN_COUNT = 32;
+var DEVICE = 21; // USB
+var BTN1 = 24;
+var BTN2 = 22;
+var BTN3 = 23;
+var BTN4 = 11;
+var BTN5 = 16;
+var GFX_WIDTH = 240;
+var GFX_HEIGHT = 240;
+var FLASH_SIZE = 4096*1024;
+</script>
+<script src="common.js"></script>
+<script>
+function jsUpdateGfx() {
+  var changed = Module.ccall('jsGfxChanged', 'number', [], []);
+  if (changed) {
+    var canvas = document.getElementById('gfxcanvas');
+    var ctx = canvas.getContext('2d');
+    var imgData = ctx.createImageData(240, 240);
+    var rgba = imgData.data;
+    var i = 0;
+    for (var y=0;y<240;y++) {
+      var p = Module.ccall('jsGfxGetPtr', 'number', ['number'], [y])>>1;
+      for (var x=0;x<240;x++) {
+        var c = p ? Module.HEAP16[p+x] : 0;
+        rgba[i++]=(c>>8)&0xF8;
+        rgba[i++]=(c>>3)&0xFC;
+        rgba[i++]=(c<<3)&0xF8;
+        rgba[i++]=255;
+      }
+    }
+    ctx.putImageData(imgData, 0, 0);
+
+  }
+  jsHandleIO();
+}
+function jsInitButtons() {
+  var div = document.getElementById("gfxdiv");
+  function handleButton(n, pin) {
+    hwPinValue[pin]=1; // inverted
+    var btn = document.getElementById("BTN"+n);
+    btn.addEventListener('mousedown', e => {
+      e.preventDefault();
+      hwPinValue[pin]=0; // inverted
+      jsTransmitPinEvent(pin);
+    });
+    btn.addEventListener('mouseup', e => {
+      hwPinValue[pin]=1; // inverted
+      jsTransmitPinEvent(pin);
+    });
+    btn.addEventListener('mouseenter', e => {
+      if (e.buttons) {
+        hwPinValue[pin]=0; // inverted
+        jsTransmitPinEvent(pin);
+      }
+    });
+    btn.addEventListener('mouseleave', e => {
+      // mouseleave comes *before* mouseenter usually - so delay it
+      // in order to get overlap when swiping to make Bangle.js screen swipes work
+      setTimeout(function() {
+        if (!hwPinValue[pin]) {
+          hwPinValue[pin]=1; // inverted
+          jsTransmitPinEvent(pin);
+        }
+      },10);
+    });
+  }
+  handleButton(1,BTN1);
+  handleButton(2,BTN2);
+  handleButton(3,BTN3);
+  handleButton(4,BTN4);
+  handleButton(5,BTN5);
+}
+</script>
+</body>
+</html>

@@ -433,6 +433,11 @@
         "!doc": "<p>Return an array which is made from the following: <code>A.map(function) = [function(A[0]), function(A[1]), ...]</code></p>\n<p> <strong>Note:</strong> This returns an <code>ArrayBuffer</code> of the same type it was called on. To get an <code>Array</code>, use <code>Array.map</code>, eg. <code>[].map.call(myArray, x=&gt;x+1)</code></p>\n",
         "!url": "http://www.espruino.com/Reference#l_ArrayBufferView_map"
       },
+      "subarray": {
+        "!type": "fn(begin: number, end: ?) -> +ArrayBufferView",
+        "!doc": "<p>Returns a smaller part of this array which references the same data (it doesn&#39;t copy it).</p>\n",
+        "!url": "http://www.espruino.com/Reference#l_ArrayBufferView_subarray"
+      },
       "indexOf": {
         "!type": "fn(value: ?, startIndex: number) -> ?",
         "!doc": "<p>Return the index of the value in the array, or <code>-1</code></p>\n",
@@ -2897,6 +2902,11 @@
       "!doc": "<p>Is the GPS powered?</p>\n<p>Set power with <code>Bangle.setGPSPower(...);</code></p>\n",
       "!url": "http://www.espruino.com/Reference#l_Bangle_isGPSOn"
     },
+    "getGPSFix": {
+      "!type": "fn() -> ?",
+      "!doc": "<p>Get the last available GPS fix info (or <code>undefined</code> if GPS is off).</p>\n<p>The fix info received is the same as you&#39;d get from the <code>Bangle.GPS</code> event.</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_Bangle_getGPSFix"
+    },
     "isCompassOn": {
       "!type": "fn() -> bool",
       "!doc": "<p>Is the compass powered?</p>\n<p>Set power with <code>Bangle.setCompassPower(...);</code></p>\n",
@@ -2929,8 +2939,13 @@
     },
     "getAccel": {
       "!type": "fn() -> ?",
-      "!doc": "<p>Get the most recent accelerometer reading. Data is in the same format as the <code>Bangle.on(&#39;accel&#39;,</code> event.</p>\n<ul>\n<li><code>x</code> is X axis (left-right) in <code>g</code></li>\n<li><code>y</code> is Y axis (up-down) in <code>g</code></li>\n<li><code>z</code> is Z axis (in-out) in <code>g</code></li>\n<li><code>diff</code> is difference between this and the last reading in <code>g</code></li>\n<li><code>mag</code> is the magnitude of the acceleration in <code>g</code></li>\n</ul>\n",
+      "!doc": "<p>Get the most recent accelerometer reading. Data is in the same format as the <code>Bangle.on(&#39;accel&#39;,</code> event.</p>\n<ul>\n<li><code>x</code> is X axis (left-right) in <code>g</code></li>\n<li><code>y</code> is Y axis (up-down) in <code>g</code></li>\n<li><code>z</code> is Z axis (in-out) in <code>g</code></li>\n<li><code>diff</code> is difference between this and the last reading in <code>g</code> (calculated by comparing vectors, not magnitudes)</li>\n<li><code>td</code> is the elapsed</li>\n<li><code>mag</code> is the magnitude of the acceleration in <code>g</code></li>\n</ul>\n",
       "!url": "http://www.espruino.com/Reference#l_Bangle_getAccel"
+    },
+    "getHealthStatus": {
+      "!type": "fn() -> ?",
+      "!doc": "<ul>\n<li><code>movement</code> is the 32 bit sum of all <code>acc.diff</code> readings since power on (and rolls over). It is the difference in accelerometer values as <code>g*8192</code></li>\n<li><code>steps</code> is the value from the step counter</li>\n<li><code>bpm</code> last BPM reading from HRM sensor</li>\n<li><code>bpmConfidence</code> last BPM confidence (0-100%)</li>\n</ul>\n",
+      "!url": "http://www.espruino.com/Reference#l_Bangle_getHealthStatus"
     },
     "F_BEEPSET": {
       "!type": "bool",
@@ -3207,7 +3222,7 @@
     "prototype": {
       "flip": {
         "!type": "fn(all: bool)",
-        "!doc": "<p>On instances of graphics that drive a display with\nan offscreen buffer, calling this function will\ncopy the contents of the offscreen buffer to the\nscreen.</p>\n<p>Call this when you have drawn something to Graphics\nand you want it shown on the screen.</p>\n<p>If a display does not have an offscreen buffer,\nit may not have a <code>g.flip()</code> method.</p>\n<p>On Bangle.js, there are different graphics modes\nchosen with <code>Bangle.setLCDMode()</code>. The default mode\nis unbuffered and in this mode <code>g.flip()</code> does not\naffect the screen contents, however it will cause the\nscreen to light up if it was previously off due\nto inactivity.</p>\n<p>On some devices, this command will attempt to\nonly update the areas of the screen that have\nchanged in order to increase speed. If you have\naccessed the <code>Graphics.buffer</code> directly then you\nmay need to use <code>Graphics.flip(true)</code> to force\na full update of the screen.</p>\n",
+        "!doc": "<p>On instances of graphics that drive a display with\nan offscreen buffer, calling this function will\ncopy the contents of the offscreen buffer to the\nscreen.</p>\n<p>Call this when you have drawn something to Graphics\nand you want it shown on the screen.</p>\n<p>If a display does not have an offscreen buffer,\nit may not have a <code>g.flip()</code> method.</p>\n<p>On Bangle.js 1, there are different graphics modes\nchosen with <code>Bangle.setLCDMode()</code>. The default mode\nis unbuffered and in this mode <code>g.flip()</code> does not\naffect the screen contents.</p>\n<p>On some devices, this command will attempt to\nonly update the areas of the screen that have\nchanged in order to increase speed. If you have\naccessed the <code>Graphics.buffer</code> directly then you\nmay need to use <code>Graphics.flip(true)</code> to force\na full update of the screen.</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Graphics_flip"
       },
       "getWidth": {
@@ -3332,12 +3347,12 @@
       },
       "setFont": {
         "!type": "fn(name: ?, size: number) -> +Graphics",
-        "!doc": "<p>Set the font by name, eg &quot;4x6&quot;, or &quot;Vector12&quot;.</p>\n<p>For bitmap fonts you can also specify a size multiplier, for example <code>g.setFont(&quot;4x6&quot;,2)</code> will double the size of the standard 4x6 bitmap font to 8x12.</p>\n",
+        "!doc": "<p>Set the font by name. Various forms are available:</p>\n<ul>\n<li><code>g.setFont(&quot;4x6&quot;)</code> - standard 4x6 bitmap font</li>\n<li><code>g.setFont(&quot;Vector:12&quot;)</code> - vector font 12px high</li>\n<li><code>g.setFont(&quot;4x6:2&quot;)</code> - 4x6 bitmap font, doubled in size</li>\n<li><code>g.setFont(&quot;6x8:2x3&quot;)</code> - 6x8 bitmap font, doubled in width, tripled in height</li>\n</ul>\n<p>You can also use these forms, but they are not recommended:</p>\n<ul>\n<li><code>g.setFont(&quot;Vector12&quot;)</code> - vector font 12px high</li>\n<li><code>g.setFont(&quot;4x6&quot;,2)</code> - 4x6 bitmap font, doubled in size</li>\n</ul>\n<p><code>g.getFont()</code> will return the current font as a String.</p>\n<p>For a list of available font names, you can use <code>g.getFonts()</code>.</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Graphics_setFont"
       },
       "getFont": {
         "!type": "fn() -> +String",
-        "!doc": "<p>Get the font by name - can be saved and used with <code>Graphics.setFont</code></p>\n",
+        "!doc": "<p>Get the font by name - can be saved and used with <code>Graphics.setFont</code>.</p>\n<p>Normally this might return something like <code>&quot;4x6&quot;</code>, but if a scale\nfactor is specified, a colon and then the size is reported, like &quot;4x6:2&quot;</p>\n<p><strong>Note:</strong> For custom fonts, <code>Custom</code> is currently\nreported instead of the font name.</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Graphics_getFont"
       },
       "getFonts": {
