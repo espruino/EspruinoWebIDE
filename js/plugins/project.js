@@ -11,7 +11,7 @@
 **/
 "use strict";
 (function(){
-  if (!chrome || !chrome.fileSystem) {
+  if (("undefined"==typeof chrome) || ("undefined"==chrome.fileSystem)) {
     console.log("No chrome.fileSystem - Projects disabled");
     return;
   }
