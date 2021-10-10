@@ -13,12 +13,6 @@
 (function(){
   var codeMirror;
   var codeMirrorDirty = false;
-  var defaultLintFlags = {
-    esversion   : 6,    // Enable ES6 for literals, arrow fns, binary
-    evil        : true, // don't warn on use of strings in setInterval
-    laxbreak    : true,  // don't warn about newlines in expressions
-    laxcomma    : true  // don't warn about commas at the start of the line
-  };
 
   function init() {
     // Options
@@ -72,20 +66,6 @@
         }
       }
     });
-    Espruino.Core.Config.add("DISABLE_CODE_HINTS", {
-      section : "General",
-      name : "Disable Code Hints",
-      description : "Disable code hints in the editor. BE CAREFUL - they're there "+
-      "for a reason. If your code is creating warnings then it may well not work "+
-      "on Espruino! (needs a restart to take effect)",
-      type : "boolean",
-      defaultValue : false,
-      onChange: function(newValue) {
-          if (codeMirror) {
-            codeMirror.setOption('lint', (Espruino.Config.DISABLE_CODE_HINTS) ? false : defaultLintFlags);
-          }
-      }
-    });
     loadThemeCSS(Espruino.Config.THEME);
     $('<div id="divcode" style="width:100%;height:100%;"><textarea id="code" name="code"></textarea></div>').appendTo(".editor--code .editor__canvas");
     // The code editor
@@ -97,7 +77,6 @@
       mode: {name: "javascript", globalVars: false},
       lineWrapping: true,
       showTrailingSpace: true,
-      lint: ((Espruino.Config.DISABLE_CODE_HINTS) ? false : defaultLintFlags),
       highlightSelectionMatches: {showToken: /\w/},
       foldGutter: {rangeFinder: new CodeMirror.fold.combine(CodeMirror.fold.brace, CodeMirror.fold.comment, CodeMirror.fold.indent)},
       gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter", "CodeMirror-lint-markers"],
