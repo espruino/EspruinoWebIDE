@@ -66,6 +66,14 @@
         }
       }
     });
+    CodeMirror.defineExtension('beautify', function () {
+      if (js_beautify) {
+        var cm = this;
+        cm.setValue(js_beautify(cm.getValue(), {
+          indent_size: codeMirror.getOption('tabSize'),
+        }));
+      }
+    });
     loadThemeCSS(Espruino.Config.THEME);
     $('<div id="divcode" style="width:100%;height:100%;"><textarea id="code" name="code"></textarea></div>').appendTo(".editor--code .editor__canvas");
     // The code editor
@@ -103,6 +111,9 @@
             cm.replaceSelection(cm.getOption("indentWithTabs")? "\t":
               " ".repeat(cm.getOption("indentUnit")), "end", "+input");
           }
+        },
+        "Ctrl-B": function(cm) {
+          cm.beautify();
         }
       }
     });

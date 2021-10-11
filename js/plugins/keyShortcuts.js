@@ -37,10 +37,11 @@
     "Shift + Ctrl + R / Shift + Cmd + Option + F" : "Replace all",
 
     "Ctrl + Space" : "Autocomplete",
+    "Ctrl + B" : "Beautify (reformat) code",
     "Ctrl + I" : "Find type at cursor",
-    "Alt + ." : "Jump to definition (Alt-, to jump back)",
     "Ctrl + Q" : "Rename variable",
     "Ctrl + ." : "Select all occurrences of a variable",
+    "Alt + ." : "Jump to definition (Alt-, to jump back)",
   }
 
   function init() {
