@@ -59,8 +59,13 @@
     });
     Espruino.addProcessor("sending", function(data, callback) {
       // save the code to local storage - not rate limited
-      if(Espruino.Config.AUTO_SAVE_CODE && typeof window !== 'undefined' && window.localStorage)
-        window.localStorage.setItem("JSCODE", Espruino.Core.EditorJavaScript.getCode());
+      if(Espruino.Config.AUTO_SAVE_CODE && typeof window !== 'undefined' && window.localStorage) {
+        try {
+          window.localStorage.setItem("JSCODE", Espruino.Core.EditorJavaScript.getCode());
+        } catch (e) {
+          console.log("ERROR [localStorage]:"+e.toString());
+        }
+      }
       callback(data);
     });
     Espruino.addProcessor("jsCodeChanged", function(data, callback) {
