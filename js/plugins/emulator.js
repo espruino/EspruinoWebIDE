@@ -19,14 +19,14 @@ Use embed.js on the client side to link this in.
       description : '240x240 16 bit, 3 buttons',
       link : "https://www.espruino.com/Bangle.js",
       emulatorURL : "/emu/emu_banglejs1.html",
-      emulatorWin : "innerWidth=280,innerHeight=258,location=0"
+      emulatorWin : "innerWidth=290,innerHeight=268,location=0"
     }, {
       id : "BANGLEJS2",
       name : "Bangle.js 2",
       description : '176x176 3 bit, 1 button, full touchscreen',
       link : "https://www.espruino.com/Bangle.js2",
       emulatorURL : "/emu/emu_banglejs2.html",
-      emulatorWin : "innerWidth=280,innerHeight=258,location=0"
+      emulatorWin : "innerWidth=290,innerHeight=268,location=0"
     }
   ];
 
