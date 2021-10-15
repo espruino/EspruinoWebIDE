@@ -13,16 +13,16 @@
     width:500px; height:500px; border:1px solid black;
   }
   #gfxdiv {
-    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:264px;height:244px;
+    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:274px;height:254px;
   }
   #BTN1 {
-    width:20px;height:73px;position:absolute;right:0px;top:0px;padding:0;font-weight:bold;
+    width:20px;height:63px;position:absolute;right:0px;top:0px;padding:0;font-weight:bold;
   }
   #BTN2 {
-    width:20px;height:73px;position:absolute;right:0px;top:73px;padding:0;font-weight:bold;
+    width:20px;height:63px;position:absolute;right:0px;top:63px;padding:0;font-weight:bold;
   }
   #BTN3 {
-    width:20px;height:73px;position:absolute;right:0px;top:146px;padding:0;font-weight:bold;
+    width:20px;height:63px;position:absolute;right:0px;top:126px;padding:0;font-weight:bold;
   }
   #BTN4 {
     width:125px;height:240px;position:absolute;left:0px;top:0px;padding:0;font-weight:bold;
@@ -30,11 +30,16 @@
   #BTN5 {
     width:125px;height:240px;position:absolute;left:120px;top:0px;padding:0;font-weight:bold;
   }
+  #border {
+    width:20px;height:21px;position:absolute;right:0px;top:193px;color:white;text-decoration:none;background-color:gray;cursor:pointer;
+    font-size: 17px;text-align: center;
+  }
   #screenshot {
     width:20px;height:21px;position:absolute;right:0px;top:219px;color:white;text-decoration:none;background-color:black;cursor:pointer;
   }
   #gfxcanvas {
     image-rendering: pixelated;
+    border: 5px solid #fff;
   }
   </style>
 </head>
@@ -45,6 +50,7 @@
   <button id="BTN1">1</button>
   <button id="BTN2">2</button>
   <button id="BTN3">3</button>
+  <a id="border">&#x05EF;</a>
   <a id="screenshot">&#x1F4F7;</a>
   <div id="BTN4"></div>
   <div id="BTN5"></div>

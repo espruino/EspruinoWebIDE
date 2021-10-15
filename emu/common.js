@@ -81,6 +81,16 @@ function jsIdle() {
 }
 function jsInit() {
   jsInitButtons();
+
+  var borderColors = ['FFF', 'FF0', 'F00', '000', '00F', '0FF'];
+  var borderColor = 0
+  document.getElementById("border").style.color = '#' + borderColors[(borderColor + 1) % borderColors.length];
+  document.getElementById("border").addEventListener('click', e => {
+    borderColor = ++borderColor % borderColors.length;
+    document.getElementById("gfxcanvas").style.borderColor = '#' + borderColors[borderColor];
+    document.getElementById("border").style.color = '#' + borderColors[(borderColor + 1) % borderColors.length];
+  });
+
   document.getElementById("screenshot").addEventListener('click', e => {
     document.getElementById("screenshot").href = document.getElementById("gfxcanvas").toDataURL();
     document.getElementById("screenshot").download = "screenshot.png";
@@ -159,8 +169,8 @@ console.log("Waiting for posted {type:init} message");
 
 var dontTrigger = false;
 var timerResize;
-var WIN_WIDTH = (GFX_WIDTH+30);
-var WIN_HEIGHT = (GFX_HEIGHT+4);
+var WIN_WIDTH = (GFX_WIDTH+10+30);
+var WIN_HEIGHT = (GFX_HEIGHT+10+4);
 function resizeEnd() {
   //100ms since last resize
   dontTrigger = true;

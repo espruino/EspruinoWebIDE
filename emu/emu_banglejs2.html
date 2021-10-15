@@ -13,16 +13,21 @@
     width:500px; height:500px; border:1px solid black;
   }
   #gfxdiv {
-    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:200px;height:180px;
+    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:210px;height:190px;
   }
   #BTN1 {
-    width:20px;height:73px;position:absolute;right:0px;top:43px;padding:0;font-weight:bold;
+    width:20px;height:63px;position:absolute;right:0px;top:33px;padding:0;font-weight:bold;
+  }
+  #border {
+    width:20px;height:21px;position:absolute;right:0px;top:130px;color:white;text-decoration:none;background-color:gray;cursor:pointer;
+    font-size: 17px;text-align: center;
   }
   #screenshot {
     width:20px;height:21px;position:absolute;right:0px;top:156px;color:white;text-decoration:none;background-color:black;cursor:pointer;
   }
   #gfxcanvas {
     image-rendering: pixelated;
+    border: 5px solid #fff;
   }
   </style>
 </head>
@@ -31,6 +36,7 @@
 <div id="gfxdiv">
   <canvas id="gfxcanvas" width="176" height="176"></canvas>
   <button id="BTN1">1</button>
+  <a id="border">&#x05EF;</a>
   <a id="screenshot">&#x1F4F7;</a>
   <div id="BTN4"></div>
   <div id="BTN5"></div>
