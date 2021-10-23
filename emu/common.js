@@ -6,19 +6,22 @@ var jsIdleTimeout;
 var flashMemory = new Uint8Array(FLASH_SIZE);
 var maxFlashMemory = 0;
 flashMemory.fill(255);
-if (window.localStorage) {
-  let s = localStorage.getItem("BANGLE_STORAGE");
-  if (s!=null) {
-    s.split(",").forEach((n,i)=>{
-      flashMemory[i] = parseInt(n);
-      maxFlashMemory = i;
-    });
-  }
-} 
-window.addEventListener("unload", function() { // Save storage contents on exit
-  var a = new Uint8Array(flashMemory.buffer, 0, maxFlashMemory+1);
-  localStorage.setItem("BANGLE_STORAGE", a.toString()); // 1,2,3,4, etc...
-});
+
+if ("undefined" != typeof window) {
+  if (window.localStorage) {
+    let s = localStorage.getItem("BANGLE_STORAGE");
+    if (s!=null) {
+      s.split(",").forEach((n,i)=>{
+        flashMemory[i] = parseInt(n);
+        maxFlashMemory = i;
+      });
+    }
+  } 
+  window.addEventListener("unload", function() { // Save storage contents on exit
+    var a = new Uint8Array(flashMemory.buffer, 0, maxFlashMemory+1);
+    localStorage.setItem("BANGLE_STORAGE", a.toString()); // 1,2,3,4, etc...
+  });
+}
 function eraseAll() {
   maxFlashMemory = 0;
   flashMemory.fill(255);
@@ -54,6 +57,11 @@ function jsTransmitChar(c) {
   Module.ccall('jshPushIOCharEvent', 'number', ['number','number'], [DEVICE,c]);
   jsIdle();
 }
+function jsTransmitString(d) {
+  for (var i=0;i<d.length;i++) {
+    jsTransmitChar(d.charCodeAt(i));
+  }
+}
 function jsTransmitPinEvent(pin) {
   //console.log("TX -> ",c);
   Module.ccall('jsSendPinWatchEvent', 'number', ['number'], [pin]);
@@ -78,23 +86,32 @@ function jsIdle() {
   if (msToNext<10) msToNext=10;
   jsIdleTimeout = setTimeout(jsIdle,msToNext);
   jsUpdateGfx();
+  return msToNext;
+}
+function jsStopIdle() {
+  if (jsIdleTimeout) {
+    clearTimeout(jsIdleTimeout);
+    jsIdleTimeout = undefined;
+  }
 }
 function jsInit() {
-  jsInitButtons();
+  if ("undefined" != typeof window) {
+    jsInitButtons();
 
-  var borderColors = ['FFF', 'FF0', 'F00', '000', '00F', '0FF'];
-  var borderColor = 0
-  document.getElementById("border").style.color = '#' + borderColors[(borderColor + 1) % borderColors.length];
-  document.getElementById("border").addEventListener('click', e => {
-    borderColor = ++borderColor % borderColors.length;
-    document.getElementById("gfxcanvas").style.borderColor = '#' + borderColors[borderColor];
+    var borderColors = ['FFF', 'FF0', 'F00', '000', '00F', '0FF'];
+    var borderColor = 0
     document.getElementById("border").style.color = '#' + borderColors[(borderColor + 1) % borderColors.length];
-  });
+    document.getElementById("border").addEventListener('click', e => {
+      borderColor = ++borderColor % borderColors.length;
+      document.getElementById("gfxcanvas").style.borderColor = '#' + borderColors[borderColor];
+      document.getElementById("border").style.color = '#' + borderColors[(borderColor + 1) % borderColors.length];
+    });
 
-  document.getElementById("screenshot").addEventListener('click', e => {
-    document.getElementById("screenshot").href = document.getElementById("gfxcanvas").toDataURL();
-    document.getElementById("screenshot").download = "screenshot.png";
-  });
+    document.getElementById("screenshot").addEventListener('click', e => {
+      document.getElementById("screenshot").href = document.getElementById("gfxcanvas").toDataURL();
+      document.getElementById("screenshot").download = "screenshot.png";
+    });
+  }
 
   Module.ccall('jsInit', 'number', [], []);
   jsHandleIO();
@@ -112,7 +129,8 @@ function drawLoadingScreen() {
   ctx.fillStyle = "black";
   ctx.fillText("Loading...", GFX_WIDTH/2, GFX_HEIGHT/2);
 }
-drawLoadingScreen();
+if ("undefined" != typeof window)
+  drawLoadingScreen();
 
 /* ===========================================================================
      Frame to frame comms
@@ -124,34 +142,35 @@ HOST sends: {type:"rx",for:"emu",data:string}
 WE send: {type:"tx",from:"emu",data:string}
 
 */
-var hostWindow = window.parent;
-window.addEventListener('message', function(e) {
-  var event = e.data;
-  console.log("EMU MESSAGE ---------------------------------------");
-  console.log(JSON.stringify(event,null,2));
-  console.log("-----------------------------------------------");
-  if (typeof event!="object" || event.for!="emu") return;
-  switch (event.type) {
-    case "init": {
-      console.log("HOST WINDOW CONFIGURED");
-      hostWindow = e.source;
-      post({type:"init"});
-      jsInit();
-      jsIdle();
-    } break;
-    case "rx": {
-      var d = event.data;
-      if (typeof d!="string")
-        console.error("receive event expecting data string");
-      for (var i=0;i<d.length;i++) {
-        jsTransmitChar(d.charCodeAt(i));
-      }
-    } break;
-    default:
-      console.error("Unknown event type ",event.type);
-      break;
-  }
-});
+if ("undefined" != typeof window) {
+  var hostWindow = window.parent;
+  window.addEventListener('message', function(e) {
+    var event = e.data;
+    console.log("EMU MESSAGE ---------------------------------------");
+    console.log(JSON.stringify(event,null,2));
+    console.log("-----------------------------------------------");
+    if (typeof event!="object" || event.for!="emu") return;
+    switch (event.type) {
+      case "init": {
+        console.log("HOST WINDOW CONFIGURED");
+        hostWindow = e.source;
+        post({type:"init"});
+        jsInit();
+        jsIdle();
+      } break;
+      case "rx": {
+        var d = event.data;
+        if (typeof d!="string")
+          console.error("receive event expecting data string");
+        jsTransmitString(d);
+      } break;
+      default:
+        console.error("Unknown event type ",event.type);
+        break;
+    }
+  });
+  console.log("Waiting for posted {type:init} message");
+}
 
 function post(msg) {
   msg.from="emu";
@@ -161,7 +180,7 @@ function post(msg) {
 jsRXCallback = function(c) {
   post({type:"tx",data:String.fromCharCode(c)});
 }
-console.log("Waiting for posted {type:init} message");
+
 
 /* ===========================================================================
      Window resizing code
@@ -209,7 +228,10 @@ function onResize(e) {
     byX=1;byY=1;
   }
 }
-var correctingRatio = 1/window.devicePixelRatio;
-var byX=1,byY=1;
-window.addEventListener('resize', onResize);
-onResize();
+
+if ("undefined" != typeof window) {
+  var correctingRatio = 1/window.devicePixelRatio;
+  var byX=1,byY=1;
+  window.addEventListener('resize', onResize);
+  onResize();
+}
