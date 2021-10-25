@@ -7,7 +7,7 @@ to work by passing messages using window.postMessage.
 Use embed.js on the client side to link this in.
 */
 
-  var emu;
+var emu;
 
 (function() {
   var callbacks = {};
@@ -19,14 +19,18 @@ Use embed.js on the client side to link this in.
       description : '240x240 16 bit, 3 buttons',
       link : "https://www.espruino.com/Bangle.js",
       emulatorURL : "/emu/emu_banglejs1.html",
-      emulatorWin : "innerWidth=290,innerHeight=268,location=0"
+      emulatorWin : "innerWidth=290,innerHeight=268,location=0",
+      width : 240,
+      height : 240,
     }, {
       id : "BANGLEJS2",
       name : "Bangle.js 2",
       description : '176x176 3 bit, 1 button, full touchscreen',
       link : "https://www.espruino.com/Bangle.js2",
       emulatorURL : "/emu/emu_banglejs2.html",
-      emulatorWin : "innerWidth=290,innerHeight=268,location=0"
+      emulatorWin : "innerWidth=290,innerHeight=268,location=0",
+      width : 176,
+      height : 176,
     }
   ];
 
@@ -83,15 +87,106 @@ Use embed.js on the client side to link this in.
     });
   }
 
+  function openEmulator(device) {
+    var url = window.location.pathname;
+    if (url.includes("/"))
+      url = url.substr(0, url.lastIndexOf("/"));
+    url = window.location.origin + url + device.emulatorURL;
+    if (Espruino.Config.EMULATOR_BANGLEJS_WINDOW === 'inside') {
+      try {
+        $('.emulator-window').remove();
+        var emulatorWindow = $('<div class="emulator-window"><div>EMULATOR</div><iframe src=""></iframe></div>').appendTo('body');
+        if (emulatorWindow) {
+          var title = $('.emulator-window > div');
+          var emulatorIFrame = $('.emulator-window > iframe');
+          if (title && emulatorIFrame) {
+            var w = device.width + 40;
+            var h = device.height + 14 + 30 + 3;
+            title.text(device.name);
+            emulatorWindow.draggable({
+              containment: 'window',
+              opacity: 0.35,
+              handle: 'div',
+            });
+            // emulatorWindow.resizable({
+            //   handles: 'e, s',
+            //   minWidth: w,
+            //   minHeight: h,
+            //   aspectRatio: true
+            // });
+            title.css({
+              height: '30px',
+              padding: '0 10px',
+              lineHeight: '30px',
+              fontSize: '18px',
+              cursor: 'default',
+            });
+            emulatorWindow.css({
+              position: 'absolute',
+              top: '10px',
+              left: '316px',
+              width: w + 'px',
+              height: h + 'px',
+              backgroundColor: '#fff',
+              zIndex: '5',
+            });
+            emulatorIFrame.css({
+              width: '100%',
+              height: 'calc(100% - 30px)',
+              border: '0 none',
+            });
+            var close = () => {
+              $('.emulator-window').remove();
+            }
+            emulatorIFrame.load(() => {
+              emulatorIFrame[0].contentWindow.close = close;
+              post({ type: "init" });
+            });
+            emulatorIFrame.attr('src', url);
+            return emulatorIFrame[0].contentWindow;
+          }
+        }
+      } catch (err) {
+        console.log('ERROR', err);
+      }
+    }
+    var emu = window.open(url, "banglewindow", device.emulatorWin);
+    if (emu.addEventListener) {
+      emu.addEventListener("load", function () {
+        post({ type: "init" });
+      }, false);
+    } else
+      if (emu.attachEvent) {
+        emu.attachEvent("onload", function () {
+          post({ type: "init" });
+        }, false);
+      }
+    return emu;
+  }
+
   var device = {
     "name" : "Emulator",
     "init" : function() {
+      Espruino.Core.Config.addSection("Emulator", { sortOrder:350, description: "Settings for Bangle.js emulator" });
       Espruino.Core.Config.add("EMULATOR_BANGLEJS", {
-        section : "Communications",
+        section : "Emulator",
         name : "Enable Bangle.js Emulator",
-        description : "The size of font used in the Terminal and Code Editor windows",
+        description : "Enable or disable Bangle.js emulator",
         type : "boolean",
         defaultValue : true
+      });
+      Espruino.Core.Config.add("EMULATOR_BANGLEJS_WINDOW", {
+        section : "Emulator",
+        name : "Bangle.js Emulator Windows",
+        description : "Use a popup window or a internal window to display Bangle.js emulator",
+        type : { "outside": "Popup window", "inside": "Internal window" },
+        defaultValue : "outside",
+        onChange: function () {
+          if (emu) {
+            emu.close();
+            emu = undefined;
+          }
+        }
       });
     },
     "getStatus": function(ignoreSettings) {
@@ -126,20 +221,7 @@ Use embed.js on the client side to link this in.
           callbacks = {};
           disconnectCallback();
         }
-        var url = window.location.pathname;
-        if (url.includes("/"))
-          url = url.substr(0,url.lastIndexOf("/"));
-        url = window.location.origin + url + device.emulatorURL;
-        emu = window.open(url, "banglewindow", device.emulatorWin);
-        var inited = false;
-        emu.addEventListener("load", function() {
-          if (!inited) post({type:"init"});
-          inited = true;
-        }, false);
-        emu.attachEvent("onload", function() {
-          if (!inited) post({type:"init"});
-          inited = true;
-        }, false);
+        emu = openEmulator(device);
       });
     },
     "write": function(d, callback) {
