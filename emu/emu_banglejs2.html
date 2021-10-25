@@ -131,6 +131,10 @@ function jsInitButtons() {
     e.preventDefault();
     touchX = e.offsetX;
     touchY = e.offsetY;
+    if (touchX<0) touchX=0;
+    if (touchY<0) touchY=0;
+    if (touchX>=GFX_WIDTH) touchX=GFX_WIDTH-1;
+    if (touchY>=GFX_HEIGHT) touchY=GFX_HEIGHT-1;
     if (touchPts) {
       console.log("Touch up", {
         x : touchX,
