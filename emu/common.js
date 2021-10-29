@@ -16,7 +16,7 @@ if ("undefined" != typeof window) {
         maxFlashMemory = i;
       });
     }
-  } 
+  }
   window.addEventListener("unload", function() { // Save storage contents on exit
     var a = new Uint8Array(flashMemory.buffer, 0, maxFlashMemory+1);
     localStorage.setItem("BANGLE_STORAGE", a.toString()); // 1,2,3,4, etc...
@@ -46,6 +46,8 @@ function jsHandleIO() {
       l += String.fromCharCode(ch);
       var ll = l.split("\n");
       if (ll.length>1) {
+        if ("undefined" != typeof onConsoleOutput)
+          onConsoleOutput(ll[0]);
         console.log("EMSCRIPTEN:",ll[0]);
         l = ll[1];
       }
