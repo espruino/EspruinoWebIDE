@@ -184,7 +184,7 @@
 
   // data = { binary_url, board_id, board_info, board_chip, flashFn }
   function stepDownload(data) {
-    if (window && window.location &&
+    if (window && window.location && data.binary_url && 
         window.location.protocol=="https:" &&
         data.binary_url.substr(0,5)=="http:")
       data.binary_url = "https:"+data.binary_url.substr(5);
@@ -458,7 +458,7 @@
           html =
             '<p><b>Please put your Bangle.js into bootloader mode.</b> Hold down the button for ~10 sec until the watch reboots to a screen of black and white text.</p>'+
             '<p>While ===== is moving across the screen release the button. Now click <b>Next</b> and connect to the Bluetooth device named <b>DfuTarg</b>...</p>'+
-            '<p>If you cannot find a device named DfuTarg, see the <a href="http://www.espruino.com/Troubleshooting+Bangle.js" target="_blank">Troubleshooting page</a></p>';          
+            '<p>If you cannot find a device named DfuTarg, see the <a href="http://www.espruino.com/Troubleshooting+Bangle.js" target="_blank">Troubleshooting page</a></p>';
       } else if (BLE_DEVICES.indexOf(data.board_id)>=0) {
         html =
           '<p><b>Please put your board into bootloader mode.</b> Hold down BTN1 while powering it on, and then release BTN1 immediately.</p>'+
