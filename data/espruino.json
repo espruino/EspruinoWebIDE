@@ -1248,6 +1248,11 @@
       "!doc": "",
       "!url": "http://www.espruino.com/Reference#l_E_showPrompt"
     },
+    "showScroller": {
+      "!type": "fn()",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_E_showScroller"
+    },
     "unmountSD": {
       "!type": "fn()",
       "!doc": "<p>Unmount the SD card, so it can be removed. If you remove the SD card without calling this you may cause corruption, and you will be unable to access another SD card until you reset Espruino or call <code>E.unmountSD()</code>.</p>\n",
@@ -1955,6 +1960,116 @@
     "!doc": "<p>This library provides TV out capability on the Espruino and Espruino Pico.</p>\n<p>See the <a href=\"/Television\">Television</a> page for more information.</p>\n",
     "!url": "http://www.espruino.com/Reference#l_tv_undefined"
   },
+  "NRF": {
+    "!type": "fn()",
+    "!doc": "<p>The NRF class is for controlling functionality of the Nordic nRF51/nRF52 chips.</p>\n<p>Most functionality is related to Bluetooth Low Energy, however there are also some functions related to NFC that apply to NRF52-based devices.</p>\n",
+    "!url": "http://www.espruino.com/Reference#NRF",
+    "getSecurityStatus": {
+      "!type": "fn() -> ?",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_NRF_getSecurityStatus"
+    },
+    "getAddress": {
+      "!type": "fn() -> ?",
+      "!doc": "<p>Get this device&#39;s default Bluetooth MAC address.</p>\n<p>For Puck.js, the last 5 characters of this (eg. <code>ee:ff</code>)\nare used in the device&#39;s advertised Bluetooth name.</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_NRF_getAddress"
+    },
+    "setServices": {
+      "!type": "fn(data: ?, options: ?)",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_NRF_setServices"
+    },
+    "setAdvertising": {
+      "!type": "fn(data: ?, options: ?)",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_NRF_setAdvertising"
+    },
+    "disconnect": {
+      "!type": "fn()",
+      "!doc": "<p>If a device is connected to Espruino, disconnect from it.</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_NRF_disconnect"
+    },
+    "sleep": {
+      "!type": "fn()",
+      "!doc": "<p>Disable Bluetooth advertising and disconnect from any device that\nconnected to Puck.js as a peripheral (this won&#39;t affect any devices\nthat Puck.js initiated connections to).</p>\n<p>This makes Puck.js undiscoverable, so it can&#39;t be connected to.</p>\n<p>Use <code>NRF.wake()</code> to wake up and make Puck.js connectable again.</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_NRF_sleep"
+    },
+    "wake": {
+      "!type": "fn()",
+      "!doc": "<p>Enable Bluetooth advertising (this is enabled by default), which\nallows other devices to discover and connect to Puck.js.</p>\n<p>Use <code>NRF.sleep()</code> to disable advertising.</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_NRF_wake"
+    },
+    "restart": {
+      "!type": "fn(callback: ?)",
+      "!doc": "<p>Restart the Bluetooth softdevice (if there is currently a BLE connection,\nit will queue a restart to be done when the connection closes).</p>\n<p>You shouldn&#39;t need to call this function in normal usage. However, Nordic&#39;s\nBLE softdevice has some settings that cannot be reset. For example there\nare only a certain number of unique UUIDs. Once these are all used the\nonly option is to restart the softdevice to clear them all out.</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_NRF_restart"
+    },
+    "getBattery": {
+      "!type": "fn() -> number",
+      "!doc": "<p>Get the battery level in volts (the voltage that the NRF chip is running off of).</p>\n<p>This is the battery level of the device itself - it has nothing to with any\ndevice that might be connected.</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_NRF_getBattery"
+    },
+    "getAdvertisingData": {
+      "!type": "fn(data: ?, options: ?) -> ?",
+      "!doc": "<p>This is just like <code>NRF.setAdvertising</code>, except instead of advertising\nthe data, it returns the packet that would be advertised as an array.</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_NRF_getAdvertisingData"
+    },
+    "setTxPower": {
+      "!type": "fn(power: number)",
+      "!doc": "<p>Set the BLE radio transmit power. The default TX power is 0 dBm.</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_NRF_setTxPower"
+    },
+    "setLowPowerConnection": {
+      "!type": "fn(lowPower: bool)",
+      "!doc": "<p><strong>THIS IS DEPRECATED</strong> - please use <code>NRF.setConnectionInterval</code> for\nperipheral and <code>NRF.connect(addr, options)</code>/<code>BluetoothRemoteGATTServer.connect(options)</code>\nfor central connections.</p>\n<p>This sets the connection parameters - these affect the transfer speed and\npower usage when the device is connected.</p>\n<ul>\n<li>When not low power, the connection interval is between 7.5 and 20ms</li>\n<li>When low power, the connection interval is between 500 and 1000ms</li>\n</ul>\n<p>When low power connection is enabled, transfers of data over Bluetooth\nwill be very slow, however power usage while connected will be drastically\ndecreased.</p>\n<p>This will only take effect after the connection is disconnected and\nre-established.</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_NRF_setLowPowerConnection"
+    },
+    "sendHIDReport": {
+      "!type": "fn(data: ?, callback: ?)",
+      "!doc": "<p>Send a USB HID report. HID must first be enabled with <code>NRF.setServices({}, {hid: hid_report})</code></p>\n",
+      "!url": "http://www.espruino.com/Reference#l_NRF_sendHIDReport"
+    },
+    "ancsAction": {
+      "!type": "fn(uid: number, positive: bool)",
+      "!doc": "<p>Send an ANCS action for a specific Notification UID. Corresponds to posaction/negaction in the &#39;ANCS&#39; event that was received</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_NRF_ancsAction"
+    },
+    "ancsGetNotificationInfo": {
+      "!type": "fn(uid: number) -> +Promise",
+      "!doc": "<p>Get ANCS info for a notification, eg:</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_NRF_ancsGetNotificationInfo"
+    },
+    "amsGetMusicInfo": {
+      "!type": "fn(id: ?) -> +Promise",
+      "!doc": "<p>Get ANCS info for an app (add id is available via <code>ancsGetNotificationInfo</code>)</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_NRF_amsGetMusicInfo"
+    },
+    "amsCommand": {
+      "!type": "fn(id: ?)",
+      "!doc": "<p>Send an AMS command to an Apple Media Service device to control music playback</p>\n<p>Command is one of play, pause, playpause, next, prev, volup, voldown, repeat, shuffle, skipforward, skipback, like, dislike, bookmark</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_NRF_amsCommand"
+    },
+    "setWhitelist": {
+      "!type": "fn(whitelisting: bool)",
+      "!doc": "<p>If set to true, whenever a device bonds it will be added to the\nwhitelist.</p>\n<p>When set to false, the whitelist is cleared and newly bonded\ndevices will not be added to the whitelist.</p>\n<p><strong>Note:</strong> This is remembered between <code>reset()</code>s but isn&#39;t\nremembered after power-on (you&#39;ll have to add it to <code>onInit()</code>.</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_NRF_setWhitelist"
+    },
+    "setConnectionInterval": {
+      "!type": "fn(interval: ?)",
+      "!doc": "<p>When connected, Bluetooth LE devices communicate at a set interval.\nLowering the interval (eg. more packets/second) means a lower delay when\nsending data, higher bandwidth, but also more power consumption.</p>\n<p>By default, when connected as a peripheral Espruino automatically adjusts the\nconnection interval. When connected it&#39;s as fast as possible (7.5ms) but when idle\nfor over a minute it drops to 200ms. On continued activity (&gt;1 BLE operation) the\ninterval is raised to 7.5ms again.</p>\n<p>The options for <code>interval</code> are:</p>\n<ul>\n<li><code>undefined</code> / <code>&quot;auto&quot;</code> : (default) automatically adjust connection interval</li>\n<li><code>100</code> : set min and max connection interval to the same number (between 7.5ms and 4000ms)</li>\n<li><code>{minInterval:20, maxInterval:100}</code> : set min and max connection interval as a range</li>\n</ul>\n<p>This configuration is not remembered during a <code>save()</code> - you will have to\nre-set it via <code>onInit</code>.</p>\n<p><strong>Note:</strong> If connecting to another device (as Central), you can use\nan extra argument to <code>NRF.connect</code> or <code>BluetoothRemoteGATTServer.connect</code>\nto specify a connection interval.</p>\n<p><strong>Note:</strong> This overwrites any changes imposed by the deprecated <code>NRF.setLowPowerConnection</code></p>\n",
+      "!url": "http://www.espruino.com/Reference#l_NRF_setConnectionInterval"
+    }
+  },
+  "Bluetooth": {
+    "!type": "+Serial",
+    "!doc": "<p>The Bluetooth Serial port - used when data is sent or received over Bluetooth Smart on nRF51/nRF52 chips.</p>\n",
+    "!url": "http://www.espruino.com/Reference#l__global_Bluetooth",
+    "setConsole": {
+      "!type": "fn()",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Bluetooth_setConsole"
+    }
+  },
   "crypto": {
     "!type": "fn()",
     "!doc": "<p>Cryptographic functions</p>\n<p><strong>Note:</strong> This library is currently only included in builds for boards where there is space. For other boards there is <code>crypto.js</code> which implements SHA1 in JS.</p>\n",
@@ -2009,81 +2124,6 @@
       "!doc": "",
       "!url": "http://www.espruino.com/Reference#l_AES_decrypt"
     }
-  },
-  "NRF": {
-    "!type": "fn()",
-    "!doc": "<p>The NRF class is for controlling functionality of the Nordic nRF51/nRF52 chips.</p>\n<p>Most functionality is related to Bluetooth Low Energy, however there are also some functions related to NFC that apply to NRF52-based devices.</p>\n",
-    "!url": "http://www.espruino.com/Reference#NRF",
-    "disconnect": {
-      "!type": "fn()",
-      "!doc": "<p>If a device is connected to Espruino, disconnect from it.</p>\n",
-      "!url": "http://www.espruino.com/Reference#l_NRF_disconnect"
-    },
-    "sleep": {
-      "!type": "fn()",
-      "!doc": "<p>Disable Bluetooth advertising and disconnect from any device that\nconnected to Puck.js as a peripheral (this won&#39;t affect any devices\nthat Puck.js initiated connections to).</p>\n<p>This makes Puck.js undiscoverable, so it can&#39;t be connected to.</p>\n<p>Use <code>NRF.wake()</code> to wake up and make Puck.js connectable again.</p>\n",
-      "!url": "http://www.espruino.com/Reference#l_NRF_sleep"
-    },
-    "wake": {
-      "!type": "fn()",
-      "!doc": "<p>Enable Bluetooth advertising (this is enabled by default), which\nallows other devices to discover and connect to Puck.js.</p>\n<p>Use <code>NRF.sleep()</code> to disable advertising.</p>\n",
-      "!url": "http://www.espruino.com/Reference#l_NRF_wake"
-    },
-    "restart": {
-      "!type": "fn(callback: ?)",
-      "!doc": "<p>Restart the Bluetooth softdevice (if there is currently a BLE connection,\nit will queue a restart to be done when the connection closes).</p>\n<p>You shouldn&#39;t need to call this function in normal usage. However, Nordic&#39;s\nBLE softdevice has some settings that cannot be reset. For example there\nare only a certain number of unique UUIDs. Once these are all used the\nonly option is to restart the softdevice to clear them all out.</p>\n",
-      "!url": "http://www.espruino.com/Reference#l_NRF_restart"
-    },
-    "getAddress": {
-      "!type": "fn() -> ?",
-      "!doc": "<p>Get this device&#39;s default Bluetooth MAC address.</p>\n<p>For Puck.js, the last 5 characters of this (eg. <code>ee:ff</code>)\nare used in the device&#39;s advertised Bluetooth name.</p>\n",
-      "!url": "http://www.espruino.com/Reference#l_NRF_getAddress"
-    },
-    "getBattery": {
-      "!type": "fn() -> number",
-      "!doc": "<p>Get the battery level in volts (the voltage that the NRF chip is running off of).</p>\n<p>This is the battery level of the device itself - it has nothing to with any\ndevice that might be connected.</p>\n",
-      "!url": "http://www.espruino.com/Reference#l_NRF_getBattery"
-    },
-    "getAdvertisingData": {
-      "!type": "fn(data: ?, options: ?) -> ?",
-      "!doc": "<p>This is just like <code>NRF.setAdvertising</code>, except instead of advertising\nthe data, it returns the packet that would be advertised as an array.</p>\n",
-      "!url": "http://www.espruino.com/Reference#l_NRF_getAdvertisingData"
-    },
-    "setTxPower": {
-      "!type": "fn(power: number)",
-      "!doc": "<p>Set the BLE radio transmit power. The default TX power is 0 dBm.</p>\n",
-      "!url": "http://www.espruino.com/Reference#l_NRF_setTxPower"
-    },
-    "setLowPowerConnection": {
-      "!type": "fn(lowPower: bool)",
-      "!doc": "<p><strong>THIS IS DEPRECATED</strong> - please use <code>NRF.setConnectionInterval</code> for\nperipheral and <code>NRF.connect(addr, options)</code>/<code>BluetoothRemoteGATTServer.connect(options)</code>\nfor central connections.</p>\n<p>This sets the connection parameters - these affect the transfer speed and\npower usage when the device is connected.</p>\n<ul>\n<li>When not low power, the connection interval is between 7.5 and 20ms</li>\n<li>When low power, the connection interval is between 500 and 1000ms</li>\n</ul>\n<p>When low power connection is enabled, transfers of data over Bluetooth\nwill be very slow, however power usage while connected will be drastically\ndecreased.</p>\n<p>This will only take effect after the connection is disconnected and\nre-established.</p>\n",
-      "!url": "http://www.espruino.com/Reference#l_NRF_setLowPowerConnection"
-    },
-    "sendHIDReport": {
-      "!type": "fn(data: ?, callback: ?)",
-      "!doc": "<p>Send a USB HID report. HID must first be enabled with <code>NRF.setServices({}, {hid: hid_report})</code></p>\n",
-      "!url": "http://www.espruino.com/Reference#l_NRF_sendHIDReport"
-    },
-    "sendANCSAction": {
-      "!type": "fn(uid: number, positive: bool)",
-      "!doc": "<p>Send an ANCS action for a specific Notification UID. Corresponds to posaction/negaction in the &#39;ANCS&#39; event that was received</p>\n",
-      "!url": "http://www.espruino.com/Reference#l_NRF_sendANCSAction"
-    },
-    "setWhitelist": {
-      "!type": "fn(whitelisting: bool)",
-      "!doc": "<p>If set to true, whenever a device bonds it will be added to the\nwhitelist.</p>\n<p>When set to false, the whitelist is cleared and newly bonded\ndevices will not be added to the whitelist.</p>\n<p><strong>Note:</strong> This is remembered between <code>reset()</code>s but isn&#39;t\nremembered after power-on (you&#39;ll have to add it to <code>onInit()</code>.</p>\n",
-      "!url": "http://www.espruino.com/Reference#l_NRF_setWhitelist"
-    },
-    "setConnectionInterval": {
-      "!type": "fn(interval: ?)",
-      "!doc": "<p>When connected, Bluetooth LE devices communicate at a set interval.\nLowering the interval (eg. more packets/second) means a lower delay when\nsending data, higher bandwidth, but also more power consumption.</p>\n<p>By default, when connected as a peripheral Espruino automatically adjusts the\nconnection interval. When connected it&#39;s as fast as possible (7.5ms) but when idle\nfor over a minute it drops to 200ms. On continued activity (&gt;1 BLE operation) the\ninterval is raised to 7.5ms again.</p>\n<p>The options for <code>interval</code> are:</p>\n<ul>\n<li><code>undefined</code> / <code>&quot;auto&quot;</code> : (default) automatically adjust connection interval</li>\n<li><code>100</code> : set min and max connection interval to the same number (between 7.5ms and 4000ms)</li>\n<li><code>{minInterval:20, maxInterval:100}</code> : set min and max connection interval as a range</li>\n</ul>\n<p>This configuration is not remembered during a <code>save()</code> - you will have to\nre-set it via <code>onInit</code>.</p>\n<p><strong>Note:</strong> If connecting to another device (as Central), you can use\nan extra argument to <code>NRF.connect</code> or <code>BluetoothRemoteGATTServer.connect</code>\nto specify a connection interval.</p>\n<p><strong>Note:</strong> This overwrites any changes imposed by the deprecated <code>NRF.setLowPowerConnection</code></p>\n",
-      "!url": "http://www.espruino.com/Reference#l_NRF_setConnectionInterval"
-    }
-  },
-  "Bluetooth": {
-    "!type": "+Serial",
-    "!doc": "<p>The Bluetooth Serial port - used when data is sent or received over Bluetooth Smart on nRF51/nRF52 chips.</p>\n",
-    "!url": "http://www.espruino.com/Reference#l__global_Bluetooth"
   },
   "BluetoothRemoteGATTServer": {
     "!type": "fn()",
@@ -2822,11 +2862,6 @@
     "!type": "fn()",
     "!doc": "<p>Class containing utility functions for the <a href=\"http://www.espruino.com/Bangle.js\">Bangle.js Smart Watch</a></p>\n",
     "!url": "http://www.espruino.com/Reference#Bangle",
-    "setLCDPower": {
-      "!type": "fn(isOn: bool)",
-      "!doc": "<p>This function can be used to turn Bangle.js&#39;s LCD off or on.</p>\n<p><strong>When on full, the LCD draws roughly 40mA.</strong> You can adjust\nWhen brightness using <code>Bange.setLCDBrightness</code>.</p>\n",
-      "!url": "http://www.espruino.com/Reference#l_Bangle_setLCDPower"
-    },
     "setLCDBrightness": {
       "!type": "fn(brightness: number)",
       "!doc": "<p>This function can be used to adjust the brightness of Bangle.js&#39;s display, and\nhence prolong its battery life.</p>\n<p>Due to hardware design constraints, software PWM has to be used which\nmeans that the display may flicker slightly when Bluetooth is active\nand the display is not at full power.</p>\n<p><strong>Power consumption</strong></p>\n<ul>\n<li>0 = 7mA</li>\n<li>0.1 = 12mA</li>\n<li>0.2 = 18mA</li>\n<li>0.5 = 28mA</li>\n<li>0.9 = 40mA (switching overhead)</li>\n<li>1 = 40mA</li>\n</ul>\n",
@@ -2859,7 +2894,7 @@
     },
     "setOptions": {
       "!type": "fn(options: ?)",
-      "!doc": "<p>Set internal options used for gestures, etc...</p>\n<ul>\n<li><code>wakeOnBTN1</code> should the LCD turn on when BTN1 is pressed? default = <code>true</code></li>\n<li><code>wakeOnBTN2</code> should the LCD turn on when BTN2 is pressed? default = <code>true</code></li>\n<li><code>wakeOnBTN3</code> should the LCD turn on when BTN3 is pressed? default = <code>true</code></li>\n<li><code>wakeOnFaceUp</code> should the LCD turn on when the watch is turned face up? default = <code>false</code></li>\n<li><code>wakeOnTouch</code> should the LCD turn on when the touchscreen is pressed? default = <code>false</code></li>\n<li><code>wakeOnTwist</code> should the LCD turn on when the watch is twisted? default = <code>true</code></li>\n<li><code>twistThreshold</code>  How much acceleration to register a twist of the watch strap? Can be negative for oppsite direction. default = <code>800</code></li>\n<li><code>twistMaxY</code> Maximum acceleration in Y to trigger a twist (low Y means watch is facing the right way up). default = <code>-800</code></li>\n<li><code>twistTimeout</code>  How little time (in ms) must a twist take from low-&gt;high acceleration? default = <code>1000</code></li>\n<li><code>gestureStartThresh</code> how big a difference before we consider a gesture started? default = <code>sqr(800)</code></li>\n<li><code>gestureEndThresh</code> how small a difference before we consider a gesture ended? default = <code>sqr(2000)</code></li>\n<li><code>gestureInactiveCount</code> how many samples do we keep after a gesture has ended? default = <code>4</code></li>\n<li><code>gestureMinLength</code> how many samples must a gesture have before we notify about it? default = <code>10</code></li>\n<li><code>powerSave</code> after a minute of not being moved, Bangle.js will change the accelerometer poll interval down to 800ms (10x accelerometer samples).\n On movement it&#39;ll be raised to the default 80ms. If <code>Bangle.setPollInterval</code> is used this is disabled, and for it to work the poll interval\n must be either 80ms or 800ms. default = <code>true</code></li>\n<li><code>lockTimeout</code> how many milliseconds before the screen locks</li>\n<li><code>lcdPowerTimeout</code> how many milliseconds before the screen turns off</li>\n<li><code>backlightTimeout</code> how many milliseconds before the screen&#39;s backlight turns off</li>\n</ul>\n<p>Where accelerations are used they are in internal units, where <code>8192 = 1g</code></p>\n",
+      "!doc": "<p>Set internal options used for gestures, etc...</p>\n<ul>\n<li><code>wakeOnBTN1</code> should the LCD turn on when BTN1 is pressed? default = <code>true</code></li>\n<li><code>wakeOnBTN2</code> should the LCD turn on when BTN2 is pressed? default = <code>true</code></li>\n<li><code>wakeOnBTN3</code> should the LCD turn on when BTN3 is pressed? default = <code>true</code></li>\n<li><code>wakeOnFaceUp</code> should the LCD turn on when the watch is turned face up? default = <code>false</code></li>\n<li><code>wakeOnTouch</code> should the LCD turn on when the touchscreen is pressed? default = <code>false</code></li>\n<li><code>wakeOnTwist</code> should the LCD turn on when the watch is twisted? default = <code>true</code></li>\n<li><code>twistThreshold</code>  How much acceleration to register a twist of the watch strap? Can be negative for oppsite direction. default = <code>800</code></li>\n<li><code>twistMaxY</code> Maximum acceleration in Y to trigger a twist (low Y means watch is facing the right way up). default = <code>-800</code></li>\n<li><code>twistTimeout</code>  How little time (in ms) must a twist take from low-&gt;high acceleration? default = <code>1000</code></li>\n<li><code>gestureStartThresh</code> how big a difference before we consider a gesture started? default = <code>sqr(800)</code></li>\n<li><code>gestureEndThresh</code> how small a difference before we consider a gesture ended? default = <code>sqr(2000)</code></li>\n<li><code>gestureInactiveCount</code> how many samples do we keep after a gesture has ended? default = <code>4</code></li>\n<li><code>gestureMinLength</code> how many samples must a gesture have before we notify about it? default = <code>10</code></li>\n<li><code>powerSave</code> after a minute of not being moved, Bangle.js will change the accelerometer poll interval down to 800ms (10x accelerometer samples).\n On movement it&#39;ll be raised to the default 80ms. If <code>Bangle.setPollInterval</code> is used this is disabled, and for it to work the poll interval\n must be either 80ms or 800ms. default = <code>true</code></li>\n<li><code>lockTimeout</code> how many milliseconds before the screen locks</li>\n<li><code>lcdPowerTimeout</code> how many milliseconds before the screen turns off</li>\n<li><code>backlightTimeout</code> how many milliseconds before the screen&#39;s backlight turns off</li>\n<li><code>hrmPollInterval</code> set the requested poll interval for the heart rate monitor. On Bangle.js 2 (only 10,20,40,80,160,200 ms are supported, and polling rate may not be exact)</li>\n</ul>\n<p>Where accelerations are used they are in internal units, where <code>8192 = 1g</code></p>\n",
       "!url": "http://www.espruino.com/Reference#l_Bangle_setOptions"
     },
     "getOptions": {
@@ -2932,6 +2967,11 @@
       "!doc": "<p>Returns the current amount of steps recorded by the step counter</p>\n",
       "!url": "http://www.espruino.com/Reference#l_Bangle_getStepCount"
     },
+    "setStepCount": {
+      "!type": "fn(count: number)",
+      "!doc": "<p>Sets the current value of the step counter</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_Bangle_setStepCount"
+    },
     "getCompass": {
       "!type": "fn() -> ?",
       "!doc": "<p>Get the most recent Magnetometer/Compass reading. Data is in the same format as the <code>Bangle.on(&#39;mag&#39;,</code> event.</p>\n<p>Returns an <code>{x,y,z,dx,dy,dz,heading}</code> object</p>\n<ul>\n<li><code>x/y/z</code> raw x,y,z magnetometer readings</li>\n<li><code>dx/dy/dz</code> readings based on calibration since magnetometer turned on</li>\n<li><code>heading</code> in degrees based on calibrated readings (will be NaN if magnetometer hasn&#39;t been rotated around 360 degrees)</li>\n</ul>\n<p>To get this event you must turn the compass on\nwith <code>Bangle.setCompassPower(1)</code>.</p>\n",
@@ -2943,8 +2983,8 @@
       "!url": "http://www.espruino.com/Reference#l_Bangle_getAccel"
     },
     "getHealthStatus": {
-      "!type": "fn() -> ?",
-      "!doc": "<ul>\n<li><code>movement</code> is the 32 bit sum of all <code>acc.diff</code> readings since power on (and rolls over). It is the difference in accelerometer values as <code>g*8192</code></li>\n<li><code>steps</code> is the value from the step counter</li>\n<li><code>bpm</code> last BPM reading from HRM sensor</li>\n<li><code>bpmConfidence</code> last BPM confidence (0-100%)</li>\n</ul>\n",
+      "!type": "fn(range: ?) -> ?",
+      "!doc": "<p><code>range</code> is one of:</p>\n<ul>\n<li><code>undefined</code> or <code>&#39;current&#39;</code> - health data so far in the last 10 minutes is returned,</li>\n<li><code>&#39;last&#39;</code> - health data during the last 10 minutes</li>\n<li><code>&#39;day&#39;</code> - the health data so far for the day</li>\n</ul>\n<p><code>getHealthStatus</code> returns an object containing:</p>\n<ul>\n<li><code>movement</code> is the 32 bit sum of all <code>acc.diff</code> readings since power on (and rolls over). It is the difference in accelerometer values as <code>g*8192</code></li>\n<li><code>steps</code> is the number of steps during this period</li>\n<li><code>bpm</code> the best BPM reading from HRM sensor during this period</li>\n<li><code>bpmConfidence</code> best BPM confidence (0-100%) during this period</li>\n</ul>\n",
       "!url": "http://www.espruino.com/Reference#l_Bangle_getHealthStatus"
     },
     "F_BEEPSET": {
@@ -2981,6 +3021,21 @@
       "!type": "fn(reg: number, data: number)",
       "!doc": "<p>Writes a register on the Magnetometer/Compass</p>\n",
       "!url": "http://www.espruino.com/Reference#l_Bangle_compassWr"
+    },
+    "compassRd": {
+      "!type": "fn(reg: number, cnt: number) -> ?",
+      "!doc": "<p>Read a register on the Magnetometer/Compass</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_Bangle_compassRd"
+    },
+    "hrmWr": {
+      "!type": "fn(reg: number, data: number)",
+      "!doc": "<p>Writes a register on the Heart rate monitor</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_Bangle_hrmWr"
+    },
+    "hrmRd": {
+      "!type": "fn(reg: number, cnt: number) -> ?",
+      "!doc": "<p>Read a register on the Heart rate monitor</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_Bangle_hrmRd"
     },
     "ioWr": {
       "!type": "fn(mask: number, isOn: number)",
@@ -3041,6 +3096,11 @@
       "!type": "fn()",
       "!doc": "<p>Erase all storage and reload it with the default\ncontents.</p>\n<p>This is only available on Bangle.js 2.0. On Bangle.js 1.0\nyou need to use <code>Install Default Apps</code> under the About page\nof <a href=\"http://banglejs.com/apps\">http://banglejs.com/apps</a></p>\n",
       "!url": "http://www.espruino.com/Reference#l_Bangle_factoryReset"
+    },
+    "appRect": {
+      "!type": "?",
+      "!doc": "<p>Returns the rectangle on the screen that is currently\nreserved for the app.</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_Bangle_appRect"
     }
   },
   "Microbit": {
@@ -3220,6 +3280,16 @@
     "!doc": "<p>This class provides Graphics operations that can be applied to a surface.</p>\n<p>Use Graphics.createXXX to create a graphics object that renders in the way you want. See <a href=\"https://www.espruino.com/Graphics\">the Graphics page</a> for more information.</p>\n<p><strong>Note:</strong> On boards that contain an LCD, there is a built-in &#39;LCD&#39; object of type Graphics. For instance to draw a line you&#39;d type: <code>LCD.drawLine(0,0,100,100)</code></p>\n",
     "!url": "http://www.espruino.com/Reference#Graphics",
     "prototype": {
+      "setFont12x20": {
+        "!type": "fn(scale: number) -> +Graphics",
+        "!doc": "<p>Set the current font</p>\n",
+        "!url": "http://www.espruino.com/Reference#l_Graphics_setFont12x20"
+      },
+      "setFont11x20": {
+        "!type": "fn(scale: number) -> +Graphics",
+        "!doc": "<p>Set the current font</p>\n",
+        "!url": "http://www.espruino.com/Reference#l_Graphics_setFont11x20"
+      },
       "flip": {
         "!type": "fn(all: bool)",
         "!doc": "<p>On instances of graphics that drive a display with\nan offscreen buffer, calling this function will\ncopy the contents of the offscreen buffer to the\nscreen.</p>\n<p>Call this when you have drawn something to Graphics\nand you want it shown on the screen.</p>\n<p>If a display does not have an offscreen buffer,\nit may not have a <code>g.flip()</code> method.</p>\n<p>On Bangle.js 1, there are different graphics modes\nchosen with <code>Bangle.setLCDMode()</code>. The default mode\nis unbuffered and in this mode <code>g.flip()</code> does not\naffect the screen contents.</p>\n<p>On some devices, this command will attempt to\nonly update the areas of the screen that have\nchanged in order to increase speed. If you have\naccessed the <code>Graphics.buffer</code> directly then you\nmay need to use <code>Graphics.flip(true)</code> to force\na full update of the screen.</p>\n",
@@ -3237,7 +3307,7 @@
       },
       "getBPP": {
         "!type": "fn() -> number",
-        "!doc": "<p>The number of bits per pixel of this Graphics instance</p>\n",
+        "!doc": "<p>The number of bits per pixel of this Graphics instance</p>\n<p><strong>Note:</strong> Bangle.js 2 behaves a little differently here. The display\nis 3 bit, so <code>getBPP</code> returns 3 and <code>asBMP</code>/<code>asImage</code>/etc return 3 bit images.\nHowever in order to allow dithering, the colors returned by <code>Graphics.getColor</code> and <code>Graphics.theme</code>\nare actually 16 bits.</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Graphics_getBPP"
       },
       "reset": {
@@ -3251,17 +3321,17 @@
         "!url": "http://www.espruino.com/Reference#l_Graphics_clear"
       },
       "fillRect": {
-        "!type": "fn(x1: number, y1: number, x2: number, y2: number) -> +Graphics",
+        "!type": "fn(x1: ?, y1: number, x2: number, y2: number) -> +Graphics",
         "!doc": "<p>Fill a rectangular area in the Foreground Color</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Graphics_fillRect"
       },
       "clearRect": {
-        "!type": "fn(x1: number, y1: number, x2: number, y2: number) -> +Graphics",
+        "!type": "fn(x1: ?, y1: number, x2: number, y2: number) -> +Graphics",
         "!doc": "<p>Fill a rectangular area in the Background Color</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Graphics_clearRect"
       },
       "drawRect": {
-        "!type": "fn(x1: number, y1: number, x2: number, y2: number) -> +Graphics",
+        "!type": "fn(x1: ?, y1: number, x2: number, y2: number) -> +Graphics",
         "!doc": "<p>Draw an unfilled rectangle 1px wide in the Foreground Color</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Graphics_drawRect"
       },
@@ -3337,7 +3407,7 @@
       },
       "setFontCustom": {
         "!type": "fn(bitmap: ?, firstChar: number, width: ?, height: number) -> +Graphics",
-        "!doc": "<p>Make subsequent calls to <code>drawString</code> use a Custom Font of the given height. See the <a href=\"http://www.espruino.com/Fonts\">Fonts page</a> for more\ninformation about custom fonts and how to create them.</p>\n",
+        "!doc": "<p>Make subsequent calls to <code>drawString</code> use a Custom Font of the given height. See the <a href=\"http://www.espruino.com/Fonts\">Fonts page</a> for more\ninformation about custom fonts and how to create them.</p>\n<p>For examples of use, see the <a href=\"https://www.espruino.com/Fonts#font-modules\">font modules</a>.</p>\n<p><strong>Note:</strong> while you can specify the character code of the first character with <code>firstChar</code>,\nthe newline character 13 will always be treated as a newline and not rendered.</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Graphics_setFontCustom"
       },
       "setFontAlign": {
@@ -3365,15 +3435,15 @@
         "!doc": "<p>Return the height in pixels of the current font</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Graphics_getFontHeight"
       },
-      "drawString": {
-        "!type": "fn(str: ?, x: number, y: number, solid: bool) -> +Graphics",
-        "!doc": "<p>Draw a string of text in the current font</p>\n",
-        "!url": "http://www.espruino.com/Reference#l_Graphics_drawString"
-      },
       "stringWidth": {
         "!type": "fn(str: ?) -> number",
         "!doc": "<p>Return the size in pixels of a string of text in the current font</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Graphics_stringWidth"
+      },
+      "stringMetrics": {
+        "!type": "fn(str: ?) -> ?",
+        "!doc": "<p>Return the width and height in pixels of a string of text in the current font</p>\n",
+        "!url": "http://www.espruino.com/Reference#l_Graphics_stringMetrics"
       },
       "drawLine": {
         "!type": "fn(x1: number, y1: number, x2: number, y2: number) -> +Graphics",
@@ -3410,6 +3480,11 @@
         "!doc": "<p>Set the current rotation of the graphics device.</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Graphics_setRotation"
       },
+      "imageMetrics": {
+        "!type": "fn(str: ?) -> ?",
+        "!doc": "<p>Return the width and height in pixels of an image (either Graphics, Image Object, Image String or ArrayBuffer). Returns\n<code>undefined</code> if image couldn&#39;t be decoded.</p>\n<p><code>frames</code> is also included is the image contains more information than you&#39;d expect for a single bitmap. In\nthis case the bitmap might be an animation with multiple frames</p>\n",
+        "!url": "http://www.espruino.com/Reference#l_Graphics_imageMetrics"
+      },
       "asImage": {
         "!type": "fn(type: ?) -> ?",
         "!doc": "<p>Return this Graphics object as an Image that can be used with <code>Graphics.drawImage</code>.\nCheck out <a href=\"http://www.espruino.com/Graphics#images-bitmaps\">the Graphics reference page</a>\nfor more information on images.</p>\n<p>Will return undefined if data can&#39;t be allocated for the image.</p>\n<p>The image data itself will be referenced rather than copied if:</p>\n<ul>\n<li>An image <code>object</code> was requested (not <code>string</code>)</li>\n<li>The Graphics instance was created with <code>Graphics.createArrayBuffer</code></li>\n<li>Is 8 bpp <em>OR</em> the <code>{msb:true}</code> option was given</li>\n<li>No other format options (zigzag/etc) were given</li>\n</ul>\n<p>Otherwise data will be copied, which takes up more space and\nmay be quite slow.</p>\n",
@@ -3444,6 +3519,16 @@
         "!type": "fn(arr: ?, options: ?) -> ?",
         "!doc": "<p>Calculate the square area under a Bezier curve.</p>\n<p> x0,y0: start point\n x1,y1: control point\n y2,y2: end point</p>\n<p> Max 10 points without start point.</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Graphics_quadraticBezier"
+      },
+      "setFont12x26": {
+        "!type": "fn(scale: number) -> +Graphics",
+        "!doc": "<p>Set the current font</p>\n",
+        "!url": "http://www.espruino.com/Reference#l_Graphics_setFont12x26"
+      },
+      "setFont9x18": {
+        "!type": "fn(scale: number) -> +Graphics",
+        "!doc": "<p>Set the current font</p>\n",
+        "!url": "http://www.espruino.com/Reference#l_Graphics_setFont9x18"
       },
       "setFont6x15": {
         "!type": "fn(scale: number) -> +Graphics",
