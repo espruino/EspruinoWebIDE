@@ -494,9 +494,6 @@ Blockly.JavaScript.espruino_timeout = function() {
 Blockly.JavaScript.espruino_getTime = function() {
   return ["getTime()\n", Blockly.JavaScript.ORDER_ATOMIC];
 };
-Blockly.JavaScript.espruino_getDate = function() {
-  return ["date.getDate()\n", Blockly.JavaScript.ORDER_ATOMIC];
-};
 Blockly.JavaScript.espruino_interval = function() {
   var seconds = Blockly.JavaScript.valueToCode(this, 'SECONDS',
       Blockly.JavaScript.ORDER_ASSIGNMENT) || '1';
