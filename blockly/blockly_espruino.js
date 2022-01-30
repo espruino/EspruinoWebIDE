@@ -19,6 +19,19 @@ var blocklyInitialBlocks = document.getElementById('blocklyInitial');
 /* Include this and the next blocks will magically appear inside the function */
 var MAGIC_CALLBACK_CODE = "function(){NEXT_BLOCKS}";
 
+var DATETIME_TYPES = [
+  ["Second","Seconds"],
+  ["Minute","Minutes"],
+  ["Hour","Hours"],
+  ["Day","Day"],
+  ["Month","Month"],
+  ["Year","FullYear"],
+  ["Date","Date"],
+  ["Time","Time"],
+  ["Millisecond","Milliseconds"],
+  ["Time Zone Offset","TimezoneOffset"]
+];
+
 // --------------------------------- Blockly init code
 window.onload = function() {
   var path = window.location.search;
@@ -398,6 +411,17 @@ Blockly.Blocks.espruino_code = {
       }
     };
 // -----------------------------------------------------------------------------------
+Blockly.Blocks.get_datetime = {
+  category: 'Espruino',
+  init: function() {
+    this.appendDummyInput().appendField('Get Current ').appendField(new Blockly.FieldDropdown(DATETIME_TYPES), 'DTTYPE');
+  }
+};
+Blockly.JavaScript.get_datetime = function() {
+  var dttype = this.getFieldValue('DTTYPE');
+  return [`Date.get${dttype}();\n`, Blockly.JavaScript.ORDER_ATOMIC];
+};
+// ----------------------------------------------------------
 Blockly.Blocks.hw_servoMove = {
   category: 'Espruino',
   init: function() {
@@ -469,6 +493,9 @@ Blockly.JavaScript.espruino_timeout = function() {
 };
 Blockly.JavaScript.espruino_getTime = function() {
   return ["getTime()\n", Blockly.JavaScript.ORDER_ATOMIC];
+};
+Blockly.JavaScript.espruino_getDate = function() {
+  return ["date.getDate()\n", Blockly.JavaScript.ORDER_ATOMIC];
 };
 Blockly.JavaScript.espruino_interval = function() {
   var seconds = Blockly.JavaScript.valueToCode(this, 'SECONDS',
