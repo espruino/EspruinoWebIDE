@@ -39,6 +39,18 @@ Blockly.JavaScript.gfx_clear = function() {
   return `g.clear();\n`;
 };
 // ----------------------------------------------------------
+Blockly.Blocks.gfx_reset = {
+  category: 'Graphics',
+  init: function() {
+    this.appendDummyInput()
+        .appendField('Reset draw settings');
+    gfxStatement(this, 'Reset the graphics context (color/font/etc)');
+  }
+};
+Blockly.JavaScript.gfx_reset = function() {
+  return `g.reset();\n`;
+};
+// ----------------------------------------------------------
 Blockly.Blocks.gfx_flip = {
   category: 'Graphics',
   init: function() {
