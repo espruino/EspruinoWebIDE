@@ -3,8 +3,8 @@ Espruino Web IDE  [![Join the chat at https://gitter.im/espruino/Espruino](https
 
 A VT100 Serial Terminal as a Chrome Web App (with both syntax highlighted and graphical editors) - designed for writing code on microcontrollers that use the [Espruino JavaScript interpreter](http://www.espruino.com). It can also run natively via [Node.js](https://nodejs.org/en/) and [Electron](http://electron.atom.io/), or a version with limited IO can be used [as a website](https://espruino.github.io/EspruinoWebIDE/).
 
-[![ScreenShot](https://raw.github.com/espruino/EspruinoWebIDE/gh-pages/extras/screenshot.png)](http://youtu.be/Fjju_QhzL-c)
-[![ScreenShot](https://raw.github.com/espruino/EspruinoWebIDE/gh-pages/extras/screenshot2.png)](http://youtu.be/Fjju_QhzL-c)
+[![ScreenShot](extras/screenshot.png)](http://youtu.be/Fjju_QhzL-c)
+[![ScreenShot](extras/screenshot2.png)](http://youtu.be/Fjju_QhzL-c)
 
 This is a Chrome Web App ([mainly](#full-web-version)) that uses [chome.serial](https://developer.chrome.com/apps/serial) to access your PC's serial port. You can download it from the Chrome Web Store: https://chrome.google.com/webstore/detail/espruino-serial-terminal/bleoifhkdalbjfbobjackfdifdneehpo
 
