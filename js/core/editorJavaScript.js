@@ -200,6 +200,8 @@
 
   function loadThemeCSS(selectedTheme) {
     var codeMirrorMainCSS = document.querySelector('link[href$="codemirror.css"]');
+    if (codeMirrorMainCSS===null) // for when serving up file-compacted IDE
+      codeMirrorMainCSS = document.querySelector('link[href="index.css"]');
     var codeMirrorThemeCSS = document.querySelector('link[href^="js/libs/codemirror/theme/"]');
 
     // default theme css lives in main css and doesn't need an extra sheet loaded
