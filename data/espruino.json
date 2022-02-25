@@ -2029,6 +2029,11 @@
       "!doc": "<p>Send a USB HID report. HID must first be enabled with <code>NRF.setServices({}, {hid: hid_report})</code></p>\n",
       "!url": "http://www.espruino.com/Reference#l_NRF_sendHIDReport"
     },
+    "ancsIsActive": {
+      "!type": "fn() -> bool",
+      "!doc": "<p>Check if Apple Notification Center Service (ANCS) is currently active on the BLE connection</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_NRF_ancsIsActive"
+    },
     "ancsAction": {
       "!type": "fn(uid: number, positive: bool)",
       "!doc": "<p>Send an ANCS action for a specific Notification UID. Corresponds to posaction/negaction in the &#39;ANCS&#39; event that was received</p>\n",
@@ -2039,10 +2044,20 @@
       "!doc": "<p>Get ANCS info for a notification, eg:</p>\n",
       "!url": "http://www.espruino.com/Reference#l_NRF_ancsGetNotificationInfo"
     },
-    "amsGetMusicInfo": {
+    "amsIsActive": {
+      "!type": "fn() -> bool",
+      "!doc": "<p>Check if Apple Media Service (AMS) is currently active on the BLE connection</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_NRF_amsIsActive"
+    },
+    "amsGetPlayerInfo": {
       "!type": "fn(id: ?) -> +Promise",
-      "!doc": "<p>Get ANCS info for an app (add id is available via <code>ancsGetNotificationInfo</code>)</p>\n",
-      "!url": "http://www.espruino.com/Reference#l_NRF_amsGetMusicInfo"
+      "!doc": "<p>Get Apple Media Service (AMS) info for the current media player.\n&quot;playbackinfo&quot; returns a concatenation of three comma-separated values:</p>\n<ul>\n<li>PlaybackState: a string that represents the integer value of the playback state:<ul>\n<li>PlaybackStatePaused = 0</li>\n<li>PlaybackStatePlaying = 1</li>\n<li>PlaybackStateRewinding = 2</li>\n<li>PlaybackStateFastForwarding = 3</li>\n</ul>\n</li>\n<li>PlaybackRate: a string that represents the floating point value of the playback rate.</li>\n<li>ElapsedTime: a string that represents the floating point value of the elapsed time of the current track, in seconds</li>\n</ul>\n",
+      "!url": "http://www.espruino.com/Reference#l_NRF_amsGetPlayerInfo"
+    },
+    "amsGetTrackInfo": {
+      "!type": "fn(id: ?) -> +Promise",
+      "!doc": "<p>Get Apple Media Service (AMS) info for the currently-playing track</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_NRF_amsGetTrackInfo"
     },
     "amsCommand": {
       "!type": "fn(id: ?)",
@@ -2058,6 +2073,11 @@
       "!type": "fn(interval: ?)",
       "!doc": "<p>When connected, Bluetooth LE devices communicate at a set interval.\nLowering the interval (eg. more packets/second) means a lower delay when\nsending data, higher bandwidth, but also more power consumption.</p>\n<p>By default, when connected as a peripheral Espruino automatically adjusts the\nconnection interval. When connected it&#39;s as fast as possible (7.5ms) but when idle\nfor over a minute it drops to 200ms. On continued activity (&gt;1 BLE operation) the\ninterval is raised to 7.5ms again.</p>\n<p>The options for <code>interval</code> are:</p>\n<ul>\n<li><code>undefined</code> / <code>&quot;auto&quot;</code> : (default) automatically adjust connection interval</li>\n<li><code>100</code> : set min and max connection interval to the same number (between 7.5ms and 4000ms)</li>\n<li><code>{minInterval:20, maxInterval:100}</code> : set min and max connection interval as a range</li>\n</ul>\n<p>This configuration is not remembered during a <code>save()</code> - you will have to\nre-set it via <code>onInit</code>.</p>\n<p><strong>Note:</strong> If connecting to another device (as Central), you can use\nan extra argument to <code>NRF.connect</code> or <code>BluetoothRemoteGATTServer.connect</code>\nto specify a connection interval.</p>\n<p><strong>Note:</strong> This overwrites any changes imposed by the deprecated <code>NRF.setLowPowerConnection</code></p>\n",
       "!url": "http://www.espruino.com/Reference#l_NRF_setConnectionInterval"
+    },
+    "startBonding": {
+      "!type": "fn(forceRepair: bool) -> ?",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_NRF_startBonding"
     }
   },
   "Bluetooth": {
@@ -2899,7 +2919,7 @@
     },
     "getOptions": {
       "!type": "fn() -> ?",
-      "!doc": "<p>Return the current state of options as set by <code>Bangle.getOptions</code></p>\n",
+      "!doc": "<p>Return the current state of options as set by <code>Bangle.setOptions</code></p>\n",
       "!url": "http://www.espruino.com/Reference#l_Bangle_getOptions"
     },
     "isLCDOn": {
@@ -2954,7 +2974,7 @@
     },
     "setBarometerPower": {
       "!type": "fn(isOn: bool, appID: ?) -> bool",
-      "!doc": "<p>Set the power to the barometer IC</p>\n<p>When on, the barometer draws roughly 50uA</p>\n",
+      "!doc": "<p>Set the power to the barometer IC. Once enbled, <code>Bangle.pressure</code> events\nare fired each time a new barometer reading is available.</p>\n<p>When on, the barometer draws roughly 50uA</p>\n",
       "!url": "http://www.espruino.com/Reference#l_Bangle_setBarometerPower"
     },
     "isBarometerOn": {
@@ -3094,7 +3114,7 @@
     },
     "factoryReset": {
       "!type": "fn()",
-      "!doc": "<p>Erase all storage and reload it with the default\ncontents.</p>\n<p>This is only available on Bangle.js 2.0. On Bangle.js 1.0\nyou need to use <code>Install Default Apps</code> under the About page\nof <a href=\"http://banglejs.com/apps\">http://banglejs.com/apps</a></p>\n",
+      "!doc": "<p>Erase all storage and reload it with the default\ncontents.</p>\n<p>This is only available on Bangle.js 2.0. On Bangle.js 1.0\nyou need to use <code>Install Default Apps</code> under the <code>More...</code> tab\nof <a href=\"http://banglejs.com/apps\">http://banglejs.com/apps</a></p>\n",
       "!url": "http://www.espruino.com/Reference#l_Bangle_factoryReset"
     },
     "appRect": {
@@ -3467,12 +3487,12 @@
       },
       "drawPoly": {
         "!type": "fn(poly: ?, closed: bool) -> +Graphics",
-        "!doc": "<p>Draw a polyline (lines between each of the points in <code>poly</code>) in the current foreground color</p>\n",
+        "!doc": "<p>Draw a polyline (lines between each of the points in <code>poly</code>) in the current foreground color</p>\n<p><strong>Note:</strong> there is a limit of 64 points (128 XY elements) for polygons</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Graphics_drawPoly"
       },
       "drawPolyAA": {
         "!type": "fn(poly: ?, closed: bool) -> +Graphics",
-        "!doc": "<p>Draw an <strong>antialiased</strong> polyline (lines between each of the points in <code>poly</code>) in the current foreground color</p>\n",
+        "!doc": "<p>Draw an <strong>antialiased</strong> polyline (lines between each of the points in <code>poly</code>) in the current foreground color</p>\n<p><strong>Note:</strong> there is a limit of 64 points (128 XY elements) for polygons</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Graphics_drawPolyAA"
       },
       "setRotation": {
@@ -3512,7 +3532,7 @@
       },
       "dump": {
         "!type": "fn()",
-        "!doc": "<p>Output this image as a bitmap URL. The Espruino Web IDE can detect the data on the console and render the image inline automatically.</p>\n<p>This is identical to <code>console.log(g.asURL())</code> - it is just a convenient function for easy debugging.</p>\n",
+        "!doc": "<p>Output this image as a bitmap URL of the form <code>data:image/bmp;base64,...</code>. The Espruino Web IDE will detect this on the console and will render the image inline automatically.</p>\n<p>This is identical to <code>console.log(g.asURL())</code> - it is just a convenient function for easy debugging and producing screenshots of what is currently in the Graphics instance.</p>\n<p><strong>Note:</strong> This may not work on some bit depths of Graphics instances. It will also not work for the main Graphics instance\nof Bangle.js 1 as the graphics on Bangle.js 1 are stored in write-only memory.</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Graphics_dump"
       },
       "quadraticBezier": {
