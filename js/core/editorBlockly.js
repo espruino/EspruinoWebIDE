@@ -62,7 +62,6 @@
       type : { "multi_select":true,
        "bluetooth":"Bluetooth LE (Puck.js)",
        "robot":"Espruino Pico Robot",
-       "motorshield":"Amperka Motor shield",
        "nordic_thingy":"Nordic Thingy:52",
        "smartibot":"Smartibot"
       },

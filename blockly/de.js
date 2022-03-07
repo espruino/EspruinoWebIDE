@@ -479,11 +479,4 @@ if (window.location.href.indexOf("lang=de")>=0) {
   /** @export */ Blockly.Msg.ESPRUINO_ULTRASONIC_ECHO = ', echo';
   /** @export */ Blockly.Msg.ESPRUINO_ULTRASONIC_TOOLTIP = 'Liefere die Entfernung in Zentimeter von dem Ultraschallsensor';
 
-  /** @export */ Blockly.Msg.AMPERKA_MOTORSHIELD_RIGHT = 'Rechts(M2)';
-  /** @export */ Blockly.Msg.AMPERKA_MOTORSHIELD_LEFT = 'Links(M1)';
-  /** @export */ Blockly.Msg.AMPERKA_MOTORSHIELD_SET = 'Setze';
-  /** @export */ Blockly.Msg.AMPERKA_MOTORSHIELD_SPEED = 'Motor Geschwindigkeit';
-  /** @export */ Blockly.Msg.AMPERKA_MOTORSHIELD_SPEED_TOOLTIP = 'Ändere die Geschwindigkeit des motors (Werte von 0.0 bis 1.0)';
-  /** @export */ Blockly.Msg.AMPERKA_MOTORSHIELD_DIRECTION = 'Motor Richtung';
-  /** @export */ Blockly.Msg.AMPERKA_MOTORSHIELD_DIRECTION_TOOLTIP =  'Wechsle die Richtung vom Motor (wahr/falsch)';
 }

@@ -473,12 +473,4 @@ if (window.location.href.indexOf("lang=ru")>=0) {
   /** @export */ Blockly.Msg.ESPRUINO_ULTRASONIC_ECHO = ', echo (приемник)';
   /** @export */ Blockly.Msg.ESPRUINO_ULTRASONIC_TOOLTIP = 'Выяснить расстояние в сантиметрах от ультразвукового датчика';
 
-  /** @export */ Blockly.Msg.AMPERKA_MOTORSHIELD_RIGHT = 'Правый(M2)';
-  /** @export */ Blockly.Msg.AMPERKA_MOTORSHIELD_LEFT = 'Левый(M1)';
-  /** @export */ Blockly.Msg.AMPERKA_MOTORSHIELD_SET = 'Установить';
-  /** @export */ Blockly.Msg.AMPERKA_MOTORSHIELD_SPEED = 'Скорость мотора';
-  /** @export */ Blockly.Msg.AMPERKA_MOTORSHIELD_SPEED_TOOLTIP = 'Устанавливает скорость мотора (значения от 0.0 до 1.0)';
-  /** @export */ Blockly.Msg.AMPERKA_MOTORSHIELD_DIRECTION = 'Направление вращения';
-  /** @export */ Blockly.Msg.AMPERKA_MOTORSHIELD_DIRECTION_TOOLTIP =  'Устанавливает направление вращения мотора (true-истина/false-ложь)';
-
 }
