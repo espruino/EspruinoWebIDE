@@ -77,7 +77,10 @@
   }
 
   function isInBlockly() { // TODO: we should really enumerate views - we might want another view?
-    return $("#divblockly").is(":visible");
+    //return $("#divblockly").is(":visible");
+    // jQuery caused a (handled) exception when doing the above - but it still wasn't great
+    var elem = document.getElementById("divblockly");
+    return !!( elem.offsetWidth || elem.offsetHeight || elem.getClientRects().length )
   };
 
   function switchToBlockly() {
