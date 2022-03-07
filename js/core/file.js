@@ -159,7 +159,7 @@
         currentFile.handle = fileHandle;
         readFileContents(currentFile);
       });
-    } else if (chrome.fileSystem) {
+    } else if (("undefined"!=typeof chrome) && chrome.fileSystem) {
       // Chrome Web App / NW.js
       chrome.fileSystem.chooseEntry({type: 'openFile', suggestedName:currentFile.name}, function(fileEntry) {
         if (!fileEntry) return;
