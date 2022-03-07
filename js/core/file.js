@@ -20,11 +20,13 @@
 
   var currentJSFile = {
     name:"code.js",
+    description:"JavaScript files",
     mimeTypes : MIMETYPE_JS,
     // also setValue, getValue, handle, lastModified
   };
   var currentXMLFile = {
     name:"code_blocks.xml",
+    description:"Blockly XML files",
     mimeTypes : MIMETYPE_XML,
   };
   var currentFiles = [currentJSFile, currentXMLFile];
@@ -150,7 +152,7 @@
     currentFile.handle = undefined;
 
     if (typeof window.showOpenFilePicker === 'function') {
-      window.showOpenFilePicker({types: [{accept: currentFile.mimeTypes}]}).
+      window.showOpenFilePicker({types: [{description:currentFile.description, accept: currentFile.mimeTypes}]}).
       then(function(fileHandles) {
         var fileHandle = fileHandles[0];
         if (fileHandle.name) {
