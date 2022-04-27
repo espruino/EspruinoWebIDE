@@ -273,6 +273,13 @@
       } else {
         html = '<div style="overflow:auto;font-family: monospace;">'+
           Espruino.Core.Utils.escapeHTML(decodeHexDump(contents)).replace(/\n/g,"<br>")+'</div>';
+        if (fileName.startsWith(".boot") || fileName.endsWith(".js") ||
+            Espruino.Plugins.Pretokenise.isTokenised(contents)) {
+          buttons.push({ name:"Decode JS", callback : function() {
+            popup.close();
+            showViewFileDialog(fileName, Espruino.Plugins.Pretokenise.untokenise(contents));
+          }});
+        }
       }
     }
     buttons.push({ name:"Save", callback : function() {

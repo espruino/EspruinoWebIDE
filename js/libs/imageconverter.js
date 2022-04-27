@@ -446,8 +446,8 @@
     }
     writeImage(pixels);
 
-    var strCmd;
-    if ((options.output=="string") || (options.output=="raw")) {
+    var strPrefix,strPostfix;
+    if ((options.output=="string") || (options.output=="gfxstring") || (options.output=="raw")) {
       var transparent = transparentCol!==undefined;
       var header = [];
       header.push(options.width);
@@ -468,9 +468,11 @@
     }
     if (options.compression) {
       bitData = heatshrink.compress(bitData);
-      strCmd = 'require("heatshrink").decompress';
+      strPrefix = 'require("heatshrink").decompress(';
+      strPostfix = ')';
     } else {
-      strCmd = 'E.toArrayBuffer';
+      strPrefix = '';
+      strPostfix = '';
     }
     var str = "";
     for (n=0; n<bitData.length; n++)
@@ -483,10 +485,12 @@
       imgstr += "  width : "+options.width+", height : "+options.height+", bpp : "+bpp+",\n";
       if (transparentCol!==undefined) imgstr += "  transparent : "+transparentCol+",\n";
       if (palette!==undefined) imgstr += "  palette : new Uint16Array(["+palette.rgb565.toString()+"]),\n";
-      imgstr += '  buffer : '+strCmd+'(atob("'+btoa(str)+'"))\n';
+      imgstr += '  buffer : '+strPrefix+'(atob("'+btoa(str)+'")'+strPostfix+'\n';
       imgstr += "}";
     } else if (options.output=="string") {
-      imgstr = strCmd+'(atob("'+btoa(str)+'"))';
+      imgstr = strPrefix+'atob("'+btoa(str)+'")'+strPostfix;
+    } else if (options.output=="gfxstring") {
+      imgstr = strPrefix+'atob("'+btoa("\0"+str)+'")'+strPostfix;
     } else {
       throw new Error("Unknown output style");
     }
@@ -640,7 +644,12 @@
       brightness : "int", // 0 default +/- 127
       contrast : "int", // 0 default, +/- 255
       mode : Object.keys(FORMATS),
-      output : ["object","string","raw"],
+      output : {
+        "string" : { title : "Image String", userFacing : true, default : true},
+        "gfxstring" : { title : "Image as Text (for drawString)", userFacing : true},
+        "object" : { title : "Image Object", userFacing : true},
+        "raw" : { title : "Raw data", userFacing : false}
+      },
       inverted : "bool",
       alphaToColor : "bool",
       autoCrop : "bool", // whether to crop the image's borders or not
@@ -719,6 +728,11 @@
     div.innerHTML = Object.keys(DIFFUSION_TYPES).map(id => `<option value="${id}">${DIFFUSION_TYPES[id]}</option>`).join("\n");
   }
 
+  function setOutputOptions(div) {
+    var outputStyles = getOptions().output;
+    div.innerHTML = Object.keys(outputStyles).filter(id=>outputStyles[id].userFacing).map(id => `<option value="${id}"${outputStyles[id].default?" selected":""}>${outputStyles[id].title}</option>`).join("\n");
+  }
+
   // =======================================================
   return {
     RGBAtoString : RGBAtoString,
@@ -729,6 +743,7 @@
     getFormats : function() { return FORMATS; },
     setFormatOptions : setFormatOptions,
     setDiffusionOptions : setDiffusionOptions,
+    setOutputOptions : setOutputOptions,
 
     stringToImageHTML : stringToImageHTML,
     stringToImageURL : stringToImageURL
