@@ -58,7 +58,7 @@
         console.log("Key Shortcut "+key+" => "+actionName);
         action(actionName);
       }
-    });
+    }, { capture : true }); // capture:true makes sure we get called first
   }
 
   function action(name, getDescription) {
