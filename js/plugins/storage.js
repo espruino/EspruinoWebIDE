@@ -113,7 +113,8 @@
   function showUploadFileDialog() {
     Espruino.Core.Utils.fileOpenDialog({
         id:"storage",
-        type:"text"
+        type:"text",
+        multi:true
         // mineType : anything
       },function(contents, mimeType, fileName) {
       var contentsToUpload = contents;
@@ -323,7 +324,7 @@
     });
     getFileList(function(fileList) {
       var items = [{
-        title: "Upload a file",
+        title: "Upload files",
         icon : "icon-folder-open",
         callback : function() {
           popup.close();
