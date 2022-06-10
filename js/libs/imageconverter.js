@@ -485,7 +485,7 @@
       imgstr += "  width : "+options.width+", height : "+options.height+", bpp : "+bpp+",\n";
       if (transparentCol!==undefined) imgstr += "  transparent : "+transparentCol+",\n";
       if (palette!==undefined) imgstr += "  palette : new Uint16Array(["+palette.rgb565.toString()+"]),\n";
-      imgstr += '  buffer : '+strPrefix+'(atob("'+btoa(str)+'")'+strPostfix+'\n';
+      imgstr += '  buffer : '+strPrefix+'atob("'+btoa(str)+'")'+strPostfix+'\n';
       imgstr += "}";
     } else if (options.output=="string") {
       imgstr = strPrefix+'atob("'+btoa(str)+'")'+strPostfix;
