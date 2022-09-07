@@ -558,6 +558,11 @@
     //console.log("All Colors",pixelCols.map(c=>({col:0|c, cnt:colorUses[c], score:scores[c], rgb:(FORMATS["rgb565"].toRGBA(c)&0xFFFFFF).toString(16).padStart(6,"0")})));
     // crop to how many palette items we're allowed
     pixelCols = pixelCols.slice(0,bppRange);
+
+    //if the image has fewer colors than our palette we need to fill in the remaining entries
+    while (pixelCols.length < bppRange) {
+      pixelCols.push(0); 
+    }
     // debugging...
     //console.log("Palette",pixelCols.map(c=>({col:0|c, cnt:colorUses[c], score:scores[c], rgb:(FORMATS["rgb565"].toRGBA(c)&0xFFFFFF).toString(16).padStart(6,"0")})));
     // Return palettes
