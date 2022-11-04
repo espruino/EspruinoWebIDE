@@ -11,11 +11,11 @@ function jsGetGfxContents(rgba) {
     var p = Module.ccall('jsGfxGetPtr', 'number', ['number'], [y]);
     for (var x=0;x<176;x++) {
       var bit = x*3, byte = bit>>3;
-      var c = p ? (Module.HEAPU8[p+byte+1]|(Module.HEAPU8[p+byte]<<8)) : 0;
-      c = c >> (13-(bit&7));
-      rgba[i++]=(c&4)?0xFF:0;
-      rgba[i++]=(c&2)?0xFF:0;
+      var c = p ? (Module.HEAPU8[p+byte]|(Module.HEAPU8[p+byte+1]<<8)) : 0;
+      c = c >> (bit&7);
       rgba[i++]=(c&1)?0xFF:0;
+      rgba[i++]=(c&2)?0xFF:0;
+      rgba[i++]=(c&4)?0xFF:0;
       rgba[i++]=255;
     }
   }
