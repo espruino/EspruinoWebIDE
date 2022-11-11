@@ -52,10 +52,10 @@ cat EspruinoTools/plugins/assembler.js >> espruinotools.js
 cat EspruinoTools/plugins/getGitHub.js >> espruinotools.js
 #cat EspruinoTools/libs/utf8.js >> espruinotools.js
 #cat EspruinoTools/plugins/unicode.js >> espruinotools.js
-#cat EspruinoTools/libs/esprima/esprima.js >> espruinotools.js
-#cat EspruinoTools/libs/esprima/esmangle.js >> espruinotools.js
-#cat EspruinoTools/libs/esprima/escodegen.js >> espruinotools.js
-#cat EspruinoTools/plugins/minify.js >> espruinotools.js
+cat EspruinoTools/libs/esprima/esprima.js >> espruinotools.js
+cat EspruinoTools/libs/esprima/esmangle.js >> espruinotools.js
+cat EspruinoTools/libs/esprima/escodegen.js >> espruinotools.js
+cat EspruinoTools/plugins/minify.js >> espruinotools.js
 cat EspruinoTools/plugins/pretokenise.js >> espruinotools.js
 cat EspruinoTools/plugins/saveOnSend.js >> espruinotools.js
 cat EspruinoTools/plugins/setTime.js >> espruinotools.js
