@@ -22,7 +22,8 @@
     "espruino-server": "./server.js"
   },
   "scripts": {
-    "start": "nw ."
+    "start": "nw .",
+    "web": "npx serve"
   },
   "repository": {
     "type": "git",
