@@ -136,10 +136,6 @@ Use embed.js on the client side to link this in.
           if (!inited) post({type:"init"});
           inited = true;
         }, false);
-        emu.attachEvent("onload", function() {
-          if (!inited) post({type:"init"});
-          inited = true;
-        }, false);
       });
     },
     "write": function(d, callback) {
