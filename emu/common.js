@@ -32,7 +32,11 @@ function eraseAll() {
 var hwPinValue = new Uint8Array(PIN_COUNT);
 function hwSetPinValue(pin,v) { hwPinValue[pin] = v; }
 function hwGetPinValue(pin) { return hwPinValue[pin]; }
-function hwFlashWrite(addr,v) { flashMemory[addr] = v; if (addr>maxFlashMemory) maxFlashMemory=addr; }
+function hwFlashWrite(addr,v) { flashMemory[addr] = v; if (addr>maxFlashMemory) maxFlashMemory=addr; } // old, unused now
+function hwFlashWritePtr(addr,ptr,len) { 
+  flashMemory.set(new Uint8Array(HEAP8.buffer, ptr, len), addr);
+  if (addr+len>maxFlashMemory) maxFlashMemory=addr+len; 
+}
 function hwFlashRead(addr) { return flashMemory[addr]; }
 
 function jsHandleIO() {
