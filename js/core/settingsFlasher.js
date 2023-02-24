@@ -92,7 +92,7 @@
 
   function flashESP8266Firmware() {
     var options = getESP8266Config();
-    var BIN = "ESP8266_AT_1_5_4_8M";
+    var BIN = "ESP8266_AT1.3.0.0-512k";
     var URL = "https://www.espruino.com/binaries/"+BIN+".bin";
     Espruino.Core.App.closePopup();
     var popup = Espruino.Core.App.openPopup({
