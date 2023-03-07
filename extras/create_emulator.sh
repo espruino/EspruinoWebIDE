@@ -7,5 +7,5 @@ source ../emsdk/emsdk_env.sh
 make clean;RELEASE=1 BOARD=EMSCRIPTEN make || exit 1
 make clean;RELEASE=1 BOARD=EMSCRIPTEN2 make || exit 1
 cd $DIR_IDE
-cp $DIR_IDE/../Espruino/emulator_banglejs*.js emu
+cp $DIR_IDE/../Espruino/bin/emulator_banglejs*.js emu
 echo Finished.
