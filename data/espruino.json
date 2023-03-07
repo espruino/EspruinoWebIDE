@@ -495,6 +495,11 @@
         "!doc": "<p>Draw a string of text in the current font.</p>\n<pre><code><span class=\"hljs-attribute\">g</span>.drawString(<span class=\"hljs-string\">&quot;Hello World&quot;</span>, <span class=\"hljs-number\">10</span>, <span class=\"hljs-number\">10</span>);\n</code></pre>\n<p>Images may also be embedded inside strings (e.g. to render Emoji or characters\nnot in the current font). To do this, just add <code>0</code> then the image string (<a href=\"http://www.espruino.com/Graphics#images-bitmaps\">about\nImages</a>) For example:</p>\n<pre><code>g.drawString(<span class=\"hljs-string\">&quot;Hi \\0\\7\\5\\1\\x82 D\\x17\\xC0&quot;</span>);\n<span class=\"hljs-regexp\">//</span> draws:\n<span class=\"hljs-regexp\">//</span> <span class=\"hljs-comment\"># #  #      #     #</span>\n<span class=\"hljs-regexp\">//</span> <span class=\"hljs-comment\"># #            #</span>\n<span class=\"hljs-regexp\">//</span> <span class=\"hljs-comment\">### ##         #</span>\n<span class=\"hljs-regexp\">//</span> <span class=\"hljs-comment\"># #  #      #     #</span>\n<span class=\"hljs-regexp\">//</span> <span class=\"hljs-comment\"># # ###      #####</span>\n</code></pre>\n",
         "!url": "http://www.espruino.com/Reference#l_Graphics_drawString"
       },
+      "getVectorFontPolys": {
+        "!type": "fn(str: ?, options: ?) -> +Array",
+        "!doc": "<p>Return the current string as a series of polygons (using the current vector font). <code>options</code> is as follows:</p>\n<ul>\n<li><code>x</code> - X offset of font (default 0)</li>\n<li><code>y</code> - Y offset of font (default 0)</li>\n<li><code>w</code> - Width of font (default 256) - the actual width will likely be less than this as most characters are non-square</li>\n<li><code>h</code> - Height of font (default 256) - the actual height will likely be less than this as most characters don&#39;t fully fill the font box</li>\n</ul>\n<pre><code>g.get<span class=\"hljs-constructor\">VectorFontPolys(<span class=\"hljs-string\">&quot;Hi&quot;</span>, {<span class=\"hljs-params\">x</span>:-80,<span class=\"hljs-params\">y</span>:-128})</span>;\n</code></pre>\n",
+        "!url": "http://www.espruino.com/Reference#l_Graphics_getVectorFontPolys"
+      },
       "drawLine": {
         "!type": "fn(x1: number, y1: number, x2: number, y2: number) -> +Graphics",
         "!doc": "<p>Draw a line between x1,y1 and x2,y2 in the current foreground color</p>\n",
@@ -905,12 +910,12 @@
     },
     "getHealthStatus": {
       "!type": "fn(range: ?) -> ?",
-      "!doc": "<p><code>range</code> is one of:</p>\n<ul>\n<li><code>undefined</code> or <code>&#39;current&#39;</code> - health data so far in the last 10 minutes is\nreturned,</li>\n<li><code>&#39;last&#39;</code> - health data during the last 10 minutes</li>\n<li><code>&#39;day&#39;</code> - the health data so far for the day</li>\n</ul>\n<p><code>getHealthStatus</code> returns an object containing:</p>\n<ul>\n<li><code>movement</code> is the 32 bit sum of all <code>acc.diff</code> readings since power on (and\nrolls over). It is the difference in accelerometer values as <code>g*8192</code></li>\n<li><code>steps</code> is the number of steps during this period</li>\n<li><code>bpm</code> the best BPM reading from HRM sensor during this period</li>\n<li><code>bpmConfidence</code> best BPM confidence (0-100%) during this period</li>\n</ul>\n",
+      "!doc": "<p><code>range</code> is one of:</p>\n<ul>\n<li><code>undefined</code> or <code>&#39;10min&#39;</code> - health data so far in this 10 minute block (eg. 9:00.00 - 9:09.59)</li>\n<li><code>&#39;last&#39;</code> - health data during the last 10 minute block</li>\n<li><code>&#39;day&#39;</code> - the health data so far for the day</li>\n</ul>\n<p><code>getHealthStatus</code> returns an object containing:</p>\n<ul>\n<li><code>movement</code> is the 32 bit sum of all <code>acc.diff</code> readings since power on (and\nrolls over). It is the difference in accelerometer values as <code>g*8192</code></li>\n<li><code>steps</code> is the number of steps during this period</li>\n<li><code>bpm</code> the best BPM reading from HRM sensor during this period</li>\n<li><code>bpmConfidence</code> best BPM confidence (0-100%) during this period</li>\n</ul>\n",
       "!url": "http://www.espruino.com/Reference#l_Bangle_getHealthStatus"
     },
     "dbg": {
       "!type": "fn() -> ?",
-      "!doc": "<p>Reads debug info</p>\n",
+      "!doc": "<p>Reads debug info. Exposes the current values of <code>accHistoryIdx</code>, <code>accGestureCount</code>, <code>accIdleCount</code> and <code>pollInterval</code>.</p>\n",
       "!url": "http://www.espruino.com/Reference#l_Bangle_dbg"
     },
     "accelWr": {
@@ -2084,156 +2089,6 @@
       "!url": "http://www.espruino.com/Reference#l_heatshrink_decompress"
     }
   },
-  "Math": {
-    "!type": "fn()",
-    "!doc": "<p>This is a standard JavaScript class that contains useful Maths routines</p>\n",
-    "!url": "http://www.espruino.com/Reference#Math",
-    "E": {
-      "!type": "number",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_Math_E"
-    },
-    "PI": {
-      "!type": "number",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_Math_PI"
-    },
-    "LN2": {
-      "!type": "number",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_Math_LN2"
-    },
-    "LN10": {
-      "!type": "number",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_Math_LN10"
-    },
-    "LOG2E": {
-      "!type": "number",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_Math_LOG2E"
-    },
-    "LOG10E": {
-      "!type": "number",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_Math_LOG10E"
-    },
-    "SQRT2": {
-      "!type": "number",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_Math_SQRT2"
-    },
-    "SQRT1_2": {
-      "!type": "number",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_Math_SQRT1_2"
-    },
-    "abs": {
-      "!type": "fn(x: number) -> number",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_Math_abs"
-    },
-    "acos": {
-      "!type": "fn(x: number) -> number",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_Math_acos"
-    },
-    "asin": {
-      "!type": "fn(x: number) -> number",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_Math_asin"
-    },
-    "atan": {
-      "!type": "fn(x: number) -> number",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_Math_atan"
-    },
-    "atan2": {
-      "!type": "fn(y: number, x: number) -> number",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_Math_atan2"
-    },
-    "cos": {
-      "!type": "fn(theta: number) -> number",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_Math_cos"
-    },
-    "pow": {
-      "!type": "fn(x: number, y: number) -> number",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_Math_pow"
-    },
-    "random": {
-      "!type": "fn() -> number",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_Math_random"
-    },
-    "round": {
-      "!type": "fn(x: number) -> ?",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_Math_round"
-    },
-    "sin": {
-      "!type": "fn(theta: number) -> number",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_Math_sin"
-    },
-    "tan": {
-      "!type": "fn(theta: number) -> number",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_Math_tan"
-    },
-    "sqrt": {
-      "!type": "fn(x: number) -> number",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_Math_sqrt"
-    },
-    "ceil": {
-      "!type": "fn(x: number) -> number",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_Math_ceil"
-    },
-    "floor": {
-      "!type": "fn(x: number) -> number",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_Math_floor"
-    },
-    "exp": {
-      "!type": "fn(x: number) -> number",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_Math_exp"
-    },
-    "log": {
-      "!type": "fn(x: number) -> number",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_Math_log"
-    },
-    "clip": {
-      "!type": "fn(x: number, min: number, max: number) -> number",
-      "!doc": "<p>DEPRECATED - Please use <code>E.clip()</code> instead. Clip a number to be between min and\nmax (inclusive)</p>\n",
-      "!url": "http://www.espruino.com/Reference#l_Math_clip"
-    },
-    "wrap": {
-      "!type": "fn(x: number, max: number) -> number",
-      "!doc": "<p>DEPRECATED - This is not part of standard JavaScript libraries</p>\n<p>Wrap a number around if it is less than 0 or greater than or equal to max. For\ninstance you might do: <code>Math.wrap(angleInDegrees, 360)</code></p>\n",
-      "!url": "http://www.espruino.com/Reference#l_Math_wrap"
-    },
-    "min": {
-      "!type": "fn(args: ?) -> number",
-      "!doc": "<p>Find the minimum of a series of numbers</p>\n",
-      "!url": "http://www.espruino.com/Reference#l_Math_min"
-    },
-    "max": {
-      "!type": "fn(args: ?) -> number",
-      "!doc": "<p>Find the maximum of a series of numbers</p>\n",
-      "!url": "http://www.espruino.com/Reference#l_Math_max"
-    },
-    "sign": {
-      "!type": "fn(x: number) -> number",
-      "!doc": "",
-      "!url": "http://www.espruino.com/Reference#l_Math_sign"
-    }
-  },
   "Queue": {
     "!type": "fn(queueName: ?) -> ?",
     "!doc": "<p>Creates a Queue Object</p>\n",
@@ -2348,6 +2203,11 @@
       "!type": "fn(enable: bool)",
       "!doc": "<p>Switches Wifi off/on, removes saved code from Flash, resets the board, and on\nrestart creates jsVars depending on available heap (actual additional 3900)</p>\n",
       "!url": "http://www.espruino.com/Reference#l_ESP32_enableWifi"
+    },
+    "setOTAValid": {
+      "!type": "fn(isValid: bool)",
+      "!doc": "<p>This function is useful for ESP32 <a href=\"https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/system/ota.html\">OTA Updates</a></p>\n<p>Normally Espruino is uploaded to the <code>factory</code> partition so this isn&#39;t so useful,\nbut it is possible to upload Espruino to the <code>ota_0</code> partition (or ota_1 if a different table has been added).</p>\n<p>If this is the case, you can use this function to mark the currently running version of Espruino as good or bad.</p>\n<ul>\n<li>If set as valid, Espruino will continue running, and the fact that everything is ok is written to flash</li>\n<li>If set as invalid (false) Espruino will mark itself as not working properly and will reboot. The ESP32 bootloader\n will then start and will load any other partition it can find that is marked as ok.</li>\n</ul>\n",
+      "!url": "http://www.espruino.com/Reference#l_ESP32_setOTAValid"
     }
   },
   "Nucleo": {
@@ -3127,6 +2987,156 @@
       }
     }
   },
+  "Math": {
+    "!type": "fn()",
+    "!doc": "<p>This is a standard JavaScript class that contains useful Maths routines</p>\n",
+    "!url": "http://www.espruino.com/Reference#Math",
+    "E": {
+      "!type": "number",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Math_E"
+    },
+    "PI": {
+      "!type": "number",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Math_PI"
+    },
+    "LN2": {
+      "!type": "number",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Math_LN2"
+    },
+    "LN10": {
+      "!type": "number",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Math_LN10"
+    },
+    "LOG2E": {
+      "!type": "number",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Math_LOG2E"
+    },
+    "LOG10E": {
+      "!type": "number",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Math_LOG10E"
+    },
+    "SQRT2": {
+      "!type": "number",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Math_SQRT2"
+    },
+    "SQRT1_2": {
+      "!type": "number",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Math_SQRT1_2"
+    },
+    "abs": {
+      "!type": "fn(x: number) -> number",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Math_abs"
+    },
+    "acos": {
+      "!type": "fn(x: number) -> number",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Math_acos"
+    },
+    "asin": {
+      "!type": "fn(x: number) -> number",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Math_asin"
+    },
+    "atan": {
+      "!type": "fn(x: number) -> number",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Math_atan"
+    },
+    "atan2": {
+      "!type": "fn(y: number, x: number) -> number",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Math_atan2"
+    },
+    "cos": {
+      "!type": "fn(theta: number) -> number",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Math_cos"
+    },
+    "pow": {
+      "!type": "fn(x: number, y: number) -> number",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Math_pow"
+    },
+    "random": {
+      "!type": "fn() -> number",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Math_random"
+    },
+    "round": {
+      "!type": "fn(x: number) -> ?",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Math_round"
+    },
+    "sin": {
+      "!type": "fn(theta: number) -> number",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Math_sin"
+    },
+    "tan": {
+      "!type": "fn(theta: number) -> number",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Math_tan"
+    },
+    "sqrt": {
+      "!type": "fn(x: number) -> number",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Math_sqrt"
+    },
+    "ceil": {
+      "!type": "fn(x: number) -> number",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Math_ceil"
+    },
+    "floor": {
+      "!type": "fn(x: number) -> number",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Math_floor"
+    },
+    "exp": {
+      "!type": "fn(x: number) -> number",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Math_exp"
+    },
+    "log": {
+      "!type": "fn(x: number) -> number",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Math_log"
+    },
+    "clip": {
+      "!type": "fn(x: number, min: number, max: number) -> number",
+      "!doc": "<p>DEPRECATED - Please use <code>E.clip()</code> instead. Clip a number to be between min and\nmax (inclusive)</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_Math_clip"
+    },
+    "wrap": {
+      "!type": "fn(x: number, max: number) -> number",
+      "!doc": "<p>DEPRECATED - This is not part of standard JavaScript libraries</p>\n<p>Wrap a number around if it is less than 0 or greater than or equal to max. For\ninstance you might do: <code>Math.wrap(angleInDegrees, 360)</code></p>\n",
+      "!url": "http://www.espruino.com/Reference#l_Math_wrap"
+    },
+    "min": {
+      "!type": "fn(args: ?) -> number",
+      "!doc": "<p>Find the minimum of a series of numbers</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_Math_min"
+    },
+    "max": {
+      "!type": "fn(args: ?) -> number",
+      "!doc": "<p>Find the maximum of a series of numbers</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_Math_max"
+    },
+    "sign": {
+      "!type": "fn(x: number) -> number",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_Math_sign"
+    }
+  },
   "Storage": {
     "!type": "fn()",
     "!doc": "<p>This module allows you to read and write part of the nonvolatile flash memory of\nyour device using a filesystem-like API.</p>\n<p>Also see the <code>Flash</code> library, which provides a low level, more dangerous way to\naccess all parts of your flash memory.</p>\n<p>The <code>Storage</code> library provides two distinct types of file:</p>\n<ul>\n<li><code>require(&quot;Storage&quot;).write(...)</code>/<code>require(&quot;Storage&quot;).read(...)</code>/etc create\nsimple contiguous files of fixed length. This is the recommended file type.</li>\n<li><code>require(&quot;Storage&quot;).open(...)</code> creates a <code>StorageFile</code>, which stores the file\nin numbered chunks (<code>&quot;filename\\1&quot;</code>/<code>&quot;filename\\2&quot;</code>/etc). It allows data to be\nappended and for the file to be read line by line.</li>\n</ul>\n<p>You must read a file using the same method you used to write it - e.g. you can&#39;t\ncreate a file with <code>require(&quot;Storage&quot;).open(...)</code> and then read it with\n<code>require(&quot;Storage&quot;).read(...)</code>.</p>\n<p><strong>Note:</strong> In firmware 2v05 and later, the maximum length for filenames is 28\ncharacters. However in 2v04 and earlier the max length is 8.</p>\n",
@@ -3472,7 +3482,7 @@
     },
     "enableWatchdog": {
       "!type": "fn(timeout: number, isAuto: ?)",
-      "!doc": "<p>Enable the watchdog timer. This will reset Espruino if it isn&#39;t able to return\nto the idle loop within the timeout.</p>\n<p>If <code>isAuto</code> is false, you must call <code>E.kickWatchdog()</code> yourself every so often\nor the chip will reset.</p>\n<pre><code><span class=\"hljs-module-access\"><span class=\"hljs-module\"><span class=\"hljs-identifier\">E</span>.</span></span>enable<span class=\"hljs-constructor\">Watchdog(0.5)</span>; <span class=\"hljs-comment\">// automatic mode                                                        </span>\n<span class=\"hljs-keyword\">while</span>(<span class=\"hljs-number\">1</span>); <span class=\"hljs-comment\">// Espruino will reboot because it has not been idle for 0.5 sec</span>\n</code></pre>\n<pre><code><span class=\"hljs-module-access\"><span class=\"hljs-module\"><span class=\"hljs-identifier\">E</span>.</span></span>enable<span class=\"hljs-constructor\">Watchdog(1, <span class=\"hljs-params\">false</span>)</span>;                                                         \nset<span class=\"hljs-constructor\">Interval(<span class=\"hljs-params\">function</span>()</span> {\n  <span class=\"hljs-keyword\">if</span> (everything_ok)\n    <span class=\"hljs-module-access\"><span class=\"hljs-module\"><span class=\"hljs-identifier\">E</span>.</span></span>kick<span class=\"hljs-constructor\">Watchdog()</span>;\n}, <span class=\"hljs-number\">500</span>);\n<span class=\"hljs-comment\">// Espruino will now reset if everything_ok is false,</span>\n<span class=\"hljs-comment\">// or if the interval fails to be called </span>\n</code></pre>\n<p><strong>NOTE:</strong> This is only implemented on STM32 and nRF5x devices (all official\nEspruino boards).</p>\n<p><strong>NOTE:</strong> On STM32 (Pico, WiFi, Original) with <code>setDeepSleep(1)</code> you need to\nexplicitly wake Espruino up with an interval of less than the watchdog timeout\nor the watchdog will fire and the board will reboot. You can do this with\n<code>setInterval(&quot;&quot;, time_in_milliseconds)</code>.</p>\n",
+      "!doc": "<p>Enable the watchdog timer. This will reset Espruino if it isn&#39;t able to return\nto the idle loop within the timeout.</p>\n<p>If <code>isAuto</code> is false, you must call <code>E.kickWatchdog()</code> yourself every so often\nor the chip will reset.</p>\n<pre><code><span class=\"hljs-module-access\"><span class=\"hljs-module\"><span class=\"hljs-identifier\">E</span>.</span></span>enable<span class=\"hljs-constructor\">Watchdog(0.5)</span>; <span class=\"hljs-comment\">// automatic mode                                                        </span>\n<span class=\"hljs-keyword\">while</span>(<span class=\"hljs-number\">1</span>); <span class=\"hljs-comment\">// Espruino will reboot because it has not been idle for 0.5 sec</span>\n</code></pre>\n<pre><code><span class=\"hljs-module-access\"><span class=\"hljs-module\"><span class=\"hljs-identifier\">E</span>.</span></span>enable<span class=\"hljs-constructor\">Watchdog(1, <span class=\"hljs-params\">false</span>)</span>;                                                         \nset<span class=\"hljs-constructor\">Interval(<span class=\"hljs-params\">function</span>()</span> {\n  <span class=\"hljs-keyword\">if</span> (everything_ok)\n    <span class=\"hljs-module-access\"><span class=\"hljs-module\"><span class=\"hljs-identifier\">E</span>.</span></span>kick<span class=\"hljs-constructor\">Watchdog()</span>;\n}, <span class=\"hljs-number\">500</span>);\n<span class=\"hljs-comment\">// Espruino will now reset if everything_ok is false,</span>\n<span class=\"hljs-comment\">// or if the interval fails to be called </span>\n</code></pre>\n<p><strong>NOTE:</strong> This is only implemented on STM32, nRF5x and ESP32 devices (all official\nEspruino boards).</p>\n<p><strong>NOTE:</strong> On STM32 (Pico, WiFi, Original) with <code>setDeepSleep(1)</code> you need to\nexplicitly wake Espruino up with an interval of less than the watchdog timeout\nor the watchdog will fire and the board will reboot. You can do this with\n<code>setInterval(&quot;&quot;, time_in_milliseconds)</code>.\n<strong>NOTE:</strong> On ESP32, the timeout will be rounded to the nearest second.</p>\n",
       "!url": "http://www.espruino.com/Reference#l_E_enableWatchdog"
     },
     "kickWatchdog": {
@@ -4202,7 +4212,7 @@
         "!url": "http://www.espruino.com/Reference#l_Object_valueOf"
       },
       "toString": {
-        "!type": "fn(radix: ?) -> ?",
+        "!type": "fn(radix: ?) -> +string",
         "!doc": "<p>Convert the Object to a string</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Object_toString"
       },
@@ -4238,24 +4248,29 @@
       }
     },
     "keys": {
-      "!type": "fn(object: ?) -> ?",
+      "!type": "fn(object: ?) -> +Array<any>",
       "!doc": "<p>Return all enumerable keys of the given object</p>\n",
       "!url": "http://www.espruino.com/Reference#l_Object_keys"
     },
     "getOwnPropertyNames": {
-      "!type": "fn(object: ?) -> ?",
+      "!type": "fn(object: ?) -> +Array<any>",
       "!doc": "<p>Returns an array of all properties (enumerable or not) found directly on a given\nobject.</p>\n",
       "!url": "http://www.espruino.com/Reference#l_Object_getOwnPropertyNames"
     },
     "values": {
-      "!type": "fn(object: ?) -> ?",
+      "!type": "fn(object: ?) -> +Array<any>",
       "!doc": "<p>Return all enumerable values of the given object</p>\n",
       "!url": "http://www.espruino.com/Reference#l_Object_values"
     },
     "entries": {
-      "!type": "fn(object: ?) -> ?",
+      "!type": "fn(object: ?) -> +Array<[string, any]>",
       "!doc": "<p>Return all enumerable keys and values of the given object</p>\n",
       "!url": "http://www.espruino.com/Reference#l_Object_entries"
+    },
+    "fromEntries": {
+      "!type": "fn(entries: ?) -> ?",
+      "!doc": "<p>Transforms an array of key-value pairs into an object</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_Object_fromEntries"
     },
     "create": {
       "!type": "fn(proto: ?, propertiesObject: ?) -> ?",
@@ -4266,6 +4281,11 @@
       "!type": "fn(obj: ?, name: ?) -> ?",
       "!doc": "<p>Get information on the given property in the object, or undefined</p>\n",
       "!url": "http://www.espruino.com/Reference#l_Object_getOwnPropertyDescriptor"
+    },
+    "getOwnPropertyDescriptors": {
+      "!type": "fn(obj: ?) -> ?",
+      "!doc": "<p>Get information on all properties in the object (from <code>Object.getOwnPropertyDescriptor</code>), or just <code>{}</code> if no properties</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_Object_getOwnPropertyDescriptors"
     },
     "defineProperty": {
       "!type": "fn(obj: ?, name: ?, desc: ?) -> ?",
@@ -4641,6 +4661,16 @@
     "!doc": "<p>Convert any groups of characters of the form &#39;%ZZ&#39;, into characters with hex\ncode &#39;0xZZ&#39;</p>\n",
     "!url": "http://www.espruino.com/Reference#l__global_decodeURIComponent"
   },
+  "trace": {
+    "!type": "fn(root: ?)",
+    "!doc": "<p>Output debugging information</p>\n<p>Note: This is not included on boards with low amounts of flash memory, or the\nEspruino board.</p>\n",
+    "!url": "http://www.espruino.com/Reference#l__global_trace"
+  },
+  "print": {
+    "!type": "fn(text: ?)",
+    "!doc": "<p>Print the supplied string(s) to the console</p>\n<p> <strong>Note:</strong> If you&#39;re connected to a computer (not a wall adaptor) via USB but\n <strong>you are not running a terminal app</strong> then when you print data Espruino may\n pause execution and wait until the computer requests the data it is trying to\n print.</p>\n",
+    "!url": "http://www.espruino.com/Reference#l__global_print"
+  },
   "global": {
     "!type": "?",
     "!doc": "<p>A reference to the global scope, where everything is defined.</p>\n",
@@ -4661,11 +4691,6 @@
     "!doc": "<p>Set whether we can enter deep sleep mode, which reduces power consumption to\naround 100uA. This only works on STM32 Espruino Boards (nRF52 boards sleep\nautomatically).</p>\n<p>Please see <a href=\"http://www.espruino.com/Power+Consumption\">http://www.espruino.com/Power+Consumption</a> for more details on this.</p>\n",
     "!url": "http://www.espruino.com/Reference#l__global_setDeepSleep"
   },
-  "trace": {
-    "!type": "fn(root: ?)",
-    "!doc": "<p>Output debugging information</p>\n<p>Note: This is not included on boards with low amounts of flash memory, or the\nEspruino board.</p>\n",
-    "!url": "http://www.espruino.com/Reference#l__global_trace"
-  },
   "dump": {
     "!type": "fn()",
     "!doc": "<p>Output current interpreter state in a text form such that it can be copied to a\nnew device</p>\n<p>Espruino keeps its current state in RAM (even if the function code is stored in\nFlash). When you type <code>dump()</code> it dumps the current state of code in RAM plus\nthe hardware state, then if there&#39;s code saved in flash it writes &quot;// Code saved\nwith E.setBootCode&quot; and dumps that too.</p>\n<p><strong>Note:</strong> &#39;Internal&#39; functions are currently not handled correctly. You will\nneed to recreate these in the <code>onInit</code> function.</p>\n",
@@ -4685,11 +4710,6 @@
     "!type": "fn(clearFlash: bool)",
     "!doc": "<p>Reset the interpreter - clear program memory in RAM, and do not load a saved\nprogram from flash. This does NOT reset the underlying hardware (which allows\nyou to reset the device without it disconnecting from USB).</p>\n<p>This command only executes when the Interpreter returns to the Idle state - for\ninstance <code>a=1;reset();a=2;</code> will still leave &#39;a&#39; as undefined.</p>\n<p>The safest way to do a full reset is to hit the reset button.</p>\n<p>If <code>reset()</code> is called with no arguments, it will reset the board&#39;s state in RAM\nbut will not reset the state in flash. When next powered on (or when <code>load()</code> is\ncalled) the board will load the previously saved code.</p>\n<p>Calling <code>reset(true)</code> will cause <em>all saved code in flash memory to be cleared\nas well</em>.</p>\n",
     "!url": "http://www.espruino.com/Reference#l__global_reset"
-  },
-  "print": {
-    "!type": "fn(text: ?)",
-    "!doc": "<p>Print the supplied string(s) to the console</p>\n<p> <strong>Note:</strong> If you&#39;re connected to a computer (not a wall adaptor) via USB but\n <strong>you are not running a terminal app</strong> then when you print data Espruino may\n pause execution and wait until the computer requests the data it is trying to\n print.</p>\n",
-    "!url": "http://www.espruino.com/Reference#l__global_print"
   },
   "edit": {
     "!type": "fn(funcName: ?)",
