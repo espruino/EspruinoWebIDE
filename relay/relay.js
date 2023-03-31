@@ -148,7 +148,7 @@ Packets Sent:
       socket = undefined;
       Espruino.Core.Notifications.warning("Websocket connection closed", true);
       term("Websocket connection closed");
-      Espruino.Core.Serial.close();
+      //Espruino.Core.Serial.close(); // let's not close our connection when the connecting device disconnects
     });
     // Listen for messages
     socket.addEventListener('message', function (event) {
