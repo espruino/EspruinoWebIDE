@@ -64,16 +64,30 @@
     });
   }
 
+  function sendMethodChanged(sendMode, sendFile) { 
+    Espruino.Config.set("SAVE_ON_SEND",sendMode|0);
+    Espruino.Config.set("SAVE_STORAGE_FILE",sendFile);   
+    Espruino.callProcessor("sendModeChanged", null, function() {
+      updateIconInfo();
+    });
+  }
+
   function chooseSendMethod() {
     // see saveOnSend.js
     var items = [{
       title: "RAM",
       description : "Lost after power down unless `save()` used",
-      callback : function() { choose(0) }
+      callback : function() { 
+        popup.close();
+        sendMethodChanged(0, "");
+      }
     },{
       title: "Flash",
       description : "Executed even after power-down",
-      callback : function() { choose(1) }
+      callback : function() { 
+        popup.close();
+        sendMethodChanged(1, "");
+      }
     }];
     if (Espruino.Plugins.Storage)
       items.push({
@@ -83,9 +97,7 @@
         popup.close();
         Espruino.Core.MenuPortSelector.ensureConnected(function() {
           Espruino.Plugins.Storage.showFileChooser({title:"Choose Storage file...", allowNew:true}, function(filename) {
-            Espruino.Config.set("SAVE_ON_SEND",3);
-            Espruino.Config.set("SAVE_STORAGE_FILE",filename);
-            updateIconInfo();
+            sendMethodChanged(3, filename);
           });
         });
       }
@@ -97,17 +109,10 @@
       contents: Espruino.Core.HTML.domList(items),
       position: "auto",
     });
-    function choose(x) {
-      popup.close();
-      Espruino.Config.set("SAVE_ON_SEND",x);
-      Espruino.Config.set("SAVE_STORAGE_FILE","");
-      updateIconInfo();
-    }
   }
-
-
 
   Espruino.Core.Send = {
     init : init,
+    updateIconInfo : updateIconInfo // update the status 
   };
 }());

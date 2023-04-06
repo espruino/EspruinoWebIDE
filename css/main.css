@@ -1,4 +1,4 @@
-/* 
+/*
   ===================================================
   Main
   ===================================================
@@ -28,13 +28,13 @@ dd {
   font-style: italic;
 }
 
-::-webkit-scrollbar 
+::-webkit-scrollbar
 {
   background: #ecf0f1;
   width: 15px;
 }
 
-::-webkit-scrollbar-thumb 
+::-webkit-scrollbar-thumb
 {
     background: #bdc3c7;
   border: 5px solid #ecf0f1;
@@ -46,3 +46,37 @@ dd {
 }
 
 *.paramStyle { background-color:#ccccff; }
+
+#file_list {
+  position: absolute;
+  display: block;
+  left: 50%;
+  bottom: 0px;
+}
+
+#file_list span {
+  display:inline-block;
+  border-radius: 10px 10px 0px 0px;
+  padding: 5px;
+
+  color: white;
+  border-top: 2px solid rgb(35, 101, 146);
+  border-left: 2px solid rgb(35, 101, 146);
+  border-right: 2px solid rgb(35, 101, 146);
+}
+
+#file_list span.active {
+  background-color: rgb(35, 101, 146);
+}
+
+#file_list span.inactive {
+  color: rgb(35, 101, 146);
+}
+
+#file_list span.close {
+  cursor:grab;
+  padding: 0px;
+}
+#file_list span.close:hover {
+  font-weight:bold;
+}

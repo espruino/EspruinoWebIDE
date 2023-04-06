@@ -38,6 +38,92 @@
   // What we should do when clicking the 'openFile' button
   var openFileMode = "open"; // open, reload, watch, upload
 
+  // Files contains objects of this type:
+  const DEFAULT_FILE = {
+    fileName : "Untitled.js", // file path in filesystem 
+    storageFile : "", // file on Espruino device (Espruino.Config.SAVE_STORAGE_FILE)
+    sendMode : 0,    // file on Espruino device (Espruino.Config.SAVE_ON_SEND)
+    contents : "",    // the actual file contents
+  };
+
+  var files = [
+    {
+      fileName : "helloworld.txt",
+      storageName : "",
+      sendMode : 0,
+      contents : ""
+    },
+    {
+      fileName : "bob.txt",
+      storageName : "bob.js",
+      sendMode : 0,
+      contents : ""
+    }
+  ];
+  var activeFile = 0; // index of active file
+
+  function setActiveFile(idx) {
+    if (idx<0 || idx>=files.length) throw new Error("File index out of range");
+    // Old state should all be saved automatically...
+
+    // Apply new state
+    activeFile = idx;
+    Espruino.Config.set("SAVE_ON_SEND", 0|files[activeFile].sendMode);
+    Espruino.Config.set("SAVE_STORAGE_FILE", files[activeFile].storageName||"");
+    setCurrentFileName(files[activeFile].fileName);
+    currentJSFile.setValue(files[activeFile].contents);
+    // we need to change which tab is active
+    updateFileTabs();
+    // Change the state of the send icon
+    Espruino.Core.Send.updateIconInfo();
+  }
+
+  function createFileTabs() {
+    var element = Espruino.Core.HTML.domElement('<div id="file_list"></div>');
+    document.querySelector(".toolbar").append(element);
+  }
+
+  function closeFileTab(idx) {
+    // TODO: Check whether it needs saving?
+    console.log(`File> Closing tab ${idx}: ${files[idx].fileName}`);
+    if (activeFile==idx) {
+      // Change to a new file
+      if (activeFile>0) setActiveFile(activeFile-1);
+      else {
+        if (files.length<2) { // if not enough files, add a new file
+          files.push(Object.assign({}, DEFAULT_FILE));
+        }
+        setActiveFile(activeFile+1);
+      }
+    }
+    // remove the old one
+    console.log(JSON.stringify(files,null,2), idx);
+    files.splice(idx,1);
+    console.log(files);
+    if (activeFile>idx) activeFile--;
+    // update the file list
+    updateFileTabs();
+  }
+
+  function updateFileTabs() {
+    var fileList = document.querySelector("#file_list");
+    fileList.innerHTML = files.map( (f,idx) => {
+      let active = activeFile==idx;
+      return `<span class="${active?'active':'inactive'}" fileIndex="${idx}">📄 ${f.fileName||"Untitled"}${active?'&nbsp;<span class="close">&#10005;</span>':""}</span>` 
+    }).join("\n");
+    var node = fileList.firstChild;
+    while (node) {
+      node.addEventListener("click", function(e) {
+        e.preventDefault();
+        if (e.target.classList.contains("close")) {
+          closeFileTab(activeFile);
+        } else {
+          setActiveFile(parseInt(e.target.getAttribute("fileIndex")));
+        }
+      });
+      node = node.nextSibling;
+    }
+  }
 
 
   function init() {
@@ -106,6 +192,19 @@
           saveFile(currentJSFile);
       }
     });
+    // Create the tabs showing what files we have
+    createFileTabs();
+    updateFileTabs();
+    // Handle file send mode or JS changed
+    Espruino.addProcessor("sendModeChanged", function(_, callback) {
+      files[activeFile].storageName = Espruino.Config.SAVE_STORAGE_FILE;
+      files[activeFile].sendMode = Espruino.Config.SAVE_ON_SEND;
+      callback(_);
+    });
+    Espruino.addProcessor("jsCodeChanged", function(data, callback) {
+      files[activeFile].contents = data.code;
+      callback(data);
+    });
   }
 
   function setOpenFileMode(mode) {
@@ -127,6 +226,9 @@
     } else {
       currentJSFile.name = filename;
     }
+    // we need to update the file list
+    files[activeFile].fileName = filename;    
+    updateFileTabs();
   }
 
   /**  Handle newline conversions - Windows expects newlines as /r/n when we're saving/loading files */
@@ -219,7 +321,7 @@
     file without the dialog. But then what do we do for 'save as'? The down-arrow
     next to the icon? */
     Espruino.Core.Utils.fileSaveDialog(convertToOS(currentFile.getValue()), currentFile.name, function(name) {
-      currentFile.name = name;
+      setCurrentFileName(name);
     });
   }
 
