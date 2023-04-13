@@ -52,6 +52,7 @@ dd {
   display: block;
   left: 50%;
   bottom: 0px;
+  padding: 0px;
 }
 
 #file_list span {

@@ -14,15 +14,6 @@
   var viewModeButton;
 
   function init() {
-    // Configuration
-    Espruino.Core.Config.add("AUTO_SAVE_CODE", {
-      section : "Communications",
-      name : "Auto Save",
-      description : "Save code to local storage",
-      type : "boolean",
-      defaultValue : true,
-    });
-
     // Setup code mode button
     viewModeButton = Espruino.Core.App.addIcon({
       id: "code",
@@ -42,45 +33,13 @@
         }
       }
     });
-
-    // get code from our config area at bootup
-    Espruino.addProcessor("initialised", function(data,callback) {
-      var code;
-      if (Espruino.Config.AUTO_SAVE_CODE && typeof window !== 'undefined' && window.localStorage) {
-        code = window.localStorage.getItem("JSCODE");
-        console.log("Loaded code from local storage.");
-      }
-      if (!code) {
-        code = Espruino.Core.Code.DEFAULT_CODE;
-        console.log("No code in storage.");
-      }
-      Espruino.Core.EditorJavaScript.setCode(code);
-      callback(data);
-    });
-    Espruino.addProcessor("sending", function(data, callback) {
-      // save the code to local storage - not rate limited
-      if(Espruino.Config.AUTO_SAVE_CODE && typeof window !== 'undefined' && window.localStorage) {
-        try {
-          window.localStorage.setItem("JSCODE", Espruino.Core.EditorJavaScript.getCode());
-        } catch (e) {
-          console.log("ERROR [localStorage]:"+e.toString());
-        }
-      }
-      callback(data);
-    });
-    Espruino.addProcessor("jsCodeChanged", function(data, callback) {
-      // save the code to local storage - not rate limited
-      if(Espruino.Config.AUTO_SAVE_CODE && typeof window !== 'undefined' && window.localStorage)
-        window.localStorage.setItem("JSCODE", data.code);
-      callback(data);
-    });
   }
 
   function isInBlockly() { // TODO: we should really enumerate views - we might want another view?
     //return $("#divblockly").is(":visible");
     // jQuery caused a (handled) exception when doing the above - but it still wasn't great
     var elem = document.getElementById("divblockly");
-    return !!( elem.offsetWidth || elem.offsetHeight || elem.getClientRects().length )
+    return elem && !!( elem.offsetWidth || elem.offsetHeight || elem.getClientRects().length )
   };
 
   function switchToBlockly() {

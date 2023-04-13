@@ -39,26 +39,16 @@
   var openFileMode = "open"; // open, reload, watch, upload
 
   // Files contains objects of this type:
-  const DEFAULT_FILE = {
-    fileName : "Untitled.js", // file path in filesystem 
-    storageFile : "", // file on Espruino device (Espruino.Config.SAVE_STORAGE_FILE)
-    sendMode : 0,    // file on Espruino device (Espruino.Config.SAVE_ON_SEND)
-    contents : "",    // the actual file contents
-  };
+  function getDefaultFile() {
+    return {
+      fileName : "Untitled.js", // file path in filesystem 
+      storageFile : "", // file on Espruino device (Espruino.Config.SAVE_STORAGE_FILE)
+      sendMode : 0,    // file on Espruino device (Espruino.Config.SAVE_ON_SEND)
+      contents : Espruino.Core.Code.DEFAULT_CODE,    // the actual file contents
+    };
+  }
 
   var files = [
-    {
-      fileName : "helloworld.txt",
-      storageName : "",
-      sendMode : 0,
-      contents : ""
-    },
-    {
-      fileName : "bob.txt",
-      storageName : "bob.js",
-      sendMode : 0,
-      contents : ""
-    }
   ];
   var activeFile = 0; // index of active file
 
@@ -67,15 +57,55 @@
     // Old state should all be saved automatically...
 
     // Apply new state
-    activeFile = idx;
-    Espruino.Config.set("SAVE_ON_SEND", 0|files[activeFile].sendMode);
-    Espruino.Config.set("SAVE_STORAGE_FILE", files[activeFile].storageName||"");
-    setCurrentFileName(files[activeFile].fileName);
-    currentJSFile.setValue(files[activeFile].contents);
+    activeFile = -1; // so we don't try and update this file when things change
+    if(typeof window !== 'undefined' && window.localStorage)
+      window.localStorage.setItem(`FILE_ACTIVE`, idx);
+    Espruino.Config.set("SAVE_ON_SEND", 0|files[idx].sendMode);
+    Espruino.Config.set("SAVE_STORAGE_FILE", files[idx].storageName||"");
+    setCurrentFileName(files[idx].fileName);
+    currentJSFile.setValue(files[idx].contents);
+    activeFile = idx; // now we're ok to set the active file
+    saveFileConfig();
     // we need to change which tab is active
     updateFileTabs();
     // Change the state of the send icon
     Espruino.Core.Send.updateIconInfo();
+  }
+  
+  function loadFileConfig() {
+    if (typeof window == 'undefined' || !window.localStorage) return;
+    var fileCount = 0|window.localStorage.getItem(`FILES`);
+    files = [];
+    for (var idx=0;idx<fileCount;idx++) {
+      var file = {};
+      file.contents = window.localStorage.getItem(`FILE${idx}_CODE`);
+      try {
+        var info = JSON.parse(window.localStorage.getItem(`FILE${idx}_INFO`))
+        file.fileName = info.fileName;
+        file.storageName = info.storageName;
+        file.sendMode = info.sendMode;
+        files.push(file);
+      } catch(e) {      
+      }
+    }
+    var newActiveFile = 0|window.localStorage.getItem(`FILE_ACTIVE`);
+    if (newActiveFile<0 || newActiveFile>=files.length)
+    newActiveFile = 0;
+    setActiveFile(newActiveFile)
+  }
+
+  function saveFileConfig() {
+    if (typeof window == 'undefined' || !window.localStorage) return;
+    window.localStorage.setItem(`FILES`, files.length);
+    window.localStorage.setItem(`FILE_ACTIVE`, activeFile);
+    files.forEach((file,idx) => {
+      window.localStorage.setItem(`FILE${idx}_CODE`, file.contents);
+      window.localStorage.setItem(`FILE${idx}_INFO`, JSON.stringify({
+        fileName : file.fileName,
+        storageName : file.storageName,
+        sendMode : file.sendMode
+      }));
+    });    
   }
 
   function createFileTabs() {
@@ -91,7 +121,7 @@
       if (activeFile>0) setActiveFile(activeFile-1);
       else {
         if (files.length<2) { // if not enough files, add a new file
-          files.push(Object.assign({}, DEFAULT_FILE));
+          files.push(getDefaultFile());
         }
         setActiveFile(activeFile+1);
       }
@@ -101,6 +131,7 @@
     files.splice(idx,1);
     console.log(files);
     if (activeFile>idx) activeFile--;
+    saveFileConfig();
     // update the file list
     updateFileTabs();
   }
@@ -110,7 +141,7 @@
     fileList.innerHTML = files.map( (f,idx) => {
       let active = activeFile==idx;
       return `<span class="${active?'active':'inactive'}" fileIndex="${idx}">📄 ${f.fileName||"Untitled"}${active?'&nbsp;<span class="close">&#10005;</span>':""}</span>` 
-    }).join("\n");
+    }).join("");
     var node = fileList.firstChild;
     while (node) {
       node.addEventListener("click", function(e) {
@@ -193,16 +224,29 @@
       }
     });
     // Create the tabs showing what files we have
-    createFileTabs();
-    updateFileTabs();
+    createFileTabs();    
     // Handle file send mode or JS changed
     Espruino.addProcessor("sendModeChanged", function(_, callback) {
-      files[activeFile].storageName = Espruino.Config.SAVE_STORAGE_FILE;
-      files[activeFile].sendMode = Espruino.Config.SAVE_ON_SEND;
+      if (activeFile>=0 && activeFile<files.length) {
+        files[activeFile].storageName = Espruino.Config.SAVE_STORAGE_FILE;
+        files[activeFile].sendMode = Espruino.Config.SAVE_ON_SEND;
+        saveFileConfig();
+      }
       callback(_);
     });
     Espruino.addProcessor("jsCodeChanged", function(data, callback) {
-      files[activeFile].contents = data.code;
+      if (activeFile>=0 && activeFile<files.length) {
+        files[activeFile].contents = data.code;
+        if(typeof window !== 'undefined' && window.localStorage)
+          window.localStorage.setItem(`FILE${activeFile}_CODE`, data.code);
+      }
+      callback(data);
+    });
+    // get code from our config area at bootup
+    Espruino.addProcessor("initialised", function(data,callback) {
+      loadFileConfig();
+      updateFileTabs();
+
       callback(data);
     });
   }
@@ -227,8 +271,11 @@
       currentJSFile.name = filename;
     }
     // we need to update the file list
-    files[activeFile].fileName = filename;    
-    updateFileTabs();
+    if (activeFile>=0 && activeFile<files.length) {
+      files[activeFile].fileName = filename;    
+      updateFileTabs();
+      saveFileConfig();
+    }
   }
 
   /**  Handle newline conversions - Windows expects newlines as /r/n when we're saving/loading files */
