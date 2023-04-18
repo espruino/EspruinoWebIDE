@@ -89,8 +89,10 @@
       }
     }
     var newActiveFile = 0|window.localStorage.getItem(`FILE_ACTIVE`);
+    if (files.length==0)
+      files.push(getDefaultFile()); // add defualt file if no files
     if (newActiveFile<0 || newActiveFile>=files.length)
-    newActiveFile = 0;
+      newActiveFile = 0; // reset active file
     setActiveFile(newActiveFile)
   }
 
