@@ -55,7 +55,7 @@ dd {
   padding: 0px;
 }
 
-#file_list span {
+#file_list span.file_list-tab {
   display:inline-block;
   border-radius: 10px 10px 0px 0px;
   padding: 5px;
@@ -80,4 +80,10 @@ dd {
 }
 #file_list span.close:hover {
   font-weight:bold;
+}
+
+#file_list span.file_list-new {
+  font-weight: bold;
+  padding-left: 4px;
+  color: white;
 }
