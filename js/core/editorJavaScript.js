@@ -11,8 +11,8 @@
 **/
 "use strict";
 (function(){
-  var codeMirror;
-  var codeMirrorDirty = false;
+  var codeMirrors = [];
+  var id = 0; // auto-incrementing ID used for codeMirror elements
   var defaultLintFlags = {
     esversion   : 6,    // Enable ES6 for literals, arrow fns, binary
     evil        : true, // don't warn on use of strings in setInterval
@@ -95,9 +95,37 @@
       }
     });
     loadThemeCSS(Espruino.Config.THEME);
-    $('<div id="divcode" style="width:100%;height:100%;"><textarea id="code" name="code"></textarea></div>').appendTo(".editor--code .editor__canvas");
+
+    createNewEditor();
+
+  }
+
+  /* Returns:
+  {
+    id : string // id of the code element
+    textarea : DOM element of textarea
+    div : DOM element of outer div
+    codeMirror : codemirror instance
+    visible : bool
+    dirty : bool // was changed but not visible
+    remove : function to remove
+    setVisible : function(bool)
+    setCode    
+  }
+  */
+  function createNewEditor() {
+    var editor = {
+      id : "code"+ (id++),
+      divid : "code"+ (id++),
+      dirty : false,
+      visible : true
+    };
+
+    $(`<div id="div${editor.id}" style="width:100%;height:100%;"><textarea id="${editor.id}"></textarea></div>`).appendTo(".editor--code .editor__canvas");
     // The code editor
-    codeMirror = CodeMirror.fromTextArea(document.getElementById("code"), {
+    editor.textarea = document.getElementById(editor.id);
+    editor.div = document.getElementById("div"+editor.id);
+    editor.codeMirror = CodeMirror.fromTextArea(editor.textarea, {
       width: "100%",
       height: "100%",
       lineNumbers: true,
@@ -139,7 +167,7 @@
       }
     });
     // When things have changed...
-    codeMirror.on("change", function(cm, changeObj) {
+    editor.codeMirror.on("change", function(cm, changeObj) {
       // If pasting, make sure text gets pasted in the right format
       if (changeObj.origin == "paste") {
         var c = cm.getCursor();
@@ -152,10 +180,10 @@
         }
       }
       // Send an event for code changed
-      Espruino.callProcessor("jsCodeChanged", { code : cm.getValue() } );
+      Espruino.callProcessor("jsCodeChanged", { code : cm.getValue(), editor : cm } );
     });
     // Handle hovering
-    CodeMirror.on(codeMirror.getWrapperElement(), "mouseover", function(e) {
+    CodeMirror.on(editor.codeMirror.getWrapperElement(), "mouseover", function(e) {
       var node = e.target || e.srcElement;
       if (node) {
         var stillInNode = true;
@@ -171,31 +199,55 @@
         });
       }
     });
-    CodeMirror.on(codeMirror.getWrapperElement(), "mouseout", function(e) {
+    CodeMirror.on(editor.codeMirror.getWrapperElement(), "mouseout", function(e) {
       var tooltips = document.getElementsByClassName('CodeMirror-Tern-tooltip');
         while(tooltips.length)
           tooltips[0].parentNode.removeChild(tooltips[0]);
     });
+    if (Espruino.Plugins.Tern)
+      Espruino.Plugins.Tern.applyToEditor(editor);
+
+    // Add extra functions to return object
+    editor.remove = function() {
+      editor.HAS_BEEN_REMOVED = true;
+      editor.codeMirror.toTextArea();
+      editor.div.remove();
+      var idx = codeMirrors.indexOf(editor);
+      codeMirrors.splice(idx, idx !== -1 ? 1 : 0);
+    };
+    editor.setVisible = function(isVisible) {
+      editor.visible = isVisible;
+      if (isVisible)
+        $(editor.div).show();
+      else
+        $(editor.div).hide();
+      if (editor.dirty) 
+        setTimeout(function () {
+          editor.codeMirror.refresh();
+        }, 1);
+        editor.dirty = false;
+    };
+    editor.setCode = function(code) {
+      editor.codeMirror.setValue(code);
+      //if (!this.visible)
+      editor.dirty = true;
+    };
+    editor.getCode = function() {
+      var code = editor.codeMirror.getValue();
+      // replace the Non-breaking space character with space. This seems to be an odd Android thing
+      return code.replace(/\xA0/g," ");
+    };
+    editor.getSelectedCode = function() {
+      var code = editor.codeMirror.getSelection();
+      // replace the Non-breaking space character with space. This seems to be an odd Android thing
+      return code.replace(/\xA0/g," ");
+    };
+    codeMirrors.push(editor);
+    return editor;
   }
 
-
-  function getCode() {
-    var code = codeMirror.getValue();
-    // replace the Non-breaking space character with space. This seems to be an odd Android thing
-    code = code.replace(/\xA0/g," ");
-    return code;
-  }
-
-  function getSelectedCode() {
-    var code = codeMirror.getSelection();
-    // replace the Non-breaking space character with space. This seems to be an odd Android thing
-    code = code.replace(/\xA0/g," ");
-    return code;
-  }
-
-  function setCode(code) {
-    codeMirror.setValue(code);
-    codeMirrorDirty = true;
+  function getVisibleEditor() {
+    return codeMirrors.find(cm => cm.visible);
   }
 
   function loadThemeCSS(selectedTheme) {
@@ -226,18 +278,6 @@
       } else if (newThemeCSS !== codeMirrorThemeCSS.href) {
         codeMirrorThemeCSS.href = newThemeCSS;
       }
-    }
-  }
-
-  /** Called this when we switch modes from blockly - the editor needs a prod to update if the code
-   * was set when it was invisible */
-  function madeVisible() {
-    if (codeMirrorDirty) {
-      codeMirrorDirty = false;
-      // important we do it a bit later so things have had time to lay out
-      setTimeout(function () {
-        codeMirror.refresh();
-      }, 1);
     }
   }
 
@@ -298,10 +338,15 @@
 
   Espruino.Core.EditorJavaScript = {
     init : init,
-    getCode : getCode,
-    getSelectedCode : getSelectedCode, // get the currently highlighted bit of code
-    setCode : setCode,
-    madeVisible : madeVisible,
-    getCodeMirror : function () { return codeMirror; }
+    createNewEditor : createNewEditor, // see createNewEditor - returns an object
+    getCode : () => getVisibleEditor().getCode(),
+    getSelectedCode : () => getVisibleEditor().getSelectedCode(), // get the currently highlighted bit of code
+    setCode : code => getVisibleEditor().setCode(code),
+    getVisibleEditor : getVisibleEditor, // return editor object created by createNewEditor
+    getCodeMirror : () => {
+      console.warn("Using Espruino.Core.EditorJavaScript.getCodeMirror - deprecated");
+      return getVisibleEditor().codeMirror
+    }, // 
+    getEditors : () => codeMirrors // return list of current editors created with createNewEditor
   };
 }());

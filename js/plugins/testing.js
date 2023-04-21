@@ -907,11 +907,10 @@
   }
 
   function openTestingWindow(){
-    if (isInTesting()) {
+    if (isInTesting())
       switchToCode();
-      Espruino.Core.EditorJavaScript.madeVisible();
-    }
-    else { switchToTesting();}
+    else 
+      switchToTesting();
   }
 
   function switchToTesting() {

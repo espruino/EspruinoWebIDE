@@ -9,8 +9,10 @@
   Awesome Tern Autocomplete code
  ------------------------------------------------------------------
 **/
-"use strict";
 (function(){
+
+  var server;
+  var espruinoJSON;
 
   function init() {
     function getURL(url, c) {
@@ -26,43 +28,12 @@
       };
     }
 
-    var server;
-    var espruinoJSON;
     getURL(/*"http://ternjs.net/defs/ecma5.json"*/"data/espruino.json", function(err, code) {
-      var codeMirror = Espruino.Core.EditorJavaScript.getCodeMirror();
       if (err) throw new Error("Request for ecma5.json failed: " + err);
       espruinoJSON = code;
       server = new CodeMirror.TernServer({defs: [JSON.parse(espruinoJSON)]});
-
-      function hintHandler(cm, c) {
-        /* Bodges Tern's handler so it can display HTML */
-        return server.getHint(cm,function(data) {
-          if (data.list)
-            for (var i=0;i<data.list.length;i++) {
-              var l = data.list[i];
-              if (!l.data || !l.data.doc) continue;
-              var div = document.createElement('div');
-              div.innerHTML = l.data.doc;
-              l.data.doc = div;
-            }
-          c(data);
-        });
-      }
-      hintHandler.async = true;
-
-      var k = codeMirror.getOption("extraKeys");
-      var nk = {
-        "Ctrl-Space": function(cm) { codeMirror.showHint({hint: hintHandler}); }, // server.complete(cm);
-        "Ctrl-I": function(cm) { server.showType(cm); },
-        "Alt-.": function(cm) { server.jumpToDef(cm); },
-        "Alt-,": function(cm) { server.jumpBack(cm); },
-        "Ctrl-Q": function(cm) { server.rename(cm); },
-        "Ctrl-.": function(cm) { server.selectName(cm); }
-      };
-      for (var i in nk)
-        k[i] = nk[i];
-      codeMirror.setOption("extraKeys", k);
-      codeMirror.on("cursorActivity", function(cm) { server.updateArgHints(cm); });
+      
+      Espruino.Core.EditorJavaScript.getEditors().forEach(applyToEditor);
     });
 
     /* Ideally espruino.json has:
@@ -133,7 +104,42 @@
     });
   }
 
+  function applyToEditor(editor) {
+    if (!server) return; // not loaded yet
+
+    function hintHandler(cm, c) {
+      /* Bodges Tern's handler so it can display HTML */
+      return server.getHint(cm,function(data) {
+        if (data.list)
+          for (var i=0;i<data.list.length;i++) {
+            var l = data.list[i];
+            if (!l.data || !l.data.doc) continue;
+            var div = document.createElement('div');
+            div.innerHTML = l.data.doc;
+            l.data.doc = div;
+          }
+        c(data);
+      });
+    }
+    hintHandler.async = true;
+
+    var k = editor.codeMirror.getOption("extraKeys");
+    var nk = {
+      "Ctrl-Space": function(cm) { editor.codeMirror.showHint({hint: hintHandler}); }, // server.complete(cm);
+      "Ctrl-I": function(cm) { server.showType(cm); },
+      "Alt-.": function(cm) { server.jumpToDef(cm); },
+      "Alt-,": function(cm) { server.jumpBack(cm); },
+      "Ctrl-Q": function(cm) { server.rename(cm); },
+      "Ctrl-.": function(cm) { server.selectName(cm); }
+    };
+    for (var i in nk)
+      k[i] = nk[i];
+    editor.codeMirror.setOption("extraKeys", k);
+    editor.codeMirror.on("cursorActivity", function(cm) { server.updateArgHints(cm); });
+  }
+
   Espruino.Plugins.Tern = {
     init : init,
+    applyToEditor : applyToEditor
   };
 }());
