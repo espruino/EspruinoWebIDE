@@ -95,9 +95,6 @@
       }
     });
     loadThemeCSS(Espruino.Config.THEME);
-
-    createNewEditor();
-
   }
 
   /* Returns:
@@ -115,8 +112,7 @@
   */
   function createNewEditor() {
     var editor = {
-      id : "code"+ (id++),
-      divid : "code"+ (id++),
+      id : "code" + (id++),
       dirty : false,
       visible : true
     };
@@ -217,9 +213,15 @@
     };
     editor.setVisible = function(isVisible) {
       editor.visible = isVisible;
-      if (isVisible)
+      if (isVisible) {
+        codeMirrors.forEach(e => {
+          if (e!=editor) {
+            $(e.div).hide();
+            e.visible = false;
+          }
+        });
         $(editor.div).show();
-      else
+      } else
         $(editor.div).hide();
       if (editor.dirty) 
         setTimeout(function () {
