@@ -494,7 +494,7 @@
       if (!contents) return;
       // if loaded, update editor
       fileToLoad.lastModified = file.lastModified;
-      setFileEditorContents(file, convertFromOS(contents));
+      setFileEditorContents(fileToLoad, convertFromOS(contents));
       if (openFileMode == "upload") {
         Espruino.Core.Notifications.info(new Date().toLocaleTimeString() + ": " + fileToLoad.name+" changed, uploading...");
         Espruino.Plugins.KeyShortcuts.action("icon-deploy");
