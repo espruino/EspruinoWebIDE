@@ -28,20 +28,19 @@
 
   function handleQuery(key, val) {
     var promise = Promise.resolve();
-    //Espruino.Core.Code.switchToCode(); // if in blockly
     switch(key){
       case "code": // Passing "encodedURIcomponent code" within the URL
-        Espruino.Core.EditorJavaScript.setCode(val);
+        Espruino.Core.File.setJSCode(val);
         break;
       case "codeurl": // Passing a URL for code within the URL
         promise = promise.then(new Promise(function(resolve,reject) {
-          Espruino.Core.EditorJavaScript.setCode("// Loading from "+val+"...");
+          Espruino.Core.File.setJSCode("// Loading from "+val+"...");
           Espruino.Core.Utils.getURL(val, function(data) {
             if (data!==undefined) {
-              Espruino.Core.EditorJavaScript.setCode(data);
+              Espruino.Core.File.setJSCode(data);
               resolve();
             } else {
-              Espruino.Core.EditorJavaScript.setCode("// Error loading "+val);
+              Espruino.Core.File.setJSCode("// Error loading "+val);
               reject();
             }
           });
@@ -62,16 +61,16 @@
         break;
       case "gist": // Get code from a gist number in the URL
         promise = promise.then(new Promise(function(resolve,reject) {
-          Espruino.Core.EditorJavaScript.setCode("// Loading Gist "+val+"...");
+          Espruino.Core.File.setJSCode("// Loading Gist "+val+"...");
           Espruino.Core.Utils.getJSONURL("https://api.github.com/gists/"+ val, function(data){
             if(data && data.files){
               var keys = Object.keys(data.files);
               if(keys.length > 0){
-                Espruino.Core.EditorJavaScript.setCode(data.files[keys[0]].content);
+                Espruino.Core.File.setJSCode(data.files[keys[0]].content);
                 resolve();
               } else reject();
             } else {
-              Espruino.Core.EditorJavaScript.setCode("// Error loading Gist "+val);
+              Espruino.Core.File.setJSCode("// Error loading Gist "+val);
               reject();
             }
           });

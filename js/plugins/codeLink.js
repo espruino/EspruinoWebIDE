@@ -47,7 +47,7 @@
   }
   
   function copyCodeLink() {
-    var code = Espruino.Core.Code.getCurrentCode();
+    var code = Espruino.Core.File.getCurrentCode();
     var url = "http://www.espruino.com/webide?code="+encodeURIComponent(code);
     if (url.length > MAX_URL) {
       Espruino.Core.Notifications.error("Your code is too large for a URL (greater than "+MAX_URL+" characters)");

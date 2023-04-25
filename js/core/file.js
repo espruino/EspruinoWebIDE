@@ -11,10 +11,8 @@
 
  FIXME:
 
- * We need to handle the Blockly->JS option properly (or maybe we just remove it?)
- * setOpenFileMode should be per file?
- * What happens when loading the IDE with a code URL? ide?code=gfhgjfgh
- * Seatch for Espruino.Core.EditorJavaScript.get/set* and remove/change what we can get away with
+  * setOpenFileMode should be per file?
+  * Seatch for Espruino.Core.EditorJavaScript.get/set* and remove/change what we can get away with
 
  **/
 "use strict";
@@ -66,6 +64,13 @@
   var files = [ ];
   var activeFile = 0; // index of active file in `files`
 
+  /* options = {
+    type : "js"/"xml"
+    fileName : string
+    isEmpty : bool
+    contents : string
+  }
+  */
   function getDefaultFile(options) {
     options = options||{};    
     if (!options.type) { // guess file type if not provided
@@ -81,9 +86,11 @@
       contents : "",    // the actual file contents
     };
     if (options.fileName) file.fileName = options.fileName;
-    if (!options.isEmpty) {
+    if (options.contents)
+      file.contents = options.contents;
+    else if (!options.isEmpty) {
       if (options.type=="js")
-        file.contents = Espruino.Core.Code.DEFAULT_CODE;
+        file.contents = Espruino.Core.EditorJavaScript.DEFAULT_CODE;
       else if (options.type=="xml")
         file.contents = Espruino.Core.EditorBlockly.DEFAULT_CODE;
       else
@@ -96,8 +103,10 @@
   // Sets the file and the editor up with the file's contents
   function setFileEditorContents(file, value) {
     file.contents = value;
-    Espruino.Core.EditorJavaScript.setCode(value);
-    //currentXMLFile.setValue = Espruino.Core.EditorBlockly.setXML;    
+    if (file.editor)
+      file.editor.setCode(value);
+    else if (file.type=="xml")
+      Espruino.Core.EditorBlockly.setXML(value);    
   }
  
   function setActiveFile(idx) {
@@ -111,18 +120,19 @@
     Espruino.Config.set("SAVE_ON_SEND", 0|files[idx].sendMode);
     Espruino.Config.set("SAVE_STORAGE_FILE", files[idx].storageName||"");
     setCurrentFileName(files[idx].fileName);
+    Espruino.Core.EditorJavaScript.hideAll();
     if (files[idx].type == "js") {
       Espruino.Core.EditorBlockly.setVisible(false);
       if (files[idx].editor==undefined) {
         // if we didn't have an editor, make one
         files[idx].editor = Espruino.Core.EditorJavaScript.createNewEditor();
-        setFileEditorContents(files[idx], files[idx].contents);
+        setFileEditorContents(files[idx], files[idx].contents); 
       } else {
-        files[idx].editor.setVisible(true);
-      }      
+        files[idx].editor.setVisible(true);        
+      }            
       iconViewMode.setIcon("code");
-    } else { // xml      
-      Espruino.Core.EditorJavaScript.hideAll();
+      files[idx].editor.codeMirror.focus();    
+    } else { // xml            
       Espruino.Core.EditorBlockly.setVisible(true);
       Espruino.Core.EditorBlockly.setXML(files[idx].contents);
       iconViewMode.setIcon("block");
@@ -209,6 +219,7 @@
     updateFileTabs();
   }
 
+  // Create a new tab, see getDefaultFile for options
   function createNewTab(options) {
     options = options||{};    
     var file = getDefaultFile(options);
@@ -500,7 +511,63 @@
     });
   }
 
+  // Set the editor's JS code (and if it doesn't exist, make a new tab)
+  function setJSCode(code, options) {
+    options = options||{};
+    if (!options.fileName)
+      options.fileName = "code.js";
+    var file = files.find(file => file.fileName==options.fileName);
+    if (!file) {
+      file = createNewTab({type:"js",fileName:options.fileName,isEmpty:true,contents:code});
+    } else if (files[activeFile] != file) {
+      setActiveFile(files.indexOf(file));
+      setFileEditorContents(file, code);
+    }    
+  }
+
+  function getCurrentCode() {
+    var file = files[activeFile];
+    if (!file) return;
+    if (file.type=="xml")
+      Espruino.Core.EditorBlockly.getCode(); // blockly code needs to be translated first!
+    return files[activeFile].contents;
+  }
+
+  function getEspruinoCode(callback) {
+    Espruino.callProcessor("transformForEspruino", getCurrentCode(), callback);
+  }
+
+  function isInBlockly() { 
+    return files[activeFile] && files[activeFile].type=="xml";
+  }
+
+  function focus() {
+    var file = files[activeFile];
+    if (!file) return;
+    if (file.type=="xml")
+      document.querySelector("#divblockly").focus();
+    else if (file.editor) 
+      file.editor.codeMirror.focus();
+  }  
+
+  function switchTo(fileType) {
+    var file = files.find(file => file.type==fileType);
+    if (!file)
+      file = createNewTab({type:fileType}); 
+    if (files[activeFile] != file) 
+      setActiveFile(files.indexOf(file));
+  }
+
   Espruino.Core.File = {
-    init : init
+    init : init, 
+    getActiveFile : () => files[activeFile], // Get the object representing the currently active file
+    showFile : file=> setActiveFile(files.indexOf(file)), // Given a file object (from getActiveFile), make sure it's showing
+    getCurrentCode : getCurrentCode, // Get the code for the currently active tab
+    getEspruinoCode : getEspruinoCode, // Get the current code in a form that is ready to send to Espruino
+    setJSCode : setJSCode, // (code, {fileName...,}}) called when the contents of the code window is to be set (eg from a URL)
+    isInBlockly : isInBlockly, // are we currently showing a Blockly window
+    focus : focus, // give focus to the current editor
+    switchToCode: () => switchTo("js"), // switch to show JS code - if it doesn't exist, make a tab
+    switchToBlockly: () => switchTo("xml") // switch to show XML code - if it doesn't exist, make a tab
   };
 }());

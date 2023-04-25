@@ -70,37 +70,35 @@
     {
       title: "The code editor",
       description: "To send more complex blocks of javascript, write them in the code editor window...",
-      attachTo: "#divcode",
-      position: "bottom",
+      attachTo: ".editor.editor--code",
+      position: "left",
       offset: {
         top: -300,
         left: null
       },
       onShow: function(){
-        isInBlockly = Espruino.Core.Code.isInBlockly();
-        if(isInBlockly){
-          Espruino.Core.Code.switchToCode();
-        }
+        isInBlockly = Espruino.Core.File.isInBlockly();
+        if(isInBlockly)
+          Espruino.Core.File.switchToCode();
       },
       onHide: function(){
         if(isInBlockly)
-          Espruino.Core.Code.switchToBlockly();
+          Espruino.Core.File.switchToBlockly();
       }
     },
     {
       title: "The block editor",
       description: "...or switch to the block editor and use 'Scratch' like code blocks...",
-      attachTo: "#icon-code",
-      position: "topRight",
+      attachTo: ".file_list-new",
+      position: "bottom",
       onShow: function(){
-        isInBlockly = Espruino.Core.Code.isInBlockly();
-        if(!isInBlockly){
-            Espruino.Core.Code.switchToBlockly();
-        }
+        isInBlockly = Espruino.Core.File.isInBlockly();
+        if(!isInBlockly)
+          Espruino.Core.File.switchToBlockly();
       },
       onHide: function(){
         if(!isInBlockly)
-          Espruino.Core.Code.switchToCode();
+          Espruino.Core.File.switchToCode();
       }
     },
     {
@@ -175,7 +173,7 @@
           itm.onHide = function(){Espruino.Core.Serial.write(itm.source);};
           break;
         case "sendEditor":
-          itm.onHide = function(){Espruino.Core.EditorJavaScript.setCode(itm.source);};
+          itm.onHide = function(){Espruino.Core.File.setJSCode(itm.source, {fileName:"tour.js"});};
           break;
         case "sendAttached":
           itm.onHide = function(){

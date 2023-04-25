@@ -74,13 +74,13 @@
       case "TOGGLE_TERMINAL_EDITOR":
         if(getDescription) return "Toggle between typing in the Terminal or Code Editor";
         if (Espruino.Core.Terminal.hasFocus())
-          Espruino.Core.Code.focus();
+          Espruino.Core.File.focus();
         else
           Espruino.Core.Terminal.focus();
         break;
       case "UPLOAD_SELECTED":
         if(getDescription) return "Upload just the text that is selected in the editor pane";
-        if (Espruino.Core.Code.isInBlockly()) return;
+        if (Espruino.Core.File.isInBlockly()) return;
         var selectedCode = Espruino.Core.EditorJavaScript.getSelectedCode().trim();
         if (selectedCode) {
           Espruino.Core.MenuPortSelector.ensureConnected(function() {

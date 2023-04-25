@@ -55,8 +55,8 @@
     // Config
     Espruino.Core.Config.add("BLOCKLY_TO_JS", {
       section : "General",
-      name : "Overwrite JavaScript with Graphical Editor",
-      description : "When you click 'Send to Espruino', should the code from the Graphical Editor overwrite the JavaScript code in the editor window?",
+      name : "Create JavaScript from Graphical Editor",
+      description : "When you click 'Send to Espruino', should the code from the Graphical Editor create a tab containing JavaScript?",
       type : "boolean",
       defaultValue : false,
     });
@@ -89,9 +89,12 @@
     });
 
     // Handle the 'sending' processor so we can update the JS if we need to...
-    Espruino.addProcessor("sending", function(data, callback) {
-      if(Espruino.Config.BLOCKLY_TO_JS && Espruino.Core.Code.isInBlockly())
-        Espruino.Core.EditorJavaScript.setCode( "// Code from Graphical Editor\n"+Espruino.Core.EditorBlockly.getCode() );
+    Espruino.addProcessor("sending", function(data, callback) {      
+      if(Espruino.Config.BLOCKLY_TO_JS && Espruino.Core.File.isInBlockly()) {
+        var activeFile = Espruino.Core.File.getActiveFile();
+        Espruino.Core.File.setJSCode( "// Code from Graphical Editor\n"+Espruino.Core.EditorBlockly.getCode() , {fileName:"blockly.js"});
+        Espruino.Core.File.showFile(activeFile); // ensure even if we created tab, we go back to blockly
+      }
       callback(data);
     });
     // when we get JSON for the board, pass it to blockly
@@ -121,10 +124,10 @@
       /* We have to hide Blockly while it refreshes for some reason or
       it comes up completely broken */
       var inBlockly = Espruino.Core.Code.isInBlockly();
-      if (inBlockly) Espruino.Core.Code.switchToCode();
+      if (inBlockly) setVisible(false);
       $("#divblockly")[0].contentWindow.location = blocklyUrl;
       if (inBlockly) setTimeout(function() {
-        Espruino.Core.Code.switchToBlockly();
+        setVisible(true);
       }, 500);
     } else {
       // Otherwise we just have the iframe

@@ -11,7 +11,7 @@
 **/
 "use strict";
 (function(){
-  var codeMirrors = [];
+  var editors = [];
   var id = 0; // auto-incrementing ID used for codeMirror elements
   var defaultLintFlags = {
     esversion   : 6,    // Enable ES6 for literals, arrow fns, binary
@@ -208,13 +208,13 @@
       editor.HAS_BEEN_REMOVED = true;
       editor.codeMirror.toTextArea();
       editor.div.remove();
-      var idx = codeMirrors.indexOf(editor);
-      codeMirrors.splice(idx, idx !== -1 ? 1 : 0);
+      var idx = editors.indexOf(editor);
+      editors.splice(idx, idx !== -1 ? 1 : 0);
     };
     editor.setVisible = function(isVisible) {
       editor.visible = isVisible;
       if (isVisible) {
-        codeMirrors.forEach(e => {
+        editors.forEach(e => {
           if (e!=editor) {
             $(e.div).hide();
             e.visible = false;
@@ -244,12 +244,12 @@
       // replace the Non-breaking space character with space. This seems to be an odd Android thing
       return code.replace(/\xA0/g," ");
     };
-    codeMirrors.push(editor);
+    editors.push(editor);
     return editor;
   }
 
   function getVisibleEditor() {
-    return codeMirrors.find(cm => cm.visible);
+    return editors.find(cm => cm.visible);
   }
 
   function loadThemeCSS(selectedTheme) {
@@ -349,10 +349,6 @@
       var ed = getVisibleEditor();
       return ed ? ed.getSelectedCode() : "";
     }, 
-    setCode : code => {
-      var ed = getVisibleEditor();
-      if (ed) ed.setCode(code)
-    },
     getCodeMirror : () => {
       console.warn("Using Espruino.Core.EditorJavaScript.getCodeMirror - deprecated");
       var ed = getVisibleEditor();
@@ -360,8 +356,9 @@
       return ed.codeMirror
     }, 
     hideAll : () => {
-      codeMirrors.forEach(editor => { if (editor.visible) editor.setVisible(false); });
+      editors.forEach(editor => { if (editor.visible) editor.setVisible(false); });
     },
-    getEditors : () => codeMirrors // return list of current editors created with createNewEditor
+    getEditors : () => editors, // return list of current editors created with createNewEditor
+    DEFAULT_CODE : "var  on = false;\nsetInterval(function() {\n  on = !on;\n  LED1.write(on);\n}, 500);"
   };
 }());
