@@ -340,15 +340,28 @@
 
   Espruino.Core.EditorJavaScript = {
     init : init,
-    createNewEditor : createNewEditor, // see createNewEditor - returns an object
-    getCode : () => getVisibleEditor().getCode(),
-    getSelectedCode : () => getVisibleEditor().getSelectedCode(), // get the currently highlighted bit of code
-    setCode : code => getVisibleEditor().setCode(code),
-    getVisibleEditor : getVisibleEditor, // return editor object created by createNewEditor
+    createNewEditor : createNewEditor, // see createNewEditor - returns an object. used by file.js
+    getCode : () => { // get the code in the currently visible editor
+      var ed = getVisibleEditor();
+      return ed ? ed.getCode() : "";
+    },
+    getSelectedCode : () => { // get the currently highlighted bit of code
+      var ed = getVisibleEditor();
+      return ed ? ed.getSelectedCode() : "";
+    }, 
+    setCode : code => {
+      var ed = getVisibleEditor();
+      if (ed) ed.setCode(code)
+    },
     getCodeMirror : () => {
       console.warn("Using Espruino.Core.EditorJavaScript.getCodeMirror - deprecated");
-      return getVisibleEditor().codeMirror
-    }, // 
+      var ed = getVisibleEditor();
+      if (!ed) return undefined;
+      return ed.codeMirror
+    }, 
+    hideAll : () => {
+      codeMirrors.forEach(editor => { if (editor.visible) editor.setVisible(false); });
+    },
     getEditors : () => codeMirrors // return list of current editors created with createNewEditor
   };
 }());

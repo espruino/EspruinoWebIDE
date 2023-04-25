@@ -122,7 +122,7 @@
       }      
       iconViewMode.setIcon("code");
     } else { // xml      
-      Espruino.Core.EditorJavaScript.getVisibleEditor().setVisible(false);
+      Espruino.Core.EditorJavaScript.hideAll();
       Espruino.Core.EditorBlockly.setVisible(true);
       Espruino.Core.EditorBlockly.setXML(files[idx].contents);
       iconViewMode.setIcon("block");
@@ -357,7 +357,17 @@
       callback(_);
     });
     Espruino.addProcessor("jsCodeChanged", function(data, callback) {
-      if (activeFile>=0 && activeFile<files.length) {
+      var file = files.find(f=>f.editor == data.editor);
+      if (file) {
+        file.contents = data.code;
+        if(typeof window !== 'undefined' && window.localStorage)
+          window.localStorage.setItem(`FILE${activeFile}_CODE`, data.code);
+      } else
+        console.warn("Got jsCodeChanged but can't match it to an editor");
+      callback(data);
+    });
+    Espruino.addProcessor("xmlCodeChanged", function(data, callback) {
+      if (files[activeFile] && files[activeFile].type=="xml") {
         files[activeFile].contents = data.code;
         if(typeof window !== 'undefined' && window.localStorage)
           window.localStorage.setItem(`FILE${activeFile}_CODE`, data.code);

@@ -69,22 +69,14 @@ window.onload = function() {
     media: 'media/',
   });
 
-  if (window.localStorage) {
-    var savedBlocks = window.localStorage.getItem("BLOCKLY");
-    if (savedBlocks) {
-      blocklyInitialBlocks = Blockly.Xml.textToDom(savedBlocks);
-    }
-  }
-
   // Store current blockly state
   Blockly.mainWorkspace.addChangeListener(function() {
     var xml = Blockly.Xml.workspaceToDom( Blockly.mainWorkspace );
-    if (window.localStorage) {
-      var txt = "";
-      if (xml.children.length)
+    var txt = "";
+    if (xml.children.length)
       txt = Blockly.Xml.domToText(xml)
-      window.localStorage.setItem("BLOCKLY", txt);
-    }
+    if (window.parent.blocklyChanged)
+      window.parent.blocklyChanged(txt);
   });
 
   // Notify parent - see /js/core/editorBlockly.js

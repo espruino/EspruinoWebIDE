@@ -47,6 +47,10 @@
     }, 10);
   };
 
+  window.blocklyChanged = function(contents) { // see blockly/blockly.html
+    Espruino.callProcessor("xmlCodeChanged", { code : contents } );
+  };
+
   function init() {
     // Config
     Espruino.Core.Config.add("BLOCKLY_TO_JS", {
