@@ -563,7 +563,7 @@
 //$("#projectName").html(theEntry.name);
       readFilefromEntry(theEntry,copySource);
       function copySource(data){
-        Espruino.Core.EditorJavaScript.setCode(data);
+        Espruino.Core.File.setJSCode(data);
       }
     }
     Espruino.Core.App.closePopup();

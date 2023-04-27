@@ -51,7 +51,7 @@
           Espruino.Core.MenuPortSelector.ensureConnected(function() {
             Espruino.Core.Terminal.focus(); // give the terminal focus
             Espruino.callProcessor("sending");
-            Espruino.Core.Code.getEspruinoCode(function(code) {
+            Espruino.Core.File.getEspruinoCode(function(code) {
               Espruino.Core.CodeWriter.writeToEspruino(code, function() {
                 resolve();
               });

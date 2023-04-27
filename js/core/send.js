@@ -44,7 +44,7 @@
           if (Espruino.Core.Terminal.isVisible())
             Espruino.Core.Terminal.focus(); // give the terminal focus
           Espruino.callProcessor("sending");
-          Espruino.Core.Code.getEspruinoCode(Espruino.Core.CodeWriter.writeToEspruino);
+          Espruino.Core.File.getEspruinoCode(Espruino.Core.CodeWriter.writeToEspruino);
         });
       },
       more: function() {

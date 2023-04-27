@@ -176,7 +176,7 @@
         }
       }
       // Send an event for code changed
-      Espruino.callProcessor("jsCodeChanged", { code : cm.getValue(), editor : cm } );
+      Espruino.callProcessor("jsCodeChanged", { code : cm.getValue(), editor : editor } );
     });
     // Handle hovering
     CodeMirror.on(editor.codeMirror.getWrapperElement(), "mouseover", function(e) {

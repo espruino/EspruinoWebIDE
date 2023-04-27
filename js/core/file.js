@@ -528,9 +528,9 @@
   function getCurrentCode() {
     var file = files[activeFile];
     if (!file) return;
-    if (file.type=="xml")
-      Espruino.Core.EditorBlockly.getCode(); // blockly code needs to be translated first!
-    return files[activeFile].contents;
+    if (file.type=="xml") // blockly code needs to be translated to JS first!
+      return Espruino.Core.EditorBlockly.getCode(); 
+    return file.contents; 
   }
 
   function getEspruinoCode(callback) {
