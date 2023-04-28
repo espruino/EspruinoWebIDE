@@ -1,4 +1,5 @@
 
+// THIS IS NEVER SHOWN AT THE MOMENT
   Espruino.Core.Terminal.OVERRIDE_CONTENTS = `
   <div style="max-width:400px;margin:auto;">
   <h1>Espruino Remote</h1>
@@ -11,6 +12,8 @@
   </ul>
   </div>
   `;
+
+  Espruino.Config.set("SHOW_WEBCAM_ICON", 1); // force webcam icon
 
   function print(txt) {
     console.log(txt);
@@ -54,7 +57,8 @@
   }
 
   function init() {
-    Espruino.Config.FONT_SIZE = 18;
+    Espruino.Config.set("FONT_SIZE", 18);
+
     $("#terminal").css("font-size", Espruino.Config.FONT_SIZE+"px");
 
     Espruino.addProcessor("connected", function(data, callback) {
@@ -67,6 +71,17 @@
       webrtc.onPortDisconnected();
       callback(data);
     });
+
+    Espruino.addProcessor("webcam", function(data, callback) {
+      if (data.visible && webrtc) {
+        webrtc.connectVideo(data.stream);
+      }
+      
+      callback(data);
+    });
+
+
+    
 
     setTimeout(() => {
       // disable terminal

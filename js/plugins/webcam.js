@@ -95,25 +95,30 @@
     return $('#terminal').hasClass("terminal--webcam");
   }
 
-  function enableWebCam(constraints) {
-    var window_url = window.URL || window.webkitURL;
+  function displayMediaStream(mediaStream) {
+    webCamStream = mediaStream;
     var vid = document.getElementById("videotag");
+    try {
+      vid.srcObject = mediaStream;
+    } catch (error) {
+      vid.src = URL.createObjectURL(mediaStream);
+    }
+    setTimeout(function cb() {
+      if (vid.videoWidth)
+        console.log("Webcam video dimensions: "+vid.videoWidth+"x"+vid.videoHeight);
+      else
+        setTimeout(cb, 1000);
+    }, 1000);
+    $("#terminal").addClass("terminal--webcam");
+  }
+
+  function enableWebCam(constraints) {
+    var window_url = window.URL || window.webkitURL;    
     console.log("Requesting WebCam ", constraints);
     navigator.getUserMedia(constraints, function(mediaSource) {
-      webCamStream = mediaSource;
-      try {
-          vid.srcObject = mediaSource;
-        } catch (error) {
-          vid.src = URL.createObjectURL(mediaSource);
-        }
       console.log("Webcam started");
-      setTimeout(function cb() {
-        if (vid.videoWidth)
-          console.log("Webcam video dimensions: "+vid.videoWidth+"x"+vid.videoHeight);
-        else
-          setTimeout(cb, 1000);
-      }, 1000);
-      $("#terminal").addClass("terminal--webcam");
+      displayMediaStream(mediaSource);
+      Espruino.callProcessor("webcam", { visible : true, stream : mediaSource });
     }, function(e) {
       console.log('onError!', e);
       Espruino.Core.Notifications.error("Problem initialising WebCam");
@@ -189,6 +194,7 @@
         enableWebCamOrChoose(sources);
       });
     } else {
+      Espruino.callProcessor("webcam", { visible : false });
       if (webCamStream.stop) // deprecated
         webCamStream.stop();
       if (webCamStream.getTracks) // new hotness
@@ -201,5 +207,6 @@
 
   Espruino.Plugins.Webcam = {
     init : init,
+    displayMediaStream : displayMediaStream,
   };
 }());
