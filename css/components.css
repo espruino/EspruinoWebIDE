@@ -68,7 +68,7 @@
 }
 .window--modal.window--center > .window__viewport
 {
-  max-height: 400px;
+  max-height: 80vh; /*80% of vertical window height */
 }
 
 .window__title-bar
