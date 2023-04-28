@@ -115,6 +115,7 @@
   
   function setDebugLine(line) {
     var cm = Espruino.Core.EditorJavaScript.getCodeMirror();
+    if (!cm) return;
     if (currentDebugLine!==undefined) {
       knownValues = {};
       cm.removeLineClass(currentDebugLine, "background", CSS_BG_CLASS);

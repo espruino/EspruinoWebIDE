@@ -28,7 +28,7 @@
   function setFontSize(size) {
     $("#terminal,.CodeMirror").css("font-size", size+"px");
     if (Espruino.Core.EditorJavaScript)
-      Espruino.Core.EditorJavaScript.getCodeMirror().refresh();
+      Espruino.Core.EditorJavaScript.getEditors().forEach(editor => editor.codeMirror.refresh());
   }
 
   Espruino.Plugins.FontSize = {
