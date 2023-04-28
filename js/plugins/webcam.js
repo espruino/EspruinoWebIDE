@@ -95,8 +95,14 @@
     return $('#terminal').hasClass("terminal--webcam");
   }
 
-  function displayMediaStream(mediaStream) {
-    webCamStream = mediaStream;
+  function displayMediaStream(mediaStream) {    
+    webCamStream = mediaStream;    
+    if (mediaStream===undefined) { // if nothing, remove the element
+      $('video').attr('src', "");
+      $("#terminal").removeClass("terminal--webcam");
+      return;
+    }
+    // otherwise create video element
     var vid = document.getElementById("videotag");
     try {
       vid.srcObject = mediaStream;
@@ -194,13 +200,12 @@
         enableWebCamOrChoose(sources);
       });
     } else {
-      Espruino.callProcessor("webcam", { visible : false });
       if (webCamStream.stop) // deprecated
         webCamStream.stop();
       if (webCamStream.getTracks) // new hotness
         webCamStream.getTracks().forEach(track => track.stop())
-      $('video').attr('src', "");
-      $("#terminal").removeClass("terminal--webcam");
+      displayMediaStream(undefined);
+      Espruino.callProcessor("webcam", { visible : false });
     }
     Espruino.Core.Terminal.focus();
   };

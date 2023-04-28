@@ -15,26 +15,11 @@
 
   Espruino.Config.set("SHOW_WEBCAM_ICON", 1); // force webcam icon
 
+  // ---------------------------
   function print(txt) {
     console.log(txt);
     Espruino.Core.Terminal.outputDataHandler(txt+"\r\n");
   }
-
-  // work out peer Id
-  var peerId = null;
-  if (window.location.search && window.location.search[0]=="?") {
-    window.location.search.substr(1).split("&").forEach(kv => {
-      kv = kv.split("=");
-      if (kv[0]=="id")
-        peerId = kv[1];
-    });
-  }
-
-  var portList;
-  /// webtrc instance when initialised
-  var webrtc; 
-
-
   function getUID() {
     var s = "";
     for (var i=0;i<8;i++)
@@ -44,6 +29,77 @@
   function ab2str(buf) {
     return String.fromCharCode.apply(null, new Uint8Array(buf));
   }
+  // ---------------------------
+
+  var portList;
+  /// webtrc instance when initialised
+  var webrtc; 
+
+  webrtc = webrtcInit({
+    bridge:true, 
+    onStatus : function(s) {
+      print(s);
+    },
+    onPeerID : function(s) {
+      print("Our peer ID:"+s);
+      // Have we been asked to connect to an IDE?
+      var clientPeerId = null;
+      if (window.location.search && window.location.search[0]=="?") {
+        window.location.search.substr(1).split("&").forEach(kv => {
+          kv = kv.split("=");
+          if (kv[0]=="id")
+          clientPeerId = kv[1];
+        });
+      }
+      if (clientPeerId) 
+        webrtc.connectSendPeerId(clientPeerId);
+    },
+    onGetPorts : function(cb) {
+      Espruino.Core.Serial.getPorts(ports => {
+        portList = ports.filter(p => !p.promptsUser);
+        cb(portList);
+      });
+    },
+    onPortConnect : function(serialPort, cb) {
+      print("Connecting to "+serialPort);          
+      Espruino.Core.Serial.open(serialPort, function(cInfo) {
+        // Ensure that data from Espruino goes here
+        Espruino.Core.Serial.startListening(function(data) {
+          data = ab2str(data);
+          console.log("remote.js -> "+JSON.stringify(data));
+          webrtc.onPortReceived(data);
+        });
+        Espruino.Core.Serial.setSlowWrite(false, true/*force*/);
+        if (cInfo!=undefined) {
+          console.log("Device found (connectionId="+ cInfo.connectionId +")");
+          Espruino.Core.Notifications.success("Connected to "+serialPort, true);
+          print("Connected to "+serialPort);
+        } else {
+          // fail
+          Espruino.Core.Notifications.error("Connection Failed.", true);
+          print("Connection Failed.");
+        }
+        cb();
+      }, function () {
+        console.log("Disconnect callback...");
+        print("Bluetooth connection closed");
+        Espruino.Core.Notifications.warning("Disconnected", true);
+        // TODO: report disconnected
+      });
+    },
+    onPortDisconnect : function(serialPort) {
+      Espruino.Core.Serial.close();
+    },
+    onPortWrite : function(data, cb) {
+      console.log("remote.js write "+JSON.stringify(data));
+      Espruino.Core.Serial.write(data, false, function() {
+        console.log("remote.js written");
+        cb();
+      });
+    }
+  });
+
+
 
   function showAvailableDevices() {
     Espruino.Core.Serial.getPorts(ports => {
@@ -80,66 +136,10 @@
       callback(data);
     });
 
-
-    
-
     setTimeout(() => {
       // disable terminal
-    Espruino.Core.Terminal.setInputDataHandler(function(d) { });
+      Espruino.Core.Terminal.setInputDataHandler(function(d) { });
       showAvailableDevices();
-      webrtc = webrtcInit({
-        bridge:true, 
-        connectToPeerID: peerId,
-        onStatus : function(s) {
-          print(s);
-        },
-        onPeerID : function(s) {
-          print(s);
-        },
-        onGetPorts : function(cb) {
-          Espruino.Core.Serial.getPorts(ports => {
-            portList = ports.filter(p => !p.promptsUser);
-            cb(portList);
-          });
-        },
-        onPortConnect : function(serialPort, cb) {
-          print("Connecting to "+serialPort);          
-          Espruino.Core.Serial.open(serialPort, function(cInfo) {
-            // Ensure that data from Espruino goes here
-            Espruino.Core.Serial.startListening(function(data) {
-              data = ab2str(data);
-              console.log("remote.js -> "+JSON.stringify(data));
-              webrtc.onPortReceived(data);
-            });
-            Espruino.Core.Serial.setSlowWrite(false, true/*force*/);
-            if (cInfo!=undefined) {
-              console.log("Device found (connectionId="+ cInfo.connectionId +")");
-              Espruino.Core.Notifications.success("Connected to "+serialPort, true);
-              print("Connected to "+serialPort);
-            } else {
-              // fail
-              Espruino.Core.Notifications.error("Connection Failed.", true);
-              print("Connection Failed.");
-            }
-            cb();
-          }, function () {
-            console.log("Disconnect callback...");
-            print("Bluetooth connection closed");
-            Espruino.Core.Notifications.warning("Disconnected", true);
-            // TODO: report disconnected
-          });
-        },
-        onPortDisconnect : function(serialPort) {
-          Espruino.Core.Serial.close();
-        },
-        onPortWrite : function(data, cb) {
-          console.log("remote.js write "+JSON.stringify(data));
-          Espruino.Core.Serial.write(data, false, function() {
-            console.log("remote.js written");
-            cb();
-          });
-        }
-      });
     }, 500);
   }
 
