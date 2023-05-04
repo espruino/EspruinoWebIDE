@@ -34,6 +34,8 @@
   var portList;
   /// webtrc instance when initialised
   var webrtc; 
+  /// If not true, the connection was requested from the top-left and we should just disconnect
+  var connectionRequested = false; 
 
   webrtc = webrtcInit({
     bridge:true, 
@@ -56,12 +58,17 @@
     },
     onGetPorts : function(cb) {
       Espruino.Core.Serial.getPorts(ports => {
+        // Don't show "Web Bluetooth"/etc
         portList = ports.filter(p => !p.promptsUser);
+        // set type to socket so they have a different web-like icon
+        portList.forEach(p => p.type="socket");
+        // respond
         cb(portList);
       });
     },
     onPortConnect : function(serialPort, cb) {
       print("Connecting to "+serialPort);          
+      connectionRequested = true;
       Espruino.Core.Serial.open(serialPort, function(cInfo) {
         // Ensure that data from Espruino goes here
         Espruino.Core.Serial.startListening(function(data) {
@@ -118,12 +125,20 @@
     $("#terminal").css("font-size", Espruino.Config.FONT_SIZE+"px");
 
     Espruino.addProcessor("connected", function(data, callback) {
-      console.log("----> Connected");
+      /* If the connection was initiated from the button in the top left
+      then we disconnect immediately and show what devices we know about. */
+      if (!connectionRequested) {
+        setTimeout(function() {
+          if (Espruino.Core.Serial.isConnected())
+            Espruino.Core.Serial.close();
+          showAvailableDevices();
+        }, 500);
+      }
+      connectionRequested = false;
       callback(data);      
     });
 
     Espruino.addProcessor("disconnected", function(data, callback) {
-      console.log("----> Disconnected");
       webrtc.onPortDisconnected();
       callback(data);
     });
