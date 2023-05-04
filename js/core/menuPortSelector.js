@@ -14,6 +14,7 @@
 
   var connectButton;
   var lastContents = undefined;
+  var popup;
 
   function init()
   {
@@ -52,7 +53,7 @@
   }
 
   function showPortSelector(callback) {
-    var checkInt, popup;
+    var checkInt;
 
     function selectPortInternal(port) {
       if (checkInt) clearInterval(checkInt);
@@ -101,7 +102,11 @@
             }
           });
           var domList = Espruino.Core.HTML.domList(listItems);
-          domList.append(Espruino.Core.HTML.domElement('<li style="text-align: right;"><a href="#" onclick="Espruino.Core.MenuPortSelector.showPortStatus()">status</a></li>'));
+          var footerHtml = "";
+          if (Espruino.Core.RemoteConnection) // serial_webrtc.js
+            footerHtml = '<span><a href="#" onclick="Espruino.Core.MenuPortSelector.showRemoteConnectionPopup()">🌐 Remote Connection</a></span>';
+          footerHtml += '<span style="float: right;"><a href="#" onclick="Espruino.Core.MenuPortSelector.showPortStatus()">status</a></span>'
+          domList.append(Espruino.Core.HTML.domElement('<li>'+footerHtml+'</li>'));
           popup.setContents(domList);
         } else {
           var html = '<h2 class="list__no-results">Searching... No ports found</h2>';
@@ -120,22 +125,18 @@
       title: "Select a port...",
       contents: searchHtml,
       position: "center",
+      onClose: function() {
+        // Make sure any calls to close popup, also clear
+        // the port check interval
+        if (checkInt) clearInterval(checkInt);
+        checkInt = undefined;
+        popup = undefined;
+      }
     });
 
     // Setup checker interval
     checkInt = setInterval(getPorts, 2000);
     getPorts();
-
-    // Make sure any calls to close popup, also clear
-    // the port check interval
-    var oldPopupClose = popup.close;
-    popup.close = function() {
-      if (checkInt) clearInterval(checkInt);
-      checkInt = undefined;
-      oldPopupClose();
-      popup.close = oldPopupClose;
-    }
-
   }
 
   function connectToPort(serialPort, callback) {
@@ -219,6 +220,11 @@
     });
   }
 
+  function showRemoteConnectionPopup() {
+    if (popup) popup.close();
+    Espruino.Core.RemoteConnection.showPairingPopup();
+  }
+
   Espruino.Core.MenuPortSelector = {
       init : init,
 
@@ -226,7 +232,8 @@
       connectToPort : connectToPort,
       disconnect : disconnect,
       showPortSelector: showPortSelector,
-      showPortStatus : showPortStatus
+      showPortStatus : showPortStatus,
+      showRemoteConnectionPopup : showRemoteConnectionPopup
   };
 
 }());
