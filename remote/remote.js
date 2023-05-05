@@ -1,17 +1,42 @@
+var portList;
+/// webtrc instance when initialised
+var webrtc; 
+/// If not true, the connection was requested from the top-left and we should just disconnect
+var connectionRequested = false; 
 
 // THIS IS NEVER SHOWN AT THE MOMENT
   Espruino.Core.Terminal.OVERRIDE_CONTENTS = `
   <div style="max-width:400px;margin:auto;">
-  <h1>Espruino Remote</h1>
-  <p>This allows you to forward the Bluetooth or Serial connection from one device to a Web IDE on a desktop computer</p>
-  <h2>How to use</h2>
-  <ul>
-  <li>Click the 'Connect' icon in the top left</li>
-  <li>Choose a Web Bluetooth device and click 'Pair'</li>
-  <li>You can now use your device from the Web IDE</li>
-  </ul>
+  <b>Loading...</b>
   </div>
   `;
+// ABOUT page  
+  Espruino.Core.Config.addSection("About", {
+    description : undefined,
+    sortOrder : -1000,
+    getHTML : function(callback) {
+      callback(`<h2>Web IDE Remote Connection Bridge</h2>
+<p>
+This Remote Connection Bridge exists so that you can connect 
+the Web IDE to your Espruino devices even if you do not have
+direct access to them or your main PC doesn't have the required
+communications (for instance Bluetooth).
+</p>
+<p>
+To use this, go to <a href="https://www.espruino.com/ide/" target="_blank">https://www.espruino.com/ide/</a>
+on the computer you want to run the IDE on, click the connect button in the top left,
+and then click <b>🌐 Remote Connection</b> at the bottom left of the <b>Select a Port</b> window.
+You can then scan the QR code (or copy the link) onto the device (probably an Android phone)
+that you want to use as the Bridge.
+</p>
+${(webrtc && webrtc.peerId)?`
+<p>
+If you want to connect to this instance of the Bridge, copy the following code
+and paste it into the <b>Remote Connection Bridge Peer ID</b> field in your 
+Web IDE's settings:
+</p><p style="text-align:center;"><b>${webrtc.peerId}</b></p>`:``}`);
+    }
+  });
 
   Espruino.Config.set("SHOW_WEBCAM_ICON", 1); // force webcam icon
 
@@ -31,11 +56,7 @@
   }
   // ---------------------------
 
-  var portList;
-  /// webtrc instance when initialised
-  var webrtc; 
-  /// If not true, the connection was requested from the top-left and we should just disconnect
-  var connectionRequested = false; 
+
 
   webrtc = webrtcInit({
     bridge:true, 
@@ -43,7 +64,10 @@
       print(s);
     },
     onPeerID : function(s) {
-      print("Bridge's Peer ID: "+s);
+      print("==========================================");
+      print(" Bridge's Peer ID:");
+      print("     "+s);
+      print("==========================================");
       // Have we been asked to connect to an IDE?
       var clientPeerId = null;
       if (window.location.search && window.location.search[0]=="?") {
@@ -130,6 +154,9 @@
     Espruino.Config.set("FONT_SIZE", 18);
 
     $("#terminal").css("font-size", Espruino.Config.FONT_SIZE+"px");
+
+    print("Web IDE Remote Connection Bridge");
+    Espruino.Core.Terminal.addNotification('<img src="../img/ide_logo.png" onclick="Espruino.Core.MenuSettings.show()"><br/>',{noBorder:true})
 
     Espruino.addProcessor("connected", function(data, callback) {
       /* If the connection was initiated from the button in the top left
