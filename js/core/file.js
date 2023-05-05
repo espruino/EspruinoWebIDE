@@ -428,6 +428,10 @@
    return chars.replace(/\r\n/g,"\n").replace(/\n/g,"\r\n");
   };
 
+  function getFilePickerTypes(fileTypes) {
+    return fileTypes.map(fileType => ({description:fileType.description, accept: fileType.mimeTypes}));
+  }
+
   function loadFile(fileTypes) {
     /* if clicking the button should just reload the existing file, do that */
     if (openFileMode == "reload" && files[activeFile].handle) {
@@ -436,7 +440,7 @@
     }
     // Otherwise load a new file
     if (typeof window.showOpenFilePicker === 'function') {
-      window.showOpenFilePicker({types: fileTypes.map(fileType => ({description:fileType.description, accept: fileType.mimeTypes}))}).
+      window.showOpenFilePicker({types: getFilePickerTypes(fileTypes)}).
       then(function(fileHandles) {
         fileHandles.forEach(fileHandle => {
           if (!fileHandle.name) return;
@@ -506,6 +510,33 @@
     /* TODO: if fileToSave.handle, we could write direct to this
     file without the dialog. But then what do we do for 'save as'? The down-arrow
     next to the icon? */
+    if (window.showSaveFilePicker) {
+      var writable, handle;
+       window.showSaveFilePicker({
+          suggestedName:fileToSave.fileName, 
+          types: getFilePickerTypes([FILETYPES[fileToSave.type||"js"]])
+        }).
+         then(h =>  {
+          handle = h;
+          return handle.createWritable()
+         }).
+         then(w => {
+          writable = w;
+          var data = fileToSave.contents;
+          var rawdata = new Uint8Array(data.length);
+          for (var i=0;i<data.length;i++) rawdata[i]=data.charCodeAt(i);
+          var fileBlob = new Blob([rawdata.buffer], {type: "text/plain"});
+          return writable.write(fileBlob);
+         }).
+         then(() => writable.close()).
+         then(() => {
+           if (files[activeFile])
+             files[activeFile].handle = handle;
+           if (handle.name) setCurrentFileName(handle.name);
+         });
+       return
+    }
+
     Espruino.Core.Utils.fileSaveDialog(convertToOS(fileToSave.contents), fileToSave.fileName, function(name) {
       setCurrentFileName(name);
     });
