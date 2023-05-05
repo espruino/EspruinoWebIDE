@@ -43,7 +43,7 @@
       print(s);
     },
     onPeerID : function(s) {
-      print("Our peer ID:"+s);
+      print("Bridge's Peer ID: "+s);
       // Have we been asked to connect to an IDE?
       var clientPeerId = null;
       if (window.location.search && window.location.search[0]=="?") {
@@ -66,7 +66,14 @@
         cb(portList);
       });
     },
+    onPeerDisconnected : function() {
+      // peer disconnected - drop connection
+      if (Espruino.Core.Serial.isConnected())
+        Espruino.Core.Serial.close();
+    },
     onPortConnect : function(serialPort, cb) {
+      if (Espruino.Core.Serial.isConnected())
+        Espruino.Core.Serial.close();
       print("Connecting to "+serialPort);          
       connectionRequested = true;
       Espruino.Core.Serial.open(serialPort, function(cInfo) {
