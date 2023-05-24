@@ -23,7 +23,7 @@
   // types of file we accept
   const FILETYPES = {
     all : { // used when opening a file dialog
-      name:"code.js", 
+      name:"code.js",
       description:"All supported files",
       mimeTypes : {"application/javascript": [".js", ".js"], "text/plain": [".txt"],"text/xml": [".xml"]},
     },
@@ -40,11 +40,11 @@
       mimeTypes : {"text/xml": [".xml"]},
     }
   };
-    
+
 
   var iconOpenFile;
   var iconSaveFile;
-  var iconViewMode;  
+  var iconViewMode;
   // interval used when checking files for modification
   var watchInterval;
   // What we should do when clicking the 'openFile' button
@@ -72,7 +72,7 @@
   }
   */
   function getDefaultFile(options) {
-    options = options||{};    
+    options = options||{};
     if (!options.type) { // guess file type if not provided
       options.type="js";
       if (options.fileName && options.fileName.toLowerCase().endsWith(".xml"))
@@ -80,7 +80,7 @@
     }
     var file = {
       type : options.type, // "js"/"xml"
-      fileName : "Untitled."+options.type, // file path in filesystem 
+      fileName : "Untitled."+options.type, // file path in filesystem
       storageFile : "", // file on Espruino device (Espruino.Config.SAVE_STORAGE_FILE)
       sendMode : 0,    // file on Espruino device (Espruino.Config.SAVE_ON_SEND)
       contents : "",    // the actual file contents
@@ -96,7 +96,7 @@
       else
         console.log("Espruino.Core.File unknown file type!");
     }
-    
+
     return file;
   }
 
@@ -106,9 +106,9 @@
     if (file.editor)
       file.editor.setCode(value);
     else if (file.type=="xml")
-      Espruino.Core.EditorBlockly.setXML(value);    
+      Espruino.Core.EditorBlockly.setXML(value);
   }
- 
+
   function setActiveFile(idx) {
     if (idx<0 || idx>=files.length) throw new Error("File index out of range");
     // Old state should all be saved automatically...
@@ -126,17 +126,17 @@
       if (files[idx].editor==undefined) {
         // if we didn't have an editor, make one
         files[idx].editor = Espruino.Core.EditorJavaScript.createNewEditor();
-        setFileEditorContents(files[idx], files[idx].contents); 
+        setFileEditorContents(files[idx], files[idx].contents);
       } else {
-        files[idx].editor.setVisible(true);        
-      }            
+        files[idx].editor.setVisible(true);
+      }
       iconViewMode.setIcon("code");
-      files[idx].editor.codeMirror.focus();    
-    } else { // xml            
+      files[idx].editor.codeMirror.focus();
+    } else { // xml
       Espruino.Core.EditorBlockly.setVisible(true);
       Espruino.Core.EditorBlockly.setXML(files[idx].contents);
       iconViewMode.setIcon("block");
-    }    
+    }
 
     activeFile = idx; // now we're ok to set the active file
     saveFileConfig();
@@ -145,7 +145,7 @@
     // Change the state of the send icon
     Espruino.Core.Send.updateIconInfo();
   }
-  
+
   function loadFileConfig() {
     if (typeof window == 'undefined' || !window.localStorage) return;
     var fileCount = 0|window.localStorage.getItem(`FILES`);
@@ -161,7 +161,7 @@
         file.storageName = info.storageName;
         file.sendMode = info.sendMode;
         files.push(file);
-      } catch(e) {      
+      } catch(e) {
       }
     }
     var newActiveFile = 0|window.localStorage.getItem(`FILE_ACTIVE`);
@@ -184,7 +184,7 @@
         storageName : file.storageName,
         sendMode : file.sendMode
       }));
-    });    
+    });
   }
 
   function createFileTabs() {
@@ -221,9 +221,9 @@
 
   // Create a new tab, see getDefaultFile for options
   function createNewTab(options) {
-    options = options||{};    
+    options = options||{};
     var file = getDefaultFile(options);
-    
+
     files.push(file);
     // Set active tab - this saves and updates the file tab list
     setActiveFile(files.length-1);
@@ -252,14 +252,14 @@
         }
       ]),
       position: "center",
-    });   
+    });
   }
 
   function updateFileTabs() {
     var fileList = document.querySelector("#file_list");
     fileList.innerHTML = files.map( (f,idx) => {
       let active = activeFile==idx;
-      return `<span class="file_list-tab ${active?'active':'inactive'}" fileIndex="${idx}">${FILETYPES[f.type].icon} ${f.fileName||"Untitled"}${active?'&nbsp;<span class="close">&#10005;</span>':""}</span>` 
+      return `<span class="file_list-tab ${active?'active':'inactive'}" fileIndex="${idx}">${FILETYPES[f.type].icon} ${f.fileName||"Untitled"}${active?'&nbsp;<span class="close">&#10005;</span>':""}</span>`
     }).join("") + `<span class="file_list-new">+</span>`;
     var node = fileList.firstChild;
     while (node) {
@@ -357,7 +357,7 @@
       }
     });
     // Create the tabs showing what files we have
-    createFileTabs();    
+    createFileTabs();
     // Handle file send mode or JS changed
     Espruino.addProcessor("sendModeChanged", function(_, callback) {
       if (activeFile>=0 && activeFile<files.length) {
@@ -410,7 +410,7 @@
   function setCurrentFileName(filename) {
     // we need to update the file list
     if (activeFile>=0 && activeFile<files.length) {
-      files[activeFile].fileName = filename;    
+      files[activeFile].fileName = filename;
       updateFileTabs();
       saveFileConfig();
     }
@@ -473,7 +473,7 @@
       var mimeTypeList = Object.values(mimeTypes) + "," + Object.keys(mimeTypes);
       Espruino.Core.Utils.fileOpenDialog({id:"code",type:"text",mimeType:mimeTypeList}, function(data, mimeType, fileName) {
         var file = createNewTab({fileName:fileName, isEmpty:true});
-        setFileEditorContents(file, convertFromOS(data));        
+        setFileEditorContents(file, convertFromOS(data));
       });
     }
   }
@@ -513,7 +513,7 @@
     if (window.showSaveFilePicker) {
       var writable, handle;
        window.showSaveFilePicker({
-          suggestedName:fileToSave.fileName, 
+          suggestedName:fileToSave.fileName,
           types: getFilePickerTypes([FILETYPES[fileToSave.type||"js"]])
         }).
          then(h =>  {
@@ -553,22 +553,22 @@
     } else if (files[activeFile] != file) {
       setActiveFile(files.indexOf(file));
       setFileEditorContents(file, code);
-    }    
+    }
   }
 
   function getCurrentCode() {
     var file = files[activeFile];
     if (!file) return;
     if (file.type=="xml") // blockly code needs to be translated to JS first!
-      return Espruino.Core.EditorBlockly.getCode(); 
-    return file.contents; 
+      return Espruino.Core.EditorBlockly.getCode();
+    return file.contents;
   }
 
   function getEspruinoCode(callback) {
     Espruino.callProcessor("transformForEspruino", getCurrentCode(), callback);
   }
 
-  function isInBlockly() { 
+  function isInBlockly() {
     return files[activeFile] && files[activeFile].type=="xml";
   }
 
@@ -577,20 +577,20 @@
     if (!file) return;
     if (file.type=="xml")
       document.querySelector("#divblockly").focus();
-    else if (file.editor) 
+    else if (file.editor)
       file.editor.codeMirror.focus();
-  }  
+  }
 
   function switchTo(fileType) {
     var file = files.find(file => file.type==fileType);
     if (!file)
-      file = createNewTab({type:fileType}); 
-    if (files[activeFile] != file) 
+      file = createNewTab({type:fileType});
+    if (files[activeFile] != file)
       setActiveFile(files.indexOf(file));
   }
 
   Espruino.Core.File = {
-    init : init, 
+    init : init,
     getActiveFile : () => files[activeFile], // Get the object representing the currently active file
     showFile : file=> setActiveFile(files.indexOf(file)), // Given a file object (from getActiveFile), make sure it's showing
     getCurrentCode : getCurrentCode, // Get the code for the currently active tab
