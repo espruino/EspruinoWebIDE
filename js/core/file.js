@@ -550,8 +550,9 @@
     var file = files.find(file => file.fileName==options.fileName);
     if (!file) {
       file = createNewTab({type:"js",fileName:options.fileName,isEmpty:true,contents:code});
-    } else if (files[activeFile] != file) {
-      setActiveFile(files.indexOf(file));
+    } else {
+      if (files[activeFile] != file)
+        setActiveFile(files.indexOf(file));
       setFileEditorContents(file, code);
     }
   }
