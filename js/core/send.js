@@ -21,9 +21,9 @@
   ];
 
   function updateIconInfo() {
-    var n = Espruino.Config.SAVE_ON_SEND|0;
+    var n = Espruino.Config.SAVE_ON_SEND | Espruino.Core.Send.SEND_MODE_RAM;
     var txt = NAMES[n];
-    if (n==3)
+    if (n==Espruino.Core.Send.SEND_MODE_STORAGE)
       txt = /*"&#x1f5ce;"+*/Espruino.Config.SAVE_STORAGE_FILE;
     sendIcon.setInfo(txt);
   }
@@ -65,7 +65,7 @@
   }
 
   function sendMethodChanged(sendMode, sendFile) { 
-    Espruino.Config.set("SAVE_ON_SEND",sendMode|0);
+    Espruino.Config.set("SAVE_ON_SEND",sendMode | Espruino.Core.Send.SEND_MODE_RAM);
     Espruino.Config.set("SAVE_STORAGE_FILE",sendFile);   
     Espruino.callProcessor("sendModeChanged", null, function() {
       updateIconInfo();
@@ -79,14 +79,14 @@
       description : "Lost after power down unless `save()` used",
       callback : function() { 
         popup.close();
-        sendMethodChanged(0, "");
+        sendMethodChanged(Espruino.Core.Send.SEND_MODE_RAM, "");
       }
     },{
       title: "Flash",
       description : "Executed even after power-down",
       callback : function() { 
         popup.close();
-        sendMethodChanged(1, "");
+        sendMethodChanged(Espruino.Core.Send.SEND_MODE_FLASH, "");
       }
     }];
     if (Espruino.Plugins.Storage)
@@ -97,7 +97,7 @@
         popup.close();
         Espruino.Core.MenuPortSelector.ensureConnected(function() {
           Espruino.Plugins.Storage.showFileChooser({title:"Choose Storage file...", allowNew:true}, function(filename) {
-            sendMethodChanged(3, filename);
+            sendMethodChanged(Espruino.Core.Send.SEND_MODE_STORAGE, filename);
           });
         });
       }
@@ -113,6 +113,9 @@
 
   Espruino.Core.Send = {
     init : init,
-    updateIconInfo : updateIconInfo // update the status 
+    updateIconInfo : updateIconInfo, // update the status 
+    SEND_MODE_RAM : 0,
+    SEND_MODE_FLASH : 1,
+    SEND_MODE_STORAGE : 3
   };
 }());

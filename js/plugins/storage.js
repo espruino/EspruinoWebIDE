@@ -262,7 +262,7 @@
       html = '<div style="overflow-y:auto;font-family: monospace;">'+
         Espruino.Core.Utils.escapeHTML(contents).replace(/\n/g,"<br>")+'</div>';
         buttons.push({ name:"Copy to Editor", callback : function() {
-          Espruino.Core.File.setJSCode(contents, {fileName: fileName});
+          Espruino.Core.File.setJSCode(contents, {fileName: fileName, isStorageFile: true});
           popup.close();
         }});
     } else {

@@ -53,7 +53,7 @@
   /* Files contains objects of this type:
       type :"js"/"xml"
       fileName : "Untitled.js"
-      storageFile : "", // file on Espruino device (Espruino.Config.SAVE_STORAGE_FILE)
+      storageName : "", // file on Espruino device (Espruino.Config.SAVE_STORAGE_FILE)
       sendMode : 0,    // file on Espruino device (Espruino.Config.SAVE_ON_SEND)
       contents : "",   // the actual file contents
       handle           // file handle if loaded using file API
@@ -81,11 +81,15 @@
     var file = {
       type : options.type, // "js"/"xml"
       fileName : "Untitled."+options.type, // file path in filesystem
-      storageFile : "", // file on Espruino device (Espruino.Config.SAVE_STORAGE_FILE)
-      sendMode : 0,    // file on Espruino device (Espruino.Config.SAVE_ON_SEND)
+      storageName : "", // file on Espruino device (Espruino.Config.SAVE_STORAGE_FILE)
+      sendMode : Espruino.Core.Send.SEND_MODE_RAM,    // file on Espruino device (Espruino.Config.SAVE_ON_SEND)
       contents : "",    // the actual file contents
     };
     if (options.fileName) file.fileName = options.fileName;
+    if (options.storageName) {
+      file.storageName = options.storageName;
+      file.sendMode = Espruino.Core.Send.SEND_MODE_STORAGE;
+    }
     if (options.contents)
       file.contents = options.contents;
     else if (!options.isEmpty) {
@@ -361,9 +365,16 @@
     // Handle file send mode or JS changed
     Espruino.addProcessor("sendModeChanged", function(_, callback) {
       if (activeFile>=0 && activeFile<files.length) {
-        files[activeFile].storageName = Espruino.Config.SAVE_STORAGE_FILE;
-        files[activeFile].sendMode = Espruino.Config.SAVE_ON_SEND;
-        saveFileConfig();
+        var f = files[activeFile];
+        f.storageName = Espruino.Config.SAVE_STORAGE_FILE;
+        f.sendMode = Espruino.Config.SAVE_ON_SEND;
+        if (f.storageName!="" && f.type=="js" && f.fileName=="Untitled.js") {
+          f.fileName = f.storageName;
+          if (!f.fileName.endsWith(".js"))
+            f.fileName += ".js";
+          updateFileTabs();
+        }
+        saveFileConfig();        
       }
       callback(_);
     });
@@ -549,7 +560,12 @@
       options.fileName = "code.js";
     var file = files.find(file => file.fileName==options.fileName);
     if (!file) {
-      file = createNewTab({type:"js",fileName:options.fileName,isEmpty:true,contents:code});
+      file = createNewTab({
+        type:"js",
+        fileName:options.fileName,
+        storageName:options.isStorageFile ? options.fileName : undefined,
+        isEmpty:true,
+        contents:code});
     } else {
       if (files[activeFile] != file)
         setActiveFile(files.indexOf(file));
