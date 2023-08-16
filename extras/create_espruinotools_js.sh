@@ -47,7 +47,7 @@ cat EspruinoTools/core/serial.js >> espruinotools.js
 cat EspruinoTools/core/codeWriter.js >> espruinotools.js
 cat EspruinoTools/core/modules.js >> espruinotools.js
 cat EspruinoTools/core/env.js >> espruinotools.js
-#cat EspruinoTools/plugins/compiler.js >> espruinotools.js
+cat EspruinoTools/plugins/compiler.js >> espruinotools.js
 cat EspruinoTools/plugins/assembler.js >> espruinotools.js
 cat EspruinoTools/plugins/getGitHub.js >> espruinotools.js
 #cat EspruinoTools/libs/utf8.js >> espruinotools.js
@@ -71,6 +71,8 @@ Espruino.transform = function(code, options) {
       var d = Espruino.Core.Env.getData();
       d.MODULES = options.builtinModules;
     }
+    if (options.boardData)
+      Object.assign(Espruino.Core.Env.getBoardData(), options.boardData);
 
     Espruino.callProcessor("transformForEspruino", code, resolve);
   });
