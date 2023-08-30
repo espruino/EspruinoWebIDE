@@ -107,7 +107,7 @@
     dirty : bool // was changed but not visible
     remove : function to remove
     setVisible : function(bool)
-    setCode    
+    setCode
   }
   */
   function createNewEditor() {
@@ -168,8 +168,8 @@
       if (changeObj.origin == "paste") {
         var c = cm.getCursor();
         var code = cm.getValue();
-	      var newcode = Espruino.Core.Utils.fixBrokenCode(code);
-	      if (newcode!=code) {
+        var newcode = Espruino.Core.Utils.fixBrokenCode(code);
+        if (newcode!=code) {
           // Only set if code has changed, as it moves the scrollbar location :(
           cm.setValue(newcode);
           cm.setCursor(c);
@@ -223,7 +223,7 @@
         $(editor.div).show();
       } else
         $(editor.div).hide();
-      if (editor.dirty) 
+      if (editor.dirty)
         setTimeout(function () {
           editor.codeMirror.refresh();
         }, 1);
@@ -348,13 +348,13 @@
     getSelectedCode : () => { // get the currently highlighted bit of code
       var ed = getVisibleEditor();
       return ed ? ed.getSelectedCode() : "";
-    }, 
+    },
     getCodeMirror : () => {
       console.warn("Using Espruino.Core.EditorJavaScript.getCodeMirror - deprecated");
       var ed = getVisibleEditor();
       if (!ed) return undefined;
       return ed.codeMirror
-    }, 
+    },
     hideAll : () => {
       editors.forEach(editor => { if (editor.visible) editor.setVisible(false); });
     },
