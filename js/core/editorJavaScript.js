@@ -261,7 +261,7 @@
     // default theme css lives in main css and doesn't need an extra sheet loaded
     if (selectedTheme === 'default') {
       if (codeMirrorThemeCSS) {
-        codeMirrorThemeCSS.parentNode.remove(codeMirrorThemeCSS); // remove previous theme css sheet
+        codeMirrorThemeCSS.remove(); // remove previous theme css sheet
       }
     }else{
       selectedTheme = selectedTheme.replace(/solarized\s(dark|light)/, 'solarized'); // edge case for solarized theme: 1 sheet for both themes
