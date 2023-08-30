@@ -90,7 +90,7 @@
       if (js_beautify) {
         var cm = this;
         cm.setValue(js_beautify(cm.getValue(), {
-          indent_size: codeMirror.getOption('tabSize'),
+          indent_size: Espruino.Config.TAB_SIZE,
         }));
       }
     });
