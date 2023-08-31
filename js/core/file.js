@@ -105,12 +105,21 @@
   }
 
   // Sets the file and the editor up with the file's contents
-  function setFileEditorContents(file, value) {
+  function setFileEditorContents(file, value, options) {
+    options = options||{};
     file.contents = value;
-    if (file.editor)
+    if (file.editor) {
       file.editor.setCode(value);
-    else if (file.type=="xml")
+
+      // If `options.clearHistory`, then mark editor as clean with no
+      // existing undo history. Using this for newly-created editors
+      // will ensure that the first entry in the Undo history sets the
+      // contents to `value` and not empty.
+      if (options.clearHistory) file.editor.codeMirror.clearHistory();
+
+    } else if (file.type=="xml") {
       Espruino.Core.EditorBlockly.setXML(value);
+    }
   }
 
   function setActiveFile(idx) {
@@ -130,7 +139,7 @@
       if (files[idx].editor==undefined) {
         // if we didn't have an editor, make one
         files[idx].editor = Espruino.Core.EditorJavaScript.createNewEditor();
-        setFileEditorContents(files[idx], files[idx].contents);
+        setFileEditorContents(files[idx], files[idx].contents, {clearHistory: true});
       } else {
         files[idx].editor.setVisible(true);
       }
@@ -413,7 +422,7 @@
     // if we're in
     if (openFileMode == "watch" || openFileMode == "upload") {
       watchInterval = setInterval(function() {
-        files.forEach(readFileContents);
+        files.forEach((file) => {readFileContents(file)});
       }, WATCH_INTERVAL);
     }
   }
@@ -457,7 +466,7 @@
           if (!fileHandle.name) return;
           var file = createNewTab({fileName:fileHandle.name, isEmpty:true});
           file.handle = fileHandle;
-          readFileContents(file);
+          readFileContents(file, {clearHistory: true});
         });
       });
     } else if (("undefined"!=typeof chrome) && chrome.fileSystem) {
@@ -468,7 +477,7 @@
           var reader = new FileReader();
           reader.onload = function(e) {
             var file = createNewTab({fileName:fileEntry.name, isEmpty:true});
-            setFileEditorContents(file, convertFromOS(e.target.result));
+            setFileEditorContents(file, convertFromOS(e.target.result), {clearHistory: true});
           };
           reader.onerror = function() {
             Espruino.Core.Notifications.error("Error Loading", true);
@@ -484,14 +493,17 @@
       var mimeTypeList = Object.values(mimeTypes) + "," + Object.keys(mimeTypes);
       Espruino.Core.Utils.fileOpenDialog({id:"code",type:"text",mimeType:mimeTypeList}, function(data, mimeType, fileName) {
         var file = createNewTab({fileName:fileName, isEmpty:true});
-        setFileEditorContents(file, convertFromOS(data));
+        setFileEditorContents(file, convertFromOS(data), {clearHistory: true});
       });
     }
   }
 
 
   // read a file from window.showOpenFilePicker
-  function readFileContents(fileToLoad) {
+  function readFileContents(fileToLoad, options) {
+    options = options||{};
+    if (options.clearHistory === undefined) options.clearHistory = false;
+
     if (!fileToLoad.handle) {
       return;
     }
@@ -509,7 +521,7 @@
       if (!contents) return;
       // if loaded, update editor
       fileToLoad.lastModified = file.lastModified;
-      setFileEditorContents(fileToLoad, convertFromOS(contents));
+      setFileEditorContents(fileToLoad, convertFromOS(contents), {clearHistory: options.clearHistory});
       if (openFileMode == "upload") {
         Espruino.Core.Notifications.info(new Date().toLocaleTimeString() + ": " + fileToLoad.name+" changed, uploading...");
         Espruino.Plugins.KeyShortcuts.action("icon-deploy");
@@ -559,6 +571,7 @@
     if (!options.fileName)
       options.fileName = "code.js";
     var file = files.find(file => file.fileName==options.fileName);
+    let newEditorOpened = false;
     if (!file) {
       file = createNewTab({
         type:"js",
@@ -566,10 +579,11 @@
         storageName:options.isStorageFile ? options.fileName : undefined,
         isEmpty:true,
         contents:code});
+      newEditorOpened = true;
     } else {
       if (files[activeFile] != file)
         setActiveFile(files.indexOf(file));
-      setFileEditorContents(file, code);
+      setFileEditorContents(file, code, {clearHistory: newEditorOpened});
     }
   }
 
