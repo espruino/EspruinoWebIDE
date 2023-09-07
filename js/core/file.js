@@ -533,10 +533,7 @@
          }).
          then(w => {
           writable = w;
-          var data = fileToSave.contents;
-          var rawdata = new Uint8Array(data.length);
-          for (var i=0;i<data.length;i++) rawdata[i]=data.charCodeAt(i);
-          var fileBlob = new Blob([rawdata.buffer], {type: "text/plain"});
+          var fileBlob = new Blob([fileToSave.contents], {type: "text/plain"});
           return writable.write(fileBlob);
          }).
          then(() => writable.close()).
