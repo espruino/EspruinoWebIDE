@@ -100,7 +100,7 @@
       padding: true,
       contents: `<p>This option will update your Espruino WiFi's ESP8266 WiFi
     module to the latest version (${BIN}). This will take several minutes, and should not be stopped
-    halfway. <b>Espruino WiFi should not be in bootloader mode when you connect.</b></p>${options.note?``:`<p>${options.note}</p>`}`,
+    halfway. <b>Espruino WiFi should not be in bootloader mode when you connect.</b></p>${options.note?`<p><b>NOTE: ${options.note}</b></p>`:``}`,
       position: "auto",
       buttons : [{ name:"Next", callback : function() {
         popup.close();
