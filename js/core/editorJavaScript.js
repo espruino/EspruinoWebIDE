@@ -221,13 +221,12 @@
           }
         });
         $(editor.div).show();
-      } else
-        $(editor.div).hide();
-      if (editor.dirty)
         setTimeout(function () {
           editor.codeMirror.refresh();
         }, 1);
-        editor.dirty = false;
+      } else
+        $(editor.div).hide();
+      editor.dirty = false;
     };
     editor.setCode = function(code) {
       editor.codeMirror.setValue(code);
