@@ -104,7 +104,6 @@
     div : DOM element of outer div
     codeMirror : codemirror instance
     visible : bool
-    dirty : bool // was changed but not visible
     remove : function to remove
     setVisible : function(bool)
     setCode
@@ -113,7 +112,6 @@
   function createNewEditor() {
     var editor = {
       id : "code" + (id++),
-      dirty : false,
       visible : true
     };
 
@@ -221,18 +219,14 @@
           }
         });
         $(editor.div).show();
-      } else
-        $(editor.div).hide();
-      if (editor.dirty)
         setTimeout(function () {
           editor.codeMirror.refresh();
         }, 1);
-        editor.dirty = false;
+      } else
+        $(editor.div).hide();
     };
     editor.setCode = function(code) {
       editor.codeMirror.setValue(code);
-      //if (!this.visible)
-      editor.dirty = true;
     };
     editor.getCode = function() {
       var code = editor.codeMirror.getValue();
