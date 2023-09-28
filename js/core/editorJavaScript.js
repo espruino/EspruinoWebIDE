@@ -67,8 +67,8 @@
       defaultValue : 2,
       onChange : function(newValue) {
         for (const ed of Espruino.Core.EditorJavaScript.getEditors()) {
-          ed.codeMirror.setOption('tabSize', Espruino.Config.TAB_SIZE);
-          ed.codeMirror.setOption('indentUnit', Espruino.Config.TAB_SIZE);
+          ed.codeMirror.setOption('tabSize', Number(Espruino.Config.TAB_SIZE));
+          ed.codeMirror.setOption('indentUnit', Number(Espruino.Config.TAB_SIZE));
         }
       }
     });
@@ -90,7 +90,7 @@
       if (js_beautify) {
         var cm = this;
         cm.setValue(js_beautify(cm.getValue(), {
-          indent_size: Espruino.Config.TAB_SIZE,
+          indent_size: Number(Espruino.Config.TAB_SIZE),
         }));
       }
     });
@@ -134,8 +134,8 @@
       keyMap: Espruino.Config.KEYMAP,
       theme: Espruino.Config.THEME,
       indentWithTabs: !!(Espruino.Config.INDENTATION_TYPE == "tabs"),
-      tabSize: Espruino.Config.TAB_SIZE,
-      indentUnit: Espruino.Config.TAB_SIZE,
+      tabSize: Number(Espruino.Config.TAB_SIZE),
+      indentUnit: Number(Espruino.Config.TAB_SIZE),
       extraKeys: {
         "Tab" : function(cm) {
           if (cm.somethingSelected()) {
