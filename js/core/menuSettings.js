@@ -192,7 +192,7 @@
       } else {
         html += '<select name="'+configName+'" style="float: right;">';
         for (var key in config.type)
-          html += '<option value="'+Espruino.Core.Utils.escapeHTML(key)+'" '+(key==value?"selected":"")+'>'+
+          html += '<option value="'+Espruino.Core.Utils.escapeHTML(key, false)+'" '+(key==value?"selected":"")+'>'+
                     Espruino.Core.Utils.escapeHTML(config.type[key])+
                   '</option>';
         html += '</select>';
