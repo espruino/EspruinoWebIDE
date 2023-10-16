@@ -18,31 +18,6 @@
   <link href="../css/components.css" rel="stylesheet" media="all"></link>
   <link href="../css/icons.css" rel="stylesheet" media="all"></link>
 
-  <script>
-    // Force HTTPS - needed for web bluetooth
-    var l = window.location.toString();
-    if (l.substr(0,7)=="http://")
-      window.location = "https://"+l.substr(7);
-  </script>
-
-  <script src="../js/libs/jquery-1.11.0.js"></script>
-  <script src="../js/libs/toastr/toastr.min.js"></script>
-
-  <script src="../EspruinoTools/espruino.js"></script>
-  <!-- load console here, so we get any messages while loading -->
-  <script src="../js/core/settingsConsole.js"></script>
-  <script src="../EspruinoTools/core/utils.js"></script>
-  <script src="../EspruinoTools/core/config.js"></script>
-  <script src="../js/core/html.js"></script>
-  <script src="../js/core/notifications.js"></script>
-  <script src="../js/core/status.js"></script>
-  <script src="../js/core/app.js"></script>
-  <script src="../js/core/menuSettings.js"></script>
-  <script src="../EspruinoTools/core/serial.js"></script>
-  <script src="../EspruinoTools/core/serial_web_bluetooth.js"></script>
-  <script src="../EspruinoTools/core/terminal.js"></script>
-  <script src="relay.js"></script>
-
   <title>Espruino IDE Relay</title>
 </head>
 <body>
@@ -73,7 +48,16 @@
             <div class="v-split__bottom sidebar__buttons sidebar__buttons--bottom"></div>
           </div>
         </div>
-        <div class="canvas editor__canvas"></div>
+        <div class="canvas editor__canvas"><div id="terminal" class="terminal" style="font-size: 18px;">
+          <div style="max-width:400px;margin:auto;">
+          <h1>Web IDE Relay</h1>
+          <p>The Web IDE Relay is no longer being supported. Please use the
+          <a href="https://www.espruino.com/ide/remote">espruino.com/ide/remote</a> instead.</p>
+          <p>Unlike the Web IDE Relay which used a connection to our servers, The <a href="https://www.espruino.com/ide/remote">Web IDE 
+          Remote</a> uses a secure peer-to-peer connection between your devices, which even
+          allows you to view video from the remote device.</p>
+          </div>
+          </div></div>
       </div>
 
       <!-- Status -->
