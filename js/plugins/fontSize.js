@@ -19,7 +19,7 @@
       description : "The size of font used in the Terminal and Code Editor windows",
       type : {8:8,10:10,12:12,14:14,18:18,24:24,32:32},
       defaultValue : 12,
-      onChange :setFontSize
+      onChange : setFontSize
     });
 
     setFontSize(Espruino.Config.FONT_SIZE);

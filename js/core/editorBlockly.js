@@ -89,7 +89,7 @@
     });
 
     // Handle the 'sending' processor so we can update the JS if we need to...
-    Espruino.addProcessor("sending", function(data, callback) {      
+    Espruino.addProcessor("sending", function(data, callback) {
       if(Espruino.Config.BLOCKLY_TO_JS && Espruino.Core.File.isInBlockly()) {
         var activeFile = Espruino.Core.File.getActiveFile();
         Espruino.Core.File.setJSCode( "// Code from Graphical Editor\n"+Espruino.Core.EditorBlockly.getCode() , {fileName:"blockly.js"});
@@ -131,7 +131,8 @@
       }, 500);
     } else {
       // Otherwise we just have the iframe
-      $('<iframe id="divblockly" class="blocky" style="display:none;border:none;" src="'+blocklyUrl+'"></iframe>').appendTo(".editor--code .editor__canvas");
+      $('<iframe id="divblockly" class="blocky" style="border:none;" src="'+blocklyUrl+'"></iframe>').appendTo(".editor--code .editor__canvas");
+      // doing display:none; here breaks new Blockly as of our update in Nov 2023, and it appears not to be needed now
     }
   }
 
@@ -140,14 +141,14 @@
   }
 
   function getXML() {
-    return Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(Blockly.mainWorkspace));
+    return Blockly.Xml.domToText(Blockly.utils.xml.workspaceToDom(Blockly.mainWorkspace));
   }
 
   function setXML(xml) {
     if (Blockly) {
       Blockly.mainWorkspace.clear();
-      Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(xml), Blockly.mainWorkspace);
-    } else 
+      Blockly.Xml.domToWorkspace(Blockly.utils.xml.textToDom(xml), Blockly.mainWorkspace);
+    } else
       whenInitialised.setXML = xml;
   }
 

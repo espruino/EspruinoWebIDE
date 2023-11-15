@@ -64,7 +64,7 @@ window.onload = function() {
     }
   }
   // Set up blockly from toolbox
-  Blockly.inject(document.body,{
+  Blockly.mainWorkspace = Blockly.inject(document.body,{
     toolbox: toolbox,
     media: 'media/',
   });
@@ -87,7 +87,7 @@ window.onload = function() {
 // Patch up scrub_ to allow nested callbacks for stuff like 'wait'
 Blockly.JavaScript.scrub__ = Blockly.JavaScript.scrub_;
 Blockly.JavaScript.scrub_ = function(block, code) {
-  var callbackIdx = goog.isString(code) ? code.indexOf(MAGIC_CALLBACK_CODE) : -1;
+  var callbackIdx = ("string" == typeof code) ? code.indexOf(MAGIC_CALLBACK_CODE) : -1;
   if (callbackIdx>=0) {
     var nextBlock = block.nextConnection && block.nextConnection.targetBlock();
     var nextCode = Blockly.JavaScript.blockToCode(nextBlock);
@@ -382,7 +382,7 @@ Blockly.Blocks.espruino_pinMode = {
 Blockly.Blocks.espruino_code = {
     category: 'Espruino',
     init: function() {
-      this.appendDummyInput().appendField(new Blockly.FieldTextArea("// Enter JavaScript Statements Here"),"CODE");
+      this.appendDummyInput().appendField(new Blockly.FieldMultilineInput("// Enter JavaScript Statements Here"),"CODE");
 
       this.setPreviousStatement(true);
       this.setNextStatement(true);
