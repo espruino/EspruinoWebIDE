@@ -125,7 +125,8 @@ Blockly.setBoardJSON = function(info) {
     if (s in info.devices) PINS.push([s,s]);
   }
   for (i in info.pins)
-    PINS.push([info.pins[i].name, info.pins[i].name]);
+    if (!("NO_BLOCKLY" in info.pins[i].functions))
+      PINS.push([info.pins[i].name, info.pins[i].name]);
 
 
 };
