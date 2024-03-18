@@ -18,7 +18,7 @@ cd ..
 echo Creating espruinotools.js
 cat > espruinotools.js << EOF
 // EspruinoTools bundle (https://github.com/espruino/EspruinoTools)
-// Created with https://github.com/espruino/EspruinoWebIDE/blob/gh-pages/extras/create_espruinotools_js.sh
+// Created with https://github.com/espruino/EspruinoWebIDE/blob/master/extras/create_espruinotools_js.sh
 EOF
 echo "// Based on EspruinoWebIDE " `sed -ne "s/.*version.*\"\(.*\)\".*/\1/p" package.json` >> espruinotools.js
 cat EspruinoTools/espruino.js >> espruinotools.js
