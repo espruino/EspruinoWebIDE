@@ -30,6 +30,7 @@ This is how we'd recommend using the IDE. You can use:
 * Our hosted IDE: https://espruino.com/ide
 * 'master' branch hosted on GitHub Pages: https://espruino.github.io/EspruinoWebIDE/
 * Or your own fork of this repository running on any HTTPS Server (eg GitHub Pages)
+    * If you want to run your fork locally, see [`Installing from GitHub`](#installing-from-github-latest-version) in this readme.
 
 
 Installing From Chrome Web Store
@@ -77,7 +78,18 @@ This will clone both the EspruinoWebIDE repository and the submodule dependencie
 * Download the files in [EspruinoWebIDE](https://github.com/espruino/EspruinoWebIDE) to an `EspruinoWebIDE` directory on your PC (either as a [ZIP File](https://github.com/espruino/EspruinoWebIDE/archive/gh-pages.zip), or using git)
 * Download the files in [EspruinoTools](https://github.com/espruino/EspruinoTools) into the `EspruinoWebIDE/EspruinoTools` on your PC (either as a [ZIP File](https://github.com/espruino/EspruinoTools/archive/gh-pages.zip), or using git)
 
-### Running in [Node.js](https://nodejs.org/en/)
+### Running in [Node.js](https://nodejs.org/en/) as a website (recommended)
+
+This is the version that is also available at https://espruino.com/ide
+
+* Go to the `EspruinoWebIDE` directory
+* Run `npm install`
+* Run `npm run web`
+* Open the link written in your terminal, it will look something like `http://localhost:3000`
+
+### Running in [Node.js](https://nodejs.org/en/) as an application
+
+This version is no longer maintained.
 
 * Go to the `EspruinoWebIDE` directory
 * Run `sudo npm install nw -g`
