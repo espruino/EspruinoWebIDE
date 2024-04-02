@@ -22,7 +22,8 @@
     "espruino-server": "./server.js"
   },
   "scripts": {
-    "start": "nw ."
+    "start": "nw .",
+    "web": "serve ."
   },
   "repository": {
     "type": "git",
@@ -48,5 +49,7 @@
     "serialport": "^9.0.1",
     "winnus": ""
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "serve": "^14.2.1"
+  }
 }
