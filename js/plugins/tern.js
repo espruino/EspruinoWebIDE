@@ -32,7 +32,7 @@
       if (err) throw new Error("Request for ecma5.json failed: " + err);
       espruinoJSON = code;
       server = new CodeMirror.TernServer({defs: [JSON.parse(espruinoJSON)]});
-      
+
       Espruino.Core.EditorJavaScript.getEditors().forEach(applyToEditor);
     });
 
@@ -94,6 +94,12 @@
                 };
             }
           });
+          if ("LCD" in data.devices)
+            defs["g"] = {
+                "!type": "+Graphics",
+                "!doc": "Graphics instance for on-device LCD",
+                "!url": "https://www.espruino.com/Reference#Graphics"
+              };
         }
 
         // reload tern server with new defs
