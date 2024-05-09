@@ -52,7 +52,8 @@ function jsHandleIO() {
       if (ll.length>1) {
         if ("undefined" != typeof onConsoleOutput)
           onConsoleOutput(ll[0]);
-        console.log("EMSCRIPTEN:",ll[0]);
+        else
+          console.log("EMSCRIPTEN:",ll[0]);
         l = ll[1];
       }
     }
