@@ -254,11 +254,11 @@
     });
   }
 
-  function showViewFileDialog(fileName, contents) {
+  function showViewFileDialog(fileName, contents, wasDecoded) {
     console.log("View",fileName);
     var buttons = [{ name:"Ok", callback : function() { popup.close(); }}];
     var html;
-    if (Espruino.Core.Utils.isASCII(contents)) {
+    if (Espruino.Core.Utils.isASCII(contents) || wasDecoded) {
       html = '<div style="overflow-y:auto;font-family: monospace;">'+
         Espruino.Core.Utils.escapeHTML(contents).replace(/\n/g,"<br>")+'</div>';
         buttons.push({ name:"Copy to Editor", callback : function() {
@@ -278,7 +278,7 @@
             Espruino.Plugins.Pretokenise.isTokenised(contents)) {
           buttons.push({ name:"Decode JS", callback : function() {
             popup.close();
-            showViewFileDialog(fileName, Espruino.Plugins.Pretokenise.untokenise(contents));
+            showViewFileDialog(fileName, Espruino.Plugins.Pretokenise.untokenise(contents), true);
           }});
         }
       }
