@@ -7,9 +7,9 @@
 (function(root, mod) {
   if (typeof exports == "object" && typeof module == "object") // CommonJS
     return mod(exports, require("./infer"), require("./signal"),
-               require("acorn"), require("acorn/dist/walk"));
+               require("acorn"), require("acorn-walk"));
   if (typeof define == "function" && define.amd) // AMD
-    return define(["exports", "./infer", "./signal", "acorn/dist/acorn", "acorn/dist/walk"], mod);
+    return define(["exports", "./infer", "./signal", "acorn/dist/acorn", "acorn-walk/dist/walk"], mod);
   mod(root.tern || (root.tern = {}), tern, tern.signal, acorn, acorn.walk); // Plain browser env
 })(this, function(exports, infer, signal, acorn, walk) {
   "use strict";
@@ -28,7 +28,7 @@
     dependencyBudget: 20000,
     reuseInstances: true,
     stripCRs: false,
-    ecmaVersion: 6,
+    ecmaVersion: 9,
     projectDir: "/",
     parent: null
   };
@@ -84,20 +84,20 @@
       allowImportExportEverywhere: true,
       ecmaVersion: srv.options.ecmaVersion,
       allowHashBang: true
-    }
-    var text = srv.signalReturnFirst("preParse", file.text, options) || file.text
-    var ast = infer.parse(text, options)
-    srv.signal("postParse", ast, text)
-    return ast
+    };
+    var text = srv.signalReturnFirst("preParse", file.text, options) || file.text;
+    var ast = infer.parse(text, options);
+    srv.signal("postParse", ast, text);
+    return ast;
   }
 
-  var astral = /[\uD800-\uDBFF]/g
+  var astral = /[\uD800-\uDBFF]/g;
 
   function updateText(file, text, srv) {
     file.text = srv.options.stripCRs ? text.replace(/\r\n/g, "\n") : text;
-    file.hasAstral = astral.test(file.text)
+    file.hasAstral = astral.test(file.text);
     infer.withContext(srv.cx, function() {
-      file.ast = parseFile(srv, file)
+      file.ast = parseFile(srv, file);
     });
     file.lineOffsets = null;
   }
@@ -108,8 +108,8 @@
     for (var o in defaultOptions) if (!options.hasOwnProperty(o))
       options[o] = defaultOptions[o];
 
-    this.projectDir = options.projectDir.replace(/\\/g, "/")
-    if (!/\/$/.test(this.projectDir)) this.projectDir += "/"
+    this.projectDir = options.projectDir.replace(/\\/g, "/");
+    if (!/\/$/.test(this.projectDir)) this.projectDir += "/";
 
     this.parent = options.parent;
     this.handlers = Object.create(null);
@@ -120,12 +120,12 @@
     this.uses = 0;
     this.pending = 0;
     this.asyncError = null;
-    this.mod = {}
+    this.mod = {};
 
-    this.defs = options.defs.slice(0)
-    this.plugins = Object.create(null)
+    this.defs = options.defs.slice(0);
+    this.plugins = Object.create(null);
     for (var plugin in options.plugins) if (options.plugins.hasOwnProperty(plugin))
-      this.loadPlugin(plugin, options.plugins[plugin])
+      this.loadPlugin(plugin, options.plugins[plugin]);
 
     this.reset();
   };
@@ -134,7 +134,7 @@
       // Don't crash when sloppy plugins pass non-existent parent ids
       if (parent && !(parent in this.fileMap)) parent = null;
       if (!(name in this.fileMap))
-        name = this.normalizeFilename(name)
+        name = this.normalizeFilename(name);
       ensureFile(this, name, parent, text);
     },
     delFile: function(name) {
@@ -198,10 +198,10 @@
     },
 
     addDefs: function(defs, toFront) {
-      if (toFront) this.defs.unshift(defs)
-      else this.defs.push(defs)
+      if (toFront) this.defs.unshift(defs);
+      else this.defs.push(defs);
 
-      if (this.cx) this.reset()
+      if (this.cx) this.reset();
     },
 
     deleteDefs: function(name) {
@@ -213,22 +213,22 @@
     },
 
     loadPlugin: function(name, options) {
-      if (arguments.length == 1) options = this.options.plugins[name] || true
-      if (name in this.plugins || !(name in plugins) || !options) return
-      this.plugins[name] = true
-      var init = plugins[name](this, options)
+      if (arguments.length == 1) options = this.options.plugins[name] || true;
+      if (name in this.plugins || !(name in plugins) || !options) return;
+      this.plugins[name] = true;
+      var init = plugins[name](this, options);
 
       // This is for backwards-compatibilty. Don't rely on it -- use addDef and on directly
-      if (!init) return
-      if (init.defs) this.addDefs(init.defs, init.loadFirst)
+      if (!init) return;
+      if (init.defs) this.addDefs(init.defs, init.loadFirst);
       if (init.passes) for (var type in init.passes) if (init.passes.hasOwnProperty(type))
-        this.on(type, init.passes[type])
+        this.on(type, init.passes[type]);
     },
 
     normalizeFilename: function(name) {
-      var norm = this.options.normalizeFilename(name).replace(/\\/g, "/")
-      if (norm.indexOf(this.projectDir) == 0) norm = norm.slice(this.projectDir.length)
-      return norm
+      var norm = this.options.normalizeFilename(name).replace(/\\/g, "/");
+      if (norm.indexOf(this.projectDir) == 0) norm = norm.slice(this.projectDir.length);
+      return norm;
     }
   });
 
@@ -244,7 +244,7 @@
     if (files.length) ++srv.uses;
     for (var i = 0; i < files.length; ++i) {
       var file = files[i];
-      file.name = srv.normalizeFilename(file.name)
+      file.name = srv.normalizeFilename(file.name);
       if (file.type == "delete")
         srv.delFile(file.name);
       else
@@ -269,7 +269,7 @@
       if (queryType.fullFile && file.type == "part")
         return c("Can't run a " + query.type + " query on a file fragment");
 
-      infer.resetGuessing()
+      infer.resetGuessing();
       infer.withContext(srv.cx, function() {
         var result, run = function() { result = queryType.run(srv, query, file); };
         try {
@@ -391,8 +391,8 @@
           try {
             infer.withTimeout(timeBudget[0], function() { analyzeFile(srv, file); });
           } catch(e) {
-            if (e instanceof infer.TimedOut) return c(e)
-            else throw e
+            if (e instanceof infer.TimedOut) return c(e);
+            else throw e;
           }
           timeBudget[0] -= +new Date - startTime;
         } else {
@@ -469,27 +469,29 @@
       var scopeStart = infer.scopeAt(realFile.ast, pos, realFile.scope);
       var scopeEnd = infer.scopeAt(realFile.ast, pos + text.length, realFile.scope);
       var scope = file.scope = scopeDepth(scopeStart) < scopeDepth(scopeEnd) ? scopeEnd : scopeStart;
-      file.ast = parseFile(srv, file)
+      file.ast = parseFile(srv, file);
       infer.analyze(file.ast, file.name, scope);
 
       // This is a kludge to tie together the function types (if any)
       // outside and inside of the fragment, so that arguments and
       // return values have some information known about them.
-      tieTogether: if (inObject || atFunction) {
-        var newInner = infer.scopeAt(file.ast, line.length, scopeStart);
-        if (!newInner.fnType) break tieTogether;
-        if (inObject) {
-          var prop = inObject.type.getProp(inObject.prop);
-          prop.addType(newInner.fnType);
-        } else if (atFunction) {
-          var inner = infer.scopeAt(realFile.ast, pos + line.length, realFile.scope);
-          if (inner == scopeStart || !inner.fnType) break tieTogether;
-          var fOld = inner.fnType, fNew = newInner.fnType;
-          if (!fNew || (fNew.name != fOld.name && fOld.name)) break tieTogether;
-          for (var i = 0, e = Math.min(fOld.args.length, fNew.args.length); i < e; ++i)
-            fOld.args[i].propagate(fNew.args[i]);
-          fOld.self.propagate(fNew.self);
-          fNew.retval.propagate(fOld.retval);
+      tieTogether: {
+        if (inObject || atFunction) {
+          var newInner = infer.scopeAt(file.ast, line.length, scopeStart);
+          if (!newInner.fnType) break tieTogether;
+          if (inObject) {
+            var prop = inObject.type.getProp(inObject.prop);
+            prop.addType(newInner.fnType);
+          } else if (atFunction) {
+            var inner = infer.scopeAt(realFile.ast, pos + line.length, realFile.scope);
+            if (inner == scopeStart || !inner.fnType) break tieTogether;
+            var fOld = inner.fnType, fNew = newInner.fnType;
+            if (!fNew || (fNew.name != fOld.name && fOld.name)) break tieTogether;
+            for (var i = 0, e = Math.min(fOld.args.length, fNew.args.length); i < e; ++i)
+              fOld.args[i].propagate(fNew.args[i]);
+            fOld.self.propagate(fNew.self);
+            fNew.retval.propagate(fOld.retval);
+          }
         }
       }
     });
@@ -566,12 +568,12 @@
   var offsetSkipLines = 25;
 
   function forwardCharacters(file, start, chars) {
-    var pos = start + chars, m
+    var pos = start + chars, m;
     if (file.hasAstral) {
-      astral.lastIndex = start
-      while ((m = astral.exec(file.text)) && m.index < pos) pos++
+      astral.lastIndex = start;
+      while ((m = astral.exec(file.text)) && m.index < pos) pos++;
     }
-    return pos
+    return pos;
   }
 
   function findLineStart(file, line) {
@@ -599,7 +601,7 @@
         pos = forwardCharacters(file, lineStart, pos.ch);
       }
     } else {
-      pos = forwardCharacters(file, 0, pos)
+      pos = forwardCharacters(file, 0, pos);
     }
     if (pos > file.text.length) {
       if (tolerant) pos = file.text.length;
@@ -609,12 +611,12 @@
   };
 
   function charDistanceBetween(file, start, end) {
-    var diff = end - start, m
+    var diff = end - start, m;
     if (file.hasAstral) {
-      astral.lastIndex = start
-      while ((m = astral.exec(file.text)) && m.index < end) diff--
+      astral.lastIndex = start;
+      while ((m = astral.exec(file.text)) && m.index < end) diff--;
     }
-    return diff
+    return diff;
   }
 
   function asLineChar(file, pos) {
@@ -671,7 +673,7 @@
   function pointInProp(objNode, point) {
     for (var i = 0; i < objNode.properties.length; i++) {
       var curProp = objNode.properties[i];
-      if (curProp.key.start <= point && curProp.key.end >= point)
+      if (curProp.key && curProp.key.start <= point && curProp.key.end >= point)
         return curProp;
     }
   }
@@ -679,7 +681,7 @@
   var jsKeywords = ("break do instanceof typeof case else new var " +
     "catch finally return void continue for switch while debugger " +
     "function this with default if throw delete in try").split(" ");
-  var jsKeywordsES6 = jsKeywords.concat("export class extends const super yield import let static".split(" "))
+  var jsKeywordsES6 = jsKeywords.concat("export class extends const super yield import let static".split(" "));
 
   var addCompletion = exports.addCompletion = function(query, completions, name, aval, depth) {
     var typeInfo = query.types || query.docs || query.urls || query.origins;
@@ -711,8 +713,8 @@
 
   function findCompletions(srv, query, file) {
     if (query.end == null) throw ternError("missing .query.end field");
-    var fromPlugin = srv.signalReturnFirst("completion", file, query)
-    if (fromPlugin) return fromPlugin
+    var fromPlugin = srv.signalReturnFirst("completion", file, query);
+    if (fromPlugin) return fromPlugin;
 
     var wordStart = resolvePos(file, query.end), wordEnd = wordStart, text = file.text;
     while (wordStart && acorn.isIdentifierChar(text.charCodeAt(wordStart - 1))) --wordStart;
@@ -759,7 +761,7 @@
         var objProp = pointInProp(exprNode, wordEnd);
         if (objProp) {
           objLit = exprAt;
-          prop = isKey = objProp.key.name;
+          prop = isKey = objProp.key.name || objProp.key.value;
         } else if (!word && !/:\s*$/.test(file.text.slice(0, wordStart))) {
           objLit = exprAt;
           prop = isKey = true;
@@ -794,7 +796,7 @@
       if (objType) infer.forAllPropertiesOf(objType, gather);
 
       if (!completions.length && query.guess !== false && objType && objType.guessProperties)
-        objType.guessProperties(function(p, o, d) {if (p != prop && p != "✖") gather(p, o, d);});
+        objType.guessProperties(function(p, o, d) {if (p != prop && p != "✖" && p != "<i>") gather(p, o, d);});
       if (!completions.length && word.length >= 2 && query.guess !== false)
         for (var prop in srv.cx.props) gather(prop, srv.cx.props[prop][0], 0);
       hookname = "memberCompletion";
@@ -804,10 +806,10 @@
         (srv.options.ecmaVersion >= 6 ? jsKeywordsES6 : jsKeywords).forEach(function(kw) {
           gather(kw, null, 0, function(rec) { rec.isKeyword = true; });
         });
-      };
+      }
       hookname = "variableCompletion";
     }
-    srv.signal(hookname, file, wordStart, wordEnd, gather)
+    srv.signal(hookname, file, wordStart, wordEnd, gather);
 
     if (query.sort !== false) completions.sort(compareCompletions);
     srv.cx.completingProperty = null;
@@ -828,16 +830,16 @@
   }
 
   function inBody(node, pos) {
-    var body = node.body, start, end
-    if (!body) return false
+    var body = node.body, start, end;
+    if (!body) return false;
     if (Array.isArray(body)) {
-      start = body[0].start
-      end = body[body.length - 1].end
+      start = body[0].start;
+      end = body[body.length - 1].end;
     } else {
-      start = body.start
-      end = body.end
+      start = body.start;
+      end = body.end;
     }
-    return start <= pos && end >= pos
+    return start <= pos && end >= pos;
   }
 
   var findExpr = exports.findQueryExpr = function(file, query, wide) {
@@ -851,15 +853,32 @@
       var start = query.start && resolvePos(file, query.start), end = resolvePos(file, query.end);
       var expr = infer.findExpressionAt(file.ast, start, end, file.scope);
       if (!expr) {
+        var span = infer.findClosestExpression(file.ast, start, end, file.scope);
+        if (span && !inBody(span.node, end) &&
+            (wide || (start == null ? end : start) - span.node.start < 20 || span.node.end - end < 20))
+          expr = span;
+      }
+      if (!expr) {
         var around = infer.findExpressionAround(file.ast, start, end, file.scope);
         if (around && !inBody(around.node, end) &&
             (around.node.type == "ObjectExpression" || wide ||
              (start == null ? end : start) - around.node.start < 20 || around.node.end - end < 20))
-          expr = around
+          expr = around;
       }
-      return expr
+      return expr;
     }
   };
+
+  function findExprAround(file, query, wide) {
+    var start = query.start && resolvePos(file, query.start), end = resolvePos(file, query.end);
+    var expr = null;
+    var around = infer.findExpressionAround(file.ast, start, end, file.scope);
+    if (around && !inBody(around.node, end) &&
+        (around.node.type == "ObjectExpression" || wide ||
+         (start == null ? end : start) - around.node.start < 20 || around.node.end - end < 20))
+      expr = around;
+    return expr;
+  }
 
   function findExprOrThrow(file, query, wide) {
     var expr = findExpr(file, query, wide);
@@ -878,11 +897,11 @@
       infer.resetGuessing();
       type = infer.expressionType(expr);
     }
-    var typeHandlers = srv.hasHandler("typeAt")
+    var typeHandlers = srv.hasHandler("typeAt");
     if (typeHandlers) {
-      var pos = resolvePos(file, query.end)
+      var pos = resolvePos(file, query.end);
       for (var i = 0; i < typeHandlers.length; i++)
-        type = typeHandlers[i](file, pos, expr, type)
+        type = typeHandlers[i](file, pos, expr, type);
     }
     if (!type) throw ternError("No type found at the given position.");
 
@@ -900,10 +919,10 @@
       }
     }
     return type;
-  };
+  }
 
-  function findTypeAt(srv, query, file) {
-    var expr = findExpr(file, query), exprName;
+  function findTypeAtExpr(srv, query, file, expr) {
+    var exprName, exprType;
     var type = findExprType(srv, query, file, expr), exprType = type;
     if (query.preferFunction)
       type = type.getFunctionType() || type.getType();
@@ -916,11 +935,27 @@
       else if (expr.node.type == "MemberExpression" && !expr.node.computed)
         exprName = expr.node.property.name;
       else if (expr.node.type == "MethodDefinition" && !expr.node.computed)
-        exprName = expr.node.key.name
+        exprName = expr.node.key.name;
     }
 
     if (query.depth != null && typeof query.depth != "number")
       throw ternError(".query.depth must be a number");
+
+    return [type, exprName, exprType];
+  }
+
+  function findTypeAt(srv, query, file) {
+    var type, exprName, exprType;
+    var expr = findExpr(file, query);
+    var typeResult = findTypeAtExpr(srv, query, file, expr);
+    type = typeResult[0];
+    if (!type) {
+      expr = findExprAround(file, query);
+      typeResult = findTypeAtExpr(srv, query, file, expr);
+      type = typeResult[0];
+    }
+    exprName = typeResult[1];
+    exprType = typeResult[2];
 
     var result = {guess: infer.didGuess(),
                   type: infer.toString(exprType, query.depth),
@@ -950,8 +985,13 @@
   function findDocs(srv, query, file) {
     var expr = findExpr(file, query);
     var type = findExprType(srv, query, file, expr);
-    var result = {url: type.url, doc: parseDoc(query, type.doc), type: infer.toString(type)};
     var inner = type.getType();
+    if (!inner) {
+      expr = findExprAround(file, query);
+      type = findExprType(srv, query, file, expr);
+      inner = type.getType();
+    }
+    var result = {url: type.url, doc: parseDoc(query, type.doc), type: infer.toString(type)};
     if (inner) storeTypeDocs(query, inner, result);
     return clean(result);
   }
@@ -1031,7 +1071,7 @@
       return function(node, scopeHere, ancestors) {
         var value = {file: file.name,
                      start: outputPos(query, file, node.start),
-                     end: outputPos(query, file, node.end)}
+                     end: outputPos(query, file, node.end)};
         if (isRename) {
           for (var s = scopeHere; s != scope; s = s.prev) {
             var exists = s.hasProp(isRename);
@@ -1040,9 +1080,9 @@
                               (asLineChar(file, node.start).line + 1) + " point to the definition at line " +
                               (asLineChar(file, exists.name.start).line + 1));
           }
-          var parent = ancestors[ancestors.length - 2]
+          var parent = ancestors[ancestors.length - 2];
           if (parent && parent.type == "Property" && parent.key == parent.value)
-            value.isShorthand = true
+            value.isShorthand = true;
         }
         refs.push(value);
       };
@@ -1137,7 +1177,7 @@
     var changes = data.changes = [];
     for (var i = 0; i < refs.length; ++i) {
       var use = refs[i];
-      if (use.isShorthand) use.text = expr.node.name + ": " + query.newName
+      if (use.isShorthand) use.text = expr.node.name + ": " + query.newName;
       else use.text = query.newName;
       changes.push(use);
     }
@@ -1149,5 +1189,5 @@
     return {files: srv.files.map(function(f){return f.name;})};
   }
 
-  exports.version = "0.21.0";
+  exports.version = "0.24.3";
 });
