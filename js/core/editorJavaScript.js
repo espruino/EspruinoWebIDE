@@ -13,7 +13,7 @@
 (function(){
   var editors = [];
   var id = 0; // auto-incrementing ID used for codeMirror elements
-  var defaultLintFlags = {
+  var defaultLintFlags = { // https://jshint.com/docs/options/
     esversion   : 6,    // Enable ES6 for literals, arrow fns, binary
     evil        : true, // don't warn on use of strings in setInterval
     laxbreak    : true,  // don't warn about newlines in expressions

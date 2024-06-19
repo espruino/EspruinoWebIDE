@@ -33,6 +33,9 @@
     for ( var i = 0; i < errors.length; i++) {
       var error = errors[i];
       if (error) {
+        if (error.a == 'nullish coalescing') continue; // ignore these warnings - we don't want to enable all ES11 just to disable this
+        if (error.code == "E054") continue; // Class properties must be methods (no way to ignore otherwise?) #298
+        
         if (error.line <= 0) {
           if (window.console) {
             window.console.warn("Cannot display JSHint error (invalid line " + error.line + ")", error);
