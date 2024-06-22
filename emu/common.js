@@ -8,6 +8,7 @@ var maxFlashMemory = 0;
 flashMemory.fill(255);
 
 if ("undefined" != typeof window) {
+  if (window.opener.emu === undefined) window.close();
   if (window.localStorage) {
     let s = localStorage.getItem("BANGLE_STORAGE");
     if (s!=null) {
