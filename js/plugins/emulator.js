@@ -37,7 +37,7 @@ Use embed.js on the client side to link this in.
   }
 
   window.addEventListener('message', function(e) {
-    if (!emu) return;
+    // emu can be undefined when emu window closed OR refreshed.
     var event = e.data;
     //if (typeof event!="object" || event.from!="emu") return;
     console.log("EMU HOST MESSAGE", event);
@@ -114,8 +114,8 @@ Use embed.js on the client side to link this in.
       callback([port], true/*instantPorts*/);
     },
     "open": function(path, openCallback, receiveCallback, disconnectCallback) {
-      chooseDevice(function(device) {
-        if (!device) {
+      chooseDevice(function(emuDevice) {
+        if (!emuDevice) {
           openCallback(null); // flag error
           return;
         }
@@ -129,13 +129,19 @@ Use embed.js on the client side to link this in.
         var url = window.location.pathname;
         if (url.includes("/"))
           url = url.substr(0,url.lastIndexOf("/"));
-        url = window.location.origin + url + device.emulatorURL;
-        emu = window.open(url, "banglewindow", device.emulatorWin);
+        url = window.location.origin + url + emuDevice.emulatorURL;
+        emu = window.open(url, "banglewindow", emuDevice.emulatorWin);
         var inited = false;
         emu.addEventListener("load", function() {
           if (!inited) post({type:"init"});
           inited = true;
         }, false);
+        window.addEventListener("unload", function() {
+          // Ensure emulator window closes on page refresh, so that can be re-init.
+          // Not fail-proof if emu windows was manual refreshed, as cant' post and emu window reference changes.
+          // So: Emu window will close its-self if window.opener.emu is undefined.
+          device.close()
+        });
       });
     },
     "write": function(d, callback) {
