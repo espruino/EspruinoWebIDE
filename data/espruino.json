@@ -1050,6 +1050,16 @@
       "!doc": "<p>Reads debug info. Exposes the current values of <code>accHistoryIdx</code>, <code>accGestureCount</code>, <code>accIdleCount</code>, <code>pollInterval</code> and others.</p>\n<p>Please see the declaration of this function for more information (click the <code>==&gt;</code> link above <a href=\"http://www.espruino.com/Reference#l_Bangle_dbg\">this description</a>)</p>\n",
       "!url": "http://www.espruino.com/Reference#l_Bangle_dbg"
     },
+    "touchWr": {
+      "!type": "fn(reg: number, data: number)",
+      "!doc": "<p>Writes a register on the touch controller</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_Bangle_touchWr"
+    },
+    "touchRd": {
+      "!type": "fn(reg: number, cnt: number) -> ?",
+      "!doc": "<p>Reads a register from the touch controller\n<strong>Note:</strong> On Espruino 2v06 and before this function only returns a number (<code>cnt</code>\nis ignored).</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_Bangle_touchRd"
+    },
     "accelWr": {
       "!type": "fn(reg: number, data: number)",
       "!doc": "<p>Writes a register on the accelerometer</p>\n",
@@ -4650,6 +4660,56 @@
     "!doc": "<p><code>Q2</code> and <code>Q3</code> have all 4 pins connected to Jolt.js&#39;s GPIO (including those usually used for power).\nAs such only around 8mA of power can be supplied to any connected device.</p>\n<p>To use this as a normal Qwiic connector, run <code>Q3.setPower(1)</code></p>\n",
     "!url": "http://www.espruino.com/Reference#l__global_Q3"
   },
+  "Q": {
+    "!type": "?",
+    "!doc": "",
+    "!url": "http://www.espruino.com/Reference#l__global_Q"
+  },
+  "SERVO": {
+    "!type": "+Pin",
+    "!doc": "",
+    "!url": "http://www.espruino.com/Reference#l__global_SERVO"
+  },
+  "IRLED": {
+    "!type": "+Pin",
+    "!doc": "",
+    "!url": "http://www.espruino.com/Reference#l__global_IRLED"
+  },
+  "IRL": {
+    "!type": "+Pin",
+    "!doc": "",
+    "!url": "http://www.espruino.com/Reference#l__global_IRL"
+  },
+  "ML1": {
+    "!type": "+Pin",
+    "!doc": "",
+    "!url": "http://www.espruino.com/Reference#l__global_ML1"
+  },
+  "ML2": {
+    "!type": "+Pin",
+    "!doc": "",
+    "!url": "http://www.espruino.com/Reference#l__global_ML2"
+  },
+  "IRR": {
+    "!type": "+Pin",
+    "!doc": "",
+    "!url": "http://www.espruino.com/Reference#l__global_IRR"
+  },
+  "MR1": {
+    "!type": "+Pin",
+    "!doc": "",
+    "!url": "http://www.espruino.com/Reference#l__global_MR1"
+  },
+  "MR2": {
+    "!type": "+Pin",
+    "!doc": "",
+    "!url": "http://www.espruino.com/Reference#l__global_MR2"
+  },
+  "led": {
+    "!type": "fn(col: ?)",
+    "!doc": "",
+    "!url": "http://www.espruino.com/Reference#l__global_led"
+  },
   "BTNA": {
     "!type": "+Pin",
     "!doc": "<p>The pin connected to the &#39;A&#39; button. Reads as <code>1</code> when pressed, <code>0</code> when not</p>\n",
@@ -4897,7 +4957,7 @@
   },
   "setWatch": {
     "!type": "fn(function: ?, pin: +Pin, options: ?) -> ?",
-    "!doc": "<p>Call the function specified when the pin changes. Watches set with <code>setWatch</code>\ncan be removed using <code>clearWatch</code>.</p>\n<p>If the <code>options</code> parameter is an object, it can contain the following\ninformation (all optional):</p>\n<pre><code>{\n   <span class=\"hljs-comment\">// Whether to keep producing callbacks, or remove the watch after the first callback</span>\n   repeat: <span class=\"hljs-keyword\">true</span>/<span class=\"hljs-keyword\">false</span>(<span class=\"hljs-keyword\">default</span>),\n   <span class=\"hljs-comment\">// Trigger on the rising or falling edge of the signal. Can be a string, or 1=&#x27;rising&#x27;, -1=&#x27;falling&#x27;, 0=&#x27;both&#x27;</span>\n   edge:<span class=\"hljs-string\">&#x27;rising&#x27;</span>(<span class=\"hljs-keyword\">default</span> <span class=\"hljs-keyword\">for</span> built-in buttons)<span class=\"hljs-regexp\">/&#x27;falling&#x27;/</span><span class=\"hljs-string\">&#x27;both&#x27;</span>(<span class=\"hljs-keyword\">default</span> <span class=\"hljs-keyword\">for</span> pins),\n   <span class=\"hljs-comment\">// Use software-debouncing to stop multiple calls if a switch bounces</span>\n   <span class=\"hljs-comment\">// This is the time in milliseconds to wait for bounces to subside, or 0 to disable</span>\n   debounce:<span class=\"hljs-number\">10</span> (<span class=\"hljs-number\">0</span> is <span class=\"hljs-keyword\">default</span> <span class=\"hljs-keyword\">for</span> pins, <span class=\"hljs-number\">25</span> is <span class=\"hljs-keyword\">default</span> <span class=\"hljs-keyword\">for</span> built-in buttons),\n   <span class=\"hljs-comment\">// Advanced: If the function supplied is a &#x27;native&#x27; function (compiled or assembly)</span>\n   <span class=\"hljs-comment\">// setting irq:true will call that function in the interrupt itself</span>\n   irq : <span class=\"hljs-keyword\">false</span>(<span class=\"hljs-keyword\">default</span>)\n   <span class=\"hljs-comment\">// Advanced: If specified, the given pin will be read whenever the watch is called</span>\n   <span class=\"hljs-comment\">// and the state will be included as a &#x27;data&#x27; field in the callback</span>\n   data : pin\n   <span class=\"hljs-comment\">// Advanced: On Nordic devices, a watch may be &#x27;high&#x27; or &#x27;low&#x27; accuracy. By default low</span>\n   <span class=\"hljs-comment\">// accuracy is used (which is better for power consumption), but this means that</span>\n   <span class=\"hljs-comment\">// high speed pulses (less than 25us) may not be reliably received. Setting hispeed=true</span>\n   <span class=\"hljs-comment\">// allows for detecting high speed pulses at the expense of higher idle power consumption</span>\n   hispeed : <span class=\"hljs-keyword\">true</span>\n}\n</code></pre>\n<p>The <code>function</code> callback is called with an argument, which is an object of type\n<code>{state:bool, time:float, lastTime:float}</code>.</p>\n<ul>\n<li><code>state</code> is whether the pin is currently a <code>1</code> or a <code>0</code></li>\n<li><code>time</code> is the time in seconds at which the pin changed state</li>\n<li><code>lastTime</code> is the time in seconds at which the <strong>pin last changed state</strong>.\nWhen using <code>edge:&#39;rising&#39;</code> or <code>edge:&#39;falling&#39;</code>, this is not the same as when\nthe function was last called.</li>\n<li><code>data</code> is included if <code>data:pin</code> was specified in the options, and can be\nused for reading in clocked data</li>\n</ul>\n<p>For instance, if you want to measure the length of a positive pulse you could\nuse <code>setWatch(function(e) { console.log(e.time-e.lastTime); }, BTN, { repeat:true, edge:&#39;falling&#39; });</code>. This will only be called on the falling edge\nof the pulse, but will be able to measure the width of the pulse because\n<code>e.lastTime</code> is the time of the rising edge.</p>\n<p>Internally, an interrupt writes the time of the pin&#39;s state change into a queue\nwith the exact time that it happened, and the function supplied to <code>setWatch</code> is\nexecuted only from the main message loop. However, if the callback is a native\nfunction <code>void (bool state)</code> then you can add <code>irq:true</code> to options, which will\ncause the function to be called from within the IRQ. When doing this, interrupts\nwill happen on both edges and there will be no debouncing.</p>\n<p><strong>Note:</strong> if you didn&#39;t call <code>pinMode</code> beforehand then this function will reset\npin&#39;s state to <code>&quot;input&quot;</code></p>\n<p><strong>Note:</strong> The STM32 chip (used in the <a href=\"/EspruinoBoard\">Espruino Board</a> and\n<a href=\"/Pico\">Pico</a>) cannot watch two pins with the same number - e.g. <code>A0</code> and <code>B0</code>.</p>\n<p><strong>Note:</strong> On nRF52 chips (used in Puck.js, Pixl.js, MDBT42Q) <code>setWatch</code> disables\nthe GPIO output on that pin. In order to be able to write to the pin again you\nneed to disable the watch with <code>clearWatch</code>.</p>\n",
+    "!doc": "<p>Call the function specified when the pin changes. Watches set with <code>setWatch</code>\ncan be removed using <code>clearWatch</code>.</p>\n<p>If the <code>options</code> parameter is an object, it can contain the following\ninformation (all optional):</p>\n<pre><code>{\n   <span class=\"hljs-comment\">// Whether to keep producing callbacks, or remove the watch after the first callback</span>\n   repeat: <span class=\"hljs-keyword\">true</span>/<span class=\"hljs-keyword\">false</span>(<span class=\"hljs-keyword\">default</span>),\n   <span class=\"hljs-comment\">// Trigger on the rising or falling edge of the signal. Can be a string, or 1=&#x27;rising&#x27;, -1=&#x27;falling&#x27;, 0=&#x27;both&#x27;</span>\n   edge:<span class=\"hljs-string\">&#x27;rising&#x27;</span>(<span class=\"hljs-keyword\">default</span> <span class=\"hljs-keyword\">for</span> built-in buttons)<span class=\"hljs-regexp\">/&#x27;falling&#x27;/</span><span class=\"hljs-string\">&#x27;both&#x27;</span>(<span class=\"hljs-keyword\">default</span> <span class=\"hljs-keyword\">for</span> pins),\n   <span class=\"hljs-comment\">// Use software-debouncing to stop multiple calls if a switch bounces</span>\n   <span class=\"hljs-comment\">// This is the time in milliseconds to wait for bounces to subside, or 0 to disable</span>\n   debounce:<span class=\"hljs-number\">10</span> (<span class=\"hljs-number\">0</span> is <span class=\"hljs-keyword\">default</span> <span class=\"hljs-keyword\">for</span> pins, <span class=\"hljs-number\">25</span> is <span class=\"hljs-keyword\">default</span> <span class=\"hljs-keyword\">for</span> built-in buttons),\n   <span class=\"hljs-comment\">// Advanced: If the function supplied is a &#x27;native&#x27; function (compiled or assembly)</span>\n   <span class=\"hljs-comment\">// setting irq:true will call that function in the interrupt itself</span>\n   irq : <span class=\"hljs-keyword\">false</span>(<span class=\"hljs-keyword\">default</span>)\n   <span class=\"hljs-comment\">// Advanced: If specified, the given pin will be read whenever the watch is called</span>\n   <span class=\"hljs-comment\">// and the state will be included as a &#x27;data&#x27; field in the callback (`debounce:0` is required)</span>\n   data : pin\n   <span class=\"hljs-comment\">// Advanced: On Nordic devices, a watch may be &#x27;high&#x27; or &#x27;low&#x27; accuracy. By default low</span>\n   <span class=\"hljs-comment\">// accuracy is used (which is better for power consumption), but this means that</span>\n   <span class=\"hljs-comment\">// high speed pulses (less than 25us) may not be reliably received. Setting hispeed=true</span>\n   <span class=\"hljs-comment\">// allows for detecting high speed pulses at the expense of higher idle power consumption</span>\n   hispeed : <span class=\"hljs-keyword\">true</span>\n}\n</code></pre>\n<p>The <code>function</code> callback is called with an argument, which is an object of type\n<code>{state:bool, time:float, lastTime:float}</code>.</p>\n<ul>\n<li><code>state</code> is whether the pin is currently a <code>1</code> or a <code>0</code></li>\n<li><code>time</code> is the time in seconds at which the pin changed state</li>\n<li><code>lastTime</code> is the time in seconds at which the <strong>pin last changed state</strong>.\nWhen using <code>edge:&#39;rising&#39;</code> or <code>edge:&#39;falling&#39;</code>, this is not the same as when\nthe function was last called.</li>\n<li><code>data</code> is included if <code>data:pin</code> was specified in the options, and can be\nused for reading in clocked data. It will only work if <code>debounce:0</code> is used</li>\n</ul>\n<p>For instance, if you want to measure the length of a positive pulse you could\nuse <code>setWatch(function(e) { console.log(e.time-e.lastTime); }, BTN, { repeat:true, edge:&#39;falling&#39; });</code>. This will only be called on the falling edge\nof the pulse, but will be able to measure the width of the pulse because\n<code>e.lastTime</code> is the time of the rising edge.</p>\n<p>Internally, an interrupt writes the time of the pin&#39;s state change into a queue\nwith the exact time that it happened, and the function supplied to <code>setWatch</code> is\nexecuted only from the main message loop. However, if the callback is a native\nfunction <code>void (bool state)</code> then you can add <code>irq:true</code> to options, which will\ncause the function to be called from within the IRQ. When doing this, interrupts\nwill happen on both edges and there will be no debouncing.</p>\n<p><strong>Note:</strong> if you didn&#39;t call <code>pinMode</code> beforehand then this function will reset\npin&#39;s state to <code>&quot;input&quot;</code></p>\n<p><strong>Note:</strong> The STM32 chip (used in the <a href=\"/EspruinoBoard\">Espruino Board</a> and\n<a href=\"/Pico\">Pico</a>) cannot watch two pins with the same number - e.g. <code>A0</code> and <code>B0</code>.</p>\n<p><strong>Note:</strong> On nRF52 chips (used in Puck.js, Pixl.js, MDBT42Q) <code>setWatch</code> disables\nthe GPIO output on that pin. In order to be able to write to the pin again you\nneed to disable the watch with <code>clearWatch</code>.</p>\n",
     "!url": "http://www.espruino.com/Reference#l__global_setWatch"
   },
   "clearWatch": {
