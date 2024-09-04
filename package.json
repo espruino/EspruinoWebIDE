@@ -1,6 +1,6 @@
 {
   "name": "espruino-web-ide",
-  "version": "0.79.4",
+  "version": "0.79.5",
   "description": "A Terminal and Graphical code Editor for Espruino JavaScript Microcontrollers",
   "//1": "-------------------------------------------------------- nw.js",
   "main": "main.html",
