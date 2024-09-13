@@ -1,15 +1,12 @@
-/* Copyright 2020 Gordon Williams, gw@pur3.co.uk
+/* Copyright 2024 Gordon Williams, gw@pur3.co.uk
    https://github.com/espruino/EspruinoWebTools
 */
 (function (root, factory) {
-    if (typeof define === 'function' && define.amd) {
-        // AMD. Register as an anonymous module.
-        define(['b'], factory);
-    } else if (typeof module === 'object' && module.exports) {
+    if (typeof module === 'object' && module.exports) {
         // Node. Does not work with strict CommonJS, but
         // only CommonJS-like environments that support module.exports,
         // like Node.
-        module.exports = factory(require('b'));
+        module.exports = factory(root.heatshrink);
     } else {
         // Browser globals (root is window)
         root.imageconverter = factory(root.heatshrink);
@@ -227,18 +224,91 @@
     "errorrandom":"Randomised Error Diffusion",
     "bayer2":"2x2 Bayer",
     "bayer4":"4x4 Bayer",
+    "comic":"Comic book"
   };
 
-  const BAYER2 = [
-    [ 0, 2 ],
-    [ 3, 1 ]
+  const DITHER = {
+    BAYER2 : [
+      [ 0, 2 ],
+      [ 3, 1 ]
+    ],
+    BAYER4 : [
+      [ 0, 8, 2,10],
+      [12, 4,14, 6],
+      [ 3,11, 1, 9],
+      [15, 7,13, 5]
+    ],
+    COMICR : [
+      [-18,-16,-13,-15,-14,-9,-9,-15],
+      [-12,-4,6,-4,-12,-4,6,-4],
+      [-6,6,21,6,-6,6,21,6],
+      [-11,0,13,0,-11,-4,6,-4],
+      [-14,0,13,1,-10,-9,-9,-15],
+      [-13,6,21,10,3,6,-4,-16],
+      [-16,-4,6,3,10,21,6,-13],
+      [-19,-16,-13,-12,-3,6,-4,-16]
+    ],
+    COMICG : [
+      [6,-13,-16,-4,6,3,10,21],
+      [-4,-16,-19,-16,-13,-12,-3,6],
+      [-9,-15,-18,-16,-13,-15,-14,-9],
+      [6,-4,-12,-4,6,-4,-12,-4],
+      [21,6,-6,6,21,6,-6,6],
+      [6,-4,-11,0,13,0,-11,-4],
+      [-9,-15,-14,0,13,1,-10,-9],
+      [-4,-16,-13,6,21,10,3,6]
+    ],
+    COMICB : [
+      [-13,-20,-20,-16,3,32,37,10],
+      [-16,-20,-20,-19,-12,3,10,-3],
+      [-18,-16,-13,-16,-18,-16,-13,-16],
+      [-12,3,10,-3,-16,-20,-20,-19],
+      [3,32,37,10,-13,-20,-20,-16],
+      [10,37,32,4,-12,-13,-16,-12],
+      [-2,10,3,-8,-2,10,3,-8],
+      [-12,-13,-16,-12,10,37,32,4]
+    ],
+  };
+
+  /*
+  // to make the COMIC dither pattern
+  // the idea is this is a pattern of blobs a bit like
+  // you might get in a newspaper - hexagonal-ish, and different patterns for R,G and B
+  let G = [ // gaussian
+    [ 1, 4, 7, 4, 1],
+    [ 4,16,26,16, 4],
+    [ 7,26,41,26, 7],
+    [ 4,16,26,16, 4],
+    [ 1, 4, 7, 4, 1],
   ];
-  const BAYER4 = [
-    [ 0, 8, 2,10],
-    [12, 4,14, 6],
-    [ 3,11, 1, 9],
-    [15, 7,13, 5]
-  ];
+
+  let NR = [], NG = [], NB = [];
+  for (var i=0;i<8;i++) {
+    NR[i] = [0,0,0,0,0,0,0,0];
+    NG[i] = [0,0,0,0,0,0,0,0];
+    NB[i] = [0,0,0,0,0,0,0,0];
+  }
+  function blob(x,y,ox,oy) {
+    NR[(y+oy)&7][(x+ox)&7] += G[y][x];
+    NG[(y+oy+2)&7][(x+ox+2)&7] += G[y][x];
+    NB[(y+oy+10-ox)&7][(x+ox+oy)&7] += G[y][x];
+  }
+  for (var y=0;y<G.length;y++)
+    for (var x=0;x<G.length;x++) {
+      blob(x,y,0,0);
+      blob(x,y,4,0);
+      blob(x,y,0,3);
+      blob(x,y,3,4);
+    }
+  let offset = 20;
+  NR = NR.map(R=>R.map(n=>n-offset));
+  NG = NG.map(R=>R.map(n=>n-offset));
+  NB = NB.map(R=>R.map(n=>n-offset));
+  console.log("  COMICR : [\n  "+JSON.stringify(NR).replaceAll("],[","],\n    [").substr(1)+",\n"+
+  "  COMICG : [\n  "+JSON.stringify(NG).replaceAll("],[","],\n    [").substr(1)+",\n"+
+  "  COMICB : [\n  "+JSON.stringify(NB).replaceAll("],[","],\n    [").substr(1)+",\n");
+*/
+
 
   function clip(x) {
     if (x<0) return 0;
@@ -334,15 +404,19 @@
             eg += Math.random()*128 - 64;
             eb += Math.random()*128 - 64;
           } else if (options.diffusion == "bayer2") {
-            var th = BAYER2[x&1][y&1]*64 - 96;
+            var th = DITHER.BAYER2[x&1][y&1]*64 - 96;
             er += th;
             eg += th;
             eb += th;
           } else if (options.diffusion == "bayer4") {
-            var th = BAYER4[x&3][y&3]*16 - 96;
+            var th = DITHER.BAYER4[x&3][y&3]*16 - 96;
             er += th;
             eg += th;
             eb += th;
+          } if (options.diffusion == "comic") {
+            er += DITHER.COMICR[x&7][y&7]*3 + Math.random()*24 - 12;
+            eg += DITHER.COMICG[x&7][y&7]*3 + Math.random()*24 - 12;
+            eb += DITHER.COMICB[x&7][y&7]*3 + Math.random()*24 - 12;
           }
           if (options.inverted) {
             r=255-r;
@@ -561,7 +635,7 @@
 
     //if the image has fewer colors than our palette we need to fill in the remaining entries
     while (pixelCols.length < bppRange) {
-      pixelCols.push(0); 
+      pixelCols.push(0);
     }
     // debugging...
     //console.log("Palette",pixelCols.map(c=>({col:0|c, cnt:colorUses[c], score:scores[c], rgb:(FORMATS["rgb565"].toRGBA(c)&0xFFFFFF).toString(16).padStart(6,"0")})));
