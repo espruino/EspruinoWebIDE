@@ -127,8 +127,24 @@ Blockly.setBoardJSON = function(info) {
   for (i in info.pins)
     if (!("NO_BLOCKLY" in info.pins[i].functions))
       PINS.push([info.pins[i].name, info.pins[i].name]);
-
-
+  /* Quick hack for Jolt.js, at least until we have some
+  other way of putting this in JSON */
+  if (info.info && info.info.name=="Jolt.js") {
+    PINS.push(["Q0 SDA", "Q0.sda"]);
+    PINS.push(["Q0 SCL", "Q0.scl"]);
+    PINS.push(["Q0 FET", "Q0.fet"]);
+    PINS.push(["Q1 SDA", "Q1.sda"]);
+    PINS.push(["Q1 SCL", "Q1.scl"]);
+    PINS.push(["Q1 FET", "Q1.fet"]);
+    PINS.push(["Q2 SDA", "Q2.sda"]);
+    PINS.push(["Q2 SCL", "Q2.scl"]);
+    PINS.push(["Q2 GND", "Q2.gnd"]);
+    PINS.push(["Q2 VCC", "Q2.vcc"]);
+    PINS.push(["Q3 SDA", "Q3.sda"]);
+    PINS.push(["Q3 SCL", "Q3.scl"]);
+    PINS.push(["Q3 GND", "Q3.gnd"]);
+    PINS.push(["Q3 VCC", "Q3.vcc"]);
+  }
 };
 // ---------------------------------
 
