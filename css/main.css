@@ -48,42 +48,59 @@ dd {
 *.paramStyle { background-color:#ccccff; }
 
 #file_list {
-  position: absolute;
-  display: block;
-  left: 50%;
-  bottom: 0px;
-  padding: 0px;
+  flex-shrink: 1;
+  overflow-x: auto;
+  overflow-y: hidden;
+  text-wrap: nowrap;
+  scrollbar-width: thin;
+  scrollbar-color: #2c80b9 #3498db;
+  height: 60px;
+}
+.compact #file_list {
+  height: 30px;
 }
 
-#file_list span.file_list-tab {
+#file_list > span {
   display:inline-block;
-  border-radius: 10px 10px 0px 0px;
   padding: 5px;
-
+  padding-bottom: 9px;
+}
+#file_list > span {
+  border-radius: 10px 10px 0px 0px;
   color: white;
   border-top: 2px solid rgb(35, 101, 146);
   border-left: 2px solid rgb(35, 101, 146);
   border-right: 2px solid rgb(35, 101, 146);
+  margin-top: 22px;
+}
+.compact #file_list > span {
+  font-size: small;
+  padding: 3px;
+  padding-bottom: 6px;
+  border-top: 1px solid rgb(35, 101, 146);
+  border-left: 1px solid rgb(35, 101, 146);
+  border-right: 1px solid rgb(35, 101, 146);
+  margin-top: 0px;
 }
 
-#file_list span.active {
+#file_list > span.active {
   background-color: rgb(35, 101, 146);
 }
 
-#file_list span.inactive {
+#file_list > span.inactive {
   color: rgb(35, 101, 146);
 }
 
-#file_list span.close {
+#file_list>  span.close {
   cursor:grab;
   padding: 0px;
 }
-#file_list span.close:hover {
+#file_list > span.close:hover {
   font-weight:bold;
 }
 
-#file_list span.file_list-new {
+#file_list > span.file_list-new {
   font-weight: bold;
   padding-left: 4px;
-  color: white;
+  border: 0px;
 }

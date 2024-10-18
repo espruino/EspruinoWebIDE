@@ -6,15 +6,13 @@
 
  .h-split
  {
-    display: table;
+    display: flex;
     width: 100%;
  }
 
 .h-split__left,
 .h-split__right
 {
-    display: table-cell;
-    vertical-align: top;
 }
 
 .h-split--middle .h-split__left,
@@ -31,12 +29,16 @@
 
 .h-split__left
 {
-
+    flex-grow: 1;
+    flex-shrink: 0;
 }
 
 .h-split__right
 {
     direction: rtl;
+    float: right;
+    flex-grow: 0;
+    flex-shrink: 0;
 }
 
 .h-split__right > *

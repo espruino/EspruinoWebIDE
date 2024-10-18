@@ -377,7 +377,7 @@
       additionalClasses += " icon--hasinfo";
 
     // add the element
-    var element = Espruino.Core.HTML.domElement('<a id="icon-'+ options.id +'" class="'+ elementClass +' '+ iconSize +' '+ additionalClasses +'" title="'+ options.title +'" data-icon-order="'+ order +'"></a>');
+    var element = Espruino.Core.HTML.domElement('<a id="icon-'+ options.id +'" class="icon '+ elementClass +' '+ iconSize +' '+ additionalClasses +'" title="'+ options.title +'" data-icon-order="'+ order +'"></a>');
     container.append(element);
 
     var info;

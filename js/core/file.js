@@ -202,7 +202,8 @@
 
   function createFileTabs() {
     var element = Espruino.Core.HTML.domElement('<div id="file_list"></div>');
-    document.querySelector(".toolbar").append(element);
+    // add file tabs after left icons (so in the middle, before --right)
+    document.querySelector(".toolbar__buttons--left").after(element);
   }
 
   function closeFileTab(idx) {
@@ -383,7 +384,7 @@
             f.fileName += ".js";
           updateFileTabs();
         }
-        saveFileConfig();        
+        saveFileConfig();
       }
       callback(_);
     });
