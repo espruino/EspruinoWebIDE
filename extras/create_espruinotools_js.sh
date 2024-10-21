@@ -47,6 +47,7 @@ cat EspruinoTools/core/serial.js >> espruinotools.js
 cat EspruinoTools/core/codeWriter.js >> espruinotools.js
 cat EspruinoTools/core/modules.js >> espruinotools.js
 cat EspruinoTools/core/env.js >> espruinotools.js
+cat EspruinoTools/core/terminal.js >> espruinotools.js
 cat EspruinoTools/plugins/compiler.js >> espruinotools.js
 cat EspruinoTools/plugins/assembler.js >> espruinotools.js
 cat EspruinoTools/plugins/getGitHub.js >> espruinotools.js
