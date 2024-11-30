@@ -1,8 +1,8 @@
 var portList;
 /// webtrc instance when initialised
-var webrtc; 
+var webrtc;
 /// If not true, the connection was requested from the top-left and we should just disconnect
-var connectionRequested = false; 
+var connectionRequested = false;
 
 // THIS IS NEVER SHOWN AT THE MOMENT
   Espruino.Core.Terminal.OVERRIDE_CONTENTS = `
@@ -10,14 +10,14 @@ var connectionRequested = false;
   <b>Loading...</b>
   </div>
   `;
-// ABOUT page  
+// ABOUT page
   Espruino.Core.Config.addSection("About", {
     description : undefined,
     sortOrder : -1000,
     getHTML : function(callback) {
       callback(`<h2>Web IDE Remote Connection Bridge</h2>
 <p>
-This Remote Connection Bridge exists so that you can connect 
+This Remote Connection Bridge exists so that you can connect
 the Web IDE to your Espruino devices even if you do not have
 direct access to them or your main PC doesn't have the required
 communications (for instance Bluetooth).
@@ -32,7 +32,7 @@ that you want to use as the Bridge.
 ${(webrtc && webrtc.peerId)?`
 <p>
 If you want to connect to this instance of the Bridge, copy the following code
-and paste it into the <b>Remote Connection Bridge Peer ID</b> field in your 
+and paste it into the <b>Remote Connection Bridge Peer ID</b> field in your
 Web IDE's settings:
 </p><p style="text-align:center;"><b>${webrtc.peerId}</b></p>`:``}`);
     }
@@ -59,7 +59,7 @@ Web IDE's settings:
 
 
   webrtc = webrtcInit({
-    bridge:true, 
+    bridge:true,
     onStatus : function(s) {
       print(s);
     },
@@ -77,7 +77,7 @@ Web IDE's settings:
           clientPeerId = kv[1];
         });
       }
-      if (clientPeerId) 
+      if (clientPeerId)
         webrtc.connectSendPeerId(clientPeerId);
     },
     onGetPorts : function(cb) {
@@ -98,7 +98,7 @@ Web IDE's settings:
     onPortConnect : function(serialPort, cb) {
       if (Espruino.Core.Serial.isConnected())
         Espruino.Core.Serial.close();
-      print("Connecting to "+serialPort);          
+      print("Connecting to "+serialPort);
       connectionRequested = true;
       Espruino.Core.Serial.open(serialPort, function(cInfo) {
         // Ensure that data from Espruino goes here
@@ -144,7 +144,7 @@ Web IDE's settings:
       ports = ports.filter(p => !p.promptsUser);
       if (ports.length)
         print("The following devices are paired:\n  "+ports.map(p=>p.path).join("\n  "));
-      else 
+      else
         print("No devices are paired");
       print("To add more devices please click the connect icon in the top left.");
     });
@@ -156,7 +156,8 @@ Web IDE's settings:
     $("#terminal").css("font-size", Espruino.Config.FONT_SIZE+"px");
 
     print("Web IDE Remote Connection Bridge");
-    Espruino.Core.Terminal.addNotification('<img src="../img/ide_logo.png" onclick="Espruino.Core.MenuSettings.show()"><br/>',{noBorder:true})
+
+    //Espruino.Core.Terminal.addNotification('<img src="../img/ide_logo.png" onclick="Espruino.Core.MenuSettings.show()"><br/>',{noBorder:true});
 
     Espruino.addProcessor("connected", function(data, callback) {
       /* If the connection was initiated from the button in the top left
@@ -169,7 +170,7 @@ Web IDE's settings:
         }, 500);
       }
       connectionRequested = false;
-      callback(data);      
+      callback(data);
     });
 
     Espruino.addProcessor("disconnected", function(data, callback) {
@@ -181,7 +182,7 @@ Web IDE's settings:
       if (data.visible && webrtc) {
         webrtc.connectVideo(data.stream);
       }
-      
+
       callback(data);
     });
 
@@ -195,13 +196,13 @@ Web IDE's settings:
 
   function startWebSocket() {
     console.log("Disabling normal terminal");
-    
-    
+
+
 
     console.log("Starting Websocket connection");
     print("Starting Websocket connection");
     // Create WebSocket connection.
-    
+
     socket.addEventListener('open', function (event) {
       Espruino.Core.Notifications.success("Websocket connection open", true);
 
@@ -218,13 +219,13 @@ Web IDE's settings:
       socketToBLE(event.data);
     });
 
-    
+
 
     function socketToBLE(data) {
       if (data[0]=="\x01") {
         console.log("BLE <- "+JSON.stringify(data.substr(1)));
         // Data to send
-        
+
       } else if (data[0]=="\x20") {
         print("New client connected");
       } else print("Unknown packet type "+JSON.stringify(data[0]));
