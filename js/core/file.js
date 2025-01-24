@@ -309,7 +309,7 @@
       }
     };
     // Only add extra options if showOpenFilePicker is available
-    if (typeof window.showOpenFilePicker === 'function') {
+    if ((typeof window.showOpenFilePicker === 'function') && !Espruino.Core.Utils.isCrossOriginSubframe()) {
       icon.more = function() {
         var popup = Espruino.Core.App.openPopup({
           id: "fileopenmodeselector",
@@ -460,7 +460,7 @@
       return;
     }
     // Otherwise load a new file
-    if (typeof window.showOpenFilePicker === 'function') {
+    if ((typeof window.showOpenFilePicker === 'function')  && !Espruino.Core.Utils.isCrossOriginSubframe()) {
       window.showOpenFilePicker({types: getFilePickerTypes(fileTypes)}).
       then(function(fileHandles) {
         fileHandles.forEach(fileHandle => {
@@ -534,7 +534,7 @@
     /* TODO: if fileToSave.handle, we could write direct to this
     file without the dialog. But then what do we do for 'save as'? The down-arrow
     next to the icon? */
-    if (window.showSaveFilePicker) {
+    if (window.showSaveFilePicker && !Espruino.Core.Utils.isCrossOriginSubframe()) {
       var writable, handle;
        window.showSaveFilePicker({
           suggestedName:fileToSave.fileName,
