@@ -61,7 +61,7 @@
       popup.setContents('<h2 class="list__no-results">Connecting...</h2>');
       function connect() {
         connectToPort(port, function(success){
-          popup.close();
+          if (popup) popup.close();
           if(success){
             if (callback!==undefined) callback();
           }
