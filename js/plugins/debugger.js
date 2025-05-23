@@ -122,6 +122,7 @@
     }
     if (line!==undefined) {
       cm.addLineClass(line, "background", CSS_BG_CLASS);
+      cm.scrollIntoView(line);
     }
     currentDebugLine = line;
   }    
@@ -174,8 +175,14 @@
       if (lastLine && lastLine.indexOf("^")>0) {
         var codeLine = Espruino.Core.Terminal.getTerminalLine(2);
         if (codeLine) {
-          var lineNumber = parseInt(codeLine.substr(0,8).trim());
-          if (lineNumber) setDebugLine(lineNumber-1);
+          var fileLineCol = codeLine.match(/([^:]*):(\d*):(\d*) /);
+          if (fileLineCol!==null) {
+            // 1=file, 2=line, 3=col
+            setDebugLine(fileLineCol[2]-1);
+          } else { // old style - just a line number
+            var lineNumber = parseInt(codeLine.substr(0,8).trim());
+            if (lineNumber) setDebugLine(lineNumber-1);
+          }
         }
       }
     } else {
