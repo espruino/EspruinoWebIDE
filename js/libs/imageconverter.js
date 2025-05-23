@@ -370,17 +370,15 @@
     if (fmt===undefined) throw new Error("Unknown image mode");
     var bpp = fmt.bpp;
     var bitData = new Uint8Array(((options.width*options.height)*bpp+7)/8);
-    var palette, paletteBpp;
+    var palette;
     if (fmt.optimalPalette) {
-      var oldBPP = bpp, oldMode = options.mode;
-      var pixels = readImage(FORMATS["rgb565"]);
+      let pixels = readImage(FORMATS["rgb565"]);
       palette = generatePalette(pixels, options);
       if (palette.transparentCol !== undefined)
         transparentCol = palette.transparentCol;
     }
 
     function readImage(fmt) {
-      var bpp = fmt.bpp;
       var pixels = new Int32Array(options.width*options.height);
       var n = 0;
       var er=0,eg=0,eb=0;
@@ -404,12 +402,12 @@
             eg += Math.random()*128 - 64;
             eb += Math.random()*128 - 64;
           } else if (options.diffusion == "bayer2") {
-            var th = DITHER.BAYER2[x&1][y&1]*64 - 96;
+            let th = DITHER.BAYER2[x&1][y&1]*64 - 96;
             er += th;
             eg += th;
             eb += th;
           } else if (options.diffusion == "bayer4") {
-            var th = DITHER.BAYER4[x&3][y&3]*16 - 96;
+            let th = DITHER.BAYER4[x&3][y&3]*16 - 96;
             er += th;
             eg += th;
             eb += th;
@@ -436,7 +434,7 @@
           pixels[n] = c;
           // error diffusion
           var cr = fmt.toRGBA(c,palette);
-          var oa = cr>>>24;
+          // var oa = cr>>>24; - no error diffusion on alpha channel
           var or = (cr>>16)&255;
           var og = (cr>>8)&255;
           var ob = cr&255;
@@ -472,13 +470,15 @@
             bitData[a+1] |= (c<<(16-shift)) >> 3;
           } else if (bpp==4) bitData[n>>1] |= c<<((n&1)?0:4);
           else if (bpp==8) bitData[n] = c;
-          else if (bpp==16) { bitData[n<<1] = c>>8; bitData[1+(n<<1)] = c&0xFF; }
-          else throw new Error("Unhandled BPP");
+          else if (bpp==16) {
+            bitData[n<<1] = c>>8;
+            bitData[1+(n<<1)] = c&0xFF;
+          } else throw new Error("Unhandled BPP");
           // Write preview
           var cr = fmt.toRGBA(c, palette);
           if (c===transparentCol)
             cr = ((((x>>2)^(y>>2))&1)?0xFFFFFF:0); // pixel pattern
-          var oa = cr>>>24;
+          //var oa = cr>>>24; - ignore alpha
           var or = (cr>>16)&255;
           var og = (cr>>8)&255;
           var ob = cr&255;
@@ -493,27 +493,27 @@
       }
     }
 
-    var pixels = readImage(fmt);
+    let pixels = readImage(fmt);
     if (options.transparent && transparentCol===undefined && bpp<=16) {
       // we have no fixed transparent colour - pick one that's unused
       var colors = new Uint32Array(1<<bpp);
       // how many colours?
-      for (var i=0;i<pixels.length;i++)
+      for (let i=0;i<pixels.length;i++)
         if (pixels[i]>=0)
           colors[pixels[i]]++;
       // find an empty one
-      for (var i=0;i<colors.length;i++)
+      for (let i=0;i<colors.length;i++)
         if (colors[i]==0) {
           transparentCol = i;
           break;
         }
       if (transparentCol===undefined) {
         console.log("No unused colour found - using 0 for transparency");
-        for (var i=0;i<pixels.length;i++)
+        for (let i=0;i<pixels.length;i++)
           if (pixels[i]<0)
             pixels[i]=0;
       } else {
-        for (var i=0;i<pixels.length;i++)
+        for (let i=0;i<pixels.length;i++)
           if (pixels[i]<0)
             pixels[i]=transparentCol;
       }
@@ -549,7 +549,7 @@
       strPostfix = '';
     }
     var str = "";
-    for (n=0; n<bitData.length; n++)
+    for (let n=0; n<bitData.length; n++)
       str += String.fromCharCode(bitData[n]);
     var imgstr;
     if (options.output=="raw") {
@@ -596,9 +596,8 @@
     var bpp = fmt.bpp;
     var bppRange = 1<<bpp;
     var colorUses = {};
-    var n=0;
     // count pixel colors - max 65535 so it's not going to kill us
-    for (var n=0;n<pixels.length;n++) {
+    for (let n=0;n<pixels.length;n++) {
       var px = pixels[n];
       if (!colorUses[px]) colorUses[px]=1;
       else colorUses[px]++;
@@ -654,8 +653,8 @@
     var stride = options.width;
     var cropCol = buf[0];
     var x1=options.width, x2=0, y1=options.height,y2=2;
-    for (var y=0;y<options.height;y++) {
-      for (var x=0;x<options.width;x++) {
+    for (let y=0;y<options.height;y++) {
+      for (let x=0;x<options.width;x++) {
         if (buf[x+y*stride]!=cropCol) {
           if (x<x1) x1=x;
           if (y<y1) y1=y;
@@ -670,8 +669,8 @@
     var w = 1+x2-x1;
     var h = 1+y2-y1;
     var dst = new Uint32Array(w*h);
-    for (var y=0;y<h;y++)
-      for (var x=0;x<w;x++)
+    for (let y=0;y<h;y++)
+      for (let x=0;x<w;x++)
         dst[x+y*w] = buf[(x+x1)+(y+y1)*stride];
     options.width = w;
     options.height = h;
@@ -796,7 +795,7 @@
   function stringToImageHTML(data, options) {
     var url = stringToImageURL(data, options);
     if (!url) return undefined;
-    return '<img src="'+url+'"\>';
+    return '<img src="'+url+'"\\>';
   }
 
   function setFormatOptions(div) {
