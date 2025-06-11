@@ -146,10 +146,19 @@
 
   function setXML(xml) {
     if (Blockly) {
+      var dom = undefined;
+      try {
+        dom = Blockly.utils.xml.textToDom(xml);
+      } catch (e) {
+        console.error(e);
+        Espruino.Core.Notifications.error("Error while loading Blockly XML");
+        return false;
+      }
       Blockly.mainWorkspace.clear();
-      Blockly.Xml.domToWorkspace(Blockly.utils.xml.textToDom(xml), Blockly.mainWorkspace);
+      Blockly.Xml.domToWorkspace(dom, Blockly.mainWorkspace);
     } else
       whenInitialised.setXML = xml;
+    return true;
   }
 
   // Hack around issues Blockly have if we initialise when the window isn't visible
