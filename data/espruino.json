@@ -189,7 +189,7 @@
       },
       "reset": {
         "!type": "fn() -> +Graphics",
-        "!doc": "<p>Reset the state of Graphics to the defaults (e.g. Color, Font, etc) that would\nhave been used when Graphics was initialised.</p>\n",
+        "!doc": "<p>Reset the state of Graphics to the defaults (e.g. Color, Font, etc) that would\nhave been used when Graphics was initialised.</p>\n<p><strong>Note:</strong> The current graphics theme is not reset when <code>g.reset()</code> is called. To reset that\nyou must store the value from <code>g.getTheme()</code> before calling <code>g.setTheme()</code>, and manually\nset it back afterwards.</p>\n",
         "!url": "http://www.espruino.com/Reference#l_Graphics_reset"
       },
       "clear": {
@@ -3526,6 +3526,11 @@
       "!doc": "<p>Check the internal voltage reference. To work out an actual voltage of an input\npin, you can use <code>analogRead(pin)*E.getAnalogVRef()</code></p>\n<p> <strong>Note:</strong> This value is calculated by reading the voltage on an internal\nvoltage reference with the ADC. It will be slightly noisy, so if you need this\nfor accurate measurements we&#39;d recommend that you call this function several\ntimes and average the results.</p>\n<p>While this is implemented on Espruino boards, it may not be implemented on other\ndevices. If so it&#39;ll return NaN.</p>\n",
       "!url": "http://www.espruino.com/Reference#l_E_getAnalogVRef"
     },
+    "getVDDH": {
+      "!type": "fn() -> number",
+      "!doc": "<p>Return the voltage on VDDH input</p>\n<p><strong>Note:</strong> This value is calculated by reading the voltage on an internal\nvoltage reference with the ADC. It will be slightly noisy, so if you need this\nfor accurate measurements we&#39;d recommend that you call this function several\ntimes and average the results.</p>\n",
+      "!url": "http://www.espruino.com/Reference#l_E_getVDDH"
+    },
     "nativeCall": {
       "!type": "fn(addr: number, sig: ?, data: ?) -> ?",
       "!doc": "<p>ADVANCED: It&#39;s very easy to crash Espruino using this function if\nyou get the code/arguments you supply wrong!</p>\n<p>Create a native function that executes the code at the given address, e.g.\n<code>E.nativeCall(0x08012345,&#39;double (double,double)&#39;)(1.1, 2.2)</code></p>\n<p>If you&#39;re executing a thumb function, you&#39;ll almost certainly need to set the\nbottom bit of the address to 1.</p>\n<p>Note it&#39;s not guaranteed that the call signature you provide can be used - there\nare limits on the number of arguments allowed (5).</p>\n<p>When supplying <code>data</code>, if it is a &#39;flat string&#39; then it will be used directly,\notherwise it&#39;ll be converted to a flat string and used.</p>\n<p>The argument types in <code>sig</code> are:</p>\n<ul>\n<li><code>void</code> - returns nothing</li>\n<li><code>bool</code> -  boolean value</li>\n<li><code>int</code> - 32 bit integer</li>\n<li><code>double</code> - 64 bit floating point</li>\n<li><code>float</code> - 32 bit floating point (2v21 and later)</li>\n<li><code>Pin</code> - Espruino &#39;pin&#39; value (8 bit integer)</li>\n<li><code>JsVar</code> - Pointer to an Espruino JsVar structure</li>\n</ul>\n",
@@ -3543,7 +3548,7 @@
     },
     "variance": {
       "!type": "fn(arr: ?, mean: number) -> number",
-      "!doc": "<p>Work out the variance of the contents of the given Array, String or ArrayBuffer\nand return the result. This is equivalent to <code>v=0;for (i in arr) v+=Math.pow(mean-arr[i],2)</code></p>\n",
+      "!doc": "<p>Work out the variance of the contents of the given Array, String or ArrayBuffer\nand return the result. This is equivalent to:</p>\n<pre><code><span class=\"hljs-attribute\">v</span>=<span class=\"hljs-number\">0</span>;\n<span class=\"hljs-attribute\">for</span> (i in arr)\n  <span class=\"hljs-attribute\">v</span>+=Math.pow(mean-arr[i],<span class=\"hljs-number\">2</span>);\n</code></pre>\n",
       "!url": "http://www.espruino.com/Reference#l_E_variance"
     },
     "convolve": {
@@ -3578,7 +3583,7 @@
     },
     "getFlags": {
       "!type": "fn() -> ?",
-      "!doc": "<p>Get Espruino&#39;s interpreter flags that control the way it handles your JavaScript\ncode.</p>\n<ul>\n<li><code>deepSleep</code> - Allow deep sleep modes (also set by setDeepSleep)</li>\n<li><code>pretokenise</code> - When adding functions, pre-minify them and tokenise reserved\nwords</li>\n<li><code>unsafeFlash</code> - Some platforms stop writes/erases to interpreter memory to\nstop you bricking the device accidentally - this removes that protection</li>\n<li><code>unsyncFiles</code> - When writing files, <em>don&#39;t</em> flush all data to the SD card\nafter each command (the default is <em>to</em> flush). This is much faster, but can\ncause filesystem damage if power is lost without the filesystem unmounted.</li>\n</ul>\n",
+      "!doc": "<p>Get Espruino&#39;s interpreter flags that control the way it handles your JavaScript\ncode.</p>\n<ul>\n<li><code>deepSleep</code> - Allow deep sleep modes (also set by setDeepSleep)</li>\n<li><code>pretokenise</code> - When adding functions, pre-minify them and tokenise reserved\nwords</li>\n<li><code>unsafeFlash</code> - Some platforms stop writes/erases to interpreter memory to\nstop you bricking the device accidentally - this removes that protection</li>\n<li><code>unsyncFiles</code> - When writing files, <em>don&#39;t</em> flush all data to the SD card\nafter each command (the default is <em>to</em> flush). This is much faster, but can\ncause filesystem damage if power is lost without the filesystem unmounted.</li>\n<li><code>jitDebug</code> - When JIT compiling, outputs debug info to the console</li>\n<li><code>onErrorSave</code> - [2v27+] when an uncaught error occurs, write it to a\nfile called <code>ERROR</code> in Storage (the file is not updated)</li>\n<li><code>onErrorFlash</code> - [2v27+] when an uncaught error occurs, flash the red LED\nfor 200ms (only on devices with a physical LED)</li>\n</ul>\n",
       "!url": "http://www.espruino.com/Reference#l_E_getFlags"
     },
     "setFlags": {
@@ -3683,7 +3688,7 @@
     },
     "dumpFragmentation": {
       "!type": "fn()",
-      "!doc": "<p>Show fragmentation.</p>\n<ul>\n<li><code> </code> is free space</li>\n<li><code>#</code> is a normal variable</li>\n<li><code>L</code> is a locked variable (address used, cannot be moved)</li>\n<li><code>=</code> represents data in a Flat String (must be contiguous)</li>\n</ul>\n",
+      "!doc": "<p>Show fragmentation. As of 2v27 this stops at the last allocated variable\nso as to avoid outputting blank lines if memory isn&#39;t full.</p>\n<ul>\n<li><code> </code> is free space</li>\n<li><code>#</code> is a normal variable</li>\n<li><code>L</code> is a locked variable (address used, cannot be moved)</li>\n<li><code>=</code> represents data in a Flat String (must be contiguous)</li>\n</ul>\n",
       "!url": "http://www.espruino.com/Reference#l_E_dumpFragmentation"
     },
     "dumpVariables": {
@@ -3693,7 +3698,7 @@
     },
     "defrag": {
       "!type": "fn()",
-      "!doc": "<p>BETA: defragment memory!</p>\n",
+      "!doc": "<p>This defragment&#39;s Espruino&#39;s memory.</p>\n<p>While Espruino does a lot of work to avoid fragmentation (variables spread over memory)\nand can usually work around it (such as by allocating data in chunks) sometimes\nit is useful to be able to allocate a large contiguous chunk of memory, and\nif memory is low and has been fragmented it may need defragmenting in order to\nfind that chunk.</p>\n<p>See <code>E.dumpFragmentation()</code> to show a map of the arrangement of variables\nwithin memory.</p>\n",
       "!url": "http://www.espruino.com/Reference#l_E_defrag"
     },
     "getSizeOf": {
@@ -4152,6 +4157,11 @@
       "!type": "fn(text: ?)",
       "!doc": "<p>Implemented in Espruino as an alias of <code>console.log</code></p>\n",
       "!url": "http://www.espruino.com/Reference#l_console_error"
+    },
+    "trace": {
+      "!type": "fn(text: ?)",
+      "!doc": "",
+      "!url": "http://www.espruino.com/Reference#l_console_trace"
     }
   },
   "OneWire": {
