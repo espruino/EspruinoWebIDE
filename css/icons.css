@@ -293,3 +293,15 @@ a .icon__more:hover {
 .compact .icon-log.lrg:before,
 .icon-log.sml:before { background-position: -60px -2700px }
 
+.icon-upkey.lrg:before { background-position: 0 -2760px }
+.compact .icon-upkey.lrg:before,
+.icon-upkey.sml:before { background-position: -60px -2760px }
+
+.icon-downkey.lrg:before { background-position: 0 -2820px }
+.compact .icon-downkey.lrg:before,
+.icon-downkey.sml:before { background-position: -60px -2820px }
+
+.icon-tabkey.lrg:before { background-position: 0 -2880px }
+.compact .icon-tabkey.lrg:before,
+.icon-tabkey.sml:before { background-position: -60px -2880px }
+
