@@ -224,7 +224,8 @@
     "errorrandom":"Randomised Error Diffusion",
     "bayer2":"2x2 Bayer",
     "bayer4":"4x4 Bayer",
-    "comic":"Comic book"
+    "comic":"Comic book",
+    "floyd":"Floyd-Steinberg"
   };
 
   const DITHER = {
@@ -334,8 +335,27 @@
     return dr*dr + dg*dg + db*db + da*da;
   }
 
+  // blend ca to cb, 0<=amt<=1
+  function blendRGBA8888(ca,cb, amt) {
+    var aa=(ca>>24)&255;
+    var ar=(ca>>16)&255;
+    var ag=(ca>>8)&255;
+    var ab=ca&255;
+    var ba=(cb>>24)&255;
+    var br=(cb>>16)&255;
+    var bg=(cb>>8)&255;
+    var bb=cb&255;
+
+    var namt = 1-amt;
+    var da = Math.round(aa*namt + ba*amt);
+    var dr = Math.round(ar*namt + br*amt);
+    var dg = Math.round(ag*namt + bg*amt);
+    var db = Math.round(ab*namt + bb*amt);
+    return (da<<24)|(dr<<16)|(dg<<8)|db;
+  }
 
   /*
+  rgba = Uint8Array(width*height*4)
   See 'getOptions' for possible options
   */
   function RGBAtoString(rgba, options) {
@@ -344,9 +364,11 @@
     if (!options.width) throw new Error("No Width specified");
     if (!options.height) throw new Error("No Height specified");
 
-    if (options.autoCrop) {
+    if (options.scale && options.scale!=1)
+      rgba = rescale(rgba, options);
+    if (options.autoCrop || options.autoCropCenter)
       rgba = autoCrop(rgba, options);
-    }
+
 
     if ("string"!=typeof options.diffusion)
       options.diffusion = "none";
@@ -382,7 +404,25 @@
       var pixels = new Int32Array(options.width*options.height);
       var n = 0;
       var er=0,eg=0,eb=0;
+      // Floyd-Steinberg error diffusion buffers (current row / next row)
+      var fs = (options.diffusion=="floyd");
+      var fsErrRRow, fsErrGRow, fsErrBRow, fsErrRNext, fsErrGNext, fsErrBNext;
+      if (fs) {
+        fsErrRRow = new Float32Array(options.width+2);
+        fsErrGRow = new Float32Array(options.width+2);
+        fsErrBRow = new Float32Array(options.width+2);
+        fsErrRNext = new Float32Array(options.width+2);
+        fsErrGNext = new Float32Array(options.width+2);
+        fsErrBNext = new Float32Array(options.width+2);
+      }
       for (var y=0; y<options.height; y++) {
+        if (fs) {
+          // move next row errors into current row, clear next row
+            var t;
+            t = fsErrRRow; fsErrRRow = fsErrRNext; fsErrRNext = t; fsErrRNext.fill(0);
+            t = fsErrGRow; fsErrGRow = fsErrGNext; fsErrGNext = t; fsErrGNext.fill(0);
+            t = fsErrBRow; fsErrBRow = fsErrBNext; fsErrBNext = t; fsErrBNext.fill(0);
+        }
         for (var x=0; x<options.width; x++) {
           var r = rgba[n*4];
           var g = rgba[n*4+1];
@@ -421,9 +461,20 @@
             g=255-g;
             b=255-b;
           }
-          r = clip(((r + options.brightness - 128)*contrast) + 128 + er);
-          g = clip(((g + options.brightness - 128)*contrast) + 128 + eg);
-          b = clip(((b + options.brightness - 128)*contrast) + 128 + eb);
+          if (fs) {
+            // Base adjust first, then add accumulated FS error from buffers
+            r = ((r + options.brightness - 128)*contrast) + 128;
+            g = ((g + options.brightness - 128)*contrast) + 128;
+            b = ((b + options.brightness - 128)*contrast) + 128;
+            var ix = x+1; // offset by 1 so we always have space at edges
+            r = clip(r + fsErrRRow[ix]);
+            g = clip(g + fsErrGRow[ix]);
+            b = clip(b + fsErrBRow[ix]);
+          } else {
+            r = clip(((r + options.brightness - 128)*contrast) + 128 + er);
+            g = clip(((g + options.brightness - 128)*contrast) + 128 + eg);
+            b = clip(((b + options.brightness - 128)*contrast) + 128 + eb);
+          }
           var isTransparent = a<128;
 
           var c = fmt.fromRGBA(r,g,b,a,palette);
@@ -438,7 +489,30 @@
           var or = (cr>>16)&255;
           var og = (cr>>8)&255;
           var ob = cr&255;
-          if (options.diffusion.startsWith("error") && a>128) {
+          if (fs && a>128) {
+            // Floyd-Steinberg distribution
+            var eR = r-or;
+            var eG = g-og;
+            var eB = b-ob;
+            // indexes with +1 offset
+            var ix = x+1;
+            // current row, pixel to the right
+            fsErrRRow[ix+1] += eR * (7/16);
+            fsErrGRow[ix+1] += eG * (7/16);
+            fsErrBRow[ix+1] += eB * (7/16);
+            // next row (below left, below, below right)
+            fsErrRNext[ix-1] += eR * (3/16);
+            fsErrGNext[ix-1] += eG * (3/16);
+            fsErrBNext[ix-1] += eB * (3/16);
+            fsErrRNext[ix]   += eR * (5/16);
+            fsErrGNext[ix]   += eG * (5/16);
+            fsErrBNext[ix]   += eB * (5/16);
+            fsErrRNext[ix+1] += eR * (1/16);
+            fsErrGNext[ix+1] += eG * (1/16);
+            fsErrBNext[ix+1] += eB * (1/16);
+            // no per-pixel carryover (er/eg/eb) used in FS mode
+            er = eg = eb = 0;
+          } else if (!fs && options.diffusion.startsWith("error") && a>128) {
             er = r-or;
             eg = g-og;
             eb = b-ob;
@@ -477,7 +551,7 @@
           // Write preview
           var cr = fmt.toRGBA(c, palette);
           if (c===transparentCol)
-            cr = ((((x>>2)^(y>>2))&1)?0xFFFFFF:0); // pixel pattern
+            cr = ((((x>>2)^(y>>2))&1)?0xCCCCCC:0x555555); // pixel pattern
           //var oa = cr>>>24; - ignore alpha
           var or = (cr>>16)&255;
           var og = (cr>>8)&255;
@@ -579,7 +653,7 @@
       for (var x=0; x<options.width; x++) {
         var na = rgba[n*4+3]/255;
         var a = 1-na;
-        var chequerboard = ((((x>>2)^(y>>2))&1)?0xFFFFFF:0);
+        var chequerboard = ((((x>>2)^(y>>2))&1)?0xCC:0x55);
         rgba[n*4]   = rgba[n*4]*na + chequerboard*a;
         rgba[n*4+1] = rgba[n*4+1]*na + chequerboard*a;
         rgba[n*4+2] = rgba[n*4+2]*na + chequerboard*a;
@@ -665,6 +739,13 @@
     }
     // no data! might as well just send it all
     if (x1>x2 || y1>y2) return rgba;
+    // if center, try and take the same off each side
+    if (options.autoCropCenter) {
+      x1 = Math.min(x1, (options.width-1)-x2);
+      y1 = Math.min(y1, (options.height-1)-y2);
+      x2 = (options.width-1)-x1;
+      y2 = (options.height-1)-y1;
+    }
     // ok, crop!
     var w = 1+x2-x1;
     var h = 1+y2-y1;
@@ -675,6 +756,31 @@
     options.width = w;
     options.height = h;
     var cropped = new Uint8ClampedArray(dst.buffer);
+    if (options.rgbaOut) options.rgbaOut = cropped;
+    return cropped;
+  }
+
+  /* attempt to rescale the image - use bilinear interpolation */
+  function rescale(rgba, options) {
+    let scale = options.scale;
+    let dstw = Math.round(options.width*scale);
+    let dsth = Math.round(options.height*scale);
+    let src = new Uint32Array(rgba.buffer);
+    let srcw = options.width;
+    let dst = new Uint32Array(dstw*dsth);
+    for (let y=0;y<dsth;y++)
+      for (let x=0;x<dstw;x++) {
+        let oldx = x / scale;
+        let oldy = y / scale;
+        let ix = Math.floor(oldx), ax=oldx-ix;
+        let iy = Math.floor(oldy), ay=oldy-iy;
+        let ca = blendRGBA8888(src[ix+(srcw*iy)], src[ix+1+(srcw*iy)], ax);
+        let cb = blendRGBA8888(src[ix+(srcw*(iy+1))], src[ix+1+(srcw*(iy+1))], ax);
+        dst[x+y*dstw] = blendRGBA8888(ca,cb,ay);
+      }
+    options.width = dstw;
+    options.height = dsth;
+    let cropped = new Uint8ClampedArray(dst.buffer);
     if (options.rgbaOut) options.rgbaOut = cropped;
     return cropped;
   }
@@ -715,6 +821,7 @@
     return {
       width : "int",
       height : "int",
+      scale : "float", // if specified, scale image size by some amount
       rgbaOut : "Uint8Array", //  to store quantised data
       diffusion : DIFFUSION_TYPES,
       compression : "bool",
@@ -731,6 +838,7 @@
       inverted : "bool",
       alphaToColor : "bool",
       autoCrop : "bool", // whether to crop the image's borders or not
+      autoCropCenter : "bool"
     }
   }
 
@@ -824,6 +932,8 @@
     setOutputOptions : setOutputOptions,
 
     stringToImageHTML : stringToImageHTML,
-    stringToImageURL : stringToImageURL
+    stringToImageURL : stringToImageURL,
+
+    setHeatShrink : hs => heatshrink=hs,
   };
 }));
