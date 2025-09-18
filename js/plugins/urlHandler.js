@@ -46,19 +46,6 @@
           });
         }));
         break;
-      case "upload": // Get "encodedURIcomponent code" from URL and upload it
-        promise = promise.then(new Promise(function(resolve,reject) {
-          Espruino.Core.MenuPortSelector.ensureConnected(function() {
-            Espruino.Core.Terminal.focus(); // give the terminal focus
-            Espruino.callProcessor("sending");
-            Espruino.Core.File.getEspruinoCode(function(code) {
-              Espruino.Core.CodeWriter.writeToEspruino(code, function() {
-                resolve();
-              });
-            });
-          });
-        }));
-        break;
       case "gist": // Get code from a gist number in the URL
         promise = promise.then(new Promise(function(resolve,reject) {
           Espruino.Core.File.setJSCode("// Loading Gist "+val+"...");
@@ -75,6 +62,23 @@
             }
           });
         }));
+        break;
+      case "upload": // Get "encodedURIcomponent code" from URL and upload it
+        promise = promise.then(new Promise(function(resolve,reject) {
+          Espruino.Core.MenuPortSelector.ensureConnected(function() {
+            Espruino.Core.Terminal.focus(); // give the terminal focus
+            Espruino.callProcessor("sending");
+            Espruino.Core.File.getEspruinoCode(function(code) {
+              Espruino.Core.CodeWriter.writeToEspruino(code, function() {
+                resolve();
+              });
+            });
+          });
+        }));
+        break;
+      case "dev": // ?dev=BLE_devicename can restrict what we connect to
+        Espruino.Config.WEB_SERIAL = false;
+        Espruino.Config.WEB_BLUETOOTH_FILTER = val;
         break;
       case "settings":
         Espruino.Plugins.SettingsProfile.updateFromJson(val);

@@ -1,7 +1,7 @@
 Espruino Web IDE  [![Join the chat at https://gitter.im/espruino/Espruino](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/espruino/Espruino?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 ======================
 
-A VT100 Serial Terminal [as a Web App](https://espruino.com/ide) (with both syntax highlighted and graphical editors) - designed for writing code on microcontrollers that use the [Espruino JavaScript interpreter](http://www.espruino.com). It can also run natively via [Node.js](https://nodejs.org/en/) and [Electron](http://electron.atom.io/), or a version 
+A VT100 Serial Terminal [as a Web App](https://espruino.com/ide) (with both syntax highlighted and graphical editors) - designed for writing code on microcontrollers that use the [Espruino JavaScript interpreter](http://www.espruino.com). It can also run natively via [Node.js](https://nodejs.org/en/) and [Electron](http://electron.atom.io/), or a version
 
 [![ScreenShot](extras/screenshot.png)](http://youtu.be/Fjju_QhzL-c)
 [![ScreenShot](extras/screenshot2.png)](http://youtu.be/Fjju_QhzL-c)
@@ -31,6 +31,18 @@ This is how we'd recommend using the IDE. You can use:
 * 'master' branch hosted on GitHub Pages: https://espruino.github.io/EspruinoWebIDE/
 * Or your own fork of this repository running on any HTTPS Server (eg GitHub Pages)
     * If you want to run your fork locally, see [`Installing from GitHub`](#installing-from-github-latest-version) in this readme.
+
+
+### URL options
+
+When running online, you can pass various options on the url:
+
+* `?code=....` set the contents of the editor to the given code value
+* `?codeurl=https://...` set the contents of the editor to the code at the given URL
+* `?gist=1234...` set the contents of the editor to the code in the gist at https://gist.github.com/
+* `?upload` attempt to upload the code (specified above) immediately
+* `?dev=Bangle.js 1234` when connecting, only offer Web Bluetooth, and filter the devices using the given `namePrefix`
+* `?settings={"MINIFICATION_LEVEL":"ESPRIMA"}` apply the given configuration changes specified as JSON (prompts the user!)
 
 
 Installing From Chrome Web Store
