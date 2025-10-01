@@ -126,14 +126,20 @@
 
     // Setup splitter
     if (document.getElementsByClassName("split-pane").length) {
+       var orientation = Espruino.Config.UI_VERTICAL ? "horizontal" : "vertical";
+
       $(".split-pane").splitster({
-        orientation: "vertical", //TODO: Load from local storage,
+        orientation: orientation,
         barWidth: 0, // Don't show the bar when vertical,
         draggable: ".editor--code > .sidebar"
       });
-
+      function updateSplitter() {
+        $(".split-pane").splitster("orientation", orientation);
+        $(".split-pane").splitster("barWidth", orientation == "vertical" ? 0 : 10);
+        $(".split-pane").splitster("draggable", orientation == "vertical" ? ".editor--code > .sidebar" : false);
+      }
+      updateSplitter();
       // Setup orientation button
-      var orientation = "vertical";
       var orientationBtn = Espruino.Core.App.addIcon({
         id: "orientation",
         icon: "split-" + orientation,
@@ -146,9 +152,8 @@
         },
         click: function() {
           orientation = orientation == "vertical" ? "horizontal" : "vertical";
-          $(".split-pane").splitster("orientation", orientation);
-          $(".split-pane").splitster("barWidth", orientation == "vertical" ? 0 : 10);
-          $(".split-pane").splitster("draggable", orientation == "vertical" ? ".editor--code > .sidebar" : false);
+          Espruino.Config.set("UI_VERTICAL", orientation == "horizontal"); // splitter=horiz means vertical layout
+          updateSplitter();
           orientationBtn.setIcon("split-" + orientation);
         }
       });
