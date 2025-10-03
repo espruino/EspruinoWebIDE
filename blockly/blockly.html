@@ -254,7 +254,7 @@
         </value>
       </block>
     </category>
-    <category name="Variables">
+    <category name="Variables" colour="%{BKY_VARIABLES_HUE}">
       <block type="variables_set" inline="false"  >
         <title name="VAR">item</title>
       </block>
@@ -276,7 +276,7 @@
       </block>
       TODO - need to auto-add calls here??
     </category> -->
-    <category name="Espruino" disable_if="smartibot">
+    <category name="Espruino" disable_if="smartibot" colour="190">
       <block type="espruino_getTime"></block>
       <block type="espruino_pin"></block>
       <block type="espruino_watch">
@@ -309,7 +309,7 @@
       <block type="espruino_jsexpression">
       </block>
     </category>
-    <category name="Hardware" disable_if="smartibot">
+    <category name="Hardware" disable_if="smartibot" colour="260">
       <block type="hw_servoMove">
         <value name="PIN"><block type="espruino_pin"><title name="PIN">H0</title></block></value>
         <value name="VAL"><block type="math_number"><title name="NUM">1</title></block></value>
@@ -321,12 +321,17 @@
         <value name="TRIG"><block type="espruino_pin"><title name="PIN">D0</title></block></value>
         <value name="ECHO"><block type="espruino_pin"><title name="PIN">D1</title></block></value>
       </block>
+      <block type="hw_sound">
+      </block>
+      <block type="hw_sound_ul">
+      </block>
       <block type="hw_sound_play">
+        <value name="SOUND"><block type="hw_sound"></block></value>
         <value name="PIN"><block type="espruino_pin"><title name="PIN">H0</title></block></value>
         <value name="SAMPLERATE"><block type="math_number"><title name="NUM">4000</title></block></value>
       </block>
     </category>
-    <category name="Graphics" disable_if="smartibot">
+    <category name="Graphics" disable_if="smartibot" colour="20">
       <block type="gfx_clear">
       </block>
       <block type="gfx_flip">
@@ -362,7 +367,7 @@
         <value name="Y"><block type="math_number"><title name="NUM">20</title></block></value>
       </block>
     </category>
-    <category name="Menus" disable_if="smartibot">
+    <category name="Menus" disable_if="smartibot" colour="10">
       <block type="menu_message">
         <value name="TEXT"><block type="text"><title name="TEXT">Hello</title></block></value>
       </block>
@@ -374,7 +379,7 @@
       </block>
     </category>
     <!-- Bangle.js -->
-    <category name="Bangle.js" disable_if="smartibot">
+    <category name="Bangle.js" disable_if="smartibot" colour="0">
       <block type="bangle_beep"></block>
       <block type="bangle_buzz"></block>
       <block type="bangle_turnon"></block>
@@ -383,7 +388,7 @@
       <block type="bangle_result_bool"></block>
       <block type="bangle_result_number"></block>
     </category>
-    <category name="Robot" enable_if="robot">
+    <category name="Robot" enable_if="robot" colour="160">
       <label text="'motor(l,r)' must be defined in .boot0 for this"></label>
       <block type="robot_fwd">
         <value name="VAL"><block type="math_number"><title name="NUM">1</title></block></value>
@@ -429,7 +434,7 @@
       </block>
     </category>
 
-    <category name="Bluetooth" enable_if="bluetooth">
+    <category name="Bluetooth" enable_if="bluetooth" colour="210">
       <block type="ble_connected"></block>
       <block type="ble_disconnected"></block>
 
@@ -466,7 +471,7 @@
       </block>
       <block type="ble_value"></block>
     </category>
-    <category name="Functions" custom="PROCEDURE"></category>
+    <category name="Functions" custom="PROCEDURE"  colour="%{BKY_PROCEDURES_HUE}"></category>
   </xml>
 
     <!-- Blockly initial code -->
