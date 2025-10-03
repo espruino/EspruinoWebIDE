@@ -97,7 +97,7 @@
       init : init,
       setStatus : setStatus,
       hasProgress : hasProgress,
-      incrementProgress : incrementProgress,
+      incrementProgress : incrementProgress, // an amount based on setStatus(.., progressMax)
       showStatusWindow : showStatusWindow,
       hideStatusWindow : hideStatusWindow
   };
