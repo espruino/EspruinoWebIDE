@@ -241,6 +241,16 @@ Blockly.Blocks.gfx_image = {
     this.appendValueInput('Y')
         .setCheck(['Number'])
         .appendField('Y');
+    let imageDataField = new Blockly.FieldTextInput('', function(value) {
+      if (value!="") fi.setValue(value);
+    });
+    this.appendDummyInput('HIDDEN_INPUT_WRAPPER')
+        .appendField(imageDataField, 'IMAGEDATA');
+    imageDataField.setVisible(false);
+    let imageCodeField = new Blockly.FieldTextInput('');
+    this.appendDummyInput('HIDDEN_INPUT_WRAPPER')
+        .appendField(imageCodeField, 'IMAGECODE');
+    imageCodeField.setVisible(false);
     gfxStatement(this, 'Draw an image');
 
     function onChooseImage(field) {
@@ -262,35 +272,35 @@ Blockly.Blocks.gfx_image = {
         var reader = new FileReader();
         reader.onload = function(e) {
           field.setValue(reader.result);
-          loadImage(reader.result);
+          loadImage(reader.result, true);
         };
         reader.readAsDataURL(e.target.files[0]);
       };
       fileLoader.click();
     }
 
-    function loadImage(url) {
+    function loadImage(url, updateFields) {
+      if (updateFields) imageDataField.setValue(url);
       var img = new Image();
       img.src = url
       img.onload = function () {
         // Add a check for width and height here??
         var str = imageconverter.imagetoString(img, {
           mode:"4bitmac", // 1 bit on Pixl.js?
-          diffusion:"error",
+          diffusion:"floyd",
+          output:"string",
           transparent:true
           //compression:true,
         });
-        block.IMAGESTR = str;
+        if (updateFields) imageCodeField.setValue(str);
       }
     }
     loadImage(defaultImage);
   }
 };
 Blockly.JavaScript.gfx_image = function() {
-  var cmd = this.getFieldValue('IMAGE');
   var x = Blockly.JavaScript.valueToCode(this, 'X', Blockly.JavaScript.ORDER_ASSIGNMENT) || 0;
   var y = Blockly.JavaScript.valueToCode(this, 'Y', Blockly.JavaScript.ORDER_ASSIGNMENT) || 0;
-  var img = this.IMAGESTR;
-
+  var img = this.getFieldValue('IMAGECODE');
   return `g.drawImage(${img}, ${x},${y});\n`;
 };
