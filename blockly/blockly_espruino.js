@@ -57,6 +57,7 @@ var ESPRUINO_SOUND_DATA = {
 //Blockly.HSV_SATURATION = 1; // 0 (inclusive) to 1 (exclusive), defaulting to 0.45
 //Blockly.HSV_VALUE = 0.8; // 0 (inclusive) to 1 (exclusive), defaulting to 0.65
 var ESPRUINO_COL = 190;
+var ESPRUINO_HW_COL = 260;
 
 // Add all possible pins (so if loading a pre-saved file, pins don't revert)
 var PORTS = [
@@ -254,7 +255,6 @@ Blockly.Blocks.espruino_interval = {
 Blockly.Blocks.espruino_pin = {
 //      category: 'Espruino',
   init: function() {
-    var originalPin = undefined;
     var pinSelector = new Blockly.FieldDropdown(() => PINS);
     this.setColour(ESPRUINO_COL);
     this.setOutput(true, 'Pin');
@@ -449,7 +449,7 @@ Blockly.Blocks.hw_servoMove = {
 
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setColour(ESPRUINO_COL);
+    this.setColour(ESPRUINO_HW_COL);
     this.setInputsInline(true);
     this.setTooltip(Blockly.Msg.ESPRUINO_MOVE_SERVO_TOOLTIP);
   }
@@ -463,7 +463,7 @@ Blockly.Blocks.hw_servoStop = {
 
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setColour(ESPRUINO_COL);
+    this.setColour(ESPRUINO_HW_COL);
     this.setInputsInline(true);
     this.setTooltip(Blockly.Msg.ESPRUINO_STOP_SERVO_TOOLTIP);
 
@@ -479,17 +479,116 @@ Blockly.Blocks.hw_ultrasonic = {
         .setCheck('Pin')
         .appendField(Blockly.Msg.ESPRUINO_ULTRASONIC_ECHO);
     this.setOutput(true, 'Number');
-    this.setColour(ESPRUINO_COL);
+    this.setColour(ESPRUINO_HW_COL);
     this.setInputsInline(true);
     this.setTooltip(Blockly.Msg.ESPRUINO_ULTRASONIC_TOOLTIP);
   }
 };
+// ----------------------------------------------------------
+Blockly.Blocks.hw_sound = {
+//      category: 'Espruino',
+  init: function() {
+    this.setColour(ESPRUINO_HW_COL);
+    this.setOutput(true, 'Sound');
+    this.appendDummyInput().appendField("Sound:").appendField(new Blockly.FieldDropdown(() => ESPRUINO_SOUNDS), 'SOUNDID');
+    this.setTooltip("A pre-recorded sound");
+  },
+};
+Blockly.Blocks.hw_sound_ul = {
+//      category: 'Espruino',
+  init: function() {
+    var fi = new Blockly.FieldImage(
+      "media/uploadsound.png",
+      128,32,"*",
+      onUpload);
+    fi.EDITABLE = true;
+    let audioDataField = new Blockly.FieldTextInput('');
+    let audioThumbUrlField = new Blockly.FieldTextInput('', function(value) {
+      if (value!="") fi.setValue(value);
+    });
+    this.appendDummyInput()
+        .appendField("Sound:").appendField(audioDataField, 'AUDIODATA').appendField(audioThumbUrlField, 'AUDIOTHUMB')
+        .appendField(fi);
+    audioDataField.setVisible(false);
+    audioThumbUrlField.setVisible(false);
+    this.setColour(ESPRUINO_HW_COL);
+    this.setOutput(true, 'Sound');
+    this.setTooltip("Upload a sound (max 10sec)");
+
+    function onUpload() {
+      var loaderId = "SoundImageLoader";
+      var fileLoader = document.getElementById(loaderId);
+      if (!fileLoader) {
+        fileLoader = document.createElement("input");
+        fileLoader.setAttribute("id", loaderId);
+        fileLoader.setAttribute("type", "file");
+        fileLoader.setAttribute("style", "z-index:-2000;position:absolute;top:0px;left:0px;");
+        fileLoader.setAttribute("accept","audio/*");
+        fileLoader.addEventListener('click', function(e) {
+          e.target.value = ''; // handle repeated upload of the same file
+        });
+        document.body.appendChild(fileLoader);
+      }
+      fileLoader.onchange = function(e) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+          loadSound(e.target.result);
+        };
+        reader.readAsArrayBuffer(e.target.files[0]);
+      };
+      fileLoader.click();
+    }
+    function loadSound(data) {
+      // create thumbnail
+      const canvas = document.createElement('canvas');
+      canvas.width = 128;
+      canvas.height = 32;
+      const ctx = canvas.getContext('2d');
+      ctx.beginPath();
+      ctx.moveTo(0, 16)
+      // audio process
+      const SAMPLERATE = 4000;
+      const offlineAudioContext = new OfflineAudioContext(1, SAMPLERATE*10/*buffer length*/, SAMPLERATE);
+      offlineAudioContext.decodeAudioData(data)
+        .then(audioBuffer => {
+          const bufferLength = audioBuffer.length;
+          const numberOfChannels = audioBuffer.numberOfChannels;
+          // Get the PCM data from the audio buffer
+          const pcmData = new Float32Array(bufferLength);
+          audioBuffer.copyFromChannel(pcmData, 0, 0); // copy from first channel only
+          // TODO: could average channels?
+          // convert it to 8 bit format and append
+          let wavContents = "";
+          let length = Math.min(pcmData.length, SAMPLERATE*10);
+          for (let i = 0; i < length; i++) {
+            ctx.lineTo(i*128/length, 16 + 16*pcmData[i]);
+            var v = 128+Math.round(pcmData[i] * 127);
+            if (v<0) v=0;
+            if (v>255) v=255;
+            wavContents += String.fromCharCode(v);
+          }
+          audioDataField.setValue(btoa(wavContents));
+          ctx.stroke();
+          const imgUrl = canvas.toDataURL('image/png');
+          audioThumbUrlField.setValue(imgUrl);
+        }, error => {
+          console.error('Error decoding audio data:', error);
+        });
+    }
+  },
+};
 Blockly.Blocks.hw_sound_play = {
   category: 'Espruino',
+  saveExtraState : function() {
+    return { uploadedAudio : this.uploadedAudio };
+  },
+  loadExtraState : function(state) {
+    if (state.uploadedAudio)
+      this.uploadedAudio = state.uploadedAudio;
+  },
   init: function() {
-    this.appendDummyInput()
-         .appendField('Play Sound')
-         .appendField(new Blockly.FieldDropdown(ESPRUINO_SOUNDS), 'SOUND');
+    this.appendDummyInput().appendField('Play');
+    this.appendValueInput('SOUND').setCheck('Sound');
     this.appendValueInput('PIN')
         .setCheck('Pin')
         .appendField('on');
@@ -500,7 +599,9 @@ Blockly.Blocks.hw_sound_play = {
          .appendField('Hz');
     this.appendStatementInput('DO')
          .appendField("when finished");
+
     robotStatement(this, 'Play a sound at a specific sample rate');
+    this.setColour(ESPRUINO_HW_COL);
   }
 };
 
@@ -617,15 +718,23 @@ Blockly.JavaScript.hw_ultrasonic = function() {
       "}"]);
   return [funcVar+"()", Blockly.JavaScript.ORDER_ATOMIC];
 };
+Blockly.JavaScript.hw_sound = function() {
+  var sound_id = this.getFieldValue('SOUNDID');
+  var sound_var = "wave_"+sound_id;
+  Blockly.JavaScript.definitions_[sound_var] = `E.${sound_var} = E.toArrayBuffer(atob(${JSON.stringify(ESPRUINO_SOUND_DATA[sound_id])}));`;
+  return [`E.${sound_var}`, Blockly.JavaScript.ORDER_ATOMIC];
+}
+Blockly.JavaScript.hw_sound_ul = function() {
+  var audioData = this.getFieldValue('AUDIODATA');
+  return [`E.toArrayBuffer(atob(${JSON.stringify(audioData)}))`, Blockly.JavaScript.ORDER_ATOMIC];
+}
 Blockly.JavaScript.hw_sound_play = function() {
-  var sound_id = this.getFieldValue('SOUND');
+  var sound = Blockly.JavaScript.valueToCode(this, 'SOUND', Blockly.JavaScript.ORDER_ASSIGNMENT);
   var pin = Blockly.JavaScript.valueToCode(this, 'PIN', Blockly.JavaScript.ORDER_ASSIGNMENT) || '0';
   var pitch = Blockly.JavaScript.valueToCode(this, 'SAMPLERATE', Blockly.JavaScript.ORDER_ASSIGNMENT) || '4000';
   var branch = Blockly.JavaScript.statementToCode(this, 'DO');
-  var sound_var = "wave_"+sound_id;
-  Blockly.JavaScript.definitions_[sound_var] = `E.${sound_var} = E.toArrayBuffer(atob("${ESPRUINO_SOUND_DATA[sound_id]}"));`;
   return `{
-  let w = new Waveform(E.${sound_var});
+  let w = new Waveform(${sound});
   analogWrite(${pin}, 0.5, {freq:80000});
   w.startOutput(${pin}, ${pitch});
   w.on("finish", function(buf) {
@@ -633,7 +742,5 @@ Blockly.JavaScript.hw_sound_play = function() {
   ${branch.replaceAll("\n","\n  ")}
   });
 }\n`;
-
-  return "Thingy.sound("+sound_var+","+pitch+",function() {\n"+branch+"});\n";
 };
 // -----------------------------------------------------------------------------------
