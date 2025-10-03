@@ -284,6 +284,7 @@
       </block>
       <block type="espruino_digitalWrite">
         <value name="PIN"><block type="espruino_pin"><title name="PIN">LED1</title></block></value>
+        <value name="VAL"><block type="math_number"><title name="NUM">1</title></block></value>
       </block>
       <block type="espruino_digitalPulse">
         <value name="PIN"><block type="espruino_pin"><title name="PIN">LED1</title></block></value>
@@ -294,7 +295,8 @@
         <value name="PIN"><block type="espruino_pin"><title name="PIN">BTN1</title></block></value>
       </block>
       <block type="espruino_analogWrite">
-        <value name="PIN"><block type="espruino_pin"><title name="PIN">A1</title></block></value>
+        <value name="PIN"><block type="espruino_pin"><title name="PIN">LED1</title></block></value>
+        <value name="VAL"><block type="math_number"><title name="NUM">0.5</title></block></value>
       </block>
       <block type="espruino_analogRead">
         <value name="PIN"><block type="espruino_pin"><title name="PIN">A0</title></block></value>
@@ -309,15 +311,19 @@
     </category>
     <category name="Hardware" disable_if="smartibot">
       <block type="hw_servoMove">
-        <value name="PIN"><block type="espruino_pin"><title name="PIN">B13</title></block></value>
+        <value name="PIN"><block type="espruino_pin"><title name="PIN">H0</title></block></value>
         <value name="VAL"><block type="math_number"><title name="NUM">1</title></block></value>
       </block>
       <block type="hw_servoStop">
-        <value name="PIN"><block type="espruino_pin"><title name="PIN">B13</title></block></value>
+        <value name="PIN"><block type="espruino_pin"><title name="PIN">H0</title></block></value>
       </block>
       <block type="hw_ultrasonic">
-        <value name="TRIG"><block type="espruino_pin"><title name="PIN">B4</title></block></value>
-        <value name="ECHO"><block type="espruino_pin"><title name="PIN">B3</title></block></value>
+        <value name="TRIG"><block type="espruino_pin"><title name="PIN">D0</title></block></value>
+        <value name="ECHO"><block type="espruino_pin"><title name="PIN">D1</title></block></value>
+      </block>
+      <block type="hw_sound_play">
+        <value name="PIN"><block type="espruino_pin"><title name="PIN">H0</title></block></value>
+        <value name="SAMPLERATE"><block type="math_number"><title name="NUM">4000</title></block></value>
       </block>
     </category>
     <category name="Graphics" disable_if="smartibot">
