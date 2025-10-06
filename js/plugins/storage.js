@@ -119,7 +119,9 @@
       },function(contents, mimeType, fileName) {
       var contentsToUpload = contents;
       var imageTypes = ['image/gif', 'image/jpeg', 'image/png'];
+      var audioTypes = ['audio/mpeg', 'audio/wav', 'audio/ogg', 'audio/aac'];
       var isImage = imageTypes.includes(mimeType);
+      var isAudio = audioTypes.includes(mimeType);
       var html = `<div>
       <p>Uploading <span id="ressize">${contents.length}</span> bytes to Storage.</p>
       <label for="filename">Filename (max ${MAX_FILENAME_LEN} chars)</label><br/>
@@ -142,6 +144,17 @@
             <th>Converted</th></tr>
         <tr><td><canvas id="canvas1" style="display:none;"></canvas></td>
             <td><canvas id="canvas2" style="display:none;"></canvas></td>
+        </tr></table>
+        </div>
+        `;
+      } else if (isAudio) {
+         html += `<p>The file you uploaded is audio...</p>
+        <input type="checkbox" id="convert" checked>Convert for Espruino</input><br/>
+        <div id="audiooptions">
+        If converted, the file will be 8 bit, unsigned raw data that can be used with the <code>Waveform</code> class.<br/>
+        Sample Rate: <input type="number" id="samplerate" min="1000" max="32000" value="4000"></input><br/>
+        <br/>
+        <div id="status"></div>
         </div>
         `;
       }
@@ -174,7 +187,7 @@
       if (isImage) {
         var controls = {
           convert : popup.window.querySelector("#convert"),
-          imageoptionsdiv : popup.window.querySelector("#imageoptions"),
+          optionsdiv : popup.window.querySelector("#imageoptions"),
           transparent : popup.window.querySelector("#transparent"),
           inverted : popup.window.querySelector("#inverted"),
           autoCrop : popup.window.querySelector("#autoCrop"),
@@ -188,23 +201,23 @@
         };
         imageconverter.setFormatOptions(controls.colorStyle);
         imageconverter.setDiffusionOptions(controls.diffusion);
-        controls.convert.addEventListener("change", recalculate);
-        controls.transparent.addEventListener("change", recalculate);
-        controls.inverted.addEventListener("change", recalculate);
-        controls.autoCrop.addEventListener("change", recalculate);
-        controls.diffusion.addEventListener("change", recalculate);
-        controls.brightness.addEventListener("change", recalculate);
-        controls.contrast.addEventListener("change", recalculate);
-        controls.colorStyle.addEventListener("change", recalculate);
+        controls.convert.addEventListener("change", recalculateImage);
+        controls.transparent.addEventListener("change", recalculateImage);
+        controls.inverted.addEventListener("change", recalculateImage);
+        controls.autoCrop.addEventListener("change", recalculateImage);
+        controls.diffusion.addEventListener("change", recalculateImage);
+        controls.brightness.addEventListener("change", recalculateImage);
+        controls.contrast.addEventListener("change", recalculateImage);
+        controls.colorStyle.addEventListener("change", recalculateImage);
 
         var img;
-        function recalculate() {
+        function recalculateImage() {
           var convert = controls.convert.checked;
           if (!convert || (img === undefined)) {
             contentsToUpload = contents;
-            controls.imageoptionsdiv.style = "display:none;";
+            controls.optionsdiv.style = "display:none;";
           } else {
-            controls.imageoptionsdiv.style = "display:block;";
+            controls.optionsdiv.style = "display:block;";
 
             var options = {};
             options.output = "raw";
@@ -248,8 +261,58 @@
           controls.ressize.innerHTML = contentsToUpload.length+" Bytes";
         }
         img = new Image();
-        img.onload = recalculate;
+        img.onload = recalculateImage;
         img.src = "data:"+mimeType+";base64,"+Espruino.Core.Utils.btoa(contents);
+      } else if (isAudio) {
+        var controls = {
+          convert : popup.window.querySelector("#convert"),
+          optionsdiv : popup.window.querySelector("#audiooptions"),
+          samplerate : popup.window.querySelector("#samplerate"),
+          status : popup.window.querySelector("#status"),
+          ressize : popup.window.querySelector("#ressize")
+        }
+        controls.convert.addEventListener("change", recalculateAudio);
+        controls.samplerate.addEventListener("change", recalculateAudio);
+
+        function recalculateAudio() {
+          var convert = controls.convert.checked;
+          if (!convert) {
+            contentsToUpload = contents;
+            controls.optionsdiv.style = "display:none;";
+          } else {
+            controls.optionsdiv.style = "display:block;";
+            const SAMPLERATE = 0|controls.samplerate.value;
+            const offlineAudioContext = new OfflineAudioContext(1, SAMPLERATE*10/*buffer length*/, SAMPLERATE);
+            const wavArray = new Uint8Array(contents.length);
+            for (let i = 0; i < contents.length; i++)
+              wavArray[i] = contents.charCodeAt(i);
+            offlineAudioContext.decodeAudioData(wavArray.buffer)
+              .then(audioBuffer => {
+                const bufferLength = audioBuffer.length;
+                const numberOfChannels = audioBuffer.numberOfChannels;
+                // Get the PCM data from the audio buffer
+                const pcmData = new Float32Array(bufferLength);
+                audioBuffer.copyFromChannel(pcmData, 0, 0); // copy from first channel only
+                // TODO: could average channels?
+                // convert it to 8 bit format and append
+                let wavContents = "";
+                let length = Math.min(pcmData.length, SAMPLERATE*30); // max 30 seconds!!
+                let isTruncated = length!=pcmData.length;
+                for (let i = 0; i < length; i++) {
+                  var v = 128+Math.round(pcmData[i] * 127);
+                  if (v<0) v=0;
+                  if (v>255) v=255;
+                  wavContents += String.fromCharCode(v);
+                }
+                contentsToUpload = wavContents;
+                controls.ressize.innerHTML = contentsToUpload.length+" Bytes";
+                controls.status.innerText = `Encoded to: ${(length/SAMPLERATE).toFixed(1)} sec, ${wavContents.length} bytes` + (isTruncated?" (TRUNCATED!)":"");
+              }, error => {
+                console.error('Error decoding audio data:', error);
+              });
+          }
+        }
+        recalculateAudio();
       }
     });
   }
