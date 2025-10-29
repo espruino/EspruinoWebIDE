@@ -105,18 +105,19 @@
           });
         }
       });
-      items.push({
-        title: "SD Card",
-        description : "Choose a file on an SD card to save to (if available)",
-        callback : function() {
-          popup.close();
-          Espruino.Core.MenuPortSelector.ensureConnected(function() {
-            Espruino.Plugins.Storage.showFileChooser({title:"Choose SD card file...", allowNew:true, fs:1}, function(filename) {
-              sendMethodChanged(Espruino.Core.Send.SEND_MODE_SDCARD, filename);
+      if (Espruino.Config.SHOW_SDCARD_ICON)
+        items.push({
+          title: "SD Card",
+          description : "Choose a file on an SD card to save to (if available)",
+          callback : function() {
+            popup.close();
+            Espruino.Core.MenuPortSelector.ensureConnected(function() {
+              Espruino.Plugins.Storage.showFileChooser({title:"Choose SD card file...", allowNew:true, fs:1}, function(filename) {
+                sendMethodChanged(Espruino.Core.Send.SEND_MODE_SDCARD, filename);
+              });
             });
-          });
-        }
-      });
+          }
+        });
     }
     var popup = Espruino.Core.App.openPopup({
       id: "sendmethod",

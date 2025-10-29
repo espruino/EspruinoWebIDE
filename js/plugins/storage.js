@@ -15,8 +15,17 @@
   var CHUNKSIZE = 384;// or any multiple of 96 for atob/btoa
   var MAX_FILENAME_LEN = 28; // 28 on 2v05 and newer, 8 on 2v04 and older
   var STORAGEFILE_POSTFIX = " (StorageFile)";
+  var iconSDCard;
 
   function init() {
+    Espruino.Core.Config.add("SHOW_SDCARD_ICON", {
+      section : "Communications",
+      name : "SD Card (fs) Support",
+      description : "Show an icon that allows you to access files on an SD Card (if your device supports it)",
+      type : "boolean",
+      defaultValue : false,
+      onChange : function(newValue) { showSDCardIcon(newValue); }
+    });
     Espruino.Core.App.addIcon({
       id: "storage",
       icon: "storage",
@@ -32,21 +41,32 @@
         });
       }
     });
-    Espruino.Core.App.addIcon({
-      id: "storage",
-      icon: "sdcard",
-      title : "Access files on SD Card",
-      order: 300,
-      area: {
-        name: "code",
-        position: "top"
-      },
-      click: function() {
-        Espruino.Core.MenuPortSelector.ensureConnected(function() {
-          showStorage({fs:1});
-        });
+    showSDCardIcon(Espruino.Config.SHOW_SDCARD_ICON);
+  }
+
+  function showSDCardIcon(show) {
+    if (show) {
+      iconSDCard = Espruino.Core.App.addIcon({
+        id: "storage",
+        icon: "sdcard",
+        title : "Access files on SD Card",
+        order: 300,
+        area: {
+          name: "code",
+          position: "top"
+        },
+        click: function() {
+          Espruino.Core.MenuPortSelector.ensureConnected(function() {
+            showStorage({fs:1});
+          });
+        }
+      });
+    } else {
+      if (iconSDCard!==undefined) {
+        iconSDCard.remove();
+        iconSDCard = undefined;
       }
-    });
+    }
   }
 
   function getTitle(options) {
