@@ -1035,6 +1035,11 @@
         "!type": "fn(destination: ?, options: ?)",
         "!doc": "<p>Pipe this file to a stream (an object with a &#39;write&#39; method)</p>\n",
         "!url": "http://www.espruino.com/Reference#l_File_pipe"
+      },
+      "truncate": {
+        "!type": "fn(length: ?) -> bool",
+        "!doc": "<p>Truncate the file. If <code>length</code> is supplied it truncates to that length in bytes\nfrom start of file; otherwise it truncates at the current file position.\nFile must be opened with write access (w, w+, a, r+). Returns true on success.</p>\n",
+        "!url": "http://www.espruino.com/Reference#l_File_truncate"
       }
     }
   },

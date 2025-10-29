@@ -305,3 +305,7 @@ a .icon__more:hover {
 .compact .icon-tabkey.lrg:before,
 .icon-tabkey.sml:before { background-position: -60px -2880px }
 
+.icon-sdcard.lrg:before { background-position: 0 -2940px }
+.compact .icon-sdcard.lrg:before,
+.icon-sdcard.sml:before { background-position: -60px -2940px }
+

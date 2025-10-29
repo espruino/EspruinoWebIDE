@@ -28,10 +28,31 @@
       },
       click: function() {
         Espruino.Core.MenuPortSelector.ensureConnected(function() {
-          showStorage();
+          showStorage({});
         });
       }
     });
+    Espruino.Core.App.addIcon({
+      id: "storage",
+      icon: "sdcard",
+      title : "Access files on SD Card",
+      order: 300,
+      area: {
+        name: "code",
+        position: "top"
+      },
+      click: function() {
+        Espruino.Core.MenuPortSelector.ensureConnected(function() {
+          showStorage({fs:1});
+        });
+      }
+    });
+  }
+
+  function getTitle(options) {
+    if (options && options.fs==1)
+      return "SD Card";
+    return "Device Storage";
   }
 
   function formatFilename(fileName) {
@@ -40,30 +61,39 @@
     return fileName;
   }
 
-  function downloadFile(fileName, callback) {
-    Espruino.Core.Status.showStatusWindow("Device Storage","Downloading "+JSON.stringify(fileName));
+  /// Get the file path when writing to fs
+  function getFSFilePath(options, fileName) {
+    if (options.dir && options.dir.length>0)
+      return options.dir+"/"+fileName;
+    return fileName;
+  }
+
+  function downloadFile(options, fileName, callback) {
+    Espruino.Core.Status.showStatusWindow(getTitle(options), "Downloading "+JSON.stringify(getFSFilePath(options, fileName)));
     // if it was a storagefile, remove the last char - downloadFile will work it out automatically
     if (fileName.endsWith(STORAGEFILE_POSTFIX)) {
       fileName = fileName.substr(0, fileName.length-STORAGEFILE_POSTFIX.length);
     }
-    Espruino.Core.Utils.downloadFile(fileName, function(contents) {
+    Espruino.Core.Utils.downloadFile(getFSFilePath(options, fileName), function(contents) {
       Espruino.Core.Status.hideStatusWindow();
       if (contents===undefined)
         return Espruino.Core.Notifications.error("Timed out receiving file")
       callback(contents);
-    });
+    }, {fs:options.fs});
   }
 
-  function uploadFile(fileName, contents, callback) {
-    Espruino.Core.Status.showStatusWindow("Device Storage","Uploading "+JSON.stringify(fileName));
-    Espruino.Core.Utils.uploadFile(fileName, contents, function() {
+  function uploadFile(options, fileName, contents, callback) {
+    Espruino.Core.Status.showStatusWindow(getTitle(options), "Uploading "+JSON.stringify(getFSFilePath(options, fileName)));
+    Espruino.Core.Utils.uploadFile(getFSFilePath(options, fileName), contents, function() {
       Espruino.Core.Status.hideStatusWindow();
       callback();
-    });
+    }, {fs:options.fs});
   }
 
-  function deleteFile(fileName, callback) {
-    if (fileName.endsWith(STORAGEFILE_POSTFIX)) {
+  function deleteFile(options, fileName, callback) {
+    if (options.fs) {
+      Espruino.Core.Utils.executeStatement(`require("fs").unlink(${JSON.stringify(getFSFilePath(options, fileName))})\n`, callback);
+    } else if (fileName.endsWith(STORAGEFILE_POSTFIX)) {
       fileName = fileName.substr(0, fileName.length-STORAGEFILE_POSTFIX.length);
       Espruino.Core.Utils.executeStatement(`require("Storage").open(${JSON.stringify(fileName)},"r").erase()\n`, callback);
     } else {
@@ -71,10 +101,13 @@
     }
   }
 
-  function getFileList(callback) {
-    //callback(['"a"','"b"','"c"']);
-
-    Espruino.Core.Utils.executeStatement(`require('Storage').list().forEach(x=>print(JSON.stringify(x)));`, function(files) {
+  function getFileList(options, callback) {
+    //callback([{fn:'"a"'},{fn:'"b"'},...]);
+    // and d:0/1 for SD card if a directory
+    let cmd = options.fs ?
+      `require('fs').readdirSync(${options.dir?JSON.stringify(options.dir):""}).forEach(x=>{ if (x!="." && x!="..") print(JSON.stringify({fn:x,d:0|require("fs").statSync(${options.dir?JSON.stringify(options.dir+"/")+"+":""}x).dir}))});` :
+      `require('Storage').list().forEach(x=>print(JSON.stringify({fn:x})));`
+    Espruino.Core.Utils.executeStatement(cmd, function(files) {
       var fileList = [];
       try {
         fileList = Espruino.Core.Utils.parseJSONish("["+files.trim().replace(/\n/g,",")+"]");
@@ -110,7 +143,7 @@
     return hexdump;
   }
 
-  function showUploadFileDialog() {
+  function showUploadFileDialog(options) {
     Espruino.Core.Utils.fileOpenDialog({
         id:"storage",
         type:"text",
@@ -177,7 +210,7 @@
             return;
           }
           console.log("Write file to Storage as "+JSON.stringify(filename));
-          uploadFile(filename, contentsToUpload, function() {
+          uploadFile(options, filename, contentsToUpload, function() {
             console.log("Upload complete!");
           });
           popup.close();
@@ -317,7 +350,7 @@
     });
   }
 
-  function showViewFileDialog(fileName, contents, wasDecoded) {
+  function showViewFileDialog(options, fileName, contents, wasDecoded) {
     console.log("View",fileName);
     var buttons = [{ name:"Ok", callback : function() { popup.close(); }}];
     var html;
@@ -341,7 +374,7 @@
             Espruino.Plugins.Pretokenise.isTokenised(contents)) {
           buttons.push({ name:"Decode JS", callback : function() {
             popup.close();
-            showViewFileDialog(fileName, Espruino.Plugins.Pretokenise.untokenise(contents), true);
+            showViewFileDialog(options, fileName, Espruino.Plugins.Pretokenise.untokenise(contents), true);
           }});
         }
       }
@@ -360,7 +393,7 @@
     });
     }
 
-  function showDeleteFileDialog(fileName) {
+  function showDeleteFileDialog(options, fileName) {
     var popup = Espruino.Core.App.openPopup({
       id: "storagefiledelete",
       title: "Really remove "+formatFilename(fileName)+"?",
@@ -368,37 +401,38 @@
       contents: "Do you really want to remove this file?",
       position: "auto",
       buttons : [{ name:"Yes", callback : function() {
-        deleteFile(fileName, function() {
+        deleteFile(options, fileName, function() {
           Espruino.Core.Status.setStatus("File deleted.");
-          showStorage();
+          showStorage(options);
         });
         popup.close();
       }},{ name:"No", callback : function() { popup.close(); }}]
     });
   }
 
-  function showStorage() {
+  function showStorage(options) {
     var popup = Espruino.Core.App.openPopup({
       id: "storage",
-      title: "Device Storage",
+      title: getTitle(options),
       padding: false,
       contents: Espruino.Core.HTML.htmlLoading(),
       position: "auto",
     });
-    getFileList(function(fileList) {
+    getFileList(options, function(fileList) {
       var items = [{
         title: "Upload files",
         icon : "icon-folder-open",
         callback : function() {
           popup.close();
-          showUploadFileDialog();
+          showUploadFileDialog(options);
         }
-      }, {
+      }];
+      if (!options.fs) items.push({
         title : "Download from RAM",
         right: [{ title:"View", icon:"icon-eye",
           callback : function() { // view the file
             Espruino.Core.Utils.executeStatement(`dump();`, function(contents) {
-              showViewFileDialog("RAM", contents);
+              showViewFileDialog(options, "RAM", contents);
             });
           }
         },{ title:"Save", icon:"icon-save",
@@ -408,45 +442,51 @@
             });
           }
         }]
-      }];
+      });
 
-      fileList.filter(fileName=>{
-        return fileName.endsWith("\u0001");
-      }).forEach(fileName=>{
-        var prefix = fileName.slice(0,-1);
+      fileList.filter(file=>{
+        return file.fn.endsWith("\u0001");
+      }).forEach(file=>{
+        var prefix = file.fn.slice(0,-1);
         console.log("Found StorageFile "+prefix);
         // filter out any files with the same name
-        fileList = fileList.filter(f=>f.slice(0,-1) != prefix);
-        // Add out new file
+        fileList = fileList.filter(f=>f.fn.slice(0,-1) != prefix);
+        // Add our new file at the end
         fileList.push(prefix+STORAGEFILE_POSTFIX);
       });
 
-      fileList.forEach(function(fileName) {
+      fileList.forEach(function(file) {
         items.push({
-          title : formatFilename(fileName),
-          right: [{ title:"View", icon:"icon-eye",
+          title : formatFilename(file.fn),
+          right: file.d ? [{ title:"Enter Subfolder", icon:"icon-folder",
             callback : function() { // view the file
-              downloadFile(fileName, function(contents) {
-                showViewFileDialog(fileName, contents);
+              var o = Object.assign({}, options);
+              o.dir = (o.dir?o.dir+"/":"")+file.fn;
+              showStorage(o);
+            }
+          }] : [{ title:"View", icon:"icon-eye",
+            callback : function() { // view the file
+              downloadFile(options, file.fn, function(contents) {
+                showViewFileDialog(options, file.fn, contents);
               });
             }
           },{ title:"Run file", icon:"icon-debug-go",
             callback : function() { // Save the file
               popup.close();
-              Espruino.Core.Serial.write(`\x03\x10load(${JSON.stringify(fileName)})\n`, false, function() {
-                Espruino.Core.Notifications.success(`${JSON.stringify(fileName)} loaded`, true);
+              Espruino.Core.Serial.write(`\x03\x10load(${JSON.stringify(file.fn)})\n`, false, function() {
+                Espruino.Core.Notifications.success(`${JSON.stringify(file.fn)} loaded`, true);
               });
             }
           },{ title:"Save", icon:"icon-save",
             callback : function() { // Save the file
-              downloadFile(fileName, function(contents) {
-                Espruino.Core.Utils.fileSaveDialog(contents, fileName);
+              downloadFile(options, file.fn, function(contents) {
+                Espruino.Core.Utils.fileSaveDialog(contents, file.fn);
               });
             }
           },{ title:"Delete", icon:"icon-bin",
             callback : function() { // Delete the file
               popup.close();
-              showDeleteFileDialog(fileName);
+              showDeleteFileDialog(options, file.fn);
             }
           }]
         });
@@ -461,6 +501,8 @@
   options = {
     title // title for window
     allowNew // add an option to type in a new filename
+    fs // 0=Storage (default), 1=SD Card
+    dir // if sd card, the directory
   }
   */
   function showFileChooser(options, callback) {
@@ -471,7 +513,7 @@
       contents: Espruino.Core.HTML.htmlLoading(),
       position: "auto",
     });
-    getFileList(function(fileList) {
+    getFileList(options, function(fileList) {
       var items = [];
 
       if (options.allowNew) {
@@ -498,7 +540,7 @@
                   return;
                 }
                 popup.close();
-                callback(filename);
+                callback(getFSFilePath(options, filename));
               }}, { name:"Cancel", callback : function() { popup.close(); }}]
             });
             popup.window.querySelector(".filenameinput").focus();
@@ -507,20 +549,27 @@
       }
 
       // filter out any 'StorageFile' files
-      fileList.filter(fileName=>{
-        return fileName.endsWith("\u0001");
-      }).forEach(fileName=>{
-        var prefix = fileName.slice(0,-1);
-        fileList = fileList.filter(f=>f.slice(0,-1) != prefix);
+      fileList.filter(file=>{
+        return file.fn.endsWith("\u0001");
+      }).forEach(file=>{
+        var prefix = file.fn.slice(0,-1);
+        fileList = fileList.filter(f=>f.fn.slice(0,-1) != prefix);
       });
 
-      fileList.forEach(function(fileName) {
+      fileList.forEach(function(file) {
         items.push({
-          title : formatFilename(fileName),
-          //icon : "icon-...",
+          title : formatFilename(file.fn),
+          icon : file.d ? "icon-folder" : undefined,
           callback : function() {
-            popup.close();
-            callback(fileName);
+            if (file.d) {
+              popup.close();
+              var o = Object.assign({}, options);
+              o.dir = (o.dir?o.dir+"/":"")+file.fn;
+              showFileChooser(o, callback);
+            } else {
+              popup.close();
+              callback(getFSFilePath(options, file.fn));
+            }
           }
         });
       });

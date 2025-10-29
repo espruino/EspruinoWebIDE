@@ -17,7 +17,8 @@
     "RAM",
     "Flash",
     "&#9888;Flash",
-    ""
+    "", // Storage
+    ""  // SD Card
   ];
 
   function updateIconInfo() {
@@ -25,6 +26,8 @@
     var txt = NAMES[n];
     if (n==Espruino.Core.Send.SEND_MODE_STORAGE)
       txt = /*"&#x1f5ce;"+*/Espruino.Config.SAVE_STORAGE_FILE;
+    if (n==Espruino.Core.Send.SEND_MODE_SDCARD)
+      txt = "&#x1f5ce;"+Espruino.Config.SAVE_STORAGE_FILE;
     sendIcon.setInfo(txt);
   }
 
@@ -64,9 +67,9 @@
     });
   }
 
-  function sendMethodChanged(sendMode, sendFile) { 
+  function sendMethodChanged(sendMode, sendFile) {
     Espruino.Config.set("SAVE_ON_SEND",sendMode | Espruino.Core.Send.SEND_MODE_RAM);
-    Espruino.Config.set("SAVE_STORAGE_FILE",sendFile);   
+    Espruino.Config.set("SAVE_STORAGE_FILE",sendFile);
     Espruino.callProcessor("sendModeChanged", null, function() {
       updateIconInfo();
     });
@@ -77,31 +80,44 @@
     var items = [{
       title: "RAM",
       description : "Lost after power down unless `save()` used",
-      callback : function() { 
+      callback : function() {
         popup.close();
         sendMethodChanged(Espruino.Core.Send.SEND_MODE_RAM, "");
       }
     },{
       title: "Flash",
       description : "Executed even after power-down",
-      callback : function() { 
+      callback : function() {
         popup.close();
         sendMethodChanged(Espruino.Core.Send.SEND_MODE_FLASH, "");
       }
     }];
-    if (Espruino.Plugins.Storage)
+    if (Espruino.Plugins.Storage) {
       items.push({
-      title: "Storage",
-      description : "Choose a file in Storage to save to",
-      callback : function() {
-        popup.close();
-        Espruino.Core.MenuPortSelector.ensureConnected(function() {
-          Espruino.Plugins.Storage.showFileChooser({title:"Choose Storage file...", allowNew:true}, function(filename) {
-            sendMethodChanged(Espruino.Core.Send.SEND_MODE_STORAGE, filename);
+        title: "Storage",
+        description : "Choose a file in Storage to save to",
+        callback : function() {
+          popup.close();
+          Espruino.Core.MenuPortSelector.ensureConnected(function() {
+            Espruino.Plugins.Storage.showFileChooser({title:"Choose Storage file...", allowNew:true}, function(filename) {
+              sendMethodChanged(Espruino.Core.Send.SEND_MODE_STORAGE, filename);
+            });
           });
-        });
-      }
-    });
+        }
+      });
+      items.push({
+        title: "SD Card",
+        description : "Choose a file on an SD card to save to (if available)",
+        callback : function() {
+          popup.close();
+          Espruino.Core.MenuPortSelector.ensureConnected(function() {
+            Espruino.Plugins.Storage.showFileChooser({title:"Choose SD card file...", allowNew:true, fs:1}, function(filename) {
+              sendMethodChanged(Espruino.Core.Send.SEND_MODE_SDCARD, filename);
+            });
+          });
+        }
+      });
+    }
     var popup = Espruino.Core.App.openPopup({
       id: "sendmethod",
       title: "Upload Destination",
@@ -113,9 +129,10 @@
 
   Espruino.Core.Send = {
     init : init,
-    updateIconInfo : updateIconInfo, // update the status 
+    updateIconInfo : updateIconInfo, // update the status
     SEND_MODE_RAM : 0,
     SEND_MODE_FLASH : 1,
-    SEND_MODE_STORAGE : 3
+    SEND_MODE_STORAGE : 3,
+    SEND_MODE_SDCARD : 4
   };
 }());
