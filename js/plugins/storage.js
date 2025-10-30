@@ -472,7 +472,7 @@
         // filter out any files with the same name
         fileList = fileList.filter(f=>f.fn.slice(0,-1) != prefix);
         // Add our new file at the end
-        fileList.push(prefix+STORAGEFILE_POSTFIX);
+        fileList.push({fn:prefix+STORAGEFILE_POSTFIX});
       });
 
       fileList.forEach(function(file) {
