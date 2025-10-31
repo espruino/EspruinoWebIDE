@@ -131,7 +131,14 @@
       var fileList = [];
       try {
         fileList = Espruino.Core.Utils.parseJSONish("["+files.trim().replace(/\n/g,",")+"]");
-        fileList.sort();
+        fileList.sort((a,b) => {
+          if (a.d != b.d) return (0|b.d) - (0|a.d); // dirs first
+          let afn = a.fn.toLowerCase();
+          let bfn = b.fn.toLowerCase();
+          if (afn<bfn) return -1;
+          if (afn>bfn) return 1;
+          return 0;
+        });
         // fileList.sort(); // ideally should ignore first char for sorting
       } catch (e) {
         console.log("getFileList",e);
