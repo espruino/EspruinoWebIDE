@@ -77,7 +77,7 @@
     "prototype": {
       "setPower": {
         "!type": "fn(isOn: bool) -> ?",
-        "!doc": "<p>This turns power for the given Qwiic connector on or off. See <code>Qwiic</code> for more information.</p>\n",
+        "!doc": "<p>This turns power for the given Qwiic connector on or off. See <code>Qwiic</code> for more information.</p>\n<ul>\n<li>If the Qwiic connector has a <code>fet</code> pin, it&#39;s set to <code>isOn</code> (eg. the FET pin is connected low is <code>isOn</code>)</li>\n<li>If the Qwiic connector has a <code>gnd</code> pin, it&#39;s always set to output <code>0</code></li>\n<li>If the Qwiic connector has a <code>vcc</code> pin, it&#39;s always set to output <code>isOn</code></li>\n</ul>\n",
         "!url": "http://www.espruino.com/Reference#l_Qwiic_setPower"
       },
       "i2c": {
@@ -1035,11 +1035,6 @@
         "!type": "fn(destination: ?, options: ?)",
         "!doc": "<p>Pipe this file to a stream (an object with a &#39;write&#39; method)</p>\n",
         "!url": "http://www.espruino.com/Reference#l_File_pipe"
-      },
-      "truncate": {
-        "!type": "fn(length: ?) -> bool",
-        "!doc": "<p>Truncate the file. If <code>length</code> is supplied it truncates to that length in bytes\nfrom start of file; otherwise it truncates at the current file position.\nFile must be opened with write access (w, w+, a, r+). Returns true on success.</p>\n",
-        "!url": "http://www.espruino.com/Reference#l_File_truncate"
       }
     }
   },
@@ -1304,7 +1299,7 @@
     },
     "sendHIDReport": {
       "!type": "fn(data: ?, callback: ?)",
-      "!doc": "<p>Send a USB HID report. HID must first be enabled with <code>NRF.setServices({}, {hid: hid_report})</code></p>\n",
+      "!doc": "<p>Send a USB HID report. HID must first be enabled with <code>NRF.setServices({}, {hid: hid_report})</code></p>\n<p>See <a href=\"https://www.espruino.com/BLE+Keyboard\">https://www.espruino.com/BLE+Keyboard</a> for some libraries that use <code>NRF.sendHIDReport</code> internally.</p>\n",
       "!url": "http://www.espruino.com/Reference#l_NRF_sendHIDReport"
     },
     "ancsIsActive": {
@@ -3537,7 +3532,7 @@
       "!url": "http://www.espruino.com/Reference#l_E_internal"
     },
     "getTemperature": {
-      "!type": "fn() -> number",
+      "!type": "fn(internal: bool) -> number",
       "!doc": "<p>Use the microcontroller&#39;s internal thermistor to work out the temperature.</p>\n<p>On Puck.js v2.0 this will use the on-board PCT2075TP temperature sensor, but on\nother devices it may not be desperately well calibrated.</p>\n<p>While this is implemented on Espruino boards, it may not be implemented on other\ndevices. If so it&#39;ll return NaN.</p>\n<p> <strong>Note:</strong> This is not entirely accurate and varies by a few degrees from chip\n to chip. It measures the <strong>die temperature</strong>, so when connected to USB it could\n be reading 10 over degrees C above ambient temperature. When running from\n battery with <code>setDeepSleep(true)</code> it is much more accurate though.</p>\n",
       "!url": "http://www.espruino.com/Reference#l_E_getTemperature"
     },
