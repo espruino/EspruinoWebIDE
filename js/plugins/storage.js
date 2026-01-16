@@ -423,9 +423,9 @@
   function showDeleteFileDialog(options, fileName) {
     var popup = Espruino.Core.App.openPopup({
       id: "storagefiledelete",
-      title: "Really remove "+formatFilename(fileName)+"?",
+      title: "Delete File",
       padding: true,
-      contents: "Do you really want to remove this file?",
+      contents: `Do you really want to remove "${formatFilename(fileName)}"?`,
       position: "auto",
       buttons : [{ name:"Yes", callback : function() {
         deleteFile(options, fileName, function() {
