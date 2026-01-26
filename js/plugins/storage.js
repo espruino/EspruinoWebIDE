@@ -589,7 +589,7 @@
           if (typeof onComplete === 'function') { try { onComplete({cancelled:true}); } catch (e) { console.warn(e); } }
           return;
         }
-        setTimeout(uploadNext, 200);
+        setTimeout(uploadNext, 500);
       }, { suppressStatus: true });
     }
 
