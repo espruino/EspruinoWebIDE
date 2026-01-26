@@ -102,10 +102,11 @@
     }, {fs:options.fs});
   }
 
-  function uploadFile(options, fileName, contents, callback) {
-    Espruino.Core.Status.showStatusWindow(getTitle(options), "Uploading "+JSON.stringify(getFSFilePath(options, fileName)));
+  function uploadFile(options, fileName, contents, callback, opts) {
+    opts = opts || {};
+    if (!opts.suppressStatus) Espruino.Core.Status.showStatusWindow(getTitle(options), "Uploading "+JSON.stringify(getFSFilePath(options, fileName)));
     Espruino.Core.Utils.uploadFile(getFSFilePath(options, fileName), contents, function() {
-      Espruino.Core.Status.hideStatusWindow();
+      if (!opts.suppressStatus) Espruino.Core.Status.hideStatusWindow();
       callback();
     }, {fs:options.fs});
   }
@@ -170,34 +171,110 @@
     return hexdump;
   }
 
-  function showUploadFileDialog(options) {
-    Espruino.Core.Utils.fileOpenDialog({
-        id:"storage",
-        type:"text",
-        multi:true
-        // mineType : anything
-      },function(contents, mimeType, fileName) {
-      var contentsToUpload = contents;
-      var imageTypes = ['image/gif', 'image/jpeg', 'image/png'];
-      var audioTypes = ['audio/mpeg', 'audio/wav', 'audio/ogg', 'audio/aac'];
-      var isImage = imageTypes.includes(mimeType);
-      var isAudio = audioTypes.includes(mimeType);
-      var html = `<div>
-      <p>Uploading <span id="ressize">${contents.length}</span> bytes to Storage.</p>
-      <label for="filename">Filename (max ${MAX_FILENAME_LEN} chars)</label><br/>
-      <input name="filename" class="filenameinput" type="text" maxlength="${MAX_FILENAME_LEN}" style="border: 2px solid #ccc;" value="${Espruino.Core.Utils.escapeHTML(fileName.substr(0,MAX_FILENAME_LEN))}"></input>
-      `;
-      if (isImage) {
-        html += `<p>The file you uploaded is an image...</p>
-        <input type="checkbox" id="convert" checked>Convert for Espruino</input><br/>
-        <div id="imageoptions">
-        <input type="checkbox" id="transparent" checked>Transparency?</input><br/>
-        <input type="checkbox" id="inverted">Inverted?</input><br/>
-        <input type="checkbox" id="autoCrop">Crop?</input><br/>
-        Colours: <select id="colorStyle"></select><br/>
-        Diffusion: <select id="diffusion"></select><br/>
-        Brightness:<input type="range" id="brightness" min="-127" max="127" value="0"></input><br/>
-        Contrast:<input type="range" id="contrast" min="-255" max="255" value="0"></input><br/>
+  /**
+   * Create an image converter popup
+   * @param {*} contents Image data contents
+   * @param {*} mimeType MIME type of the image
+   * @param {*} fileName Name of the image file
+   * @param {*} callback Callback function to receive converted image data
+   * @returns {Object} Converter object with setup and getHTML functions
+   */
+  function createImageConverter(contents, mimeType, fileName, callback) {
+    var converter = {
+      html: '',
+      controls: null,
+      img: null,
+      originalContents: contents,
+      convertedContents: contents,
+      
+      setup: function(popup) {
+        this.controls = {
+          optionsdiv: popup.window.querySelector("#imageoptions"),
+          transparent: popup.window.querySelector("#transparent"),
+          inverted: popup.window.querySelector("#inverted"),
+          autoCrop: popup.window.querySelector("#autoCrop"),
+          diffusion: popup.window.querySelector("#diffusion"),
+          brightness: popup.window.querySelector("#brightness"),
+          contrast: popup.window.querySelector("#contrast"),
+          colorStyle: popup.window.querySelector("#colorStyle"),
+          canvas1: popup.window.querySelector("#canvas1"),
+          canvas2: popup.window.querySelector("#canvas2")
+        };
+        
+        imageconverter.setFormatOptions(this.controls.colorStyle);
+        imageconverter.setDiffusionOptions(this.controls.diffusion);
+        
+        var self = this;
+        this.controls.transparent.addEventListener("change", function() { self.recalculate(); });
+        this.controls.inverted.addEventListener("change", function() { self.recalculate(); });
+        this.controls.autoCrop.addEventListener("change", function() { self.recalculate(); });
+        this.controls.diffusion.addEventListener("change", function() { self.recalculate(); });
+        this.controls.brightness.addEventListener("change", function() { self.recalculate(); });
+        this.controls.contrast.addEventListener("change", function() { self.recalculate(); });
+        this.controls.colorStyle.addEventListener("change", function() { self.recalculate(); });
+        
+        this.img = new Image();
+        this.img.onload = function() { self.recalculate(); };
+        this.img.src = "data:"+mimeType+";base64,"+Espruino.Core.Utils.btoa(contents);
+      },
+      
+      recalculate: function() {
+        if (!this.img) {
+          this.convertedContents = this.originalContents;
+          this.controls.optionsdiv.style = "display:none;";
+          return;
+        }
+        this.controls.optionsdiv.style = "display:block;";
+        var opts = {
+          output: "raw",
+          diffusion: this.controls.diffusion.options[this.controls.diffusion.selectedIndex].value,
+          compression: false,
+          transparent: this.controls.transparent.checked,
+          inverted: this.controls.inverted.checked,
+          autoCrop: this.controls.autoCrop.checked,
+          brightness: 0|this.controls.brightness.value,
+          contrast: 0|this.controls.contrast.value,
+          mode: this.controls.colorStyle.options[this.controls.colorStyle.selectedIndex].value
+        };
+        
+        this.controls.canvas1.width = this.img.width;
+        this.controls.canvas1.height = this.img.height;
+        this.controls.canvas1.style = "display:block;border:1px solid black;margin:8px;";
+        var ctx1 = this.controls.canvas1.getContext("2d");
+        ctx1.drawImage(this.img, 0, 0);
+        
+        var imageData = ctx1.getImageData(0, 0, this.img.width, this.img.height);
+        var rgba = imageData.data;
+        opts.rgbaOut = rgba;
+        opts.width = this.img.width;
+        opts.height = this.img.height;
+        this.convertedContents = imageconverter.RGBAtoString(rgba, opts);
+        
+        this.controls.canvas2.width = opts.width;
+        this.controls.canvas2.height = opts.height;
+        this.controls.canvas2.style = "display:block;border:1px solid black;margin:8px;";
+        var ctx2 = this.controls.canvas2.getContext("2d");
+        ctx2.fillStyle = 'white';
+        ctx2.fillRect(opts.width, 0, opts.width, opts.height);
+        var outputImageData = new ImageData(opts.rgbaOut, opts.width, opts.height);
+        ctx2.putImageData(outputImageData, 0, 0);
+        
+        // checkerboard for transparency on original image
+        imageData = ctx1.getImageData(0, 0, this.img.width, this.img.height);
+        imageconverter.RGBAtoCheckerboard(imageData.data, {width:this.img.width, height:this.img.height});
+        ctx1.putImageData(imageData, 0, 0);
+        
+      },
+      
+      getHTML: function() {
+        return `<div id="imageoptions">
+        <input type="checkbox" id="transparent" checked><label for="transparent">Transparency?</label><br/>
+        <input type="checkbox" id="inverted"><label for="inverted">Inverted?</label><br/>
+        <input type="checkbox" id="autoCrop"><label for="autoCrop">Crop?</label><br/>
+        <label for="colorStyle">Colours:</label> <select id="colorStyle"></select><br/>
+        <label for="diffusion">Diffusion:</label> <select id="diffusion"></select><br/>
+        <label for="brightness">Brightness:</label><input type="range" id="brightness" min="-127" max="127" value="0"></input><br/>
+        <label for="contrast">Contrast:</label><input type="range" id="contrast" min="-255" max="255" value="0"></input><br/>
 
         <table width="100%">
         <tr><th>Original</th>
@@ -207,16 +284,386 @@
         </tr></table>
         </div>
         `;
-      } else if (isAudio) {
-         html += `<p>The file you uploaded is audio...</p>
-        <input type="checkbox" id="convert" checked>Convert for Espruino</input><br/>
+      }
+    };
+    
+    return converter;
+  }
+
+  /**
+   * Create an audio converter popup
+   * @param {*} contents Audio data contents
+   * @param {*} mimeType MIME type of the audio
+   * @param {*} fileName Name of the audio file
+   * @param {*} callback Callback function to receive converted audio data
+   * @returns {Object} Converter object with setup and getHTML functions
+   */
+  function createAudioConverter(contents, mimeType, fileName, callback) {
+    var converter = {
+      html: '',
+      controls: null,
+      originalContents: contents,
+      convertedContents: contents,
+      
+      setup: function(popup) {
+        this.controls = {
+          optionsdiv: popup.window.querySelector("#audiooptions"),
+          samplerate: popup.window.querySelector("#samplerate"),
+          status: popup.window.querySelector("#status")
+        };
+        
+        var self = this;
+        this.controls.samplerate.addEventListener("change", function() { self.recalculate(); });
+        this.recalculate();
+      },
+      
+      recalculate: function() {
+        if (!this.originalContents) {
+          this.convertedContents = this.originalContents;
+          this.controls.optionsdiv.style = "display:none;";
+          return;
+        }
+        this.controls.optionsdiv.style = "display:block;";
+        const SAMPLERATE = 0|this.controls.samplerate.value;
+        const offlineAudioContext = new OfflineAudioContext(1, SAMPLERATE*10/*buffer length*/, SAMPLERATE);
+        const wavArray = new Uint8Array(this.originalContents.length);
+        for (let i = 0; i < this.originalContents.length; i++)
+          wavArray[i] = this.originalContents.charCodeAt(i);
+        
+        var self = this;
+        offlineAudioContext.decodeAudioData(wavArray.buffer)
+          .then(audioBuffer => {
+            const bufferLength = audioBuffer.length;
+            const numberOfChannels = audioBuffer.numberOfChannels;
+            // Get PCM data from the audio buffer
+            const pcmData = new Float32Array(bufferLength);
+            audioBuffer.copyFromChannel(pcmData, 0, 0); // copy from first channel only
+            // TODO: could average channels?
+            // convert it to 8 bit format and append
+            let wavContents = "";
+            let length = Math.min(pcmData.length, SAMPLERATE*30); // max 30 seconds!!
+            let isTruncated = length!=pcmData.length;
+            for (let i = 0; i < length; i++) {
+              var v = 128+Math.round(pcmData[i] * 127);
+              if (v<0) v=0;
+              if (v>255) v=255;
+              wavContents += String.fromCharCode(v);
+            }
+            self.convertedContents = wavContents;
+            self.controls.status.innerText = `Encoded to: ${(length/SAMPLERATE).toFixed(1)} sec, ${wavContents.length} bytes` + (isTruncated?" (TRUNCATED!)":"");
+          }, error => {
+            console.error('Error decoding audio data:', error);
+          });
+      },
+      
+      getHTML: function() {
+        return `<div id="audiooptions">
         <div id="audiooptions">
         If converted, the file will be 8 bit, unsigned raw data that can be used with the <code>Waveform</code> class.<br/>
-        Sample Rate: <input type="number" id="samplerate" min="1000" max="32000" value="4000"></input><br/>
+        <label for="samplerate">Sample Rate:</label> <input type="number" id="samplerate" min="1000" max="32000" value="4000"></input><br/>
         <br/>
         <div id="status"></div>
         </div>
         `;
+      }
+    };
+    
+    return converter;
+  }
+
+  /**
+   * Show batch upload dialog
+   * @param {*} options Upload options
+   * @param {*} files Array of files to upload
+   */
+  function showBatchUploadDialog(options, files) {
+
+    var fileList = files.map(function(file) {
+      return {
+        sourceFile: file,
+        targetName: file.fileName.substr(0, MAX_FILENAME_LEN),
+        shouldEvaluate: false,
+        shouldUpload: true,
+        converter: null,
+        convertedContents: file.contents
+      };
+    });
+
+    // Sort uploaded files by their filename
+    fileList.sort(function(a,b){
+      var A = (a && a.sourceFile && a.sourceFile.fileName) ? a.sourceFile.fileName.toLowerCase() : "";
+      var B = (b && b.sourceFile && b.sourceFile.fileName) ? b.sourceFile.fileName.toLowerCase() : "";
+      if (A < B) return -1;
+      if (A > B) return 1;
+      return 0;
+    });
+    
+    // Build UI
+    var html = '<div style="max-height:400px;overflow-y:auto;"><table style="width:100%;"><tr><th>Upload?</th><th>Source File</th><th>Target Name</th><th style="text-align:right;">Size</th><th>Convert</th></tr>';
+    fileList.forEach(function(item, idx) {
+      var isImage = ['image/gif','image/jpeg','image/png'].includes(item.sourceFile.mimeType);
+      var isAudio = ['audio/mpeg','audio/wav','audio/ogg','audio/aac'].includes(item.sourceFile.mimeType);
+      item.hasConverter = isImage || isAudio;
+      item.convertedDone = true; // assume done unless we open converter
+      html += '<tr>';
+      html += '<td style="text-align:center;"><input type="checkbox" class="upload-check" data-idx="'+idx+'" '+(item.shouldUpload?'checked':'')+'/></td>';
+      var escName = Espruino.Core.Utils.escapeHTML(item.sourceFile.fileName);
+      html += '<td><div title="'+escName+'" style="max-width:25ch;display:inline-block;overflow:hidden;text-overflow:ellipsis;">'+escName+'</div></td>';
+      html += '<td><input type="text" class="target-name" data-idx="'+idx+'" maxlength="'+MAX_FILENAME_LEN+'" value="'+Espruino.Core.Utils.escapeHTML(item.targetName)+'" style="width:100%;box-sizing:border-box;"/></td>';
+      html += '<td style="text-align:right;font-family:monospace;">'+item.sourceFile.contents.length+'&nbsp;B</td>';
+      if (item.hasConverter)
+        html += '<td style="white-space:nowrap;"><button class="btn convert-btn" data-idx="'+idx+'">Convert</button><span class="conv-status" data-idx="'+idx+'" style="margin-left:6px;color:#c00;"></span></td>';
+      else
+        html += '<td>-</td>';
+      html += '</tr>';
+    });
+    html += '</table></div>';
+    
+    var popup = Espruino.Core.App.openPopup({
+      id: "storagebatchupload",
+      title: "Upload Files to Storage",
+      padding: true,
+      contents: html,
+      position: "auto",
+      buttons: [{ name:"Upload", callback: function() {
+        // Gather selected files
+        var toUpload = [];
+        popup.window.querySelectorAll('.upload-check').forEach(function(cb) {
+          if (cb.checked) {
+            var idx = parseInt(cb.getAttribute('data-idx'));
+            var targetInput = popup.window.querySelector('.target-name[data-idx="'+idx+'"]');
+            fileList[idx].targetName = targetInput.value;
+            if (fileList[idx].targetName.length > 0 && fileList[idx].targetName.length <= MAX_FILENAME_LEN) {
+              toUpload.push(fileList[idx]);
+            }
+          }
+        });
+        
+        if (toUpload.length === 0) {
+          Espruino.Core.Notifications.warning("No files selected");
+          return;
+        }
+
+        // Check for duplicate target filenames
+        var seenNames = new Set();
+        var duplicates = [];
+        for (var i = 0; i < toUpload.length; i++) {
+          var name = toUpload[i].targetName.toLowerCase();
+          if (seenNames.has(name)) {
+            duplicates.push(toUpload[i].targetName);
+          } else {
+            seenNames.add(name);
+          }
+        }
+        if (duplicates.length > 0) {
+          Espruino.Core.Notifications.error("Duplicate target filenames: "+duplicates.join(', '));
+          return;
+        }
+
+        // Ensure all conversions completed
+        var incomplete = toUpload.filter(f=>f.mustConvert && !f.convertedDone);
+        if (incomplete.length) {
+          Espruino.Core.Notifications.error("You must convert: "+incomplete.map(f=>f.sourceFile.fileName).join(', '));
+          return;
+        }
+
+        // Close selection popup and open a small progress popup with Cancel
+        popup.close();
+        const cancelToken = { cancelled: false };
+        const progressPopup = Espruino.Core.App.openPopup({
+          id: "storageuploadprogress",
+          title: "Uploading...",
+          padding: true,
+          contents: '<div id="uploadprogress">Uploading files...<br/><div id="uploadFilename" style="font-size:smaller;color:#444;margin-bottom:6px;"></div><progress id="uploadProgress" max="100" value="0" style="width:100%;"></progress><div id="uploadPercent" style="text-align:right;margin-top:6px;font-size:smaller;color:#666"></div></div>',
+          position: "center",
+          buttons: [{ name: "Cancel", callback: function() { cancelToken.cancelled = true; try { progressPopup.close(); } catch(e){} } }]
+        });
+
+        // Wire progress updater so uploadBatchFiles can update the UI
+        cancelToken.onProgress = function(curr, total, src, target) {
+          try {
+            const pct = total ? Math.round(curr/total*100) : 0;
+            const bar = progressPopup.window.querySelector('#uploadProgress');
+            if (bar) bar.value = pct;
+            const pctEl = progressPopup.window.querySelector('#uploadPercent');
+            if (pctEl) pctEl.innerText = pct + '% ('+curr+'/'+total+')';
+            const fnEl = progressPopup.window.querySelector('#uploadFilename');
+            if (fnEl) {
+              let displayName = (src || target || '');
+              if (displayName.length > 64) displayName = displayName.substr(0,61) + '...';
+              fnEl.innerText = displayName;
+            }
+          } catch (e) { console.warn(e); }
+        };
+
+        uploadBatchFiles(options, toUpload, function(result) {
+          try { progressPopup.close(); } catch(e){}
+          if (result && result.cancelled) Espruino.Core.Notifications.warning("Upload cancelled");
+          else Espruino.Core.Notifications.success("All files uploaded");
+        }, cancelToken);
+      }}, { name:"Cancel", callback: function() { popup.close(); }}]
+    });
+
+    // Conversion popup logic
+    function openConversion(itemIdx) {
+      var item = fileList[itemIdx];
+      var isImage = ['image/gif','image/jpeg','image/png'].includes(item.sourceFile.mimeType);
+      var isAudio = ['audio/mpeg','audio/wav','audio/ogg','audio/aac'].includes(item.sourceFile.mimeType);
+      var converter = isImage ? createImageConverter(item.sourceFile.contents, item.sourceFile.mimeType, item.sourceFile.fileName) :
+                     isAudio ? createAudioConverter(item.sourceFile.contents, item.sourceFile.mimeType, item.sourceFile.fileName) : null;
+      var html = '<div><h3>Convert '+Espruino.Core.Utils.escapeHTML(item.sourceFile.fileName)+'</h3>';
+      html += '<p>Adjust options then click Apply to convert; Cancel will keep the original data.</p>';
+      if (converter) html += converter.getHTML();
+      html += '</div>';
+      var cv = Espruino.Core.App.openPopup({
+        id:"storageconvertitem",
+        title:"Media Conversion",
+        padding:true,
+        contents:html,
+        position:"auto",
+        buttons:[{name:"Apply", callback:function(){
+          if (converter && typeof converter.recalculate === 'function') {
+            try { converter.recalculate(); } catch(e) { console.warn(e); }
+            item.convertedContents = converter.convertedContents;
+          }
+          item.convertedDone = true; // mark complete
+          var statusEl = popup.window.querySelector('.conv-status[data-idx="'+itemIdx+'"]');
+          if (statusEl) { statusEl.innerHTML = 'Convert'; statusEl.style.color = '#090'; }
+          cv.close();
+        }},{name:"Cancel", callback:function(){ cv.close(); }}]
+      });
+      if (converter) converter.setup(cv);
+    }
+    popup.window.querySelectorAll('.convert-btn').forEach(btn => {
+      btn.addEventListener('click', function(){ openConversion(parseInt(btn.getAttribute('data-idx'))); });
+    });
+  }
+
+  /**
+   * Upload multiple files in sequence
+   * @param {*} options 
+   * @param {*} fileList 
+   * @param {*} onComplete 
+   */
+  function uploadBatchFiles(options, fileList, onComplete, cancelToken) {
+    var currentIndex = 0;
+    var totalFiles = fileList.length;
+
+    // If cancellation was requested before starting
+    if (cancelToken && cancelToken.cancelled) {
+      Espruino.Core.Status.setStatus("Upload cancelled");
+      if (typeof onComplete === 'function') { try { onComplete({cancelled:true}); } catch (e) { console.warn(e); } }
+      return;
+    }
+
+    function startUploads() {
+      uploadNext();
+    }
+
+    function uploadNext() {
+      if (cancelToken && cancelToken.cancelled) {
+        Espruino.Core.Status.setStatus("Upload cancelled");
+        if (typeof onComplete === 'function') { try { onComplete({cancelled:true}); } catch (e) { console.warn(e); } }
+        return;
+      }
+
+      if (currentIndex >= totalFiles) {
+        Espruino.Core.Status.setStatus("All files uploaded!");
+        setTimeout(function() { Espruino.Core.Status.setStatus(""); }, 2000);
+        if (typeof onComplete === 'function') { try { onComplete(); } catch (e) { console.warn(e); } }
+        return;
+      }
+      
+      var item = fileList[currentIndex];
+      currentIndex++;
+      
+      Espruino.Core.Status.setStatus("Uploading " + currentIndex + " of " + totalFiles + ": " + item.targetName);
+      if (cancelToken && typeof cancelToken.onProgress === 'function') {
+        try { cancelToken.onProgress(currentIndex, totalFiles, (item.sourceFile && item.sourceFile.fileName) || '', item.targetName); } catch (e) { console.warn(e); }
+      }
+
+      uploadFile(options, item.targetName, item.convertedContents, function() {
+        console.log("Uploaded: " + item.targetName);
+        if (cancelToken && cancelToken.cancelled) {
+          Espruino.Core.Status.setStatus("Upload cancelled");
+          if (typeof onComplete === 'function') { try { onComplete({cancelled:true}); } catch (e) { console.warn(e); } }
+          return;
+        }
+        setTimeout(uploadNext, 500);
+      }, { suppressStatus: true });
+    }
+
+    startUploads();
+  }
+
+  /**
+   * Show file open dialog for uploading files
+   * @param {*} options 
+   */
+  function showUploadFileDialog(options) {
+    // Request arraybuffer -- easier to convert to binary string later
+    Espruino.Core.Utils.fileOpenDialog({
+        id:"storage",
+        type:"arraybuffer",
+        multi:true,
+        onComplete: function(files) {
+          if (!files || files.length === 0) return;
+
+          // Convert ArrayBuffers to binary-string
+          files.forEach(function(f) {
+            if (f && f.contents && f.contents instanceof ArrayBuffer) {
+              f.contents = arrayBufferToBinaryString(f.contents);
+            }
+          });
+
+          // If multiple files, use new batch upload
+          if (files.length > 1) {
+            showBatchUploadDialog(options, files);
+          } else {
+            var file = files[0];
+            showSingleFileUploadDialog(options, file.contents, file.mimeType, file.fileName);
+          }
+        }
+      });
+  }
+
+  // Helper to convert an ArrayBuffer to a binary string
+  function arrayBufferToBinaryString(buffer) {
+    var bytes = new Uint8Array(buffer);
+    var s = "";
+    for (var i=0;i<bytes.length;i++) s += String.fromCharCode(bytes[i]);
+    return s;
+  }
+
+  /**
+   * Show single file upload dialog
+   * @param {*} options 
+   * @param {*} contents 
+   * @param {*} mimeType 
+   * @param {*} fileName 
+   */
+  function showSingleFileUploadDialog(options, contents, mimeType, fileName) {
+      var imageTypes = ['image/gif', 'image/jpeg', 'image/png'];
+      var audioTypes = ['audio/mpeg', 'audio/wav', 'audio/ogg', 'audio/aac'];
+      var isImage = imageTypes.includes(mimeType);
+      var isAudio = audioTypes.includes(mimeType);
+      
+      var imageConverter = null;
+      var audioConverter = null;
+      var contentsToUpload = contents;
+      
+      var html = `<div>
+      <p>Uploading <span id="ressize">${contents.length}</span> bytes to Storage.</p>
+      <label for="filename">Filename (max ${MAX_FILENAME_LEN} chars)</label><br/>
+      <input name="filename" class="filenameinput" type="text" maxlength="${MAX_FILENAME_LEN}" style="border: 2px solid #ccc;" value="${Espruino.Core.Utils.escapeHTML(fileName.substr(0,MAX_FILENAME_LEN))}"></input>
+      `;
+      
+      if (isImage) {
+        imageConverter = createImageConverter(contents, mimeType, fileName);
+        html += imageConverter.getHTML();
+      } else if (isAudio) {
+        audioConverter = createAudioConverter(contents, mimeType, fileName);
+        html += audioConverter.getHTML();
       }
       html += `</div>`;
 
@@ -236,6 +683,8 @@
             Espruino.Core.Notifications.error("Filename greater than "+MAX_FILENAME_LEN+" characters")
             return;
           }
+          if (imageConverter && imageConverter.convertedContents) contentsToUpload = imageConverter.convertedContents;
+          if (audioConverter && audioConverter.convertedContents) contentsToUpload = audioConverter.convertedContents;
           console.log("Write file to Storage as "+JSON.stringify(filename));
           uploadFile(options, filename, contentsToUpload, function() {
             console.log("Upload complete!");
@@ -244,137 +693,12 @@
         }}, { name:"Cancel", callback : function() { popup.close(); }}]
       });
       popup.window.querySelector(".filenameinput").focus();
-      if (isImage) {
-        var controls = {
-          convert : popup.window.querySelector("#convert"),
-          optionsdiv : popup.window.querySelector("#imageoptions"),
-          transparent : popup.window.querySelector("#transparent"),
-          inverted : popup.window.querySelector("#inverted"),
-          autoCrop : popup.window.querySelector("#autoCrop"),
-          diffusion : popup.window.querySelector("#diffusion"),
-          brightness : popup.window.querySelector("#brightness"),
-          contrast : popup.window.querySelector("#contrast"),
-          colorStyle : popup.window.querySelector("#colorStyle"),
-          canvas1 : popup.window.querySelector("#canvas1"),
-          canvas2 : popup.window.querySelector("#canvas2"),
-          ressize : popup.window.querySelector("#ressize")
-        };
-        imageconverter.setFormatOptions(controls.colorStyle);
-        imageconverter.setDiffusionOptions(controls.diffusion);
-        controls.convert.addEventListener("change", recalculateImage);
-        controls.transparent.addEventListener("change", recalculateImage);
-        controls.inverted.addEventListener("change", recalculateImage);
-        controls.autoCrop.addEventListener("change", recalculateImage);
-        controls.diffusion.addEventListener("change", recalculateImage);
-        controls.brightness.addEventListener("change", recalculateImage);
-        controls.contrast.addEventListener("change", recalculateImage);
-        controls.colorStyle.addEventListener("change", recalculateImage);
-
-        var img;
-        function recalculateImage() {
-          var convert = controls.convert.checked;
-          if (!convert || (img === undefined)) {
-            contentsToUpload = contents;
-            controls.optionsdiv.style = "display:none;";
-          } else {
-            controls.optionsdiv.style = "display:block;";
-
-            var options = {};
-            options.output = "raw";
-            options.diffusion = controls.diffusion.options[controls.diffusion.selectedIndex].value;
-            options.compression = false;
-            options.transparent = controls.transparent.checked;
-            options.inverted = document.getElementById("inverted").checked;
-            options.autoCrop = controls.autoCrop.checked;
-            options.brightness = 0|controls.brightness.value;
-            options.contrast = 0|controls.contrast.value;
-            options.mode = controls.colorStyle.options[controls.colorStyle.selectedIndex].value;
-
-            controls.canvas1.width = img.width;
-            controls.canvas1.height = img.height;
-            controls.canvas1.style = "display:block;border:1px solid black;margin:8px;"
-            var ctx1 = canvas1.getContext("2d");
-            ctx1.drawImage(img,0,0);
-
-            var imageData = ctx1.getImageData(0, 0, img.width, img.height);
-            var rgba = imageData.data;
-            options.rgbaOut = rgba;
-            options.width = img.width;
-            options.height = img.height;
-            contentsToUpload = imageconverter.RGBAtoString(rgba, options);
-
-            controls.canvas2.width = options.width;
-            controls.canvas2.height = options.height;
-            controls.canvas2.style = "display:block;border:1px solid black;margin:8px;"
-            var ctx2 = canvas2.getContext("2d");
-            ctx2.fillStyle = 'white';
-            ctx2.fillRect(options.width, 0, options.width, options.height);
-            var outputImageData = new ImageData(options.rgbaOut, options.width, options.height);
-            ctx2.putImageData(outputImageData,0,0);
-
-            // checkerboard for transparency on original image
-            var imageData = ctx1.getImageData(0, 0, img.width, img.height);
-            imageconverter.RGBAtoCheckerboard(imageData.data, {width:img.width,height:img.height});
-            ctx1.putImageData(imageData,0,0);
-          }
-
-          controls.ressize.innerHTML = contentsToUpload.length+" Bytes";
-        }
-        img = new Image();
-        img.onload = recalculateImage;
-        img.src = "data:"+mimeType+";base64,"+Espruino.Core.Utils.btoa(contents);
-      } else if (isAudio) {
-        var controls = {
-          convert : popup.window.querySelector("#convert"),
-          optionsdiv : popup.window.querySelector("#audiooptions"),
-          samplerate : popup.window.querySelector("#samplerate"),
-          status : popup.window.querySelector("#status"),
-          ressize : popup.window.querySelector("#ressize")
-        }
-        controls.convert.addEventListener("change", recalculateAudio);
-        controls.samplerate.addEventListener("change", recalculateAudio);
-
-        function recalculateAudio() {
-          var convert = controls.convert.checked;
-          if (!convert) {
-            contentsToUpload = contents;
-            controls.optionsdiv.style = "display:none;";
-          } else {
-            controls.optionsdiv.style = "display:block;";
-            const SAMPLERATE = 0|controls.samplerate.value;
-            const offlineAudioContext = new OfflineAudioContext(1, SAMPLERATE*10/*buffer length*/, SAMPLERATE);
-            const wavArray = new Uint8Array(contents.length);
-            for (let i = 0; i < contents.length; i++)
-              wavArray[i] = contents.charCodeAt(i);
-            offlineAudioContext.decodeAudioData(wavArray.buffer)
-              .then(audioBuffer => {
-                const bufferLength = audioBuffer.length;
-                const numberOfChannels = audioBuffer.numberOfChannels;
-                // Get the PCM data from the audio buffer
-                const pcmData = new Float32Array(bufferLength);
-                audioBuffer.copyFromChannel(pcmData, 0, 0); // copy from first channel only
-                // TODO: could average channels?
-                // convert it to 8 bit format and append
-                let wavContents = "";
-                let length = Math.min(pcmData.length, SAMPLERATE*30); // max 30 seconds!!
-                let isTruncated = length!=pcmData.length;
-                for (let i = 0; i < length; i++) {
-                  var v = 128+Math.round(pcmData[i] * 127);
-                  if (v<0) v=0;
-                  if (v>255) v=255;
-                  wavContents += String.fromCharCode(v);
-                }
-                contentsToUpload = wavContents;
-                controls.ressize.innerHTML = contentsToUpload.length+" Bytes";
-                controls.status.innerText = `Encoded to: ${(length/SAMPLERATE).toFixed(1)} sec, ${wavContents.length} bytes` + (isTruncated?" (TRUNCATED!)":"");
-              }, error => {
-                console.error('Error decoding audio data:', error);
-              });
-          }
-        }
-        recalculateAudio();
+      
+      if (isImage && imageConverter) {
+        imageConverter.setup(popup);
+      } else if (isAudio && audioConverter) {
+        audioConverter.setup(popup);
       }
-    });
   }
 
   function showViewFileDialog(options, fileName, contents, wasDecoded) {
