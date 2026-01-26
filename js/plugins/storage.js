@@ -102,10 +102,11 @@
     }, {fs:options.fs});
   }
 
-  function uploadFile(options, fileName, contents, callback) {
-    Espruino.Core.Status.showStatusWindow(getTitle(options), "Uploading "+JSON.stringify(getFSFilePath(options, fileName)));
+  function uploadFile(options, fileName, contents, callback, opts) {
+    opts = opts || {};
+    if (!opts.suppressStatus) Espruino.Core.Status.showStatusWindow(getTitle(options), "Uploading "+JSON.stringify(getFSFilePath(options, fileName)));
     Espruino.Core.Utils.uploadFile(getFSFilePath(options, fileName), contents, function() {
-      Espruino.Core.Status.hideStatusWindow();
+      if (!opts.suppressStatus) Espruino.Core.Status.hideStatusWindow();
       callback();
     }, {fs:options.fs});
   }
@@ -188,7 +189,6 @@
       
       setup: function(popup) {
         this.controls = {
-          convert: popup.window.querySelector("#convert"),
           optionsdiv: popup.window.querySelector("#imageoptions"),
           transparent: popup.window.querySelector("#transparent"),
           inverted: popup.window.querySelector("#inverted"),
@@ -205,7 +205,6 @@
         imageconverter.setDiffusionOptions(this.controls.diffusion);
         
         var self = this;
-        this.controls.convert.addEventListener("change", function() { self.recalculate(); });
         this.controls.transparent.addEventListener("change", function() { self.recalculate(); });
         this.controls.inverted.addEventListener("change", function() { self.recalculate(); });
         this.controls.autoCrop.addEventListener("change", function() { self.recalculate(); });
@@ -220,14 +219,11 @@
       },
       
       recalculate: function() {
-        var convert = this.controls.convert.checked;
-        if (!convert || !this.img) {
+        if (!this.img) {
           this.convertedContents = this.originalContents;
           this.controls.optionsdiv.style = "display:none;";
-          if (callback) callback(this.convertedContents);
           return;
         }
-        
         this.controls.optionsdiv.style = "display:block;";
         var opts = {
           output: "raw",
@@ -268,20 +264,17 @@
         imageconverter.RGBAtoCheckerboard(imageData.data, {width:this.img.width, height:this.img.height});
         ctx1.putImageData(imageData, 0, 0);
         
-        if (callback) callback(this.convertedContents);
       },
       
       getHTML: function() {
-        return `<p>The file you uploaded is an image...</p>
-        <input type="checkbox" id="convert" checked>Convert for Espruino</input><br/>
-        <div id="imageoptions">
-        <input type="checkbox" id="transparent" checked>Transparency?</input><br/>
-        <input type="checkbox" id="inverted">Inverted?</input><br/>
-        <input type="checkbox" id="autoCrop">Crop?</input><br/>
-        Colours: <select id="colorStyle"></select><br/>
-        Diffusion: <select id="diffusion"></select><br/>
-        Brightness:<input type="range" id="brightness" min="-127" max="127" value="0"></input><br/>
-        Contrast:<input type="range" id="contrast" min="-255" max="255" value="0"></input><br/>
+        return `<div id="imageoptions">
+        <input type="checkbox" id="transparent" checked><label for="transparent">Transparency?</label><br/>
+        <input type="checkbox" id="inverted"><label for="inverted">Inverted?</label><br/>
+        <input type="checkbox" id="autoCrop"><label for="autoCrop">Crop?</label><br/>
+        <label for="colorStyle">Colours:</label> <select id="colorStyle"></select><br/>
+        <label for="diffusion">Diffusion:</label> <select id="diffusion"></select><br/>
+        <label for="brightness">Brightness:</label><input type="range" id="brightness" min="-127" max="127" value="0"></input><br/>
+        <label for="contrast">Contrast:</label><input type="range" id="contrast" min="-255" max="255" value="0"></input><br/>
 
         <table width="100%">
         <tr><th>Original</th>
@@ -314,27 +307,22 @@
       
       setup: function(popup) {
         this.controls = {
-          convert: popup.window.querySelector("#convert"),
           optionsdiv: popup.window.querySelector("#audiooptions"),
           samplerate: popup.window.querySelector("#samplerate"),
           status: popup.window.querySelector("#status")
         };
         
         var self = this;
-        this.controls.convert.addEventListener("change", function() { self.recalculate(); });
         this.controls.samplerate.addEventListener("change", function() { self.recalculate(); });
         this.recalculate();
       },
       
       recalculate: function() {
-        var convert = this.controls.convert.checked;
-        if (!convert) {
+        if (!this.originalContents) {
           this.convertedContents = this.originalContents;
           this.controls.optionsdiv.style = "display:none;";
-          if (callback) callback(this.convertedContents);
           return;
         }
-        
         this.controls.optionsdiv.style = "display:block;";
         const SAMPLERATE = 0|this.controls.samplerate.value;
         const offlineAudioContext = new OfflineAudioContext(1, SAMPLERATE*10/*buffer length*/, SAMPLERATE);
@@ -363,18 +351,16 @@
             }
             self.convertedContents = wavContents;
             self.controls.status.innerText = `Encoded to: ${(length/SAMPLERATE).toFixed(1)} sec, ${wavContents.length} bytes` + (isTruncated?" (TRUNCATED!)":"");
-            if (callback) callback(self.convertedContents);
           }, error => {
             console.error('Error decoding audio data:', error);
           });
       },
       
       getHTML: function() {
-        return `<p>The file you uploaded is audio...</p>
-        <input type="checkbox" id="convert" checked>Convert for Espruino</input><br/>
+        return `<div id="audiooptions">
         <div id="audiooptions">
         If converted, the file will be 8 bit, unsigned raw data that can be used with the <code>Waveform</code> class.<br/>
-        Sample Rate: <input type="number" id="samplerate" min="1000" max="32000" value="4000"></input><br/>
+        <label for="samplerate">Sample Rate:</label> <input type="number" id="samplerate" min="1000" max="32000" value="4000"></input><br/>
         <br/>
         <div id="status"></div>
         </div>
@@ -413,19 +399,20 @@
     });
     
     // Build UI
-    var html = '<div style="max-height:400px;overflow-y:auto;"><table style="width:100%;"><tr><th>Upload?</th><th>Source File</th><th>Target Name</th><th>Size</th><th>Convert</th></tr>';
+    var html = '<div style="max-height:400px;overflow-y:auto;"><table style="width:100%;"><tr><th>Upload?</th><th>Source File</th><th>Target Name</th><th style="text-align:right;">Size</th><th>Convert</th></tr>';
     fileList.forEach(function(item, idx) {
       var isImage = ['image/gif','image/jpeg','image/png'].includes(item.sourceFile.mimeType);
       var isAudio = ['audio/mpeg','audio/wav','audio/ogg','audio/aac'].includes(item.sourceFile.mimeType);
-      if (isImage || isAudio) item.mustConvert = true; else item.mustConvert = false;
-      item.convertedDone = !item.mustConvert; // if not media, already done
+      item.hasConverter = isImage || isAudio;
+      item.convertedDone = true; // assume done unless we open converter
       html += '<tr>';
       html += '<td style="text-align:center;"><input type="checkbox" class="upload-check" data-idx="'+idx+'" '+(item.shouldUpload?'checked':'')+'/></td>';
-      html += '<td>'+Espruino.Core.Utils.escapeHTML(item.sourceFile.fileName)+'</td>';
-      html += '<td><input type="text" class="target-name" data-idx="'+idx+'" maxlength="'+MAX_FILENAME_LEN+'" value="'+Espruino.Core.Utils.escapeHTML(item.targetName)+'" style="width:100%;"/></td>';
+      var escName = Espruino.Core.Utils.escapeHTML(item.sourceFile.fileName);
+      html += '<td><div title="'+escName+'" style="max-width:25ch;display:inline-block;overflow:hidden;text-overflow:ellipsis;">'+escName+'</div></td>';
+      html += '<td><input type="text" class="target-name" data-idx="'+idx+'" maxlength="'+MAX_FILENAME_LEN+'" value="'+Espruino.Core.Utils.escapeHTML(item.targetName)+'" style="width:100%;box-sizing:border-box;"/></td>';
       html += '<td style="text-align:right;font-family:monospace;">'+item.sourceFile.contents.length+'&nbsp;B</td>';
-      if (item.mustConvert)
-        html += '<td style="white-space:nowrap;"><button class="btn convert-btn" data-idx="'+idx+'">Convert...</button><span class="conv-status" data-idx="'+idx+'" style="margin-left:6px;color:#c00;">Pending</span></td>';
+      if (item.hasConverter)
+        html += '<td style="white-space:nowrap;"><button class="btn convert-btn" data-idx="'+idx+'">Convert</button><span class="conv-status" data-idx="'+idx+'" style="margin-left:6px;color:#c00;"></span></td>';
       else
         html += '<td>-</td>';
       html += '</tr>';
@@ -479,9 +466,41 @@
           Espruino.Core.Notifications.error("You must convert: "+incomplete.map(f=>f.sourceFile.fileName).join(', '));
           return;
         }
-        
+
+        // Close selection popup and open a small progress popup with Cancel
         popup.close();
-        uploadBatchFiles(options, toUpload);
+        const cancelToken = { cancelled: false };
+        const progressPopup = Espruino.Core.App.openPopup({
+          id: "storageuploadprogress",
+          title: "Uploading...",
+          padding: true,
+          contents: '<div id="uploadprogress">Uploading files...<br/><div id="uploadFilename" style="font-size:smaller;color:#444;margin-bottom:6px;"></div><progress id="uploadProgress" max="100" value="0" style="width:100%;"></progress><div id="uploadPercent" style="text-align:right;margin-top:6px;font-size:smaller;color:#666"></div></div>',
+          position: "center",
+          buttons: [{ name: "Cancel", callback: function() { cancelToken.cancelled = true; try { progressPopup.close(); } catch(e){} } }]
+        });
+
+        // Wire progress updater so uploadBatchFiles can update the UI
+        cancelToken.onProgress = function(curr, total, src, target) {
+          try {
+            const pct = total ? Math.round(curr/total*100) : 0;
+            const bar = progressPopup.window.querySelector('#uploadProgress');
+            if (bar) bar.value = pct;
+            const pctEl = progressPopup.window.querySelector('#uploadPercent');
+            if (pctEl) pctEl.innerText = pct + '% ('+curr+'/'+total+')';
+            const fnEl = progressPopup.window.querySelector('#uploadFilename');
+            if (fnEl) {
+              let displayName = (src || target || '');
+              if (displayName.length > 64) displayName = displayName.substr(0,61) + '...';
+              fnEl.innerText = displayName;
+            }
+          } catch (e) { console.warn(e); }
+        };
+
+        uploadBatchFiles(options, toUpload, function(result) {
+          try { progressPopup.close(); } catch(e){}
+          if (result && result.cancelled) Espruino.Core.Notifications.warning("Upload cancelled");
+          else Espruino.Core.Notifications.success("All files uploaded");
+        }, cancelToken);
       }}, { name:"Cancel", callback: function() { popup.close(); }}]
     });
 
@@ -490,10 +509,10 @@
       var item = fileList[itemIdx];
       var isImage = ['image/gif','image/jpeg','image/png'].includes(item.sourceFile.mimeType);
       var isAudio = ['audio/mpeg','audio/wav','audio/ogg','audio/aac'].includes(item.sourceFile.mimeType);
-      var converter = isImage ? createImageConverter(item.sourceFile.contents, item.sourceFile.mimeType, item.sourceFile.fileName, function(converted){ item.convertedContents = converted; }) :
-                     isAudio ? createAudioConverter(item.sourceFile.contents, item.sourceFile.mimeType, item.sourceFile.fileName, function(converted){ item.convertedContents = converted; }) : null;
+      var converter = isImage ? createImageConverter(item.sourceFile.contents, item.sourceFile.mimeType, item.sourceFile.fileName) :
+                     isAudio ? createAudioConverter(item.sourceFile.contents, item.sourceFile.mimeType, item.sourceFile.fileName) : null;
       var html = '<div><h3>Convert '+Espruino.Core.Utils.escapeHTML(item.sourceFile.fileName)+'</h3>';
-      html += '<p>Adjust options then click Apply. Uncheck "Convert for Espruino" to keep original data.</p>';
+      html += '<p>Adjust options then click Apply to convert; Cancel will keep the original data.</p>';
       if (converter) html += converter.getHTML();
       html += '</div>';
       var cv = Espruino.Core.App.openPopup({
@@ -503,9 +522,13 @@
         contents:html,
         position:"auto",
         buttons:[{name:"Apply", callback:function(){
+          if (converter && typeof converter.recalculate === 'function') {
+            try { converter.recalculate(); } catch(e) { console.warn(e); }
+            item.convertedContents = converter.convertedContents;
+          }
           item.convertedDone = true; // mark complete
           var statusEl = popup.window.querySelector('.conv-status[data-idx="'+itemIdx+'"]');
-          if (statusEl) { statusEl.innerHTML = 'Ready'; statusEl.style.color = '#090'; }
+          if (statusEl) { statusEl.innerHTML = 'Convert'; statusEl.style.color = '#090'; }
           cv.close();
         }},{name:"Cancel", callback:function(){ cv.close(); }}]
       });
@@ -522,15 +545,28 @@
    * @param {*} fileList 
    * @param {*} onComplete 
    */
-  function uploadBatchFiles(options, fileList, onComplete) {
+  function uploadBatchFiles(options, fileList, onComplete, cancelToken) {
     var currentIndex = 0;
     var totalFiles = fileList.length;
+
+    // If cancellation was requested before starting
+    if (cancelToken && cancelToken.cancelled) {
+      Espruino.Core.Status.setStatus("Upload cancelled");
+      if (typeof onComplete === 'function') { try { onComplete({cancelled:true}); } catch (e) { console.warn(e); } }
+      return;
+    }
 
     function startUploads() {
       uploadNext();
     }
 
     function uploadNext() {
+      if (cancelToken && cancelToken.cancelled) {
+        Espruino.Core.Status.setStatus("Upload cancelled");
+        if (typeof onComplete === 'function') { try { onComplete({cancelled:true}); } catch (e) { console.warn(e); } }
+        return;
+      }
+
       if (currentIndex >= totalFiles) {
         Espruino.Core.Status.setStatus("All files uploaded!");
         setTimeout(function() { Espruino.Core.Status.setStatus(""); }, 2000);
@@ -542,11 +578,19 @@
       currentIndex++;
       
       Espruino.Core.Status.setStatus("Uploading " + currentIndex + " of " + totalFiles + ": " + item.targetName);
+      if (cancelToken && typeof cancelToken.onProgress === 'function') {
+        try { cancelToken.onProgress(currentIndex, totalFiles, (item.sourceFile && item.sourceFile.fileName) || '', item.targetName); } catch (e) { console.warn(e); }
+      }
 
       uploadFile(options, item.targetName, item.convertedContents, function() {
         console.log("Uploaded: " + item.targetName);
-        uploadNext();
-      });
+        if (cancelToken && cancelToken.cancelled) {
+          Espruino.Core.Status.setStatus("Upload cancelled");
+          if (typeof onComplete === 'function') { try { onComplete({cancelled:true}); } catch (e) { console.warn(e); } }
+          return;
+        }
+        setTimeout(uploadNext, 200);
+      }, { suppressStatus: true });
     }
 
     startUploads();
@@ -615,22 +659,10 @@
       `;
       
       if (isImage) {
-        imageConverter = createImageConverter(contents, mimeType, fileName, function(converted) {
-          contentsToUpload = converted;
-          if (popup && popup.window) {
-            var ressize = popup.window.querySelector("#ressize");
-            if (ressize) ressize.innerHTML = converted.length + " Bytes";
-          }
-        });
+        imageConverter = createImageConverter(contents, mimeType, fileName);
         html += imageConverter.getHTML();
       } else if (isAudio) {
-        audioConverter = createAudioConverter(contents, mimeType, fileName, function(converted) {
-          contentsToUpload = converted;
-          if (popup && popup.window) {
-            var ressize = popup.window.querySelector("#ressize");
-            if (ressize) ressize.innerHTML = converted.length + " Bytes";
-          }
-        });
+        audioConverter = createAudioConverter(contents, mimeType, fileName);
         html += audioConverter.getHTML();
       }
       html += `</div>`;
@@ -651,6 +683,8 @@
             Espruino.Core.Notifications.error("Filename greater than "+MAX_FILENAME_LEN+" characters")
             return;
           }
+          if (imageConverter && imageConverter.convertedContents) contentsToUpload = imageConverter.convertedContents;
+          if (audioConverter && audioConverter.convertedContents) contentsToUpload = audioConverter.convertedContents;
           console.log("Write file to Storage as "+JSON.stringify(filename));
           uploadFile(options, filename, contentsToUpload, function() {
             console.log("Upload complete!");
