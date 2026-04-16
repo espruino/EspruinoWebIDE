@@ -1,9 +1,9 @@
 /**
  * Macro Buttons Plugin for Espruino Web IDE
  *
- * Adds a single "Macros" icon to the terminal sidebar. Clicking it
- * opens a popup listing user-configurable macros — tap one to send
- * its script to the connected Espruino device.
+ * Adds a single "Macros" icon to the terminal sidebar. Hover to
+ * see a menu of macros for quick execution, or click the icon to
+ * open a popup for managing macros.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -44,6 +44,21 @@
     Espruino.Core.Serial.write(cmd);
   }
 
+  function buildMenuItems() {
+    var macros = getMacros();
+    return macros.map(function(m, idx) {
+      return {
+        id: "macro-" + idx,
+        icon: "lightning",
+        title: m.name,
+        order: idx,
+        click: function() {
+          sendScript(m.script);
+        }
+      };
+    });
+  }
+
   function showConfigPopup(index) {
     var macros = getMacros();
     var isNew = (index === undefined);
@@ -73,6 +88,7 @@
         macros[index].script = scriptInput.value;
         setMacros(macros);
         popup.close();
+        recreateIcon();
         showMacroList();
       }},
       { name: "Cancel", callback: function() {
@@ -85,6 +101,7 @@
         macros.splice(index, 1);
         setMacros(macros);
         popup.close();
+        recreateIcon();
         showMacroList();
       }});
     }
@@ -143,13 +160,8 @@
   }
 
   function init() {
-    Espruino.Core.Config.addSection("Macro Buttons", {
-      sortOrder: 500,
-      description: "Configurable macro buttons for sending quick commands to Espruino"
-    });
-
     Espruino.Core.Config.add("MACRO_ENABLED", {
-      section: "Macro Buttons",
+      section: "General",
       name: "Enable Macro Buttons",
       description: "Show a Macros icon in the terminal sidebar with quick-send script buttons",
       type: "boolean",
@@ -164,7 +176,7 @@
     });
 
     Espruino.Core.Config.add("MACRO_SCRIPTS", {
-      section: "Macro Buttons",
+      section: "General",
       name: "Macro Scripts (JSON)",
       description: "JSON array of macro objects with name and script fields. Edited via the Macros popup.",
       type: "string",
@@ -185,7 +197,8 @@
       area: { name: "terminal", position: "top" },
       click: function() {
         showMacroList();
-      }
+      },
+      menu: buildMenuItems()
     });
   }
 
@@ -194,6 +207,12 @@
       icon.remove();
       icon = undefined;
     }
+  }
+
+  function recreateIcon() {
+    if (!icon) return;
+    removeIcon();
+    createIcon();
   }
 
   Espruino.Plugins.MacroButtons = {
