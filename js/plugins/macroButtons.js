@@ -112,7 +112,6 @@
       var preview = m.script.replace(/\n/g, " ").trim();
       if (preview.length > 50) preview = preview.substring(0, 50) + "...";
       return {
-        icon: "icon-lightning",
         title: Espruino.Core.Utils.escapeHTML(m.name),
         description: Espruino.Core.Utils.escapeHTML(preview),
         callback: function() {
@@ -120,7 +119,7 @@
           sendScript(m.script);
         },
         right: [{
-          icon: "icon-wrench",
+          icon: "icon-settings",
           title: "Edit",
           callback: function() {
             popup.close();
