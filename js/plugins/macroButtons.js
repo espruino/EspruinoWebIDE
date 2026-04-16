@@ -5,8 +5,6 @@
  * opens a popup listing user-configurable macros — tap one to send
  * its script to the connected Espruino device.
  *
- * Copyright (C) 2025 Jean-Philippe Rey
- *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
@@ -109,27 +107,25 @@
     var macros = getMacros();
 
     var listItems = macros.map(function(m, idx) {
-      var preview = m.script.replace(/\n/g, " ").trim();
-      if (preview.length > 50) preview = preview.substring(0, 50) + "...";
       return {
         title: Espruino.Core.Utils.escapeHTML(m.name),
-        description: Espruino.Core.Utils.escapeHTML(preview),
-        callback: function() {
-          popup.close();
-          sendScript(m.script);
-        },
-        right: [{
-          icon: "icon-settings",
-          title: "Edit",
-          callback: function() {
-            popup.close();
-            showConfigPopup(idx);
+        right: [
+          { title: "Run", icon: "icon-deploy",
+            callback: function() {
+              popup.close();
+              sendScript(m.script);
+            }
+          },
+          { title: "Edit", icon: "icon-settings",
+            callback: function() {
+              popup.close();
+              showConfigPopup(idx);
+            }
           }
-        }]
+        ]
       };
     });
 
-    // "Add Macro" item at the end
     listItems.push({
       icon: "icon-plus",
       title: "Add Macro...",
