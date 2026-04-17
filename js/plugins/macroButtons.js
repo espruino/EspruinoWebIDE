@@ -41,7 +41,9 @@
     if (!script) return;
     var cmd = script.replace(/\r\n/g, "\n");
     if (cmd[cmd.length - 1] !== "\n") cmd += "\n";
-    Espruino.Core.Serial.write(cmd);
+    Espruino.Core.MenuPortSelector.ensureConnected(function() {
+      Espruino.Core.Serial.write(cmd);
+    });
   }
 
   function buildMenuItems() {
