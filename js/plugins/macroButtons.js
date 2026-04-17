@@ -73,11 +73,11 @@
     var m = macros[index];
 
     var contents =
-      '<div style="padding:10px 15px;">' +
+      '<div style="padding:10px;">' +
         '<label style="display:block;margin-bottom:4px;font-weight:bold;">Name:</label>' +
-        '<input id="macro-cfg-name" type="text" maxlength="15" value="" style="width:calc(100% - 4px);padding:4px;margin-bottom:10px;margin-left:2px;box-sizing:border-box;" />' +
+        '<input id="macro-cfg-name" type="text" maxlength="15" value="" size="30" style="border:2px solid #ccc;margin-bottom:10px;" />' +
         '<label style="display:block;margin-bottom:4px;font-weight:bold;">Script (sent to Espruino on click):</label>' +
-        '<textarea id="macro-cfg-script" rows="6" style="width:calc(100% - 4px);padding:4px;margin-left:2px;box-sizing:border-box;font-family:monospace;font-size:13px;resize:vertical;"></textarea>' +
+        '<textarea id="macro-cfg-script" rows="6" cols="30" style="border:2px solid #ccc;font-family:monospace;font-size:13px;resize:vertical;"></textarea>' +
       '</div>' +
       '<style>.guiders_buttons_container { height: auto !important; display: flex; flex-wrap: wrap; gap: 4px; justify-content: flex-end; } .guiders_buttons_container .guiders_button { padding: 6px 12px; font-size: 13px; }</style>';
 
