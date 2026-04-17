@@ -73,18 +73,20 @@
     var m = macros[index];
 
     var contents =
-      '<div style="padding:10px;">' +
+      '<div style="padding:10px 15px;">' +
         '<label style="display:block;margin-bottom:4px;font-weight:bold;">Name:</label>' +
-        '<input id="macro-cfg-name" type="text" value="" style="width:100%;padding:4px;margin-bottom:10px;box-sizing:border-box;" />' +
+        '<input id="macro-cfg-name" type="text" maxlength="15" value="" style="width:100%;padding:4px;margin-bottom:10px;box-sizing:border-box;" />' +
         '<label style="display:block;margin-bottom:4px;font-weight:bold;">Script (sent to Espruino on click):</label>' +
         '<textarea id="macro-cfg-script" rows="6" style="width:100%;padding:4px;box-sizing:border-box;font-family:monospace;font-size:13px;resize:vertical;"></textarea>' +
-      '</div>';
+      '</div>' +
+      '<style>.guiders_buttons_container { height: auto !important; display: flex; flex-wrap: wrap; gap: 4px; justify-content: flex-end; } .guiders_buttons_container .guiders_button { padding: 6px 12px; font-size: 13px; }</style>';
 
     var buttons = [
       { name: "Save", callback: function() {
         var nameInput = document.getElementById("macro-cfg-name");
         var scriptInput = document.getElementById("macro-cfg-script");
-        macros[index].name = nameInput.value || ("Macro " + (index + 1));
+        var name = (nameInput.value || ("Macro " + (index + 1))).substring(0, 15);
+        macros[index].name = name;
         macros[index].script = scriptInput.value;
         setMacros(macros);
         popup.close();
