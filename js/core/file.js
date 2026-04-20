@@ -601,12 +601,35 @@
       return name.toLowerCase().indexOf(filter) >= 0;
     });
 
-    fileList.innerHTML = visibleFiles.map( (entry) => {
+    fileList.textContent = "";
+    visibleFiles.forEach(function(entry) {
       var f = entry.f;
       var idx = entry.idx;
       let active = activeFile==idx;
-      return `<span class="file_list-tab ${active?'active':'inactive'}" fileIndex="${idx}">${FILETYPES[f.type].icon} ${f.fileName||"Untitled"}${active?'&nbsp;<span class="close">&#10005;</span>':""}</span>`
-    }).join("") + `<span class="file_list-new">+</span>`;
+      var tab = document.createElement("span");
+      tab.className = "file_list-tab " + (active ? "active" : "inactive");
+      tab.setAttribute("fileIndex", idx);
+      tab.appendChild(document.createTextNode(FILETYPES[f.type].icon + " "));
+
+      var label = document.createElement("span");
+      label.textContent = f.fileName || "Untitled";
+      tab.appendChild(label);
+
+      if (active) {
+        tab.appendChild(document.createTextNode("\u00A0"));
+        var close = document.createElement("span");
+        close.className = "close";
+        close.textContent = "\u2715";
+        tab.appendChild(close);
+      }
+
+      fileList.appendChild(tab);
+    });
+
+    var newTab = document.createElement("span");
+    newTab.className = "file_list-new";
+    newTab.textContent = "+";
+    fileList.appendChild(newTab);
     var node = fileList.firstChild;
     while (node) {
       node.addEventListener("click", function(e) {
