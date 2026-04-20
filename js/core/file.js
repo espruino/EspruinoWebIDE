@@ -231,14 +231,19 @@
 
   function toggleTabSearch() {
     tabSearchOpen = !tabSearchOpen;
-    if (!tabSearchOpen) {
-      tabSearchQuery = "";
-      if (tabSearchInput) tabSearchInput.value = "";
-      updateFileTabs();
+    if (tabSearchOpen && tabSearchInput) {
+      // Restore query when reopening
+      tabSearchInput.value = tabSearchQuery;
+      setTimeout(function() { tabSearchInput.focus(); }, 10);
     }
     updateTabSearchState();
-    if (tabSearchOpen && tabSearchInput)
-      setTimeout(function() { tabSearchInput.focus(); }, 10);
+  }
+
+  function clearTabSearch() {
+    tabSearchQuery = "";
+    if (tabSearchInput) tabSearchInput.value = "";
+    updateTabSearchState();
+    updateFileTabs();
   }
 
   function createTabSearch() {
@@ -274,11 +279,9 @@
     });
     tabSearchInput.addEventListener("keydown", function(e) {
       if (e.key === "Escape") {
-        tabSearchQuery = "";
-        tabSearchInput.value = "";
+        clearTabSearch();
         tabSearchOpen = false;
         updateTabSearchState();
-        updateFileTabs();
       }
     });
 
