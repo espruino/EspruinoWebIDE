@@ -53,6 +53,8 @@
   max-width:90vh;
   left: 50%; top: 50%;
   transform: translate(-50%,-50%);
+  border-radius: 10px;
+  overflow: hidden;
 }
 .window--modal.window--auto >  .window__viewport
 {
@@ -68,6 +70,8 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%,-50%);
+  overflow: hidden;
+  border-radius: 10px;
 }
 .window--modal.window--center > .window__viewport
 {
@@ -109,8 +113,24 @@
   left: 0;
 	width: 100%;
 	height: 100%;
-  background: rgba(0,0,0,0.4);
+  background: rgba(0,0,0,0.28);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
   z-index: 199;
+  animation: fadeInOverlay 0.15s ease-out;
+}
+
+@keyframes fadeInOverlay {
+  from {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+  }
+  to {
+    opacity: 1;
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+  }
 }
 
 .window__overlay-inner
