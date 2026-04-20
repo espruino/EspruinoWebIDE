@@ -159,7 +159,6 @@
   background: linear-gradient(135deg, #3ba9ef 0%, #1981ca 100%);
   height: 60px;
   padding: 0px;
-  overflow: hidden;
 }
 
 .toolbar .toolbar__buttons--right {
