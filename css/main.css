@@ -91,6 +91,51 @@ dd {
   color: rgb(35, 101, 146);
 }
 
+#file_list > span.file_list-tab {
+  user-select: none;
+  position: relative;
+  cursor: grab;
+}
+
+#file_list > span.file_list-tab.file_list-tab--dragging {
+  opacity: 0.55;
+  cursor: grabbing;
+}
+
+#file_list > span.file_list-tab.file_list-tab--ghost {
+  position: fixed;
+  margin: 0;
+  z-index: 4500;
+  pointer-events: none;
+  opacity: 0.92;
+  cursor: grabbing;
+}
+
+#file_list > span.file_list-tab.file_list-tab--drop-before::before,
+#file_list > span.file_list-tab.file_list-tab--drop-after::after {
+  content: "";
+  position: absolute;
+  top: 6px;
+  bottom: 6px;
+  width: 3px;
+  border-radius: 3px;
+  background: rgba(243, 156, 18, 0.98);
+  box-shadow: 0 0 0 1px rgba(243, 156, 18, 0.35);
+  pointer-events: none;
+}
+
+#file_list > span.file_list-tab.file_list-tab--drop-before::before {
+  left: -4px;
+}
+
+#file_list > span.file_list-tab.file_list-tab--drop-after::after {
+  right: -4px;
+}
+
+#file_list .file_list-tab .close {
+  cursor: pointer;
+}
+
 #file_list>  span.close {
   cursor:grab;
   padding: 0px;
@@ -103,4 +148,40 @@ dd {
   font-weight: bold;
   padding-left: 4px;
   border: 0px;
+}
+
+.tab-context-menu {
+  position: fixed;
+  z-index: 5000;
+  min-width: 170px;
+  background: #ffffff;
+  border: 1px solid rgba(35, 101, 146, 0.28);
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(16, 53, 79, 0.22);
+  padding: 6px;
+}
+
+.tab-context-menu-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  border: 0;
+  background: transparent;
+  color: #1f5578;
+  border-radius: 8px;
+  padding: 9px 10px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.tab-context-menu-item:hover {
+  background: #edf6fc;
+}
+
+.tab-context-menu-item--danger {
+  color: #b8432a;
+}
+
+.tab-context-menu-item--danger:hover {
+  background: #fff0ec;
 }

@@ -94,13 +94,15 @@
       return;
     }
 
-    var html = "<h1>"+sectionName+"</h1>";
+    var html = "<h1 class='settings-sectiontitle'>"+sectionName+"</h1>";
     if (section.descriptionHTML!==undefined)
-      html += "<p>"+section.descriptionHTML+"<p>";
+      html += "<p class='settings-sectiondescription'>"+section.descriptionHTML+"</p>";
     if (section.description!==undefined)
-      html += "<p>"+Espruino.Core.Utils.escapeHTML(section.description, false).replace("\n","</p><p>") +"<p>";
+      html += "<p class='settings-sectiondescription'>"+
+        Espruino.Core.Utils.escapeHTML(section.description, false).replace("\n","</p><p class='settings-sectiondescription'>")+
+      "</p>";
     if (section.tours!==undefined) {
-      html += "<p>See the ";
+      html += "<p class='settings-sectiondescription'>See the ";
       var tours = [];
       for (var tourName in section.tours)
         tours.push('<a href="#" class="tour_link" tour_name="'+section.tours[tourName]+'">'+tourName+'</a>');
@@ -133,8 +135,8 @@
      var configGroup = $(this).attr("configGroup");
      if (configGroup && configItems[configGroup] !== undefined) {
        var checked = [];
-       $(this).parent().children().each(function() {
-         if ($(this).is(':checked')) checked.push($(this).val());
+       $(".settings .currentsection input[configGroup='"+configGroup+"']:checked").each(function() {
+         checked.push($(this).val());
        });
       Espruino.Config.set(configGroup, "|"+checked.join("|")+"|");
       return;
@@ -161,50 +163,58 @@
   function getHtmlForConfigItem(configName, config) {
     var value = Espruino.Config[configName];
     var html =
-      '<h3 style="clear:both">'+Espruino.Core.Utils.escapeHTML(config.name)+'</h3>';
+      '<div class="settings-option-card">'+
+        '<div class="settings-option-header">'+
+          '<h3 class="settings-configtitle">'+Espruino.Core.Utils.escapeHTML(config.name)+'</h3>'+
+        '</div>';
     var desc = "";
     if (config.descriptionHTML!==undefined)
-      desc += "<p>"+config.descriptionHTML+"<p>";
+      desc += "<p class='settings-description'>"+config.descriptionHTML+"</p>";
     if (config.getDescriptionHTML!==undefined)
-      html += "<p>"+config.getDescriptionHTML()+"<p>";
+      desc += "<p class='settings-description'>"+config.getDescriptionHTML()+"</p>";
     if (config.description!==undefined)
-      desc += '<p>'+Espruino.Core.Utils.escapeHTML(config.description, false).replace("\n","</p><p>")+'</p>';
+      desc += '<p class="settings-description">'+Espruino.Core.Utils.escapeHTML(config.description, false).replace("\n","</p><p class=\"settings-description\">")+'</p>';
     // type : "int"/"boolean"/"string"/{ value1:niceName, value2:niceName },
     if (config.type == "none" || config.type===undefined) {
       html += desc;
     } else if (config.type == "boolean") {
-      html += '<input name="'+configName+'" type="checkbox" style="float: right;" '+(value?"checked":"")+'/>';
+      html += '<div class="settings-option-control"><input name="'+configName+'" type="checkbox" style="float: right;" '+(value?"checked":"")+'/></div>';
       html += desc;
     } else if (config.type == "string") {
+      html += '<div class="settings-option-control">';
       html += desc;
       html += '<input name="'+configName+'" type="text" size="80" value="'+Espruino.Core.Utils.escapeHTML(value)+'"/>';
+      html += '</div>';
     } else if ((typeof config.type) == "object") {
       if (config.type.multi_select==true) {
-        html += '<div name="'+configName+'" style="float: right;">';
+        html += '<div class="settings-option-control settings-option-group" name="'+configName+'">';
         for (var key in config.type) {
           if (key=="multi_select") continue;
           var checked = value.indexOf("|"+key+"|")>=0;
           var id = configName+"_"+key;
-          html += '<input type="checkbox" id="'+id+'" configGroup="'+configName+'" name="'+id+'" value="'+key+'" '+(checked?"checked":"")+'>'+
-                  '<label for="'+id+'">'+Espruino.Core.Utils.escapeHTML(config.type[key])+'</label><br/>';
+          html += '<label class="settings-option-check" for="'+id+'">'+
+                    '<input type="checkbox" id="'+id+'" configGroup="'+configName+'" name="'+id+'" value="'+key+'" '+(checked?"checked":"")+'>'+
+                    Espruino.Core.Utils.escapeHTML(config.type[key])+
+                  '</label>';
         }
         html += '</div>';
       } else {
-        html += '<select name="'+configName+'" style="float: right;">';
+        html += '<div class="settings-option-control"><select class="settings-option-select" name="'+configName+'" style="float: right;">';
         for (var key in config.type)
           html += '<option value="'+Espruino.Core.Utils.escapeHTML(key, false)+'" '+(key==value?"selected":"")+'>'+
                     Espruino.Core.Utils.escapeHTML(config.type[key])+
                   '</option>';
-        html += '</select>';
+        html += '</select></div>';
       }
       html += desc;
     } else if (config.type == "button") {
       var label = config.label || "Go";
-      html += '<button name="'+configName+'" style="float: right;" '+(value?"checked":"")+'>'+label+'</button>';
+      html += '<div class="settings-option-control"><button class="settings-option-button" name="'+configName+'" style="float: right;" '+(value?"checked":"")+'>'+label+'</button></div>';
       html += desc;
     } else {
       console.warn("Unknown config type '"+config.type+"' for Config."+configName);
     }
+    html += '</div>';
     return html;
   }
 

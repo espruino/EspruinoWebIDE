@@ -45,6 +45,7 @@
   var iconOpenFile;
   var iconSaveFile;
   var iconViewMode;
+  var iconTabSearch;
   // interval used when checking files for modification
   var watchInterval;
   // What we should do when clicking the 'openFile' button
@@ -63,6 +64,17 @@
   // List of currently open file tabs
   var files = [ ];
   var activeFile = 0; // index of active file in `files`
+  var tabSearchOpen = false;
+  var tabSearchQuery = "";
+  var tabSearchInput;
+  var tabDragIndex = -1;
+  var tabMouseDrag;
+  var tabDropIndex = -1;
+  var tabDropAfter = false;
+  var tabClickSuppressUntil = 0;
+  var tabContextMenuEl;
+  var tabContextMenuOutsideHandler;
+  var tabContextMenuKeyHandler;
 
   /* options = {
     type : "js"/"xml"
@@ -206,6 +218,73 @@
     document.querySelector(".toolbar__buttons--left").after(element);
   }
 
+  function updateTabSearchState() {
+    var iconEl = document.querySelector("#icon-tabSearch");
+    if (iconEl) {
+      iconEl.classList.toggle("tab-search-active", !!tabSearchQuery.trim());
+      iconEl.classList.toggle("tab-search-open", !!tabSearchOpen);
+    }
+    var container = document.querySelector("#tab_search_container");
+    if (container)
+      container.classList.toggle("tab-search-container--open", !!tabSearchOpen);
+  }
+
+  function toggleTabSearch() {
+    tabSearchOpen = !tabSearchOpen;
+    if (!tabSearchOpen) {
+      tabSearchQuery = "";
+      if (tabSearchInput) tabSearchInput.value = "";
+      updateFileTabs();
+    }
+    updateTabSearchState();
+    if (tabSearchOpen && tabSearchInput)
+      setTimeout(function() { tabSearchInput.focus(); }, 10);
+  }
+
+  function createTabSearch() {
+    iconTabSearch = Espruino.Core.App.addIcon({
+      id: "tabSearch",
+      icon: "compass",
+      title : "Search and Filter Tabs",
+      order: -79,
+      area: {
+        name: "toolbar",
+        position: "right"
+      },
+      click: function(e) {
+        if (e) e.preventDefault();
+        toggleTabSearch();
+      }
+    });
+
+    var iconEl = document.querySelector("#icon-tabSearch");
+    if (!iconEl || !iconEl.parentNode) return;
+
+    var searchContainer = Espruino.Core.HTML.domElement(
+      '<div id="tab_search_container" class="tab-search-container">'+
+        '<input id="tab_search_input" class="tab-search-input" type="text" placeholder="Filter tabs..."/>'+
+      '</div>');
+
+    iconEl.parentNode.insertBefore(searchContainer, iconEl.nextSibling);
+    tabSearchInput = searchContainer.querySelector("#tab_search_input");
+    tabSearchInput.addEventListener("input", function() {
+      tabSearchQuery = (tabSearchInput.value || "").trim();
+      updateTabSearchState();
+      updateFileTabs();
+    });
+    tabSearchInput.addEventListener("keydown", function(e) {
+      if (e.key === "Escape") {
+        tabSearchQuery = "";
+        tabSearchInput.value = "";
+        tabSearchOpen = false;
+        updateTabSearchState();
+        updateFileTabs();
+      }
+    });
+
+    updateTabSearchState();
+  }
+
   function closeFileTab(idx) {
     // TODO: Check whether it needs saving?
     console.log(`File> Closing tab ${idx}: ${files[idx].fileName}`);
@@ -231,6 +310,249 @@
     // update the file list
     saveFileConfig();
     updateFileTabs();
+  }
+
+  function reorderFileTabs(fromIdx, toIdx) {
+    if (fromIdx === toIdx) return;
+    if (fromIdx < 0 || toIdx < 0 || fromIdx >= files.length || toIdx >= files.length) return;
+
+    var moved = files.splice(fromIdx, 1)[0];
+    files.splice(toIdx, 0, moved);
+
+    if (activeFile === fromIdx)
+      activeFile = toIdx;
+    else if (fromIdx < activeFile && toIdx >= activeFile)
+      activeFile--;
+    else if (fromIdx > activeFile && toIdx <= activeFile)
+      activeFile++;
+
+    saveFileConfig();
+    updateFileTabs();
+  }
+
+  function renameFileTab(idx) {
+    if (idx < 0 || idx >= files.length) return;
+    var oldName = files[idx].fileName || "Untitled";
+    var newName = window.prompt("Rename tab", oldName);
+    if (newName === null) return;
+    newName = (newName || "").trim();
+    if (!newName || newName === oldName) return;
+
+    files[idx].fileName = newName;
+    if (idx === activeFile)
+      setCurrentFileName(newName);
+    else {
+      saveFileConfig();
+      updateFileTabs();
+    }
+  }
+
+  function closeTabContextMenu() {
+    if (tabContextMenuEl && tabContextMenuEl.parentNode)
+      tabContextMenuEl.parentNode.removeChild(tabContextMenuEl);
+    tabContextMenuEl = undefined;
+    if (tabContextMenuOutsideHandler) {
+      document.removeEventListener("mousedown", tabContextMenuOutsideHandler, true);
+      document.removeEventListener("contextmenu", tabContextMenuOutsideHandler, true);
+      tabContextMenuOutsideHandler = undefined;
+    }
+    if (tabContextMenuKeyHandler) {
+      document.removeEventListener("keydown", tabContextMenuKeyHandler, true);
+      tabContextMenuKeyHandler = undefined;
+    }
+  }
+
+  function openTabContextMenu(idx, x, y) {
+    if (idx < 0 || idx >= files.length) return;
+    closeTabContextMenu();
+
+    tabContextMenuEl = Espruino.Core.HTML.domElement(
+      '<div id="tab_context_menu" class="tab-context-menu">'+
+        '<button type="button" class="tab-context-menu-item" data-action="rename">Rename Tab</button>'+
+        '<button type="button" class="tab-context-menu-item tab-context-menu-item--danger" data-action="delete">Delete Tab</button>'+
+      '</div>'
+    );
+    tabContextMenuEl.addEventListener("click", function(e) {
+      var item = e.target.closest(".tab-context-menu-item");
+      if (!item) return;
+      var action = item.getAttribute("data-action");
+      closeTabContextMenu();
+      if (action === "rename")
+        renameFileTab(idx);
+      else if (action === "delete")
+        closeFileTab(idx);
+    });
+    tabContextMenuEl.addEventListener("contextmenu", function(e) {
+      e.preventDefault();
+    });
+    document.body.appendChild(tabContextMenuEl);
+
+    var menuRect = tabContextMenuEl.getBoundingClientRect();
+    var left = Math.min(x, window.innerWidth - menuRect.width - 8);
+    var top = Math.min(y, window.innerHeight - menuRect.height - 8);
+    tabContextMenuEl.style.left = Math.max(8, left) + "px";
+    tabContextMenuEl.style.top = Math.max(8, top) + "px";
+
+    tabContextMenuOutsideHandler = function(e) {
+      if (!tabContextMenuEl || tabContextMenuEl.contains(e.target)) return;
+      closeTabContextMenu();
+    };
+    tabContextMenuKeyHandler = function(e) {
+      if (e.key === "Escape") closeTabContextMenu();
+    };
+    document.addEventListener("mousedown", tabContextMenuOutsideHandler, true);
+    document.addEventListener("contextmenu", tabContextMenuOutsideHandler, true);
+    document.addEventListener("keydown", tabContextMenuKeyHandler, true);
+  }
+
+  function clearTabDropIndicators() {
+    var tabs = document.querySelectorAll("#file_list .file_list-tab");
+    tabs.forEach(function(tab) {
+      tab.classList.remove("file_list-tab--drop-before");
+      tab.classList.remove("file_list-tab--drop-after");
+      tab.classList.remove("file_list-tab--drop-target");
+    });
+    tabDropIndex = -1;
+    tabDropAfter = false;
+  }
+
+  function styleTabGhost(ghostEl, sourceEl) {
+    var style = window.getComputedStyle(sourceEl);
+    ghostEl.style.display = style.display;
+    ghostEl.style.position = "fixed";
+    ghostEl.style.margin = "0";
+    ghostEl.style.paddingTop = style.paddingTop;
+    ghostEl.style.paddingRight = style.paddingRight;
+    ghostEl.style.paddingBottom = style.paddingBottom;
+    ghostEl.style.paddingLeft = style.paddingLeft;
+    ghostEl.style.borderTopWidth = style.borderTopWidth;
+    ghostEl.style.borderRightWidth = style.borderRightWidth;
+    ghostEl.style.borderBottomWidth = style.borderBottomWidth;
+    ghostEl.style.borderLeftWidth = style.borderLeftWidth;
+    ghostEl.style.borderTopStyle = style.borderTopStyle;
+    ghostEl.style.borderRightStyle = style.borderRightStyle;
+    ghostEl.style.borderBottomStyle = style.borderBottomStyle;
+    ghostEl.style.borderLeftStyle = style.borderLeftStyle;
+    ghostEl.style.borderTopColor = style.borderTopColor;
+    ghostEl.style.borderRightColor = style.borderRightColor;
+    ghostEl.style.borderBottomColor = style.borderBottomColor;
+    ghostEl.style.borderLeftColor = style.borderLeftColor;
+    ghostEl.style.borderTopLeftRadius = style.borderTopLeftRadius;
+    ghostEl.style.borderTopRightRadius = style.borderTopRightRadius;
+    ghostEl.style.borderBottomLeftRadius = style.borderBottomLeftRadius;
+    ghostEl.style.borderBottomRightRadius = style.borderBottomRightRadius;
+    ghostEl.style.backgroundColor = style.backgroundColor;
+    ghostEl.style.color = style.color;
+    ghostEl.style.fontSize = style.fontSize;
+    ghostEl.style.lineHeight = style.lineHeight;
+    ghostEl.style.whiteSpace = style.whiteSpace;
+    ghostEl.style.boxSizing = style.boxSizing;
+    ghostEl.style.pointerEvents = "none";
+    ghostEl.style.zIndex = "4500";
+  }
+
+  function updateTabDropIndicatorFromX(clientX) {
+    var tabs = Array.from(document.querySelectorAll("#file_list .file_list-tab")).filter(function(tab) {
+      return parseInt(tab.getAttribute("fileIndex")) !== tabDragIndex;
+    });
+    if (!tabs.length) {
+      clearTabDropIndicators();
+      return;
+    }
+
+    var targetTab = tabs[tabs.length - 1];
+    var dropAfter = true;
+    for (var i = 0; i < tabs.length; i++) {
+      var rect = tabs[i].getBoundingClientRect();
+      if (clientX < rect.left + rect.width / 2) {
+        targetTab = tabs[i];
+        dropAfter = false;
+        break;
+      }
+    }
+
+    clearTabDropIndicators();
+    if (dropAfter)
+      targetTab.classList.add("file_list-tab--drop-after");
+    else
+      targetTab.classList.add("file_list-tab--drop-before");
+    tabDropIndex = parseInt(targetTab.getAttribute("fileIndex"));
+    tabDropAfter = dropAfter;
+  }
+
+  function endTabMouseDrag(options) {
+    options = options || {};
+    if (!tabMouseDrag) return;
+
+    var wasDragging = !!tabMouseDrag.dragging;
+    var fromIdx = tabMouseDrag.fromIdx;
+    var targetIdx = tabDropIndex;
+    var dropAfter = tabDropAfter;
+
+    document.removeEventListener("mousemove", onTabMouseMove, true);
+    document.removeEventListener("mouseup", onTabMouseUp, true);
+
+    if (tabMouseDrag.sourceEl)
+      tabMouseDrag.sourceEl.classList.remove("file_list-tab--dragging");
+    if (tabMouseDrag.ghostEl && tabMouseDrag.ghostEl.parentNode)
+      tabMouseDrag.ghostEl.parentNode.removeChild(tabMouseDrag.ghostEl);
+
+    tabMouseDrag = undefined;
+    tabDragIndex = -1;
+    clearTabDropIndicators();
+
+    if (!wasDragging) return;
+    tabClickSuppressUntil = Date.now() + 200;
+
+    if (options.reorder && !isNaN(fromIdx) && !isNaN(targetIdx)) {
+      var toIdx = dropAfter ? targetIdx + 1 : targetIdx;
+      if (toIdx > fromIdx) toIdx--;
+      if (toIdx < 0) toIdx = 0;
+      if (toIdx >= files.length) toIdx = files.length - 1;
+      reorderFileTabs(fromIdx, toIdx);
+    }
+  }
+
+  function onTabMouseMove(e) {
+    if (!tabMouseDrag) return;
+
+    var dx = e.clientX - tabMouseDrag.startX;
+    var dy = e.clientY - tabMouseDrag.startY;
+    if (!tabMouseDrag.dragging) {
+      // Start dragging only when horizontal movement is dominant.
+      if (Math.abs(dx) < 4 || Math.abs(dx) < Math.abs(dy)) return;
+
+      tabMouseDrag.dragging = true;
+      tabDragIndex = tabMouseDrag.fromIdx;
+      tabMouseDrag.sourceEl.classList.add("file_list-tab--dragging");
+      closeTabContextMenu();
+
+      var ghostEl = tabMouseDrag.sourceEl.cloneNode(true);
+      ghostEl.classList.add("file_list-tab--ghost");
+      ghostEl.classList.remove("active");
+      ghostEl.classList.remove("inactive");
+      styleTabGhost(ghostEl, tabMouseDrag.sourceEl);
+      ghostEl.style.width = tabMouseDrag.sourceRect.width + "px";
+      ghostEl.style.top = tabMouseDrag.sourceRect.top + "px";
+      ghostEl.style.left = (e.clientX - tabMouseDrag.offsetX) + "px";
+      document.body.appendChild(ghostEl);
+      tabMouseDrag.ghostEl = ghostEl;
+    }
+
+    if (!tabMouseDrag.dragging) return;
+    e.preventDefault();
+
+    var newLeft = e.clientX - tabMouseDrag.offsetX;
+    var maxLeft = window.innerWidth - tabMouseDrag.sourceRect.width;
+    if (newLeft < 0) newLeft = 0;
+    if (newLeft > maxLeft) newLeft = maxLeft;
+    tabMouseDrag.ghostEl.style.left = newLeft + "px";
+
+    updateTabDropIndicatorFromX(e.clientX);
+  }
+
+  function onTabMouseUp() {
+    endTabMouseDrag({reorder:true});
   }
 
   // Create a new tab, see getDefaultFile for options
@@ -270,8 +592,18 @@
   }
 
   function updateFileTabs() {
+    closeTabContextMenu();
     var fileList = document.querySelector("#file_list");
-    fileList.innerHTML = files.map( (f,idx) => {
+    var filter = tabSearchQuery.toLowerCase();
+    var visibleFiles = files.map((f, idx) => ({f:f, idx:idx})).filter(function(file) {
+      if (!filter) return true;
+      var name = file.f.fileName || "Untitled";
+      return name.toLowerCase().indexOf(filter) >= 0;
+    });
+
+    fileList.innerHTML = visibleFiles.map( (entry) => {
+      var f = entry.f;
+      var idx = entry.idx;
       let active = activeFile==idx;
       return `<span class="file_list-tab ${active?'active':'inactive'}" fileIndex="${idx}">${FILETYPES[f.type].icon} ${f.fileName||"Untitled"}${active?'&nbsp;<span class="close">&#10005;</span>':""}</span>`
     }).join("") + `<span class="file_list-new">+</span>`;
@@ -279,15 +611,45 @@
     while (node) {
       node.addEventListener("click", function(e) {
         e.preventDefault();
+        if (Date.now() < tabClickSuppressUntil) return;
         if (e.target.classList.contains("close")) {
-          closeFileTab(activeFile);
+          closeFileTab(parseInt(this.getAttribute("fileIndex")));
         } else if (e.target.classList.contains("file_list-new")) {
           showNewFileDialog();
-        } else if (e.target.classList.contains("file_list-tab")) {
-          setActiveFile(parseInt(e.target.getAttribute("fileIndex")));
+        } else if (this.classList.contains("file_list-tab")) {
+          setActiveFile(parseInt(this.getAttribute("fileIndex")));
         } else
           console.log("Unexpected element clicked", e.target);
       });
+
+      if (node.classList.contains("file_list-tab")) {
+        node.addEventListener("contextmenu", function(e) {
+          e.preventDefault();
+          openTabContextMenu(parseInt(this.getAttribute("fileIndex")), e.clientX, e.clientY);
+        });
+
+        node.addEventListener("mousedown", function(e) {
+          if (e.button !== 0) return;
+          if (e.target.classList.contains("close")) return;
+          if (tabMouseDrag) endTabMouseDrag();
+
+          var rect = this.getBoundingClientRect();
+          tabMouseDrag = {
+            sourceEl : this,
+            sourceRect : rect,
+            fromIdx : parseInt(this.getAttribute("fileIndex")),
+            startX : e.clientX,
+            startY : e.clientY,
+            offsetX : e.clientX - rect.left,
+            dragging : false,
+            ghostEl : undefined
+          };
+          tabDropIndex = -1;
+          tabDropAfter = false;
+          document.addEventListener("mousemove", onTabMouseMove, true);
+          document.addEventListener("mouseup", onTabMouseUp, true);
+        });
+      }
       node = node.nextSibling;
     }
   }
@@ -372,6 +734,7 @@
     });
     // Create the tabs showing what files we have
     createFileTabs();
+    createTabSearch();
     // Handle file send mode or JS changed
     Espruino.addProcessor("sendModeChanged", function(_, callback) {
       if (activeFile>=0 && activeFile<files.length) {

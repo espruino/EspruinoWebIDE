@@ -45,6 +45,10 @@
         for (const ed of Espruino.Core.EditorJavaScript.getEditors()) {
           ed.codeMirror.setOption('theme', Espruino.Config.THEME);
         }
+        setTimeout(function() {
+          var ed = getVisibleEditor() || editors[0];
+          if (ed) applySplitPaneThemeFromCodeMirror(ed.codeMirror);
+        }, 10);
       }
     });
     Espruino.Core.Config.add("INDENTATION_TYPE", {
@@ -95,6 +99,43 @@
       }
     });
     loadThemeCSS(Espruino.Config.THEME);
+  }
+
+  function parseRGB(cssColor) {
+    var m = /^rgba?\((\d+)\s*,\s*(\d+)\s*,\s*(\d+)/.exec(cssColor || "");
+    if (!m) return [255, 255, 255];
+    return [parseInt(m[1], 10), parseInt(m[2], 10), parseInt(m[3], 10)];
+  }
+
+  function rgbToCss(rgb) {
+    return "rgb("+rgb[0]+", "+rgb[1]+", "+rgb[2]+")";
+  }
+
+  function mixRGB(a, b, ratioToB) {
+    var r = Math.max(0, Math.min(1, ratioToB));
+    return [
+      Math.round(a[0] * (1-r) + b[0] * r),
+      Math.round(a[1] * (1-r) + b[1] * r),
+      Math.round(a[2] * (1-r) + b[2] * r),
+    ];
+  }
+
+  function applySplitPaneThemeFromCodeMirror(codeMirror) {
+    if (!codeMirror) return;
+    var wrapper = codeMirror.getWrapperElement();
+    if (!wrapper) return;
+    var styles = window.getComputedStyle(wrapper);
+    var codeBg = styles.backgroundColor || "rgb(255, 255, 255)";
+    var codeFg = styles.color || "rgb(31, 35, 42)";
+    var codeBgRgb = parseRGB(codeBg);
+    var codeFgRgb = parseRGB(codeFg);
+    // Keep terminal side dark, but nudge it toward theme cohesion
+    var termBg = rgbToCss(mixRGB(codeBgRgb, [0, 0, 0], 0.78));
+
+    var root = document.querySelector(".split-pane") || document.documentElement;
+    root.style.setProperty("--ide-term-bg", termBg);
+    root.style.setProperty("--ide-code-bg", codeBg);
+    root.style.setProperty("--ide-code-fg", codeFg);
   }
 
   /* Returns:
@@ -160,6 +201,9 @@
         }
       }
     });
+    setTimeout(function() {
+      applySplitPaneThemeFromCodeMirror(editor.codeMirror);
+    }, 0);
     // When things have changed...
     editor.codeMirror.on("change", function(cm, changeObj) {
       // If pasting, make sure text gets pasted in the right format
