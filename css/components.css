@@ -39,7 +39,6 @@
 	right: 40px;
 	bottom: 40px;
 	width: auto;
-    border-radius: 10px;
 	height: auto;
 }
 
@@ -52,7 +51,6 @@
   max-width:90vh;
   left: 50%; top: 50%;
   transform: translate(-50%,-50%);
-  border-radius: 10px !important;
 }
 .window--modal.window--auto >  .window__viewport
 {
@@ -67,10 +65,8 @@
   position: absolute;
   height: auto;
   overflow: hidden;
-  border-radius:0.7em !important;
   left: 50%;
   top: 50%;
-    border-radius: 10px;
   transform: translate(-50%,-50%);
 }
 .window--modal.window--center > .window__viewport
