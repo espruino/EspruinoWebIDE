@@ -48,6 +48,8 @@ dd {
 *.paramStyle { background-color:#ccccff; }
 
 #file_list {
+  display: flex;
+  align-items: flex-end;
   flex-shrink: 1;
   overflow-x: auto;
   overflow-y: hidden;
@@ -62,33 +64,71 @@ dd {
 
 #file_list > span {
   display:inline-block;
+  flex: 0 0 auto;
   padding: 5px;
   padding-bottom: 9px;
 }
 #file_list > span {
   border-radius: 10px 10px 0px 0px;
   color: white;
-  border-top: 2px solid rgb(35, 101, 146);
-  border-left: 2px solid rgb(35, 101, 146);
-  border-right: 2px solid rgb(35, 101, 146);
-  margin-top: 22px;
+  border-top: 1.5px solid rgba(35, 102, 146, 0.606);
+  border-right: 1.5px solid rgba(35, 102, 146, 0.606);
+  border-left: 1.5px solid rgba(35, 102, 146, 0.606);
+ 
+  margin-top: 0;
+
 }
 .compact #file_list > span {
   font-size: small;
   padding: 3px;
   padding-bottom: 6px;
-  border-top: 1px solid rgb(35, 101, 146);
-  border-left: 1px solid rgb(35, 101, 146);
-  border-right: 1px solid rgb(35, 101, 146);
+  border-top: 1px solid rgba(35, 102, 146, 0.606);
+  border-right: 1px solid rgba(35, 102, 146, 0.606);
+  border-left: 1px solid rgba(35, 102, 146, 0.606);
   margin-top: 0px;
+  margin-left:2px;
+  margin-right:2px;
 }
 
 #file_list > span.active {
   background-color: rgb(35, 101, 146);
 }
 
+
+
 #file_list > span.inactive {
   color: rgb(35, 101, 146);
+}
+
+#file_list > span.inactive:hover {
+  background-color: rgba(35, 101, 146, 0.15);
+}
+
+#file_list > span.file_list-tab {
+  position: relative;
+}
+
+#file_list > span.dragging {
+  opacity: 0.55;
+}
+
+#file_list > span.file_list-tab.drop-before:before,
+#file_list > span.file_list-tab.drop-after:after {
+  content: "";
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  width: 3px;
+  border-radius: 2px;
+  background: #f39c12;
+}
+
+#file_list > span.file_list-tab.drop-before:before {
+  left: -2px;
+}
+
+#file_list > span.file_list-tab.drop-after:after {
+  right: -2px;
 }
 
 #file_list>  span.close {
@@ -99,8 +139,127 @@ dd {
   font-weight:bold;
 }
 
-#file_list > span.file_list-new {
+#file_tab_search {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  overflow: hidden;
+  vertical-align: top;
+  margin-left: 4px;
+}
+
+#file_tab_search .file-tab-search__button {
+  width: 34px;
+  height: 34px;
+  border: 0;
+  padding: 0;
+  color: white;
+  background: transparent;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+#file_tab_search .file-tab-search__new {
+  width: 34px;
+  height: 34px;
+  border: 0;
+  padding: 0;
+  margin-left: 4px;
+  color: white;
+  background: transparent;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  border-radius: 6px;
   font-weight: bold;
-  padding-left: 4px;
-  border: 0px;
+}
+
+#file_tab_search .file-tab-search__button:hover {
+  background-color: rgba(0,0,0,.15);
+}
+
+#file_tab_search .file-tab-search__new:hover {
+  background-color: rgba(0,0,0,.15);
+}
+
+#file_tab_search.filtering .file-tab-search__button {
+  background-color: #f39c12;
+}
+
+#file_tab_search .file-tab-search__input {
+  width: 0;
+  opacity: 0;
+  border: 0;
+  outline: none;
+  background: rgba(255,255,255,0.95);
+  color: #244c6a;
+  margin: 0;
+  padding: 0;
+  height: 34px;
+  border-radius: 6px;
+  transition: width 0.2s ease, opacity 0.2s ease, padding 0.2s ease, margin-right 0.2s ease;
+}
+
+#file_tab_search.expanded .file-tab-search__input {
+  width: 200px;
+  opacity: 1;
+  padding: 0 10px;
+  margin-right: 8px;
+  margin-left: 8px;
+}
+
+.compact #file_tab_search .file-tab-search__button {
+  width: 22px;
+  height: 22px;
+  font-size: 11px;
+}
+
+.compact #file_tab_search .file-tab-search__new {
+  width: 22px;
+  height: 22px;
+  font-size: 14px;
+  border-radius: 5px;
+}
+
+.compact #file_tab_search .file-tab-search__input {
+  height: 22px;
+  font-size: 12px;
+  border-radius: 4px;
+}
+
+.compact #file_tab_search.expanded .file-tab-search__input {
+  width: 140px;
+  margin-right: 5px;
+}
+
+#file_tab_context_menu {
+  display: none;
+  position: fixed;
+  z-index: 3000;
+  min-width: 140px;
+  background: #2c80b9;
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+}
+
+#file_tab_context_menu.visible {
+  display: block;
+}
+
+#file_tab_context_menu button {
+  display: block;
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  text-align: left;
+  padding: 8px 10px;
+  cursor: pointer;
+}
+
+#file_tab_context_menu button:hover {
+  background: rgba(0,0,0,0.2);
 }
