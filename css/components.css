@@ -733,6 +733,15 @@ paddi   ng-left: 15px;
     padding: 15px 30px;
 }
 
+.settings .config-item {
+	padding-left: 10px;
+	border-bottom: 1px solid #ddd;
+}
+
+.settings .config-item p {
+	padding-left: 10px;
+}
+
 .board_info
 {
   /* allow select */

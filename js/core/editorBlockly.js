@@ -55,6 +55,7 @@
     // Config
     Espruino.Core.Config.add("BLOCKLY_TO_JS", {
       section : "General",
+      subSection : "Graphical Editor",
       name : "Create JavaScript from Graphical Editor",
       description : "When you click 'Send to Espruino', should the code from the Graphical Editor create a tab containing JavaScript?",
       type : "boolean",
@@ -63,6 +64,7 @@
 
     Espruino.Core.Config.add("BLOCKLY_LANGUAGE", {
       section : "General",
+      subSection : "Graphical Editor",
       name : "Graphical Editor Language",
       description : "The language to use for blocks in the graphical editor. Modifying this will restart Blockly and lose any changes.",
       type : { "en": "English", "ru":"Russian", "de": "German" },
@@ -71,6 +73,7 @@
     });
     Espruino.Core.Config.add("BLOCKLY_EXTENSIONS", {
       section : "General",
+      subSection : "Graphical Editor",
       name : "Graphical Editor Extensions",
       description : "Which extra types of blocks to display in the graphical editor. Modifying this will restart Blockly and lose any changes." ,
       type : { "multi_select":true,

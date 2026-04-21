@@ -20,6 +20,7 @@
   function init() {
     Espruino.Core.Config.add("SHOW_SDCARD_ICON", {
       section : "Communications",
+      subSection: "Storage",
       name : "SD Card (fs) Support",
       description : "Show an icon that allows you to access files on an SD Card (if your device supports it)",
       type : "boolean",
