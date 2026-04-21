@@ -166,6 +166,7 @@
   function init() {
     Espruino.Core.Config.add("MACRO_ENABLED", {
       section: "General",
+      subSection: "Terminal",
       name: "Enable Macro Buttons",
       description: "Show a Macros icon in the terminal sidebar with quick-send script buttons",
       type: "boolean",
@@ -181,6 +182,7 @@
 
     Espruino.Core.Config.add("MACRO_SCRIPTS", {
       section: "General",
+      subSection: "Terminal", hidden: true,
       name: "Macro Scripts (JSON)",
       description: "JSON array of macro objects with name and script fields. Edited via the Macros popup.",
       type: "string",

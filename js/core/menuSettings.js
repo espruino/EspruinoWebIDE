@@ -112,7 +112,7 @@
       html += " for more information.</p>";
     }
     var configItems = Espruino.Core.Config.data;
-    var configItemNames = Object.keys(configItems).filter(c => configItems[c].section == sectionName);
+    var configItemNames = Object.keys(configItems).filter(c => configItems[c].section == sectionName && !configItems[c].hidden);
     // work out subsections
     var subSections = [ undefined ]; // undefined, followed by subsections
     for (var configName of configItemNames) {
