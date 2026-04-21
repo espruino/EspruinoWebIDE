@@ -18,6 +18,7 @@
     toastr.options = {
       "closeButton": false,
       "debug": false,
+      "escapeHtml": true,
       "positionClass": "toast-bottom-right",
       "onclick": null,
       "showDuration": "300",
