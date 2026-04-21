@@ -937,7 +937,7 @@
     },
     "factoryReset": {
       "!type": "fn(noReboot: bool)",
-      "!doc": "<p>Erase all storage and reload it with the default contents.</p>\n<p>This is only available on Bangle.js 2.0. On Bangle.js 1.0 you need to use\n<code>Install Default Apps</code> under the <code>More...</code> tab of <a href=\"http://banglejs.com/apps\">http://banglejs.com/apps</a></p>\n",
+      "!doc": "<p>Erase all storage and reload it with the default contents. As of 2v29 it will also\nremove any pairing data from flash memory.</p>\n<p>This is only available on Bangle.js 2.0. On Bangle.js 1.0 you need to use\n<code>Install Default Apps</code> under the <code>More...</code> tab of <a href=\"http://banglejs.com/apps\">http://banglejs.com/apps</a></p>\n",
       "!url": "http://www.espruino.com/Reference#l_Bangle_factoryReset"
     },
     "showLoadingScreen": {
@@ -1596,8 +1596,8 @@
       "!url": "http://www.espruino.com/Reference#l_Puck_accelWr"
     },
     "accelRd": {
-      "!type": "fn(reg: number) -> number",
-      "!doc": "<p>Reads a register from the LSM6DS3TR-C Accelerometer. Can be used for configuring\nadvanced functions.</p>\n<p>Check out <a href=\"http://www.espruino.com/Puck.js#on-board-peripherals\">the Puck.js page on the\naccelerometer</a> for more\ninformation and links to modules that use this function.</p>\n",
+      "!type": "fn(reg: number, cnt: number) -> ?",
+      "!doc": "<p>Reads a register from the LSM6DS3TR-C Accelerometer. Can be used for configuring\nadvanced functions.</p>\n<ul>\n<li><code>Puck.accelRd(reg)</code> returns the value of the given register as a number.</li>\n<li><code>Puck.accelRd(reg, 64)</code> reads 64 bytes starting at the given register and returns\nthem as a <code>Uint8Array</code>.</li>\n</ul>\n<p>If the amount of data to read is too large to fit on the stack, <code>undefined</code> is returned.</p>\n<p>Check out <a href=\"http://www.espruino.com/Puck.js#on-board-peripherals\">the Puck.js page on the\naccelerometer</a> for more\ninformation and links to modules that use this function.</p>\n",
       "!url": "http://www.espruino.com/Reference#l_Puck_accelRd"
     },
     "IR": {
