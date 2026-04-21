@@ -111,12 +111,24 @@
         html += tours.slice(0,-1).join(", ") + " and "+tours[tours.length-1];
       html += " for more information.</p>";
     }
-
     var configItems = Espruino.Core.Config.data;
-    for (var configName in configItems) {
+    var configItemNames = Object.keys(configItems).filter(c => configItems[c].section == sectionName);
+    // work out subsections
+    var subSections = [ undefined ]; // undefined, followed by subsections
+    for (var configName of configItemNames) {
       var configItem = configItems[configName];
-      if (configItem.section == sectionName) {
-        html += getHtmlForConfigItem(configName, configItem);
+      if (!subSections.includes(configItem.subSection))
+        subSections.push(configItem.subSection);
+    }
+    // rendert out subsection by subsection
+    for (var subSection of subSections) {
+      if (subSection !== undefined)
+        html += "<h2>"+subSection+"</h2>";
+      for (var configName of configItemNames) {
+        var configItem = configItems[configName];
+        if (configItem.subSection == subSection) {
+          html += getHtmlForConfigItem(configName, configItem);
+        }
       }
     }
 
@@ -161,7 +173,7 @@
   function getHtmlForConfigItem(configName, config) {
     var value = Espruino.Config[configName];
     var html =
-      '<h3 style="clear:both">'+Espruino.Core.Utils.escapeHTML(config.name)+'</h3>';
+      '<div class="config-item"><h3 style="clear:both">'+Espruino.Core.Utils.escapeHTML(config.name)+'</h3>';
     var desc = "";
     if (config.descriptionHTML!==undefined)
       desc += "<p>"+config.descriptionHTML+"<p>";
@@ -205,7 +217,7 @@
     } else {
       console.warn("Unknown config type '"+config.type+"' for Config."+configName);
     }
-    return html;
+    return html+"</div>";
   }
 
   function refresh() {

@@ -19,6 +19,7 @@
   function init() {
     Espruino.Core.Config.add("SHOW_TERMINAL_LOGGER_ICON", {
       section : "General",
+      subSection : "Terminal",
       name : "Terminal Log Icon",
       description : "Show an icon in the terminal window that allows you to record the contents of the terminal to a file",
       type : "boolean",
@@ -27,13 +28,14 @@
     });
     Espruino.Core.Config.add("TERMINAL_LOGGER_SAVE_TO_LOCALSTORAGE", {
       section : "General",
+      subSection : "Terminal",
       name : "Terminal Log - save to localstorage",
       description : "Save the terminal log to localstorage?",
       type : "boolean",
       defaultValue : false,
       onChange : function(newValue) { if(newValue && !window.localStorage) { Espruino.Core.Notifications.error("Can't access localStorage!"); Espruino.Config.set("TERMINAL_LOGGER_SAVE_TO_LOCALSTORAGE", false); } }
     });
-    
+
     if (Espruino.Config.TERMINAL_LOGGER_SAVE_TO_LOCALSTORAGE && window.localStorage) {
       let logString = window.localStorage.getItem("TERMINAL_LOGGER_STORAGE");
       if (logString) {
@@ -56,8 +58,8 @@
     Espruino.addProcessor("terminalNewLine", function(line, callback) {
       if (logStarted) {
         log.push(line);
-        if(Espruino.Config.TERMINAL_LOGGER_SAVE_TO_LOCALSTORAGE && window.localStorage) 
-          window.localStorage.setItem("TERMINAL_LOGGER_STORAGE", JSON.stringify(log)); 
+        if(Espruino.Config.TERMINAL_LOGGER_SAVE_TO_LOCALSTORAGE && window.localStorage)
+          window.localStorage.setItem("TERMINAL_LOGGER_STORAGE", JSON.stringify(log));
         icon.setInfo(getLogStateMessage());
       }
       callback(line);

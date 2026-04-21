@@ -88,8 +88,9 @@ Use embed.js on the client side to link this in.
     "init" : function() {
       Espruino.Core.Config.add("EMULATOR_BANGLEJS", {
         section : "Communications",
+        subSection: "Connections",
         name : "Enable Bangle.js Emulator",
-        description : "The size of font used in the Terminal and Code Editor windows",
+        description : "Whether to show the option for Emulators when clicking the Connect button",
         type : "boolean",
         defaultValue : true
       });

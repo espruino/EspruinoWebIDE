@@ -24,6 +24,7 @@
 
     Espruino.Core.Config.add("SHOW_WEBCAM_ICON", {
       section : "General",
+      subSection : "Terminal",
       name : "Webcam Icon",
       description : "Show an icon that allows the terminal to be overlaid on the view from a Webcam",
       type : { 0 : "No",
@@ -36,6 +37,7 @@
     showIcon(Espruino.Config.SHOW_WEBCAM_ICON);
     Espruino.Core.Config.add("WEBCAM_CONSTRAINTS", {
       section : "General",
+      subSection : "Terminal",
       name : "Webcam Resolution",
       description : "When using the Webcam, should we request a specific resolution?",
       type : { 0 : "Default",
@@ -95,8 +97,8 @@
     return $('#terminal').hasClass("terminal--webcam");
   }
 
-  function displayMediaStream(mediaStream) {    
-    webCamStream = mediaStream;    
+  function displayMediaStream(mediaStream) {
+    webCamStream = mediaStream;
     if (mediaStream===undefined) { // if nothing, remove the element
       $('video').attr('src', "");
       $("#terminal").removeClass("terminal--webcam");
@@ -119,7 +121,7 @@
   }
 
   function enableWebCam(constraints) {
-    var window_url = window.URL || window.webkitURL;    
+    var window_url = window.URL || window.webkitURL;
     console.log("Requesting WebCam ", constraints);
     navigator.getUserMedia(constraints, function(mediaSource) {
       console.log("Webcam started");
