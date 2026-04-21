@@ -146,6 +146,8 @@ dd {
   overflow: hidden;
   vertical-align: top;
   margin-left: 4px;
+  border-left: #ffffff5c 1px solid;
+  height:100%;
 }
 
 #file_tab_search .file-tab-search__button {
