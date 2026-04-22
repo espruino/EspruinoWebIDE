@@ -65,7 +65,11 @@
   var activeFile = 0; // index of active file in `files`
   var fileTabSearchText = "";
   var fileTabSearchExpanded = false;
+  var fileTabSearchEnabled = false;
   var fileTabSearchInput;
+  var fileTabSearchElement;
+  var fileTabSearchButton;
+  var fileTabSearchDivider;
   var fileTabContextMenu;
   var fileTabContextMenuIndex = -1;
   var fileTabDragIndex = -1;
@@ -302,12 +306,15 @@
   }
 
   function createFileTabSearch() {
+    if (fileTabSearchElement) return;
+
     var rightButtons = document.querySelector(".toolbar__buttons--right");
     if (!rightButtons) return;
     var element = Espruino.Core.HTML.domElement(
       '<div id="file_tab_search" class="file-tab-search" data-icon-order="-79">' +
-      '<input type="text" class="file-tab-search__input" placeholder="Filter tabs..." aria-label="Search tabs" />' +
       '<button type="button" class="file-tab-search__new" title="New tab" aria-label="New tab">+</button>' +
+      '<span class="file-tab-search__divider" aria-hidden="true"></span>' +
+      '<input type="text" class="file-tab-search__input" placeholder="Filter tabs..." aria-label="Search tabs" />' +
       '<button type="button" class="file-tab-search__button" title="Search tabs" aria-label="Search tabs">🔎</button>' +
       '</div>'
     );
@@ -321,13 +328,30 @@
       rightButtons.insertBefore(element, rightButtons.firstChild);
     }
 
+    fileTabSearchElement = element;
     fileTabSearchInput = element.querySelector(".file-tab-search__input");
+    fileTabSearchButton = element.querySelector(".file-tab-search__button");
+    fileTabSearchDivider = element.querySelector(".file-tab-search__divider");
+    var newButton = element.querySelector(".file-tab-search__new");
 
     function updateSearchUI(focusInput) {
       element.classList.toggle("expanded", fileTabSearchExpanded);
       element.classList.toggle("filtering", !!fileTabSearchText);
+      element.classList.toggle("search-enabled", fileTabSearchEnabled);
       if (focusInput && fileTabSearchExpanded && fileTabSearchInput)
         fileTabSearchInput.focus();
+    }
+
+    function applySearchVisibility() {
+      element.classList.toggle("search-enabled", fileTabSearchEnabled);
+      if (fileTabSearchInput) fileTabSearchInput.style.display = fileTabSearchEnabled ? "" : "none";
+      if (fileTabSearchButton) fileTabSearchButton.style.display = fileTabSearchEnabled ? "" : "none";
+      if (!fileTabSearchEnabled) {
+        fileTabSearchExpanded = false;
+        fileTabSearchText = "";
+        if (fileTabSearchInput) fileTabSearchInput.value = "";
+      }
+      updateSearchUI(false);
     }
 
     function clearFilter() {
@@ -337,7 +361,12 @@
       updateFileTabs();
     }
 
-    element.querySelector(".file-tab-search__button").addEventListener("click", function(e) {
+    newButton.addEventListener("click", function(e) {
+      e.preventDefault();
+      showNewFileDialog();
+    });
+
+    fileTabSearchButton.addEventListener("click", function(e) {
       e.preventDefault();
       if (!fileTabSearchExpanded) {
         fileTabSearchExpanded = true;
@@ -346,11 +375,6 @@
       }
       fileTabSearchExpanded = false;
       updateSearchUI(false);
-    });
-
-    element.querySelector(".file-tab-search__new").addEventListener("click", function(e) {
-      e.preventDefault();
-      showNewFileDialog();
     });
 
     fileTabSearchInput.addEventListener("input", function() {
@@ -369,7 +393,35 @@
       }
     });
 
-    updateSearchUI(false);
+    applySearchVisibility();
+  }
+
+  function removeFileTabSearch() {
+    fileTabSearchEnabled = false;
+    fileTabSearchExpanded = false;
+    fileTabSearchText = "";
+    if (fileTabSearchInput) fileTabSearchInput.value = "";
+    if (fileTabSearchElement) {
+      fileTabSearchElement.classList.remove("search-enabled");
+      if (fileTabSearchInput) fileTabSearchInput.style.display = "none";
+      if (fileTabSearchButton) fileTabSearchButton.style.display = "none";
+    }
+    updateFileTabs();
+  }
+
+  function setTabSearchEnabled(enabled) {
+    fileTabSearchEnabled = !!enabled;
+    if (fileTabSearchElement) {
+      if (fileTabSearchInput) fileTabSearchInput.style.display = fileTabSearchEnabled ? "" : "none";
+      if (fileTabSearchButton) fileTabSearchButton.style.display = fileTabSearchEnabled ? "" : "none";
+      fileTabSearchElement.classList.toggle("search-enabled", fileTabSearchEnabled);
+      if (!fileTabSearchEnabled) {
+        fileTabSearchExpanded = false;
+        fileTabSearchText = "";
+        if (fileTabSearchInput) fileTabSearchInput.value = "";
+      }
+    }
+    updateFileTabs();
   }
 
   function closeFileTab(idx) {
@@ -440,7 +492,7 @@
     hideFileTabContextMenu();
     clearFileTabDropIndicators(fileList);
     var visibleFiles = files.map((f, idx) => ({file: f, idx: idx})).filter(entry => {
-      if (!fileTabSearchText) return true;
+      if (!fileTabSearchEnabled || !fileTabSearchText) return true;
       var title = entry.file.fileName || "Untitled";
       return title.toLowerCase().includes(fileTabSearchText.toLowerCase());
     });
@@ -639,6 +691,7 @@
     // get code from our config area at bootup
     Espruino.addProcessor("initialised", function(data,callback) {
       loadFileConfig();
+      setTabSearchEnabled(Espruino.Config.TABSEARCH_ENABLED);
       updateFileTabs();
 
       callback(data);
@@ -857,6 +910,7 @@
     setJSCode : setJSCode, // (code, {fileName...,}}) called when the contents of the code window is to be set (eg from a URL)
     isInBlockly : isInBlockly, // are we currently showing a Blockly window
     focus : focus, // give focus to the current editor
+    setTabSearchEnabled : setTabSearchEnabled,
     switchToCode: () => switchTo("js"), // switch to show JS code - if it doesn't exist, make a tab
     switchToBlockly: () => switchTo("xml") // switch to show XML code - if it doesn't exist, make a tab
   };

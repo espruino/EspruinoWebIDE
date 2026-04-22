@@ -48,8 +48,6 @@ dd {
 *.paramStyle { background-color:#ccccff; }
 
 #file_list {
-  display: flex;
-  align-items: flex-end;
   flex-shrink: 1;
   overflow-x: auto;
   overflow-y: hidden;
@@ -64,40 +62,41 @@ dd {
 
 #file_list > span {
   display:inline-block;
-  flex: 0 0 auto;
   padding: 5px;
   padding-bottom: 9px;
 }
 #file_list > span {
   border-radius: 10px 10px 0px 0px;
   color: white;
-  border-top: 1.5px solid rgba(35, 102, 146, 0.606);
-  border-right: 1.5px solid rgba(35, 102, 146, 0.606);
-  border-left: 1.5px solid rgba(35, 102, 146, 0.606);
- 
-  margin-top: 0;
-
+  border-top: 2px solid rgb(35, 101, 146);
+  border-left: 2px solid rgb(35, 101, 146);
+  border-right: 2px solid rgb(35, 101, 146);
+  margin-top: 22px;
 }
 .compact #file_list > span {
   font-size: small;
   padding: 3px;
   padding-bottom: 6px;
-  border-top: 1px solid rgba(35, 102, 146, 0.606);
-  border-right: 1px solid rgba(35, 102, 146, 0.606);
-  border-left: 1px solid rgba(35, 102, 146, 0.606);
+  border-top: 1px solid rgb(35, 101, 146);
+  border-left: 1px solid rgb(35, 101, 146);
+  border-right: 1px solid rgb(35, 101, 146);
   margin-top: 0px;
-  margin-left:2px;
-  margin-right:2px;
 }
 
 #file_list > span.active {
   background-color: rgb(35, 101, 146);
 }
 
-
-
 #file_list > span.inactive {
   color: rgb(35, 101, 146);
+}
+
+#file_list>  span.close {
+  cursor:grab;
+  padding: 0px;
+}
+#file_list > span.close:hover {
+  font-weight:bold;
 }
 
 #file_list > span.inactive:hover {
@@ -131,62 +130,72 @@ dd {
   right: -2px;
 }
 
-#file_list>  span.close {
-  cursor:grab;
-  padding: 0px;
-}
-#file_list > span.close:hover {
-  font-weight:bold;
-}
-
 #file_tab_search {
   display: inline-flex;
   flex-direction: row;
-  align-items: center;
-  overflow: hidden;
+  align-items: stretch;
+  overflow: visible;
   vertical-align: top;
   margin-left: 4px;
-  border-left: #ffffff5c 1px solid;
-  height:100%;
+  align-self: flex-end;
+  position: relative;
+  height: 100%;
 }
 
 #file_tab_search .file-tab-search__button {
-  width: 34px;
-  height: 34px;
+  width: 60px;
+  height: 60px;
   border: 0;
   padding: 0;
   color: white;
   background: transparent;
-  font-size: 14px;
+  font-size: 16px;
   cursor: pointer;
-  border-radius: 6px;
+  border-radius: 0;
 }
 
 #file_tab_search .file-tab-search__new {
-  width: 34px;
-  height: 34px;
+  width: 24px;
+  height: 24px;
   border: 0;
   padding: 0;
-  margin-left: 4px;
+  margin: 0 4px;
+  margin-top: 22px;
   color: white;
-  background: transparent;
-  font-size: 18px;
+  background: rgba(0,0,0,.08);
+  font-size: 16px;
   line-height: 1;
   cursor: pointer;
-  border-radius: 6px;
+  border-radius: 5px;
   font-weight: bold;
+  flex: 0 0 24px;
+  align-self: flex-end;
+  margin-bottom: 13px !important;
 }
 
-#file_tab_search .file-tab-search__button:hover {
-  background-color: rgba(0,0,0,.15);
+#file_tab_search .file-tab-search__divider {
+  width: 1px;
+  background: rgba(255,255,255,0.3);
+  margin: 0 4px;
+  align-self: stretch;
 }
 
+#file_tab_search .file-tab-search__button:hover,
 #file_tab_search .file-tab-search__new:hover {
   background-color: rgba(0,0,0,.15);
 }
 
 #file_tab_search.filtering .file-tab-search__button {
   background-color: #f39c12;
+}
+
+#file_tab_search.search-enabled .file-tab-search__button {
+  display: inline-block;
+}
+
+#file_tab_search:not(.search-enabled) .file-tab-search__button,
+#file_tab_search:not(.search-enabled) .file-tab-search__input {
+  display: none;
 }
 
 #file_tab_search .file-tab-search__input {
@@ -201,6 +210,7 @@ dd {
   height: 34px;
   border-radius: 6px;
   transition: width 0.2s ease, opacity 0.2s ease, padding 0.2s ease, margin-right 0.2s ease;
+  align-self: center;
 }
 
 #file_tab_search.expanded .file-tab-search__input {
@@ -212,16 +222,23 @@ dd {
 }
 
 .compact #file_tab_search .file-tab-search__button {
-  width: 22px;
-  height: 22px;
-  font-size: 11px;
+  width: 30px;
+  height: 30px;
+  font-size: 12px;
 }
 
 .compact #file_tab_search .file-tab-search__new {
-  width: 22px;
-  height: 22px;
-  font-size: 14px;
-  border-radius: 5px;
+  width: 18px;
+  height: 18px;
+  flex-basis: 18px;
+  font-size: 12px;
+  border-radius: 4px;
+  margin: 0 3px;
+  margin-top: 0;
+}
+
+.compact #file_tab_search .file-tab-search__divider {
+  margin: 0 3px;
 }
 
 .compact #file_tab_search .file-tab-search__input {
@@ -264,4 +281,112 @@ dd {
 
 #file_tab_context_menu button:hover {
   background: rgba(0,0,0,0.2);
+}
+
+#file_list > span.file_list-new {
+  font-weight: bold;
+  padding-left: 4px;
+  border: 0px;
+}
+
+.file_list-tab {
+  user-select: none;
+  position: relative;
+  cursor: grab;
+}
+
+.file_list-tab--dragging {
+  opacity: 0.55;
+  cursor: grabbing;
+}
+
+.file_list-tab--ghost {
+  position: fixed;
+  z-index: 4500;
+  pointer-events: none;
+  opacity: 0.92;
+}
+
+.file_list-tab--drop-before::before {
+  content: '';
+  position: absolute;
+  left: -4px;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: rgba(243, 156, 18, 0.98);
+  box-shadow: 0 0 4px rgba(243, 156, 18, 0.5);
+}
+
+.file_list-tab--drop-after::after {
+  content: '';
+  position: absolute;
+  right: -4px;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: rgba(243, 156, 18, 0.98);
+  box-shadow: 0 0 4px rgba(243, 156, 18, 0.5);
+}
+
+.tab-context-menu {
+  position: fixed;
+  z-index: 5000;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.tab-context-menu-item {
+  cursor: pointer;
+  padding: 9px 10px;
+  border-radius: 8px;
+}
+
+.tab-context-menu-item:hover {
+  background: #edf6fc;
+}
+
+.tab-context-menu-item--danger {
+  color: #b8432a;
+}
+
+#tab_search_container {
+  width: 0;
+  display: flex;
+  align-items: center;
+  transition: width 0.2s ease;
+  height: 100%;
+  overflow: hidden;
+  flex: 0 0 auto;
+}
+
+.tab-search-container--open {
+  width: 220px;
+  margin-left: 0;
+  margin-right: 6px;
+}
+
+.tab-search-input {
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: 13px;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.tab-search-input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+#icon-tabSearch {
+  background-color: transparent !important;
+}
+
+#icon-tabSearch.tab-search-active {
+  background-color: #f39c12 !important;
 }

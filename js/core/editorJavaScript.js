@@ -91,6 +91,21 @@
         }
       }
     });
+    Espruino.Core.Config.add("TABSEARCH_ENABLED", {
+      section: "General",
+      name: "Show Tab Search Button",
+      subSection : "Editor UI",
+      description: "Show a button in the top bar for filtering tabs by name. Useful if you have a lot of tabs.",
+      type: "boolean",
+      defaultValue: false,
+      onChange: function(newValue) {
+        if (Espruino.Core.File && Espruino.Core.File.setTabSearchEnabled)
+          Espruino.Core.File.setTabSearchEnabled(newValue);
+        // Legacy hooks may not exist in current builds.
+        if (newValue && (typeof createIcon === "function")) createIcon();
+        if (!newValue && (typeof removeIcon === "function")) removeIcon();
+      }
+    });
     CodeMirror.defineExtension('beautify', function () {
       if (js_beautify) {
         var cm = this;
