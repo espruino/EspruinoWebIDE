@@ -145,7 +145,6 @@
         icon: "split-" + orientation,
         title : "Toggle Orientation",
         order: -80,
-        divider: "right",
         area: {
           name: "toolbar",
           position: "right"

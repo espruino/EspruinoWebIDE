@@ -106,10 +106,31 @@
   left: 0;
 	width: 100%;
 	height: 100%;
-  background: rgba(0,0,0,0.4);
+  background: rgba(0,0,0,0.28);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  animation: fadeInOverlay 0.15s ease-out;
   z-index: 199;
 }
 
+@keyframes fadeInOverlay {
+  from {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+  }
+  to {
+    opacity: 1;
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+  }
+}
+
+.settings-item{
+  border-bottom: #a9a9a9 1px solid;
+  padding:20px;
+  margin-bottom: 5px;
+}
 .window__overlay-inner
 {
 	display: table-cell;
@@ -230,7 +251,7 @@ a:hover > .menu
   transform: translate(-50%,-50%);
   font-size:24px;
   font-weight: bold;
-  color:#888;"
+  color:#888;
 }
 
 /* Status */
@@ -419,7 +440,7 @@ a:hover > .menu
 
 .terminalSnippets
 {
-paddi   ng-left: 15px;
+padding-left: 15px;
 }
 
 .terminalSnippet
@@ -731,15 +752,6 @@ paddi   ng-left: 15px;
     bottom: 0px;
     overflow: auto;
     padding: 15px 30px;
-}
-
-.settings .config-item {
-	padding-left: 10px;
-	border-bottom: 1px solid #ddd;
-}
-
-.settings .config-item p {
-	padding-left: 10px;
 }
 
 .board_info

@@ -168,6 +168,7 @@
       section: "General",
       subSection: "Terminal",
       name: "Enable Macro Buttons",
+      subSection : "Terminal",
       description: "Show a Macros icon in the terminal sidebar with quick-send script buttons",
       type: "boolean",
       defaultValue: false,
@@ -184,6 +185,7 @@
       section: "General",
       subSection: "Terminal", hidden: true,
       name: "Macro Scripts (JSON)",
+      subSection : "Terminal",
       description: "JSON array of macro objects with name and script fields. Edited via the Macros popup.",
       type: "string",
       defaultValue: JSON.stringify(defaults)
