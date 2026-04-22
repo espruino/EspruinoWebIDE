@@ -315,7 +315,7 @@
       '<button type="button" class="file-tab-search__new" title="New tab" aria-label="New tab">+</button>' +
       '<span class="file-tab-search__divider" aria-hidden="true"></span>' +
       '<input type="text" class="file-tab-search__input" placeholder="Filter tabs..." aria-label="Search tabs" />' +
-      '<button type="button" class="file-tab-search__button" title="Search tabs" aria-label="Search tabs">🔎</button>' +
+      '<a id="icon-tabSearch" class="file-tab-search__button icon icon-search lrg" title="Search tabs" aria-label="Search tabs"></button>' +
       '</div>'
     );
 
@@ -570,9 +570,7 @@
         moveFileTab(fileTabDragIndex, insertIdx);
       });
     });
-
   }
-
 
   function init() {
     // Open file icon
@@ -649,6 +647,17 @@
           // else we didn't find one - make a new tab
           createNewTab({type:switchToType});
         }
+      }
+    });
+    Espruino.Core.Config.add("TABSEARCH_ENABLED", {
+      section: "General",
+      name: "Show Tab Search Button",
+      subSection : "Editor UI",
+      description: "Show a button in the top bar for filtering tabs by name. Useful if you have a lot of tabs.",
+      type: "boolean",
+      defaultValue: false,
+      onChange: function(newValue) {
+        setTabSearchEnabled(newValue);
       }
     });
     // Create the tabs showing what files we have
@@ -910,7 +919,6 @@
     setJSCode : setJSCode, // (code, {fileName...,}}) called when the contents of the code window is to be set (eg from a URL)
     isInBlockly : isInBlockly, // are we currently showing a Blockly window
     focus : focus, // give focus to the current editor
-    setTabSearchEnabled : setTabSearchEnabled,
     switchToCode: () => switchTo("js"), // switch to show JS code - if it doesn't exist, make a tab
     switchToBlockly: () => switchTo("xml") // switch to show XML code - if it doesn't exist, make a tab
   };
