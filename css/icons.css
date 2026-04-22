@@ -309,3 +309,7 @@ a .icon__more:hover {
 .compact .icon-sdcard.lrg:before,
 .icon-sdcard.sml:before { background-position: -60px -2940px }
 
+.icon-search.lrg:before { background-position: 0 -3000px }
+.compact .icon-search.lrg:before,
+.icon-search.sml:before { background-position: -60px -3000px }
+

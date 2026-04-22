@@ -101,6 +101,7 @@ i svg/appbar.arrow.up upkey
 i svg/appbar.arrow.down downkey
 i icons/tabkey tabkey
 i svg/appbar.sd.micro sdcard
+i svg/appbar.magnify search
 
 # Now put them all together into one file
 convert icons/oldicons.png $IMAGES -append $ICONFILE
