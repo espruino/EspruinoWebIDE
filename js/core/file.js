@@ -315,7 +315,7 @@
       '<button type="button" class="file-tab-search__new" title="New tab" aria-label="New tab">+</button>' +
       '<span class="file-tab-search__divider" aria-hidden="true"></span>' +
       '<input type="text" class="file-tab-search__input" placeholder="Filter tabs..." aria-label="Search tabs" />' +
-      '<a id="icon-tabSearch" class="file-tab-search__button icon icon-search lrg" title="Search tabs" aria-label="Search tabs"></button>' +
+      '<a id="icon-tabSearch" class="file-tab-search__button icon icon-search lrg" title="Search tabs" aria-label="Search tabs"></a>' +
       '</div>'
     );
 

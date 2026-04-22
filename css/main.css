@@ -54,6 +54,7 @@ dd {
   text-wrap: nowrap;
   scrollbar-width: thin;
   scrollbar-color: #2c80b9 #3498db;
+  margin-left:10px !important;
   height: 60px;
 }
 .compact #file_list {
@@ -136,10 +137,25 @@ dd {
   align-items: stretch;
   overflow: visible;
   vertical-align: top;
-  margin-left: 4px;
+  margin-left: -28px;
+  padding-left: 32px;
   align-self: flex-end;
   position: relative;
   height: 100%;
+    background:transparent!important;
+
+}
+
+#file_tab_search:before {
+  content: "";
+  position: absolute;
+  left: -64px;
+  top: 0;
+  bottom: 5px;
+  width: 96px;
+  pointer-events: none;
+  background: linear-gradient(to right, rgba(35, 101, 146, 0) 0%,rgba(35, 101, 146, 0) 50%,#3498db 70%, #3498db 100%);
+  z-index: 1;
 }
 
 #file_tab_search .file-tab-search__button {
@@ -155,22 +171,25 @@ dd {
 }
 
 #file_tab_search .file-tab-search__new {
+  position: absolute;
+  left: 4px;
+  bottom: 13px;
+  z-index: 2;
   width: 24px;
   height: 24px;
   border: 0;
   padding: 0;
-  margin: 0 4px;
-  margin-top: 22px;
+  margin: 0;
   color: white;
-  background: rgba(0,0,0,.08);
+  background: rgba(35, 102, 146, 0.818) !important;
+  
   font-size: 16px;
   line-height: 1;
   cursor: pointer;
   border-radius: 5px;
   font-weight: bold;
   flex: 0 0 24px;
-  align-self: flex-end;
-  margin-bottom: 13px !important;
+  align-self: auto;
 }
 
 #file_tab_search .file-tab-search__divider {
@@ -228,13 +247,24 @@ dd {
 }
 
 .compact #file_tab_search .file-tab-search__new {
+  left: 3px;
+  bottom: 0;
   width: 18px;
   height: 18px;
-  flex-basis: 18px;
+  flex-basis: auto;
   font-size: 12px;
   border-radius: 4px;
-  margin: 0 3px;
-  margin-top: 0;
+  margin: 0;
+}
+
+.compact #file_tab_search {
+  margin-left: -21px;
+  padding-left: 24px;
+}
+
+.compact #file_tab_search:before {
+  left: -64px;
+  width: 88px;
 }
 
 .compact #file_tab_search .file-tab-search__divider {
@@ -249,7 +279,6 @@ dd {
 
 .compact #file_tab_search.expanded .file-tab-search__input {
   width: 140px;
-  margin-right: 5px;
 }
 
 #file_tab_context_menu {
@@ -383,10 +412,3 @@ dd {
   color: rgba(255, 255, 255, 0.7);
 }
 
-#icon-tabSearch {
-  background-color: transparent !important;
-}
-
-#icon-tabSearch.tab-search-active {
-  background-color: #f39c12 !important;
-}
