@@ -58,16 +58,16 @@
     function selectPortInternal(port) {
       if (checkInt) clearInterval(checkInt);
       checkInt = undefined;
-      popup.setContents('<h2 class="list__no-results">Connecting...</h2>');
-      function connect() {
-        connectToPort(port, function(success){
-          if (popup) popup.close();
-          if(success){
-            if (callback!==undefined) callback();
-          }
-        });
-      }
-      connect();
+      popup.setTitle("Connecting...");
+      popup.setContents('<p style="padding-top: 1.8em;text-align: center;" class="status__message">Please wait...</p>');
+      /* setting class="status__message" means that status messages get shown in this popup, which
+       is useful as the modal background is now blurred, which obscures the main status bar */
+      connectToPort(port, function(success){
+        if (popup) popup.close();
+        if(success){
+          if (callback!==undefined) callback();
+        }
+      });
     }
 
     var searchHtml = `<h2 class="list__no-results">Searching...</h2>
