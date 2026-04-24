@@ -52,10 +52,36 @@ dd {
   overflow-x: auto;
   overflow-y: hidden;
   text-wrap: nowrap;
-  scrollbar-width: thin;
+  scrollbar-width: none;
   scrollbar-color: #2c80b9 #3498db;
+  padding-right:45px;
   margin-left:10px !important;
   height: 60px;
+}
+@keyframes fadeInScrollbar {
+  from { scrollbar-color: transparent transparent; scrollbar-base-color: transparent;}
+  to { scrollbar-color: #2c80b9 #3498db; }
+}
+#file_list:hover {
+  scrollbar-width: thin;
+  animation: fadeInScrollbar 0.3s ease forwards;
+}
+
+#file_list::-webkit-scrollbar:horizontal {
+  height: 0;
+}
+
+#file_list:hover::-webkit-scrollbar:horizontal {
+  height: 15px;
+}
+
+#file_list::-webkit-scrollbar-thumb:horizontal {
+  background: #bdc3c7;
+  border: 5px solid #ecf0f1;
+}
+
+#file_list::-webkit-scrollbar-track:horizontal {
+  background: #ecf0f1;
 }
 .compact #file_list {
   height: 30px;
