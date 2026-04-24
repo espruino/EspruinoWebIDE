@@ -384,7 +384,7 @@ dd {
 }
 
 #icon-tabSearch {
-  background-color: transparent !important;
+  background-color: transparent;
 }
 
 #icon-tabSearch.tab-search-active {
