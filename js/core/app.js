@@ -218,6 +218,7 @@
   *
   * returns : {
   *  setContents, // set window contents
+  *  setTitle,    // set window title
   *  close, // close this window
   *  window  // the window's dom element
   * }
@@ -242,6 +243,9 @@
       close : function() {
         winOverlay.remove();
         if (options.onClose) options.onClose();
+      },
+      setTitle : function(title) {
+        winModal.querySelector(".title-bar__title").innerHTML = title;
       }
     }
 
