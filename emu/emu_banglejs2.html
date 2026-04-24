@@ -87,10 +87,12 @@
 <script src="emulator_banglejs2.js"></script>
 <script src="emu_banglejs2.js"></script>
 <script src="common.js"></script>
+<script src="../js/libs/long-press-event.min.js"></script>
 <script>
 var touchX=0, touchY=0, touchPts=0;
 var touchDX=0, touchDY=0; // drag direction
 var touchAX=0, touchAY=0; // drag amount
+var longTouchSent=0; // "Was a long-touch gesture sent already?"
 
 function jsUpdateGfx() {
   var changed = Module.ccall('jsGfxChanged', 'number', [], []);
@@ -167,6 +169,7 @@ function jsInitButtons() {
     touchX = e.offsetX;
     touchY = e.offsetY;
     touchPts = 1;
+    longTouchSent = 0;
     jsSendTouchEvent(touchX, touchY, touchPts, 0);
   });
   div.addEventListener('mouseup', e => {
@@ -187,7 +190,7 @@ function jsInitButtons() {
         ay : touchAY
       });
       jsSendTouchEvent(touchX, touchY, 0, 0);
-      if (touchAX<5 && touchAY<5) // single click
+      if (touchAX<5 && touchAY<5 && (!longTouchSent)) // single click
         jsSendTouchEvent(touchX, touchY, 0, 5);
       if (touchAX>80 && touchAY<20)
         jsSendTouchEvent(touchX, touchY, 0, (touchDX<0) ? 3 : 4); // slide left/right
@@ -199,11 +202,41 @@ function jsInitButtons() {
     touchAX = 0;
     touchAY = 0;
     touchPts = 0;
+    longTouchSent = 0;
   });
   div.addEventListener('mouseleave', e => {
     if (touchPts)
       jsSendTouchEvent(touchX, touchY, 0, 0);
     touchPts = 0;
+    longTouchSent = 0;
+  });
+  div.addEventListener('long-press', e => {
+    // The hardware touchscreen emits the 0x0C "long-touch" gesture while
+    // the screen is still being touched.  (This allows, for example,
+    // "grab-and-drag" actions.)
+    //
+    // In terms of Bangle 'drag' and 'touch' events:
+    //
+    // - touch-[...hold...]-move-release:
+    //      1*drag(b=1), [...1*touch(t=2)...], N*drag(b=1), 1*drag(b=0)
+    //
+    // - touch-[...hold...]-release:
+    //      1*drag(b=1), [...1*touch(t=2)...], 1*drag(b=0)
+    //
+    e.preventDefault();
+    touchX = Math.round(e.detail.offsetX);
+    touchY = Math.round(e.detail.offsetY);
+    if (touchX<0) touchX=0;
+    if (touchY<0) touchY=0;
+    if (touchX>=GFX_WIDTH) touchX=GFX_WIDTH-1;
+    if (touchY>=GFX_HEIGHT) touchY=GFX_HEIGHT-1;
+    console.log("Long touch", {
+      x : touchX,
+      y : touchY,
+    });
+    touchPts = 1;
+    jsSendTouchEvent(touchX, touchY, touchPts, 0x0C /*long-touch*/);
+    longTouchSent = 1;
   });
 }
 </script>
