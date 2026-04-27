@@ -43,12 +43,7 @@
         position: "top"
       },
       click: function() {
-        Espruino.Core.MenuPortSelector.ensureConnected(function() {
-          if (Espruino.Core.Terminal.isVisible())
-            Espruino.Core.Terminal.focus(); // give the terminal focus
-          Espruino.callProcessor("sending");
-          Espruino.Core.File.getEspruinoCode(Espruino.Core.CodeWriter.writeToEspruino);
-        });
+        sendToEspruino();
       },
       more: function() {
         chooseSendMethod();
@@ -64,6 +59,23 @@
     Espruino.addProcessor("disconnected", function(data, callback) {
       $(".send").button( "option", "disabled", true);
       callback(data);
+    });
+  }
+
+  // Send the current code in the editor to Espruino - returns a Promise that resolves when the code has been sent
+  function sendToEspruino() {
+    return new Promise(function(resolve, reject) {
+      Espruino.Core.MenuPortSelector.ensureConnected(function() {
+        if (Espruino.Core.Terminal.isVisible())
+          Espruino.Core.Terminal.focus(); // give the terminal focus
+        Espruino.callProcessor("sending", null, function() {
+          Espruino.Core.File.getEspruinoCode(function (code) {
+            Espruino.Core.CodeWriter.writeToEspruino(code, function() {
+              resolve();
+            });
+          });
+        });
+      });
     });
   }
 
@@ -130,6 +142,7 @@
 
   Espruino.Core.Send = {
     init : init,
+    sendToEspruino : sendToEspruino, // actually send code to Espruino
     updateIconInfo : updateIconInfo, // update the status
     SEND_MODE_RAM : 0,
     SEND_MODE_FLASH : 1,

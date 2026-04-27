@@ -64,17 +64,7 @@
         }));
         break;
       case "upload": // Get "encodedURIcomponent code" from URL and upload it
-        promise = promise.then(new Promise(function(resolve,reject) {
-          Espruino.Core.MenuPortSelector.ensureConnected(function() {
-            Espruino.Core.Terminal.focus(); // give the terminal focus
-            Espruino.callProcessor("sending");
-            Espruino.Core.File.getEspruinoCode(function(code) {
-              Espruino.Core.CodeWriter.writeToEspruino(code, function() {
-                resolve();
-              });
-            });
-          });
-        }));
+        promise = promise.then(Espruino.Core.Send.sendToEspruino());
         break;
       case "dev": // ?dev=BLE_devicename can restrict what we connect to
         Espruino.Config.WEB_SERIAL = false;
