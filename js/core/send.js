@@ -88,7 +88,7 @@
   }
 
   function chooseSendMethod() {
-    // see saveOnSend.js
+    // see codeWriter.js
     var items = [{
       title: "RAM",
       description : "Lost after power down unless `save()` used",
