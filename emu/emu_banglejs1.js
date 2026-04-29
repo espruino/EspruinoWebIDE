@@ -7,6 +7,8 @@ var BTN4 = 11;
 var BTN5 = 16;
 var GFX_WIDTH = 240;
 var GFX_HEIGHT = 240;
+var GFX_PAD_WIDTH = 40; // padding for window
+var GFX_PAD_HEIGHT = 14;
 var FLASH_SIZE = 4096*1024;
 
 function jsGetGfxContents(rgba) {

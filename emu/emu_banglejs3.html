@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html><!-- index for ws.js or totally online Web IDE -->
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Bangle.js emulator</title>
+  <style>
+  body {
+    overflow:hidden;
+  }
+  #emu {
+    width:500px; height:500px; border:1px solid black;
+  }
+  #gfxdiv {
+    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:294px;height:254px;
+  }
+  #gfxcanvas {
+    position:absolute;top:0px;left:22px;
+  }
+  #BTN1 {
+    width:20px;height:63px;position:absolute;right:0px;top:33px;padding:0;font-weight:bold;
+  }
+  #BTN2 {
+    width:20px;height:63px;position:absolute;right:0px;top:97px;padding:0;font-weight:bold;
+  }
+  #BTN3 {
+    width:20px;height:63px;position:absolute;right:0px;top:161px;padding:0;font-weight:bold;
+  }
+  #BTN4 {
+    width:20px;height:63px;position:absolute;left:0px;top:97px;padding:0;font-weight:bold;
+  }
+  #border {
+    width:20px;height:21px;position:absolute;left:0px;top:167px;color:white;text-decoration:none;background-color:gray;cursor:pointer;
+    font-size: 17px;text-align: center;
+  }
+  #border::before{
+    content: "Set Border Colour";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-120%) translateY(95%);
+    background-color: #333;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    white-space: nowrap;
+    font-size: 12px;
+    font-weight: bold;
+    transition-delay: 0s;
+    visibility: hidden;
+  }
+  #border:hover::before {
+    color: white;
+    visibility: visible;
+    transition-delay: 0.3s;
+  }
+  #screenshot {
+    width:20px;height:21px;position:absolute;left:0px;top:195px;color:white;text-decoration:none;background-image: linear-gradient(45deg, #ff0000, #00ff00 10px, #0000ff 20px);cursor:pointer;
+  }
+  #screenshot::before{
+    content: "Take Screenshot";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-120%) translateY(95%);
+    background-color: #333;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    white-space: nowrap;
+    font-size: 12px;
+    font-weight: bold;
+    transition-delay: 0s;
+    visibility: hidden;
+  }
+  #screenshot:hover::before {
+    color: white;
+    visibility: visible;
+    transition-delay: 0.3s;
+  }
+  #gfxcanvas {
+    image-rendering: pixelated;
+    border: 5px solid #fff;
+  }
+  </style>
+</head>
+<body>
+
+<div id="gfxdiv">
+  <canvas id="gfxcanvas" width="240" height="240"></canvas>
+  <button id="BTN1">1</button>
+  <button id="BTN2">2</button>
+  <button id="BTN3">3</button>
+  <button id="BTN4">4</button>
+  <a id="border">&#x05EF;</a>
+  <a id="screenshot">&#x1F4F7;</a>
+</div>
+
+<script src="emulator_banglejs3.js"></script>
+<script src="emu_banglejs3.js"></script>
+<script src="common.js"></script>
+<script>
+var touchX=0, touchY=0, touchPts=0;
+var touchDX=0, touchDY=0; // drag direction
+var touchAX=0, touchAY=0; // drag amount
+
+function jsUpdateGfx() {
+  var changed = Module.ccall('jsGfxChanged', 'number', [], []);
+  if (changed) {
+    var canvas = document.getElementById('gfxcanvas');
+    var ctx = canvas.getContext('2d');
+    var imgData = ctx.createImageData(240, 240);
+    var rgba = imgData.data;
+    jsGetGfxContents(rgba);
+    ctx.putImageData(imgData, 0, 0);
+  }
+  jsHandleIO();
+}
+
+
+function jsInitButtons() {
+  var div = document.getElementById("gfxdiv");
+  function handleButton(n, pin) {
+    hwPinValue[pin]=1; // inverted
+    var btn = document.getElementById("BTN"+n);
+    btn.addEventListener('mousedown', e => {
+      e.preventDefault();
+      hwPinValue[pin]=0; // inverted
+      jsTransmitPinEvent(pin);
+    });
+    btn.addEventListener('mouseup', e => {
+      hwPinValue[pin]=1; // inverted
+      jsTransmitPinEvent(pin);
+    });
+    btn.addEventListener('mouseenter', e => {
+      if (e.buttons) {
+        hwPinValue[pin]=0; // inverted
+        jsTransmitPinEvent(pin);
+      }
+    });
+    btn.addEventListener('mouseleave', e => {
+      // mouseleave comes *before* mouseenter usually - so delay it
+      // in order to get overlap when swiping to make Bangle.js screen swipes work
+      setTimeout(function() {
+        if (!hwPinValue[pin]) {
+          hwPinValue[pin]=1; // inverted
+          jsTransmitPinEvent(pin);
+        }
+      },10);
+    });
+  }
+  handleButton(1,BTN1);
+  handleButton(2,BTN2);
+  handleButton(3,BTN3);
+  handleButton(4,BTN4);
+
+
+  div = document.getElementById("gfxcanvas");
+  div.addEventListener('mousemove', e => {
+    e.preventDefault();
+
+    var x = e.offsetX;
+    var y = e.offsetY;
+    var dx = x-touchX;
+    var dy = y-touchY;
+    var pts =e.buttons?1:0;
+    if (pts) {
+      touchDX += dx;
+      touchDY += dy;
+      touchAX += Math.abs(dx);
+      touchAY += Math.abs(dy);
+    }
+    touchX = x;
+    touchY = y;
+    if (pts || (touchPts != pts))
+      jsSendTouchEvent(touchX, touchY, pts, 0);
+    touchPts = pts;
+  });
+  div.addEventListener('mousedown', e => {
+    e.preventDefault();
+    touchX = e.offsetX;
+    touchY = e.offsetY;
+    touchPts = 1;
+    jsSendTouchEvent(touchX, touchY, touchPts, 0);
+  });
+  div.addEventListener('mouseup', e => {
+    e.preventDefault();
+    touchX = e.offsetX;
+    touchY = e.offsetY;
+    if (touchX<0) touchX=0;
+    if (touchY<0) touchY=0;
+    if (touchX>=GFX_WIDTH) touchX=GFX_WIDTH-1;
+    if (touchY>=GFX_HEIGHT) touchY=GFX_HEIGHT-1;
+    if (touchPts) {
+      console.log("Touch up", {
+        x : touchX,
+        y : touchY,
+        dx : touchDX,
+        dy : touchDY,
+        ax : touchAX,
+        ay : touchAY
+      });
+      jsSendTouchEvent(touchX, touchY, 0, 0);
+      if (touchAX<5 && touchAY<5) // single click
+        jsSendTouchEvent(touchX, touchY, 0, 5);
+      if (touchAX>80 && touchAY<20)
+        jsSendTouchEvent(touchX, touchY, 0, (touchDX<0) ? 3 : 4); // slide left/right
+      if (touchAX<20 && touchAY>80)
+        jsSendTouchEvent(touchX, touchY, 0, (touchDY<0) ? 2 : 1); // slide up/down
+    }
+    touchDX = 0;
+    touchDY = 0;
+    touchAX = 0;
+    touchAY = 0;
+    touchPts = 0;
+  });
+  div.addEventListener('mouseleave', e => {
+    if (touchPts)
+      jsSendTouchEvent(touchX, touchY, 0, 0);
+    touchPts = 0;
+  });
+}
+</script>
+</body>
+</html>

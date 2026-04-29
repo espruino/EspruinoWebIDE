@@ -34,9 +34,9 @@ var hwPinValue = new Uint8Array(PIN_COUNT);
 function hwSetPinValue(pin,v) { hwPinValue[pin] = v; }
 function hwGetPinValue(pin) { return hwPinValue[pin]; }
 function hwFlashWrite(addr,v) { flashMemory[addr] = v; if (addr>maxFlashMemory) maxFlashMemory=addr; } // old, unused now
-function hwFlashWritePtr(addr,ptr,len) { 
+function hwFlashWritePtr(addr,ptr,len) {
   flashMemory.set(new Uint8Array(HEAP8.buffer, ptr, len), addr);
-  if (addr+len>maxFlashMemory) maxFlashMemory=addr+len; 
+  if (addr+len>maxFlashMemory) maxFlashMemory=addr+len;
 }
 function hwFlashRead(addr) { return flashMemory[addr]; }
 
@@ -112,6 +112,7 @@ function jsInit() {
     document.getElementById("border").addEventListener('click', e => {
       borderColor = ++borderColor % borderColors.length;
       document.getElementById("gfxcanvas").style.borderColor = '#' + borderColors[borderColor];
+      document.getElementById("gfxcanvas").style.background = '#' + borderColors[borderColor];
       document.getElementById("border").style.color = '#' + borderColors[(borderColor + 1) % borderColors.length];
     });
 
@@ -196,8 +197,8 @@ jsRXCallback = function(c) {
 
 var dontTrigger = false;
 var timerResize;
-var WIN_WIDTH = (GFX_WIDTH+10+30);
-var WIN_HEIGHT = (GFX_HEIGHT+10+4);
+var WIN_WIDTH = (GFX_WIDTH+GFX_PAD_WIDTH);
+var WIN_HEIGHT = (GFX_HEIGHT+GFX_PAD_HEIGHT);
 function resizeEnd() {
   //100ms since last resize
   dontTrigger = true;

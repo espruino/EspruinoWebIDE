@@ -3,13 +3,15 @@ var DEVICE = 21; // USB
 var BTN1 = 17;
 var GFX_WIDTH = 176;
 var GFX_HEIGHT = 176;
+var GFX_PAD_WIDTH = 40; // padding for window
+var GFX_PAD_HEIGHT = 14;
 var FLASH_SIZE = 8192*1024;
 
 function jsGetGfxContents(rgba) {
   var i = 0;
-  for (var y=0;y<176;y++) {
+  for (var y=0;y<GFX_HEIGHT;y++) {
     var p = Module.ccall('jsGfxGetPtr', 'number', ['number'], [y]);
-    for (var x=0;x<176;x++) {
+    for (var x=0;x<GFX_WIDTH;x++) {
       var bit = x*3, byte = bit>>3;
       var c = p ? (Module.HEAPU8[p+byte]|(Module.HEAPU8[p+byte+1]<<8)) : 0;
       c = c >> (bit&7);
