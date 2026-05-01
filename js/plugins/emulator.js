@@ -1,34 +1,50 @@
-/*
-Gordon Williams (gw@pur3.co.uk)
+/**
+ Copyright 2026 Gordon Williams (gw@pur3.co.uk)
 
-If we're running in an iframe, this gets enabled and allows the IDE
-to work by passing messages using window.postMessage.
+ This Source Code is subject to the terms of the Mozilla Public
+ License, v2.0. If a copy of the MPL was not distributed with this
+ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-Use embed.js on the client side to link this in.
-*/
-
-  var emu;
-
+ ------------------------------------------------------------------
+  Plugin to allow connections to Emulators
+ ------------------------------------------------------------------
+**/
+var emu;
 (function() {
   var callbacks = {};
 
-  var EMULATORS = [
-    {
-      id : "BANGLEJS2",
-      name : "Bangle.js 1",
-      description : '240x240 16 bit, 3 buttons',
-      link : "https://www.espruino.com/Bangle.js",
-      emulatorURL : "/emu/emu_banglejs1.html",
-      emulatorWin : "innerWidth=290,innerHeight=268,location=0"
-    }, {
-      id : "BANGLEJS2",
-      name : "Bangle.js 2",
-      description : '176x176 3 bit, 1 button, full touchscreen',
-      link : "https://www.espruino.com/Bangle.js2",
-      emulatorURL : "/emu/emu_banglejs2.html",
-      emulatorWin : "innerWidth=290,innerHeight=268,location=0"
-    }
-  ];
+  /* To enable 'beta' emulators, paste this into the console:
+  Espruino.Config.set("EMU_BETA", 1);
+  */
+  function getEmulators() {
+    let emulators = [
+      {
+        id : "BANGLEJS2",
+        name : "Bangle.js 1",
+        description : '240x240 16 bit, 3 buttons',
+        link : "https://www.espruino.com/Bangle.js",
+        emulatorURL : "/emu/emu_banglejs1.html",
+        emulatorWin : "innerWidth=290,innerHeight=268,location=0"
+      }, {
+        id : "BANGLEJS2",
+        name : "Bangle.js 2",
+        description : '176x176 3 bit, 1 button, full touchscreen',
+        link : "https://www.espruino.com/Bangle.js2",
+        emulatorURL : "/emu/emu_banglejs2.html",
+        emulatorWin : "innerWidth=290,innerHeight=268,location=0"
+      }
+    ];
+    if (Espruino.Config.EMU_BETA)
+      emulators.push({
+        id : "BANGLEJS3",
+        name : "Bangle.js 3",
+        description : '240x240 6 bit, 4 buttons, full touchscreen',
+        link : "https://www.espruino.com/Bangle.js3",
+        emulatorURL : "/emu/emu_banglejs3.html",
+        emulatorWin : "innerWidth=290,innerHeight=268,location=0"
+      });
+    return emulators;
+  }
 
   function post(msg) {
     if (!emu) return;
@@ -67,7 +83,7 @@ Use embed.js on the client side to link this in.
       id: "sendmethod",
       title: "Upload Destination",
       padding: true,
-      contents: Espruino.Core.HTML.domList(EMULATORS.map(e=>({
+      contents: Espruino.Core.HTML.domList(getEmulators().map(e=>({
         title: e.name,
         description : e.description,//+`<a href="${e.link}" target="_blank">more info</a>`,
         callback : function() {
