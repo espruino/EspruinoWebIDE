@@ -19,7 +19,7 @@ var emu;
   function getEmulators() {
     let emulators = [
       {
-        id : "BANGLEJS2",
+        id : "BANGLEJS",
         name : "Bangle.js 1",
         description : '240x240 16 bit, 3 buttons',
         link : "https://www.espruino.com/Bangle.js",
@@ -81,7 +81,7 @@ var emu;
     var selected = false;
     var popup = Espruino.Core.App.openPopup({
       id: "sendmethod",
-      title: "Upload Destination",
+      title: "Choose Emulator",
       padding: true,
       contents: Espruino.Core.HTML.domList(getEmulators().map(e=>({
         title: e.name,
