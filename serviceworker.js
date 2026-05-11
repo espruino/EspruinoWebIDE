@@ -1,5 +1,5 @@
 // Service worker for Offline Web IDE
-const VERSION = 'v144';
+const VERSION = 'v145';
 
 const CACHED_RESOURCES = [
   'blockly/blockly_espruino.js',
@@ -103,8 +103,10 @@ const CACHED_RESOURCES = [
   'emu/common.js',
   'emu/emulator_banglejs1.js',
   'emu/emulator_banglejs2.js',
+  'emu/emulator_banglejs3.js',
   'emu/emu_banglejs1.html',
   'emu/emu_banglejs2.html',
+  'emu/emu_banglejs3.html',
   'js/plugins/emulator.js',
   './'
 ];
