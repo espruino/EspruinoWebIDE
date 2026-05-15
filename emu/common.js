@@ -172,10 +172,19 @@ if ("undefined" != typeof window) {
           console.error("receive event expecting data string");
         jsTransmitString(d);
       } break;
+      case "ping": { // to allow us to check if it's still there
+        post({type:"pong"});
+      } break;
       default:
         console.error("Unknown event type ",event.type);
         break;
     }
+  });
+  window.addEventListener('pagehide', (event) => {
+    post({type:"pagehide"});
+  });
+  window.addEventListener('unload', (event) => {
+    post({type:"unload"});
   });
   console.log("Waiting for posted {type:init} message");
 }
