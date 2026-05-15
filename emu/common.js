@@ -8,9 +8,8 @@ var maxFlashMemory = 0;
 flashMemory.fill(255);
 
 if ("undefined" != typeof window) {
-  if (window.opener.emu === undefined) window.close();
   if (window.localStorage) {
-    let s = localStorage.getItem("BANGLE_STORAGE");
+    let s = localStorage.getItem(DEVICE_NAME+"_STORAGE");
     if (s!=null) {
       s.split(",").forEach((n,i)=>{
         flashMemory[i] = parseInt(n);
@@ -20,13 +19,13 @@ if ("undefined" != typeof window) {
   }
   window.addEventListener("unload", function() { // Save storage contents on exit
     var a = new Uint8Array(flashMemory.buffer, 0, maxFlashMemory+1);
-    localStorage.setItem("BANGLE_STORAGE", a.toString()); // 1,2,3,4, etc...
+    localStorage.setItem(DEVICE_NAME+"_STORAGE", a.toString()); // 1,2,3,4, etc...
   });
 }
 function eraseAll() {
   maxFlashMemory = 0;
   flashMemory.fill(255);
-  localStorage.setItem("BANGLE_STORAGE", null);
+  localStorage.setItem(DEVICE_NAME+"_STORAGE", null);
 }
 
 // Pin handling

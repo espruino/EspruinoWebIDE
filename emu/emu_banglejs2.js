@@ -1,3 +1,4 @@
+var DEVICE_NAME = "BANGLEJS2";
 var PIN_COUNT = 48;
 var DEVICE = 21; // USB
 var BTN1 = 17;
