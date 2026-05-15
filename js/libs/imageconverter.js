@@ -68,8 +68,6 @@
       bpp:2,name:"2 bit greyscale",
       fromRGBA:function(r,g,b) {
         var c = (r+g+b) / 3;
-        c += 31; // rounding
-        if (c>255)c=255;
         return c>>6;
       },toRGBA:function(c) {
         c = c&3;
@@ -81,8 +79,6 @@
       bpp:4,name:"4 bit greyscale",
       fromRGBA:function(r,g,b) {
         var c = (r+g+b) / 3;
-        c += 7; // rounding
-        if (c>255)c=255;
         return c>>4;
       },toRGBA:function(c) {
         c = c&15;
@@ -366,9 +362,6 @@
 
     if (options.scale && options.scale!=1)
       rgba = rescale(rgba, options);
-    if (options.autoCrop || options.autoCropCenter)
-      rgba = autoCrop(rgba, options);
-
 
     if ("string"!=typeof options.diffusion)
       options.diffusion = "none";
@@ -391,7 +384,7 @@
     var fmt = FORMATS[options.mode];
     if (fmt===undefined) throw new Error("Unknown image mode");
     var bpp = fmt.bpp;
-    var bitData = new Uint8Array(((options.width*options.height)*bpp+7)/8);
+    var bitData;
     var palette;
     if (fmt.optimalPalette) {
       let pixels = readImage(FORMATS["rgb565"]);
@@ -592,6 +585,9 @@
             pixels[i]=transparentCol;
       }
     }
+    if (options.autoCrop || options.autoCropCenter)
+      pixels = autoCrop(pixels, options);
+    bitData = new Uint8Array(((options.width*options.height)*bpp+7)/8);
     writeImage(pixels);
 
     var strPrefix,strPostfix;
@@ -722,14 +718,13 @@
 
   /* Given an image attempt to automatically crop (use top left
   pixel color) */
-  function autoCrop(rgba, options) {
-    var buf = new Uint32Array(rgba.buffer);
+  function autoCrop(pixels, options) {
     var stride = options.width;
-    var cropCol = buf[0];
-    var x1=options.width, x2=0, y1=options.height,y2=2;
+    var cropCol = pixels[0];
+    var x1=options.width, x2=0, y1=options.height,y2=0;
     for (let y=0;y<options.height;y++) {
       for (let x=0;x<options.width;x++) {
-        if (buf[x+y*stride]!=cropCol) {
+        if (pixels[x+y*stride]!=cropCol) {
           if (x<x1) x1=x;
           if (y<y1) y1=y;
           if (x>x2) x2=x;
@@ -738,7 +733,7 @@
       }
     }
     // no data! might as well just send it all
-    if (x1>x2 || y1>y2) return rgba;
+    if (x1>x2 || y1>y2) return pixels;
     // if center, try and take the same off each side
     if (options.autoCropCenter) {
       x1 = Math.min(x1, (options.width-1)-x2);
@@ -749,15 +744,14 @@
     // ok, crop!
     var w = 1+x2-x1;
     var h = 1+y2-y1;
-    var dst = new Uint32Array(w*h);
-    for (let y=0;y<h;y++)
-      for (let x=0;x<w;x++)
-        dst[x+y*w] = buf[(x+x1)+(y+y1)*stride];
     options.width = w;
     options.height = h;
-    var cropped = new Uint8ClampedArray(dst.buffer);
-    if (options.rgbaOut) options.rgbaOut = cropped;
-    return cropped;
+    var dst = new Int32Array(w*h);
+    for (let y=0;y<h;y++)
+      for (let x=0;x<w;x++)
+        dst[x+y*w] = pixels[(x+x1)+(y+y1)*stride];
+    if (options.rgbaOut) options.rgbaOut = new Uint8ClampedArray(w*h*4);
+    return dst;
   }
 
   /* attempt to rescale the image - use bilinear interpolation */
