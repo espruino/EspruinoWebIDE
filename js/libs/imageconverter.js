@@ -13,14 +13,24 @@
     }
 }(typeof self !== 'undefined' ? self : this, function (heatshrink) {
 
+  //------------------------------------------
+  const VERSION = 1.01;
+/*
+1v01: Added option to dither transparency
+      Added Atkinson Dithering option
+      Allow transparency even when all palette entries are used
+      Add stringToRGBA to allow decoding outside of browser
+*/
+  //------------------------------------------
   const PALETTE = {
-   VGA: [0x000000, 0x0000a8, 0x00a800, 0x00a8a8, 0xa80000, 0xa800a8, 0xa85400, 0xa8a8a8, 0x545454, 0x5454fc, 0x54fc54, 0x54fcfc, 0xfc5454, 0xfc54fc, 0xfcfc54, 0xfcfcfc, 0x000000, 0x141414, 0x202020, 0x2c2c2c, 0x383838, 0x444444, 0x505050, 0x606060, 0x707070, 0x808080, 0x909090, 0xa0a0a0, 0xb4b4b4, 0xc8c8c8, 0xe0e0e0, 0xfcfcfc, 0x0000fc, 0x4000fc, 0x7c00fc, 0xbc00fc, 0xfc00fc, 0xfc00bc, 0xfc007c, 0xfc0040, 0xfc0000, 0xfc4000, 0xfc7c00, 0xfcbc00, 0xfcfc00, 0xbcfc00, 0x7cfc00, 0x40fc00, 0x00fc00, 0x00fc40, 0x00fc7c, 0x00fcbc, 0x00fcfc, 0x00bcfc, 0x007cfc, 0x0040fc, 0x7c7cfc, 0x9c7cfc, 0xbc7cfc, 0xdc7cfc, 0xfc7cfc, 0xfc7cdc, 0xfc7cbc, 0xfc7c9c, 0xfc7c7c, 0xfc9c7c, 0xfcbc7c, 0xfcdc7c, 0xfcfc7c, 0xdcfc7c, 0xbcfc7c, 0x9cfc7c, 0x7cfc7c, 0x7cfc9c, 0x7cfcbc, 0x7cfcdc, 0x7cfcfc, 0x7cdcfc, 0x7cbcfc, 0x7c9cfc, 0xb4b4fc, 0xc4b4fc, 0xd8b4fc, 0xe8b4fc, 0xfcb4fc, 0xfcb4e8, 0xfcb4d8, 0xfcb4c4, 0xfcb4b4, 0xfcc4b4, 0xfcd8b4, 0xfce8b4, 0xfcfcb4, 0xe8fcb4, 0xd8fcb4, 0xc4fcb4, 0xb4fcb4, 0xb4fcc4, 0xb4fcd8, 0xb4fce8, 0xb4fcfc, 0xb4e8fc, 0xb4d8fc, 0xb4c4fc, 0x000070, 0x1c0070, 0x380070, 0x540070, 0x700070, 0x700054, 0x700038, 0x70001c, 0x700000, 0x701c00, 0x703800, 0x705400, 0x707000, 0x547000, 0x387000, 0x1c7000, 0x007000, 0x00701c, 0x007038, 0x007054, 0x007070, 0x005470, 0x003870, 0x001c70, 0x383870, 0x443870, 0x543870, 0x603870, 0x703870, 0x703860, 0x703854, 0x703844, 0x703838, 0x704438, 0x705438, 0x706038, 0x707038, 0x607038, 0x547038, 0x447038, 0x387038, 0x387044, 0x387054, 0x387060, 0x387070, 0x386070, 0x385470, 0x384470, 0x505070, 0x585070, 0x605070, 0x685070, 0x705070, 0x705068, 0x705060, 0x705058, 0x705050, 0x705850, 0x706050, 0x706850, 0x707050, 0x687050, 0x607050, 0x587050, 0x507050, 0x507058, 0x507060, 0x507068, 0x507070, 0x506870, 0x506070, 0x505870, 0x000040, 0x100040, 0x200040, 0x300040, 0x400040, 0x400030, 0x400020, 0x400010, 0x400000, 0x401000, 0x402000, 0x403000, 0x404000, 0x304000, 0x204000, 0x104000, 0x004000, 0x004010, 0x004020, 0x004030, 0x004040, 0x003040, 0x002040, 0x001040, 0x202040, 0x282040, 0x302040, 0x382040, 0x402040, 0x402038, 0x402030, 0x402028, 0x402020, 0x402820, 0x403020, 0x403820, 0x404020, 0x384020, 0x304020, 0x284020, 0x204020, 0x204028, 0x204030, 0x204038, 0x204040, 0x203840, 0x203040, 0x202840, 0x2c2c40, 0x302c40, 0x342c40, 0x3c2c40, 0x402c40, 0x402c3c, 0x402c34, 0x402c30, 0x402c2c, 0x40302c, 0x40342c, 0x403c2c, 0x40402c, 0x3c402c, 0x34402c, 0x30402c, 0x2c402c, 0x2c4030, 0x2c4034, 0x2c403c, 0x2c4040, 0x2c3c40, 0x2c3440, 0x2c3040, 0x000000, 0x000000, 0x000000, 0x000000, 0x000000, 0x000000, 0x000000, 0xFFFFFF],
+  VGA: [0x000000, 0x0000a8, 0x00a800, 0x00a8a8, 0xa80000, 0xa800a8, 0xa85400, 0xa8a8a8, 0x545454, 0x5454fc, 0x54fc54, 0x54fcfc, 0xfc5454, 0xfc54fc, 0xfcfc54, 0xfcfcfc, 0x000000, 0x141414, 0x202020, 0x2c2c2c, 0x383838, 0x444444, 0x505050, 0x606060, 0x707070, 0x808080, 0x909090, 0xa0a0a0, 0xb4b4b4, 0xc8c8c8, 0xe0e0e0, 0xfcfcfc, 0x0000fc, 0x4000fc, 0x7c00fc, 0xbc00fc, 0xfc00fc, 0xfc00bc, 0xfc007c, 0xfc0040, 0xfc0000, 0xfc4000, 0xfc7c00, 0xfcbc00, 0xfcfc00, 0xbcfc00, 0x7cfc00, 0x40fc00, 0x00fc00, 0x00fc40, 0x00fc7c, 0x00fcbc, 0x00fcfc, 0x00bcfc, 0x007cfc, 0x0040fc, 0x7c7cfc, 0x9c7cfc, 0xbc7cfc, 0xdc7cfc, 0xfc7cfc, 0xfc7cdc, 0xfc7cbc, 0xfc7c9c, 0xfc7c7c, 0xfc9c7c, 0xfcbc7c, 0xfcdc7c, 0xfcfc7c, 0xdcfc7c, 0xbcfc7c, 0x9cfc7c, 0x7cfc7c, 0x7cfc9c, 0x7cfcbc, 0x7cfcdc, 0x7cfcfc, 0x7cdcfc, 0x7cbcfc, 0x7c9cfc, 0xb4b4fc, 0xc4b4fc, 0xd8b4fc, 0xe8b4fc, 0xfcb4fc, 0xfcb4e8, 0xfcb4d8, 0xfcb4c4, 0xfcb4b4, 0xfcc4b4, 0xfcd8b4, 0xfce8b4, 0xfcfcb4, 0xe8fcb4, 0xd8fcb4, 0xc4fcb4, 0xb4fcb4, 0xb4fcc4, 0xb4fcd8, 0xb4fce8, 0xb4fcfc, 0xb4e8fc, 0xb4d8fc, 0xb4c4fc, 0x000070, 0x1c0070, 0x380070, 0x540070, 0x700070, 0x700054, 0x700038, 0x70001c, 0x700000, 0x701c00, 0x703800, 0x705400, 0x707000, 0x547000, 0x387000, 0x1c7000, 0x007000, 0x00701c, 0x007038, 0x007054, 0x007070, 0x005470, 0x003870, 0x001c70, 0x383870, 0x443870, 0x543870, 0x603870, 0x703870, 0x703860, 0x703854, 0x703844, 0x703838, 0x704438, 0x705438, 0x706038, 0x707038, 0x607038, 0x547038, 0x447038, 0x387038, 0x387044, 0x387054, 0x387060, 0x387070, 0x386070, 0x385470, 0x384470, 0x505070, 0x585070, 0x605070, 0x685070, 0x705070, 0x705068, 0x705060, 0x705058, 0x705050, 0x705850, 0x706050, 0x706850, 0x707050, 0x687050, 0x607050, 0x587050, 0x507050, 0x507058, 0x507060, 0x507068, 0x507070, 0x506870, 0x506070, 0x505870, 0x000040, 0x100040, 0x200040, 0x300040, 0x400040, 0x400030, 0x400020, 0x400010, 0x400000, 0x401000, 0x402000, 0x403000, 0x404000, 0x304000, 0x204000, 0x104000, 0x004000, 0x004010, 0x004020, 0x004030, 0x004040, 0x003040, 0x002040, 0x001040, 0x202040, 0x282040, 0x302040, 0x382040, 0x402040, 0x402038, 0x402030, 0x402028, 0x402020, 0x402820, 0x403020, 0x403820, 0x404020, 0x384020, 0x304020, 0x284020, 0x204020, 0x204028, 0x204030, 0x204038, 0x204040, 0x203840, 0x203040, 0x202840, 0x2c2c40, 0x302c40, 0x342c40, 0x3c2c40, 0x402c40, 0x402c3c, 0x402c34, 0x402c30, 0x402c2c, 0x40302c, 0x40342c, 0x403c2c, 0x40402c, 0x3c402c, 0x34402c, 0x30402c, 0x2c402c, 0x2c4030, 0x2c4034, 0x2c403c, 0x2c4040, 0x2c3c40, 0x2c3440, 0x2c3040, 0x000000, 0x000000, 0x000000, 0x000000, 0x000000, 0x000000, 0x000000, 0xFFFFFF],
   WEB : [0x000000,0x000033,0x000066,0x000099,0x0000cc,0x0000ff,0x003300,0x003333,0x003366,0x003399,0x0033cc,0x0033ff,0x006600,0x006633,0x006666,0x006699,0x0066cc,0x0066ff,0x009900,0x009933,0x009966,0x009999,0x0099cc,0x0099ff,0x00cc00,0x00cc33,0x00cc66,0x00cc99,0x00cccc,0x00ccff,0x00ff00,0x00ff33,0x00ff66,0x00ff99,0x00ffcc,0x00ffff,0x330000,0x330033,0x330066,0x330099,0x3300cc,0x3300ff,0x333300,0x333333,0x333366,0x333399,0x3333cc,0x3333ff,0x336600,0x336633,0x336666,0x336699,0x3366cc,0x3366ff,0x339900,0x339933,0x339966,0x339999,0x3399cc,0x3399ff,0x33cc00,0x33cc33,0x33cc66,0x33cc99,0x33cccc,0x33ccff,0x33ff00,0x33ff33,0x33ff66,0x33ff99,0x33ffcc,0x33ffff,0x660000,0x660033,0x660066,0x660099,0x6600cc,0x6600ff,0x663300,0x663333,0x663366,0x663399,0x6633cc,0x6633ff,0x666600,0x666633,0x666666,0x666699,0x6666cc,0x6666ff,0x669900,0x669933,0x669966,0x669999,0x6699cc,0x6699ff,0x66cc00,0x66cc33,0x66cc66,0x66cc99,0x66cccc,0x66ccff,0x66ff00,0x66ff33,0x66ff66,0x66ff99,0x66ffcc,0x66ffff,0x990000,0x990033,0x990066,0x990099,0x9900cc,0x9900ff,0x993300,0x993333,0x993366,0x993399,0x9933cc,0x9933ff,0x996600,0x996633,0x996666,0x996699,0x9966cc,0x9966ff,0x999900,0x999933,0x999966,0x999999,0x9999cc,0x9999ff,0x99cc00,0x99cc33,0x99cc66,0x99cc99,0x99cccc,0x99ccff,0x99ff00,0x99ff33,0x99ff66,0x99ff99,0x99ffcc,0x99ffff,0xcc0000,0xcc0033,0xcc0066,0xcc0099,0xcc00cc,0xcc00ff,0xcc3300,0xcc3333,0xcc3366,0xcc3399,0xcc33cc,0xcc33ff,0xcc6600,0xcc6633,0xcc6666,0xcc6699,0xcc66cc,0xcc66ff,0xcc9900,0xcc9933,0xcc9966,0xcc9999,0xcc99cc,0xcc99ff,0xcccc00,0xcccc33,0xcccc66,0xcccc99,0xcccccc,0xccccff,0xccff00,0xccff33,0xccff66,0xccff99,0xccffcc,0xccffff,0xff0000,0xff0033,0xff0066,0xff0099,0xff00cc,0xff00ff,0xff3300,0xff3333,0xff3366,0xff3399,0xff33cc,0xff33ff,0xff6600,0xff6633,0xff6666,0xff6699,0xff66cc,0xff66ff,0xff9900,0xff9933,0xff9966,0xff9999,0xff99cc,0xff99ff,0xffcc00,0xffcc33,0xffcc66,0xffcc99,0xffcccc,0xffccff,0xffff00,0xffff33,0xffff66,0xffff99,0xffffcc,0xffffff],
   MAC16 : [
   0x000000, 0x444444, 0x888888, 0xBBBBBB,
   0x996633, 0x663300, 0x006600, 0x00aa00,
   0x0099ff, 0x0000cc, 0x330099, 0xff0099,
   0xdd0000, 0xff6600, 0xffff00, 0xffffff],
+  EPAPER4 : [ 0x000000, 0xffffff, 0xffcc33, 0xdb3727 ],
   lookup : function(palette,r,g,b,a, transparentCol) {
     if (isFinite(transparentCol) && a<128) return transparentCol;
     var maxd = 0xFFFFFF;
@@ -200,7 +210,15 @@
       },toRGBA:function(c,palette) {
         return palette.rgb888[c];
       }
-    }
+    },
+    "epaper4":{
+      bpp:2,name:"ePaper: 2 bit (4 color) BWRY",
+      fromRGBA:function(r,g,b,a) {
+        return PALETTE.lookup(PALETTE.EPAPER4,r,g,b,a, undefined /* no transparency */);
+      },toRGBA:function(c) {
+        return 0xFF000000|PALETTE.EPAPER4[c];
+      }
+    },
   };
   // What Espruino uses by default
   const BPP_TO_COLOR_FORMAT = {
@@ -221,7 +239,8 @@
     "bayer2":"2x2 Bayer",
     "bayer4":"4x4 Bayer",
     "comic":"Comic book",
-    "floyd":"Floyd-Steinberg"
+    "floyd":"Floyd-Steinberg",
+    "atkinson":"Atkinson" // https://en.wikipedia.org/wiki/Atkinson_dithering
   };
 
   const DITHER = {
@@ -306,11 +325,62 @@
   "  COMICB : [\n  "+JSON.stringify(NB).replaceAll("],[","],\n    [").substr(1)+",\n");
 */
 
-
   function clip(x) {
     if (x<0) return 0;
     if (x>255) return 255;
     return x;
+  }
+
+  class RGBA {
+    constructor(r,g,b,a) {
+      if (r===undefined)
+        r = g = b = a = 0;
+      if (a===undefined)
+        a = 0;
+      this.r = r;
+      this.g = g;
+      this.b = b;
+      this.a = a;
+    }
+    static fromRGBA32(v) {
+      return new RGBA(
+        (v>>16)&255,
+        (v>>8)&255,
+        v&255,
+        (v>>24)&255);
+    }
+    zero() {
+      this.r = this.g = this.b = this.a = 0;
+    }
+    inc(rgba) {
+      this.r += rgba.r;
+      this.g += rgba.g;
+      this.b += rgba.b;
+      this.a += rgba.a;
+      return this;
+    }
+    dec(rgba) {
+      this.r -= rgba.r;
+      this.g -= rgba.g;
+      this.b -= rgba.b;
+      this.a -= rgba.a;
+      return this;
+    }
+    mul(v) {
+      return new RGBA(
+        this.r*v,
+        this.g*v,
+        this.b*v,
+        this.a*v
+      );
+    }
+    toRGBA32() {
+      let dr = clip(Math.round(this.r));
+      let dg = clip(Math.round(this.g));
+      let db = clip(Math.round(this.b));
+      let da = clip(Math.round(this.a));
+      return (da<<24)|(dr<<16)|(dg<<8)|db;
+    }
   }
 
   // compare two RGB888 colors and give a squared distance value
@@ -372,6 +442,7 @@
     options.output = options.output || "object";
     options.inverted = options.inverted || false;
     options.transparent = !!options.transparent;
+    options.transparentDither = !!options.transparentDither;
     var contrast =  (259 * (options.contrast + 255)) / (255 * (259 - options.contrast));
 
     var transparentCol = undefined;
@@ -396,27 +467,24 @@
     function readImage(fmt) {
       var pixels = new Int32Array(options.width*options.height);
       var n = 0;
-      var er=0,eg=0,eb=0;
-      // Floyd-Steinberg error diffusion buffers (current row / next row)
-      var fs = (options.diffusion=="floyd");
-      var fsErrRRow, fsErrGRow, fsErrBRow, fsErrRNext, fsErrGNext, fsErrBNext;
-      if (fs) {
-        fsErrRRow = new Float32Array(options.width+2);
-        fsErrGRow = new Float32Array(options.width+2);
-        fsErrBRow = new Float32Array(options.width+2);
-        fsErrRNext = new Float32Array(options.width+2);
-        fsErrGNext = new Float32Array(options.width+2);
-        fsErrBNext = new Float32Array(options.width+2);
+      // error diffusion buffers (current row / next row)
+      var row1 = new Array(options.width+3),  // current row
+          row2 = new Array(options.width+3),  // next row
+          row3 = new Array(options.width+3);  // row after
+      for (var x=0; x<row1.length; x++) {
+        row1[x] = new RGBA();
+        row2[x] = new RGBA();
+        row3[x] = new RGBA();
       }
+
       for (var y=0; y<options.height; y++) {
-        if (fs) {
-          // move next row errors into current row, clear next row
-            var t;
-            t = fsErrRRow; fsErrRRow = fsErrRNext; fsErrRNext = t; fsErrRNext.fill(0);
-            t = fsErrGRow; fsErrGRow = fsErrGNext; fsErrGNext = t; fsErrGNext.fill(0);
-            t = fsErrBRow; fsErrBRow = fsErrBNext; fsErrBNext = t; fsErrBNext.fill(0);
-        }
+        // error diffusion: move next row errors into current row, clear next row
+        var t;
+        t = row1; row1 = row2; row2 = row3; row3 = t;
+        row3.forEach(v => v.zero());
+        // for each row...
         for (var x=0; x<options.width; x++) {
+          var ex = x+1; // offset by 1 so we always have space at edges in error buffers
           var r = rgba[n*4];
           var g = rgba[n*4+1];
           var b = rgba[n*4+2];
@@ -427,47 +495,44 @@
 
           if (options.diffusion == "random1" ||
               options.diffusion == "errorrandom") {
-            er += Math.random()*48 - 24;
-            eg += Math.random()*48 - 24;
-            eb += Math.random()*48 - 24;
+            row1[ex].inc(new RGBA(
+              Math.random()*48 - 24,
+              Math.random()*48 - 24,
+              Math.random()*48 - 24,
+              Math.random()*48 - 24));
           } else if (options.diffusion == "random2") {
-            er += Math.random()*128 - 64;
-            eg += Math.random()*128 - 64;
-            eb += Math.random()*128 - 64;
+            row1[ex].inc(new RGBA(
+              Math.random()*128 - 64,
+              Math.random()*128 - 64,
+              Math.random()*128 - 64,
+              Math.random()*128 - 64));
           } else if (options.diffusion == "bayer2") {
             let th = DITHER.BAYER2[x&1][y&1]*64 - 96;
-            er += th;
-            eg += th;
-            eb += th;
+            row1[ex].inc(new RGBA(th,th,th,th));
           } else if (options.diffusion == "bayer4") {
             let th = DITHER.BAYER4[x&3][y&3]*16 - 96;
-            er += th;
-            eg += th;
-            eb += th;
+            row1[ex].inc(new RGBA(th,th,th,th));
           } if (options.diffusion == "comic") {
-            er += DITHER.COMICR[x&7][y&7]*3 + Math.random()*24 - 12;
-            eg += DITHER.COMICG[x&7][y&7]*3 + Math.random()*24 - 12;
-            eb += DITHER.COMICB[x&7][y&7]*3 + Math.random()*24 - 12;
+            row1[ex].inc(new RGBA(
+              DITHER.COMICR[x&7][y&7]*3 + Math.random()*24 - 12,
+              DITHER.COMICG[x&7][y&7]*3 + Math.random()*24 - 12,
+              DITHER.COMICB[x&7][y&7]*3 + Math.random()*24 - 12));
           }
           if (options.inverted) {
             r=255-r;
             g=255-g;
             b=255-b;
           }
-          if (fs) {
-            // Base adjust first, then add accumulated FS error from buffers
-            r = ((r + options.brightness - 128)*contrast) + 128;
-            g = ((g + options.brightness - 128)*contrast) + 128;
-            b = ((b + options.brightness - 128)*contrast) + 128;
-            var ix = x+1; // offset by 1 so we always have space at edges
-            r = clip(r + fsErrRRow[ix]);
-            g = clip(g + fsErrGRow[ix]);
-            b = clip(b + fsErrBRow[ix]);
-          } else {
-            r = clip(((r + options.brightness - 128)*contrast) + 128 + er);
-            g = clip(((g + options.brightness - 128)*contrast) + 128 + eg);
-            b = clip(((b + options.brightness - 128)*contrast) + 128 + eb);
-          }
+          // Base adjust first
+          r = ((r + options.brightness - 128)*contrast) + 128;
+          g = ((g + options.brightness - 128)*contrast) + 128;
+          b = ((b + options.brightness - 128)*contrast) + 128;
+          // add accumulated error from buffers
+          r = clip(r + row1[ex].r);
+          g = clip(g + row1[ex].g);
+          b = clip(b + row1[ex].b);
+          if (options.transparentDither)
+            a = clip(a + row1[ex].a);
           var isTransparent = a<128;
 
           var c = fmt.fromRGBA(r,g,b,a,palette);
@@ -478,43 +543,33 @@
           pixels[n] = c;
           // error diffusion
           var cr = fmt.toRGBA(c,palette);
-          // var oa = cr>>>24; - no error diffusion on alpha channel
-          var or = (cr>>16)&255;
-          var og = (cr>>8)&255;
-          var ob = cr&255;
-          if (fs && a>128) {
+          var final = RGBA.fromRGBA32(cr);
+          if (!isTransparent) {isTransparent
             // Floyd-Steinberg distribution
-            var eR = r-or;
-            var eG = g-og;
-            var eB = b-ob;
-            // indexes with +1 offset
-            var ix = x+1;
-            // current row, pixel to the right
-            fsErrRRow[ix+1] += eR * (7/16);
-            fsErrGRow[ix+1] += eG * (7/16);
-            fsErrBRow[ix+1] += eB * (7/16);
-            // next row (below left, below, below right)
-            fsErrRNext[ix-1] += eR * (3/16);
-            fsErrGNext[ix-1] += eG * (3/16);
-            fsErrBNext[ix-1] += eB * (3/16);
-            fsErrRNext[ix]   += eR * (5/16);
-            fsErrGNext[ix]   += eG * (5/16);
-            fsErrBNext[ix]   += eB * (5/16);
-            fsErrRNext[ix+1] += eR * (1/16);
-            fsErrGNext[ix+1] += eG * (1/16);
-            fsErrBNext[ix+1] += eB * (1/16);
-            // no per-pixel carryover (er/eg/eb) used in FS mode
-            er = eg = eb = 0;
-          } else if (!fs && options.diffusion.startsWith("error") && a>128) {
-            er = r-or;
-            eg = g-og;
-            eb = b-ob;
-          } else {
-            er = 0;
-            eg = 0;
-            eb = 0;
+            var err = new RGBA(r, g, b, a).dec(final);
+            if (options.diffusion=="floyd") {
+              // current row, pixel to the right
+              row1[ex+1].inc(err.mul(7/16));
+              // next row (below left, below, below right)
+              row2[ex-1].inc(err.mul(3/16));
+              row2[ex  ].inc(err.mul(5/16));
+              row2[ex+1].inc(err.mul(1/16));
+            } else if (options.diffusion=="atkinson") {
+              err = err.mul(1/8)
+              // current row, 2 pixels to the right
+              row1[ex+1].inc(err);
+              row1[ex+2].inc(err);
+              // next row (below left, below, below right)
+              row2[ex-1].inc(err);
+              row2[ex  ].inc(err);
+              row2[ex+1].inc(err);
+              // row after, below
+              row3[ex  ].inc(err);
+            } else if (["error","errorrandom"].includes(options.diffusion)) {
+              // else for other error diffision just push the error along the line
+              row1[ex+1].inc(err);
+            }
           }
-
           n++;
         }
       }
@@ -569,21 +624,35 @@
         if (pixels[i]>=0)
           colors[pixels[i]]++;
       // find an empty one
+      let leastUsed = colors[0];
+      transparentCol = 0;
       for (let i=0;i<colors.length;i++)
-        if (colors[i]==0) {
+        if (colors[i] < leastUsed) {
+          leastUsed = colors[i];
           transparentCol = i;
           break;
         }
-      if (transparentCol===undefined) {
-        console.log("No unused colour found - using 0 for transparency");
+      if (leastUsed>0) {
+        // find replacement colour for least used col
+        let similarCol, similarDiff;
+        for (let i=0;i<colors.length;i++)
+          if (i!=transparentCol) {
+            let diff = compareRGBA8888(fmt.toRGBA(transparentCol,palette), fmt.toRGBA(i,palette))
+            if (similarDiff===undefined || diff<similarDiff) {
+              similarDiff = diff;
+              similarCol = i;
+            }
+          }
+        console.log(`No unused colour found - using least used (${transparentCol} -> ${leastUsed} pixels) and changing that to ${similarCol}`);
+        // replace colour we need
         for (let i=0;i<pixels.length;i++)
-          if (pixels[i]<0)
-            pixels[i]=0;
-      } else {
-        for (let i=0;i<pixels.length;i++)
-          if (pixels[i]<0)
-            pixels[i]=transparentCol;
+          if (pixels[i]==transparentCol)
+            pixels[i]=similarCol;
       }
+      // replace transparency
+      for (let i=0;i<pixels.length;i++)
+        if (pixels[i]<0)
+          pixels[i]=transparentCol;
     }
     if (options.autoCrop || options.autoCropCenter)
       pixels = autoCrop(pixels, options);
@@ -819,7 +888,8 @@
       rgbaOut : "Uint8Array", //  to store quantised data
       diffusion : DIFFUSION_TYPES,
       compression : "bool",
-      transparent : "bool",
+      transparent : "bool", // add alpha channel?
+      transparentDither : "bool", // dither the alpha channel?
       brightness : "int", // 0 default +/- 127
       contrast : "int", // 0 default, +/- 255
       mode : Object.keys(FORMATS),
@@ -839,8 +909,15 @@
   /* Decode an Espruino image string into a URL, return undefined if it's not valid.
   options =  {
     transparent : bool // should the image be transparent, or just chequered where transparent?
-  } */
-  function stringToImageURL(data, options) {
+  }
+
+  returns {
+    width : int,
+    height : int,
+    rgba : new Uint8Array()
+  }
+  */
+  function stringToRGBA(data, options) {
     options = options||{};
     var p = 0;
     var width = 0|data.charCodeAt(p++);
@@ -866,9 +943,7 @@
     var canvas = document.createElement('canvas');
     canvas.width = width;
     canvas.height = height;
-    var ctx = canvas.getContext("2d");
-    var imageData = ctx.getImageData(0, 0, width, height);
-    var rgba = imageData.data;
+    var rgba = new Uint8Array(4*width*height);
     var no = 0;
     var nibits = 0;
     var nidata = 0;
@@ -889,6 +964,25 @@
     }
     if (!options.transparent)
       RGBAtoCheckerboard(rgba, {width:width, height:height});
+    return {
+      width:width,
+      height:height,
+      rgba:rgba
+    };
+  }
+
+  /* Decode an Espruino image string into a URL, return undefined if it's not valid.
+  options =  {
+    transparent : bool // should the image be transparent, or just chequered where transparent?
+  } */
+  function stringToImageURL(data, options) {
+    var img = stringToRGBA(data, options);
+    var canvas = document.createElement('canvas');
+    canvas.width = img.width;
+    canvas.height = img.height;
+    var ctx = canvas.getContext("2d");
+    var imageData = ctx.getImageData(0, 0, img.width, img.height);
+    imageData.data.set(img.rgba);
     ctx.putImageData(imageData,0,0);
     return canvas.toDataURL();
   }
@@ -915,6 +1009,9 @@
 
   // =======================================================
   return {
+    VERSION : VERSION,
+    RGBA : RGBA,
+
     RGBAtoString : RGBAtoString,
     RGBAtoCheckerboard : RGBAtoCheckerboard,
     canvastoString : canvastoString,
@@ -925,6 +1022,7 @@
     setDiffusionOptions : setDiffusionOptions,
     setOutputOptions : setOutputOptions,
 
+    stringToRGBA : stringToRGBA,
     stringToImageHTML : stringToImageHTML,
     stringToImageURL : stringToImageURL,
 

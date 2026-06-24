@@ -193,6 +193,7 @@
         <input type="checkbox" id="convert" checked>Convert for Espruino</input><br/>
         <div id="imageoptions">
         <input type="checkbox" id="transparent" checked>Transparency?</input><br/>
+        <input type="checkbox" id="transparentDither">Dither Transparency?</input><br/>
         <input type="checkbox" id="inverted">Inverted?</input><br/>
         <input type="checkbox" id="autoCrop">Crop?</input><br/>
         Colours: <select id="colorStyle"></select><br/>
@@ -250,6 +251,7 @@
           convert : popup.window.querySelector("#convert"),
           optionsdiv : popup.window.querySelector("#imageoptions"),
           transparent : popup.window.querySelector("#transparent"),
+          transparentDither : popup.window.querySelector("#transparentDither"),
           inverted : popup.window.querySelector("#inverted"),
           autoCrop : popup.window.querySelector("#autoCrop"),
           diffusion : popup.window.querySelector("#diffusion"),
@@ -264,6 +266,7 @@
         imageconverter.setDiffusionOptions(controls.diffusion);
         controls.convert.addEventListener("change", recalculateImage);
         controls.transparent.addEventListener("change", recalculateImage);
+        controls.transparentDither.addEventListener("change", recalculateImage);
         controls.inverted.addEventListener("change", recalculateImage);
         controls.autoCrop.addEventListener("change", recalculateImage);
         controls.diffusion.addEventListener("change", recalculateImage);
@@ -285,6 +288,7 @@
             options.diffusion = controls.diffusion.options[controls.diffusion.selectedIndex].value;
             options.compression = false;
             options.transparent = controls.transparent.checked;
+            options.transparentDither = controls.transparentDither.checked;
             options.inverted = document.getElementById("inverted").checked;
             options.autoCrop = controls.autoCrop.checked;
             options.brightness = 0|controls.brightness.value;
