@@ -14,8 +14,9 @@
 }(typeof self !== 'undefined' ? self : this, function (heatshrink) {
 
   //------------------------------------------
-  const VERSION = 1.01;
+  const VERSION = 1.02;
 /*
+1v02: Fix for stringToImage* with invalid image
 1v01: Added option to dither transparency
       Added Atkinson Dithering option
       Allow transparency even when all palette entries are used
@@ -977,6 +978,7 @@
   } */
   function stringToImageURL(data, options) {
     var img = stringToRGBA(data, options);
+    if (img===undefined) return undefined;
     var canvas = document.createElement('canvas');
     canvas.width = img.width;
     canvas.height = img.height;
