@@ -14,8 +14,9 @@
 }(typeof self !== 'undefined' ? self : this, function (heatshrink) {
 
   //------------------------------------------
-  const VERSION = 1.02;
+  const VERSION = 1.03;
 /*
+1v03: Automatically disable transparency if there are no transparent pixels
 1v02: Fix for stringToImage* with invalid image
 1v01: Added option to dither transparency
       Added Atkinson Dithering option
@@ -442,12 +443,12 @@
     options.mode = options.mode || "1bit";
     options.output = options.output || "object";
     options.inverted = options.inverted || false;
-    options.transparent = !!options.transparent;
+    let transparent = !!options.transparent;
     options.transparentDither = !!options.transparentDither;
     var contrast =  (259 * (options.contrast + 255)) / (255 * (259 - options.contrast));
 
     var transparentCol = undefined;
-    if (options.transparent) {
+    if (transparent) {
       if (options.mode=="4bit")
         transparentCol=0;
       if (options.mode=="vga" || options.mode=="web")
@@ -537,7 +538,7 @@
           var isTransparent = a<128;
 
           var c = fmt.fromRGBA(r,g,b,a,palette);
-          if (isTransparent && options.transparent && transparentCol===undefined) {
+          if (isTransparent && transparent && transparentCol===undefined) {
             c = -1;
             a = 0;
           }
@@ -545,7 +546,7 @@
           // error diffusion
           var cr = fmt.toRGBA(c,palette);
           var final = RGBA.fromRGBA32(cr);
-          if (!isTransparent) {isTransparent
+          if (!isTransparent) {
             // Floyd-Steinberg distribution
             var err = new RGBA(r, g, b, a).dec(final);
             if (options.diffusion=="floyd") {
@@ -617,7 +618,13 @@
     }
 
     let pixels = readImage(fmt);
-    if (options.transparent && transparentCol===undefined && bpp<=16) {
+    if (!pixels.some(p=>p==-1)) {
+      // if we'd asked for transparency but there are no transparent pixels,
+      // disable transparency.
+      transparent = false;
+      transparentCol = undefined;
+    }
+    if (transparent && transparentCol===undefined && bpp<=16) {
       // we have no fixed transparent colour - pick one that's unused
       var colors = new Uint32Array(1<<bpp);
       // how many colours?
@@ -662,7 +669,7 @@
 
     var strPrefix,strPostfix;
     if ((options.output=="string") || (options.output=="gfxstring") || (options.output=="raw")) {
-      var transparent = transparentCol!==undefined;
+      transparent = transparentCol!==undefined; // disable transparency if no transparent colour
       var header = [];
       header.push(options.width);
       header.push(options.height);
