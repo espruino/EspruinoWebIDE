@@ -33,7 +33,7 @@
                 if ("string" != typeof v)
                   v = ""+JSON.stringify(v);
                 if (v.length>80) v=v.substr(0,77)+" ...";
-                strData[k] = v;
+                strData[k] = Espruino.Core.Utils.escapeHTML(v);
               }
               html = Espruino.Core.HTML.htmlTable(strData);
             } else
