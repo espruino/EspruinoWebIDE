@@ -14,8 +14,9 @@
 }(typeof self !== 'undefined' ? self : this, function (heatshrink) {
 
   //------------------------------------------
-  const VERSION = 1.03;
+  const VERSION = 1.04;
 /*
+1v04: Add rotate option to rotate image by 90 degrees
 1v03: Automatically disable transparency if there are no transparent pixels
 1v02: Fix for stringToImage* with invalid image
 1v01: Added option to dither transparency
@@ -214,7 +215,7 @@
       }
     },
     "epaper4":{
-      bpp:2,name:"ePaper: 2 bit (4 color) BWRY",
+      bpp:2,name:"ePaper: 2 bit (4 color) BWYR",
       fromRGBA:function(r,g,b,a) {
         return PALETTE.lookup(PALETTE.EPAPER4,r,g,b,a, undefined /* no transparency */);
       },toRGBA:function(c) {
@@ -435,6 +436,9 @@
     if (options.scale && options.scale!=1)
       rgba = rescale(rgba, options);
 
+    if (options.rotate)
+      rgba = rotate(rgba, options);
+
     if ("string"!=typeof options.diffusion)
       options.diffusion = "none";
     options.compression = options.compression || false;
@@ -468,24 +472,24 @@
 
     function readImage(fmt) {
       var pixels = new Int32Array(options.width*options.height);
-      var n = 0;
+      var x,y,n = 0;
       // error diffusion buffers (current row / next row)
       var row1 = new Array(options.width+3),  // current row
           row2 = new Array(options.width+3),  // next row
           row3 = new Array(options.width+3);  // row after
-      for (var x=0; x<row1.length; x++) {
+      for (x=0; x<row1.length; x++) {
         row1[x] = new RGBA();
         row2[x] = new RGBA();
         row3[x] = new RGBA();
       }
 
-      for (var y=0; y<options.height; y++) {
+      for (y=0; y<options.height; y++) {
         // error diffusion: move next row errors into current row, clear next row
         var t;
         t = row1; row1 = row2; row2 = row3; row3 = t;
         row3.forEach(v => v.zero());
         // for each row...
-        for (var x=0; x<options.width; x++) {
+        for (x=0; x<options.width; x++) {
           var ex = x+1; // offset by 1 so we always have space at edges in error buffers
           var r = rgba[n*4];
           var g = rgba[n*4+1];
@@ -856,6 +860,26 @@
     return cropped;
   }
 
+  /* attempt to rotate the image - right now we just do this by 90 degrees*/
+  function rotate(rgba, options) {
+    let rotate = options.rotate;
+    let srcw = options.width;
+    let dstw = options.height;
+    let dsth = options.width;
+    let src = new Uint32Array(rgba.buffer);
+    let dst = new Uint32Array(dstw*dsth);
+    for (let y=0;y<dsth;y++)
+      for (let x=0;x<dstw;x++) {
+        dst[x+y*dstw] = src[y+(srcw*(dstw-(x+1)))];
+      }
+    options.width = dstw;
+    options.height = dsth;
+    let rotated = new Uint8ClampedArray(dst.buffer);
+    if (options.rgbaOut) options.rgbaOut = rotated;
+    return rotated;
+  }
+
+
   /* RGBAtoString options, PLUS:
 
   updateCanvas: update canvas with the quantized image
@@ -910,7 +934,8 @@
       inverted : "bool",
       alphaToColor : "bool",
       autoCrop : "bool", // whether to crop the image's borders or not
-      autoCropCenter : "bool"
+      autoCropCenter : "bool",
+      rotate : "bool" // rotate by 90 degrees?
     }
   }
 
