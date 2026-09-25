@@ -14,8 +14,9 @@
 }(typeof self !== 'undefined' ? self : this, function (heatshrink) {
 
   //------------------------------------------
-  const VERSION = 1.04;
+  const VERSION = 1.05;
 /*
+1v05: Fix problem with transparency in optimal palettes or pals that define a transparent colour index (#15)
 1v04: Add rotate option to rotate image by 90 degrees
 1v03: Automatically disable transparency if there are no transparent pixels
 1v02: Fix for stringToImage* with invalid image
@@ -42,16 +43,6 @@
       var pr=(p>>16)&255;
       var pg=(p>>8)&255;
       var pb=p&255;
-      var pa=(p>>24)&255;
-      if (transparentCol=="palette" && pa<128) {
-        // if this is a transparent palette entry,
-        // either use it or ignore it depending on pixel transparency
-        if (a<128) {
-          maxd = 0;
-          c = n;
-        }
-        return;
-      }
       var dr = r-pr;
       var dg = g-pg;
       var db = b-pb;
@@ -185,7 +176,7 @@
     "opt1bit":{
       bpp:1, optimalPalette:true,name:"Optimal 1 bit",
       fromRGBA:function(r,g,b,a,palette) {
-        return PALETTE.lookup(palette.rgb888,r,g,b,a, "palette");
+        return PALETTE.lookup(palette.rgb888,r,g,b,a, palette.transparentCol);
       },toRGBA:function(c,palette) {
         return palette.rgb888[c];
       }
@@ -193,7 +184,7 @@
     "opt2bit":{
       bpp:2, optimalPalette:true,name:"Optimal 2 bit",
       fromRGBA:function(r,g,b,a,palette) {
-        return PALETTE.lookup(palette.rgb888,r,g,b,a, "palette");
+        return PALETTE.lookup(palette.rgb888,r,g,b,a, palette.transparentCol);
       },toRGBA:function(c,palette) {
         return palette.rgb888[c];
       }
@@ -201,7 +192,7 @@
     "opt3bit":{
       bpp:3, optimalPalette:true,name:"Optimal 3 bit",
       fromRGBA:function(r,g,b,a,palette) {
-        return PALETTE.lookup(palette.rgb888,r,g,b,a, "palette");
+        return PALETTE.lookup(palette.rgb888,r,g,b,a, palette.transparentCol);
       },toRGBA:function(c,palette) {
         return palette.rgb888[c];
       }
@@ -209,7 +200,7 @@
     "opt4bit":{
       bpp:4, optimalPalette:true,name:"Optimal 4 bit",
       fromRGBA:function(r,g,b,a,palette) {
-        return PALETTE.lookup(palette.rgb888,r,g,b,a, "palette");
+        return PALETTE.lookup(palette.rgb888,r,g,b,a, palette.transparentCol);
       },toRGBA:function(c,palette) {
         return palette.rgb888[c];
       }
@@ -540,17 +531,15 @@
           if (options.transparentDither)
             a = clip(a + row1[ex].a);
           var isTransparent = a<128;
-
           var c = fmt.fromRGBA(r,g,b,a,palette);
-          if (isTransparent && transparent && transparentCol===undefined) {
+          if (isTransparent && transparent && transparentCol===undefined)
             c = -1;
-            a = 0;
-          }
           pixels[n] = c;
           // error diffusion
           var cr = fmt.toRGBA(c,palette);
           var final = RGBA.fromRGBA32(cr);
-          if (!isTransparent) {
+          if (isTransparent) final.a = 0;
+          if (!isTransparent || options.transparentDither) {
             // Floyd-Steinberg distribution
             var err = new RGBA(r, g, b, a).dec(final);
             if (options.diffusion=="floyd") {
@@ -622,13 +611,7 @@
     }
 
     let pixels = readImage(fmt);
-    if (!pixels.some(p=>p==-1)) {
-      // if we'd asked for transparency but there are no transparent pixels,
-      // disable transparency.
-      transparent = false;
-      transparentCol = undefined;
-    }
-    if (transparent && transparentCol===undefined && bpp<=16) {
+    if (transparent && transparentCol===undefined && bpp<=16 && pixels.some(p=>p==-1)) {
       // we have no fixed transparent colour - pick one that's unused
       var colors = new Uint32Array(1<<bpp);
       // how many colours?
@@ -665,6 +648,12 @@
       for (let i=0;i<pixels.length;i++)
         if (pixels[i]<0)
           pixels[i]=transparentCol;
+    }
+    if (transparent && transparentCol===undefined)
+      transparent = false;
+    if (transparent && !pixels.some(p=>p==transparentCol)) { // if we'd asked for transparency but there are no transparent pixels, disable transparency.
+      transparent = false;
+      transparentCol = undefined;
     }
     if (options.autoCrop || options.autoCropCenter)
       pixels = autoCrop(pixels, options);
