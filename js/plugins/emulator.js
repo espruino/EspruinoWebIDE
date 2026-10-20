@@ -117,6 +117,9 @@ var emu;
       return true;
     },
     "getPorts": function(callback) {
+      var noEmulatorRequested = window.location.search.substr(1).split("&").includes("noemulator");
+      if (noEmulatorRequested)
+        return callback([]);
       var emulatorRequested = window.location.search.substr(1).split("&").includes("emulator");
       if (emulatorRequested)
         Espruino.Config.set("EMULATOR_BANGLEJS", true);

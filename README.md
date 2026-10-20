@@ -43,6 +43,8 @@ When running online, you can pass various options on the url:
 * `?upload` attempt to upload the code (specified above) immediately
 * `?dev=Bangle.js 1234` when connecting, only offer Web Bluetooth, and filter the devices using the given `namePrefix`
 * `?settings={"MINIFICATION_LEVEL":"ESPRIMA"}` apply the given configuration changes specified as JSON (prompts the user!)
+* `?emulator` Show **only** the emulator as a connection option
+* `?noemulator` Do not show the emulator as a connection option
 
 
 Installing From Chrome Web Store
@@ -114,6 +116,7 @@ Chrome Permissions
 
 This web app requires the following permissions:
 * *Serial port access* : So that it can access the Espruino board via USB/Serial
+* *Bluetooth access* : So that it can access the Espruino board via Bluetooth
 * *Webcam access* : So that when you click the little person icon in the top-right of the terminal window, you can overlay the terminal on a live video feed
 * *Audio access*: if you want to [communicate with Espruino using your headphone jack](http://www.espruino.com/Headphone)
 * *Filesystem/storage access* : For loading/saving your JavaScript files to your local disk
