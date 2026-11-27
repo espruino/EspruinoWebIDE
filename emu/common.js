@@ -217,6 +217,13 @@ function resizeEnd() {
 
 }
 function onResize(e) {
+  if (window.parent !== window) {
+    // We're in an iframe - we can't resize the window, so just scale to fit
+    var scale = Math.min(window.innerWidth/WIN_WIDTH, window.innerHeight/WIN_HEIGHT);
+    if (!(scale>0)) scale = 1;
+    document.getElementById("gfxdiv").style.transform = "translate(-50%,-50%) scale("+scale+","+scale+")";
+    return;
+  }
   if ( !dontTrigger ) {
     clearTimeout(timerResize);
     timerResize = setTimeout(resizeEnd, 100);
