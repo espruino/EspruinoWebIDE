@@ -15,9 +15,10 @@
 
   TODO:
 
-  eval could return the value+console output separately if using the packet parsing code
-  Benchmark function
-  Screenshot function
+  * upload should strip out welcome banner
+  * eval could return the value+console output separately if using the packet parsing code
+  * Benchmark function
+  * Screenshot function
  ------------------------------------------------------------------
 **/
 "use strict";
@@ -71,7 +72,9 @@ in Espruino.API can be used as well.
       }, {flatten:true})
     }),
     connect : device_name => new Promise((resolve,reject) => {
-       if (Espruino.Core.Serial.isConnected())
+      if ((typeof device_name) != "string")
+        return reject(new Error("`connect` must be called with a String"));
+      if (Espruino.Core.Serial.isConnected())
         return reject(new Error("Already connected"));
       log(`Connecting to ${device_name}`, 'cmd');
       Espruino.Core.Serial.open(device_name, connection => {
@@ -151,7 +154,7 @@ in Espruino.API can be used as well.
       });
     },
     display : markdown => {
-      log(`Instructions:\n${Espruino.Core.HTML(markdownToHTML)}`, 'info');
+      log(`AI: ${Espruino.Core.HTML.markdownToHTML(markdown)}`, 'info');
     }
   };
   /*-------------*/
