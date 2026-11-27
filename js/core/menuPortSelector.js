@@ -164,6 +164,7 @@
         callback(true);
       } else {
         // fail
+        console.log("Connection failed with "+JSON.stringify(cInfo));
         var msg = ".";
         if (cInfo!==undefined && cInfo.error!==undefined)
           msg = ": "+cInfo.error;
