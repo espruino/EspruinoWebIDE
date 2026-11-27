@@ -43,6 +43,7 @@ var emu;
         emulatorURL : "/emu/emu_banglejs3.html",
         emulatorWin : "innerWidth=290,innerHeight=268,location=0"
       });
+    emulators.forEach(e => e.path = e.name+" Emulator");
     return emulators;
   }
 
@@ -87,7 +88,7 @@ var emu;
         title: e.name,
         description : e.description,//+`<a href="${e.link}" target="_blank">more info</a>`,
         callback : function() {
-          selected=true;
+          selected = true;
           popup.close();
           callback(e);
         }
@@ -116,7 +117,8 @@ var emu;
         return {warning:"Disabled in Communications Settings"};
       return true;
     },
-    "getPorts": function(callback) {
+    "getPorts": function(callback, options) {
+      options = options||{};
       var noEmulatorRequested = window.location.search.substr(1).split("&").includes("noemulator");
       if (noEmulatorRequested)
         return callback([]);
@@ -125,16 +127,23 @@ var emu;
         Espruino.Config.set("EMULATOR_BANGLEJS", true);
       if (!Espruino.Config.EMULATOR_BANGLEJS)
         return callback([]);
-      var port = {
+      var ports = [{
         path:'Emulator',
         description:'Bangle.js Emulator',
-        type:"emulator"};
+        type:"emulator"}];
+      if (options.flatten) { // if set, include all emulators
+        ports = getEmulators().map(e=>({
+          path:e.path,
+          description:e.description,
+          type:"emulator"
+        }));
+      }
       if (emulatorRequested)
-        port.autoconnect = true;
-      callback([port], true/*instantPorts*/);
+        ports.forEach(p => p.autoconnect = true);
+      callback(ports, true/*instantPorts*/);
     },
     "open": function(path, openCallback, receiveCallback, disconnectCallback) {
-      chooseDevice(function(emuDevice) {
+      function open(emuDevice) {
         if (!emuDevice) {
           openCallback(null); // flag error
           return;
@@ -162,7 +171,10 @@ var emu;
           // So: Emu window will close its-self if window.opener.emu is undefined.
           device.close()
         });
-      });
+      };
+      var emuDevice = getEmulators().find(e => e.path == path);
+      if (emuDevice) open(emuDevice);
+      else chooseDevice(open);
     },
     "write": function(d, callback) {
       post({type:"rx",data:d});
